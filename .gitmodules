@@ -19,3 +19,6 @@
 [submodule "dependencies/date-adapter"]
 	path = dependencies/date-adapter
 	url = https://github.com/njoy/date-adapter.git
+[submodule "dependencies/header-utilities"]
+	path = dependencies/header-utilities
+	url = https://github.com/njoy/header-utilities.git

@@ -1,0 +1,404 @@
+{
+  "compiler": {
+    "apple clang++": {
+      "minimum version": "8.0",
+      "osx": {
+        "flags": {
+          "base project": [],
+          "common": [
+            "-stdlib=libc++"
+          ],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      }
+    },
+    "g++": {
+      "linux": {
+        "flags": {
+          "base project": [],
+          "common": [],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3",
+            "-fsignaling-nans"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      },
+      "minimum version": "6.2",
+      "osx": {
+        "flags": {
+          "base project": [],
+          "common": [],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3",
+            "-fsignaling-nans"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      },
+      "windows": {
+        "flags": {
+          "base project": [],
+          "common": [],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3",
+            "-fsignaling-nans"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      }
+    },
+    "llvm clang++": {
+      "linux": {
+        "flags": {
+          "base project": [],
+          "common": [
+            "-stdlib=libstdc++"
+          ],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      },
+      "minimum version": "3.8",
+      "osx": {
+        "flags": {
+          "base project": [],
+          "common": [
+            "-stdlib=libc++"
+          ],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      },
+      "windows": {
+        "flags": {
+          "base project": [],
+          "common": [
+            "-stdlib=libc++"
+          ],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      }
+    }
+  },
+  "file extension": {
+    "header files": [
+      "h++",
+      "hxx",
+      "hpp",
+      "hh",
+      "h"
+    ],
+    "implementation files": [
+      "c++",
+      "cxx",
+      "cpp",
+      "cc"
+    ]
+  },
+  "header files": [
+    "src/ACEtk.hpp",
+    "src/ACEtk/Table.hpp",
+    "src/ACEtk/Table/Data.hpp",
+    "src/ACEtk/Table/Header.hpp",
+    "src/ACEtk/Table/Data/Parse.hpp",
+    "src/ACEtk/Table/Data/Parser.hpp",
+    "src/ACEtk/Table/Data/Parse/src/IZAW.hpp",
+    "src/ACEtk/Table/Data/Parse/src/JXS.hpp",
+    "src/ACEtk/Table/Data/Parse/src/NXS.hpp",
+    "src/ACEtk/Table/Data/Parse/src/XSS.hpp",
+    "src/ACEtk/Table/Header/String.hpp",
+    "src/ACEtk/Table/Header/src/parse.hpp",
+    "src/ACEtk/Table/Header/src/print.hpp"
+  ],
+  "ignore pattern": "$^",
+  "implementation files": [],
+  "include path": "src",
+  "initialized": true,
+  "is external project": false,
+  "language": "c++",
+  "name": "ACEtk",
+  "standard": "c++14",
+  "standards": [
+    "c++98",
+    "c++11",
+    "c++14"
+  ],
+  "strict": true,
+  "test pattern": "test$",
+  "tests": {
+    "ACEtk.Table.Header.String": [
+      "src/ACEtk/Table/Header/String/test/String.test.cpp"
+    ]
+  },
+  "update": true
+}
