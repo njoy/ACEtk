@@ -1,11 +1,14 @@
 #ifndef ACETK_HPP
 #define ACETK_HPP
 
+#include <regex>
+
 #include "date.h"
 #include "disco.hpp"
 #include "dimwits.hpp"
-#inlcude "header-utilities.hpp"
-#inlcude "Log.hpp"
+#include "interpolation.hpp"
+#include "header-utilities.hpp"
+#include "Log.hpp"
 
 namespace njoy {
 namespace ACEtk {

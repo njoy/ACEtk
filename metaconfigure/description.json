@@ -396,6 +396,25 @@
   "strict": true,
   "test pattern": "test$",
   "tests": {
+    "ACEtk.Table.Data": [
+      "src/ACEtk/Table/Data/test/AW.test.cpp",
+      "src/ACEtk/Table/Data/test/Data.test.cpp",
+      "src/ACEtk/Table/Data/test/IZ.test.cpp",
+      "src/ACEtk/Table/Data/test/JXS.test.cpp",
+      "src/ACEtk/Table/Data/test/NXS.test.cpp",
+      "src/ACEtk/Table/Data/test/XSS.test.cpp"
+    ],
+    "ACEtk.Table.Data.Parse": [
+      "src/ACEtk/Table/Data/Parse/test/IZAW.test.cpp",
+      "src/ACEtk/Table/Data/Parse/test/JXS.test.cpp",
+      "src/ACEtk/Table/Data/Parse/test/NXS.test.cpp",
+      "src/ACEtk/Table/Data/Parse/test/Parse.test.cpp",
+      "src/ACEtk/Table/Data/Parse/test/XSS.test.cpp"
+    ],
+    "ACEtk.Table.Header": [
+      "src/ACEtk/Table/Header/test/Header.test.cpp",
+      "src/ACEtk/Table/Header/test/parse.test.cpp"
+    ],
     "ACEtk.Table.Header.String": [
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
     ]
