@@ -141,7 +141,7 @@ public:
     return ranges::make_iterator_range( left, right );
   }
 
-  const auto& XSS(){ return this->xss; }
+  const auto& XSS() const { return this->xss; }
   
   #include "ACEtk/Table/Data/src/print.hpp"
 };
