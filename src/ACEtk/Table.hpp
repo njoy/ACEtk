@@ -15,7 +15,7 @@ protected:
   /* api methods */
   template< typename Iterator >
   Table( State<Iterator>& state, Header&& header ) :
-    Table( std::move(header), Data(state) ){}
+    Table( std::forward< decltype(header) >(header), Data(state) ){}
 
 public:
   template< typename Iterator >

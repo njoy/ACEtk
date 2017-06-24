@@ -376,9 +376,20 @@
     "src/ACEtk/Table/Data/Parse/src/JXS.hpp",
     "src/ACEtk/Table/Data/Parse/src/NXS.hpp",
     "src/ACEtk/Table/Data/Parse/src/XSS.hpp",
+    "src/ACEtk/Table/Data/src/AW.hpp",
+    "src/ACEtk/Table/Data/src/ctor.hpp",
+    "src/ACEtk/Table/Data/src/fetch.hpp",
+    "src/ACEtk/Table/Data/src/IZ.hpp",
+    "src/ACEtk/Table/Data/src/JXS.hpp",
+    "src/ACEtk/Table/Data/src/name.hpp",
+    "src/ACEtk/Table/Data/src/NXS.hpp",
+    "src/ACEtk/Table/Data/src/print.hpp",
+    "src/ACEtk/Table/Data/src/verifyIndex.hpp",
+    "src/ACEtk/Table/Data/src/XSS.hpp",
     "src/ACEtk/Table/Header/String.hpp",
     "src/ACEtk/Table/Header/src/parse.hpp",
-    "src/ACEtk/Table/Header/src/print.hpp"
+    "src/ACEtk/Table/Header/src/print.hpp",
+    "src/ACEtk/Table/src/print.hpp"
   ],
   "ignore pattern": "$^",
   "implementation files": [],
@@ -396,6 +407,9 @@
   "strict": true,
   "test pattern": "test$",
   "tests": {
+    "ACEtk.Table": [
+      "src/ACEtk/Table/test/Table.test.cpp"
+    ],
     "ACEtk.Table.Data": [
       "src/ACEtk/Table/Data/test/AW.test.cpp",
       "src/ACEtk/Table/Data/test/Data.test.cpp",
@@ -413,7 +427,8 @@
     ],
     "ACEtk.Table.Header": [
       "src/ACEtk/Table/Header/test/Header.test.cpp",
-      "src/ACEtk/Table/Header/test/parse.test.cpp"
+      "src/ACEtk/Table/Header/test/parse.test.cpp",
+      "src/ACEtk/Table/Header/test/print.test.cpp"
     ],
     "ACEtk.Table.Header.String": [
       "src/ACEtk/Table/Header/String/test/String.test.cpp"

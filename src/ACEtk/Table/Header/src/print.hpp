@@ -28,7 +28,7 @@ void print( Ostream& ostream, Version< 2,0,1 > ) const {
   Line2::write( it,
                 this->atomicWeightRatio,
                 this->processTemperature.value,
-                date::format( "%m-%d-%Y", this->processDate ),
+                date::format( "%Y-%m-%d", this->processDate ),
                 this->comments.size() );
 
   using CommentLine = disco::Record< disco::Character<70> >;
@@ -48,7 +48,7 @@ void print( Ostream& ostream, Version< 1,0,0 > ) const {
                                disco::Character<10> >;   // processing date
 
   Line1::write( it,
-                static_cast< const std::string& >( this->szaid ),
+                std::string{ this->szaid.begin() + 14, this->szaid.end() },
                 this->atomicWeightRatio,
                 this->processTemperature.value,
                 date::format( "%m/%d/%y", this->processDate ) );
@@ -56,8 +56,11 @@ void print( Ostream& ostream, Version< 1,0,0 > ) const {
   using Line2 = disco::Record< disco::Character<70>, disco::Character<10> >;
   auto empty = []( int size ){ return std::string(size, ' '); };
   Line2::write( it,
-                this->comments.size() ? this->comments.front() : empty(70),
-                this->mat ? *(this->mat) : empty(10) );
+                this->comments.size() ?
+                  static_cast< const std::string& >(this->comments.front()) :
+                  empty(70),
+                this->mat ?
+                  static_cast< const std::string& >( *(this->mat) ) : empty(10) );
 }
 
 public:
