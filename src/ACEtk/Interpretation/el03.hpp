@@ -7,17 +7,16 @@ public:
   Interpretation( const Table& table ) : table( table ) {}
 
   template< typename Tag >
-  auto dependentVariable( const Tag ) const {
-    const auto startOfDependent = table.data.JXS( Tag::dependentVariableBegin );
-    const auto lengthOfDependent = table.data.NXS( Tag::dependentVariableLength );          
-    return table.data.XSS( startOfDependent, lengthOfDependent );
+  auto energyGrid( const Tag ) const {
+    return table.data.XSS( table.data.JXS( Tag::energyGridBegin ),
+			   table.data.NXS( Tag::energyGridLength ) );
   }
 
   template< typename Tag >
-  auto independentVariable( const Tag ) const {
-    const auto lengthOfData = table.data.NXS( Tag::dependentVariableLength );    
-    const auto startOfData = table.data.JXS( Tag::dependentVariableBegin ) + lengthOfData;
-    return table.data.XSS( startOfData, lengthOfData );
+  auto evaluations( const Tag ) const {
+    const auto lengthOfRadStoppingPower = table.data.NXS( Tag::radStoppingPowerLength );
+    return table.data.XSS( table.data.JXS( Tag::radStoppingPowerBegin ) + lengthOfRadStoppingPower,
+			   lengthOfRadStoppingPower );
   }    
   
 };
