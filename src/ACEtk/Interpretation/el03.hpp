@@ -14,9 +14,9 @@ public:
 
   template< typename Tag >
   auto evaluations( const Tag ) const {
-    const auto lengthOfRadStoppingPower = table.data.NXS( Tag::radStoppingPowerLength );
-    return table.data.XSS( table.data.JXS( Tag::radStoppingPowerBegin ) + lengthOfRadStoppingPower,
-			   lengthOfRadStoppingPower );
+    const auto lengthOfEvaluation = table.data.NXS( Tag::length );
+    return table.data.XSS( table.data.JXS( Tag::begin ) + Tag::offset * lengthOfEvaluation,
+			   lengthOfEvaluation );
   }    
   
 };
