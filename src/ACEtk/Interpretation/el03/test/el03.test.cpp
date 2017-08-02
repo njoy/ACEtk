@@ -25,7 +25,7 @@ namespace{
       6.000000000000E-03,  5.000000000000E-03,  4.000000000000E-03,  3.000000000000E-03,
       2.000000000000E-03,  1.500000000000E-03,  1.000000000000E-03, }};
 
-  std::array< double, 57 > refEvaluations= {{  
+  std::array< double, 57 > refRadiativeStopping = {{  
       2.136440000000E+01,
       2.134340000000E+01,  2.130791000000E+01,  2.128101000000E+01,  2.124249000000E+01,
       2.118210000000E+01,  2.106950000000E+01,  2.097020000000E+01,  2.079390000000E+01,
@@ -42,7 +42,7 @@ namespace{
       5.280360000000E+00,  5.272320000000E+00,  5.268760000000E+00,  5.266160000000E+00,
       5.265870000000E+00,  5.271560000000E+00,  5.278690000000E+00,  5.289160000000E+00 }};
 
-  std::array< double, 57 > refCorrectionEvaluations= {{
+  std::array< double, 57 > refBremssCorrection = {{
       1.149660000000E+00,  1.148810000000E+00,  1.147510000000E+00,  1.146550000000E+00,
       1.145260000000E+00,  1.143380000000E+00,  1.140440000000E+00,  1.137900000000E+00,
       1.133630000000E+00,  1.130970000000E+00,  1.127410000000E+00,  1.125180000000E+00,
@@ -91,26 +91,33 @@ SCENARIO("Testing XSS from el03"){
       const auto energyGrid = interpretation.energyGrid( El03::RadiativeStopping{} );      
       auto compareThese = ranges::view::zip( refEnergyGrid, energyGrid );
       for( const auto pair : compareThese ) {
-	REQUIRE( pair.first == Approx( pair.second ).epsilon( 1e-15 ) );
+	REQUIRE( ( pair.first ) == Approx( ( pair.second ).value ).epsilon( 1e-15 ) );
       }
     }
 
-    WHEN("Querying for the radiative stopping power evaluation points"){
-      const auto evaluations = interpretation.evaluations( El03::RadiativeStopping{} );      
-      auto compareThese = ranges::view::zip( refEvaluations, evaluations );
-      for( const auto pair : compareThese ) {
-	REQUIRE( pair.first == Approx( pair.second ).epsilon( 1e-15 ) );
-      }
-    }
-    
     WHEN("Querying for the electron-electron bremmstrahlung correction evaluation points"){
-      const auto evaluations = interpretation.evaluations( El03::BremsstrahlungCorrection{} );      
-      auto compareThese = ranges::view::zip( refCorrectionEvaluations, evaluations );
+      const auto bremsstrahlungCorrections = interpretation.bremsstrahlungCorrection();      
+
+      auto compareThese = ranges::view::zip( refBremssCorrection,
+					     bremsstrahlungCorrections );
+      
       for( const auto pair : compareThese ) {
 	REQUIRE( pair.first == Approx( pair.second ).epsilon( 1e-15 ) );
       }
     }        
     
-    
+    WHEN("Querying for the radiative stopping power evaluation points"){
+
+      // ref in units of MeV barn
+      const auto mcnpRef1keV = 1.5709714430603072E-003; 
+      const auto mcnpRef1MeV = 8.5914575611197690E-003; 
+      const auto mcnpRef10000MeV = 266.13402564187817;
+      const auto radiativeStoppingPower = interpretation.radiativeStoppingPower();
+
+      //REQUIRE( radiativeStoppingPower[56].value * 1e32 ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
+      //REQUIRE( radiativeStoppingPower[32].value * 1e32 ==  Approx( mcnpRef1MeV ).epsilon( 1e-4 ) );           
+      REQUIRE( radiativeStoppingPower[0].value * 1e32 ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
+
+    }
   }
 }
