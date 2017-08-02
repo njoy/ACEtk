@@ -114,9 +114,9 @@ SCENARIO("Testing XSS from el03"){
       const auto mcnpRef10000MeV = 266.13402564187817;
       const auto radiativeStoppingPower = interpretation.radiativeStoppingPower();
 
-      //REQUIRE( radiativeStoppingPower[56].value * 1e32 ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
-      //REQUIRE( radiativeStoppingPower[32].value * 1e32 ==  Approx( mcnpRef1MeV ).epsilon( 1e-4 ) );           
-      REQUIRE( radiativeStoppingPower[0].value * 1e32 ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
+      REQUIRE( radiativeStoppingPower[56].value * 1e28 ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
+      REQUIRE( radiativeStoppingPower[32].value * 1e28 ==  Approx( mcnpRef1MeV ).epsilon( 1e-4 ) );           
+      REQUIRE( radiativeStoppingPower[0].value * 1e28 ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
 
     }
   }

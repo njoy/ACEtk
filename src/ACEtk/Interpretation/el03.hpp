@@ -6,6 +6,8 @@ class Interpretation< El03 >{
 public:
   Interpretation( const Table& table ) : table( table ) {}
 
+
+  
   template< typename Tag >
   auto energyGrid( const Tag ) const {
     return table.data.XSS( table.data.JXS( Tag::energyGridBegin ),
@@ -13,7 +15,7 @@ public:
       | ranges::view::transform( []( const auto& entry ){ return entry * mega( electronVolt ); } );
   }
 
-  auto bremsstrahlungCorrection( ) const {  
+  auto bremsstrahlungCorrection() const {  
     auto length = table.data.NXS( 3 );
     auto start  = table.data.JXS( 2 ) + 2 * length;
     return table.data.XSS( start, length );
@@ -38,15 +40,16 @@ public:
                               * constant::classicalElectronRadius
                               * constant::fineStructure ;
 
-    auto predecate = [m=multiplier, z=atomicNumber]( const auto& pair )
-      { return m * z * ( z + pair.first ) * pair.second; };      
+    auto predecate = [m=multiplier, z=atomicNumber]( const auto& tup )
+      { return m * z * ( z + std::get<0>(tup) ) * std::get<1>(tup) * std::get<2>(tup); };      
 
     auto length = table.data.NXS( 3 );
     auto start  = table.data.JXS( 2 ) + length;
-    auto collisionalStopping = table.data.XSS( start, length );
+    auto radiativeStopping = table.data.XSS( start, length );
     
     return ranges::view::zip( this->bremsstrahlungCorrection(),
-			      collisionalStopping ) 
+			      radiativeStopping,
+			      totalEnergy ) 
       | ranges::view::transform( predecate );
 
   }
