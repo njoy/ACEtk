@@ -89,7 +89,9 @@ SCENARIO("Testing XSS from el03"){
     WHEN("Querying for the energy grid in MeV,"
 	 "on which the radiative stopping interpolation are evaluated") {
       const auto energyGrid = interpretation.energyGrid( El03::RadiativeStopping{} );      
-      auto compareThese = ranges::view::zip( refEnergyGrid, energyGrid );
+      auto compareThese = ranges::view::zip( std::reverse( refEnergyGrid.begin( ),
+							   refEnergyGrid.end( ) )
+					     , energyGrid );
       for( const auto pair : compareThese ) {
 	REQUIRE( ( pair.first ) == Approx( ( pair.second ).value ).epsilon( 1e-15 ) );
       }
@@ -98,7 +100,8 @@ SCENARIO("Testing XSS from el03"){
     WHEN("Querying for the electron-electron bremmstrahlung correction evaluation points"){
       const auto bremsstrahlungCorrections = interpretation.bremsstrahlungCorrection();      
 
-      auto compareThese = ranges::view::zip( refBremssCorrection,
+      auto compareThese = ranges::view::zip( std::reverse( refBremssCorrection.begin( ),
+							   refBremssCorrection.end( ) ),
 					     bremsstrahlungCorrections );
       
       for( const auto pair : compareThese ) {
@@ -114,9 +117,9 @@ SCENARIO("Testing XSS from el03"){
       const auto mcnpRef10000MeV = 266.13402564187817;
       const auto radiativeStoppingPower = interpretation.radiativeStoppingPower();
 
-      REQUIRE( radiativeStoppingPower[56].value * 1e28 ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
+      REQUIRE( radiativeStoppingPower[0].value * 1e28 ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
       REQUIRE( radiativeStoppingPower[32].value * 1e28 ==  Approx( mcnpRef1MeV ).epsilon( 1e-4 ) );           
-      REQUIRE( radiativeStoppingPower[0].value * 1e28 ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
+      REQUIRE( radiativeStoppingPower[56].value * 1e28 ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
 
     }
   }

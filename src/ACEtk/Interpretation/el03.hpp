@@ -12,13 +12,14 @@ public:
   auto energyGrid( const Tag ) const {
     return table.data.XSS( table.data.JXS( Tag::energyGridBegin ),
 			   table.data.NXS( Tag::energyGridLength ) )
+      | ranges::view::reverse
       | ranges::view::transform( []( const auto& entry ){ return entry * mega( electronVolt ); } );
   }
 
   auto bremsstrahlungCorrection() const {  
     auto length = table.data.NXS( 3 );
     auto start  = table.data.JXS( 2 ) + 2 * length;
-    return table.data.XSS( start, length );
+    return table.data.XSS( start, length ) | ranges::view::reverse;
   }
   
   auto atomicNumber() const {
@@ -36,6 +37,7 @@ public:
       | ranges::view::transform( [massEquivalent]( const auto& entry )
 				 { return entry + massEquivalent; } );
 
+
     constexpr auto multiplier = constant::classicalElectronRadius
                               * constant::classicalElectronRadius
                               * constant::fineStructure ;
@@ -45,11 +47,11 @@ public:
 
     auto length = table.data.NXS( 3 );
     auto start  = table.data.JXS( 2 ) + length;
-    auto radiativeStopping = table.data.XSS( start, length );
+    auto radiativeStopping = table.data.XSS( start, length ) | ranges::view::reverse;;
     
     return ranges::view::zip( this->bremsstrahlungCorrection(),
 			      radiativeStopping,
-			      totalEnergy ) 
+			      totalEnergy )
       | ranges::view::transform( predecate );
 
   }
