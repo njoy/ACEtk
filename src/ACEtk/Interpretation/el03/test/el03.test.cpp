@@ -86,6 +86,7 @@ SCENARIO("Testing XSS from el03"){
     
     Interpretation< El03 > interpretation( table );          
 
+    /*
     WHEN("Querying for the energy grid in MeV,"
 	 "on which the radiative stopping interpolation are evaluated") {
       const auto energyGrid = interpretation.energyGrid( El03::RadiativeStopping{} );      
@@ -98,6 +99,7 @@ SCENARIO("Testing XSS from el03"){
     }
 
     WHEN("Querying for the electron-electron bremmstrahlung correction evaluation points"){
+      
       const auto bremsstrahlungCorrections = interpretation.bremsstrahlungCorrection();      
 
       auto compareThese = ranges::view::zip( std::reverse( refBremssCorrection.begin( ),
@@ -107,7 +109,8 @@ SCENARIO("Testing XSS from el03"){
       for( const auto pair : compareThese ) {
 	REQUIRE( pair.first == Approx( pair.second ).epsilon( 1e-15 ) );
       }
-    }        
+      }     
+      */   
     
     WHEN("Querying for the radiative stopping power evaluation points"){
 
@@ -117,10 +120,23 @@ SCENARIO("Testing XSS from el03"){
       const auto mcnpRef10000MeV = 266.13402564187817;
       const auto radiativeStoppingPower = interpretation.radiativeStoppingPower();
 
-      REQUIRE( radiativeStoppingPower[0].value * 1e28 ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
-      REQUIRE( radiativeStoppingPower[32].value * 1e28 ==  Approx( mcnpRef1MeV ).epsilon( 1e-4 ) );           
-      REQUIRE( radiativeStoppingPower[56].value * 1e28 ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
-
+      REQUIRE( radiativeStoppingPower[0].value * 1e28
+	       ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
+      REQUIRE( radiativeStoppingPower[32].value * 1e28
+	       ==  Approx( mcnpRef1MeV ).epsilon( 1e-4 ) );           
+      REQUIRE( radiativeStoppingPower[56].value * 1e28
+	       ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
     }
   }
+}
+
+SCENARIO("Generating individual ACE files for el03"){
+ auto contents = njoy::utility::slurpFileToMemory("el03");
+  State< std::string::iterator > s{ 1, contents.begin(), contents.end() };  
+  auto table = Table(s);
+
+  std::ostringstream oss;  
+  //  table.print<1,0,0>( oss );
+  table.data.print( oss );
+
 }
