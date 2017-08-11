@@ -430,6 +430,7 @@
       "src/ACEtk/Table/Data/test/IZ.test.cpp",
       "src/ACEtk/Table/Data/test/JXS.test.cpp",
       "src/ACEtk/Table/Data/test/NXS.test.cpp",
+      "src/ACEtk/Table/Data/test/print.test.cpp",
       "src/ACEtk/Table/Data/test/XSS.test.cpp"
     ],
     "ACEtk.Table.Data.Parse": [
