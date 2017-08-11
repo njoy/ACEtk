@@ -308,3 +308,8 @@ static Header parse( State<Iterator>& state ){
     throw e;
   }
 }
+
+template< typename Iterator >
+static Header parse( State<Iterator>&& state ){
+  return parse( state );
+}
