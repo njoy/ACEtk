@@ -5,7 +5,6 @@
 
 using namespace njoy::ACEtk;
 
-
 namespace{
 
   std::array< double, 57 > refEnergyGrid= {{
@@ -62,28 +61,22 @@ namespace{
 }
 
 SCENARIO("Testing XSS from el03"){  
-  auto contents = njoy::utility::slurpFileToMemory("1000.e03");
-  State< std::string::iterator > s{ 1, contents.begin(), contents.end() };  
-  auto table = Table(s);
-
+  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
   
   GIVEN("The XSS array for 1000.e03"){
     
-    WHEN("XSS( JXS(1) ) = XSS( 1 ),"
-	 "K edge below which no electron induced relaxation will occur - keV...") {
+    WHEN("K edge below which no electron induced relaxation will occur - keV...") {
       const auto index = table.data.JXS(1);
       REQUIRE( table.data.XSS( index ) == 1.4E-2 );
     }
 
-    WHEN("XSS( JXS(1) + 1 ) = XSS( 1 + 1 ),"
-	 "Auger electron emission energy") {
+    WHEN("Auger electron emission energy") {
       const auto index = table.data.JXS(1) + 1;
       REQUIRE( table.data.XSS( index ) == 1.4E-2 );
     }
   }
 
   GIVEN("An interpretation for 1000.e03"){
-    
     Interpretation< El03 > interpretation( table );          
 
     /*
@@ -131,6 +124,7 @@ SCENARIO("Testing XSS from el03"){
     }
   }
 }
+
 /*
 SCENARIO("Slurp all of the el03 files and make table"){
 
@@ -144,25 +138,4 @@ SCENARIO("Slurp all of the el03 files and make table"){
   
 }
 */
-
-
-SCENARIO("Generating individual ACE files for el03"){
-  auto contents = njoy::utility::slurpFileToMemory("el03");
-  State< std::string::iterator > s{ 1, contents.begin(), contents.end() };  
-  auto table = Table(s);
-  std::ofstream outFile;
-  std::ostringstream oss;  
-  table.print<1,0,0>( oss );  
-
-  for ( auto Z : ranges::view::iota(1,101) ) {
-    outFile.open( std::to_string( Z * 1000 ) + ".el03" );
-    outFile << oss.str() << std::endl;
-    outFile.close();
-    oss.str("");
-    table = Table(s);
-    table.print<1,0,0>( oss );    
-  }
-  
-  
-}
 
