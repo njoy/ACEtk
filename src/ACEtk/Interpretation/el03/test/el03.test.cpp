@@ -120,23 +120,49 @@ SCENARIO("Testing XSS from el03"){
       const auto mcnpRef10000MeV = 266.13402564187817;
       const auto radiativeStoppingPower = interpretation.radiativeStoppingPower();
 
+      //for ( const auto entry : radiativeStoppingPower ) std::cout << entry << std::endl;
+      
       REQUIRE( radiativeStoppingPower[0].value * 1e28
 	       ==  Approx( mcnpRef1keV ).epsilon( 1e-4 ) );                 
-      REQUIRE( radiativeStoppingPower[32].value * 1e28
+      REQUIRE( radiativeStoppingPower[24].value * 1e28
 	       ==  Approx( mcnpRef1MeV ).epsilon( 1e-4 ) );           
       REQUIRE( radiativeStoppingPower[56].value * 1e28
 	       ==  Approx( mcnpRef10000MeV ).epsilon( 1e-4 ) );     
     }
   }
 }
+/*
+SCENARIO("Slurp all of the el03 files and make table"){
+
+  for ( auto Z : ranges::view::iota(1,101) ) {
+    std::cout << std::to_string( Z * 1000 ) + ".el03" << std::endl;    
+    auto contents =
+      njoy::utility::slurpFileToMemory( std::to_string( Z * 1000 ) + ".el03");
+    State< std::string::iterator > s{ 1, contents.begin(), contents.end() };  
+    auto table = Table(s);
+  }
+  
+}
+*/
+
 
 SCENARIO("Generating individual ACE files for el03"){
- auto contents = njoy::utility::slurpFileToMemory("el03");
+  auto contents = njoy::utility::slurpFileToMemory("el03");
   State< std::string::iterator > s{ 1, contents.begin(), contents.end() };  
   auto table = Table(s);
-
+  std::ofstream outFile;
   std::ostringstream oss;  
-  //  table.print<1,0,0>( oss );
-  table.data.print( oss );
+  table.print<1,0,0>( oss );  
 
+  for ( auto Z : ranges::view::iota(1,101) ) {
+    outFile.open( std::to_string( Z * 1000 ) + ".el03" );
+    outFile << oss.str() << std::endl;
+    outFile.close();
+    oss.str("");
+    table = Table(s);
+    table.print<1,0,0>( oss );    
+  }
+  
+  
 }
+
