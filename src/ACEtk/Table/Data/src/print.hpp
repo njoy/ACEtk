@@ -2,10 +2,10 @@ template< typename Ostream >
 void print( Ostream& ostream ) const {
   auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
   
-  using IZAWLine = Record< Integer<7>, FixedPoint<11, 8>,
-                           Integer<7>, FixedPoint<11, 8>,
-                           Integer<7>, FixedPoint<11, 8>,
-                           Integer<7>, FixedPoint<11, 8> >;
+  using IZAWLine = Record< Integer<7>, FixedPoint<11, 7>,
+                           Integer<7>, FixedPoint<11, 7>,
+                           Integer<7>, FixedPoint<11, 7>,
+                           Integer<7>, FixedPoint<11, 7> >;
   
   IZAWLine::write( it,
                    this->IZ(1), this->AW(1), this->IZ(2), this->AW(2),
