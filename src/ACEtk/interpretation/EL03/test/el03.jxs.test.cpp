@@ -4,9 +4,7 @@
 using namespace njoy::ACEtk;
 
 SCENARIO("Testing JXS from el03"){
-  auto contents = njoy::utility::slurpFileToMemory("1000.e03");
-  State< std::string::iterator > s{ 1, contents.begin(), contents.end() };  
-  auto table = Table(s);
+  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
   
   GIVEN("The JXS array for 1000.e03"){
 
@@ -63,8 +61,6 @@ SCENARIO("Testing JXS from el03"){
     WHEN("querying 11th entry of JXS,"
 	 "offsest for oscillator descriptions for density effect calculation") {
       REQUIRE( table.data.JXS(11) == 2328 );
-    }    
-
+    }
   }
-
 }

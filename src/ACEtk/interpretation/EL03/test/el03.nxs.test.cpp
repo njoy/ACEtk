@@ -4,9 +4,7 @@
 using namespace njoy::ACEtk;
 
 SCENARIO("Testing NXS from el03"){  
-  auto contents = njoy::utility::slurpFileToMemory("1000.e03");
-  State< std::string::iterator > s{ 1, contents.begin(), contents.end() };  
-  auto table = Table(s);
+  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
   
   GIVEN("The NXS array for 1000.e03"){
 
@@ -64,7 +62,7 @@ SCENARIO("Testing NXS from el03"){
     WHEN("querying 11th entry of NXS,"
 	 "number of oscillator points for density effect calculation"){
       REQUIRE( table.data.NXS(11) == 1 );
-    }    
+    } 
 
     WHEN("querying 12th entry of NXS,"
 	 "unused"){

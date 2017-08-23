@@ -27,8 +27,7 @@ struct State{
 };
 
 #include "ACEtk/Table.hpp"
-#include "ACEtk/Tags.hpp"    
-#include "ACEtk/Interpretation.hpp"  
+#include "ACEtk/interpretation.hpp"  
 
 }
 }
