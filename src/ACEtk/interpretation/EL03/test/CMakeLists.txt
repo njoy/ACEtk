@@ -3,7 +3,8 @@ add_executable( ACEtk.interpretation.EL03.test
                 el03.jxs.test.cpp
                 occupationNumber.test.cpp
                 el03.test.cpp
-                el03.nxs.test.cpp )
+                el03.nxs.test.cpp
+                BindingEnergy.test.cpp )
 target_compile_options( ACEtk.interpretation.EL03.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

@@ -398,8 +398,9 @@
     "src/ACEtk/Table/Header/String.hpp",
     "src/ACEtk/Table/Header/src/print.hpp",
     "src/ACEtk/Table/Header/src/parse.hpp",
-    "src/ACEtk/interpretation/OccupationNumber.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
+    "src/ACEtk/interpretation/EL03/OccupationNumber.hpp",
+    "src/ACEtk/interpretation/EL03/BindingEnergy.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
   ],
   "ignore pattern": "$^",
@@ -449,7 +450,8 @@
       "src/ACEtk/interpretation/EL03/test/el03.jxs.test.cpp",
       "src/ACEtk/interpretation/EL03/test/occupationNumber.test.cpp",
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
-      "src/ACEtk/interpretation/EL03/test/el03.nxs.test.cpp"
+      "src/ACEtk/interpretation/EL03/test/el03.nxs.test.cpp",
+      "src/ACEtk/interpretation/EL03/test/BindingEnergy.test.cpp"
     ]
   },
   "update": true

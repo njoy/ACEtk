@@ -1,5 +1,3 @@
-
-
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
@@ -7,7 +5,7 @@ using namespace njoy::ACEtk;
 
 namespace{
 
-  std::array< double, 57 > occupationNumbersGold = {{
+  std::array< double, 22 > occupationNumbersGold = {{
       2.000000000000E+00,
       2.000000000000E+00,  2.000000000000E+00,  4.000000000000E+00,  2.000000000000E+00,
       2.000000000000E+00,  4.000000000000E+00,  4.000000000000E+00,  6.000000000000E+00,

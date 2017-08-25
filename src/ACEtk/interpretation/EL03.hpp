@@ -16,8 +16,16 @@ public:
   }
 
   #include "ACEtk/interpretation/EL03/OccupationNumber.hpp"  
+
   auto occupationNumber() const {
     return OccupationNumber{ this->table };
-  }  
+  }
+
+  #include "ACEtk/interpretation/EL03/BindingEnergy.hpp"  
+
+  auto bindingEnergy() const {
+    return BindingEnergy{ this->table };
+  }    
+  
 };
   
