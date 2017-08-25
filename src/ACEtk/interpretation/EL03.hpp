@@ -14,5 +14,10 @@ public:
   auto radiativeStoppingPower() const {
     return RadiativeStoppingPower{ this->table };
   }
+
+  #include "ACEtk/interpretation/EL03/OccupationNumber.hpp"  
+  auto occupationNumber() const {
+    return OccupationNumber{ this->table };
+  }  
 };
   

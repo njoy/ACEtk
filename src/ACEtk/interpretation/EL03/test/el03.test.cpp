@@ -26,28 +26,47 @@ namespace{
       3.000000000000E-02, 2.000000000000E-02, 1.500000000000E-02,
       1.000000000000E-02, 8.000000000000E-03, 6.000000000000E-03,
       5.000000000000E-03, 4.000000000000E-03, 3.000000000000E-03,
-      2.000000000000E-03, 1.500000000000E-03, 1.000000000000E-03 }};
+      2.000000000000E-03, 1.500000000000E-03, 1.000000000000E-03 }};      
+}
+
+SCENARIO("test interpretation::EL03"){  
+  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
+  
+  GIVEN("An ACE Table for 1000.e03"){
+    const auto el03 = interpretation::EL03( table );
+
+    WHEN("Querying for the energy grid in MeV,"
+	 "on which the radiative stopping interpolation are evaluated") {
+      const auto trial = el03.radiativeStoppingPower().energyGrid(); 
+      const auto reference = referenceEnergyGrid | ranges::view::reverse;
+      for( const auto pair : ranges::view::zip( reference, trial ) ) {
+	REQUIRE( pair.first == Approx( pair.second.value ) );
+      }
+    }
+    
+    WHEN("Querying for the radiative stopping power evaluation points"){
+      const std::map< int, double > mcnpReference{
+        { 0, 1.5709714430603072E-003 },
+        { 24, 8.5914575611197690E-003 },
+        { 56, 266.13402564187817 } };
+
+      const auto stoppingPowers = el03.radiativeStoppingPower().values();
+
+      for ( const auto& pair : mcnpReference ){
+        const auto index = pair.first;
+        const auto reference = pair.second;
+        REQUIRE( stoppingPowers[index].value * 1e28
+                 ==  Approx( reference ).epsilon( 1e-4 ) );                 
+      }
+    }
+  }
+}
+
+
+
+
+
 /*
-  std::array< double, 57 > referenceRadiativeStopping = {{  
-      2.136440000000E+01, 2.134340000000E+01, 2.130791000000E+01,
-      2.128101000000E+01, 2.124249000000E+01, 2.118210000000E+01,
-      2.106950000000E+01, 2.097020000000E+01, 2.079390000000E+01,
-      2.067419000000E+01, 2.049170000000E+01, 2.035789000000E+01,
-      2.017230000000E+01, 1.989639000000E+01, 1.942900000000E+01,
-      1.903630000000E+01, 1.839030000000E+01, 1.798621000000E+01,
-      1.741209000000E+01, 1.701830000000E+01, 1.650320000000E+01,
-      1.578480000000E+01, 1.467370000000E+01, 1.382350000000E+01,
-      1.255910000000E+01, 1.184060000000E+01, 1.090830000000E+01,
-      1.032100000000E+01, 9.599990000000E+00, 8.714690000000E+00,
-      7.571310000000E+00, 6.867790000000E+00, 6.051420000000E+00,
-      5.696110000000E+00, 5.341790000000E+00, 5.175060000000E+00,
-      5.028350000000E+00, 4.924720000000E+00, 4.907630000000E+00,
-      4.949440000000E+00, 5.045750000000E+00, 5.101910000000E+00,
-      5.170810000000E+00, 5.207790000000E+00, 5.244590000000E+00,
-      5.273570000000E+00, 5.289890000000E+00, 5.296510000000E+00,
-      5.287470000000E+00, 5.280360000000E+00, 5.272320000000E+00,
-      5.268760000000E+00, 5.266160000000E+00, 5.265870000000E+00,
-      5.271560000000E+00, 5.278690000000E+00, 5.289160000000E+00 }};
 
   std::array< double, 57 > refBremssCorrection = {{
       1.149660000000E+00, 1.148810000000E+00, 1.147510000000E+00,
@@ -69,38 +88,7 @@ namespace{
       1.330000000000E-02, 1.059000000000E-02, 7.880000000000E-03,
       6.520000000000E-03, 5.160000000000E-03, 3.800000000000E-03,
       2.460000000000E-03, 1.770000000000E-03, 1.140000000000E-03 }};
-*/      
-}
 
-SCENARIO("Testing XSS from el03"){  
-  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
-  
-  GIVEN("The XSS array for 1000.e03"){
-    
-    WHEN("K edge below which no electron induced relaxation will occur - keV...") {
-      const auto index = table.data.JXS(1);
-      REQUIRE( table.data.XSS( index ) == 1.4E-2 );
-    }
-
-    WHEN("Auger electron emission energy") {
-      const auto index = table.data.JXS(1) + 1;
-      REQUIRE( table.data.XSS( index ) == 1.4E-2 );
-    }
-  }
-
-  GIVEN("An interpretation for 1000.e03"){
-    const auto el03 = interpretation::EL03( table );
-
-    WHEN("Querying for the energy grid in MeV,"
-	 "on which the radiative stopping interpolation are evaluated") {
-      const auto trial = el03.radiativeStoppingPower().energyGrid(); 
-      const auto reference = referenceEnergyGrid | ranges::view::reverse;
-      for( const auto pair : ranges::view::zip( reference, trial ) ) {
-	REQUIRE( pair.first == Approx( pair.second.value ) );
-      }
-    }
-
-    /*
     WHEN("Querying for the electron-electron bremmstrahlung correction evaluation points"){
       
       const auto bremsstrahlungCorrections = interpretation.bremsstrahlungCorrection();      
@@ -114,34 +102,3 @@ SCENARIO("Testing XSS from el03"){
       }
     }     
     */
-    
-    WHEN("Querying for the radiative stopping power evaluation points"){
-      const std::map< int, double > mcnpReference{
-        { 0, 1.5709714430603072E-003 },
-        { 24, 8.5914575611197690E-003 },
-        { 56, 266.13402564187817 } };
-
-      const auto stoppingPowers = el03.radiativeStoppingPower().values();
-
-      for ( const auto& pair : mcnpReference ){
-        const auto index = pair.first;
-        const auto reference = pair.second;
-        REQUIRE( stoppingPowers[index].value * 1e28
-                 ==  Approx( reference ).epsilon( 1e-4 ) );                 
-      }
-    }
-  }
-}
-
-/*
-SCENARIO("Slurp all of the el03 files and make table"){ 
-  for ( auto Z : ranges::view::iota(1,101) ) { 
-    std::cout << std::to_string( Z * 1000 ) + ".el03" << std::endl; 
-    auto contents = 
-      njoy::utility::slurpFileToMemory( std::to_string( Z * 1000 ) + ".el03"); 
-    State< std::string::iterator > s{ 1, contents.begin(), contents.end() }; 
-    auto table = Table(s); 
-  } 
-} 
-*/ 
-

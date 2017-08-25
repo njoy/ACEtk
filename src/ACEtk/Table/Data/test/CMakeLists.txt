@@ -1,12 +1,12 @@
 
 add_executable( ACEtk.Table.Data.test
-                AW.test.cpp
-                Data.test.cpp
-                IZ.test.cpp
-                JXS.test.cpp
                 NXS.test.cpp
+                AW.test.cpp
+                XSS.test.cpp
+                JXS.test.cpp
+                Data.test.cpp
                 print.test.cpp
-                XSS.test.cpp )
+                IZ.test.cpp )
 target_compile_options( ACEtk.Table.Data.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}
