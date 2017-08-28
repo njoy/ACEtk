@@ -15,17 +15,11 @@ public:
     return RadiativeStoppingPower{ this->table };
   }
 
-  #include "ACEtk/interpretation/EL03/OccupationNumber.hpp"  
+  #include "ACEtk/interpretation/EL03/AtomicLevels.hpp"  
 
-  auto occupationNumber() const {
-    return OccupationNumber{ this->table };
-  }
-
-  #include "ACEtk/interpretation/EL03/BindingEnergy.hpp"  
-
-  auto bindingEnergy() const {
-    return BindingEnergy{ this->table };
-  }    
+  auto atomicLevels() const {
+    return AtomicLevels{ this->table };
+  }      
   
 };
   
