@@ -1,7 +1,6 @@
 struct DeflectionCosines{ static constexpr int offset = 1; };
 struct CDF{ static constexpr int offset = 2; };
 
-
 class DiscreteScatteringData{
   const Table& table;
   const std::map<int, int>& ACEptr;
