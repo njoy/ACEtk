@@ -1,8 +1,7 @@
 class AtomicLevels {
   const Table& table;
-  bool conductor = false;
   
-  auto bindingEnergy() const {
+  auto bindingEnergies() const {
     const auto length = this->table.data.NXS( 11 );
     const auto start  = this->table.data.JXS( 11 ) + length;
     return this->table.data.XSS( start, length )
@@ -10,24 +9,27 @@ class AtomicLevels {
 				 { return entry * electronVolt; } );
   }
 
-  auto occupationNumber() const {
+  auto occupationNumbers() const {
     const auto length = this->table.data.NXS( 11 );
     const auto start  = this->table.data.JXS( 11 );
     return this->table.data.XSS( start, length );
   }
+
+  auto isLevelConductive() const {
+    return this->occupationNumbers() |
+      ranges::view::transform( []( const auto entry ) { return entry < 0; } );
+  }  
   
 public:
-  AtomicLevels( const Table& table )
-    : table( table ),
-      conductor( ranges::any_of( this->occupationNumber(),
-				 []( const auto entry ){ return entry < 0; } ) )
-  {}
+  AtomicLevels( const Table& table ) : table( table ) {}
 
-  bool isConductive() const { return conductor; }
-      
   auto values() const {
-    return ranges::view::zip( this->occupationNumber(),
-			      this->bindingEnergy() );
+    auto absEntry = []( const auto entry ){ return std::abs(entry); };
+    return
+      ranges::view::zip( this->occupationNumbers()
+			 | ranges::view::transform( absEntry ), 
+			 this->isLevelConductive(),
+			 this->bindingEnergies() );
   }
     
 };
