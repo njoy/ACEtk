@@ -403,7 +403,6 @@
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
-    "src/ACEtk/interpretation/MP1/src/DiscreteScatteringData.hpp",
     "src/ACEtk/interpretation/MP1/src/fetch.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
@@ -458,6 +457,8 @@
     ],
     "ACEtk.interpretation.MP1": [
       "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp",
+      "src/ACEtk/interpretation/MP1/test/cummulativeFunction.test.cpp",
+      "src/ACEtk/interpretation/MP1/test/deflectionCosine.test.cpp",
       "src/ACEtk/interpretation/MP1/test/energyGrid.test.cpp"
     ]
   },

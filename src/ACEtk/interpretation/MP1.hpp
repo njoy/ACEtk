@@ -18,11 +18,11 @@ public:
   #include "ACEtk/interpretation/MP1/src/energyGrid.hpp"  
   #include "ACEtk/interpretation/MP1/src/totalCrossSection.hpp"
 
-  auto deflectionCosine( int order ){
+  auto deflectionCosine( int order ) const {
     return this->fetch< DeflectionCosines >( order );
   }
 
-  auto cummulativeDistribution( int order ){
+  auto cummulativeDistribution( int order ) const {
     return this->fetch< CDF >( order );
   }  
   
