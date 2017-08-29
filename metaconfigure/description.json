@@ -400,8 +400,7 @@
     "src/ACEtk/Table/Header/src/parse.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
-    "src/ACEtk/interpretation/EL03/OccupationNumber.hpp",
-    "src/ACEtk/interpretation/EL03/BindingEnergy.hpp",
+    "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/MP1/src/DiscreteScatteringData.hpp",
     "src/ACEtk/interpretation/MP1/src/TotalCrossSection.hpp",
@@ -451,15 +450,12 @@
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
-      "src/ACEtk/interpretation/EL03/test/el03.jxs.test.cpp",
-      "src/ACEtk/interpretation/EL03/test/occupationNumber.test.cpp",
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
-      "src/ACEtk/interpretation/EL03/test/el03.nxs.test.cpp",
-      "src/ACEtk/interpretation/EL03/test/BindingEnergy.test.cpp"
+      "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
-      "src/ACEtk/interpretation/MP1/test/DiscreteScatteringData.test.cpp",
-      "src/ACEtk/interpretation/MP1/test/TotalCrossSection.test.cpp"
+      "src/ACEtk/interpretation/MP1/test/TotalCrossSection.test.cpp",
+      "src/ACEtk/interpretation/MP1/test/DiscreteScatteringData.test.cpp"
     ]
   },
   "update": true
