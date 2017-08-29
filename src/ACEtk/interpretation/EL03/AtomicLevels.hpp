@@ -16,6 +16,12 @@ public:
 				 { return std::abs(x); } );
   }  
 
+  auto isLevelConductive() const {
+    return this->occupationNumbers()
+      | ranges::view::transform( []( const auto entry )
+				 { return entry < 0; } );
+  }    
+  
   auto bindingEnergies() const {
     const auto length = this->table.data.NXS( 11 );
     const auto start  = this->table.data.JXS( 11 ) + length;
@@ -24,12 +30,6 @@ public:
 				 { return entry * electronVolt; } );
   }
 
-  auto isLevelConductive() const {
-    return this->occupationNumbers()
-      | ranges::view::transform( []( const auto entry )
-				 { return entry < 0; } );
-  }  
-  
   auto values() const {
     return ranges::view::zip( this->occupationNumbers()
 			      this->isLevelConductive(),
