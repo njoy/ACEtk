@@ -14,5 +14,12 @@ public:
   auto radiativeStoppingPower() const {
     return RadiativeStoppingPower{ this->table };
   }
+
+  #include "ACEtk/interpretation/EL03/AtomicLevels.hpp"  
+
+  auto atomicLevels() const {
+    return AtomicLevels{ this->table };
+  }      
+  
 };
   
