@@ -17,7 +17,7 @@ public:
   }  
 
   auto isLevelConductive() const {
-    return this->occupationNumbers()
+    return this->rawOccupationNumbers()
       | ranges::view::transform( []( const auto entry )
 				 { return entry < 0; } );
   }    
