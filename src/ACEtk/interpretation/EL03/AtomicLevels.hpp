@@ -31,7 +31,7 @@ public:
   }
 
   auto values() const {
-    return ranges::view::zip( this->occupationNumbers()
+    return ranges::view::zip( this->occupationNumbers(),
 			      this->isLevelConductive(),
 			      this->bindingEnergies() );
   }
