@@ -8,10 +8,17 @@ static auto startOfDiscreteBlock( const Table& table ) {
 
 static auto findStartOfBlock( const Table& table , const int order ) {
 
-  auto zipOrdersWithStart = ranges::view::zip( availableOrders( table ),
-					       startOfDiscreteBlock( table ) );
+  auto lrnd = []( const auto x ){ return std::lround( x ); };
+  auto orders = availableOrders( table )
+    | ranges::view::transform( lrnd );
+
+  auto starts = startOfDiscreteData( table )
+    | ranges::view::transform( lrnd );
+  
+  auto zipOrdersWithStart = ranges::view::zip( orders, starts );
+  
   auto foundIfThisIsTrue =
-    [ order ]( const auto pair ) { return ( std::abs( double( order ) - pair.first ) < 1e-10 ); };
+    [ order ]( const auto pair ) { return ( order == pair.first ); };
   
   auto pairContainingIndex = ranges::find_if( zipOrdersWithStart,
 					      foundIfThisIsTrue );
