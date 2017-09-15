@@ -1,8 +1,7 @@
-auto totalCrossSection( size_t numberOfAngles ) const {
+auto totalCrossSection( ) const {
   const auto length = this->table.data.NXS( 3 );
-  const auto start  = this->table.data.JXS( this->ACEptr.find( numberOfAngles )->second );
   return
-    this->table.data.XSS( start, length )
+    this->table.data.XSS( this->start, length )
     | ranges::view::transform( []( auto&& entry )
 			       { return entry * centi( meters ) * centi( meters ); } );    
 }

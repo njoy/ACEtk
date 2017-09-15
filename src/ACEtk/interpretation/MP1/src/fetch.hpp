@@ -1,15 +1,13 @@
-struct DeflectionCosines{ static constexpr int offset = 1; };
-struct CDF{ static constexpr int offset = 2; };
-
-auto fetch( int offset, int order ) const {
-  const auto length = this->table.data.NXS( 3 ) * order;
-  const auto jxsIndex = this->ACEptr.find( order )->second + offset; 
-  const auto start = this->table.data.JXS( jxsIndex );
+auto mu( ) const {
+  const auto length = this->table.data.NXS( 3 ) * this->order;
+  const auto start = this->start + this->table.data.NXS( 3 );
   return this->table.data.XSS( start, length )
-    | ranges::view::chunk( order );
+    | ranges::view::chunk( this->order );  
 }
-  
-template< typename Tag, typename... Args >
-auto fetch( Args... args ) const {
-  return this->fetch( Tag::offset, std::forward<Args>(args)... );
-}
+
+auto cdf( ) const {
+  const auto length = this->table.data.NXS( 3 ) * this->order;
+  const auto start = this->start + this->table.data.NXS( 3 ) + length;
+  return this->table.data.XSS( start, length )
+    | ranges::view::chunk( this->order );    
+}  
