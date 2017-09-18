@@ -8,8 +8,7 @@ public:
   Header header;
  
   Table( Header&& header, Data&& data ) :
-    data( std::move(data) ),
-    header( std::move(header) ){}
+    data( std::move(data) ), header( std::move(header) ){}
 
 protected:
   /* api methods */
@@ -27,7 +26,26 @@ public:
       throw e;
     }
 
-public:
+  template< typename Iterator >
+  Table( State<Iterator>&& state ) : Table( state ){}
+
+  template< typename Range,
+            typename... Args,
+            typename = utility::void_t
+            < decltype( std::declval< Range >().begin() ),
+              decltype( std::declval< Range >().end() ) > >
+  Table( Range&& range, Args&&... ) :
+    Table( State< decltype( range.begin() ) >
+           { 1, range.begin(), range.end() } ){}
+
+  template< typename Istream,
+            typename = std::enable_if_t
+                       < std::is_base_of< std::istream,
+                                          std::decay_t< Istream > >::value > >
+  Table( Istream&& istream ) :
+    Table( std::string{ std::istreambuf_iterator< char >{ istream },
+                        std::istreambuf_iterator< char >{} } ){}
   
+public:
   #include "ACEtk/Table/src/print.hpp"
 };

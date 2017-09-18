@@ -2,20 +2,21 @@ template< typename Ostream >
 void print( Ostream& ostream ) const {
   auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
   
-  using IZAWLine = Record< Integer<7>, FixedPoint<11, 8>,
-                           Integer<7>, FixedPoint<11, 8>,
-                           Integer<7>, FixedPoint<11, 8>,
-                           Integer<7>, FixedPoint<11, 8> >;
+  using IZAWLine = Record< Integer<7>, FixedPoint<11, 7>,
+                           Integer<7>, FixedPoint<11, 7>,
+                           Integer<7>, FixedPoint<11, 7>,
+                           Integer<7>, FixedPoint<11, 7> >;
   
   IZAWLine::write( it,
                    this->IZ(1), this->AW(1), this->IZ(2), this->AW(2),
-                   this->IZ(3), this->AW(3), this->IZ(4), this->AW(4),
+                   this->IZ(3), this->AW(3), this->IZ(4), this->AW(4) );
+  IZAWLine::write( it,
                    this->IZ(5), this->AW(5), this->IZ(6), this->AW(6),
-                   this->IZ(7), this->AW(7), this->IZ(8), this->AW(8) );
-  
+                   this->IZ(7), this->AW(7), this->IZ(8), this->AW(8) );  
   IZAWLine::write( it,
                    this->IZ(9),  this->AW(9), this->IZ(10), this->AW(10),
-                   this->IZ(11), this->AW(11), this->IZ(12), this->AW(12),
+                   this->IZ(11), this->AW(11), this->IZ(12), this->AW(12) );
+  IZAWLine::write( it,
                    this->IZ(13), this->AW(13), this->IZ(14), this->AW(14),
                    this->IZ(15), this->AW(15), this->IZ(16), this->AW(16) );
 
@@ -57,10 +58,10 @@ void print( Ostream& ostream ) const {
   auto remainingEntries = this->xss.size() % 4;
   auto iterator = this->xss.begin();
 
-  using XSSLine = Record< Scientific< 20, 13 >,
-                          Scientific< 20, 13 >,
-                          Scientific< 20, 13 >,
-                          Scientific< 20, 13 > >;
+  using XSSLine = Record< Scientific< 20, 12 >,
+                          Scientific< 20, 12 >,
+                          Scientific< 20, 12 >,
+                          Scientific< 20, 12 > >;
 
   while ( remainingLines-- ) {
     XSSLine::write( it, iterator[0], iterator[1], iterator[2], iterator[3] );
@@ -69,7 +70,8 @@ void print( Ostream& ostream ) const {
 
   if ( remainingEntries ){
     while( remainingEntries-- ){
-      Scientific< 20, 13 >::write( it, *iterator++ );
+      Scientific< 20, 13 >::write( *iterator, it );
+      ++iterator;
     }
     Record<>::write( it );
   }
