@@ -12,7 +12,7 @@ static auto findStartOfBlock( const Table& table , const int order ) {
   auto orders = availableOrders( table )
     | ranges::view::transform( lrnd );
 
-  auto starts = startOfDiscreteData( table )
+  auto starts = startOfDiscreteBlock( table )
     | ranges::view::transform( lrnd );
   
   auto zipOrdersWithStart = ranges::view::zip( orders, starts );

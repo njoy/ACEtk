@@ -404,7 +404,6 @@
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/MP1/src/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
-    "src/ACEtk/interpretation/MP1/src/Offset.hpp",
     "src/ACEtk/interpretation/MP1/src/fetch.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
