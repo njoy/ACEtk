@@ -14,6 +14,9 @@ SCENARIO("test interpretation::MP1::energyGrid method"){
     REQUIRE( energyGrid.size() == 287 );
     auto minMaxEl = std::minmax_element( std::begin(energyGrid),
 					 std::end(energyGrid) );
+
+    REQUIRE( *( minMaxEl.first ) == 5e-5 * mega( electronVolts ) );
+    REQUIRE( *( minMaxEl.second ) == 0.1 * giga ( electronVolts ) );        
     
   }
 }

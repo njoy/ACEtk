@@ -6,3 +6,4 @@ auto energyGrid() const {
     | ranges::view::transform( []( auto&& entry )
 			       { return entry * mega(electronVolt); } );
 }  
+
