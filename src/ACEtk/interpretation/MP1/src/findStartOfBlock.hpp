@@ -1,9 +1,13 @@
 static auto availableOrders( const Table& table ) {
-  return table.data.XSS( 1, 5 );
+  auto start = table.data.JXS( 1 );
+  auto length = table.data.NXS( 5 );
+  return table.data.XSS( start, length );
 }
 
 static auto startOfDiscreteBlock( const Table& table ) {
-  return table.data.XSS( 6, 5 );
+  auto start = table.data.JXS( 1 ) + table.data.NXS( 5 );
+  auto length = table.data.NXS( 5 );
+  return table.data.XSS( start, length ); 
 }
 
 static auto findStartOfBlock( const Table& table , const int order ) {

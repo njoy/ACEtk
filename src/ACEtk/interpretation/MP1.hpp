@@ -10,7 +10,7 @@ public:
   auto atomicNumber() const { return Z( this->table ); }
     
   #include "ACEtk/interpretation/MP1/src/energyGrid.hpp"  				         
-  #include "ACEtk/interpretation/MP1/src/DiscreteData.hpp"
+  #include "ACEtk/interpretation/MP1/DiscreteData.hpp"
 
   auto discreteData( const int order ) const {
     return DiscreteData{ this->table, order };
