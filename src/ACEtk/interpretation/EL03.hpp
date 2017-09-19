@@ -9,13 +9,13 @@ public:
 
   auto atomicNumber() const { return Z( this->table ); }
   
-  #include "ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
+  #include "ACEtk/interpretation/EL03/src/RadiativeStoppingPower.hpp"
 
   auto radiativeStoppingPower() const {
     return RadiativeStoppingPower{ this->table };
   }
 
-  #include "ACEtk/interpretation/EL03/AtomicLevels.hpp"  
+  #include "ACEtk/interpretation/EL03/src/AtomicLevels.hpp"  
 
   auto atomicLevels() const {
     return AtomicLevels{ this->table };

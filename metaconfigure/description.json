@@ -375,7 +375,6 @@
     "src/ACEtk.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/interpretation.hpp",
-    "src/ACEtk/Tags.hpp",
     "src/ACEtk/Table/Data.hpp",
     "src/ACEtk/Table/Header.hpp",
     "src/ACEtk/Table/src/print.hpp",
@@ -399,8 +398,8 @@
     "src/ACEtk/Table/Header/src/print.hpp",
     "src/ACEtk/Table/Header/src/parse.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
-    "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
-    "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
+    "src/ACEtk/interpretation/EL03/src/RadiativeStoppingPower.hpp",
+    "src/ACEtk/interpretation/EL03/src/AtomicLevels.hpp"
   ],
   "ignore pattern": "$^",
   "implementation files": [],
