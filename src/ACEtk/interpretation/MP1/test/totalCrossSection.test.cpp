@@ -11,6 +11,10 @@ SCENARIO("test interpretation::MP1::totalCrossSection"){
   GIVEN("An ACE Table for 1000.mp1"){
 
     const auto mp1 = interpretation::MP1( table );    
+
+    WHEN("querying for the discrete data for order 3"){
+      REQUIRE_THROWS( mp1.discreteData( 3 ).totalCrossSection( ) );
+    }
     
     WHEN("querying for the total xs for order 1"){
       const auto txs =

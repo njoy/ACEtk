@@ -20,14 +20,19 @@ static auto findStartOfBlock( const Table& table , const int order ) {
     | ranges::view::transform( lrnd );
   
   auto zipOrdersWithStart = ranges::view::zip( orders, starts );
-  
+
   auto foundIfThisIsTrue =
     [ order ]( const auto pair ) { return ( order == pair.first ); };
   
   auto pairContainingIndex = ranges::find_if( zipOrdersWithStart,
 					      foundIfThisIsTrue );
   
-  assert( pairContainingIndex != ranges::end( zipOrdersWithStart ) );
-
+  if( pairContainingIndex == ranges::end( zipOrdersWithStart ) ){
+    std::runtime_error r( "Could not find the requested order in ACE file.\n"
+			  "order requested: " + std::to_string( order ) );
+    njoy::Log::error( r.what() );      
+    throw r;
+  }
+  
   return (*pairContainingIndex).second;
 }
