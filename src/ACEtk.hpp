@@ -2,6 +2,8 @@
 #define ACETK_HPP
 
 #include <regex>
+#include <istream>
+#include <iterator>
 
 #include "date.h"
 #include "disco.hpp"
@@ -25,6 +27,7 @@ struct State{
 };
 
 #include "ACEtk/Table.hpp"
+#include "ACEtk/interpretation.hpp"  
 
 }
 }
