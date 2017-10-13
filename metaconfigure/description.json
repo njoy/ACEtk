@@ -397,9 +397,17 @@
     "src/ACEtk/Table/Header/String.hpp",
     "src/ACEtk/Table/Header/src/print.hpp",
     "src/ACEtk/Table/Header/src/parse.hpp",
+    "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
-    "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
-    "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
+    "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
+    "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
+    "src/ACEtk/interpretation/MP1/src/fetch.hpp",
+    "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
+    "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
+    "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
+    "src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp",
+    "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
+    "src/ACEtk/interpretation/EL03/AtomicLevels.hpp"
   ],
   "ignore pattern": "$^",
   "implementation files": [],
@@ -447,6 +455,12 @@
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp"
+    ],
+    "ACEtk.interpretation.MP1": [
+      "src/ACEtk/interpretation/MP1/test/deflectionCosines.test.cpp",
+      "src/ACEtk/interpretation/MP1/test/cumulativeDistributions.test.cpp",
+      "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp",
+      "src/ACEtk/interpretation/MP1/test/energyGrid.test.cpp"
     ]
   },
   "update": true

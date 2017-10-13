@@ -258,9 +258,17 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/String.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/print.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/parse.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/AtomicLevels.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp" )
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/DiscreteData.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/energyGrid.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/fetch.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/AtomicLevels.hpp" )
 
 target_include_directories( ACEtk INTERFACE src )
 
@@ -279,6 +287,7 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/Table/Header/test )
         add_subdirectory( src/ACEtk/Table/Header/String/test )
         add_subdirectory( src/ACEtk/interpretation/EL03/test )
+        add_subdirectory( src/ACEtk/interpretation/MP1/test )
     endif() 
 endif()
 
