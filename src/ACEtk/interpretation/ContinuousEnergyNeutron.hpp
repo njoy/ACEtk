@@ -1,11 +1,4 @@
-class ContinuousEnergyNeutron {
-  const Table& table;
-
-public:
-  ContinuousEnergyNeutron( const Table& table ): table( table ) {}
-
-  int size() const { return this->table.data.NXS(1); }
-  int ZA() const { return this->table.data.NXS(2); }
-
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid.hpp"
-};
+namespace ContinuousEnergyNeutron {
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron.hpp"  
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp"  
+}

@@ -378,7 +378,17 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/CrossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/EnergyGrid.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/EnergyGrid/src/energies.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/src/neutronReactionIDs.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/src/photonProductionReactionIDs.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/src/reactionIDs.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Base.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Base/src/getReactionIndex.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
@@ -454,11 +464,17 @@
     "ACEtk.Table.Header.String": [
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
     ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
+    "ACEtk.interpretation.ContinuousEnergyNeutron.ContinuousEnergyNeutron": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
     ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyGrid": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/test/EnergyGrid.test.cpp"
+    "ACEtk.interpretation.ContinuousEnergyNeutron.ContinuousEnergyNeutron.EnergyGrid": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/EnergyGrid/test/EnergyGrid.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.Base": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Base/test/Base.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.Neutron": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron/test/Neutron.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
