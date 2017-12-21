@@ -40,7 +40,7 @@ SCENARIO("test interpretation::EL03"){
       const auto trial = el03.radiativeStoppingPower().energyGrid(); 
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for( const auto pair : ranges::view::zip( reference, trial ) ) {
-	REQUIRE( pair.first == Approx( pair.second.value ) );
+        REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
     

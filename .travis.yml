@@ -16,10 +16,9 @@ addons:
       - g++-6
       - clang-3.8
       - llvm-dev
-      - libc++-dev
       - cmake
       - cmake-data
-      
+
 language: cpp
 
 compiler:
@@ -33,6 +32,7 @@ os:
 osx_image: xcode8
 
 script: ./.travis/build.sh
+after_success: "./.travis/signature.sh"
 
 env:
   - build_type=debug static_libraries=FALSE
@@ -42,19 +42,20 @@ env:
 
 matrix:
   include:
-    - os: linux
-      compiler: gcc
-      env: build_type=coverage static_libraries=FALSE
-    - os: linux
-      compiler: clang
-      env:
-        build_type=debug static_libraries=FALSE
-        appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
-    - os: linux
-      compiler: clang
-      env:
-        build_type=debug static_libraries=FALSE
-        appended_flags="-fsanitize=undefined;-fno-omit-frame-pointer;"
-  exclude:
-    - os: osx
-      compiler: gcc
+  - os: linux
+    compiler: gcc
+    env: 
+      build_type=coverage 
+      static_libraries=FALSE
+  - os: linux
+    compiler: clang
+    env:
+      build_type=debug 
+      static_libraries=FALSE
+      appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
+  - os: linux
+    compiler: clang
+    env:
+      build_type=debug 
+      static_libraries=FALSE
+      appended_flags="-fsanitize=undefined;-fsanitize=integer;-fno-omit-frame-pointer;"
