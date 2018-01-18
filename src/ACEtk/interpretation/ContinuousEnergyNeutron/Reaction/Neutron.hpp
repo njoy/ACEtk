@@ -5,4 +5,7 @@ public:
       Base::getReactionIndex( 
         ContinuousEnergyNeutron::neutronReactionIDs( table ), ID ) )
   { }
+
+  using Base::ID;
+  using Base::Index;
 };

@@ -14,6 +14,12 @@ SCENARIO( "Testing the Neutron (Reaction)" ){
         interpretation::ContinuousEnergyNeutron::Reaction::Neutron( ACETable, 
                                                                     18 );
 
+      THEN( "the parameters can be verified" ){
+        REQUIRE( 18 == nFission.ID() );
+        REQUIRE( 2 == nFission.Index() );
+
+      }
+
     } // WHEN
   } // GIVEN
 } // SCENARIO

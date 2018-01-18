@@ -13,4 +13,5 @@ protected:
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Base/src/getReactionIndex.hpp"
   int ID() const { return this->MT; }
+  int Index() const { return this-> reactionIndex; }
 };
