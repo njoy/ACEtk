@@ -388,6 +388,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/ContinuousEnergyNeutron/src/reactionIDs.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Base.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/PhotonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Base/src/getReactionIndex.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
@@ -475,6 +476,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.Neutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron/test/Neutron.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.PhotonProduction": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/PhotonProduction/test/PhotonProduction.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
