@@ -1,11 +1,11 @@
-class Neutron: protected Base {
+class Neutron: protected Reaction {
 public:
   Neutron( const Table& table, int ID ) :
-    Base( table, ID, 
-      Base::getReactionIndex( 
+    Reaction( table, ID, 
+      Reaction::getReactionIndex( 
         ContinuousEnergyNeutron::neutronReactionIDs( table ), ID ) )
   { }
 
-  using Base::ID;
-  using Base::Index;
+  using Reaction::ID;
+  using Reaction::Index;
 };

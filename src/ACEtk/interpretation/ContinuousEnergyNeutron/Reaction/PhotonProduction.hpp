@@ -1,11 +1,11 @@
-class PhotonProduction: protected Base {
+class PhotonProduction: protected Reaction {
 public:
   PhotonProduction( const Table& table, int ID ):
-    Base( table, ID,
-      Base::getReactionIndex(
+    Reaction( table, ID,
+      Reaction::getReactionIndex(
         ContinuousEnergyNeutron::photonProductionReactionIDs( table ), ID ) )
   { }
 
-  using Base::ID;
-  using Base::Index;
+  using Reaction::ID;
+  using Reaction::Index;
 };

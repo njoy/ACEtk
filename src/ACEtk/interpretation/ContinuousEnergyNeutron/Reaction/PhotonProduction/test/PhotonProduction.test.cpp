@@ -4,14 +4,15 @@
 #include "ACEtk.hpp"
 
 using namespace njoy::ACEtk;
-using namespace njoy::ACEtk::interpretation::ContinuousEnergyNeutron;
+using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing the PhotonProduction (Reaction)" ){
   GIVEN( "An ACE Table for 92235.710nc" ){
     auto ACETable = Table( njoy::utility::slurpFileToMemory("92235.710nc") );
 
     WHEN( "extracting the Neutron (Reaction)" ){
-      auto pProduction = Reaction::PhotonProduction( ACETable, 4004 );
+      auto pProduction = ContinuousEnergyNeutron::PhotonProduction( 
+          ACETable, 4004 );
 
       THEN( "the parameters can be verified" ){
         REQUIRE( 4004 == pProduction.ID() );
@@ -21,7 +22,8 @@ SCENARIO( "Testing the PhotonProduction (Reaction)" ){
 
     WHEN( "extracting a non-valid reaction" ){
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( Reaction::PhotonProduction( ACETable, 18 ) );
+        REQUIRE_THROWS( ContinuousEnergyNeutron::PhotonProduction( 
+                ACETable, 18 ) );
       }
     }
   } // GIVEN
