@@ -1,14 +1,12 @@
 class CrossSection {
-  const Table& table;
-  const int MT;
-  const int reactionIndex;
+
+  Slice energyGrid_;
+  Slice xsValues_;
 
 public:
-  CrossSection( const Table& table, int ID ):
-    table( table ),
-    MT( ID ),
-    reactionIndex( getReactionIndex( table ) )
-  { }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp"
 
-  int ID() const { return this->MT; }
+  auto energyGrid() const {
+    return scaleBy( 1.0 * mega( electronVolts ) )( this->energyGrid_ );
+  }
 };

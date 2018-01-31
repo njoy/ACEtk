@@ -466,6 +466,9 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
     ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.CrossSection": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/test/CrossSection.test.cpp"
+    ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyGrid": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/test/EnergyGrid.test.cpp"
     ],
