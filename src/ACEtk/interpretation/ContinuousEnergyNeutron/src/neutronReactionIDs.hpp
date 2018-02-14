@@ -1,6 +1,8 @@
 static
 auto neutronReactionIDs(const Table& ACETable) {
-  return ACETable.data.XSS( ACETable.data.JXS(3), ACETable.data.NXS( 4 ) );
+  return ACETable.data.XSS( 
+    ACETable.data.JXS( ContinuousEnergyNeutron::NeutronHeaderIndices::MTs.jxs ), 
+    ACETable.data.NXS( ContinuousEnergyNeutron::NeutronHeaderIndices::MTs.nxs ) );
 }
 
 auto neutronReactionIDs() const{

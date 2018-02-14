@@ -377,16 +377,18 @@
     "src/ACEtk/Table.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
+    "src/ACEtk/interpretation/HeaderIndices.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/PhotonProduction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/src/getReactionIndex.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/NeutronHeaderIndices.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/neutronReactionIDs.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/PhotonProductionHeaderIndices.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/photonProductionReactionIDs.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIDs.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
@@ -475,12 +477,6 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/test/Reaction.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.Neutron": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron/test/Neutron.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.PhotonProduction": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/PhotonProduction/test/PhotonProduction.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",

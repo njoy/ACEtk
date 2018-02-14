@@ -1,5 +1,5 @@
 struct NeutronHeaderIndices{
-  // static constexpr HeaderIndices crossSection{ 4, 0};
+  static constexpr HeaderIndices MTs{ 4, 3 };
+  static constexpr HeaderIndices crossSection{ 4, 7};
 };
 
-typedef NeutronHeaderIndices Loanne;

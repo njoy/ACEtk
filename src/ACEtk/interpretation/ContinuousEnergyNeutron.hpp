@@ -1,10 +1,10 @@
 class ContinuousEnergyNeutron {
   const Table& table;
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/NeutronHeaderIndices.hpp"
-
 protected:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/NeutronHeaderIndices.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/PhotonProductionHeaderIndices.hpp"
+
   using Slice = decltype( table.data.XSS( 1, 2 ) );
 
 public:
@@ -15,13 +15,11 @@ public:
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp"
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/neutronReactionIDs.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/photonProductionReactionIDs.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIDs.hpp"
-
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/PhotonProduction.hpp"
 
 };
 
