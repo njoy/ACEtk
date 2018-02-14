@@ -385,12 +385,14 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/src/energies.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/src/ctor.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/src/getReactionIndex.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeCrossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/NeutronHeaderIndices.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/neutronReactionIDs.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/PhotonProductionHeaderIndices.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/photonProductionReactionIDs.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIDs.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIndex.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
@@ -467,7 +469,10 @@
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/makeCrossSection.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/makeReaction.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/reactionIndex.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.CrossSection": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/test/CrossSection.test.cpp"

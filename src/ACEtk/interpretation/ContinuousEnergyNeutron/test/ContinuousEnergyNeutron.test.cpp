@@ -5,9 +5,10 @@
 
 using namespace njoy::ACEtk;
 
+njoy::ACEtk::Table ACETable( njoy::utility::slurpFileToMemory("92235.710nc") );
+
 SCENARIO( "Testing interpretation:nc" ){
   GIVEN( "An ACE Table for 92235.710nc" ){
-    auto ACETable = Table( njoy::utility::slurpFileToMemory("92235.710nc") );
     WHEN( "constructing a ContinuousEnergyNeutron interpretation" ){
 
       const auto ncTable = interpretation::nc( ACETable );

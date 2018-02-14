@@ -26,4 +26,14 @@ SCENARIO( "Constructing a CrossSection" ){
       }
     }
   } // GIVEN
+  GIVEN( "bad values" ){
+    std::vector< double > eGrid{1.0, 2.0, 3.0};
+    std::vector< double > xsValues{2.1, 3.1, 4.1, 5.0};
+
+    WHEN( "constructing a CrossSection" ){
+      THEN( "an exception is thrown" ){
+        REQUIRE_THROWS( interpretation::nc::CrossSection( eGrid, xsValues ) );
+      }
+    }
+  }
 } // SCENARIO
