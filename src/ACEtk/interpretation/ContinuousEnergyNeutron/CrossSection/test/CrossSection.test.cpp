@@ -20,6 +20,9 @@ SCENARIO( "Constructing a CrossSection" ){
             XS.energyGrid() );
         REQUIRE( equal );
 
+        equal = ranges::equal( scaleBy( barn )( xsValues ), XS.values() );
+        REQUIRE( equal );
+
       }
     }
   } // GIVEN

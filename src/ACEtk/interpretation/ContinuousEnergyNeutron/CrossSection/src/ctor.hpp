@@ -1,6 +1,6 @@
 CrossSection( Slice energies, Slice values ) :
   energyGrid_( energies ),
-  xsValues_( values )
+  values_( values )
 { }
 
 template< typename Range  >

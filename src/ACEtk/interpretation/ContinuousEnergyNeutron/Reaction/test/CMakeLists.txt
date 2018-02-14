@@ -1,5 +1,5 @@
 
-add_executable( ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.test Base.test.cpp )
+add_executable( ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.test Reaction.test.cpp )
 target_compile_options( ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

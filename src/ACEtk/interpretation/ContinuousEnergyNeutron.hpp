@@ -2,6 +2,7 @@ class ContinuousEnergyNeutron {
   const Table& table;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/NeutronHeaderIndices.hpp"
 
 protected:
   using Slice = decltype( table.data.XSS( 1, 2 ) );

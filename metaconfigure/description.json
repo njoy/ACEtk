@@ -381,6 +381,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/src/energies.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/PhotonProduction.hpp",
@@ -473,7 +474,7 @@
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/test/EnergyGrid.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/test/Base.test.cpp"
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/test/Reaction.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction.Neutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/Neutron/test/Neutron.test.cpp"

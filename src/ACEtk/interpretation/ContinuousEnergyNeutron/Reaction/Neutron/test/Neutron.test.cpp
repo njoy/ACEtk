@@ -11,10 +11,11 @@ SCENARIO( "Testing the Neutron (Reaction)" ){
     auto ACETable = Table( njoy::utility::slurpFileToMemory("92235.710nc") );
 
     WHEN( "extracting the Neutron (Reaction)" ){
-      auto nFission = ContinuousEnergyNeutron::Neutron( ACETable, 18 );
+      int MT{18};
+      auto nFission = ContinuousEnergyNeutron::Neutron( ACETable, MT );
 
       THEN( "the parameters can be verified" ){
-        REQUIRE( 18 == nFission.ID() );
+        REQUIRE( MT == nFission.ID() );
         REQUIRE( 2 == nFission.Index() );
       }
     } // WHEN
