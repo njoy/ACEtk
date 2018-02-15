@@ -472,6 +472,7 @@
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp",
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/makeCrossSection.test.cpp",
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/makeReaction.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/QValues.test.cpp",
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/reactionIndex.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.CrossSection": [

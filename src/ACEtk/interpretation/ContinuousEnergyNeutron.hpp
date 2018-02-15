@@ -22,6 +22,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIDs.hpp"
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIndex.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/QValues.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/makeCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/makeReaction.hpp"
 
