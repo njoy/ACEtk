@@ -386,8 +386,9 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/src/energies.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/src/ctor.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/fissionMultiplicity.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeCrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/NeutronHeaderIndices.hpp",
@@ -490,6 +491,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.fissionMultiplicity.Polynomial": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/test/Polynomial.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.fissionMultiplicity.Tabulated": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/test/Tabulated.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",

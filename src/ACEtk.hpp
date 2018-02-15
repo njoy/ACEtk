@@ -11,6 +11,7 @@
 #include "interpolation.hpp"
 #include "header-utilities.hpp"
 #include "Log.hpp"
+#include "ENDFtk.hpp"
 
 namespace njoy {
 namespace ACEtk {
