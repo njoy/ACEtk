@@ -11,8 +11,9 @@ Reaction makeReaction( const Table& ACETable, int MT){
     throw;
   }
   auto XS = makeCrossSection( ACETable, index );
+  double QValue = QValues( ACETable )[index];
 
-  return Reaction( std::move( XS ) );
+  return Reaction( std::move( XS ), QValue );
 }
 
 Reaction makeReaction( int MT ) const {

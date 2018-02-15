@@ -21,6 +21,6 @@ CrossSection makeCrossSection( const Table& ACETable, int index ){
   return CrossSection( energies, sigma );
 }
 
-Reaction makeCrossSection( int index ) const {
+CrossSection makeCrossSection( int index ) const {
   return makeCrossSection( this->table, index );
 }
