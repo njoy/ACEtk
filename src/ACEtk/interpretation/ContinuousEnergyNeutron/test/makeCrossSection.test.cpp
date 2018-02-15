@@ -6,19 +6,23 @@ using namespace njoy::ACEtk;
 extern njoy::ACEtk::Table ACETable;
 
 SCENARIO( "Finding Crosssections in a Table" ){
-  GIVEN( "valid identifiers" ){
-    std::vector< int > IDs{ 16, 17, 102 };
+  GIVEN( "valid indices" ){
+    std::vector< int > indices{ 0, 1, 45 };
 
     THEN( "a CrossSection can be created" ){
-      for( auto& id : IDs ){
-        REQUIRE_NOTHROW( nc::makeCrossSection( ACETable, id ) );
+      for( auto& index : indices ){
+        njoy::Log::info( "index: {}", index );
+        REQUIRE_NOTHROW( nc::makeCrossSection( ACETable, index ) );
       }
     }
   } // GIVEN
   GIVEN( "invalid identifiers" ){
-
+    std::vector< int > indices { -1, 49, 100 };
     THEN( "an exception is thrown" ){
-      REQUIRE_THROWS( nc::makeCrossSection( ACETable, 2 ) );
+      for( auto& index : indices ){
+        njoy::Log::info( "index: {}", index );
+        REQUIRE_THROWS( nc::makeCrossSection( ACETable, index ) );
+      }
     }
   }
 } // SCENARIO

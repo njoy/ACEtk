@@ -14,16 +14,16 @@ SCENARIO( "Finding reaction indices" ){
     WHEN( "giving valid IDs" ){
       THEN( "the indices can be found" ){
 
-        REQUIRE( 3 == nc::getReactionIndex( IDs, 37 ) );
+        REQUIRE( 3 == nc::reactionIndex( IDs, 37 ) );
 
         for( size_t i=0; i < IDs.size(); i++ ){
-          REQUIRE( i == nc::getReactionIndex( IDs, IDs[i] ) );
+          REQUIRE( i == nc::reactionIndex( IDs, IDs[i] ) );
         }
       }
     } // WHEN
     WHEN( "given invalid IDs" ){
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( nc::getReactionIndex( IDs, 15 ) );
+        REQUIRE_THROWS( nc::reactionIndex( IDs, 15 ) );
       }
     }
   } // GIVEN

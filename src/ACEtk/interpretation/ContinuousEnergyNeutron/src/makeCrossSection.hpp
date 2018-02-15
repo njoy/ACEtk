@@ -1,32 +1,16 @@
 static
-CrossSection makeCrossSection( const Table& ACETable, int MT ){
+CrossSection makeCrossSection( const Table& ACETable, int index ){
 
-  Log::info( "MT: {}", MT );
-  int index;
-  int LXS;
-  int lxs2;
-  try{
-    // Look first in the neutron reactions
-    index = getReactionIndex( neutronReactionIDs( ACETable ), MT );
-    LXS = ACETable.data.JXS( 
-        NeutronHeaderIndices::Locators::crossSection.jxs ) + index;
-    lxs2 = ACETable.data.JXS( NeutronHeaderIndices::crossSection.jxs );
-  } catch( const std::exception& e ){
-    try{
-      // If you can't find it amongst the neutron reactions, look in the photon
-      // production reactions
-      index = getReactionIndex( photonProductionReactionIDs( ACETable ), MT );
-      LXS = ACETable.data.JXS( 
-          PhotonProductionHeaderIndices::Locators::crossSection.jxs ) + index;
-      lxs2 = ACETable.data.JXS( 
-          PhotonProductionHeaderIndices::crossSection.jxs );
-    } catch( const std::exception& e ){
-      njoy::Log::info( 
-          "Can't make a CrossSection because the Reaction can't be found." );
-      throw std::exception();
-    }
+  int NTR = ACETable.data.NXS( NeutronHeaderIndices::MTs.nxs );
+  if( ( index > NTR ) or ( index < 0 ) ){
+    Log::error( "Index ({}) is outside the range of number of reactions ({}).",
+               index, NTR );
+    throw std::exception();
   }
 
+  int LXS = ACETable.data.JXS( 
+      NeutronHeaderIndices::Locators::crossSection.jxs ) + index;
+  int lxs2 = ACETable.data.JXS( NeutronHeaderIndices::crossSection.jxs );
   auto LOCA = ACETable.data.XSS( LXS );
   auto IE = ACETable.data.XSS( lxs2 + LOCA - 1);
   auto NE = ACETable.data.XSS( lxs2 + LOCA );
@@ -37,6 +21,6 @@ CrossSection makeCrossSection( const Table& ACETable, int MT ){
   return CrossSection( energies, sigma );
 }
 
-Reaction makeCrossSection( int MT ) const {
-  return makeCrossSection( this->table, MT );
+Reaction makeCrossSection( int index ) const {
+  return makeCrossSection( this->table, index );
 }
