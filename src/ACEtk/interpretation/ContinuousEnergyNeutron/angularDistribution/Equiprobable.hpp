@@ -1,6 +1,6 @@
 class Equiprobable {
   Slice energyGrid_;
-  Slice boundaries_;
+  std::vector< std::optional< std::vector< double > > > boundaries_;
 
 public:
   #include  "ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable/src/ctor.hpp"
