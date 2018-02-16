@@ -379,10 +379,14 @@
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/HeaderIndices.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyGrid/src/energies.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial.hpp",
@@ -488,6 +492,12 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/test/Reaction.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.angularDistribution.Equiprobable": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable/test/Equiprobable.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.angularDistribution.Tabulated": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated/test/Tabulated.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.fissionMultiplicity.Polynomial": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/test/Polynomial.test.cpp"
