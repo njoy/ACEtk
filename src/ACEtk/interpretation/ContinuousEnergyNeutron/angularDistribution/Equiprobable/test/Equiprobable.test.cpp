@@ -8,7 +8,7 @@ using namespace njoy::ACEtk;
 SCENARIO( "Constructing an equiprobable bins for angular distribution" ){
   GIVEN( "a list of energies and bin boundaries" ){
     std::vector< double > eGrid{1.0, 2.0, 3.0};
-    std::vector< double > boundaries; boundaries.reserve( 33 );
+    std::vector< double > boundaries( 33 );
     std::iota( boundaries.begin(), boundaries.end(), 1 );
 
     WHEN( "constructing a Tabulated representation" ){
