@@ -15,7 +15,8 @@ CrossSection makeCrossSection( const Table& ACETable, int index ){
   auto IE = ACETable.data.XSS( lxs2 + LOCA - 1);
   auto NE = ACETable.data.XSS( lxs2 + LOCA );
 
-  auto energies = EnergyGrid( ACETable ).energies( IE, NE );
+  auto energies = ACETable.data.XSS(
+    NeutronHeaderIndices::Energies.jxs + IE, NE );
   auto sigma = ACETable.data.XSS( LXS + LOCA + 1, NE );
 
   return CrossSection( energies, sigma );
