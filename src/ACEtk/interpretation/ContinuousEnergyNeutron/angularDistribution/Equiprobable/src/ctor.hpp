@@ -22,6 +22,7 @@ Equiprobable( Slice bins ):
 
 }
 
+// Need to change this so it's no to specific to std::vector
 template< typename Range >
 Equiprobable( Range& bins ):
   Equiprobable( 
