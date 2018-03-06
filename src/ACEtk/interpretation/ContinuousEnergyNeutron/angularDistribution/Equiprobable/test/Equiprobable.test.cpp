@@ -3,34 +3,54 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
-using namespace njoy::ACEtk;
+using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Constructing an equiprobable bins for angular distribution" ){
-  GIVEN( "a list of energies and bin boundaries" ){
-    std::vector< double > eGrid{1.0, 2.0, 3.0};
-    std::vector< double > boundaries; boundaries.reserve( 33 );
-    std::iota( boundaries.begin(), boundaries.end(), 1 );
+  GIVEN( "a list of bin boundaries" ){
+    std::vector< double > boundaries; boundaries.resize( 33 );
 
-    WHEN( "constructing a Tabulated representation" ){
-      interpretation::nc::angularDistribution::Equiprobable equi( 
-          eGrid, boundaries );
+    WHEN( "boundaries are correct" ){
+      for( size_t i=0; i < boundaries.size(); i++ ){
+        boundaries[i] = -1.0 + i*( 2.0/32 );
+      }
+      ContinuousEnergyNeutron::angularDistribution::Equiprobable equi( 
+          boundaries );
 
-      THEN( "the boundaries and energies can be verified" ){
-        bool equal = ranges::equal( 
-            scaleBy( 1.0*mega( electronVolts ) )( eGrid ),
-            equi.energyGrid() );
-        REQUIRE( equal );
-
-        equal = ranges::equal( boundaries, equi.boundaries() );
+      THEN( "the boundaries can be verified" ){
+        bool equal = ranges::equal( boundaries, equi.boundaries() );
         REQUIRE( ranges::equal( boundaries, equi.boundaries() ) );
       }
     }
+    WHEN( "boundaries are incorrect" ){
+      for( size_t i=0; i < boundaries.size(); i++ ){
+        boundaries[i] = -1.0 + i*( 2.0/32 );
+      }
+      WHEN( "first value is != -1.0" ){
+        boundaries.front() = -0.99;
 
-    WHEN( "the length of the boundaries is not 33" ){
-      boundaries.push_back( 45.0 );
-      THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( interpretation::nc::angularDistribution::Equiprobable(
-                eGrid, boundaries ) );
+        THEN( "an exception is thrown" ){
+          REQUIRE_THROWS( 
+            ContinuousEnergyNeutron::angularDistribution::Equiprobable( 
+                boundaries ) );
+        }
+      }
+      WHEN( "last value is != 1.0" ){
+        boundaries.back() = 0.99;
+
+        THEN( "an exception is thrown" ){
+          REQUIRE_THROWS( 
+            ContinuousEnergyNeutron::angularDistribution::Equiprobable( 
+                boundaries ) );
+        }
+      }
+      WHEN( "last values are not sorted" ){
+        boundaries[1] = 4.0/32;
+
+        THEN( "an exception is thrown" ){
+          REQUIRE_THROWS( 
+            ContinuousEnergyNeutron::angularDistribution::Equiprobable( 
+                boundaries ) );
+        }
       }
     }
   }

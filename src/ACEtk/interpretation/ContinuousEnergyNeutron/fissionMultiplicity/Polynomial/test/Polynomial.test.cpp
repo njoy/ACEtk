@@ -7,7 +7,7 @@ using namespace njoy::ACEtk;
 
 SCENARIO( "Constructing a polynomial representation of fission multiplicity" ){
   GIVEN( "a list of polynomial coefficients" ){
-    std::vector< double > coeffs{ 10 };
+    std::vector< double > coeffs; coeffs.resize( 10 );
     std::iota( coeffs.begin(), coeffs.end(), 1 );
 
     THEN( "a Polynomial can be constructed" ){

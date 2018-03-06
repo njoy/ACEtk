@@ -3,19 +3,18 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
-using namespace njoy::ACEtk;
+using namespace njoy::ACEtk::interpretation;
 
 njoy::ACEtk::Table ACETable( njoy::utility::slurpFileToMemory("92235.710nc") );
 
-SCENARIO( "Testing interpretation:nc" ){
+SCENARIO( "Testing interpretation:ContinuousEnergyNeutron" ){
   GIVEN( "An ACE Table for 92235.710nc" ){
     WHEN( "constructing a ContinuousEnergyNeutron interpretation" ){
 
-      const auto ncTable = interpretation::nc( ACETable );
+      const auto ncTable = ContinuousEnergyNeutron( ACETable );
 
       THEN( "parameters can be extracted" ){
 
-        REQUIRE( 837481 == ncTable.size() );
         REQUIRE( 92235 == ncTable.ZA() );
       }
       THEN( "the reaction IDs can be extracted and verified" ){
@@ -32,7 +31,7 @@ SCENARIO( "Testing interpretation:nc" ){
         for( const auto tuple : ranges::view::zip( 
            refNeutronIDs, 
            ncTable.neutronReactionIDs(),
-           interpretation::nc::neutronReactionIDs( ACETable ))
+           ContinuousEnergyNeutron::neutronReactionIDs( ACETable ))
         ){
           auto ref = std::get< 0 >( tuple );
           REQUIRE( ref == Approx( std::get< 1 >( tuple ) ) );
@@ -41,7 +40,7 @@ SCENARIO( "Testing interpretation:nc" ){
         for( const auto tuple : ranges::view::zip( 
            refPhotonIDs, 
            ncTable.photonProductionReactionIDs(),
-           interpretation::nc::photonProductionReactionIDs( ACETable )
+           ContinuousEnergyNeutron::photonProductionReactionIDs( ACETable )
               )
         ){
           auto ref = std::get< 0 >( tuple );
