@@ -2,8 +2,9 @@ auto& XSS( std::size_t index ){ return fetch(this->xss, index); }
 
 CONST_OVERLOAD( XSS )
 
-auto XSS( std::size_t index, std::size_t length ){
-#ifndef ndebug
+ranges::iterator_range< std::vector< double >::iterator >
+XSS( std::size_t index, std::size_t length ){
+#ifndef NDEBUG
   verifyIndex( this->xss, index );
   verifyIndex( this->xss, index + length - 1 );
 #endif
@@ -14,7 +15,8 @@ auto XSS( std::size_t index, std::size_t length ){
 
 auto& XSS(){ return this->xss; }
 
-auto XSS( std::size_t index, std::size_t length ) const {
+ranges::iterator_range< std::vector< double >::const_iterator >
+XSS( std::size_t index, std::size_t length ) const {
 #ifndef NDEBUG
   verifyIndex( this->xss, index );
   verifyIndex( this->xss, index + length - 1 );

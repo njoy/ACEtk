@@ -5,7 +5,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/NeutronHeaderIndices.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/PhotonProductionHeaderIndices.hpp"
 
-  using Slice = decltype( table.data.XSS( 1, 2 ) );
+  using Slice = Table::Slice;
 
 public:
   ContinuousEnergyNeutron( const Table& table ): table( table ) {}
