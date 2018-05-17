@@ -376,6 +376,7 @@
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
+    "src/ACEtk/interpretation/CoupledDensityFunctions.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/HeaderIndices.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
@@ -392,6 +393,9 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/interpolationSchemes.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/regions.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeCrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeReaction.hpp",
@@ -402,6 +406,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/QValues.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIDs.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIndex.hpp",
+    "src/ACEtk/interpretation/CoupledDensityFunctions/src/ctor.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
@@ -411,6 +416,7 @@
     "src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp",
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
     "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
+    "src/ACEtk/interpretation/src/checkHistLinLinFlag.hpp",
     "src/ACEtk/Table/Data.hpp",
     "src/ACEtk/Table/Header.hpp",
     "src/ACEtk/Table/Data/Parse.hpp",
@@ -501,6 +507,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.fissionMultiplicity.Tabulated": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/test/Tabulated.test.cpp"
+    ],
+    "ACEtk.interpretation.CoupledDensityFunctions": [
+      "src/ACEtk/interpretation/CoupledDensityFunctions/test/CoupledDensityFunctions.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
