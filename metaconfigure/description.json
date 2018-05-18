@@ -378,11 +378,13 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/CoupledDensityFunctions.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
+    "src/ACEtk/interpretation/ENDFInterpolationParameters.hpp",
     "src/ACEtk/interpretation/HeaderIndices.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/ScaleBy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/energyDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable.hpp",
@@ -409,6 +411,7 @@
     "src/ACEtk/interpretation/CoupledDensityFunctions/src/ctor.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
+    "src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -514,6 +517,9 @@
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp"
+    ],
+    "ACEtk.interpretation.ENDFInterpolationParameters": [
+      "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
       "src/ACEtk/interpretation/MP1/test/cumulativeDistributions.test.cpp",
