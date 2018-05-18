@@ -14,7 +14,8 @@ public:
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/energyDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp"
 

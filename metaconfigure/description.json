@@ -384,7 +384,8 @@
     "src/ACEtk/interpretation/ScaleBy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/energyDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable.hpp",
@@ -392,6 +393,8 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/src/ctor.hpp",
@@ -495,6 +498,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.CrossSection": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/test/CrossSection.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.DiscretePhotonEnergy": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/test/DiscretePhotonEnergy.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/test/Reaction.test.cpp"
