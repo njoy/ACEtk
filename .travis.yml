@@ -10,20 +10,18 @@ addons:
     - ubuntu-toolchain-r-test
     - george-edison55-precise-backports
     packages:
-    - gcc-6
     - g++-6
     - clang-3.8
     - llvm-dev
-    - cmake
-    - cmake-data
 language: cpp
 compiler:
-- gcc
-- clang
+  - gcc
+  - clang
 os:
-- linux
-- osx
+  - linux
+  - osx
 osx_image: xcode8
+
 script: "./.travis/build.sh"
 after_success: "./.travis/signature.sh"
 env:
@@ -36,12 +34,16 @@ env:
     secure: Ddj8OGVM61Ijx7laTmYG2kOwvDUnhyOAhx88brXYG5MhRo+uPEHVeSMYeJX8wIT6E8fDqbOQ1Nu418o3t0z1+uoR56aqngcHYcgteQ0ElGwq9WAjP/ShAqmOqQ0egPmuX3J9kxUqrftYJ1lLrgPIq/GYNRh8FraLUW/nVfN/56GyEeDyxDrd6Ro88nuf0p74RX+j0bfA6wDt/0JdjH8niIoPH1urlSbnW9sMcrtQzBkKCe7mUajW2xw23B7EZ3ggxE76gpQsMM1aUEyEXUofiOq5hFV7CMYkFjnVa4la0XPzR07gB00nL+mHWb6LZinJlEJXlde+U5icEWv93gw0a3kratGzGL9ZkLsPtfT0dH0wPBNdriQiBzGogbZc2/P8tthXguMVY0jFHaWiUYI98dTEuM4PA8ONjvPZL71tv2Qh7dEzXP7ldMsNN693f3ECuVyZlxlRYxNqkwjJtQ2qPrNoqtR226ULoWvjC2SMPzGzPZcUq9Ai3p1JAN9pr4GgHbGpdDhZueYaj0RiEjE4tGQqB+gVFz2hekfuz56RmgHWMH/b0v8ojraG9DR17qHc4CUBvhExTJ72ifsiYbWqAYN8+FPXIWkCgWgXysluD5PQYg9B2J5NhfYkQgBemjv4Pohq0jiMILv2MD2bi/VD+eugE5/Xv2YFJwHHzjchKkA=
 matrix:
   include:
-  - os: linux
-    compiler: gcc
-    env: build_type=coverage static_libraries=FALSE
-  - os: linux
-    compiler: clang
-    env: build_type=debug static_libraries=FALSE appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
-  - os: linux
-    compiler: clang
-    env: build_type=debug static_libraries=FALSE appended_flags="-fsanitize=undefined;-fsanitize=integer;-fno-omit-frame-pointer;"
+    - os: linux
+      compiler: gcc
+      env: build_type=coverage static_libraries=FALSE
+    - os: linux
+      compiler: clang
+      env:
+        build_type=debug static_libraries=FALSE
+        appended_flags="-fsanitize=address;-fno-omit-frame-pointer"
+    - os: linux
+      compiler: clang
+      env:
+        build_type=debug static_libraries=FALSE
+        appended_flags="-fsanitize=undefined;-fsanitize=integer;-fno-omit-frame-pointer"

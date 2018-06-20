@@ -35,6 +35,7 @@ else
   export coverage=false
 fi;
 
+./metaconfigure/fetch_subprojects.py
 mkdir build
 cd build
        
