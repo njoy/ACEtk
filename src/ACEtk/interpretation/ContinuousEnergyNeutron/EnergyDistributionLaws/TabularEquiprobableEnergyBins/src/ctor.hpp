@@ -30,10 +30,11 @@ template< typename Range >
 TabularEquiprobableEnergyBins( Range& NBT, Range& INT, Range& energies, 
                                size_t NET, Range& outgoingEnergies)
   try:
-    TabularEquiprobableEnergyBins( ENDFInterpolationParameters( NBT, INT ),
-        Table::Slice{ energies.begin(), energies.end() },
-        NET, Table::Slice{ outgoingEnergies.begin(), outgoingEnergies.end() }
-        )
+    TabularEquiprobableEnergyBins( 
+      ENDFInterpolationParameters( NBT, INT ),
+      Table::Slice{ energies.begin(), energies.end() },
+      NET, Table::Slice{ outgoingEnergies.begin(), outgoingEnergies.end() }
+    )
 { } catch( const std::exception& e ){
   njoy::Log::info(
     "Trouble encountered constructing TabularEquiprobableEnergyBins" );

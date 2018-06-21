@@ -27,8 +27,8 @@ SCENARIO( "Law1" ){
         auto eip = law1.interpolationParameters();
         REQUIRE( ranges::equal( NBT, eip.NBT() ) );
         REQUIRE( ranges::equal( INT, eip.schemes() ) );
-
         REQUIRE( ranges::equal( energies, law1.incidentEnergies() ) );
+
         auto oET = law1.outgoingEnergyTables();
         REQUIRE( 5 == oET.size() );
         REQUIRE( ranges::equal( outgoingTables, oET | ranges::view::join ) );
