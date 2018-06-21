@@ -56,5 +56,20 @@ SCENARIO( "Law1" ){
           NBT, INT, energies, 4, outgoingTables ) );
       }
     }
+    WHEN( "NBT.back() doesn't match the number of energies" ){
+      std::vector< double > NBT{ 1, 6 };
+        THEN( "an exception is thrown" ){
+          REQUIRE_THROWS( ContinuousEnergyNeutron::TabularEquiprobableEnergyBins( 
+            NBT, INT, energies, 4, outgoingTables ) );
+      }
+    }
+    WHEN( "there is the wrong number of interpolation regions" ){
+      std::vector< double > NBT{ 1, 2, 3, 4, 5 };
+      std::vector< double > INT{ 1, 2, 3, 4, 5 };
+        THEN( "an exception is thrown" ){
+          REQUIRE_THROWS( ContinuousEnergyNeutron::TabularEquiprobableEnergyBins( 
+            NBT, INT, energies, 4, outgoingTables ) );
+      }
+    }
   } // GIVEN
 } // SCENARIO
