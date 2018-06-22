@@ -39,14 +39,6 @@ SCENARIO( "Law4" ){
   } // GIVEN valid
 
   GIVEN( "invalid input values" ){
-    WHEN( "wrong number of inerpolation regions" ){
-      std::vector< double > NBT{ 1, 2, 3, 4, 5 };
-      std::vector< double > INT{ 1, 2, 3, 4, 5 };
-      THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( ContinuousEnergyNeutron::ContinuousTabular( 
-          NBT, INT, energies, std::move( dists ) ) );
-      }
-    }
     WHEN( "wrong number of distributions" ){
       std::vector< Dist > dists{
         Dist{ INTT, dEnergies, PDF, CDF },

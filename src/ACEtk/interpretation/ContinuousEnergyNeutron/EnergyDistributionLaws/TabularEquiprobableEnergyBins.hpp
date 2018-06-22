@@ -1,4 +1,5 @@
-class TabularEquiprobableEnergyBins {
+class TabularEquiprobableEnergyBins : public BaseLaw{
+private:
   template< typename T >
   static auto make( T oEnergies, int NE, int NET ){
     auto chunked = oEnergies | ranges::view::chunk( NET );
@@ -18,16 +19,14 @@ class TabularEquiprobableEnergyBins {
                        | ranges::view::chunk(1)
                        | ranges::view::take_exactly(1) );
 
-  ENDFInterpolationParameters interpolationParameters_;
-  Table::Slice incidentEnergies_;
   EOut_t outgoingEnergyTables_;
 
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins/src/ctor.hpp"
 
 
-  auto interpolationParameters() const { return interpolationParameters_; }
-  auto incidentEnergies() const { return incidentEnergies_; }
+  using BaseLaw::interpolationParameters;
+  using BaseLaw::incidentEnergies;
   auto outgoingEnergyTables() const { return outgoingEnergyTables_; }
 };
 
