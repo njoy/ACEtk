@@ -42,7 +42,6 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
                                    tabulated.regions() ) ){
             auto NBT = regions[ pair.first ];
             auto eRange = pair.second.first;
-            auto nubar = pair.second.second;
 
             REQUIRE( NBT == eRange.end() - energies.begin() );
           }
