@@ -7,4 +7,5 @@ public:
 
   auto NBT() const { return NBT_; }
   auto schemes() const { return schemes_; }
+  auto size() const { return NBT_.size(); }
 };

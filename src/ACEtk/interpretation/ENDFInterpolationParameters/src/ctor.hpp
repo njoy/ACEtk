@@ -18,8 +18,7 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
       ){
       
       njoy::Log::error(
-        "Invalid ENDF interpolation scheme ({}) found at index {}",
-        sch, i );
+        "Invalid ENDF interpolation scheme ({}) found at index {}", sch, i );
       throw std::exception();
     }
   }

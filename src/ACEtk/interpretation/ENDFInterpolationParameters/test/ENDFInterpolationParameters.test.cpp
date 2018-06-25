@@ -20,7 +20,18 @@ SCENARIO( "Constructing coupled density functions" ){
           ENDFInterpolationParameters EIP(NBT, INT);
           REQUIRE( ranges::equal( NBT, EIP.NBT() ) );
           REQUIRE( ranges::equal( INT, EIP.schemes() ) );
+          REQUIRE( 6 == EIP.size() );
         }
+      }
+    }
+    WHEN( "NBT and INT are empty" ){
+      std::vector< double > NBT;
+      std::vector< double > INT;
+
+      ENDFInterpolationParameters EIP( NBT, INT );
+
+      THEN( "the size is zero" ){
+        REQUIRE( 0 == EIP.size() );
       }
     }
   } // GIVEN
