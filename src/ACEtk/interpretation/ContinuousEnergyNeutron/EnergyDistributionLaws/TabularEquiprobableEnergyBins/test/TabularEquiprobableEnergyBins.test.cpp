@@ -16,7 +16,7 @@ SCENARIO( "Law1" ){
     1.3, 2.3, 3.3, 4.3,
     1.4, 2.4, 3.4, 4.4,
   };
-  ENDFInterpolationParameters EIP( NBT, INT );
+
   GIVEN( "valid input values" ){
     WHEN( "constructing a LAW1" ){
       ContinuousEnergyNeutron::TabularEquiprobableEnergyBins law1( 

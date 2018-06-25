@@ -16,4 +16,5 @@ try:
 } catch( const std::exception& e ){
   njoy::Log::info(
     "Trouble encountered constructing ContinuousTabular" );
+  throw e;
 }

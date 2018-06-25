@@ -6,9 +6,7 @@ try:
   outgoingEnergyTables_( 
     make( Table::Slice{ outgoingEnergies.begin(), outgoingEnergies.end() },
           incidentEnergies_.size(), NET ) )
-{ 
-  
-} catch( const std::exception& e ){
+{ } catch( const std::exception& e ){
   njoy::Log::info(
     "Trouble encountered constructing TabularEquiprobableEnergyBins" );
 }
