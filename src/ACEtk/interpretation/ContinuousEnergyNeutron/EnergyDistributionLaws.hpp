@@ -5,3 +5,5 @@
 
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular.hpp"                // Law 4
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum.hpp"       // Law 5
+
+#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum.hpp"     // Law 7

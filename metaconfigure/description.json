@@ -397,12 +397,14 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/Distribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/Distribution/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated.hpp",
@@ -522,6 +524,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.GeneralEvaporationSpectrum": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum/test/GeneralEvaporationSpectrum.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.SimpleMaxwellFissionSpectrum": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum/test/SimpleMaxwellFissionSpectrum.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.TabularEquiprobableEnergyBins": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins/test/TabularEquiprobableEnergyBins.test.cpp"
