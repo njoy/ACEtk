@@ -11,3 +11,5 @@
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EvaporationSpectrum.hpp"              // Law 9
 
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum.hpp"      // Law 11
+
+#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/NbodyPhaseSpace.hpp"                  // Law 66
