@@ -8,7 +8,7 @@ AngularDistribution( int INTMU, Range& energies,
   if( cosineDistributions_.size() != energyGrid_.size() ){
     njoy::Log::error(
       "There must be one cosine distribution for each energy grid point" );
-    njoy::Log::info( "energy gird size: {}, # cosine distributions: {}",
+    njoy::Log::info( "energy grid size: {}, # cosine distributions: {}",
                      energyGrid_.size(), cosineDistributions_.size() );
     njoy::Log::info( "Trouble constucting AngularDistribution" );
     throw std::exception();

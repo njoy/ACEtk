@@ -12,6 +12,7 @@ public:
   using BaseLaw::interpolationParameters;
   using BaseLaw::incidentEnergies;
 
+  auto angularDistributions() const { return angularDistributions_; }
   auto NMU() const{ return angularDistributions_.size(); }
 };
 
