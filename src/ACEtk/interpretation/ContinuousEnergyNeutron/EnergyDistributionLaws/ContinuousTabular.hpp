@@ -1,10 +1,6 @@
 class ContinuousTabular : public BaseLaw {
 
-public:
-#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/Distribution.hpp"
-
-private:
-  std::vector< Distribution > distributions_;
+  std::vector< SecondaryDistribution > distributions_;
 
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/src/ctor.hpp"

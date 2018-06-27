@@ -6,7 +6,7 @@
 
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "Law4::Distribution" ){
+SCENARIO( "SecondaryDistribution" ){
   int INTT{ 2 };
   std::vector< double > PDF{ 0.1, 0.2, 0.3, 0.3, 0.1 };
   std::vector< double > CDF{ 0.1, 0.3, 0.6, 0.9, 1.0 };
@@ -14,12 +14,11 @@ SCENARIO( "Law4::Distribution" ){
   GIVEN( "valid input values" ){
 
     WHEN( "the Distribution is constructed" ){
-      ContinuousEnergyNeutron::Law4::Distribution dist{ 
+      ContinuousEnergyNeutron::SecondaryDistribution dist{ 
         INTT, energies, PDF, CDF };
 
       THEN( "the values can be verified" ){
         REQUIRE( INTT == dist.interpolationParameter() );
-        REQUIRE( INTT == dist.INTT() );
 
         REQUIRE( ranges::equal( energies, dist.energyGrid() ) );
 
@@ -36,8 +35,8 @@ SCENARIO( "Law4::Distribution" ){
 
       THEN( "an exception is thrown" ){
         REQUIRE_THROWS( 
-          ContinuousEnergyNeutron::Law4::Distribution(
-          INTT, energies, PDF, CDF ) );
+          ContinuousEnergyNeutron::SecondaryDistribution(
+            INTT, energies, PDF, CDF ) );
       }
     }
   } // GIVEN invalid

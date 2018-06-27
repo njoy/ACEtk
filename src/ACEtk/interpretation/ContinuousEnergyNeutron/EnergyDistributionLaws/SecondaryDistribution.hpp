@@ -1,13 +1,12 @@
-class Distribution {
+class SecondaryDistribution {
   int interpolationParameter_;
   Table::Slice energyGrid_;
   CoupledDensityFunctions densityFunctions_;
 
 public:
-#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/Distribution/src/ctor.hpp"
+#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution/src/ctor.hpp"
 
   auto interpolationParameter() const { return interpolationParameter_; }
-  auto INTT() const { return interpolationParameter_; }
 
   auto energyGrid() const{ return energyGrid_; }
 

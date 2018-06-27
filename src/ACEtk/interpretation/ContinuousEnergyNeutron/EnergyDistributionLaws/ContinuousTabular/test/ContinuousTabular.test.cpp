@@ -15,7 +15,7 @@ SCENARIO( "Law4" ){
   std::vector< double > PDF{ 0.2, 0.5, 0.3 };
   std::vector< double > CDF{ 0.2, 0.7, 1.0 };
   
-  using Dist = ContinuousEnergyNeutron::ContinuousTabular::Distribution;
+  using Dist = ContinuousEnergyNeutron::SecondaryDistribution;
   std::vector< Dist > dists{
     Dist{ INTT, dEnergies, PDF, CDF },
     Dist{ INTT, dEnergies, PDF, CDF },

@@ -399,18 +399,22 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EvaporationSpectrum.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/NbodyPhaseSpace.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/src/ctor.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/Distribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/Distribution/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EvaporationSpectrum/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw/AngularDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw/AngularDistribution/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/NbodyPhaseSpace/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial.hpp",
@@ -523,9 +527,6 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.ContinuousTabular": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/test/ContinuousTabular.test.cpp"
     ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.ContinuousTabular.Distribution": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/Distribution/test/Distribution.test.cpp"
-    ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.DiscretePhotonEnergy": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/test/DiscretePhotonEnergy.test.cpp"
     ],
@@ -538,8 +539,17 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.GeneralEvaporationSpectrum": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum/test/GeneralEvaporationSpectrum.test.cpp"
     ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.LaboratoryAngleEnergyLaw": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw/test/LaboratoryAngleEnergyLaw.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.LaboratoryAngleEnergyLaw.AngularDistribution": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw/AngularDistribution/test/AngularDistribution.test.cpp"
+    ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.NbodyPhaseSpace": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/NbodyPhaseSpace/test/NbodyPhaseSpace.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.SecondaryDistribution": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution/test/SecondaryDistribution.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.SimpleMaxwellFissionSpectrum": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum/test/SimpleMaxwellFissionSpectrum.test.cpp"

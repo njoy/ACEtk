@@ -1,10 +1,9 @@
 template< typename Range >
-ContinuousTabular( Range& NBT, Range& INT, 
-                   Range& energies, 
-                   std::vector< Distribution >&& distributions )
+ContinuousTabular( Range& NBT, Range& INT, Range& energies, 
+                   std::vector< SecondaryDistribution >&& distributions )
 try:
   BaseLaw( NBT, INT, energies ),
-  distributions_( distributions )
+  distributions_( std::move( distributions ) )
 {
   if( distributions_.size() != incidentEnergies().size() ){
     njoy::Log::error(
@@ -14,7 +13,6 @@ try:
     throw std::exception();
   }
 } catch( const std::exception& e ){
-  njoy::Log::info(
-    "Trouble encountered constructing ContinuousTabular" );
+  njoy::Log::info( "Trouble encountered constructing ContinuousTabular" );
   throw e;
 }

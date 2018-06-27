@@ -1,4 +1,5 @@
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw.hpp"   
+#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution.hpp"   
 
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins.hpp"    // Law 1
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy.hpp"             // Law 2
@@ -13,3 +14,4 @@
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum.hpp"      // Law 11
 
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/NbodyPhaseSpace.hpp"                  // Law 66
+#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw.hpp"         // Law 66

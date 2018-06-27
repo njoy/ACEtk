@@ -1,4 +1,4 @@
-Distribution( int INTT, 
+SecondaryDistribution( int INTT, 
               Table::Slice energies,
               CoupledDensityFunctions&& DFs ):
   interpolationParameter_( INTT ),
@@ -15,9 +15,9 @@ Distribution( int INTT,
 }
 
 template< typename Range >
-Distribution( int INTT, Range& energies, Range& PDF, Range& CDF )
+SecondaryDistribution( int INTT, Range& energies, Range& PDF, Range& CDF )
   try:
-    Distribution( 
+    SecondaryDistribution( 
       INTT,
       Table::Slice{ energies.begin(), energies.end() },
       CoupledDensityFunctions{ PDF, CDF }
