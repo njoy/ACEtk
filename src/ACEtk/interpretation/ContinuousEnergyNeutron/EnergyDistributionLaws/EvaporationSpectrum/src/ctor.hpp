@@ -1,7 +1,7 @@
 template< typename Range >
 EvaporationSpectrum( Range& NBT, Range& INT, Range& energies,
                               Table::Slice theta, double U ):
-  InterpolatedEnergies( NBT, INT, energies ),
+  BaseLaw( NBT, INT, energies ),
   restrictionEnergy_( U ),
   theta_( theta )
 { 

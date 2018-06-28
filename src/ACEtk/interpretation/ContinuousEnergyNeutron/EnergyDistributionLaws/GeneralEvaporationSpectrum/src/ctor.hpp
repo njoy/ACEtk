@@ -1,7 +1,7 @@
 template< typename Range >
 GeneralEvaporationSpectrum( Range& NBT, Range& INT, Range& energies,
                             Table::Slice theta, Table::Slice X ):
-  InterpolatedEnergies( NBT, INT, energies ),
+  BaseLaw( NBT, INT, energies ),
   theta_( theta ),
   tabulatedProbabilisticFunction_( X )
 { 

@@ -380,7 +380,6 @@
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/ENDFInterpolationParameters.hpp",
     "src/ACEtk/interpretation/HeaderIndices.hpp",
-    "src/ACEtk/interpretation/InterpolatedEnergies.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/ScaleBy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
@@ -394,6 +393,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum.hpp",
@@ -404,6 +404,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum/src/ctor.hpp",
@@ -436,7 +437,6 @@
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp",
-    "src/ACEtk/interpretation/InterpolatedEnergies/src/ctor.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -521,6 +521,9 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.CrossSection": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/test/CrossSection.test.cpp"
     ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.BaseLaw": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/test/BaseLaw.test.cpp"
+    ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.ContinuousTabular": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/test/ContinuousTabular.test.cpp"
     ],
@@ -578,9 +581,6 @@
     ],
     "ACEtk.interpretation.ENDFInterpolationParameters": [
       "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp"
-    ],
-    "ACEtk.interpretation.InterpolatedEnergies": [
-      "src/ACEtk/interpretation/InterpolatedEnergies/test/InterpolatedEnergies.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
       "src/ACEtk/interpretation/MP1/test/cumulativeDistributions.test.cpp",

@@ -1,7 +1,7 @@
 class EnergyDependentWattSpectrum {
-  InterpolatedEnergies aParameters;
+  BaseLaw aParameters;
   Table::Slice aValues_;
-  InterpolatedEnergies bParameters;
+  BaseLaw bParameters;
   Table::Slice bValues_;
 
 public:

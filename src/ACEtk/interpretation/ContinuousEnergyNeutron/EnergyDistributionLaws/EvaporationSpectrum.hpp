@@ -1,12 +1,12 @@
-class EvaporationSpectrum : public InterpolatedEnergies {
+class EvaporationSpectrum : public BaseLaw {
   double restrictionEnergy_;
   Table::Slice theta_;
 
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EvaporationSpectrum/src/ctor.hpp"
 
-  using InterpolatedEnergies::interpolationParameters;
-  using InterpolatedEnergies::incidentEnergies;
+  using BaseLaw::interpolationParameters;
+  using BaseLaw::incidentEnergies;
   auto theta() const{ return theta_; }
   double restrictionEnergy() const{ return restrictionEnergy_; }
   double U() const{ return restrictionEnergy_; }

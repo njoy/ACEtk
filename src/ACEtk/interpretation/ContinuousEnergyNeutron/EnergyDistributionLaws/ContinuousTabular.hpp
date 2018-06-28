@@ -1,12 +1,12 @@
-class ContinuousTabular : public InterpolatedEnergies {
+class ContinuousTabular : public BaseLaw {
 
   std::vector< SecondaryDistribution > distributions_;
 
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/src/ctor.hpp"
 
-  using InterpolatedEnergies::interpolationParameters;
-  using InterpolatedEnergies::incidentEnergies;
+  using BaseLaw::interpolationParameters;
+  using BaseLaw::incidentEnergies;
   auto distributions() const{ return distributions_; }
 
 };

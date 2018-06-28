@@ -1,4 +1,5 @@
-Tabulated( ENDFInterpolationParameters&& interp, Slice energies, 
+Tabulated( ENDFInterpolationParameters&& interp,
+           Slice energies, 
            Slice nubar) :
   interpolationParameters_( interp ),
   energies_( energies ),

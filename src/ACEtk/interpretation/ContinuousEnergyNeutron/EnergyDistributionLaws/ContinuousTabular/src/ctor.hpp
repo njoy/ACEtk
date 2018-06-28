@@ -2,7 +2,7 @@ template< typename Range >
 ContinuousTabular( Range& NBT, Range& INT, Range& energies, 
                    std::vector< SecondaryDistribution >&& distributions )
 try:
-  InterpolatedEnergies( NBT, INT, energies ),
+  BaseLaw( NBT, INT, energies ),
   distributions_( std::move( distributions ) )
 {
   if( distributions_.size() != incidentEnergies().size() ){

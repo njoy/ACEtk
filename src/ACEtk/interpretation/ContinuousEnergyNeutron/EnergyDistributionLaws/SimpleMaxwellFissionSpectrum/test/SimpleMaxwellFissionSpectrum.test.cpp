@@ -4,7 +4,6 @@
 #include "ACEtk.hpp"
 
 using namespace njoy::ACEtk::interpretation;
-using namespace dimwits;
 
 SCENARIO( "Law7" ){
   std::vector< double > NBT{ 1, 5 };
@@ -23,9 +22,7 @@ SCENARIO( "Law7" ){
         auto eip = law7.interpolationParameters();
         REQUIRE( ranges::equal( NBT, eip.NBT() ) );
         REQUIRE( ranges::equal( INT, eip.schemes() ) );
-
-        auto refEnergies = scaleBy( 1.0*mega( electronVolts ) )( energies );
-        REQUIRE( ranges::equal( refEnergies, law7.incidentEnergies() ) );
+        REQUIRE( ranges::equal( energies, law7.incidentEnergies() ) );
 
         REQUIRE( ranges::equal( theta, law7.theta() ) );
 
