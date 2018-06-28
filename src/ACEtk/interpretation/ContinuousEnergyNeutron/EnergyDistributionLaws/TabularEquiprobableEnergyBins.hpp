@@ -1,4 +1,4 @@
-class TabularEquiprobableEnergyBins : public BaseLaw{
+class TabularEquiprobableEnergyBins : public InterpolatedEnergies{
 private:
   template< typename T >
   static auto make( T oEnergies, int NE, int NET ){
@@ -25,8 +25,8 @@ public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins/src/ctor.hpp"
 
 
-  using BaseLaw::interpolationParameters;
-  using BaseLaw::incidentEnergies;
+  using InterpolatedEnergies::interpolationParameters;
+  using InterpolatedEnergies::incidentEnergies;
   auto outgoingEnergyTables() const { return outgoingEnergyTables_; }
 };
 

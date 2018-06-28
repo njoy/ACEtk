@@ -1,4 +1,4 @@
-BaseLaw( ENDFInterpolationParameters&& interp,
+InterpolatedEnergies( ENDFInterpolationParameters&& interp,
                    Table::Slice energies ):
   interpolationParameters_( interp ),
   incidentEnergies_( energies )
@@ -24,14 +24,14 @@ BaseLaw( ENDFInterpolationParameters&& interp,
 }
 
 template< typename Range >
-BaseLaw( Range& NBT, Range& INT, Range& energies )
+InterpolatedEnergies( Range& NBT, Range& INT, Range& energies )
   try:
-    BaseLaw( 
+    InterpolatedEnergies( 
       ENDFInterpolationParameters( NBT, INT ),
       Table::Slice{ energies.begin(), energies.end() }
     )
 { } catch( const std::exception& e ){
   njoy::Log::info(
-    "Trouble encountered constructing BaseLaw" );
+    "Trouble encountered constructing InterpolatedEnergies" );
 }
 

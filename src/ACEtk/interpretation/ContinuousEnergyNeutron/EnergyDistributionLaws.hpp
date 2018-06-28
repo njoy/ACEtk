@@ -1,4 +1,3 @@
-#include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw.hpp"   
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution.hpp"   
 
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins.hpp"    // Law 1

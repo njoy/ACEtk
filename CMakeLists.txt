@@ -80,30 +80,6 @@ set( ACEtk_AppleClang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_AppleClang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_AppleClang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_AppleClang_Darwin_static_flags "-static" )
-set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
-set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_GNU_Windows_strict_flags "-Werror" )
-set( ACEtk_GNU_Windows_coverage_flags "--coverage" )
-set( ACEtk_GNU_Windows_subproject_flags  )
-set( ACEtk_GNU_Windows_base_project_flags  )
-set( ACEtk_GNU_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
-set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
-set( ACEtk_GNU_Windows_static_flags "-static" )
-set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
-set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_GNU_Linux_strict_flags "-Werror" )
-set( ACEtk_GNU_Linux_coverage_flags "--coverage" )
-set( ACEtk_GNU_Linux_subproject_flags  )
-set( ACEtk_GNU_Linux_base_project_flags  )
-set( ACEtk_GNU_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
-set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
-set( ACEtk_GNU_Linux_static_flags "-static" )
 set( ACEtk_GNU_Darwin_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_GNU_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
 set( ACEtk_GNU_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -116,30 +92,30 @@ set( ACEtk_GNU_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Darwin_static_flags "-static" )
-set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_Clang_Windows_strict_flags "-Werror" )
-set( ACEtk_Clang_Windows_coverage_flags "--coverage" )
-set( ACEtk_Clang_Windows_subproject_flags  )
-set( ACEtk_Clang_Windows_base_project_flags  )
-set( ACEtk_Clang_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Windows_link_time_optimization_flags "-flto" )
-set( ACEtk_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Windows_nonportable_optimization_flags "-march=native" )
-set( ACEtk_Clang_Windows_static_flags "-static" )
-set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_Clang_Linux_strict_flags "-Werror" )
-set( ACEtk_Clang_Linux_coverage_flags "--coverage" )
-set( ACEtk_Clang_Linux_subproject_flags  )
-set( ACEtk_Clang_Linux_base_project_flags  )
-set( ACEtk_Clang_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
-set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
-set( ACEtk_Clang_Linux_static_flags "-static" )
+set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
+set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_GNU_Linux_strict_flags "-Werror" )
+set( ACEtk_GNU_Linux_coverage_flags "--coverage" )
+set( ACEtk_GNU_Linux_subproject_flags  )
+set( ACEtk_GNU_Linux_base_project_flags  )
+set( ACEtk_GNU_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
+set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
+set( ACEtk_GNU_Linux_static_flags "-static" )
+set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
+set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_GNU_Windows_strict_flags "-Werror" )
+set( ACEtk_GNU_Windows_coverage_flags "--coverage" )
+set( ACEtk_GNU_Windows_subproject_flags  )
+set( ACEtk_GNU_Windows_base_project_flags  )
+set( ACEtk_GNU_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
+set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
+set( ACEtk_GNU_Windows_static_flags "-static" )
 set( ACEtk_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -152,6 +128,30 @@ set( ACEtk_Clang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_Clang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_Clang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_Clang_Darwin_static_flags "-static" )
+set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_Clang_Linux_strict_flags "-Werror" )
+set( ACEtk_Clang_Linux_coverage_flags "--coverage" )
+set( ACEtk_Clang_Linux_subproject_flags  )
+set( ACEtk_Clang_Linux_base_project_flags  )
+set( ACEtk_Clang_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
+set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
+set( ACEtk_Clang_Linux_static_flags "-static" )
+set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_Clang_Windows_strict_flags "-Werror" )
+set( ACEtk_Clang_Windows_coverage_flags "--coverage" )
+set( ACEtk_Clang_Windows_subproject_flags  )
+set( ACEtk_Clang_Windows_base_project_flags  )
+set( ACEtk_Clang_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Windows_link_time_optimization_flags "-flto" )
+set( ACEtk_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Windows_nonportable_optimization_flags "-march=native" )
+set( ACEtk_Clang_Windows_static_flags "-static" )
 get_directory_property( is_subproject PARENT_DIRECTORY )
 
 if( NOT TARGET date-adapter )
@@ -249,6 +249,7 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ENDFInterpolationParameters.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/HeaderIndices.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/InterpolatedEnergies.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ScaleBy.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp"
@@ -262,7 +263,6 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum.hpp"
@@ -273,7 +273,6 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SecondaryDistribution.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/SimpleMaxwellFissionSpectrum.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum/src/ctor.hpp"
@@ -306,6 +305,7 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/AtomicLevels.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/InterpolatedEnergies/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/DiscreteData.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/energyGrid.hpp"
@@ -355,7 +355,6 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/Table/Header/String/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/test )
-        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/DiscretePhotonEnergy/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/EnergyDependentWattSpectrum/test )
@@ -375,6 +374,7 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/interpretation/CoupledDensityFunctions/test )
         add_subdirectory( src/ACEtk/interpretation/EL03/test )
         add_subdirectory( src/ACEtk/interpretation/ENDFInterpolationParameters/test )
+        add_subdirectory( src/ACEtk/interpretation/InterpolatedEnergies/test )
         add_subdirectory( src/ACEtk/interpretation/MP1/test )
     endif() 
 endif()

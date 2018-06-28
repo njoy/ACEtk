@@ -1,12 +1,12 @@
-class GeneralEvaporationSpectrum : public BaseLaw {
+class GeneralEvaporationSpectrum : public InterpolatedEnergies {
   Table::Slice theta_;
   Table::Slice tabulatedProbabilisticFunction_;
 
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/GeneralEvaporationSpectrum/src/ctor.hpp"
 
-  using BaseLaw::interpolationParameters;
-  using BaseLaw::incidentEnergies;
+  using InterpolatedEnergies::interpolationParameters;
+  using InterpolatedEnergies::incidentEnergies;
   auto theta() const{ return theta_; }
   auto tabulatedProbabilisticFunction() const{ 
     return tabulatedProbabilisticFunction_; }

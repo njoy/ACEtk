@@ -22,10 +22,9 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
       THEN( "the contents can be verified" ){
 
         std::vector< double > Es{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-        auto refEnergies = scaleBy( 
-            1.0*mega( electronVolts ) )( Es );
-        njoy::Log::info( "refEnergies.size: {}", refEnergies.size() );
-        for( const auto pair : ranges::view::zip( refEnergies, tabulated.energies() ) ){
+        auto refEnergies = scaleBy( 1.0*mega( electronVolts ) )( Es );
+        for( const auto pair : 
+             ranges::view::zip( refEnergies, tabulated.energies() ) ){
           REQUIRE( pair.first == pair.second );
         }
 
@@ -90,7 +89,8 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         auto refEnergies = scaleBy( 
             1.0*mega( electronVolts ) )( Es );
         njoy::Log::info( "refEnergies.size: {}", refEnergies.size() );
-        for( const auto pair : ranges::view::zip( refEnergies, tabulated.energies() ) ){
+        for( const auto pair : 
+             ranges::view::zip( refEnergies, tabulated.energies() ) ){
           REQUIRE( pair.first == pair.second );
         }
 

@@ -1,7 +1,7 @@
 template< typename Range >
 SimpleMaxwellFissionSpectrum( Range& NBT, Range& INT, Range& energies,
                               Table::Slice theta, double U ):
-  BaseLaw( NBT, INT, energies ),
+  InterpolatedEnergies( NBT, INT, energies ),
   restrictionEnergy_( U ),
   theta_( theta )
 { 

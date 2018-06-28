@@ -1,4 +1,4 @@
-class LaboratoryAngleEnergyLaw : public BaseLaw {
+class LaboratoryAngleEnergyLaw : public InterpolatedEnergies {
 
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw/AngularDistribution.hpp"
@@ -9,8 +9,8 @@ private:
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/LaboratoryAngleEnergyLaw/src/ctor.hpp"
 
-  using BaseLaw::interpolationParameters;
-  using BaseLaw::incidentEnergies;
+  using InterpolatedEnergies::interpolationParameters;
+  using InterpolatedEnergies::incidentEnergies;
 
   auto angularDistributions() const { return angularDistributions_; }
   auto NMU() const{ return angularDistributions_.size(); }

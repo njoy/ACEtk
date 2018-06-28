@@ -9,6 +9,7 @@ auto copy( T&& t ){
 }
 
 using namespace njoy::ACEtk::interpretation;
+using namespace dimwits;
 
 using angDist = ContinuousEnergyNeutron::Law67::AngularDistribution;
 using Dist = ContinuousEnergyNeutron::SecondaryDistribution;
@@ -45,7 +46,9 @@ SCENARIO( "Law67" ){
         auto eip = law67.interpolationParameters();
         REQUIRE( ranges::equal( NBT, eip.NBT() ) );
         REQUIRE( ranges::equal( INT, eip.schemes() ) );
-        REQUIRE( ranges::equal( energies, law67.incidentEnergies() ) );
+
+        auto refEnergies = scaleBy( 1.0*mega( electronVolts ) )( energies );
+        REQUIRE( ranges::equal( refEnergies, law67.incidentEnergies() ) );
 
         REQUIRE( 3 == law67.angularDistributions().size() );
         REQUIRE( 3 == law67.NMU() );

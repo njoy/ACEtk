@@ -2,7 +2,7 @@ template< typename Range >
 LaboratoryAngleEnergyLaw( Range& NBT, Range& INT, Range& energies,
                           std::vector< AngularDistribution >&& distributions )
 try:
-  BaseLaw( NBT, INT, energies ),
+  InterpolatedEnergies( NBT, INT, energies ),
   angularDistributions_( std::move( distributions ) )
 {
   if( incidentEnergies().size() != angularDistributions_.size() ){
