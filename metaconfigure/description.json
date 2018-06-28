@@ -381,6 +381,7 @@
     "src/ACEtk/interpretation/ENDFInterpolationParameters.hpp",
     "src/ACEtk/interpretation/HeaderIndices.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
+    "src/ACEtk/interpretation/Region.hpp",
     "src/ACEtk/interpretation/ScaleBy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
@@ -444,6 +445,7 @@
     "src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp",
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
     "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
+    "src/ACEtk/interpretation/Region/src/ctor.hpp",
     "src/ACEtk/interpretation/src/checkHistLinLinFlag.hpp",
     "src/ACEtk/Table/Data.hpp",
     "src/ACEtk/Table/Header.hpp",
@@ -587,6 +589,9 @@
       "src/ACEtk/interpretation/MP1/test/deflectionCosines.test.cpp",
       "src/ACEtk/interpretation/MP1/test/energyGrid.test.cpp",
       "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp"
+    ],
+    "ACEtk.interpretation.Region": [
+      "src/ACEtk/interpretation/Region/test/Region.test.cpp"
     ]
   },
   "update": true
