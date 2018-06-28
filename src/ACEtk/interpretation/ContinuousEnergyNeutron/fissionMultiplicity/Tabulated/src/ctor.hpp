@@ -1,14 +1,10 @@
-Tabulated( std::optional< Slice > interpolationParameters, 
-           std::optional< Slice > interpolationSchemes, 
+Tabulated( ENDFInterpolationParameters&& interp,
            Slice energies, 
            Slice nubar) :
-  NBT( interpolationParameters ),
-  INT( interpolationSchemes ),
+  interpolationParameters_( interp ),
   energies_( energies ),
   nubar_( nubar )
 {
-  assert( bool( NBT ) == bool( INT ) );
-  assert( not bool( NBT ) or ( NBT->size() == INT->size() ) );
   assert( energies_.size() == nubar.size() );
 
 #if ACETK_CHECK
@@ -17,4 +13,17 @@ Tabulated( std::optional< Slice > interpolationParameters,
   // positive nubar
   // INT must be in [1,8)
 #endif
+}
+
+template< typename Range >
+Tabulated( Range& NBT, Range& INT,
+           Range& energies, Range& nubar )
+try:
+  Tabulated( ENDFInterpolationParameters( NBT, INT ), 
+             Table::Slice{ energies.begin(), energies.end() }, 
+             Table::Slice{ nubar.begin(), nubar.end() } )
+{ } catch( const std::exception& e ){
+  njoy::Log::info( 
+      "Trouble encountered constructing Tabulated nubar" );
+  throw e;
 }

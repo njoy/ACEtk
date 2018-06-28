@@ -1,13 +1,13 @@
 class Tabulated {
-  std::optional< Slice > NBT;
-  std::optional< Slice > INT;
+  ENDFInterpolationParameters interpolationParameters_;
   Slice energies_;
   Slice nubar_;
 
 public:
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/ctor.hpp"
-#include "ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/interpolationSchemes.hpp"
 #include "ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/regions.hpp"
+
+  auto interpolationParameters() const { return interpolationParameters_; }
 
   auto energies() const{
     return scaleBy( 1.0*mega( electronVolts ) )( this->energies_ );

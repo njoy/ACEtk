@@ -16,9 +16,8 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
     
     WHEN( "a Tabulated is constructed" ){
       ContinuousEnergyNeutron::fissionMultiplicity::Tabulated tabulated(
-         Table::slice( regions ), 
-         Table::slice( iSchemes ),
-         Table::slice( energies ), Table::slice( multiplicities ) );
+         regions, iSchemes,
+         energies, multiplicities );
 
       THEN( "the contents can be verified" ){
 
@@ -35,7 +34,7 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
           REQUIRE( pair.first == Approx( pair.second ) );
         }
 
-        // AND_THEN( "the 'regions' can be verified (twice)" ){
+        AND_THEN( "the 'regions' can be verified (twice)" ){
           // Once
           for( const auto pair : ranges::view::zip
                                  ( ranges::view::iota( 0ul, regions.size() ),
@@ -73,16 +72,17 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         }
 
         for( const auto pair : ranges::view::zip(
-                iSchemes, tabulated.interpolationSchemes() ) ){
+                iSchemes, tabulated.interpolationParameters().schemes() ) ){
           REQUIRE( pair.first == Approx( pair.second ) );
         }
-      // }
+      }
     }
     
     WHEN( "a Tabulated is constructed without interpolation parameters" ){
+      std::vector< double > regions;
+      std::vector< double > iSchemes;
       ContinuousEnergyNeutron::fissionMultiplicity::Tabulated tabulated(
-         std::nullopt, std::nullopt,
-         Table::slice( energies ), Table::slice( multiplicities ) );
+         regions, iSchemes, energies, multiplicities );
 
       THEN( "the contents can be verified" ){
 
@@ -99,7 +99,7 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
           REQUIRE( pair.first == Approx( pair.second ) );
         }
 
-        REQUIRE( 1 == tabulated.interpolationSchemes().front() );
+        REQUIRE( 0 == tabulated.interpolationParameters().size() );
       }
     }
   } // GIVEN
