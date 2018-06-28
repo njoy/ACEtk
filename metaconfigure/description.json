@@ -446,6 +446,8 @@
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
     "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
     "src/ACEtk/interpretation/Region/src/ctor.hpp",
+    "src/ACEtk/interpretation/Region/src/makeRegions.hpp",
+    "src/ACEtk/interpretation/Region/src/verifyInterpolationScheme.hpp",
     "src/ACEtk/interpretation/src/checkHistLinLinFlag.hpp",
     "src/ACEtk/Table/Data.hpp",
     "src/ACEtk/Table/Header.hpp",
@@ -591,6 +593,7 @@
       "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp"
     ],
     "ACEtk.interpretation.Region": [
+      "src/ACEtk/interpretation/Region/test/makeRegions.test.cpp",
       "src/ACEtk/interpretation/Region/test/Region.test.cpp"
     ]
   },

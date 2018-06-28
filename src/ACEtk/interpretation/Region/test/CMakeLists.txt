@@ -1,5 +1,7 @@
 
-add_executable( ACEtk.interpretation.Region.test Region.test.cpp )
+add_executable( ACEtk.interpretation.Region.test
+                makeRegions.test.cpp
+                Region.test.cpp )
 target_compile_options( ACEtk.interpretation.Region.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

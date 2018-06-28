@@ -21,6 +21,13 @@ SCENARIO( "Constructing coupled density functions" ){
           REQUIRE( ranges::equal( NBT, EIP.NBT() ) );
           REQUIRE( ranges::equal( INT, EIP.schemes() ) );
           REQUIRE( 6 == EIP.size() );
+
+          for( size_t j=0; j< INT.size(); j++ ){
+            REQUIRE( NBT[ j ] == EIP[ j ].first );
+            REQUIRE( INT[ j ] == EIP[ j ].second );
+            REQUIRE( NBT[ j ] == EIP.at( j ).first );
+            REQUIRE( INT[ j ] == EIP.at( j ).second );
+          }
         }
       }
     }
@@ -56,6 +63,17 @@ SCENARIO( "Constructing coupled density functions" ){
           REQUIRE_THROWS( ENDFInterpolationParameters(NBT, INT) );
         }
       }
+    }
+  }
+  GIVEN( "invalid index" ){
+    std::vector< double > NBT{ 1, 2, 3 };
+    std::vector< double > INT{ 1,  2,  3 };
+
+    ENDFInterpolationParameters EIP{ NBT, INT };
+
+    THEN( "an exception is thrown" ){
+      int index = 4;
+      REQUIRE_THROWS( EIP.at( index ) );
     }
   }
 } // SCENARIO

@@ -8,6 +8,7 @@ class Region {
 
 public:
 #include "ACEtk/interpretation/Region/src/ctor.hpp"
+#include "ACEtk/interpretation/Region/src/makeRegions.hpp"
 
   int interpolationScheme() const { return interpolationScheme_; }
   auto x() const { return x_; }
