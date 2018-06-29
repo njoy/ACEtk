@@ -8,10 +8,11 @@ class InterpolationRegion {
 
 public:
 #include "ACEtk/interpretation/InterpolationRegion/src/ctor.hpp"
-#include "ACEtk/interpretation/InterpolationRegion/src/makeInterpolationRegions.hpp"
 
   int interpolationScheme() const { return interpolationScheme_; }
   auto x() const { return x_; }
   auto y() const { return y_; }
 
 };
+
+#include "ACEtk/interpretation/InterpolationRegion/src/makeInterpolationRegions.hpp"

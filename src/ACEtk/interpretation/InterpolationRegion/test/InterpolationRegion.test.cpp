@@ -6,6 +6,9 @@
 using namespace njoy::ACEtk::interpretation;
 using namespace njoy::ACEtk;
 
+template< typename T >
+auto copy( T&& t ){ return t; }
+
 SCENARIO( "InterpolationRegion" ){
   GIVEN( "valid input parameters" ){
     std::vector< int > validINT{  
@@ -16,9 +19,12 @@ SCENARIO( "InterpolationRegion" ){
       std::vector< double > y{ 0.1, 0.2, 0.3 };
 
       for( int INT : validINT ){
+        Table::Slice xSlice( Table::slice( x ) );
+        Table::Slice ySlice( Table::slice( y ) );
+
         InterpolationRegion< 
           std::vector< double >, std::vector< double > > regSimple( 
-            INT, Table::slice( x ), Table::slice( y ) );
+            INT, copy( x ), copy( y ) );
 
         THEN( "the outputs can be veirified (INT=" 
               + std::to_string( INT ) + ")" ){
@@ -38,13 +44,13 @@ SCENARIO( "InterpolationRegion" ){
       for( int INT : validINT ){
         InterpolationRegion< 
           std::vector< double >, std::vector< std::vector< double > > >
-            regSimple( INT, std::move( x ), std::move( y ) );
+            regComplex( INT, copy( x ), copy( y ) );
 
         THEN( "the outputs can be veirified (INT=" 
               + std::to_string( INT ) + ")" ){
-          REQUIRE( INT == regSimple.interpolationScheme() );
-          REQUIRE( ranges::equal( x, regSimple.x() ) );
-          REQUIRE( ranges::equal( y, regSimple.y() ) );
+          REQUIRE( INT == regComplex.interpolationScheme() );
+          REQUIRE( ranges::equal( x, regComplex.x() ) );
+          REQUIRE( ranges::equal( y, regComplex.y() ) );
         }
       }
     }

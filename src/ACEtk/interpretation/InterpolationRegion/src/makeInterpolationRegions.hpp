@@ -1,12 +1,12 @@
-// static int makeRegions( ENDFInterpolationParameters eip,
-//                          xRange& x, yRange& y ){
+template< typename xRange, typename yRange, typename E >
+auto makeInterpolationRegions( E&& e, xRange& x, yRange& y ){
 
-//   eip;
-
-// }
-
-// template< typename Range >
-// static int makeRegions( Range& INT, Range& NBT,
-//                          xRange& x, yRange& y ){
-//   makeRegions( ENDFInterpolationParameters( INT, NBT ), x, y );
-// }
+  return e | ranges::view::transform(
+    [ &x, &y ]( auto&& e ){ 
+      return InterpolationRegion< xRange, yRange >{ e.scheme(),
+        x | ranges::view::slice( e.indices().begin(), e.indices().end() ),
+        y | ranges::view::slice( e.indices().begin(), e.indices().end() )
+        };
+      }
+    );
+}
