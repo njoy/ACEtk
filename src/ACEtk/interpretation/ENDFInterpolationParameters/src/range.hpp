@@ -1,12 +1,32 @@
 auto range(){
-  std::vector< std::pair< int, std::pair< int, int > > > r;
+  struct Indices {
+    long begin_;
+    long end_;
 
-  size_t i = 0;
-  r.push_back( std::make_pair( schemes_[i], std::make_pair( 0, NBT_[ i ] ) ) );
-  for( size_t i = 1; i < NBT_.size(); i++ ){
-    r.push_back( std::make_pair( 
-        schemes_[ i ], std::make_pair( NBT_[ i-1 ], NBT_[ i ] ) ) );
-  }
+    auto begin() const { return begin_; }
+    auto end() const { return end_; }
+  };
 
-  return r;
+  auto makeIndices = []( double begin, double end ){ 
+    return Indices{ std::lround( begin ), std::lround( end ) }; };
+
+  struct Parameters {
+    int scheme_;
+    Indices indices_;
+    
+    int scheme() const { return scheme_; }
+    Indices indices() const { return indices_; }
+  };
+  
+  auto makeParameters = []( int scheme, Indices indices ){ 
+    return Parameters{ scheme, indices }; };
+
+  auto leadingIndices = ranges::view::concat( ranges::view::single( 0 ), 
+        NBT_
+          | ranges::view::take( NBT_.size() - 1 )
+          | ranges::view::transform( []( auto i ){ return i-1; } ) );
+
+  auto indexPairs = ranges::view::zip_with( makeIndices, leadingIndices, NBT_ );
+
+  return ranges::view::zip_with( makeParameters, schemes_, indexPairs );
 }

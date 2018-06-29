@@ -22,11 +22,13 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
           REQUIRE( ranges::equal( INT, EIP.schemes() ) );
           REQUIRE( 6 == EIP.size() );
 
+          REQUIRE( 0 == EIP.range()[ 0 ].indices().begin() );
           for( size_t j=0; j< INT.size(); j++ ){
-            REQUIRE( NBT[ j ] == EIP[ j ].first );
-            REQUIRE( INT[ j ] == EIP[ j ].second );
-            REQUIRE( NBT[ j ] == EIP.at( j ).first );
-            REQUIRE( INT[ j ] == EIP.at( j ).second );
+            REQUIRE( NBT[ j ] == EIP.range()[ j+1 ].indices().begin() +1 );
+            REQUIRE( NBT[ j ] == EIP.range()[ j ].indices().end() );
+            REQUIRE( INT[ j ] == EIP.range()[ j ].scheme() );
+            REQUIRE( NBT[ j ] == EIP.range().at( j ).indices().end() );
+            REQUIRE( INT[ j ] == EIP.range().at( j ).scheme() );
           }
         }
       }
@@ -73,7 +75,7 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
 
     THEN( "an exception is thrown" ){
       int index = 4;
-      REQUIRE_THROWS( EIP.at( index ) );
+      REQUIRE_THROWS( EIP.range().at( index ) );
     }
   }
 } // SCENARIO

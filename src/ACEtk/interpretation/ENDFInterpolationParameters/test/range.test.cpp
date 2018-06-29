@@ -16,13 +16,13 @@ SCENARIO( "creating ranges from interpolation parameters" ){
       THEN( "the values can be verified" ){
         REQUIRE( 2 == interpolationRange.size() );
 
-        REQUIRE( 3 == interpolationRange[ 0 ].first );
-        REQUIRE( 0 == interpolationRange[ 0 ].second.first );
-        REQUIRE( 3 == interpolationRange[ 0 ].second.second );
+        REQUIRE( 3 == interpolationRange[ 0 ].scheme() );
+        REQUIRE( 0 == interpolationRange[ 0 ].indices().begin() );
+        REQUIRE( 3 == interpolationRange[ 0 ].indices().end() );
 
-        REQUIRE( 1 == interpolationRange[ 1 ].first );
-        REQUIRE( 3 == interpolationRange[ 1 ].second.first );
-        REQUIRE( 5 == interpolationRange[ 1 ].second.second );
+        REQUIRE( 1 == interpolationRange[ 1 ].scheme() );
+        REQUIRE( 2 == interpolationRange[ 1 ].indices().begin() );
+        REQUIRE( 5 == interpolationRange[ 1 ].indices().end() );
       }
     }
   }
