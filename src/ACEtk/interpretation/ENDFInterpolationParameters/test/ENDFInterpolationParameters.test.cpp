@@ -5,7 +5,7 @@
 
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "Constructing coupled density functions" ){
+SCENARIO( "Constructing ENDFInterpolationParameters" ){
   std::vector< double > NBT{ 1, 2, 3, 4, 5, 6 };
   GIVEN( "valid NBT and schemes" ){
     std::vector< std::vector< double > > validINT{

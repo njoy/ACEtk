@@ -4,6 +4,7 @@ class ENDFInterpolationParameters {
 
 public:
 #include "ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp"
+#include "ACEtk/interpretation/ENDFInterpolationParameters/src/range.hpp"
 
   auto operator[]( int index ) const { 
     return std::make_pair( NBT_[ index ], schemes_[ index ] ); }

@@ -438,6 +438,7 @@
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp",
+    "src/ACEtk/interpretation/ENDFInterpolationParameters/src/range.hpp",
     "src/ACEtk/interpretation/InterpolationRegion/src/ctor.hpp",
     "src/ACEtk/interpretation/InterpolationRegion/src/makeInterpolationRegions.hpp",
     "src/ACEtk/interpretation/InterpolationRegion/src/verifyInterpolationScheme.hpp",
@@ -584,7 +585,8 @@
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp"
     ],
     "ACEtk.interpretation.ENDFInterpolationParameters": [
-      "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp"
+      "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp",
+      "src/ACEtk/interpretation/ENDFInterpolationParameters/test/range.test.cpp"
     ],
     "ACEtk.interpretation.InterpolationRegion": [
       "src/ACEtk/interpretation/InterpolationRegion/test/InterpolationRegion.test.cpp",
