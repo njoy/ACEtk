@@ -26,4 +26,19 @@ SCENARIO( "creating ranges from interpolation parameters" ){
       }
     }
   }
+  GIVEN( "empty inteprolation parameters" ){
+    std::vector< double > NBT;
+    std::vector< double > INT;
+
+    njoy::Log::info( "empty parameters" );
+    ENDFInterpolationParameters EIP( NBT, INT );
+
+    WHEN( "a range is created" ){
+      auto interpolationRange = EIP.range();
+
+      THEN( "the range can be verified" ){
+        REQUIRE( 0 == interpolationRange.size() );
+      }
+    }
+  }
 } // SCENARIO
