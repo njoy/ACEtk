@@ -380,8 +380,8 @@
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/ENDFInterpolationParameters.hpp",
     "src/ACEtk/interpretation/HeaderIndices.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
-    "src/ACEtk/interpretation/Region.hpp",
     "src/ACEtk/interpretation/ScaleBy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
@@ -438,6 +438,9 @@
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/ctor.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/makeInterpolationRegions.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/verifyInterpolationScheme.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -445,9 +448,6 @@
     "src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp",
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
     "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
-    "src/ACEtk/interpretation/Region/src/ctor.hpp",
-    "src/ACEtk/interpretation/Region/src/makeRegions.hpp",
-    "src/ACEtk/interpretation/Region/src/verifyInterpolationScheme.hpp",
     "src/ACEtk/interpretation/src/checkHistLinLinFlag.hpp",
     "src/ACEtk/Table/Data.hpp",
     "src/ACEtk/Table/Header.hpp",
@@ -586,15 +586,15 @@
     "ACEtk.interpretation.ENDFInterpolationParameters": [
       "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp"
     ],
+    "ACEtk.interpretation.InterpolationRegion": [
+      "src/ACEtk/interpretation/InterpolationRegion/test/InterpolationRegion.test.cpp",
+      "src/ACEtk/interpretation/InterpolationRegion/test/makeInterpolationRegions.test.cpp"
+    ],
     "ACEtk.interpretation.MP1": [
       "src/ACEtk/interpretation/MP1/test/cumulativeDistributions.test.cpp",
       "src/ACEtk/interpretation/MP1/test/deflectionCosines.test.cpp",
       "src/ACEtk/interpretation/MP1/test/energyGrid.test.cpp",
       "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp"
-    ],
-    "ACEtk.interpretation.Region": [
-      "src/ACEtk/interpretation/Region/test/makeRegions.test.cpp",
-      "src/ACEtk/interpretation/Region/test/Region.test.cpp"
     ]
   },
   "update": true

@@ -2,7 +2,7 @@
 
 #include "ACEtk.hpp"
 
-using namespace ACEtk::interpretation;
+using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "making regions" ){
   std::vector< double > INT{ 2, 3 };

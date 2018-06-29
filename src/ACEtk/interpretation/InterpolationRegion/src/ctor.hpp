@@ -1,4 +1,4 @@
-Region( int INT, xRange&& x, yRange&& y )
+InterpolationRegion( int INT, xRange&& x, yRange&& y )
 try:
   interpolationScheme_( verifyInterpolationScheme( INT ) ),
   x_( x ), y_( y )
@@ -9,6 +9,6 @@ try:
     throw std::exception();
   }
 } catch ( std::exception& e ){
-  njoy::Log::info( "Trouble constructing Region." );
+  njoy::Log::info( "Trouble constructing InterpolationRegion." );
   throw e;
 }
