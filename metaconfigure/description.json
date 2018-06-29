@@ -380,6 +380,7 @@
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/ENDFInterpolationParameters.hpp",
     "src/ACEtk/interpretation/HeaderIndices.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/ScaleBy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
@@ -437,6 +438,10 @@
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp",
+    "src/ACEtk/interpretation/ENDFInterpolationParameters/src/range.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/ctor.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/makeInterpolationRegions.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/verifyInterpolationScheme.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -580,7 +585,12 @@
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp"
     ],
     "ACEtk.interpretation.ENDFInterpolationParameters": [
-      "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp"
+      "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp",
+      "src/ACEtk/interpretation/ENDFInterpolationParameters/test/range.test.cpp"
+    ],
+    "ACEtk.interpretation.InterpolationRegion": [
+      "src/ACEtk/interpretation/InterpolationRegion/test/InterpolationRegion.test.cpp",
+      "src/ACEtk/interpretation/InterpolationRegion/test/makeInterpolationRegions.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
       "src/ACEtk/interpretation/MP1/test/cumulativeDistributions.test.cpp",

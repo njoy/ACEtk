@@ -5,7 +5,7 @@
 
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "Constructing coupled density functions" ){
+SCENARIO( "Constructing ENDFInterpolationParameters" ){
   std::vector< double > NBT{ 1, 2, 3, 4, 5, 6 };
   GIVEN( "valid NBT and schemes" ){
     std::vector< std::vector< double > > validINT{
@@ -21,6 +21,15 @@ SCENARIO( "Constructing coupled density functions" ){
           REQUIRE( ranges::equal( NBT, EIP.NBT() ) );
           REQUIRE( ranges::equal( INT, EIP.schemes() ) );
           REQUIRE( 6 == EIP.size() );
+
+          REQUIRE( 0 == EIP.range()[ 0 ].indices().begin() );
+          for( size_t j=0; j< INT.size(); j++ ){
+            REQUIRE( NBT[ j ] == EIP.range()[ j+1 ].indices().begin() +1 );
+            REQUIRE( NBT[ j ] == EIP.range()[ j ].indices().end() );
+            REQUIRE( INT[ j ] == EIP.range()[ j ].scheme() );
+            REQUIRE( NBT[ j ] == EIP.range().at( j ).indices().end() );
+            REQUIRE( INT[ j ] == EIP.range().at( j ).scheme() );
+          }
         }
       }
     }
@@ -56,6 +65,17 @@ SCENARIO( "Constructing coupled density functions" ){
           REQUIRE_THROWS( ENDFInterpolationParameters(NBT, INT) );
         }
       }
+    }
+  }
+  GIVEN( "invalid index" ){
+    std::vector< double > NBT{ 1, 2, 3 };
+    std::vector< double > INT{ 1,  2,  3 };
+
+    ENDFInterpolationParameters EIP{ NBT, INT };
+
+    THEN( "an exception is thrown" ){
+      int index = 4;
+      REQUIRE_THROWS( EIP.range().at( index ) );
     }
   }
 } // SCENARIO
