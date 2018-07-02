@@ -1,5 +1,8 @@
 
 add_executable( ACEtk.details.verify.test
+                parameters.test.cpp
+                positive.test.cpp
+                size.test.cpp
                 sorted.test.cpp
                 verify.test.cpp )
 target_compile_options( ACEtk.details.verify.test PRIVATE ${${PREFIX}_common_flags}

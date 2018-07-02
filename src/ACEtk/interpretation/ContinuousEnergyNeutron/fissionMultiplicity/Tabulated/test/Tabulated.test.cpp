@@ -121,6 +121,22 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
           regions, iSchemes, energies, multiplicities ) );
       }
     }
+    WHEN( "energies are not positive" ){
+      std::vector< double > energies{ -1.0, 2.0, 3.0, 4.0, 5.0, 5.0 };
+
+      THEN( "an exception is thrown" ){
+        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+          regions, iSchemes, energies, multiplicities ) );
+      }
+    }
+    WHEN( "multiplicies are not positive" ){
+      std::vector< double > multiplicities{ -1.0, 2.0, 3.0, 4.0, 5.0, 5.0 };
+
+      THEN( "an exception is thrown" ){
+        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+          regions, iSchemes, energies, multiplicities ) );
+      }
+    }
   } // GIVEN
 } // SCENARIO
 

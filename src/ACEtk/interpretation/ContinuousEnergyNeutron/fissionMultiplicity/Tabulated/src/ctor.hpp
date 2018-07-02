@@ -12,14 +12,18 @@ Tabulated( ENDFInterpolationParameters&& interp,
     throw std::exception();
   }
 
-  if( not details::verify::sorted( energies_ ) ){
+  if( not details::verify::sorted_positive( energies_ ) ){
     njoy::Log::info( "incident energies must be sorted" );
+    throw std::exception();
+  }
+
+  if( not details::verify::positive( nubar ) ){
+    njoy::Log::info( "nubar values must be positive" );
     throw std::exception();
   }
 
 #if ACETK_CHECK
   // sorted NBT
-  // positive nubar
   // INT must be in [1,8)
 #endif
 }
