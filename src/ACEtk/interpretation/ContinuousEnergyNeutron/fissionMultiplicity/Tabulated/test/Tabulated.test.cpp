@@ -8,12 +8,12 @@ using namespace njoy::ACEtk::interpretation;
 using namespace dimwits;
 
 SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
-  GIVEN( "the pieces of a Tabulated nubar" ){
-    std::vector< double > regions{ 3, 4, 6 };
-    std::vector< double > iSchemes{ 1, 2, 3 };
-    std::vector< double > energies{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-    std::vector< double > multiplicities{ 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 };
+  std::vector< double > regions{ 3, 4, 6 };
+  std::vector< double > iSchemes{ 1, 2, 3 };
+  std::vector< double > energies{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
+  std::vector< double > multiplicities{ 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 };
     
+  GIVEN( "valid pieces of a Tabulated nubar" ){
     WHEN( "a Tabulated is constructed" ){
       ContinuousEnergyNeutron::fissionMultiplicity::Tabulated tabulated(
          regions, iSchemes,
@@ -89,8 +89,8 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         std::vector< double > Es{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
         auto refEnergies = scaleBy( 
             1.0*mega( electronVolts ) )( Es );
-        njoy::Log::info( "refEnergies.size: {}", refEnergies.size() );
-        for( const auto pair : ranges::view::zip( refEnergies, tabulated.energies() ) ){
+        for( const auto pair : 
+             ranges::view::zip( refEnergies, tabulated.energies() ) ){
           REQUIRE( pair.first == pair.second );
         }
 
@@ -100,6 +100,25 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         }
 
         REQUIRE( 0 == tabulated.interpolationParameters().size() );
+      }
+    }
+  } // GIVEN
+
+  GIVEN( "invalid pieces of a Tabulated nubar" ){
+    WHEN( "energies size != multiplicities size" ){
+      std::vector< double > energies{ 1.0, 2.0, 3.0, 4.0, 5.0 };
+
+      THEN( "an exception is thrown" ){
+        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+          regions, iSchemes, energies, multiplicities ) );
+      }
+    }
+    WHEN( "energies are not sorted" ){
+      std::vector< double > energies{ 1.0, 2.0, 3.0, 4.0, 5.0, 4.1 };
+
+      THEN( "an exception is thrown" ){
+        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+          regions, iSchemes, energies, multiplicities ) );
       }
     }
   } // GIVEN

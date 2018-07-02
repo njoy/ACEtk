@@ -373,8 +373,11 @@
   },
   "header files": [
     "src/ACEtk.hpp",
+    "src/ACEtk/details.hpp",
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
+    "src/ACEtk/details/verify.hpp",
+    "src/ACEtk/details/verify/src/sorted.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/CoupledDensityFunctions.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
@@ -515,6 +518,10 @@
     ],
     "ACEtk.Table.Header.String": [
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
+    ],
+    "ACEtk.details.verify": [
+      "src/ACEtk/details/verify/test/sorted.test.cpp",
+      "src/ACEtk/details/verify/test/verify.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp",
