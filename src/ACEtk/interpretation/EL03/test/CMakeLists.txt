@@ -1,7 +1,6 @@
 
 add_executable( ACEtk.interpretation.EL03.test
                 el03.test.cpp
-                RileyCrossSections.test.cpp
                 MottScatteringCorrection.test.cpp
                 AtomicLevels.test.cpp )
 target_compile_options( ACEtk.interpretation.EL03.test PRIVATE ${${PREFIX}_common_flags}
