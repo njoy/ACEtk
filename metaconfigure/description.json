@@ -377,7 +377,6 @@
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/details/verify.hpp",
-    "src/ACEtk/details/verify/src/parameters.hpp",
     "src/ACEtk/details/verify/src/positive.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
@@ -523,7 +522,7 @@
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
     ],
     "ACEtk.details.verify": [
-      "src/ACEtk/details/verify/test/parameters.test.cpp",
+      "src/ACEtk/details/verify/test/interpolationParameters.test.cpp",
       "src/ACEtk/details/verify/test/positive.test.cpp",
       "src/ACEtk/details/verify/test/size.test.cpp",
       "src/ACEtk/details/verify/test/sorted.test.cpp",

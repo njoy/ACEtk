@@ -1,6 +1,6 @@
 
 add_executable( ACEtk.details.verify.test
-                parameters.test.cpp
+                interpolationParameters.test.cpp
                 positive.test.cpp
                 size.test.cpp
                 sorted.test.cpp
