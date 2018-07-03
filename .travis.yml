@@ -5,21 +5,28 @@ git:
 addons:
   apt:
     sources:
-    - sourceline: deb http://apt.llvm.org/precise/ llvm-toolchain-precise-3.8 main
-      key_url: http://apt.llvm.org/llvm-snapshot.gpg.key
-    - ubuntu-toolchain-r-test
-    - george-edison55-precise-backports
+      - sourceline: deb http://apt.llvm.org/precise/ llvm-toolchain-precise-3.8 main
+        key_url: http://apt.llvm.org/llvm-snapshot.gpg.key
+      - ubuntu-toolchain-r-test
+      - george-edison55-precise-backports
     packages:
-    - g++-6
-    - clang-3.8
-    - llvm-dev
+      - g++-6
+      - clang-3.8
+      - llvm-dev
+
+before_install:
+  - brew update
+  - brew install python3
 language: cpp
+
 compiler:
   - gcc
   - clang
+
 os:
   - linux
   - osx
+
 osx_image: xcode8
 
 script: "./.travis/build.sh"
