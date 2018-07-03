@@ -21,11 +21,6 @@ Tabulated( ENDFInterpolationParameters&& interp,
     njoy::Log::info( "nubar values must be positive" );
     throw std::exception();
   }
-
-#if ACETK_CHECK
-  // sorted NBT
-  // INT must be in [1,8)
-#endif
 }
 
 template< typename Range >

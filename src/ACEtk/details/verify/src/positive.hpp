@@ -1,5 +1,5 @@
 template< typename Range >
-bool positive( Range& array ){
+inline bool positive( Range& array ){
   auto firstNegative = ranges::count_if( array, 
     [](auto& e ){ return e < 0.0; } );
 
@@ -13,7 +13,7 @@ bool positive( Range& array ){
 }
 
 template< typename Range >
-bool strictlyPositive( Range& array ){
+inline bool strictlyPositive( Range& array ){
   auto firstNegative = ranges::count_if( array, 
     [](auto& e ){ return e <= 0.0; } );
 

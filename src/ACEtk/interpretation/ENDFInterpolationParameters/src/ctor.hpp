@@ -14,18 +14,9 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
       throw std::exception();
     }
 
-    int sch{ 0 };
-    for( size_t i=0; i<schemes_.size(); i++ ){
-      sch = schemes_[i];
-      if( not ( ( ( sch >  0 ) and ( sch <  7 ) ) or
-                ( ( sch > 10 ) and ( sch < 16 ) ) or
-                ( ( sch > 20 ) and ( sch < 26 ) ) )
-        ){
-        
-        njoy::Log::error(
-          "Invalid ENDF interpolation scheme ({}) found at index {}", sch, i );
-        throw std::exception();
-      }
+    if( not details::verify::interpolationParameters( schemes_ ) ){
+      njoy::Log::info( "Invalid ENDF interpolation schem found." );
+      throw std::exception();
     }
   } // NBT_.size()
 }

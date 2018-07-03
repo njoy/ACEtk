@@ -1,5 +1,5 @@
 template< typename Range >
-bool sorted( Range& array ){
+inline bool sorted( Range& array ){
 
   auto sortedEnd = ranges::is_sorted_until( array );
   if( sortedEnd != array.end() ){
@@ -12,7 +12,7 @@ bool sorted( Range& array ){
 }
 
 template< typename Range >
-bool sorted_positive( Range& array ){
+inline bool sorted_positive( Range& array ){
   if( sorted( array ) ){
     if( *( array.begin() ) < 0.0 ){
       njoy::Log::error( "array is not all positive" );
@@ -26,7 +26,7 @@ bool sorted_positive( Range& array ){
 }
 
 template< typename Range >
-bool sorted_strictlyPositive( Range& array ){
+inline bool sorted_strictlyPositive( Range& array ){
   if( sorted( array ) ){
     if( *( array.begin() ) <= 0.0 ){
       njoy::Log::error( "array is not strictly positive" );
