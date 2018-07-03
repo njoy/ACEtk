@@ -12,12 +12,7 @@ inline bool interpolationParameter( int p ){
 template< typename V >
 inline bool interpolationParameters( V&& ps ){
 
-  // auto all = ps | ranges::all_of( interpolationParameter );
-  bool all = true;
-  for( auto& p : ps ){
-    all = interpolationParameter( p );
-    if( not all ) break;
-  }
+  auto all = ranges::all_of( ps, interpolationParameter );
   if( not all ){
     njoy::Log::info( "Invalid ENDF interpolation parameter found in array." );
     return false;
