@@ -19,6 +19,12 @@ public:
 
   auto atomicLevels() const {
     return AtomicLevels{ this->table };
+  }
+
+  #include "ACEtk/interpretation/EL03/Bremsstrahlung.hpp"  
+
+  auto bremsstrahlung() const {
+    return Bremsstrahlung{ this->table };
   }      
   
 };
