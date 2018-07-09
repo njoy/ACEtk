@@ -19,7 +19,7 @@ public:
     return this->table.data.XSS( start, length );
   }
 
-  auto interpolationBremstrahlungXS() const {
+  auto xSInterpolationValues() const {
     const auto length = this->table.data.NXS( 5 )*this->table.data.NXS( 6 );
     const auto start  = this->table.data.JXS( 5 ) + this->table.data.NXS( 5 )
                                                   + this->table.data.NXS( 6 );

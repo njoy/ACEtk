@@ -71,7 +71,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
 
     WHEN( "Querying for the values for interpolation for Bremstrahlung "
 	  "cross section values" ) {
-      const auto trial = el03.bremsstrahlung().interpolationBremstrahlungXS();
+      const auto trial = el03.bremsstrahlung().xSInterpolationValues();
       const auto reference1 = referenceInterpolationXS;
       for ( const auto pair : ranges::view::zip( reference1, trial[0] ) ) {
 	  REQUIRE( pair.first == Approx( pair.second ) );
