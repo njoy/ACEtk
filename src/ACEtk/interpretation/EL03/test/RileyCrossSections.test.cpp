@@ -31,7 +31,7 @@ SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){
   GIVEN( "An ACE Table for 1000.03e" ) {
     const auto el03 = interpretation::EL03( table );
 
-    /*
+
     WHEN( "Queing for the energy grid in MeV, "
 	  "on which the Mott Scattering Corrections are evaluated" ) {
       const auto trial = el03.rileyCrossSections().energyGrid();
@@ -40,18 +40,18 @@ SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){
 	REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
-    */
+
     
     WHEN( "Queing for the Riley scattering correction points" ) {
       const auto riley_xs = el03.rileyCrossSections().values();
       const auto reference1 = mcnpReference1;
       const auto reference2 = mcnpReference2;
 
-      for ( const auto pair : ranges::view::zip ( reference1, riley_xs[0] ) ) {
+      for ( const auto pair : ranges::view::zip ( reference2, riley_xs[0] ) ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
       
-      for ( const auto pair : ranges::view::zip ( reference2, riley_xs[8] ) ) {
+      for ( const auto pair : ranges::view::zip ( reference1, riley_xs[8] ) ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
