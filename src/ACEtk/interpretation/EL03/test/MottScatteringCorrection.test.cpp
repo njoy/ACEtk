@@ -24,7 +24,6 @@ SCENARIO("test interpretation::EL03::MottScatteringCorrection.hpp"){
     WHEN("Querying for the energy grid in MeV,"
 	 "on which the mott scattering cross section data are evaluated") {
       const auto trial = el03.mottScatteringCorrection().energyGrid();
-      el03.mottScatteringCorrection().values();       
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for( const auto pair : ranges::view::zip( reference, trial ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );
@@ -32,7 +31,8 @@ SCENARIO("test interpretation::EL03::MottScatteringCorrection.hpp"){
     }
     
     WHEN("Querying for the mott scattering cross section data"){
-
+      el03.mottScatteringCorrection().values();
+            
     }
   }
 }
