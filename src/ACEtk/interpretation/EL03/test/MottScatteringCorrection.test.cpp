@@ -1,4 +1,3 @@
-
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
@@ -31,8 +30,11 @@ SCENARIO("test interpretation::EL03::MottScatteringCorrection.hpp"){
     }
     
     WHEN("Querying for the mott scattering cross section data"){
-      el03.mottScatteringCorrection().values();
-            
+      const auto trial = el03.mottScatteringCorrection().values();
+      ranges::for_each( const auto group, trial ) {
+	std::cout << group.first << "\n";
+      }
+	
     }
   }
 }
