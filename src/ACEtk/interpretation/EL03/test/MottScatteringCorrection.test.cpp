@@ -23,14 +23,14 @@ namespace{
 
 }
 
-SCENARIO("test interpretation::EL03::MottScatteringCorrection.hpp"){  
-  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
+SCENARIO("Test interpretation::EL03::MottScatteringCorrection.hpp") {  
+  auto table = Table( njoy::utility::slurpFileToMemory( "1000.e03" ) );
   
-  GIVEN("An ACE Table for 1000.e03"){
+  GIVEN("An ACE Table for 1000.03e") {
     const auto el03 = interpretation::EL03( table );
 
-    WHEN("Querying for the energy grid in MeV,"
-	 "on which the mott scattering correction data are evaluated") {
+    WHEN("querying for the energy grid in MeV, "
+	 "on which the mott scattering correction data points are evaluated") {
       const auto trial = el03.mottScatteringCorrection().energyGrid();
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for ( const auto pair : ranges::view::zip( reference, trial ) ) {
@@ -38,7 +38,7 @@ SCENARIO("test interpretation::EL03::MottScatteringCorrection.hpp"){
       }
     }
     
-    WHEN("Querying for the Mott scattering correction data"){
+    WHEN("querying for the Mott scattering correction data") {
       const auto mottCorrectionValues = el03.mottScatteringCorrection().values();
       for ( const auto pair
 	      : ranges::view::zip( referenceMottCorrections1, mottCorrectionValues[17] ) ) {
