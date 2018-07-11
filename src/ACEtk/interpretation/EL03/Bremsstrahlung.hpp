@@ -13,27 +13,27 @@ public:
 				 { return entry * mega(electronVolt); } );
   }
 
-  auto photonEnergyRatio() const {
+  auto photonElectronEnergyRatio() const {
     const auto length = this->table.data.NXS( 6 );
     const auto start  = this->table.data.JXS( 5 ) + this->table.data.NXS( 5 );
     return this->table.data.XSS( start, length );
   }
 
-  auto xSInterpolationValues() const {
+  auto xsInterpolationGrid() const {
     const auto length = this->table.data.NXS( 5 )*this->table.data.NXS( 6 );
     const auto start  = this->table.data.JXS( 5 ) + this->table.data.NXS( 5 )
                                                   + this->table.data.NXS( 6 );
     return this->table.data.XSS( start, length )
-           | ranges::view::chunk( this->table.data.NXS( 6 ) );
+           | ranges::view::chunk( this->table.data.NXS( 5 ) );
   }
 
-  auto ratioValuesSpectrumCalculation() const {
+  auto photonElectronRatioValuesSpectrumCalculation() const {
     const auto length = this->table.data.NXS( 9 );
     const auto start  = this->table.data.JXS( 9 );
     return this->table.data.XSS( start, length );
   }
 
-  auto ratioValuesAngularDistribution() const {
+  auto photonElectronRatioValuesAngularDistribution() const {
     const auto length = this->table.data.NXS( 10 );
     const auto start  = this->table.data.JXS( 10 );
     return this->table.data.XSS( start, length );
