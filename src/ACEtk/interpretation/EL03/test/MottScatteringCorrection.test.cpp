@@ -38,17 +38,20 @@ SCENARIO("Test interpretation::EL03::MottScatteringCorrection.hpp") {
       }
     }
     
-    WHEN("querying for the Mott scattering correction data") {
-      const auto mottCorrectionValues = el03.mottScatteringCorrection().values();
-      for ( const auto pair
-	      : ranges::view::zip( referenceMottCorrections1, mottCorrectionValues[17] ) ) {
+    WHEN("querying for the Mott scattering correction data at 1-GeV") {
+      auto testZip = ranges::view::zip( referenceMottCorrections1,
+					el03.mottScatteringCorrection().values()[17] );
+      RANGES_FOR( const auto pair, testZip ){
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
-      
-      for ( const auto pair
-	      : ranges::view::zip( referenceMottCorrections2, mottCorrectionValues[0] ) ) {
+    }
+
+    WHEN("querying for the Mott scattering correction data at 100-eV") {      
+      auto testZip = ranges::view::zip( referenceMottCorrections2,
+					el03.mottScatteringCorrection().values()[0] );
+      RANGES_FOR( const auto pair, testZip ){
 	REQUIRE( pair.first == Approx( pair.second ) );
-      }      
+      }
     }
   }
 }
