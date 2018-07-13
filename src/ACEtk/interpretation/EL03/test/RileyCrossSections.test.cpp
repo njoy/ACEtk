@@ -39,16 +39,17 @@ SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){
 	REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
-    
-    WHEN( "querying for the Riley scattering cross section parameters" ) {
-      const auto riley_xs = el03.rileyCrossSection().values();
-      const auto reference1 = referenceRileyScatteringParameters2;
 
-      for ( const auto pair : ranges::view::zip ( reference1, riley_xs[0] ) ) {
+    WHEN( "querying for the Riley scattering cross section parameters at 1-keV" ) {
+      const auto reference1 = referenceRileyScatteringParameters2;
+      for ( const auto pair : ranges::view::zip ( reference1, el03.rileyCrossSection().values()[0] ) ) {
 	REQUIRE( pair.first == Approx( pair.second ) );	
       }
+    }
+
+    WHEN( "querying for the Riley scattering cross section parameters at 256-keV" ) {    
       const auto reference2 = referenceRileyScatteringParameters1;      
-      for ( const auto pair : ranges::view::zip ( reference2, riley_xs[8] ) ) {
+      for ( const auto pair : ranges::view::zip ( reference2, el03.rileyCrossSection().values()[8] ) ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
