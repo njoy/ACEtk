@@ -28,27 +28,26 @@ namespace{
 SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){  
   auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
 
-  GIVEN( "An ACE Table for 1000.03e" ) {
+  GIVEN( "an ACE Table for 1000.03e" ) {
     const auto el03 = interpretation::EL03( table );
 
-    WHEN( "Quering for the energy points in MeV, "
-	  "on which the Riley Scattering cross section are evaluated" ) {
-      const auto rileyEnergy = el03.rileyCrossSections().energyGrid();
+    WHEN( "querying for the energy points, "
+	  "on which the Riley scattering cross section parameters are evaluated" ) {
+      const auto rileyEnergy = el03.rileyCrossSection().energyGrid();
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for ( const auto pair : ranges::view::zip( reference, rileyEnergy ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
     
-    WHEN( "Quering for the Riley scattering correction parameters" ) {
-      const auto riley_xs = el03.rileyCrossSections().values();
+    WHEN( "querying for the Riley scattering cross section parameters" ) {
+      const auto riley_xs = el03.rileyCrossSection().values();
       const auto reference1 = referenceRileyScatteringParameters2;
-      const auto reference2 = referenceRileyScatteringParameters1;
 
       for ( const auto pair : ranges::view::zip ( reference1, riley_xs[0] ) ) {
-	REQUIRE( pair.first == Approx( pair.second ) );
+	REQUIRE( pair.first == Approx( pair.second ) );	
       }
-      
+      const auto reference2 = referenceRileyScatteringParameters1;      
       for ( const auto pair : ranges::view::zip ( reference2, riley_xs[8] ) ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
