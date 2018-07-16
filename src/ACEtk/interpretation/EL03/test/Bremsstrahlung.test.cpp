@@ -56,8 +56,8 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
     const auto el03 = interpretation::EL03( table );
 
     WHEN( "Querying for the electron energy values" ) {
-      const auto energyValue = el03.bremsstrahlung().electronEnergy();
-      for ( const auto pair : ranges::view::zip( referenceElectronEnergy, energyValue ) ) {
+      for ( const auto pair : ranges::view::zip( referenceElectronEnergy,
+						 el03.bremsstrahlung().electronEnergy() ) ) {
 	  REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
