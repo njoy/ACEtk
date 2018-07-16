@@ -4,7 +4,7 @@
 using namespace njoy::ACEtk;
 
 namespace{
-  std::array< double, 57 > referenceEnergyGrid = {{
+  std::array< double, 57 > referenceElectronEnergies = {{
       1.000000000000E-03, 1.500000000000E-03, 2.000000000000E-03,
       3.000000000000E-03, 4.000000000000E-03, 5.000000000000E-03,
       6.000000000000E-03, 8.000000000000E-03, 1.000000000000E-02,
@@ -57,8 +57,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
 
     WHEN( "Querying for the electron energy values" ) {
       const auto energyValues = el03.bremsstrahlung().electronEnergy();
-      const auto referenceEnergyValues = referenceEnergyGrid;
-      for ( const auto pair : ranges::view::zip( referenceEnergyValues, energyValues ) ) {
+      for ( const auto pair : ranges::view::zip( referenceElectronEnergies, energyValues ) ) {
 	  REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
@@ -67,7 +66,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
       const std::map< int, double > referenceRatios {
 	{  0, 0.000000000000E+00 }, {  8, 4.000000000000E-01 },
 	{ 16, 8.000000000000E-01 }, { 24, 9.990000000000E-01 },
-	{ 29, 1.000000000000E+00 }    };
+	{ 29, 1.000000000000E+00 } };
 
       const auto photonRatios = el03.bremsstrahlung().photonElectronEnergyRatio();
 
@@ -79,9 +78,9 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
     }
 
     WHEN( "Querying for the values the cross section grid for Bremstrahlung"  ) {
-      const auto xsGrid = el03.bremsstrahlung().xsInterpolationGrid();
-      for ( const auto pair : ranges::view::zip( referenceInterpolationXS, xsGrid[0] ) ) {
-	  REQUIRE( pair.first == Approx( pair.second ) );
+      for ( const auto pair : ranges::view::zip( referenceInterpolationXS,
+						 el03.bremsstrahlung().values()[0]) ) {
+	REQUIRE( pair.first == Approx( pair.second ) );
       }      
     }
 
@@ -90,7 +89,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
       const std::map< int, double > spectrumReference{
 	{  0, 1.000000000000E-06 }, { 24, 1.000000000000E-03 },
 	{ 48, 4.000000000000E-02 }, { 72, 5.000000000000E-01 },
-	{ 88, 1.000000000000E+00 }    };
+	{ 88, 1.000000000000E+00 } };
       
       const auto spectrum = el03.bremsstrahlung()
 	                        .photonElectronRatioValuesSpectrumCalculation();
