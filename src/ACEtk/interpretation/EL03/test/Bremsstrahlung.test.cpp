@@ -4,7 +4,7 @@
 using namespace njoy::ACEtk;
 
 namespace{
-  std::array< double, 57 > referenceElectronEnergies = {{
+  std::array< double, 57 > referenceElectronEnergy = {{
       1.000000000000E-03, 1.500000000000E-03, 2.000000000000E-03,
       3.000000000000E-03, 4.000000000000E-03, 5.000000000000E-03,
       6.000000000000E-03, 8.000000000000E-03, 1.000000000000E-02,
@@ -25,7 +25,7 @@ namespace{
       3.000000000000E+03, 4.000000000000E+03, 5.000000000000E+03,
       6.000000000000E+03, 8.000000000000E+03, 1.000000000000E+04 }};
 
-  std::array< double, 57 > referenceInterpolationXS = {{
+  std::array< double, 57 > referenceValues = {{
       7.853270000000E-03, 8.385290000000E-03, 8.805280000000E-03,
       9.446420000000E-03, 9.929790000000E-03, 1.031651000000E-02,
       1.063768000000E-02, 1.114991000000E-02, 1.155073000000E-02,
@@ -56,29 +56,29 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
     const auto el03 = interpretation::EL03( table );
 
     WHEN( "Querying for the electron energy values" ) {
-      const auto energyValues = el03.bremsstrahlung().electronEnergy();
-      for ( const auto pair : ranges::view::zip( referenceElectronEnergies, energyValues ) ) {
+      const auto energyValue = el03.bremsstrahlung().electronEnergy();
+      for ( const auto pair : ranges::view::zip( referenceElectronEnergy, energyValue ) ) {
 	  REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
 
     WHEN( "Querying for the photon to electron energy ratio values" ) {
-      const std::map< int, double > referenceRatios {
+      const std::map< int, double > referenceRatio {
 	{  0, 0.000000000000E+00 }, {  8, 4.000000000000E-01 },
 	{ 16, 8.000000000000E-01 }, { 24, 9.990000000000E-01 },
 	{ 29, 1.000000000000E+00 } };
 
-      const auto photonRatios = el03.bremsstrahlung().photonElectronEnergyRatio();
+      const auto photonRatio = el03.bremsstrahlung().photonElectronEnergyRatio();
 
-      for ( const auto& pair : referenceRatios ) {
+      for ( const auto& pair : referenceRatio ) {
 	const auto index = pair.first;
 	const auto value = pair.second;
-	REQUIRE( photonRatios[index] == Approx( value ) );
+	REQUIRE( photonRatio[index] == Approx( value ) );
       }
     }
 
     WHEN( "Querying for the values the cross section grid for Bremstrahlung"  ) {
-      for ( const auto pair : ranges::view::zip( referenceInterpolationXS,
+      for ( const auto pair : ranges::view::zip( referenceValues,
 						 el03.bremsstrahlung().values()[0]) ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }      
