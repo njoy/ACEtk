@@ -5,10 +5,8 @@ Tabulated( ENDFInterpolationParameters&& interp,
   energies_( energies ),
   nubar_( nubar )
 {
-  if( energies_.size() != nubar.size() ){
+  if( not details::verify::equalSize(energies, nubar) ){
     njoy::Log::error( "incident energies and nubar must be the same size" );
-    njoy::Log::info( "energies size: {}, nubar size: {}", 
-                     energies_.size(), nubar_.size() );
     throw std::exception();
   }
 

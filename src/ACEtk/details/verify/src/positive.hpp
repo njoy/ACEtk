@@ -1,4 +1,5 @@
-template< typename Range >
+template< typename Range, 
+          utility::Require< true, utility::is_range, Range > = true >
 inline bool positive( const Range& array ){
   auto firstNegative = ranges::count_if( array, 
     [](auto& e ){ return e < 0.0; } );
@@ -12,7 +13,8 @@ inline bool positive( const Range& array ){
   return true;
 }
 
-template< typename Range >
+template< typename Range, 
+          utility::Require< true, utility::is_range, Range > = true >
 inline bool strictlyPositive( const Range& array ){
   auto firstNegative = ranges::count_if( array, 
     [](auto& e ){ return e <= 0.0; } );

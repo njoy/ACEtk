@@ -9,7 +9,7 @@ inline bool interpolationParameter( int p ){
   return true;
 }
 
-template< typename V >
+template< typename V, utility::Require< true, utility::is_range, V > = true >
 inline bool interpolationParameters( V&& ps ){
 
   auto all = ranges::all_of( ps, interpolationParameter );
