@@ -15,7 +15,7 @@ addons:
       - llvm-dev
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew upgrade python; fi
+  - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then brew update && brew upgrade python3; fi
 
 language: cpp
 
@@ -29,8 +29,8 @@ os:
 
 osx_image: xcode8
 
-script: "./.travis/build.sh"
-after_success: "./.travis/signature.sh"
+script: ./.travis/build.sh
+after_success: ./.travis/signature.sh
 env:
   - build_type=debug static_libraries=FALSE
   - build_type=release static_libraries=FALSE
