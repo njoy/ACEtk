@@ -377,6 +377,7 @@
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/details/verify.hpp",
+    "src/ACEtk/details/verify/src/interpolationParameters.hpp",
     "src/ACEtk/details/verify/src/positive.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
