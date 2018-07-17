@@ -11,15 +11,15 @@ SCENARIO( "Testing positive verification" ){
     std::vector< int > negative{ -1, 0, 2, 4 };
 
     WHEN( "testing for positivity" ){
-      REQUIRE( verify::positive( strictlyPositive ) );
-      REQUIRE( verify::positive( positive ) );
-      REQUIRE( not verify::positive( negative ) );
+      REQUIRE( verify::isPositive( strictlyPositive ) );
+      REQUIRE( verify::isPositive( positive ) );
+      REQUIRE( not verify::isPositive( negative ) );
     }
 
     WHEN( "testing for strict positivity" ){
-      REQUIRE( verify::strictlyPositive( strictlyPositive ) );
-      REQUIRE( not verify::strictlyPositive( positive ) );
-      REQUIRE( not verify::strictlyPositive( negative ) );
+      REQUIRE( verify::isStrictlyPositive( strictlyPositive ) );
+      REQUIRE( not verify::isStrictlyPositive( positive ) );
+      REQUIRE( not verify::isStrictlyPositive( negative ) );
     }
   } // GIVEN positive
 } // SCENARIO

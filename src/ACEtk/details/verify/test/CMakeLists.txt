@@ -1,9 +1,9 @@
 
 add_executable( ACEtk.details.verify.test
                 interpolationParameters.test.cpp
-                positive.test.cpp
+                isPositive.test.cpp
+                isSorted.test.cpp
                 size.test.cpp
-                sorted.test.cpp
                 verify.test.cpp )
 target_compile_options( ACEtk.details.verify.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:

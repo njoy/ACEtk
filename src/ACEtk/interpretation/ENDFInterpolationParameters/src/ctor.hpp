@@ -9,7 +9,7 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
 
   if( NBT_.size() ){
 
-    if( not details::verify::sorted_strictlyPositive( NBT_ ) ){
+    if( not details::verify::isSortedStrictlyPositive( NBT_ ) ){
       njoy::Log::info( "NBT must be sorted and strictly positive." );
       throw std::exception();
     }

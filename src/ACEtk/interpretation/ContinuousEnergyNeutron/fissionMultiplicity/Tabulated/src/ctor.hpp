@@ -10,12 +10,12 @@ Tabulated( ENDFInterpolationParameters&& interp,
     throw std::exception();
   }
 
-  if( not details::verify::sorted_positive( energies_ ) ){
+  if( not details::verify::isSortedPositive( energies_ ) ){
     njoy::Log::info( "incident energies must be sorted" );
     throw std::exception();
   }
 
-  if( not details::verify::positive( nubar ) ){
+  if( not details::verify::isPositive( nubar ) ){
     njoy::Log::info( "nubar values must be positive" );
     throw std::exception();
   }

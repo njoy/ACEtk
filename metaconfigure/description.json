@@ -378,9 +378,9 @@
     "src/ACEtk/Table.hpp",
     "src/ACEtk/details/verify.hpp",
     "src/ACEtk/details/verify/src/interpolationParameters.hpp",
-    "src/ACEtk/details/verify/src/positive.hpp",
+    "src/ACEtk/details/verify/src/isPositive.hpp",
+    "src/ACEtk/details/verify/src/isSorted.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
-    "src/ACEtk/details/verify/src/sorted.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/CoupledDensityFunctions.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
@@ -524,9 +524,9 @@
     ],
     "ACEtk.details.verify": [
       "src/ACEtk/details/verify/test/interpolationParameters.test.cpp",
-      "src/ACEtk/details/verify/test/positive.test.cpp",
+      "src/ACEtk/details/verify/test/isPositive.test.cpp",
+      "src/ACEtk/details/verify/test/isSorted.test.cpp",
       "src/ACEtk/details/verify/test/size.test.cpp",
-      "src/ACEtk/details/verify/test/sorted.test.cpp",
       "src/ACEtk/details/verify/test/verify.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
