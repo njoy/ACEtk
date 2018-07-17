@@ -17,14 +17,14 @@ SCENARIO( "Testing sorted verification" ){
     }
 
     WHEN( "testing for positive values" ){
-      REQUIRE(     verify::isSortedPositive( strictlyPositive ) );
-      REQUIRE(     verify::isSortedPositive( positive ) );
-      REQUIRE( not verify::isSortedPositive( negative ) );
+      REQUIRE(        verify::isSortedPositive( strictlyPositive ) );
+      REQUIRE(        verify::isSortedPositive( positive ) );
+      REQUIRE_THROWS( verify::isSortedPositive( negative ) );
     }
     WHEN( "testing for strictly positive values" ){
-      REQUIRE(     verify::isSortedStrictlyPositive( strictlyPositive ) );
-      REQUIRE( not verify::isSortedStrictlyPositive( positive ) );
-      REQUIRE( not verify::isSortedStrictlyPositive( negative ) );
+      REQUIRE(        verify::isSortedStrictlyPositive( strictlyPositive ) );
+      REQUIRE_THROWS( verify::isSortedStrictlyPositive( positive ) );
+      REQUIRE_THROWS( verify::isSortedStrictlyPositive( negative ) );
     }
   }
 

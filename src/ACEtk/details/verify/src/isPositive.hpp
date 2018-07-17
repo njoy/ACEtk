@@ -7,7 +7,7 @@ inline bool isPositive( const Range& range ){
     njoy::Log::error( "All elements of the range must be positive" );
     njoy::Log::info( "First negative element ({}) found at index: {}",
                      *firstNegative, ( firstNegative - range.begin() ) );
-    return false;
+    throw std::exception();
   }
 
   return true;
@@ -20,7 +20,7 @@ inline bool isPositive( const Sorted< Range >& range ){
     njoy::Log::error( "All elements of the range must be positive" );
     njoy::Log::info( "Negative element ({}) found at index: {}",
                      *(std::begin( range ) ), 0 );
-    return false;
+    throw std::exception();
   }
   return true;
 }
@@ -36,7 +36,7 @@ inline bool isStrictlyPositive( const Range& range ){
     njoy::Log::info( 
         "First non strictly positive element ({}) found at index: {}",
         *firstNonPositive, ( firstNonPositive - range.begin() ) );
-    return false;
+    throw std::exception();
   }
 
   return true;
@@ -49,7 +49,7 @@ inline bool isStrictlyPositive( const Sorted< Range >& range ){
     njoy::Log::error( "All elements of the range must be strictly positive" );
     njoy::Log::info( "Non strictly positiveelement ({}) found at index: {}",
                      *(std::begin( range ) ), 0 );
-    return false;
+    throw std::exception();
   }
   return true;
 }
