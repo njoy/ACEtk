@@ -21,10 +21,10 @@ SCENARIO( "making regions" ){
       REQUIRE( ranges::equal( energies | slicer, regions[ 0 ].x() ) );
       REQUIRE( ranges::equal( nubar | slicer, regions[ 0 ].y() ) );
 
-      slicer = ranges::view::slice( 2, 5 );
+      auto slicer2 = ranges::view::slice( 2, 5 );
       REQUIRE( 3 == regions[1].interpolationScheme() );
-      REQUIRE( ranges::equal( energies | slicer, regions[ 1 ].x() ) );
-      REQUIRE( ranges::equal( nubar | slicer, regions[ 1 ].y() ) );
+      REQUIRE( ranges::equal( energies | slicer2, regions[ 1 ].x() ) );
+      REQUIRE( ranges::equal( nubar | slicer2, regions[ 1 ].y() ) );
     }
 
     WHEN( "INT and NBT are empty" ){
@@ -33,10 +33,10 @@ SCENARIO( "making regions" ){
 
       ENDFInterpolationParameters eip{ NBT, INT };
 
-      // auto regions = makeInterpolationRegions( eip.range(), energies, nubar );
+      auto regions = makeInterpolationRegions( eip.range(), energies, nubar );
 
       THEN( "the otuput can be verified" ){
-        // REQUIRE( 1 == regions.size() );
+        REQUIRE( 0 == regions.size() );
       }
     }
   }
