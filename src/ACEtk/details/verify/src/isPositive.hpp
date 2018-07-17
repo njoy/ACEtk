@@ -15,6 +15,18 @@ inline bool isPositive( const Range& range ){
 
 template< typename Range, 
           utility::Require< true, utility::is_range, Range > = true >
+inline bool isPositive( const Sorted< Range >& range ){
+  if( *( range.begin() ) < 0.0 ){
+    njoy::Log::error( "All elements of the range must be positive" );
+    njoy::Log::info( "Negative element ({}) found at index: {}",
+                     *(std::begin( range ) ), 0 );
+    return false;
+  }
+  return true;
+}
+
+template< typename Range, 
+          utility::Require< true, utility::is_range, Range > = true >
 inline bool isStrictlyPositive( const Range& range ){
   auto firstNonPositive = ranges::find_if( 
       range, [](auto& e ){ return e <= 0; } );
@@ -29,3 +41,16 @@ inline bool isStrictlyPositive( const Range& range ){
 
   return true;
 }
+
+template< typename Range, 
+          utility::Require< true, utility::is_range, Range > = true >
+inline bool isStrictlyPositive( const Sorted< Range >& range ){
+  if( *( range.begin() ) <= 0.0 ){
+    njoy::Log::error( "All elements of the range must be strictly positive" );
+    njoy::Log::info( "Non strictly positiveelement ({}) found at index: {}",
+                     *(std::begin( range ) ), 0 );
+    return false;
+  }
+  return true;
+}
+

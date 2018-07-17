@@ -11,9 +11,9 @@ SCENARIO( "Testing sorted verification" ){
     std::vector< int > negative{ -1, 0, 2, 4 };
 
     THEN( "they all verify as sorted" ){
-      REQUIRE( verify::isSorted( strictlyPositive ) );
-      REQUIRE( verify::isSorted( positive ) );
-      REQUIRE( verify::isSorted( negative ) );
+      REQUIRE_NOTHROW( verify::isSorted( strictlyPositive ) );
+      REQUIRE_NOTHROW( verify::isSorted( positive ) );
+      REQUIRE_NOTHROW( verify::isSorted( negative ) );
     }
 
     WHEN( "testing for positive values" ){
@@ -31,6 +31,6 @@ SCENARIO( "Testing sorted verification" ){
   GIVEN( "unsorted containers" ){
     std::vector< double > unsortedVector{ 1.0, 3.0, 2.0 };
 
-    REQUIRE( not verify::isSorted( unsortedVector ) );
+    REQUIRE_THROWS( verify::isSorted( unsortedVector ) );
   }
 } // SCENARIO
