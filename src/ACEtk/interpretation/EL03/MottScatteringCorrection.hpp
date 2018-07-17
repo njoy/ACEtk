@@ -1,7 +1,7 @@
 class MottScatteringCorrection {
   const Table& table;
 
-  auto h() const {
+  auto data() const {
     constexpr int num_angles = 5;
     const auto length = num_angles * this->table.data.NXS( 4 );
     const auto start  = this->table.data.JXS( 3 ) + this->table.data.NXS( 4 );
@@ -34,7 +34,7 @@ public:
 	  return ror | ranges::view::transform( get_entry(index) ); } );
       } );
     
-    return this->h() | ranges::view::chunk( num_energies )
+    return this->data() | ranges::view::chunk( num_energies )
       | ranges::view::transform( ranges::view::reverse )
       | transpose;
     

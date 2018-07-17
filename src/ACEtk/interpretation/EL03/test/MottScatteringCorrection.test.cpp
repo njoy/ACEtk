@@ -48,7 +48,7 @@ SCENARIO("Test interpretation::EL03::MottScatteringCorrection.hpp") {
 
     WHEN("querying for the Mott scattering correction data at 100-eV") {      
       auto testZip = ranges::view::zip( referenceMottCorrections2,
-					el03.mottScatteringCorrection().values()[0] );
+					el03.mottScatteringCorrection().values().front() );
       RANGES_FOR( const auto pair, testZip ){
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
