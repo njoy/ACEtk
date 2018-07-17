@@ -377,6 +377,8 @@
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/details/verify.hpp",
+    "src/ACEtk/details/verify/Sorted.hpp",
+    "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
     "src/ACEtk/details/verify/src/interpolationParameters.hpp",
     "src/ACEtk/details/verify/src/isPositive.hpp",
     "src/ACEtk/details/verify/src/isSorted.hpp",
@@ -528,6 +530,9 @@
       "src/ACEtk/details/verify/test/isSorted.test.cpp",
       "src/ACEtk/details/verify/test/size.test.cpp",
       "src/ACEtk/details/verify/test/verify.test.cpp"
+    ],
+    "ACEtk.details.verify.Sorted": [
+      "src/ACEtk/details/verify/Sorted/test/Sorted.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp",
