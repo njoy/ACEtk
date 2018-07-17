@@ -21,7 +21,8 @@ Tabulated( ENDFInterpolationParameters&& interp,
   }
 }
 
-template< typename Range >
+template< typename Range, 
+          utility::Require< true, utility::is_range, Range > = true >
 Tabulated( Range& NBT, Range& INT,
            Range& energies, Range& nubar )
 try:

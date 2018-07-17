@@ -21,7 +21,8 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
   } // NBT_.size()
 }
 
-template< typename Range >
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true >
 ENDFInterpolationParameters( Range& NBT, Range& INT )
   try:
     ENDFInterpolationParameters(
