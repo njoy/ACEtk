@@ -22,6 +22,7 @@ public:
     const auto length = this->table.data.NXS( 5 ) * this->table.data.NXS( 6 );
     const auto start  = this->table.data.JXS( 5 ) + this->table.data.NXS( 5 )
                                                   + this->table.data.NXS( 6 );
+
     const auto units = [](auto&& entry) { return entry * centi(meter)
 					  * centi(meter) / mega(electronVolt); };
 
