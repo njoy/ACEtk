@@ -20,6 +20,12 @@ public:
   auto atomicLevels() const {
     return AtomicLevels{ this->table };
   }      
+
+  #include "ACEtk/interpretation/EL03/RileyCrossSection.hpp"  
+
+  auto rileyCrossSection() const {
+    return RileyCrossSection{ this->table };
+  }      
   
 };
   
