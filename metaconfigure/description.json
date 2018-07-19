@@ -381,6 +381,7 @@
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
+    "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
@@ -459,6 +460,7 @@
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
+      "src/ACEtk/interpretation/EL03/test/RileyCrossSection.test.cpp",
       "src/ACEtk/interpretation/EL03/test/MottScatteringCorrection.test.cpp",
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp"
     ],
