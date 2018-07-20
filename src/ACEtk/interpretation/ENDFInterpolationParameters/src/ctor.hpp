@@ -9,10 +9,10 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
 
   if( NBT_.size() ){
 
-    if( not details::verify::isSortedStrictlyPositive( NBT_ ) ){
-      njoy::Log::info( "NBT must be sorted and strictly positive." );
-      throw std::exception();
-    }
+    // if( not details::verify::isSortedStrictlyPositive( NBT_ ) ){
+    //   njoy::Log::info( "NBT must be sorted and strictly positive." );
+    //   throw std::exception();
+    // }
 
     if( not details::verify::interpolationParameters( schemes_ ) ){
       njoy::Log::info( "Invalid ENDF interpolation schem found." );
