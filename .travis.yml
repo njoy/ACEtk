@@ -15,7 +15,7 @@ addons:
       - llvm-dev
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then brew update && brew upgrade python3; fi
+- if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then brew update && brew upgrade python3; fi
 
 language: cpp
 
@@ -49,17 +49,12 @@ matrix:
       compiler: clang
       env:
         build_type=debug static_libraries=FALSE
-        appended_flags="-fsanitize=address -fno-omit-frame-pointer "
-    - os: linux
-      compiler: clang
-      env:
-        build_type=debug static_libraries=TRUE
-        appended_flags="-fsanitize=memory -fPIE -fno-omit-frame-pointer "
+        appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
     - os: linux
       compiler: clang
       env:
         build_type=debug static_libraries=FALSE
-        appended_flags="-fsanitize=undefined -fsanitize=integer -fno-omit-frame-pointer "
+        appended_flags="-fsanitize=undefined;-fno-omit-frame-pointer;"
   exclude:
     - os: osx
       compiler: gcc
