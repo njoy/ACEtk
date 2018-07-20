@@ -11,28 +11,38 @@ SCENARIO( "Testing sorted verification" ){
   std::vector< int > negative{ -1, 0, 2, 4 };
   std::vector< double > unsortedVector{ 1.0, 3.0, 2.0 };
 
-  GIVEN( "sorted containers" ){
-    THEN( "they all verify as sorted" ){
-      // REQUIRE_NOTHROW( Sorted< std::vector< double > >{ 1.1, 1.2, 1.3 } );
+  GIVEN( "containers" ){
+    WHEN( "constructing from initilizer list" ){
+      REQUIRE_NOTHROW( Sorted< std::vector< int > >( { 1,2,3,4,5 } ) );
+
+      REQUIRE_THROWS_AS( 
+        Sorted< std::vector< double > >( { 1,2,3,2,1 } ), 
+        UnsortedException 
+      );
+    }
+    WHEN( "constructing from a 'range'" ){
       REQUIRE_NOTHROW( 
           Sorted< std::vector< double > >( strictlyPositive ) );
       REQUIRE_NOTHROW( 
           Sorted< std::vector< double > >( positive ) );
       REQUIRE_NOTHROW( 
           Sorted< std::vector< int > >( negative ) );
-    }
-    WHEN( "assigning to Sorted" ){
-      // Sorted< std::vector< int > > sortedDouble{ 1.1, 1.2, 1.3 };
-      // std::vector< double > sortedDouble{ 1.1, 1.2, 1.3 };
+      REQUIRE_THROWS_AS( 
+        Sorted< std::vector< double > >( unsortedVector ), 
+        UnsortedException 
+      );
+
+    } // WHEN
+    WHEN( "assigning" ){
+      Sorted< std::vector< double > > sdVector = positive;
+      REQUIRE_NOTHROW( 
+          sdVector = Sorted< std::vector< double > >( strictlyPositive) );
+      REQUIRE_THROWS_AS( 
+        sdVector = unsortedVector,
+        UnsortedException
+      );
     }
   } // GIVEN
 
-  GIVEN( "unsorted containers" ){
-    THEN( "an exception is thrown" ){
-      REQUIRE_THROWS_AS( 
-        Sorted< std::vector< double > >( unsortedVector ), 
-        UnsortedException );
-    }
-  } // GIVEN
 } // SCENARIO
 
