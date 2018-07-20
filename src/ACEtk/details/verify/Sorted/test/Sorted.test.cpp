@@ -6,13 +6,13 @@
 using namespace njoy::ACEtk::details::verify;
 
 SCENARIO( "Testing sorted verification" ){
-  std::vector< double > strictlyPositive{ 1.0, 2.0, 3.0 };
-  std::vector< double > positive{ 0.0, 1.0, 2.0, 3.0 };
-  std::vector< int > negative{ -1, 0, 2, 4 };
-  std::vector< double > unsortedVector{ 1.0, 3.0, 2.0 };
-
   GIVEN( "containers" ){
-    WHEN( "constructing from initilizer list" ){
+    std::vector< double > strictlyPositive{ 1.0, 2.0, 3.0 };
+    std::vector< double > positive{ 0.0, 1.0, 2.0, 3.0 };
+    std::vector< int > negative{ -1, 0, 2, 4 };
+    std::vector< double > unsortedVector{ 1.0, 3.0, 2.0 };
+
+    WHEN( "constructing from initializer list" ){
       REQUIRE_NOTHROW( Sorted< std::vector< int > >( { 1,2,3,4,5 } ) );
 
       REQUIRE_THROWS_AS( 

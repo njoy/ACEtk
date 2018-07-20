@@ -1,5 +1,5 @@
 template< typename Arg,
-          utility::Require< true, utility::is_range, Range> = true >
+          utility::Require< true, utility::is_range, Range > = true >
 decltype( auto ) check( Arg&& arg ){
   auto sortedEnd = ranges::is_sorted_until( arg );
   if( sortedEnd != arg.end() ){
