@@ -378,6 +378,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
+    "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
@@ -460,6 +461,7 @@
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
       "src/ACEtk/interpretation/EL03/test/RileyCrossSection.test.cpp",
+      "src/ACEtk/interpretation/EL03/test/MottScatteringCorrection.test.cpp",
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
