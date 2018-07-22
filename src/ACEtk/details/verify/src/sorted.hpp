@@ -7,7 +7,7 @@ auto sorted( Range&& r ){
 }
 
 template< typename Range,
-          utility::Require< false, IsSorted, Range > = true 
+          utility::Require< true, IsSorted, Range > = true 
         >
 auto sorted( Range&& r ){
   return r;

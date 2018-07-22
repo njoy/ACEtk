@@ -3,7 +3,7 @@ template< typename Arg,
 decltype( auto ) check( Arg&& arg ){
   auto sortedEnd = ranges::is_sorted_until( arg );
   if( sortedEnd != arg.end() ){
-    auto index = sortedEnd - arg.begin();
+    auto index = std::distance( arg.begin(), sortedEnd );
 
     njoy::Log::error( "range is not sorted");
     njoy::Log::info( "first non-sorted element is: {} at index: {}", 
