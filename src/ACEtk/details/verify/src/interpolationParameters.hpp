@@ -1,21 +1,21 @@
-inline bool interpolationParameter( int p ){
+inline void interpolationParameter( int p ){
   if( not ( ( ( p >  0 ) and ( p <  7 ) ) or
             ( ( p > 10 ) and ( p < 16 ) ) or
             ( ( p > 20 ) and ( p < 26 ) ) )
     ){
     njoy::Log::error( "Invalid ENDF interpolation parameter: {}", p );
-    return false;
+    throw details::verify::InvalidENDFInterpolationParameterException();
   }
-  return true;
 }
 
-template< typename V, utility::Require< true, utility::is_range, V > = true >
-inline bool interpolationParameters( V&& ps ){
+template< typename Range, 
+          utility::Require< true, utility::is_range, Range > = true >
+inline void interpolationParameters( Range&& ps ){
 
-  auto all = ranges::all_of( ps, interpolationParameter );
-  if( not all ){
+  try{
+    auto all = ranges::all_of( ps, interpolationParameter );
+  } catch( details::verify::InvalidENDFInterpolationParameterException& e ){
     njoy::Log::info( "Invalid ENDF interpolation parameter found in array." );
-    return false;
+    throw e;
   }
-  return true;
 }

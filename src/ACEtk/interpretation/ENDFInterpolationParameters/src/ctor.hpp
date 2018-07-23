@@ -2,9 +2,11 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
   NBT_( NBT ),
   schemes_( INT )
 {
-  if( not details::verify::equalSize( NBT_, schemes_ ) ){
+  try{
+    details::verify::equalSize( NBT_, schemes_ );
+  } catch( std::range_error& e ){
     njoy::Log::info( "NBT and INT must be the same size" );
-    throw std::exception();
+    throw e;
   }
 
   if( NBT_.size() ){
@@ -14,7 +16,9 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
     //   throw std::exception();
     // }
 
-    if( not details::verify::interpolationParameters( schemes_ ) ){
+    try{ 
+      details::verify::interpolationParameters( schemes_ );
+    } catch( details::verify::InvalidENDFInterpolationParameterException& e ){
       njoy::Log::info( "Invalid ENDF interpolation schem found." );
       throw std::exception();
     }

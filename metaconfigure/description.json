@@ -392,6 +392,7 @@
     "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
     "src/ACEtk/details/verify/Sorted/src/check.hpp",
     "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
+    "src/ACEtk/details/verify/src/interpolationParameters.hpp",
     "src/ACEtk/details/verify/src/positive.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
@@ -463,6 +464,11 @@
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
+    "src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp",
+    "src/ACEtk/interpretation/ENDFInterpolationParameters/src/range.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/ctor.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/makeInterpolationRegions.hpp",
+    "src/ACEtk/interpretation/InterpolationRegion/src/verifyInterpolationScheme.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -538,6 +544,9 @@
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
     ],
     "ACEtk.details.verify": [
+      "src/ACEtk/details/verify/test/interpolationParameters.test.cpp",
+      "src/ACEtk/details/verify/test/isPositive.test.cpp",
+      "src/ACEtk/details/verify/test/isSorted.test.cpp",
       "src/ACEtk/details/verify/test/size.test.cpp",
       "src/ACEtk/details/verify/test/verify.test.cpp"
     ],
