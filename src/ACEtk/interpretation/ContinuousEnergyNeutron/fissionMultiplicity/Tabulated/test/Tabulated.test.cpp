@@ -109,32 +109,44 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
       std::vector< double > energies{ 1.0, 2.0, 3.0, 4.0, 5.0 };
 
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
-          regions, iSchemes, energies, multiplicities ) );
+        REQUIRE_THROWS_AS( 
+          ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+            regions, iSchemes, energies, multiplicities ),
+          std::range_error
+        );
       }
     }
     WHEN( "energies are not sorted" ){
       std::vector< double > energies{ 1.0, 2.0, 3.0, 4.0, 5.0, 4.1 };
 
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
-          regions, iSchemes, energies, multiplicities ) );
+        REQUIRE_THROWS_AS( 
+          ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+            regions, iSchemes, energies, multiplicities ),
+          details::verify::exceptions::NotSorted
+        );
       }
     }
     WHEN( "energies are not positive" ){
       std::vector< double > energies{ -1.0, 2.0, 3.0, 4.0, 5.0, 5.0 };
 
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
-          regions, iSchemes, energies, multiplicities ) );
+        REQUIRE_THROWS_AS( 
+          ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+            regions, iSchemes, energies, multiplicities ),
+          details::verify::exceptions::NotPositive
+        );
       }
     }
     WHEN( "multiplicies are not positive" ){
       std::vector< double > multiplicities{ -1.0, 2.0, 3.0, 4.0, 5.0, 5.0 };
 
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
-          regions, iSchemes, energies, multiplicities ) );
+        REQUIRE_THROWS_AS( 
+          ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
+            regions, iSchemes, energies, multiplicities ),
+          details::verify::exceptions::NotPositive
+        );
       }
     }
   } // GIVEN

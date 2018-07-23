@@ -18,7 +18,7 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
 
     try{ 
       details::verify::interpolationParameters( schemes_ );
-    } catch( details::verify::InvalidENDFInterpolationParameterException& e ){
+    } catch( details::verify::exceptions::InvalidENDFInterpolationParameter& e ){
       njoy::Log::info( "Invalid ENDF interpolation schem found." );
       throw std::exception();
     }

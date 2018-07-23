@@ -5,19 +5,28 @@ Tabulated( ENDFInterpolationParameters&& interp,
   energies_( energies ),
   nubar_( nubar )
 {
-  if( not details::verify::equalSize(energies, nubar) ){
-    njoy::Log::error( "incident energies and nubar must be the same size" );
-    throw std::exception();
+  try{
+    details::verify::equalSize(energies, nubar);
+  } catch( std::range_error& e ){
+    njoy::Log::info( "incident energies and nubar must be the same size" );
+    throw e;
   }
 
-  // if( not details::verify::isSortedPositive( energies_ ) ){
-  //   njoy::Log::info( "incident energies must be sorted" );
-  //   throw std::exception();
-  // }
+  try{
+    details::verify::positive( details::verify::sorted( energies_ ) );
+  } catch( details::verify::exceptions::NotPositive& e ){
+    njoy::Log::info( "incident energies must be positive" );
+    throw e;
+  } catch( details::verify::exceptions::NotSorted& e ){
+    njoy::Log::info( "incident energies must be sorted" );
+    throw e;
+  }
 
-  if( not details::verify::isPositive( nubar ) ){
+  try{
+    details::verify::positive( nubar );
+  } catch( details::verify::exceptions::NotPositive& e ){
     njoy::Log::info( "nubar values must be positive" );
-    throw std::exception();
+    throw e;
   }
 }
 

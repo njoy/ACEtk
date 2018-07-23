@@ -1,4 +1,4 @@
-struct InvalidENDFInterpolationParameterException : std::exception {
+struct InvalidENDFInterpolationParameter: std::exception {
   using std::exception::exception;
 
   using std::exception::what;
