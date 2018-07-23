@@ -377,14 +377,28 @@
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/details/verify.hpp",
+    "src/ACEtk/details/verify/IsPositive.hpp",
+    "src/ACEtk/details/verify/IsSorted.hpp",
+    "src/ACEtk/details/verify/IsStrictlyPositive.hpp",
+    "src/ACEtk/details/verify/NotPositiveException.hpp",
+    "src/ACEtk/details/verify/NotStrictlyPositiveException.hpp",
     "src/ACEtk/details/verify/Positive.hpp",
     "src/ACEtk/details/verify/Sorted.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive.hpp",
+    "src/ACEtk/details/verify/UnsortedException.hpp",
+    "src/ACEtk/details/verify/Positive/src/assignment.hpp",
+    "src/ACEtk/details/verify/Positive/src/check.hpp",
     "src/ACEtk/details/verify/Positive/src/ctor.hpp",
+    "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
+    "src/ACEtk/details/verify/Sorted/src/check.hpp",
     "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
-    "src/ACEtk/details/verify/src/interpolationParameters.hpp",
-    "src/ACEtk/details/verify/src/isPositive.hpp",
-    "src/ACEtk/details/verify/src/isSorted.hpp",
+    "src/ACEtk/details/verify/src/positive.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
+    "src/ACEtk/details/verify/src/sorted.hpp",
+    "src/ACEtk/details/verify/src/strictlyPositive.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive/src/assignment.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive/src/check.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/CoupledDensityFunctions.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
@@ -446,12 +460,9 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIndex.hpp",
     "src/ACEtk/interpretation/CoupledDensityFunctions/src/ctor.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
+    "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
-    "src/ACEtk/interpretation/ENDFInterpolationParameters/src/ctor.hpp",
-    "src/ACEtk/interpretation/ENDFInterpolationParameters/src/range.hpp",
-    "src/ACEtk/interpretation/InterpolationRegion/src/ctor.hpp",
-    "src/ACEtk/interpretation/InterpolationRegion/src/makeInterpolationRegions.hpp",
-    "src/ACEtk/interpretation/InterpolationRegion/src/verifyInterpolationScheme.hpp",
+    "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -527,9 +538,6 @@
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
     ],
     "ACEtk.details.verify": [
-      "src/ACEtk/details/verify/test/interpolationParameters.test.cpp",
-      "src/ACEtk/details/verify/test/isPositive.test.cpp",
-      "src/ACEtk/details/verify/test/isSorted.test.cpp",
       "src/ACEtk/details/verify/test/size.test.cpp",
       "src/ACEtk/details/verify/test/verify.test.cpp"
     ],
@@ -538,6 +546,9 @@
     ],
     "ACEtk.details.verify.Sorted": [
       "src/ACEtk/details/verify/Sorted/test/Sorted.test.cpp"
+    ],
+    "ACEtk.details.verify.StrictlyPositive": [
+      "src/ACEtk/details/verify/StrictlyPositive/test/StrictlyPositive.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp",
@@ -605,7 +616,9 @@
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
-      "src/ACEtk/interpretation/EL03/test/el03.test.cpp"
+      "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
+      "src/ACEtk/interpretation/EL03/test/MottScatteringCorrection.test.cpp",
+      "src/ACEtk/interpretation/EL03/test/RileyCrossSection.test.cpp"
     ],
     "ACEtk.interpretation.ENDFInterpolationParameters": [
       "src/ACEtk/interpretation/ENDFInterpolationParameters/test/ENDFInterpolationParameters.test.cpp",
