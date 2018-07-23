@@ -37,6 +37,10 @@ SCENARIO( "Testing sorted verification" ){
       Sorted< std::vector< double > > sdVector = positive;
       REQUIRE_NOTHROW( 
           sdVector = Sorted< std::vector< double > >( strictlyPositive) );
+
+      sdVector = { 1.0, 2.0, 3.0 };
+      CHECK( ranges::equal( { 1.0, 2.0, 3.0 }, sdVector ) );
+
       REQUIRE_THROWS_AS( 
         sdVector = unsortedVector,
         UnsortedException

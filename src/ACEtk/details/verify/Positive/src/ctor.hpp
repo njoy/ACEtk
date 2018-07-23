@@ -11,8 +11,10 @@ template< typename... Args,
           utility::Require< true, std::is_constructible, Range, Args... > = true
         >
 Positive( Args&&... args ) :
-  Range( check( std::forward< Args >( args )... ) )
-{ }
+  Range( std::forward< Args >( args )... )
+{ 
+  check( *this );
+}
 
 template< typename Arg = std::initializer_list< typename Range::value_type >,
           utility::Require< false, IsPositive, Arg > = true,

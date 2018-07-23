@@ -7,7 +7,7 @@ decltype( auto ) check( Arg&& arg ){
   if( firstNegative != arg.end() ){
     njoy::Log::error( "range is not all positive" );
     njoy::Log::info( "First negative element ({}) found at index: {}",
-                     *firstNegative, ( firstNegative - arg.begin() ) );
+      *firstNegative, std::distance(  arg.begin(), firstNegative ) );
     throw NotPositiveException( "range is not all positive" );
   }
   return std::forward< Arg >( arg );
@@ -20,7 +20,7 @@ decltype( auto ) check( Arg&& arg ){
   if( *( arg.begin() ) < 0.0 ){
     njoy::Log::error( "range is not all positive" );
     njoy::Log::info( "Negative element ({}) found at index: {}",
-                     *(std::begin( arg ) ), 0 );
+                     *( arg.begin() ), 0 );
     throw NotPositiveException( "(sorted) range is not all positive" );
   }
   return std::forward< Arg >( arg );
