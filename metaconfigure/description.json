@@ -377,14 +377,23 @@
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/details/verify.hpp",
+    "src/ACEtk/details/verify/IsPositive.hpp",
     "src/ACEtk/details/verify/IsSorted.hpp",
+    "src/ACEtk/details/verify/NotPositiveException.hpp",
+    "src/ACEtk/details/verify/NotStrictlyPositive.hpp",
     "src/ACEtk/details/verify/Positive.hpp",
     "src/ACEtk/details/verify/Sorted.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive.hpp",
     "src/ACEtk/details/verify/UnsortedException.hpp",
+    "src/ACEtk/details/verify/Positive/src/assignment.hpp",
+    "src/ACEtk/details/verify/Positive/src/check.hpp",
+    "src/ACEtk/details/verify/Positive/src/ctor.hpp",
     "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
     "src/ACEtk/details/verify/Sorted/src/check.hpp",
     "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
+    "src/ACEtk/details/verify/src/positive.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive/src/check.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
@@ -473,6 +482,9 @@
     ],
     "ACEtk.details.verify.Sorted": [
       "src/ACEtk/details/verify/Sorted/test/Sorted.test.cpp"
+    ],
+    "ACEtk.details.verify.StrictlyPositive": [
+      "src/ACEtk/details/verify/StrictlyPositive/test/StrictlyPositive.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
