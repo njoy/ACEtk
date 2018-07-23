@@ -17,7 +17,7 @@ SCENARIO( "Testing sorted verification" ){
 
       REQUIRE_THROWS_AS( 
         Sorted< std::vector< double > >( { 1,2,3,2,1 } ), 
-        UnsortedException 
+        exceptions::Unsorted 
       );
     }
     WHEN( "constructing from a 'range'" ){
@@ -29,7 +29,7 @@ SCENARIO( "Testing sorted verification" ){
           Sorted< std::vector< int > >( negative ) );
       REQUIRE_THROWS_AS( 
         Sorted< std::vector< double > >( unsortedVector ), 
-        UnsortedException 
+        exceptions::Unsorted 
       );
 
     } // WHEN
@@ -43,7 +43,7 @@ SCENARIO( "Testing sorted verification" ){
 
       REQUIRE_THROWS_AS( 
         sdVector = unsortedVector,
-        UnsortedException
+        exceptions::Unsorted
       );
     }
   } // GIVEN

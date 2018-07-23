@@ -9,7 +9,8 @@ decltype( auto ) check( Arg&& arg ){
     njoy::Log::info( 
       "First non-strictly positve element ({}) found at index: {}",
       *firstNegative, std::distance(  arg.begin(), firstNegative ) );
-    throw NotStrictlyPositiveException( "range is not all strictly positive" );
+    throw exceptions::NotStrictlyPositive( 
+      "range is not all strictly positive" );
   }
   return std::forward< Arg >( arg );
 }
@@ -22,7 +23,7 @@ decltype( auto ) check( Arg&& arg ){
     njoy::Log::error( "range is not all positive" );
     njoy::Log::info( "Non-strictly positive element ({}) found at index: {}",
                      *( arg.begin() ), 0 );
-    throw NotStrictlyPositiveException( 
+    throw exceptions::NotStrictlyPositive( 
         "(sorted) range is not all strictly positive" );
   }
   return std::forward< Arg >( arg );
