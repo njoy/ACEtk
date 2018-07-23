@@ -18,12 +18,12 @@ SCENARIO( "Testing positivity verification" ){
 
       REQUIRE_THROWS_AS( 
         StrictlyPositive< std::vector< double > >( { 1,2,-13,2,1 } ), 
-        NotStrictlyPositiveException 
+        exceptions::NotStrictlyPositive 
       );
 
       REQUIRE_THROWS_AS( 
         StrictlyPositive< std::vector< double > >( { 1,0,13,2,1 } ), 
-        NotStrictlyPositiveException 
+        exceptions::NotStrictlyPositive 
       );
     }
     WHEN( "constructing from a 'range'" ){
@@ -31,17 +31,17 @@ SCENARIO( "Testing positivity verification" ){
         StrictlyPositive< std::vector< double > > ( strictPosi ) );
       REQUIRE_THROWS_AS( 
         StrictlyPositive< std::vector< double > > ( posi ),
-        NotStrictlyPositiveException
+        exceptions::NotStrictlyPositive
       );
       REQUIRE_THROWS_AS( 
-        StrictlyPositive< std::vector< double > > ( strictlyPositive( posi ) ),
-        NotStrictlyPositiveException
+        StrictlyPositive< std::vector< double > > ( positive( posi ) ),
+        exceptions::NotStrictlyPositive
       );
       REQUIRE_NOTHROW( 
         StrictlyPositive< std::vector< double > > ( unsortedVector ) );
       REQUIRE_THROWS_AS(
         StrictlyPositive< std::vector< int > >( negative ),
-        NotStrictlyPositiveException
+        exceptions::NotStrictlyPositive
       );
 
       WHEN( "constructing from a Sorted range" ){
@@ -50,18 +50,18 @@ SCENARIO( "Testing positivity verification" ){
               strictPosi ) );
         REQUIRE_THROWS_AS( 
           StrictlyPositive< Sorted< std::vector< double > > >( posi ),
-          NotStrictlyPositiveException
+          exceptions::NotStrictlyPositive
         );
         REQUIRE_THROWS_AS(
           StrictlyPositive< std::vector< int > > ( sorted( negative ) ),
-          NotStrictlyPositiveException
+          exceptions::NotStrictlyPositive
         );
       }
       WHEN( "assigning" ){
         StrictlyPositive< std::vector< double > > pdVector = strictPosi;
         REQUIRE_THROWS_AS(
             pdVector = StrictlyPositive< std::vector< double > >( posi ),
-            NotStrictlyPositiveException
+            exceptions::NotStrictlyPositive
         );
 
             pdVector = { 1.0, 2.0, 6.0, 4.0 };
@@ -70,7 +70,7 @@ SCENARIO( "Testing positivity verification" ){
         REQUIRE_THROWS_AS(
             pdVector = StrictlyPositive< std::vector< double > >( 
                 { 1, -2, 13, 2, 1 } ), 
-            NotStrictlyPositiveException
+            exceptions::NotStrictlyPositive
         );
       }
     } // WHEN
