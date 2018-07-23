@@ -9,7 +9,7 @@ decltype( auto ) check( Arg&& arg ){
     njoy::Log::info( "first non-sorted element is: {} at index: {}", 
                      *sortedEnd, index );
     njoy::Log::info( "Value at index: {} is: {}", index-1, *(sortedEnd-1) );
-    throw UnsortedException( "range is not sorted" );
+    throw exceptions::Unsorted( "range is not sorted" );
   }
   return std::forward< Arg >( arg );
 }
