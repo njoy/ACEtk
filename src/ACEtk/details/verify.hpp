@@ -12,4 +12,5 @@ namespace verify{
 #include "ACEtk/details/verify/src/sorted.hpp"
 #include "ACEtk/details/verify/src/positive.hpp"
 #include "ACEtk/details/verify/src/strictlyPositive.hpp"
+#include "ACEtk/details/verify/src/size.hpp"
 }
