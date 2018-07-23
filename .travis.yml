@@ -32,8 +32,8 @@ os:
 osx_image: xcode8
 
 script: ./.travis/build.sh
-
 after_success: ./.travis/signature.sh
+
 env:
   - build_type=debug static_libraries=FALSE
   - build_type=release static_libraries=FALSE
