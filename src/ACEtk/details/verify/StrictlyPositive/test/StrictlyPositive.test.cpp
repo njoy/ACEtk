@@ -7,7 +7,7 @@ using namespace njoy::ACEtk::details::verify;
 
 SCENARIO( "Testing positivity verification" ){
   GIVEN( "containers" ){
-    std::vector< double > strictlyPositive{ 1.0, 2.0, 3.0 };
+    std::vector< double > strictPosi{ 1.0, 2.0, 3.0 };
     std::vector< double > posi{ 0.0, 1.0, 2.0, 3.0 };
     std::vector< int > negative{ -1, 0, 2, 4 };
     std::vector< double > unsortedVector{ 1.0, 3.0, 2.0 };
@@ -28,13 +28,13 @@ SCENARIO( "Testing positivity verification" ){
     }
     WHEN( "constructing from a 'range'" ){
       REQUIRE_NOTHROW( 
-        StrictlyPositive< std::vector< double > > ( strictlyPositive ) );
+        StrictlyPositive< std::vector< double > > ( strictPosi ) );
       REQUIRE_THROWS_AS( 
         StrictlyPositive< std::vector< double > > ( posi ),
         NotStrictlyPositiveException
       );
       REQUIRE_THROWS_AS( 
-        StrictlyPositive< std::vector< double > > ( positive( posi ) ),
+        StrictlyPositive< std::vector< double > > ( strictlyPositive( posi ) ),
         NotStrictlyPositiveException
       );
       REQUIRE_NOTHROW( 
@@ -47,7 +47,7 @@ SCENARIO( "Testing positivity verification" ){
       WHEN( "constructing from a Sorted range" ){
         REQUIRE_NOTHROW( 
           StrictlyPositive< Sorted< std::vector< double > > >( 
-              strictlyPositive ) );
+              strictPosi ) );
         REQUIRE_THROWS_AS( 
           StrictlyPositive< Sorted< std::vector< double > > >( posi ),
           NotStrictlyPositiveException
@@ -58,7 +58,7 @@ SCENARIO( "Testing positivity verification" ){
         );
       }
       WHEN( "assigning" ){
-        StrictlyPositive< std::vector< double > > pdVector = strictlyPositive;
+        StrictlyPositive< std::vector< double > > pdVector = strictPosi;
         REQUIRE_THROWS_AS(
             pdVector = StrictlyPositive< std::vector< double > >( posi ),
             NotStrictlyPositiveException
