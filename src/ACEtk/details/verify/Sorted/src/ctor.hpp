@@ -11,8 +11,10 @@ template< typename... Args,
           utility::Require< true, std::is_constructible, Range, Args... > = true
         >
 Sorted( Args&&... args ):
-  Range( check( std::forward< Args >( args )... ) )
-{ }
+  Range( std::forward< Args >( args )... )
+{ 
+  check( *this );
+}
 
 template< typename Arg,
           utility::Require< true, IsSorted, Arg > = true,

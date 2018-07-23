@@ -10,9 +10,11 @@ addons:
         key_url : "http://apt.llvm.org/llvm-snapshot.gpg.key"
       - ubuntu-toolchain-r-test
     packages:
+      - gcc-6
       - g++-6
       - clang-3.8
       - llvm-dev
+      - libc++-dev
 
 before_install:
 - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then brew update && brew upgrade python3; fi
