@@ -15,7 +15,7 @@ public:
     return RadiativeStoppingPower{ this->table };
   }
 
-  #include "ACEtk/interpretation/EL03/AtomicLevels.hpp"  
+  #include "ACEtk/interpretation/EL03/AtomicLevels.hpp"	 
 
   auto atomicLevels() const {
     return AtomicLevels{ this->table };
@@ -25,6 +25,18 @@ public:
 
   auto bremsstrahlung() const {
     return Bremsstrahlung{ this->table };
+  }	 
+
+  #include "ACEtk/interpretation/EL03/MottScatteringCorrection.hpp"  
+
+  auto mottScatteringCorrection() const {
+    return MottScatteringCorrection{ this->table };
+  }
+
+  #include "ACEtk/interpretation/EL03/RileyCrossSection.hpp"  
+
+  auto rileyCrossSection() const {
+    return RileyCrossSection{ this->table };
   }      
   
 };
