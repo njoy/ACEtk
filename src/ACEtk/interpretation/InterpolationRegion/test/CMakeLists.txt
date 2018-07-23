@@ -1,7 +1,7 @@
 
 add_executable( ACEtk.interpretation.InterpolationRegion.test
-                makeInterpolationRegions.test.cpp
-                InterpolationRegion.test.cpp )
+                InterpolationRegion.test.cpp
+                makeInterpolationRegions.test.cpp )
 target_compile_options( ACEtk.interpretation.InterpolationRegion.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

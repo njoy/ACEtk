@@ -17,7 +17,7 @@ Tabulated( ENDFInterpolationParameters&& interp,
   } catch( details::verify::exceptions::NotPositive& e ){
     njoy::Log::info( "incident energies must be positive" );
     throw e;
-  } catch( details::verify::exceptions::NotSorted& e ){
+  } catch( details::verify::exceptions::Unsorted& e ){
     njoy::Log::info( "incident energies must be sorted" );
     throw e;
   }

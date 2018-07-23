@@ -21,6 +21,8 @@ SCENARIO( "Testing sorted verification" ){
       );
     }
     WHEN( "constructing from a 'range'" ){
+      // REQUIRE_NOTHROW( Sorted< std::vector< double > >( 
+      //         njoy::ACEtk::Table::slice( strictlyPositive ) ) );
       REQUIRE_NOTHROW( 
           Sorted< std::vector< double > >( strictlyPositive ) );
       REQUIRE_NOTHROW( 

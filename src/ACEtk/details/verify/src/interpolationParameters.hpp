@@ -1,4 +1,4 @@
-inline void interpolationParameter( int p ){
+inline void interpolationParameter( const int& p ){
   if( not ( ( ( p >  0 ) and ( p <  7 ) ) or
             ( ( p > 10 ) and ( p < 16 ) ) or
             ( ( p > 20 ) and ( p < 26 ) ) )
@@ -13,7 +13,7 @@ template< typename Range,
 inline void interpolationParameters( Range&& ps ){
 
   try{
-    auto all = ranges::all_of( ps, interpolationParameter );
+    ranges::for_each( ps, interpolationParameter );
   } catch( details::verify::exceptions:: InvalidENDFInterpolationParameter& e ){
     njoy::Log::info( "Invalid ENDF interpolation parameter found in array." );
     throw e;

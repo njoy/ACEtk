@@ -1,4 +1,4 @@
-template< typename Arg = std::initializer_list< typename Range::value_type >,
+template< typename Arg = std::initializer_list< utility::value_t< Range > >,
           utility::Require< false, IsPositive, Arg > = true,
           utility::Require< true, utility::is_range, Arg > = true,
           utility::Require< true, std::is_constructible, Range, Arg > = true
@@ -16,7 +16,7 @@ Positive( Args&&... args ) :
   check( *this );
 }
 
-template< typename Arg = std::initializer_list< typename Range::value_type >,
+template< typename Arg = std::initializer_list< utility::value_t< Range > >,
           utility::Require< false, IsPositive, Arg > = true,
           utility::Require< true, IsSorted, Arg > = true,
           utility::Require< true, utility::is_range, Arg > = true,
