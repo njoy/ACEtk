@@ -4,7 +4,7 @@ inline void interpolationParameter( const int& p ){
             ( ( p > 20 ) and ( p < 26 ) ) )
     ){
     njoy::Log::error( "Invalid ENDF interpolation parameter: {}", p );
-    throw details::verify::exceptions:: InvalidENDFInterpolationParameter();
+    throw details::verify::exceptions::InvalidENDFInterpolationParameter();
   }
 }
 
@@ -14,7 +14,7 @@ inline void interpolationParameters( Range&& ps ){
 
   try{
     ranges::for_each( ps, interpolationParameter );
-  } catch( details::verify::exceptions:: InvalidENDFInterpolationParameter& e ){
+  } catch( details::verify::exceptions::InvalidENDFInterpolationParameter& e ){
     njoy::Log::info( "Invalid ENDF interpolation parameter found in array." );
     throw e;
   }

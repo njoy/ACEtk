@@ -11,24 +11,30 @@ SCENARIO( "Verifying ENDFInterpolationParameters" ){
     WHEN( "constructing ENDFInterpolationParameters" ){
       THEN( "the parameters can be checked" ){
         for( int INT : validINT ){
-          CHECK( verify::interpolationParameter( INT ) );
+          REQUIRE_NOTHROW( verify::interpolationParameter( INT ) );
         }
-        CHECK( verify::interpolationParameters( validINT ) );
+        REQUIRE_NOTHROW( verify::interpolationParameters( validINT ) );
       }
     }
     WHEN( "interpulation parameters are empty" ){
       std::vector< double > validINT;
 
-      CHECK( verify::interpolationParameters( validINT ) );
+      REQUIRE_NOTHROW( verify::interpolationParameters( validINT ) );
     }
   } // GIVEN
   GIVEN( "invalid interpolation parameters" ){
     std::vector< int > invalidINT{ 0, 7, 8, 9, 10, 16, 17, 18, 19, 20 };
       THEN( "the parameters can be checked" ){
         for( int INT : invalidINT ){
-          CHECK( not verify::interpolationParameter( INT ) );
+          REQUIRE_THROWS_AS( 
+            verify::interpolationParameter( INT ),
+            verify::exceptions::InvalidENDFInterpolationParameter
+          )
         }
-        CHECK( not verify::interpolationParameters( invalidINT ) );
+        REQUIRE_THROWS( 
+          verify::interpolationParameters( invalidINT ),
+          verify::exceptions::InvalidENDFInterpolationParameter
+        );
       }
   } // GIVEN invalid
 } // SCENARIO
