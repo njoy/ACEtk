@@ -1,11 +1,10 @@
-template< typename R1, typename R2,
-          utility::Require< true, utility::is_range, R1 > = true,
-          utility::Require< true, utility::is_range, R2 > = true
-        >
+template< typename R1, typename R2 >
 inline void equalSize( R1&& a1, R2&& a2 ){
-  if( a1.size() != a2.size() ){
+  if( ranges::distance( a1 ) != ranges::distance( a2 ) ){
     njoy::Log::error( "array sizes are not the same" );
-    njoy::Log::info( "size1: {}, size2: {}", a1.size(), a2.size() );
+    njoy::Log::info( "size1: {}, size2: {}", 
+        ranges::distance( a1 ), ranges::distance( a2 ) );
+
     throw std::range_error( "array sizes are not the same" );
   }
 }
