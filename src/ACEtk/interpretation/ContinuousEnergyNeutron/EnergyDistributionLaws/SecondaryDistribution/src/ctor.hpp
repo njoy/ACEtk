@@ -5,12 +5,12 @@ SecondaryDistribution( int INTT,
   energyGrid_( energies ),
   densityFunctions_( DFs )
 {
-  if( energyGrid_.size() != densityFunctions_.size() ){
-    njoy::Log::error( 
-      "outgoing energy grid and density functions must have same size" );
-    njoy::Log::info( "energy grid size: {}", energyGrid_.size() );
-    njoy::Log::info( "density function size: {}", densityFunctions_.size() );
-    throw std::exception();
+  try{
+    details::verify::equalSize( energyGrid_, densityFunctions_.PDF() );
+  } catch( std::range_error& e ){
+    njoy::Log::info( 
+      "outgoing energy grid and density functions ar no the same size" );
+    throw;
   }
 }
 

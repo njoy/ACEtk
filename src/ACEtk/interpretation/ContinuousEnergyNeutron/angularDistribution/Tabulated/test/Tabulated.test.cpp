@@ -47,9 +47,11 @@ SCENARIO( "Constructing a tabulated table for angular distribution" ){
       WHEN( "cos bins are not the right length" ){
         std::vector< double > invalidCos{ -0.6, -0.2, 0.2, 0.4 };
         THEN( "an exception is thrown" ){
-          REQUIRE_THROWS( 
+          REQUIRE_THROWS_AS( 
             ContinuousEnergyNeutron::angularDistribution::Tabulated(
-                0, invalidCos, PDF, CDF ) );
+                0, invalidCos, PDF, CDF ),
+            std::range_error
+          );
         }
       }
 

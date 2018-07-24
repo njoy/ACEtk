@@ -14,9 +14,8 @@ SCENARIO( "Constructing coupled density functions" ){
       CoupledDensityFunctions pdf_cdf( PDF, CDF );
 
       THEN( "the values can be verified" ){
-        REQUIRE( 5 == pdf_cdf.PDF().size() );
-        REQUIRE( 5 == pdf_cdf.CDF().size() );
-        REQUIRE( 5 == pdf_cdf.size() );
+        REQUIRE( 5 == ranges::distance( pdf_cdf.PDF() ) );
+        REQUIRE( 5 == ranges::distance( pdf_cdf.CDF() ) );
 
         REQUIRE( ranges::equal( PDF, pdf_cdf.PDF() ) );
         REQUIRE( ranges::equal( CDF, pdf_cdf.CDF() ) );

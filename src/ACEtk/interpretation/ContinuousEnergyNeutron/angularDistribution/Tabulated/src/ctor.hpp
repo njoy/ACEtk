@@ -15,17 +15,18 @@ Tabulated( int interpFlag,
   }
 
   try{
-    details::verify::equalSize( cosineBins, densityFunctions );
+    details::verify::equalSize( cosineBins, densityFunctions.PDF() );
   } catch( std::range_error& e ){
     njoy::Log::info( 
       "The length of the cosine bins ({}) != the length of the PDF/CDF ({})",
-      cosineBins_.size(), densityFunctions.size() );
+      ranges::distance( cosineBins_ ), 
+      ranges::distance( densityFunctions.PDF() ) );
     throw;
   }
 } catch( std::exception& e ){
   njoy::Log::info( 
     "Trouble encountered constructing Tabulated angular distribution" );
-  throw
+  throw;
 }
 
 template< typename Range >
