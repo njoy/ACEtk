@@ -31,9 +31,8 @@ SCENARIO( "test interpretation::EPRdata" ){
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( photonEnergies[ index ].value == Approx( reference ).epsilon( 1e-6) );
+	REQUIRE( photonEnergies[ index ].value == Approx( reference ).epsilon( 1e-8) );
       }
-
     }
     
     WHEN( "Querying for the incoherent scattering cross sections" ){
@@ -55,13 +54,11 @@ SCENARIO( "test interpretation::EPRdata" ){
       for ( const auto& pair : referenceIncoherentXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( incoherentScatteringXS[ index ] == Approx( reference ).epsilon( 1e-6) );
+	REQUIRE( incoherentScatteringXS[ index ] == Approx( reference ).epsilon( 1e-8) );
       }
-
     }
 
     WHEN( "Querying for the coherent scattering cross sections" ){
-
       const std::map< int, double > referenceCoherentXS{
 	{   0, 9.887553000014E-06 },
 	{  65, 3.361804999998E-01 },
@@ -74,30 +71,51 @@ SCENARIO( "test interpretation::EPRdata" ){
 	{ 520, 5.862947790958E-07 },
 	{ 585, 7.228371741121E-10 },
 	{ 646, 4.626159999988E-16 } };
-
       
       const auto coherentScatteringXS = eprdata.eszg().coherentScatteringXS();
       
-
       for ( const auto& pair : referenceCoherentXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( coherentScatteringXS[ index ] == Approx( reference ).epsilon( 1e-6) );
+	REQUIRE( coherentScatteringXS[ index ] == Approx( reference ).epsilon( 1e-8) );
       }
-
-      
-      std::cout << coherentScatteringXS[646] << "\n";
-
     }
 
     WHEN( "Querying for the total photoelectric cross sections" ){
-      //      const auto reference = eprdata.eszg().totalPhotoelectricXS();
-      
+      const std::map< int, double > referencePhotoelectricXS{
+	{   0, 0.000000000000E+00 },
+	{ 260, 0.000000000000E+00 },
+	{ 325, 8.425752000037E+05 },
+	{ 390, 2.345066984180E-01 },
+	{ 455, 3.161881017536E-09 },
+	{ 520, 3.844938856038E-10 },
+	{ 585, 9.793289828319E-12 },
+	{ 646, 7.735999999998E-15 } };
+
+      const auto photoelectricXS = eprdata.eszg().totalPhotoelectricXS();
+
+      for ( const auto& pair : referencePhotoelectricXS ){
+	const auto index = pair.first;
+	const auto reference = pair.second;
+	REQUIRE( photoelectricXS[ index ] == Approx( reference ).epsilon( 1e-8) );
+      }
     }
 
     WHEN( "Querying for the pair-production cross sections" ){
-      //      const auto reference = eprdata.eszg().pairProductionXS();
-      
+      const std::map< int, double > referencePairProductionXS{
+	{   0, 0.000000000000E+00 },
+	{ 455, 0.000000000000E+00 },
+	{ 520, 4.644311999999E-04 },
+	{ 585, 1.086700000001E-02 },
+	{ 646, 2.070099999999E-02 } };
+
+      const auto pairProductionXS = eprdata.eszg().pairProductionXS();
+
+      for ( const auto& pair : referencePairProductionXS ){
+	const auto index = pair.first;
+	const auto reference = pair.second;
+	REQUIRE( pairProductionXS[ index ] == Approx( reference ).epsilon( 1e-8) );
+      }
     }
   }
-}    
+}
