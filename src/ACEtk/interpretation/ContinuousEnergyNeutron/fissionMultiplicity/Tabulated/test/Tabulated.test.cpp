@@ -123,7 +123,7 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         REQUIRE_THROWS_AS( 
           ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
             regions, iSchemes, energies, multiplicities ),
-          details::verify::exceptions::NotSorted
+          details::verify::exceptions::Unsorted
         );
       }
     }

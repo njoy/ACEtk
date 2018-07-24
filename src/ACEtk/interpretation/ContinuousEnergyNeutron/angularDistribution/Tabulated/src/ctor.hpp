@@ -7,23 +7,25 @@ Tabulated( int interpFlag,
     densityFunctions( densityFunctions )
 { 
   try{
-    checkHistLinLinFlag( interpolationFlag_ );
+    details::verify::checkHistLinLinFlag( interpolationFlag_ );
   } catch( const std::exception& e ){
     njoy::Log::info(
       "Invalid interpolation flag for tabulated angular distribution." );
-    throw e;
+    throw;
   }
 
-  if( cosineBins_.size() != densityFunctions.size() ){
+  try{
+    details::verify::equalSize( cosineBins, densityFunctions );
+  } catch( std::range_error& e ){
     njoy::Log::info( 
       "The length of the cosine bins ({}) != the length of the PDF/CDF ({})",
       cosineBins_.size(), densityFunctions.size() );
-    throw std::exception();
+    throw;
   }
 } catch( std::exception& e ){
   njoy::Log::info( 
     "Trouble encountered constructing Tabulated angular distribution" );
-  throw e;
+  throw
 }
 
 template< typename Range >

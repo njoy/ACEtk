@@ -9,24 +9,24 @@ Tabulated( ENDFInterpolationParameters&& interp,
     details::verify::equalSize(energies, nubar);
   } catch( std::range_error& e ){
     njoy::Log::info( "incident energies and nubar must be the same size" );
-    throw e;
+    throw;
   }
 
   try{
     details::verify::positive( details::verify::sorted( energies_ ) );
   } catch( details::verify::exceptions::NotPositive& e ){
     njoy::Log::info( "incident energies must be positive" );
-    throw e;
+    throw;
   } catch( details::verify::exceptions::Unsorted& e ){
     njoy::Log::info( "incident energies must be sorted" );
-    throw e;
+    throw;
   }
 
   try{
     details::verify::positive( nubar );
   } catch( details::verify::exceptions::NotPositive& e ){
     njoy::Log::info( "nubar values must be positive" );
-    throw e;
+    throw;
   }
 }
 
@@ -41,5 +41,5 @@ try:
 { } catch( const std::exception& e ){
   njoy::Log::info( 
       "Trouble encountered constructing Tabulated nubar" );
-  throw e;
+  throw;
 }

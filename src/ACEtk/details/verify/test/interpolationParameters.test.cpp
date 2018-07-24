@@ -29,9 +29,9 @@ SCENARIO( "Verifying ENDFInterpolationParameters" ){
           REQUIRE_THROWS_AS( 
             verify::interpolationParameter( INT ),
             verify::exceptions::InvalidENDFInterpolationParameter
-          )
+          );
         }
-        REQUIRE_THROWS( 
+        REQUIRE_THROWS_AS( 
           verify::interpolationParameters( invalidINT ),
           verify::exceptions::InvalidENDFInterpolationParameter
         );

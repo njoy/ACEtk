@@ -35,9 +35,11 @@ SCENARIO( "Constructing a tabulated table for angular distribution" ){
         std::vector< int > invalidJJ{-1,2};
         for( auto JJ : invalidJJ ){
           THEN( "an exception is thrown JJ=" + std::to_string(JJ) ){
-            REQUIRE_THROWS( 
+            REQUIRE_THROWS_AS( 
               ContinuousEnergyNeutron::angularDistribution::Tabulated(
-                  JJ, cos, PDF, CDF ) );
+                  JJ, cos, PDF, CDF ),
+              std::exception
+            );
           }
         }
       }

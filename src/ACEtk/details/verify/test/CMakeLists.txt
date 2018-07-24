@@ -1,8 +1,6 @@
 
 add_executable( ACEtk.details.verify.test
                 interpolationParameters.test.cpp
-                isPositive.test.cpp
-                isSorted.test.cpp
                 size.test.cpp
                 verify.test.cpp )
 target_compile_options( ACEtk.details.verify.test PRIVATE ${${PREFIX}_common_flags}

@@ -1,6 +1,5 @@
 namespace interpretation {
 
-#include "ACEtk/interpretation/src/checkHistLinLinFlag.hpp"
 #include "ACEtk/interpretation/CoupledDensityFunctions.hpp"
 #include "ACEtk/interpretation/ENDFInterpolationParameters.hpp"
 #include "ACEtk/interpretation/ScaleBy.hpp"  
