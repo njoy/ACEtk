@@ -11,7 +11,7 @@ SCENARIO( "test interpretation::EPRdata" ){
 
   GIVEN( "An ACE Table for 1000.14p" ){
     const auto eprdata = interpretation::EPRData( table );
-
+    
     WHEN( "Querying for the energy grid" ) {
       const std::map< int, double > referencePhotonEnergies{
 	{   0, 1.000000000000E-06 },
@@ -31,7 +31,7 @@ SCENARIO( "test interpretation::EPRdata" ){
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( photonEnergies[ index ].value == Approx( reference ).epsilon( 1e-8) );
+	REQUIRE( photonEnergies[ index ].value == Approx( reference ).epsilon( 1e-8 ) );
       }
     }
     
@@ -54,7 +54,7 @@ SCENARIO( "test interpretation::EPRdata" ){
       for ( const auto& pair : referenceIncoherentXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( incoherentScatteringXS[ index ] == Approx( reference ).epsilon( 1e-8) );
+	REQUIRE( incoherentScatteringXS[ index ].value == Approx( reference ) );
       }
     }
 
@@ -77,7 +77,7 @@ SCENARIO( "test interpretation::EPRdata" ){
       for ( const auto& pair : referenceCoherentXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( coherentScatteringXS[ index ] == Approx( reference ).epsilon( 1e-8) );
+	REQUIRE( coherentScatteringXS[ index ].value == Approx( reference ) );
       }
     }
 
@@ -92,12 +92,12 @@ SCENARIO( "test interpretation::EPRdata" ){
 	{ 585, 9.793289828319E-12 },
 	{ 646, 7.735999999998E-15 } };
 
-      const auto photoelectricXS = eprdata.eszg().totalPhotoelectricXS();
+      const auto photoelectricXS = eprdata.eszg().photoelectricXS();
 
       for ( const auto& pair : referencePhotoelectricXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( photoelectricXS[ index ] == Approx( reference ).epsilon( 1e-8) );
+	REQUIRE( photoelectricXS[ index ].value == Approx( reference ) );
       }
     }
 
@@ -114,7 +114,7 @@ SCENARIO( "test interpretation::EPRdata" ){
       for ( const auto& pair : referencePairProductionXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( pairProductionXS[ index ] == Approx( reference ).epsilon( 1e-8) );
+	REQUIRE( pairProductionXS[ index ].value == Approx( reference ) );
       }
     }
   }
