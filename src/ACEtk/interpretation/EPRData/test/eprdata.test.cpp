@@ -6,10 +6,10 @@
 
 using namespace njoy::ACEtk;
 
-SCENARIO( "test interpretation::EPRdata" ){
+SCENARIO( "Test interpretation::EPRdata::ESZG" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
-  GIVEN( "An ACE Table for 1000.14p" ){
+  GIVEN( "An ACE table for 1000.14p" ){
     const auto eprdata = interpretation::EPRData( table );
     
     WHEN( "Querying for the energy grid" ) {
@@ -26,7 +26,7 @@ SCENARIO( "test interpretation::EPRdata" ){
 	{ 584, 7.943300000026E+01 },
 	{ 646, 1.000000000000E+05 } };
       
-      const auto photonEnergies = eprdata.eszg().photonEnergy();
+      const auto photonEnergies = eprdata.eszg().energyGrid();
 
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;
