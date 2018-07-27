@@ -1,8 +1,7 @@
 sudo: required
-dist: trusty
 
 git:
-  submodules: false  
+  submodules: false
 
 addons:
   apt:

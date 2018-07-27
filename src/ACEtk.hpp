@@ -26,6 +26,7 @@ struct State{
   const Iterator end;
 };
 
+#include "ACEtk/details.hpp"
 #include "ACEtk/Table.hpp"
 #include "ACEtk/interpretation.hpp"  
 
