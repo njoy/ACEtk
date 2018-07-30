@@ -1,7 +1,7 @@
 template< typename R1, typename R2 >
-inline void equalSize( R1&& a1, R2&& a2 ){
+void equalSize( const R1& a1, const R2& a2 ){
   if( ranges::distance( a1 ) != ranges::distance( a2 ) ){
-    njoy::Log::error( "array sizes are not the same" );
+    njoy::Log::error( "ranges are not the same size" );
     njoy::Log::info( "size1: {}, size2: {}", 
         ranges::distance( a1 ), ranges::distance( a2 ) );
 
