@@ -10,8 +10,8 @@ template< typename Arg,
 static decltype( auto ) check( Arg&& arg ){
   if( *( arg.begin() ) < 0.0 ){
     njoy::Log::error( "range is not all positive" );
-    njoy::Log::info( "First negative element ({}) found at index: {}",
-      *firstNegative, std::distance(  arg.begin(), firstNegative ) );
+    njoy::Log::info( "Non-positive element ({}) found at index: {}",
+                     *( arg.begin() ), 0 );
     throw exceptions::NotPositive( "range is not all positive" );
   }
   return std::forward< Arg >( arg );
