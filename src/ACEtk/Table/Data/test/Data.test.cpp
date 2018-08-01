@@ -10,7 +10,6 @@ Table::Data build();
 auto data = build();
 
 inline Table::Data build(){
-  const auto pair = std::pair<int, double>{0, 0.0};
   using IZ = std::array< int32_t, 16 >;
   using AW = std::array< double, 16 >;
   using IZAW = std::pair<IZ,AW>;
