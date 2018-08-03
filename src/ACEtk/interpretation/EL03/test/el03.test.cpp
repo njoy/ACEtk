@@ -37,7 +37,7 @@ SCENARIO("test interpretation::EL03"){
 
     WHEN("Querying for the energy grid in MeV,"
 	 "on which the radiative stopping interpolation are evaluated") {
-      const auto trial = el03.radiativeStoppingPower().energyGrid(); 
+      const auto trial = el03.radiativeStoppingPower().energies(); 
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for( const auto pair : ranges::view::zip( reference, trial ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );

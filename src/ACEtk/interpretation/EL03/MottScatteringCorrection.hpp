@@ -11,7 +11,7 @@ class MottScatteringCorrection {
 public:
   MottScatteringCorrection( const Table& table ) : table(table) {}
 
-  auto energyGrid() const {
+  auto energies() const {
     const auto length = this->table.data.NXS( 4 );
     const auto start  = this->table.data.JXS( 3 );
     return this->table.data.XSS( start, length )

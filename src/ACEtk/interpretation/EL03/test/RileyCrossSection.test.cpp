@@ -33,7 +33,7 @@ SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){
 
     WHEN( "querying for the energy points, "
 	  "on which the Riley scattering cross section parameters are evaluated" ) {
-      const auto rileyEnergy = el03.rileyCrossSection().energyGrid();
+      const auto rileyEnergy = el03.rileyCrossSection().energies();
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for ( const auto pair : ranges::view::zip( reference, rileyEnergy ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );

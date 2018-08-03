@@ -7,7 +7,7 @@ class RileyCrossSection {
 public:
   RileyCrossSection( const Table& table ) : table(table) {}
 
-  auto energyGrid() const {
+  auto energies() const {
     const auto start  = this->table.data.JXS( 4 );
     return
       this->table.data.XSS( start, RileyCrossSection::length )
