@@ -24,7 +24,7 @@ namespace{
 }
 
 SCENARIO("Test interpretation::EL03::MottScatteringCorrection.hpp") {  
-  auto table = Table( njoy::utility::slurpFileToMemory( "1000.e03" ) );
+  auto table = Table( njoy::utility::slurpFileToMemory( "1000.03e" ) );
   
   GIVEN("An ACE Table for 1000.03e") {
     const auto el03 = interpretation::EL03( table );

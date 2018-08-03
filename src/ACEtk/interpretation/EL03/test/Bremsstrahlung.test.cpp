@@ -8,7 +8,7 @@ extern std::array< double, 57 > referenceElectronEnergy;
 extern std::array< double, 57 > referenceValues;
 
 SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
-  auto table = njoy::ACEtk::Table( njoy::utility::slurpFileToMemory( "1000.e03" ) );
+  auto table = njoy::ACEtk::Table( njoy::utility::slurpFileToMemory( "1000.03e" ) );
 
   GIVEN( "An ACE Table for 1000.03e" ) {
     const auto el03_brems = interpretation::EL03( table ).bremsstrahlung();

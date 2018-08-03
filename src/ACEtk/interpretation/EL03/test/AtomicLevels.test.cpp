@@ -10,8 +10,8 @@ extern std::array< bool, 22 > isConductiveGold;
 SCENARIO("test AtomicLevels"){  
 
   
-  GIVEN("An ACE Table for 1000.e03"){
-    auto table = Table( njoy::utility::slurpFileToMemory("1000.el03") );
+  GIVEN("An ACE Table for 1000.03e"){
+    auto table = Table( njoy::utility::slurpFileToMemory("1000.03e") );
     auto atomicLevel =
       interpretation::EL03::AtomicLevels( table ).values();
     
@@ -22,8 +22,8 @@ SCENARIO("test AtomicLevels"){
   }
   
 
-  GIVEN("An ACE Table for 79000.e03"){
-    auto table = Table( njoy::utility::slurpFileToMemory("79000.el03") );
+  GIVEN("An ACE Table for 79000.03e"){
+    auto table = Table( njoy::utility::slurpFileToMemory("79000.03e") );
     const auto atomicLevels = interpretation::EL03::AtomicLevels( table );
     const auto compareThese = ranges::view::zip( occupationNumbersGold,
 						 isConductiveGold,

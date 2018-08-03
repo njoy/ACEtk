@@ -26,7 +26,7 @@ namespace{
 }
 
 SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){  
-  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
+  auto table = Table( njoy::utility::slurpFileToMemory("1000.03e") );
 
   GIVEN( "an ACE Table for 1000.03e" ) {
     const auto el03 = interpretation::EL03( table );
