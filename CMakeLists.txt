@@ -158,16 +158,20 @@ if( NOT TARGET catch-adapter )
     add_subdirectory( ${ROOT_DIRECTORY}/subprojects/catch-adapter )
 endif()
 
-if( NOT TARGET disco )
-    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/disco )
-endif()
-
 if( NOT TARGET date-adapter )
     add_subdirectory( ${ROOT_DIRECTORY}/subprojects/date-adapter )
 endif()
 
-if( NOT TARGET range-v3-adapter )
-    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/range-v3-adapter )
+if( NOT TARGET hana-adapter )
+    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/hana-adapter )
+endif()
+
+if( NOT TARGET dimwits )
+    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/dimwits )
+endif()
+
+if( NOT TARGET disco )
+    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/disco )
 endif()
 
 if( NOT TARGET fmt-adapter )
@@ -186,12 +190,8 @@ if( NOT TARGET header-utilities )
     add_subdirectory( ${ROOT_DIRECTORY}/subprojects/header-utilities )
 endif()
 
-if( NOT TARGET hana-adapter )
-    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/hana-adapter )
-endif()
-
-if( NOT TARGET dimwits )
-    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/dimwits )
+if( NOT TARGET range-v3-adapter )
+    add_subdirectory( ${ROOT_DIRECTORY}/subprojects/range-v3-adapter )
 endif()
 
 if( NOT TARGET variant-adapter )
@@ -237,42 +237,44 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/AtomicLevels.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/Bremsstrahlung.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/AtomicLevels.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/RileyCrossSection.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/Bremsstrahlung/OutgoingDistributions.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/Bremsstrahlung/ProductionCrossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/DiscreteData.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/energyGrid.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/fetch.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/String.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/print.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/parse.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/src/print.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parse.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parser.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parse/src/XSS.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parse/src/IZAW.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parse/src/JXS.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parse/src/NXS.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parse/src/IZAW.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/Parse/src/XSS.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/AW.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/JXS.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/XSS.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/ctor.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/verifyIndex.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/NXS.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/fetch.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/name.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/IZ.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/print.hpp" )
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/JXS.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/name.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/NXS.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/print.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/verifyIndex.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Data/src/XSS.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/String.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/parse.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/print.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/src/print.hpp" )
 
 target_include_directories( ACEtk INTERFACE src )
 
@@ -280,7 +282,7 @@ set( PREFIX ACEtk_${CMAKE_CXX_COMPILER_ID}_${CMAKE_SYSTEM_NAME} )
 
 target_link_libraries( ACEtk INTERFACE "$<$<AND:$<CONFIG:RELEASE>,$<BOOL:${link_time_optimization}>>:${${PREFIX}_RELEASE_flags};${${PREFIX}_link_time_optimization_flags}$<$<BOOL:${profile_generate}>:${${PREFIX}_profile_generate_flags};>$<$<BOOL:${profile_use}>:${${PREFIX}_profile_use_flags};>$<$<BOOL:${nonportable_optimization}>:${${PREFIX}_nonportable_optimization_flags};>>$<$<CONFIG:DEBUG>:$<$<BOOL:${coverage}>:${${PREFIX}_coverage_flags};>>$<$<BOOL:CXX_appended_flags>:${CXX_appended_flags};>$<$<BOOL:ACEtk_appended_flags>:${ACEtk_appended_flags};>" )
 
-target_link_libraries( ACEtk INTERFACE disco INTERFACE date-adapter INTERFACE range-v3-adapter INTERFACE header-utilities INTERFACE catch-adapter INTERFACE Log INTERFACE interpolation INTERFACE dimwits )
+target_link_libraries( ACEtk INTERFACE catch-adapter INTERFACE date-adapter INTERFACE dimwits INTERFACE disco INTERFACE header-utilities INTERFACE interpolation INTERFACE Log INTERFACE range-v3-adapter )
 
 if( NOT is_subproject )
     enable_testing() 

@@ -1,20 +1,23 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
+#include <map>
 
-using namespace njoy::ACEtk;
+namespace interpretation = njoy::ACEtk::interpretation;
 
 extern std::array< double, 57 > referenceElectronEnergy;
 extern std::array< double, 57 > referenceValues;
 
 SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
-  auto table = Table( njoy::utility::slurpFileToMemory( "1000.e03" ) );
+  auto table = njoy::ACEtk::Table( njoy::utility::slurpFileToMemory( "1000.e03" ) );
 
   GIVEN( "An ACE Table for 1000.03e" ) {
-    const auto el03 = interpretation::EL03( table );
+    const auto el03_brems = interpretation::EL03( table ).bremsstrahlung();
+    const auto production_xs = el03_brems.productionCrossSection();
+    const auto outgoing_dist = el03_brems.outgoingDistributions();        
 
     WHEN( "Querying for the electron energy values" ) {
       for ( const auto pair : ranges::view::zip( referenceElectronEnergy,
-						 el03.bremsstrahlung().electronEnergy() ) ) {
+						 production_xs.electron_energies() ) ) {
 	  REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
@@ -25,7 +28,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
 	{ 16, 8.000000000000E-01 }, { 24, 9.990000000000E-01 },
 	{ 29, 1.000000000000E+00 } };
 
-      const auto photonRatio = el03.bremsstrahlung().photonElectronEnergyRatio();
+      const auto photonRatio = production_xs.photonElectronEnergyRatio();
 
       for ( const auto& pair : referenceRatio ) {
 	const auto index = pair.first;
@@ -36,7 +39,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
 
     WHEN( "Querying for the values the cross section grid for Bremstrahlung"  ) {
       for ( const auto pair : ranges::view::zip( referenceValues,
-						 el03.bremsstrahlung().values().front()) ) {
+						 production_xs.values().front()) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );
       }      
     }
@@ -48,7 +51,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
 	{ 48, 4.000000000000E-02 }, { 72, 5.000000000000E-01 },
 	{ 88, 1.000000000000E+00 } };
       
-      const auto spectrum = el03.bremsstrahlung().photonElectronRatiosForSpectra();
+      const auto spectrum = outgoing_dist.photonElectronRatiosForEnergy();
 
       for ( const auto& pair : spectrumReference ) {
 	const auto index = pair.first;
@@ -65,7 +68,7 @@ SCENARIO( "test interperatation::EL03::Bremsstrahlung" ) {
 	{ 33, 1.000000000000E-06 }    };
 
       const auto angularDistribution =
-	el03.bremsstrahlung().photonElectronRatiosForAngle();
+	outgoing_dist.photonElectronRatiosForAngle();
 
       for ( const auto& pair : angularDistributionReference ) {
 	const auto index = pair.first;
