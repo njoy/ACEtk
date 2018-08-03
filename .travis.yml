@@ -1,60 +1,49 @@
 sudo: required
-dist: trusty
-
 git:
-  submodules: false  
-
+  submodules: false
 addons:
   apt:
     sources:
-      - sourceline: "deb http://apt.llvm.org/precise/ llvm-toolchain-precise-3.8 main"
-        key_url : "http://apt.llvm.org/llvm-snapshot.gpg.key"
-      - ubuntu-toolchain-r-test
+    - sourceline: deb http://apt.llvm.org/precise/ llvm-toolchain-precise-3.8 main
+      key_url: http://apt.llvm.org/llvm-snapshot.gpg.key
+    - ubuntu-toolchain-r-test
     packages:
-      - gcc-6
-      - g++-6
-      - clang-3.8
-      - llvm-dev
-      - libc++-dev
-
+    - gcc-6
+    - g++-6
+    - clang-3.8
+    - llvm-dev
+    - libc++-dev
 before_install:
 - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then brew update && brew upgrade python3; fi
-
 language: cpp
-
 compiler:
-  - gcc
-  - clang
-
+- gcc
+- clang
 os:
-  - linux
-  - osx
-  
+- linux
+- osx
 osx_image: xcode8
-
-script: ./.travis/build.sh
-
+script: "./.travis/build.sh"
+after_success: "./.travis/signature.sh"
 env:
+  matrix:
   - build_type=debug static_libraries=FALSE
   - build_type=release static_libraries=FALSE
   - build_type=debug static_libraries=TRUE
   - build_type=release static_libraries=TRUE
-
+  global:
+    secure: EqXkIF71rCmSM0pU2SPvooKW0nR/hzLlhskpspPv2fypN8acMyVkBqfyowMNdMDNvPuoM12mTlBhTru3u3tbqoh/w5iiU5RxNmB+HyBrTCu9KsMeGj5u76QpjKzYZXneE72+tm8xvfgcy2vPP8LmJcA7Vwwp14LwptrD/HriodONul1MsRttA/ZvfqvPSoTXKuOXSL5QmrchDL94awq49QfCyY7Od+vEXGH2SLjBYReVEjmDMF4JlWMvWpePakg0wYy1BdiWuRdPMdnFfWM/N5Ac/wK5lL3+9pvwtaIP1KaHIs+bhCNfhXkADafNio5dJH9G9xc860Jeu9WJt77s0Wgwo+v+fXW0djJ1lMOKdGoKNxkzE5HFRrl1+CIiEs+UafFyqKm4qBaw3yo66jaerJm33g4m/1kJrzv+hzwuPBl51zc394jwGLv2gGgyqS72v7ozG/WupCJX8eJqNYfu/TD/sMsGkM1PaSKOCelYnbTasXSyRawQtJ/0BYtnU3H9X/pZ6f0GHzBnU7j/sLi3k3J+/DRUwOBkD7v9bWjvPDvfnE5BNAy18rdlbZxHJ5STH0PgLJz2BzpBd9/igTxwgtHvjq7MFSJ6W0P/nUKNt3akKHG2LSwpyeIpFB3tpmowe3WHNZO7nWK8U+uN+urXqnoQHPYv+G4r/8y//+dIQKE=
 matrix:
   include:
-    - os: linux
-      compiler: gcc
-      env: build_type=coverage static_libraries=FALSE
-    - os: linux
-      compiler: clang
-      env:
-        build_type=debug static_libraries=FALSE
-        appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
-    - os: linux
-      compiler: clang
-      env:
-        build_type=debug static_libraries=FALSE
-        appended_flags="-fsanitize=undefined;-fno-omit-frame-pointer;"
+  - os: linux
+    compiler: gcc
+    env: build_type=coverage static_libraries=FALSE
+  - os: linux
+    compiler: clang
+    env: build_type=debug static_libraries=FALSE appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
+  - os: linux
+    compiler: clang
+    env: build_type=debug static_libraries=FALSE appended_flags="-fsanitize=undefined;-fno-omit-frame-pointer;"
   exclude:
-    - os: osx
-      compiler: gcc
+  - os: osx
+    compiler: gcc

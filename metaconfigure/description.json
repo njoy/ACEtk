@@ -373,8 +373,31 @@
   },
   "header files": [
     "src/ACEtk.hpp",
+    "src/ACEtk/details.hpp",
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
+    "src/ACEtk/details/verify.hpp",
+    "src/ACEtk/details/verify/IsPositive.hpp",
+    "src/ACEtk/details/verify/IsSorted.hpp",
+    "src/ACEtk/details/verify/IsStrictlyPositive.hpp",
+    "src/ACEtk/details/verify/NotPositiveException.hpp",
+    "src/ACEtk/details/verify/NotStrictlyPositiveException.hpp",
+    "src/ACEtk/details/verify/Positive.hpp",
+    "src/ACEtk/details/verify/Sorted.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive.hpp",
+    "src/ACEtk/details/verify/UnsortedException.hpp",
+    "src/ACEtk/details/verify/Positive/src/assignment.hpp",
+    "src/ACEtk/details/verify/Positive/src/check.hpp",
+    "src/ACEtk/details/verify/Positive/src/ctor.hpp",
+    "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
+    "src/ACEtk/details/verify/Sorted/src/check.hpp",
+    "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
+    "src/ACEtk/details/verify/src/positive.hpp",
+    "src/ACEtk/details/verify/src/sorted.hpp",
+    "src/ACEtk/details/verify/src/strictlyPositive.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive/src/assignment.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive/src/check.hpp",
+    "src/ACEtk/details/verify/StrictlyPositive/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
@@ -383,8 +406,6 @@
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
-    "src/ACEtk/interpretation/EL03/Bremsstrahlung/OutgoingDistributions.hpp",
-    "src/ACEtk/interpretation/EL03/Bremsstrahlung/ProductionCrossSection.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -457,6 +478,18 @@
     ],
     "ACEtk.Table.Header.String": [
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
+    ],
+    "ACEtk.details.verify": [
+      "src/ACEtk/details/verify/test/verify.test.cpp"
+    ],
+    "ACEtk.details.verify.Positive": [
+      "src/ACEtk/details/verify/Positive/test/Positive.test.cpp"
+    ],
+    "ACEtk.details.verify.Sorted": [
+      "src/ACEtk/details/verify/Sorted/test/Sorted.test.cpp"
+    ],
+    "ACEtk.details.verify.StrictlyPositive": [
+      "src/ACEtk/details/verify/StrictlyPositive/test/StrictlyPositive.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
