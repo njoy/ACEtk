@@ -406,6 +406,8 @@
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
+    "src/ACEtk/interpretation/EL03/Bremsstrahlung/src/OutgoingDistributions.hpp",
+    "src/ACEtk/interpretation/EL03/Bremsstrahlung/src/ProductionCrossSection.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
