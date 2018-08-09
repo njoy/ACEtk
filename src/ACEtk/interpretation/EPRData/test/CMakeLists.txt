@@ -1,8 +1,9 @@
 
 add_executable( ACEtk.interpretation.EPRData.test
                 eprdata.test.cpp
-                IncoherentPhotonData.test.cpp
-                CoherentPhotonData.test.cpp )
+                ShellData.test.cpp
+                CoherentPhotonData.test.cpp
+                IncoherentPhotonData.test.cpp )
 target_compile_options( ACEtk.interpretation.EPRData.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

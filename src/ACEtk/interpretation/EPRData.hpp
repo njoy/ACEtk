@@ -24,5 +24,11 @@ public:
   auto coherentPhotonData() const {
     return CoherentPhotonData( this->table );
   }
+
+  #include "ACEtk/interpretation/EPRData/ShellData.hpp"
+  
+  auto shellData() const {
+    return ShellData( this->table );
+  }
   
 };

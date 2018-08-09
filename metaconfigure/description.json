@@ -381,6 +381,7 @@
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/EPRData/CoherentPhotonData.hpp",
     "src/ACEtk/interpretation/EPRData/ESZG.hpp",
+    "src/ACEtk/interpretation/EPRData/ShellData.hpp",
     "src/ACEtk/interpretation/EPRData/IncoherentPhotonData.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
@@ -470,8 +471,9 @@
     ],
     "ACEtk.interpretation.EPRData": [
       "src/ACEtk/interpretation/EPRData/test/eprdata.test.cpp",
-      "src/ACEtk/interpretation/EPRData/test/IncoherentPhotonData.test.cpp",
-      "src/ACEtk/interpretation/EPRData/test/CoherentPhotonData.test.cpp"
+      "src/ACEtk/interpretation/EPRData/test/ShellData.test.cpp",
+      "src/ACEtk/interpretation/EPRData/test/CoherentPhotonData.test.cpp",
+      "src/ACEtk/interpretation/EPRData/test/IncoherentPhotonData.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
       "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp",
