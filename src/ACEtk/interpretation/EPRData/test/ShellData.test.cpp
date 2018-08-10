@@ -4,11 +4,71 @@
 
 using namespace njoy::ACEtk;
 
+extern std::array< double, 94 > referenceDopplerData;
+
 SCENARIO( "Test interpretation::EPRdata::ShellData" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData( table );
-    eprdata.shellData();
+    const auto shellData = interpretation::EPRData( table ).shellData();
+
+    WHEN( "Querying for the shell electron population" ){
+      shellData.electronPopulations();
+    }
+
+    WHEN( "Querying for the binding energies in eV" ){
+      shellData.bindingEnergies();
+    }
+
+    WHEN( "Querying for the shell probabilities" ) {
+      shellData.probabilities();
+    }
+
+    WHEN( "Querying for a zip of electron population,"
+	  "binding energy, and probaility" ) {
+      shellData.shellValues();
+    }
+
+    WHEN( "Querying for the doppler data for each shell" ){
+      const auto data = shellData.dopplerData();
+      const auto reference = referenceDopplerData;
+      for( const auto pair : ranges::view::zip( data[0], reference ) ) {
+	REQUIRE( pair.first == Approx( pair.second ) );
+      }
+    }
   }
 }
+
+std::array< double, 94 > referenceDopplerData = {{
+    2.000000000000E+00, 3.100000000000E+01, 0.000000000000E+00,
+    5.000000000000E-02, 1.000000000000E-01, 1.500000000000E-01,
+    2.000000000000E-01, 3.000000000000E-01, 4.000000000000E-01,
+    5.000000000000E-01, 6.000000000000E-01, 7.000000000000E-01,
+    8.000000000000E-01, 1.000000000000E+00, 1.200000000000E+00,
+    1.400000000000E+00, 1.600000000000E+00, 1.800000000000E+00,
+    2.000000000000E+00, 2.400000000000E+00, 3.000000000000E+00,
+    4.000000000000E+00, 5.000000000000E+00, 6.000000000000E+00,
+    7.000000000000E+00, 8.000000000000E+00, 1.000000000000E+01,
+    1.500000000000E+01, 2.000000000000E+01, 3.000000000000E+01,
+    4.000000000000E+01, 6.000000000000E+01, 1.000000000000E+02,
+    1.690581458877E+00, 1.676642624705E+00, 1.640799908262E+00,
+    1.581062047524E+00, 1.503402828565E+00, 1.304276626106E+00,
+    1.083246541377E+00, 8.661989806966E-01, 6.710553022868E-01,
+    5.117543403196E-01, 3.823223087213E-01, 2.110737746065E-01,
+    1.162897022361E-01, 6.511426820409E-02, 3.743572606229E-02,
+    2.210300847295E-02, 1.352066914697E-02, 5.475970567622E-03,
+    1.690581458877E-03, 3.444883302541E-04, 9.617795578770E-05,
+    3.345320201311E-05, 1.352066914697E-05, 6.152999655983E-06,
+    1.632834860164E-06, 1.473533898197E-07, 2.588640631967E-08,
+    2.389514429508E-09, 4.579902656557E-10, 8.562426705737E-11,
+    5.177281263934E-11, 0.000000000000E+00, 8.418060208954E-02,
+    1.671166654137E-01, 2.476632143084E-01, 3.247748362106E-01,
+    4.651588089442E-01, 5.845349673184E-01, 6.820072434221E-01,
+    7.588699575712E-01, 8.180104397016E-01, 8.627142721536E-01,
+    9.220538804864E-01, 9.547902281706E-01, 9.729306252147E-01,
+    9.831856246413E-01, 9.891394980948E-01, 9.927018658568E-01,
+    9.965011937997E-01, 9.986511594077E-01, 9.996686943023E-01,
+    9.998890274453E-01, 9.999538430242E-01, 9.999773299598E-01,
+    9.999871667942E-01, 9.999949526287E-01, 9.999994030993E-01,
+    9.999998361988E-01, 9.999999775784E-01, 9.999999918159E-01,
+    9.999999972521E-01 }};
