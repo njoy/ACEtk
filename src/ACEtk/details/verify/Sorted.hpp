@@ -1,4 +1,4 @@
-template< typename Range, 
+template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
 struct Sorted : Range {
 protected:

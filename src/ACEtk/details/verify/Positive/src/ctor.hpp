@@ -32,4 +32,3 @@ template< typename Arg,
 Positive( Arg&& arg ) :
   Range( std::forward< Arg >( arg ) )
 { }
-

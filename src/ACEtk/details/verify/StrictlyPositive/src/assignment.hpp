@@ -13,6 +13,6 @@ template< typename Arg,
           utility::Require< false, std::is_assignable, Range&, Arg > = true
         >
 StrictlyPositive& operator=( Arg&& arg ){
-  static_cast< Range& >( *this ) = std::forward< Arg >( arg );
+  static_cast< Range& >( *this ) = check( std::forward< Arg >( arg ) );
   return *this;
 }
