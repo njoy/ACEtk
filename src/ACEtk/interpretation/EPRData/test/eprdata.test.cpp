@@ -2,7 +2,7 @@
 
 #include "catch.hpp"
 #include "ACEtk.hpp"
-
+#include <map>
 
 using namespace njoy::ACEtk;
 
