@@ -12,7 +12,7 @@ SCENARIO( "Test interpretation::EPRdata::IncoherentPhotonData" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData( table );
+    const auto eprdata = interpretation::EPRData( std::move(table) );
     
    WHEN( "Querying for the energy grid for the incoherent scattering cross sections" ) {
       const std::map< int, double > referencePhotonEnergies{
@@ -28,7 +28,7 @@ SCENARIO( "Test interpretation::EPRdata::IncoherentPhotonData" ){
 	{ 584, 7.943300000026E+01 },
 	{ 646, 1.000000000000E+05 } };
       
-      const auto photonEnergies = eprdata.incoherentPhotonData().energyGrid();
+      const auto photonEnergies = eprdata.incoherentPhotonData().energies();
 
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;

@@ -13,7 +13,7 @@ SCENARIO( "Test interpretation::EPRdata::CoherentPhotonData" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData( table );
+    const auto eprdata = interpretation::EPRData( std::move(table) );
 
     WHEN( "Querying for the energy grid for the coherent scattering cross sections" ) {
       const std::map< int, double > referencePhotonEnergies{
@@ -29,7 +29,7 @@ SCENARIO( "Test interpretation::EPRdata::CoherentPhotonData" ){
 	{ 584, 7.943300000026E+01 },
 	{ 646, 1.000000000000E+05 } };
       
-      const auto photonEnergies = eprdata.coherentPhotonData().energyGrid();
+      const auto photonEnergies = eprdata.coherentPhotonData().energies();
 
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;

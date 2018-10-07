@@ -1,7 +1,6 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
-
 using namespace njoy::ACEtk;
 
 extern std::array< double, 94 > referenceDopplerData;
@@ -10,7 +9,7 @@ SCENARIO( "Test interpretation::EPRdata::ShellData" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto shellData = interpretation::EPRData( table ).shellData();
+    const auto shellData = interpretation::EPRData( std::move(table) ).shellData();
 
     WHEN( "Querying for the shell electron population" ){
       shellData.electronPopulations();
