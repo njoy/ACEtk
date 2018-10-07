@@ -10,7 +10,7 @@ public:
   #include "ACEtk/interpretation/EPRData/ESZG.hpp"
   
   auto eszg() const {
-    return ESZG( this->table );
+    return ESZG{ this->table };
   }
 
   #include "ACEtk/interpretation/EPRData/IncoherentPhotonData.hpp"
