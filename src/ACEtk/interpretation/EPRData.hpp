@@ -1,11 +1,11 @@
 class EPRData {
-  const Table& table;
+  Table table;
 
 protected:
   static int Z( const Table& table ) { return table.data.NXS( 2 ); }
   
 public:
-  EPRData( const Table& table ) : table( table ) {}
+  EPRData( Table&& table ) : table( std::move(table) ) {}
 
   #include "ACEtk/interpretation/EPRData/ESZG.hpp"
   

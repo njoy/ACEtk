@@ -10,7 +10,7 @@ SCENARIO( "Test interpretation::EPRdata::ESZG" ){
   auto table = Table{ njoy::utility::slurpFileToMemory( "1000.14p" ) };
 
   GIVEN( "An ACE table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData{ table };
+    const auto eprdata = interpretation::EPRData{ std::move(table) };
     
     WHEN( "Querying for the energy grid" ) {
       const std::map< int, double > referencePhotonEnergies{
