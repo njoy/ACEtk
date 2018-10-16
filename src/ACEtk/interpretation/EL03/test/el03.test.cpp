@@ -30,14 +30,14 @@ namespace{
 }
 
 SCENARIO("test interpretation::EL03"){  
-  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
+  auto table = Table( njoy::utility::slurpFileToMemory("1000.03e") );
   
-  GIVEN("An ACE Table for 1000.e03"){
+  GIVEN("An ACE Table for 1000.03e"){
     const auto el03 = interpretation::EL03( table );
 
     WHEN("Querying for the energy grid in MeV,"
 	 "on which the radiative stopping interpolation are evaluated") {
-      const auto trial = el03.radiativeStoppingPower().energyGrid(); 
+      const auto trial = el03.radiativeStoppingPower().energies(); 
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for( const auto pair : ranges::view::zip( reference, trial ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );

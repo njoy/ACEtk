@@ -26,14 +26,14 @@ namespace{
 }
 
 SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){  
-  auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
+  auto table = Table( njoy::utility::slurpFileToMemory("1000.03e") );
 
   GIVEN( "an ACE Table for 1000.03e" ) {
     const auto el03 = interpretation::EL03( table );
 
     WHEN( "querying for the energy points, "
 	  "on which the Riley scattering cross section parameters are evaluated" ) {
-      const auto rileyEnergy = el03.rileyCrossSection().energyGrid();
+      const auto rileyEnergy = el03.rileyCrossSection().energies();
       const auto reference = referenceEnergyGrid | ranges::view::reverse;
       for ( const auto pair : ranges::view::zip( reference, rileyEnergy ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );

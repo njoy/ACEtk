@@ -1,8 +1,9 @@
 
 add_executable( ACEtk.interpretation.EL03.test
+                AtomicLevels.test.cpp
+                Bremsstrahlung.test.cpp
                 el03.test.cpp
                 MottScatteringCorrection.test.cpp
-                AtomicLevels.test.cpp
                 RileyCrossSection.test.cpp )
 target_compile_options( ACEtk.interpretation.EL03.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:

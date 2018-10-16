@@ -16,7 +16,7 @@ class RadiativeStoppingPower {
 public:
   RadiativeStoppingPower( const Table& table ) : table( table ){}
     
-  auto energyGrid() const {
+  auto energies() const {
     const auto length = this->table.data.NXS( 3 );
     const auto start  = this->table.data.JXS( 2 );
     return
@@ -33,7 +33,7 @@ public:
                        * constant::lightSpeed;
     
     auto totalEnergy =
-      this->energyGrid()
+      this->energies()
       | ranges::view::transform( [ massEquivalent ]( auto&& entry )
 				 { return entry + massEquivalent; } );
 
