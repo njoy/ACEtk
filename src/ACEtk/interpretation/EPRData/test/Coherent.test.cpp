@@ -1,6 +1,6 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
-
+#include <map>
 
 using namespace njoy::ACEtk;
 
@@ -9,11 +9,11 @@ extern std::array< double, 90 > refCumulativeCoherentFormFactor;
 extern std::array< double, 90 > refDifferentialCoherentFormFactor;
 
 
-SCENARIO( "Test interpretation::EPRdata::CoherentPhotonData" ){
+SCENARIO( "Test interpretation::EPRdata::Coherent" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData( table );
+    const auto eprdata = interpretation::EPRData( std::move(table) );
 
     WHEN( "Querying for the energy grid for the coherent scattering cross sections" ) {
       const std::map< int, double > referencePhotonEnergies{
@@ -29,13 +29,18 @@ SCENARIO( "Test interpretation::EPRdata::CoherentPhotonData" ){
 	{ 584, 7.943300000026E+01 },
 	{ 646, 1.000000000000E+05 } };
       
-      const auto photonEnergies = eprdata.coherentPhotonData().energyGrid();
+      const auto photonEnergies = eprdata.coherent().energies();
 
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
 	REQUIRE( photonEnergies[ index ].value == Approx( reference ).epsilon( 1e-8 ) );
       }
+      
+      using Energy_t = decltype( photonEnergies.front() );
+      using Expected_t = dimwits::Quantity< dimwits::Mega< dimwits::ElectronVolt > >;
+      constexpr bool same_v = std::is_same<Energy_t, Expected_t>::value;
+      REQUIRE( same_v );      
     }
 
     WHEN( "Querying for the coherent scattering cross sections" ){
@@ -52,38 +57,42 @@ SCENARIO( "Test interpretation::EPRdata::CoherentPhotonData" ){
 	{ 585, 7.228371741121E-10 },
 	{ 646, 4.626159999988E-16 } };
       
-      const auto coherentScatteringXS = eprdata.coherentPhotonData().coherentScatteringXS();
+      const auto coherentScatteringXS = eprdata.coherent().crossSection();
       
       for ( const auto& pair : referenceCoherentXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
 	REQUIRE( coherentScatteringXS[ index ].value == Approx( reference ) );
       }
+
+      using XS_t = decltype( coherentScatteringXS.front() );
+      using Expected_t = dimwits::Quantity< dimwits::Barn >;
+      constexpr bool same_v = std::is_same<XS_t, Expected_t>::value;
+      REQUIRE( same_v );            
+
     }
-
+    
+    const auto cohff = eprdata.coherent().formFactors();
     WHEN( "Querying for the independant variable for the photon coherent form factors" ) {
-      const auto indVar = eprdata.coherentPhotonData().independentVariableForFormFactors();
-
-      for( const auto pair
-	     : ranges::view::zip( refIndVarcoherentFormFactor, indVar ) ) {
+      auto var = cohff.independentVariable();
+      auto compairs = ranges::view::zip( refIndVarcoherentFormFactor, var );
+      for( const auto pair : compairs ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
 
     WHEN( "Querying for the cumulative coherent form factors" ) {
-      const auto cumulativeFF = eprdata.coherentPhotonData().cumulativeFormFactors();
-      
-      for( const auto pair
-	     : ranges::view::zip( refCumulativeCoherentFormFactor, cumulativeFF ) ) {
+      const auto cumulative = cohff.cumulative();
+      const auto compairs = ranges::view::zip( refCumulativeCoherentFormFactor, cumulative );
+      for( const auto pair : compairs ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
     
     WHEN( "Querying for the differential coherent form factors" ) {
-      const auto differentialFF = eprdata.coherentPhotonData().differentialFormFactors();
-      
-      for( const auto pair
-	     : ranges::view::zip( refDifferentialCoherentFormFactor, differentialFF ) ) {
+      const auto differential = cohff.differential();
+      const auto compairs = ranges::view::zip( refDifferentialCoherentFormFactor, differential );
+      for( const auto pair : compairs ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }

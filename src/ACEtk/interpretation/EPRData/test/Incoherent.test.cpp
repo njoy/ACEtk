@@ -1,6 +1,6 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
-
+#include <map>
 
 using namespace njoy::ACEtk;
 
@@ -8,13 +8,13 @@ extern std::array< double, 94 > refIndVarIncoherentFF;
 extern std::array< double, 94 > refIncoherentFF;
 
 
-SCENARIO( "Test interpretation::EPRdata::IncoherentPhotonData" ){
+SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData( table );
-    
-   WHEN( "Querying for the energy grid for the incoherent scattering cross sections" ) {
+    const auto eprdata = interpretation::EPRData( std::move(table) );
+    const auto incoh = eprdata.incoherent();
+    WHEN( "Querying for the energy grid for the incoherent scattering cross sections" ) {
       const std::map< int, double > referencePhotonEnergies{
 	{   0, 1.000000000000E-06 },
 	{  64, 8.013002999974E-06 },
@@ -28,12 +28,11 @@ SCENARIO( "Test interpretation::EPRdata::IncoherentPhotonData" ){
 	{ 584, 7.943300000026E+01 },
 	{ 646, 1.000000000000E+05 } };
       
-      const auto photonEnergies = eprdata.incoherentPhotonData().energyGrid();
-
+      const auto energies = incoh.energies();
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
-	REQUIRE( photonEnergies[ index ].value == Approx( reference ).epsilon( 1e-8 ) );
+	REQUIRE( energies[ index ].value == Approx( reference ).epsilon( 1e-8 ) );
       }
     }
     
@@ -51,8 +50,7 @@ SCENARIO( "Test interpretation::EPRdata::IncoherentPhotonData" ){
 	{ 585, 9.876644877527E-03 },
 	{ 646, 1.704199999997E-05 } };
       
-      const auto incoherentScatteringXS = eprdata.incoherentPhotonData().incoherentScatteringXS();
-      
+      const auto incoherentScatteringXS = incoh.crossSection();
       for ( const auto& pair : referenceIncoherentXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
@@ -60,21 +58,19 @@ SCENARIO( "Test interpretation::EPRdata::IncoherentPhotonData" ){
       }
     }
     
+    const auto incohff = incoh.formFactors();    
     WHEN( "Querying for the independant variable for the photon incoherent form factors" ) {
-      const auto indVarIncoherentFF
-	= eprdata.incoherentPhotonData().independantVariableForFormFactor();
-
-      for( const auto pair
-	     : ranges::view::zip( refIndVarIncoherentFF, indVarIncoherentFF ) ) {
+      const auto var = incohff.independentVariable();
+      auto compairs = ranges::view::zip( refIndVarIncoherentFF, var );
+      for( const auto pair : compairs ){
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
 
     WHEN( "Querying for the photon incoherent form factors" ) {
-      const auto incoherentFF = eprdata.incoherentPhotonData().incoherentFormFactor();
-      
-      for( const auto pair
-	     : ranges::view::zip( refIncoherentFF, incoherentFF ) ) {
+      const auto differential = incohff.differential();
+      auto compairs = ranges::view::zip( refIncoherentFF, differential );
+      for( const auto pair : compairs ){
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }

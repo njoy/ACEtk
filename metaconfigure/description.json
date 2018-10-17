@@ -375,45 +375,46 @@
     "src/ACEtk.hpp",
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
-    "src/ACEtk/interpretation/EPRData.hpp",
-    "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
+    "src/ACEtk/interpretation/EL03.hpp",
+    "src/ACEtk/interpretation/EPRData.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
-    "src/ACEtk/interpretation/EPRData/CoherentPhotonData.hpp",
-    "src/ACEtk/interpretation/EPRData/ESZG.hpp",
-    "src/ACEtk/interpretation/EPRData/IncoherentPhotonData.hpp",
-    "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
-    "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
-    "src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp",
-    "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/MP1/src/fetch.hpp",
-    "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
-    "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
+    "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
-    "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
-    "src/ACEtk/Table/Header.hpp",
+    "src/ACEtk/interpretation/EPRData/Coherent.hpp",
+    "src/ACEtk/interpretation/EPRData/Incoherent.hpp",
+    "src/ACEtk/interpretation/EPRData/Coherent/FormFactors.hpp",
+    "src/ACEtk/interpretation/EPRData/Incoherent/FormFactors.hpp",
+    "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
+    "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
+    "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
+    "src/ACEtk/interpretation/MP1/src/fetch.hpp",
+    "src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp",
+    "src/ACEtk/interpretation/MP1/src/scatteringAngles.hpp",
+    "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
     "src/ACEtk/Table/Data.hpp",
-    "src/ACEtk/Table/Header/String.hpp",
-    "src/ACEtk/Table/Header/src/print.hpp",
-    "src/ACEtk/Table/Header/src/parse.hpp",
+    "src/ACEtk/Table/Header.hpp",
     "src/ACEtk/Table/Data/Parse.hpp",
     "src/ACEtk/Table/Data/Parser.hpp",
     "src/ACEtk/Table/Data/Parse/src/IZAW.hpp",
+    "src/ACEtk/Table/Data/Parse/src/JXS.hpp",
     "src/ACEtk/Table/Data/Parse/src/NXS.hpp",
     "src/ACEtk/Table/Data/Parse/src/XSS.hpp",
-    "src/ACEtk/Table/Data/Parse/src/JXS.hpp",
-    "src/ACEtk/Table/Data/src/XSS.hpp",
-    "src/ACEtk/Table/Data/src/ctor.hpp",
     "src/ACEtk/Table/Data/src/AW.hpp",
+    "src/ACEtk/Table/Data/src/ctor.hpp",
+    "src/ACEtk/Table/Data/src/fetch.hpp",
+    "src/ACEtk/Table/Data/src/IZ.hpp",
     "src/ACEtk/Table/Data/src/JXS.hpp",
     "src/ACEtk/Table/Data/src/name.hpp",
     "src/ACEtk/Table/Data/src/NXS.hpp",
     "src/ACEtk/Table/Data/src/print.hpp",
-    "src/ACEtk/Table/Data/src/fetch.hpp",
-    "src/ACEtk/Table/Data/src/IZ.hpp",
     "src/ACEtk/Table/Data/src/verifyIndex.hpp",
+    "src/ACEtk/Table/Data/src/XSS.hpp",
+    "src/ACEtk/Table/Header/String.hpp",
+    "src/ACEtk/Table/Header/src/parse.hpp",
+    "src/ACEtk/Table/Header/src/print.hpp",
     "src/ACEtk/Table/src/print.hpp"
   ],
   "ignore pattern": "$^",
@@ -436,25 +437,25 @@
       "src/ACEtk/Table/test/Table.test.cpp"
     ],
     "ACEtk.Table.Data": [
-      "src/ACEtk/Table/Data/test/JXS.test.cpp",
       "src/ACEtk/Table/Data/test/AW.test.cpp",
-      "src/ACEtk/Table/Data/test/IZ.test.cpp",
       "src/ACEtk/Table/Data/test/Data.test.cpp",
-      "src/ACEtk/Table/Data/test/XSS.test.cpp",
+      "src/ACEtk/Table/Data/test/IZ.test.cpp",
+      "src/ACEtk/Table/Data/test/JXS.test.cpp",
       "src/ACEtk/Table/Data/test/NXS.test.cpp",
-      "src/ACEtk/Table/Data/test/print.test.cpp"
+      "src/ACEtk/Table/Data/test/print.test.cpp",
+      "src/ACEtk/Table/Data/test/XSS.test.cpp"
     ],
     "ACEtk.Table.Data.Parse": [
-      "src/ACEtk/Table/Data/Parse/test/JXS.test.cpp",
-      "src/ACEtk/Table/Data/Parse/test/Parse.test.cpp",
-      "src/ACEtk/Table/Data/Parse/test/NXS.test.cpp",
       "src/ACEtk/Table/Data/Parse/test/IZAW.test.cpp",
+      "src/ACEtk/Table/Data/Parse/test/JXS.test.cpp",
+      "src/ACEtk/Table/Data/Parse/test/NXS.test.cpp",
+      "src/ACEtk/Table/Data/Parse/test/Parse.test.cpp",
       "src/ACEtk/Table/Data/Parse/test/XSS.test.cpp"
     ],
     "ACEtk.Table.Header": [
+      "src/ACEtk/Table/Header/test/Header.test.cpp",
       "src/ACEtk/Table/Header/test/parse.test.cpp",
-      "src/ACEtk/Table/Header/test/print.test.cpp",
-      "src/ACEtk/Table/Header/test/Header.test.cpp"
+      "src/ACEtk/Table/Header/test/print.test.cpp"
     ],
     "ACEtk.Table.Header.String": [
       "src/ACEtk/Table/Header/String/test/String.test.cpp"
@@ -463,21 +464,21 @@
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
-      "src/ACEtk/interpretation/EL03/test/RileyCrossSection.test.cpp",
-      "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
-      "src/ACEtk/interpretation/EL03/test/MottScatteringCorrection.test.cpp"
+      "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
+      "src/ACEtk/interpretation/EL03/test/MottScatteringCorrection.test.cpp",
+      "src/ACEtk/interpretation/EL03/test/RileyCrossSection.test.cpp"
     ],
     "ACEtk.interpretation.EPRData": [
+      "src/ACEtk/interpretation/EPRData/test/Coherent.test.cpp",
       "src/ACEtk/interpretation/EPRData/test/eprdata.test.cpp",
-      "src/ACEtk/interpretation/EPRData/test/IncoherentPhotonData.test.cpp",
-      "src/ACEtk/interpretation/EPRData/test/CoherentPhotonData.test.cpp"
+      "src/ACEtk/interpretation/EPRData/test/Incoherent.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
-      "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp",
       "src/ACEtk/interpretation/MP1/test/cumulativeDistributions.test.cpp",
       "src/ACEtk/interpretation/MP1/test/deflectionCosines.test.cpp",
-      "src/ACEtk/interpretation/MP1/test/energyGrid.test.cpp"
+      "src/ACEtk/interpretation/MP1/test/energyGrid.test.cpp",
+      "src/ACEtk/interpretation/MP1/test/totalCrossSection.test.cpp"
     ]
   },
   "update": true
