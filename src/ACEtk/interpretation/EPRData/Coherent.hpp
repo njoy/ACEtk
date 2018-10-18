@@ -11,5 +11,4 @@ protected:
 public:
   Coherent( const Table& table )
     : CRTP<Coherent>(table), table(table) {}  
-
 };
