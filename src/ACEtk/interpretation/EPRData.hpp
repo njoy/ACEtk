@@ -11,6 +11,7 @@ public:
     return Z( this->table );
   }
 
+  #include "ACEtk/interpretation/EPRData/CRTP.hpp"  
   #include "ACEtk/interpretation/EPRData/Coherent.hpp"
   
   auto coherent() const {

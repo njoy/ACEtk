@@ -31,5 +31,13 @@ public:
       | ranges::view::transform( []( auto&& entry ){
 	  return std::exp(entry) * barn; } );
   }
+
+  #include "ACEtk/interpretation/EPRData/FormFactors.hpp"  
+
+  auto formFactors() const {
+    return FormFactors<Derived>{ this->table };
+  }
   
+  
+
 };
