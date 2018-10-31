@@ -14,7 +14,12 @@ addons:
     - llvm-dev
     - libc++-dev
 before_install:
-- if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then brew update && brew upgrade python3; fi
+- if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then 
+    brew update > /dev/null && 
+    brew install gcc || true &&
+    brew link --overwrite gcc;
+    brew upgrade python3; 
+  fi
 language: cpp
 compiler:
 - gcc
@@ -22,7 +27,7 @@ compiler:
 os:
 - linux
 - osx
-osx_image: xcode8
+osx_image: xcode9
 script: "./.travis/build.sh"
 after_success: "./.travis/signature.sh"
 env:
@@ -37,13 +42,18 @@ matrix:
   include:
   - os: linux
     compiler: gcc
-    env: build_type=coverage static_libraries=FALSE
+    env: 
+      build_type=coverage 
+      static_libraries=FALSE
   - os: linux
     compiler: clang
-    env: build_type=debug static_libraries=FALSE appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
+    env: 
+      build_type=debug 
+      static_libraries=FALSE 
+      appended_flags="-fsanitize=address;-fno-omit-frame-pointer;"
   - os: linux
     compiler: clang
-    env: build_type=debug static_libraries=FALSE appended_flags="-fsanitize=undefined;-fno-omit-frame-pointer;"
-  exclude:
-  - os: osx
-    compiler: gcc
+    env: 
+      build_type=debug 
+      static_libraries=FALSE 
+      appended_flags="-fsanitize=undefined;-fno-omit-frame-pointer;"
