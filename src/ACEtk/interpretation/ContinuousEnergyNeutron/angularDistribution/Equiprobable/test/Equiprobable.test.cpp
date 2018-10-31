@@ -29,27 +29,45 @@ SCENARIO( "Constructing an equiprobable bins for angular distribution" ){
         boundaries.front() = -0.99;
 
         THEN( "an exception is thrown" ){
+#ifndef NDEBUG
           REQUIRE_THROWS( 
             ContinuousEnergyNeutron::angularDistribution::Equiprobable{
                 boundaries } );
+#else
+          REQUIRE_NOTHROW( 
+            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+                boundaries } );
+#endif
         }
       }
       WHEN( "last value is != 1.0" ){
         boundaries.back() = 0.99;
 
         THEN( "an exception is thrown" ){
+#ifndef NDEBUG
           REQUIRE_THROWS( 
             ContinuousEnergyNeutron::angularDistribution::Equiprobable{
                 boundaries } );
+#else
+          REQUIRE_NOTHROW( 
+            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+                boundaries } );
+#endif
         }
       }
       WHEN( "last values are not sorted" ){
         boundaries[1] = 4.0/32;
 
         THEN( "an exception is thrown" ){
+#ifndef NDEBUG
           REQUIRE_THROWS( 
             ContinuousEnergyNeutron::angularDistribution::Equiprobable{
                 boundaries } );
+#else
+          REQUIRE_NOTHROW( 
+            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+                boundaries } );
+#endif
         }
       }
     }
