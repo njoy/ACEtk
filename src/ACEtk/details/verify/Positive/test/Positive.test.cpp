@@ -23,7 +23,7 @@ SCENARIO( "Testing positivity verification" ){
     WHEN( "constructing from a 'range'" ){
       REQUIRE_NOTHROW( Positive< std::vector< double > > ( strictlyPositive ) );
       REQUIRE_NOTHROW( Positive< std::vector< double > > ( posi ) );
-      REQUIRE_NOTHROW( Positive< std::vector< double > > ( positive( posi ) ) );
+      REQUIRE_NOTHROW( Positive< std::vector< double > > ( isPositive( posi ) ) );
       REQUIRE_NOTHROW( Positive< std::vector< double > > ( unsortedVector ) );
       REQUIRE_THROWS_AS(
         Positive< std::vector< int > >( negative ),
@@ -36,7 +36,7 @@ SCENARIO( "Testing positivity verification" ){
         REQUIRE_NOTHROW( 
           Positive< Sorted< std::vector< double > > >( posi ) );
         REQUIRE_THROWS_AS(
-          Positive< std::vector< int > > ( sorted( negative ) ),
+          Positive< std::vector< int > > ( isSorted( negative ) ),
           exceptions::NotPositive
         );
       }

@@ -34,7 +34,7 @@ SCENARIO( "Testing positivity verification" ){
         exceptions::NotStrictlyPositive
       );
       REQUIRE_THROWS_AS( 
-        StrictlyPositive< std::vector< double > > ( positive( posi ) ),
+        StrictlyPositive< std::vector< double > > ( isPositive( posi ) ),
         exceptions::NotStrictlyPositive
       );
       REQUIRE_NOTHROW( 
@@ -53,7 +53,7 @@ SCENARIO( "Testing positivity verification" ){
           exceptions::NotStrictlyPositive
         );
         REQUIRE_THROWS_AS(
-          StrictlyPositive< std::vector< int > > ( sorted( negative ) ),
+          StrictlyPositive< std::vector< int > > ( isSorted( negative ) ),
           exceptions::NotStrictlyPositive
         );
       }

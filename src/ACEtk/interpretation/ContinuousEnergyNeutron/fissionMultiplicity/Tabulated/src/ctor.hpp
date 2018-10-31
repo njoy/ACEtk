@@ -13,7 +13,7 @@ Tabulated( ENDFInterpolationParameters&& interp,
   }
 
   try{
-    details::verify::positive( details::verify::sorted( energies_ ) );
+    details::verify::isPositive( details::verify::isSorted( energies_ ) );
   } catch( details::verify::exceptions::NotPositive& e ){
     njoy::Log::info( "incident energies must be positive" );
     throw;
@@ -23,7 +23,7 @@ Tabulated( ENDFInterpolationParameters&& interp,
   }
 
   try{
-    details::verify::positive( nubar );
+    details::verify::isPositive( nubar );
   } catch( details::verify::exceptions::NotPositive& e ){
     njoy::Log::info( "nubar values must be positive" );
     throw;

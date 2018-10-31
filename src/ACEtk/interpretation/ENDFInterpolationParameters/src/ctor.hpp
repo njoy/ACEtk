@@ -12,7 +12,7 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
   if( NBT_.size() ){
 
     try{
-      details::verify::strictlyPositive( details::verify::sorted( NBT_ ) );
+      details::verify::isStrictlyPositive( details::verify::isSorted( NBT_ ) );
     } catch( details::verify::exceptions::NotStrictlyPositive& e ){
       njoy::Log::info( "NBT values must be strictly positive" );
       throw e;
