@@ -28,6 +28,7 @@ else
   export coverage=false
 fi;
 
+./metaconfigure/fetch_subprojects.py
 mkdir build
 cd build
 cmake -D CMAKE_BUILD_TYPE=$build_type \
