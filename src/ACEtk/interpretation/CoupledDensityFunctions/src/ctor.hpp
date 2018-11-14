@@ -2,11 +2,11 @@ CoupledDensityFunctions( Table::Slice PDF, Table::Slice CDF ):
     PDF_( PDF ),
     CDF_( CDF )
 {
-  if( PDF_.size() != CDF_.size() ){
-    njoy::Log::error( "PDF and CDF must be the same size" );
-    njoy::Log::info( "PDF size: {}, CDF size: {}", 
-                     PDF_.size(), CDF_.size() );
-    throw std::exception();
+  try{
+    details::verify::equalSize( PDF_, CDF_ );
+  } catch( std::range_error& e ){
+    njoy::Log::info( "PDF and CDF must be the same size" );
+    throw;
   }
 }
 

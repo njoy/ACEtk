@@ -2,29 +2,37 @@ ENDFInterpolationParameters( Table::Slice NBT, Table::Slice INT ):
   NBT_( NBT ),
   schemes_( INT )
 {
-  if( NBT_.size() != schemes_.size() ){
-    njoy::Log::error( "NBT and INT must be the same size" );
-    njoy::Log::info( "NBT size: {}, INT size: {}", 
-                     NBT_.size(), schemes_.size() );
-    throw std::exception();
+  try{
+    details::verify::equalSize( NBT_, schemes_ );
+  } catch( std::range_error& e ){
+    njoy::Log::info( "NBT and INT must be the same size" );
+    throw e;
   }
 
-  int sch{ 0 };
-  for( size_t i=0; i<schemes_.size(); i++ ){
-    sch = schemes_[i];
-    if( not ( ( ( sch >  0 ) and ( sch <  7 ) ) or
-              ( ( sch > 10 ) and ( sch < 16 ) ) or
-              ( ( sch > 20 ) and ( sch < 26 ) ) )
-      ){
-      
-      njoy::Log::error(
-        "Invalid ENDF interpolation scheme ({}) found at index {}", sch, i );
-      throw std::exception();
+  if( NBT_.size() ){
+
+    try{
+      details::verify::isStrictlyPositive( details::verify::isSorted( NBT_ ) );
+    } catch( details::verify::exceptions::NotStrictlyPositive& e ){
+      njoy::Log::info( "NBT values must be strictly positive" );
+      throw e;
+    } catch( details::verify::exceptions::Unsorted& e ){
+      njoy::Log::info( "NBT values must be sorted" );
+      throw e;
     }
-  }
+
+    try{ 
+      details::verify::interpolationParameters( schemes_ );
+    } catch( 
+        details::verify::exceptions::InvalidENDFInterpolationParameter& e ){
+      njoy::Log::info( "Invalid ENDF interpolation schem found." );
+      throw e;
+    }
+  } // NBT_.size()
 }
 
-template< typename Range >
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true >
 ENDFInterpolationParameters( Range& NBT, Range& INT )
   try:
     ENDFInterpolationParameters(

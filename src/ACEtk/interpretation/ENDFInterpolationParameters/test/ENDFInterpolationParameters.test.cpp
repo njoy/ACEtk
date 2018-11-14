@@ -44,7 +44,7 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
       }
     }
   } // GIVEN
-  GIVEN( "inalid schemes" ){
+  GIVEN( "invalid schemes" ){
     std::vector< std::vector< double > > invalidINT{
       {  1,  2,  3,  4,  5 },
       {  1,  2,  3,  4,  5,  0 },
@@ -67,6 +67,22 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
       }
     }
   }
+  GIVEN( "invalid NBT" ){
+    std::vector< double > INT{ 1, 2, 3, 4, 5, 6 };
+    WHEN( "NBT is negative" ){
+      std::vector< double > NBT{ -1, 2, 3, 4, 5, 6 };
+      THEN( "an exception is thrown" ){
+        REQUIRE_THROWS( ENDFInterpolationParameters( NBT, INT ) );
+      }
+    }
+    WHEN( "NBT is not sorted" ){
+      std::vector< double > NBT{ 1, 2, 3, 4, 5, 3 };
+      THEN( "an exception is thrown" ){
+        REQUIRE_THROWS( ENDFInterpolationParameters( NBT, INT ) );
+      }
+    }
+  }
+
   GIVEN( "invalid index" ){
     std::vector< double > NBT{ 1, 2, 3 };
     std::vector< double > INT{ 1,  2,  3 };

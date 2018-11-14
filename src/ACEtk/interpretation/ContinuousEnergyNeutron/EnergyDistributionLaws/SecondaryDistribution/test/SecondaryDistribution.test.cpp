@@ -34,9 +34,11 @@ SCENARIO( "SecondaryDistribution" ){
       std::vector< double > energies{ 1.0, 2.0, 3.0, 4.0 };
 
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( 
+        REQUIRE_THROWS_AS( 
           ContinuousEnergyNeutron::SecondaryDistribution(
-            INTT, energies, PDF, CDF ) );
+            INTT, energies, PDF, CDF ),
+          std::range_error
+        );
       }
     }
   } // GIVEN invalid

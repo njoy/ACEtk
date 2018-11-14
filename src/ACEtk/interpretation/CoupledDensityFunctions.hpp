@@ -7,5 +7,4 @@ public:
 
   auto PDF() const { return PDF_; }
   auto CDF() const { return CDF_; }
-  auto size() const { return PDF_.size(); }
 };

@@ -23,8 +23,8 @@ Equiprobable( Slice bins ):
 }
 
 // Need to change this so it's no to specific to std::vector
-template< typename Range >
-Equiprobable( Range& bins ):
-  Equiprobable( 
-      Slice( bins.begin(), bins.end() ) )
+template< typename Range, 
+          utility::Require< true, utility::is_range, Range > = true >
+Equiprobable( Range&& bins ):
+  Equiprobable( Table::slice( bins ) )
 {   }

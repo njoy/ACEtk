@@ -1,8 +1,8 @@
-  Data( const std::array< std::pair< int, double >, 16 >& izaw,
-        const std::array< int64_t, 16 >&              nxs,
-        const std::array< int64_t, 32 >&              jxs,
-        std::vector< double >&&                       xss ) :
-    xss( std::move(xss) ), jxs( jxs ), nxs( nxs ), izaw( izaw ) {}
+  Data( const decltype(izaw)& izaw_,
+        const decltype(nxs)& nxs_,
+        const decltype(jxs)& jxs_,
+        decltype(xss)&& xss_ ) :
+    xss( std::move(xss_) ), jxs( jxs_ ), nxs( nxs_ ), izaw( izaw_ ) {}
 
 protected:
   template< typename Iterator >
@@ -10,20 +10,20 @@ protected:
         const decltype(izaw)& izaw_,
         const decltype(nxs)& nxs_,
         const decltype(jxs)& jxs_ ) :
-    Data( izaw_, nxs_, jxs_, Parse::XSS( state, nxs_[0] ) ){}
-    
+    Data( izaw_, nxs_, jxs_, Parse::XSS( state, int64_t{nxs_[0]} ) ){}
+
   template< typename Iterator >
   Data( State<Iterator>& state,
         const decltype(izaw)& izaw_,
         const decltype(nxs)& nxs_ ) :
     Data( state, izaw_, nxs_, Parse::JXS( state ) ){}
-    
+
   template< typename Iterator >
   Data( State<Iterator>& state,
         const decltype(izaw)& izaw_ ) :
     Data( state, izaw_, Parse::NXS( state ) ){}
-    
-public:  
+
+public:
   template< typename Iterator >
   Data( State<Iterator>& state )
     try :

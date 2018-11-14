@@ -3,8 +3,9 @@ private:
   std::vector< double > xss;
   std::array< int64_t, 32 > jxs;
   std::array< int64_t, 16 > nxs;
-  std::array< std::pair< int, double >, 16 > izaw;
-  
+  std::pair< std::array< int32_t, 16 >,
+             std::array< double, 16 > > izaw;
+
   /* helper typedef */
   template< int index >
   using Index = std::integral_constant< int, index >;
@@ -23,7 +24,7 @@ public:
   auto method( std::size_t index ) const {              \
     return const_cast<Data&>(*this).method(index);      \
   }
-  
+
   #include "ACEtk/Table/Data/src/IZ.hpp"
   #include "ACEtk/Table/Data/src/AW.hpp"
   #include "ACEtk/Table/Data/src/NXS.hpp"
