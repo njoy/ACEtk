@@ -401,9 +401,9 @@
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/GammaProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/src/ctor.hpp",
@@ -432,17 +432,18 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/PhotonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Equiprobable/src/ctor.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/GammaProduction/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/interpolationSchemes.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/regions.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/PhotonProductionHeaderIndices.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIndex.hpp",
@@ -611,8 +612,8 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.EnergyDistributionLaws.TabularEquiprobableEnergyBins": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/TabularEquiprobableEnergyBins/test/TabularEquiprobableEnergyBins.test.cpp"
     ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.GammaProduction": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/GammaProduction/test/GammaProduction.test.cpp"
+    "ACEtk.interpretation.ContinuousEnergyNeutron.PhotonProduction": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction/test/PhotonProduction.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Reaction": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/test/Reaction.test.cpp"

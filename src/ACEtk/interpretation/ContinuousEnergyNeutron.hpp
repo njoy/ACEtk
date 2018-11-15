@@ -17,7 +17,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/GammaProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp"
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/neutronReactionIDs.hpp"

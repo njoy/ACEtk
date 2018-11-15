@@ -1,4 +1,4 @@
-GammaProduction( Slice crossSection, 
+PhotonProduction( Slice crossSection, 
                  Slice grid ):
   crossSection_( crossSection ),
   outgoingEnergyGrid_( grid )
@@ -6,8 +6,8 @@ GammaProduction( Slice crossSection,
   auto size = outgoingEnergyGrid_.size();
   if( size != 600 ){
     njoy::Log::error( 
-      "Gamma production outgoing energy grid size ({})!= 600", size );
-    throw std::range_error( "Gamma production grid size != 600." );
+      "Photon production outgoing energy grid size ({})!= 600", size );
+    throw std::range_error( "Photon production grid size != 600." );
   }
 
   try{
@@ -27,7 +27,7 @@ GammaProduction( Slice crossSection,
 
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
-GammaProduction( Range& crossSection, Range& grid ):
-  GammaProduction( Table::slice( crossSection ),
+PhotonProduction( Range& crossSection, Range& grid ):
+  PhotonProduction( Table::slice( crossSection ),
                    Table::slice( grid ) )
 { }

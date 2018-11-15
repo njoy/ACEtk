@@ -7,7 +7,7 @@ using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 using namespace dimwits;
 
-SCENARIO( "Constructing GammaProduction" ){
+SCENARIO( "Constructing PhotonProduction" ){
   GIVEN( "total cross section values and outgoing energy grid" ){
     std::vector< double > xsValues{1.0, 2.0, 3.0, 4.0, 5.0};
     std::vector< double > grid{{
@@ -102,7 +102,7 @@ SCENARIO( "Constructing GammaProduction" ){
           29.10, 29.11, 29.12, 29.13, 29.14, 29.15, 29.16, 29.17, 29.18, 29.19
     }};
     WHEN( "inputs are all valid" ){
-      ContinuousEnergyNeutron::GammaProduction GP{ xsValues, grid };
+      ContinuousEnergyNeutron::PhotonProduction GP{ xsValues, grid };
 
       THEN( "the values can be verified" ){
         CHECK( ranges::equal( xsValues, GP.crossSection() ) );
@@ -124,7 +124,7 @@ SCENARIO( "Constructing GammaProduction" ){
       THEN( "an exception is thrown" ){
         xsValues[ 2 ] *= -1;
         CHECK_THROWS_AS(
-            ContinuousEnergyNeutron::GammaProduction( xsValues, grid),
+            ContinuousEnergyNeutron::PhotonProduction( xsValues, grid),
             details::verify::exceptions::NotPositive
             );
       }
@@ -132,13 +132,13 @@ SCENARIO( "Constructing GammaProduction" ){
     WHEN( "grid is too big" ){
       grid.push_back( 3.14 );
       CHECK_THROWS(
-          ContinuousEnergyNeutron::GammaProduction( xsValues, grid )
+          ContinuousEnergyNeutron::PhotonProduction( xsValues, grid )
           );
     }
     WHEN( "grid is too small" ){
       grid.pop_back();
       CHECK_THROWS(
-          ContinuousEnergyNeutron::GammaProduction( xsValues, grid )
+          ContinuousEnergyNeutron::PhotonProduction( xsValues, grid )
           );
     }
   } // GIVEN
