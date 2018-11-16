@@ -108,7 +108,6 @@ SCENARIO( "Constructing PhotonProduction" ){
         CHECK( ranges::equal( xsValues, GP.crossSection() ) );
         auto GPgrid = GP.outgoingEnergyGrid();
         CHECK( 30 == GPgrid.size() );
-        // CHECK( ranges::equal( grid, GP.outgoingEnergyGrid() ) );
 
         for( int i=0; i<30; i++ ){
           AND_THEN( "sub grid: " + std::to_string( i ) + " can be verified" ){

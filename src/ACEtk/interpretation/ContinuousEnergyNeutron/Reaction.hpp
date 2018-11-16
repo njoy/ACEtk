@@ -1,6 +1,6 @@
 class Reaction {
 protected: 
-  ContinuousEnergyNeutron::CrossSection crossSection_;
+  CrossSection crossSection_;
   double QValue_;
 
 public:

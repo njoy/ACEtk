@@ -6,7 +6,7 @@ PhotonProduction( Slice crossSection,
   auto size = outgoingEnergyGrid_.size();
   if( size != 600 ){
     njoy::Log::error( 
-      "Photon production outgoing energy grid size ({})!= 600", size );
+      "Photon production outgoing energy grid size ({}) != 600", size );
     throw std::range_error( "Photon production grid size != 600." );
   }
 
