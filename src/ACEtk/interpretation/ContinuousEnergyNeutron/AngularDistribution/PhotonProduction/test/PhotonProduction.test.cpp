@@ -27,7 +27,7 @@ SCENARIO( "Constructing PhotonProduction angular distribution" ){
   }};
   GIVEN( "the pieces necessary to build the angular distribution" ){
 
-    ContinuousEnergyNeutron::angularDistribution::PhotonProduction PP{ 
+    ContinuousEnergyNeutron::AngularDistribution::PhotonProduction PP{ 
       energyGrid, cosineBins };
 
     THEN( "the values can be verified" ){
@@ -38,7 +38,7 @@ SCENARIO( "Constructing PhotonProduction angular distribution" ){
     WHEN( "cosine bin size is too small" ){
       cosineBins.pop_back();
       CHECK_THROWS(
-        ContinuousEnergyNeutron::angularDistribution::PhotonProduction( 
+        ContinuousEnergyNeutron::AngularDistribution::PhotonProduction( 
           energyGrid, cosineBins ) 
       );
     }

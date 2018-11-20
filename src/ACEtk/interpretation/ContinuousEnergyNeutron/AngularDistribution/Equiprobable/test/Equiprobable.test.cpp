@@ -13,7 +13,7 @@ SCENARIO( "Constructing an equiprobable bins for angular distribution" ){
       for( size_t i=0; i < boundaries.size(); i++ ){
         boundaries[i] = -1.0 + i*( 2.0/32 );
       }
-      ContinuousEnergyNeutron::angularDistribution::Equiprobable equi{
+      ContinuousEnergyNeutron::AngularDistribution::Equiprobable equi{
           boundaries };
 
       THEN( "the boundaries can be verified" ){
@@ -31,11 +31,11 @@ SCENARIO( "Constructing an equiprobable bins for angular distribution" ){
         THEN( "an exception is thrown" ){
 #ifndef NDEBUG
           REQUIRE_THROWS( 
-            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+            ContinuousEnergyNeutron::AngularDistribution::Equiprobable{
                 boundaries } );
 #else
           REQUIRE_NOTHROW( 
-            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+            ContinuousEnergyNeutron::AngularDistribution::Equiprobable{
                 boundaries } );
 #endif
         }
@@ -46,11 +46,11 @@ SCENARIO( "Constructing an equiprobable bins for angular distribution" ){
         THEN( "an exception is thrown" ){
 #ifndef NDEBUG
           REQUIRE_THROWS( 
-            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+            ContinuousEnergyNeutron::AngularDistribution::Equiprobable{
                 boundaries } );
 #else
           REQUIRE_NOTHROW( 
-            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+            ContinuousEnergyNeutron::AngularDistribution::Equiprobable{
                 boundaries } );
 #endif
         }
@@ -61,11 +61,11 @@ SCENARIO( "Constructing an equiprobable bins for angular distribution" ){
         THEN( "an exception is thrown" ){
 #ifndef NDEBUG
           REQUIRE_THROWS( 
-            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+            ContinuousEnergyNeutron::AngularDistribution::Equiprobable{
                 boundaries } );
 #else
           REQUIRE_NOTHROW( 
-            ContinuousEnergyNeutron::angularDistribution::Equiprobable{
+            ContinuousEnergyNeutron::AngularDistribution::Equiprobable{
                 boundaries } );
 #endif
         }

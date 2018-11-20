@@ -13,7 +13,7 @@ public:
   int ZA() const { return this->table.data.NXS(2); }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp"

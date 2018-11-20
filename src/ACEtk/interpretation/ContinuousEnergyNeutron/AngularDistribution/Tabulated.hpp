@@ -4,7 +4,7 @@ class Tabulated {
   CoupledDensityFunctions densityFunctions;
 
 public:
-  #include  "ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/Tabulated/src/ctor.hpp"
+  #include  "ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/Tabulated/src/ctor.hpp"
 
   int interpolationFlag() const{ return interpolationFlag_; }
   auto cosineBins() const{ return cosineBins_; }

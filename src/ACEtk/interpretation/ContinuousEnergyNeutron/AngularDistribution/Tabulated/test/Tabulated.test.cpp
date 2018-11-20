@@ -16,7 +16,7 @@ SCENARIO( "Constructing a tabulated table for angular distribution" ){
     WHEN( "input parameters are consistent" ){
       for( auto JJ : validJJ ){
 
-        ContinuousEnergyNeutron::angularDistribution::Tabulated tabu(
+        ContinuousEnergyNeutron::AngularDistribution::Tabulated tabu(
             JJ, cos, PDF, CDF );
 
         THEN( "the parameteters can be verified JJ=" + std::to_string(JJ) ){
@@ -36,7 +36,7 @@ SCENARIO( "Constructing a tabulated table for angular distribution" ){
         for( auto JJ : invalidJJ ){
           THEN( "an exception is thrown JJ=" + std::to_string(JJ) ){
             REQUIRE_THROWS_AS( 
-              ContinuousEnergyNeutron::angularDistribution::Tabulated(
+              ContinuousEnergyNeutron::AngularDistribution::Tabulated(
                   JJ, cos, PDF, CDF ),
               std::exception
             );
@@ -48,7 +48,7 @@ SCENARIO( "Constructing a tabulated table for angular distribution" ){
         std::vector< double > invalidCos{ -0.6, -0.2, 0.2, 0.4 };
         THEN( "an exception is thrown" ){
           REQUIRE_THROWS_AS( 
-            ContinuousEnergyNeutron::angularDistribution::Tabulated(
+            ContinuousEnergyNeutron::AngularDistribution::Tabulated(
                 0, invalidCos, PDF, CDF ),
             std::range_error
           );

@@ -6,7 +6,7 @@ protected:
 
 
 public:
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/angularDistribution/PhotonProduction/src/ctor.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/PhotonProduction/src/ctor.hpp"
 
  auto energyGrid() const{ return energyGrid_; }
  auto cosineBins() const{ 
