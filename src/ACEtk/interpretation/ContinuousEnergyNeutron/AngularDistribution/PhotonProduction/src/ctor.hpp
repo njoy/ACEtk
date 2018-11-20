@@ -21,7 +21,7 @@ PhotonProduction( Slice energies, Slice cosineBins ):
 }
 
 template< typename Range,
-utility::Require< true, utility::is_range, Range > = true >
+          utility::Require< true, utility::is_range, Range > = true >
 PhotonProduction( Range& energies, Range& cosineBins ):
     PhotonProduction( Table::slice( energies ),
             Table::slice( cosineBins ))

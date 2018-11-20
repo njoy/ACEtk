@@ -19,6 +19,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange.hpp"
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/neutronReactionIDs.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/photonProductionReactionIDs.hpp"
