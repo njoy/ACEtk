@@ -336,6 +336,8 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/src/QValues.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIDs.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/src/reactionIndex.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/ProbabilityTable.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/ProbabilityTable/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/CoupledDensityFunctions/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/AtomicLevels.hpp"
@@ -421,6 +423,7 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/ProbabilityTable/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/test )
         add_subdirectory( src/ACEtk/interpretation/CoupledDensityFunctions/test )

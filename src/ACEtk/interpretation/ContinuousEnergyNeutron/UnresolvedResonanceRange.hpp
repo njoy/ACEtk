@@ -1,10 +1,18 @@
 class UnresolvedResonanceRange {
 
+public:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/ProbabilityTable.hpp"
+
+private:
   auto pTableColumn( int col ) const {
-    return probabilityTables_
-      | ranges::view::drop_exactly( col )
-      | ranges::view::stride ( 6 );
+    return ranges::for_each( 
+        probabilityTables_, [&]( auto& pT ){ return pT.parameter( col ); } );
+
+    // return probabilityTables_
+    //   | ranges::view::drop_exactly( col )
+    //   | ranges::view::stride ( 6 );
   }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/src/makeProbabilityTables.hpp"
 
 protected:
   int interpolationParameter_;
@@ -12,7 +20,7 @@ protected:
   int otherAbsorption_;
   int factors_;
   Slice incidentEnergies_;
-  Slice probabilityTables_;
+  std::vector< ProbabilityTable > probabilityTables_;
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/src/ctor.hpp"
@@ -36,10 +44,10 @@ public:
       | ranges::view::stride( incidentEnergies_.size() );
   }
 
-  auto CDF() const       { return pTableColumn( 0 ); }
-  auto totalXS() const   { return pTableColumn( 1 ); }
-  auto elasticXS() const { return pTableColumn( 2 ); }
-  auto fissionXS() const { return pTableColumn( 3 ); }
-  auto captureXS() const { return pTableColumn( 4 ); }
-  auto heating() const   { return pTableColumn( 5 ); }
+  auto CDF() const       { return pTableColumn( 1 ); }
+  auto totalXS() const   { return pTableColumn( 2 ); }
+  auto elasticXS() const { return pTableColumn( 3 ); }
+  auto fissionXS() const { return pTableColumn( 4 ); }
+  auto captureXS() const { return pTableColumn( 5 ); }
+  auto heating() const   { return pTableColumn( 6 ); }
 };

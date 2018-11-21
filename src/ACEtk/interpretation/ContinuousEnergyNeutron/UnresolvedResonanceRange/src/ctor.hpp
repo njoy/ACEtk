@@ -5,7 +5,7 @@ UnresolvedResonanceRange( int INTT, int ILF, int IOA, int IFF,
   otherAbsorption_( IOA ),
   factors_( IFF ),
   incidentEnergies_( energies ),
-  probabilityTables_( ptables )
+  probabilityTables_( makeProbabilityTables( ptables ) )
 {
   if( ( interpolationParameter_ != 2 ) and ( interpolationParameter_ != 5 ) ) {
     njoy::Log::error( 
