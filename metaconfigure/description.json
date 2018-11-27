@@ -402,6 +402,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Reaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction.hpp",
@@ -448,6 +449,9 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Tabulated/src/regions.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/fissionMultiplicity/Polynomial/src/ctor.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/PhotonProduction/src/ctor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/makeReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/src/PhotonProductionHeaderIndices.hpp",
@@ -586,6 +590,12 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.AngularDistribution.Tabulated": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/Tabulated/test/Tabulated.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.CrossSection": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/test/CrossSection.test.cpp"

@@ -13,6 +13,15 @@
 #include "Log.hpp"
 #include "ENDFtk.hpp"
 
+#ifdef USING_CPP17
+  #include <optional>
+#else 
+  #include <experimental/optional>
+  namespace std {
+    using namespace std::experimental;
+  }
+#endif
+
 namespace njoy {
 namespace ACEtk {
 

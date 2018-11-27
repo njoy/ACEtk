@@ -30,7 +30,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/makeCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/src/makeReaction.hpp"
 
-
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder.hpp"
 };
 
 typedef ContinuousEnergyNeutron nc;
