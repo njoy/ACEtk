@@ -31,14 +31,14 @@ UnresolvedResonanceRange( int INTT, int ILF, int IOA, int IFF,
     njoy::Log::info( "Incident energy values must be positive" );
     throw;
   }
-
-  auto N = incidentEnergies_.size();
 }
 
 template< typename Range,
-          utility::Require< true, utility::is_range, Range > = true >
+          utility::Require< true, utility::is_range, Range > = true,
+          utility::Require< true, std::is_lvalue_reference, Range > = true
+          >
 UnresolvedResonanceRange( int INTT, int ILF, int IOA, int IFF,
-                          Range& energies, Range& ptables ):
+                          Range&& energies, Range&& ptables ):
   UnresolvedResonanceRange( INTT, ILF, IOA, IFF,
                             Table::slice( energies ),
                             Table::slice( ptables ) )

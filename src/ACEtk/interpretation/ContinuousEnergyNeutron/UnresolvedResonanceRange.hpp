@@ -5,12 +5,9 @@ public:
 
 private:
   auto pTableColumn( int col ) const {
-    return ranges::for_each( 
-        probabilityTables_, [&]( auto& pT ){ return pT.parameter( col ); } );
-
-    // return probabilityTables_
-    //   | ranges::view::drop_exactly( col )
-    //   | ranges::view::stride ( 6 );
+    return probabilityTables_
+      | ranges::view::transform(
+          [ = ]( auto& pT ){ return pT.parameter( col ); } );
   }
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/UnresolvedResonanceRange/src/makeProbabilityTables.hpp"
 
@@ -39,10 +36,7 @@ public:
 
   auto incidentEnergies() const{ return incidentEnergies_; }
 
-  auto probabilityTables() const{ 
-    return probabilityTables_
-      | ranges::view::stride( incidentEnergies_.size() );
-  }
+  auto& probabilityTables() const{ return probabilityTables_; }
 
   auto CDF() const       { return pTableColumn( 1 ); }
   auto totalXS() const   { return pTableColumn( 2 ); }

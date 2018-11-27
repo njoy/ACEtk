@@ -1,10 +1,13 @@
-auto
+std::vector< ProbabilityTable > 
 makeProbabilityTables( Slice pTables ){
 
   return pTables
     | ranges::view::chunk( 6 )
     | ranges::view::transform(
-        [ ]( auto values ){ 
-          return ProbabilityTable{ Table::slice( values ) }; } )
-    | ranges::to_vector;
+        [ ]( const auto& values ){ 
+          return ProbabilityTable{ 
+            Table::Slice{ values.begin(), values.end() } 
+          }; 
+        } 
+    );
 }

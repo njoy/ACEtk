@@ -1,6 +1,6 @@
 class ProbabilityTable {
 
-protected:
+public:
   Slice table_;
 
 public:
