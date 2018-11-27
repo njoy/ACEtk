@@ -1,9 +1,9 @@
 
 add_executable( ACEtk.Table.Data.Parse.test
-                IZAW.test.cpp
                 JXS.test.cpp
-                NXS.test.cpp
                 Parse.test.cpp
+                NXS.test.cpp
+                IZAW.test.cpp
                 XSS.test.cpp )
 target_compile_options( ACEtk.Table.Data.Parse.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:

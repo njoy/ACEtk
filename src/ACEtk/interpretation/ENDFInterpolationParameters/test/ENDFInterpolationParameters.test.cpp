@@ -15,20 +15,23 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
     };
     WHEN( "constructing ENDFInterpolationParameters" ){
       THEN( "the parameters can be checked" ){
-        for( size_t i=0; i<validINT.size(); i++ ){
-          auto INT = validINT[i];
+        for( auto INT : validINT ){
           ENDFInterpolationParameters EIP(NBT, INT);
-          REQUIRE( ranges::equal( NBT, EIP.NBT() ) );
-          REQUIRE( ranges::equal( INT, EIP.schemes() ) );
-          REQUIRE( 6 == EIP.size() );
+          CHECK( ranges::equal( NBT, EIP.NBT() ) );
+          CHECK( ranges::equal( INT, EIP.schemes() ) );
+          CHECK( 6 == EIP.size() );
 
-          REQUIRE( 0 == EIP.range()[ 0 ].indices().begin() );
+          CHECK( 0 == EIP.range()[ 0 ].indices().begin() );
+          
+          ranges::view::zip_with( [](auto nbt, auto eip){ 
+                   CHECK( nbt == eip.indices().begin() + 1 ); }, 
+                    NBT, EIP.range() | ranges::view::drop_exactly( 1 ) );
+
           for( size_t j=0; j< INT.size(); j++ ){
-            REQUIRE( NBT[ j ] == EIP.range()[ j+1 ].indices().begin() +1 );
-            REQUIRE( NBT[ j ] == EIP.range()[ j ].indices().end() );
-            REQUIRE( INT[ j ] == EIP.range()[ j ].scheme() );
-            REQUIRE( NBT[ j ] == EIP.range().at( j ).indices().end() );
-            REQUIRE( INT[ j ] == EIP.range().at( j ).scheme() );
+            CHECK( NBT[ j ] == EIP.range()[ j ].indices().end() );
+            CHECK( INT[ j ] == EIP.range()[ j ].scheme() );
+            CHECK( NBT[ j ] == EIP.range().at( j ).indices().end() );
+            CHECK( INT[ j ] == EIP.range().at( j ).scheme() );
           }
         }
       }
@@ -40,7 +43,7 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
       ENDFInterpolationParameters EIP( NBT, INT );
 
       THEN( "the size is zero" ){
-        REQUIRE( 0 == EIP.size() );
+        CHECK( 0 == EIP.size() );
       }
     }
   } // GIVEN
@@ -62,7 +65,7 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
       THEN( "an exception is thrown" ){
         for( size_t i=0; i < invalidINT.size(); i++ ){
           auto INT = invalidINT[i];
-          REQUIRE_THROWS( ENDFInterpolationParameters(NBT, INT) );
+          CHECK_THROWS( ENDFInterpolationParameters(NBT, INT) );
         }
       }
     }
@@ -72,13 +75,13 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
     WHEN( "NBT is negative" ){
       std::vector< double > NBT{ -1, 2, 3, 4, 5, 6 };
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( ENDFInterpolationParameters( NBT, INT ) );
+        CHECK_THROWS( ENDFInterpolationParameters( NBT, INT ) );
       }
     }
     WHEN( "NBT is not sorted" ){
       std::vector< double > NBT{ 1, 2, 3, 4, 5, 3 };
       THEN( "an exception is thrown" ){
-        REQUIRE_THROWS( ENDFInterpolationParameters( NBT, INT ) );
+        CHECK_THROWS( ENDFInterpolationParameters( NBT, INT ) );
       }
     }
   }
@@ -91,7 +94,7 @@ SCENARIO( "Constructing ENDFInterpolationParameters" ){
 
     THEN( "an exception is thrown" ){
       int index = 4;
-      REQUIRE_THROWS( EIP.range().at( index ) );
+      CHECK_THROWS( EIP.range().at( index ) );
     }
   }
 } // SCENARIO
