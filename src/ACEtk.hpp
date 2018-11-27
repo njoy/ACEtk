@@ -12,6 +12,7 @@
 #include "header-utilities.hpp"
 #include "Log.hpp"
 #include "ENDFtk.hpp"
+#include "hopscotch_map.h"
 
 #ifdef USING_CPP17
   #include <optional>

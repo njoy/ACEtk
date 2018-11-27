@@ -1,4 +1,5 @@
 struct Reaction{
+ int MT;
  std::vector< double > crossSection;
  // angularDistribution
 

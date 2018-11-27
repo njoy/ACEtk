@@ -8,14 +8,14 @@ using namespace njoy::ACEtk::interpretation;
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
   GIVEN( "parent builder" ){
     ContinuousEnergyNeutron::Builder parentBuilder{};
-    using ReactionBuilder = decltype( parentBuilder.reaction() );
+    using ReactionBuilder = decltype( parentBuilder.reaction( 1 ) );
 
     struct TestBuilder : ReactionBuilder {
       using ReactionBuilder::construct;
       using ReactionBuilder::ReactionBuilder;
     };
 
-    TestBuilder tb{ parentBuilder };
+    TestBuilder tb{ 14, parentBuilder };
 
     WHEN( "creating a Reaction Builder" ){
       std::vector< double > XS{ 1.0, 2.0, 3.0 };
@@ -27,6 +27,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       THEN( "the constructed Reaction can be verified" ){
         CHECK( XS == reaction.crossSection );
+        CHECK( 14 == reaction.MT );
       }
     } // WHEN
     WHEN( "all the pieces of a Reaction are not present" ){

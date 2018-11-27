@@ -2,16 +2,19 @@ class Builder{
 
 private:
   std::reference_wrapper< ContinuousEnergyNeutron::Builder > parent;
+  int MT_;
   std::optional< std::vector< double > > crossSection_;
 
 protected:
   Reaction construct(){
-    return Reaction{ std::move( this->crossSection_.value() ) };
+    return Reaction{ 
+      MT_, 
+      std::move( this->crossSection_.value() ) };
   }
 
 public:
-  Builder( ContinuousEnergyNeutron::Builder& parent ):
-    parent( parent )
+  Builder( int MT, ContinuousEnergyNeutron::Builder& parent ):
+    parent( parent ), MT_( MT )
   { }
 
   ContinuousEnergyNeutron::Builder& add() { 
