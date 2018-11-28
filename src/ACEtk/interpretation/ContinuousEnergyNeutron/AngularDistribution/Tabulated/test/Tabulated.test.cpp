@@ -38,7 +38,7 @@ SCENARIO( "Constructing a tabulated table for angular distribution" ){
             REQUIRE_THROWS_AS( 
               ContinuousEnergyNeutron::AngularDistribution::Tabulated(
                   JJ, cos, PDF, CDF ),
-              std::exception
+              std::exception&
             );
           }
         }
@@ -50,7 +50,7 @@ SCENARIO( "Constructing a tabulated table for angular distribution" ){
           REQUIRE_THROWS_AS( 
             ContinuousEnergyNeutron::AngularDistribution::Tabulated(
                 0, invalidCos, PDF, CDF ),
-            std::range_error
+            std::range_error&
           );
         }
       }

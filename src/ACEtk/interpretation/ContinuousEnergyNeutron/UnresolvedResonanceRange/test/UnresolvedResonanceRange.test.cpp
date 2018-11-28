@@ -119,7 +119,7 @@ SCENARIO( "Constructing UnresolvedResonanceRange" ){
         CHECK_THROWS_AS(
           ContinuousEnergyNeutron::UnresolvedResonanceRange( 
               INTT, ILF, IOA, IFF, energies, ptables ),
-          details::verify::exceptions::NotPositive
+          details::verify::exceptions::NotPositive&
         );
       }
     }

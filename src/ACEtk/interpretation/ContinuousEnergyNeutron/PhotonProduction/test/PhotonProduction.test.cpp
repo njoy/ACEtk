@@ -124,7 +124,7 @@ SCENARIO( "Constructing PhotonProduction" ){
         xsValues[ 2 ] *= -1;
         CHECK_THROWS_AS(
             ContinuousEnergyNeutron::PhotonProduction( xsValues, grid),
-            details::verify::exceptions::NotPositive
+            details::verify::exceptions::NotPositive&
             );
       }
     }
