@@ -7,6 +7,7 @@ Builder& crossSection( std::vector< double >&& xs, Slice energyGrid ){
     return *this;
 
   } catch( std::range_error& e){
+    Log::info( "energy grid size must equal the size of the cross section" );
     throw;
   }
 }
