@@ -8,13 +8,13 @@ using namespace njoy::ACEtk::interpretation;
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder::nu::Builder" ){
   GIVEN( "parent builder" ){
     ContinuousEnergyNeutron::Builder parentBuilder{};
-    using FissionNeutronsBuilder = decltype( parentBuilder.reaction( 1 ) );
+    using FissionNeutronsBuilder = decltype( parentBuilder.fissionNeutrons() );
 
-    struct TestBuilder : ReactionBuilder {
-      using ReactionBuilder::construct;
-      using ReactionBuilder::ReactionBuilder;
+    struct TestBuilder : FissionNeutronsBuilder {
+      using FissionNeutronsBuilder::construct;
+      using FissionNeutronsBuilder::FissionNeutronsBuilder;
     };
 
-    TestBuilder tb{ 14, parentBuilder };
+    TestBuilder tb{ parentBuilder };
   } // GIVEN
 } // SCENARIO
