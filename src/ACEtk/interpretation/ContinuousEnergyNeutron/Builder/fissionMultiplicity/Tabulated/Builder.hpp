@@ -3,6 +3,8 @@ class Builder {
      ContinuousEnergyNeutron::Builder::fissionMultiplicity::Builder;
 
   std::reference_wrapper< ParentBuilder > parent;
+  std::optional< std::vector< double > > boundaries_;
+  std::optional< std::vector< double > > schemes_;
   std::optional< std::vector< double > > energies_;
   std::optional< std::vector< double > > multiplicities_;
 
@@ -17,6 +19,8 @@ public:
   // ContinuousEnergyNeutron::Builder& add() { 
   //   return parent.get().addFissionNeutrons( this->construct() );
   // }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder/src/boundaries.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder/src/schemes.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder/src/multiplicities.hpp"
 };

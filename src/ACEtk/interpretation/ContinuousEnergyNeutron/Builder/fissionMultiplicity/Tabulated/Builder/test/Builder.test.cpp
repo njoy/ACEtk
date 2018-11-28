@@ -18,12 +18,16 @@ SCENARIO( "Testing fissionMultiplicity::Tabulated::Builder" ){
       using TabulatedBuilder::TabulatedBuilder;
     };
 
+    std::vector< double > boundaries{ 0.0, 3.0 };
+    std::vector< double > schemes{ 2.0, 1.0 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
     std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
     TestBuilder tb{ parentBuilder };
 
     WHEN( "creating a Tabulated fission multiplicity" ){
-      tb.energies( njoy::utility::copy( energies ) )
+      tb.boundaries( njoy::utility::copy( boundaries ) )
+        .schemes( njoy::utility::copy( schemes ) )
+        .energies( njoy::utility::copy( energies ) )
         .multiplicities( njoy::utility::copy( multiplicities ) );
       auto tabu = tb.construct();
 
@@ -32,7 +36,7 @@ SCENARIO( "Testing fissionMultiplicity::Tabulated::Builder" ){
         CHECK( multiplicities == tabu.multiplicities );
       }
     }
-    WHEN( "creating a Tabulated fission multiplicity "
+    WHEN( "constructing a Tabulated fission multiplicity "
           "without all it's components" ){
       CHECK_THROWS( tb.construct() );
 
