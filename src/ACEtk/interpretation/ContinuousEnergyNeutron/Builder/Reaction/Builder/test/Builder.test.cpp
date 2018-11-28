@@ -17,6 +17,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
     TestBuilder tb{ 14, parentBuilder };
 
+    double Q{ 3.14 };
     std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
     njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
 
@@ -27,16 +28,18 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         CHECK_THROWS( tb.crossSection( njoy::utility::copy( XS ) ) );
       }
 
+      tb.Q( Q );
       tb.crossSection( njoy::utility::copy( XS ), grid );
       auto reaction = tb.construct();
 
       THEN( "the constructed Reaction can be verified" ){
+        CHECK( Q == reaction.Q );
         CHECK( XS == reaction.crossSection );
         CHECK( 14 == reaction.MT );
         CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
       }
     } // WHEN
-    WHEN( "creating a Reaction Builder witha parent energyGrid" ){
+    WHEN( "creating a Reaction Builder with a parent energyGrid" ){
       std::vector< double > XS{ 1.0, 2.0, 3.0 };
 
       parentBuilder.energyGrid( njoy::utility::copy( energyGrid ) );
@@ -44,10 +47,12 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         CHECK_NOTHROW( tb.crossSection( njoy::utility::copy( XS ) ) );
       }
 
+      tb.Q( Q );
       tb.crossSection( njoy::utility::copy( XS ) );
       auto reaction = tb.construct();
 
       THEN( "the constructed Reaction can be verified" ){
+        CHECK( Q == reaction.Q );
         CHECK( XS == reaction.crossSection );
         CHECK( 14 == reaction.MT );
         CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
