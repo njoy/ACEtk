@@ -17,7 +17,7 @@ SCENARIO( "Testing positivity verification" ){
 
       REQUIRE_THROWS_AS( 
         Positive< std::vector< double > >( { 1,2,-13,2,1 } ), 
-        exceptions::NotPositive 
+        exceptions::NotPositive& 
       );
     }
     WHEN( "constructing from a 'range'" ){
@@ -27,7 +27,7 @@ SCENARIO( "Testing positivity verification" ){
       REQUIRE_NOTHROW( Positive< std::vector< double > > ( unsortedVector ) );
       REQUIRE_THROWS_AS(
         Positive< std::vector< int > >( negative ),
-        exceptions::NotPositive
+        exceptions::NotPositive&
       );
 
       WHEN( "constructing from a Sorted range" ){
@@ -37,7 +37,7 @@ SCENARIO( "Testing positivity verification" ){
           Positive< Sorted< std::vector< double > > >( posi ) );
         REQUIRE_THROWS_AS(
           Positive< std::vector< int > > ( isSorted( negative ) ),
-          exceptions::NotPositive
+          exceptions::NotPositive&
         );
       }
       WHEN( "assigning" ){
@@ -50,7 +50,7 @@ SCENARIO( "Testing positivity verification" ){
 
         REQUIRE_THROWS_AS(
             pdVector = Positive< std::vector< double > >( { 1, -2, 13, 2, 1 } ), 
-            exceptions::NotPositive
+            exceptions::NotPositive&
         );
       }
     } // WHEN

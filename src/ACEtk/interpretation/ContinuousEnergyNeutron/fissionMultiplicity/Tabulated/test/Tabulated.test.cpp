@@ -112,7 +112,7 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         REQUIRE_THROWS_AS( 
           ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
             regions, iSchemes, energies, multiplicities ),
-          std::range_error
+          std::range_error&
         );
       }
     }
@@ -123,7 +123,7 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         REQUIRE_THROWS_AS( 
           ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
             regions, iSchemes, energies, multiplicities ),
-          details::verify::exceptions::Unsorted
+          details::verify::exceptions::Unsorted&
         );
       }
     }
@@ -134,7 +134,7 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         REQUIRE_THROWS_AS( 
           ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
             regions, iSchemes, energies, multiplicities ),
-          details::verify::exceptions::NotPositive
+          details::verify::exceptions::NotPositive&
         );
       }
     }
@@ -145,7 +145,7 @@ SCENARIO( "Constructing a tabulated representation of fission multiplicity" ){
         REQUIRE_THROWS_AS( 
           ContinuousEnergyNeutron::fissionMultiplicity::Tabulated(
             regions, iSchemes, energies, multiplicities ),
-          details::verify::exceptions::NotPositive
+          details::verify::exceptions::NotPositive&
         );
       }
     }

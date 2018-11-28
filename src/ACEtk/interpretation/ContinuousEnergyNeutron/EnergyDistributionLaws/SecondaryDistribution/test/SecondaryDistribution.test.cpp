@@ -37,7 +37,7 @@ SCENARIO( "SecondaryDistribution" ){
         REQUIRE_THROWS_AS( 
           ContinuousEnergyNeutron::SecondaryDistribution(
             INTT, energies, PDF, CDF ),
-          std::range_error
+          std::range_error&
         );
       }
     }

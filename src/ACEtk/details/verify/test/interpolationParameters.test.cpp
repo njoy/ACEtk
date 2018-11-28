@@ -28,12 +28,12 @@ SCENARIO( "Verifying ENDFInterpolationParameters" ){
         for( int INT : invalidINT ){
           REQUIRE_THROWS_AS( 
             verify::interpolationParameter( INT ),
-            verify::exceptions::InvalidENDFInterpolationParameter
+            verify::exceptions::InvalidENDFInterpolationParameter&
           );
         }
         REQUIRE_THROWS_AS( 
           verify::interpolationParameters( invalidINT ),
-          verify::exceptions::InvalidENDFInterpolationParameter
+          verify::exceptions::InvalidENDFInterpolationParameter&
         );
       }
   } // GIVEN invalid
