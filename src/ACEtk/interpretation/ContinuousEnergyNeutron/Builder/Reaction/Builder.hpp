@@ -4,11 +4,13 @@ private:
   std::reference_wrapper< ContinuousEnergyNeutron::Builder > parent;
   int MT_;
   std::optional< std::vector< double > > crossSection_;
+  std::optional< Table::Slice > energyGrid_;
 
 protected:
   Reaction construct(){
     return Reaction{ 
       MT_, 
+      energyGrid_.value(),
       std::move( this->crossSection_.value() ) };
   }
 

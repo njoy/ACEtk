@@ -55,7 +55,12 @@ public:
     return { S.begin(), S.end() }; 
   }
 
-  static Slice slice( Slice& S ){ 
+  template< typename Range,
+            typename iterator = typename std::decay_t< Range >::iterator,
+            utility::Require< true, std::is_constructible, Slice, 
+                              iterator, iterator > = true
+          >
+  static Slice slice( Range&& S ){ 
     return { S.begin(), S.end() }; 
   }
 
