@@ -1,4 +1,4 @@
-Tabulated construct(){ 
+Tabulated1D construct(){ 
   try{
     details::verify::equalSize( this->energies_.value(), 
                                 this->multiplicities_.value() );

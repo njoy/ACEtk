@@ -1,5 +1,6 @@
 class Builder{
 protected:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
 

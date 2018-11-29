@@ -7,10 +7,13 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
   GIVEN( "parent builder" ){
-    ContinuousEnergyNeutron::Builder parentBuilder{};
-    using ReactionBuilder = decltype( parentBuilder.reaction( 1 ) );
+    struct ParentBuilder: public ContinuousEnergyNeutron::Builder{
+      using ContinuousEnergyNeutron::Builder::reactions_;
+    };
+    ParentBuilder parentBuilder{};
+    using ReactionBuilder = decltype( parentBuilder.reaction( 14 ) );
 
-    struct TestBuilder : ReactionBuilder {
+    struct TestBuilder : public ReactionBuilder {
       using ReactionBuilder::construct;
       using ReactionBuilder::ReactionBuilder;
     };
@@ -30,13 +33,17 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       tb.Q( Q );
       tb.crossSection( njoy::utility::copy( XS ), grid );
-      auto reaction = tb.construct();
+      tb.add();
 
       THEN( "the constructed Reaction can be verified" ){
+        auto reaction = parentBuilder.reactions_[ 14 ];
         CHECK( Q == reaction.Q );
         CHECK( XS == reaction.crossSection );
         CHECK( 14 == reaction.MT );
         CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
+
+        CHECK( 1 == 
+               static_cast< ParentBuilder& >(parentBuilder).reactions_.size() );
       }
     } // WHEN
     WHEN( "creating a Reaction Builder with a parent energyGrid" ){

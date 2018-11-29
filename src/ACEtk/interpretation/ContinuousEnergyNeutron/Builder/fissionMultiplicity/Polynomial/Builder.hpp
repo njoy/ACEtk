@@ -1,8 +1,7 @@
 class Builder {
 private:
 
- using ParentBuilder = 
-     ContinuousEnergyNeutron::Builder::fissionMultiplicity::Builder;
+  using ParentBuilder = ContinuousEnergyNeutron::Builder;
 
   std::reference_wrapper< ParentBuilder > parent;
   std::optional< std::vector< double > > coefficients_;
@@ -16,8 +15,8 @@ public:
     parent( parent )
   { }
 
-  // ParentBuilder& add() { 
-  //   return parent.get().addFissionNeutrons( this->construct() );
-  // }
+  ParentBuilder& add() { 
+    return parent.get().addFissionMultiplicity( this->construct() );
+  }
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Polynomial/Builder/src/coefficients.hpp"
 };

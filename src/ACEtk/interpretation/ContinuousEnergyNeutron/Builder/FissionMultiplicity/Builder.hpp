@@ -1,11 +1,12 @@
 class Builder {
 private:
 
-  std::reference_wrapper< ContinuousEnergyNeutron::Builder > parent;
+  using ParentBuilder = ContinuousEnergyNeutron::Builder;
+  std::reference_wrapper< ParentBuilder > parent;
 
 public:
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Builder/src/ctor.hpp"
+  Builder( ParentBuilder& parent ): parent( parent ) { }
 
-  Polynomial::Builder polynomial(){ return Polynomial::Builder{ *this }; }
-  Tabulated::Builder tabulated(){ return Tabulated::Builder{ *this }; }
+  Polynomial::Builder polynomial(){ return Polynomial::Builder{ parent }; }
+  Tabulated::Builder tabulated(){ return Tabulated::Builder{ parent }; }
 };

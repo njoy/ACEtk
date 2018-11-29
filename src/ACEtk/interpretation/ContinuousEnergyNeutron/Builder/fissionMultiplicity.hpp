@@ -8,4 +8,5 @@ struct fissionMultiplicity {
 };
 
 using FissionMultiplicity = std::variant< fissionMultiplicity::Polynomial, 
-                                          fissionMultiplicity::Tabulated >;
+                                          Tabulated1D 
+                                          >;

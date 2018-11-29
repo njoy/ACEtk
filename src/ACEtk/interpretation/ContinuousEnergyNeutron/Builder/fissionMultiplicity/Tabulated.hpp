@@ -1,7 +1,8 @@
-struct Tabulated{
+struct Tabulated: protected ContinuousEnergyNeutron::Builder::Tabulated1D{
 
-  std::vector< double > energies;
-  std::vector< double > multiplicities;
+  using ParentBuilder = ContinuousEnergyNeutron::Builder;
+  using BaseBuilder = 
+      ContinuousEnergyNeutron::Builder::Tabulated1D::Builder< ParentBuilder >;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder.hpp"
 };
