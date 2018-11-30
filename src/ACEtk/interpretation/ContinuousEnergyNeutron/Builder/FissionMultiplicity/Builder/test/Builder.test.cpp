@@ -24,11 +24,11 @@ SCENARIO(
 
     THEN( "we can ensure the correct builder is returned" ){
       bool passed = std::is_same< Builder::
-          fissionMultiplicity::Polynomial::Builder, 
+          FissionMultiplicity::Polynomial::Builder, 
         decltype( tb.polynomial() ) >::value;
       CHECK( passed );
-      bool passed = std::is_same< Builder::
-          fissionMultiplicity::Tabulated::Builder, 
+      passed = std::is_same< Builder::
+          FissionMultiplicity::Tabulated::Builder, 
         decltype( tb.tabulated() ) >::value;
       CHECK( passed );
     }

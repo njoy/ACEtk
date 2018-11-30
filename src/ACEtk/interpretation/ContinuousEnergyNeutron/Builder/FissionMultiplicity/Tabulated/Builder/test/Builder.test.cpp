@@ -5,7 +5,7 @@
 
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "Testing fissionMultiplicity::Tabulated::Builder" ){
+SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
   GIVEN( "parent builder" ){
     ContinuousEnergyNeutron::Builder grandparentBuilder{};
     using ParentBuilder = decltype( grandparentBuilder.fissionMultiplicity() );
