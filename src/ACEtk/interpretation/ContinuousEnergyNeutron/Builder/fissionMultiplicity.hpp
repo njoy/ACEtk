@@ -1,12 +1,9 @@
-struct fissionMultiplicity {
+struct FissionMultiplicity {
   class Builder;
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Polynomial.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated.hpp"
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder.hpp"
 };
-
-using FissionMultiplicity = std::variant< fissionMultiplicity::Polynomial, 
-                                          Tabulated1D 
-                                          >;
+using nubar = std::variant< fissionMultiplicity::Polynomial, Tabulated1D >;

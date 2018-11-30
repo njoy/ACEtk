@@ -5,7 +5,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
 
   std::optional< std::vector< double > > energyGrid_;
-  // std::optional< FissionMultiplicity > fissionMultiplicity_;
+  std::optional< nubar > fissionMultiplicity_;
   tsl::hopscotch_map< int, Reaction > reactions_;
 
   friend Reaction::Builder;
@@ -15,8 +15,8 @@ protected:
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
   Reaction::Builder reaction( int MT ){ return Reaction::Builder{ MT, *this }; }
-  fissionMultiplicity::Builder fissionMultiplicity() { 
-    return fissionMultiplicity::Builder{ *this }; 
+  FissionMultiplicity::Builder fissionMultiplicity() { 
+    return FissionMultiplicity::Builder{ *this }; 
   }
 
 };

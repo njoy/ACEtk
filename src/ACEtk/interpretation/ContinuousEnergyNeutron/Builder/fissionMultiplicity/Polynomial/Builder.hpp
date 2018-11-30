@@ -18,5 +18,5 @@ public:
   ParentBuilder& add() { 
     return parent.get().addFissionMultiplicity( this->construct() );
   }
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Polynomial/Builder/src/coefficients.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/src/coefficients.hpp"
 };

@@ -1,3 +1,3 @@
-Builder& addFissionMultiplicity( FissionMultiplicity&& ){
+Builder& addFissionMultiplicity( nubar&& ){
   return *this;
 }

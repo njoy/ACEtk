@@ -80,18 +80,6 @@ set( ACEtk_AppleClang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_AppleClang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_AppleClang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_AppleClang_Darwin_static_flags "-static" )
-set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
-set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_GNU_Windows_strict_flags "-Werror" )
-set( ACEtk_GNU_Windows_coverage_flags "--coverage" )
-set( ACEtk_GNU_Windows_subproject_flags  )
-set( ACEtk_GNU_Windows_base_project_flags  )
-set( ACEtk_GNU_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
-set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
-set( ACEtk_GNU_Windows_static_flags "-static" )
 set( ACEtk_GNU_Darwin_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_GNU_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
 set( ACEtk_GNU_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -116,18 +104,18 @@ set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Linux_static_flags "-static" )
-set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_Clang_Windows_strict_flags "-Werror" )
-set( ACEtk_Clang_Windows_coverage_flags "--coverage" )
-set( ACEtk_Clang_Windows_subproject_flags  )
-set( ACEtk_Clang_Windows_base_project_flags  )
-set( ACEtk_Clang_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Windows_link_time_optimization_flags "-flto" )
-set( ACEtk_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Windows_nonportable_optimization_flags "-march=native" )
-set( ACEtk_Clang_Windows_static_flags "-static" )
+set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
+set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_GNU_Windows_strict_flags "-Werror" )
+set( ACEtk_GNU_Windows_coverage_flags "--coverage" )
+set( ACEtk_GNU_Windows_subproject_flags  )
+set( ACEtk_GNU_Windows_base_project_flags  )
+set( ACEtk_GNU_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
+set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
+set( ACEtk_GNU_Windows_static_flags "-static" )
 set( ACEtk_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -152,6 +140,18 @@ set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
 set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
 set( ACEtk_Clang_Linux_static_flags "-static" )
+set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_Clang_Windows_strict_flags "-Werror" )
+set( ACEtk_Clang_Windows_coverage_flags "--coverage" )
+set( ACEtk_Clang_Windows_subproject_flags  )
+set( ACEtk_Clang_Windows_base_project_flags  )
+set( ACEtk_Clang_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Windows_link_time_optimization_flags "-flto" )
+set( ACEtk_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Windows_nonportable_optimization_flags "-march=native" )
+set( ACEtk_Clang_Windows_static_flags "-static" )
 get_directory_property( is_subproject PARENT_DIRECTORY )
 
 if( NOT TARGET catch-adapter )
@@ -295,17 +295,16 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/Equiprobable/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/PhotonProduction/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/Tabulated/src/ctor.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Builder.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Polynomial.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Builder/src/ctor.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Polynomial/Builder.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Polynomial/Builder/src/coefficients.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder/src/construct.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/src/coefficients.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder/src/construct.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp"
@@ -432,11 +431,10 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/PhotonProduction/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/AngularDistribution/Tabulated/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test )
-        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D/Builder/test )
-        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Builder/test )
-        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Polynomial/Builder/test )
-        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/CrossSection/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/BaseLaw/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/EnergyDistributionLaws/ContinuousTabular/test )
