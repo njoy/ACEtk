@@ -1,28 +1,32 @@
-class Builder: protected BaseBuilder  {
+class Builder: 
+  public ContinuousEnergyNeutron::Builder::Tabulated1D::Builder< Builder >{
 
-  std::optional< std::vector< double > > boundaries_;
-  std::optional< std::vector< double > > schemes_;
-  std::optional< std::vector< double > > energies_;
-  std::optional< std::vector< double > > multiplicities_;
+  using BaseBuilder = ContinuousEnergyNeutron::Builder::
+      Tabulated1D::Builder< Builder >;
+
+  std::reference_wrapper< ParentBuilder > parent;
 
 protected:
-  //#include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/fissionMultiplicity/Tabulated/Builder/src/construct.hpp"
+
+  using BaseBuilder::x;
+  using BaseBuilder::y;
 
 public:
-  using BaseBuilder::BaseBuilder;
+  Builder( ContinuousEnergyNeutron::Builder& parent ):
+    parent( parent )
+  { }
 
-  // ContinuousEnergyNeutron::Builder& add() { 
-  //   return parent.get().addFissionNeutrons( this->construct() );
-  // }
-
-  using BaseBuilder::boundaries;
-  using BaseBuilder::schemes;
-#define RENAME(basename, derivedname)\
-  Builder& derivedname( std::vector< double>&& derivedname ){\
-    return static_cast< Builder& >(  \
-      BaseBuilder::basename( std::move( derivedname ) ) );\
+  ParentBuilder& add(){
+    parent.get().addFissionMultiplicity( this->construct() );
+    return parent;
   }
 
+#define RENAME(basename, derivedname)\
+  Builder& derivedname( std::vector< double>&& derivedname ){\
+    return BaseBuilder::basename( std::move( derivedname ) );\
+  }
+
+  RENAME( x, energies );
   RENAME( y, multiplicities );
   RENAME( y, nubar );
 #undef RENAME

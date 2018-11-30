@@ -1,4 +1,4 @@
-Builder& y( std::vector< double>&& y ){
+Derived& y( std::vector< double>&& y ){
   this->y_ = std::move( y );
-  return *this;
+  return static_cast< Derived& >( *this );
 }

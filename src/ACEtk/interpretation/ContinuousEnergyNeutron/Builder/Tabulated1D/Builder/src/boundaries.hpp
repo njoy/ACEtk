@@ -1,4 +1,4 @@
-Builder& boundaries( std::vector< double>&& boundaries ){
+Derived& boundaries( std::vector< double>&& boundaries ){
   this->boundaries_ = std::move( boundaries );
-  return *this;
+  return static_cast< Derived& >( *this );
 }
