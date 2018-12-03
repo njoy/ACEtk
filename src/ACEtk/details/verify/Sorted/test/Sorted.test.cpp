@@ -17,10 +17,12 @@ SCENARIO( "Testing sorted verification" ){
 
       REQUIRE_THROWS_AS( 
         Sorted< std::vector< double > >( { 1,2,3,2,1 } ), 
-        exceptions::Unsorted 
+        exceptions::Unsorted &
       );
     }
     WHEN( "constructing from a 'range'" ){
+      // REQUIRE_NOTHROW( Sorted< std::vector< double > >( 
+      //         njoy::ACEtk::Table::slice( strictlyPositive ) ) );
       REQUIRE_NOTHROW( 
           Sorted< std::vector< double > >( strictlyPositive ) );
       REQUIRE_NOTHROW( 
@@ -29,7 +31,7 @@ SCENARIO( "Testing sorted verification" ){
           Sorted< std::vector< int > >( negative ) );
       REQUIRE_THROWS_AS( 
         Sorted< std::vector< double > >( unsortedVector ), 
-        exceptions::Unsorted 
+        exceptions::Unsorted&
       );
 
     } // WHEN
@@ -43,7 +45,7 @@ SCENARIO( "Testing sorted verification" ){
 
       REQUIRE_THROWS_AS( 
         sdVector = unsortedVector,
-        exceptions::Unsorted
+        exceptions::Unsorted&
       );
     }
   } // GIVEN
