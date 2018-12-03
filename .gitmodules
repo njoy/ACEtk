@@ -22,3 +22,6 @@
 [submodule "dependencies/header-utilities"]
 	path = dependencies/header-utilities
 	url = https://github.com/njoy/header-utilities.git
+[submodule "dependencies/hopscotch-map-adapter"]
+	path = dependencies/hopscotch-map-adapter
+	url = https://github.com/njoy/hopscotch-map-adapter.git
