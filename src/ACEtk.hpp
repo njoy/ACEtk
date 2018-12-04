@@ -5,6 +5,15 @@
 #include <istream>
 #include <iterator>
 
+#ifdef USING_CPP17
+  #include <optional>
+#else 
+  #include <experimental/optional>
+  namespace std {
+    using namespace std::experimental;
+  }
+#endif
+
 #include "date.h"
 #include "disco.hpp"
 #include "dimwits.hpp"
