@@ -2,6 +2,7 @@
 add_executable( ACEtk.details.verify.test
                 verify.test.cpp
                 size.test.cpp
+                neutronYield.test.cpp
                 interpolationParameters.test.cpp )
 target_compile_options( ACEtk.details.verify.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:

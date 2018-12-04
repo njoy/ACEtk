@@ -1,6 +1,7 @@
 struct Reaction{
  int MT;
  double Q;
+ int neutronYield;
  Table::Slice energyGrid;
  std::vector< double > crossSection;
  // angularDistribution

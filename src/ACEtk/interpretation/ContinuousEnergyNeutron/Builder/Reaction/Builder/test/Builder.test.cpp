@@ -3,6 +3,7 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
+using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
@@ -21,6 +22,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     TestBuilder tb{ 14, parentBuilder };
 
     double Q{ 3.14 };
+    int neutronYield{ 2 };
     std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
     njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
 
@@ -33,11 +35,15 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       tb.Q( Q );
       tb.crossSection( njoy::utility::copy( XS ), grid );
+      tb.neutronYield( neutronYield, 
+                       ContinuousEnergyNeutron::Builder::
+                          NeutronYieldReferenceFrame::CENTEROFMASS );
       tb.add();
 
       THEN( "the constructed Reaction can be verified" ){
         auto reaction = parentBuilder.reactions_[ 14 ];
         CHECK( Q == reaction.Q );
+        CHECK( -1*neutronYield == reaction.neutronYield );
         CHECK( XS == reaction.crossSection );
         CHECK( 14 == reaction.MT );
         CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
@@ -60,6 +66,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       THEN( "the constructed Reaction can be verified" ){
         CHECK( Q == reaction.Q );
+        CHECK( 0 == reaction.neutronYield );
         CHECK( XS == reaction.crossSection );
         CHECK( 14 == reaction.MT );
         CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
@@ -67,6 +74,32 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     } // WHEN
     WHEN( "all the pieces of a Reaction are not present" ){
       CHECK_THROWS( tb.construct() );
+    }
+    WHEN( "valid neutron yield values are given" ){
+      std::vector< int > validYields{
+        -102, -101, -19, -4, -3, -2, -1, 0, 1, 2, 3, 4, 19, 101, 102
+      };
+      for( auto yield : validYields ){
+        THEN( "no exception is thrown when yield: " + std::to_string( yield ) ){
+          CHECK_NOTHROW( 
+            tb.neutronYield( yield, 
+                             ContinuousEnergyNeutron::Builder::
+                                NeutronYieldReferenceFrame::LAB ) );
+        }
+      }
+    }
+    WHEN( "invalid neutron yield values are given" ){
+      std::vector< int > invalidYields{ -100, -99, -21, -20, 20, 21, 99, 100 };
+      for( auto yield : invalidYields ){
+        THEN( "an exception is thrown when yield: " + std::to_string( yield ) ){
+          CHECK_THROWS_AS( 
+            tb.neutronYield ( yield, 
+                             ContinuousEnergyNeutron::Builder::
+                                NeutronYieldReferenceFrame::LAB ),
+            details::verify::exceptions::InvalidNeutronYield& 
+          );
+        }
+      }
     }
   } // GIVEN
 } // SCENARIO

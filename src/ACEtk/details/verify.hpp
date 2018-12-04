@@ -12,4 +12,5 @@ namespace verify{
 #include "ACEtk/details/verify/src/strictlyPositive.hpp"
 #include "ACEtk/details/verify/src/size.hpp"
 #include "ACEtk/details/verify/src/interpolationParameters.hpp"
+#include "ACEtk/details/verify/src/neutronYield.hpp"
 }

@@ -396,6 +396,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D/Builder/src/x.hpp",
@@ -408,6 +409,8 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/polynomial.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/src/coefficients.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp",
@@ -426,6 +429,7 @@
     "src/ACEtk/details/verify/Positive/src/assignment.hpp",
     "src/ACEtk/details/verify/exceptions/Unsorted.hpp",
     "src/ACEtk/details/verify/exceptions/NotStrictlyPositive.hpp",
+    "src/ACEtk/details/verify/exceptions/InvalidNeutronYield.hpp",
     "src/ACEtk/details/verify/exceptions/NotPositive.hpp",
     "src/ACEtk/details/verify/exceptions/InvalidENDFInterpolationParameter.hpp",
     "src/ACEtk/details/verify/StrictlyPositive/src/check.hpp",
@@ -436,6 +440,7 @@
     "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
+    "src/ACEtk/details/verify/src/neutronYield.hpp",
     "src/ACEtk/details/verify/src/strictlyPositive.hpp",
     "src/ACEtk/details/verify/src/interpolationParameters.hpp",
     "src/ACEtk/details/verify/src/positive.hpp",
@@ -508,6 +513,7 @@
     "ACEtk.details.verify": [
       "src/ACEtk/details/verify/test/verify.test.cpp",
       "src/ACEtk/details/verify/test/size.test.cpp",
+      "src/ACEtk/details/verify/test/neutronYield.test.cpp",
       "src/ACEtk/details/verify/test/interpolationParameters.test.cpp"
     ],
     "ACEtk.details.verify.Positive": [
