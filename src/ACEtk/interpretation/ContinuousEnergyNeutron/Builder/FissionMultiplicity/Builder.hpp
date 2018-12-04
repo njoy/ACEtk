@@ -3,10 +3,15 @@ private:
 
   using ParentBuilder = ContinuousEnergyNeutron::Builder;
   std::reference_wrapper< ParentBuilder > parent;
+  std::string nuType;
 
 public:
-  Builder( ParentBuilder& parent ): parent( parent ) { }
+  Builder( ParentBuilder& parent, std::string nuType ): 
+    parent( parent ),
+    nuType( nuType )
+  { }
 
-  Polynomial::Builder polynomial(){ return Polynomial::Builder{ parent }; }
-  Tabulated::Builder tabulated(){ return Tabulated::Builder{ parent }; }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/polynomial.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/tabulated.hpp"
+
 };

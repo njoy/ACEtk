@@ -7,11 +7,13 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
   GIVEN( "parent builder" ){
+    std::string nuType{ "delayed" };
     ContinuousEnergyNeutron::Builder grandparentBuilder{};
-    using ParentBuilder = decltype( grandparentBuilder.fissionMultiplicity() );
-    ParentBuilder parentBuilder{ grandparentBuilder };
+    using ParentBuilder = decltype( 
+        grandparentBuilder.fissionMultiplicity( nuType ) );
+    ParentBuilder parentBuilder{ grandparentBuilder, nuType };
 
-    using TabulatedBuilder = decltype( parentBuilder.tabulated() );
+    using TabulatedBuilder = decltype( parentBuilder.tabulated( ) );
 
     struct TestBuilder : TabulatedBuilder{
       using TabulatedBuilder::construct;
@@ -22,7 +24,7 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
     std::vector< double > schemes{ 2.0, 1.0 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
     std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
-    TestBuilder tb{ grandparentBuilder };
+    TestBuilder tb{ grandparentBuilder, nuType };
 
     WHEN( "creating a Tabulated fission multiplicity" ){
       tb.boundaries( njoy::utility::copy( boundaries ) )

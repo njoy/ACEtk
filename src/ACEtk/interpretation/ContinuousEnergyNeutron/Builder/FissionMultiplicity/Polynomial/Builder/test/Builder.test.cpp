@@ -7,11 +7,15 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
   GIVEN( "parent builder" ){
-    ContinuousEnergyNeutron::Builder grandparentBuilder{};
-    using ParentBuilder = decltype( grandparentBuilder.fissionMultiplicity() );
-    ParentBuilder parentBuilder{ grandparentBuilder };
+    std::string nuType{ "prompt" };
 
-    using PolynomialBuilder = decltype( parentBuilder.polynomial() );
+    ContinuousEnergyNeutron::Builder grandparentBuilder{};
+    using ParentBuilder = decltype( 
+        grandparentBuilder.fissionMultiplicity( nuType ) );
+    ParentBuilder parentBuilder{ grandparentBuilder, nuType };
+
+    using PolynomialBuilder = decltype( 
+        parentBuilder.polynomial( ) );
 
     struct TestBuilder : PolynomialBuilder{
       using PolynomialBuilder::construct;
@@ -19,7 +23,7 @@ SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
     };
 
     std::vector< double > coefficients{ 1.0, 2.0, 5.0, 6.0 };
-    TestBuilder tb{ grandparentBuilder };
+    TestBuilder tb{ grandparentBuilder, nuType };
 
     WHEN( "creating a Polynomial fission multiplicity" ){
       tb.coefficients( njoy::utility::copy( coefficients ) );

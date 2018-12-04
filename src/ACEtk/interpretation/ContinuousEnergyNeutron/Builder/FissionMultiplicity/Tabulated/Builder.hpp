@@ -5,6 +5,7 @@ class Builder:
       Tabulated1D::Builder< Builder >;
 
   std::reference_wrapper< ParentBuilder > parent;
+  std::string nuType;
 
 protected:
 
@@ -12,13 +13,14 @@ protected:
   using BaseBuilder::y;
 
 public:
-  Builder( ContinuousEnergyNeutron::Builder& parent ):
-    parent( parent )
+  Builder( ParentBuilder& parent, std::string nuType ): 
+    parent( parent ),
+    nuType( nuType )
   { }
 
   ParentBuilder& add(){
-    parent.get().addFissionMultiplicity( this->construct() );
-    return parent;
+    return parent.get().addFissionMultiplicity( this->nuType,  
+                                                this->construct() );
   }
 
 #define RENAME(basename, derivedname)\

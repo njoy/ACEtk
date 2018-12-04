@@ -13,21 +13,25 @@ SCENARIO(
         using ContinuousEnergyNeutron::Builder::FissionMultiplicity;
     };
     Builder parentBuilder{};
-    using NubarBuilder = decltype( parentBuilder.fissionMultiplicity() );
 
-    struct TestBuilder : NubarBuilder {
-      // using NubarBuilder::construct;
+    std::string nuType{ "total" };
+    using NubarBuilder = decltype( 
+        parentBuilder.fissionMultiplicity( nuType ) );
+
+    struct TestBuilder : public NubarBuilder {
       using NubarBuilder::NubarBuilder;
     };
 
-    TestBuilder tb{ parentBuilder };
+    TestBuilder tb{ parentBuilder, "total" };
 
-    THEN( "we can ensure the correct builder is returned" ){
+    WHEN( "creating a polynomial representation" ){
       bool passed = std::is_same< Builder::
           FissionMultiplicity::Polynomial::Builder, 
         decltype( tb.polynomial() ) >::value;
       CHECK( passed );
-      passed = std::is_same< Builder::
+    }
+    WHEN( "creating a tabulated representation" ){
+      bool passed = std::is_same< Builder::
           FissionMultiplicity::Tabulated::Builder, 
         decltype( tb.tabulated() ) >::value;
       CHECK( passed );
