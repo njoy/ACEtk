@@ -23,7 +23,7 @@ protected:
 
 public:
   Builder( int MT, ContinuousEnergyNeutron::Builder& parent ):
-    parent( parent ), MT_( MT ), neutronYield_( 0 )
+    parent( parent ), MT_( MT )
   { }
 
   ContinuousEnergyNeutron::Builder& add() { 

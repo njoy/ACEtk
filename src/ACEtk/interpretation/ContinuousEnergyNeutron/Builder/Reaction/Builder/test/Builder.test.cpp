@@ -101,5 +101,14 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         }
       }
     }
+    WHEN( "cross section isn't all positive" ){
+      std::vector< double > XS{ 1.0, -2.0, 3.0 };
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS(
+          tb.crossSection( njoy::utility::copy( XS ), grid ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
   } // GIVEN
 } // SCENARIO
