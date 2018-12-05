@@ -10,7 +10,7 @@ SCENARIO( "Testing positivity verification" ){
     std::vector< double > strictlyPositive{ 1.0, 2.0, 3.0 };
     std::vector< double > posi{ 0.0, 1.0, 2.0, 3.0 };
     std::vector< int > negative{ -1, 0, 2, 4 };
-    std::vector< double > unsortedVector{ 1.0, 3.0, 2.0 };
+    std::array< double, 3 > unsortedVector{ 1.0, 3.0, 2.0 };
     
     WHEN( "constructing from initializer list" ){
       REQUIRE_NOTHROW( Positive< std::vector< int > >( { 1,2,3,4,5 } ) );
@@ -24,7 +24,7 @@ SCENARIO( "Testing positivity verification" ){
       REQUIRE_NOTHROW( Positive< std::vector< double > > ( strictlyPositive ) );
       REQUIRE_NOTHROW( Positive< std::vector< double > > ( posi ) );
       REQUIRE_NOTHROW( Positive< std::vector< double > > ( isPositive( posi ) ) );
-      REQUIRE_NOTHROW( Positive< std::vector< double > > ( unsortedVector ) );
+      REQUIRE_NOTHROW( Positive< std::array< double, 3 > > ( unsortedVector ) );
       REQUIRE_THROWS_AS(
         Positive< std::vector< int > >( negative ),
         exceptions::NotPositive&
