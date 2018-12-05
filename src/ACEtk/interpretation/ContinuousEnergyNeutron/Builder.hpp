@@ -11,10 +11,12 @@ protected:
   std::optional< details::verify::Positive< std::vector< double > > > energyGrid_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   tsl::hopscotch_map< int, Reaction > reactions_;
+  std::optional< TotalGammaProduction > totalGammaProduction_;
 
   friend Reaction::Builder;
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
