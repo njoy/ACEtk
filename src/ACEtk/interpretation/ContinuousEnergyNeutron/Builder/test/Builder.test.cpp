@@ -149,6 +149,25 @@ SCENARIO( "fissionMultiplicity components ofContinuousEnergyNeutron::Builder" ){
   }
 } // SCENARIO
 
+SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
+  ContinuousEnergyNeutron::Builder ncBuilder{};
+  int MT{ 102 };
+  WHEN( "valid MFS are used" ){
+  }
+  WHEN( "invalid MFS are used" ){
+    std::vector< int > invalidMFs{ 10, 11, 14, 15, 17, 18 };
+
+    for( auto MF : invalidMFs ){
+      THEN( "an exception is thrown when MF = " + std::to_string( MF ) ){
+        CHECK_THROWS_AS(
+          ncBuilder.photonProduction( MF, MT ),
+          std::range_error&
+        );
+      }
+    }
+  }
+}
+
 SCENARIO( "adding gamma production data" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
   std::vector< double > XS{ 1.0, 2.0, 3.0 };
