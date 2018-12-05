@@ -2,7 +2,7 @@ Builder& crossSection( std::vector< double >&& xs, Slice energyGrid ){
 
   try{
     details::verify::equalSize( xs, energyGrid );
-    this->crossSection_ = std::move( details::verify::isPositive( xs ) );
+    this->crossSection_ = std::move( details::verify::positive( xs ) );
     this->energyGrid_ = energyGrid;
     return *this;
 

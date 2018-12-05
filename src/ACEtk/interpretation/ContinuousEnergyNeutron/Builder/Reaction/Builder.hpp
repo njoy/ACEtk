@@ -6,7 +6,8 @@ private:
   std::optional< int > neutronYield_;
   std::optional< NeutronYieldReferenceFrame > neutronYieldReferenceFrame_;
   std::optional< double > Q_;
-  std::optional< std::vector< double > > crossSection_;
+  std::optional< 
+      details::verify::Positive< std::vector< double > > > crossSection_;
   std::optional< Table::Slice > energyGrid_;
 
 protected:

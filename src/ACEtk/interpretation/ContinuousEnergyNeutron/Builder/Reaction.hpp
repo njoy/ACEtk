@@ -3,7 +3,7 @@ struct Reaction{
  double Q;
  int neutronYield;
  Table::Slice energyGrid;
- std::vector< double > crossSection;
+ details::verify::Positive< std::vector< double > > crossSection;
  // angularDistribution
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp"

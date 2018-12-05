@@ -3,7 +3,9 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
+using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
+
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
 
@@ -13,6 +15,16 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
 
     THEN( "we can verify the energy grid" ){
       CHECK( ranges::equal( grid, ncBuilder.energyGrid() ) );
+    }
+
+    WHEN( "the energy grid has negative components" ){
+      std::vector< double > grid{1.0, 2.0, 3.0, -4.0, 5.0};
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS(
+          ncBuilder.energyGrid( njoy::utility::copy( grid ) ),
+          details::verify::exceptions::NotPositive&
+          );
+      }
     }
   }
   WHEN( "no energy grid has been given" ){

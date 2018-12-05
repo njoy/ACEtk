@@ -8,7 +8,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
 
-  std::optional< std::vector< double > > energyGrid_;
+  std::optional< details::verify::Positive< std::vector< double > > > energyGrid_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   tsl::hopscotch_map< int, Reaction > reactions_;
 
