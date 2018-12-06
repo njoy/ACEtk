@@ -1,4 +1,6 @@
-Builder& crossSection( std::vector< double >&& xs){
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true >
+Builder& crossSection( Range&& xs){
   try{
     this->crossSection_ = std::move( details::verify::positive( xs ) );
     return *this;

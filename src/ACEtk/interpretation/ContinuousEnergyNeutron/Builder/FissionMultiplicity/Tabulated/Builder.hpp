@@ -24,13 +24,15 @@ public:
   }
 
 #define RENAME(basename, derivedname)\
-  Builder& derivedname( std::vector< double>&& derivedname ){\
+  template< typename Range,\
+            utility::Require< true, utility::is_range, Range > = true >\
+  Builder& derivedname( Range&& derivedname ){\
     return BaseBuilder::basename( std::move( derivedname ) );\
   }
 
-  RENAME( x, energies );
-  RENAME( y, multiplicities );
-  RENAME( y, nubar );
+  RENAME( x, energies )
+  RENAME( y, multiplicities )
+  RENAME( y, nubar )
 #undef RENAME
 };
 
