@@ -58,11 +58,13 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     WHEN( "constructing a cross section photon production with invalid data" ){
       TestBuilder tb{ topBuilder, MT };
       GIVEN( "too few cross section values" ){
-        tb.values( { 1.0, 2.0 } );
+        std::vector< double > values{ 1.0, 2.0 };
+        tb.values( values );
         CHECK_THROWS_AS( tb.construct(), std::range_error& );
       }
       GIVEN( "too many cross section values" ){
-        tb.values( { 1.0, 2.0, 3.0, 4.0 } );
+        std::vector< double > values{ 1.0, 2.0, 3.0, 4.0 };
+        tb.values( values );
         CHECK_THROWS_AS( tb.construct(), std::range_error& );
       }
     }

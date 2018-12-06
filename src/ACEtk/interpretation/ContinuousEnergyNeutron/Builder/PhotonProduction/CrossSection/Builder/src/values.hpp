@@ -1,4 +1,6 @@
-Builder& values( std::vector< double >&& xs ){
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true >
+Builder& values( Range&& xs ){
   try{
     this->values_ = std::move( details::verify::positive( xs ) );
     return *this;

@@ -1,4 +1,6 @@
-Builder& crossSection( std::vector< double >&& xs, Slice energyGrid ){
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true >
+Builder& crossSection( Range&& xs, Slice energyGrid ){
 
   try{
     details::verify::equalSize( xs, energyGrid );
@@ -15,7 +17,9 @@ Builder& crossSection( std::vector< double >&& xs, Slice energyGrid ){
   }
 }
 
-Builder& crossSection( std::vector< double >&& xs ){
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true >
+Builder& crossSection( Range&& xs ){
   return crossSection( std::move( xs ), this->parent.get().energyGrid() );
 }
 
