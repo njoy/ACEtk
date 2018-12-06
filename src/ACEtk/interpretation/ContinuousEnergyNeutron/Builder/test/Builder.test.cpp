@@ -153,6 +153,28 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
   int MT{ 102 };
   WHEN( "valid MFS are used" ){
+    {
+      int MF = 12;
+      std::vector< double > boundaries{ 0.0, 3.0 };
+      std::vector< double > schemes{ 2.0, 1.0 };
+      std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+      std::vector< double > yields{ 2.1, 2.2, 2.5, 2.5 };
+
+      ncBuilder.photonProduction( MF, MT )
+               .tabulated()
+               .boundaries ( njoy::utility::copy ( boundaries )  ) 
+               .schemes    ( njoy::utility::copy ( schemes    )  ) 
+               .energies   ( njoy::utility::copy ( energies   )  ) 
+               .yields     ( njoy::utility::copy ( yields     )  ) ;
+    }
+    {
+      int MF = 13;
+      ncBuilder.photonProduction( MF, MT );
+    }
+    {
+      int MF = 16;
+      ncBuilder.photonProduction( MF, MT );
+    }
   }
   WHEN( "invalid MFS are used" ){
     std::vector< int > invalidMFs{ 10, 11, 14, 15, 17, 18 };
@@ -164,6 +186,25 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
           std::range_error&
         );
       }
+    }
+  }
+  WHEN( "wrong sub-builder is called" ){
+    THEN( "an exception is thrown" ){
+      CHECK_THROWS_AS(
+        ncBuilder.photonProduction( 13, MT ).tabulated(),
+        std::range_error&
+      );
+
+    }
+    THEN( "an exception is thrown" ){
+      CHECK_THROWS_AS(
+        ncBuilder.photonProduction( 12, MT ).crossSection(),
+        std::range_error&
+      );
+      CHECK_THROWS_AS(
+        ncBuilder.photonProduction( 16, MT ).crossSection(),
+        std::range_error&
+      );
     }
   }
 }

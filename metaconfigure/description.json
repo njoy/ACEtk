@@ -420,9 +420,11 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/src/coefficients.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/crossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp",
@@ -430,6 +432,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProduction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp",
     "src/ACEtk/details/verify.hpp",
     "src/ACEtk/details/verify/IsPositive.hpp",
@@ -558,6 +561,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProduction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProduction.CrossSection.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProduction.Tabulated.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated/Builder/test/Builder.test.cpp"

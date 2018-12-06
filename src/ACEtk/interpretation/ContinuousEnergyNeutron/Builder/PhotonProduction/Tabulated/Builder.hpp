@@ -22,6 +22,9 @@ public:
     return parent.get().addPhotonProduction( this->MT, this->construct() );
   }
 
+  using BaseBuilder::boundaries;
+  using BaseBuilder::schemes;
+
 #define RENAME(basename, derivedname)\
   Builder& derivedname( std::vector< double>&& derivedname ){\
     return BaseBuilder::basename( std::move( derivedname ) );\

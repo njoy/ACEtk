@@ -14,4 +14,5 @@ public:
   { }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/tabulated.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/crossSection.hpp"
 };
