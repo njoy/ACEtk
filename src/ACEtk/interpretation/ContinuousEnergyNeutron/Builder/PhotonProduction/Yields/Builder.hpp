@@ -31,7 +31,7 @@ public:
   }
 
   RENAME( x, energies );
-  RENAME( y, yields );
+  RENAME( y, values );
 #undef RENAME
 };
 

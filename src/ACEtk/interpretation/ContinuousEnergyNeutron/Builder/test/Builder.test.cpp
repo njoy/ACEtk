@@ -158,14 +158,14 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
       std::vector< double > boundaries{ 0.0, 3.0 };
       std::vector< double > schemes{ 2.0, 1.0 };
       std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
-      std::vector< double > yields{ 2.1, 2.2, 2.5, 2.5 };
+      std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
 
       ncBuilder.photonProduction( MF, MT )
-               .tabulated()
+               .yields()
                .boundaries ( njoy::utility::copy ( boundaries )  ) 
                .schemes    ( njoy::utility::copy ( schemes    )  ) 
                .energies   ( njoy::utility::copy ( energies   )  ) 
-               .yields     ( njoy::utility::copy ( yields     )  ) ;
+               .values     ( njoy::utility::copy ( values     )  ) ;
     }
     {
       int MF = 13;
@@ -191,7 +191,7 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
   WHEN( "wrong sub-builder is called" ){
     THEN( "an exception is thrown" ){
       CHECK_THROWS_AS(
-        ncBuilder.photonProduction( 13, MT ).tabulated(),
+        ncBuilder.photonProduction( 13, MT ).yields(),
         std::range_error&
       );
 

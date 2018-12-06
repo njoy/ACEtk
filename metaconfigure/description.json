@@ -419,13 +419,17 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/src/coefficients.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Yields.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/src/values.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/src/energies.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/yields.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/crossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/tabulated.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Yields/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Yields/Builder/src/construct.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp",
@@ -565,8 +569,8 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProduction.CrossSection.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/test/Builder.test.cpp"
     ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProduction.Tabulated.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Tabulated/Builder/test/Builder.test.cpp"
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProduction.Yields.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Yields/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test/Builder.test.cpp"

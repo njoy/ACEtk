@@ -13,6 +13,6 @@ public:
     MT( MT )
   { }
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/tabulated.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/yields.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/Builder/src/crossSection.hpp"
 };
