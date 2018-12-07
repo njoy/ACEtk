@@ -80,18 +80,6 @@ set( ACEtk_AppleClang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_AppleClang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_AppleClang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_AppleClang_Darwin_static_flags "-static" )
-set( ACEtk_GNU_Darwin_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_GNU_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
-set( ACEtk_GNU_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_GNU_Darwin_strict_flags "-Werror" )
-set( ACEtk_GNU_Darwin_coverage_flags "--coverage" )
-set( ACEtk_GNU_Darwin_subproject_flags  )
-set( ACEtk_GNU_Darwin_base_project_flags  )
-set( ACEtk_GNU_Darwin_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Darwin_link_time_optimization_flags "-flto" )
-set( ACEtk_GNU_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Darwin_nonportable_optimization_flags "-march=native" )
-set( ACEtk_GNU_Darwin_static_flags "-static" )
 set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
 set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -104,6 +92,18 @@ set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Linux_static_flags "-static" )
+set( ACEtk_GNU_Darwin_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_GNU_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
+set( ACEtk_GNU_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_GNU_Darwin_strict_flags "-Werror" )
+set( ACEtk_GNU_Darwin_coverage_flags "--coverage" )
+set( ACEtk_GNU_Darwin_subproject_flags  )
+set( ACEtk_GNU_Darwin_base_project_flags  )
+set( ACEtk_GNU_Darwin_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Darwin_link_time_optimization_flags "-flto" )
+set( ACEtk_GNU_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Darwin_nonportable_optimization_flags "-march=native" )
+set( ACEtk_GNU_Darwin_static_flags "-static" )
 set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
 set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -116,18 +116,6 @@ set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Windows_static_flags "-static" )
-set( ACEtk_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_Clang_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( ACEtk_Clang_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_Clang_Darwin_strict_flags "-Werror" )
-set( ACEtk_Clang_Darwin_coverage_flags "--coverage" )
-set( ACEtk_Clang_Darwin_subproject_flags  )
-set( ACEtk_Clang_Darwin_base_project_flags  )
-set( ACEtk_Clang_Darwin_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Darwin_link_time_optimization_flags "-flto" )
-set( ACEtk_Clang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Darwin_nonportable_optimization_flags "-march=native" )
-set( ACEtk_Clang_Darwin_static_flags "-static" )
 set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -140,6 +128,18 @@ set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
 set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
 set( ACEtk_Clang_Linux_static_flags "-static" )
+set( ACEtk_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_Clang_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( ACEtk_Clang_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_Clang_Darwin_strict_flags "-Werror" )
+set( ACEtk_Clang_Darwin_coverage_flags "--coverage" )
+set( ACEtk_Clang_Darwin_subproject_flags  )
+set( ACEtk_Clang_Darwin_base_project_flags  )
+set( ACEtk_Clang_Darwin_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Darwin_link_time_optimization_flags "-flto" )
+set( ACEtk_Clang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Darwin_nonportable_optimization_flags "-march=native" )
+set( ACEtk_Clang_Darwin_static_flags "-static" )
 set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -263,16 +263,16 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/StrictlyPositive/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPRData.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPR.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/AtomicLevels.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EL03/RileyCrossSection.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPRData/Coherent.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPRData/CRTP.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPRData/Incoherent.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPRData/CRTP/FormFactors.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPR/Coherent.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPR/CRTP.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPR/Incoherent.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/EPR/CRTP/FormFactors.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/DiscreteData.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/MP1/src/energyGrid.hpp"
@@ -325,7 +325,7 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/details/verify/StrictlyPositive/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/test )
         add_subdirectory( src/ACEtk/interpretation/EL03/test )
-        add_subdirectory( src/ACEtk/interpretation/EPRData/test )
+        add_subdirectory( src/ACEtk/interpretation/EPR/test )
         add_subdirectory( src/ACEtk/interpretation/MP1/test )
     endif() 
 endif()

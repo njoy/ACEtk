@@ -32,7 +32,7 @@ public:
 	  return std::exp(entry) * barn; } );
   }
 
-  #include "ACEtk/interpretation/EPRData/FormFactors.hpp"  
+  #include "ACEtk/interpretation/EPR/CRTP/FormFactors.hpp"  
 
   auto formFactors() const {
     return FormFactors<Derived>{ this->table };

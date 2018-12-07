@@ -7,6 +7,6 @@ protected:
   static constexpr bool hasCumulative = false;
   
 public:
-  Incoherent(const Table& table) : CRTP<Coherent>(table) {}
+  Incoherent(const Table& table) : CRTP<Incoherent>(table) {}
   Incoherent(Table&&) = delete;  
 };

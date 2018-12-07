@@ -13,7 +13,7 @@ SCENARIO( "Test interpretation::EPRdata::Coherent" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData( std::move(table) );
+    const auto eprdata = interpretation::EPR( std::move(table) );
 
     WHEN( "Querying for the energy grid for the coherent scattering cross sections" ) {
       const std::map< int, double > referencePhotonEnergies{
@@ -74,7 +74,7 @@ SCENARIO( "Test interpretation::EPRdata::Coherent" ){
     
     const auto cohff = eprdata.coherent().formFactors();
     WHEN( "Querying for the independant variable for the photon coherent form factors" ) {
-      auto var = cohff.independentVariable();
+      auto var = cohff.scatteringCosines();
       auto compairs = ranges::view::zip( refIndVarcoherentFormFactor, var );
       for( const auto pair : compairs ) {
 	REQUIRE( pair.first == Approx( pair.second ) );

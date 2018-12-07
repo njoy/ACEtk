@@ -12,7 +12,7 @@ SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
   auto table = Table( njoy::utility::slurpFileToMemory( "1000.14p" ) );
 
   GIVEN( "An ACE Table for 1000.14p" ){
-    const auto eprdata = interpretation::EPRData( std::move(table) );
+    const auto eprdata = interpretation::EPR( std::move(table) );
     const auto incoh = eprdata.incoherent();
     WHEN( "Querying for the energy grid for the incoherent scattering cross sections" ) {
       const std::map< int, double > referencePhotonEnergies{
@@ -60,7 +60,7 @@ SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
     
     const auto incohff = incoh.formFactors();    
     WHEN( "Querying for the independant variable for the photon incoherent form factors" ) {
-      const auto var = incohff.independentVariable();
+      const auto var = incohff.scatteringCosines();
       auto compairs = ranges::view::zip( refIndVarIncoherentFF, var );
       for( const auto pair : compairs ){
 	REQUIRE( pair.first == Approx( pair.second ) );
