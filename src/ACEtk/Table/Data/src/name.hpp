@@ -9,7 +9,7 @@ static constexpr const char*
 name( const decltype(jxs)& ){ return "JXS"; }
 
 static constexpr const char*
-name( const decltype(izaw)&, Index<0> ){ return "IZ"; }
+name( const decltype(izaw.first)& ){ return "IZ"; }
 
 static constexpr const char*
-name( const decltype(izaw)&, Index<1> ){ return "AW"; }
+name( const decltype(izaw.second)& ){ return "AW"; }
