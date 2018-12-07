@@ -1,5 +1,4 @@
 class Coherent : public CRTP<Coherent> {
-  std::reference_wrapper<const Table> table;
   friend CRTP<Coherent>;
   
 protected:
@@ -7,8 +6,7 @@ protected:
   static constexpr int formFactorOffset() { return 1; }    
   static constexpr bool hasCumulativeFormFactor() { return true; }
 
-  
 public:
-  Coherent( const Table& table )
-    : CRTP<Coherent>(table), table(table) {}  
+  Coherent(const Table& table) : CRTP<Coherent>(table) {}
+  Coherent(Table&&) = delete;
 };

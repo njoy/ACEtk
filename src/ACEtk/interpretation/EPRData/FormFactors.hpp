@@ -5,7 +5,7 @@ struct FormFactors{
 
   FormFactors( const Table& table ) : table(table) {}
 
-  auto independentVariable() const {
+  auto scatteringCosines() const {
     const auto length =
       ( this->table.get().data.JXS( 3 + N )
 	- this->table.get().data.JXS( 2 + N ) ) / ( 2 + N );
