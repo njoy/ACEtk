@@ -3,6 +3,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/NeutronYieldReferenceFrame.hpp"
 
 protected:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp"

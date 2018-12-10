@@ -37,7 +37,6 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       THEN( "the members of the cross section can be verified" ){
         CHECK( XS == xs.values );
-        CHECK( MT == xs.MT );
         CHECK( ranges::equal( grid, xs.energyGrid ) );
       }
     }
@@ -51,7 +50,6 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       THEN( "the members of the cross section can be verified" ){
         CHECK( XS == xs.values );
-        CHECK( MT == xs.MT );
         CHECK( ranges::equal( grid, xs.energyGrid ) );
       }
     }

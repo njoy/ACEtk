@@ -10,9 +10,8 @@ CrossSection construct(){
     Log::info( "energy grid size must equal the size of the cross section" );
     throw;
   }
-  return CrossSection{
-    this->MT,
-    energyGrid_.value(),
+
+  return CrossSection{ energyGrid_.value(),
     std::move( this->values_.value() )
   };
 }

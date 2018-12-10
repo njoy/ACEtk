@@ -1,7 +1,6 @@
-struct CrossSection{
-  int MT;
-  Table::Slice energyGrid;
-  details::verify::Positive< std::vector< double > > values;
+struct CrossSection: protected ContinuousEnergyNeutron::Builder::CrossSection {
+
+  using ParentBuilder = ContinuousEnergyNeutron::Builder;
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder.hpp"

@@ -32,6 +32,13 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
       CHECK_THROWS( ncBuilder.energyGrid() );
     }
   }
+} // SCENARIO
+
+SCENARIO( "incident neutron reaction" ){
+  ContinuousEnergyNeutron::Builder ncBuilder{};
+  std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
+  ncBuilder.energyGrid( njoy::utility::copy( grid ) );
+
   GIVEN( "data for a reaction" ){
     std::vector< double > XS{ 1.1, 2.1, 3.1 };
     std::vector< double > grid{1.0, 2.0, 3.0};

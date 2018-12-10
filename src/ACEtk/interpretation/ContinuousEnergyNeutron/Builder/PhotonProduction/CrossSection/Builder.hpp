@@ -1,26 +1,27 @@
-class Builder{
+class Builder:
+  public ContinuousEnergyNeutron::Builder::CrossSection::Builder< 
+    Builder, ParentBuilder > {
 
-  using ParentBuilder = ContinuousEnergyNeutron::Builder;
-  using BaseBuilder = ParentBuilder::Tabulated1D::Builder< Builder >;
+  using BaseBuilder = ContinuousEnergyNeutron::Builder::
+    CrossSection::Builder< Builder, ParentBuilder >;
 
-  std::reference_wrapper< ParentBuilder > parent;
   int MT;
   std::optional< 
       details::verify::Positive< std::vector< double > > > values_;
   std::optional< Table::Slice > energyGrid_;
 
 protected:
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/src/construct.hpp"
 
 public:
   Builder( ParentBuilder& parent, int MT ):
-    parent( parent ),
+    BaseBuilder( parent ),
     MT( MT )
   { }
 
   ParentBuilder& add(){
     return parent.get().addPhotonProduction( this->MT, this->construct() );
   }
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/src/values.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction/CrossSection/Builder/src/energies.hpp"
+
+  using BaseBuilder::energies;
+  using BaseBuilder::values;
 };
