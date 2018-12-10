@@ -5,8 +5,7 @@
 
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( 
-    "Testing ContinuousEnergyNeutron::Builder::FissionMultiplicity::Builder" ){
+SCENARIO( "Testing FissionMultiplicity::Builder" ){
   GIVEN( "parent builder" ){
     struct Builder : public ContinuousEnergyNeutron::Builder{
       public:

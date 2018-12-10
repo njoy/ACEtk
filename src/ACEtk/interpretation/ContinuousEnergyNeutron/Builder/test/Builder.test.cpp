@@ -10,7 +10,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
 
   GIVEN( "data for the energy grid" ){
-    std::vector< double > grid{1.0, 2.0, 3.0, 4.0, 5.0};
+    std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
     ncBuilder.energyGrid( njoy::utility::copy( grid ) );
 
     THEN( "we can verify the energy grid" ){
@@ -151,29 +151,61 @@ SCENARIO( "fissionMultiplicity components ofContinuousEnergyNeutron::Builder" ){
 
 SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
-  int MT{ 102 };
+  std::vector< double > boundaries{ 0.0, 3.0 };
+  std::vector< double > schemes{ 2.0, 1.0 };
+  std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+  std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
+
+  std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0 };
+  ncBuilder.energyGrid( njoy::utility::copy( grid ) );
+
   WHEN( "valid MFS are used" ){
     {
       int MF = 12;
-      std::vector< double > boundaries{ 0.0, 3.0 };
-      std::vector< double > schemes{ 2.0, 1.0 };
-      std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
-      std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
-
-      ncBuilder.photonProduction( MF, MT )
-               .yields()
-               .boundaries ( njoy::utility::copy ( boundaries )  ) 
-               .schemes    ( njoy::utility::copy ( schemes    )  ) 
-               .energies   ( njoy::utility::copy ( energies   )  ) 
-               .values     ( njoy::utility::copy ( values     )  ) ;
+      CHECK_NOTHROW(
+        ncBuilder.photonProduction( MF, 102 )
+                 .yields()
+                 .boundaries ( njoy::utility::copy ( boundaries )  ) 
+                 .schemes    ( njoy::utility::copy ( schemes    )  ) 
+                 .energies   ( njoy::utility::copy ( energies   )  ) 
+                 .values     ( njoy::utility::copy ( values     )  ) 
+                 .add()
+      );
     }
     {
       int MF = 13;
-      ncBuilder.photonProduction( MF, MT );
+      auto xsBuilder = ncBuilder.photonProduction( MF, 103 ).crossSection();
+      xsBuilder.values( njoy::utility::copy( values ) );
+      THEN( "no exception is thrown when no energy grid is given" ){
+        CHECK_NOTHROW( xsBuilder.add() );
+      }
+      THEN( "no exception is thrown when a valid energy grid is given" ){
+        xsBuilder.energies( ncBuilder.energyGrid() );
+        CHECK_NOTHROW( xsBuilder.add() );
+      }
+      THEN( 
+        "an exception is thrown with the wrong number of energies are given" ){
+        std::vector< double > energies{ 1.0, 2.0, 3.0 };
+        Table::Slice grid = Table::slice( energies );
+
+        xsBuilder.energies( grid );
+        CHECK_THROWS_AS( 
+          xsBuilder.add(),
+          std::range_error&
+        );
+      }
     }
     {
       int MF = 16;
-      ncBuilder.photonProduction( MF, MT );
+      CHECK_NOTHROW(
+        ncBuilder.photonProduction( MF, 106 )
+                 .yields()
+                 .boundaries ( njoy::utility::copy ( boundaries )  ) 
+                 .schemes    ( njoy::utility::copy ( schemes    )  ) 
+                 .energies   ( njoy::utility::copy ( energies   )  ) 
+                 .values     ( njoy::utility::copy ( values     )  ) 
+                 .add()
+      );
     }
   }
   WHEN( "invalid MFS are used" ){
@@ -182,7 +214,7 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
     for( auto MF : invalidMFs ){
       THEN( "an exception is thrown when MF = " + std::to_string( MF ) ){
         CHECK_THROWS_AS(
-          ncBuilder.photonProduction( MF, MT ),
+          ncBuilder.photonProduction( MF, 107 ),
           std::range_error&
         );
       }
@@ -191,18 +223,18 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
   WHEN( "wrong sub-builder is called" ){
     THEN( "an exception is thrown" ){
       CHECK_THROWS_AS(
-        ncBuilder.photonProduction( 13, MT ).yields(),
+        ncBuilder.photonProduction( 13, 108 ).yields(),
         std::range_error&
       );
 
     }
     THEN( "an exception is thrown" ){
       CHECK_THROWS_AS(
-        ncBuilder.photonProduction( 12, MT ).crossSection(),
+        ncBuilder.photonProduction( 12, 109 ).crossSection(),
         std::range_error&
       );
       CHECK_THROWS_AS(
-        ncBuilder.photonProduction( 16, MT ).crossSection(),
+        ncBuilder.photonProduction( 16, 110 ).crossSection(),
         std::range_error&
       );
     }
