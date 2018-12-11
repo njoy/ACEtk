@@ -8,13 +8,13 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp"
 
   std::optional< 
     details::verify::Positive< std::vector< double > > > energyGrid_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   tsl::hopscotch_map< int, Reaction > reactions_;
-  tsl::hopscotch_map< int, PhotonReaction > photonReactions_;
+  tsl::hopscotch_map< int, PhotonProductionReaction > photonProductionReactions_;
   std::optional< TotalGammaProduction > totalGammaProduction_;
 
   friend Reaction::Builder;
@@ -27,7 +27,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
 
 

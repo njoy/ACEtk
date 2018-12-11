@@ -3,5 +3,5 @@ CrossSection::Builder crossSection(){
     Log::error( "Photon production cross section only comes from MF=13" );
     throw std::range_error( "MF=12,16 must use photon production yields" );
   }
-  return CrossSection::Builder{ parent, this->MT }; 
+  return CrossSection::Builder{ *this }; 
 }

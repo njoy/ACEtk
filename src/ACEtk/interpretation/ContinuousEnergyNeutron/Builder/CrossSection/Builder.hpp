@@ -1,6 +1,7 @@
 template< typename Derived, typename ParentBuilder >
 class Builder{
 
+public:
   std::optional< details::verify::Positive< std::vector< double > > > values_;
   std::optional< Table::Slice > energyGrid_;
 

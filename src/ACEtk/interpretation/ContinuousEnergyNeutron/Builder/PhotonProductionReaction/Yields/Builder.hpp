@@ -1,11 +1,12 @@
 class Builder: 
   public ContinuousEnergyNeutron::Builder::Tabulated1D::Builder< Builder >{
 
+  using ParentBuilder = ContinuousEnergyNeutron::Builder::
+      PhotonProductionReaction::Builder;
   using BaseBuilder = ContinuousEnergyNeutron::Builder::
       Tabulated1D::Builder< Builder >;
 
   std::reference_wrapper< ParentBuilder > parent;
-  int MT;
 
 protected:
 
@@ -13,13 +14,12 @@ protected:
   using BaseBuilder::y;
 
 public:
-  Builder( ParentBuilder& parent, int MT ):
-    parent( parent ),
-    MT( MT )
+  Builder( ParentBuilder& parent ):
+    parent( parent )
   { }
 
   ParentBuilder& add(){
-    return parent.get().addPhotonProduction( this->MT, this->construct() );
+    return parent.get().addYields( this->construct() );
   }
 
   using BaseBuilder::boundaries;

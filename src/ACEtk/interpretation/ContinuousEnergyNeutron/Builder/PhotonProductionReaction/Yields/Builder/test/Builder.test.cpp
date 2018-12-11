@@ -9,7 +9,7 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
   GIVEN( "parent builder" ){
     ContinuousEnergyNeutron::Builder grandparentBuilder{};
     using ParentBuilder = decltype( 
-        grandparentBuilder.photonProduction( 12, 102 ) );
+        grandparentBuilder.photonProductionReaction( 12, 102 ) );
     ParentBuilder parentBuilder{ grandparentBuilder, 12, 102 };
 
     using YieldsBuilder = decltype( parentBuilder.yields( ) );
@@ -24,7 +24,7 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
     std::vector< double > schemes{ 2.0, 1.0 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
     std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
-    TestBuilder tb{ grandparentBuilder, MT };
+    TestBuilder tb{ parentBuilder };
 
     WHEN( "creating a Yields photon production" ){
       tb.boundaries( njoy::utility::copy( boundaries ) )

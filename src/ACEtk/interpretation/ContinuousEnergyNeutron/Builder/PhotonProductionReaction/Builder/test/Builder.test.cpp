@@ -9,11 +9,12 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
   GIVEN( "parent builder" ){
     struct Builder : public ContinuousEnergyNeutron::Builder{
       public:
-        using ContinuousEnergyNeutron::Builder::PhotonProduction;
+        using ContinuousEnergyNeutron::Builder::PhotonProductionReaction;
     };
     Builder parentBuilder{};
 
-    using PPBuilder = decltype( parentBuilder.photonProduction( 6, 102 ) );
+    using PPBuilder = decltype( 
+        parentBuilder.photonProductionReaction( 6, 102 ) );
 
     struct TestBuilder : public PPBuilder {
       using PPBuilder::PPBuilder;
@@ -22,13 +23,13 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
     
     WHEN( "adding a cross section" ){
       bool passed = std::is_same< 
-        Builder::PhotonProduction::CrossSection::Builder,
+        Builder::PhotonProductionReaction::CrossSection::Builder,
           decltype( ppB.crossSection() ) >::value;
       CHECK( passed );
     }
     WHEN( "adding yields" ){
       bool passed = std::is_same< 
-        Builder::PhotonProduction::Yields::Builder,
+        Builder::PhotonProductionReaction::Yields::Builder,
           decltype( ppB.yields() ) >::value;
       CHECK( passed );
     }

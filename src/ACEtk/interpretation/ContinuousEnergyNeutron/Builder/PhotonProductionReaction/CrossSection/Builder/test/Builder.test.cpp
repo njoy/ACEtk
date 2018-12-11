@@ -8,13 +8,17 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
   GIVEN( "parent builder" ){
-    ContinuousEnergyNeutron::Builder topBuilder{};
-    using PPBuilder = decltype( topBuilder.photonProduction( 13, 102 ) );
+    ContinuousEnergyNeutron::Builder parentBuilder{};
+    using PPBuilder = decltype( 
+        parentBuilder.photonProductionReaction( 13, 102 ) );
 
     std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
-    PPBuilder ppBuilder{ topBuilder, 13, 102 };
-    topBuilder.energyGrid( njoy::utility::copy( energyGrid ) );
+    PPBuilder ppBuilder{ parentBuilder, 13, 102 };
+    parentBuilder.energyGrid( njoy::utility::copy( energyGrid ) );
 
+    int MT{ 102 };
+    std::vector< double > XS{ 1.0, 2.0, 3.0 };
+    njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
     using XSBuilder = decltype( ppBuilder.crossSection( ) );
 
     struct TestBuilder : public XSBuilder{
@@ -22,14 +26,10 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
       using XSBuilder::XSBuilder;
     };
 
-    int MT{ 102 };
-    std::vector< double > XS{ 1.0, 2.0, 3.0 };
-    njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
 
-    WHEN( "constructing a cross section photon production without "
-          "a parent energyGrid" ){
+    WHEN( "constructing a cross section photon production" ){
 
-      TestBuilder tb{ topBuilder, MT };
+      TestBuilder tb{ ppBuilder };
       tb.values( njoy::utility::copy( XS ) );
       tb.energyGrid( grid );
 
@@ -40,29 +40,19 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
         CHECK( ranges::equal( grid, xs.energyGrid ) );
       }
     }
-    WHEN( "constructing a cross section photon production with"
-          "a parent energyGrid" ){
-
-      TestBuilder tb{ topBuilder, MT };
-      tb.values( njoy::utility::copy( XS ) );
-
-      auto xs = tb.construct();
-
-      THEN( "the members of the cross section can be verified" ){
-        CHECK( XS == xs.values );
-        CHECK( ranges::equal( grid, xs.energyGrid ) );
-      }
-    }
     WHEN( "constructing a cross section photon production with invalid data" ){
-      TestBuilder tb{ topBuilder, MT };
+      TestBuilder tb{ ppBuilder };
       GIVEN( "too few cross section values" ){
         std::vector< double > values{ 1.0, 2.0 };
         tb.values( values );
+        tb.energyGrid( grid );
+
         CHECK_THROWS_AS( tb.construct(), std::range_error& );
       }
       GIVEN( "too many cross section values" ){
         std::vector< double > values{ 1.0, 2.0, 3.0, 4.0 };
         tb.values( values );
+        tb.energyGrid( grid );
         CHECK_THROWS_AS( tb.construct(), std::range_error& );
       }
     }
