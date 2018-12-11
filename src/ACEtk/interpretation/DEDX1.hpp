@@ -1,15 +1,15 @@
 class DEDX1{
 
-  Table table;
+  njoy::ACEtk::Table table;
 
 protected:
   static int Z( const Table& table ) { return table.data.NXS( 2 ); }
-  static int energySpacing( const Table& table ) { return table.data.XSS( 1 ); }
-  static int densitySpacing( const Table& table ) { return table.data.XSS( 2 ); }
-  static int temperatureSpacing( const Table& table ) { return table.data.XSS( 3 ); }    
+  static auto energySpacing( const Table& table ) { return table.data.XSS( 1 ); }
+  static auto densitySpacing( const Table& table ) { return table.data.XSS( 2 ); }
+  static auto temperatureSpacing( const Table& table ) { return table.data.XSS( 3 ); }    
   
 public:
-  DEDX1( Table&& table) : table(table){}
+  DEDX1( Table&& table) : table(std::move(table)){}
 
   auto atomicNumber() const { return Z( this->table ); }
   auto energySpacing() const { return energySpacing( this->table ); }
