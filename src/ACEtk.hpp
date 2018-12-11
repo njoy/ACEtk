@@ -4,6 +4,7 @@
 #include <regex>
 #include <istream>
 #include <iterator>
+#include <functional>
 
 #include "date.h"
 #include "disco.hpp"
