@@ -19,7 +19,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       using ReactionBuilder::ReactionBuilder;
     };
 
-    TestBuilder tb{ 14, parentBuilder };
+    TestBuilder tb{ parentBuilder, 14 };
 
     double Q{ 3.14 };
     int neutronYield{ 2 };
@@ -29,22 +29,21 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     WHEN( "creating a Reaction Builder without a parent energyGrid" ){
       std::vector< double > XS{ 1.0, 2.0, 3.0 };
 
-      THEN( "an exception is thrown if no energyGrid is given" ){
-        CHECK_THROWS( tb.crossSection( njoy::utility::copy( XS ) ) );
-      }
-
       tb.Q( Q );
-      tb.crossSection( njoy::utility::copy( XS ), grid );
+      tb.crossSection().values( njoy::utility::copy( XS ) )
+                       .energies( grid )
+                       .add();
       tb.neutronYield( neutronYield, 
                        ContinuousEnergyNeutron::Builder::
                           NeutronYieldReferenceFrame::CENTEROFMASS );
+      tb.energyGrid( grid );
       tb.add();
 
       THEN( "the constructed Reaction can be verified" ){
         auto reaction = parentBuilder.reactions_[ 14 ];
         CHECK( Q == reaction.Q );
         CHECK( -1*neutronYield == reaction.neutronYield );
-        CHECK( XS == reaction.crossSection );
+        CHECK( XS == reaction.crossSection.values );
         CHECK( 14 == reaction.MT );
         CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
 
@@ -57,17 +56,18 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       parentBuilder.energyGrid( njoy::utility::copy( energyGrid ) );
       THEN( "no exception is thrown if no energyGrid is given" ){
-        CHECK_NOTHROW( tb.crossSection( njoy::utility::copy( XS ) ) );
+        CHECK_NOTHROW( tb.crossSection().values( njoy::utility::copy( XS ) ) );
       }
 
+      tb.energyGrid( grid );
       tb.Q( Q );
-      tb.crossSection( njoy::utility::copy( XS ) );
+      tb.crossSection().values( njoy::utility::copy( XS ) ).add();
       auto reaction = tb.construct();
 
       THEN( "the constructed Reaction can be verified" ){
         CHECK( Q == reaction.Q );
         CHECK( 0 == reaction.neutronYield );
-        CHECK( XS == reaction.crossSection );
+        CHECK( XS == reaction.crossSection.values );
         CHECK( 14 == reaction.MT );
         CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
       }
@@ -105,7 +105,8 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       std::vector< double > XS{ 1.0, -2.0, 3.0 };
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS(
-          tb.crossSection( njoy::utility::copy( XS ), grid ),
+          tb.crossSection().values( njoy::utility::copy( XS ) )
+                           .energies( grid ),
           details::verify::exceptions::NotPositive&
         );
       }
