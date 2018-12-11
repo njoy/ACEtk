@@ -19,6 +19,6 @@ public:
     return parent.get().addPhotonProduction( this->MT, this->construct() );
   }
 
-  using BaseBuilder::energies;
+  using BaseBuilder::energyGrid;
   using BaseBuilder::values;
 };

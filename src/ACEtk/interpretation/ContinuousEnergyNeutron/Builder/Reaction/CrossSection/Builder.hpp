@@ -19,6 +19,6 @@ public:
     return parent.get().addCrossSection( this->construct() );
   }
 
-  using BaseBuilder::energies;
+  using BaseBuilder::energyGrid;
   using BaseBuilder::values;
 };

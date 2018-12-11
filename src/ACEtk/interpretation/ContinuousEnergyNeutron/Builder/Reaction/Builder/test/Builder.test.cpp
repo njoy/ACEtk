@@ -31,7 +31,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       tb.Q( Q );
       tb.crossSection().values( njoy::utility::copy( XS ) )
-                       .energies( grid )
+                       .energyGrid( grid )
                        .add();
       tb.neutronYield( neutronYield, 
                        ContinuousEnergyNeutron::Builder::
@@ -106,7 +106,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS(
           tb.crossSection().values( njoy::utility::copy( XS ) )
-                           .energies( grid ),
+                           .energyGrid( grid ),
           details::verify::exceptions::NotPositive&
         );
       }

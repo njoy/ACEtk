@@ -31,7 +31,7 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
 
       TestBuilder tb{ topBuilder, MT };
       tb.values( njoy::utility::copy( XS ) );
-      tb.energies( grid );
+      tb.energyGrid( grid );
 
       auto xs = tb.construct();
 

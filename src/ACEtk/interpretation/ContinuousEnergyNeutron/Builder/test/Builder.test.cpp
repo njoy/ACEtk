@@ -104,7 +104,7 @@ SCENARIO( "incident neutron reaction" ){
           ncBuilder.reaction( MT )
                    .energyGrid( ncBuilder.energyGrid() )
                    .crossSection().values(  njoy::utility::copy( XS ) )
-                                  .energies( 
+                                  .energyGrid( 
                                      njoy::ACEtk::Table::slice(
                                          ncBuilder.energyGrid() 
                                          | ranges::view::drop( 1 )
@@ -203,7 +203,7 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
         CHECK_NOTHROW( xsBuilder.add() );
       }
       THEN( "no exception is thrown when a valid energy grid is given" ){
-        xsBuilder.energies( ncBuilder.energyGrid() );
+        xsBuilder.energyGrid( ncBuilder.energyGrid() );
         CHECK_NOTHROW( xsBuilder.add() );
       }
       THEN( 
@@ -211,7 +211,7 @@ SCENARIO( "Photon Production components of ContinuousEnergyNeutron::Builder" ){
         std::vector< double > energies{ 1.0, 2.0, 3.0 };
         Table::Slice grid = Table::slice( energies );
 
-        xsBuilder.energies( grid );
+        xsBuilder.energyGrid( grid );
         CHECK_THROWS_AS( 
           xsBuilder.add(),
           std::range_error&
