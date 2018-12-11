@@ -10,7 +10,8 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProduction.hpp"
 
-  std::optional< details::verify::Positive< std::vector< double > > > energyGrid_;
+  std::optional< 
+    details::verify::Positive< std::vector< double > > > energyGrid_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   tsl::hopscotch_map< int, Reaction > reactions_;
   tsl::hopscotch_map< int, PhotonReaction > photonReactions_;
@@ -27,7 +28,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProduction.hpp"
-  Reaction::Builder reaction( int MT ){ return Reaction::Builder{ MT, *this }; }
+  Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
 
 
 };

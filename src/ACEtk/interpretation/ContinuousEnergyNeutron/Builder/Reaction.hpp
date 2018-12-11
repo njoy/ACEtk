@@ -1,10 +1,13 @@
 struct Reaction{
+  class Builder;
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection.hpp"
+
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp"
+
  int MT;
  double Q;
  int neutronYield;
  Table::Slice energyGrid;
- details::verify::Positive< std::vector< double > > crossSection;
+ ContinuousEnergyNeutron::Builder::CrossSection crossSection;
  // angularDistribution
-
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp"
 };

@@ -1,22 +1,22 @@
 class Builder:
   public ContinuousEnergyNeutron::Builder::CrossSection::Builder< 
-    Builder, ParentBuilder > {
+      Builder, 
+      ContinuousEnergyNeutron::Builder::Reaction::Builder
+    > {
 
+  using ParentBuilder = ContinuousEnergyNeutron::Builder::Reaction::Builder;
   using BaseBuilder = ContinuousEnergyNeutron::Builder::
     CrossSection::Builder< Builder, ParentBuilder >;
-
-  int MT;
   std::optional< details::verify::Positive< std::vector< double > > > values_;
   std::optional< Table::Slice > energyGrid_;
 
 public:
-  Builder( ParentBuilder& parent, int MT ):
-    BaseBuilder( parent ),
-    MT( MT )
+  Builder( ParentBuilder& parent ):
+    BaseBuilder( parent )
   { }
 
   ParentBuilder& add(){
-    return parent.get().addPhotonProduction( this->MT, this->construct() );
+    return parent.get().addCrossSection( this->construct() );
   }
 
   using BaseBuilder::energies;

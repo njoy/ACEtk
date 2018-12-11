@@ -48,22 +48,29 @@ SCENARIO( "incident neutron reaction" ){
     int MT{ 14 };
     WHEN( "adding a reaction" ){
       THEN( "no exception is thrown" ){
-        CHECK_NOTHROW( ncBuilder.reaction( MT )
-                      .crossSection( njoy::utility::copy( XS ) )
-                      .Q( Qvalue )
-                      .add()
+        CHECK_NOTHROW( 
+          ncBuilder.reaction( MT )
+                   .energyGrid( ncBuilder.energyGrid() )
+                   .crossSection().values( njoy::utility::copy( XS ) )
+                                  .add()
+                   .Q( Qvalue )
+                   .add()
                      );
       }
     } // WHEN
     WHEN( "adding a duplicate reaction" ){
       THEN( "an exception is thrown" ){
         ncBuilder.reaction( MT )
-                 .crossSection( njoy::utility::copy( XS ) )
-                  .Q( Qvalue )
+                 .energyGrid( ncBuilder.energyGrid() )
+                 .crossSection().values( njoy::utility::copy( XS ) )
+                                .add()
+                 .Q( Qvalue )
                  .add();
         CHECK_THROWS(
           ncBuilder.reaction( MT )
-                    .crossSection( njoy::utility::copy( XS ) )
+                   .energyGrid( ncBuilder.energyGrid() )
+                   .crossSection().values( njoy::utility::copy( XS ) )
+                                  .add()
                     .Q( Qvalue )
                     .add() 
           );
@@ -72,29 +79,38 @@ SCENARIO( "incident neutron reaction" ){
     WHEN( "cross section length is less than full energy Grid length" ){
       std::vector< double > XS{ 1.0, 2.0 };
       THEN( "an exception is thrown if no energyGrid is given" ){
-        CHECK_THROWS( ncBuilder.reaction( MT )
-                     .crossSection( njoy::utility::copy( XS ) )
-                     .Q( Qvalue )
-                     .add()
-                    );
+        CHECK_THROWS( 
+          ncBuilder.reaction( MT )
+                   .energyGrid( ncBuilder.energyGrid() )
+                   .crossSection().values( njoy::utility::copy( XS ) )
+                                  .add()
+                   .Q( Qvalue )
+                   .add()
+        );
       }
       THEN( "an exception is thrown if energyGrid is the wrong size" ){
-        CHECK_THROWS( ncBuilder.reaction( MT )
-                     .crossSection( njoy::utility::copy( XS ),
-                                   ncBuilder.energyGrid() )
-                     .Q( Qvalue )
-                     .add()
+        CHECK_THROWS( 
+          ncBuilder.reaction( MT )
+                   .energyGrid( ncBuilder.energyGrid() )
+                   .crossSection().values( njoy::utility::copy( XS ) )
+                                 .add()
+                   .Q( Qvalue )
+                   .add()
                     );
       } // THEN
       THEN( 
           "no exception is thrown when an appropriate energyGrid is given" ){
-        CHECK_NOTHROW( ncBuilder.reaction( MT )
-                      .crossSection( njoy::utility::copy( XS ),
-                                    njoy::ACEtk::Table::slice(
-                                        ncBuilder.energyGrid() 
-                                        | ranges::view::drop( 1 )
-                                        )
+        CHECK_NOTHROW( 
+          ncBuilder.reaction( MT )
+                   .energyGrid( ncBuilder.energyGrid() )
+                   .crossSection().values(  njoy::utility::copy( XS ) )
+                                  .energies( 
+                                     njoy::ACEtk::Table::slice(
+                                         ncBuilder.energyGrid() 
+                                         | ranges::view::drop( 1 )
+                                     )
                                    )
+                                  .add()
                       .Q( Qvalue )
                       .add()
                      );

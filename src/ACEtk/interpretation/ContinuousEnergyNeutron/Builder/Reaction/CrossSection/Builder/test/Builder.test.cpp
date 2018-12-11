@@ -9,27 +9,24 @@ using namespace njoy::ACEtk::interpretation;
 SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
   GIVEN( "parent builder" ){
     ContinuousEnergyNeutron::Builder topBuilder{};
-    using PPBuilder = decltype( topBuilder.photonProduction( 13, 102 ) );
+    using ReacBuilder = decltype( topBuilder.reaction( 102 ) );
 
     std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
-    PPBuilder ppBuilder{ topBuilder, 13, 102 };
-    topBuilder.energyGrid( njoy::utility::copy( energyGrid ) );
+    ReacBuilder reacBuilder{ topBuilder, 102 };
+    reacBuilder.energyGrid( Table::slice( energyGrid ) );
 
-    using XSBuilder = decltype( ppBuilder.crossSection( ) );
+    std::vector< double > XS{ 1.0, 2.0, 3.0 };
+    njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
+    using XSBuilder = decltype( reacBuilder.crossSection( ) );
 
     struct TestBuilder : public XSBuilder{
       using XSBuilder::construct;
       using XSBuilder::XSBuilder;
     };
-
-    int MT{ 102 };
-    std::vector< double > XS{ 1.0, 2.0, 3.0 };
-    njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
-
-    WHEN( "constructing a cross section photon production without "
+    WHEN( "constructing a cross section reaction without "
           "a parent energyGrid" ){
 
-      TestBuilder tb{ topBuilder, MT };
+      TestBuilder tb{ reacBuilder };
       tb.values( njoy::utility::copy( XS ) );
       tb.energies( grid );
 
@@ -40,10 +37,10 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
         CHECK( ranges::equal( grid, xs.energyGrid ) );
       }
     }
-    WHEN( "constructing a cross section photon production with"
+    WHEN( "constructing a cross section reaction with"
           "a parent energyGrid" ){
 
-      TestBuilder tb{ topBuilder, MT };
+      TestBuilder tb{ reacBuilder };
       tb.values( njoy::utility::copy( XS ) );
 
       auto xs = tb.construct();
@@ -54,7 +51,7 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
       }
     }
     WHEN( "constructing a cross section photon production with invalid data" ){
-      TestBuilder tb{ topBuilder, MT };
+      TestBuilder tb{ reacBuilder };
       GIVEN( "too few cross section values" ){
         std::vector< double > values{ 1.0, 2.0 };
         tb.values( values );

@@ -6,11 +6,13 @@ private:
   std::optional< int > neutronYield_;
   std::optional< NeutronYieldReferenceFrame > neutronYieldReferenceFrame_;
   std::optional< double > Q_;
-  std::optional< 
-      details::verify::Positive< std::vector< double > > > crossSection_;
+  std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
   std::optional< Table::Slice > energyGrid_;
 
 protected:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
+
+  friend CrossSection::Builder;
   Reaction construct(){
     return Reaction{ 
       MT_, 
@@ -23,7 +25,7 @@ protected:
   }
 
 public:
-  Builder( int MT, ContinuousEnergyNeutron::Builder& parent ):
+  Builder( ContinuousEnergyNeutron::Builder& parent, int MT ):
     parent( parent ), MT_( MT )
   { }
 
@@ -31,6 +33,7 @@ public:
     return parent.get().addReaction( this->construct() );
   }
 
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"
