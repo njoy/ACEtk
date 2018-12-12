@@ -27,6 +27,10 @@ public:
     MT( MT )
   { }
 
+  ContinuousEnergyNeutron::Builder& add(){
+    return parent.get().addPhotonProductionReaction( this->construct() );
+  }
+
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/yields.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/crossSection.hpp"
 

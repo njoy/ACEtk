@@ -18,10 +18,11 @@ protected:
   std::optional< TotalGammaProduction > totalGammaProduction_;
 
   friend Reaction::Builder;
+  friend PhotonProductionReaction::Builder;
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"

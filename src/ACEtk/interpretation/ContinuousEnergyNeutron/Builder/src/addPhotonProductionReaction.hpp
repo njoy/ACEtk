@@ -1,4 +1,4 @@
-Builder& addPhotonProduction( PhotonProductionReaction&& reaction ){
+Builder& addPhotonProductionReaction( PhotonProductionReaction&& reaction ){
   if( photonProductionReactions_.insert( 
           std::make_pair( reaction.MT, std::move( reaction ) ) ).second ){
     return *this;

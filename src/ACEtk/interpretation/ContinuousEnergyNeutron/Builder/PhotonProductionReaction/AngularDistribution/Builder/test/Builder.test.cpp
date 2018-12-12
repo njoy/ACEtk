@@ -64,10 +64,11 @@ SCENARIO( "Testing Builder::TotalGammaProduction::Builder" ){
     }
     WHEN( "grid isn't all positive" ){
       std::vector< double > grid{ 1.0, 2.0, -3.0 };
-      tb.energyGrid( njoy::utility::copy( grid ) )
-        .cosineBins( njoy::utility::copy( bins ) );
       THEN( "an exception is thrown" ){
-        CHECK_THROWS( tb.construct() );
+        CHECK_THROWS_AS( 
+          tb.energyGrid( njoy::utility::copy( grid ) ),
+          details::verify::exceptions::NotPositive&
+        );
       }
     }
   }
