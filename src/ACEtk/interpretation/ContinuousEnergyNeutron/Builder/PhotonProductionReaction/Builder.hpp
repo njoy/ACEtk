@@ -8,20 +8,17 @@ private:
 
   std::optional< ContinuousEnergyNeutron::Builder::Tabulated1D > yields_;
   std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
+  std::optional< AngularDistribution > angularDistribution_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addYields.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addAngularDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/construct.hpp"
 
   friend CrossSection::Builder;
   friend Yields::Builder;
-  PhotonProductionReaction construct(){
-    return PhotonProductionReaction{
-      MT,
-      yields_,
-      crossSection_
-    };
-  }
+  friend AngularDistribution::Builder;
 
 public:
   Builder( ParentBuilder& parent, int MF, int MT ):
@@ -32,4 +29,8 @@ public:
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/yields.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/crossSection.hpp"
+
+  AngularDistribution::Builder angularDistribution(){ 
+    return AngularDistribution::Builder{ *this }; 
+  }
 };

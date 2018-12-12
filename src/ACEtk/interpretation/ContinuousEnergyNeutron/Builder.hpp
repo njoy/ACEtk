@@ -30,5 +30,4 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
 
-
 };

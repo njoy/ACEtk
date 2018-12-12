@@ -16,7 +16,6 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
     PPBuilder ppBuilder{ parentBuilder, 13, 102 };
     parentBuilder.energyGrid( njoy::utility::copy( energyGrid ) );
 
-    int MT{ 102 };
     std::vector< double > XS{ 1.0, 2.0, 3.0 };
     njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
     using XSBuilder = decltype( ppBuilder.crossSection( ) );
@@ -30,8 +29,8 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
     WHEN( "constructing a cross section photon production" ){
 
       TestBuilder tb{ ppBuilder };
-      tb.values( njoy::utility::copy( XS ) );
-      tb.energyGrid( grid );
+      tb.values( njoy::utility::copy( XS ) )
+        .energyGrid( grid );
 
       auto xs = tb.construct();
 
@@ -44,15 +43,15 @@ SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
       TestBuilder tb{ ppBuilder };
       GIVEN( "too few cross section values" ){
         std::vector< double > values{ 1.0, 2.0 };
-        tb.values( values );
-        tb.energyGrid( grid );
+        tb.values( values )
+          .energyGrid( grid );
 
         CHECK_THROWS_AS( tb.construct(), std::range_error& );
       }
       GIVEN( "too many cross section values" ){
         std::vector< double > values{ 1.0, 2.0, 3.0, 4.0 };
-        tb.values( values );
-        tb.energyGrid( grid );
+        tb.values( values )
+          .energyGrid( grid );
         CHECK_THROWS_AS( tb.construct(), std::range_error& );
       }
     }

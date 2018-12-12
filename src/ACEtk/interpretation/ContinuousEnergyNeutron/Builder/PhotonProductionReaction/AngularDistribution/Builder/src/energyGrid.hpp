@@ -2,12 +2,10 @@ template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
 Builder& energyGrid( Range&& grid ){
   try{
-    this->energyGrid_ = std::move( grid );
+    this-> energyGrid_ = details::verify::positive( grid );
     return *this;
   } catch( details::verify::exceptions::NotPositive& e ){
-    Log::info( "energy grid values must be all positive" );
-    throw;
+    Log::info( "energy grid must be all positive" );
+    throw e;
   }
 }
-
-Slice energyGrid(){ return Table::slice( energyGrid_.value() ); }
