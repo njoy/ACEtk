@@ -18,6 +18,7 @@ protected:
   tsl::hopscotch_map< int, Reaction > reactions_;
   tsl::hopscotch_map< int, PhotonProductionReaction > photonProductionReactions_;
   std::optional< TotalGammaProduction > totalGammaProduction_;
+  std::optional< ProbabilityTable > probabilityTable_;
 
   friend Reaction::Builder;
   friend PhotonProductionReaction::Builder;
@@ -25,6 +26,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"

@@ -9,11 +9,8 @@ Builder& CDFs( Range&& cdfs ){
     }
     this->CDFs_ = cdfs;
     return *this;
-  } catch( details::verify::exceptions::NotPositive& e ){
-    Log::info( "Probability table CDFs must be all positive" );
-    throw;
-  } catch( details::verify::exceptions::Unsorted& e ){
-    Log::info( "Probability table CDFs must be sorted" );
+  } catch( details::verify::exceptions::InvalidCDF& e ){
+    Log::info( "Trouble constructing CDF values in probability table" );
     throw;
   }
 }
