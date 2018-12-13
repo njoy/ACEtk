@@ -8,12 +8,12 @@ template< typename Arg,
           utility::Require< false, IsCDF, Arg > = true >
 static decltype( auto ) check( Arg&& arg ){
   try{
-    return std::forward< Arg >( positive( sorted( arg ) ) );
+    return positive( sorted( std::forward< Arg >( arg ) ) );
   } catch( details::verify::exceptions::NotPositive& p ){
     Log::info( "CDFs must be all positive" );
-    throw;
+    throw exceptions::InvalidCDF( "CDFs must be all positive" );
   } catch( details::verify::exceptions::Unsorted& s ){
     Log::info( "CDFs must be sorted" );
-    throw;
+    throw exceptions::InvalidCDF( "CDFs must be sorted" );
   }
 }

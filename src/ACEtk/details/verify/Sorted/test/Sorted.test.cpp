@@ -13,34 +13,34 @@ SCENARIO( "Testing sorted verification" ){
     std::vector< double > unsortedVector{ 1.0, 3.0, 2.0 };
 
     WHEN( "constructing from initializer list" ){
-      REQUIRE_NOTHROW( Sorted< std::vector< int > >( { 1,2,3,4,5 } ) );
+      CHECK_NOTHROW( Sorted< std::vector< int > >( { 1,2,3,4,5 } ) );
 
-      REQUIRE_THROWS_AS( 
+      CHECK_THROWS_AS( 
         Sorted< std::vector< double > >( { 1,2,3,2,1 } ), 
-        exceptions::Unsorted 
+        exceptions::Unsorted&
       );
     }
     WHEN( "constructing from a 'range'" ){
-      REQUIRE_NOTHROW( Sorted< std::vector< double > >( strictlyPositive ) );
-      REQUIRE_NOTHROW( Sorted< std::vector< double > >( positive ) );
-      REQUIRE_NOTHROW( Sorted< std::vector< int > >( negative ) );
-      REQUIRE_THROWS_AS( 
+      CHECK_NOTHROW( Sorted< std::vector< double > >( strictlyPositive ) );
+      CHECK_NOTHROW( Sorted< std::vector< double > >( positive ) );
+      CHECK_NOTHROW( Sorted< std::vector< int > >( negative ) );
+      CHECK_THROWS_AS( 
         Sorted< std::vector< double > >( unsortedVector ), 
-        exceptions::Unsorted 
+        exceptions::Unsorted& 
       );
 
     } // WHEN
     WHEN( "assigning" ){
       Sorted< std::vector< double > > sdVector = positive;
-      REQUIRE_NOTHROW( 
+      CHECK_NOTHROW( 
           sdVector = Sorted< std::vector< double > >( strictlyPositive) );
 
       sdVector = { 1.0, 2.0, 3.0 };
       CHECK( ranges::equal( { 1.0, 2.0, 3.0 }, sdVector ) );
 
-      REQUIRE_THROWS_AS( 
+      CHECK_THROWS_AS( 
         sdVector = unsortedVector,
-        exceptions::Unsorted
+        exceptions::Unsorted&
       );
     }
   } // GIVEN
