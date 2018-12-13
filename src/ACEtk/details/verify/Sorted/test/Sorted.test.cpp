@@ -21,12 +21,9 @@ SCENARIO( "Testing sorted verification" ){
       );
     }
     WHEN( "constructing from a 'range'" ){
-      REQUIRE_NOTHROW( 
-          Sorted< std::vector< double > >( strictlyPositive ) );
-      REQUIRE_NOTHROW( 
-          Sorted< std::vector< double > >( positive ) );
-      REQUIRE_NOTHROW( 
-          Sorted< std::vector< int > >( negative ) );
+      REQUIRE_NOTHROW( Sorted< std::vector< double > >( strictlyPositive ) );
+      REQUIRE_NOTHROW( Sorted< std::vector< double > >( positive ) );
+      REQUIRE_NOTHROW( Sorted< std::vector< int > >( negative ) );
       REQUIRE_THROWS_AS( 
         Sorted< std::vector< double > >( unsortedVector ), 
         exceptions::Unsorted 
