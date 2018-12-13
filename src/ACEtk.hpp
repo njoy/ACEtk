@@ -4,6 +4,7 @@
 #include <regex>
 #include <istream>
 #include <iterator>
+#include <functional>
 
 #ifdef USING_CPP17
   #include <optional>
