@@ -6,11 +6,7 @@
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing PhotonProduction::Builder" ){
-  struct Builder : public ContinuousEnergyNeutron::Builder{
-   public:
-    using ContinuousEnergyNeutron::Builder::PhotonProductionReaction;
-  };
-  Builder parentBuilder{};
+  ContinuousEnergyNeutron::Builder parentBuilder{};
 
   using PPBuilder = decltype( 
       parentBuilder.photonProductionReaction( 16, 102 ) );

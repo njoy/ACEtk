@@ -1,6 +1,7 @@
 class Builder{
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/NeutronYieldReferenceFrame.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Factors.hpp"
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection.hpp"
@@ -9,9 +10,10 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp"
 
-  std::optional< 
-    details::verify::Positive< std::vector< double > > > energyGrid_;
+  std::optional< details::verify::Positive< 
+    details::verify::Sorted< std::vector< double > > > > energyGrid_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   tsl::hopscotch_map< int, Reaction > reactions_;
   tsl::hopscotch_map< int, PhotonProductionReaction > photonProductionReactions_;
@@ -30,5 +32,6 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
+  ProbabilityTable::Builder probabilityTable(){ return ProbabilityTable::Builder{ *this }; }
 
 };

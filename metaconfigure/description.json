@@ -395,6 +395,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/NeutronYieldReferenceFrame.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp",
@@ -405,10 +406,15 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder/src/construct.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/energyGrid.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/cosineBins.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addYields.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/yields.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addCrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/crossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addAngularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/src/construct.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp",
@@ -441,12 +447,13 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/src/coefficients.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp",
     "src/ACEtk/details/verify.hpp",
@@ -585,6 +592,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.Yields.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.ProbabilityTable.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test/Builder.test.cpp"

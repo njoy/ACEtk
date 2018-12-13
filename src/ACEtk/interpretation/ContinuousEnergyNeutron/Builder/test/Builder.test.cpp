@@ -26,6 +26,15 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
           );
       }
     }
+    WHEN( "the energy grid is not sorted " ){
+      std::vector< double > grid{1.0, 2.0, 3.0, 7.0, 5.0};
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS(
+          ncBuilder.energyGrid( njoy::utility::copy( grid ) ),
+          details::verify::exceptions::Unsorted&
+          );
+      }
+    }
   }
   WHEN( "no energy grid has been given" ){
     THEN( "an exception is thrown when the energy grid is asked for" ){
@@ -391,3 +400,11 @@ SCENARIO( "adding gamma production data" ){
   GIVEN( "invalid cross section and energies" ){
   } // GIVEN
 } // SCENARIO
+
+SCENARIO( "Adding probability table" ){
+  ContinuousEnergyNeutron::Builder ncBuilder{};
+  // auto ptBuilder = ncBuilder.probabilityTable();
+
+  GIVEN( "valid data" ){
+  }
+}

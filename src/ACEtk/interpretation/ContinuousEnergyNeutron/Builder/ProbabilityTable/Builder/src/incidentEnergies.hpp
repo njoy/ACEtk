@@ -1,16 +1,14 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
-Builder& energyGrid( Range&& grid ){
+Builder& incidentEnergies( Range&& energies ){
   try{
-    this->energyGrid_ = std::move( grid );
+    this->incidentEnergies_ = energies;
     return *this;
   } catch( details::verify::exceptions::NotPositive& e ){
-    Log::info( "energy grid values must be all positive" );
+    Log::info( "Probability table incident energies must be all postive" );
     throw;
   } catch( details::verify::exceptions::Unsorted& e ){
-    Log::info( "energy grid values must be sorted" );
+    Log::info( "Probability table incident energies must be sorted" );
     throw;
   }
 }
-
-Slice energyGrid(){ return Table::slice( energyGrid_.value() ); }
