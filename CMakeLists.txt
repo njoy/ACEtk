@@ -80,6 +80,18 @@ set( ACEtk_AppleClang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_AppleClang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_AppleClang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_AppleClang_Darwin_static_flags "-static" )
+set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
+set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_GNU_Linux_strict_flags "-Werror" )
+set( ACEtk_GNU_Linux_coverage_flags "--coverage" )
+set( ACEtk_GNU_Linux_subproject_flags  )
+set( ACEtk_GNU_Linux_base_project_flags  )
+set( ACEtk_GNU_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
+set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
+set( ACEtk_GNU_Linux_static_flags "-static" )
 set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
 set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -104,18 +116,18 @@ set( ACEtk_GNU_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Darwin_static_flags "-static" )
-set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
-set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_GNU_Linux_strict_flags "-Werror" )
-set( ACEtk_GNU_Linux_coverage_flags "--coverage" )
-set( ACEtk_GNU_Linux_subproject_flags  )
-set( ACEtk_GNU_Linux_base_project_flags  )
-set( ACEtk_GNU_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
-set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
-set( ACEtk_GNU_Linux_static_flags "-static" )
+set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_Clang_Linux_strict_flags "-Werror" )
+set( ACEtk_Clang_Linux_coverage_flags "--coverage" )
+set( ACEtk_Clang_Linux_subproject_flags  )
+set( ACEtk_Clang_Linux_base_project_flags  )
+set( ACEtk_Clang_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
+set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
+set( ACEtk_Clang_Linux_static_flags "-static" )
 set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -140,18 +152,6 @@ set( ACEtk_Clang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_Clang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_Clang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_Clang_Darwin_static_flags "-static" )
-set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_Clang_Linux_strict_flags "-Werror" )
-set( ACEtk_Clang_Linux_coverage_flags "--coverage" )
-set( ACEtk_Clang_Linux_subproject_flags  )
-set( ACEtk_Clang_Linux_base_project_flags  )
-set( ACEtk_Clang_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
-set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
-set( ACEtk_Clang_Linux_static_flags "-static" )
 get_directory_property( is_subproject PARENT_DIRECTORY )
 
 if( NOT TARGET hopscotch-map-adapter )
@@ -346,20 +346,29 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsPositive.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsCDF.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Sorted.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsNormal.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsPDF.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Normal.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/StrictlyPositive.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsSorted.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsStrictlyPositive.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive/src/check.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive/src/assignment.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF/src/check.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF/src/ctor.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF/src/assignment.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/Unsorted.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/NotStrictlyPositive.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/InvalidNeutronYield.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/NotPositive.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/InvalidENDFInterpolationParameter.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/InvalidCDF.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/InvalidPDF.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/NotNormal.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CDF/src/check.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CDF/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CDF/src/assignment.hpp"
@@ -369,9 +378,13 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Sorted/src/check.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Sorted/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Sorted/src/assignment.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Normal/src/check.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Normal/src/ctor.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Normal/src/assignment.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/size.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/sorted.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/neutronYield.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/normal.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/strictlyPositive.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/interpolationParameters.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/positive.hpp"
@@ -417,6 +430,8 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/Table/Header/String/test )
         add_subdirectory( src/ACEtk/details/verify/test )
         add_subdirectory( src/ACEtk/details/verify/CDF/test )
+        add_subdirectory( src/ACEtk/details/verify/Normal/test )
+        add_subdirectory( src/ACEtk/details/verify/PDF/test )
         add_subdirectory( src/ACEtk/details/verify/Positive/test )
         add_subdirectory( src/ACEtk/details/verify/Sorted/test )
         add_subdirectory( src/ACEtk/details/verify/StrictlyPositive/test )
