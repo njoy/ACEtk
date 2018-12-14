@@ -37,4 +37,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"
+  AngularDistribution::Builder angularDistribution(){ 
+    return AngularDistribution::Builder{ *this }; 
+  }
 };

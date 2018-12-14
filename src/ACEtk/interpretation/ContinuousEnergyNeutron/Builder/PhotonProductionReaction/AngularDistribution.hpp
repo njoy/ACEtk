@@ -1,6 +1,7 @@
 struct AngularDistribution {
 
-  std::vector< double > energyGrid;
+  details::verify::Positive< 
+    details::verify::Sorted< std::vector< double > > > energyGrid;
   std::vector<
     details::verify::Positive< std::array< double, 33 > > > cosineBins;
 

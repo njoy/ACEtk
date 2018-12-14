@@ -420,9 +420,14 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/src/construct.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/energyGrid.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/construct.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/angularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyGrid.hpp",
@@ -643,6 +648,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.ProbabilityTable.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.AngularDistribution.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test/Builder.test.cpp"
