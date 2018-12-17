@@ -63,11 +63,20 @@ SCENARIO( "Testing Builder::TotalGammaProduction::Builder" ){
       }
     }
     WHEN( "grid isn't all positive" ){
-      std::vector< double > grid{ 1.0, 2.0, -3.0 };
+      std::vector< double > grid{ -1.0, 2.0, 3.0 };
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           tb.energyGrid( njoy::utility::copy( grid ) ),
           details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "energy grid isn't sorted" ){
+      std::vector< double > grid{ 1.0, 4.0, 3.0 };
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS(
+          tb.energyGrid( grid ),
+          details::verify::exceptions::Unsorted&
         );
       }
     }

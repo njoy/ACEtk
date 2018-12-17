@@ -289,10 +289,21 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Isotropic.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/CDF.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/equalSize.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/construct.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/PDF.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/src/construct.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/src/cosineBins.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/energyGrid.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/construct.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/isotropic.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/angularDistribution.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyGrid.hpp"
@@ -358,11 +369,15 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsSorted.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsStrictlyPositive.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/IsCosineBins.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CosineBins.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive/src/check.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Positive/src/assignment.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CosineBins/src/check.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CosineBins/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF/src/check.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/PDF/src/assignment.hpp"
@@ -374,6 +389,7 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/InvalidCDF.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/InvalidPDF.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/NotNormal.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/exceptions/InvalidCosine.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CDF/src/check.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CDF/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/CDF/src/assignment.hpp"
@@ -388,6 +404,7 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Normal/src/assignment.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/size.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/sorted.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/cosines.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/neutronYield.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/normal.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/strictlyPositive.hpp"
@@ -435,6 +452,7 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/Table/Header/String/test )
         add_subdirectory( src/ACEtk/details/verify/test )
         add_subdirectory( src/ACEtk/details/verify/CDF/test )
+        add_subdirectory( src/ACEtk/details/verify/CosineBins/test )
         add_subdirectory( src/ACEtk/details/verify/Normal/test )
         add_subdirectory( src/ACEtk/details/verify/PDF/test )
         add_subdirectory( src/ACEtk/details/verify/Positive/test )
@@ -451,6 +469,8 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/test )

@@ -13,6 +13,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
 
   friend CrossSection::Builder;
+  friend AngularDistribution::Builder;
   Reaction construct(){
     return Reaction{ 
       MT_, 

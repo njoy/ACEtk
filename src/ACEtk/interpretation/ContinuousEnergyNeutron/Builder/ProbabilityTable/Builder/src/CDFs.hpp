@@ -7,7 +7,7 @@ Builder& CDFs( Range&& cdfs ){
       Log::info( "Final CDF value must be 1.0" );
       throw std::exception();
     }
-    this->CDFs_ = cdfs;
+    this->CDFs_ = std::move( cdfs );
     return *this;
   } catch( details::verify::exceptions::InvalidCDF& e ){
     Log::info( "Trouble constructing CDF values in probability table" );
