@@ -46,7 +46,7 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           tb.cosineBins( njoy::utility::copy( cosineBins ) ),
-          details::verify::exceptions::Unsorted&
+          details::verify::exceptions::InvalidCosine&
         );
       }
     }
@@ -61,7 +61,7 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           tb.cosineBins( njoy::utility::copy( cosineBins ) ),
-          std::range_error&
+          details::verify::exceptions::InvalidCosine&
         );
       }
     }
