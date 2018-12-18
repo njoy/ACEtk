@@ -1,6 +1,6 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
-Builder& CDF( Range&& cdf ){
+Builder& cdf( Range&& cdf ){
 
   try{
     this->CDF_ = std::move( cdf );

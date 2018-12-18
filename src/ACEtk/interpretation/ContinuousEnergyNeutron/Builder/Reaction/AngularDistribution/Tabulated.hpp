@@ -1,7 +1,7 @@
-class Tabulated{
+struct Tabulated{
 
   int interpolationFlag;
-  details::verify::Positive< std::vector< double > > cosineGrid;
+  details::verify::CosineBins< std::vector< double > > cosineGrid;
   details::verify::PDF< std::vector< double > > PDF;
   details::verify::CDF< std::vector< double > > CDF;
 

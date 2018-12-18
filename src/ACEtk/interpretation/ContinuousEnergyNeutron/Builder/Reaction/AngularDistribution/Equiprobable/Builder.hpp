@@ -1,6 +1,7 @@
 class Builder {
 
-  using ParentBuilder = ContinuousEnergyNeutron::Builder::Reaction::AngularDistribution::Builder;
+  using ParentBuilder = ContinuousEnergyNeutron::Builder::Reaction::
+      AngularDistribution::Builder;
 
   std::reference_wrapper< ParentBuilder > parent;
   std::optional< 

@@ -3,7 +3,8 @@ template< typename Range,
 Builder& cosineBins( Range&& bins ){
   try{ 
     this->cosineBins_ = std::move( 
-        details::verify::sorted( details::make_array< 33 > (bins ) ) );
+        details::verify::CosineBins< std::array< double, 33 > >( 
+            details::make_array< 33 > (bins ) ) );
 
     auto values = cosineBins_.value();
     if( ( std::abs( values.front() ) > 1.0 ) or

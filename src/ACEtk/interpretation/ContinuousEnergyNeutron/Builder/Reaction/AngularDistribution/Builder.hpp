@@ -24,8 +24,8 @@ public:
   Equiprobable::Builder equiprobableCosineBins(){
     return Equiprobable::Builder{ *this };
   }
-  // Tabulated::Builder tabulated(){
-  //   return Tabulated::Builder{ *this };
-  // }
+  Tabulated::Builder tabulated(){
+    return Tabulated::Builder{ *this };
+  }
 
 };

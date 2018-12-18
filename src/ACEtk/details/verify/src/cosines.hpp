@@ -6,7 +6,7 @@ inline void cosine( const double& c ){
 }
 
 template< typename Range, 
-          utility::Require< false, IsCosineBins, Range > = true,
+          utility::Require< false, IsSorted, Range > = true,
           utility::Require< true, utility::is_range, Range > = true >
 inline void cosines( Range&& cs ){
   try{
@@ -17,6 +17,16 @@ inline void cosines( Range&& cs ){
   }
 }
 
-template< typename Range,
-          utility::Require< true, IsCosineBins, Range > = true >
-auto cosines( Range&& r ){ return r; }
+template< typename Range, 
+          utility::Require< false, IsCosineBins, Range > = true,
+          utility::Require< true, IsSorted, Range > = true,
+          utility::Require< true, utility::is_range, Range > = true >
+inline void cosines( Range&& cs ){
+  try{
+    cosine( cs.front() );
+    cosine( cs.back() );
+  } catch( details::verify::exceptions::InvalidCosine& c ){
+    Log::info( "Invalid cosine value found in array" );
+    throw c;
+  }
+}
