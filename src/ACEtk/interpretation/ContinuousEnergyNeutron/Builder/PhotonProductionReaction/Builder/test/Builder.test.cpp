@@ -64,8 +64,9 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
       CHECK( ranges::equal( bins, angularDistribution.cosineBins ) );
 
       auto yields = ppReaction.yields.value();
-      CHECK( ranges::equal( boundaries, yields.boundaries ) );
-      CHECK( ranges::equal( schemes, yields.schemes ) );
+      auto parameters = yields.parameters.value();
+      CHECK( ranges::equal( boundaries, parameters.first ) );
+      CHECK( ranges::equal( schemes, parameters.second ) );
       CHECK( ranges::equal( energies, yields.x ) );
       CHECK( ranges::equal( values, yields.y ) );
     }

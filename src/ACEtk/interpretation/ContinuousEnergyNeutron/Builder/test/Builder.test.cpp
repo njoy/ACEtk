@@ -244,10 +244,10 @@ SCENARIO( "fissionMultiplicity components ofContinuousEnergyNeutron::Builder" ){
         CHECK_NOTHROW( 
           ncBuilder.fissionMultiplicity( nuType )
                    .tabulated()
-                   .boundaries( std::move( boundaries ) )
-                   .schemes( std::move( schemes ) )
-                   .energies( std::move( energies ) )
-                   .multiplicities( std::move( multiplicities ) )
+                      .boundaries( std::move( boundaries ) )
+                      .schemes( std::move( schemes ) )
+                      .energies( std::move( energies ) )
+                      .multiplicities( std::move( multiplicities ) )
                    .add()
         );
       }

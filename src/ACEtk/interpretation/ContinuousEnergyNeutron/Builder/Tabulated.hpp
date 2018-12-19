@@ -1,7 +1,8 @@
 template< typename T >
 struct Tabulated {
-  std::vector< double > boundaries;
-  std::vector< double > schemes;
+  std::optional< std::pair<
+      std::vector< double >,
+      std::vector< double > >> parameters;
   std::vector< double > x;
   std::vector< T > y;
 
