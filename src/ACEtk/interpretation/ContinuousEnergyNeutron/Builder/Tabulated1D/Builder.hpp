@@ -4,7 +4,7 @@ class Builder {
   std::optional< std::vector< double > > boundaries_;
   std::optional< std::vector< double > > schemes_;
   std::optional< std::vector< double > > x_;
-  std::optional< std::vector< double > > y_;
+  std::optional< std::vector< T > > y_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D/Builder/src/construct.hpp"

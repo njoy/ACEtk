@@ -15,5 +15,9 @@ public:
     parent( parent )
   { }
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/src/cosineBins.hpp"
+  ParentBuilder& add() {
+    return parent.get().addEquiprobable( this->construct() );
+  }
+
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/src/values.hpp"
 };

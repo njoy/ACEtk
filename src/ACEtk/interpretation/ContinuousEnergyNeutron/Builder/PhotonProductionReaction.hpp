@@ -7,7 +7,7 @@ struct PhotonProductionReaction {
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder.hpp"
 
   int MT;
-  std::optional< ContinuousEnergyNeutron::Builder::Tabulated1D > yields;
+  std::optional< ContinuousEnergyNeutron::Builder::Tabulated1D<> > yields;
   std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection;
   AngularDistribution angularDistribution;
 

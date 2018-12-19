@@ -19,6 +19,10 @@ public:
     parent( parent )
   { }
 
+  ParentBuilder& add() {
+    return parent.get().addTabulated( this->construct() );
+  }
+
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/pdf.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/cdf.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/cosineGrid.hpp"

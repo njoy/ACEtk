@@ -1,8 +1,9 @@
+template< typename T = double >
 struct Tabulated1D {
   std::vector< double > boundaries;
   std::vector< double > schemes;
   std::vector< double > x;
-  std::vector< double > y;
+  std::vector< T > y;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated1D/Builder.hpp"
 };

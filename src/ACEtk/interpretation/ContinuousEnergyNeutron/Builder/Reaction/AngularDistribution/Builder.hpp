@@ -8,15 +8,20 @@ class Builder {
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/construct.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/addTabulated.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/addEquiprobable.hpp"
+
+  friend Tabulated::Builder;
+  friend Equiprobable::Builder;
 
 public: 
   Builder( ParentBuilder& parent ):
     parent( parent )
   { }
 
-  // ParentBuilder& add() {
-  //   return parent.get().addAngularDistribution( this->construct() );
-  // }
+  ParentBuilder& add() {
+    return parent.get().addAngularDistribution( this->construct() );
+  }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/isotropic.hpp"
@@ -24,6 +29,7 @@ public:
   Equiprobable::Builder equiprobableCosineBins(){
     return Equiprobable::Builder{ *this };
   }
+
   Tabulated::Builder tabulated(){
     return Tabulated::Builder{ *this };
   }

@@ -7,23 +7,16 @@ private:
   std::optional< NeutronYieldReferenceFrame > neutronYieldReferenceFrame_;
   std::optional< double > Q_;
   std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
+  std::optional< AngularDistribution > angularDistribution_;
   std::optional< Table::Slice > energyGrid_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addAngularDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/construct.hpp"
 
   friend CrossSection::Builder;
   friend AngularDistribution::Builder;
-  Reaction construct(){
-    return Reaction{ 
-      MT_, 
-      Q_.value(),
-      neutronYield_.value_or( 0 )*
-        static_cast< int >( neutronYieldReferenceFrame_.value_or( 
-            NeutronYieldReferenceFrame::LAB ) ),
-      energyGrid_.value(),
-      std::move( this->crossSection_.value() ) };
-  }
 
 public:
   Builder( ContinuousEnergyNeutron::Builder& parent, int MT ):

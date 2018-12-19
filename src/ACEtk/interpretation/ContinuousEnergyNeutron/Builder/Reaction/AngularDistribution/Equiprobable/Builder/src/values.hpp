@@ -1,6 +1,6 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
-Builder& cosineBins( Range&& bins ){
+Builder& values( Range&& bins ){
   try{ 
     this->cosineBins_ = std::move( 
         details::verify::CosineBins< std::array< double, 33 > >( 

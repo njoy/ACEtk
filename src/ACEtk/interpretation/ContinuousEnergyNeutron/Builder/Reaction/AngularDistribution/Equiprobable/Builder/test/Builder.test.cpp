@@ -26,7 +26,7 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
 
   TestBuilder tb{ angBuilder };
   GIVEN( "valid inputs" ){
-    tb.cosineBins( njoy::utility::copy( cosineBins ) );
+    tb.values( njoy::utility::copy( cosineBins ) );
 
     THEN( "the constructed values can be verified" ){
       auto equiprobable = tb.construct();
@@ -45,7 +45,7 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
 
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
-          tb.cosineBins( njoy::utility::copy( cosineBins ) ),
+          tb.values( njoy::utility::copy( cosineBins ) ),
           details::verify::exceptions::InvalidCosine&
         );
       }
@@ -60,7 +60,7 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
 
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
-          tb.cosineBins( njoy::utility::copy( cosineBins ) ),
+          tb.values( njoy::utility::copy( cosineBins ) ),
           details::verify::exceptions::InvalidCosine&
         );
       }

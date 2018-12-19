@@ -6,9 +6,10 @@ struct AngularDistribution{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable.hpp"
 
   using Format = std::variant<
-      Isotropic,
-      Equiprobable
-      >;
+    Isotropic,
+    Equiprobable,
+    Tabulated
+  >;
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp"
 
   details::verify::Positive< 
