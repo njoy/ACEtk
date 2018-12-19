@@ -1,10 +1,10 @@
 class Builder: 
-  public ContinuousEnergyNeutron::Builder::Tabulated1D<>::Builder< Builder >{
+  public ContinuousEnergyNeutron::Builder::Tabulated1D::Builder< Builder >{
 
   using ParentBuilder = ContinuousEnergyNeutron::Builder::
       PhotonProductionReaction::Builder;
   using BaseBuilder = ContinuousEnergyNeutron::Builder::
-      Tabulated1D<>::Builder< Builder >;
+      Tabulated1D::Builder< Builder >;
 
   std::reference_wrapper< ParentBuilder > parent;
 

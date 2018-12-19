@@ -1,4 +1,4 @@
-Tabulated1D<> construct(){ 
+Tabulated< T > construct(){ 
   try{
     details::verify::equalSize( this->boundaries_.value(), 
                                 this->schemes_.value() );
@@ -15,7 +15,7 @@ Tabulated1D<> construct(){
     throw;
   }
 
-  return Tabulated1D<>{
+  return Tabulated1D{
     std::move( this->boundaries_.value() ),
     std::move( this->schemes_.value() ),
     std::move( this->x_.value() ),

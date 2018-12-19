@@ -11,5 +11,4 @@ struct Reaction{
  Table::Slice energyGrid;
  ContinuousEnergyNeutron::Builder::CrossSection crossSection;
  AngularDistribution angularDistribution;
- // angularDistribution
 };
