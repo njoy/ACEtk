@@ -30,15 +30,10 @@ SCENARIO("test interpretation::DEDX1"){
 
     WHEN("querying for the temperature spacing"){
       REQUIRE( dedx1.temperatureSpacing() == 1.465744 );
-    }
-    
+    }    
   }
 
   auto standard = dedx1.standardWithoutCutoff();
-
-  auto exp = [=](auto&& entry){
-    return std::exp(entry) * mev;};
-    
   GIVEN("a standard model without a cutoff"){
 
     auto refLogErgFirstFour = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
@@ -59,7 +54,6 @@ SCENARIO("test interpretation::DEDX1"){
 	auto test =logEnergies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
-	// precision weirdness
 	RANGES_FOR(auto&& pair, ranges::view::zip(refLogErgMiddleFour,test)){
 	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
 	}
@@ -69,7 +63,6 @@ SCENARIO("test interpretation::DEDX1"){
 	auto test = logEnergies | ranges::view::drop_exactly(87) | ranges::to_vector;
 	REQUIRE( test == refLogErgLastFour );
       }            
-
     }
     
     WHEN("querying for the energies"){
@@ -78,15 +71,17 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( energies.size() == 91 );
 
       constexpr auto mev = 1.0 * dimwits::mega( dimwits::electronVolt );
+      auto exp_mev = [=](auto&& entry){
+	return std::exp(entry) * mev;};
     
       THEN("taking the first four entries"){
-	auto refExp = refLogErgFirstFour | ranges::view::transform(exp) | ranges::to_vector;
+	auto refExp = refLogErgFirstFour | ranges::view::transform(exp_mev) | ranges::to_vector;
 	auto test = energies | ranges::view::take_exactly(4) | ranges::to_vector;
 	REQUIRE( test == refExp );
       }
       
       AND_THEN("taking entries 40-43 (note that first index is 0)"){
-	auto refExp = refLogErgMiddleFour | ranges::view::transform(exp) | ranges::to_vector;
+	auto refExp = refLogErgMiddleFour | ranges::view::transform(exp_mev) | ranges::to_vector;
 	auto test = energies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
@@ -97,83 +92,83 @@ SCENARIO("test interpretation::DEDX1"){
       }
 
       AND_THEN("taking the last four entries"){
-	auto refExp = refLogErgLastFour | ranges::view::transform(exp) | ranges::to_vector;	
+	auto refExp = refLogErgLastFour | ranges::view::transform(exp_mev) | ranges::to_vector;	
 	auto test = energies | ranges::view::drop_exactly(87) | ranges::to_vector;
 	REQUIRE( test == refExp );
       } 
     }
 
+    auto refLogDenFirstFour = std::vector<double>{-11.51293, -10.83068, -10.14843,-9.466183};
+    auto refLogDenMiddleFour = std::vector<double>{-4.690451, -4.008204, -3.325956, -2.643709};
+    auto refLogDenLastFour = std::vector<double>{4.861013, 5.54326, 6.225508, 6.907755};
+    
     WHEN("querying for the log of densities"){
-      
+
       auto logDensities = standard.logDensities();
       REQUIRE( logDensities.size() == 28 );
-      
+
       THEN("taking the first four entries"){
-	auto reference = std::vector<double>{-11.51293, -10.83068, -10.14843,-9.466183};
 	auto test = logDensities | ranges::view::take_exactly(4) | ranges::to_vector;
-	//REQUIRE( test == reference );
-	// precision weirdness
-	RANGES_FOR(auto&& pair, ranges::view::zip(reference,test)){
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refLogDenFirstFour,test)){
 	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
 	}	
       }
-      
-      AND_THEN("taking entries 10-13"){
-	auto reference = std::vector<double>{-4.690451, -4.008204, -3.325956, -2.643709};	
+
+      AND_THEN("taking entries 10-13 (note that first index is 0)"){
 	auto test =logDensities | ranges::view::drop_exactly(10)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
-	//REQUIRE( test == reference );
-	// precision weirdness
-	RANGES_FOR(auto&& pair, ranges::view::zip(reference,test)){
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refLogDenMiddleFour,test)){
 	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
 	}
       }
 
       AND_THEN("taking the last four entries"){
-	auto reference = std::vector<double>{4.861013, 5.54326, 6.225508, 6.907755};	
 	auto test = logDensities | ranges::view::drop_exactly(24) | ranges::to_vector;
-	REQUIRE( test == reference );
-      }            
+	REQUIRE( test == refLogDenLastFour );
+      }
     }
     
     WHEN("querying for the densities"){
+
       auto densities = standard.densities();
       REQUIRE( densities.size() == 28 );
 
-      constexpr auto mev = 1.0 * dimwits::mega( dimwits::electronVolt );
-      auto exp = [=](auto&& entry){
-	return std::exp(entry) * mev;};
+      constexpr auto g = 1e-3 * dimwits::kilo( dimwits::gram );
+      constexpr auto cm = 1.0 * dimwits::centi( dimwits::meter );
+      
+      auto exp_gpcc = [=](auto&& entry){
+	return std::exp(entry) * g/(cm*cm*cm);};          
 
       THEN("taking the first four entries"){
-	auto reference = std::vector<double>{-11.51293, -10.83068, -10.14843,-9.466183};
-	auto refExp = reference | ranges::view::transform(exp) | ranges::to_vector;
+	auto refExp = refLogDenFirstFour | ranges::view::transform(exp_gpcc) | ranges::to_vector;
 	auto test = densities | ranges::view::take_exactly(4) | ranges::to_vector;
-	// REQUIRE( test == refExp );
-	// precision weirdness
+
 	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
 	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) );
 	}	
       }
-    
+      
       AND_THEN("taking entries 10-13 (note that first index is 0)"){
-	auto reference = std::vector<double>{-4.690451, -4.008204, -3.325956, -2.643709};
-	auto refExp = reference | ranges::view::transform(exp) | ranges::to_vector;
+	auto refExp = refLogDenMiddleFour | ranges::view::transform(exp_gpcc) | ranges::to_vector;
 	auto test = densities | ranges::view::drop_exactly(10)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
-	// REQUIRE( test == refExp );
-	// precision weirdness
-	RANGES_FOR(auto&& pair, ranges::view::zip(refExp,test)){
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
 	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) ); 
 	}
       }
-      
+
       AND_THEN("taking the last four entries"){
-	auto reference = std::vector<double>{4.861013, 5.54326, 6.225508, 6.907755};
-	auto refExp = reference | ranges::view::transform(exp) | ranges::to_vector;	
+	auto refExp = refLogDenLastFour | ranges::view::transform(exp_gpcc) | ranges::to_vector;	
 	auto test = densities | ranges::view::drop_exactly(24) | ranges::to_vector;
-	REQUIRE( test == refExp );
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
+	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) ); 
+	}
+	// REQUIRE( test == refExp ); this will not compile...
       } 
     }
   }
-  
 }

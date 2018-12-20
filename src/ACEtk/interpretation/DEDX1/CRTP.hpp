@@ -25,9 +25,11 @@ public:
   }
 
   auto densities() const {
+    constexpr auto g = 1e-3 * dimwits::kilo( dimwits::gram );
+    constexpr auto cm = 1.0 * dimwits::centi( dimwits::meter );    
     return this->logDensities()
-      | ranges::view::transform( []( auto&& entry ){
-	  return std::exp(entry) * mega(electronVolt); } );
+      | ranges::view::transform( [=]( auto&& entry ){
+	  return std::exp(entry) * g / (cm*cm*cm); } );
   }
 
   auto logTemperatures() const {
