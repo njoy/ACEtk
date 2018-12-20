@@ -400,21 +400,14 @@
     "src/ACEtk/details/verify/IsPositive.hpp",
     "src/ACEtk/details/verify/IsCDF.hpp",
     "src/ACEtk/details/verify/Sorted.hpp",
-    "src/ACEtk/details/verify/IsNormal.hpp",
-    "src/ACEtk/details/verify/IsPDF.hpp",
-    "src/ACEtk/details/verify/Normal.hpp",
     "src/ACEtk/details/verify/StrictlyPositive.hpp",
     "src/ACEtk/details/verify/IsSorted.hpp",
     "src/ACEtk/details/verify/exceptions.hpp",
     "src/ACEtk/details/verify/IsStrictlyPositive.hpp",
-    "src/ACEtk/details/verify/PDF.hpp",
     "src/ACEtk/details/verify/Positive.hpp",
     "src/ACEtk/details/verify/Positive/src/check.hpp",
     "src/ACEtk/details/verify/Positive/src/ctor.hpp",
     "src/ACEtk/details/verify/Positive/src/assignment.hpp",
-    "src/ACEtk/details/verify/PDF/src/check.hpp",
-    "src/ACEtk/details/verify/PDF/src/ctor.hpp",
-    "src/ACEtk/details/verify/PDF/src/assignment.hpp",
     "src/ACEtk/details/verify/exceptions/Unsorted.hpp",
     "src/ACEtk/details/verify/exceptions/NotStrictlyPositive.hpp",
     "src/ACEtk/details/verify/exceptions/InvalidNeutronYield.hpp",
@@ -432,9 +425,6 @@
     "src/ACEtk/details/verify/Sorted/src/check.hpp",
     "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
     "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
-    "src/ACEtk/details/verify/Normal/src/check.hpp",
-    "src/ACEtk/details/verify/Normal/src/ctor.hpp",
-    "src/ACEtk/details/verify/Normal/src/assignment.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
     "src/ACEtk/details/verify/src/neutronYield.hpp",
@@ -515,12 +505,6 @@
     ],
     "ACEtk.details.verify.CDF": [
       "src/ACEtk/details/verify/CDF/test/CDF.test.cpp"
-    ],
-    "ACEtk.details.verify.Normal": [
-      "src/ACEtk/details/verify/Normal/test/Normal.test.cpp"
-    ],
-    "ACEtk.details.verify.PDF": [
-      "src/ACEtk/details/verify/PDF/test/PDF.test.cpp"
     ],
     "ACEtk.details.verify.Positive": [
       "src/ACEtk/details/verify/Positive/test/Positive.test.cpp"

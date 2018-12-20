@@ -29,6 +29,9 @@ SCENARIO( "Testing sorted verification" ){
           CDF< std::vector< double > >( unsortedVector ),
           exceptions::InvalidCDF&
       );
+      auto cdf = CDF< std::vector< double > >( increasing );
+      CHECK( cdf.isPositive );
+      CHECK( cdf.isSorted );
     }
     WHEN( "assigning" ){
       CDF< std::vector< double > > cdf = increasing;
