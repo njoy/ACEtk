@@ -72,8 +72,9 @@ SCENARIO("test interpretation::DEDX1"){
       auto energies = standard.energies();
       REQUIRE( energies.size() == 91 );
 
-      auto logit = [](auto&& entry){
-	return std::exp(entry) * dimwits::mega( dimwits::electronVolt );};
+      constexpr auto mev = 1.0 * dimwits::mega( dimwits::electronVolt );
+      auto logit = [=](auto&& entry){
+	return std::exp(entry) * mev;};
     
       THEN("taking the first four entries"){
 	auto reference = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
@@ -81,25 +82,25 @@ SCENARIO("test interpretation::DEDX1"){
 	auto test = energies | ranges::view::take_exactly(4) | ranges::to_vector;
 	REQUIRE( test == refExp );
       }
-      /*
+      
       AND_THEN("taking entries 40-43 (note that first index is 0)"){
 	auto reference = std::vector<double>{-2.376966, -2.223461, -2.069955, -1.916449};
-	auto test =logEnergies | ranges::view::drop_exactly(40)
+	auto refExp = reference | ranges::view::transform(logit) | ranges::to_vector;
+	auto test = energies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
 	// precision weirdness
-	RANGES_FOR(auto&& pair, ranges::view::zip(reference,test)){
-	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
+	RANGES_FOR(auto&& pair, ranges::view::zip(refExp,test)){
+	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) ); 
 	}
       }
 
-      AND_THEN("taking the last four entries 40-43"){
+      AND_THEN("taking the last four entries"){
 	auto reference = std::vector<double>{4.8378, 4.991306, 5.1448120, 5.298317};
-	auto test = logEnergies | ranges::view::drop_exactly(87) | ranges::to_vector;
-	REQUIRE( test == reference );
+	auto refExp = reference | ranges::view::transform(logit) | ranges::to_vector;	
+	auto test = energies | ranges::view::drop_exactly(87) | ranges::to_vector;
+	REQUIRE( test == refExp );
       } 
-      */           
-      
     }
     
     WHEN("querying for the log of the densities"){
