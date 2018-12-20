@@ -1,5 +1,7 @@
 
-add_executable( ACEtk.interpretation.DEDX1.test dedx1.test.cpp )
+add_executable( ACEtk.interpretation.DEDX1.test
+                dedx1.test.cpp
+                StandardWithoutCutoff.test.cpp )
 target_compile_options( ACEtk.interpretation.DEDX1.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

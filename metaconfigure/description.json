@@ -404,6 +404,8 @@
     "src/ACEtk/interpretation/DEDX1.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP.hpp",
+    "src/ACEtk/interpretation/DEDX1/StandardWithoutCutoff.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
@@ -498,7 +500,8 @@
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
     ],
     "ACEtk.interpretation.DEDX1": [
-      "src/ACEtk/interpretation/DEDX1/test/dedx1.test.cpp"
+      "src/ACEtk/interpretation/DEDX1/test/dedx1.test.cpp",
+      "src/ACEtk/interpretation/DEDX1/test/StandardWithoutCutoff.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
