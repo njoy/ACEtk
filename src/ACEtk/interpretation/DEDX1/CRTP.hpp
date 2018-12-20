@@ -8,7 +8,6 @@ public:
   auto logEnergies() const {
     const auto length = this->table.get().data.NXS( 4 );
     const auto start = this->table.get().data.JXS( 2 );
-    std::cout << start << " " << length << "\n";
     return this->table.get().data.XSS( start, length );    
   }
 
