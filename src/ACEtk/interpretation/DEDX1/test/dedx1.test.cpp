@@ -36,7 +36,14 @@ SCENARIO("test interpretation::DEDX1"){
 
   auto standard = dedx1.standardWithoutCutoff();
 
+  auto exp = [=](auto&& entry){
+    return std::exp(entry) * mev;};
+    
   GIVEN("a standard model without a cutoff"){
+
+    auto refLogErgFirstFour = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
+    auto refLogErgMiddleFour = std::vector<double>{-2.376966, -2.223461, -2.069955, -1.916449};
+    auto refLogErgLastFour = std::vector<double>{4.8378, 4.991306, 5.1448120, 5.298317};
     
     WHEN("querying for the log of energies"){
 
@@ -44,48 +51,42 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( logEnergies.size() == 91 );
 
       THEN("taking the first four entries"){
-	auto reference = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
 	auto test = logEnergies | ranges::view::take_exactly(4) | ranges::to_vector;
-	REQUIRE( test == reference );
+	REQUIRE( test == refLogErgFirstFour );
       }
 
       AND_THEN("taking entries 40-43 (note that first index is 0)"){
-	auto reference = std::vector<double>{-2.376966, -2.223461, -2.069955, -1.916449};
 	auto test =logEnergies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
 	// precision weirdness
-	RANGES_FOR(auto&& pair, ranges::view::zip(reference,test)){
+	RANGES_FOR(auto&& pair, ranges::view::zip(refLogErgMiddleFour,test)){
 	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
 	}
       }
 
       AND_THEN("taking the last four entries"){
-	auto reference = std::vector<double>{4.8378, 4.991306, 5.1448120, 5.298317};
 	auto test = logEnergies | ranges::view::drop_exactly(87) | ranges::to_vector;
-	REQUIRE( test == reference );
+	REQUIRE( test == refLogErgLastFour );
       }            
 
     }
     
     WHEN("querying for the energies"){
+
       auto energies = standard.energies();
       REQUIRE( energies.size() == 91 );
 
       constexpr auto mev = 1.0 * dimwits::mega( dimwits::electronVolt );
-      auto exp = [=](auto&& entry){
-	return std::exp(entry) * mev;};
     
       THEN("taking the first four entries"){
-	auto reference = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
-	auto refExp = reference | ranges::view::transform(exp) | ranges::to_vector;
+	auto refExp = refLogErgFirstFour | ranges::view::transform(exp) | ranges::to_vector;
 	auto test = energies | ranges::view::take_exactly(4) | ranges::to_vector;
 	REQUIRE( test == refExp );
       }
       
       AND_THEN("taking entries 40-43 (note that first index is 0)"){
-	auto reference = std::vector<double>{-2.376966, -2.223461, -2.069955, -1.916449};
-	auto refExp = reference | ranges::view::transform(exp) | ranges::to_vector;
+	auto refExp = refLogErgMiddleFour | ranges::view::transform(exp) | ranges::to_vector;
 	auto test = energies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
@@ -96,8 +97,7 @@ SCENARIO("test interpretation::DEDX1"){
       }
 
       AND_THEN("taking the last four entries"){
-	auto reference = std::vector<double>{4.8378, 4.991306, 5.1448120, 5.298317};
-	auto refExp = reference | ranges::view::transform(exp) | ranges::to_vector;	
+	auto refExp = refLogErgLastFour | ranges::view::transform(exp) | ranges::to_vector;	
 	auto test = energies | ranges::view::drop_exactly(87) | ranges::to_vector;
 	REQUIRE( test == refExp );
       } 
