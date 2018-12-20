@@ -20,13 +20,14 @@ public:
   auto logDensities() const {
     const auto length = this->table.get().data.NXS( 5 );
     auto start = this->table.get().data.JXS( 2 )
-      + this->table.get().data.NXS( 4 ) + length;
+      + this->table.get().data.NXS( 4 );
     return this->table.get().data.XSS( start, length );    
   }
 
   auto densities() const {
-    constexpr auto g = 1e-3 * dimwits::kilo( dimwits::gram );
-    constexpr auto cm = 1.0 * dimwits::centi( dimwits::meter );    
+    constexpr auto cm = 1.0 * dimwits::centi(dimwits::meter);
+    constexpr auto g = 1.0 * dimwits::gram;
+    
     return this->logDensities()
       | ranges::view::transform( [=]( auto&& entry ){
 	  return std::exp(entry) * g / (cm*cm*cm); } );
@@ -36,7 +37,7 @@ public:
     const auto length = this->table.get().data.NXS( 6 );
     auto start = this->table.get().data.JXS( 2 )
       + this->table.get().data.NXS( 4 )
-      + this->table.get().data.NXS( 5 ) + length;
+      + this->table.get().data.NXS( 5 );
     return this->table.get().data.XSS( start, length );    
     
   }
