@@ -2,7 +2,7 @@ template< typename T >
 struct Tabulated {
   std::optional< std::pair<
       std::vector< double >,
-      std::vector< double > >> parameters;
+      std::vector< double > > > parameters;
   std::vector< double > x;
   std::vector< T > y;
 

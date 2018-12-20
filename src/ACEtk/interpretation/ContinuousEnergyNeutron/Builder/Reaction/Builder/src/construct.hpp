@@ -8,7 +8,8 @@ Reaction construct(){
                   NeutronYieldReferenceFrame::LAB ) ),
       energyGrid_.value(),
       std::move( this->crossSection_.value() ),
-      std::move( this->angularDistribution_.value() )
+      std::move( this->angularDistribution_.value() ),
+      std::move( this->energyDistribution_.value() )
     };
   } catch( std::bad_optional_access& b ){
     Log::error( "Trouble when creating a Reaction object" );

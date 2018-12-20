@@ -30,10 +30,12 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
         .schemes( njoy::utility::copy( schemes ) )
         .energies( njoy::utility::copy( energies ) )
         .values( njoy::utility::copy( values ) );
-      auto tabu = tb.construct();
-      tb.add();
 
       THEN( "the members of Yields can be verified" ){
+        auto tabu = tb.construct();
+        auto pair = tabu.parameters.value();
+        CHECK( boundaries == pair.first );
+        CHECK( schemes == pair.second );
         CHECK( energies == tabu.x );
         CHECK( values == tabu.y );
       }

@@ -6,7 +6,7 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "Testing PhotonProduction::CrossSection::Builder" ){
+SCENARIO( "Testing Reaction::CrossSection::Builder" ){
   GIVEN( "parent builder" ){
     ContinuousEnergyNeutron::Builder topBuilder{};
     using ReacBuilder = decltype( topBuilder.reaction( 102 ) );

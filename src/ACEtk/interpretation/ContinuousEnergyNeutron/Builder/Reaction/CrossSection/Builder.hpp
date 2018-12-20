@@ -13,6 +13,7 @@ public:
   ParentBuilder& add(){
     return parent.get().addCrossSection( this->construct() );
   }
+
   using BaseBuilder::BaseBuilder;
   using BaseBuilder::energyGrid;
   using BaseBuilder::values;

@@ -8,6 +8,7 @@ private:
   std::optional< double > Q_;
   std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
   std::optional< AngularDistribution > angularDistribution_;
+  std::optional< EnergyDistribution > energyDistribution_;
   std::optional< Table::Slice > energyGrid_;
 
 protected:
@@ -33,5 +34,8 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"
   AngularDistribution::Builder angularDistribution(){ 
     return AngularDistribution::Builder{ *this }; 
+  }
+  EnergyDistribution::Builder energyDistribution(){ 
+    return EnergyDistribution::Builder{ *this }; 
   }
 };
