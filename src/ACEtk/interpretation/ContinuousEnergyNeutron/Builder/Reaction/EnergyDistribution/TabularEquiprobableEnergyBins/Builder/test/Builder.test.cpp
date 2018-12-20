@@ -14,11 +14,11 @@ SCENARIO(
   using TabBuilder = decltype( edBuilder.tabularEquiprobableEnergyBins() );
 
   struct TestBuilder : public TabBuilder {
-    using TabBuilder::construct;
+    // using TabBuilder::construct;
     using TabBuilder::TabBuilder;
   };
 
-  TestBuilder tb{ angBuilder };
+  TestBuilder tb{ edBuilder };
   GIVEN( "valid inputs" ){
   }
   GIVEN( "invalid inputs" ){

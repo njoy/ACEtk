@@ -1,12 +1,14 @@
 template< typename DerivedBuilder, typename DerivedType, typename ParentBuilder >
 class Builder: 
-  public Tabulated1D::Builder< Builder< DerivedBuilder, ParentBuilder > >{
+  public Tabulated1D::Builder< 
+    Builder< DerivedBuilder, DerivedType, ParentBuilder > >{
 
-  using BaseBuilder = ContinuousEnergyNeutron::Builder::
-      Tabulated1D::Builder< Builder >;
+  using BaseBuilder = Tabulated1D::Builder< 
+    Builder< DerivedBuilder, DerivedType, ParentBuilder > >;
 
 protected:
   std::reference_wrapper< ParentBuilder > parent;
+  using BaseBuilder::construct;
 
 public:
   Builder( ParentBuilder& parent ):
@@ -16,9 +18,11 @@ public:
   using BaseBuilder::boundaries;
   using BaseBuilder::schemes;
 
-  TabularEquiprobableEnergyBins::Builder tabularEquiprobableEnergyBins(){
-    return TabularEquiprobableEnergyBins::Builder { ... };
+  typename DerivedType::TabularEquiprobableEnergyBins::Builder 
+  tabularEquiprobableEnergyBins(){
+    return { parent };
   }
+
 #define RENAME(basename, derivedname)\
   template< typename Range,\
             utility::Require< true, utility::is_range, Range > = true >\
