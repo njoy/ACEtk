@@ -77,13 +77,15 @@ SCENARIO("test interpretation::DEDX1"){
 
     
       THEN("taking the first four entries"){
-	auto refExp = refLogErgFirstFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;
+	auto refExp = refLogErgFirstFour | ranges::view::transform(exp_w_units(mev))
+	  | ranges::to_vector;
 	auto test = energies | ranges::view::take_exactly(4) | ranges::to_vector;
 	REQUIRE( test == refExp );
       }
       
       AND_THEN("taking entries 40-43"){
-	auto refExp = refLogErgMiddleFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;
+	auto refExp = refLogErgMiddleFour | ranges::view::transform(exp_w_units(mev))
+	  | ranges::to_vector;
 	auto test = energies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
@@ -94,7 +96,8 @@ SCENARIO("test interpretation::DEDX1"){
       }
 
       AND_THEN("taking the last four entries"){
-	auto refExp = refLogErgLastFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;	
+	auto refExp = refLogErgLastFour | ranges::view::transform(exp_w_units(mev))
+	  | ranges::to_vector;	
 	auto test = energies | ranges::view::drop_exactly(87) | ranges::to_vector;
 	REQUIRE( test == refExp );
       } 
@@ -143,7 +146,8 @@ SCENARIO("test interpretation::DEDX1"){
       constexpr auto gpcc = g/cm/cm/cm;
       
       THEN("taking the first four entries"){
-	auto refExp = refLogDenFirstFour | ranges::view::transform(exp_w_units(gpcc)) | ranges::to_vector;
+	auto refExp = refLogDenFirstFour | ranges::view::transform(exp_w_units(gpcc))
+	  | ranges::to_vector;
 	auto test = densities | ranges::view::take_exactly(4) | ranges::to_vector;
 
 	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
@@ -162,7 +166,8 @@ SCENARIO("test interpretation::DEDX1"){
       }
 
       AND_THEN("taking the last four entries"){
-	auto refExp = refLogDenLastFour | ranges::view::transform(exp_w_units(gpcc)) | ranges::to_vector;	
+	auto refExp = refLogDenLastFour | ranges::view::transform(exp_w_units(gpcc))
+	  | ranges::to_vector;	
 	auto test = densities | ranges::view::drop_exactly(24) | ranges::to_vector;
 
 	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
@@ -209,7 +214,8 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( temperatures.size() == 28 );
 
       THEN("taking the first four entries"){
-	auto refExp = refLogTempFirstFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;
+	auto refExp = refLogTempFirstFour | ranges::view::transform(exp_w_units(mev))
+	  | ranges::to_vector;
 	auto test = temperatures | ranges::view::take_exactly(4) | ranges::to_vector;
 
 	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
@@ -218,7 +224,8 @@ SCENARIO("test interpretation::DEDX1"){
       }
       
       AND_THEN("taking entries 10-13"){
-	auto refExp = refLogTempMiddleFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;
+	auto refExp = refLogTempMiddleFour | ranges::view::transform(exp_w_units(mev))
+	  | ranges::to_vector;
 	auto test = temperatures | ranges::view::drop_exactly(10)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
@@ -228,14 +235,88 @@ SCENARIO("test interpretation::DEDX1"){
       }
 
       AND_THEN("taking the last four entries"){
-	auto refExp = refLogTempLastFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;	
+	auto refExp = refLogTempLastFour | ranges::view::transform(exp_w_units(mev))
+	  | ranges::to_vector;	
 	auto test = temperatures | ranges::view::drop_exactly(24) | ranges::to_vector;
 
 	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
 	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) ); 
 	}
-	// REQUIRE( test == refExp ); this will not compile...
       } 
     }
+
+    auto refLogSPFirstFour = std::vector<double>{-48.6146, -48.64614, -48.69095, -48.74642};
+    auto refLogSPMiddleFour = std::vector<double>{0.0, 0.0, 0.0, -47.82199};
+    auto refLogSPLastFour = std::vector<double>{-60.42358, -60.57709, -60.73059, -60.8841};
+    
+    WHEN("querying for the log of StoppingPowers"){
+
+      auto logStoppingPowers = standard.logStoppingPowers();
+      REQUIRE( logStoppingPowers.size() == 71344 );
+
+      THEN("taking the first four entries"){
+	auto test = logStoppingPowers | ranges::view::take_exactly(4) | ranges::to_vector;
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refLogSPFirstFour,test)){
+	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
+	}	
+      }
+
+      THEN("taking the middle four entries"){
+	auto test = logStoppingPowers | ranges::view::drop_exactly(35672)
+	  | ranges::view::take_exactly(4) | ranges::to_vector;
+	
+	RANGES_FOR(auto&& pair, ranges::view::zip(refLogSPMiddleFour,test)){
+	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
+	}	
+      }
+
+      THEN("taking the last four entries"){
+	auto test = logStoppingPowers | ranges::view::drop_exactly(71340)
+	  | ranges::view::take_exactly(4) | ranges::to_vector;
+	
+	RANGES_FOR(auto&& pair, ranges::view::zip(refLogSPLastFour,test)){
+	  REQUIRE( pair.first == Approx(pair.second).margin(1e-15) );
+	}	
+      }        
+    }
+
+    WHEN("querying for the stoppingPowers"){
+
+      auto stoppingPowers = standard.stoppingPowers();
+      REQUIRE( stoppingPowers.size() == 71344 );
+
+      THEN("taking the first four entries"){
+	auto refExp = refLogSPFirstFour | ranges::view::transform(exp_w_units(barn))
+	  | ranges::to_vector;
+	auto test = stoppingPowers | ranges::view::take_exactly(4) | ranges::to_vector;
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
+	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) );
+	}	
+      }
+      
+      AND_THEN("taking the middle four entries"){
+	auto refExp = refLogSPMiddleFour | ranges::view::transform(exp_w_units(barn))
+	  | ranges::to_vector;
+	auto test = stoppingPowers | ranges::view::drop_exactly(35672)
+	  | ranges::view::take_exactly(4) | ranges::to_vector;
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
+	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) ); 
+	}
+      }
+
+      AND_THEN("taking the last four entries"){
+	auto refExp = refLogSPLastFour | ranges::view::transform(exp_w_units(barn))
+	  | ranges::to_vector;	
+	auto test = stoppingPowers | ranges::view::drop_exactly(71340) | ranges::to_vector;
+
+	RANGES_FOR(auto&& pair, ranges::view::zip(refExp, test)){
+	  REQUIRE( pair.first.value == Approx(pair.second.value).margin(1e-15) ); 
+	}
+      } 
+    }
+    
   }
 }
