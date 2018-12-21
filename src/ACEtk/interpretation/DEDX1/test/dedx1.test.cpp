@@ -55,7 +55,7 @@ SCENARIO("test interpretation::DEDX1"){
 	REQUIRE( test == refLogErgFirstFour );
       }
 
-      AND_THEN("taking entries 40-43 (note that first index is 0)"){
+      AND_THEN("taking entries 40-43"){
 	auto test =logEnergies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
@@ -82,7 +82,7 @@ SCENARIO("test interpretation::DEDX1"){
 	REQUIRE( test == refExp );
       }
       
-      AND_THEN("taking entries 40-43 (note that first index is 0)"){
+      AND_THEN("taking entries 40-43"){
 	auto refExp = refLogErgMiddleFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;
 	auto test = energies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
@@ -117,7 +117,7 @@ SCENARIO("test interpretation::DEDX1"){
 	}	
       }
 
-      AND_THEN("taking entries 10-13 (note that first index is 0)"){
+      AND_THEN("taking entries 10-13"){
 	auto test =logDensities | ranges::view::drop_exactly(10)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
@@ -151,7 +151,7 @@ SCENARIO("test interpretation::DEDX1"){
 	}	
       }
       
-      AND_THEN("taking entries 10-13 (note that first index is 0)"){
+      AND_THEN("taking entries 10-13"){
 	auto refExp = refLogDenMiddleFour | ranges::view::transform(exp_w_units(gpcc)) | ranges::to_vector;
 	auto test = densities | ranges::view::drop_exactly(10)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
@@ -188,7 +188,7 @@ SCENARIO("test interpretation::DEDX1"){
 	}	
       }
 
-      AND_THEN("taking entries 10-13 (note that first index is 0)"){
+      AND_THEN("taking entries 10-13"){
 	auto test =logTemperatures | ranges::view::drop_exactly(10)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
 
@@ -217,7 +217,7 @@ SCENARIO("test interpretation::DEDX1"){
 	}	
       }
       
-      AND_THEN("taking entries 10-13 (note that first index is 0)"){
+      AND_THEN("taking entries 10-13"){
 	auto refExp = refLogTempMiddleFour | ranges::view::transform(exp_w_units(mev)) | ranges::to_vector;
 	auto test = temperatures | ranges::view::drop_exactly(10)
 	  | ranges::view::take_exactly(4) | ranges::to_vector;
