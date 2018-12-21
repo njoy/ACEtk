@@ -403,6 +403,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
     "src/ACEtk/interpretation/DEDX1.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
+    "src/ACEtk/interpretation/EPR.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/DEDX1/CRTP.hpp",
     "src/ACEtk/interpretation/DEDX1/StandardWithoutCutoff.hpp",
@@ -410,6 +411,10 @@
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
+    "src/ACEtk/interpretation/EPR/Coherent.hpp",
+    "src/ACEtk/interpretation/EPR/CRTP.hpp",
+    "src/ACEtk/interpretation/EPR/Incoherent.hpp",
+    "src/ACEtk/interpretation/EPR/CRTP/FormFactors.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/cummulativeDistribution.hpp",
     "src/ACEtk/interpretation/MP1/src/energyGrid.hpp",
@@ -500,14 +505,18 @@
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
     ],
     "ACEtk.interpretation.DEDX1": [
-      "src/ACEtk/interpretation/DEDX1/test/dedx1.test.cpp",
-      "src/ACEtk/interpretation/DEDX1/test/StandardWithoutCutoff.test.cpp"
+      "src/ACEtk/interpretation/DEDX1/test/dedx1.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/AtomicLevels.test.cpp",
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
       "src/ACEtk/interpretation/EL03/test/MottScatteringCorrection.test.cpp",
       "src/ACEtk/interpretation/EL03/test/RileyCrossSection.test.cpp"
+    ],
+    "ACEtk.interpretation.EPR": [
+      "src/ACEtk/interpretation/EPR/test/Coherent.test.cpp",
+      "src/ACEtk/interpretation/EPR/test/eprdata.test.cpp",
+      "src/ACEtk/interpretation/EPR/test/Incoherent.test.cpp"
     ],
     "ACEtk.interpretation.MP1": [
       "src/ACEtk/interpretation/MP1/test/cumulativeDistributions.test.cpp",
