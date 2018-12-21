@@ -9,7 +9,6 @@ SCENARIO("test interpretation::DEDX1"){
 
   constexpr auto mev = 1.0 * mega(electronVolt);
   constexpr auto cm = 1.0 * centi(meter);
-  constexpr auto g = 1.0 * gram;
 
   auto exp_w_units = [](auto units){
     return [units](auto&& entry){

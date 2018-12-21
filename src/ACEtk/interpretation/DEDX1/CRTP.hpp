@@ -30,7 +30,7 @@ public:
     constexpr auto cm = centi(meter);
     
     return this->logDensities()
-      | ranges::view::transform( [=]( auto&& entry ){
+      | ranges::view::transform( [cm]( auto&& entry ){
 	  return std::exp(entry) / (cm*cm*cm); } );
   }
 
@@ -65,7 +65,7 @@ public:
     constexpr auto mev = mega(electronVolt);
 
     return this->logStoppingPowers()
-      | ranges::view::transform( [=]( auto&& entry ){
+      | ranges::view::transform( [cm, mev]( auto&& entry ){
 	  return std::exp(entry) * cm * cm * mev; } );
   }
 
