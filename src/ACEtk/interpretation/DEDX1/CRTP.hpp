@@ -19,23 +19,25 @@ public:
 
   auto logDensities() const {
     const auto length = this->table.get().data.NXS( 5 );
-    auto start = this->table.get().data.JXS( 2 )
+    const auto start =
+      this->table.get().data.JXS( 2 )
       + this->table.get().data.NXS( 4 );
     return this->table.get().data.XSS( start, length );    
   }
 
   auto densities() const {
-    constexpr auto cm = 1.0 * dimwits::centi(dimwits::meter);
-    constexpr auto g = 1.0 * dimwits::gram;
+    using namespace dimwits;
+    constexpr auto cm = centi(meter);
     
     return this->logDensities()
       | ranges::view::transform( [=]( auto&& entry ){
-	  return std::exp(entry) * g / (cm*cm*cm); } );
+	  return std::exp(entry) / (cm*cm*cm); } );
   }
 
   auto logTemperatures() const {
     const auto length = this->table.get().data.NXS( 6 );
-    auto start = this->table.get().data.JXS( 2 )
+    const auto start =
+      this->table.get().data.JXS( 2 )
       + this->table.get().data.NXS( 4 )
       + this->table.get().data.NXS( 5 );
     return this->table.get().data.XSS( start, length );    
@@ -58,9 +60,13 @@ public:
   }
 
   auto stoppingPowers() const {
+    using namespace dimwits;
+    constexpr auto cm = centi(meter);    
+    constexpr auto mev = mega(electronVolt);
+
     return this->logStoppingPowers()
-      | ranges::view::transform( []( auto&& entry ){
-	  return std::exp(entry) * barn; } );
+      | ranges::view::transform( [=]( auto&& entry ){
+	  return std::exp(entry) * cm * cm * mev; } );
   }
 
 };
