@@ -69,29 +69,31 @@ public:
   }  
 
 protected:
-  auto density_index(const DenT density) const {
+  auto densityIndex(const DenT density) const {
     auto ds = this->densities();
-    auto index = ranges::distance(ds.begin(), ranges::lower_bound(ds, density));
+    auto index =
+      ranges::distance(ds.begin(), ranges::lower_bound(ds, density));
     return  (index != -1) ? index : 0;
   }
-  auto density_index(const TempT temperature) const {
+  auto densityIndex(const TempT temperature) const {
     auto ts = this->temperatures();
-    auto index = ranges::distance(ts.begin(), ranges::lower_bound(ts, temperature)) - 1;
+    auto index =
+      ranges::distance(ts.begin(), ranges::lower_bound(ts, temperature)) - 1;
     return  (index != -1) ? index : 0;
   }
   
 public:
   auto logStoppingPowers(const DenT density, const TempT temperature) const {
-    auto i = this->density_index(density);
-    auto j = this->density_index(temperature);    
+    auto i = this->densityIndex(density);
+    auto j = this->densityIndex(temperature);    
     return ( this->logStoppingPowers()
 	     | ranges::view::chunk( this->numEnergies() )
 	     | ranges::view::chunk( this->numDensities() ) )[i][j];
   }
   
   auto stoppingPowers(const DenT density, const TempT temperature) const {
-    auto i = this->density_index(density);
-    auto j = this->density_index(temperature);        
+    auto i = this->densityIndex(density);
+    auto j = this->densityIndex(temperature);        
     return ( this->stoppingPowers()
 	     | ranges::view::chunk( this->numEnergies() )
 	     | ranges::view::chunk( this->numDensities() ) )[i][j];
