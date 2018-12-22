@@ -4,11 +4,12 @@
 #include "ACEtk.hpp"
 
 SCENARIO("test interpretation::DEDX1"){
-
+  
   using namespace dimwits;
 
-  constexpr auto mev = 1.0 * mega(electronVolt);
-  constexpr auto cm = 1.0 * centi(meter);
+  constexpr auto mev = mega(electronVolt);
+  constexpr auto cm = centi(meter);
+  constexpr auto cc = cm*cm*cm;  
 
   auto exp_w_units = [](auto units){
     return [units](auto&& entry){
@@ -20,7 +21,7 @@ SCENARIO("test interpretation::DEDX1"){
   
   auto table = njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("1001.dedx.h1"));
   const auto dedx1 = njoy::ACEtk::interpretation::DEDX1(std::move(table));
-
+    
   GIVEN("a DEDX1 interpretation"){
 
     WHEN("querying for the target atomic number"){
@@ -311,6 +312,24 @@ SCENARIO("test interpretation::DEDX1"){
 	  REQUIRE( pair.first == pair.second );
 	}	
       } 
-    }    
+    }
+
+    WHEN("querying for the stoppingPowers at density = 1e21 / cc"
+	 "                               and temperature = 1e-5 MeV (kT)"){
+
+      auto stoppingPowers = standard.stoppingPowers( 1e21/cc, 1e-5*mev);
+      REQUIRE( stoppingPowers.size() == 91 );
+
+      THEN("taking the first four entries"){
+	auto refExp = refLogSPFirstFour | ranges::view::transform(exp_w_units(cm*cm*mev));
+	auto test = stoppingPowers | ranges::view::take_exactly(4);
+	auto difference = ranges::view::zip_with(rel_diff, refExp, test)
+	  | ranges::view::transform([](auto&& x){return x.value;});
+	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+	  REQUIRE( pair.first == pair.second );
+	}		
+      } 
+    }
+    
   }
 }
