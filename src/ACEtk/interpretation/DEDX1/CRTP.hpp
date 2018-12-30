@@ -1,8 +1,3 @@
-template<typename... T>
-static void f(T...){
-  std::puts(__PRETTY_FUNCTION__);
-}
-
 template<typename Derived>
 class CRTP{
   std::reference_wrapper<const Table> table;
@@ -10,8 +5,8 @@ class CRTP{
   static constexpr auto cm = dimwits::centi(dimwits::meter);
   static constexpr auto cc = cm*cm*cm;  
   static constexpr auto mev = dimwits::mega(dimwits::electronVolt);
-  using DenT = decltype(1.0 / cc);
-  using TempT = decltype(1.0 * mev);
+  using DenT = decltype(1.0/cc);
+  using TempT = decltype(1.0*mev);
 
 protected:
   auto numEnergies() const {return this->table.get().data.NXS( 4 );}
@@ -50,7 +45,6 @@ public:
     const auto length = this->numTemperatures();
     const auto start = this->gridStart() + this->numEnergies() + this->numDensities();
     return this->table.get().data.XSS( start, length );    
-    
   }
 
   auto temperatures() const {
@@ -95,7 +89,7 @@ public:
   auto logStoppingPowers(const DenT density, const TempT temperature) const {
     return this->get( this->logStoppingPowers(), density, temperature );
   }
-  
+
   auto stoppingPowers(const DenT density, const TempT temperature) const {
     return this->get( this->stoppingPowers(), density, temperature );    
   }
