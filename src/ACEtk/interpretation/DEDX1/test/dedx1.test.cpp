@@ -314,21 +314,24 @@ SCENARIO("test interpretation::DEDX1"){
       } 
     }
 
-    WHEN("querying for the stoppingPowers at density = 1e21 / cc"
-	 "                               and temperature = 1e-5 MeV (kT)"){
+    WHEN("querying for the stoppingPowers at density = 1e21/cc "
+	 "and temperature = 1e-5 MeV (kT)"){
 
-      auto stoppingPowers = standard.stoppingPowers( 1e21/cc, 1e-5*mev);
+      //      auto logStoppingPowers = standard.logStoppingPowers( 1e21/cc, 1e-5*mev);      
+      auto stoppingPowers = standard.stoppingPowers( 1.01e21/cc, 1e-5*mev);
       REQUIRE( stoppingPowers.size() == 91 );
-
+      
       THEN("taking the first four entries"){
 	auto refExp = refLogSPFirstFour | ranges::view::transform(exp_w_units(cm*cm*mev));
 	auto test = stoppingPowers | ranges::view::take_exactly(4);
 	auto difference = ranges::view::zip_with(rel_diff, refExp, test)
 	  | ranges::view::transform([](auto&& x){return x.value;});
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}		
-      } 
+	
+	RANGES_FOR(auto&& val, difference){
+	  REQUIRE( abs(val) < 1e-14 );
+	}
+
+      }       
     }
     
   }

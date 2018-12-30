@@ -1,3 +1,8 @@
+template<typename... T>
+static void f(T...){
+  std::puts(__PRETTY_FUNCTION__);
+}
+
 template<typename Derived>
 class CRTP{
   std::reference_wrapper<const Table> table;
@@ -69,34 +74,30 @@ public:
   }  
 
 protected:
-  auto densityIndex(const DenT density) const {
-    auto ds = this->densities();
-    auto index =
-      ranges::distance(ds.begin(), ranges::lower_bound(ds, density));
-    return  (index != -1) ? index : 0;
+
+  template<typename Range, typename T>
+  auto lowerBoundIndex(const Range& range, const T value) const {
+    assert( *(range.begin()) <= value && *(range.end()-1) >= value );    
+    auto index = ranges::distance(range.begin(),
+    				  ranges::lower_bound(range, value)) - 1;
+    return (index != -1) ? index : 0;
   }
-  auto densityIndex(const TempT temperature) const {
-    auto ts = this->temperatures();
-    auto index =
-      ranges::distance(ts.begin(), ranges::lower_bound(ts, temperature)) - 1;
-    return  (index != -1) ? index : 0;
+
+  template<typename Range>  
+  auto get(Range&& range, const DenT density, const TempT temperature) const {
+    auto i = this->lowerBoundIndex(this->densities(), density);
+    auto j = this->lowerBoundIndex(this->temperatures(), temperature);
+    return ( range | ranges::view::chunk( this->numEnergies() )
+	     | ranges::view::chunk( this->numDensities() ) )[i][j];
   }
-  
+
 public:
   auto logStoppingPowers(const DenT density, const TempT temperature) const {
-    auto i = this->densityIndex(density);
-    auto j = this->densityIndex(temperature);    
-    return ( this->logStoppingPowers()
-	     | ranges::view::chunk( this->numEnergies() )
-	     | ranges::view::chunk( this->numDensities() ) )[i][j];
+    return this->get( this->logStoppingPowers(), density, temperature );
   }
   
   auto stoppingPowers(const DenT density, const TempT temperature) const {
-    auto i = this->densityIndex(density);
-    auto j = this->densityIndex(temperature);        
-    return ( this->stoppingPowers()
-	     | ranges::view::chunk( this->numEnergies() )
-	     | ranges::view::chunk( this->numDensities() ) )[i][j];
+    return this->get( this->stoppingPowers(), density, temperature );    
   }
   
 };
