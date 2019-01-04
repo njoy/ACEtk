@@ -3,6 +3,11 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
+template<typename... T>
+void f(T...){
+  std::puts(__PRETTY_FUNCTION__);
+}
+
 SCENARIO("test interpretation::DEDX1"){
   
   using namespace dimwits;
@@ -15,9 +20,12 @@ SCENARIO("test interpretation::DEDX1"){
     return [units](auto&& entry){
       return std::exp(entry) * units;};
   };
-  
+
   auto make_approx = [](auto tol){return ranges::view::repeat_n(Approx(0.0).margin(tol), 4);};
-  auto rel_diff = [](auto&& first, auto&& second){return (first-second)/first;};  
+  auto rel_diff = [](auto&& first, auto&& second){
+    
+    return (first-second)/first; 
+  };
   
   auto table = njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("1001.dedx.h1"));
   const auto dedx1 = njoy::ACEtk::interpretation::DEDX1(std::move(table));
@@ -295,7 +303,8 @@ SCENARIO("test interpretation::DEDX1"){
       
       AND_THEN("taking middle entries"){
 	auto refExp = refLogSPMiddleFour | ranges::view::transform(exp_w_units(cm*cm*mev));
-	auto test = stoppingPowers | ranges::view::drop_exactly(35675) | ranges::view::take_exactly(4);
+	auto test =
+	  stoppingPowers | ranges::view::drop_exactly(35675) | ranges::view::take_exactly(4);
 	auto difference = ranges::view::zip_with(rel_diff, refExp, test)
 	  | ranges::view::transform([](auto&& x){return x.value;});
 	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
@@ -317,8 +326,7 @@ SCENARIO("test interpretation::DEDX1"){
     WHEN("querying for the stoppingPowers at density = 1e21/cc "
 	 "and temperature = 1e-5 MeV (kT)"){
 
-      //      auto logStoppingPowers = standard.logStoppingPowers( 1e21/cc, 1e-5*mev);      
-      auto stoppingPowers = standard.stoppingPowers( 1.01e21/cc, 1e-5*mev);
+      auto stoppingPowers = standard.stoppingPowers(1.01e21/cc, 1e-5*mev);
       REQUIRE( stoppingPowers.size() == 91 );
       
       THEN("taking the first four entries"){
@@ -326,11 +334,9 @@ SCENARIO("test interpretation::DEDX1"){
 	auto test = stoppingPowers | ranges::view::take_exactly(4);
 	auto difference = ranges::view::zip_with(rel_diff, refExp, test)
 	  | ranges::view::transform([](auto&& x){return x.value;});
-	
-	RANGES_FOR(auto&& val, difference){
-	  REQUIRE( abs(val) < 1e-14 );
-	}
-
+	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+	  REQUIRE( pair.first == pair.second );
+	}		
       }       
     }
     

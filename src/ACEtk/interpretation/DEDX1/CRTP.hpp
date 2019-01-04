@@ -54,11 +54,12 @@ public:
   }    
 
   auto logStoppingPowers() const {
-    const auto length = this->numEnergies() * this->numDensities() * this->numTemperatures();
+    const auto length =
+      this->numEnergies() * this->numDensities() * this->numTemperatures();
     const auto index_to_start =
       static_cast<const Derived&>(*this).startOfStoppingPower();
     const auto start = this->table.get().data.JXS( index_to_start );
-    return this->table.get().data.XSS( start, length );          
+    return this->table.get().data.XSS( start, length );
   }
 
   auto stoppingPowers() const {
@@ -91,7 +92,9 @@ public:
   }
 
   auto stoppingPowers(const DenT density, const TempT temperature) const {
-    return this->get( this->stoppingPowers(), density, temperature );    
+    return this->get( this->logStoppingPowers(), density, temperature )
+      | ranges::view::transform( [cm=this->cm, mev=this->mev]( auto&& entry ){
+	  return std::exp(entry) * cm * cm * mev; } );
   }
   
 };
