@@ -64,18 +64,28 @@ public:
 
   auto stoppingPowers() const {
     return this->logStoppingPowers()
-      | ranges::view::transform( [cm=this->cm, mev=this->mev]( auto&& entry ){
+      | ranges::view::transform( [cm=this->cm, mev=this->mev]( auto&& entry ) {
 	  return std::exp(entry) * cm * cm * mev; } );
   }  
 
 protected:
 
   template<typename Range, typename T>
-  auto lowerBoundIndex(const Range& range, const T value) const {
-    assert( *(range.begin()) <= value && *(range.end()-1) >= value );    
-    auto index = ranges::distance(range.begin(),
-    				  ranges::lower_bound(range, value)) - 1;
-    return (index != -1) ? index : 0;
+  auto lowerBoundIndex(const Range& range, const T value) const noexcept(false) {
+    auto first = ranges::front(range);
+    auto last = ranges::back(range);
+    
+    if ( value < first ) {
+      throw std::domain_error("Queried value is below lowest value in table");
+    }
+    if ( value > last ) {
+      throw std::domain_error("Queried value is above upper value in table");
+    }
+    
+    const auto rightEdge = ranges::lower_bound(range, value);
+    const auto distance = ranges::distance(range.begin(), rightEdge);
+    const auto index = distance - (*rightEdge != value);
+    return index;
   }
 
   template<typename Range>  
@@ -96,5 +106,5 @@ public:
       | ranges::view::transform( [cm=this->cm, mev=this->mev]( auto&& entry ){
 	  return std::exp(entry) * cm * cm * mev; } );
   }
-  
+
 };

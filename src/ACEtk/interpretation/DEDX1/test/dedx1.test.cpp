@@ -384,5 +384,23 @@ SCENARIO("test interpretation::DEDX1"){
 	}
       }
     }
+  
+    WHEN("querying for the log/stoppingPowers with density/temperature outside domain"){
+
+      auto invalid_density_low = 1.0/cc;
+      auto invalid_density_high = 1e30/cc;
+      auto invalid_temperature_low = 1e-7*mev;
+      auto invalid_temperature_high = 1e10*mev;
+
+      REQUIRE_THROWS( standard.logStoppingPowers(invalid_density_low, 999.0*mev) );
+      REQUIRE_THROWS( standard.logStoppingPowers(invalid_density_high, 999.0*mev) );
+      REQUIRE_THROWS( standard.logStoppingPowers(1e22/cc, invalid_temperature_low) );
+      REQUIRE_THROWS( standard.logStoppingPowers(1e22/cc, invalid_temperature_high) );
+
+      REQUIRE_THROWS( standard.stoppingPowers(invalid_density_low, 999.0*mev) );
+      REQUIRE_THROWS( standard.stoppingPowers(invalid_density_high, 999.0*mev) );
+      REQUIRE_THROWS( standard.stoppingPowers(1e22/cc, invalid_temperature_low) );
+      REQUIRE_THROWS( standard.stoppingPowers(1e22/cc, invalid_temperature_high) );
+    }
   }
 }
