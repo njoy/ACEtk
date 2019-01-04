@@ -1,10 +1,8 @@
-template< typename DerivedBuilder, typename DerivedType, typename ParentBuilder >
+template<  typename ParentBuilder >
 class Builder: 
-  public Tabulated1D::Builder< 
-    Builder< DerivedBuilder, DerivedType, ParentBuilder > >{
+  public Tabulated1D::Builder< Builder< ParentBuilder > >{
 
-  using BaseBuilder = Tabulated1D::Builder< 
-    Builder< DerivedBuilder, DerivedType, ParentBuilder > >;
+  using BaseBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
 
 protected:
   std::reference_wrapper< ParentBuilder > parent;
@@ -18,7 +16,7 @@ public:
   using BaseBuilder::boundaries;
   using BaseBuilder::schemes;
 
-  typename DerivedType::TabularEquiprobableEnergyBins::Builder 
+  typename EnergyDistribution::TabularEquiprobableEnergyBins::Builder< Builder > 
   tabularEquiprobableEnergyBins(){
     return { parent };
   }

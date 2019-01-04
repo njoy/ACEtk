@@ -35,7 +35,7 @@ public:
   AngularDistribution::Builder angularDistribution(){ 
     return AngularDistribution::Builder{ *this }; 
   }
-  EnergyDistribution::Builder energyDistribution(){ 
-    return EnergyDistribution::Builder{ *this }; 
+  EnergyDistribution::Builder< Builder > energyDistribution(){ 
+    return EnergyDistribution::Builder< Builder >{ *this }; 
   }
 };
