@@ -323,6 +323,35 @@ SCENARIO("test interpretation::DEDX1"){
       } 
     }
 
+    WHEN("querying for the logStoppingPowers at density = 1e21/cc "
+	 "and temperature = 1e-5 MeV (kT)"){
+      auto stoppingPowers = standard.logStoppingPowers(1.01e21/cc, 1e-5*mev);
+      REQUIRE( stoppingPowers.size() == 91 );
+      
+      THEN("taking the first four entries"){
+	auto test = stoppingPowers | ranges::view::take_exactly(4);
+	auto difference = ranges::view::zip_with(rel_diff, refLogSPFirstFour, test);
+	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+	  REQUIRE( pair.first == pair.second );
+	}		
+      }       
+    }
+
+
+    WHEN("querying for the logStoppingPowers at density = 9.9e28/cc "
+	 "and temperature = 999 MeV (kT)"){
+      auto stoppingPowers = standard.logStoppingPowers(9.9e28/cc, 999.0*mev);
+      REQUIRE( stoppingPowers.size() == 91 );
+      
+      THEN("taking the last four entries"){
+	auto test = stoppingPowers | ranges::view::drop_exactly(87);
+	auto difference = ranges::view::zip_with(rel_diff, refLogSPLastFour, test);
+	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+	  REQUIRE( pair.first == pair.second );
+	}
+      }
+    }
+
     WHEN("querying for the stoppingPowers at density = 1e21/cc "
 	 "and temperature = 1e-5 MeV (kT)"){
 
@@ -336,9 +365,24 @@ SCENARIO("test interpretation::DEDX1"){
 	  | ranges::view::transform([](auto&& x){return x.value;});
 	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
 	  REQUIRE( pair.first == pair.second );
-	}		
-      }       
+	}
+      }
     }
-    
+
+    WHEN("querying for the stoppingPowers at density = 9.9e28/cc "
+	 "and temperature = 999 MeV (kT)"){
+      auto stoppingPowers = standard.stoppingPowers(9.9e28/cc, 999.0*mev);
+      REQUIRE( stoppingPowers.size() == 91 );
+      
+      THEN("taking the last four entries"){
+	auto refExp = refLogSPLastFour | ranges::view::transform(exp_w_units(cm*cm*mev));
+	auto test = stoppingPowers | ranges::view::drop_exactly(87);
+	auto difference = ranges::view::zip_with(rel_diff, refExp, test)
+	  | ranges::view::transform([](auto&& x){return x.value;});
+	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+	  REQUIRE( pair.first == pair.second );
+	}
+      }
+    }
   }
 }
