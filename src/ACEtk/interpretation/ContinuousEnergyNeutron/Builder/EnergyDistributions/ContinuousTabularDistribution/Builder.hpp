@@ -5,9 +5,11 @@ class Builder:
 
 protected:
   std::reference_wrapper< ParentBuilder > parent;
+  double probability_;
 
 public:
-  Builder( EnergyDistribution::Builder< ParentBuilder >& parent ):
+  Builder( double probability, ParentBuilder& parent ):
+    probability_( probability ),
     parent( parent )
   { }
 

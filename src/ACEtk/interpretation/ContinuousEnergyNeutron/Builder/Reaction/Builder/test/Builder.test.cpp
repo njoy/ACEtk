@@ -96,6 +96,9 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
                                   njoy::utility::copy( cosineBins ) )
                                 .add()
         .add();
+
+      tb.energyDistribution();
+        // .add();
       auto reaction = tb.construct();
 
       THEN( "the constructed Reaction can be verified" ){

@@ -13,14 +13,22 @@ public:
     parent( parent )
   { }
 
-  using BaseBuilder::boundaries;
-  using BaseBuilder::schemes;
+  // ParentBuilder& add() {
+  //   return parent.get().addEnergyDistribution( 
+  //     static_cast< EnergyDistribution& >( this->construct() ) );
+  // }
 
-  typename EnergyDistribution::TabularEquiprobableEnergyBins::Builder< Builder > 
-  tabularEquiprobableEnergyBins(){
-    return { parent };
+  EnergyDistributions::TabularEquiprobableEnergyBins::Builder< Builder > 
+  tabularEquiprobableEnergyBins( double probability ){
+    return { probability, *this };
+  }
+  EnergyDistributions::ContinuousTabularDistribution::Builder< Builder > 
+  continuousTabularDistribution( double probability ){
+    return { probability, *this };
   }
 
+  using BaseBuilder::boundaries;
+  using BaseBuilder::schemes;
 #define RENAME(basename, derivedname)\
   template< typename Range,\
             utility::Require< true, utility::is_range, Range > = true >\
@@ -29,6 +37,5 @@ public:
   }
 
   RENAME( x, energies )
-  RENAME( y, probabilities )
 #undef RENAME
 };
