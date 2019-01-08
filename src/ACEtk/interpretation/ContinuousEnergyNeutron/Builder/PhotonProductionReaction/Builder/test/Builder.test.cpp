@@ -37,8 +37,8 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
     int MF{ 12 };
     TestBuilder ppB{ parentBuilder, MF, 102 };
 
-    std::vector< double > boundaries{ 0.0, 3.0 };
-    std::vector< double > schemes{ 2.0, 1.0 };
+    std::vector< int > boundaries{ 0, 3 };
+    std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
     std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
 
