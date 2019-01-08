@@ -6,6 +6,7 @@
 template<typename... T>
 void f(T...){
   std::puts(__PRETTY_FUNCTION__);
+  std::cout << std::endl;  
 }
 
 SCENARIO("test interpretation::DEDX1"){
@@ -49,7 +50,20 @@ SCENARIO("test interpretation::DEDX1"){
     }    
   }
 
-  auto standard = dedx1.standardWithoutCutoff();
+  auto s0 = dedx1.standardWithoutCutoff().stoppingPowers();
+
+  RANGES_FOR(auto&& entry, s0) {
+    std::cout << entry.logDensity_ << " " << entry.logTemperature_ << std::endl;
+  }
+  std::cout << " asdfasdfasdfsdf"<< std::endl;
+  RANGES_FOR(auto&& entry, s0.ceil( 1.0 * mev )){
+    std::cout << entry.logDensity_ << " " << entry.logTemperature_ << std::endl;
+  }
+  std::cout << dedx1.standardWithoutCutoff().temperatures();
+  
+}
+/* 
+
   GIVEN("a standard model without a cutoff"){
 
     auto refLogErgFirstFour = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
@@ -67,7 +81,7 @@ SCENARIO("test interpretation::DEDX1"){
       }
 
       AND_THEN("taking entries 40-43"){
-	auto test =logEnergies | ranges::view::drop_exactly(40)
+	auto test = logEnergies | ranges::view::drop_exactly(40)
 	  | ranges::view::take_exactly(4);
 	auto difference = ranges::view::zip_with(rel_diff, refLogErgMiddleFour, test);
 	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
@@ -108,7 +122,7 @@ SCENARIO("test interpretation::DEDX1"){
 	REQUIRE( ranges::equal(test, refExp) );
       } 
     }
-    
+
     auto refLogDenFirstFour = std::vector<double>{48.35429, 49.03653, 49.71878, 50.40103};
     auto refLogDenMiddleFour = std::vector<double>{55.17676, 55.85901, 56.54126, 57.2235};
     auto refLogDenLastFour = std::vector<double>{64.72823, 65.41047, 66.09272, 66.77497};
@@ -250,7 +264,7 @@ SCENARIO("test interpretation::DEDX1"){
 	}	
       } 
     }
-
+    
     auto refLogSPFirstFour = std::vector<double>{-48.6146, -48.64614, -48.69095, -48.74642};
     auto refLogSPMiddleFour = std::vector<double>{-47.82199, -47.80323, -47.82374, -47.87637};
     auto refLogSPLastFour = std::vector<double>{-60.42358, -60.57709, -60.73059, -60.8841};
@@ -285,7 +299,8 @@ SCENARIO("test interpretation::DEDX1"){
 	}	
       }            
     }
-    
+
+
     WHEN("querying for the stoppingPowers"){
 
       auto stoppingPowers = standard.stoppingPowers();
@@ -404,3 +419,4 @@ SCENARIO("test interpretation::DEDX1"){
     }
   }
 }
+*/

@@ -8,12 +8,14 @@ class CRTP{
   using DenT = decltype(1.0/cc);
   using TempT = decltype(1.0*mev);
 
+  #include "ACEtk/interpretation/DEDX1/S0.hpp"   
+
 protected:
   auto numEnergies() const {return this->table.get().data.NXS( 4 );}
   auto numDensities() const {return this->table.get().data.NXS( 5 );}
   auto numTemperatures() const {return this->table.get().data.NXS( 6 );}
   auto gridStart() const {return this->table.get().data.JXS( 2 );}    
-  
+
 public:
   CRTP( const Table& table ) : table(table) {}
 
@@ -53,58 +55,43 @@ public:
 	  return std::exp(entry) * mega(electronVolt); } );
   }    
 
-  auto logStoppingPowers() const {
-    const auto length =
-      this->numEnergies() * this->numDensities() * this->numTemperatures();
-    const auto index_to_start =
-      static_cast<const Derived&>(*this).startOfStoppingPower();
-    const auto start = this->table.get().data.JXS( index_to_start );
-    return this->table.get().data.XSS( start, length );
-  }
+  auto stoppingPowers() const {    
+    auto logStoppingPowerRanges = [self = this]{
+      const auto length =
+        self->numEnergies() * self->numDensities() * self->numTemperatures();
+      const auto index_to_start =
+        static_cast<const Derived&>(*self).startOfStoppingPower();
+      const auto start = self->table.get().data.JXS( index_to_start );
 
-  auto stoppingPowers() const {
-    return this->logStoppingPowers()
-      | ranges::view::transform( [cm=this->cm, mev=this->mev]( auto&& entry ) {
-	  return std::exp(entry) * cm * cm * mev; } );
-  }  
+      return self->table.get().data.XSS( start, length )
+             | ranges::view::chunk(self->numEnergies());
+    }();
 
-protected:
+    using LogEnergies = decltype(this->logEnergies());    
+    using LogValues = std::decay_t<decltype(logStoppingPowerRanges.front())>;
 
-  template<typename Range, typename T>
-  auto lowerBoundIndex(const Range& range, const T value) const noexcept(false) {
-    auto first = ranges::front(range);
-    auto last = ranges::back(range);
-    
-    if ( value < first ) {
-      throw std::domain_error("Queried value is below lowest value in table");
-    }
-    if ( value > last ) {
-      throw std::domain_error("Queried value is above upper value in table");
-    }
-    
-    const auto rightEdge = ranges::lower_bound(range, value);
-    const auto distance = ranges::distance(range.begin(), rightEdge);
-    const auto index = distance - (*rightEdge != value);
-    return index;
-  }
+    struct StoppingPower {
+      double logTemperature_;
+      double logDensity_;
+      LogEnergies logEnergies_;
+      LogValues logValues_;
+    };
+        
+    auto makeStoppingPower = [=](auto&& tup, auto&& rangeLogValues){
+      auto logTemperature = ranges::get<0>(tup);
+      auto logDensity = ranges::get<1>(tup);
+      return StoppingPower{logTemperature, logDensity, this->logEnergies(), rangeLogValues};
+    };
 
-  template<typename Range>  
-  auto get(Range&& range, const DenT density, const TempT temperature) const {
-    auto i = this->lowerBoundIndex(this->densities(), density);
-    auto j = this->lowerBoundIndex(this->temperatures(), temperature);
-    return ( range | ranges::view::chunk( this->numEnergies() )
-	     | ranges::view::chunk( this->numDensities() ) )[i][j];
-  }
+    auto densAndTemps = ranges::view::cartesian_product(this->logTemperatures(),
+							this->logDensities());
 
-public:
-  auto logStoppingPowers(const DenT density, const TempT temperature) const {
-    return this->get( this->logStoppingPowers(), density, temperature );
-  }
+    auto stoppingPowerRange = ranges::view::zip_with(makeStoppingPower,
+						     densAndTemps,
+						     logStoppingPowerRanges);
 
-  auto stoppingPowers(const DenT density, const TempT temperature) const {
-    return this->get( this->logStoppingPowers(), density, temperature )
-      | ranges::view::transform( [cm=this->cm, mev=this->mev]( auto&& entry ){
-	  return std::exp(entry) * cm * cm * mev; } );
+    return this->makeS0(this->numDensities(), std::move(stoppingPowerRange));
+
   }
 
 };

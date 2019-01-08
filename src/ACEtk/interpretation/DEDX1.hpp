@@ -11,6 +11,7 @@ protected:
    #include "ACEtk/interpretation/DEDX1/CRTP.hpp" 
   
 public:
+
   DEDX1( Table&& table) : table(std::move(table)){}
 
   auto atomicNumber() const { return Z( this->table ); }
@@ -23,5 +24,5 @@ public:
   auto standardWithoutCutoff() const {
     return StandardWithoutCutoff{this->table};
   }
-
+  
 };
