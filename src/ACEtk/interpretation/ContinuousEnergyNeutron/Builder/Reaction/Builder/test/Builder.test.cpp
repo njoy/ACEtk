@@ -6,6 +6,48 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
+std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
+njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
+
+template< typename B >
+void addEnergyDistribution( B& builder ){
+  std::vector< double > energies{
+    0.01, //0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 
+    // 0.11, 0.12, 0.13,
+  };
+  builder.energyDistribution().energies( njoy::utility::copy( energies ) );
+    // .add();
+}
+
+template< typename B >
+void addAngularDistribution( B& builder ){
+    std::vector< double > cosineBins{
+      0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
+      0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19,
+      0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
+      0.30, 0.31, 0.32
+    };
+    int f{1};
+    std::vector< double > cosineGrid{ -0.1, 0.5, 0.8 };
+    std::vector< double > pdf{ 0.1, 0.5, 0.4 };
+    std::vector< double > cdf{ 0.1, 0.6, 1.0 };
+    builder.angularDistribution().energyGrid( energyGrid )
+                                 .isotropic()
+                                 .tabulated().interpolationFlag( f )
+                                             .cosineGrid( 
+                                               njoy::utility::copy( 
+                                                   cosineGrid ) )
+                                             .pdf( njoy::utility::copy( 
+                                                     pdf ) )
+                                             .cdf( njoy::utility::copy( 
+                                                     cdf ) )
+                                   .add() 
+                                 .equiprobableCosineBins().values( 
+                                     njoy::utility::copy( cosineBins ) )
+                                   .add()
+      .add();
+}
+
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
   GIVEN( "parent builder" ){
     struct ParentBuilder: public ContinuousEnergyNeutron::Builder{
@@ -23,18 +65,6 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
     double Q{ 3.14 };
     int neutronYield{ 2 };
-    std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
-    std::vector< double > cosineBins{
-      0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
-      0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19,
-      0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
-      0.30, 0.31, 0.32
-    };
-    int f{1};
-    std::vector< double > cosineGrid{ -0.1, 0.5, 0.8 };
-    std::vector< double > pdf{ 0.1, 0.5, 0.4 };
-    std::vector< double > cdf{ 0.1, 0.6, 1.0 };
-    njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
 
     WHEN( "creating a Reaction Builder without a parent energyGrid" ){
       std::vector< double > XS{ 1.0, 2.0, 3.0 };
@@ -46,18 +76,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       tb.neutronYield( neutronYield, 
                        ContinuousEnergyNeutron::Builder::
                           NeutronYieldReferenceFrame::CENTEROFMASS );
-      tb.angularDistribution().energyGrid( energyGrid )
-                              .isotropic()
-                              .tabulated().interpolationFlag( f )
-                                          .cosineGrid( 
-                                            njoy::utility::copy( cosineGrid ) )
-                                          .pdf( njoy::utility::copy( pdf ) )
-                                          .cdf( njoy::utility::copy( cdf ) )
-                                .add() 
-                              .equiprobableCosineBins().values( 
-                                  njoy::utility::copy( cosineBins ) )
-                                .add()
-        .add();
+      addAngularDistribution( tb );
       tb.energyGrid( grid );
       tb.add();
 
@@ -84,21 +103,9 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       tb.energyGrid( grid );
       tb.Q( Q );
       tb.crossSection().values( njoy::utility::copy( XS ) ).add();
-      tb.angularDistribution().energyGrid( energyGrid )
-                              .isotropic()
-                              .tabulated().interpolationFlag( f )
-                                          .cosineGrid( 
-                                            njoy::utility::copy( cosineGrid ) )
-                                          .pdf( njoy::utility::copy( pdf ) )
-                                          .cdf( njoy::utility::copy( cdf ) )
-                                .add() 
-                              .equiprobableCosineBins().values( 
-                                  njoy::utility::copy( cosineBins ) )
-                                .add()
-        .add();
+      addAngularDistribution( tb );
+      addEnergyDistribution( tb );
 
-      tb.energyDistribution();
-        // .add();
       auto reaction = tb.construct();
 
       THEN( "the constructed Reaction can be verified" ){
