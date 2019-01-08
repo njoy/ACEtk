@@ -15,7 +15,8 @@ struct EnergyDistribution {
     // ContinuousTabularDistribution  // LAW=4
                            >;
 
-  Tabulated< std::pair< double, double > > tabulated;
+  using lawTab = Tabulated< std::pair< double, LAWS > >;
+  lawTab tabulated;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder.hpp"
 };

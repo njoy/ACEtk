@@ -19,6 +19,7 @@ protected:
 
   friend CrossSection::Builder;
   friend AngularDistribution::Builder;
+  friend EnergyDistribution::Builder< Builder >;
 
 public:
   Builder( ContinuousEnergyNeutron::Builder& parent, int MT ):

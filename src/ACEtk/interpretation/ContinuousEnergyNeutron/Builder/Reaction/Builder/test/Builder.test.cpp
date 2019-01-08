@@ -17,8 +17,19 @@ void addEnergyDistribution( B& builder ){
     0.01, //0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 
     // 0.11, 0.12, 0.13,
   };
-  builder.energyDistribution().energies( njoy::utility::copy( energies ) );
-    // .add();
+  auto ED = builder.energyDistribution();
+  ED.boundaries( njoy::utility::copy( boundaries ) )
+    .schemes( njoy::utility::copy( schemes ) )
+    .energies( njoy::utility::copy( energies ) );
+  auto dPE = ED.discretePhotonEnergy( 0.1 );
+  dPE.energy( 2.1 );
+  CHECK_THROWS( dPE.primaryFlag( -1 ) );
+
+  dPE.primaryFlag( 1 );
+
+  dPE.add();
+
+  ED.add();
 }
 
 template< typename B >
@@ -79,6 +90,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
                        ContinuousEnergyNeutron::Builder::
                           NeutronYieldReferenceFrame::CENTEROFMASS );
       addAngularDistribution( tb );
+      addEnergyDistribution( tb );
       tb.energyGrid( grid );
       tb.add();
 

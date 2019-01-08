@@ -1,19 +1,21 @@
 template<  typename ParentBuilder >
 class Builder {
-  // public Tabulated1D::Builder< Builder< ParentBuilder > >{
 
-  // using BaseBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
-
-  std::optional< std::vector< double > > boundaries_;
-  std::optional< std::vector< double > > schemes_;
+  std::optional< std::vector< int > > boundaries_;
+  std::optional< std::vector< int > > schemes_;
   std::optional< std::vector< double > > energies_;
   std::vector< double > probabilities_;
   std::vector< LAWS > laws_;
 
+  template< typename Derived, typename PB >
+  friend class Base::Builder;
+  
 protected:
   std::reference_wrapper< ParentBuilder > parent;
 
-public:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/addEnergyDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/construct.hpp"
+
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/boundaries.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/schemes.hpp"
@@ -22,7 +24,11 @@ public:
     parent( parent )
   { }
 
-  EnergyDistribution::DiscretePhotonEnergy::Builder 
+  ParentBuilder& add() {
+    return parent.get().addEnergyDistribution( this->construct() );
+  }
+
+  EnergyDistribution::DiscretePhotonEnergy::Builder< Builder >
   discretePhotonEnergy( double probability ){
     return { probability, *this };
   }
