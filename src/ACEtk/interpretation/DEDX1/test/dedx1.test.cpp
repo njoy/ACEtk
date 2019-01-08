@@ -52,15 +52,34 @@ SCENARIO("test interpretation::DEDX1"){
 
   auto s0 = dedx1.standardWithoutCutoff().stoppingPowers();
 
-  RANGES_FOR(auto&& entry, s0) {
-    std::cout << entry.logDensity_ << " " << entry.logTemperature_ << std::endl;
-  }
-  std::cout << " asdfasdfasdfsdf"<< std::endl;
-  RANGES_FOR(auto&& entry, s0.ceil( 1.0 * mev )){
-    std::cout << entry.logDensity_ << " " << entry.logTemperature_ << std::endl;
-  }
-  std::cout << dedx1.standardWithoutCutoff().temperatures();
+  auto hh = s0.ceil( 1.5 * mev ).ceil( 1.5e24 / cc );
+  std::cout << std::exp(hh.logDensity_) << " " << std::exp(hh.logTemperature_) << std::endl;
+
+  auto hl = s0.ceil( 1.5 * mev ).floor( 1.5e24 / cc );
+  std::cout << std::exp(hl.logDensity_) << " " << std::exp(hl.logTemperature_) << std::endl;  
+
+  auto ll = s0.floor( 1.5 * mev ).floor( 1.5e24 / cc );
+  std::cout <<std::exp( ll.logDensity_) << " " << std::exp(ll.logTemperature_) << std::endl;
+
+  auto lh = s0.floor( 1.5 * mev ).ceil( 1.5e24 / cc );
+  std::cout <<std::exp( lh.logDensity_) << " " << std::exp(lh.logTemperature_) << std::endl;
+
+
+  hh = s0.ceil( 1.5e24 / cc ).ceil( 1.5 * mev );
+  std::cout << std::exp(hh.logDensity_) << " " << std::exp(hh.logTemperature_) << std::endl;
+
+  hl = s0.floor( 1.5e24 / cc ).ceil( 1.5 * mev );
+  std::cout << std::exp(hl.logDensity_) << " " << std::exp(hl.logTemperature_) << std::endl;  
+
   
+  ll = s0.floor( 1.5e24 / cc ).floor( 1.5 * mev );
+  std::cout <<std::exp( ll.logDensity_) << " " << std::exp(ll.logTemperature_) << std::endl;
+
+  lh = s0.ceil( 1.5e24 / cc ).floor( 1.5 * mev );
+  std::cout <<std::exp( lh.logDensity_) << " " << std::exp(lh.logTemperature_) << std::endl;      
+  
+  std::cout << std::endl;
+
 }
 /* 
 
