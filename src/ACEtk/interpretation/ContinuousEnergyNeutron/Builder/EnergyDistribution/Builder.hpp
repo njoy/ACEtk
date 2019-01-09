@@ -28,8 +28,14 @@ public:
     return parent.get().addEnergyDistribution( this->construct() );
   }
 
+  // LAW=2
   EnergyDistribution::DiscretePhotonEnergy::Builder< Builder >
   discretePhotonEnergy( double probability ){
+    return { probability, *this };
+  }
+  // LAW=3
+  EnergyDistribution::LevelScattering::Builder< Builder >
+  levelScattering( double probability ){
     return { probability, *this };
   }
 

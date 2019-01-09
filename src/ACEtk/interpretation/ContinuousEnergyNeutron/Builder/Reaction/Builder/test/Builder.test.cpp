@@ -21,13 +21,17 @@ void addEnergyDistribution( B& builder ){
   ED.boundaries( njoy::utility::copy( boundaries ) )
     .schemes( njoy::utility::copy( schemes ) )
     .energies( njoy::utility::copy( energies ) );
+
   auto dPE = ED.discretePhotonEnergy( 0.1 );
   dPE.energy( 2.1 );
   CHECK_THROWS( dPE.primaryFlag( -1 ) );
-
   dPE.primaryFlag( 1 );
-
   dPE.add();
+
+  auto ls = ED.levelScattering( 0.2 );
+  std::array< double, 2 > ldat{ 1.1, 2.2 };
+  ls.LDAT( njoy::utility::copy( ldat ) );
+  ls.add();
 
   ED.add();
 }
