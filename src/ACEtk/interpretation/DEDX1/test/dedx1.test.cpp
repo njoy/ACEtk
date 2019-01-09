@@ -11,11 +11,6 @@ SCENARIO("test interpretation::DEDX1"){
   constexpr auto cm = centi(meter);
   constexpr auto cc = cm*cm*cm;  
 
-  auto exp_w_units = [](auto units){
-    return [units](auto&& entry){
-      return std::exp(entry) * units;};
-  };
-
   auto make_approx = [](auto tol){
     return ranges::view::repeat_n(Approx(0.0).margin(tol), 4);
   };
