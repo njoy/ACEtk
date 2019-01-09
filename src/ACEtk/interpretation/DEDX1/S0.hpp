@@ -6,43 +6,34 @@ protected:
   using StoppingPower = std::decay_t<decltype(std::declval<const Range&>().front())>;
 
   template<typename SubRange,
-	   typename Unit>
-  struct S1 : public SubRange {
+	   typename Unit,
+	   typename Projection>
+  struct S1 : protected Projection, public SubRange {
 
     template<typename...Args>
-    S1(Args&&... args)
-      : SubRange(std::forward<Args>(args)...) {}
+    S1(Projection proj, Args&&... args)
+      : Projection(proj), SubRange(std::forward<Args>(args)...) {}
     
-    auto floor(TempT parameter) const {
+    auto floor(Unit parameter) const {
       auto value = std::log(parameter.value);
-      auto range = *this;
-      auto it = ranges::lower_bound(range, value, std::less<>{}, &StoppingPower::logTemperature_);
-      std::cout << std::exp((*it).logTemperature()) * mev << std::endl;
-      const bool match = (*it).logTemperature_ == value;
-      return match ? *it : *(--it);
-    }
-
-    auto floor(DenT parameter) const {
-      auto value = std::log(parameter.value);
-      auto it = ranges::lower_bound(*this, value, std::less<>{}, &StoppingPower::logDensity_);
-      const bool match = (*it).logDensity_ == value;      
+      const auto& projection = static_cast<const Projection&>(*this);
+      auto range = *this;      
+      auto it = ranges::lower_bound(range, value, std::less<>{}, projection);
+      if ( it == range.end() ){ throw std::domain_error("Could not find value in range"); }
+      const bool match = projection(*it) == value;      
       it = ranges::prev(it, not match);
       return *it;
     }    
-    
-    auto ceil(TempT parameter) const {
+
+    auto ceil(Unit parameter) const {
       auto value = std::log(parameter.value);
       auto range = *this;
-      auto it = ranges::lower_bound(range, value, std::less<>{}, &StoppingPower::logTemperature_);
+      auto it = ranges::lower_bound(range, value, std::less<>{},
+				    static_cast<const Projection&>(*this));
+      if ( it == range.end() ){ throw std::domain_error("Could not find value in range"); }      
       return *it;
     }
 
-    auto ceil(DenT parameter) const {
-      auto value = std::log(parameter.value);
-      auto it = ranges::lower_bound(*this, value, std::less<>{}, &StoppingPower::logDensity_);      
-      return *it;
-    }        
-    
   };
   
 public:
@@ -52,63 +43,71 @@ public:
 
   auto floor(DenT density) const {
     auto value = std::log(density.value);
-    auto it = ranges::lower_bound(this->begin(),
-				  ranges::next(this->begin(), nDensities),
-				  value,
-				  std::less<>{},
-				  &StoppingPower::logDensity_);
-    if ( it == this->end() ) { throw("Did not find value"); }
+    auto end_it = ranges::next(this->begin(), nDensities);
+    auto it =
+      ranges::lower_bound(this->begin(), end_it, value, std::less<>{},
+			  &StoppingPower::logDensity);
+    if ( it == end_it ){ throw std::domain_error("Could not find density in range"); }
     const bool match = (*it).logDensity_ == value;
     it = ranges::prev(it, not match);
     int distance = ranges::distance(this->begin(), it);
     auto result =
       *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
-    
-    return S1<decltype(result), TempT>{std::move(result)};    
+    auto logTemperature = [](const StoppingPower& stoppingPower){
+      return stoppingPower.logTemperature();
+    };        
+    using Projection = decltype(logTemperature);
+    return S1<decltype(result), TempT, Projection>{logTemperature, std::move(result)};    
   }
 
   auto ceil(DenT density) const {
-    auto it = ranges::lower_bound(this->begin(),
-				  ranges::next(this->begin(), nDensities),
-				  std::log(density.value),
-				  std::less<>{},
-				  &StoppingPower::logDensity_);
+    auto value = std::log(density.value);
+    auto end_it = ranges::next(this->begin(), nDensities);    
+    auto it =
+      ranges::lower_bound(this->begin(), end_it, value, std::less<>{},
+			  &StoppingPower::logDensity);
+    if ( it == end_it ){ throw std::domain_error("Could not find density in range"); }    
     int distance = ranges::distance(this->begin(), it);
     auto result =
       *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
-    return S1<decltype(result), TempT>{std::move(result)};
+    auto logTemperature = [](const StoppingPower& stoppingPower){
+      return stoppingPower.logTemperature();
+    };        
+    using Projection = decltype(logTemperature);    
+    return S1<decltype(result), TempT, Projection>{logTemperature, std::move(result)};
   }
 
   auto floor(TempT temperature) const {
     auto value = std::log(temperature.value);
-    auto it = ranges::lower_bound(this->begin(),
-				  this->end(),
-				  value,
-				  std::less<>{},
-				  &StoppingPower::logTemperature_);
-    if ( it == this->end() ) { throw("Did not find value"); }
+    auto it = ranges::lower_bound(this->begin(), this->end(), value, std::less<>{},
+				  &StoppingPower::logTemperature);
+    if ( it == this->end() ){ throw std::domain_error("Could not find temperature in range"); }
     int distance = ranges::distance(this->begin(), it);
     if( (*it).logTemperature_ != value) { distance -= nDensities; }
     auto result =
-      *this | ranges::view::slice(distance, distance+nDensities);      
-
-    return S1<decltype(result), DenT>{std::move(result)};
+      *this | ranges::view::slice(distance, distance+nDensities);
+    auto logDensity = [](const StoppingPower& stoppingPower){
+      return stoppingPower.logDensity();
+    };        
+    using Projection = decltype(logDensity);    
+    return S1<decltype(result), DenT, Projection>{logDensity, std::move(result)};
   }  
 
   auto ceil(TempT temperature) const {
-    auto it = ranges::lower_bound(this->begin(),
-				  this->end(),
-				  std::log(temperature.value),
-				  std::less<>{},
-				  &StoppingPower::logTemperature_);
-
+    auto value = std::log(temperature.value);
+    auto it = ranges::lower_bound(this->begin(), this->end(), value, std::less<>{},
+				  &StoppingPower::logTemperature);
+    if ( it == this->end() ){ throw std::domain_error("Could not find temperature in range"); }
     auto distance = ranges::distance(this->begin(), it);
     auto result =
       *this | ranges::view::slice(distance, distance+nDensities);
-
-    return S1<decltype(result), DenT>{std::move(result)};
+    auto logDensity = [](const StoppingPower& stoppingPower){
+      return stoppingPower.logDensity();
+    };    
+    using Projection = decltype(logDensity);    
+    return S1<decltype(result), DenT, Projection>{logDensity, std::move(result)};
   }
-  
+
 };
 
 template<typename Range>

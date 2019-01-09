@@ -92,12 +92,13 @@ SCENARIO("test interpretation::DEDX1"){
 	  ++i;
 	}
       }
-
+      /*
       AND_THEN("constraining on density and temperature"){
 	auto ff = sp.floor(2.2/cc).floor(150.0*mev);
 	// auto reference = std::vector<double>{4.0, 4.0};
 	// REQUIRE( ranges::equal(ff.logValues(), reference) );
       }
+      */
     }
   }
   
