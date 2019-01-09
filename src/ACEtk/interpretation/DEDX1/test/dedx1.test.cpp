@@ -16,16 +16,67 @@ SCENARIO("test interpretation::DEDX1"){
       return std::exp(entry) * units;};
   };
 
-  auto make_approx = [](auto tol){return ranges::view::repeat_n(Approx(0.0).margin(tol), 4);};
+  auto make_approx = [](auto tol){
+    return ranges::view::repeat_n(Approx(0.0).margin(tol), 4);
+  };
+  
   auto rel_diff = [](auto&& first, auto&& second){
     
     return (first-second)/first; 
   };
-  
-  auto table = njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("1001.dedx.h1"));
-  const auto dedx1 = njoy::ACEtk::interpretation::DEDX1(std::move(table));
-    
-  GIVEN("a DEDX1 interpretation"){
+
+  GIVEN("a DEDX1 interpretation with faux data"){
+    auto table =
+      njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("faux.dedx.data"));
+    const auto faux = njoy::ACEtk::interpretation::DEDX1(std::move(table));
+
+    WHEN("querying for the target atomic number"){
+      REQUIRE( faux.atomicNumber() == 1 );
+    }
+
+    WHEN("querying for the energy spacing"){
+      REQUIRE( faux.energySpacing() == 0.0 );
+    }
+
+    WHEN("querying for the density spacing"){
+      REQUIRE( faux.densitySpacing() == 0.0 );
+    }
+
+    WHEN("querying for the temperature spacing"){
+      REQUIRE( faux.temperatureSpacing() == 0.0 );
+    }
+
+    const auto standard = faux.standardWithoutCutoff();
+    WHEN("querying for the stopping power range"){
+      auto sp = standard.stoppingPowers();      
+      auto base = std::vector<double>(2,0.0);
+      double i = 0.0;
+      auto increment = [&](auto&& val){return val+i;};	
+
+      AND_THEN("testing the faux stopping power values"){
+
+	RANGES_FOR(auto&& entry, sp){
+	  auto reference = base | ranges::view::transform(increment);
+	  REQUIRE( ranges::equal(entry.logValues(), reference) );
+	  ++i;
+	}
+	
+	AND_THEN("constraining on temperature"){
+	  i = 0;
+	  RANGES_FOR(auto&& entry, sp.ceil(1.2/cc)){
+	    auto reference = base | ranges::view::transform(increment);
+	    REQUIRE( ranges::equal(entry.logValues(), reference) );
+	    i+=3;
+	  }	  
+	}
+      }
+    }
+  }
+
+  auto table =
+    njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("1001.dedx.h1"));
+  const auto dedx1 = njoy::ACEtk::interpretation::DEDX1(std::move(table));  
+  GIVEN("a DEDX1 interpretation with real data"){
 
     WHEN("querying for the target atomic number"){
       REQUIRE( dedx1.atomicNumber() == 1 );
