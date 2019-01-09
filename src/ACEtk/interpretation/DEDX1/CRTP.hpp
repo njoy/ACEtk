@@ -25,22 +25,10 @@ public:
     return this->table.get().data.XSS( start, length );    
   }
 
-  auto energies() const {
-    return this->logEnergies()
-      | ranges::view::transform( []( auto&& entry ){
-	  return std::exp(entry) * mega(electronVolt); } );
-  }
-
   auto logDensities() const {
     const auto length = this->numDensities();
     const auto start = this->gridStart() + this->numEnergies();
     return this->table.get().data.XSS( start, length );    
-  }
-
-  auto densities() const {    
-    return this->logDensities()
-      | ranges::view::transform( [cc=this->cc]( auto&& entry ){
-	  return std::exp(entry)/cc; } );
   }
 
   auto logTemperatures() const {
@@ -48,13 +36,7 @@ public:
     const auto start = this->gridStart() + this->numEnergies() + this->numDensities();
     return this->table.get().data.XSS( start, length );    
   }
-
-  auto temperatures() const {
-    return this->logTemperatures()
-      | ranges::view::transform( []( auto&& entry ){
-	  return std::exp(entry) * mega(electronVolt); } );
-  }    
-
+  
   auto stoppingPowers() const {    
     auto logStoppingPowerRanges = [self = this]{
       const auto length =
@@ -75,6 +57,10 @@ public:
       double logDensity_;
       LogEnergies logEnergies_;
       LogValues logValues_;
+      auto logTemperature() const {return this->logTemperature_;}
+      auto logDensity() const {return this->logDensity_;}
+      auto logEnergies() const {return this->logEnergies_;}
+      auto logValues() const {return this->logValues_;}      
     };
         
     auto makeStoppingPower = [=](auto&& tup, auto&& rangeLogValues){
@@ -95,3 +81,24 @@ public:
   }
 
 };
+
+/*
+
+  auto energies() const {
+    return this->logEnergies()
+      | ranges::view::transform( []( auto&& entry ){
+	  return std::exp(entry) * mega(electronVolt); } );
+  }
+  
+  auto densities() const {    
+    return this->logDensities()
+      | ranges::view::transform( [cc=this->cc]( auto&& entry ){
+	  return std::exp(entry)/cc; } );
+  }
+  
+  auto temperatures() const {
+    return this->logTemperatures()
+      | ranges::view::transform( []( auto&& entry ){
+	  return std::exp(entry) * mega(electronVolt); } );
+  }    
+*/
