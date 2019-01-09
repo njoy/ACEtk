@@ -15,11 +15,11 @@ protected:
     
     auto floor(TempT parameter) const {
       auto value = std::log(parameter.value);
-      auto range = *this;      
+      auto range = *this;
       auto it = ranges::lower_bound(range, value, std::less<>{}, &StoppingPower::logTemperature_);
+      std::cout << std::exp((*it).logTemperature()) * mev << std::endl;
       const bool match = (*it).logTemperature_ == value;
-      it = ranges::prev(it, not match);
-      return *it;
+      return match ? *it : *(--it);
     }
 
     auto floor(DenT parameter) const {
@@ -63,7 +63,7 @@ public:
     int distance = ranges::distance(this->begin(), it);
     auto result =
       *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
-
+    
     return S1<decltype(result), TempT>{std::move(result)};    
   }
 

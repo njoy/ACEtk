@@ -21,15 +21,13 @@ SCENARIO("test interpretation::DEDX1"){
   };
   
   auto rel_diff = [](auto&& first, auto&& second){
-    
     return (first-second)/first; 
   };
-
-  GIVEN("a DEDX1 interpretation with faux data"){
-    auto table =
-      njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("faux.dedx.data"));
+  
+  GIVEN("A faux stopping power data table"){
+    auto table = njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("faux.dedx.data"));
     const auto faux = njoy::ACEtk::interpretation::DEDX1(std::move(table));
-
+    
     WHEN("querying for the target atomic number"){
       REQUIRE( faux.atomicNumber() == 1 );
     }
@@ -46,59 +44,66 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( faux.temperatureSpacing() == 0.0 );
     }
 
-    const auto standard = faux.standardWithoutCutoff();
-    WHEN("querying for the stopping power range"){
-      auto sp = standard.stoppingPowers();      
+    WHEN("querying for standard stopping power model without a cutoff"){
+      const auto standard = faux.standardWithoutCutoff();      
+      auto sp = standard.stoppingPowers();
       auto base = std::vector<double>(2,0.0);
       double i = 0.0;
       auto increment = [&](auto&& val){return val+i;};	
 
-      AND_THEN("testing the faux stopping power values"){
+      AND_THEN("iterating through the stopping power values and "
+	       "querying for the values"){
 
 	RANGES_FOR(auto&& entry, sp){
 	  auto reference = base | ranges::view::transform(increment);
 	  REQUIRE( ranges::equal(entry.logValues(), reference) );
 	  ++i;
 	}
-	
-	AND_THEN("constraining on density"){
-	  i = 0;
-	  RANGES_FOR(auto&& entry, sp.floor(2.2/cc)){
-	    auto reference = base | ranges::view::transform(increment);
-	    REQUIRE( ranges::equal(entry.logValues(), reference) );
-	    i+=3;
-	  }
-
-	  i = 1;
-	  RANGES_FOR(auto&& entry, sp.ceil(2.2/cc)){
-	    auto reference = base | ranges::view::transform(increment);
-	    REQUIRE( ranges::equal(entry.logValues(), reference) );
-	    i+=3;
-	  }	  	  
+      }
+      
+      AND_THEN("constraining on density"){
+	i = 0;
+	RANGES_FOR(auto&& entry, sp.floor(2.2/cc)){
+	  auto reference = base | ranges::view::transform(increment);
+	  REQUIRE( ranges::equal(entry.logValues(), reference) );
+	  i+=3;
 	}
+	
+	i = 1;
+	RANGES_FOR(auto&& entry, sp.ceil(2.2/cc)){
+	  auto reference = base | ranges::view::transform(increment);
+	  REQUIRE( ranges::equal(entry.logValues(), reference) );
+	  i+=3;
+	}	  	  
+      }
+      
+      AND_THEN("constraining on temperature"){
+	i = 6;
+	RANGES_FOR(auto&& entry, sp.ceil(150.0*mev)){
+	  auto reference = base | ranges::view::transform(increment);
+	  REQUIRE( ranges::equal(entry.logValues(), reference) );
+	  ++i;
+	}
+	
+	i = 3;
+	RANGES_FOR(auto&& entry, sp.floor(150.0*mev)){
+	  auto reference = base | ranges::view::transform(increment);
+	  REQUIRE( ranges::equal(entry.logValues(), reference) );
+	  ++i;
+	}
+      }
 
-	AND_THEN("constraining on temperature"){
-	  i = 6;
-	  RANGES_FOR(auto&& entry, sp.ceil(150.0*mev)){
-	    auto reference = base | ranges::view::transform(increment);
-	    REQUIRE( ranges::equal(entry.logValues(), reference) );
-	    ++i;
-	  }
-	  
-	  i = 3;
-	  RANGES_FOR(auto&& entry, sp.floor(150.0*mev)){
-	    auto reference = base | ranges::view::transform(increment);
-	    REQUIRE( ranges::equal(entry.logValues(), reference) );
-	    ++i;
-	  }	  	  
-	}	
+      AND_THEN("constraining on density and temperature"){
+	auto ff = sp.floor(2.2/cc).floor(150.0*mev);
+	// auto reference = std::vector<double>{4.0, 4.0};
+	// REQUIRE( ranges::equal(ff.logValues(), reference) );
       }
     }
   }
-
+  
   auto table =
     njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("1001.dedx.h1"));
-  const auto dedx1 = njoy::ACEtk::interpretation::DEDX1(std::move(table));  
+  const auto dedx1 = njoy::ACEtk::interpretation::DEDX1(std::move(table));      
   GIVEN("a DEDX1 interpretation with real data"){
 
     WHEN("querying for the target atomic number"){
