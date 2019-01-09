@@ -61,14 +61,37 @@ SCENARIO("test interpretation::DEDX1"){
 	  ++i;
 	}
 	
-	AND_THEN("constraining on temperature"){
+	AND_THEN("constraining on density"){
 	  i = 0;
-	  RANGES_FOR(auto&& entry, sp.ceil(1.2/cc)){
+	  RANGES_FOR(auto&& entry, sp.floor(2.2/cc)){
 	    auto reference = base | ranges::view::transform(increment);
 	    REQUIRE( ranges::equal(entry.logValues(), reference) );
 	    i+=3;
-	  }	  
+	  }
+
+	  i = 1;
+	  RANGES_FOR(auto&& entry, sp.ceil(2.2/cc)){
+	    auto reference = base | ranges::view::transform(increment);
+	    REQUIRE( ranges::equal(entry.logValues(), reference) );
+	    i+=3;
+	  }	  	  
 	}
+
+	AND_THEN("constraining on temperature"){
+	  i = 6;
+	  RANGES_FOR(auto&& entry, sp.ceil(150.0*mev)){
+	    auto reference = base | ranges::view::transform(increment);
+	    REQUIRE( ranges::equal(entry.logValues(), reference) );
+	    ++i;
+	  }
+	  
+	  i = 3;
+	  RANGES_FOR(auto&& entry, sp.floor(150.0*mev)){
+	    auto reference = base | ranges::view::transform(increment);
+	    REQUIRE( ranges::equal(entry.logValues(), reference) );
+	    ++i;
+	  }	  	  
+	}	
       }
     }
   }
