@@ -15,5 +15,3 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/x.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/y.hpp"
 };
-
-

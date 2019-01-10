@@ -23,6 +23,6 @@ public:
     return parent.get().addTotalGammaProduction( this->construct() );
   }
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaproduction/Builder/src/crossSection.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaproduction/Builder/src/outgoingEnergies.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/src/crossSection.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/src/outgoingEnergies.hpp"
 };

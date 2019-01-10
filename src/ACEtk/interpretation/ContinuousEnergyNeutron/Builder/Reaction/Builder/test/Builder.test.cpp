@@ -22,12 +22,39 @@ void addEnergyDistribution( B& builder ){
     .schemes( njoy::utility::copy( schemes ) )
     .energies( njoy::utility::copy( energies ) );
 
+  CHECK_THROWS( ED.tabularEquiprobableEnergyBins( -0.1 ) );
+
+  // LAW=1
+  auto tEEB = ED.tabularEquiprobableEnergyBins( 0.01 );
+  {
+    std::vector< int > boundaries{ 0, 3 };
+    std::vector< int > schemes{ 2, 1 };
+    std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+    std::vector< double > eout_v{ 1.1, 1.2, 1.3 };
+    std::array< double, 3 > eout_a{ 1.1, 1.2, 1.3 };
+
+    tEEB.boundaries( njoy::utility::copy( boundaries ) )
+        .schemes( njoy::utility::copy( schemes ) )
+        .energies( njoy::utility::copy( energies ) )
+        .outgoingEnergyTable( njoy::utility::copy( eout_v ) )
+        .outgoingEnergyTable( njoy::utility::copy( eout_a ) );
+
+    CHECK_THROWS(
+        tEEB.outgoingEnergyTable( std::vector< double >{ 1.0, 2.0 } ) );
+
+    tEEB.outgoingEnergyTable( njoy::utility::copy( eout_a ) )
+        .outgoingEnergyTable( njoy::utility::copy( eout_a ) );
+  }
+  tEEB.add();
+
+  // LAW=2
   auto dPE = ED.discretePhotonEnergy( 0.1 );
   dPE.energy( 2.1 );
   CHECK_THROWS( dPE.primaryFlag( -1 ) );
   dPE.primaryFlag( 1 );
   dPE.add();
 
+  // LAW=3
   auto ls = ED.levelScattering( 0.2 );
   std::array< double, 2 > ldat{ 1.1, 2.2 };
   ls.LDAT( njoy::utility::copy( ldat ) );

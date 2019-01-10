@@ -28,6 +28,11 @@ public:
     return parent.get().addEnergyDistribution( this->construct() );
   }
 
+  // LAW=1
+  EnergyDistribution::TabularEquiprobableEnergyBins::Builder< Builder >
+  tabularEquiprobableEnergyBins( double probability ){
+    return { probability, *this };
+  }
   // LAW=2
   EnergyDistribution::DiscretePhotonEnergy::Builder< Builder >
   discretePhotonEnergy( double probability ){
@@ -38,5 +43,10 @@ public:
   levelScattering( double probability ){
     return { probability, *this };
   }
+  // LAW=4
+  // EnergyDistribution::ContinuousTabularDistribution::Builder< Builder >
+  // levelScattering( double probability ){
+  //   return { probability, *this };
+  // }
 
 };
