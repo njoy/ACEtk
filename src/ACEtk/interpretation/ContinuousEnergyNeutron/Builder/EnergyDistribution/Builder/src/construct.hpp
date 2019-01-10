@@ -15,13 +15,13 @@ EnergyDistribution construct(){
     else if( ( not boundaries_ ) and ( not schemes_ ) ){
       return {
         lawTab{ std::nullopt,
-                std::move( energies_.value() ),
+                std::move( energies_ ),
                 std::move( pairs ) } 
       };
     }
     return {
       lawTab{ std::make_pair( boundaries_.value(), schemes_.value() ),
-              std::move( energies_.value() ),
+              std::move( energies_ ),
               std::move( pairs ) } 
     };
   } catch( std::bad_optional_access& b ){

@@ -14,9 +14,9 @@ Tabulated< T > construct(){
   }
   else if( ( not boundaries_ ) and ( not schemes_ ) ){
     return {
-      {},
-          std::move( this->x_.value() ),
-          std::move( this->y_.value() ) 
+      std::nullopt,
+      std::move( this->x_.value() ),
+      std::move( this->y_.value() ) 
     }; 
   }
   try{

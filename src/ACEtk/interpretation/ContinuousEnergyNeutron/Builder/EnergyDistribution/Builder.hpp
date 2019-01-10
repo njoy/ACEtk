@@ -3,7 +3,7 @@ class Builder {
 
   std::optional< std::vector< int > > boundaries_;
   std::optional< std::vector< int > > schemes_;
-  std::optional< std::vector< double > > energies_;
+  std::vector< double > energies_;
   std::vector< double > probabilities_;
   std::vector< LAWS > laws_;
 
@@ -30,23 +30,23 @@ public:
 
   // LAW=1
   EnergyDistribution::TabularEquiprobableEnergyBins::Builder< Builder >
-  tabularEquiprobableEnergyBins( double probability ){
-    return { probability, *this };
+  tabularEquiprobableEnergyBins( double energy, double probability ){
+    return { energy, probability, *this };
   }
   // LAW=2
   EnergyDistribution::DiscretePhotonEnergy::Builder< Builder >
-  discretePhotonEnergy( double probability ){
-    return { probability, *this };
+  discretePhotonEnergy( double energy, double probability ){
+    return { energy, probability, *this };
   }
   // LAW=3
   EnergyDistribution::LevelScattering::Builder< Builder >
-  levelScattering( double probability ){
-    return { probability, *this };
+  levelScattering( double energy, double probability ){
+    return { energy, probability, *this };
   }
   // LAW=4
-  // EnergyDistribution::ContinuousTabularDistribution::Builder< Builder >
-  // levelScattering( double probability ){
-  //   return { probability, *this };
-  // }
+  EnergyDistribution::ContinuousTabularDistribution::Builder< Builder >
+  continuousTabularDistribution( double energy, double probability ){
+    return { energy, probability, *this };
+  }
 
 };
