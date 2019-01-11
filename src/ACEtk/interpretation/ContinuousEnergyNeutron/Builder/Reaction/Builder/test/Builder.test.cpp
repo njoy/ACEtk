@@ -9,6 +9,7 @@ using namespace njoy::ACEtk::interpretation;
 std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
 njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
 
+/*
 template< typename B >
 void addEnergyDistribution( B& builder ){
   std::vector< int > boundaries{ 0, 13 };
@@ -97,6 +98,7 @@ void addEnergyDistribution( B& builder ){
   }
   ED.add();
 }
+*/
 
 template< typename B >
 void addAngularDistribution( B& builder ){
@@ -156,7 +158,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
                        ContinuousEnergyNeutron::Builder::
                           NeutronYieldReferenceFrame::CENTEROFMASS );
       addAngularDistribution( tb );
-      addEnergyDistribution( tb );
+      // addEnergyDistribution( tb );
       tb.energyGrid( grid );
       tb.add();
 
@@ -184,7 +186,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       tb.Q( Q );
       tb.crossSection().values( njoy::utility::copy( XS ) ).add();
       addAngularDistribution( tb );
-      addEnergyDistribution( tb );
+      // addEnergyDistribution( tb );
 
       auto reaction = tb.construct();
 
