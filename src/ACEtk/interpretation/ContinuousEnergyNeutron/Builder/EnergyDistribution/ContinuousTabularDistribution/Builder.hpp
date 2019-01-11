@@ -1,14 +1,36 @@
 template< typename ParentBuilder >
 class Builder: 
-  public ContinuousEnergyNeutron::Builder::Tabulated1D::Builder< 
-    Builder< ParentBuilder > >,
+  public Tabulated< Data >::Builder< Builder< ParentBuilder > >,
   public Base::Builder< Builder< ParentBuilder >, ParentBuilder > {
 
+  using TabBuilder = Tabulated< Data >::Builder< Builder< ParentBuilder > >;
   using BaseBuilder = Base::Builder< Builder< ParentBuilder >, ParentBuilder >;
 
+  std::vector< Data > data_;
+
 protected:
+
+  using TabBuilder::y;
+
+  friend Base::Builder< Builder< ParentBuilder >, ParentBuilder >;
+  friend Data::Builder< Builder< ParentBuilder > >;
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/construct.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/addData.hpp"
 
 public:
   using BaseBuilder::BaseBuilder;
 
+  Data::Builder< Builder< ParentBuilder > > distributionData(){
+    return { *this };
+  }
+
+#define RENAME(basename, derivedname)\
+  template< typename Range,\
+            utility::Require< true, utility::is_range, Range > = true >\
+  Builder& derivedname( Range&& derivedname ){\
+    return TabBuilder::basename( std::move( derivedname ) );\
+  }
+
+  RENAME( x, energies )
+#undef RENAME
 };

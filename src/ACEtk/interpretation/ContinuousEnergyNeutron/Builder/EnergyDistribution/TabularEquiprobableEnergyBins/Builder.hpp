@@ -15,14 +15,15 @@ class Builder:
 
 protected:
 
-  using TabBuilder::x;
   using TabBuilder::y;
+
+  friend Base::Builder< Builder< ParentBuilder >, ParentBuilder >;
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/construct.hpp"
 
 public:
   using BaseBuilder::BaseBuilder;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/outgoingEnergyTable.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/construct.hpp"
 
 #define RENAME(basename, derivedname)\
   template< typename Range,\

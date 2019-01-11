@@ -25,8 +25,8 @@ void addEnergyDistribution( B& builder ){
   CHECK_THROWS( ED.tabularEquiprobableEnergyBins( -0.1, 0.1 ) );
 
   // LAW=1
-  auto tEEB = ED.tabularEquiprobableEnergyBins( 20.0, 0.01 );
   {
+    auto tEEB = ED.tabularEquiprobableEnergyBins( 20.0, 0.01 );
     std::vector< int > boundaries{ 0, 3 };
     std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
@@ -44,24 +44,57 @@ void addEnergyDistribution( B& builder ){
 
     tEEB.outgoingEnergyTable( njoy::utility::copy( eout_a ) )
         .outgoingEnergyTable( njoy::utility::copy( eout_a ) );
+    tEEB.add();
   }
-  tEEB.add();
 
   // LAW=2
-  auto dPE = ED.discretePhotonEnergy( 21.0, 0.1 );
   {
+    auto dPE = ED.discretePhotonEnergy( 21.0, 0.1 );
     dPE.energy( 2.1 );
     CHECK_THROWS( dPE.primaryFlag( -1 ) );
     dPE.primaryFlag( 1 );
+    dPE.add();
   }
-  dPE.add();
 
   // LAW=3
-  auto ls = ED.levelScattering( 22.0, 0.2 );
-  std::array< double, 2 > ldat{ 1.1, 2.2 };
-  ls.LDAT( njoy::utility::copy( ldat ) );
-  ls.add();
+  {
+    auto ls = ED.levelScattering( 22.0, 0.2 );
+    std::array< double, 2 > ldat{ 1.1, 2.2 };
+    ls.LDAT( njoy::utility::copy( ldat ) );
+    ls.add();
+  }
 
+  // LAW=4
+  {
+    auto cTB = ED.continuousTabularDistribution( 20.0, 0.01 );
+    std::vector< int > boundaries{ 0, 3 };
+    std::vector< int > schemes{ 2, 1 };
+    std::vector< double > energies{ 1.0, 2.0 };
+
+    cTB.boundaries( njoy::utility::copy( boundaries ) )
+        .schemes( njoy::utility::copy( schemes ) )
+        .energies( njoy::utility::copy( energies ) );
+
+    int INTT{ 2 };
+    std::vector< double > ene{ 1.0, 2.0};
+    std::vector< double > pdf{ 0.25, 0.75 };
+    std::vector< double > cdf{ 0.25, 1.0 };
+
+    cTB.distributionData().interpolationParameter( INTT )
+                          .energies( njoy::utility::copy( ene ) )
+                          .pdf( njoy::utility::copy( pdf ) )
+                          .cdf( njoy::utility::copy( cdf ) )
+        .add()
+       .distributionData().interpolationParameter( INTT )
+                          .energies( njoy::utility::copy( ene ) )
+                          .pdf( njoy::utility::copy( pdf ) )
+                          .cdf( njoy::utility::copy( cdf ) )
+        .add();
+    cTB.add();
+
+
+    // cTB.add();
+  }
   ED.add();
 }
 

@@ -3,7 +3,7 @@ Tabulated< T > construct(){
     details::verify::equalSize( this->x_.value(), 
                                this->y_.value() );
   } catch( std::range_error& e){
-    Log::error( "Tabulated x and y values must have the same size" );
+    Log::info( "Tabulated x and y values must have the same size" );
     throw;
   }
 
