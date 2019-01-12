@@ -2,39 +2,11 @@ template<typename Range>
 class S0 : public Range {
 
   int nDensities;
+  
 protected:
   using StoppingPower = std::decay_t<decltype(std::declval<const Range&>().front())>;
 
-  template<typename SubRange,
-	   typename Unit,
-	   typename Projection>
-  struct S1 : protected Projection, public SubRange {
-
-    template<typename...Args>
-    S1(Projection proj, Args&&... args)
-      : Projection(proj), SubRange(std::forward<Args>(args)...) {}
-    
-    auto floor(Unit parameter) const {
-      auto value = std::log(parameter.value);
-      const auto& projection = static_cast<const Projection&>(*this);
-      auto range = *this;      
-      auto it = ranges::lower_bound(range, value, std::less<>{}, projection);
-      if ( it == range.end() ){ throw std::domain_error("Could not find value in range"); }
-      const bool match = projection(*it) == value;      
-      it = ranges::prev(it, not match);
-      return *it;
-    }    
-
-    auto ceil(Unit parameter) const {
-      auto value = std::log(parameter.value);
-      auto range = *this;
-      auto it = ranges::lower_bound(range, value, std::less<>{},
-				    static_cast<const Projection&>(*this));
-      if ( it == range.end() ){ throw std::domain_error("Could not find value in range"); }      
-      return *it;
-    }
-
-  };
+  #include "ACEtk/interpretation/DEDX1/CRTP/src/S1.hpp"
   
 public:
   template<typename... Args>
@@ -47,8 +19,11 @@ public:
     auto it =
       ranges::lower_bound(this->begin(), end_it, value, std::less<>{},
 			  &StoppingPower::logDensity);
-    if ( it == end_it ){ throw std::domain_error("Could not find density in range"); }
-    const bool match = (*it).logDensity_ == value;
+    if ( it == end_it ){
+      njoy::Log::error( "Could not find value in range" );
+      throw std::domain_error("Could not find density in range");      
+    }
+    const bool match = (*it).logDensity() == value;
     it = ranges::prev(it, not match);
     int distance = ranges::distance(this->begin(), it);
     auto result =
@@ -66,7 +41,10 @@ public:
     auto it =
       ranges::lower_bound(this->begin(), end_it, value, std::less<>{},
 			  &StoppingPower::logDensity);
-    if ( it == end_it ){ throw std::domain_error("Could not find density in range"); }    
+    if ( it == end_it ){
+      njoy::Log::error( "Could not find density in range" );
+      throw std::domain_error("Could not find density in range");
+    }
     int distance = ranges::distance(this->begin(), it);
     auto result =
       *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
@@ -79,11 +57,14 @@ public:
 
   auto floor(TempT temperature) const {
     auto value = std::log(temperature.value);
-    auto it = ranges::lower_bound(this->begin(), this->end(), value, std::less<>{},
+    auto it = ranges::lower_bound(*this, value, std::less<>{},
 				  &StoppingPower::logTemperature);
-    if ( it == this->end() ){ throw std::domain_error("Could not find temperature in range"); }
+    if ( it == this->end() ){
+      njoy::Log::error( "Could not find temperature in range" );
+      throw std::domain_error("Could not find temperature in range");      
+    }      
     int distance = ranges::distance(this->begin(), it);
-    if( (*it).logTemperature_ != value) { distance -= nDensities; }
+    if( (*it).logTemperature() != value) { distance -= nDensities; }
     auto result =
       *this | ranges::view::slice(distance, distance+nDensities);
     auto logDensity = [](const StoppingPower& stoppingPower){
@@ -97,7 +78,10 @@ public:
     auto value = std::log(temperature.value);
     auto it = ranges::lower_bound(this->begin(), this->end(), value, std::less<>{},
 				  &StoppingPower::logTemperature);
-    if ( it == this->end() ){ throw std::domain_error("Could not find temperature in range"); }
+    if ( it == this->end() ){
+      njoy::Log::error( "Could not find temperature in range" );
+      throw std::domain_error("Could not find temperature in range");
+    }
     auto distance = ranges::distance(this->begin(), it);
     auto result =
       *this | ranges::view::slice(distance, distance+nDensities);

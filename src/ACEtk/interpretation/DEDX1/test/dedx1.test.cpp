@@ -44,13 +44,12 @@ SCENARIO("test interpretation::DEDX1"){
       auto sp = standard.stoppingPowers();
       auto base = std::vector<double>(2,0.0);
       double i = 0.0;
-      auto increment = [&](auto&& val){return val+i;};	
 
       AND_THEN("iterating through the stopping power values and "
 	       "querying for the values"){
 
 	RANGES_FOR(auto&& entry, sp){
-	  auto reference = base | ranges::view::transform(increment);
+	  auto reference = ranges::view::repeat_n(i, 2);
 	  REQUIRE( ranges::equal(entry.logValues(), reference) );
 	  ++i;
 	}
@@ -59,14 +58,14 @@ SCENARIO("test interpretation::DEDX1"){
       AND_THEN("constraining on density"){
 	i = 0;
 	RANGES_FOR(auto&& entry, sp.floor(2.2/cc)){
-	  auto reference = base | ranges::view::transform(increment);
+	  auto reference = ranges::view::repeat_n(i, 2);	  
 	  REQUIRE( ranges::equal(entry.logValues(), reference) );
 	  i+=3;
 	}
 	
 	i = 1;
 	RANGES_FOR(auto&& entry, sp.ceil(2.2/cc)){
-	  auto reference = base | ranges::view::transform(increment);
+	  auto reference = ranges::view::repeat_n(i, 2);
 	  REQUIRE( ranges::equal(entry.logValues(), reference) );
 	  i+=3;
 	}	  	  
@@ -75,18 +74,19 @@ SCENARIO("test interpretation::DEDX1"){
       AND_THEN("constraining on temperature"){
 	i = 6;
 	RANGES_FOR(auto&& entry, sp.ceil(150.0*mev)){
-	  auto reference = base | ranges::view::transform(increment);
+	  auto reference = ranges::view::repeat_n(i, 2);
 	  REQUIRE( ranges::equal(entry.logValues(), reference) );
 	  ++i;
 	}
 	
 	i = 3;
 	RANGES_FOR(auto&& entry, sp.floor(150.0*mev)){
-	  auto reference = base | ranges::view::transform(increment);
+	  auto reference = ranges::view::repeat_n(i, 2);
 	  REQUIRE( ranges::equal(entry.logValues(), reference) );
 	  ++i;
 	}
       }
+      
       /*
       AND_THEN("constraining on density and temperature"){
 	auto ff = sp.floor(2.2/cc).floor(150.0*mev);
@@ -94,6 +94,7 @@ SCENARIO("test interpretation::DEDX1"){
 	// REQUIRE( ranges::equal(ff.logValues(), reference) );
       }
       */
+      
     }
   }
   
@@ -126,37 +127,66 @@ SCENARIO("test interpretation::DEDX1"){
       WHEN("Querying via the parameterized interface"){
 
       auto hh = s0.ceil( 1.5 * mev ).ceil( 1.5e24 / cc );
-      REQUIRE( hh.logDensity_ == 55.85901 );
-      REQUIRE( hh.logTemperature_ ==  0.7675284);
+      REQUIRE( hh.logDensity() == 55.85901 );
+      REQUIRE( hh.logTemperature() ==  0.7675284);
 
       hh = s0.ceil( 1.5e24 / cc ).ceil( 1.5 * mev );
-      REQUIRE( hh.logDensity_ == 55.85901 );
-      REQUIRE( hh.logTemperature_ ==  0.7675284);  
+      REQUIRE( hh.logDensity() == 55.85901 );
+      REQUIRE( hh.logTemperature() ==  0.7675284);  
     
       auto hl = s0.ceil( 1.5 * mev ).floor( 1.5e24 / cc );
-      REQUIRE( hl.logDensity_ == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( hl.logTemperature_ ==  0.7675284);
+      REQUIRE( hl.logDensity() == Approx(55.17676).epsilon(1e-15) );
+      REQUIRE( hl.logTemperature() ==  0.7675284);
     
       hl = s0.floor( 1.5e24 / cc ).ceil( 1.5 * mev );
-      REQUIRE( hl.logDensity_ == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( hl.logTemperature_ ==  0.7675284);  
+      REQUIRE( hl.logDensity() == Approx(55.17676).epsilon(1e-15) );
+      REQUIRE( hl.logTemperature() ==  0.7675284);  
     
       auto ll = s0.floor( 1.5 * mev ).floor( 1.5e24 / cc );
-      REQUIRE( ll.logDensity_ == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( ll.logTemperature_ ==  0.08528093);
+      REQUIRE( ll.logDensity() == Approx(55.17676).epsilon(1e-15) );
+      REQUIRE( ll.logTemperature() ==  0.08528093);
     
       ll = s0.floor( 1.5e24 / cc ).floor( 1.5 * mev );  
-      REQUIRE( ll.logDensity_ == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( ll.logTemperature_ ==  0.08528093);
+      REQUIRE( ll.logDensity() == Approx(55.17676).epsilon(1e-15) );
+      REQUIRE( ll.logTemperature() ==  0.08528093);
     
       auto lh = s0.floor( 1.5 * mev ).ceil( 1.5e24 / cc );
-      REQUIRE( lh.logDensity_ == 55.85901 );  
-      REQUIRE( lh.logTemperature_ ==  0.08528093);  
+      REQUIRE( lh.logDensity() == 55.85901 );  
+      REQUIRE( lh.logTemperature() ==  0.08528093);  
     
       lh = s0.ceil( 1.5e24 / cc ).floor( 1.5 * mev );
-      REQUIRE( lh.logDensity_ == 55.85901 );  
-      REQUIRE( lh.logTemperature_ ==  0.08528093);
+      REQUIRE( lh.logDensity() == 55.85901 );  
+      REQUIRE( lh.logTemperature() ==  0.08528093);
     }
+
+
+      WHEN("Querying via the parameterized interface "
+	   "for values outside of the range"){
+	auto tempBelow = 1e-24 * mev;
+	// REQUIRE_THROWS( s0.ceil( tempBelow ) );
+	// REQUIRE_THROWS( s0.floor( tempBelow ) );
+	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );
+	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );		
+
+	auto tempAbove = 1e14 * mev;
+	// REQUIRE_THROWS( s0.ceil( tempAbove ) );
+	// REQUIRE_THROWS( s0.floor( tempAbove ) );
+	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );
+	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );			
+
+	auto denBelow = 1e14 / cc;
+	// REQUIRE_THROWS( s0.ceil( denBelow ) );
+	// REQUIRE_THROWS( s0.floor( denBelow ) );
+	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denBelow ) );
+	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denBelow ) );
+	
+	auto denAbove = 1e36 / cc;			 
+	// REQUIRE_THROWS( s0.ceil( denAbove ) );
+	// REQUIRE_THROWS( s0.floor( denAbove ) );	
+	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denAbove ) );
+	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denAbove ) );	
+
+    }      
   
     auto refLogErgFirstFour = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
     auto refLogErgMiddleFour = std::vector<double>{-2.376966, -2.223461, -2.069955, -1.916449};
