@@ -46,11 +46,9 @@ auto stoppingPowers() const {
 
   auto densAndTemps = ranges::view::cartesian_product(this->logTemperatures(),
 						      this->logDensities());
-
   auto stoppingPowerRange = ranges::view::zip_with(makeStoppingPower,
 						   densAndTemps,
 						   logStoppingPowerRanges);
-
   return this->makeS0(this->numDensities(), std::move(stoppingPowerRange));
 
 }

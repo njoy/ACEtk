@@ -12,6 +12,9 @@ public:
   template<typename... Args>
   S0(int nDensities, Args&&... args)
     : Range(std::forward<Args>(args)...), nDensities(nDensities) {}
+  
+  template<typename... T>
+  static void f(T...){std::puts(__PRETTY_FUNCTION__);}
 
   auto floor(DenT density) const {
     auto value = std::log(density.value);
@@ -30,7 +33,7 @@ public:
       *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
     auto logTemperature = [](const StoppingPower& stoppingPower){
       return stoppingPower.logTemperature();
-    };        
+    };
     using Projection = decltype(logTemperature);
     return S1<decltype(result), TempT, Projection>{logTemperature, std::move(result)};    
   }
@@ -59,6 +62,8 @@ public:
     auto value = std::log(temperature.value);
     auto it = ranges::lower_bound(*this, value, std::less<>{},
 				  &StoppingPower::logTemperature);
+    f(it->begin());
+    
     if ( it == this->end() ){
       njoy::Log::error( "Could not find temperature in range" );
       throw std::domain_error("Could not find temperature in range");      
@@ -84,10 +89,11 @@ public:
     }
     auto distance = ranges::distance(this->begin(), it);
     auto result =
-      *this | ranges::view::slice(distance, distance+nDensities);
+      *this | ranges::view::slice(distance,
+				  static_cast<decltype(distance)>(distance+nDensities));
     auto logDensity = [](const StoppingPower& stoppingPower){
       return stoppingPower.logDensity();
-    };    
+    };
     using Projection = decltype(logDensity);    
     return S1<decltype(result), DenT, Projection>{logDensity, std::move(result)};
   }

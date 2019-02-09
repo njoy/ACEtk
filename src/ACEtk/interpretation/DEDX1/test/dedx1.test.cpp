@@ -3,6 +3,9 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
+template<typename... T>
+void f(T...){std::puts(__PRETTY_FUNCTION__);}
+
 SCENARIO("test interpretation::DEDX1"){
   
   using namespace dimwits;
@@ -22,7 +25,7 @@ SCENARIO("test interpretation::DEDX1"){
   GIVEN("A faux stopping power data table"){
     auto table = njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("faux.dedx.data"));
     const auto faux = njoy::ACEtk::interpretation::DEDX1(std::move(table));
-    
+
     WHEN("querying for the target atomic number"){
       REQUIRE( faux.atomicNumber() == 1 );
     }
@@ -44,10 +47,9 @@ SCENARIO("test interpretation::DEDX1"){
       auto sp = standard.stoppingPowers();
       auto base = std::vector<double>(2,0.0);
       double i = 0.0;
-
+      
       AND_THEN("iterating through the stopping power values and "
 	       "querying for the values"){
-
 	RANGES_FOR(auto&& entry, sp){
 	  auto reference = ranges::view::repeat_n(i, 2);
 	  REQUIRE( ranges::equal(entry.logValues(), reference) );
@@ -87,15 +89,12 @@ SCENARIO("test interpretation::DEDX1"){
 	}
       }
       
-      /*
       AND_THEN("constraining on density and temperature"){
 	auto ff = sp.floor(2.2/cc).floor(150.0*mev);
-	// auto reference = std::vector<double>{4.0, 4.0};
-	// REQUIRE( ranges::equal(ff.logValues(), reference) );
+	auto reference = std::vector<double>{3.0, 3.0};
+	REQUIRE( ranges::equal(ff.logValues(), reference) );
+	}
       }
-      */
-      
-    }
   }
   
   auto table =
@@ -123,7 +122,7 @@ SCENARIO("test interpretation::DEDX1"){
   auto standard = dedx1.standardWithoutCutoff();  
   GIVEN("a standard model without a cutoff"){
     auto s0 = standard.stoppingPowers();
-
+   
       WHEN("Querying via the parameterized interface"){
 
       auto hh = s0.ceil( 1.5 * mev ).ceil( 1.5e24 / cc );
@@ -159,11 +158,11 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( lh.logTemperature() ==  0.08528093);
     }
 
-
       WHEN("Querying via the parameterized interface "
 	   "for values outside of the range"){
 	auto tempBelow = 1e-24 * mev;
-	// REQUIRE_THROWS( s0.ceil( tempBelow ) );
+	REQUIRE_THROWS( s0.ceil( tempBelow ) );
+	
 	// REQUIRE_THROWS( s0.floor( tempBelow ) );
 	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );
 	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );		
