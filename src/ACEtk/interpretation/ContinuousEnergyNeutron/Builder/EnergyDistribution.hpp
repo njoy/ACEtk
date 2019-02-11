@@ -1,4 +1,4 @@
-struct EnergyDistribution {
+struct EnergyDistribution{
 
   template<  typename ParentBuilder >
   class Builder;
@@ -17,8 +17,8 @@ struct EnergyDistribution {
     ContinuousTabularDistribution  // LAW=4
                            >;
 
-  using lawTab = Tabulated< std::pair< double, LAWS > >;
-  lawTab tabulated;
+  Tabulated1D tab1;
+  LAWS law;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder.hpp"
 };

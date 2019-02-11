@@ -24,14 +24,6 @@ public:
   using BaseBuilder::BaseBuilder;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/outgoingEnergyTable.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/energies.hpp"
 
-#define RENAME(basename, derivedname)\
-  template< typename Range,\
-            utility::Require< true, utility::is_range, Range > = true >\
-  Builder& derivedname( Range&& derivedname ){\
-    return TabBuilder::basename( std::move( derivedname ) );\
-  }
-
-  RENAME( x, energies )
-#undef RENAME
 };

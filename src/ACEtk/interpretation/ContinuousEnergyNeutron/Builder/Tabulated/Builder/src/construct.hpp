@@ -1,4 +1,13 @@
 Tabulated< T > construct(){ 
+  if( not x_ ){
+    Log::error( "Tabulated x-value must be specified before construction." );
+    throw std::bad_optional_access();
+  }
+  if( not y_ ){
+    Log::error( "Tabulated y-value must be specified before construction." );
+    throw std::bad_optional_access();
+  }
+
   try{
     details::verify::equalSize( this->x_.value(), 
                                this->y_.value() );

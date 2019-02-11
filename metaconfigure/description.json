@@ -689,6 +689,9 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/test/Builder.test.cpp"
     ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.TabularEquiprobableEnergyBins.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/test/Builder.test.cpp"
+    ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.FissionMultiplicity.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/test/Builder.test.cpp"
     ],

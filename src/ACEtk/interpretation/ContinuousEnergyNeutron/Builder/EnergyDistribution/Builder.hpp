@@ -1,11 +1,10 @@
 template<  typename ParentBuilder >
-class Builder {
+class Builder: 
+  public Tabulated1D::Builder< Builder< ParentBuilder > >{
 
-  std::optional< std::vector< int > > boundaries_;
-  std::optional< std::vector< int > > schemes_;
-  std::vector< double > energies_;
-  std::vector< double > probabilities_;
-  std::vector< LAWS > laws_;
+  using BaseBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
+
+  std::optional< LAWS > law_;
 
   template< typename Derived, typename PB >
   friend class Base::Builder;
@@ -17,9 +16,6 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/construct.hpp"
 
 public:
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/boundaries.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/schemes.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
 
   Builder( ParentBuilder& parent ):
     parent( parent )
@@ -31,23 +27,18 @@ public:
 
   // LAW=1
   EnergyDistribution::TabularEquiprobableEnergyBins::Builder< Builder >
-  tabularEquiprobableEnergyBins( double energy, double probability ){
-    return { energy, probability, *this };
-  }
+  tabularEquiprobableEnergyBins(){ return { *this }; }
   // LAW=2
   EnergyDistribution::DiscretePhotonEnergy::Builder< Builder >
-  discretePhotonEnergy( double energy, double probability ){
-    return { energy, probability, *this };
-  }
+  discretePhotonEnergy( ){ return { *this }; }
   // LAW=3
   EnergyDistribution::LevelScattering::Builder< Builder >
-  levelScattering( double energy, double probability ){
-    return { energy, probability, *this };
-  }
+  levelScattering( ){ return { *this }; }
   // LAW=4
   EnergyDistribution::ContinuousTabularDistribution::Builder< Builder >
-  continuousTabularDistribution( double energy, double probability ){
-    return { energy, probability, *this };
-  }
+  continuousTabularDistribution( ){ return { *this }; }
+
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"
 
 };
