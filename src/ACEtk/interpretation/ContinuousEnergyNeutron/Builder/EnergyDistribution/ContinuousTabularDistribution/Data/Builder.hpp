@@ -4,9 +4,10 @@ class Builder {
   std::reference_wrapper< ParentBuilder > parent;
 
   std::optional< int > interpolationParameter_;
-  std::optional< std::vector< double > > energies_;
-  std::optional< std::vector< double > > pdf_;
-  std::optional< std::vector< double > > cdf_;
+  std::optional< details::verify::Sorted< details::verify::Positive< 
+      std::vector< double > > > > energies_;
+  std::optional< details::verify::Positive< std::vector< double > > >  pdf_;
+  std::optional< details::verify::CDF< std::vector< double > > > cdf_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/src/construct.hpp"

@@ -4,16 +4,18 @@ class Builder: public Base::Builder< Builder< ParentBuilder >, ParentBuilder > {
 
   friend class Base::Builder< Builder, ParentBuilder >;
 
-  std::optional< std::array< double, 2 > > LDAT_;
+  std::optional< double > atomicWeightRatio_;
+  std::optional< double > QValue_;
 
 protected:
   LevelScattering construct(){
-    return { LDAT_.value() };
+    return { atomicWeightRatio_.value(), QValue_.value() };
   }
 
 public:
 
   using BaseBuilder::BaseBuilder;
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/LDAT.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/atomicWeightRatio.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/QValue.hpp"
 };

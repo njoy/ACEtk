@@ -92,18 +92,6 @@ set( ACEtk_GNU_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Darwin_static_flags "-static" )
-set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
-set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_GNU_Windows_strict_flags "-Werror" )
-set( ACEtk_GNU_Windows_coverage_flags "--coverage" )
-set( ACEtk_GNU_Windows_subproject_flags  )
-set( ACEtk_GNU_Windows_base_project_flags  )
-set( ACEtk_GNU_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
-set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
-set( ACEtk_GNU_Windows_static_flags "-static" )
 set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
 set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -116,6 +104,18 @@ set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Linux_static_flags "-static" )
+set( ACEtk_GNU_Windows_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_GNU_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
+set( ACEtk_GNU_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_GNU_Windows_strict_flags "-Werror" )
+set( ACEtk_GNU_Windows_coverage_flags "--coverage" )
+set( ACEtk_GNU_Windows_subproject_flags  )
+set( ACEtk_GNU_Windows_base_project_flags  )
+set( ACEtk_GNU_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
+set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
+set( ACEtk_GNU_Windows_static_flags "-static" )
 set( ACEtk_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -128,18 +128,6 @@ set( ACEtk_Clang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_Clang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_Clang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_Clang_Darwin_static_flags "-static" )
-set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_Clang_Windows_strict_flags "-Werror" )
-set( ACEtk_Clang_Windows_coverage_flags "--coverage" )
-set( ACEtk_Clang_Windows_subproject_flags  )
-set( ACEtk_Clang_Windows_base_project_flags  )
-set( ACEtk_Clang_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Windows_link_time_optimization_flags "-flto" )
-set( ACEtk_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Windows_nonportable_optimization_flags "-march=native" )
-set( ACEtk_Clang_Windows_static_flags "-static" )
 set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -152,6 +140,18 @@ set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
 set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
 set( ACEtk_Clang_Linux_static_flags "-static" )
+set( ACEtk_Clang_Windows_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_Clang_Windows_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( ACEtk_Clang_Windows_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_Clang_Windows_strict_flags "-Werror" )
+set( ACEtk_Clang_Windows_coverage_flags "--coverage" )
+set( ACEtk_Clang_Windows_subproject_flags  )
+set( ACEtk_Clang_Windows_base_project_flags  )
+set( ACEtk_Clang_Windows_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Windows_link_time_optimization_flags "-flto" )
+set( ACEtk_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Windows_nonportable_optimization_flags "-march=native" )
+set( ACEtk_Clang_Windows_static_flags "-static" )
 get_directory_property( is_subproject PARENT_DIRECTORY )
 
 if( NOT TARGET hopscotch-map-adapter )
@@ -328,6 +328,7 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/outgoingEnergyTable.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/construct.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/energies.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/LDAT.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder.hpp"
@@ -340,15 +341,12 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/src/energies.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/addData.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/construct.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/schemes.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/tabularEquiprobableEnergyBins.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/boundaries.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/energies.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/construct.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/addEnergyDistribution.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base/Builder.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base/Builder/src/checkEnergy.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base/Builder/src/checkProbability.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/x.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/schemes.hpp"
@@ -502,6 +500,10 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder/test )
+        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/test )
