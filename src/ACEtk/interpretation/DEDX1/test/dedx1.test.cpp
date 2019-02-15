@@ -12,7 +12,7 @@ SCENARIO("test interpretation::DEDX1"){
 
   constexpr auto mev = mega(electronVolt);
   constexpr auto cm = centi(meter);
-  constexpr auto cc = cm*cm*cm;  
+  constexpr auto cc = cm*cm*cm;
 
   auto make_approx = [](auto tol){
     return ranges::view::repeat_n(Approx(0.0).margin(tol), 4);
@@ -21,7 +21,7 @@ SCENARIO("test interpretation::DEDX1"){
   auto rel_diff = [](auto&& first, auto&& second){
     return (first-second)/first; 
   };
-  
+
   GIVEN("A faux stopping power data table"){
     auto table = njoy::ACEtk::Table(njoy::utility::slurpFileToMemory("faux.dedx.data"));
     const auto faux = njoy::ACEtk::interpretation::DEDX1(std::move(table));
@@ -49,52 +49,52 @@ SCENARIO("test interpretation::DEDX1"){
       double i = 0.0;
       
       AND_THEN("iterating through the stopping power values and "
-	       "querying for the values"){
-	RANGES_FOR(auto&& entry, sp){
-	  auto reference = ranges::view::repeat_n(i, 2);
-	  REQUIRE( ranges::equal(entry.logValues(), reference) );
-	  ++i;
-	}
+               "querying for the values"){
+        RANGES_FOR(auto&& entry, sp){
+          auto reference = ranges::view::repeat_n(i, 2);
+          REQUIRE( ranges::equal(entry.logValues(), reference) );
+          ++i;
+        }
       }
       
       AND_THEN("constraining on density"){
-	i = 0;
-	RANGES_FOR(auto&& entry, sp.floor(2.2/cc)){
-	  auto reference = ranges::view::repeat_n(i, 2);	  
-	  REQUIRE( ranges::equal(entry.logValues(), reference) );
-	  i+=3;
-	}
-	
-	i = 1;
-	RANGES_FOR(auto&& entry, sp.ceil(2.2/cc)){
-	  auto reference = ranges::view::repeat_n(i, 2);
-	  REQUIRE( ranges::equal(entry.logValues(), reference) );
-	  i+=3;
-	}	  	  
+        i = 0;
+        RANGES_FOR(auto&& entry, sp.floor(2.2/cc)){
+          auto reference = ranges::view::repeat_n(i, 2);          
+          REQUIRE( ranges::equal(entry.logValues(), reference) );
+          i+=3;
+        }
+        
+        i = 1;
+        RANGES_FOR(auto&& entry, sp.ceil(2.2/cc)){
+          auto reference = ranges::view::repeat_n(i, 2);
+          REQUIRE( ranges::equal(entry.logValues(), reference) );
+          i+=3;
+        }                 
       }
       
       AND_THEN("constraining on temperature"){
-	i = 6;
-	RANGES_FOR(auto&& entry, sp.ceil(150.0*mev)){
-	  auto reference = ranges::view::repeat_n(i, 2);
-	  REQUIRE( ranges::equal(entry.logValues(), reference) );
-	  ++i;
-	}
-	
-	i = 3;
-	RANGES_FOR(auto&& entry, sp.floor(150.0*mev)){
-	  auto reference = ranges::view::repeat_n(i, 2);
-	  REQUIRE( ranges::equal(entry.logValues(), reference) );
-	  ++i;
-	}
+        i = 6;
+        RANGES_FOR(auto&& entry, sp.ceil(150.0*mev)){
+          auto reference = ranges::view::repeat_n(i, 2);
+          REQUIRE( ranges::equal(entry.logValues(), reference) );
+          ++i;
+        }
+        
+        i = 3;
+        RANGES_FOR(auto&& entry, sp.floor(150.0*mev)){	  
+          auto reference = ranges::view::repeat_n(i, 2);
+          REQUIRE( ranges::equal(entry.logValues(), reference) );
+          ++i;
+        }
       }
       
       AND_THEN("constraining on density and temperature"){
-	auto ff = sp.floor(2.2/cc).floor(150.0*mev);
-	auto reference = std::vector<double>{3.0, 3.0};
-	REQUIRE( ranges::equal(ff.logValues(), reference) );
-	}
+        auto ff = sp.floor(2.2/cc).floor(150.0*mev);
+        auto reference = std::vector<double>{3.0, 3.0};
+        REQUIRE( ranges::equal(ff.logValues(), reference) );
       }
+    }
   }
   
   auto table =
@@ -122,8 +122,8 @@ SCENARIO("test interpretation::DEDX1"){
   auto standard = dedx1.standardWithoutCutoff();  
   GIVEN("a standard model without a cutoff"){
     auto s0 = standard.stoppingPowers();
-   
-      WHEN("Querying via the parameterized interface"){
+    
+    WHEN("Querying via the parameterized interface"){
 
       auto hh = s0.ceil( 1.5 * mev ).ceil( 1.5e24 / cc );
       REQUIRE( hh.logDensity() == 55.85901 );
@@ -158,32 +158,32 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( lh.logTemperature() ==  0.08528093);
     }
 
-      WHEN("Querying via the parameterized interface "
-	   "for values outside of the range"){
-	auto tempBelow = 1e-24 * mev;
-	REQUIRE_THROWS( s0.ceil( tempBelow ) );
-	
-	// REQUIRE_THROWS( s0.floor( tempBelow ) );
-	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );
-	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );		
+    WHEN("Querying via the parameterized interface "
+         "for values outside of the range"){
+        
+      auto tempBelow = 1e-24 * mev;
+      REQUIRE_THROWS( s0.ceil( tempBelow ) );
+      REQUIRE_THROWS( s0.floor( tempBelow ) );
+      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );
+      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );              
 
-	auto tempAbove = 1e14 * mev;
-	// REQUIRE_THROWS( s0.ceil( tempAbove ) );
-	// REQUIRE_THROWS( s0.floor( tempAbove ) );
-	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );
-	// REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );			
+      auto tempAbove = 1e14 * mev;
+      REQUIRE_THROWS( s0.ceil( tempAbove ) );
+      REQUIRE_THROWS( s0.floor( tempAbove ) );
+      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );
+      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );                      
 
-	auto denBelow = 1e14 / cc;
-	// REQUIRE_THROWS( s0.ceil( denBelow ) );
-	// REQUIRE_THROWS( s0.floor( denBelow ) );
-	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denBelow ) );
-	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denBelow ) );
-	
-	auto denAbove = 1e36 / cc;			 
-	// REQUIRE_THROWS( s0.ceil( denAbove ) );
-	// REQUIRE_THROWS( s0.floor( denAbove ) );	
-	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denAbove ) );
-	// REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denAbove ) );	
+      auto denBelow = 1e14 / cc;
+      REQUIRE_THROWS( s0.ceil( denBelow ) );
+      REQUIRE_THROWS( s0.floor( denBelow ) );
+      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denBelow ) );
+      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denBelow ) );
+        
+      auto denAbove = 1e36 / cc;                         
+      REQUIRE_THROWS( s0.ceil( denAbove ) );
+      REQUIRE_THROWS( s0.floor( denAbove ) );   
+      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denAbove ) );
+      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denAbove ) );  
 
     }      
   
@@ -197,22 +197,22 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( logEnergies.size() == 91 );
 
       THEN("taking the first four entries"){
-	auto test = logEnergies | ranges::view::take_exactly(4);
-	REQUIRE( ranges::equal(test, refLogErgFirstFour) );
+        auto test = logEnergies | ranges::view::take_exactly(4);
+        REQUIRE( ranges::equal(test, refLogErgFirstFour) );
       }
-
+      
       AND_THEN("taking entries 40-43"){
-	auto test = logEnergies | ranges::view::drop_exactly(40)
-	  | ranges::view::take_exactly(4);
-	auto difference = ranges::view::zip_with(rel_diff, refLogErgMiddleFour, test);
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}
+        auto test = logEnergies | ranges::view::drop_exactly(40)
+          | ranges::view::take_exactly(4);
+        auto difference = ranges::view::zip_with(rel_diff, refLogErgMiddleFour, test);
+        auto diff = ranges::view::zip(difference, make_approx(1e-15));
+        RANGES_FOR(auto&& pair, diff){
+          REQUIRE( pair.first == pair.second );
+        }
       }
-
       AND_THEN("taking the last four entries"){
-	auto test = logEnergies | ranges::view::drop_exactly(87);
-	REQUIRE( ranges::equal(test, refLogErgLastFour) );
+        auto test = logEnergies | ranges::view::drop_exactly(87);
+        REQUIRE( ranges::equal(test, refLogErgLastFour) );
       }            
     }
     
@@ -226,28 +226,28 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( logDensities.size() == 28 );
 
       THEN("taking the first four entries"){
-	auto test = logDensities | ranges::view::take_exactly(4);
-	auto difference = ranges::view::zip_with(rel_diff, refLogDenFirstFour, test);
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}	
+        auto test = logDensities | ranges::view::take_exactly(4);
+        auto difference = ranges::view::zip_with(rel_diff, refLogDenFirstFour, test);
+        RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+          REQUIRE( pair.first == pair.second );
+        }       
       }
 
       AND_THEN("taking entries 10-13"){
-	auto test = logDensities | ranges::view::drop_exactly(10)
-	  | ranges::view::take_exactly(4);
-	auto difference = ranges::view::zip_with(rel_diff, refLogDenMiddleFour, test);
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference,make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}
+        auto test = logDensities | ranges::view::drop_exactly(10)
+          | ranges::view::take_exactly(4);
+        auto difference = ranges::view::zip_with(rel_diff, refLogDenMiddleFour, test);
+        RANGES_FOR(auto&& pair, ranges::view::zip(difference,make_approx(1e-15))){
+          REQUIRE( pair.first == pair.second );
+        }
       }
 
       AND_THEN("taking the last four entries"){
-	auto test = logDensities | ranges::view::drop_exactly(24);
-	auto difference = ranges::view::zip_with(rel_diff, refLogDenLastFour, test);
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}	
+        auto test = logDensities | ranges::view::drop_exactly(24);
+        auto difference = ranges::view::zip_with(rel_diff, refLogDenLastFour, test);
+        RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+          REQUIRE( pair.first == pair.second );
+        }       
       }            
     }
     
@@ -261,28 +261,28 @@ SCENARIO("test interpretation::DEDX1"){
       REQUIRE( logTemperatures.size() == 28 );
 
       THEN("taking the first four entries"){
-	auto test = logTemperatures | ranges::view::take_exactly(4);
-	auto difference = ranges::view::zip_with(rel_diff, refLogTempFirstFour, test);
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}	
+        auto test = logTemperatures | ranges::view::take_exactly(4);
+        auto difference = ranges::view::zip_with(rel_diff, refLogTempFirstFour, test);
+        RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+          REQUIRE( pair.first == pair.second );
+        }       
       }
 
       AND_THEN("taking entries 10-13"){
-	auto test = logTemperatures | ranges::view::drop_exactly(10)
-	  | ranges::view::take_exactly(4);
-	auto difference = ranges::view::zip_with(rel_diff, refLogTempMiddleFour, test);
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference,make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}
+        auto test = logTemperatures | ranges::view::drop_exactly(10)
+          | ranges::view::take_exactly(4);
+        auto difference = ranges::view::zip_with(rel_diff, refLogTempMiddleFour, test);
+        RANGES_FOR(auto&& pair, ranges::view::zip(difference,make_approx(1e-15))){
+          REQUIRE( pair.first == pair.second );
+        }
       }
 
       AND_THEN("taking the last four entries"){
-	auto test = logTemperatures | ranges::view::drop_exactly(24);
-	auto difference = ranges::view::zip_with(rel_diff, refLogTempLastFour, test);
-	RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
-	  REQUIRE( pair.first == pair.second );
-	}	
+        auto test = logTemperatures | ranges::view::drop_exactly(24);
+        auto difference = ranges::view::zip_with(rel_diff, refLogTempLastFour, test);
+        RANGES_FOR(auto&& pair, ranges::view::zip(difference, make_approx(1e-15))){
+          REQUIRE( pair.first == pair.second );
+        }       
       }            
     }
   }

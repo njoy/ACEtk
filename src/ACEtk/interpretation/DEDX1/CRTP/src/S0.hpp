@@ -2,108 +2,52 @@ template<typename Range>
 class S0 : public Range {
 
   int nDensities;
+  DenT min_den; 
+  DenT max_den;
+  TempT min_temp;
+  TempT max_temp;
   
 protected:
-  using StoppingPower = std::decay_t<decltype(std::declval<const Range&>().front())>;
+  using StoppingPower =
+    std::decay_t<decltype(std::declval<const Range&>().front())>;
 
+  bool out_of_bounds(TempT value) const {
+    return not (this->min_temp < value && value < this->max_temp);
+  }
+
+  bool out_of_bounds(DenT value) const {
+    return not (this->min_den < value && value < this->max_den);
+  }  
+ 
   #include "ACEtk/interpretation/DEDX1/CRTP/src/S1.hpp"
   
 public:
   template<typename... Args>
-  S0(int nDensities, Args&&... args)
-    : Range(std::forward<Args>(args)...), nDensities(nDensities) {}
-  
-  template<typename... T>
-  static void f(T...){std::puts(__PRETTY_FUNCTION__);}
+  S0(int nDensities,
+     DenT min_den,
+     DenT max_den,
+     TempT min_temp,
+     TempT max_temp,
+     Args&&... args)
+    : Range(std::forward<Args>(args)...),
+      nDensities(nDensities),
+      min_den(min_den),
+      max_den(max_den),
+      min_temp(min_temp),
+      max_temp(max_temp) {}
 
-  auto floor(DenT density) const {
-    auto value = std::log(density.value);
-    auto end_it = ranges::next(this->begin(), nDensities);
-    auto it =
-      ranges::lower_bound(this->begin(), end_it, value, std::less<>{},
-			  &StoppingPower::logDensity);
-    if ( it == end_it ){
-      njoy::Log::error( "Could not find value in range" );
-      throw std::domain_error("Could not find density in range");      
-    }
-    const bool match = (*it).logDensity() == value;
-    it = ranges::prev(it, not match);
-    int distance = ranges::distance(this->begin(), it);
-    auto result =
-      *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
-    auto logTemperature = [](const StoppingPower& stoppingPower){
-      return stoppingPower.logTemperature();
-    };
-    using Projection = decltype(logTemperature);
-    return S1<decltype(result), TempT, Projection>{logTemperature, std::move(result)};    
-  }
-
-  auto ceil(DenT density) const {
-    auto value = std::log(density.value);
-    auto end_it = ranges::next(this->begin(), nDensities);    
-    auto it =
-      ranges::lower_bound(this->begin(), end_it, value, std::less<>{},
-			  &StoppingPower::logDensity);
-    if ( it == end_it ){
-      njoy::Log::error( "Could not find density in range" );
-      throw std::domain_error("Could not find density in range");
-    }
-    int distance = ranges::distance(this->begin(), it);
-    auto result =
-      *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
-    auto logTemperature = [](const StoppingPower& stoppingPower){
-      return stoppingPower.logTemperature();
-    };        
-    using Projection = decltype(logTemperature);    
-    return S1<decltype(result), TempT, Projection>{logTemperature, std::move(result)};
-  }
-
-  auto floor(TempT temperature) const {
-    auto value = std::log(temperature.value);
-    auto it = ranges::lower_bound(*this, value, std::less<>{},
-				  &StoppingPower::logTemperature);
-    f(it->begin());
-    
-    if ( it == this->end() ){
-      njoy::Log::error( "Could not find temperature in range" );
-      throw std::domain_error("Could not find temperature in range");      
-    }      
-    int distance = ranges::distance(this->begin(), it);
-    if( (*it).logTemperature() != value) { distance -= nDensities; }
-    auto result =
-      *this | ranges::view::slice(distance, distance+nDensities);
-    auto logDensity = [](const StoppingPower& stoppingPower){
-      return stoppingPower.logDensity();
-    };        
-    using Projection = decltype(logDensity);    
-    return S1<decltype(result), DenT, Projection>{logDensity, std::move(result)};
-  }  
-
-  auto ceil(TempT temperature) const {
-    auto value = std::log(temperature.value);
-    auto it = ranges::lower_bound(this->begin(), this->end(), value, std::less<>{},
-				  &StoppingPower::logTemperature);
-    if ( it == this->end() ){
-      njoy::Log::error( "Could not find temperature in range" );
-      throw std::domain_error("Could not find temperature in range");
-    }
-    auto distance = ranges::distance(this->begin(), it);
-    auto result =
-      *this | ranges::view::slice(distance,
-				  static_cast<decltype(distance)>(distance+nDensities));
-    auto logDensity = [](const StoppingPower& stoppingPower){
-      return stoppingPower.logDensity();
-    };
-    using Projection = decltype(logDensity);    
-    return S1<decltype(result), DenT, Projection>{logDensity, std::move(result)};
-  }
+  #include "ACEtk/interpretation/DEDX1/CRTP/src/S0/src/floor.hpp"
+  #include "ACEtk/interpretation/DEDX1/CRTP/src/S0/src/ceil.hpp"    
 
 };
 
 template<typename Range>
-auto makeS0(int N, Range&& range) const {
+auto makeS0(int N,
+	    DenT mind,
+	    DenT maxd,
+	    TempT mint,
+	    TempT maxt,
+	    Range&& range ) const {
   using Parent = std::decay_t<decltype(range)>;
-  return S0<Parent>{N, std::forward<Range>(range)};
+  return S0<Parent>{N, mind, maxd, mint, maxt, std::forward<Range>(range)};
 }
-
-

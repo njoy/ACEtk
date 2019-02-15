@@ -39,16 +39,23 @@ auto stoppingPowers() const {
   };
         
   auto makeStoppingPower = [=](auto&& tup, auto&& rangeLogValues){
-    auto logTemperature = ranges::get<0>(tup);
-    auto logDensity = ranges::get<1>(tup);
+    auto logTemperature = std::get<0>(tup);
+    auto logDensity = std::get<1>(tup);
     return StoppingPower{logTemperature, logDensity, this->logEnergies(), rangeLogValues};
   };
 
   auto densAndTemps = ranges::view::cartesian_product(this->logTemperatures(),
 						      this->logDensities());
+
   auto stoppingPowerRange = ranges::view::zip_with(makeStoppingPower,
 						   densAndTemps,
 						   logStoppingPowerRanges);
-  return this->makeS0(this->numDensities(), std::move(stoppingPowerRange));
+
+  return this->makeS0(this->numDensities(),
+		      ranges::min(this->densities()),
+		      ranges::max(this->densities()),				  
+		      ranges::min(this->temperatures()),	
+		      ranges::max(this->temperatures()),			  
+		      std::move(stoppingPowerRange));
 
 }

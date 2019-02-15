@@ -5,6 +5,7 @@
 #include <istream>
 #include <iterator>
 #include <functional>
+#include <algorithm>
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsign-compare"
