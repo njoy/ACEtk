@@ -29,17 +29,17 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
        .schemes( njoy::utility::copy( schemes ) )
        .energies( njoy::utility::copy( energies ) );
 
-    int INTT{ 2 };
+    std::vector< int > INTT{ 1, 2 };
     std::vector< double > ene{ 1.0, 2.0};
     std::vector< double > pdf{ 0.25, 0.75 };
     std::vector< double > cdf{ 0.25, 1.0 };
 
-    cTB.distributionData().interpolationParameter( INTT )
+    cTB.distributionData().interpolationParameter( INTT[ 0 ] )
                           .energies( njoy::utility::copy( ene ) )
                           .pdf( njoy::utility::copy( pdf ) )
                           .cdf( njoy::utility::copy( cdf ) )
         .add()
-       .distributionData().interpolationParameter( INTT )
+       .distributionData().interpolationParameter( INTT[ 1 ] )
                           .energies( njoy::utility::copy( ene ) )
                           .pdf( njoy::utility::copy( pdf ) )
                           .cdf( njoy::utility::copy( cdf ) )
@@ -48,6 +48,31 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
     auto distribution = cTB.construct();
 
     THEN( "the values can be verified" ){
+      auto tab = distribution.tabulated;
+      auto parameters = tab.parameters;
+      CHECK( ranges::equal( boundaries, parameters->first ) );
+      CHECK( ranges::equal( schemes, parameters->second ) );
+      CHECK( ranges::equal( energies, tab.x ) );
+
+      auto y = tab.y;
+      CHECK( 2 == y.size() );
+
+      int index = 0;
+      {
+        auto energyDistribution = y[ index ];
+        CHECK( INTT[ index ] == energyDistribution.interpolationParameter );
+        CHECK( ranges::equal( ene, energyDistribution.energies ) );
+        CHECK( ranges::equal( pdf, energyDistribution.pdf ) );
+        CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
+      }
+      index = 1;
+      {
+        auto energyDistribution = y[ index ];
+        CHECK( INTT[ index ] == energyDistribution.interpolationParameter );
+        CHECK( ranges::equal( ene, energyDistribution.energies ) );
+        CHECK( ranges::equal( pdf, energyDistribution.pdf ) );
+        CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
+      }
 
     }
     
