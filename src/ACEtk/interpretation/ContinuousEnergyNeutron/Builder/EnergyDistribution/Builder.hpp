@@ -26,20 +26,23 @@ public:
   }
 
   // LAW=1
-  EnergyDistribution::TabularEquiprobableEnergyBins::Builder< Builder >
+  TabularEquiprobableEnergyBins::Builder< Builder >
   tabularEquiprobableEnergyBins(){ return { *this }; }
   // LAW=2
-  EnergyDistribution::DiscretePhotonEnergy::Builder< Builder >
+  DiscretePhotonEnergy::Builder< Builder >
   discretePhotonEnergy( ){ return { *this }; }
   // LAW=3
-  EnergyDistribution::LevelScattering::Builder< Builder >
+  LevelScattering::Builder< Builder >
   levelScattering( ){ return { *this }; }
   // LAW=4
-  EnergyDistribution::ContinuousTabularDistribution::Builder< Builder >
+  ContinuousTabularDistribution::Builder< Builder >
   continuousTabularDistribution( ){ return { *this }; }
   // LAW=5
-  EnergyDistribution::GeneralEvaporationSpectrum::Builder< Builder >
+  GeneralEvaporationSpectrum::Builder< Builder >
   generalEvaporationSpectrum( ){ return { *this }; }
+  // LAW=7
+  SimpleMaxwellianFissionSpectrum::Builder< Builder >
+  simpleMaxwellianFissionSpectrum( ){ return { *this }; }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"

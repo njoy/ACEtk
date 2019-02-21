@@ -9,96 +9,49 @@ using namespace njoy::ACEtk::interpretation;
 std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };
 njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
 
-/*
+template< typename B >
+void LAW1( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+  std::vector< double > eout_v{ 1.1, 1.2, 1.3 };
+  std::array< double, 3 > eout_a{ 1.1, 1.2, 1.4 };
+
+  ED.tabularEquiprobableEnergyBins()
+      .boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .outgoingEnergyTable( njoy::utility::copy( eout_v ) )
+      .outgoingEnergyTable( njoy::utility::copy( eout_a ) )
+      .outgoingEnergyTable( njoy::utility::copy( eout_a ) )
+      .outgoingEnergyTable( njoy::utility::copy( eout_a ) )
+      .add()
+    .add();
+}
+
 template< typename B >
 void addEnergyDistribution( B& builder ){
-  std::vector< int > boundaries{ 0, 13 };
+  std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
-  std::vector< double > energies{
-    0.01, //0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 
-    // 0.11, 0.12, 0.13,
-  };
-  auto ED = builder.energyDistribution();
-  ED.boundaries( njoy::utility::copy( boundaries ) )
-    .schemes( njoy::utility::copy( schemes ) );
+  std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+  std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
 
-  CHECK_THROWS( ED.tabularEquiprobableEnergyBins( 0.1, -0.1 ) );
-  CHECK_THROWS( ED.tabularEquiprobableEnergyBins( -0.1, 0.1 ) );
+  std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9 };
+  for( auto LAW : LAWS ){
+    auto ED = builder.energyDistribution();
+    ED.boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .probabilities( njoy::utility::copy( probabilities ) );
 
-  // LAW=1
-  {
-    auto tEEB = ED.tabularEquiprobableEnergyBins( 20.0, 0.01 );
-    std::vector< int > boundaries{ 0, 3 };
-    std::vector< int > schemes{ 2, 1 };
-    std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
-    std::vector< double > eout_v{ 1.1, 1.2, 1.3 };
-    std::array< double, 3 > eout_a{ 1.1, 1.2, 1.3 };
-
-    tEEB.boundaries( njoy::utility::copy( boundaries ) )
-        .schemes( njoy::utility::copy( schemes ) )
-        .energies( njoy::utility::copy( energies ) )
-        .outgoingEnergyTable( njoy::utility::copy( eout_v ) )
-        .outgoingEnergyTable( njoy::utility::copy( eout_a ) );
-
-    CHECK_THROWS(
-        tEEB.outgoingEnergyTable( std::vector< double >{ 1.0, 2.0 } ) );
-
-    tEEB.outgoingEnergyTable( njoy::utility::copy( eout_a ) )
-        .outgoingEnergyTable( njoy::utility::copy( eout_a ) );
-    tEEB.add();
+    switch( LAW ){
+      case 1:
+        LAW1( ED );
+        break;
+    }
   }
 
-  // LAW=2
-  {
-    auto dPE = ED.discretePhotonEnergy( 21.0, 0.1 );
-    dPE.energy( 2.1 );
-    CHECK_THROWS( dPE.primaryFlag( -1 ) );
-    dPE.primaryFlag( 1 );
-    dPE.add();
-  }
-
-  // LAW=3
-  {
-    auto ls = ED.levelScattering( 22.0, 0.2 );
-    std::array< double, 2 > ldat{ 1.1, 2.2 };
-    ls.LDAT( njoy::utility::copy( ldat ) );
-    ls.add();
-  }
-
-  // LAW=4
-  {
-    auto cTB = ED.continuousTabularDistribution( 20.0, 0.01 );
-    std::vector< int > boundaries{ 0, 3 };
-    std::vector< int > schemes{ 2, 1 };
-    std::vector< double > energies{ 1.0, 2.0 };
-
-    cTB.boundaries( njoy::utility::copy( boundaries ) )
-        .schemes( njoy::utility::copy( schemes ) )
-        .energies( njoy::utility::copy( energies ) );
-
-    int INTT{ 2 };
-    std::vector< double > ene{ 1.0, 2.0};
-    std::vector< double > pdf{ 0.25, 0.75 };
-    std::vector< double > cdf{ 0.25, 1.0 };
-
-    cTB.distributionData().interpolationParameter( INTT )
-                          .energies( njoy::utility::copy( ene ) )
-                          .pdf( njoy::utility::copy( pdf ) )
-                          .cdf( njoy::utility::copy( cdf ) )
-        .add()
-       .distributionData().interpolationParameter( INTT )
-                          .energies( njoy::utility::copy( ene ) )
-                          .pdf( njoy::utility::copy( pdf ) )
-                          .cdf( njoy::utility::copy( cdf ) )
-        .add();
-    cTB.add();
-
-
-    // cTB.add();
-  }
-  ED.add();
 }
-*/
 
 template< typename B >
 void addAngularDistribution( B& builder ){
@@ -158,7 +111,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
                        ContinuousEnergyNeutron::Builder::
                           NeutronYieldReferenceFrame::CENTEROFMASS );
       addAngularDistribution( tb );
-      // addEnergyDistribution( tb );
+      addEnergyDistribution( tb );
       tb.energyGrid( grid );
       tb.add();
 
@@ -186,7 +139,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       tb.Q( Q );
       tb.crossSection().values( njoy::utility::copy( XS ) ).add();
       addAngularDistribution( tb );
-      // addEnergyDistribution( tb );
+      addEnergyDistribution( tb );
 
       auto reaction = tb.construct();
 

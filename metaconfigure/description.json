@@ -458,6 +458,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder/src/energy.hpp",
@@ -469,7 +470,11 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/QValue.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/atomicWeightRatio.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Spectrum/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Spectrum/Builder/src/spectrum.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Spectrum/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Spectrum/Builder/src/energies.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder.hpp",
@@ -485,6 +490,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/construct.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/addEnergyDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/x.hpp",
@@ -705,6 +711,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.LevelScattering.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.SimpleMaxwellianFissionSpectrum.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.TabularEquiprobableEnergyBins.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/test/Builder.test.cpp"
