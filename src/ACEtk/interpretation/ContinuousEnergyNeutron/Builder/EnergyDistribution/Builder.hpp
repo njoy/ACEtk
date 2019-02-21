@@ -37,6 +37,9 @@ public:
   // LAW=4
   EnergyDistribution::ContinuousTabularDistribution::Builder< Builder >
   continuousTabularDistribution( ){ return { *this }; }
+  // LAW=5
+  EnergyDistribution::GeneralEvaporationSpectrum::Builder< Builder >
+  generalEvaporationSpectrum( ){ return { *this }; }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"
