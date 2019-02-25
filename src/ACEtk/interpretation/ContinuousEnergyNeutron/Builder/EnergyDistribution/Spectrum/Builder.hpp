@@ -1,16 +1,19 @@
-template< typename ParentBuilder >
+template< typename Derived, typename ParentBuilder >
 class Builder: 
-  public Tabulated1D::Builder< Builder< ParentBuilder > >,
-  public Base::Builder< Builder< ParentBuilder >, ParentBuilder > {
+  public Tabulated1D::Builder< Builder< Derived, ParentBuilder > >,
+  public Base::Builder< Builder< Derived, ParentBuilder >, ParentBuilder > {
 
-  using TabBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
-  using BaseBuilder = Base::Builder< Builder< ParentBuilder >, ParentBuilder >;
-
-  std::optional< S > spectrum_;
+  using BaseBuilder = 
+      Base::Builder< Builder< Derived, ParentBuilder >, ParentBuilder >;
 
 protected:
+  using TabBuilder = Tabulated1D::Builder< Builder< Derived, ParentBuilder > >;
+  std::optional< S > spectrum_;
+
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Spectrum/Builder/src/construct.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Spectrum/Builder/src/spectrum.hpp"
+
+  friend Base::Builder< Builder< Derived, ParentBuilder >, ParentBuilder >;
 
 public:
   using BaseBuilder::BaseBuilder;
@@ -20,8 +23,9 @@ public:
 #define RENAME(basename, derivedname)\
   template< typename Range,\
             utility::Require< true, utility::is_range, Range > = true >\
-  Builder& derivedname( Range&& derivedname ){\
-    return TabBuilder::basename( std::move( derivedname ) );\
+  Derived& derivedname( Range&& derivedname ){\
+    TabBuilder::basename( std::move( derivedname ) );\
+    return static_cast< Derived& >( *this );\
   }
 
   RENAME( y, effectiveTemperature )

@@ -24,22 +24,22 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
     std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0 };
     std::vector< double > theta{ 2.5, 3.7 };
+    std::vector< double > X{ 1.0, 2.2, 5.4 };
 
     gES.boundaries( njoy::utility::copy( boundaries ) )
        .schemes( njoy::utility::copy( schemes ) )
        .energies( njoy::utility::copy( energies ) )
-       .effectiveTemperature( njoy::utility::copy( theta ) );
+       .effectiveTemperature( njoy::utility::copy( theta ) )
+       .equiprobableBins( njoy::utility::copy( X ) );
 
-    std::vector< double > X{ 1.0, 2.2, 5.4 };
 
-    WHEN( "not everything has been built" ){
-      CHECK_THROWS_AS(
-          gES.construct(),
-          std::bad_optional_access&
-      );
-    }
+    // WHEN( "not everything has been built" ){
+    //   CHECK_THROWS_AS(
+    //       gES.construct(),
+    //       std::bad_optional_access&
+    //   );
+    // }
 
-    gES.equiprobableBins( njoy::utility::copy( X ) );
 
     auto distribution = gES.construct();
     THEN( "the values can be verified" ){
@@ -49,7 +49,7 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
       CHECK( ranges::equal( schemes, parameters->second ) );
       CHECK( ranges::equal( energies, tab.x ) );
       CHECK( ranges::equal( theta, tab.y ) );
-      CHECK( ranges::equal( X, distribution.spectrum ) );
+      CHECK( ranges::equal( X, distribution.x ) );
 
     }
   }

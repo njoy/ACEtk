@@ -1,4 +1,4 @@
-Builder& spectrum( S&& spectrum ){
+Derived& spectrum( S&& spectrum ){
   this->spectrum_ = std::move( spectrum );
-  return *this;
+  return static_cast< Derived& >( *this );
 }

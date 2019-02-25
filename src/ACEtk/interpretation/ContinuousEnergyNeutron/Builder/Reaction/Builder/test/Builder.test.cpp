@@ -11,6 +11,8 @@ njoy::ACEtk::Table::Slice grid{ energyGrid.begin(), energyGrid.end() };
 
 template< typename B >
 void LAW1( B& ED ){
+  njoy::Log::info( "Adding LAW=1, tabular equiprobable energy bins, data" );
+
   std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
@@ -27,6 +29,77 @@ void LAW1( B& ED ){
       .outgoingEnergyTable( njoy::utility::copy( eout_a ) )
       .add()
     .add();
+}
+
+template< typename B >
+void LAW2( B& ED ){
+  njoy::Log::info( "Adding LAW=2, discrete photon energy, data" );
+  ED.discretePhotonEnergy()
+      .energy( 3.14 )
+      .primaryFlag( 1 )
+      .add()
+    .add();
+}
+
+template< typename B >
+void LAW3( B& ED ){
+  njoy::Log::info( "Adding LAW=3, level scattering, data" );
+  ED.levelScattering()
+      .atomicWeightRatio( 235.98 )
+      .QValue( 2.765 )
+      .add()
+    .add();
+}
+
+template< typename B >
+void LAW4( B& ED ){
+  njoy::Log::info( "Adding LAW=4, continuous tabular distribution, data" );
+  
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+
+  std::vector< int > INTT{ 1, 2 };
+  std::vector< double > ene{ 1.0, 2.0};
+  std::vector< double > pdf{ 0.25, 0.75 };
+  std::vector< double > cdf{ 0.25, 1.0 };
+
+  ED.continuousTabularDistribution()
+      .boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .distributionData().interpolationParameter( INTT[ 0 ] )
+                         .energies( njoy::utility::copy( ene ) )
+                         .pdf( njoy::utility::copy( pdf ) )
+                         .cdf( njoy::utility::copy( cdf ) )
+        .add()
+      .distributionData().interpolationParameter( INTT[ 1 ] )
+                         .energies( njoy::utility::copy( ene ) )
+                         .pdf( njoy::utility::copy( pdf ) )
+                         .cdf( njoy::utility::copy( cdf ) )
+        .add()
+      .add()
+    .add();
+}
+
+template< typename B >
+void LAW5( B& ED ){
+  njoy::Log::info( "Adding LAW=5, general evaporation spectrum, data" );
+
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+  std::vector< double > theta{ 2.5, 3.7 };
+  std::vector< double > X{ 1.0, 2.2, 5.4 };
+
+  auto gES = ED.generalEvaporationSpectrum();
+  gES.boundaries( njoy::utility::copy( boundaries ) )
+     .schemes( njoy::utility::copy( schemes ) )
+     .energies( njoy::utility::copy( energies ) )
+     .effectiveTemperature( njoy::utility::copy( theta ) )
+     .equiprobableBins( njoy::utility::copy( X ) )
+     .add();
+  ED.add();
 }
 
 template< typename B >
@@ -48,6 +121,20 @@ void addEnergyDistribution( B& builder ){
       case 1:
         LAW1( ED );
         break;
+      case 2:
+        LAW2( ED );
+        break;
+      case 3:
+        LAW3( ED );
+        break;
+      case 4:
+        LAW4( ED );
+        break;
+      case 5:
+        LAW5( ED );
+        break;
+      default:
+        njoy::Log::info( "I don't know what to do with LAW={}", LAW );
     }
   }
 
