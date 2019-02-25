@@ -103,6 +103,44 @@ void LAW5( B& ED ){
 }
 
 template< typename B >
+void LAW7( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+  std::vector< double > theta{ 2.5, 3.7 };
+  double U{ 3.14 };
+
+  auto sMFS = ED.simpleMaxwellianFissionSpectrum();
+  sMFS.boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .effectiveTemperature( njoy::utility::copy( theta ) )
+      .restrictionEnergy( U )
+      .add();
+  ED.add();
+
+}
+
+template< typename B >
+void LAW9( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+  std::vector< double > theta{ 2.5, 3.7 };
+  double U{ 3.14 };
+
+  auto eS = ED.evaporationSpectrum();
+  eS.boundaries( njoy::utility::copy( boundaries ) )
+    .schemes( njoy::utility::copy( schemes ) )
+    .energies( njoy::utility::copy( energies ) )
+    .effectiveTemperature( njoy::utility::copy( theta ) )
+    .restrictionEnergy( U )
+    .add();
+  ED.add();
+
+}
+
+template< typename B >
 void addEnergyDistribution( B& builder ){
   std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
@@ -133,6 +171,12 @@ void addEnergyDistribution( B& builder ){
       case 5:
         LAW5( ED );
         break;
+      // case 7:
+      //   LAW7( ED );
+      //   break;
+      // case 9:
+      //   LAW9( ED );
+      //   break;
       default:
         njoy::Log::info( "I don't know what to do with LAW={}", LAW );
     }

@@ -51,7 +51,7 @@ SCENARIO(
       CHECK( ranges::equal( schemes, parameters->second ) );
       CHECK( ranges::equal( energies, tab.x ) );
       CHECK( ranges::equal( theta, tab.y ) );
-      CHECK( U == distribution.spectrum );
+      CHECK( U == distribution.restrictionEnergy );
 
     }
   }
