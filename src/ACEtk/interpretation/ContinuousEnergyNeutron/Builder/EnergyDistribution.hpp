@@ -10,7 +10,8 @@ struct EnergyDistribution{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering.hpp" // LAW=3
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution.hpp" // LAW=4
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum.hpp" // LAW=5
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum.hpp" // LAW=7
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum.hpp" // LAW=7 & 9
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum.hpp" // LAW=11
 
   using EvaporationSpectrum = SimpleMaxwellianFissionSpectrum; // LAW=9
 
@@ -21,7 +22,8 @@ struct EnergyDistribution{
     ContinuousTabularDistribution,    // LAW=4
     GeneralEvaporationSpectrum,       // LAW=5
     SimpleMaxwellianFissionSpectrum,  // LAW=7
-    EvaporationSpectrum               // LAW=9
+    EvaporationSpectrum,              // LAW=9
+    EnergyDependentWattSpectrum       // LAW=11
                            >;
 
   Tabulated1D tab1;

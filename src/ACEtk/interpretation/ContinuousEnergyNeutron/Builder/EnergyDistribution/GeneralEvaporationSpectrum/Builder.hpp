@@ -17,13 +17,7 @@ public:
   using BaseBuilder::BaseBuilder;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/energies.hpp"
-
-  template< typename Range,
-            utility::Require< true, utility::is_range, Range > = true >
-  Builder& equiprobableBins( Range&& bins ){
-    this->equiprobableBins_ = std::move( bins );
-    return *this;
-  }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/equiprobableBins.hpp"
 
 #define RENAME(basename, derivedname)\
   template< typename Range,\

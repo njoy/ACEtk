@@ -46,6 +46,9 @@ public:
   // LAW=9
   SimpleMaxwellianFissionSpectrum::Builder< Builder >
   evaporationSpectrum( ){ return { *this }; }
+  // LAW=11
+  EnergyDependentWattSpectrum::Builder< Builder >
+  energyDependentWattSpectrum( ){ return { *this }; }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"

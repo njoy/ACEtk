@@ -35,4 +35,3 @@ public:
   RENAME( y, nubar )
 #undef RENAME
 };
-

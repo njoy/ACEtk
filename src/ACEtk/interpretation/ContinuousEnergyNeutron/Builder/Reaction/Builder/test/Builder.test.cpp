@@ -141,13 +141,43 @@ void LAW9( B& ED ){
 }
 
 template< typename B >
+void LAW11( B& ED ){
+  std::vector< int > aBoundaries{ 0, 3 };
+  std::vector< int > bBoundaries{ 1, 4 };
+  std::vector< int > aSchemes{ 2, 1 };
+  std::vector< int > bSchemes{ 2, 3 };
+  std::vector< double > aEnergies{ 1.0, 2.0, 3.0 };
+  std::vector< double > bEnergies{ 1.1, 2.1, 3.1 };
+  std::vector< double > a{ 0.1, 0.2, 0.3 };
+  std::vector< double > b{ 1.1, 1.2, 1.3 };
+  double restrictionEnergy{ 2.68 };
+
+  ED.energyDependentWattSpectrum()
+      .aTabulated()
+          .boundaries( njoy::utility::copy( aBoundaries ) )
+          .schemes( njoy::utility::copy( aSchemes ) )
+          .energies( njoy::utility::copy( aEnergies ) )
+          .values( njoy::utility::copy( a ) )
+        .add()
+      .bTabulated()
+          .boundaries( njoy::utility::copy( bBoundaries ) )
+          .schemes( njoy::utility::copy( bSchemes ) )
+          .energies( njoy::utility::copy( bEnergies ) )
+          .values( njoy::utility::copy( b ) )
+        .add()
+        .restrictionEnergy( restrictionEnergy )
+    .add();
+  ED.add();
+}
+
+template< typename B >
 void addEnergyDistribution( B& builder ){
   std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
 
-  std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9 };
+  std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11 };
   for( auto LAW : LAWS ){
     auto ED = builder.energyDistribution();
     ED.boundaries( njoy::utility::copy( boundaries ) )
@@ -177,6 +207,9 @@ void addEnergyDistribution( B& builder ){
       // case 9:
       //   LAW9( ED );
       //   break;
+      case 11:
+        LAW11( ED );
+        break;
       default:
         njoy::Log::info( "I don't know what to do with LAW={}", LAW );
     }

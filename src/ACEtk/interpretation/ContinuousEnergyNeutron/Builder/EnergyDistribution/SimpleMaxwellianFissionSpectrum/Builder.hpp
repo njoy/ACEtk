@@ -17,11 +17,7 @@ public:
   using BaseBuilder::BaseBuilder;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/energies.hpp"
-
-  Builder& restrictionEnergy( double energy ){
-    this->restrictionEnergy_ = energy;
-    return *this;
-  }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/restrictionEnergy.hpp"
 
 #define RENAME(basename, derivedname)\
   template< typename Range,\
