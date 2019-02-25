@@ -54,5 +54,45 @@ SCENARIO(
       CHECK( U == distribution.restrictionEnergy );
 
     }
+  } // GIVEN
+  GIVEN( "invalid inputs" ){
+    WHEN( "energies are negative" ){
+      std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          sMFS.energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "energies are not sorted" ){
+      std::vector< double > energies{ 1.0, 2.0, 5.0, 4.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          sMFS.energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::Unsorted&
+        );
+      }
+    }
+    WHEN( "effective temperatures are negative" ){
+      std::vector< double > theta{ 1.0, 2.0, -5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          sMFS.effectiveTemperature( njoy::utility::copy( theta ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "restriction energy is negative" ){
+      THEN( "anexception is thrown" ){
+        CHECK_THROWS_AS(
+          sMFS.restrictionEnergy( -0.01 ),
+          std::exception&
+        );
+      }
+    }
   }
 } // SCENARIO

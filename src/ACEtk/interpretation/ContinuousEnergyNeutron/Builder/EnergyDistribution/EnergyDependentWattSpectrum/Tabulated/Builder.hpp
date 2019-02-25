@@ -13,6 +13,7 @@ public:
   { }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated/Builder/src/add.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated/Builder/src/energies.hpp"
 
 #define RENAME(basename, derivedname)\
   template< typename Range,\
@@ -21,7 +22,6 @@ public:
     return BaseBuilder::basename( std::move( derivedname ) );\
   }
 
-  RENAME( x, energies )
   RENAME( y, values )
 #undef RENAME
 };

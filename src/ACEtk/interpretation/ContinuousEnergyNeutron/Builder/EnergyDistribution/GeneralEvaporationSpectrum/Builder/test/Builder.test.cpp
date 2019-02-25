@@ -32,15 +32,6 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
        .effectiveTemperature( njoy::utility::copy( theta ) )
        .equiprobableBins( njoy::utility::copy( X ) );
 
-
-    // WHEN( "not everything has been built" ){
-    //   CHECK_THROWS_AS(
-    //       gES.construct(),
-    //       std::bad_optional_access&
-    //   );
-    // }
-
-
     auto distribution = gES.construct();
     THEN( "the values can be verified" ){
       auto tab = distribution.tabulatedEffectiveTemperature;
@@ -52,5 +43,37 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
       CHECK( ranges::equal( X, distribution.x ) );
 
     }
-  }
+  } // GIVEN valid
+  GIVEN( "invalid inputs" ){
+    WHEN( "energies are negative" ){
+      std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          gES.energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "energies are not sorted" ){
+      std::vector< double > energies{ 1.0, 2.0, 5.0, 4.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          gES.energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::Unsorted&
+        );
+      }
+    }
+    WHEN( "effective temperatures are negative" ){
+      std::vector< double > theta{ 1.0, 2.0, -5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          gES.effectiveTemperature( njoy::utility::copy( theta ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+  } // GIVEN invalid
 } // SCENARIO

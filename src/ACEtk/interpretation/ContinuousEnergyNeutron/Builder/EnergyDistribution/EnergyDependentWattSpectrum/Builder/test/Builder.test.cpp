@@ -63,5 +63,35 @@ SCENARIO( "Testing EnergyDistribtion::EnergyDependentWattSpectrum::Builder" ){
 
       CHECK( restrictionEnergy == distribution.restrictionEnergy );
     }
-  } // GIVEN
+  } // GIVEN valid
+  GIVEN( "invalid inputs" ){
+    WHEN( "energies are negative" ){
+      std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          eDWS.aTabulated().energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "energies are not sorted" ){
+      std::vector< double > energies{ 1.0, 2.0, 5.0, 4.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          eDWS.aTabulated().energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::Unsorted&
+        );
+      }
+    }
+    WHEN( "restriction energy is negative" ){
+      THEN( "anexception is thrown" ){
+        CHECK_THROWS_AS(
+          eDWS.restrictionEnergy( -0.01 ),
+          std::exception&
+        );
+      }
+    }
+  }
 } // SCENARIO

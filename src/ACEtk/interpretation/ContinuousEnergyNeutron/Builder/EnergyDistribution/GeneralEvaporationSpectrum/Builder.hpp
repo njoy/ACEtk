@@ -17,16 +17,6 @@ public:
   using BaseBuilder::BaseBuilder;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/energies.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/effectiveTemperature.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/equiprobableBins.hpp"
-
-#define RENAME(basename, derivedname)\
-  template< typename Range,\
-            utility::Require< true, utility::is_range, Range > = true >\
-  Builder& derivedname( Range&& derivedname ){\
-    TabBuilder::basename( std::move( derivedname ) );\
-    return *this;\
-  }
-
-  RENAME( y, effectiveTemperature )
-#undef RENAME
 };
