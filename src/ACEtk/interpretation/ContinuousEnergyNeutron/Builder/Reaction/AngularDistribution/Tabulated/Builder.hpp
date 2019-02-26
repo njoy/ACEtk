@@ -7,7 +7,7 @@ class Builder {
   std::optional< int > interpolationFlag_;
   std::optional< 
     details::verify::CosineBins< std::vector< double > > > cosineGrid_;
-  std::optional< details::verify::PDF< std::vector< double > > > PDF_;
+  std::optional< details::verify::Positive< std::vector< double > > > PDF_;
   std::optional< details::verify::CDF< std::vector< double > > > CDF_;
 
 protected:
