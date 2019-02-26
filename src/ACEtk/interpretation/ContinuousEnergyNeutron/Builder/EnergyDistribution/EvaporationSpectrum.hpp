@@ -1,0 +1,2 @@
+struct EvaporationSpectrum: public SimpleMaxwellianFissionSpectrum {
+};

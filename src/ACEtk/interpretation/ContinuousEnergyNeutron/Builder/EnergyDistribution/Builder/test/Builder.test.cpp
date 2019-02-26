@@ -192,18 +192,18 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
     using EDBuilder::EDBuilder;
   };
 
-  TestBuilder tb{ parentBuilder };
-
   std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
 
   GIVEN( "valid inputs" ){
+    TestBuilder tb{ parentBuilder };
+
     tb.boundaries( njoy::utility::copy( boundaries ) )
-        .schemes( njoy::utility::copy( schemes ) )
-        .energies( njoy::utility::copy( energies ) )
-        .probabilities( njoy::utility::copy( probabilities ) );
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .probabilities( njoy::utility::copy( probabilities ) );
 
     std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24, 44, 61, 66, 67 */ };
 
@@ -227,12 +227,12 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
           case 5:
             LAW5( tb );
             break;
-          // case 7:
-          //   LAW7( tb );
-          //   break;
-          // case 9:
-          //   LAW9( tb );
-          //   break;
+          case 7:
+            LAW7( tb );
+            break;
+          case 9:
+            LAW9( tb );
+            break;
           case 11:
             LAW11( tb );
             break;
@@ -249,6 +249,8 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
     } // THEN a law can be given
   } // GIVEN
   GIVEN( "invalid inputs" ){
+    TestBuilder tb{ parentBuilder };
+
     WHEN( "energies are negative" ){
       std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
 
