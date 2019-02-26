@@ -9,4 +9,3 @@ auto positive( Range&& r ){
   return Positive< std::decay_t< Range > >{ std::forward< Range >( r ) };
 }
 
-
