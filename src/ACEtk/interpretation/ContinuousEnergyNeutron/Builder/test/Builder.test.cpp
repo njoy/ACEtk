@@ -66,6 +66,13 @@ SCENARIO( "incident neutron reaction" ){
     std::vector< double > pdf{ 0.1, 0.5, 0.4 };
     std::vector< double > cdf{ 0.1, 0.6, 1.0 };
 
+    std::vector< int > boundaries{ 0, 3 };
+    std::vector< int > schemes{ 2, 1 };
+    std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+    std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
+    std::vector< double > ene{ 1.0, 2.0, 3.0};
+    std::vector< int > INTT{ 1, 2 };
+
     int MT{ 14 };
     WHEN( "adding a reaction" ){
       THEN( "no exception is thrown" ){
@@ -89,7 +96,43 @@ SCENARIO( "incident neutron reaction" ){
                         .equiprobableCosineBins().values( 
                             njoy::utility::copy( cosineBins ) )
                           .add()
-                   .add()
+                      .add() // angular distribution
+                      .energyDistribution()
+                        .boundaries( njoy::utility::copy( boundaries ) )
+                        .schemes( njoy::utility::copy( schemes ) )
+                        .energies( njoy::utility::copy( energies ) )
+                        .probabilities( njoy::utility::copy( probabilities ) )
+                        .continuousTabularDistribution()
+                          .boundaries( njoy::utility::copy( boundaries ) )
+                          .schemes( njoy::utility::copy( schemes ) )
+                          .energies( njoy::utility::copy( energies ) )
+                          .distributionData()
+                            .interpolationParameter( INTT[ 0 ] )
+                            .energies( njoy::utility::copy( ene ) )
+                            .pdf( njoy::utility::copy( pdf ) )
+                            .cdf( njoy::utility::copy( cdf ) )
+                            .add()
+                          .distributionData()
+                            .interpolationParameter( INTT[ 1 ] )
+                            .energies( njoy::utility::copy( ene ) )
+                            .pdf( njoy::utility::copy( pdf ) )
+                            .cdf( njoy::utility::copy( cdf ) )
+                          .add()
+                          .distributionData()
+                            .interpolationParameter( INTT[ 0 ] )
+                            .energies( njoy::utility::copy( ene ) )
+                            .pdf( njoy::utility::copy( pdf ) )
+                            .cdf( njoy::utility::copy( cdf ) )
+                          .add()
+                          .distributionData()
+                            .interpolationParameter( INTT[ 1 ] )
+                            .energies( njoy::utility::copy( ene ) )
+                            .pdf( njoy::utility::copy( pdf ) )
+                            .cdf( njoy::utility::copy( cdf ) )
+                          .add()
+                        .add() // continuousTabularDistribution LAW=4
+                      .add() // energy distribution
+                    .add() // reaction
         );
       }
     } // WHEN
@@ -114,8 +157,43 @@ SCENARIO( "incident neutron reaction" ){
                     .equiprobableCosineBins().values( 
                         njoy::utility::copy( cosineBins ) )
                       .add()
-                    .add()
-                 .add();
+                  .add() // angular distribution
+                  .energyDistribution()
+                    .boundaries( njoy::utility::copy( boundaries ) )
+                    .schemes( njoy::utility::copy( schemes ) )
+                    .energies( njoy::utility::copy( energies ) )
+                    .probabilities( njoy::utility::copy( probabilities ) )
+                    .continuousTabularDistribution()
+                      .boundaries( njoy::utility::copy( boundaries ) )
+                      .schemes( njoy::utility::copy( schemes ) )
+                      .energies( njoy::utility::copy( energies ) )
+                      .distributionData()
+                        .interpolationParameter( INTT[ 0 ] )
+                        .energies( njoy::utility::copy( ene ) )
+                        .pdf( njoy::utility::copy( pdf ) )
+                        .cdf( njoy::utility::copy( cdf ) )
+                        .add()
+                      .distributionData()
+                        .interpolationParameter( INTT[ 1 ] )
+                        .energies( njoy::utility::copy( ene ) )
+                        .pdf( njoy::utility::copy( pdf ) )
+                        .cdf( njoy::utility::copy( cdf ) )
+                      .add()
+                      .distributionData()
+                        .interpolationParameter( INTT[ 0 ] )
+                        .energies( njoy::utility::copy( ene ) )
+                        .pdf( njoy::utility::copy( pdf ) )
+                        .cdf( njoy::utility::copy( cdf ) )
+                      .add()
+                      .distributionData()
+                        .interpolationParameter( INTT[ 1 ] )
+                        .energies( njoy::utility::copy( ene ) )
+                        .pdf( njoy::utility::copy( pdf ) )
+                        .cdf( njoy::utility::copy( cdf ) )
+                      .add()
+                    .add() // continuousTabularDistribution LAW=4
+                  .add() // energy distribution
+                 .add(); // reaction
         CHECK_THROWS(
           ncBuilder.reaction( MT )
                    .energyGrid( ncBuilder.energyGrid() )
@@ -133,8 +211,43 @@ SCENARIO( "incident neutron reaction" ){
                       .equiprobableCosineBins().values( 
                           njoy::utility::copy( cosineBins ) )
                         .add()
-                      .add() 
-                  .add()
+                    .add() // angular distribution
+                    .energyDistribution()
+                      .boundaries( njoy::utility::copy( boundaries ) )
+                      .schemes( njoy::utility::copy( schemes ) )
+                      .energies( njoy::utility::copy( energies ) )
+                      .probabilities( njoy::utility::copy( probabilities ) )
+                      .continuousTabularDistribution()
+                        .boundaries( njoy::utility::copy( boundaries ) )
+                        .schemes( njoy::utility::copy( schemes ) )
+                        .energies( njoy::utility::copy( energies ) )
+                        .distributionData()
+                          .interpolationParameter( INTT[ 0 ] )
+                          .energies( njoy::utility::copy( ene ) )
+                          .pdf( njoy::utility::copy( pdf ) )
+                          .cdf( njoy::utility::copy( cdf ) )
+                          .add()
+                        .distributionData()
+                          .interpolationParameter( INTT[ 1 ] )
+                          .energies( njoy::utility::copy( ene ) )
+                          .pdf( njoy::utility::copy( pdf ) )
+                          .cdf( njoy::utility::copy( cdf ) )
+                        .add()
+                        .distributionData()
+                          .interpolationParameter( INTT[ 0 ] )
+                          .energies( njoy::utility::copy( ene ) )
+                          .pdf( njoy::utility::copy( pdf ) )
+                          .cdf( njoy::utility::copy( cdf ) )
+                        .add()
+                        .distributionData()
+                          .interpolationParameter( INTT[ 1 ] )
+                          .energies( njoy::utility::copy( ene ) )
+                          .pdf( njoy::utility::copy( pdf ) )
+                          .cdf( njoy::utility::copy( cdf ) )
+                        .add()
+                      .add() // continuousTabularDistribution LAW=4
+                    .add() // energy distribution
+                  .add() // reaction
         );
       }
     }
