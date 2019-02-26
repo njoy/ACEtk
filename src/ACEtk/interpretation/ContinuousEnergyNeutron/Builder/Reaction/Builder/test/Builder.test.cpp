@@ -171,6 +171,31 @@ void LAW11( B& ED ){
 }
 
 template< typename B >
+void LAW22( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+
+  auto tLF = ED.tabularLinearFunctions();
+  tLF.boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) );
+
+  std::vector< double > P{ 0.1, 0.2, 0.4 };
+  std::vector< double > T{ 1.1, 1.2, 1.4 };
+  std::vector< double > C{ 2.1, 2.2, 2.4 };
+
+  tLF.distributionData().P( njoy::utility::copy( P ) )
+                        .T( njoy::utility::copy( T ) )
+                        .C( njoy::utility::copy( C ) )
+      .add()
+      .distributionData().P( njoy::utility::copy( P ) )
+                        .T( njoy::utility::copy( T ) )
+                        .C( njoy::utility::copy( C ) )
+      .add();
+}
+
+template< typename B >
 void addEnergyDistribution( B& builder ){
   std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
@@ -209,6 +234,9 @@ void addEnergyDistribution( B& builder ){
       //   break;
       case 11:
         LAW11( ED );
+        break;
+      case 22:
+        LAW22( ED );
         break;
       default:
         njoy::Log::info( "I don't know what to do with LAW={}", LAW );

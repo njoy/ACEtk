@@ -12,6 +12,7 @@ struct EnergyDistribution{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum.hpp" // LAW=5
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum.hpp" // LAW=7 & 9
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum.hpp" // LAW=11
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions.hpp" // LAW=22
 
   using EvaporationSpectrum = SimpleMaxwellianFissionSpectrum; // LAW=9
 
@@ -23,7 +24,14 @@ struct EnergyDistribution{
     GeneralEvaporationSpectrum,       // LAW=5
     SimpleMaxwellianFissionSpectrum,  // LAW=7
     EvaporationSpectrum,              // LAW=9
-    EnergyDependentWattSpectrum       // LAW=11
+    EnergyDependentWattSpectrum,      // LAW=11
+    TabularLinearFunctions            // LAW=22
+    // LAW24,                            // LAW=24
+    // KalbachMann,                      // LAW=44
+    // TabularAngularDistribution,       // LAW=61
+    // NBodyPhaseSpace,                  // LAW=66
+    // LaboratoryAngleEnergy,            // LAW=67
+    // EnergyDependentNeutronYields
                            >;
 
   Tabulated1D tab1;

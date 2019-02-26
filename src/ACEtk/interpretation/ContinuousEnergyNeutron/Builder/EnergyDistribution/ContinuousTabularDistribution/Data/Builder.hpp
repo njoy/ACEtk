@@ -25,5 +25,4 @@ public:
   ParentBuilder& add() {
     return parent.get().addData( this->construct() );
   }
-
 };

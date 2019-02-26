@@ -6,7 +6,8 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
+SCENARIO( 
+  "Testing EnergyDistribtion::ContinuousTabularDistribution::Data::Builder" ){
     ContinuousEnergyNeutron::Builder CENBuilder;
 
     auto parentBuilder = CENBuilder.reaction( 14 )

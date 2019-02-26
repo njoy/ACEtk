@@ -49,6 +49,9 @@ public:
   // LAW=11
   EnergyDependentWattSpectrum::Builder< Builder >
   energyDependentWattSpectrum( ){ return { *this }; }
+  // LAW=22
+  TabularLinearFunctions::Builder< Builder >
+  tabularLinearFunctions( ){ return { *this }; }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"

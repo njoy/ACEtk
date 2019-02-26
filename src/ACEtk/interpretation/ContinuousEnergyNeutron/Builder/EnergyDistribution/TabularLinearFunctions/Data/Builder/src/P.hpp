@@ -1,6 +1,6 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
-Builder& pdf( Range&& pdf ){
-  this->pdf_ = std::move( pdf );
+Builder& P( Range&& P ){
+  this->P_ = std::move( P );
   return *this;
 }
