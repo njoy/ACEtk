@@ -391,167 +391,6 @@
     "src/ACEtk/interpretation/EL03/RileyCrossSection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/NeutronYieldReferenceFrame.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Factors.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/cosineBins.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addYields.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/yields.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addCrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/crossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addAngularDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Isotropic.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/interpolationFlag.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/cdf.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/cosineGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/equalSize.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/src/pdf.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/src/values.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/addTabulated.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/addEquiprobable.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/isotropic.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addAngularDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addEnergyDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder/src/energy.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder/src/primaryFlag.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions/Data.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions/Data/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated/Builder/src/add.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Builder/src/restrictionEnergy.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/outgoingEnergyTable.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/QValue.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/atomicWeightRatio.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/equiprobableBins.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/effectiveTemperature.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/src/cdf.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/src/interpolationParameter.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/src/pdf.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/addData.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/addEnergyDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/restrictionEnergy.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/effectiveTemperature.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/energies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/x.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/schemes.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/y.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/boundaries.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection/Builder/src/values.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection/Builder/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/src/outgoingEnergies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/src/crossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/polynomial.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/src/tabulated.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/src/coefficients.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/captureCrossSections.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/heating.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/interpolationParameter.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/CDFs.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/equalSize.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/inelasticCompetition.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/incidentEnergies.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/otherAbsorption.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/fissionCrossSections.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/factors.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/totalCrossSections.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/elasticCrossSections.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp",
     "src/ACEtk/interpretation/EPR/Incoherent.hpp",
     "src/ACEtk/interpretation/EPR/Coherent.hpp",
     "src/ACEtk/interpretation/EPR/CRTP.hpp",
@@ -561,26 +400,14 @@
     "src/ACEtk/details/verify/IsPositive.hpp",
     "src/ACEtk/details/verify/IsCDF.hpp",
     "src/ACEtk/details/verify/Sorted.hpp",
-    "src/ACEtk/details/verify/IsNormal.hpp",
-    "src/ACEtk/details/verify/IsPDF.hpp",
-    "src/ACEtk/details/verify/Normal.hpp",
     "src/ACEtk/details/verify/StrictlyPositive.hpp",
     "src/ACEtk/details/verify/IsSorted.hpp",
     "src/ACEtk/details/verify/exceptions.hpp",
     "src/ACEtk/details/verify/IsStrictlyPositive.hpp",
-    "src/ACEtk/details/verify/IsCosineBins.hpp",
-    "src/ACEtk/details/verify/PDF.hpp",
     "src/ACEtk/details/verify/Positive.hpp",
-    "src/ACEtk/details/verify/CosineBins.hpp",
     "src/ACEtk/details/verify/Positive/src/check.hpp",
     "src/ACEtk/details/verify/Positive/src/ctor.hpp",
     "src/ACEtk/details/verify/Positive/src/assignment.hpp",
-    "src/ACEtk/details/verify/CosineBins/src/check.hpp",
-    "src/ACEtk/details/verify/CosineBins/src/ctor.hpp",
-    "src/ACEtk/details/verify/CosineBins/src/assignment.hpp",
-    "src/ACEtk/details/verify/PDF/src/check.hpp",
-    "src/ACEtk/details/verify/PDF/src/ctor.hpp",
-    "src/ACEtk/details/verify/PDF/src/assignment.hpp",
     "src/ACEtk/details/verify/exceptions/Unsorted.hpp",
     "src/ACEtk/details/verify/exceptions/NotStrictlyPositive.hpp",
     "src/ACEtk/details/verify/exceptions/InvalidNeutronYield.hpp",
@@ -589,7 +416,6 @@
     "src/ACEtk/details/verify/exceptions/InvalidCDF.hpp",
     "src/ACEtk/details/verify/exceptions/InvalidPDF.hpp",
     "src/ACEtk/details/verify/exceptions/NotNormal.hpp",
-    "src/ACEtk/details/verify/exceptions/InvalidCosine.hpp",
     "src/ACEtk/details/verify/CDF/src/check.hpp",
     "src/ACEtk/details/verify/CDF/src/ctor.hpp",
     "src/ACEtk/details/verify/CDF/src/assignment.hpp",
@@ -599,12 +425,8 @@
     "src/ACEtk/details/verify/Sorted/src/check.hpp",
     "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
     "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
-    "src/ACEtk/details/verify/Normal/src/check.hpp",
-    "src/ACEtk/details/verify/Normal/src/ctor.hpp",
-    "src/ACEtk/details/verify/Normal/src/assignment.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
-    "src/ACEtk/details/verify/src/cosines.hpp",
     "src/ACEtk/details/verify/src/neutronYield.hpp",
     "src/ACEtk/details/verify/src/normal.hpp",
     "src/ACEtk/details/verify/src/strictlyPositive.hpp",
@@ -679,21 +501,10 @@
     ],
     "ACEtk.details.verify": [
       "src/ACEtk/details/verify/test/verify.test.cpp",
-      "src/ACEtk/details/verify/test/size.test.cpp",
-      "src/ACEtk/details/verify/test/neutronYield.test.cpp",
-      "src/ACEtk/details/verify/test/interpolationParameters.test.cpp"
+      "src/ACEtk/details/verify/test/size.test.cpp"
     ],
     "ACEtk.details.verify.CDF": [
       "src/ACEtk/details/verify/CDF/test/CDF.test.cpp"
-    ],
-    "ACEtk.details.verify.CosineBins": [
-      "src/ACEtk/details/verify/CosineBins/test/CosineBins.test.cpp"
-    ],
-    "ACEtk.details.verify.Normal": [
-      "src/ACEtk/details/verify/Normal/test/Normal.test.cpp"
-    ],
-    "ACEtk.details.verify.PDF": [
-      "src/ACEtk/details/verify/PDF/test/PDF.test.cpp"
     ],
     "ACEtk.details.verify.Positive": [
       "src/ACEtk/details/verify/Positive/test/Positive.test.cpp"
@@ -706,84 +517,6 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.ContinuousTabularDistribution.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.ContinuousTabularDistribution.Data.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.DiscretePhotonEnergy.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.EnergyDependentWattSpectrum.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.GeneralEvaporationSpectrum.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.LevelScattering.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.SimpleMaxwellianFissionSpectrum.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.TabularEquiprobableEnergyBins.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.TabularLinearFunctions.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.TabularLinearFunctions.Data.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions/Data/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.FissionMultiplicity.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.FissionMultiplicity.Polynomial.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.FissionMultiplicity.Tabulated.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.AngularDistribution.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.CrossSection.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.Yields.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.ProbabilityTable.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.AngularDistribution.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.AngularDistribution.Equiprobable.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.AngularDistribution.Tabulated.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.CrossSection.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.TotalGammaProduction.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
