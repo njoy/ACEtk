@@ -215,6 +215,63 @@ void LAW44( B& ED ){
     .add(); // kalbachMann
 }
 
+template< typename B >
+void LAW61( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+  int INTT{ 1 };
+  std::vector< double > ene{ 1.0, 2.0};
+  std::vector< double > pdf{ 0.25, 0.75 };
+  std::vector< double > cdf{ 0.25, 1.0 };
+  int JJ{ 2 };
+  std::vector< double > cosines{ -0.99, 0.01, 0.75 };
+  std::vector< double > apdf{ 0.25, 0.65, 0.10 };
+  std::vector< double > acdf{ 0.25, 0.90, 1.0 };
+
+  ED.kalbachMannAngularDistribution()
+      .boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .distributionData()
+         .interpolationParameter( INTT )
+         .energies( njoy::utility::copy( ene ) )
+         .pdf( njoy::utility::copy( pdf ) )
+         .cdf( njoy::utility::copy( cdf ) )
+         .angularDistribution()
+           .interpolationParameter( JJ )
+           .cosineGrid( njoy::utility::copy( cosines ) )
+           .pdf( njoy::utility::copy( apdf ) )
+           .cdf( njoy::utility::copy( acdf ) )
+         .add() // angularDistribution
+         .angularDistribution()
+           .interpolationParameter( JJ )
+           .cosineGrid( njoy::utility::copy( cosines ) )
+           .pdf( njoy::utility::copy( apdf ) )
+           .cdf( njoy::utility::copy( acdf ) )
+         .add()  // angularDistribution
+      .add() // distributionData
+      .distributionData()
+         .interpolationParameter( INTT )
+         .energies( njoy::utility::copy( ene ) )
+         .pdf( njoy::utility::copy( pdf ) )
+         .cdf( njoy::utility::copy( cdf ) )
+         .angularDistribution()
+           .interpolationParameter( JJ )
+           .cosineGrid( njoy::utility::copy( cosines ) )
+           .pdf( njoy::utility::copy( apdf ) )
+           .cdf( njoy::utility::copy( acdf ) )
+         .add() // angularDistribution
+         .angularDistribution()
+           .interpolationParameter( JJ )
+           .cosineGrid( njoy::utility::copy( cosines ) )
+           .pdf( njoy::utility::copy( apdf ) )
+           .cdf( njoy::utility::copy( acdf ) )
+         .add()  // angularDistribution
+       .add()  // distributionData
+     .add(); // kalbachMannAngularDistribution
+}
+
 SCENARIO( "Testing EnergyDistribtion::Builder" ){
   ContinuousEnergyNeutron::Builder CENBuilder;
   using ParentBuilder = decltype( CENBuilder.reaction( 14 ) );
@@ -240,7 +297,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
       .energies( njoy::utility::copy( energies ) )
       .probabilities( njoy::utility::copy( probabilities ) );
 
-    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, /*61, 66, 67 */ };
+    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, 61, /*66, 67 */ };
 
     for( auto LAW : LAWS ){
       THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
@@ -257,6 +314,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
           case 11: LAW11( tb ); break;
           case 22: LAW22( tb ); break;
           case 44: LAW44( tb ); break;
+          case 61: LAW61( tb ); break;
           default:
             njoy::Log::info( "I don't know what to do with LAW={}", LAW );
         }

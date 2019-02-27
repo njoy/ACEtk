@@ -56,6 +56,9 @@ public:
   // LAW=44
   KalbachMann::Builder< Builder >
   kalbachMann( ){ return { *this }; }
+  // LAW=61
+  KalbachMannAngularDistribution::Builder< Builder >
+  kalbachMannAngularDistribution( ){ return { *this }; }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"
