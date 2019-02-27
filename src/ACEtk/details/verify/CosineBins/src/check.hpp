@@ -12,7 +12,7 @@ static decltype( auto ) check( Arg&& arg ){
     return sorted( std::forward< Arg >( arg ) );
   } catch( details::verify::exceptions::Unsorted& s ){
     Log::info( "Cosine bins must be sorted" );
-    throw;
+    throw details::verify::exceptions::InvalidCosine();
   } catch( details::verify::exceptions::InvalidCosine& s ){
     Log::info( "Cosine bin values must be in the range: [ -1, 1 ]." );
     throw;

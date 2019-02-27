@@ -23,7 +23,7 @@ SCENARIO( "Testing sorted verification" ){
       CHECK_NOTHROW( CosineBins< std::vector< double > >( cosineBins ) );
       CHECK_THROWS_AS(
         CosineBins< std::vector< double > >( unsorted ),
-        exceptions::Unsorted&
+        exceptions::InvalidCosine&
       );
       CHECK_THROWS_AS(
         CosineBins< std::vector< double > >( invalid ),
