@@ -15,6 +15,8 @@ struct EnergyDistribution{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum.hpp" // LAW=11
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions.hpp" // LAW=22
 
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann.hpp" // LAW=44
+
   using LAWS = std::variant< 
     TabularEquiprobableEnergyBins,    // LAW=1
     DiscretePhotonEnergy,             // LAW=2
@@ -24,9 +26,9 @@ struct EnergyDistribution{
     SimpleMaxwellianFissionSpectrum,  // LAW=7
     EvaporationSpectrum,              // LAW=9
     EnergyDependentWattSpectrum,      // LAW=11
-    TabularLinearFunctions            // LAW=22
+    TabularLinearFunctions,           // LAW=22
     // LAW24,                            // LAW=24
-    // KalbachMann,                      // LAW=44
+    KalbachMann                       // LAW=44
     // TabularAngularDistribution,       // LAW=61
     // NBodyPhaseSpace,                  // LAW=66
     // LaboratoryAngleEnergy,            // LAW=67

@@ -180,6 +180,41 @@ void LAW22( B& ED ){
     .add(); // tabularLinearFunctions
 }
 
+template< typename B >
+void LAW44( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+  std::vector< int > INTT{ 1, 2 };
+  std::vector< double > ene{ 1.0, 2.0};
+  std::vector< double > pdf{ 0.25, 0.75 };
+  std::vector< double > cdf{ 0.25, 1.0 };
+  std::vector< double > R{ 0.99, 0.01 };
+  std::vector< double > A{ 0.75, 0.22 };
+
+  ED.kalbachMann()
+      .boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .distributionData()
+        .interpolationParameter( INTT[ 0 ] )
+        .energies( njoy::utility::copy( ene ) )
+        .pdf( njoy::utility::copy( pdf ) )
+        .cdf( njoy::utility::copy( cdf ) )
+        .precompoundFraction( njoy::utility::copy( R ) )
+        .angularDistributionSlope( njoy::utility::copy( A ) )
+      .add() // distributionData
+      .distributionData()
+        .interpolationParameter( INTT[ 1 ] )
+        .energies( njoy::utility::copy( ene ) )
+        .pdf( njoy::utility::copy( pdf ) )
+        .cdf( njoy::utility::copy( cdf ) )
+        .precompoundFraction( njoy::utility::copy( R ) )
+        .angularDistributionSlope( njoy::utility::copy( A ) )
+      .add()   // distributionData
+    .add(); // kalbachMann
+}
+
 SCENARIO( "Testing EnergyDistribtion::Builder" ){
   ContinuousEnergyNeutron::Builder CENBuilder;
   using ParentBuilder = decltype( CENBuilder.reaction( 14 ) );
@@ -205,48 +240,31 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
       .energies( njoy::utility::copy( energies ) )
       .probabilities( njoy::utility::copy( probabilities ) );
 
-    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24, 44, 61, 66, 67 */ };
+    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, /*61, 66, 67 */ };
 
-    THEN( "a LAW can be given" ){
-      for( auto LAW : LAWS ){
+    for( auto LAW : LAWS ){
+      THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
         njoy::Log::info( "Trying LAW={}", LAW );
 
         switch( LAW ){
-          case 1:
-            LAW1( tb );
-            break;
-          case 2:
-            LAW2( tb );
-            break;
-          case 3:
-            LAW3( tb );
-            break;
-          case 4:
-            LAW4( tb );
-            break;
-          case 5:
-            LAW5( tb );
-            break;
-          case 7:
-            LAW7( tb );
-            break;
-          case 9:
-            LAW9( tb );
-            break;
-          case 11:
-            LAW11( tb );
-            break;
-          case 22:
-            LAW22( tb );
-            break;
+          case 1:  LAW1( tb ); break;
+          case 2:  LAW2( tb ); break;
+          case 3:  LAW3( tb ); break;
+          case 4:  LAW4( tb ); break;
+          case 5:  LAW5( tb ); break;
+          case 7:  LAW7( tb ); break;
+          case 9:  LAW9( tb ); break;
+          case 11: LAW11( tb ); break;
+          case 22: LAW22( tb ); break;
+          case 44: LAW44( tb ); break;
           default:
             njoy::Log::info( "I don't know what to do with LAW={}", LAW );
         }
 
         CHECK_NOTHROW( tb.construct() );
 
-      } // for LAW
-    } // THEN a law can be given
+      } // THEN a law can be given
+    } // for LAW
   } // GIVEN
   GIVEN( "invalid inputs" ){
     TestBuilder tb{ parentBuilder };

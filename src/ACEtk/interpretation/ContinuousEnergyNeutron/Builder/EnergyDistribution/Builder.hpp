@@ -53,6 +53,10 @@ public:
   TabularLinearFunctions::Builder< Builder >
   tabularLinearFunctions( ){ return { *this }; }
 
+  // LAW=44
+  KalbachMann::Builder< Builder >
+  kalbachMann( ){ return { *this }; }
+
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"
 

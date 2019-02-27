@@ -7,12 +7,12 @@ using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( 
-  "Testing EnergyDistribtion::ContinuousTabularDistribution::Data::Builder" ){
+  "Testing EnergyDistribtion::KalbachMann::Data::Builder" ){
     ContinuousEnergyNeutron::Builder CENBuilder;
 
     auto parentBuilder = CENBuilder.reaction( 14 )
                                      .energyDistribution()
-                                       .continuousTabularDistribution();
+                                       .kalbachMann();
     using DataBuilder = decltype( parentBuilder.distributionData() );
 
     struct TestBuilder : public DataBuilder {
@@ -27,11 +27,15 @@ SCENARIO(
     std::vector< double > ene{ 1.0, 2.0};
     std::vector< double > pdf{ 0.25, 0.75 };
     std::vector< double > cdf{ 0.25, 1.0 };
+    std::vector< double > R{ 0.99, 0.01 };
+    std::vector< double > A{ 0.75, 0.22 };
 
     dataB.interpolationParameter( INTT )
          .energies( njoy::utility::copy( ene ) )
          .pdf( njoy::utility::copy( pdf ) )
-         .cdf( njoy::utility::copy( cdf ) );
+         .cdf( njoy::utility::copy( cdf ) )
+         .precompoundFraction( njoy::utility::copy( R ) )
+         .angularDistributionSlope( njoy::utility::copy( A ) );
 
     auto distribution = dataB.construct();
     THEN( "the values can be verified" ){
@@ -39,6 +43,8 @@ SCENARIO(
       CHECK( ranges::equal( ene, distribution.energies ) );
       CHECK( ranges::equal( pdf, distribution.pdf ) );
       CHECK( ranges::equal( cdf, distribution.cdf ) );
+      CHECK( ranges::equal( R, distribution.precompoundFraction ) );
+      CHECK( ranges::equal( A, distribution.angularDistributionSlope ) );
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){
