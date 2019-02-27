@@ -272,6 +272,14 @@ void LAW61( B& ED ){
      .add(); // kalbachMannAngularDistribution
 }
 
+template< typename B >
+void LAW66( B& ED ){
+  ED.nBodyPhaseSpace()
+      .numberBodies( 1 )
+      .totalMassRatio( 3.14 )
+      .add(); // nBodyPhaseSpace
+}
+
 SCENARIO( "Testing EnergyDistribtion::Builder" ){
   ContinuousEnergyNeutron::Builder CENBuilder;
   using ParentBuilder = decltype( CENBuilder.reaction( 14 ) );
@@ -297,7 +305,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
       .energies( njoy::utility::copy( energies ) )
       .probabilities( njoy::utility::copy( probabilities ) );
 
-    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, 61, /*66, 67 */ };
+    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, 61, 66, /*67 */ };
 
     for( auto LAW : LAWS ){
       THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
@@ -315,6 +323,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
           case 22: LAW22( tb ); break;
           case 44: LAW44( tb ); break;
           case 61: LAW61( tb ); break;
+          case 66: LAW66( tb ); break;
           default:
             njoy::Log::info( "I don't know what to do with LAW={}", LAW );
         }
