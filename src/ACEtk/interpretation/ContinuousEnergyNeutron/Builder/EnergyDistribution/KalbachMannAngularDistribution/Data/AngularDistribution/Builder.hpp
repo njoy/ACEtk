@@ -25,9 +25,4 @@ public:
   ParentBuilder& add() {
     return parent.get().addData( this->construct() );
   }
-
-  AngularDistribution::Builder< Builder< ParentBuilder > > 
-  angularDistribution(){
-    return { *this };
-  }
 };

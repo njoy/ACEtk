@@ -26,4 +26,3 @@ public:
   }
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Builder/src/energies.hpp"
 };
-

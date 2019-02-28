@@ -31,7 +31,5 @@ public:
   }
 
   AngularDistribution::Builder< Builder< ParentBuilder > > 
-  angularDistribution(){
-    return { *this };
-  }
+  angularDistribution(){ return { *this }; }
 };

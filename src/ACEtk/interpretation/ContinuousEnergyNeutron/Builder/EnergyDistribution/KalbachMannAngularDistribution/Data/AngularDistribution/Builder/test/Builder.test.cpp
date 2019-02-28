@@ -35,7 +35,7 @@ SCENARIO(
                    .cdf( njoy::utility::copy( cdf ) );
 
     auto distribution = angDistribution.construct();
-    THEN( "the values can be construct" ){
+    THEN( "the values can be verified" ){
       CHECK( JJ == distribution.interpolationParameter );
       CHECK( ranges::equal( cosines, distribution.cosineGrid ) );
       CHECK( ranges::equal( pdf, distribution.pdf ) );

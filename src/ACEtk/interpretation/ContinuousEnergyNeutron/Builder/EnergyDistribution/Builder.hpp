@@ -62,6 +62,9 @@ public:
   // LAW=66
   NBodyPhaseSpace::Builder< Builder >
   nBodyPhaseSpace( ){ return { *this }; }
+  // LAW=67
+  LaboratoryAngleEnergy::Builder< Builder >
+  laboratoryAngleEnergy( ){ return { *this }; }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"

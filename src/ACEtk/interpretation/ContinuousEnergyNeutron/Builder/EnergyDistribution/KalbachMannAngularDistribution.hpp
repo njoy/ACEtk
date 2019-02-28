@@ -5,4 +5,3 @@ struct KalbachMannAngularDistribution {
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Builder.hpp"
 };
-

@@ -280,6 +280,71 @@ void LAW66( B& ED ){
       .add(); // nBodyPhaseSpace
 }
 
+template< typename B >
+void LAW67( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0 };
+
+  std::vector< double > cosines{ -0.99, 0.01, 0.75 };
+  std::vector< int > INTMUs{ 1, 2 };
+
+  std::vector< double > ene{ 1.0, 2.0};
+  std::vector< double > pdf{ 0.25, 0.75 };
+  std::vector< double > cdf{ 0.25, 1.0 };
+  std::vector< int > INTEPs{ 1, 2 };
+
+  ED.laboratoryAngleEnergy()
+      .boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .angularDistribution()
+        .interpolationParameter( INTMUs[ 0 ] )
+        .cosines( njoy::utility::copy( cosines ) )
+        .energyDistribution()
+          .interpolationParameter( INTEPs[ 0 ] )
+          .energies( njoy::utility::copy( ene ) )
+          .pdf( njoy::utility::copy( pdf ) )
+          .cdf( njoy::utility::copy( cdf ) )
+        .add() // energyDistribution
+        .energyDistribution()
+          .interpolationParameter( INTEPs[ 1 ] )
+          .energies( njoy::utility::copy( ene ) )
+          .pdf( njoy::utility::copy( pdf ) )
+          .cdf( njoy::utility::copy( cdf ) )
+        .add() // energyDistribution
+        .energyDistribution()
+          .interpolationParameter( INTEPs[ 0 ] )
+          .energies( njoy::utility::copy( ene ) )
+          .pdf( njoy::utility::copy( pdf ) )
+          .cdf( njoy::utility::copy( cdf ) )
+        .add()  // energyDistribution
+      .add() // angularDistribution
+      .angularDistribution()
+        .interpolationParameter( INTMUs[ 1 ] )
+        .cosines( njoy::utility::copy( cosines ) )
+        .energyDistribution()
+          .interpolationParameter( INTEPs[ 0 ] )
+          .energies( njoy::utility::copy( ene ) )
+          .pdf( njoy::utility::copy( pdf ) )
+          .cdf( njoy::utility::copy( cdf ) )
+        .add() // energyDistribution
+        .energyDistribution()
+          .interpolationParameter( INTEPs[ 1 ] )
+          .energies( njoy::utility::copy( ene ) )
+          .pdf( njoy::utility::copy( pdf ) )
+          .cdf( njoy::utility::copy( cdf ) )
+        .add() // energyDistribution
+        .energyDistribution()
+          .interpolationParameter( INTEPs[ 0 ] )
+          .energies( njoy::utility::copy( ene ) )
+          .pdf( njoy::utility::copy( pdf ) )
+          .cdf( njoy::utility::copy( cdf ) )
+        .add()  // energyDistribution
+      .add() // angularDistribution
+    .add(); // laboratoryAngleEnergy
+}
+
 SCENARIO( "Testing EnergyDistribtion::Builder" ){
   ContinuousEnergyNeutron::Builder CENBuilder;
   using ParentBuilder = decltype( CENBuilder.reaction( 14 ) );
@@ -305,7 +370,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
       .energies( njoy::utility::copy( energies ) )
       .probabilities( njoy::utility::copy( probabilities ) );
 
-    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, 61, 66, /*67 */ };
+    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, 61, 66, 67 };
 
     for( auto LAW : LAWS ){
       THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
@@ -324,6 +389,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
           case 44: LAW44( tb ); break;
           case 61: LAW61( tb ); break;
           case 66: LAW66( tb ); break;
+          case 67: LAW67( tb ); break;
           default:
             njoy::Log::info( "I don't know what to do with LAW={}", LAW );
         }

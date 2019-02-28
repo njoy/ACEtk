@@ -18,6 +18,7 @@ struct EnergyDistribution{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann.hpp" // LAW=44
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution.hpp" // LAW=61
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/NBodyPhaseSpace.hpp" // LAW=66
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy.hpp" // LAW=67
 
   using LAWS = std::variant< 
     TabularEquiprobableEnergyBins,    // LAW=1
@@ -32,8 +33,8 @@ struct EnergyDistribution{
     // LAW24,                            // LAW=24
     KalbachMann,                      // LAW=44
     KalbachMannAngularDistribution,   // LAW=61
-    NBodyPhaseSpace                   // LAW=66
-    // LaboratoryAngleEnergy,            // LAW=67
+    NBodyPhaseSpace,                  // LAW=66
+    LaboratoryAngleEnergy             // LAW=67
     // EnergyDependentNeutronYields
                            >;
 
