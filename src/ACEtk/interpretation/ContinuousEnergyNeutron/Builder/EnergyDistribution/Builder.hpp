@@ -52,7 +52,9 @@ public:
   // LAW=22
   TabularLinearFunctions::Builder< Builder >
   tabularLinearFunctions( ){ return { *this }; }
-
+  // LAW=24
+  LAW24::Builder< Builder >
+  law24( ){ return { *this }; }
   // LAW=44
   KalbachMann::Builder< Builder >
   kalbachMann( ){ return { *this }; }

@@ -181,6 +181,25 @@ void LAW22( B& ED ){
 }
 
 template< typename B >
+void LAW24( B& ED ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+  std::vector< double > T1{ 1.1, 1.2, 1.3 };
+  std::array< double, 3 > T2{ 1.1, 1.2, 1.4 };
+
+  ED.law24()
+      .boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .table( njoy::utility::copy( T1 ) )
+      .table( njoy::utility::copy( T1 ) )
+      .table( njoy::utility::copy( T2 ) )
+      .table( njoy::utility::copy( T2 ) )
+    .add(); // law24
+}
+
+template< typename B >
 void LAW44( B& ED ){
   std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
@@ -370,7 +389,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
       .energies( njoy::utility::copy( energies ) )
       .probabilities( njoy::utility::copy( probabilities ) );
 
-    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, /*24,*/ 44, 61, 66, 67 };
+    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, 24, 44, 61, 66, 67 };
 
     for( auto LAW : LAWS ){
       THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
@@ -386,6 +405,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
           case 9:  LAW9( tb ); break;
           case 11: LAW11( tb ); break;
           case 22: LAW22( tb ); break;
+          case 24: LAW24( tb ); break;
           case 44: LAW44( tb ); break;
           case 61: LAW61( tb ); break;
           case 66: LAW66( tb ); break;
