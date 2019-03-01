@@ -24,5 +24,5 @@ public:
   Data::Builder< Builder< ParentBuilder > > distributionData(){
     return { *this };
   }
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder/src/energies.hpp"
+  using TabBuilder::energies;
 };

@@ -25,5 +25,5 @@ public:
   AngularDistribution::Builder< Builder< ParentBuilder > > angularDistribution(){
     return { *this };
   }
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy/Builder/src/energies.hpp"
+  using TabBuilder::energies;
 };
