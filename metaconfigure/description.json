@@ -763,7 +763,12 @@
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/test/ContinuousEnergyNeutron.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/Builder.test.cpp"
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/Builder.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/FissionMultiplicity.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/GammaProduction.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/ProbabilityTable.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/PhotonProductionReaction.test.cpp",
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/test/IncidentNeutronReaction.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/test/Builder.test.cpp"
