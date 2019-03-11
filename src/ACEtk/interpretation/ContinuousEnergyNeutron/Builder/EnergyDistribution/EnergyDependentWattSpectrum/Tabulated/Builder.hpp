@@ -1,6 +1,7 @@
 template< typename ParentBuilder >
 class Builder: public Tabulated1D::Builder< Builder< ParentBuilder > > {
 
+  using TabBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
   using BaseBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
 
   std::reference_wrapper< ParentBuilder > parent;
@@ -13,7 +14,7 @@ public:
   { }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated/Builder/src/add.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Tabulated/Builder/src/energies.hpp"
+  using TabBuilder::energies;
 
 #define RENAME(basename, derivedname)\
   template< typename Range,\

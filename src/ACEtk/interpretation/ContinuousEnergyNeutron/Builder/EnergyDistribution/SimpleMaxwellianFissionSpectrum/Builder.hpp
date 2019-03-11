@@ -16,7 +16,7 @@ protected:
 public:
   using BaseBuilder::BaseBuilder;
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/energies.hpp"
+  using TabBuilder::energies;
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/effectiveTemperature.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/src/restrictionEnergy.hpp"
 };

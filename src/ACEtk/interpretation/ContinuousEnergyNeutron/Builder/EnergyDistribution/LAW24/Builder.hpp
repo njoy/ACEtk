@@ -23,6 +23,6 @@ public:
   using BaseBuilder::BaseBuilder;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder/src/table.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder/src/energies.hpp"
+  using TabBuilder::energies;
 
 };

@@ -2,6 +2,7 @@ template<  typename ParentBuilder >
 class Builder: 
   public Tabulated1D::Builder< Builder< ParentBuilder > >{
 
+  using TabBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
   using BaseBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
 
   std::optional< LAWS > law_;
@@ -68,7 +69,7 @@ public:
   LaboratoryAngleEnergy::Builder< Builder >
   laboratoryAngleEnergy( ){ return { *this }; }
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/energies.hpp"
+  using TabBuilder::energies;
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder/src/probabilities.hpp"
 
 };

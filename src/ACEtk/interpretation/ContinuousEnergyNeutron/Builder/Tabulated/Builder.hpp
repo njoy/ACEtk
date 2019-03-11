@@ -8,6 +8,7 @@ class Builder {
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/construct.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/energies.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder/src/boundaries.hpp"
