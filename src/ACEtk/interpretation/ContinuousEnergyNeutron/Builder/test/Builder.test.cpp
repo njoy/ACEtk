@@ -386,6 +386,11 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
+  std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
+  std::vector< double > ene{ 1.0, 2.0, 3.0};
+  std::vector< int > INTT{ 1, 2 };
+  std::vector< double > pdf{ 0.1, 0.5, 0.4 };
+  std::vector< double > cdf{ 0.1, 0.6, 1.0 };
 
   std::vector< double > XS{ 1.0, 2.0, 3.0, 4.0 };
   std::vector< double > angularGrid{ 1.0, 2.0, 3.0 };
@@ -418,12 +423,47 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
                     .schemes    ( njoy::utility::copy ( schemes    )  ) 
                     .energies   ( njoy::utility::copy ( energies   )  ) 
                     .values     ( njoy::utility::copy ( values     )  ) 
-                    .add()
+                 .add() // yields
                  .angularDistribution()
                     .energyGrid( njoy::utility::copy( angularGrid ) )
                     .cosineBins( njoy::utility::copy( bins ) )
-                    .add()
-                 .add()
+                 .add() // angularDistribution
+                 .energyDistribution()
+                   .boundaries( njoy::utility::copy( boundaries ) )
+                   .schemes( njoy::utility::copy( schemes ) )
+                   .energies( njoy::utility::copy( energies ) )
+                   .probabilities( njoy::utility::copy( probabilities ) )
+                   .continuousTabularDistribution()
+                     .boundaries( njoy::utility::copy( boundaries ) )
+                     .schemes( njoy::utility::copy( schemes ) )
+                     .energies( njoy::utility::copy( energies ) )
+                     .distributionData()
+                       .interpolationParameter( INTT[ 0 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                       .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 1 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 0 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 1 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                   .add() // continuousTabularDistribution LAW=4
+                 .add() // energy distribution
+              .add()  // photonProductionReaction
       );
     }
     {
@@ -438,6 +478,41 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
                     .energyGrid( njoy::utility::copy( angularGrid ) )
                     .cosineBins( njoy::utility::copy( bins ) )
                     .add()
+                 .energyDistribution()
+                   .boundaries( njoy::utility::copy( boundaries ) )
+                   .schemes( njoy::utility::copy( schemes ) )
+                   .energies( njoy::utility::copy( energies ) )
+                   .probabilities( njoy::utility::copy( probabilities ) )
+                   .continuousTabularDistribution()
+                     .boundaries( njoy::utility::copy( boundaries ) )
+                     .schemes( njoy::utility::copy( schemes ) )
+                     .energies( njoy::utility::copy( energies ) )
+                     .distributionData()
+                       .interpolationParameter( INTT[ 0 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                       .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 1 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 0 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 1 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                   .add() // continuousTabularDistribution LAW=4
+                 .add() // energy distribution
                  .add()
       );
     }
@@ -455,6 +530,41 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
                     .energyGrid( njoy::utility::copy( angularGrid ) )
                     .cosineBins( njoy::utility::copy( bins ) )
                     .add()
+                 .energyDistribution()
+                   .boundaries( njoy::utility::copy( boundaries ) )
+                   .schemes( njoy::utility::copy( schemes ) )
+                   .energies( njoy::utility::copy( energies ) )
+                   .probabilities( njoy::utility::copy( probabilities ) )
+                   .continuousTabularDistribution()
+                     .boundaries( njoy::utility::copy( boundaries ) )
+                     .schemes( njoy::utility::copy( schemes ) )
+                     .energies( njoy::utility::copy( energies ) )
+                     .distributionData()
+                       .interpolationParameter( INTT[ 0 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                       .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 1 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 0 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                     .distributionData()
+                       .interpolationParameter( INTT[ 1 ] )
+                       .energies( njoy::utility::copy( ene ) )
+                       .pdf( njoy::utility::copy( pdf ) )
+                       .cdf( njoy::utility::copy( cdf ) )
+                     .add()
+                   .add() // continuousTabularDistribution LAW=4
+                 .add() // energy distribution
                  .add()
       );
     }

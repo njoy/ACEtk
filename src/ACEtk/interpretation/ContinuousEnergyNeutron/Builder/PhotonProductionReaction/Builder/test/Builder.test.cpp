@@ -5,6 +5,28 @@
 
 using namespace njoy::ACEtk::interpretation;
 
+template< typename B >
+void addEnergyDistribution( B& builder ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+  std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
+
+  std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11 };
+  for( auto LAW : LAWS ){
+    auto ED = builder.energyDistribution();
+    ED.boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .probabilities( njoy::utility::copy( probabilities ) )
+      .levelScattering()
+        .atomicWeightRatio( 235.98 )
+        .QValue( 2.765 )
+      .add(); // levelScattering
+    ED.add();
+  }
+}
+
 SCENARIO( "Testing PhotonProduction::Builder" ){
   ContinuousEnergyNeutron::Builder parentBuilder{};
 
@@ -23,15 +45,15 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
       0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
       0.30, 0.31, 0.32 },
 
-        { 1.00, 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
-          1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19,
-          1.20, 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29,
-          1.30, 1.31, 1.32 },
+    { 1.00, 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
+      1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19,
+      1.20, 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29,
+      1.30, 1.31, 1.32 },
 
-        { 2.00, 2.01, 2.02, 2.03, 2.04, 2.05, 2.06, 2.07, 2.08, 2.09,
-          2.10, 2.11, 2.12, 2.13, 2.14, 2.15, 2.16, 2.17, 2.18, 2.19,
-          2.20, 2.21, 2.22, 2.23, 2.24, 2.25, 2.26, 2.27, 2.28, 2.29,
-          2.30, 2.31, 2.32 }
+    { 2.00, 2.01, 2.02, 2.03, 2.04, 2.05, 2.06, 2.07, 2.08, 2.09,
+      2.10, 2.11, 2.12, 2.13, 2.14, 2.15, 2.16, 2.17, 2.18, 2.19,
+      2.20, 2.21, 2.22, 2.23, 2.24, 2.25, 2.26, 2.27, 2.28, 2.29,
+      2.30, 2.31, 2.32 }
   };
   WHEN( "constructing MF=12 (or 16) photon production reaction" ){
     int MF{ 12 };
@@ -56,6 +78,7 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
         .angularDistribution().energyGrid( njoy::utility::copy( angularGrid ) )
         .cosineBins( njoy::utility::copy( bins ) )
         .add();
+    addEnergyDistribution( ppB );
 
     auto ppReaction = ppB.construct();
     THEN( "the values can be verified" ){
@@ -91,6 +114,7 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
         .angularDistribution().energyGrid( njoy::utility::copy( angularGrid ) )
         .cosineBins( njoy::utility::copy( bins ) )
         .add();
+    addEnergyDistribution( ppB );
 
     auto ppReaction = ppB.construct();
     THEN( "the values can be verified" ){
