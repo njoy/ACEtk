@@ -7,7 +7,15 @@ using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
+  ContinuousEnergyNeutron::Builder nc{};
+
   GIVEN( "valid data" ){
+    nc.header()
+         .processDate( date::year{2019}/3/14 )
+         .temperature( 2.5301E-8*dimwits::mega( electronVolts ) )
+         .atomicWeightRatio( 0.99173 )
+         .zaid( "1001.123nc" )
+      .add(); // header
   } // GIVEN valid
   GIVEN( "invalid data" ){
   } // GIVEN invalid
@@ -16,15 +24,15 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
 
-  GIVEN( "data for the energy grid" ){
+  GIVEN( "valid data for the energy grid" ){
     std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
     ncBuilder.energyGrid( njoy::utility::copy( grid ) );
 
     THEN( "we can verify the energy grid" ){
       CHECK( ranges::equal( grid, ncBuilder.energyGrid() ) );
     }
+  } // GIVEN valid
 
-  }
   GIVEN( "invalid data" ){
     WHEN( "the energy grid has negative components" ){
       std::vector< double > grid{1.0, 2.0, 3.0, -4.0, 5.0};

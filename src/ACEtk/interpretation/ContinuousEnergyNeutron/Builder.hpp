@@ -13,6 +13,8 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp"
 
+  std::optional< Table::Header > header_;
+
   std::optional< details::verify::Positive< 
     details::verify::Sorted< std::vector< double > > > > energyGrid_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
@@ -23,6 +25,8 @@ protected:
 
   friend Reaction::Builder;
   friend PhotonProductionReaction::Builder;
+  friend Table::Header::Builder< Builder >;
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addHeader.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
@@ -35,6 +39,9 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
-  ProbabilityTable::Builder probabilityTable(){ return ProbabilityTable::Builder{ *this }; }
+  ProbabilityTable::Builder probabilityTable(){ 
+    return ProbabilityTable::Builder{ *this }; }
 
+  Table::Header::Builder< Builder > header(){ 
+    return Table::Header::Builder< Builder >{ *this }; }
 };

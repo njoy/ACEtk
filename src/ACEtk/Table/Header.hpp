@@ -6,6 +6,8 @@ public:
   using Comment = String<70>;
   using SZAID = String<24, true>;
   
+  #include "ACEtk/Table/Header/Builder.hpp"
+
   /* fields */
   year_month_day                  processDate;
   Quantity< Mega<ElectronVolts> > processTemperature;

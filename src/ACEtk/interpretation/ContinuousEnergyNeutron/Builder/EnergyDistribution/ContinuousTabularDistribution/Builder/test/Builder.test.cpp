@@ -7,16 +7,16 @@ using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
-    ContinuousEnergyNeutron::Builder CENBuilder;
+  ContinuousEnergyNeutron::Builder CENBuilder;
 
-    auto parentBuilder = CENBuilder.reaction( 14 ).energyDistribution();
-    using CTBBuilder = decltype( 
-        parentBuilder.continuousTabularDistribution() );
+  auto parentBuilder = CENBuilder.reaction( 14 ).energyDistribution();
+  using CTBBuilder = decltype( 
+      parentBuilder.continuousTabularDistribution() );
 
-    struct TestBuilder : public CTBBuilder {
-      using CTBBuilder::construct;
-      using CTBBuilder::CTBBuilder;
-    };
+  struct TestBuilder : public CTBBuilder {
+    using CTBBuilder::construct;
+    using CTBBuilder::CTBBuilder;
+  };
 
   TestBuilder cTB( parentBuilder );
 

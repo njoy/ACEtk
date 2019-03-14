@@ -1,8 +1,8 @@
 
 add_executable( ACEtk.interpretation.EPR.test
                 Coherent.test.cpp
-                Incoherent.test.cpp
-                eprdata.test.cpp )
+                eprdata.test.cpp
+                Incoherent.test.cpp )
 target_compile_options( ACEtk.interpretation.EPR.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

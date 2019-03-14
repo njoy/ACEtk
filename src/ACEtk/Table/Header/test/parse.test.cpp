@@ -10,12 +10,12 @@ SCENARIO("parsing a 1.0.0 header"){
 
   State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
   auto header = Table::Header::parse(s);
-  REQUIRE( s.lineNumber == 3 );
-  REQUIRE( header.atomicWeightRatio == Approx(233.024800) );
-  REQUIRE( header.szaid == "               92235.80c" );
-  REQUIRE( header.processDate.year() == date::year(2012) );
-  REQUIRE( header.processDate.month() == date::month(12) );
-  REQUIRE( header.processDate.day() == date::day(19) );
+  CHECK( s.lineNumber == 3 );
+  CHECK( header.atomicWeightRatio == Approx(233.024800) );
+  CHECK( header.szaid == "               92235.80c" );
+  CHECK( header.processDate.year() == date::year(2012) );
+  CHECK( header.processDate.month() == date::month(12) );
+  CHECK( header.processDate.day() == date::day(19) );
 }
 
 SCENARIO("parsing a 2.0.1 header"){
@@ -28,12 +28,12 @@ SCENARIO("parsing a 2.0.1 header"){
 
   State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
   auto header = Table::Header::parse(s);
-  REQUIRE( s.lineNumber == 6 );
-  REQUIRE( header.atomicWeightRatio == Approx(239.980100) );
-  REQUIRE( header.szaid == "           1095242.710nc" );
-  REQUIRE( header.processDate.year() == date::year(2012) );
-  REQUIRE( header.processDate.month() == date::month(12) );
-  REQUIRE( header.processDate.day() == date::day(13) );
+  CHECK( s.lineNumber == 6 );
+  CHECK( header.atomicWeightRatio == Approx(239.980100) );
+  CHECK( header.szaid == "           1095242.710nc" );
+  CHECK( header.processDate.year() == date::year(2012) );
+  CHECK( header.processDate.month() == date::month(12) );
+  CHECK( header.processDate.day() == date::day(13) );
   
 }
 
@@ -44,7 +44,7 @@ SCENARIO("invalid 1.0.0 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
  
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("nonphysical atomic weight ratio"){
     std::string retroHeader = 
@@ -52,7 +52,7 @@ SCENARIO("invalid 1.0.0 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
  
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("nonphysical temperature"){
     std::string retroHeader = 
@@ -60,7 +60,7 @@ SCENARIO("invalid 1.0.0 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
  
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("misformatted date"){
     std::string retroHeader = 
@@ -68,7 +68,7 @@ SCENARIO("invalid 1.0.0 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
  
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("invalid date"){
     std::string retroHeader = 
@@ -76,7 +76,7 @@ SCENARIO("invalid 1.0.0 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
  
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
 }
 
@@ -89,7 +89,7 @@ SCENARIO("invalid 2.0.1 header"){
       " 92235.80c  233.024800  2.5301E-08   12/19/12                         \n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("nonphysical atomic weight ratio"){
     std::string modernHeader =
@@ -100,7 +100,7 @@ SCENARIO("invalid 2.0.1 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
  
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("nonphysical temperature"){
     std::string modernHeader = 
@@ -111,7 +111,7 @@ SCENARIO("invalid 2.0.1 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
  
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("misformatted date"){
     std::string modernHeader =
@@ -122,7 +122,7 @@ SCENARIO("invalid 2.0.1 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
  
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("invalid date"){
     std::string modernHeader =
@@ -133,7 +133,7 @@ SCENARIO("invalid 2.0.1 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
  
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
   SECTION("negative number of comment lines"){
     std::string modernHeader =
@@ -144,7 +144,7 @@ SCENARIO("invalid 2.0.1 header"){
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
  
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
-    REQUIRE_THROWS( Table::Header::parse(s) );
+    CHECK_THROWS( Table::Header::parse(s) );
   }
 }
 
@@ -152,5 +152,5 @@ SCENARIO("invalid header version"){
   std::string modernHeader =
     "     3.0.1              92235.710nc              ENDFB-VII.1\n";
   State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
-  REQUIRE_THROWS( Table::Header::parse(s) );
+  CHECK_THROWS( Table::Header::parse(s) );
 }
