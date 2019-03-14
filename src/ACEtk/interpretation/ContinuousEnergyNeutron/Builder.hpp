@@ -17,6 +17,8 @@ protected:
 
   std::optional< details::verify::Positive< 
     details::verify::Sorted< std::vector< double > > > > energyGrid_;
+  std::optional< details::verify::Positive< 
+    details::verify::Sorted< std::vector< double > > > > heating_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   tsl::hopscotch_map< int, Reaction > reactions_;
   tsl::hopscotch_map< int, PhotonProductionReaction > photonProductionReactions_;
@@ -35,6 +37,7 @@ protected:
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/heating.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
