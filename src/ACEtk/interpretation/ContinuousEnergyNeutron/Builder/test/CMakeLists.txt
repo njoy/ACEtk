@@ -5,7 +5,8 @@ add_executable( ACEtk.interpretation.ContinuousEnergyNeutron.Builder.test
                 GammaProduction.test.cpp
                 ProbabilityTable.test.cpp
                 PhotonProductionReaction.test.cpp
-                IncidentNeutronReaction.test.cpp )
+                IncidentNeutronReaction.test.cpp
+                energyGrid.test.cpp )
 target_compile_options( ACEtk.interpretation.ContinuousEnergyNeutron.Builder.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}
