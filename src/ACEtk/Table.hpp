@@ -46,7 +46,6 @@ public:
     Table( std::string{ std::istreambuf_iterator< char >{ istream },
                         std::istreambuf_iterator< char >{} } ){}
   
-public:
   #include "ACEtk/Table/src/print.hpp"
 
   using Slice = decltype( std::declval< const Data >().XSS( 1, 2 ) );

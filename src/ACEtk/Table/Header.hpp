@@ -25,10 +25,10 @@ protected:
 
 public:
   Header( year_month_day processDate,
-	  Quantity< Mega<ElectronVolts> > processTemperature,
-	  double atomicWeightRatio,
-	  SZAID&& szaid,
-	  std::vector< Comment >&& comments ) :
+          Quantity< Mega<ElectronVolts> > processTemperature,
+          double atomicWeightRatio,
+          SZAID&& szaid,
+          std::vector< Comment >&& comments ) :
     processDate( processDate ),
     processTemperature( processTemperature ),
     atomicWeightRatio( atomicWeightRatio ),

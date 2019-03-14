@@ -6,6 +6,13 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
+SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
+  GIVEN( "valid data" ){
+  } // GIVEN valid
+  GIVEN( "invalid data" ){
+  } // GIVEN invalid
+} // SCENARIO complete
+
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
 
@@ -17,6 +24,8 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
       CHECK( ranges::equal( grid, ncBuilder.energyGrid() ) );
     }
 
+  }
+  GIVEN( "invalid data" ){
     WHEN( "the energy grid has negative components" ){
       std::vector< double > grid{1.0, 2.0, 3.0, -4.0, 5.0};
       THEN( "an exception is thrown" ){
@@ -35,10 +44,10 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder" ){
           );
       }
     }
-  }
-  WHEN( "no energy grid has been given" ){
-    THEN( "an exception is thrown when the energy grid is asked for" ){
-      CHECK_THROWS( ncBuilder.energyGrid() );
+    WHEN( "no energy grid has been given" ){
+      THEN( "an exception is thrown when the energy grid is asked for" ){
+        CHECK_THROWS( ncBuilder.energyGrid() );
+      }
     }
   }
 } // SCENARIO
