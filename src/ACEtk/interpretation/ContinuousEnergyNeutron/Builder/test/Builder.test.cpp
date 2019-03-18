@@ -28,13 +28,27 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     { // nubar 
       std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
       std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
+      std::vector< double > coefficients{ 1.0, 2.0, 5.0, 6.0 };
       { // prompt
         nc.fissionMultiplicity( "prompt" )
+           .polynomial()
+             .coefficients( njoy::utility::copy( coefficients ) )
+          .add(); // fissionMultiplicity (prompt)
+      }
+      { // delayed
+        nc.fissionMultiplicity( "delayed" )
           .tabulated()
-            .energies( std::move( energies ) )
-            .multiplicities( std::move( multiplicities ) )
+            .energies( njoy::utility::copy( energies ) )
+            .multiplicities( njoy::utility::copy( multiplicities ) )
           .add(); // prompt nubar
 
+      }
+      { // delayed precursors
+        nc.precursors()
+            .energies( njoy::utility::copy( energies ) )
+            .probabilities( njoy::utility::copy( coefficients ) )
+            .decayConstant( 1.5E-4 )
+          .add(); // precursors
       }
     }
     { // MT=16

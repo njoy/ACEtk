@@ -4,5 +4,5 @@ struct Precursors {
   double decayConstant;
   Tabulated1D data;
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Precursors/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Precursors/Builder.hpp"
 };

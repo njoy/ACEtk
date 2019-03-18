@@ -8,19 +8,16 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing FissionMultiplicity::Precursors::Builder" ){
 
-  ContinuousEnergyNeutron::Builder grandparentBuilder{};
-  using ParentBuilder = decltype( 
-      grandparentBuilder.fissionMultiplicity( "precursors" ) );
-  ParentBuilder parentBuilder{ grandparentBuilder, "precursors" };
+  ContinuousEnergyNeutron::Builder CENBuilder{};
 
-  using PreBuilder = decltype( parentBuilder.precursors( ) );
+  using PreBuilder = decltype( CENBuilder.precursors( ) );
 
   struct TestBuilder : PreBuilder{
     using PreBuilder::construct;
     using PreBuilder::PreBuilder;
   };
 
-  TestBuilder tb{ grandparentBuilder };
+  TestBuilder tb{ CENBuilder };
 
   GIVEN( "valid inputs" ){
     std::vector< double > energies{ 1.0, 2.0 };
