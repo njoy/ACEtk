@@ -3,29 +3,31 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
+using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
-  GIVEN( "parent builder" ){
-    std::string nuType{ "delayed" };
-    ContinuousEnergyNeutron::Builder grandparentBuilder{};
-    using ParentBuilder = decltype( 
-        grandparentBuilder.fissionMultiplicity( nuType ) );
-    ParentBuilder parentBuilder{ grandparentBuilder, nuType };
+  std::string nuType{ "delayed" };
+  ContinuousEnergyNeutron::Builder grandparentBuilder{};
+  using ParentBuilder = decltype( 
+      grandparentBuilder.fissionMultiplicity( nuType ) );
+  ParentBuilder parentBuilder{ grandparentBuilder, nuType };
 
-    using TabulatedBuilder = decltype( parentBuilder.tabulated( ) );
+  using TabulatedBuilder = decltype( parentBuilder.tabulated( ) );
 
-    struct TestBuilder : TabulatedBuilder{
-      using TabulatedBuilder::construct;
-      using TabulatedBuilder::TabulatedBuilder;
-    };
+  struct TestBuilder : TabulatedBuilder{
+    using TabulatedBuilder::construct;
+    using TabulatedBuilder::TabulatedBuilder;
+  };
 
-    std::vector< int > boundaries{ 0, 3 };
-    std::vector< int > schemes{ 2, 1 };
-    std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
-    std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
-    TestBuilder tb{ grandparentBuilder, nuType };
+  TestBuilder tb{ grandparentBuilder, nuType };
 
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+  std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
+
+  GIVEN( "valid data" ){
     WHEN( "creating a Tabulated fission multiplicity" ){
       tb.boundaries( njoy::utility::copy( boundaries ) )
         .schemes( njoy::utility::copy( schemes ) )
@@ -37,6 +39,28 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
       THEN( "the members of Tabulated can be verified" ){
         CHECK( energies == tabu.x );
         CHECK( multiplicities == tabu.y );
+      }
+    }
+  } // GIVEN valid
+  GIVEN( "invalid data" ){
+    WHEN( "energies are negative" ){
+      std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          tb.energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "energies are not sorted" ){
+      std::vector< double > energies{ 1.0, 2.0, 5.0, 4.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          tb.energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::Unsorted&
+        );
       }
     }
     WHEN( "constructing a Tabulated fission multiplicity "

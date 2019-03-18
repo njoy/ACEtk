@@ -23,6 +23,8 @@ public:
                                                 this->construct() );
   }
 
+  using BaseBuilder::energies;
+
 #define RENAME(basename, derivedname)\
   template< typename Range,\
             utility::Require< true, utility::is_range, Range > = true >\
@@ -30,7 +32,6 @@ public:
     return BaseBuilder::basename( std::move( derivedname ) );\
   }
 
-  RENAME( x, energies )
   RENAME( y, multiplicities )
   RENAME( y, nubar )
 #undef RENAME
