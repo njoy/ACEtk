@@ -1,8 +1,6 @@
-class Builder: 
-  public ContinuousEnergyNeutron::Builder::Tabulated1D::Builder< Builder >{
+class Builder: public Tabulated1D::Builder< Builder >{
 
-  using BaseBuilder = ContinuousEnergyNeutron::Builder::
-      Tabulated1D::Builder< Builder >;
+  using BaseBuilder = Tabulated1D::Builder< Builder >;
 
   std::reference_wrapper< ParentBuilder > parent;
   std::string nuType;

@@ -18,14 +18,26 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       .add(); // header
 
     std::vector< double > energyGrid{ 
-      0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+      .0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
     nc.energyGrid( njoy::utility::copy( energyGrid ) );
 
     std::vector< double > heating{ 
       0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
     nc.heating( njoy::utility::copy( heating ) );
 
-    {
+    { // nubar 
+      std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+      std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
+      { // prompt
+        nc.fissionMultiplicity( "prompt" )
+          .tabulated()
+            .energies( std::move( energies ) )
+            .multiplicities( std::move( multiplicities ) )
+          .add(); // prompt nubar
+
+      }
+    }
+    { // MT=16
       std::vector< double > elasticXS{ 
         0.1, 1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1 };
 
