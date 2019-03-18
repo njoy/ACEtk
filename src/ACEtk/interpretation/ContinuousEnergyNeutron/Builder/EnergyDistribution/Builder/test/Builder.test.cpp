@@ -13,7 +13,7 @@ void LAW1( B& ED ){
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > eout_v{ 1.1, 1.2, 1.3 };
-  std::array< double, 3 > eout_a{ 1.1, 1.2, 1.4 };
+  std::array< double, 3 > eout_a{{ 1.1, 1.2, 1.4 }};
 
   ED.tabularEquiprobableEnergyBins()
       .boundaries( njoy::utility::copy( boundaries ) )
@@ -186,7 +186,7 @@ void LAW24( B& ED ){
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > T1{ 1.1, 1.2, 1.3 };
-  std::array< double, 3 > T2{ 1.1, 1.2, 1.4 };
+  std::array< double, 3 > T2{{ 1.1, 1.2, 1.4 }};
 
   ED.law24()
       .boundaries( njoy::utility::copy( boundaries ) )
