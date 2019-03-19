@@ -53,9 +53,9 @@ auto stoppingPowers() const {
 
   return this->makeS0(this->numDensities(),
 		      ranges::min(this->densities()),
-		      ranges::max(this->densities()),				  
-		      ranges::min(this->temperatures()),	
-		      ranges::max(this->temperatures()),			  
+		      ranges::max(this->densities()),
+		      ranges::min(this->temperatures()),
+		      ranges::max(this->temperatures()),
 		      std::move(stoppingPowerRange));
 
 }
