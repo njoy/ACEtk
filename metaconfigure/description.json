@@ -377,13 +377,24 @@
     "src/ACEtk/interpretation.hpp",
     "src/ACEtk/Table.hpp",
     "src/ACEtk/details/verify.hpp",
+    "src/ACEtk/details/src/make_array.hpp",
+    "src/ACEtk/details/verify/CDF.hpp",
     "src/ACEtk/details/verify/exceptions.hpp",
+    "src/ACEtk/details/verify/IsCDF.hpp",
     "src/ACEtk/details/verify/IsPositive.hpp",
     "src/ACEtk/details/verify/IsSorted.hpp",
     "src/ACEtk/details/verify/IsStrictlyPositive.hpp",
     "src/ACEtk/details/verify/Positive.hpp",
     "src/ACEtk/details/verify/Sorted.hpp",
     "src/ACEtk/details/verify/StrictlyPositive.hpp",
+    "src/ACEtk/details/verify/CDF/src/assignment.hpp",
+    "src/ACEtk/details/verify/CDF/src/check.hpp",
+    "src/ACEtk/details/verify/CDF/src/ctor.hpp",
+    "src/ACEtk/details/verify/exceptions/InvalidCDF.hpp",
+    "src/ACEtk/details/verify/exceptions/InvalidENDFInterpolationParameter.hpp",
+    "src/ACEtk/details/verify/exceptions/InvalidNeutronYield.hpp",
+    "src/ACEtk/details/verify/exceptions/InvalidPDF.hpp",
+    "src/ACEtk/details/verify/exceptions/NotNormal.hpp",
     "src/ACEtk/details/verify/exceptions/NotPositive.hpp",
     "src/ACEtk/details/verify/exceptions/NotStrictlyPositive.hpp",
     "src/ACEtk/details/verify/exceptions/Unsorted.hpp",
@@ -393,6 +404,9 @@
     "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
     "src/ACEtk/details/verify/Sorted/src/check.hpp",
     "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
+    "src/ACEtk/details/verify/src/interpolationParameters.hpp",
+    "src/ACEtk/details/verify/src/neutronYield.hpp",
+    "src/ACEtk/details/verify/src/normal.hpp",
     "src/ACEtk/details/verify/src/positive.hpp",
     "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
@@ -410,6 +424,8 @@
     "src/ACEtk/interpretation/DEDX1/CRTP/src/S0.hpp",
     "src/ACEtk/interpretation/DEDX1/CRTP/src/S1.hpp",
     "src/ACEtk/interpretation/DEDX1/CRTP/src/stoppingPowers.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/src/S0/src/ceil.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/src/S0/src/floor.hpp",
     "src/ACEtk/interpretation/EL03/AtomicLevels.hpp",
     "src/ACEtk/interpretation/EL03/MottScatteringCorrection.hpp",
     "src/ACEtk/interpretation/EL03/RadiativeStoppingPower.hpp",
@@ -494,6 +510,9 @@
     "ACEtk.details.verify": [
       "src/ACEtk/details/verify/test/size.test.cpp",
       "src/ACEtk/details/verify/test/verify.test.cpp"
+    ],
+    "ACEtk.details.verify.CDF": [
+      "src/ACEtk/details/verify/CDF/test/CDF.test.cpp"
     ],
     "ACEtk.details.verify.Positive": [
       "src/ACEtk/details/verify/Positive/test/Positive.test.cpp"
