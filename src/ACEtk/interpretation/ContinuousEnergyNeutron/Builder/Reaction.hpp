@@ -11,6 +11,6 @@ struct Reaction{
   int neutronYield;
   Table::Slice energyGrid;
   ContinuousEnergyNeutron::Builder::CrossSection crossSection;
-  AngularDistribution angularDistribution;
-  EnergyDistribution energyDistribution;
+  std::optional< AngularDistribution > angularDistribution;
+  std::optional< EnergyDistribution > energyDistribution;
 };

@@ -51,9 +51,46 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           .add(); // precursors
       }
     }
+    { // MT=2
+      std::vector< double > XS{ 
+        0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
+
+      // Angular distribution
+      std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
+      std::vector< double > cosine{ -0.1, 0.5, 0.8 };
+      std::vector< double > apdf{ 0.1, 0.5, 0.4 };
+      std::vector< double > acdf{ 0.1, 0.6, 1.0 };
+      std::vector< double > cosineBins{
+        0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
+        0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19,
+        0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
+        0.30, 0.31, 0.32
+      };
+
+      nc.reaction( 2 )
+          .Q( 0.0 )
+          .energyGrid( nc.energyGrid() )
+          .crossSection().values( XS )
+          .add()  // crossSection
+          .angularDistribution()
+            .energyGrid( njoy::utility::copy( grid ) )
+            .isotropic()
+            .tabulated().interpolationFlag( 1 )
+                        .cosineGrid( njoy::utility::copy( cosine ) )
+                        .pdf( njoy::utility::copy( apdf ) )
+                        .cdf( njoy::utility::copy( acdf ) )
+            .add()  // tabulated
+            .equiprobableCosineBins().values( 
+                njoy::utility::copy( cosineBins ) )
+            .add() // equiprobableCosineBins
+            .isotropic()
+            .isotropic()
+          .add() // angular distribution
+        .add(); // reaction 16
+    }
     { // MT=16
-      std::vector< double > elasticXS{ 
-        0.1, 1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1 };
+      std::vector< double > XS{ 
+        0.16, 1.16, 2.16, 3.16, 4.16, 5.16, 6.16, 7.16, 8.16, 9.16 };
 
       // Angular distribution
       std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
@@ -80,9 +117,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       std::vector< double > A{ 0.75, 0.22 };
 
       nc.reaction( 16 )
-          .Q( -5.297781E5 )
+          .Q( -5.297781 )
           .energyGrid( nc.energyGrid() )
-          .crossSection().values( elasticXS )
+          .crossSection().values( XS )
           .add()  // crossSection
           .angularDistribution()
             .energyGrid( njoy::utility::copy( grid ) )
@@ -127,10 +164,81 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           .add()  // energyDistribution
         .add(); // reaction 16
     }
+    { // MT=18
 
+      std::vector< double > XS{ 
+        0.18, 1.18, 2.18, 3.18, 4.18, 5.18, 6.18, 7.18, 8.18, 9.18 };
+      
+      // Energy distribution
+      std::vector< int > boundaries{ 0, 3 };
+      std::vector< int > schemes{ 2, 1 };
+      std::vector< double > energies{ 1.0, 2.0 };
+      std::vector< double > probabilities{ 0.1, 0.2 };
+      std::vector< int > INTT{ 1, 2 };
+      std::vector< double > ene{ 1.0, 2.0};
+      std::vector< double > pdf{ 0.25, 0.75 };
+      std::vector< double > cdf{ 0.25, 1.0 };
+
+      nc.reaction( 18 )
+          .Q( 1.934054E2 )
+          .energyGrid( nc.energyGrid() )
+          .crossSection().values( XS )
+          .add() // crossSection
+          // Isotropic---no angular distribution needed
+          .energyDistribution()
+            .energies( std::move( energies ) )
+            .probabilities( std::move( probabilities ) )
+            .continuousTabularDistribution()
+              .energies( std::move( energies ) )
+              .distributionData()
+                .interpolationParameter( INTT[ 0 ] )
+                .energies( njoy::utility::copy( ene ) )
+                .pdf( njoy::utility::copy( pdf ) )
+                .cdf( njoy::utility::copy( cdf ) )
+              .add() // distributionData
+              .distributionData()
+                .interpolationParameter( INTT[ 1 ] )
+                .energies( njoy::utility::copy( ene ) )
+                .pdf( njoy::utility::copy( pdf ) )
+                .cdf( njoy::utility::copy( cdf ) )
+              .add() // distributionData
+            .add() // continuousTabularDistribution
+          .add() // energyDistribution
+        .add(); // reaction 18
+    }
 
   } // GIVEN valid
   GIVEN( "invalid data" ){
+    WHEN( "heating data is negative" ){
+      std::vector< double > heating{ 
+        0.0, 0.1, -0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS(
+          nc.heating( heating ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "energies are negative" ){
+      std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          nc.energyGrid( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "energies are not sorted" ){
+      std::vector< double > energies{ 1.0, 2.0, 5.0, 4.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          nc.energyGrid( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::Unsorted&
+        );
+      }
+    }
   } // GIVEN invalid
 } // SCENARIO complete
 

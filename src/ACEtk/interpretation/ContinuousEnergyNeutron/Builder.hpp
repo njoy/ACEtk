@@ -18,12 +18,14 @@ protected:
 
   std::optional< details::verify::Positive< 
     details::verify::Sorted< std::vector< double > > > > energyGrid_;
-  std::optional< details::verify::Positive< 
-    details::verify::Sorted< std::vector< double > > > > heating_;
+  std::optional< 
+      details::verify::Positive< std::vector< double > > > elasticXS_;
+  std::optional< details::verify::Positive< std::vector< double > > > heating_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   std::vector< Precursors > delayedPrecursors_;
   tsl::hopscotch_map< int, Reaction > reactions_;
-  tsl::hopscotch_map< int, PhotonProductionReaction > photonProductionReactions_;
+  tsl::hopscotch_map< 
+      int, PhotonProductionReaction > photonProductionReactions_;
   std::optional< TotalGammaProduction > totalGammaProduction_;
   std::optional< ProbabilityTable > probabilityTable_;
 
@@ -47,6 +49,8 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp"
+  // #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/elasticCrossSection.hpp"
+
   Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
   ProbabilityTable::Builder probabilityTable(){ 
     return ProbabilityTable::Builder{ *this }; }
