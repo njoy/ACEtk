@@ -1,7 +1,10 @@
 Data construct(){
   try{
-    details::verify::equalSize( this->energies_.value(), this->pdf_.value() );
-    details::verify::equalSize( this->pdf_.value(), this->cdf_.value() );
+    details::verify::equalSize( 
+      this->energies_.value(), 
+      this->pdf_.value(),
+      this->cdf_.value()
+    );
   } catch( std::range_error& e ){
     Log::info( "Energies, pdf, and cdf must all be the same size." );
     throw;

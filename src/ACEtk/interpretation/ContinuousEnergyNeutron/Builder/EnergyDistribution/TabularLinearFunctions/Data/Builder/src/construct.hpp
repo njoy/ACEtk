@@ -1,7 +1,10 @@
 Data construct() {
   try{
-    details::verify::equalSize( this->P_.value(), this->T_.value() );
-    details::verify::equalSize( this->P_.value(), this->C_.value() );
+    details::verify::equalSize( 
+      this->P_.value(), 
+      this->T_.value(),   
+      this->C_.value()
+    );
   } catch( std::range_error& e ){
     Log::info( "P, T, and C must all be the same size." );
     Log::info( "P.size = {}", P_.value().size() );

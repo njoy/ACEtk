@@ -1,11 +1,12 @@
 Data construct(){
   try{
-    details::verify::equalSize( this->energies_.value(), this->pdf_.value() );
-    details::verify::equalSize( this->pdf_.value(), this->cdf_.value() );
-    details::verify::equalSize( this->cdf_.value(), 
-                                this->precompoundFraction_.value() );
-    details::verify::equalSize( this->cdf_.value(), 
-                                this->angularDistributionSlope_.value() );
+    details::verify::equalSize( 
+      this->energies_.value(), 
+      this->pdf_.value(),
+      this->cdf_.value(),
+      this->precompoundFraction_.value(),
+      this->angularDistributionSlope_.value()
+    );
   } catch( std::range_error& e ){
     Log::info( 
       "Energies, pdf, cdf, precompound fraction, and angulardistribution slope"
