@@ -164,26 +164,26 @@ SCENARIO("test interpretation::DEDX1"){
       auto tempBelow = 1e-24 * mev;
       REQUIRE_THROWS( s0.ceil( tempBelow ) );
       REQUIRE_THROWS( s0.floor( tempBelow ) );
-      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );
-      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );              
+      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).ceil( tempBelow ) );
+      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );              
 
       auto tempAbove = 1e14 * mev;
       REQUIRE_THROWS( s0.ceil( tempAbove ) );
       REQUIRE_THROWS( s0.floor( tempAbove ) );
-      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );
-      //REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );                      
+      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).ceil( tempAbove ) );
+      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );    
 
       auto denBelow = 1e14 / cc;
       REQUIRE_THROWS( s0.ceil( denBelow ) );
       REQUIRE_THROWS( s0.floor( denBelow ) );
-      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denBelow ) );
-      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denBelow ) );
+      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denBelow ) );
+      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denBelow ) );
         
       auto denAbove = 1e36 / cc;                         
       REQUIRE_THROWS( s0.ceil( denAbove ) );
       REQUIRE_THROWS( s0.floor( denAbove ) );   
-      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denAbove ) );
-      //REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denAbove ) );  
+      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denAbove ) );
+      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denAbove ) );  
 
     }      
   
