@@ -24,5 +24,17 @@ public:
   auto standardWithoutCutoff() const {
     return StandardWithoutCutoff{this->table};
   }
+
+  #include "ACEtk/interpretation/DEDX1/StandardWithCutoff.hpp"
+  
+  auto standardWithCutoff() const {
+    return StandardWithCutoff{this->table};
+  }
+
+  #include "ACEtk/interpretation/DEDX1/BPS.hpp"
+  
+  auto bps() const {
+    return BPS{this->table};
+  }  
   
 };
