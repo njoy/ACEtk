@@ -14,6 +14,13 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp"
 
+  // Used to create Table::Data
+  std::vector< double > xss;
+  std::array< int64_t, 32 > jxs;
+  std::array< int64_t, 16 > nxs;
+  std::pair< std::array< int32_t, 16 >,
+             std::array< double, 16 > > izaw;
+
   std::optional< Table::Header > header_;
 
   std::optional< details::verify::Positive< 
@@ -44,8 +51,10 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ESZ.hpp"
 
 public:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalDisappearanceCrossSection.hpp"

@@ -18,21 +18,21 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       .add(); // header
 
     std::vector< double > energyGrid{ 
-      .0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+      0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
     nc.energyGrid( njoy::utility::copy( energyGrid ) );
 
     std::vector< double > totalXS{ 
       10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9 };
     nc.totalCrossSection( njoy::utility::copy( totalXS ) );
 
+    std::vector< double > heating{ 
+      0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
+    nc.heating( njoy::utility::copy( heating ) );
+
     std::vector< double > totalDisappearanceXS{ 
       7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9 };
     nc.totalDisappearanceCrossSection( 
         njoy::utility::copy( totalDisappearanceXS ) );
-
-    std::vector< double > heating{ 
-      0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
-    nc.heating( njoy::utility::copy( heating ) );
 
     { // nubar 
       std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
@@ -347,6 +347,67 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       .add(); // probabilityTable
     }
 
+    WHEN( "constructing a Table" ){
+
+      auto table = nc.construct();
+
+      auto header = table.header;
+      auto data = table.data;
+
+      size_t size{ 50 };
+      CHECK( size == data.XSS().size() );
+
+      CHECK( size == data.NXS( 1 ) );
+      // CHECK( 10 == data.NXS( 2 ) );
+      CHECK( 10 == data.NXS(  3 ) );
+      // CHECK( 10 == data.NXS(  4 ) );
+      // CHECK( 10 == data.NXS(  5 ) );
+      // CHECK( 10 == data.NXS(  6 ) );
+      CHECK( 0 == data.NXS(  7 ) );
+      // CHECK( 10 == data.NXS(  8 ) );
+      CHECK( 0 == data.NXS(  9 ) );
+      CHECK( 0 == data.NXS( 10 ) );
+      CHECK( 0 == data.NXS( 11 ) );
+      CHECK( 0 == data.NXS( 12 ) );
+      CHECK( 0 == data.NXS( 13 ) );
+      CHECK( 0 == data.NXS( 14 ) );
+      CHECK( 0 == data.NXS( 15 ) );
+      CHECK( 0 == data.NXS( 16 ) );
+
+      CHECK( 1 == data.JXS( 1  ) );
+      // CHECK( 0 == data.JXS( 2  ) );
+      // CHECK( 0 == data.JXS( 3  ) );
+      // CHECK( 0 == data.JXS( 4  ) );
+      // CHECK( 0 == data.JXS( 5  ) );
+      // CHECK( 0 == data.JXS( 6  ) );
+      // CHECK( 0 == data.JXS( 7  ) );
+      // CHECK( 0 == data.JXS( 8  ) );
+      // CHECK( 0 == data.JXS( 9  ) );
+      // CHECK( 0 == data.JXS( 10 ) );
+      // CHECK( 0 == data.JXS( 11 ) );
+      // CHECK( 0 == data.JXS( 12 ) );
+      // CHECK( 0 == data.JXS( 13 ) );
+      // CHECK( 0 == data.JXS( 14 ) );
+      // CHECK( 0 == data.JXS( 15 ) );
+      // CHECK( 0 == data.JXS( 16 ) );
+      // CHECK( 0 == data.JXS( 17 ) );
+      // CHECK( 0 == data.JXS( 18 ) );
+      // CHECK( 0 == data.JXS( 19 ) );
+      // CHECK( 0 == data.JXS( 20 ) );
+      // CHECK( 0 == data.JXS( 21 ) );
+      // CHECK( 0 == data.JXS( 22 ) );
+      // CHECK( 0 == data.JXS( 23 ) );
+      // CHECK( 0 == data.JXS( 24 ) );
+      // CHECK( 0 == data.JXS( 25 ) );
+      // CHECK( 0 == data.JXS( 26 ) );
+      // CHECK( 0 == data.JXS( 27 ) );
+      CHECK( 0 == data.JXS( 28 ) );
+      CHECK( 0 == data.JXS( 29 ) );
+      CHECK( 0 == data.JXS( 30 ) );
+      CHECK( 0 == data.JXS( 31 ) );
+      CHECK( 0 == data.JXS( 32 ) );
+
+    }
   } // GIVEN valid
   GIVEN( "invalid data" ){
     WHEN( "heating data is negative" ){
@@ -358,6 +419,45 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           details::verify::exceptions::NotPositive&
         );
       }
+    }
+    WHEN( "various data is the wrong length" ){
+      std::vector< double > energyGrid{ 
+        0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+      nc.energyGrid( njoy::utility::copy( energyGrid ) );
+
+      THEN( "an exception is thrown" ){
+        std::vector< double > totalXS{ 
+          10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8 };
+        nc.totalCrossSection( njoy::utility::copy( totalXS ) );
+
+        CHECK_THROWS_AS(
+          nc.construct(),
+          std::range_error&
+        );
+
+        AND_THEN( "an exception is thrown" ){
+          std::vector< double > heating{ 
+            0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 };
+          nc.heating( njoy::utility::copy( heating ) );
+
+          CHECK_THROWS_AS(
+            nc.construct(),
+            std::range_error&
+          );
+          AND_THEN( "an exception is thrown" ){
+            std::vector< double > totalDisappearanceXS{ 
+              7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8 };
+            nc.totalDisappearanceCrossSection( 
+                njoy::utility::copy( totalDisappearanceXS ) );
+
+            CHECK_THROWS_AS(
+              nc.construct(),
+              std::range_error&
+            );
+          }
+        }
+      }
+
     }
     WHEN( "energies are negative" ){
       std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
@@ -381,4 +481,3 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     }
   } // GIVEN invalid
 } // SCENARIO complete
-
