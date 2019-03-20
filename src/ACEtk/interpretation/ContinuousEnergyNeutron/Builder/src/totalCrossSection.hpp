@@ -1,11 +1,11 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
-Builder& heating( Range&& heat ){
+Builder& totalCrossSection( Range&& xs ){
   try{
-    this->heating_ = std::move( heat );
+    this->totalXS_ = std::move( xs );
     return *this;
   } catch( details::verify::exceptions::NotPositive& e ){
-    Log::info( "heating values must be all positive" );
+    Log::info( "total cross section values must be all positive" );
     throw;
   }
 }

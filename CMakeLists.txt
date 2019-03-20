@@ -80,18 +80,6 @@ set( ACEtk_AppleClang_Darwin_link_time_optimization_flags "-flto" )
 set( ACEtk_AppleClang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_AppleClang_Darwin_nonportable_optimization_flags "-march=native" )
 set( ACEtk_AppleClang_Darwin_static_flags "-static" )
-set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
-set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_GNU_Linux_strict_flags "-Werror" )
-set( ACEtk_GNU_Linux_coverage_flags "--coverage" )
-set( ACEtk_GNU_Linux_subproject_flags  )
-set( ACEtk_GNU_Linux_base_project_flags  )
-set( ACEtk_GNU_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
-set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
-set( ACEtk_GNU_Linux_static_flags "-static" )
 set( ACEtk_GNU_Darwin_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_GNU_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
 set( ACEtk_GNU_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -116,18 +104,18 @@ set( ACEtk_GNU_Windows_link_time_optimization_flags "-flto" )
 set( ACEtk_GNU_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_GNU_Windows_nonportable_optimization_flags "-march=native" )
 set( ACEtk_GNU_Windows_static_flags "-static" )
-set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
-set( ACEtk_Clang_Linux_strict_flags "-Werror" )
-set( ACEtk_Clang_Linux_coverage_flags "--coverage" )
-set( ACEtk_Clang_Linux_subproject_flags  )
-set( ACEtk_Clang_Linux_base_project_flags  )
-set( ACEtk_Clang_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
-set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
-set( ACEtk_Clang_Linux_static_flags "-static" )
+set( ACEtk_GNU_Linux_common_flags "-Wno-subobject-linkage" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_GNU_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" "-fsignaling-nans" )
+set( ACEtk_GNU_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_GNU_Linux_strict_flags "-Werror" )
+set( ACEtk_GNU_Linux_coverage_flags "--coverage" )
+set( ACEtk_GNU_Linux_subproject_flags  )
+set( ACEtk_GNU_Linux_base_project_flags  )
+set( ACEtk_GNU_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Linux_link_time_optimization_flags "-flto" )
+set( ACEtk_GNU_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_GNU_Linux_nonportable_optimization_flags "-march=native" )
+set( ACEtk_GNU_Linux_static_flags "-static" )
 set( ACEtk_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( ACEtk_Clang_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( ACEtk_Clang_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
@@ -152,6 +140,18 @@ set( ACEtk_Clang_Windows_link_time_optimization_flags "-flto" )
 set( ACEtk_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( ACEtk_Clang_Windows_nonportable_optimization_flags "-march=native" )
 set( ACEtk_Clang_Windows_static_flags "-static" )
+set( ACEtk_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( ACEtk_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( ACEtk_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
+set( ACEtk_Clang_Linux_strict_flags "-Werror" )
+set( ACEtk_Clang_Linux_coverage_flags "--coverage" )
+set( ACEtk_Clang_Linux_subproject_flags  )
+set( ACEtk_Clang_Linux_base_project_flags  )
+set( ACEtk_Clang_Linux_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Linux_link_time_optimization_flags "-flto" )
+set( ACEtk_Clang_Linux_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( ACEtk_Clang_Linux_nonportable_optimization_flags "-march=native" )
+set( ACEtk_Clang_Linux_static_flags "-static" )
 get_directory_property( is_subproject PARENT_DIRECTORY )
 
 if( NOT TARGET hopscotch-map-adapter )
@@ -313,7 +313,6 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyGrid.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/construct.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addAngularDistribution.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addEnergyDistribution.hpp"
@@ -477,12 +476,16 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/heating.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalDisappearanceCrossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalCrossSection.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addHeader.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
@@ -528,6 +531,7 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Sorted/src/ctor.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/Sorted/src/assignment.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/size.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/all.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/sorted.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/cosines.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/details/verify/src/neutronYield.hpp"
@@ -560,8 +564,10 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/Builder/src/atomicWeightRatio.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/Builder/src/processDate.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/Builder/src/temperature.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/Builder/src/materialNumber.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/Builder/src/comment.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/Builder/src/construct.hpp"
+             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/Builder/src/source.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/print.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/Header/src/parse.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/Table/src/print.hpp" )

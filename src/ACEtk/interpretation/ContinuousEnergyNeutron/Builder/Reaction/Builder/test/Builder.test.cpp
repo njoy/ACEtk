@@ -108,7 +108,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     }
     WHEN( "valid neutron yield values are given" ){
       std::vector< int > validYields{
-        -102, -101, -19, -4, -3, -2, -1, 0, 1, 2, 3, 4, 19, 101, 102
+        -102, -101, -19, -4, -3, -2, -1, 1, 2, 3, 4, 19, 101, 102
       };
       for( auto yield : validYields ){
         THEN( "no exception is thrown when yield: " + std::to_string( yield ) ){
@@ -143,6 +143,16 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
           details::verify::exceptions::NotPositive&
         );
       }
+    }
+    WHEN( "neutron yield isn't correct" ){
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS(
+          tb.neutronYield( 0, 
+                          ContinuousEnergyNeutron::Builder::
+                              NeutronYieldReferenceFrame::CENTEROFMASS )
+        );
+      }
+
     }
   } // GIVEN invalid
 } // SCENARIO

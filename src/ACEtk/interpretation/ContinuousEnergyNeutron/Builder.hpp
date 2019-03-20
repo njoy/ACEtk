@@ -18,6 +18,9 @@ protected:
 
   std::optional< details::verify::Positive< 
     details::verify::Sorted< std::vector< double > > > > energyGrid_;
+  std::optional< details::verify::Positive< std::vector< double > > > totalXS_;
+  std::optional< details::verify::Positive< std::vector< double > > > 
+      totalDisappearanceXS_;
   std::optional< 
       details::verify::Positive< std::vector< double > > > elasticXS_;
   std::optional< details::verify::Positive< std::vector< double > > > heating_;
@@ -44,6 +47,8 @@ protected:
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalCrossSection.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalDisappearanceCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/heating.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
