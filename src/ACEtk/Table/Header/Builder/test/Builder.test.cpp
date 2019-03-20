@@ -21,6 +21,7 @@ SCENARIO( "Testing Table::Header::Builder" ){
     double AWR{ 0.9971 };
     double temp{ 293.6 };
     auto pDate = date::year{2019}/3/14;
+    int mat{ 9228 };
     std::string szaid{ "1001.123nc" };
     std::string comment1{ "this is comment 1" };
     std::string comment2{ "this is comment 2" };
@@ -29,6 +30,8 @@ SCENARIO( "Testing Table::Header::Builder" ){
                .temperature( temp )
                .atomicWeightRatio( AWR )
                .zaid( szaid )
+               .materialNumber( mat )
+               .source( "ENDF/B-I.23" )
                .comment( comment1 )
                .comment( comment2 );
 
@@ -41,6 +44,7 @@ SCENARIO( "Testing Table::Header::Builder" ){
       CHECK( temp*dimwits::mega( electronVolts ) == header.processTemperature );
       CHECK( pDate == header.processDate );
       CHECK( "              " + szaid == header.szaid );
+      // CHECK( mat == header.mat );
       CHECK( comment1 + blank == header.comments[0] );
       CHECK( comment2 + blank == header.comments[1] );
     }

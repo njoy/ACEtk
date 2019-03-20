@@ -5,6 +5,8 @@ class Builder {
   std::optional< double >                          atomicWeightRatio_;
   std::optional< SZAID >                           szaid_;
   std::vector< Comment >                           comments_;
+  std::optional< MAT >                             mat_;
+  std::optional< Source >                          source_;
 
 protected:
   std::reference_wrapper< ParentBuilder > parent;
@@ -23,5 +25,7 @@ public:
   #include "ACEtk/Table/Header/Builder/src/temperature.hpp"
   #include "ACEtk/Table/Header/Builder/src/atomicWeightRatio.hpp"
   #include "ACEtk/Table/Header/Builder/src/szaid.hpp"
+  #include "ACEtk/Table/Header/Builder/src/materialNumber.hpp"
+  #include "ACEtk/Table/Header/Builder/src/source.hpp"
   #include "ACEtk/Table/Header/Builder/src/comment.hpp"
 };
