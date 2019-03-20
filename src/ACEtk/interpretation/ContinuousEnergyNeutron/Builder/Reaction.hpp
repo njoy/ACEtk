@@ -9,7 +9,6 @@ struct Reaction{
   int MT;
   double Q;
   int neutronYield;
-  Table::Slice energyGrid;
   ContinuousEnergyNeutron::Builder::CrossSection crossSection;
   std::optional< AngularDistribution > angularDistribution;
   std::optional< EnergyDistribution > energyDistribution;

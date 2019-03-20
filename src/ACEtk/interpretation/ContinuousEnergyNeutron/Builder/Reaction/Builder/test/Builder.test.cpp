@@ -61,7 +61,6 @@ void addAngularDistribution( B& builder ){
 }
 
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
-  GIVEN( "parent builder" ){
     struct ParentBuilder: public ContinuousEnergyNeutron::Builder{
       using ContinuousEnergyNeutron::Builder::reactions_;
     };
@@ -75,6 +74,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
     TestBuilder tb{ parentBuilder, 14 };
 
+  GIVEN( "valid values" ){
     double Q{ 3.14 };
     int neutronYield{ 2 };
 
@@ -90,7 +90,6 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
                           NeutronYieldReferenceFrame::CENTEROFMASS );
       addAngularDistribution( tb );
       addEnergyDistribution( tb );
-      tb.energyGrid( grid );
       tb.add();
 
       THEN( "the constructed Reaction can be verified" ){
@@ -99,34 +98,9 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         CHECK( -1*neutronYield == reaction.neutronYield );
         CHECK( XS == reaction.crossSection.values );
         CHECK( 14 == reaction.MT );
-        CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
 
         CHECK( 1 == 
                static_cast< ParentBuilder& >(parentBuilder).reactions_.size() );
-      }
-    } // WHEN
-    WHEN( "creating a Reaction Builder with a parent energyGrid" ){
-      std::vector< double > XS{ 1.0, 2.0, 3.0 };
-
-      parentBuilder.energyGrid( njoy::utility::copy( energyGrid ) );
-      THEN( "no exception is thrown if no energyGrid is given" ){
-        CHECK_NOTHROW( tb.crossSection().values( njoy::utility::copy( XS ) ) );
-      }
-
-      tb.energyGrid( grid );
-      tb.Q( Q );
-      tb.crossSection().values( njoy::utility::copy( XS ) ).add();
-      addAngularDistribution( tb );
-      addEnergyDistribution( tb );
-
-      auto reaction = tb.construct();
-
-      THEN( "the constructed Reaction can be verified" ){
-        CHECK( Q == reaction.Q );
-        CHECK( 0 == reaction.neutronYield );
-        CHECK( XS == reaction.crossSection.values );
-        CHECK( 14 == reaction.MT );
-        CHECK( ranges::equal( energyGrid, reaction.energyGrid ) );
       }
     } // WHEN
     WHEN( "all the pieces of a Reaction are not present" ){
@@ -145,6 +119,8 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         }
       }
     }
+  } // GIVEN valid
+  GIVEN( "invalid values" ){
     WHEN( "invalid neutron yield values are given" ){
       std::vector< int > invalidYields{ -100, -99, -21, -20, 20, 21, 99, 100 };
       for( auto yield : invalidYields ){
@@ -168,5 +144,5 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         );
       }
     }
-  } // GIVEN
+  } // GIVEN invalid
 } // SCENARIO

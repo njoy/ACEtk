@@ -69,8 +69,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
       nc.reaction( 2 )
           .Q( 0.0 )
-          .energyGrid( nc.energyGrid() )
-          .crossSection().values( XS )
+          .crossSection()
+            .values( XS )
+            .energyGrid( nc.energyGrid() )
           .add()  // crossSection
           .angularDistribution()
             .energyGrid( njoy::utility::copy( grid ) )
@@ -118,8 +119,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
       nc.reaction( 16 )
           .Q( -5.297781 )
-          .energyGrid( nc.energyGrid() )
-          .crossSection().values( XS )
+          .crossSection()
+            .values( XS )
+            .energyGrid( nc.energyGrid() )
           .add()  // crossSection
           .angularDistribution()
             .energyGrid( njoy::utility::copy( grid ) )
@@ -181,8 +183,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
       nc.reaction( 18 )
           .Q( 1.934054E2 )
-          .energyGrid( nc.energyGrid() )
-          .crossSection().values( XS )
+          .crossSection()
+            .values( XS )
+            .energyGrid( nc.energyGrid() )
           .add() // crossSection
           // Isotropic---no angular distribution needed
           .energyDistribution()
@@ -205,6 +208,20 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .add() // continuousTabularDistribution
           .add() // energyDistribution
         .add(); // reaction 18
+    }
+    { // MT 102
+      std::vector< double > XS{ 
+        0.102, 1.102, 2.102, 3.102, 4.102, 5.102, 6.102, 7.102, 8.102, 9.102 };
+
+      nc.reaction( 102 )
+          .Q( 6.5452 )
+          .crossSection()
+            .values( XS )
+            .energyGrid( nc.energyGrid() )
+          .add() // crossSection
+          // No angularDistribution
+          // No energyDistribution
+        .add(); // reaction 102
     }
 
   } // GIVEN valid

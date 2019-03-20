@@ -40,9 +40,10 @@ SCENARIO( "incident neutron reaction" ){
         CHECK_NOTHROW( 
           ncBuilder.reaction( MT )
                       .Q( Qvalue )
-                      .energyGrid( ncBuilder.energyGrid() )
-                      .crossSection().values( njoy::utility::copy( XS ) )
-                                      .add()
+                      .crossSection()
+                        .values( njoy::utility::copy( XS ) )
+                        .energyGrid( ncBuilder.energyGrid() )
+                      .add() // crossSection
                       .neutronYield( neutronYield, 
                                 ContinuousEnergyNeutron::Builder::
                                     NeutronYieldReferenceFrame::CENTEROFMASS )
@@ -100,9 +101,10 @@ SCENARIO( "incident neutron reaction" ){
     WHEN( "adding a duplicate reaction" ){
       THEN( "an exception is thrown" ){
         ncBuilder.reaction( MT )
-                  .energyGrid( ncBuilder.energyGrid() )
-                  .crossSection().values( njoy::utility::copy( XS ) )
-                                  .add()
+                  .crossSection()
+                    .values( njoy::utility::copy( XS ) )
+                    .energyGrid( ncBuilder.energyGrid() )
+                  .add() // crossSection
                   .neutronYield( neutronYield, 
                             ContinuousEnergyNeutron::Builder::
                                 NeutronYieldReferenceFrame::CENTEROFMASS )
@@ -157,9 +159,10 @@ SCENARIO( "incident neutron reaction" ){
                  .add(); // reaction
         CHECK_THROWS(
           ncBuilder.reaction( MT )
-                   .energyGrid( ncBuilder.energyGrid() )
-                   .crossSection().values( njoy::utility::copy( XS ) )
-                                  .add()
+                   .crossSection()
+                    .values( njoy::utility::copy( XS ) )
+                    .energyGrid( ncBuilder.energyGrid() )
+                   .add() // crossSection
                     .Q( Qvalue )
                     .angularDistribution()
                       .energyGrid( grid )
@@ -217,8 +220,8 @@ SCENARIO( "incident neutron reaction" ){
       THEN( "an exception is thrown if no energyGrid is given" ){
         CHECK_THROWS( 
           ncBuilder.reaction( MT )
-                   .energyGrid( ncBuilder.energyGrid() )
                    .crossSection().values( njoy::utility::copy( XS ) )
+                    .energyGrid( ncBuilder.energyGrid() )
                                   .add()
                    .Q( Qvalue )
                     .angularDistribution()
@@ -238,8 +241,8 @@ SCENARIO( "incident neutron reaction" ){
       THEN( "an exception is thrown if energyGrid is the wrong size" ){
         CHECK_THROWS( 
           ncBuilder.reaction( MT )
-                   .energyGrid( ncBuilder.energyGrid() )
                    .crossSection().values( njoy::utility::copy( XS ) )
+                    .energyGrid( ncBuilder.energyGrid() )
                                  .add()
                    .Q( Qvalue )
                     .angularDistribution()
@@ -260,10 +263,9 @@ SCENARIO( "incident neutron reaction" ){
           "no exception is thrown when an appropriate energyGrid is given" ){
         CHECK_NOTHROW( 
           ncBuilder.reaction( MT )
-                   .energyGrid( ncBuilder.energyGrid() )
-                   .crossSection().values(  njoy::utility::copy( XS ) )
-                                  .energyGrid( 
-                                     njoy::ACEtk::Table::slice(
+                   .crossSection()
+                      .values(  njoy::utility::copy( XS ) )
+                      .energyGrid( njoy::ACEtk::Table::slice(
                                          ncBuilder.energyGrid() 
                                          | ranges::view::drop( 1 )
                                      )

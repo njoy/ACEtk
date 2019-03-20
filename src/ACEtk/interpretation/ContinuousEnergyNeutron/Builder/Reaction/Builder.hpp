@@ -9,7 +9,6 @@ private:
   std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
   std::optional< AngularDistribution > angularDistribution_;
   std::optional< EnergyDistribution > energyDistribution_;
-  std::optional< Table::Slice > energyGrid_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
@@ -30,7 +29,6 @@ public:
     return parent.get().addReaction( this->construct() );
   }
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"

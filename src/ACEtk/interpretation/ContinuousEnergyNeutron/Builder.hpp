@@ -49,7 +49,6 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp"
-  // #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/elasticCrossSection.hpp"
 
   Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
   ProbabilityTable::Builder probabilityTable(){ 
