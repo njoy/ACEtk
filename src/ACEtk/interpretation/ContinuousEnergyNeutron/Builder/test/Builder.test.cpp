@@ -34,6 +34,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     nc.totalDisappearanceCrossSection( 
         njoy::utility::copy( totalDisappearanceXS ) );
 
+    int ZA{ 92235 };
+    nc.ZA( ZA );
+
     { // nubar 
       std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
       std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
@@ -358,7 +361,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       CHECK( size == data.XSS().size() );
 
       CHECK( size == data.NXS( 1 ) );
-      // CHECK( 10 == data.NXS( 2 ) );
+      CHECK( ZA == data.NXS( 2 ) );
       CHECK( 10 == data.NXS(  3 ) );
       // CHECK( 10 == data.NXS(  4 ) );
       // CHECK( 10 == data.NXS(  5 ) );
@@ -410,6 +413,12 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     }
   } // GIVEN valid
   GIVEN( "invalid data" ){
+    WHEN( "SZA is negative" ){
+      int SZA{ -5 };
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS( nc.SZA( SZA ) );
+      }
+    }
     WHEN( "heating data is negative" ){
       std::vector< double > heating{ 
         0.0, 0.1, -0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
@@ -457,7 +466,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           }
         }
       }
-
     }
     WHEN( "energies are negative" ){
       std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };

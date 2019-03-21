@@ -47,20 +47,18 @@ void ESZ(){
   }
 
   try{
-    auto grid = this->energyGrid_.value();
-    auto total = this->totalXS_.value();
-    auto disap = this->totalDisappearanceXS_.value();
-    auto elast = this->reactions_[ 2 ].crossSection.values;
-    auto heat  = this->heating_.value();
+    this->nxs[ 1 ] = this->SZA_.value();
 
-    this->nxs[ 2 ] = grid.size();
+    this->nxs[ 2 ] = this->energyGrid_.value().size();
     this->jxs[ 0 ] = 1;
 
-    this->xss.insert( xss.end(), grid.begin(), grid.end() );
-    this->xss.insert( xss.end(), total.begin(), total.end() );
-    this->xss.insert( xss.end(), disap.begin(), disap.end() );
-    this->xss.insert( xss.end(), elast.begin(), elast.end() );
-    this->xss.insert( xss.end(), heat.begin(), heat.end() );
+    this->xss |= ranges::action::push_back( this->energyGrid_.value() );
+    this->xss |= ranges::action::push_back( this->totalXS_.value() );
+    this->xss |= ranges::action::push_back( 
+        this->totalDisappearanceXS_.value() );
+    this->xss |= ranges::action::push_back( 
+        this->reactions_[ 2 ].crossSection.values );
+    this->xss |= ranges::action::push_back( this->heating_.value() );
 
   } catch( std::bad_optional_access& b ){
     Log::error( "Some component in the ESZ Block has not been built." );

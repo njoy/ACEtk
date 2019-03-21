@@ -31,6 +31,7 @@ protected:
   std::optional< 
       details::verify::Positive< std::vector< double > > > elasticXS_;
   std::optional< details::verify::Positive< std::vector< double > > > heating_;
+  std::optional< int > SZA_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
   std::vector< Precursors > delayedPrecursors_;
   tsl::hopscotch_map< int, Reaction > reactions_;
@@ -59,6 +60,7 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalDisappearanceCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/heating.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SZA.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
