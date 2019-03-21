@@ -7,7 +7,7 @@ template< typename U=T,
             )
           >
 >
-auto ACEify_y(){
+auto ACEify_y() const{
   return this->y 
     | ranges::view::for_each(
         []( auto& ele ){ return ele.ACEify(); }
@@ -15,7 +15,7 @@ auto ACEify_y(){
 }
 
 template< typename... R >
-auto ACEify_y( R... ){
+auto ACEify_y( R... ) const{
 
   return this->y | ranges::view::all;
 }

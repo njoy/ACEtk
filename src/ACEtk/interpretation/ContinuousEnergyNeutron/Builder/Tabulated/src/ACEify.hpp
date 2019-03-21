@@ -1,4 +1,4 @@
-auto ACEify(){
+auto ACEify() const{
   std::vector< double > aced;
   aced.emplace_back( 2 );
 
