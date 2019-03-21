@@ -378,7 +378,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       CHECK( 0 == data.NXS( 16 ) );
 
       CHECK( 1 == data.JXS( 1  ) );
-      // CHECK( 0 == data.JXS( 2  ) );
+      CHECK( 51 == data.JXS( 2  ) );
       // CHECK( 0 == data.JXS( 3  ) );
       // CHECK( 0 == data.JXS( 4  ) );
       // CHECK( 0 == data.JXS( 5  ) );

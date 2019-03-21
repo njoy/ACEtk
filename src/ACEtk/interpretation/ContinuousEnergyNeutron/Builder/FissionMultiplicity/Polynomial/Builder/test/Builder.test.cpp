@@ -31,6 +31,14 @@ SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
 
       THEN( "the coefficients can be verified" ){
         CHECK( coefficients == poly.coefficients );
+
+        AND_THEN( "the contents can be ACE-ified" ){
+          // auto aceified = ranges::view::concat( 
+          //     ranges::view::single( 1 ), coefficients );
+          // CHECK( ranges::equal( aceified, poly.ACEify() ) );
+
+          njoy::Log::info( "poly: {}", poly.ACEify() );
+        }
       }
     }
     WHEN( "creating a Polynomial fission multiplicity without coefficients" ){

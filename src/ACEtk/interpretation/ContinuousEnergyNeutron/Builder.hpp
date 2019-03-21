@@ -52,7 +52,9 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp"
+
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ESZ.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/NU.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"

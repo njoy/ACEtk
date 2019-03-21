@@ -1,6 +1,7 @@
 Table construct(){
 
   this->ESZ();
+  this->NU();
 
   try{
     this->nxs[ 0 ] = this->xss.size();

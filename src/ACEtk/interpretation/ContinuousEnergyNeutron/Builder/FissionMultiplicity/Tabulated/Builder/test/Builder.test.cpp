@@ -39,6 +39,20 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
       THEN( "the members of Tabulated can be verified" ){
         CHECK( energies == tabu.x );
         CHECK( multiplicities == tabu.y );
+
+        AND_THEN( "the contents can be ACE-ified" ){
+          auto aceified = ranges::view::concat(
+            ranges::view::single( 2 ), // LNU
+            ranges::view::single( 2 ), // N_R
+            boundaries,
+            schemes,
+            ranges::view::single( energies.size() ),
+            energies,
+            multiplicities
+            );
+
+          CHECK( ranges::equal( aceified, tabu.ACEify() ) );
+        }
       }
     }
   } // GIVEN valid
@@ -78,4 +92,3 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
     }
   } // GIVEN
 } // SCENARIO
-
