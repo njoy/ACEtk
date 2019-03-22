@@ -1,56 +1,48 @@
 template<typename SubRange,
 	 typename Unit,
 	 typename Projection>
-struct S1 : protected Projection, public SubRange {
+struct S1 : public SubRange, protected Projection {
 
-  template<typename StoppingPower>
-  auto get(TempT, StoppingPower&& sp) const { return sp.temperature(); }
-  template<typename StoppingPower>
-  auto get(DenT, StoppingPower&& sp) const { return sp.density(); }
-  
-  template<typename T, typename P>
-  bool out_of_bounds(T value, P projection) const {
-    auto grrrr = *this;
-    auto min_ = this->get(value, ranges::min(grrrr, std::less<T>{}, projection));
-    auto max_ = this->get(value, ranges::max(grrrr, std::less<T>{}, projection));
-    return not (min_ < value && value < max_);
-  }
-  
   template<typename...Args>
   S1(Projection proj, Args&&... args)
-    : Projection(proj),
-      SubRange(std::forward<Args>(args)...){}
-    
-  auto floor(Unit parameter) const {
+    : SubRange(std::forward<Args>(args)...),
+      Projection(proj) {}
+      
 
-    auto value = parameter;
+  auto floor(Unit parameter) const {
     const auto& projection = static_cast<const Projection&>(*this);
+    const auto& r = static_cast<const SubRange&>(*this);
+    //    auto b = r.begin();
+
     
-    if ( this->out_of_bounds(parameter, projection) ){
+    /*
+    auto min_ = projection(r.front());
+    auto max_ = projection(r.back());
+    if ( not (min_ < parameter  && parameter < max_) ){
       njoy::Log::error( "Could not find value in range" );
       throw std::domain_error("Could not find value in range");      
     } 
-
+    */
     auto range = *this;
-    auto it = ranges::lower_bound(range, value, std::less<>{}, projection);
-    
-    const bool match = projection(*it) == value;      
-    it = ranges::prev(it, not match);
-    
+    auto it = ranges::lower_bound(range, parameter, std::less<>{}, projection);
+    const bool match = projection(*it) == parameter;      
+    it = ranges::prev(it, not match);    
     return *it;
   }    
 
   auto ceil(Unit parameter) const {
-    auto value = parameter;
     auto projection = static_cast<const Projection&>(*this);
-    
-    if ( this->out_of_bounds(parameter, projection) ){
+    /*
+    const auto& r = static_cast<const SubRange&>(*this) | ranges::view::bounded;
+    auto min_ = projection(r.front());
+    auto max_ = projection(r.back());
+    if ( not (min_ < parameter  && parameter < max_) ){
       njoy::Log::error( "Could not find value in range" );
       throw std::domain_error("Could not find value in range");      
     }
-
+    */
     auto range = *this;
-    auto it = ranges::lower_bound(range, value, std::less<>{}, projection);
+    auto it = ranges::lower_bound(range, parameter, std::less<>{}, projection);
     return *it;
   }
 

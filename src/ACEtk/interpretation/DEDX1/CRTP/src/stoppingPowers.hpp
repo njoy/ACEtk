@@ -1,3 +1,6 @@
+template<typename... T>
+static void f(T...){std::puts(__PRETTY_FUNCTION__);}
+
 auto stoppingPowers() const {
   auto logStoppingPowerRanges = [self = this]{
     const auto length =
@@ -50,12 +53,6 @@ auto stoppingPowers() const {
   auto stoppingPowerRange = ranges::view::zip_with(makeStoppingPower,
 						   densAndTemps,
 						   logStoppingPowerRanges);
-
-  return this->makeS0(this->numDensities(),
-		      ranges::min(this->densities()),
-		      ranges::max(this->densities()),
-		      ranges::min(this->temperatures()),
-		      ranges::max(this->temperatures()),
-		      std::move(stoppingPowerRange));
-
+  
+  return this->makeS0(this->numDensities(), std::move(stoppingPowerRange));
 }

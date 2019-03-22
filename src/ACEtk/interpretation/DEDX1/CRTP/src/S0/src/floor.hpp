@@ -1,6 +1,8 @@
 auto floor(DenT density) const {
-
-  if ( this->out_of_bounds(density) ){    
+  const auto& r = static_cast<const Range&>(*this);  
+  auto min_ = r.front().density();
+  auto max_ = ranges::back(r|ranges::view::bounded).density();  
+  if ( not (min_ < density  && density < max_) ){    
     njoy::Log::error( "Could not find value in range" );
     throw std::domain_error("Could not find density in range");      
   }
@@ -23,8 +25,10 @@ auto floor(DenT density) const {
 }
 
 auto floor(TempT temperature) const {
-
-  if ( this->out_of_bounds(temperature) ){
+  const auto& r = static_cast<const Range&>(*this);  
+  auto min_ = r.front().temperature();
+  auto max_ = ranges::back(r|ranges::view::bounded).temperature();  
+  if ( not (min_ < temperature && temperature < max_) ){    
     njoy::Log::error( "Could not find temperature in range" );
     throw std::domain_error("Could not find temperature in range");      
   }      
@@ -39,6 +43,6 @@ auto floor(TempT temperature) const {
   auto density = [](const StoppingPower& stoppingPower){
     return stoppingPower.density();
   };        
-  using Projection = decltype(density);    
+  using Projection = decltype(density);
   return S1<decltype(result), DenT, Projection>{density, std::move(result)};
 }  

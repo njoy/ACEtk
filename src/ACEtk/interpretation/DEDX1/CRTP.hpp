@@ -8,6 +8,7 @@ class CRTP{
   using DenT = decltype(1.0/cc);
   using TempT = decltype(1.0*mev);
 
+  //#include "ACEtk/interpretation/DEDX1/CRTP/src/outOfBounds.hpp"
   #include "ACEtk/interpretation/DEDX1/CRTP/src/S0.hpp"
 
 protected:

@@ -1,6 +1,8 @@
 auto ceil(DenT density) const {
-  
-  if ( this->out_of_bounds(density) ){    
+  const auto& r = static_cast<const Range&>(*this);
+  auto min_ = r.front().density();
+  auto max_ = ranges::back(r|ranges::view::bounded).density();  
+  if ( not (min_ < density  && density < max_) ){    
     njoy::Log::error( "Could not find density in range" );
     throw std::domain_error("Could not find density in range");
   }
@@ -20,14 +22,15 @@ auto ceil(DenT density) const {
 }
 
 auto ceil(TempT temperature) const {
-
-  if ( this->out_of_bounds(temperature) ){
+  const auto& r = static_cast<const Range&>(*this);
+  auto min_ = r.front().temperature();
+  auto max_ = ranges::back(r|ranges::view::bounded).temperature();    
+  if ( not (min_ < temperature  && temperature < max_) ){
     njoy::Log::error( "Could not find value in range" );
     throw std::domain_error("Could not find temperature in range");      
   }
 
   auto value = temperature;
-
   auto it = ranges::lower_bound(this->begin(), this->end(), value, std::less<>{},
 				&StoppingPower::temperature);
   auto distance = ranges::distance(this->begin(), it);
