@@ -1,3 +1,4 @@
+  Data() { };
   Data( const decltype(izaw)& izaw_,
         const decltype(nxs)& nxs_,
         const decltype(jxs)& jxs_,

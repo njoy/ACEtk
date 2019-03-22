@@ -22,6 +22,7 @@ protected:
              std::array< double, 16 > > izaw;
 
   std::optional< Table::Header > header_;
+  std::optional< Table::Data > tableData_;
 
   std::optional< details::verify::Positive< 
     details::verify::Sorted< std::vector< double > > > > energyGrid_;
