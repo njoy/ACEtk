@@ -44,14 +44,16 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
           auto aceified = ranges::view::concat(
             ranges::view::single( 2 ), // LNU
             ranges::view::single( 2 ), // N_R
-            boundaries,
-            schemes,
-            ranges::view::single( energies.size() ),
-            energies,
-            multiplicities
+            boundaries, // NBT
+            schemes, // INT
+            ranges::view::single( energies.size() ), // N_E
+            energies, // E
+            multiplicities // nubar
             );
 
-          CHECK( ranges::equal( aceified, tabu.ACEify() ) );
+          Table::Data data{};
+          tabu.ACEify( data );
+          CHECK( ranges::equal( aceified, data.XSS() ) );
         }
       }
     }

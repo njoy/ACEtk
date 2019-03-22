@@ -10,6 +10,8 @@ protected:
   using BaseBuilder::x;
   using BaseBuilder::y;
 
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder/src/construct.hpp"
+
 public:
   Builder( ParentBuilder& parent, std::string nuType ): 
     parent( parent ),

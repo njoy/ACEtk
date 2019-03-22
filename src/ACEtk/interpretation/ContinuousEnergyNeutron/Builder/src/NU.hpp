@@ -7,36 +7,36 @@ void NU(){
   auto& xss = this->tableData_.value().XSS();
   auto& jxs = this->tableData_.value().JXS();
 
-  auto nuVisitor = [&](auto& nubar ) -> void
-  {
-    xss |= ranges::action::push_back( nubar.ACEify() );
-  };
+  // auto nuVisitor = [&](auto& nubar ) -> void
+  // {
+  //   xss |= ranges::action::push_back( nubar.ACEify( this->tableData_ ) );
+  // };
 
-  auto size = xss.size() + 1;
-  jxs[ 1 ] = size;
-  if( foundPrompt ){
-    auto prompt = this->fissionMultiplicity_[ "prompt" ];
+  // auto size = xss.size() + 1;
+  // jxs[ 1 ] = size;
+  // if( foundPrompt ){
+  //   auto prompt = this->fissionMultiplicity_[ "prompt" ];
 
-    std::visit( nuVisitor, prompt );
-    auto promptSize = xss.size();
+  //   std::visit( nuVisitor, prompt );
+  //   auto promptSize = xss.size();
 
-    if( foundTotal ){
-      auto total = this->fissionMultiplicity_[ "total" ];
+  //   if( foundTotal ){
+  //     auto total = this->fissionMultiplicity_[ "total" ];
 
-      std::visit( nuVisitor, total );
+  //     std::visit( nuVisitor, total );
 
-      auto totalSize = xss.size() - promptSize;
-      xss.insert( xss.begin() + size, -1*totalSize );
-    }
-  }
-  else if( foundTotal ){
-      auto total = this->fissionMultiplicity_[ "total" ];
-      std::visit( nuVisitor, total );
-  }
-  else{
-    jxs[ 1 ] = 0;
-  }
+  //     auto totalSize = xss.size() - promptSize;
+  //     xss.insert( xss.begin() + size, -1*totalSize );
+  //   }
+  // }
+  // else if( foundTotal ){
+  //     auto total = this->fissionMultiplicity_[ "total" ];
+  //     std::visit( nuVisitor, total );
+  // }
+  // else{
+  //   jxs[ 1 ] = 0;
+  // }
 
-  if( not this->delayedPrecursors_.empty() ){
-  }
+  // if( not this->delayedPrecursors_.empty() ){
+  // }
 }

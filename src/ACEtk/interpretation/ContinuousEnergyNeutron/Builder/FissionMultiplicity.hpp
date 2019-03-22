@@ -6,4 +6,5 @@ struct FissionMultiplicity {
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Builder.hpp"
 };
-using Nubar = std::variant< FissionMultiplicity::Polynomial, Tabulated1D >;
+using Nubar = std::variant< FissionMultiplicity::Polynomial, 
+                            FissionMultiplicity::Tabulated >;

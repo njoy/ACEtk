@@ -7,15 +7,15 @@ template< typename U=T,
             )
           >
 >
-auto ACEify_y() const{
-  return this->y 
-    | ranges::view::for_each(
-        []( auto& ele ){ return ele.ACEify(); }
+void ACEify_y( Table::Data& tData ){
+  auto& xss = tData.XSS();
+    xss |= ranges::view::for_each(
+        [ &tData ]( auto& ele ){ return ele.ACEify( tData ); }
       );
 }
 
 template< typename... R >
-auto ACEify_y( R... ) const{
+void ACEify_y( Table::Data& tData, R... ){
 
-  return this->y | ranges::view::all;
+  tData.XSS() |= ranges::action::push_back( this->y );
 }

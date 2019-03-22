@@ -3,6 +3,7 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
+using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
@@ -35,7 +36,10 @@ SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
         AND_THEN( "the contents can be ACE-ified" ){
           auto aceified = ranges::view::concat( 
               ranges::view::single( 1 ), coefficients );
-          CHECK( ranges::equal( aceified, poly.ACEify() ) );
+
+          Table::Data dataTable{};
+          poly.ACEify( dataTable );
+          CHECK( ranges::equal( aceified, dataTable.XSS() ) );
         }
       }
     }

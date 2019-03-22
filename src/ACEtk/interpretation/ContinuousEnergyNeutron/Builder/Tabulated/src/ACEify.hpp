@@ -1,10 +1,9 @@
-auto ACEify() const{
-  std::vector< double > aced;
-  aced.emplace_back( 2 );
+void ACEify( Table::Data& tData ){
+  auto& xss = tData.XSS();
 
   if( parameters ){
     auto p = parameters.value();
-    aced 
+    xss 
       |= ranges::action::push_back( 
           ranges::view::concat(
             ranges::view::single( p.first.size() ), p.first, p.second
@@ -12,14 +11,14 @@ auto ACEify() const{
         );
   }
   else{
-    aced |= ranges::action::push_back( ranges::view::single( 0 ) );
+    xss |= ranges::action::push_back( ranges::view::single( 0 ) );
   }
 
-  aced 
+  xss 
     |= ranges::action::push_back( 
       ranges::view::concat( ranges::view::single( x.size() ), x )
       );
 
-  return aced |= ranges::action::push_back( this->ACEify_y( ) );
+  this->ACEify_y( tData );
 
 }
