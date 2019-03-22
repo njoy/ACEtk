@@ -12,18 +12,21 @@ void NU(){
   auto size = this->xss.size() + 1;
   this->jxs[ 1 ] = size;
   if( foundPrompt ){
+    auto prompt = this->fissionMultiplicity_[ "prompt" ];
 
-    // std::visit( nuVisitor, foundPrompt );
+    std::visit( nuVisitor, prompt );
     auto promptSize = this->xss.size();
 
     if( foundTotal ){
-      // std::visit( nuVisitor, foundTotal );
+      auto total = this->fissionMultiplicity_[ "total" ];
+      std::visit( nuVisitor, total );
       auto totalSize = this->xss.size() - promptSize;
       this->xss.insert( this->xss.begin() + size, -1*totalSize );
     }
   }
   else if( foundTotal ){
-    // std::visit( nuVisitor, foundTotal );
+      auto total = this->fissionMultiplicity_[ "total" ];
+      std::visit( nuVisitor, total );
   }
   else{
     this->jxs[ 1 ] = 0;
@@ -31,6 +34,4 @@ void NU(){
 
   if( not this->delayedPrecursors_.empty() ){
   }
-
-
 }

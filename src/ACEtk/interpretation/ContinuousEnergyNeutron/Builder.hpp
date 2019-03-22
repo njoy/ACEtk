@@ -25,18 +25,27 @@ protected:
 
   std::optional< details::verify::Positive< 
     details::verify::Sorted< std::vector< double > > > > energyGrid_;
+
   std::optional< details::verify::Positive< std::vector< double > > > totalXS_;
+
   std::optional< details::verify::Positive< std::vector< double > > > 
       totalDisappearanceXS_;
+
   std::optional< 
       details::verify::Positive< std::vector< double > > > elasticXS_;
+
   std::optional< details::verify::Positive< std::vector< double > > > heating_;
+
   std::optional< int > SZA_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
+
   std::vector< Precursors > delayedPrecursors_;
+
   tsl::hopscotch_map< int, Reaction > reactions_;
+
   tsl::hopscotch_map< 
       int, PhotonProductionReaction > photonProductionReactions_;
+
   std::optional< TotalGammaProduction > totalGammaProduction_;
   std::optional< ProbabilityTable > probabilityTable_;
 

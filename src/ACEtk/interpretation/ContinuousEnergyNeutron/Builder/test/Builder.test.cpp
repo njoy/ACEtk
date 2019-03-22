@@ -357,7 +357,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto header = table.header;
       auto data = table.data;
 
-      size_t size{ 50 };
+      size_t size{ 55 };
       CHECK( size == data.XSS().size() );
 
       CHECK( size == data.NXS( 1 ) );

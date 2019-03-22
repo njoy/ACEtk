@@ -33,11 +33,9 @@ SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
         CHECK( coefficients == poly.coefficients );
 
         AND_THEN( "the contents can be ACE-ified" ){
-          // auto aceified = ranges::view::concat( 
-          //     ranges::view::single( 1 ), coefficients );
-          // CHECK( ranges::equal( aceified, poly.ACEify() ) );
-
-          njoy::Log::info( "poly: {}", poly.ACEify() );
+          auto aceified = ranges::view::concat( 
+              ranges::view::single( 1 ), coefficients );
+          CHECK( ranges::equal( aceified, poly.ACEify() ) );
         }
       }
     }
