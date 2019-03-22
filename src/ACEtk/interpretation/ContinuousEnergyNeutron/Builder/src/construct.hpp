@@ -1,7 +1,7 @@
 Table construct(){
 
   this->tableData_ = Table::Data{};
-  auto tableData = this->tableData_.value();
+  auto& tableData = this->tableData_.value();
 
   this->ESZ();
   this->NU();

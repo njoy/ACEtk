@@ -4,24 +4,29 @@ void NU(){
   auto foundTotal = (
       fissionMultiplicity_.find( "total" ) != fissionMultiplicity_.end() );
 
+  auto& xss = this->tableData_.value().XSS();
+  auto& jxs = this->tableData_.value().JXS();
+
   auto nuVisitor = [&](auto& nubar ) -> void
   {
     xss |= ranges::action::push_back( nubar.ACEify() );
   };
 
-  auto size = this->xss.size() + 1;
-  this->jxs[ 1 ] = size;
+  auto size = xss.size() + 1;
+  jxs[ 1 ] = size;
   if( foundPrompt ){
     auto prompt = this->fissionMultiplicity_[ "prompt" ];
 
     std::visit( nuVisitor, prompt );
-    auto promptSize = this->xss.size();
+    auto promptSize = xss.size();
 
     if( foundTotal ){
       auto total = this->fissionMultiplicity_[ "total" ];
+
       std::visit( nuVisitor, total );
-      auto totalSize = this->xss.size() - promptSize;
-      this->xss.insert( this->xss.begin() + size, -1*totalSize );
+
+      auto totalSize = xss.size() - promptSize;
+      xss.insert( xss.begin() + size, -1*totalSize );
     }
   }
   else if( foundTotal ){
@@ -29,7 +34,7 @@ void NU(){
       std::visit( nuVisitor, total );
   }
   else{
-    this->jxs[ 1 ] = 0;
+    jxs[ 1 ] = 0;
   }
 
   if( not this->delayedPrecursors_.empty() ){

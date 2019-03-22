@@ -14,13 +14,6 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp"
 
-  // Used to create Table::Data
-  std::vector< double > xss;
-  std::array< int64_t, 32 > jxs;
-  std::array< int64_t, 16 > nxs;
-  std::pair< std::array< int32_t, 16 >,
-             std::array< double, 16 > > izaw;
-
   std::optional< Table::Header > header_;
   std::optional< Table::Data > tableData_;
 
