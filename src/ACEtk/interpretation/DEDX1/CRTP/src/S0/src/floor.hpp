@@ -1,48 +1,85 @@
 auto floor(DenT density) const {
-  const auto& r = static_cast<const Range&>(*this);  
-  auto min_ = r.front().density();
-  auto max_ = ranges::back(r|ranges::view::bounded).density();  
-  if ( not (min_ < density  && density < max_) ){    
-    njoy::Log::error( "Could not find value in range" );
-    throw std::domain_error("Could not find density in range");      
-  }
+  auto range = static_cast<const Range&>( *this );
+  auto variesWithDensity =
+    range | ranges::view::slice( std::size_t(0), this->nDensities );
   
-  auto value = density;  
-  auto end_it = ranges::next(this->begin(), nDensities);
+  {  
+    const auto min = variesWithDensity.front().density();
+    const auto max = variesWithDensity.back().density();
+    const auto inbounds = ( min <= density ) and ( density <= max ); 
+
+    if ( not inbounds ){    
+      njoy::Log::error( "Could not find density in range" );
+      njoy::Log::info( "The density in question is {}", density);
+      njoy::Log::info( "The density range is ({},{})", min, max);                  
+      throw std::domain_error("Could not find density in range");
+    }
+  }
+
   auto it =
-    ranges::lower_bound(this->begin(), end_it, value, std::less<>{},
-			&StoppingPower::density);
-  const bool match = (*it).density() == value;
+    ranges::lower_bound( variesWithDensity,
+			 density,
+			 std::less<void>{},
+			 &StoppingPower::density );
+
+  const bool match = (*it).density() == density;
   it = ranges::prev(it, not match);
-  int distance = ranges::distance(this->begin(), it);
+  const auto distance = ranges::distance( variesWithDensity.begin(), it );
+
   auto result =
-    *this | ranges::view::drop_exactly(distance) | ranges::view::stride(nDensities);
-  auto temperature = [](const StoppingPower& stoppingPower){
-    return stoppingPower.temperature();
-  };
-  using Projection = decltype(temperature);
-  return S1<decltype(result), TempT, Projection>{temperature, std::move(result)};    
+    range
+    | ranges::view::drop_exactly( distance )
+    | ranges::view::stride( this->nDensities );
+
+  auto projection =
+    [](auto&& stoppingPower){ return stoppingPower.temperature(); };
+
+  using SubTable = S1<decltype(result), TempT, decltype(projection)>;
+
+  const auto nTemperatures = ranges::size( range ) / this->nDensities;
+
+  return SubTable{nTemperatures, projection, std::move(result)};
 }
 
-auto floor(TempT temperature) const {
-  const auto& r = static_cast<const Range&>(*this);  
-  auto min_ = r.front().temperature();
-  auto max_ = ranges::back(r|ranges::view::bounded).temperature();  
-  if ( not (min_ < temperature && temperature < max_) ){    
-    njoy::Log::error( "Could not find temperature in range" );
-    throw std::domain_error("Could not find temperature in range");      
-  }      
-  auto value = temperature;
-  auto it = ranges::lower_bound(*this, value, std::less<>{},
-				&StoppingPower::temperature);
 
-  int distance = ranges::distance(this->begin(), it);
-  if( (*it).temperature() != value) { distance -= nDensities; }
+auto floor(TempT temperature) const {
+  auto range = static_cast<const Range&>( *this );
+  auto variesWithTemp = range | ranges::view::stride( this->nDensities );
+
+  {
+    const auto last = this->nTemperatures - 1;   
+    auto it = variesWithTemp.begin();
+    decltype(auto) front = it[0];
+    decltype(auto) back = it[last];
+
+    const auto min = front.temperature();
+    const auto max = back.temperature();    
+    const auto inbounds = ( min <= temperature ) and ( temperature <= max ); 
+    if ( not inbounds ){    
+      njoy::Log::error( "Could not find temperature in range" );
+      njoy::Log::info( "The temperature in question is {}", temperature);
+      njoy::Log::info( "The temperature range is ({},{})", min, max);            
+      throw std::domain_error("Could not find temperature in range");
+    }
+  }
+  
+  auto it = ranges::lower_bound( variesWithTemp,
+				 temperature,
+				 std::less<void>{},
+				 &StoppingPower::temperature );
+
+  const bool match = (*it).temperature() == temperature;
+  it = ranges::prev(it, not match);
+  
+  std::size_t distance = ranges::distance( range.begin(), it.base() );
+
   auto result =
-    *this | ranges::view::slice(distance, distance+nDensities);
-  auto density = [](const StoppingPower& stoppingPower){
+    range | ranges::view::slice( distance, distance + this->nDensities );
+
+  auto projection = [](auto&& stoppingPower){
     return stoppingPower.density();
-  };        
-  using Projection = decltype(density);
-  return S1<decltype(result), DenT, Projection>{density, std::move(result)};
-}  
+  };
+  
+  return S1<decltype(result), DenT, decltype(projection)>
+    {this->nDensities, projection, std::move(result)};
+}

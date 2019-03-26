@@ -5,8 +5,9 @@ class CRTP{
   static constexpr auto cm = dimwits::centi(dimwits::meter);
   static constexpr auto cc = cm*cm*cm;  
   static constexpr auto mev = dimwits::mega(dimwits::electronVolt);
-  using DenT = decltype(1.0/cc);
-  using TempT = decltype(1.0*mev);
+
+  using DenT = decltype( 1.0 / cc );
+  using TempT = decltype( 1.0 * mev );
 
   //#include "ACEtk/interpretation/DEDX1/CRTP/src/outOfBounds.hpp"
   #include "ACEtk/interpretation/DEDX1/CRTP/src/S0.hpp"

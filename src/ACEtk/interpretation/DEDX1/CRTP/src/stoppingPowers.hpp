@@ -2,20 +2,24 @@ template<typename... T>
 static void f(T...){std::puts(__PRETTY_FUNCTION__);}
 
 auto stoppingPowers() const {
-  auto logStoppingPowerRanges = [self = this]{
+  // lift into protected method
+  auto logStoppingPowerRanges = [&self = *this]{
+    const auto& derived = static_cast<const Derived&>( self );
+    const auto& table = self.table.get();
+    
+    const auto start = table.data.JXS( derived.startOfStoppingPower() );
     const auto length =
-    self->numEnergies() * self->numDensities() * self->numTemperatures();
-    const auto index_to_start =
-    static_cast<const Derived&>(*self).startOfStoppingPower();
-    const auto start = self->table.get().data.JXS( index_to_start );
+      self.numEnergies() * self.numDensities() * self.numTemperatures();
 
-    return self->table.get().data.XSS( start, length )
-    | ranges::view::chunk(self->numEnergies());
+    return
+      table.data.XSS( start, length )
+      | ranges::view::chunk( self.numEnergies() );
   }();
 
   using LogEnergies = decltype(this->logEnergies());    
   using LogValues = std::decay_t<decltype(logStoppingPowerRanges.front())>;
 
+  // lift into protected class 
   class StoppingPower {
     double logTemperature_;
     double logDensity_;
@@ -54,5 +58,7 @@ auto stoppingPowers() const {
 						   densAndTemps,
 						   logStoppingPowerRanges);
   
-  return this->makeS0(this->numDensities(), std::move(stoppingPowerRange));
+  return this->makeS0( this->numDensities(),
+		       this->numTemperatures(),
+		       std::move(stoppingPowerRange) );
 }
