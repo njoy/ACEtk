@@ -1,4 +1,8 @@
-  Data() { };
+  Data():
+    jxs( decltype( jxs ){} ),
+    nxs( decltype( nxs ){} ),
+    izaw( decltype( izaw ){} )
+  { };
   Data( const decltype(izaw)& izaw_,
         const decltype(nxs)& nxs_,
         const decltype(jxs)& jxs_,
