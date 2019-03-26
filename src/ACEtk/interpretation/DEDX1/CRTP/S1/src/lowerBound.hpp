@@ -9,4 +9,3 @@ auto lowerBound(const SubRange& range,
   return
     ranges::lower_bound( range, parameter, std::less<void>{}, projection );
 }
-  
