@@ -20,9 +20,8 @@ public:
 	    "densities by the number of temperatures" );
   }
   
-  #include "ACEtk/interpretation/DEDX1/CRTP/src/S1.hpp"  
-  #include "ACEtk/interpretation/DEDX1/CRTP/src/S0/src/floor.hpp"
-  #include "ACEtk/interpretation/DEDX1/CRTP/src/S0/src/ceil.hpp"    
+  #include "ACEtk/interpretation/DEDX1/CRTP/S0/src/floor.hpp"
+  #include "ACEtk/interpretation/DEDX1/CRTP/S0/src/ceil.hpp"    
 
 };
 

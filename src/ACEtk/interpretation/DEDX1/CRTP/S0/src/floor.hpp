@@ -6,16 +6,9 @@ auto floor(DenT density) const {
   {  
     const auto min = variesWithDensity.front().density();
     const auto max = variesWithDensity.back().density();
-    const auto inbounds = ( min <= density ) and ( density <= max ); 
-
-    if ( not inbounds ){    
-      njoy::Log::error( "Could not find density in range" );
-      njoy::Log::info( "The density in question is {}", density);
-      njoy::Log::info( "The density range is ({},{})", min, max);                  
-      throw std::domain_error("Could not find density in range");
-    }
+    const bool ob = outOfBounds(density, min, max);
   }
-
+  
   auto it =
     ranges::lower_bound( variesWithDensity,
 			 density,
@@ -51,16 +44,9 @@ auto floor(TempT temperature) const {
     auto it = variesWithTemp.begin();
     decltype(auto) front = it[0];
     decltype(auto) back = it[last];
-
     const auto min = front.temperature();
     const auto max = back.temperature();    
-    const auto inbounds = ( min <= temperature ) and ( temperature <= max ); 
-    if ( not inbounds ){    
-      njoy::Log::error( "Could not find temperature in range" );
-      njoy::Log::info( "The temperature in question is {}", temperature);
-      njoy::Log::info( "The temperature range is ({},{})", min, max);            
-      throw std::domain_error("Could not find temperature in range");
-    }
+    const bool ob = outOfBounds(temperature, min, max);
   }
   
   auto it = ranges::lower_bound( variesWithTemp,
