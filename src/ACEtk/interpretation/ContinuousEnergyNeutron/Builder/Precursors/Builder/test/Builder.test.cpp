@@ -6,6 +6,28 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
+template< typename B >
+void addEnergyDistribution( B& builder ){
+  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > schemes{ 2, 1 };
+  std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+  std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
+
+  std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11 };
+  for( auto LAW : LAWS ){
+    auto ED = builder.energyDistribution();
+    ED.boundaries( njoy::utility::copy( boundaries ) )
+      .schemes( njoy::utility::copy( schemes ) )
+      .energies( njoy::utility::copy( energies ) )
+      .probabilities( njoy::utility::copy( probabilities ) )
+      .levelScattering()
+        .atomicWeightRatio( 235.98 )
+        .QValue( 2.765 )
+      .add(); // levelScattering
+    ED.add();
+  }
+}
+
 SCENARIO( "Testing FissionMultiplicity::Precursors::Builder" ){
 
   ContinuousEnergyNeutron::Builder CENBuilder{};
@@ -27,7 +49,7 @@ SCENARIO( "Testing FissionMultiplicity::Precursors::Builder" ){
     tb.energies( njoy::utility::copy( energies ) )
       .probabilities( njoy::utility::copy( pdf ) )
       .decayConstant( l );
-
+    addEnergyDistribution( tb );
 
     auto pre = tb.construct();
     THEN( "the values can be verified" ){

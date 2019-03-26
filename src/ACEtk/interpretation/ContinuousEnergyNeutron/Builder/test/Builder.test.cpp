@@ -41,6 +41,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
       std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
       std::vector< double > coefficients{ 1.0, 2.0, 5.0, 6.0 };
+      std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
       { // prompt
         nc.fissionMultiplicity( "prompt" )
            .polynomial()
@@ -60,6 +61,14 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .energies( njoy::utility::copy( energies ) )
             .probabilities( njoy::utility::copy( coefficients ) )
             .decayConstant( 1.5E-4 )
+            .energyDistribution()
+              .energies( njoy::utility::copy( energies ) )
+              .probabilities( njoy::utility::copy( probabilities ) )
+              .levelScattering()
+                .atomicWeightRatio( 235.98 )
+                .QValue( 2.765 )
+              .add() // levelScattering
+            .add() // energyDistribution
           .add(); // precursors
       }
     }
