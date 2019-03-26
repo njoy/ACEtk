@@ -19,7 +19,8 @@ public:
 	    "Size of stopping power range is not equal to the number of "
 	    "densities by the number of temperatures" );
   }
-  
+
+  #include "ACEtk/interpretation/DEDX1/CRTP/S0/src/lowerBound.hpp"  
   #include "ACEtk/interpretation/DEDX1/CRTP/S0/src/floor.hpp"
   #include "ACEtk/interpretation/DEDX1/CRTP/S0/src/ceil.hpp"    
 

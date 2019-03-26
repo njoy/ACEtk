@@ -1,37 +1,12 @@
 auto floor(DenT density) const {
   auto range = static_cast<const Range&>( *this );
-  auto variesWithDensity =
-    range | ranges::view::slice( std::size_t(0), this->nDensities );
+
+  auto incrementIfMatch = [=](auto&& it){
+    const bool match = (*it).density() == density;
+    return ranges::prev(it, not match);
+  };
   
-  {  
-    const auto min = variesWithDensity.front().density();
-    const auto max = variesWithDensity.back().density();
-    const bool ob = outOfBounds(density, min, max);
-  }
-  
-  auto it =
-    ranges::lower_bound( variesWithDensity,
-			 density,
-			 std::less<void>{},
-			 &StoppingPower::density );
-
-  const bool match = (*it).density() == density;
-  it = ranges::prev(it, not match);
-  const auto distance = ranges::distance( variesWithDensity.begin(), it );
-
-  auto result =
-    range
-    | ranges::view::drop_exactly( distance )
-    | ranges::view::stride( this->nDensities );
-
-  auto projection =
-    [](auto&& stoppingPower){ return stoppingPower.temperature(); };
-
-  using SubTable = S1<decltype(result), TempT, decltype(projection)>;
-
-  const auto nTemperatures = ranges::size( range ) / this->nDensities;
-
-  return SubTable{nTemperatures, projection, std::move(result)};
+  return this->lowerBound(range, density, incrementIfMatch);
 }
 
 
