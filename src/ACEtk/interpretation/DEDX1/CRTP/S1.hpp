@@ -20,11 +20,7 @@ public:
       decltype(auto) back = it[this->size_ - 1];
       const auto min = projection(front);
       const auto max = projection(back);
-      const auto inbounds = (min <= parameter) and (parameter <= max);
-      if ( not inbounds ){
-	njoy::Log::error( "Could not find value in range" );
-	throw std::domain_error("Could not find value in range");      
-      } 
+      const bool ob = outOfBounds(parameter, min, max);
     }
     
     const auto it = ranges::lower_bound(range, parameter, std::less<void>{}, projection);
@@ -41,12 +37,8 @@ public:
       decltype(auto) front = it[0];
       decltype(auto) back = it[this->size_ - 1];
       const auto min = projection(front);
-      const auto max = projection(back);      
-      const auto inbounds = (min <= parameter) and (parameter <= max);
-      if ( not inbounds ){
-	njoy::Log::error( "Could not find value in range" );
-	throw std::domain_error("Could not find value in range");      
-      } 
+      const auto max = projection(back);
+      const bool ob = outOfBounds(parameter, min, max);      
     }
 
     return *(ranges::lower_bound(range, parameter, std::less<void>{}, projection));
