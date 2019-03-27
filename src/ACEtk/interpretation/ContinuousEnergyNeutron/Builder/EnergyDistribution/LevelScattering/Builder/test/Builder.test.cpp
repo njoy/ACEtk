@@ -30,6 +30,17 @@ SCENARIO( "Testing EnergyDistribtion::LevelScattering::Builder" ){
     THEN( "the values of the distribution can be checked" ){
       CHECK( awr == distribution.atomicWeightRatio );
       CHECK( QValue == distribution.QValue );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat( 
+          ranges::view::single( QValue ),
+          ranges::view::single( awr )
+        );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN
   GIVEN( "invalid inputs" ){

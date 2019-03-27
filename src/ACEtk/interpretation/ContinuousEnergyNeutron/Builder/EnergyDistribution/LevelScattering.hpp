@@ -3,4 +3,9 @@ struct LevelScattering {
 
   double atomicWeightRatio;
   double QValue;
+
+  void ACEify( Table::Data& tData ){
+    tData.XSS().push_back( QValue );
+    tData.XSS().push_back( atomicWeightRatio );
+  }
 };
