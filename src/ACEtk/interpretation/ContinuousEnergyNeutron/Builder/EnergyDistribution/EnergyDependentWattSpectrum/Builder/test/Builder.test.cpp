@@ -62,6 +62,29 @@ SCENARIO( "Testing EnergyDistribtion::EnergyDependentWattSpectrum::Builder" ){
       CHECK( ranges::equal( b, bTabulated.y ) );
 
       CHECK( restrictionEnergy == distribution.restrictionEnergy );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( aBoundaries.size() ),
+            aBoundaries,
+            aSchemes,
+            ranges::view::single( aEnergies.size() ),
+            aEnergies,
+            a,
+            ranges::view::single( bBoundaries.size() ),
+            bBoundaries,
+            bSchemes,
+            ranges::view::single( bEnergies.size() ),
+            bEnergies,
+            b,
+            ranges::view::single( restrictionEnergy )
+          );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){

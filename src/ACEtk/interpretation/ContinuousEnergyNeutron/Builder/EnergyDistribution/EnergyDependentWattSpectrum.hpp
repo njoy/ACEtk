@@ -7,4 +7,5 @@ struct EnergyDependentWattSpectrum {
   double restrictionEnergy;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum/src/ACEify.hpp"
 };
