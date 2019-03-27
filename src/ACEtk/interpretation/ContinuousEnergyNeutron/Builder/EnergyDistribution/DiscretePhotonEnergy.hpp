@@ -3,4 +3,9 @@ struct DiscretePhotonEnergy {
 
   int primaryFlag;
   double energy;
+
+  void ACEify( Table::Data& tData ){
+    tData.XSS().push_back( primaryFlag );
+    tData.XSS().push_back( energy );
+  }
 };

@@ -34,6 +34,17 @@ SCENARIO( "Testing EnergyDistribtion::DiscretePhotonEnergy::Builder" ){
     THEN( "the values of the distribution can be checked" ){
       CHECK( energy ==  distribution.energy );
       CHECK( primaryFlag == distribution.primaryFlag );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat( 
+          ranges::view::single( primaryFlag ),
+          ranges::view::single( energy )
+        );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN
 
