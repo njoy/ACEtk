@@ -53,6 +53,22 @@ SCENARIO(
       CHECK( ranges::equal( theta, tab.y ) );
       CHECK( U == distribution.restrictionEnergy );
 
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( boundaries.size() ),
+            boundaries,
+            schemes,
+            ranges::view::single( energies.size() ),
+            energies,
+            theta,
+            ranges::view::single( U )
+          );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN
   GIVEN( "invalid inputs" ){
