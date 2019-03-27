@@ -51,6 +51,21 @@ SCENARIO( "Testing EnergyDistribtion::TabularEquiprobableBins::Builder" ){
       auto y = distribution.y;
       CHECK( eout_v == y[0] );
       CHECK( ranges::equal( eout_a, y[1] ) );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( 2 ), // N_R
+            boundaries, // NBT
+            schemes, // INT
+            ranges::view::single( energies.size() ), // N_E
+            energies, // E
+            eout_v, eout_a, eout_a, eout_a
+          );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN
 

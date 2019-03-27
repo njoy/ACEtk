@@ -1,3 +1,11 @@
+template< typename U=T,
+          utility::Require< true, details::verify::IsPositive, U > = true,
+          typename R >
+void ACEify_y( Table::Data& tData, R... ){
+
+  tData.XSS() |= ranges::action::push_back( this->y );
+}
+
 template< typename U=T, 
           typename = utility::void_t< 
             decltype( 
@@ -6,7 +14,7 @@ template< typename U=T,
               >().ACEify()
             )
           >
->
+        >
 void ACEify_y( Table::Data& tData ){
   auto& xss = tData.XSS();
     xss |= ranges::view::for_each(

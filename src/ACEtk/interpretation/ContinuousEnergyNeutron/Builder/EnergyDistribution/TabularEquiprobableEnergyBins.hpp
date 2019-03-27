@@ -1,5 +1,6 @@
 struct TabularEquiprobableEnergyBins: 
   public Tabulated< details::verify::Positive< std::vector< double > > > {
+
   using Parent = Tabulated< details::verify::Positive< std::vector< double > > >;
 
   template< typename... Ts,
