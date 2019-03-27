@@ -5,4 +5,5 @@ struct ContinuousTabularDistribution {
   Tabulated< Data > tabulated;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/src/ACEify.hpp"
 };

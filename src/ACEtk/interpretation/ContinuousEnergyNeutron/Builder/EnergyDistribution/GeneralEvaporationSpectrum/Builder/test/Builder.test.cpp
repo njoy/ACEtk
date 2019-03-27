@@ -42,6 +42,22 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
       CHECK( ranges::equal( theta, tab.y ) );
       CHECK( ranges::equal( X, distribution.x ) );
 
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( boundaries.size() ),
+            boundaries,
+            schemes,
+            ranges::view::single( energies.size() ),
+            energies,
+            theta,
+            X
+          );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){

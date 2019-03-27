@@ -74,6 +74,32 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
         CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
       }
 
+      int N_R = boundaries.size();
+      int N_E = energies.size();
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( N_R ),
+            boundaries,
+            schemes,
+            ranges::view::single( N_E ),
+            energies,
+            ranges::view::single( 11 ),
+            ranges::view::single( 19 ),
+            // distributionData 1
+            ranges::view::single( INTT[ 0 ] ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf,
+            // distributionData 2
+            ranges::view::single( INTT[ 1 ] ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf
+          );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
     
   } // GIVEN

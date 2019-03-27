@@ -7,4 +7,5 @@ struct Data{
   details::verify::CDF< std::vector< double > > cdf;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/src/ACEify.hpp"
 };

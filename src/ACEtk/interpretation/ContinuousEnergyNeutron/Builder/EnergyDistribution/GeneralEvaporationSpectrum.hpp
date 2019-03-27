@@ -4,4 +4,5 @@ struct GeneralEvaporationSpectrum {
   std::vector< double > x;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/src/ACEify.hpp"
 };
