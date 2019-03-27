@@ -37,6 +37,14 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearFunctions::Data::Builder" ){
       CHECK( ranges::equal( P, distribution.P ) );
       CHECK( ranges::equal( T, distribution.T ) );
       CHECK( ranges::equal( C, distribution.C ) );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat( P, T, C );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
 } // SCENARIO

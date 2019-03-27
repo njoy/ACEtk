@@ -52,6 +52,22 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearFunctions::Builder" ){
 
       auto y = tab.y;
       CHECK( 2 == y.size() );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        // auto aceified = ranges::view::concat(
+        //   ranges::view::single( boundaries.size() ),
+        //   boundaries,
+        //   schemes,
+        //   ranges::view::single( energies.size() ),
+        //   P, T, C,
+        //   P, T, C
+        // );
+
+        // Table::Data data{};
+        // distribution.ACEify( data );
+
+        // CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
 
   } // GIVEN valid
