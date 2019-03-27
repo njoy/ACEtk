@@ -1,6 +1,6 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
-struct Positive : Range{
+struct Positive : public Range{
 protected:
 #include "ACEtk/details/verify/Positive/src/check.hpp"
 
