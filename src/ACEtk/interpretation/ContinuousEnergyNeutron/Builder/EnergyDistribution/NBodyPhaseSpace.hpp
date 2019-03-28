@@ -3,4 +3,9 @@ struct NBodyPhaseSpace {
 
   int numberBodies;
   double totalMassRatio;
+
+  void ACEify( Table::Data& tData ){
+    tData.XSS().push_back( this->numberBodies );
+    tData.XSS().push_back( this->totalMassRatio );
+  }
 };

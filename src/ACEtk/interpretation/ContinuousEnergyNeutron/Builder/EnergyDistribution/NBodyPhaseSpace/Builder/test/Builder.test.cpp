@@ -30,6 +30,17 @@ SCENARIO( "Testing EnergyDistribtion::NBodyPhaseSpace::Builder" ){
     THEN( "the values of the distribution can be checked" ){
       CHECK( N == distribution.numberBodies );
       CHECK( A == distribution.totalMassRatio );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat( 
+          ranges::view::single( N ),
+          ranges::view::single( A )
+        );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){
