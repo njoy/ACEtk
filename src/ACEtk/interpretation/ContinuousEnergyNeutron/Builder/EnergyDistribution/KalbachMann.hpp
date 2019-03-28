@@ -4,4 +4,5 @@ struct KalbachMann {
   Tabulated< Data > tabulated;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann/src/ACEify.hpp"
 };

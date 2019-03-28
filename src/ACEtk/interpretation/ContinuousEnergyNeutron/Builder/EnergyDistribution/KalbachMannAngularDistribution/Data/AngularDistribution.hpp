@@ -6,4 +6,5 @@ struct AngularDistribution {
   details::verify::CDF< std::vector< double > > cdf;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Data/AngularDistribution/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Data/AngularDistribution/src/ACEify.hpp"
 };

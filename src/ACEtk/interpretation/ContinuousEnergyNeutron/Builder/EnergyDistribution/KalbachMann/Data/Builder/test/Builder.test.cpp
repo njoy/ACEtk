@@ -45,6 +45,20 @@ SCENARIO(
       CHECK( ranges::equal( cdf, distribution.cdf ) );
       CHECK( ranges::equal( R, distribution.precompoundFraction ) );
       CHECK( ranges::equal( A, distribution.angularDistributionSlope ) );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat( 
+          ranges::view::single( INTT ),
+          ranges::view::single( ene.size() ),
+          ene, pdf, cdf,
+          R, A
+        );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){

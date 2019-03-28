@@ -50,7 +50,6 @@ SCENARIO(
            .cdf( njoy::utility::copy( acdf ) )
          .add(); // angularDistribution
 
-
     auto distribution = dataB.construct();
 
     THEN( "the values can be verified" ){
@@ -61,6 +60,28 @@ SCENARIO(
 
       CHECK( 2 == distribution.angularDistributions.size() );
 
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+          ranges::view::single( INTT ),
+          ranges::view::single( ene.size() ),
+          ene, pdf, cdf,
+          ranges::view::single( 11 ),
+          ranges::view::single( 22 ),
+          // angularDistribution
+          ranges::view::single( JJ ),
+          ranges::view::single( cosines.size() ),
+          cosines, apdf, acdf,
+          // angularDistribution
+          ranges::view::single( JJ ),
+          ranges::view::single( cosines.size() ),
+          cosines, apdf, acdf
+        );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){

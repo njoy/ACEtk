@@ -40,6 +40,19 @@ SCENARIO(
       CHECK( ranges::equal( cosines, distribution.cosineGrid ) );
       CHECK( ranges::equal( pdf, distribution.pdf ) );
       CHECK( ranges::equal( cdf, distribution.cdf ) );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat( 
+          ranges::view::single( JJ ),
+          ranges::view::single( cosines.size() ),
+          cosines, pdf, cdf
+        );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){

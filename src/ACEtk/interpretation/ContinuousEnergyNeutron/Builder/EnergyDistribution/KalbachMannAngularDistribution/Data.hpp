@@ -9,4 +9,5 @@ struct Data {
   std::vector< AngularDistribution > angularDistributions;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Data/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Data/src/ACEify.hpp"
 };

@@ -34,6 +34,6 @@ void ACEify( Table::Data& tData ){
     auto sizeDiff = K - LDAT;
     xss[ L + i ] = sizeDiff + 1;
 
-    tabulated.y[ i ].ACEify( tData );
+    tabulated.y[ i ].ACEify( tData, LDAT );
   }
 }

@@ -8,4 +8,5 @@ struct Data {
   std::vector< double > angularDistributionSlope;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann/Data/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann/Data/src/ACEify.hpp"
 };

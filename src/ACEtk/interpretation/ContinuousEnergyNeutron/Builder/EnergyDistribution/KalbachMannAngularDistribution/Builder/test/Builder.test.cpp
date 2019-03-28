@@ -103,6 +103,52 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
         CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
       }
 
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( boundaries.size() ),
+            boundaries, schemes,
+            ranges::view::single( energies.size() ),
+            energies,
+            ranges::view::single( 11 ),
+            ranges::view::single( 43 ),
+            // distributionData---size 32
+            ranges::view::single( INTT[ 0 ] ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf,
+            ranges::view::single( 21 ),
+            ranges::view::single( 32 ),
+              // angularDistrubtion---size 11
+              ranges::view::single( JJ ),
+              ranges::view::single( cosines.size() ),
+              cosines, apdf, acdf,
+              // angularDistrubtion---size 11
+              ranges::view::single( JJ ),
+              ranges::view::single( cosines.size() ),
+              cosines, apdf, acdf,
+            // distributionData---size32
+            ranges::view::single( INTT[ 1 ] ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf,
+            ranges::view::single( 53 ),
+            ranges::view::single( 64 ),
+              // angularDistrubtion---size 11
+              ranges::view::single( JJ ),
+              ranges::view::single( cosines.size() ),
+              cosines, apdf, acdf,
+              // angularDistrubtion---size 11
+              ranges::view::single( JJ ),
+              ranges::view::single( cosines.size() ),
+              cosines, apdf, acdf
+          );
+
+        Table::Data data{};
+        distribution.ACEify( data );
+
+        njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
+        njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){
