@@ -38,7 +38,7 @@ SCENARIO( "Testing EnergyDistribtion::NBodyPhaseSpace::Builder" ){
         );
 
         Table::Data data{};
-        distribution.ACEify( data );
+        distribution.ACEify( data, 0 );
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }
     }

@@ -8,7 +8,7 @@ ProbabilityTable construct(){
   }
   else{
     this->fissionXS_ = ranges::view::repeat_n( 
-        0.0, this->incidentEnergies_.value().size() );
+        0.0, this->incidentEnergies_.value().size() ) | ranges::to_vector;
   }
   equalSize( this->captureXS_, "capture cross section" );
   if( this->heating_ ){
@@ -16,7 +16,7 @@ ProbabilityTable construct(){
   }
   else{
     this->heating_ = ranges::view::repeat_n( 
-        0.0, this->incidentEnergies_.value().size() );
+        0.0, this->incidentEnergies_.value().size() ) | ranges::to_vector;
   }
 
   return ProbabilityTable{

@@ -1,6 +1,5 @@
-void ACEify( Table::Data& tData ){
+void ACEify( Table::Data& tData, int jxsRelative ){
   auto& xss = tData.XSS();
-  auto LDAT = xss.size();
 
   if( tabulated.parameters ){
     auto p = tabulated.parameters.value();
@@ -31,9 +30,9 @@ void ACEify( Table::Data& tData ){
   for( size_t i = 0; i < ySize; i++ ){
     // Set locator value
     auto K = xss.size();
-    auto sizeDiff = K - LDAT;
+    auto sizeDiff = K - jxsRelative;
     xss[ L + i ] = sizeDiff + 1;
 
-    tabulated.y[ i ].ACEify( tData, LDAT );
+    tabulated.y[ i ].ACEify( tData, jxsRelative );
   }
 }

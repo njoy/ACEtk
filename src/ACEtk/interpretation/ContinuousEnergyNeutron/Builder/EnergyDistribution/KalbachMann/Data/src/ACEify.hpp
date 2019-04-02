@@ -1,4 +1,4 @@
-void ACEify( Table::Data& tData){
+void ACEify( Table::Data& tData, int ){
   tData.XSS()
     |= ranges::action::push_back(
       ranges::view::concat(

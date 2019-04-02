@@ -1,6 +1,5 @@
-void ACEify( Table::Data& tData, size_t LDAT ){
+void ACEify( Table::Data& tData, int jxsRelative ){
   auto& xss = tData.XSS();
-  // auto LDAT = xss.size();
 
   auto N_p = angularDistributions.size();
   xss |= ranges::action::push_back( 
@@ -17,10 +16,10 @@ void ACEify( Table::Data& tData, size_t LDAT ){
   for( size_t i = 0; i < N_p; i++ ){
     // Set locator value
     auto K = xss.size();
-    auto sizeDiff = K - LDAT;
+    auto sizeDiff = K - jxsRelative;
     xss[ L + i ] = sizeDiff + 1;
 
-    angularDistributions[ i ].ACEify( tData );
+    angularDistributions[ i ].ACEify( tData, jxsRelative );
   }
 }
 

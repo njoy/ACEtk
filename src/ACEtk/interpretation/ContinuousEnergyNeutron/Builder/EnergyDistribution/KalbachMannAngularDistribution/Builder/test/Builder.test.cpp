@@ -142,7 +142,7 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
           );
 
         Table::Data data{};
-        distribution.ACEify( data );
+        distribution.ACEify( data, 0 );
 
         njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
         njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
