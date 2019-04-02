@@ -58,6 +58,35 @@ SCENARIO(
             std::to_string (INTMU ) ){
         CHECK( INTMU == distribution.interpolationParameter );
         CHECK( ranges::equal( cosines, distribution.cosines ) );
+
+        AND_THEN( "the contents can be ACE-ified" ){
+          auto aceified = ranges::view::concat( 
+            ranges::view::single( INTMU ),
+            ranges::view::single( cosines.size() ),
+            cosines,
+            ranges::view::single( 9 ),
+            ranges::view::single( 17 ),
+            ranges::view::single( 25 ),
+            // energyDistribution---size 8
+            ranges::view::single( INTEPs[ 0 ] ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf,
+            // energyDistribution---size 8
+            ranges::view::single( INTEPs[ 1 ] ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf,
+            // energyDistribution---size 8
+            ranges::view::single( INTEPs[ 0 ] ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf
+
+          );
+
+          Table::Data data{};
+          distribution.ACEify( data, 0 );
+
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        }
       }
     }
 

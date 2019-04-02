@@ -90,6 +90,60 @@ SCENARIO( "Testing EnergyDistribtion::LaboratoryAngleEnergy::Builder" ){
 
       auto y = tab.y;
       CHECK( 2 == y.size() );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( boundaries.size() ),
+            boundaries, schemes,
+            ranges::view::single( energies.size() ),
+            energies,
+            ranges::view::single( 11 ),
+            ranges::view::single( 43 ),
+            // angularDistribution---size=24
+            ranges::view::single( INTMUs[ 0 ] ),
+            ranges::view::single( cosines.size() ),
+            cosines,
+            ranges::view::single( 19 ),
+            ranges::view::single( 27 ),
+            ranges::view::single( 35 ),
+              // energyDistribution---size 8
+              ranges::view::single( INTEPs[ 0 ] ),
+              ranges::view::single( ene.size() ),
+              ene, pdf, cdf,
+              // energyDistribution---size 8
+              ranges::view::single( INTEPs[ 1 ] ),
+              ranges::view::single( ene.size() ),
+              ene, pdf, cdf,
+              // energyDistribution---size 8
+              ranges::view::single( INTEPs[ 0 ] ),
+              ranges::view::single( ene.size() ),
+              ene, pdf, cdf,
+            // angularDistribution---size=24
+            ranges::view::single( INTMUs[ 1 ] ),
+            ranges::view::single( cosines.size() ),
+            cosines,
+            ranges::view::single( 51 ),
+            ranges::view::single( 59 ),
+            ranges::view::single( 67 ),
+              // energyDistribution---size 8
+              ranges::view::single( INTEPs[ 0 ] ),
+              ranges::view::single( ene.size() ),
+              ene, pdf, cdf,
+              // energyDistribution---size 8
+              ranges::view::single( INTEPs[ 1 ] ),
+              ranges::view::single( ene.size() ),
+              ene, pdf, cdf,
+              // energyDistribution---size 8
+              ranges::view::single( INTEPs[ 0 ] ),
+              ranges::view::single( ene.size() ),
+              ene, pdf, cdf
+          );
+
+        Table::Data data{};
+        distribution.ACEify( data, 0 );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){

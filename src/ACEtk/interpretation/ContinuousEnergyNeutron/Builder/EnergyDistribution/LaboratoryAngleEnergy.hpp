@@ -4,4 +4,5 @@ struct LaboratoryAngleEnergy {
   Tabulated< AngularDistribution > tabulated;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy/src/ACEify.hpp"
 };

@@ -43,6 +43,19 @@ SCENARIO(
         CHECK( ranges::equal( ene, distribution.energies ) );
         CHECK( ranges::equal( pdf, distribution.pdf ) );
         CHECK( ranges::equal( cdf, distribution.cdf ) );
+
+        AND_THEN( "the contents can be ACE-ified" ){
+          auto aceified = ranges::view::concat( 
+            ranges::view::single( INTEP ),
+            ranges::view::single( ene.size() ),
+            ene, pdf, cdf
+          );
+
+          Table::Data data{};
+          distribution.ACEify( data, 0 );
+
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        }
       }
     }
   } // GIVEN valid

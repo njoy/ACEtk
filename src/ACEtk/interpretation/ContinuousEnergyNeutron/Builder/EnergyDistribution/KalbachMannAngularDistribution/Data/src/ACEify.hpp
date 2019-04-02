@@ -13,9 +13,10 @@ void ACEify( Table::Data& tData, int jxsRelative ){
   auto L = xss.size();
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, N_p ));
 
+  auto K = xss.size();
   for( size_t i = 0; i < N_p; i++ ){
     // Set locator value
-    auto K = xss.size();
+    K = xss.size();
     auto sizeDiff = K - jxsRelative;
     xss[ L + i ] = sizeDiff + 1;
 
