@@ -45,7 +45,7 @@ public:
   SimpleMaxwellianFissionSpectrum::Builder< Builder >
   simpleMaxwellianFissionSpectrum( ){ return { *this }; }
   // LAW=9
-  SimpleMaxwellianFissionSpectrum::Builder< Builder >
+  EvaporationSpectrum::Builder< Builder >
   evaporationSpectrum( ){ return { *this }; }
   // LAW=11
   EnergyDependentWattSpectrum::Builder< Builder >

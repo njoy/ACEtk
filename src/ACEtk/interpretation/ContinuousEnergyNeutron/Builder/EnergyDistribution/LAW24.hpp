@@ -2,6 +2,8 @@ struct LAW24:
   public Tabulated< details::verify::Positive< std::vector< double > > > {
   using Parent = Tabulated< details::verify::Positive< std::vector< double > > >;
 
+  using Tab = Tabulated< details::verify::Positive< std::vector< double > > >;
+
   template< typename... Ts,
     utility::Require< true, std::is_constructible, Parent, Ts... > = true 
   >
@@ -10,4 +12,8 @@ struct LAW24:
   { }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder.hpp"
+
+  void ACEify( Table::Data& tData, int ){
+    Tab::ACEify( tData );
+  }
 };

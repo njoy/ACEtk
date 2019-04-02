@@ -3,7 +3,6 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/NeutronYieldReferenceFrame.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Factors.hpp"
 
-protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution.hpp"
@@ -14,6 +13,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp"
 
+protected:
   std::optional< Table::Header > header_;
   std::optional< Table::Data > tableData_;
 

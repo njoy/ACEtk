@@ -414,7 +414,11 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
             njoy::Log::info( "I don't know what to do with LAW={}", LAW );
         }
 
-        CHECK_NOTHROW( tb.construct() );
+        auto energyDistribution = tb.construct();
+        CHECK( LAW == 
+          ContinuousEnergyNeutron::Builder::EnergyDistribution::law2Int( 
+              energyDistribution.law )
+        );
 
       } // THEN a law can be given
     } // for LAW

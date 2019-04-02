@@ -42,4 +42,12 @@ struct EnergyDistribution{
   LAWS law;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Law2Int.hpp"
+
+  static int law2Int( LAWS& law ){
+    return std::visit( Law2Int(), law );
+  }
+
+  // #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ACEify.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/src/ACEify.hpp"
 };
