@@ -48,6 +48,5 @@ struct EnergyDistribution{
     return std::visit( Law2Int(), law );
   }
 
-  // #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ACEify.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/src/ACEify.hpp"
 };

@@ -420,6 +420,62 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
               energyDistribution.law )
         );
 
+        // We don't need to check every case
+        if( LAW == 4 ){
+
+          auto aceified = ranges::view::concat(
+            ranges::view::single( 0 ),                      // LNW_1
+            ranges::view::single( 4 ),                      // LAW_1
+            ranges::view::single( 18 ),                     // IDAT_1
+            // Energy distribution --- size 14
+            ranges::view::single( boundaries.size() ),      // N_R
+            boundaries, schemes,
+            ranges::view::single( energies.size() ),        // N_E
+            energies, probabilities, 
+            // LAW=4
+              ranges::view::single( 2 ),                    // N_R
+              boundaries, schemes,
+              ranges::view::single( 2 ),                    // N_E
+              // Energies
+              ranges::view::single( 1.0 ),
+              ranges::view::single( 2.0 ),
+              // Locators
+              ranges::view::single( 28 ),
+              ranges::view::single( 36 ),
+              // distribution -- size 8
+                ranges::view::single( 1 ),                    // INTT
+                ranges::view::single( 2 ),                    // N_p
+                // Energies
+                ranges::view::single( 1.0 ),
+                ranges::view::single( 2.0 ),
+                // PDF
+                ranges::view::single( 0.25 ),
+                ranges::view::single( 0.75 ),
+                // CDF
+                ranges::view::single( 0.25 ),
+                ranges::view::single( 1.0 ),
+              // distribution -- size 8
+                ranges::view::single( 2 ),                    // INTT
+                ranges::view::single( 2 ),                    // N_p
+                // Energies
+                ranges::view::single( 1.0 ),
+                ranges::view::single( 2.0 ),
+                // PDF
+                ranges::view::single( 0.25 ),
+                ranges::view::single( 0.75 ),
+                // CDF
+                ranges::view::single( 0.25 ),
+                ranges::view::single( 1.0 )
+
+          );
+
+          Table::Data data{};
+          data.XSS().push_back( 0 );
+          energyDistribution.ACEify( data, 0 );
+
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        }
+
       } // THEN a law can be given
     } // for LAW
   } // GIVEN
