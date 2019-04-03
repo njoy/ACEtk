@@ -1,5 +1,6 @@
 
 add_executable( ACEtk.interpretation.ContinuousEnergyNeutron.Builder.test
+                ACEifyEDs.test.cpp
                 Builder.test.cpp
                 FissionMultiplicity.test.cpp
                 GammaProduction.test.cpp

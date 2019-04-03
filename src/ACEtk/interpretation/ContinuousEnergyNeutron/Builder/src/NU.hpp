@@ -4,12 +4,14 @@ void NU(){
   auto foundTotal = (
       fissionMultiplicity_.find( "total" ) != fissionMultiplicity_.end() );
 
-  auto& xss = this->tableData_.value().XSS();
-  auto& jxs = this->tableData_.value().JXS();
+  auto& tData = this->tableData_.value();
+  auto& xss = tData.XSS();
+  auto& nxs = tData.NXS();
+  auto& jxs = tData.JXS();
 
   auto nuVisitor = [&](auto& nubar ) -> void
   {
-    nubar.ACEify( this->tableData_.value() );
+    nubar.ACEify( tData );
   };
 
   auto size = xss.size() + 1;
@@ -37,6 +39,31 @@ void NU(){
     jxs[ 1 ] = 0;
   }
 
-  if( not this->delayedPrecursors_.empty() ){
+  auto NPCR = this->delayedPrecursors_.size();
+  if( NPCR ){
+    nxs[ 7 ] = NPCR;
+    jxs[ 23 ] = xss.size() + 1;
+
+    // ACEify precursors
+    for( auto& pre : this->delayedPrecursors_ ){
+      pre.ACEify( tData );
+
+    }
+
+    // ACEify precursor energy distributions
+    auto LED = xss.size() + 1;
+    jxs[ 25 ] = LED;
+    // Precursor energy distribution locators
+    xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NPCR ) );
+    auto JED = xss.size() + 1;
+    jxs[ 26 ] = JED;
+
+    // Precursor energy distributions
+    auto EDs = this->delayedPrecursors_
+      | ranges::view::transform(
+        [](auto& dp ){ return dp.energyDistribution; }
+      );
+
+    this->ACEifyEDs( EDs, tData, LED, JED );
   }
 }
