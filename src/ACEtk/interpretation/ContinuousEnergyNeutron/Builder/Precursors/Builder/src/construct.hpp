@@ -1,9 +1,9 @@
 Precursors construct() {
   try{
     return Precursors{ 
-      decayConstant_.value(), 
+      std::move( decayConstant_.value() ),
       TabBuilder::construct(),
-      energyDistribution_.value()
+      std::move( energyDistribution_ )
     };
   } catch( std::bad_optional_access& b ){
     Log::error( "Some delayed Precursors component not built." );

@@ -8,7 +8,7 @@ private:
   std::optional< double > Q_;
   std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
   std::optional< AngularDistribution > angularDistribution_;
-  std::optional< EnergyDistribution > energyDistribution_;
+  std::vector< EnergyDistribution > energyDistribution_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"

@@ -11,5 +11,5 @@ struct Reaction{
   int neutronYield;
   ContinuousEnergyNeutron::Builder::CrossSection crossSection;
   std::optional< AngularDistribution > angularDistribution;
-  std::optional< EnergyDistribution > energyDistribution;
+  std::vector< EnergyDistribution > energyDistribution;
 };

@@ -57,6 +57,21 @@ SCENARIO( "Testing FissionMultiplicity::Precursors::Builder" ){
       CHECK( ranges::equal( energies, pre.data.x ) );
       CHECK( ranges::equal( pdf, pre.data.y ) );
       CHECK( l == pre.decayConstant );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        auto aceified = ranges::view::concat(
+            ranges::view::single( l ),
+            ranges::view::single( 0 ),
+            ranges::view::single( energies.size() ),
+            energies, pdf
+
+          );
+
+        Table::Data data{};
+        pre.ACEify( data );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){

@@ -4,7 +4,7 @@ class Builder: public Tabulated1D::Builder< Builder >{
 
   std::reference_wrapper< ParentBuilder > parent;
   std::optional< double > decayConstant_;
-  std::optional< EnergyDistribution > energyDistribution_;
+  std::vector< EnergyDistribution > energyDistribution_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Precursors/Builder/src/construct.hpp"
