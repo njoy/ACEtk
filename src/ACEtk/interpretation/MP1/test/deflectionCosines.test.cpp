@@ -11,6 +11,10 @@ SCENARIO("test interpretation::MP1::DiscreteData::deflectionCosines"){
     
     const auto mp1 = interpretation::MP1( table );
 
+    WHEN("querying for the target atomic number"){
+      REQUIRE( mp1.atomicNumber() == 1 );
+    }
+    
     WHEN("querying for the total xs for order 1"){
       const auto mu = mp1.discreteData( 1 ).deflectionCosines( ) | ranges::to_vector;
       REQUIRE( mu.size() == 287 );

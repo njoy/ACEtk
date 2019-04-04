@@ -35,6 +35,10 @@ SCENARIO("test interpretation::EL03"){
   GIVEN("An ACE Table for 1000.e03"){
     const auto el03 = interpretation::EL03( table );
 
+    WHEN("querying for the target atomic number"){
+      REQUIRE( el03.atomicNumber() == 1 );
+    }
+    
     WHEN("Querying for the energy grid in MeV,"
 	 "on which the radiative stopping interpolation are evaluated") {
       const auto trial = el03.radiativeStoppingPower().energyGrid(); 
