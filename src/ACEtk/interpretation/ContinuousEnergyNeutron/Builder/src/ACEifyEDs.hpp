@@ -19,8 +19,9 @@ void ACEifyEDs( Range& distributions,
   auto N = distributions.size();
   int LOCC{ 0 };
   for( size_t index = 0; index < N; index++ ){
-    LOCC = xss.size() - JED;
-    xss[ LED + index ] = LOCC;
+
+    LOCC = ( xss.size() + 1 ) - JED + 1;
+    xss[ LED + index - 1 ] = LOCC;
 
     auto ed = distributions[ index ];
     int LNW{ 0 };
@@ -29,11 +30,12 @@ void ACEifyEDs( Range& distributions,
       xss.push_back( 0 ); // LNW
       LNW = xss.size();
 
-      ed[ kndex ].ACEify( tData, JED );
+      ed[ kndex ].ACEify( tData, JED + LOCC - 1 );
 
       if( kndex != ( ed.size() - 1 ) ){
-        xss[ LNW ] = xss.size() + 1;
+        xss[ LNW - 1 ] = xss.size() - ( JED + LOCC - 1 );
       } // if
-    } // for
-  } // for
+    } // for kndex
+
+  } // for index
 }

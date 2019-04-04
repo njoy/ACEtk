@@ -9,7 +9,7 @@ class Builder: public Base::Builder< Builder< ParentBuilder >, ParentBuilder > {
 
 protected:
   LevelScattering construct(){
-    return { atomicWeightRatio_.value(), QValue_.value() };
+    return { QValue_.value(), atomicWeightRatio_.value() };
   }
 
 public:
