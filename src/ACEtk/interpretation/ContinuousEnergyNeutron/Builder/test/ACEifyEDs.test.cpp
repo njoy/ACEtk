@@ -145,8 +145,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
   }
   */
 
-  GIVEN( "real-world example" ){
-    // This comes from 8017.800nc
+  GIVEN( "real-world example: 8017.800nc" ){
 
     std::vector< std::vector< 
         ContinuousEnergyNeutron::Builder::EnergyDistribution > > EDs;
@@ -283,4 +282,119 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       CHECK( ranges::equal( aceified, data.XSS() ) );
     }
   }
+  GIVEN( "real-world example: 11022.800nc" ){
+      auto aceified = ranges::view::concat(
+        ranges::view::single( 1 ),          // LOCC_1 
+        ranges::view::single( 17 ),         // LOCC_2 
+        ranges::view::single( 35 ),         // LOCC_3 
+        ranges::view::single( 53 ),         // LOCC_4 
+        ranges::view::single( 64 ),         // LOCC_5 
+        ranges::view::single( 75 ),         // LOCC_6 
+        ranges::view::single( 86 ),         // LOCC_7 
+        ranges::view::single( 97 ),         // LOCC_8 
+        ranges::view::single( 108 ),        // LOCC_9 
+        ranges::view::single( 119 ),        // LOCC_10
+        ranges::view::single( 130 ),        // LOCC_11
+        ranges::view::single( 141 ),        // LOCC_12
+        ranges::view::single( 152 ),        // LOCC_13
+        ranges::view::single( 163 ),        // LOCC_14
+        ranges::view::single( 174 )         // LOCC_15
+
+      );
+
+    std::vector< std::vector< 
+        ContinuousEnergyNeutron::Builder::EnergyDistribution > > EDs;
+    std::vector< ContinuousEnergyNeutron::Builder::EnergyDistribution > inner;
+
+    TestBuilder tb{ parentBuilder };
+
+    { // First reaction
+      std::vector< double > energies{ 11.0696, 20.0 };
+      std::vector< double > probabilities{ 1.0, 1.0 };
+
+      aceified |= range::action::push_back(
+        ranges::view::concat(
+          ranges::view::single( 1 ),                        // LNW_1
+          ranges::view::single( 9 ),                        // LAW_1
+          ranges::view::single( 10 ),                       // IDAT_1
+          ranges::view::single( 0 ),                        // N_R
+          ranges::view::single( energies.size() )           // N_E
+          energies, probabilities
+        )
+      );
+    }
+
+    THEN( "the EnergyDistributions can be ACEified" ){
+
+      Table::Data data{};
+      data.XSS() |= ranges::action::push_back(
+        ranges::view::repeat_n( 0, 16 )
+      );
+      CENBuilder.ACEifyEDs( EDs, data, 1, 16 );
+      
+      CHECK( ranges::equal( aceified, data.XSS() ) );
+    }
+  }
 } // SCENARIO
+/* 11022.800nc
+                  17                  35                  53                  64
+                  75                  86                  97                 108
+                 119                 130                 141                 152
+                 163                 174                   0                   9
+                  10                   0                   2   1.10696000000E+01
+   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00                   0
+                   2   1.10696000000E+01   2.00000000000E+01   2.17669000000E+00
+   2.17669000000E+00   1.05840000000E+01                   0                   9
+                  26                   0                   2   1.10000000000E+01
+   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00                   1
+                   2                   5                   2   1.10000000000E+01
+   2.00000000000E+01   8.00000000000E-01   1.20000000000E+00   1.05180000000E+01
+                   0                   9                  44                   0
+                   2   7.00000000000E+00   2.00000000000E+01   1.00000000000E+00
+   1.00000000000E+00                   1                   2                   5
+                   2   7.00000000000E+00   2.00000000000E+01   9.00000000000E-01
+   1.10000000000E+00   6.69310000000E+00                   0                   3
+                  62                   0                   2   6.09736500000E-01
+   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00   6.09736400000E-01
+   9.14224600000E-01                   0                   3                  73
+                   0                   2   6.87130100000E-01   2.00000000000E+01
+   1.00000000000E+00   1.00000000000E+00   6.87130000000E-01   9.14224600000E-01
+                   0                   3                  84                   0
+                   2   9.31757000000E-01   2.00000000000E+01   1.00000000000E+00
+   1.00000000000E+00   9.31756700000E-01   9.14224600000E-01                   0
+                   3                  95                   0                   2
+   1.59807500000E+00   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00
+   1.59807400000E+00   9.14224600000E-01                   0                   3
+                 106                   0                   2   2.02583200000E+00
+   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00   2.02583100000E+00
+   9.14224600000E-01                   0                   3                 117
+                   0                   2   2.04152000000E+00   2.00000000000E+01
+   1.00000000000E+00   1.00000000000E+00   2.04151900000E+00   9.14224600000E-01
+                   0                   3                 128                   0
+                   2   2.07499000000E+00   2.00000000000E+01   1.00000000000E+00
+   1.00000000000E+00   2.07498600000E+00   9.14224600000E-01                   0
+                   3                 139                   0                   2
+   2.31344300000E+00   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00
+   2.31344200000E+00   9.14224600000E-01                   0                   3
+                 150                   0                   2   2.68995300000E+00
+   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00   2.68995200000E+00
+   9.14224600000E-01                   0                   3                 161
+                   0                   2   3.10516000000E+00   2.00000000000E+01
+   1.00000000000E+00   1.00000000000E+00   3.10515800000E+00   9.14224600000E-01
+                   0                   3                 172                   0
+                   2   3.20033300000E+00   2.00000000000E+01   1.00000000000E+00
+   1.00000000000E+00   3.20033200000E+00   9.14224600000E-01                 196
+                   9                 187                   0                   4
+   3.51900000000E+00   1.10000000000E+01   1.10000000000E+01   2.00000000000E+01
+   1.00000000000E+00   1.00000000000E+00   0.00000000000E+00   0.00000000000E+00
+                   0                   3   3.51900000000E+00   9.00000000000E+00
+   2.00000000000E+01   2.17669000000E+00   2.18846000000E+00   2.91265000000E+00
+   3.51900000000E+00                   0                   9                 209
+                   0                   4   3.51900000000E+00   1.10000000000E+01
+   1.10000000000E+01   2.00000000000E+01   0.00000000000E+00   0.00000000000E+00
+   1.00000000000E+00   1.00000000000E+00                   0                   3
+   3.51900000000E+00   9.00000000000E+00   2.00000000000E+01   2.17669000000E+00
+   2.18846000000E+00   2.91265000000E+00   6.00000000000E-01                  13
+                  16                   2                  -1                   0
+                   0   1.50000100000E-02   1.70000000000E-02   2.00000000000E-02
+*/
