@@ -1,4 +1,4 @@
-void ACEify( Table::Data& tData, int jxsRelative ) {
+void ACEify( Table::Data& tData, int JED ) {
 
   auto& xss = tData.XSS();
 
@@ -9,8 +9,7 @@ void ACEify( Table::Data& tData, int jxsRelative ) {
 
   tab1.ACEify( tData );
 
-  xss[ IDAT ] = xss.size() - jxsRelative;
+  xss[ IDAT ] = xss.size() - ( JED - 1 ) + 1;
 
-  std::visit( 
-      [&]( auto& law ){ return law.ACEify( tData, jxsRelative ); }, law );
+  std::visit( [&]( auto& law ){ return law.ACEify( tData, JED ); }, law );
 }
