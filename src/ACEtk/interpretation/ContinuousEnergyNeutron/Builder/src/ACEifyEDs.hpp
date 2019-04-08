@@ -11,10 +11,16 @@ template< typename Range,
         >
 void ACEifyEDs( Range& distributions,
                 Table::Data& tData, 
-                int LED, int JED ) {
+                int LED, int NMT ) {
 
 
   auto& xss = tData.XSS();
+  // Locators
+  xss |= ranges::action::push_back( 
+    ranges::view::repeat_n( 0, NMT )
+  );
+
+  auto JED = LED + NMT;
 
   auto N = distributions.size();
   int LOCC{ 0 };
