@@ -283,24 +283,23 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
     }
   }
   GIVEN( "real-world example: 11022.800nc" ){
-      auto aceified = ranges::view::concat(
-        ranges::view::single( 1 ),          // LOCC_1 
-        ranges::view::single( 17 ),         // LOCC_2 
-        ranges::view::single( 35 ),         // LOCC_3 
-        ranges::view::single( 53 ),         // LOCC_4 
-        ranges::view::single( 64 ),         // LOCC_5 
-        ranges::view::single( 75 ),         // LOCC_6 
-        ranges::view::single( 86 ),         // LOCC_7 
-        ranges::view::single( 97 ),         // LOCC_8 
-        ranges::view::single( 108 ),        // LOCC_9 
-        ranges::view::single( 119 ),        // LOCC_10
-        ranges::view::single( 130 ),        // LOCC_11
-        ranges::view::single( 141 ),        // LOCC_12
-        ranges::view::single( 152 ),        // LOCC_13
-        ranges::view::single( 163 ),        // LOCC_14
-        ranges::view::single( 174 )         // LOCC_15
-
-      );
+    auto aceified = std::vector< double >{
+       1,          // LOCC_1 
+       17,         // LOCC_2 
+       35,         // LOCC_3 
+       53,         // LOCC_4 
+       64,         // LOCC_5 
+       75,         // LOCC_6 
+       86,         // LOCC_7 
+       97,         // LOCC_8 
+       108,        // LOCC_9 
+       119,        // LOCC_10
+       130,        // LOCC_11
+       141,        // LOCC_12
+       152,        // LOCC_13
+       163,        // LOCC_14
+       174         // LOCC_15
+    };
 
     std::vector< std::vector< 
         ContinuousEnergyNeutron::Builder::EnergyDistribution > > EDs;
@@ -312,13 +311,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 11.0696, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
 
-      aceified |= range::action::push_back(
+      aceified |= ranges::action::push_back(
         ranges::view::concat(
           ranges::view::single( 1 ),                        // LNW_1
           ranges::view::single( 9 ),                        // LAW_1
           ranges::view::single( 10 ),                       // IDAT_1
           ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() )           // N_E
+          ranges::view::single( energies.size() ),          // N_E
           energies, probabilities
         )
       );
