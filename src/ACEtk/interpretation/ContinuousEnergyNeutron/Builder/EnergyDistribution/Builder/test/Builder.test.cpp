@@ -440,8 +440,8 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
               ranges::view::single( 1.0 ),
               ranges::view::single( 2.0 ),
               // Locators
-              ranges::view::single( 28 ),
-              ranges::view::single( 36 ),
+              ranges::view::single( 27 ),
+              ranges::view::single( 35 ),
               // distribution -- size 8
                 ranges::view::single( 1 ),                    // INTT
                 ranges::view::single( 2 ),                    // N_p
@@ -471,7 +471,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
 
           Table::Data data{};
           data.XSS().push_back( 0 );
-          energyDistribution.ACEify( data, 0 );
+          energyDistribution.ACEify( data, 1 );
 
           CHECK( ranges::equal( aceified, data.XSS() ) );
         }
