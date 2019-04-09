@@ -267,9 +267,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       Table::Data data{};
       CENBuilder.ACEifyEDs( EDs, data, 1, 2 );
       
-      njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
-      njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
-
       CHECK( ranges::equal( aceified, data.XSS() ) );
     }
   }

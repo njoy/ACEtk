@@ -367,19 +367,19 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       size_t size{ 82 };
-      // CHECK( size == data.XSS().size() );
+      CHECK( size == data.XSS().size() );
 
-      // CHECK( size == data.NXS( 1 ) );
+      CHECK( size == data.NXS( 1 ) );
       CHECK( ZA == data.NXS( 2 ) );
       CHECK( 10 == data.NXS(  3 ) );
       // CHECK( 10 == data.NXS(  4 ) );
       // CHECK( 10 == data.NXS(  5 ) );
       // CHECK( 10 == data.NXS(  6 ) );
       CHECK( 0 == data.NXS(  7 ) );
-      // CHECK( 10 == data.NXS(  8 ) );
-      CHECK( 0 == data.NXS(  9 ) );
-      CHECK( 0 == data.NXS( 10 ) );
-      CHECK( 0 == data.NXS( 11 ) );
+      CHECK( 1 == data.NXS(  8 ) );
+      // CHECK( 0 == data.NXS(  9 ) );
+      // CHECK( 0 == data.NXS( 10 ) );
+      // CHECK( 0 == data.NXS( 11 ) );
       CHECK( 0 == data.NXS( 12 ) );
       CHECK( 0 == data.NXS( 13 ) );
       CHECK( 0 == data.NXS( 14 ) );
@@ -411,7 +411,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       // CHECK( 0 == data.JXS( 23 ) );
       // CHECK( 0 == data.JXS( 24 ) );
       // CHECK( 0 == data.JXS( 25 ) );
-      // CHECK( 0 == data.JXS( 26 ) );
+      CHECK( 67 == data.JXS( 26 ) );
       // CHECK( 0 == data.JXS( 27 ) );
       CHECK( 0 == data.JXS( 28 ) );
       CHECK( 0 == data.JXS( 29 ) );

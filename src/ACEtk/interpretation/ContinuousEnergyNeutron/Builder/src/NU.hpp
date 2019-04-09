@@ -53,17 +53,16 @@ void NU(){
     // ACEify precursor energy distributions
     auto LED = xss.size() + 1;
     jxs[ 25 ] = LED;
-    // Precursor energy distribution locators
-    xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NPCR ) );
-    auto JED = xss.size() + 1;
-    jxs[ 26 ] = JED;
 
     // Precursor energy distributions
     auto EDs = this->delayedPrecursors_
       | ranges::view::transform(
         [](auto& dp ){ return dp.energyDistribution; }
       );
+    auto NMT = EDs.size();
+    nxs[ 7 ] = NMT;
+    jxs[ 26 ] = LED + NMT;
 
-    this->ACEifyEDs( EDs, tData, LED, JED );
+    this->ACEifyEDs( EDs, tData, LED, NMT );
   }
 }
