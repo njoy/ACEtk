@@ -14,7 +14,7 @@ struct EnergyDistribution{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EvaporationSpectrum.hpp" // LAW=9
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum.hpp" // LAW=11
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions.hpp" // LAW=22
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24.hpp" // LAW=24
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers.hpp" // LAW=24
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann.hpp" // LAW=44
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution.hpp" // LAW=61
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/NBodyPhaseSpace.hpp" // LAW=66
@@ -30,7 +30,7 @@ struct EnergyDistribution{
     EvaporationSpectrum,              // LAW=9
     EnergyDependentWattSpectrum,      // LAW=11
     TabularLinearFunctions,           // LAW=22
-    LAW24,                            // LAW=24
+    TabularEnergyMultipliers,         // LAW=24
     KalbachMann,                      // LAW=44
     KalbachMannAngularDistribution,   // LAW=61
     NBodyPhaseSpace,                  // LAW=66

@@ -459,7 +459,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EnergyDependentWattSpectrum.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularLinearFunctions.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Base.hpp",
@@ -546,12 +546,12 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann/Builder/src/addData.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann/Builder/src/construct.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMann/src/ACEify.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers/Builder/src/table.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/outgoingEnergyTable.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder/src/table.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/QValue.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LevelScattering/Builder/src/atomicWeightRatio.hpp",
@@ -853,9 +853,6 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.KalbachMannAngularDistribution.Data.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Data/Builder/test/Builder.test.cpp"
     ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.LAW24.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder/test/Builder.test.cpp"
-    ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.LaboratoryAngleEnergy.AngularDistribution.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy/AngularDistribution/Builder/test/Builder.test.cpp"
     ],
@@ -873,6 +870,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.SimpleMaxwellianFissionSpectrum.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/SimpleMaxwellianFissionSpectrum/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.TabularEnergyMultipliers.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.EnergyDistribution.TabularEquiprobableEnergyBins.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder/test/Builder.test.cpp"

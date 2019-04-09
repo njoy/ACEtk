@@ -54,8 +54,8 @@ public:
   TabularLinearFunctions::Builder< Builder >
   tabularLinearFunctions( ){ return { *this }; }
   // LAW=24
-  LAW24::Builder< Builder >
-  law24( ){ return { *this }; }
+  TabularEnergyMultipliers::Builder< Builder >
+  tabularEnergyMultipliers( ){ return { *this }; }
   // LAW=44
   KalbachMann::Builder< Builder >
   kalbachMann( ){ return { *this }; }

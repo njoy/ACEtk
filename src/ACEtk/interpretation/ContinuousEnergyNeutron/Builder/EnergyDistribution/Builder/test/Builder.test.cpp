@@ -188,7 +188,7 @@ void LAW24( B& ED ){
   std::vector< double > T1{ 1.1, 1.2, 1.3 };
   std::array< double, 3 > T2{{ 1.1, 1.2, 1.4 }};
 
-  ED.law24()
+  ED.tabularEnergyMultipliers()
       .boundaries( njoy::utility::copy( boundaries ) )
       .schemes( njoy::utility::copy( schemes ) )
       .energies( njoy::utility::copy( energies ) )

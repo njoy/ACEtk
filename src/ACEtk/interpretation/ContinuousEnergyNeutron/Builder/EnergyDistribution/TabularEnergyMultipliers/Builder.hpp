@@ -17,12 +17,12 @@ protected:
   using TabBuilder::y;
 
   friend Base::Builder< Builder< ParentBuilder >, ParentBuilder >;
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder/src/construct.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers/Builder/src/construct.hpp"
 
 public:
   using BaseBuilder::BaseBuilder;
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LAW24/Builder/src/table.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers/Builder/src/table.hpp"
   using TabBuilder::energies;
 
 };

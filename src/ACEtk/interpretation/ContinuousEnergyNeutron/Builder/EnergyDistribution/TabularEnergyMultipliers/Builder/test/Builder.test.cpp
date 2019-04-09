@@ -6,11 +6,11 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "Testing EnergyDistribtion::LAW24::Builder" ){
+SCENARIO( "Testing EnergyDistribtion::TabularLinearMultipliers::Builder" ){
     ContinuousEnergyNeutron::Builder CENBuilder;
 
     auto parentBuilder = CENBuilder.reaction( 14 ).energyDistribution();
-    using LAW24Builder = decltype( parentBuilder.law24() );
+    using LAW24Builder = decltype( parentBuilder.tabularEnergyMultipliers() );
 
     struct TestBuilder : public LAW24Builder {
       using LAW24Builder::construct;

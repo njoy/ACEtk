@@ -1,4 +1,4 @@
-LAW24 construct(){
+TabularEnergyMultipliers construct(){
   this->y( std::move( tables_ ) );
 
   return TabBuilder::construct();

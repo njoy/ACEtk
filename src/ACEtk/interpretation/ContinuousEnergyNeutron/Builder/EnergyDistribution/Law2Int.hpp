@@ -8,7 +8,7 @@ struct Law2Int{
   int operator()( const EvaporationSpectrum&             ){ return 9; }
   int operator()( const EnergyDependentWattSpectrum&     ){ return 11; }
   int operator()( const TabularLinearFunctions&          ){ return 22; }
-  int operator()( const LAW24&                           ){ return 24; }
+  int operator()( const TabularEnergyMultipliers&        ){ return 24; }
   int operator()( const KalbachMann&                     ){ return 44; }
   int operator()( const KalbachMannAngularDistribution&  ){ return 61; }
   int operator()( const NBodyPhaseSpace&                 ){ return 66; }
