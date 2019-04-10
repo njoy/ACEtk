@@ -61,21 +61,26 @@ SCENARIO(
       CHECK( 2 == distribution.angularDistributions.size() );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-          ranges::view::single( INTT ),
-          ranges::view::single( ene.size() ),
-          ene, pdf, cdf,
-          ranges::view::single( 11 ),
-          ranges::view::single( 22 ),
-          // angularDistribution
-          ranges::view::single( JJ ),
-          ranges::view::single( cosines.size() ),
-          cosines, apdf, acdf,
-          // angularDistribution
-          ranges::view::single( JJ ),
-          ranges::view::single( cosines.size() ),
-          cosines, apdf, acdf
-        );
+        std::vector< double > aceified{};
+        aceified.push_back( INTT );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        aceified.push_back( 11 );
+        aceified.push_back( 22 );
+        // angularDistribution
+        aceified.push_back( JJ );
+        aceified.push_back( cosines.size() );
+        aceified |= ranges::action::push_back( cosines );
+        aceified |= ranges::action::push_back( apdf );
+        aceified |= ranges::action::push_back( acdf );
+        // angularDistribution
+        aceified.push_back( JJ );
+        aceified.push_back( cosines.size() );
+        aceified |= ranges::action::push_back( cosines );
+        aceified |= ranges::action::push_back( apdf );
+        aceified |= ranges::action::push_back( acdf );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );
