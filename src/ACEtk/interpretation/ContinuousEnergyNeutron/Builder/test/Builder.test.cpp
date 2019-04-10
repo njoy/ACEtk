@@ -34,6 +34,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     nc.totalDisappearanceCrossSection( 
         njoy::utility::copy( totalDisappearanceXS ) );
 
+    std::vector< double > elasticXS{ 
+      0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
+
     int ZA{ 92235 };
     nc.ZA( ZA );
 
@@ -73,8 +76,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       }
     }
     { // MT=2
-      std::vector< double > XS{ 
-        0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
 
       // Angular distribution
       std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
@@ -91,7 +92,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       nc.reaction( 2 )
           .Q( 0.0 )
           .crossSection()
-            .values( XS )
+            .values( njoy::utility::copy( elasticXS ) )
             .energyGrid( nc.energyGrid() )
           .add()  // crossSection
           .angularDistribution()
@@ -366,58 +367,91 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto header = table.header;
       auto data = table.data;
 
-      size_t size{ 85 };
-      CHECK( size == data.XSS().size() );
+      THEN( "the NXS array can be checked " ){
+        size_t size{ 88 };
+        CHECK( size == data.XSS().size() );
 
-      CHECK( size == data.NXS( 1 ) );
-      CHECK( ZA == data.NXS( 2 ) );
-      CHECK( 10 == data.NXS(  3 ) );
-      CHECK( 3 == data.NXS(  4 ) );
-      // CHECK( 10 == data.NXS(  5 ) );
-      // CHECK( 10 == data.NXS(  6 ) );
-      CHECK( 0 == data.NXS(  7 ) );
-      CHECK( 1 == data.NXS(  8 ) );
-      // CHECK( 0 == data.NXS(  9 ) );
-      // CHECK( 0 == data.NXS( 10 ) );
-      // CHECK( 0 == data.NXS( 11 ) );
-      CHECK( 0 == data.NXS( 12 ) );
-      CHECK( 0 == data.NXS( 13 ) );
-      CHECK( 0 == data.NXS( 14 ) );
-      CHECK( 0 == data.NXS( 15 ) );
-      CHECK( 0 == data.NXS( 16 ) );
+        CHECK( size == data.NXS( 1 ) );
+        CHECK( ZA == data.NXS( 2 ) );
+        CHECK( 10 == data.NXS(  3 ) );
+        CHECK( 3 == data.NXS(  4 ) );
+        // CHECK( 10 == data.NXS(  5 ) );
+        // CHECK( 10 == data.NXS(  6 ) );
+        CHECK( 0 == data.NXS(  7 ) );
+        CHECK( 1 == data.NXS(  8 ) );
+        // CHECK( 0 == data.NXS(  9 ) );
+        // CHECK( 0 == data.NXS( 10 ) );
+        // CHECK( 0 == data.NXS( 11 ) );
+        CHECK( 0 == data.NXS( 12 ) );
+        CHECK( 0 == data.NXS( 13 ) );
+        CHECK( 0 == data.NXS( 14 ) );
+        CHECK( 0 == data.NXS( 15 ) );
+        CHECK( 0 == data.NXS( 16 ) );
+      }
+      THEN( "the JXS array can be checked " ){
+        CHECK( 1  == data.JXS( 1  ) );
+        CHECK( 51 == data.JXS( 2  ) );
+        CHECK( 83 == data.JXS( 3  ) );
+        CHECK( 86 == data.JXS( 4  ) );
+        // CHECK( 0 == data.JXS( 5  ) );
+        // CHECK( 0 == data.JXS( 6  ) );
+        // CHECK( 0 == data.JXS( 7  ) );
+        // CHECK( 0 == data.JXS( 8  ) );
+        // CHECK( 0 == data.JXS( 9  ) );
+        // CHECK( 0 == data.JXS( 10 ) );
+        // CHECK( 0 == data.JXS( 11 ) );
+        // CHECK( 0 == data.JXS( 12 ) );
+        // CHECK( 0 == data.JXS( 13 ) );
+        // CHECK( 0 == data.JXS( 14 ) );
+        // CHECK( 0 == data.JXS( 15 ) );
+        // CHECK( 0 == data.JXS( 16 ) );
+        // CHECK( 0 == data.JXS( 17 ) );
+        // CHECK( 0 == data.JXS( 18 ) );
+        // CHECK( 0 == data.JXS( 19 ) );
+        // CHECK( 0 == data.JXS( 20 ) );
+        // CHECK( 0 == data.JXS( 21 ) );
+        // CHECK( 0 == data.JXS( 22 ) );
+        // CHECK( 0 == data.JXS( 23 ) );
+        // CHECK( 0 == data.JXS( 24 ) );
+        // CHECK( 0 == data.JXS( 25 ) );
+        CHECK( 67 == data.JXS( 26 ) );
+        // CHECK( 0 == data.JXS( 27 ) );
+        CHECK( 0 == data.JXS( 28 ) );
+        CHECK( 0 == data.JXS( 29 ) );
+        CHECK( 0 == data.JXS( 30 ) );
+        CHECK( 0 == data.JXS( 31 ) );
+        CHECK( 0 == data.JXS( 32 ) );
+      }
 
-      CHECK( 1  == data.JXS( 1  ) );
-      CHECK( 51 == data.JXS( 2  ) );
-      CHECK( 83 == data.JXS( 3  ) );
-      // CHECK( 0 == data.JXS( 4  ) );
-      // CHECK( 0 == data.JXS( 5  ) );
-      // CHECK( 0 == data.JXS( 6  ) );
-      // CHECK( 0 == data.JXS( 7  ) );
-      // CHECK( 0 == data.JXS( 8  ) );
-      // CHECK( 0 == data.JXS( 9  ) );
-      // CHECK( 0 == data.JXS( 10 ) );
-      // CHECK( 0 == data.JXS( 11 ) );
-      // CHECK( 0 == data.JXS( 12 ) );
-      // CHECK( 0 == data.JXS( 13 ) );
-      // CHECK( 0 == data.JXS( 14 ) );
-      // CHECK( 0 == data.JXS( 15 ) );
-      // CHECK( 0 == data.JXS( 16 ) );
-      // CHECK( 0 == data.JXS( 17 ) );
-      // CHECK( 0 == data.JXS( 18 ) );
-      // CHECK( 0 == data.JXS( 19 ) );
-      // CHECK( 0 == data.JXS( 20 ) );
-      // CHECK( 0 == data.JXS( 21 ) );
-      // CHECK( 0 == data.JXS( 22 ) );
-      // CHECK( 0 == data.JXS( 23 ) );
-      // CHECK( 0 == data.JXS( 24 ) );
-      // CHECK( 0 == data.JXS( 25 ) );
-      CHECK( 67 == data.JXS( 26 ) );
-      // CHECK( 0 == data.JXS( 27 ) );
-      CHECK( 0 == data.JXS( 28 ) );
-      CHECK( 0 == data.JXS( 29 ) );
-      CHECK( 0 == data.JXS( 30 ) );
-      CHECK( 0 == data.JXS( 31 ) );
-      CHECK( 0 == data.JXS( 32 ) );
+      // njoy::Log::info( "xss: {}", data.XSS() | ranges::view::all );
+
+      int NTR = data.NXS( 4 );
+
+      THEN( "the ESZ Block can be checked" ){
+        auto ESZ = data.JXS( 1 );
+        auto NES = data.NXS( 3 );
+
+        CHECK( ranges::equal( energyGrid, data.XSS( ESZ + 0*NES, NES ) ) );
+        CHECK( ranges::equal( totalXS,    data.XSS( ESZ + 1*NES, NES ) ) );
+        CHECK( ranges::equal( totalDisappearanceXS,
+                                          data.XSS( ESZ + 2*NES, NES ) ) );
+        CHECK( ranges::equal( elasticXS,  data.XSS( ESZ + 3*NES, NES ) ) );
+        CHECK( ranges::equal( heating,    data.XSS( ESZ + 4*NES, NES ) ) );
+      }
+
+      THEN( "the MTR Block can be checked" ){
+        std::vector< double > mtrRef{ 16, 18, 102 };
+        auto mtr = data.XSS( data.JXS( 3 ), NTR );
+
+        CHECK( ranges::equal( mtrRef, mtr ) );
+      }
+
+      THEN( "the LQR Block can be checked" ){
+        std::vector< double > lqrRef{ -5.297781, 1.934054E2, 6.5452 };
+        auto lqr = data.XSS( data.JXS( 4 ), NTR );
+
+        CHECK( ranges::equal( lqrRef, lqr ) );
+      }
 
     }
   } // GIVEN valid
