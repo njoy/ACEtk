@@ -195,6 +195,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
       std::vector< double > XS{ 
         0.18, 1.18, 2.18, 3.18, 4.18, 5.18, 6.18, 7.18, 8.18, 9.18 };
+      // auto xsEnergies = nc.energyGrid() | ranges::view::slice( 7, -1 );
       
       // Energy distribution
       std::vector< int > boundaries{ 0, 3 };
@@ -207,7 +208,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       std::vector< double > cdf{ 0.25, 1.0 };
 
       nc.reaction( 18 )
-          .Q( 1.934054E2 )
+          .Q( 7.0 )
           .crossSection()
             .values( XS )
             .energyGrid( nc.energyGrid() )
@@ -368,7 +369,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        size_t size{ 88 };
+        size_t size{ 91 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -393,7 +394,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 51 == data.JXS( 2  ) );
         CHECK( 83 == data.JXS( 3  ) );
         CHECK( 86 == data.JXS( 4  ) );
-        // CHECK( 0 == data.JXS( 5  ) );
+        CHECK( 89 == data.JXS( 5  ) );
         // CHECK( 0 == data.JXS( 6  ) );
         // CHECK( 0 == data.JXS( 7  ) );
         // CHECK( 0 == data.JXS( 8  ) );
@@ -438,19 +439,23 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( ranges::equal( elasticXS,  data.XSS( ESZ + 3*NES, NES ) ) );
         CHECK( ranges::equal( heating,    data.XSS( ESZ + 4*NES, NES ) ) );
       }
-
       THEN( "the MTR Block can be checked" ){
         std::vector< double > mtrRef{ 16, 18, 102 };
         auto mtr = data.XSS( data.JXS( 3 ), NTR );
 
         CHECK( ranges::equal( mtrRef, mtr ) );
       }
-
       THEN( "the LQR Block can be checked" ){
-        std::vector< double > lqrRef{ -5.297781, 1.934054E2, 6.5452 };
+        std::vector< double > lqrRef{ -5.297781, 7.0, 6.5452 };
         auto lqr = data.XSS( data.JXS( 4 ), NTR );
 
         CHECK( ranges::equal( lqrRef, lqr ) );
+      }
+      THEN( "the TYR Block can be checked" ){
+        std::vector< double > tyrRef{ -2, 19, 0 };
+        auto tyr = data.XSS( data.JXS( 5 ), NTR );
+
+        CHECK( ranges::equal( tyrRef, tyr ) );
       }
 
     }
