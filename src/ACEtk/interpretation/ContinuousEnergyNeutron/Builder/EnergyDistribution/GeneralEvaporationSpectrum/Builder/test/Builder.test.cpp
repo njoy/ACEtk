@@ -43,15 +43,14 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
       CHECK( ranges::equal( X, distribution.x ) );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( boundaries.size() ),
-            boundaries,
-            schemes,
-            ranges::view::single( energies.size() ),
-            energies,
-            theta,
-            X
-          );
+        std::vector< double > aceified{};
+        aceified.push_back( boundaries.size() );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified |= ranges::action::push_back( theta );
+        aceified |= ranges::action::push_back( X );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

@@ -34,8 +34,9 @@ SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
         CHECK( coefficients == poly.coefficients );
 
         AND_THEN( "the contents can be ACE-ified" ){
-          auto aceified = ranges::view::concat( 
-              ranges::view::single( 1 ), coefficients );
+          std::vector< double > aceified{};
+          aceified.push_back( 1 );
+          aceified |= ranges::action::push_back( coefficients );
 
           Table::Data dataTable{};
           poly.ACEify( dataTable );

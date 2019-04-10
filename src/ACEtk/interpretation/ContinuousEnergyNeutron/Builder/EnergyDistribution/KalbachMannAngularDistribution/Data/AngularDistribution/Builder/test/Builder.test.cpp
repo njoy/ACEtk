@@ -42,11 +42,12 @@ SCENARIO(
       CHECK( ranges::equal( cdf, distribution.cdf ) );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat( 
-          ranges::view::single( JJ ),
-          ranges::view::single( cosines.size() ),
-          cosines, pdf, cdf
-        );
+        std::vector< double > aceified{};
+        aceified.push_back( JJ );
+        aceified.push_back( cosines.size() );
+        aceified |= ranges::action::push_back( cosines );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

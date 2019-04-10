@@ -36,10 +36,9 @@ SCENARIO( "Testing EnergyDistribtion::DiscretePhotonEnergy::Builder" ){
       CHECK( primaryFlag == distribution.primaryFlag );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat( 
-          ranges::view::single( primaryFlag ),
-          ranges::view::single( energy )
-        );
+        std::vector< double > aceified{};
+        aceified.push_back( primaryFlag );
+        aceified.push_back( energy );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

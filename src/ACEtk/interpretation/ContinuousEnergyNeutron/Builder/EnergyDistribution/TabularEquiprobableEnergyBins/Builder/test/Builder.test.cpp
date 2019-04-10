@@ -53,14 +53,16 @@ SCENARIO( "Testing EnergyDistribtion::TabularEquiprobableBins::Builder" ){
       CHECK( ranges::equal( eout_a, y[1] ) );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( 2 ), // N_R
-            boundaries, // NBT
-            schemes, // INT
-            ranges::view::single( energies.size() ), // N_E
-            energies, // E
-            eout_v, eout_a, eout_a, eout_a
-          );
+        std::vector< double > aceified{};
+        aceified.push_back( 2 ); // N_R
+        aceified |= ranges::action::push_back( boundaries ); // NBT
+        aceified |= ranges::action::push_back( schemes ); // INT
+        aceified.push_back( energies.size() ); // N_E
+        aceified |= ranges::action::push_back( energies ); // E
+        aceified |= ranges::action::push_back( eout_v );
+        aceified |= ranges::action::push_back( eout_a );
+        aceified |= ranges::action::push_back( eout_a );
+        aceified |= ranges::action::push_back( eout_a );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

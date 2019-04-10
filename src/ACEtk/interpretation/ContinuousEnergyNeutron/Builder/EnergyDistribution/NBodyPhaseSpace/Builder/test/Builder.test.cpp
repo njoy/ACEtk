@@ -32,10 +32,9 @@ SCENARIO( "Testing EnergyDistribtion::NBodyPhaseSpace::Builder" ){
       CHECK( A == distribution.totalMassRatio );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat( 
-          ranges::view::single( N ),
-          ranges::view::single( A )
-        );
+        std::vector< double > aceified{};
+        aceified.push_back( N );
+        aceified.push_back( A );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

@@ -47,12 +47,14 @@ SCENARIO(
       CHECK( ranges::equal( A, distribution.angularDistributionSlope ) );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat( 
-          ranges::view::single( INTT ),
-          ranges::view::single( ene.size() ),
-          ene, pdf, cdf,
-          R, A
-        );
+        std::vector< double > aceified{};
+        aceified.push_back( INTT );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        aceified |= ranges::action::push_back( R );
+        aceified |= ranges::action::push_back( A );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

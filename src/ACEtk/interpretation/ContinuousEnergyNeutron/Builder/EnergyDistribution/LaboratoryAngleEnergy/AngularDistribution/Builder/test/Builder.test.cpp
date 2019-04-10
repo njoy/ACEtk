@@ -60,27 +60,31 @@ SCENARIO(
         CHECK( ranges::equal( cosines, distribution.cosines ) );
 
         AND_THEN( "the contents can be ACE-ified" ){
-          auto aceified = ranges::view::concat( 
-            ranges::view::single( INTMU ),
-            ranges::view::single( cosines.size() ),
-            cosines,
-            ranges::view::single( 9 ),
-            ranges::view::single( 17 ),
-            ranges::view::single( 25 ),
-            // energyDistribution---size 8
-            ranges::view::single( INTEPs[ 0 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf,
-            // energyDistribution---size 8
-            ranges::view::single( INTEPs[ 1 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf,
-            // energyDistribution---size 8
-            ranges::view::single( INTEPs[ 0 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf
-
-          );
+          std::vector< double > aceified{};
+          aceified.push_back( INTMU );
+          aceified.push_back( cosines.size() );
+          aceified |= ranges::action::push_back( cosines );
+          aceified.push_back( 9 );
+          aceified.push_back( 17 );
+          aceified.push_back( 25 );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 0 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 1 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 0 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
 
           Table::Data data{};
           distribution.ACEify( data, 0 );

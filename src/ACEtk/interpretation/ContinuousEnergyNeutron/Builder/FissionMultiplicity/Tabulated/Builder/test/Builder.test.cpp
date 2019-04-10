@@ -41,15 +41,14 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
         CHECK( multiplicities == tabu.y );
 
         AND_THEN( "the contents can be ACE-ified" ){
-          auto aceified = ranges::view::concat(
-            ranges::view::single( 2 ), // LNU
-            ranges::view::single( 2 ), // N_R
-            boundaries, // NBT
-            schemes, // INT
-            ranges::view::single( energies.size() ), // N_E
-            energies, // E
-            multiplicities // nubar
-            );
+          std::vector< double > aceified{};
+          aceified.push_back( 2 ); // LNU
+          aceified.push_back( 2 ); // N_R
+          aceified |= ranges::action::push_back( boundaries ); // NBT
+          aceified |= ranges::action::push_back( schemes ); // INT
+          aceified.push_back( energies.size() ); // N_E
+          aceified |= ranges::action::push_back( energies ); // E
+          aceified |= ranges::action::push_back( multiplicities ); // nubar
 
           Table::Data data{};
           tabu.ACEify( data );

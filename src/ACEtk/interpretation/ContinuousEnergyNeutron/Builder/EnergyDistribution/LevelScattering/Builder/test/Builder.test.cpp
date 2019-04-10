@@ -32,10 +32,9 @@ SCENARIO( "Testing EnergyDistribtion::LevelScattering::Builder" ){
       CHECK( QValue == distribution.QValue );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat( 
-          ranges::view::single( QValue ),
-          ranges::view::single( awr )
-        );
+        std::vector< double > aceified{};
+        aceified.push_back( QValue );
+        aceified.push_back( awr );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

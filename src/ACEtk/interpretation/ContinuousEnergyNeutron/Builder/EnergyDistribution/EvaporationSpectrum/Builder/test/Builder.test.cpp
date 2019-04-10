@@ -54,15 +54,14 @@ SCENARIO(
       CHECK( U == distribution.restrictionEnergy );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( boundaries.size() ),
-            boundaries,
-            schemes,
-            ranges::view::single( energies.size() ),
-            energies,
-            theta,
-            ranges::view::single( U )
-          );
+        std::vector< double > aceified{};
+        aceified.push_back( boundaries.size() );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified |= ranges::action::push_back( theta );
+        aceified.push_back( U );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

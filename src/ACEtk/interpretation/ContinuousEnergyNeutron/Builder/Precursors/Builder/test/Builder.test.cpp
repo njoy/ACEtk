@@ -59,13 +59,12 @@ SCENARIO( "Testing FissionMultiplicity::Precursors::Builder" ){
       CHECK( l == pre.decayConstant );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( l ),
-            ranges::view::single( 0 ),
-            ranges::view::single( energies.size() ),
-            energies, pdf
-
-          );
+        std::vector< double > aceified{};
+        aceified.push_back( l );
+        aceified.push_back( 0 );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified |= ranges::action::push_back( pdf );
 
         Table::Data data{};
         pre.ACEify( data );
