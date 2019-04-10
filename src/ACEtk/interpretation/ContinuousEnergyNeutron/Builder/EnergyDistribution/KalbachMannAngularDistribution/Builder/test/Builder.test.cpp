@@ -104,42 +104,55 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
       }
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( boundaries.size() ),
-            boundaries, schemes,
-            ranges::view::single( energies.size() ),
-            energies,
-            ranges::view::single( 11 ),
-            ranges::view::single( 43 ),
-            // distributionData---size 32
-            ranges::view::single( INTT[ 0 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf,
-            ranges::view::single( 21 ),
-            ranges::view::single( 32 ),
-              // angularDistrubtion---size 11
-              ranges::view::single( JJ ),
-              ranges::view::single( cosines.size() ),
-              cosines, apdf, acdf,
-              // angularDistrubtion---size 11
-              ranges::view::single( JJ ),
-              ranges::view::single( cosines.size() ),
-              cosines, apdf, acdf,
-            // distributionData---size32
-            ranges::view::single( INTT[ 1 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf,
-            ranges::view::single( 53 ),
-            ranges::view::single( 64 ),
-              // angularDistrubtion---size 11
-              ranges::view::single( JJ ),
-              ranges::view::single( cosines.size() ),
-              cosines, apdf, acdf,
-              // angularDistrubtion---size 11
-              ranges::view::single( JJ ),
-              ranges::view::single( cosines.size() ),
-              cosines, apdf, acdf
-          );
+        std::vector< double > aceified{};
+
+        aceified.push_back( boundaries.size() );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified.push_back( 11 );
+        aceified.push_back( 43 );
+        // distributionData---size 32
+        aceified.push_back( INTT[ 0 ] );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        aceified.push_back( 21 );
+        aceified.push_back( 32 );
+          // angularDistrubtion---size 11
+          aceified.push_back( JJ );
+          aceified.push_back( cosines.size() );
+          aceified |= ranges::action::push_back( cosines );
+          aceified |= ranges::action::push_back( apdf );
+          aceified |= ranges::action::push_back( acdf );
+          // angularDistrubtion---size 11
+          aceified.push_back( JJ );
+          aceified.push_back( cosines.size() );
+          aceified |= ranges::action::push_back( cosines );
+          aceified |= ranges::action::push_back( apdf );
+          aceified |= ranges::action::push_back( acdf );
+        // distributionData---size32
+        aceified.push_back( INTT[ 1 ] );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        aceified.push_back( 53 );
+        aceified.push_back( 64 );
+          // angularDistrubtion---size 11
+          aceified.push_back( JJ );
+          aceified.push_back( cosines.size() );
+          aceified |= ranges::action::push_back( cosines );
+          aceified |= ranges::action::push_back( apdf );
+          aceified |= ranges::action::push_back( acdf );
+          // angularDistrubtion---size 11
+          aceified.push_back( JJ );
+          aceified.push_back( cosines.size() );
+          aceified |= ranges::action::push_back( cosines );
+          aceified |= ranges::action::push_back( apdf );
+          aceified |= ranges::action::push_back( acdf );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

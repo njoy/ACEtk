@@ -77,23 +77,27 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
       int N_R = boundaries.size();
       int N_E = energies.size();
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( N_R ),
-            boundaries,
-            schemes,
-            ranges::view::single( N_E ),
-            energies,
-            ranges::view::single( 11 ),
-            ranges::view::single( 19 ),
-            // distributionData 1
-            ranges::view::single( INTT[ 0 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf,
-            // distributionData 2
-            ranges::view::single( INTT[ 1 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf
-          );
+        std::vector< double > aceified{};
+
+        aceified.push_back( N_R );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( N_E );
+        aceified |= ranges::action::push_back( energies );
+        aceified.push_back( 11 );
+        aceified.push_back( 19 );
+        // distributionData 1
+        aceified.push_back( INTT[ 0 ] );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene ); 
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        // distributionData 2
+        aceified.push_back( INTT[ 1 ] );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene ); 
+        aceified |= ranges::action::push_back( pdf ); 
+        aceified |= ranges::action::push_back( cdf );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

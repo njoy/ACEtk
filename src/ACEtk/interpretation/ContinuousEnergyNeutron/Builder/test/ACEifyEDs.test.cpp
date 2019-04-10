@@ -536,7 +536,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
       aceified.push_back( Q );
-      ranges::view::single( awr );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -753,7 +753,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
       aceified.push_back( Q );
-      ranges::view::single( awr );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -830,8 +830,21 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       int NMT{ 15 };
       CENBuilder.ACEifyEDs( EDs, data, LED, NMT );
       
+      njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
+      njoy::Log::info( "data.XSS: {}", aceified | ranges::view::all );
+
+      auto& xss = data.XSS();
       CHECK( NMT == EDs.size() );
-      CHECK( ranges::equal( aceified, data.XSS() ) );
+      CHECK( ranges::equal( aceified, xss ) );
+
+      for( size_t i=0; i < aceified.size(); i++ ){
+        njoy::Log::info( "i: {}", i );
+        njoy::Log::info( "aceified: {}, xss: {}", aceified[ i ], xss[ i ] );
+
+        if ( aceified[ i ] != xss[ i ] ){
+          njoy::Log::info( "\tNot equal!" );
+        }
+      }
     }
   }
 } // SCENARIO

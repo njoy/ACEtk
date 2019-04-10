@@ -85,23 +85,31 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMann::Builder" ){
         CHECK( ranges::equal( A, energyDistribution.angularDistributionSlope ));
       }
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( boundaries.size() ),
-            boundaries,
-            schemes,
-            ranges::view::single( energies.size() ),
-            energies,
-            ranges::view::single( 11 ),
-            ranges::view::single( 23 ),
-            // distributionData 1
-            ranges::view::single( INTT[ 0 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf, R, A,
-            // distributionData 2
-            ranges::view::single( INTT[ 1 ] ),
-            ranges::view::single( ene.size() ),
-            ene, pdf, cdf, R, A
-          );
+        std::vector< double > aceified{};
+
+        aceified.push_back( boundaries.size() );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified.push_back( 11 );
+        aceified.push_back( 23 );
+        // distributionData 1
+        aceified.push_back( INTT[ 0 ] );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        aceified |= ranges::action::push_back( R );
+        aceified |= ranges::action::push_back( A );
+        // distributionData 2
+        aceified.push_back( INTT[ 1 ] );
+        aceified.push_back( ene.size() );
+        aceified |= ranges::action::push_back( ene );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        aceified |= ranges::action::push_back( R );
+        aceified |= ranges::action::push_back( A );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

@@ -92,52 +92,65 @@ SCENARIO( "Testing EnergyDistribtion::LaboratoryAngleEnergy::Builder" ){
       CHECK( 2 == y.size() );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( boundaries.size() ),
-            boundaries, schemes,
-            ranges::view::single( energies.size() ),
-            energies,
-            ranges::view::single( 11 ),
-            ranges::view::single( 43 ),
-            // angularDistribution---size=24
-            ranges::view::single( INTMUs[ 0 ] ),
-            ranges::view::single( cosines.size() ),
-            cosines,
-            ranges::view::single( 19 ),
-            ranges::view::single( 27 ),
-            ranges::view::single( 35 ),
-              // energyDistribution---size 8
-              ranges::view::single( INTEPs[ 0 ] ),
-              ranges::view::single( ene.size() ),
-              ene, pdf, cdf,
-              // energyDistribution---size 8
-              ranges::view::single( INTEPs[ 1 ] ),
-              ranges::view::single( ene.size() ),
-              ene, pdf, cdf,
-              // energyDistribution---size 8
-              ranges::view::single( INTEPs[ 0 ] ),
-              ranges::view::single( ene.size() ),
-              ene, pdf, cdf,
-            // angularDistribution---size=24
-            ranges::view::single( INTMUs[ 1 ] ),
-            ranges::view::single( cosines.size() ),
-            cosines,
-            ranges::view::single( 51 ),
-            ranges::view::single( 59 ),
-            ranges::view::single( 67 ),
-              // energyDistribution---size 8
-              ranges::view::single( INTEPs[ 0 ] ),
-              ranges::view::single( ene.size() ),
-              ene, pdf, cdf,
-              // energyDistribution---size 8
-              ranges::view::single( INTEPs[ 1 ] ),
-              ranges::view::single( ene.size() ),
-              ene, pdf, cdf,
-              // energyDistribution---size 8
-              ranges::view::single( INTEPs[ 0 ] ),
-              ranges::view::single( ene.size() ),
-              ene, pdf, cdf
-          );
+        std::vector< double > aceified{};
+
+        aceified.push_back( boundaries.size() );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified.push_back( 11 );
+        aceified.push_back( 43 );
+        // angularDistribution---size=24
+        aceified.push_back( INTMUs[ 0 ] );
+        aceified.push_back( cosines.size() );
+        aceified |= ranges::action::push_back( cosines );
+        aceified.push_back( 19 );
+        aceified.push_back( 27 );
+        aceified.push_back( 35 );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 0 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 1 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 0 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+        // angularDistribution---size=24
+        aceified.push_back( INTMUs[ 1 ] );
+        aceified.push_back( cosines.size() );
+        aceified |= ranges::action::push_back( cosines );
+        aceified.push_back( 51 );
+        aceified.push_back( 59 );
+        aceified.push_back( 67 );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 0 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 1 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          // energyDistribution---size 8
+          aceified.push_back( INTEPs[ 0 ] );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );

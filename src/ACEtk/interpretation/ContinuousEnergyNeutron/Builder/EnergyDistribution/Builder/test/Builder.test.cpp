@@ -423,51 +423,53 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
         // We don't need to check every case
         if( LAW == 4 ){
 
-          auto aceified = ranges::view::concat(
-            ranges::view::single( 0 ),                      // LNW_1
-            ranges::view::single( 4 ),                      // LAW_1
-            ranges::view::single( 18 ),                     // IDAT_1
+          std::vector< double > aceified{};
+            aceified.push_back( 0 );                      // LNW_1
+            aceified.push_back( 4 );                      // LAW_1
+            aceified.push_back( 18 );                     // IDAT_1
             // Energy distribution --- size 14
-            ranges::view::single( boundaries.size() ),      // N_R
-            boundaries, schemes,
-            ranges::view::single( energies.size() ),        // N_E
-            energies, probabilities, 
+            aceified.push_back( boundaries.size() );      // N_R
+            aceified |= ranges::action::push_back( boundaries );
+            aceified |= ranges::action::push_back( schemes );
+            aceified.push_back( energies.size() );        // N_E
+            aceified |= ranges::action::push_back( energies );
+            aceified |= ranges::action::push_back( probabilities ); 
             // LAW=4
-              ranges::view::single( 2 ),                    // N_R
-              boundaries, schemes,
-              ranges::view::single( 2 ),                    // N_E
+              aceified.push_back( 2 );                    // N_R
+              aceified |= ranges::action::push_back( boundaries ); 
+              aceified |= ranges::action::push_back( schemes );
+              aceified.push_back( 2 );                    // N_E
               // Energies
-              ranges::view::single( 1.0 ),
-              ranges::view::single( 2.0 ),
+              aceified.push_back( 1.0 );
+              aceified.push_back( 2.0 );
               // Locators
-              ranges::view::single( 27 ),
-              ranges::view::single( 35 ),
+              aceified.push_back( 27 );
+              aceified.push_back( 35 );
               // distribution -- size 8
-                ranges::view::single( 1 ),                    // INTT
-                ranges::view::single( 2 ),                    // N_p
+                aceified.push_back( 1 );                    // INTT
+                aceified.push_back( 2 );                    // N_p
                 // Energies
-                ranges::view::single( 1.0 ),
-                ranges::view::single( 2.0 ),
+                aceified.push_back( 1.0 );
+                aceified.push_back( 2.0 );
                 // PDF
-                ranges::view::single( 0.25 ),
-                ranges::view::single( 0.75 ),
+                aceified.push_back( 0.25 );
+                aceified.push_back( 0.75 );
                 // CDF
-                ranges::view::single( 0.25 ),
-                ranges::view::single( 1.0 ),
+                aceified.push_back( 0.25 );
+                aceified.push_back( 1.0 );
               // distribution -- size 8
-                ranges::view::single( 2 ),                    // INTT
-                ranges::view::single( 2 ),                    // N_p
+                aceified.push_back( 2 );                    // INTT
+                aceified.push_back( 2 );                    // N_p
                 // Energies
-                ranges::view::single( 1.0 ),
-                ranges::view::single( 2.0 ),
+                aceified.push_back( 1.0 );
+                aceified.push_back( 2.0 );
                 // PDF
-                ranges::view::single( 0.25 ),
-                ranges::view::single( 0.75 ),
+                aceified.push_back( 0.25 );
+                aceified.push_back( 0.75 );
                 // CDF
-                ranges::view::single( 0.25 ),
-                ranges::view::single( 1.0 )
+                aceified.push_back( 0.25 );
+                aceified.push_back( 1.0 );
 
-          );
 
           Table::Data data{};
           data.XSS().push_back( 0 );
