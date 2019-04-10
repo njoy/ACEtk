@@ -83,52 +83,59 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
     }
 
     THEN( "the EnergyDistributions can be ACEified" ){
-      auto aceified = ranges::view::concat(
-        ranges::view::single( 1 ),          // LOCC_1
-        ranges::view::single( 39 ),         // LOCC_2
+      std::vector< double > aceified{};
+        aceified.push_back( 1 );          // LOCC_1
+        aceified.push_back( 39 );         // LOCC_2
         // First set of distributions
-          ranges::view::single( 20 ),       // LNW_1
-          ranges::view::single( 2 ),        // LAW_1
-          ranges::view::single( 18 ),       // IDAT_1
-          ranges::view::single( 2 ),        // N_R_1
-          boundaries, schemes,
-          ranges::view::single( 4 ),        // N_E_1
-          energies, probabilities,
+          aceified.push_back( 20 );       // LNW_1
+          aceified.push_back( 2 );        // LAW_1
+          aceified.push_back( 18 );       // IDAT_1
+          aceified.push_back( 2 );        // N_R_1
+          aceified |= ranges::action::push_back( boundaries );
+          aceified |= ranges::action::push_back( schemes );
+          aceified.push_back( 4 );        // N_E_1
+          aceified |= ranges::action::push_back( energies );
+          aceified |= ranges::action::push_back( probabilities );
           // Discrete photon energy
-            ranges::view::single( 1 ),
-            ranges::view::single( 3.14 ),
-          ranges::view::single( 0 ),        // LNW_2
-          ranges::view::single( 3 ),        // LAW_2
-          ranges::view::single( 37 ),       // IDAT_2
-          ranges::view::single( 2 ),        // N_R_2
-          boundaries, schemes,
-          ranges::view::single( 4 ),        // N_E_2
-          energies, probabilities,
+            aceified.push_back( 1 );
+            aceified.push_back( 3.14 );
+          aceified.push_back( 0 );        // LNW_2
+          aceified.push_back( 3 );        // LAW_2
+          aceified.push_back( 37 );       // IDAT_2
+          aceified.push_back( 2 );        // N_R_2
+          aceified |= ranges::action::push_back( boundaries );
+          aceified |= ranges::action::push_back( schemes );
+          aceified.push_back( 4 );        // N_E_2
+          aceified |= ranges::action::push_back( energies );
+          aceified |= ranges::action::push_back( probabilities );
           // Level scattering
-            ranges::view::single( 2.765 ),
-            ranges::view::single( 235.98 ),
+            aceified.push_back( 2.765 );
+            aceified.push_back( 235.98 );
         // Second set of distributions
-          ranges::view::single( 58 ),       // LNW_1
-          ranges::view::single( 3 ),        // LAW_1
-          ranges::view::single( 56 ),       // IDAT_1
-          ranges::view::single( 2 ),        // N_R_1
-          boundaries, schemes,
-          ranges::view::single( 4 ),        // N_E_1
-          energies, probabilities,
+          aceified.push_back( 58 );       // LNW_1
+          aceified.push_back( 3 );        // LAW_1
+          aceified.push_back( 56 );       // IDAT_1
+          aceified.push_back( 2 );        // N_R_1
+          aceified |= ranges::action::push_back( boundaries );
+          aceified |= ranges::action::push_back( schemes );
+          aceified.push_back( 4 );        // N_E_1
+          aceified |= ranges::action::push_back( energies );
+          aceified |= ranges::action::push_back( probabilities );
           // Level scattering
-            ranges::view::single( 2.765 ),
-            ranges::view::single( 235.98 ),
-          ranges::view::single( 0 ),        // LNW_2
-          ranges::view::single( 2 ),        // LAW_2
-          ranges::view::single( 75 ),       // IDAT_2
-          ranges::view::single( 2 ),        // N_R_2
-          boundaries, schemes,
-          ranges::view::single( 4 ),        // N_E_2
-          energies, probabilities,
+            aceified.push_back( 2.765 );
+            aceified.push_back( 235.98 );
+          aceified.push_back( 0 );        // LNW_2
+          aceified.push_back( 2 );        // LAW_2
+          aceified.push_back( 75 );       // IDAT_2
+          aceified.push_back( 2 );        // N_R_2
+          aceified |= ranges::action::push_back( boundaries );
+          aceified |= ranges::action::push_back( schemes );
+          aceified.push_back( 4 );        // N_E_2
+          aceified |= ranges::action::push_back( energies );
+          aceified |= ranges::action::push_back( probabilities );
           // Discrete photon energy
-            ranges::view::single( 1 ),
-            ranges::view::single( 3.14 )
-      );
+            aceified.push_back( 1 );
+            aceified.push_back( 3.14 );
 
       Table::Data data{};
       CENBuilder.ACEifyEDs( EDs, data, 1, 2 );
@@ -224,45 +231,50 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
     }
 
     THEN( "the EnergyDistributions can be ACEified" ){
-      auto aceified = ranges::view::concat(
-        ranges::view::single( 1 ),          // LOCC_1
-        ranges::view::single( 89 ),         // LOCC_2
+      std::vector< double > aceified{};
+        aceified.push_back( 1 );          // LOCC_1
+        aceified.push_back( 89 );         // LOCC_2
         // Reaction 1--MT16
-        ranges::view::single( 47 ),         // LNW_1
-        ranges::view::single( 9 ),          // LAW_1
-        ranges::view::single( 12 ),         // IDAT_1
-        ranges::view::single( 0 ),          // N_R
-        ranges::view::single( 3 ),          // N_E
-        energies_1, probabilities_1,
+        aceified.push_back( 47 );         // LNW_1
+        aceified.push_back( 9 );          // LAW_1
+        aceified.push_back( 12 );         // IDAT_1
+        aceified.push_back( 0 );          // N_R
+        aceified.push_back( 3 );          // N_E
+        aceified |= ranges::action::push_back( energies_1 );
+        aceified |= ranges::action::push_back( probabilities_1 );
           // LAW 9
-          ranges::view::single( 0 ),          // N_R
-          ranges::view::single( 16 ),          // N_E
-          Law9_1Energies, Law9_1Theta, 
-          ranges::view::single( U_1 ),
-        ranges::view::single( 0 ),          // LNW_2
-        ranges::view::single( 9 ),          // LAW_2
-        ranges::view::single( 58 ),         // IDAT_2
-        ranges::view::single( 0 ),          // N_R
-        ranges::view::single( 3 ),          // N_E
-        energies_1, probabilities_1,
+          aceified.push_back( 0 );          // N_R
+          aceified.push_back( 16 );          // N_E
+          aceified |= ranges::action::push_back( Law9_1Energies );
+          aceified |= ranges::action::push_back( Law9_1Theta ); 
+          aceified.push_back( U_1 );
+        aceified.push_back( 0 );          // LNW_2
+        aceified.push_back( 9 );          // LAW_2
+        aceified.push_back( 58 );         // IDAT_2
+        aceified.push_back( 0 );          // N_R
+        aceified.push_back( 3 );          // N_E
+        aceified |= ranges::action::push_back( energies_1 );
+        aceified |= ranges::action::push_back( probabilities_1 );
           // LAW 9
-          ranges::view::single( 0 ),          // N_R
-          ranges::view::single( 14 ),          // N_E
-          Law9_2Energies, Law9_2Theta, 
-          ranges::view::single( U_2 ),
+          aceified.push_back( 0 );          // N_R
+          aceified.push_back( 14 );          // N_E
+          aceified |= ranges::action::push_back( Law9_2Energies );
+          aceified |= ranges::action::push_back( Law9_2Theta ); 
+          aceified.push_back( U_2 );
         // Reaction 2--MT22
-        ranges::view::single( 0 ),         // LNW_1
-        ranges::view::single( 9 ),          // LAW_1
-        ranges::view::single( 100 ),         // IDAT_1
-        ranges::view::single( 0 ),          // N_R
-        ranges::view::single( 3 ),          // N_E
-        energies_2, probabilities_2,
+        aceified.push_back( 0 );         // LNW_1
+        aceified.push_back( 9 );          // LAW_1
+        aceified.push_back( 100 );         // IDAT_1
+        aceified.push_back( 0 );          // N_R
+        aceified.push_back( 3 );          // N_E
+        aceified |= ranges::action::push_back( energies_2 );
+        aceified |= ranges::action::push_back( probabilities_2 );
           // LAW 9
-          ranges::view::single( 0 ),          // N_R
-          ranges::view::single( 10 ),          // N_E
-          Law9_3Energies, Law9_3Theta, 
-          ranges::view::single( U_3 )
-      );
+          aceified.push_back( 0 );          // N_R
+          aceified.push_back( 10 );          // N_E
+          aceified |= ranges::action::push_back( Law9_3Energies );
+          aceified |= ranges::action::push_back( Law9_3Theta ); 
+          aceified.push_back( U_3 );
 
       Table::Data data{};
       CENBuilder.ACEifyEDs( EDs, data, 1, 2 );
@@ -312,20 +324,19 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 9 ),                        // LAW_1
-          ranges::view::single( 10 ),                       // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( 2 ),                        // N_E
-          energies, theta, ranges::view::single( U )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 9 );                        // LAW_1
+      aceified.push_back( 10 );                       // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( 2 );                        // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( theta );
+      aceified.push_back( U );
     }
     { // MT=22
       inner = std::vector< 
@@ -351,21 +362,21 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 9 ),                        // LAW_1
-          ranges::view::single( 26 ),                       // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( 1 ),                        // N_R
-          boundaries, schemes,
-          ranges::view::single( 2 ),                        // N_E
-          energies, theta, ranges::view::single( U )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 9 );                        // LAW_1
+      aceified.push_back( 26 );                       // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( 1 );                        // N_R
+      aceified |= ranges::action::push_back( boundaries );
+      aceified |= ranges::action::push_back( schemes );
+      aceified.push_back( 2 );                        // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( theta );
+      aceified.push_back( U );
     }
     { // MT=28
       inner = std::vector< 
@@ -391,21 +402,21 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 9 ),                        // LAW_1
-          ranges::view::single( 44 ),                       // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( 2 ),                        // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( 1 ),                        // N_R
-          boundaries, schemes,
-          ranges::view::single( 2 ),                        // N_E
-          energies, theta, ranges::view::single( U )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 9 );                        // LAW_1
+      aceified.push_back( 44 );                       // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( 2 );                        // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( 1 );                        // N_R
+      aceified |= ranges::action::push_back( boundaries );
+      aceified |= ranges::action::push_back( schemes );
+      aceified.push_back( 2 );                        // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( theta );
+      aceified.push_back( U );
     }
     { // MT=51
       inner = std::vector< 
@@ -423,19 +434,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 62 ),                       // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 62 );                       // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -457,19 +465,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 73 ),                       // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 73 );                       // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -491,19 +496,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 84 ),                       // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 84 );                       // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -525,19 +527,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 95 ),                       // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 95 );                       // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      ranges::view::single( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -559,19 +558,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 106 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 106 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -593,19 +589,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 117 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 117 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -627,19 +620,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 128 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 128 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -661,19 +651,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 139 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 139 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -695,19 +682,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 150 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 150 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -729,19 +713,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 161 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 161 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      aceified.push_back( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -763,19 +744,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           .atomicWeightRatio( awr )
         .add(); // levelScattering
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 0 ),                        // LNW_1
-          ranges::view::single( 3 ),                        // LAW_1
-          ranges::view::single( 172 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities,
-          // LAW data
-          ranges::view::single( Q ),
-          ranges::view::single( awr )
-        )
-      );
+      aceified.push_back( 0 );                        // LNW_1
+      aceified.push_back( 3 );                        // LAW_1
+      aceified.push_back( 172 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities );
+      // LAW data
+      aceified.push_back( Q );
+      ranges::view::single( awr );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -815,31 +793,33 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
 
       EDs.emplace_back( std::move( inner ) );
 
-      aceified |= ranges::action::push_back(
-        ranges::view::concat(
-          ranges::view::single( 196 ),                      // LNW_1
-          ranges::view::single( 9 ),                        // LAW_1
-          ranges::view::single( 187 ),                      // IDAT_1
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities_1,
-          // LAW data
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( law_energies.size() ),      // N_E
-          law_energies, theta, ranges::view::single( U_1 ),
-          //
-          ranges::view::single( 0 ),                        // LNW_2
-          ranges::view::single( 9 ),                        // LAW_2
-          ranges::view::single( 209 ),                      // IDAT_2
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( energies.size() ),          // N_E
-          energies, probabilities_2,
-          // LAW data
-          ranges::view::single( 0 ),                        // N_R
-          ranges::view::single( law_energies.size() ),      // N_E
-          law_energies, theta, ranges::view::single( U_2 )
-        )
-      );
+      aceified.push_back( 196 );                      // LNW_1
+      aceified.push_back( 9 );                        // LAW_1
+      aceified.push_back( 187 );                      // IDAT_1
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities_1 );
+      // LAW data
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( law_energies.size() );      // N_E
+      aceified |= ranges::action::push_back( law_energies );
+      aceified |= ranges::action::push_back( theta );
+      aceified.push_back( U_1 );
+      //
+      aceified.push_back( 0 );                        // LNW_2
+      aceified.push_back( 9 );                        // LAW_2
+      aceified.push_back( 209 );                      // IDAT_2
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( energies.size() );          // N_E
+      aceified |= ranges::action::push_back( energies );
+      aceified |= ranges::action::push_back( probabilities_2 );
+      // LAW data
+      aceified.push_back( 0 );                        // N_R
+      aceified.push_back( law_energies.size() );      // N_E
+      aceified |= ranges::action::push_back( law_energies );
+      aceified |= ranges::action::push_back( theta );
+      aceified.push_back( U_2 );
 
     }
 
@@ -855,65 +835,3 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
     }
   }
 } // SCENARIO
-/* 11022.800nc
-                  17                  35                  53                  64
-                  75                  86                  97                 108
-                 119                 130                 141                 152
-                 163                 174                   0                   9
-                  10                   0                   2   1.10696000000E+01
-   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00                   0
-                   2   1.10696000000E+01   2.00000000000E+01   2.17669000000E+00
-   2.17669000000E+00   1.05840000000E+01                   0                   9
-                  26                   0                   2   1.10000000000E+01
-   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00                   1
-                   2                   5                   2   1.10000000000E+01
-   2.00000000000E+01   8.00000000000E-01   1.20000000000E+00   1.05180000000E+01
-                   0                   9                  44                   0
-                   2   7.00000000000E+00   2.00000000000E+01   1.00000000000E+00
-   1.00000000000E+00                   1                   2                   5
-                   2   7.00000000000E+00   2.00000000000E+01   9.00000000000E-01
-   1.10000000000E+00   6.69310000000E+00                   0                   3
-                  62                   0                   2   6.09736500000E-01
-   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00   6.09736400000E-01
-   9.14224600000E-01                   0                   3                  73
-                   0                   2   6.87130100000E-01   2.00000000000E+01
-   1.00000000000E+00   1.00000000000E+00   6.87130000000E-01   9.14224600000E-01
-                   0                   3                  84                   0
-                   2   9.31757000000E-01   2.00000000000E+01   1.00000000000E+00
-   1.00000000000E+00   9.31756700000E-01   9.14224600000E-01                   0
-                   3                  95                   0                   2
-   1.59807500000E+00   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00
-   1.59807400000E+00   9.14224600000E-01                   0                   3
-                 106                   0                   2   2.02583200000E+00
-   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00   2.02583100000E+00
-   9.14224600000E-01                   0                   3                 117
-                   0                   2   2.04152000000E+00   2.00000000000E+01
-   1.00000000000E+00   1.00000000000E+00   2.04151900000E+00   9.14224600000E-01
-                   0                   3                 128                   0
-                   2   2.07499000000E+00   2.00000000000E+01   1.00000000000E+00
-   1.00000000000E+00   2.07498600000E+00   9.14224600000E-01                   0
-                   3                 139                   0                   2
-   2.31344300000E+00   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00
-   2.31344200000E+00   9.14224600000E-01                   0                   3
-                 150                   0                   2   2.68995300000E+00
-   2.00000000000E+01   1.00000000000E+00   1.00000000000E+00   2.68995200000E+00
-   9.14224600000E-01                   0                   3                 161
-                   0                   2   3.10516000000E+00   2.00000000000E+01
-   1.00000000000E+00   1.00000000000E+00   3.10515800000E+00   9.14224600000E-01
-                   0                   3                 172                   0
-                   2   3.20033300000E+00   2.00000000000E+01   1.00000000000E+00
-   1.00000000000E+00   3.20033200000E+00   9.14224600000E-01                 196
-                   9                 187                   0                   4
-   3.51900000000E+00   1.10000000000E+01   1.10000000000E+01   2.00000000000E+01
-   1.00000000000E+00   1.00000000000E+00   0.00000000000E+00   0.00000000000E+00
-                   0                   3   3.51900000000E+00   9.00000000000E+00
-   2.00000000000E+01   2.17669000000E+00   2.18846000000E+00   2.91265000000E+00
-   3.51900000000E+00                   0                   9                 209
-                   0                   4   3.51900000000E+00   1.10000000000E+01
-   1.10000000000E+01   2.00000000000E+01   0.00000000000E+00   0.00000000000E+00
-   1.00000000000E+00   1.00000000000E+00                   0                   3
-   3.51900000000E+00   9.00000000000E+00   2.00000000000E+01   2.17669000000E+00
-   2.18846000000E+00   2.91265000000E+00   6.00000000000E-01                  13
-                  16                   2                  -1                   0
-                   0   1.50000100000E-02   1.70000000000E-02   2.00000000000E-02
-*/

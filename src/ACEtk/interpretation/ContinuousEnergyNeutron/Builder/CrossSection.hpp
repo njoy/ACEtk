@@ -4,4 +4,7 @@ struct CrossSection{
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection/Builder.hpp"
+  void ACEify( Table::Data& tData ){
+    tData.XSS() |= ranges::action::push_back( values );
+  }
 };

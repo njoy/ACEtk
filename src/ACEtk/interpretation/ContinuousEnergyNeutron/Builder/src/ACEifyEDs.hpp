@@ -4,7 +4,7 @@
  *
  * distributions: range of EnergyDistributions
  * LED: Location in XSS where locators begin
- * JED: Location in XSS where EnergyDistributions begin
+ * NMT: Number of reactions that have secondary energy distribution(s)
  */
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true

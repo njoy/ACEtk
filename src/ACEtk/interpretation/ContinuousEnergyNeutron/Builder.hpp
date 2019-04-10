@@ -61,6 +61,7 @@ public:
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ESZ.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/NU.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/MTR.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"

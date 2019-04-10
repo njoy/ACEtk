@@ -5,6 +5,7 @@ Table construct(){
 
   this->ESZ();
   this->NU();
+  this->MTR();
 
   try{
     tableData.NXS()[ 0 ] = tableData.XSS().size();
