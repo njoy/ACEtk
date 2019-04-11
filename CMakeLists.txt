@@ -325,10 +325,10 @@ if( NOT is_subproject )
 endif()
 
 install( DIRECTORY src/ DESTINATION include
-         FILE_PERMISSIONS OWNER_READ OWNER_WRITE 
+         FILE_PERMISSIONS OWNER_READ OWNER_WRITE
                           GROUP_READ 
                           WORLD_READ
-         DIRECTORY_PERMISSIONS OWNER_READ OWNER_WRITE 
+         DIRECTORY_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
                                GROUP_READ 
                                WORLD_READ
          FILES_MATCHING REGEX ".*\.h[+][+]$|.*\.hxx$|.*\.hpp$|.*\.hh$|.*\.h$"  )
