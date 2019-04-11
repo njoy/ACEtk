@@ -8,6 +8,7 @@ Table construct(){
   this->MTR();
   this->LQR();
   this->TYR();
+  this->SIG( 6 );
 
   try{
     tableData.NXS()[ 0 ] = tableData.XSS().size();

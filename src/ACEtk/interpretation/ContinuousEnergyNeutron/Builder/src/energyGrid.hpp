@@ -13,4 +13,4 @@ Builder& energyGrid( Range&& grid ){
   }
 }
 
-Slice energyGrid(){ return Table::slice( energyGrid_.value() ); }
+auto energyGrid(){ return Table::slice( energyGrid_.value() ); }

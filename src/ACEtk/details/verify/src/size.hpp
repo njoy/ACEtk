@@ -7,6 +7,8 @@ void equalSize( const R1& a1, const R2&... a2 ){
 
   if( not all( ( d1 == ranges::distance( a2 ) )... ) ){
     njoy::Log::error( "ranges are not the same size" );
+    njoy::Log::info( "a1 size: {}", d1 );
+    njoy::Log::info( "a2 size: {}", ranges::distance( a2 )... );
 
     throw std::range_error( "array sizes are not the same" );
   }

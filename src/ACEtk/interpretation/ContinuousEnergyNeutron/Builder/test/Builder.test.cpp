@@ -193,10 +193,11 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     }
     { // MT=18
 
-      std::vector< double > XS{ 
-        0.18, 1.18, 2.18, 3.18, 4.18, 5.18, 6.18, 7.18, 8.18, 9.18 };
-      // auto xsEnergies = nc.energyGrid() | ranges::view::slice( 7, -1 );
-      
+      std::vector< double > XS{ 7.18, 8.18, 9.18 };
+      auto grid = nc.energyGrid();
+      auto xsEnergies = grid 
+        | ranges::view::slice( 7l, ranges::distance( grid ) );
+
       // Energy distribution
       std::vector< int > boundaries{ 0, 3 };
       std::vector< int > schemes{ 2, 1 };
@@ -211,7 +212,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           .Q( 7.0 )
           .crossSection()
             .values( XS )
-            .energyGrid( nc.energyGrid() )
+            // .energyGrid( nc.energyGrid() )
+            .energyGrid( xsEnergies )
           .add() // crossSection
           .neutronYield( 19, 
                     ContinuousEnergyNeutron::Builder::

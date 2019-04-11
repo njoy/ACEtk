@@ -1,9 +1,10 @@
 template< typename Derived, typename ParentBuilder >
 class Builder{
 
+  using Range = std::vector< double >;
 public:
-  std::optional< details::verify::Positive< std::vector< double > > > values_;
-  std::optional< Table::Slice > energyGrid_;
+  std::optional< details::verify::Positive< Range > > values_;
+  std::optional< Table::pizza > energyGrid_;
 
 protected:
   std::reference_wrapper< ParentBuilder > parent;

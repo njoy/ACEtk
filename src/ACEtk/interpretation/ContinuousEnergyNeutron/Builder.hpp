@@ -57,6 +57,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp"
 
 public:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ACEifyEDs.hpp"
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ESZ.hpp"
@@ -64,10 +65,10 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/MTR.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/LQR.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/TYR.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SIG.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalDisappearanceCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/heating.hpp"
