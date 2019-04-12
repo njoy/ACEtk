@@ -371,7 +371,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        size_t size{ 91 };
+        size_t size{ 123 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -397,8 +397,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 83 == data.JXS( 3  ) );
         CHECK( 86 == data.JXS( 4  ) );
         CHECK( 89 == data.JXS( 5  ) );
-        // CHECK( 0 == data.JXS( 6  ) );
-        // CHECK( 0 == data.JXS( 7  ) );
+        CHECK( 92 == data.JXS( 6  ) );
+        CHECK( 95 == data.JXS( 7  ) );
         // CHECK( 0 == data.JXS( 8  ) );
         // CHECK( 0 == data.JXS( 9  ) );
         // CHECK( 0 == data.JXS( 10 ) );
@@ -458,6 +458,14 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         auto tyr = data.XSS( data.JXS( 5 ), NTR );
 
         CHECK( ranges::equal( tyrRef, tyr ) );
+      }
+      THEN( "the LSIG Block can be checked" ){
+        std::vector< double > lsigRef{ 1, 13, 18, 30 };
+        auto lsig = data.XSS( data.JXS( 6 ), NTR );
+
+        njoy::Log::info( "lsigR: {}" , lsigRef | ranges::view::all );
+        njoy::Log::info( "lsig : {}" , lsig | ranges::view::all );
+        CHECK( ranges::equal( lsigRef, lsig ) );
       }
 
     }

@@ -1,16 +1,16 @@
-void LQR(){
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true
+        >
+void LQR(int indexJXS, Range& reactions ){
   auto& tData = this->tableData_.value();
   auto& xss = tData.XSS();
   auto& jxs = tData.JXS();
 
   auto SLQR = xss.size() + 1;
-  jxs[ 3 ] = SLQR;
+  jxs[ indexJXS ] = xss.size() + 1;
 
-  int MT{ 0 };
-  for( const auto& reac : this->reactions_ ){
+  for( const auto& reac : reactions ){
 
-    MT = reac.first;
-    if( MT == 2 ) continue;
     xss.push_back( reac.second.Q );
 
   }

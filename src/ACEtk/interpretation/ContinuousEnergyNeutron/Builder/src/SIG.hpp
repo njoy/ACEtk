@@ -1,21 +1,21 @@
-// template< typename Range,
-//           utility::Require< true, utility::is_range, Range > = true
-//         >
-void SIG(int indexJXS ){
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true
+        >
+void SIG(int indexJXS, int NMT, Range& reactions ){
 
   auto& tData = this->tableData_.value();
   auto& xss = tData.XSS();
   auto& jxs = tData.JXS();
 
+  // LSIG(P) Block
   auto LXS = xss.size() + 1;
-  jxs[ indexJXS - 1 ] = LXS;
+  jxs[ indexJXS ] = LXS;
+  xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
-  // All reactions (except MT 2)
-  int MT{ 0 };
-  for( const auto& reac : this->reactions_ ){
+  // SIG(P) Block
+  jxs[ indexJXS + 1 ] = xss.size() + 1;
+  for( const auto& reac : reactions ){
 
-    MT = reac.first;
-    if( MT == 2 ) continue;
     reac.second.crossSection.ACEify( tData, this->energyGrid() );
 
   }
