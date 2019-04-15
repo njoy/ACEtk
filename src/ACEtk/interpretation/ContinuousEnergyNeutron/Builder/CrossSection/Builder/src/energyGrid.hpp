@@ -1,7 +1,7 @@
-Derived& energyGrid( Table::pizza energyGrid ){
+Builder& energyGrid( Table::pizza energyGrid ){
   this->energyGrid_ = 
       details::verify::sorted( details::verify::positive( energyGrid ) );
-  return static_cast< Derived& >( *this );
+  return *this;
 }
 
 decltype(auto) energyGrid( Table::Slice energyGrid ){

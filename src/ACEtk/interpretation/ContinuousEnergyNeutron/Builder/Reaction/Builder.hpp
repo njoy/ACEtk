@@ -6,7 +6,7 @@ private:
   std::optional< int > neutronYield_;
   std::optional< NeutronYieldReferenceFrame > neutronYieldReferenceFrame_;
   std::optional< double > Q_;
-  std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
+  std::optional< CrossSection > crossSection_;
   std::optional< AngularDistribution > angularDistribution_;
   std::vector< EnergyDistribution > energyDistribution_;
 
@@ -16,7 +16,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addEnergyDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/construct.hpp"
 
-  friend CrossSection::Builder;
+  friend CrossSection::Builder< Builder >;
   friend AngularDistribution::Builder;
   friend EnergyDistribution::Builder< Builder >;
 

@@ -7,7 +7,7 @@ private:
   int MT;
 
   std::optional< ContinuousEnergyNeutron::Builder::Tabulated1D > yields_;
-  std::optional< ContinuousEnergyNeutron::Builder::CrossSection > crossSection_;
+  std::optional< CrossSection > crossSection_;
   std::optional< AngularDistribution > angularDistribution_;
   std::optional< EnergyDistribution > energyDistribution_;
 
@@ -18,7 +18,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addEnergyDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/construct.hpp"
 
-  friend CrossSection::Builder;
+  friend CrossSection::Builder< Builder >;
   friend Yields::Builder;
   friend AngularDistribution::Builder;
   friend EnergyDistribution::Builder< Builder >;

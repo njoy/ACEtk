@@ -1,4 +1,4 @@
-template< typename Derived, typename ParentBuilder >
+template< typename ParentBuilder >
 class Builder{
 
   using Range = std::vector< double >;
@@ -15,6 +15,10 @@ public:
   Builder( ParentBuilder& parent ):
     parent( parent )
   { }
+
+  ParentBuilder& add(){
+    return parent.get().addCrossSection( this->construct() );
+  }
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection/Builder/src/values.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection/Builder/src/energyGrid.hpp"

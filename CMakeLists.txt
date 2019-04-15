@@ -271,9 +271,6 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder/src/construct.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/energyGrid.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/construct.hpp"
@@ -289,8 +286,6 @@ target_sources( ACEtk INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/src/construct.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection.hpp"
-             "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Isotropic.hpp"
              "${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated.hpp"
@@ -661,7 +656,6 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Tabulated/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/test )
-        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/CrossSection/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Precursors/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/test )
@@ -669,7 +663,6 @@ if( NOT is_subproject )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test )
-        add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/CrossSection/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/test )
         add_subdirectory( src/ACEtk/interpretation/EL03/test )
         add_subdirectory( src/ACEtk/interpretation/EPR/test )

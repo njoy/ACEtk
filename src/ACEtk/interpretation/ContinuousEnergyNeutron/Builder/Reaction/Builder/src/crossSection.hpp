@@ -1,3 +1,3 @@
-CrossSection::Builder crossSection(){
-  return CrossSection::Builder{ *this };
+CrossSection::Builder< Builder > crossSection(){
+  return { *this };
 }
