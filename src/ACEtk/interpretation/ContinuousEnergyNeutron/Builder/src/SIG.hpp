@@ -12,10 +12,15 @@ void SIG(int indexJXS, int NMT, Range& reactions ){
   jxs[ indexJXS ] = LXS;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
+  auto enumerated = ranges::view::enumerate( reactions );
   // SIG(P) Block
   jxs[ indexJXS + 1 ] = xss.size() + 1;
-  for( const auto& reac : reactions ){
+  for( auto it = enumerated.begin(); it != enumerated.end(); ++it ){
 
+    const auto index = std::get< 0 >( *it );
+    xss[ LXS + index - 1 ] = xss.size() + 1;
+
+    const auto reac = std::get< 1 >( *it );
     reac.second.crossSection.ACEify( tData, this->energyGrid() );
 
   }
