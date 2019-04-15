@@ -2,8 +2,7 @@ PhotonProductionReaction construct(){
   try{
     return PhotonProductionReaction{
       MT,
-      yields_,
-      crossSection_,
+      crossSection_.value(),
       angularDistribution_.value(),
       energyDistribution_.value()
     };

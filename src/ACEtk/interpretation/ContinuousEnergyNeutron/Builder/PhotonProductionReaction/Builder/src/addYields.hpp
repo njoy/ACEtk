@@ -1,6 +1,6 @@
-ContinuousEnergyNeutron::Builder::PhotonProductionReaction::Builder&
-addYields( ContinuousEnergyNeutron::Builder::Tabulated1D&& yields ){
-  this->yields_ = std::move( yields );
+Builder&
+addYields( Tabulated1D&& yields ){
+  this->crossSection_ = std::move( yields );
   return *this;
 }
 

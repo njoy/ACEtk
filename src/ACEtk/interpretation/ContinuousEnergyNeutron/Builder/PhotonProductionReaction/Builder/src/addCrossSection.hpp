@@ -1,5 +1,5 @@
-ContinuousEnergyNeutron::Builder::PhotonProductionReaction::Builder&
-addCrossSection( ContinuousEnergyNeutron::Builder::CrossSection&& XS ){
+Builder&
+addCrossSection( CrossSection&& XS ){
   this->crossSection_ = std::move( XS );
   return *this;
 }

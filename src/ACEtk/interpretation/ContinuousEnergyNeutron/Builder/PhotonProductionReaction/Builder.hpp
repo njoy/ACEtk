@@ -6,8 +6,7 @@ private:
   int MF;
   int MT;
 
-  std::optional< ContinuousEnergyNeutron::Builder::Tabulated1D > yields_;
-  std::optional< CrossSection > crossSection_;
+  std::optional< MFType > crossSection_;
   std::optional< AngularDistribution > angularDistribution_;
   std::optional< EnergyDistribution > energyDistribution_;
 

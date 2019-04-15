@@ -86,8 +86,8 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
       CHECK( angularGrid == angularDistribution.energyGrid );
       CHECK( ranges::equal( bins, angularDistribution.cosineBins ) );
 
-      auto yields = ppReaction.yields.value();
-      auto parameters = yields.parameters.value();
+      auto& yields = std::experimental::get< 1 >( ppReaction.crossSection );
+      auto& parameters = yields.parameters.value();
       CHECK( ranges::equal( boundaries, parameters.first ) );
       CHECK( ranges::equal( schemes, parameters.second ) );
       CHECK( ranges::equal( energies, yields.x ) );
@@ -122,7 +122,8 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
       CHECK( angularGrid == angularDistribution.energyGrid );
       CHECK( ranges::equal( bins, angularDistribution.cosineBins ) );
 
-      auto crossSection = ppReaction.crossSection.value();
+      auto& crossSection = std::experimental::get< 0 >( 
+          ppReaction.crossSection );
       CHECK( ranges::equal( XS, crossSection.values ) );
       CHECK( ranges::equal( grid, crossSection.energyGrid ) );
     }
