@@ -43,7 +43,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::CrossSection" ){
           aceified |= ranges::action::push_back( XS );
 
           Table::Data data{};
-          crossSection.ACEify( data, grid );
+          crossSection.ACEify( data );
           
           CHECK( ranges::equal( aceified, data.XSS() ) );
         }
@@ -68,7 +68,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::CrossSection" ){
           aceified |= ranges::action::push_back( sXS );
 
           Table::Data data{};
-          crossSection.ACEify( data, grid );
+          crossSection.ACEify( data );
 
           CHECK( ranges::equal( aceified, data.XSS() ) );
         }

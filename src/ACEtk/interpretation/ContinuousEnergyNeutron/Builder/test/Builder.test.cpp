@@ -429,6 +429,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       // njoy::Log::info( "xss: {}", data.XSS() | ranges::view::all );
 
       int NTR = data.NXS( 4 );
+      int NTRP = data.NXS( 6 );
 
       THEN( "the ESZ Block can be checked" ){
         auto ESZ = data.JXS( 1 );
@@ -447,6 +448,14 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( mtrRef, mtr ) );
       }
+      /*
+      THEN( "the MTRP Block can be checked" ){
+        std::vector< double > mtrpRef{ 102 };
+        auto mtrp = data.XSS( data.JXS( 3 ), NTRP );
+
+        CHECK( ranges::equal( mtrpRef, mtrp ) );
+      }
+      */
       THEN( "the LQR Block can be checked" ){
         std::vector< double > lqrRef{ -5.297781, 7.0, 6.5452 };
         auto lqr = data.XSS( data.JXS( 4 ), NTR );
@@ -460,13 +469,21 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( ranges::equal( tyrRef, tyr ) );
       }
       THEN( "the LSIG Block can be checked" ){
-        std::vector< double > lsigRef{ 1, 13, 18, 30 };
-        auto lsig = data.XSS( data.JXS( 6 ), NTR );
+        std::vector< double > lsigRef{ 1, 13, 18 };
+        auto lsig = data.XSS( data.JXS( 7 ), NTR );
 
-        njoy::Log::info( "lsigR: {}" , lsigRef | ranges::view::all );
-        njoy::Log::info( "lsig : {}" , lsig | ranges::view::all );
         CHECK( ranges::equal( lsigRef, lsig ) );
       }
+      /*
+      THEN( "the LSIG Block can be checked" ){
+        std::vector< double > lsigpRef{ 1 };
+        auto lsigp = data.XSS( data.JXS( 15 ), NTRP );
+
+        njoy::Log::info( "lsigpR: {}" , lsigpRef | ranges::view::all );
+        njoy::Log::info( "lsigp : {}" , lsigp | ranges::view::all );
+        CHECK( ranges::equal( lsigpRef, lsigp ) );
+      }
+      */
 
     }
   } // GIVEN valid
