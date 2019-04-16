@@ -19,6 +19,6 @@ void ACEify( Table::Data& tData ){
       ranges::view::concat( ranges::view::single( x.size() ), x )
       );
 
-  this->ACEify_y( tData );
+  details::ACEify( tData, this->y );
 
 }

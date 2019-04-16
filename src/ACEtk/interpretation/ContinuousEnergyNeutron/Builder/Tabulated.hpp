@@ -8,7 +8,6 @@ struct Tabulated {
   std::vector< T > y;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/src/ACEify_y.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/src/ACEify.hpp"
 };
 
