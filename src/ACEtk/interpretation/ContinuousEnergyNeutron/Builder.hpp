@@ -35,10 +35,9 @@ protected:
 
   std::vector< Precursors > delayedPrecursors_;
 
-  tsl::hopscotch_map< int, Reaction > reactions_;
+  std::map< int, Reaction > reactions_;
 
-  tsl::hopscotch_map< 
-      int, PhotonProductionReaction > photonProductionReactions_;
+  std::map< int, PhotonProductionReaction > photonProductionReactions_;
 
   std::optional< TotalGammaProduction > totalGammaProduction_;
   std::optional< ProbabilityTable > probabilityTable_;
@@ -77,8 +76,8 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/reaction.hpp"
 
-  Reaction::Builder reaction( int MT ){ return Reaction::Builder{ *this, MT }; }
   ProbabilityTable::Builder probabilityTable(){ 
     return ProbabilityTable::Builder{ *this }; }
 

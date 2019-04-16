@@ -7,9 +7,11 @@ void ACEify( Table::Data& tData, int JED ) {
   auto IDAT_i = xss.size();
   xss.push_back( 0 ); // IDAT
 
-  tab1.ACEify( tData );
+  details::ACEify( tData, tab1 );
 
   xss[ IDAT_i ] = xss.size() - ( JED - 1 ) + 1;
 
-  std::visit( [&]( auto& law ){ return law.ACEify( tData, JED ); }, law );
+  std::visit( 
+    [&]( auto& law ){ return details::ACEify( tData, law, JED ); }, 
+    law );
 }

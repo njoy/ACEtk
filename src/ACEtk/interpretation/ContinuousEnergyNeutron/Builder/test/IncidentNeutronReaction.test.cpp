@@ -288,4 +288,18 @@ SCENARIO( "incident neutron reaction" ){
       } // THEN
     } // WHEN
   } // GIVEN
+  GIVEN( "invalid data" ){
+    WHEN( "reaction number <= 1" ){
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          ncBuilder.reaction( 1 ),
+          std::range_error&
+        );
+        CHECK_THROWS_AS( 
+          ncBuilder.reaction( -10 ),
+          std::range_error&
+        );
+      }
+    }
+  }
 } // SCENARIO

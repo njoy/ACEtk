@@ -3,11 +3,20 @@ Table construct(){
   this->tableData_ = Table::Data{};
   auto& tableData = this->tableData_.value();
 
+  // Get all reactions that are not MT=2
   auto nonMT2Reactions = this->reactions_
-    | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );
+    | ranges::view::filter( []( auto& pair ){ return pair.first != 2; } );
 
-  auto getXS = []( auto& reaction ) -> decltype( auto )
+  // Get all reactions that have an angular distribution
+  // auto angReactions = this->reactions_
+  //   | ranges::view::filter( 
+  //       []( auto& pair )-> bool
+  //       { return pair.second.angularDistribution; } );
+
+  auto getXS = []( auto& reaction ) -> auto&
   { return reaction.second.crossSection; };
+  // auto getAD = []( auto& reaction ) -> auto&
+  // { return reaction.second.angularDistribution; };
 
   int NTR = ranges::distance( nonMT2Reactions );
   tableData.NXS()[ 3 ] = NTR;

@@ -37,7 +37,8 @@ void ACEifyEDs( Range& distributions,
       xss.push_back( 0 ); // LNW
       LNW_i = xss.size() - 1;
 
-      ed[ kndex ].ACEify( tData, JED );
+      details::ACEify( tData, ed[ kndex ], JED );
+      // ed[ kndex ].ACEify( tData, JED );
 
       if( kndex != ( ed.size() - 1 ) ){
         LNW = xss.size() - ( JED - 1 ) + 1;

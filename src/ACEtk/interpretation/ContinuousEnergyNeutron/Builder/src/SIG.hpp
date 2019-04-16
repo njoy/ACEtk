@@ -23,7 +23,7 @@ void SIG(int indexJXS, int NMT, Range&& reactions ){
     auto reac = std::get< 1 >( *it );
     xss[ LXS + index - 1 ] = xss.size() - LXS + 2;
 
-    reac.ACEify( tData );
+    details::ACEify( tData, reac );
 
   }
 }
