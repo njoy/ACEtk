@@ -5,7 +5,7 @@ struct hasACEify {
   
   template<typename U>
   struct nested < U, decltype(
-    std::declval< U >().ACEify( std::declval< ACEtk::Table::Data & >(), 
+    std::declval< std::decay_t< U > >().ACEify( std::declval< ACEtk::Table::Data & >(), 
                                 std::declval< Args >()... )
       ) > : std::true_type {};
 

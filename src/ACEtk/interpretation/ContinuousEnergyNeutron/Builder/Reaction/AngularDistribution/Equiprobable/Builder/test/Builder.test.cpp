@@ -32,6 +32,17 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
       auto equiprobable = tb.construct();
 
       CHECK( ranges::equal( cosineBins, equiprobable.cosineBins ) );
+
+      AND_THEN( "it can be ACEified" ){
+        std::vector< double > aceified{};
+        aceified.push_back( 1 );
+        aceified |= ranges::action::push_back( cosineBins );
+
+        Table::Data data{};
+        data.XSS().push_back( 0 );
+        equiprobable.ACEify( data, data.XSS()[ 0 ] );
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN 
   GIVEN( "invalid inputs" ){

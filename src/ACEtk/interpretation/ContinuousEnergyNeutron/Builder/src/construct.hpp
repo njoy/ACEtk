@@ -26,8 +26,8 @@ Table construct(){
   this->MTR( 2, nonMT2Reactions );
   this->LQR( 3, nonMT2Reactions );
   this->TYR( 4, nonMT2Reactions );
-  this->SIG( 5, NTR, nonMT2Reactions 
-                      | ranges::view::transform( getXS ) );
+  this->SIG( 5, nonMT2Reactions | ranges::view::transform( getXS ) );
+  // this->AND( 7, angReactions | ranges::view::transform( getAD ) );
 
   auto nonMT2PhotonReactions = this->photonProductionReactions_
     | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );

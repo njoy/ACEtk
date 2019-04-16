@@ -65,6 +65,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/LQR.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/TYR.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SIG.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/AND.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"

@@ -6,4 +6,5 @@ struct Tabulated{
   details::verify::CDF< std::vector< double > > CDF;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/src/ACEify.hpp"
 };

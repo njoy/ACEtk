@@ -49,6 +49,24 @@ SCENARIO( "Testing Builder::Reaction::AngularDistribution::Builder" ){
 
       CHECK( ranges::equal( grid, angDistribution.energyGrid ) );
       CHECK( 3 == angDistribution.representations.size() );
+
+      AND_THEN( "the distribution can be ACEified" ){
+        std::vector< double > aceified{};
+        aceified.push_back( grid.size() );
+        aceified |= ranges::action::push_back( grid );
+        aceified.push_back( 0 );    // LC_1
+        aceified.push_back( -1 );   // LC_2
+        aceified.push_back( 13 );    // LC_3
+
+        Table::Data data{};
+        njoy::Log::info( "ACEifying the angular distribution" );
+        angDistribution.ACEify( data, 1 );
+
+        njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
+        njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
     }
   } // GIVEN
   GIVEN( "invalid inputs" ){

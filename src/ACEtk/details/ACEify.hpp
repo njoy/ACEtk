@@ -18,9 +18,8 @@ template< typename... Ts, typename... Args >
 void ACEify( Table::Data& data, std::variant< Ts... >& v, Args&... args );
 
 /* Definitions */
-template< typename... Ts, typename... Args >
-void ACEify( Table::Data& data, std::variant< Ts... >& v, Args&... args ){
-  std::visit( [ & ]( auto&& t ){ ACEify( data, t, args... ); }, v );
+inline void ACEify( Table::Data& d, double t ){
+  d.XSS().push_back( t );
 }
 
 template< typename T, 
@@ -42,6 +41,7 @@ void ACEify( Table::Data& d, T& t, Args&... args ){
   }
 }
 
-inline void ACEify( Table::Data& d, double t ){
-  d.XSS().push_back( t );
+template< typename... Ts, typename... Args >
+void ACEify( Table::Data& data, std::variant< Ts... >& v, Args&... args ){
+  std::visit( [ & ]( auto&& t ){ details::ACEify( data, t, args... ); }, v );
 }
