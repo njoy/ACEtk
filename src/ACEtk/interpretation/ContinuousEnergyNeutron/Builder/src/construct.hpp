@@ -27,7 +27,8 @@ Table construct(){
   tableData.NXS()[ 5 ] = NTRP;
   njoy::Log::info( "NTRP: {}", NTRP );
   // this->MTR( 12, nonMT2PhotonReactions );
-  // this->SIG( 14, NTRP, nonMT2PhotonReactions );
+  // this->SIG( 14, NTRP, nonMT2PhotonReactions 
+  //                       | ranges::view::transform( getXS ) );
 
   try{
     tableData.NXS()[ 0 ] = tableData.XSS().size();

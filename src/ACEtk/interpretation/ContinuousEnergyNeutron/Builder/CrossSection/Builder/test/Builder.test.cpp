@@ -32,6 +32,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::CrossSection" ){
         .energyGrid( grid );
 
       auto crossSection = tb.construct();
+
       THEN( "the values can be verified" ){
         CHECK( ranges::equal( XS, crossSection.values ) );
         CHECK( ranges::equal( grid, crossSection.energyGrid ) );
