@@ -15,9 +15,7 @@ void ACEify( Table::Data& tData, int jxsRelative ) {
     decltype( auto ) index = std::get< 0 >( *it );
     decltype( auto ) distribution = std::get< 1 >( *it );
 
-    Log::info( "index: {}", index );
     LC = 0;
-
     details::ACEify( tData, distribution, LC );
 
     auto distance = xss.size() - jxsRelative + 1;

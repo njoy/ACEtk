@@ -8,18 +8,20 @@ Table construct(){
     | ranges::view::filter( []( auto& pair ){ return pair.first != 2; } );
 
   // Get all reactions that have an angular distribution
-  // auto angReactions = this->reactions_
-  //   | ranges::view::filter( 
-  //       []( auto& pair )-> bool
-  //       { return pair.second.angularDistribution; } );
+  auto angReactions = this->reactions_
+    | ranges::view::filter( 
+        []( auto& pair )-> bool
+        { return bool( pair.second.angularDistribution ); } );
 
   auto getXS = []( auto& reaction ) -> auto&
   { return reaction.second.crossSection; };
-  // auto getAD = []( auto& reaction ) -> auto&
-  // { return reaction.second.angularDistribution; };
+  auto getAD = []( auto& reaction ) -> auto&
+  { return reaction.second.angularDistribution.value(); };
 
   int NTR = ranges::distance( nonMT2Reactions );
   tableData.NXS()[ 3 ] = NTR;
+  int NR = ranges::distance( angReactions );
+  tableData.NXS()[ 4 ] = NR;
 
   this->ESZ();
   this->NU();
@@ -27,14 +29,13 @@ Table construct(){
   this->LQR( 3, nonMT2Reactions );
   this->TYR( 4, nonMT2Reactions );
   this->SIG( 5, nonMT2Reactions | ranges::view::transform( getXS ) );
-  // this->AND( 7, angReactions | ranges::view::transform( getAD ) );
+  this->AND( 7, angReactions | ranges::view::transform( getAD ) );
 
   auto nonMT2PhotonReactions = this->photonProductionReactions_
     | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );
 
   int NTRP = ranges::distance( nonMT2PhotonReactions );
   tableData.NXS()[ 5 ] = NTRP;
-  njoy::Log::info( "NTRP: {}", NTRP );
   // this->MTR( 12, nonMT2PhotonReactions );
   // this->SIG( 14, NTRP, nonMT2PhotonReactions 
   //                       | ranges::view::transform( getXS ) );

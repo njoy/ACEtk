@@ -371,14 +371,14 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        size_t size{ 123 };
+        size_t size{ 235 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
         CHECK( ZA == data.NXS( 2 ) );
         CHECK( 10 == data.NXS(  3 ) );
         CHECK( 3 == data.NXS(  4 ) );
-        // CHECK( 10 == data.NXS(  5 ) );
+        CHECK( 2 == data.NXS(  5 ) );
         // CHECK( 10 == data.NXS(  6 ) );
         CHECK( 0 == data.NXS(  7 ) );
         CHECK( 1 == data.NXS(  8 ) );
@@ -399,8 +399,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 89 == data.JXS( 5  ) );
         CHECK( 92 == data.JXS( 6  ) );
         CHECK( 95 == data.JXS( 7  ) );
-        // CHECK( 0 == data.JXS( 8  ) );
-        // CHECK( 0 == data.JXS( 9  ) );
+        CHECK( 124 == data.JXS( 8  ) );
+        CHECK( 126 == data.JXS( 9  ) );
         // CHECK( 0 == data.JXS( 10 ) );
         // CHECK( 0 == data.JXS( 11 ) );
         // CHECK( 0 == data.JXS( 12 ) );
@@ -429,6 +429,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       // njoy::Log::info( "xss: {}", data.XSS() | ranges::view::all );
 
       int NTR = data.NXS( 4 );
+      int NR = data.NXS( 5 );
       int NTRP = data.NXS( 6 );
 
       THEN( "the ESZ Block can be checked" ){
@@ -474,8 +475,17 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( lsigRef, lsig ) );
       }
+      THEN( "the LAND Block can be checked" ){
+        std::vector< double > landRef{ 1, 56 };
+        auto land = data.XSS( data.JXS( 8 ), NR );
+
+        njoy::Log::info( "landRef: {}", landRef | ranges::view::all );
+        njoy::Log::info( "land:    {}", land | ranges::view::all );
+
+        CHECK( ranges::equal( landRef, land ) );
+      }
       /*
-      THEN( "the LSIG Block can be checked" ){
+      THEN( "the LSIGP Block can be checked" ){
         std::vector< double > lsigpRef{ 1 };
         auto lsigp = data.XSS( data.JXS( 15 ), NTRP );
 

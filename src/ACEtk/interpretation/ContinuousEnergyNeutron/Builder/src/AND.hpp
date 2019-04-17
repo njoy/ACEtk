@@ -10,10 +10,10 @@ void AND(int indexJXS, Range&& reactions ){
   auto& jxs = tData.JXS();
 
   // LAND Block
-  auto LXS = xss.size() + 1;
-  jxs[ indexJXS ] = LXS;
+  auto LED = xss.size() + 1;
+  jxs[ indexJXS ] = LED;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
-  LXS += NMT;
+  auto LXS = LED + NMT;
 
   auto enumerated = ranges::view::enumerate( reactions );
 
@@ -23,9 +23,10 @@ void AND(int indexJXS, Range&& reactions ){
 
     auto index = std::get< 0 >( *it );
     auto angularDistribution = std::get< 1 >( *it );
-    xss[ LXS + index - 1 ] = xss.size() - LXS + 2;
+    int LOCB = xss.size() - LXS + 2;
+    xss[ LED + index - 1 ] = LOCB;
 
-    details::ACEify( tData, angularDistribution );
+    details::ACEify( tData, angularDistribution, LOCB );
 
   }
 }
