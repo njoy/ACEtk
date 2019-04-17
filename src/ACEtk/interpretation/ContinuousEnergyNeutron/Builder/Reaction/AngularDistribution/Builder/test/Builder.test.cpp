@@ -54,16 +54,21 @@ SCENARIO( "Testing Builder::Reaction::AngularDistribution::Builder" ){
         std::vector< double > aceified{};
         aceified.push_back( grid.size() );
         aceified |= ranges::action::push_back( grid );
-        aceified.push_back( 0 );    // LC_1
-        aceified.push_back( -1 );   // LC_2
-        aceified.push_back( 13 );    // LC_3
+        aceified.push_back( 0 );      // LC_1
+        aceified.push_back( -19 );    // LC_2
+        aceified.push_back( 52 );     // LC_3
+        // Isotropic distribution has no data
+        // Tabulated distribution
+        aceified.push_back( f );    // JJ
+        aceified.push_back( cosine.size() ); // N_P
+        aceified |= ranges::action::push_back( cosine );
+        aceified |= ranges::action::push_back( pdf );
+        aceified |= ranges::action::push_back( cdf );
+        // Equiprobable distribution
+        aceified |= ranges::action::push_back( cosineBins );
 
         Table::Data data{};
-        njoy::Log::info( "ACEifying the angular distribution" );
-        angDistribution.ACEify( data, 1 );
-
-        njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
-        njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
+        angDistribution.ACEify( data, 0 );
 
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }
