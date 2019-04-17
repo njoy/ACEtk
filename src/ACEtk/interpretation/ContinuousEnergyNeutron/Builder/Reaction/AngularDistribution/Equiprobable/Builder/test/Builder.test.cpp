@@ -6,6 +6,9 @@ using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
+  constexpr auto checked = details::hasACEify< ContinuousEnergyNeutron::Builder::Reaction::AngularDistribution::Equiprobable&, double& >::value;
+  CHECK( checked );
+
   using ParentBuilder = ContinuousEnergyNeutron::Builder;
   ParentBuilder parentBuilder{};
 

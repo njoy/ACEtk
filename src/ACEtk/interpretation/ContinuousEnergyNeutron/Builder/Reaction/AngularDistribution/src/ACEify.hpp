@@ -1,3 +1,4 @@
+template< typename = int >
 void ACEify( Table::Data& tData, int jxsRelative ) {
 
   auto& grid = this->energyGrid;
