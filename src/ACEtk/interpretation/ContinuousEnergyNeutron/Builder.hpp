@@ -35,7 +35,9 @@ protected:
 
   std::vector< Precursors > delayedPrecursors_;
 
-  std::map< int, Reaction > reactions_;
+  std::optional< Reaction::NeutronProducing > elasticScattering_;
+  std::map< int, Reaction::NeutronProducing > neutronProducingReactions_;
+  std::map< int, Reaction::NonNeutronProducing > nonNeutronProducingReactions_;
 
   std::map< int, PhotonProductionReaction > photonProductionReactions_;
 
@@ -49,6 +51,7 @@ protected:
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addHeader.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addElasticScattering.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp"

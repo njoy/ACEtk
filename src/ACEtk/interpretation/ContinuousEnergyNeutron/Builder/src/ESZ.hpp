@@ -30,7 +30,7 @@ void ESZ(){
   }
 
   // Ensure MT2 exists
-  if( reactions_.find( 2 ) == reactions_.end() ){
+  if( not elasticScattering_ ){
     Log::error( "Elastic scattering cross section must exist "
                 "before a table can be created." );
     throw std::exception();
@@ -38,8 +38,8 @@ void ESZ(){
   else{
     try{ 
       details::verify::equalSize( 
-        reactions_[ 2 ].crossSection.energyGrid, this->energyGrid_.value() );
-
+        elasticScattering_.value().crossSection.energyGrid, 
+        this->energyGrid_.value() );
     } catch( std::range_error& r ){
       Log::info( "Elastic scattering cross section has the wrong length." );
       throw;
@@ -60,7 +60,7 @@ void ESZ(){
     xss |= ranges::action::push_back( this->totalXS_.value() );
     xss |= ranges::action::push_back( this->totalDisappearanceXS_.value() );
     xss |= ranges::action::push_back( 
-        this->reactions_[ 2 ].crossSection.values );
+        this->elasticScattering_.value().crossSection.values );
     xss |= ranges::action::push_back( this->heating_.value() );
 
   } catch( std::bad_optional_access& b ){

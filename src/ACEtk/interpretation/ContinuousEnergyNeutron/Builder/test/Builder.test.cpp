@@ -111,6 +111,23 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           .add() // angular distribution
         .add(); // reaction 16
     }
+    /*
+    { // MT=4
+
+      // Angular distribution
+      std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
+      std::vector< double > inelasticXS{ 
+        0.4, 1.4, 2.4, 3.4, 4.4, 5.4, 6.4, 7.4, 8.4, 9.4 };
+
+      nc.reaction( 2 )
+          .Q( 0.0 )
+          .crossSection()
+            .values( njoy::utility::copy( inelasticXS ) )
+            .energyGrid( nc.energyGrid() )
+          .add()  // crossSection
+        .add(); // reaction 16
+    }
+    */
     { // MT=16
       std::vector< double > XS{ 
         0.16, 1.16, 2.16, 3.16, 4.16, 5.16, 6.16, 7.16, 8.16, 9.16 };

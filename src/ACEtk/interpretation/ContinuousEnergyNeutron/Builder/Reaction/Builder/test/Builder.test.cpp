@@ -61,14 +61,12 @@ void addAngularDistribution( B& builder ){
 }
 
 SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
-    struct ParentBuilder: public ContinuousEnergyNeutron::Builder{
-      using ContinuousEnergyNeutron::Builder::reactions_;
-    };
-    ParentBuilder parentBuilder{};
+    ContinuousEnergyNeutron::Builder parentBuilder{};
     using ReactionBuilder = decltype( parentBuilder.reaction( 14 ) );
 
     struct TestBuilder : public ReactionBuilder {
-      using ReactionBuilder::construct;
+      using ReactionBuilder::constructNonNeutronProducing;
+      using ReactionBuilder::constructNeutronProducing;
       using ReactionBuilder::ReactionBuilder;
     };
 
@@ -78,7 +76,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     double Q{ 3.14 };
     int neutronYield{ 2 };
 
-    WHEN( "creating a Reaction Builder without a parent energyGrid" ){
+    WHEN( "creating a Reaction::NeutronProducing" ){
       std::vector< double > XS{ 1.0, 2.0, 3.0 };
 
       tb.Q( Q );
@@ -90,22 +88,16 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
                           NeutronYieldReferenceFrame::CENTEROFMASS );
       addAngularDistribution( tb );
       addEnergyDistribution( tb );
-      tb.add();
+
+      auto reaction = tb.constructNeutronProducing();
 
       THEN( "the constructed Reaction can be verified" ){
-        auto reaction = parentBuilder.reactions_[ 14 ];
         CHECK( Q == reaction.Q );
         CHECK( -1*neutronYield == reaction.neutronYield );
         CHECK( XS == reaction.crossSection.values );
         CHECK( 14 == reaction.MT );
-
-        CHECK( 1 == 
-               static_cast< ParentBuilder& >(parentBuilder).reactions_.size() );
       }
     } // WHEN
-    WHEN( "all the pieces of a Reaction are not present" ){
-      CHECK_THROWS( tb.construct() );
-    }
     WHEN( "valid neutron yield values are given" ){
       std::vector< int > validYields{
         -102, -101, -19, -4, -3, -2, -1, 1, 2, 3, 4, 19, 101, 102
@@ -121,6 +113,10 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     }
   } // GIVEN valid
   GIVEN( "invalid values" ){
+    WHEN( "adding secondary distributions to non neutron producing reaction" ){
+      THEN( "an exception is thrown" ){
+      }
+    }
     WHEN( "invalid neutron yield values are given" ){
       std::vector< int > invalidYields{ -100, -99, -21, -20, 20, 21, 99, 100 };
       for( auto yield : invalidYields ){

@@ -14,7 +14,9 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addAngularDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addEnergyDistribution.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/construct.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/constructNeutronProducing.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/constructNonNeutronProducing.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/isNeutronProducing.hpp"
 
   friend CrossSection::Builder< Builder >;
   friend AngularDistribution::Builder;
@@ -25,10 +27,7 @@ public:
     parent( parent ), MT_( MT )
   { }
 
-  ContinuousEnergyNeutron::Builder& add() { 
-    return parent.get().addReaction( this->construct() );
-  }
-
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/add.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"

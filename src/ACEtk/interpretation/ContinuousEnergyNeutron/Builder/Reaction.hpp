@@ -3,12 +3,8 @@ struct Reaction{
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution.hpp"
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/NonNeutronProducing.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/NeutronProducing.hpp"
 
-  int MT;
-  double Q;
-  int neutronYield;
-  ContinuousEnergyNeutron::Builder::CrossSection crossSection;
-  std::optional< AngularDistribution > angularDistribution;
-  std::vector< EnergyDistribution > energyDistribution;
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp"
 };

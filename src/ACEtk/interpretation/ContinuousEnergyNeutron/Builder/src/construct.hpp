@@ -3,33 +3,39 @@ Table construct(){
   this->tableData_ = Table::Data{};
   auto& tableData = this->tableData_.value();
 
-  // Get all reactions that are not MT=2
-  auto nonMT2Reactions = this->reactions_
-    | ranges::view::filter( []( auto& pair ){ return pair.first != 2; } );
+  this->ESZ();
 
-  // Get all reactions that have an angular distribution
-  auto angReactions = this->reactions_
-    | ranges::view::filter( 
-        []( auto& pair )-> bool
-        { return bool( pair.second.angularDistribution ); } );
+  auto getReaction = []( auto& pair ){ return pair.second; };
+  // auto getAD = []( auto& reaction ) -> auto&
+  // { return reaction.second.angularDistribution.value(); };
 
-  auto getXS = []( auto& reaction ) -> auto&
-  { return reaction.second.crossSection; };
-  auto getAD = []( auto& reaction ) -> auto&
-  { return reaction.second.angularDistribution.value(); };
+  // Get all reactions that are neutron producing (including elastic scattering)
+  auto neutronProducingReactions = 
+    ranges::view::concat( 
+      ranges::view::single( this->elasticScattering_.value() ),
+      this->neutronProducingReactions_ | ranges::view::transform( getReaction )
+    );
 
-  int NTR = ranges::distance( nonMT2Reactions );
+  int NTR = this->neutronProducingReactions_.size() + 
+            this->nonNeutronProducingReactions_.size();
   tableData.NXS()[ 3 ] = NTR;
-  int NR = ranges::distance( angReactions );
+  int NR = ranges::distance( this->neutronProducingReactions_ );
   tableData.NXS()[ 4 ] = NR;
 
-  this->ESZ();
   this->NU();
-  this->MTR( 2, nonMT2Reactions );
-  this->LQR( 3, nonMT2Reactions );
-  this->TYR( 4, nonMT2Reactions );
-  this->SIG( 5, nonMT2Reactions | ranges::view::transform( getXS ) );
-  this->AND( 7, angReactions | ranges::view::transform( getAD ) );
+  this->MTR( 2, 
+             this->neutronProducingReactions_, 
+             this->nonNeutronProducingReactions_ );
+  this->LQR( 3,
+             this->neutronProducingReactions_, 
+             this->nonNeutronProducingReactions_ );
+  this->TYR( 4,
+             this->neutronProducingReactions_, 
+             this->nonNeutronProducingReactions_ );
+  this->SIG( 5,
+             this->neutronProducingReactions_, 
+             this->nonNeutronProducingReactions_ );
+  // this->AND( 7, neutronProducingReactions );
 
   auto nonMT2PhotonReactions = this->photonProductionReactions_
     | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );
