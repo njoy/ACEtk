@@ -3,6 +3,8 @@ struct NeutronProducing{
   double Q;
   int neutronYield;
   ContinuousEnergyNeutron::Builder::CrossSection crossSection;
-  std::optional< AngularDistribution > angularDistribution;
+  std::variant< std::monostate,
+                Isotropic, 
+                AngularDistribution > angularDistribution;
   std::vector< EnergyDistribution > energyDistribution;
 };

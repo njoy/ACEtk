@@ -7,7 +7,7 @@ Table construct(){
 
   auto getReaction = []( auto& pair ){ return pair.second; };
   // auto getAD = []( auto& reaction ) -> auto&
-  // { return reaction.second.angularDistribution.value(); };
+  // { return reaction.second.angularDistribution; };
 
   // Get all reactions that are neutron producing (including elastic scattering)
   auto neutronProducingReactions = 
@@ -35,13 +35,13 @@ Table construct(){
   this->SIG( 5,
              this->neutronProducingReactions_, 
              this->nonNeutronProducingReactions_ );
-  // this->AND( 7, neutronProducingReactions );
+  this->AND( 7, neutronProducingReactions  );
 
-  auto nonMT2PhotonReactions = this->photonProductionReactions_
-    | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );
+  // auto nonMT2PhotonReactions = this->photonProductionReactions_
+  //   | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );
 
-  int NTRP = ranges::distance( nonMT2PhotonReactions );
-  tableData.NXS()[ 5 ] = NTRP;
+  // int NTRP = ranges::distance( nonMT2PhotonReactions );
+  // tableData.NXS()[ 5 ] = NTRP;
   // this->MTR( 12, nonMT2PhotonReactions );
   // this->SIG( 14, NTRP, nonMT2PhotonReactions 
   //                       | ranges::view::transform( getXS ) );

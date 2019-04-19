@@ -1,5 +1,6 @@
 struct Isotropic {
   void ACEify( Table::Data&, double& LC ){
-  LC = 0;
+    // njoy::Log::info( "Isotropic ACEify." );
+    LC = 0;
   }
 };

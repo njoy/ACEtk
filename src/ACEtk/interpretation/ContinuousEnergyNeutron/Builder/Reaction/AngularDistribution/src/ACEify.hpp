@@ -1,8 +1,13 @@
 template< typename = int >
-void ACEify( Table::Data& tData, int jxsRelative ) {
+void ACEify( Table::Data& tData, double& LOCB ) {
+  // njoy::Log::info( "AngularDistribution ACEify." );
+  
+  LOCB = 1;
 
   auto& grid = this->energyGrid;
   auto& xss = tData.XSS();
+
+  auto start = xss.size() + 1;
 
   xss.push_back( grid.size() );
   xss |= ranges::action::push_back( this->energyGrid );
@@ -18,8 +23,8 @@ void ACEify( Table::Data& tData, int jxsRelative ) {
     LC = 0;
     details::ACEify( tData, distribution, LC );
 
-    auto distance = xss.size() - jxsRelative + 1;
+    auto distance = xss.size() - start + 1;
     LC = LC*distance;
-    xss[ jxsRelative + LXS + index - 1 ] = LC;
+    xss[ start + LXS + index - 1 ] = LC;
   }
 }

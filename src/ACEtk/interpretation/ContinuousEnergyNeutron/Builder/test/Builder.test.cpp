@@ -449,6 +449,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       int NR = data.NXS( 5 );
       int NTRP = data.NXS( 6 );
 
+      /*
       THEN( "the ESZ Block can be checked" ){
         auto ESZ = data.JXS( 1 );
         auto NES = data.NXS( 3 );
@@ -466,14 +467,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( mtrRef, mtr ) );
       }
-      /*
-      THEN( "the MTRP Block can be checked" ){
-        std::vector< double > mtrpRef{ 102 };
-        auto mtrp = data.XSS( data.JXS( 3 ), NTRP );
-
-        CHECK( ranges::equal( mtrpRef, mtrp ) );
-      }
-      */
       THEN( "the LQR Block can be checked" ){
         std::vector< double > lqrRef{ -5.297781, 7.0, 6.5452 };
         auto lqr = data.XSS( data.JXS( 4 ), NTR );
@@ -501,6 +494,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( landRef, land ) );
       }
+      */
       /*
       THEN( "the LSIGP Block can be checked" ){
         std::vector< double > lsigpRef{ 1 };

@@ -98,6 +98,28 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         CHECK( 14 == reaction.MT );
       }
     } // WHEN
+    WHEN( "creating a Reaction with isotropic distribution" ){
+      std::vector< double > XS{ 1.0, 2.0, 3.0 };
+
+      tb.Q( Q );
+      tb.crossSection().values( njoy::utility::copy( XS ) )
+                       .energyGrid( grid )
+                       .add();
+      tb.neutronYield( neutronYield, 
+                       ContinuousEnergyNeutron::Builder::
+                          NeutronYieldReferenceFrame::CENTEROFMASS );
+      tb.isotropic();
+      addEnergyDistribution( tb );
+
+      auto reaction = tb.constructNeutronProducing();
+
+      THEN( "the constructed Reaction can be verified" ){
+        CHECK( Q == reaction.Q );
+        CHECK( -1*neutronYield == reaction.neutronYield );
+        CHECK( XS == reaction.crossSection.values );
+        CHECK( 14 == reaction.MT );
+      }
+    } // WHEN
     WHEN( "valid neutron yield values are given" ){
       std::vector< int > validYields{
         -102, -101, -19, -4, -3, -2, -1, 1, 2, 3, 4, 19, 101, 102
@@ -114,7 +136,13 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
   } // GIVEN valid
   GIVEN( "invalid values" ){
     WHEN( "adding secondary distributions to non neutron producing reaction" ){
+      std::vector< int > nonProducingMTs{ 4, 101, 104 };
       THEN( "an exception is thrown" ){
+        for( auto MT : nonProducingMTs ){
+          TestBuilder tb{ parentBuilder, MT };
+          CHECK_THROWS_AS( tb.angularDistribution(), std::range_error& );
+          CHECK_THROWS_AS( tb.energyDistribution(), std::range_error& );
+        }
       }
     }
     WHEN( "invalid neutron yield values are given" ){

@@ -1,3 +1,10 @@
 bool isNeutronProducing() const{
-  return true;
+  if( 
+    ( MT_ > 100 ) or ( MT_ == 4 )
+    ){
+
+    return false;
+  } else {
+    return true;
+  }
 }

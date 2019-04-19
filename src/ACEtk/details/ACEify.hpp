@@ -1,5 +1,12 @@
 /* Declarations */
-inline void ACEify( Table::Data& d, double t ){ d.XSS().push_back( t ); }
+inline 
+void ACEify( Table::Data& d, double t ){ d.XSS().push_back( t ); }
+
+inline
+void ACEify( Table::Data&, std::monostate, double& LC ){
+  // njoy::Log::info( "monostate ACEify." );
+  LC = 0;
+}
 
 template< typename T, 
           typename... Args,

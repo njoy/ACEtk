@@ -18,15 +18,20 @@ void AND(int indexJXS, Range&& reactions ){
   auto enumerated = ranges::view::enumerate( reactions );
 
   // AND Block
+  double LOCB{ 0 };
+  double distance{ 0 };
   jxs[ indexJXS + 1 ] = xss.size() + 1;
   for( auto it = enumerated.begin(); it != enumerated.end(); ++it ){
 
     auto index = std::get< 0 >( *it );
-    auto angularDistribution = std::get< 1 >( *it );
-    int LOCB = xss.size() - LXS + 2;
+    auto reac = std::get< 1 >( *it );
+
+    LOCB = 0;
+
+    details::ACEify( tData, reac.angularDistribution, LOCB );
+
+    distance = xss.size() - LXS + 2;
+    LOCB *= distance;
     xss[ LED + index - 1 ] = LOCB;
-
-    details::ACEify( tData, angularDistribution, LOCB );
-
   }
 }

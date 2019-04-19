@@ -7,7 +7,10 @@ private:
   std::optional< NeutronYieldReferenceFrame > neutronYieldReferenceFrame_;
   std::optional< double > Q_;
   std::optional< CrossSection > crossSection_;
-  std::optional< AngularDistribution > angularDistribution_;
+  std::variant< 
+    std::monostate,
+    Isotropic,
+    AngularDistribution > angularDistribution_;
   std::vector< EnergyDistribution > energyDistribution_;
 
 protected:
@@ -31,10 +34,6 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp"
-  AngularDistribution::Builder angularDistribution(){ 
-    return AngularDistribution::Builder{ *this }; 
-  }
-  EnergyDistribution::Builder< Builder > energyDistribution(){ 
-    return EnergyDistribution::Builder< Builder >{ *this }; 
-  }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/angularDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyDistribution.hpp"
 };
