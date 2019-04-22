@@ -3,8 +3,9 @@ inline
 void ACEify( Table::Data& d, double t ){ d.XSS().push_back( t ); }
 
 inline
-void ACEify( Table::Data&, std::monostate, double& LC ){
+void ACEify( Table::Data&, std::monostate&, double& LC ){
   // njoy::Log::info( "monostate ACEify." );
+  // m = {};
   LC = 0;
 }
 

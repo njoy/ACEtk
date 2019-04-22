@@ -8,10 +8,7 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing Builder::TotalGammaProduction::Builder" ){
   GIVEN( "parent builder" ){
-    struct ParentBuilder: public ContinuousEnergyNeutron::Builder{
-      using ContinuousEnergyNeutron::Builder::reactions_;
-    };
-    ParentBuilder parentBuilder{};
+    ContinuousEnergyNeutron::Builder parentBuilder{};
     using TotalGammaProductionBuilder = decltype( 
         parentBuilder.totalGammaProduction() );
 

@@ -67,8 +67,9 @@ SCENARIO( "Testing Builder::Reaction::AngularDistribution::Builder" ){
         // Equiprobable distribution
         aceified |= ranges::action::push_back( cosineBins );
 
+        double LC{0};
         Table::Data data{};
-        angDistribution.ACEify( data, 0 );
+        angDistribution.ACEify( data, LC );
 
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }

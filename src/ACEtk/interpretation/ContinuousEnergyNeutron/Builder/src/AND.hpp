@@ -13,6 +13,7 @@ void AND(int indexJXS, Range&& reactions ){
   auto LED = xss.size() + 1;
   jxs[ indexJXS ] = LED;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
+
   auto LXS = LED + NMT;
 
   auto enumerated = ranges::view::enumerate( reactions );
@@ -20,6 +21,7 @@ void AND(int indexJXS, Range&& reactions ){
   // AND Block
   double LOCB{ 0 };
   double distance{ 0 };
+
   jxs[ indexJXS + 1 ] = xss.size() + 1;
   for( auto it = enumerated.begin(); it != enumerated.end(); ++it ){
 

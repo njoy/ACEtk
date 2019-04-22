@@ -388,7 +388,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        size_t size{ 235 };
+        size_t size{ 236 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -408,6 +408,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 0 == data.NXS( 15 ) );
         CHECK( 0 == data.NXS( 16 ) );
       }
+      /*
       THEN( "the JXS array can be checked " ){
         CHECK( 1  == data.JXS( 1  ) );
         CHECK( 51 == data.JXS( 2  ) );
@@ -442,6 +443,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 0 == data.JXS( 31 ) );
         CHECK( 0 == data.JXS( 32 ) );
       }
+      */
 
       // njoy::Log::info( "xss: {}", data.XSS() | ranges::view::all );
 
@@ -449,7 +451,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       int NR = data.NXS( 5 );
       int NTRP = data.NXS( 6 );
 
-      /*
       THEN( "the ESZ Block can be checked" ){
         auto ESZ = data.JXS( 1 );
         auto NES = data.NXS( 3 );
@@ -494,7 +495,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( landRef, land ) );
       }
-      */
       /*
       THEN( "the LSIGP Block can be checked" ){
         std::vector< double > lsigpRef{ 1 };
