@@ -827,7 +827,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
 
       Table::Data data{};
       int LED{ 1 };
-      int NMT{ 15 };
+      size_t NMT{ 15 };
       CENBuilder.ACEifyEDs( EDs, data, LED, NMT );
       
       auto& xss = data.XSS();

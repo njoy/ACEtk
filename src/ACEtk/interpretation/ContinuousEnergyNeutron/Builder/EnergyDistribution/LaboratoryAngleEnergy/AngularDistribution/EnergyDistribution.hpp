@@ -1,10 +1,10 @@
 struct EnergyDistribution{
 
   int interpolationParameter;
-  details::verify::Sorted< details::verify::Positive< 
+  dvS< dvP< 
       std::vector< double > > > energies;
-  details::verify::Positive< std::vector< double > > pdf;
-  details::verify::CDF< std::vector< double > > cdf;
+  dvP< std::vector< double > > pdf;
+  dvC< std::vector< double > > cdf;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy/AngularDistribution/EnergyDistribution/Builder.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy/AngularDistribution/EnergyDistribution/src/ACEify.hpp"

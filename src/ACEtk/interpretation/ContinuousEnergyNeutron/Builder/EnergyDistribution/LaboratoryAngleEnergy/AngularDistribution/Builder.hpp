@@ -4,8 +4,7 @@ class Builder {
   std::reference_wrapper< ParentBuilder > parent;
 
   std::optional< int > interpolationParameter_;
-  std::optional< 
-    details::verify::CosineBins< std::vector< double > > > cosines_;
+  std::optional< dvCB< std::vector< double > > > cosines_;
   std::vector< EnergyDistribution > energyDistributions_;
 
 protected:

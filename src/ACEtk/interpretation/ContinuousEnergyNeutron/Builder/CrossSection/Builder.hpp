@@ -2,8 +2,9 @@ template< typename ParentBuilder >
 class Builder{
 
   using Range = std::vector< double >;
+
 public:
-  std::optional< details::verify::Positive< Range > > values_;
+  std::optional< dvP< Range > > values_;
   std::optional< Table::pizza > energyGrid_;
 
 protected:

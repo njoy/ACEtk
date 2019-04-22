@@ -3,7 +3,7 @@ private:
   std::reference_wrapper< ContinuousEnergyNeutron::Builder > parent;
   std::optional< std::vector< double > > crossSection_;
   std::optional< std::array<
-    details::verify::Positive< 
+    dvP< 
       std::array< double, 20 > >, 30 > > outgoingEnergies_;
 
 protected:

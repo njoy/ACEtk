@@ -1,9 +1,9 @@
 struct Tabulated{
 
   int interpolationFlag;
-  details::verify::CosineBins< std::vector< double > > cosineGrid;
-  details::verify::Positive< std::vector< double > > PDF;
-  details::verify::CDF< std::vector< double > > CDF;
+  dvCB< std::vector< double > > cosineGrid;
+  dvP< std::vector< double > > PDF;
+  dvC< std::vector< double > > CDF;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/Builder.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated/src/ACEify.hpp"

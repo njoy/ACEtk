@@ -1,10 +1,10 @@
 struct Data{
 
   int interpolationParameter;
-  details::verify::Sorted< 
-      details::verify::Positive< std::vector< double > > > energies;
-  details::verify::Positive< std::vector< double > > pdf;
-  details::verify::CDF< std::vector< double > > cdf;
+  dvS< 
+      dvP< std::vector< double > > > energies;
+  dvP< std::vector< double > > pdf;
+  dvC< std::vector< double > > cdf;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/Builder.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/ContinuousTabularDistribution/Data/src/ACEify.hpp"

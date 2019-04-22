@@ -6,18 +6,18 @@ private:
   std::optional< int > inelasticCompetition_;
   std::optional< int > otherAbsorption_;
   std::optional< Factors > factors_;
-  std::optional< details::verify::Positive< 
-    details::verify::Sorted< std::vector< double > > > > incidentEnergies_;
-  std::optional< details::verify::CDF< std::vector< double > > > CDFs_;
-  std::optional< details::verify::Positive< std::vector< double > > > totalXS_;
+  std::optional< dvP< 
+    dvS< std::vector< double > > > > incidentEnergies_;
+  std::optional< dvC< std::vector< double > > > CDFs_;
+  std::optional< dvP< std::vector< double > > > totalXS_;
   std::optional< 
-    details::verify::Positive< std::vector< double > > > elasticXS_;
+    dvP< std::vector< double > > > elasticXS_;
   std::optional< 
-    details::verify::Positive< std::vector< double > > > fissionXS_;
+    dvP< std::vector< double > > > fissionXS_;
   std::optional< 
-    details::verify::Positive< std::vector< double > > > captureXS_;
+    dvP< std::vector< double > > > captureXS_;
   std::optional< 
-    details::verify::Positive< std::vector< double > > > heating_;
+    dvP< std::vector< double > > > heating_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder/src/equalSize.hpp"

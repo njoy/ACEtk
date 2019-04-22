@@ -4,10 +4,9 @@ class Builder {
   std::reference_wrapper< ParentBuilder > parent;
 
   std::optional< int > interpolationParameter_;
-  std::optional< 
-    details::verify::CosineBins< std::vector< double > > > cosineGrid_;
-  std::optional< details::verify::Positive< std::vector< double > > >  pdf_;
-  std::optional< details::verify::CDF< std::vector< double > > > cdf_;
+  std::optional< dvCB< std::vector< double > > > cosineGrid_;
+  std::optional< dvP< std::vector< double > > >  pdf_;
+  std::optional< dvC< std::vector< double > > > cdf_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Data/AngularDistribution/Builder/src/construct.hpp"

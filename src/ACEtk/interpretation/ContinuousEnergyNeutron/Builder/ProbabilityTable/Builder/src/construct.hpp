@@ -7,16 +7,22 @@ ProbabilityTable construct(){
     equalSize( this->fissionXS_, "fission cross section" );
   }
   else{
-    this->fissionXS_ = ranges::view::repeat_n( 
-        0.0, this->incidentEnergies_.value().size() ) | ranges::to_vector;
+    this->fissionXS_ = std::make_optional<
+      dvP< std::vector< double > > >(
+        ranges::view::repeat_n( 0.0, this->incidentEnergies_.value().size() )
+          | ranges::to_vector 
+      );
   }
   equalSize( this->captureXS_, "capture cross section" );
   if( this->heating_ ){
     equalSize( this->heating_, "heating" );
   }
   else{
-    this->heating_ = ranges::view::repeat_n( 
-        0.0, this->incidentEnergies_.value().size() ) | ranges::to_vector;
+    this->heating_ = std::make_optional<
+      dvP< std::vector< double > > >(
+        ranges::view::repeat_n( 
+          0.0, this->incidentEnergies_.value().size() ) | ranges::to_vector
+      );
   }
 
   return ProbabilityTable{

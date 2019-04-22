@@ -3,7 +3,9 @@ template< typename Range,
 Builder& pdf( Range&& pdf ){
 
   try{
-    this->PDF_ = std::move( pdf );
+    this->PDF_  = std::make_optional< 
+      dvP< std::vector< double > > >( 
+        std::move( pdf ) | ranges::to_vector );
     return *this;
   } catch( details::verify::exceptions::InvalidPDF& e ){
     Log::info( "Trouble constructing PDF values in "

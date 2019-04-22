@@ -5,7 +5,7 @@ class Builder {
 
   std::reference_wrapper< ParentBuilder > parent;
   std::optional< 
-    details::verify::CosineBins< std::array< double, 33 > > > cosineBins_;
+    dvCB< std::array< double, 33 > > > cosineBins_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable/Builder/src/construct.hpp"

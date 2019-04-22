@@ -1,4 +1,9 @@
 class Builder{
+  template< typename T > using dvP = details::verify::Positive< T >;
+  template< typename T > using dvS = details::verify::Sorted< T >;
+  template< typename T > using dvC = details::verify::CDF< T >;
+  template< typename T > using dvCB = details::verify::CosineBins< T >;
+
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/NeutronYieldReferenceFrame.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Factors.hpp"
@@ -18,18 +23,11 @@ protected:
   std::optional< Table::Header > header_;
   std::optional< Table::Data > tableData_;
 
-  std::optional< details::verify::Positive< 
-    details::verify::Sorted< std::vector< double > > > > energyGrid_;
-
-  std::optional< details::verify::Positive< std::vector< double > > > totalXS_;
-
-  std::optional< details::verify::Positive< std::vector< double > > > 
-      totalDisappearanceXS_;
-
-  std::optional< 
-      details::verify::Positive< std::vector< double > > > elasticXS_;
-
-  std::optional< details::verify::Positive< std::vector< double > > > heating_;
+  std::optional< dvP< dvS< std::vector< double > > > > energyGrid_;
+  std::optional< dvP< std::vector< double > > > totalXS_;
+  std::optional< dvP< std::vector< double > > > totalDisappearanceXS_;
+  std::optional< dvP< std::vector< double > > > elasticXS_;
+  std::optional< dvP< std::vector< double > > > heating_;
 
   std::optional< int > SZA_;
   tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;

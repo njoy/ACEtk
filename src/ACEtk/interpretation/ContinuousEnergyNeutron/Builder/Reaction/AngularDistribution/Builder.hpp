@@ -2,8 +2,8 @@ class Builder {
   using ParentBuilder = ContinuousEnergyNeutron::Builder::Reaction::Builder;
 
   std::reference_wrapper< ParentBuilder > parent;
-  std::optional< details::verify::Positive< 
-      details::verify::Sorted< std::vector< double > > > > energyGrid_;
+  std::optional< dvP< 
+      dvS< std::vector< double > > > > energyGrid_;
   std::vector< Format > representations_;
 
 protected:

@@ -1,8 +1,8 @@
 struct TabularEnergyMultipliers: 
-  public Tabulated< details::verify::Positive< std::vector< double > > > {
-  using Parent = Tabulated< details::verify::Positive< std::vector< double > > >;
+  public Tabulated< dvP< std::vector< double > > > {
+  using Parent = Tabulated< dvP< std::vector< double > > >;
 
-  using Tab = Tabulated< details::verify::Positive< std::vector< double > > >;
+  using Tab = Tabulated< dvP< std::vector< double > > >;
 
   template< typename... Ts,
     utility::Require< true, std::is_constructible, Parent, Ts... > = true 

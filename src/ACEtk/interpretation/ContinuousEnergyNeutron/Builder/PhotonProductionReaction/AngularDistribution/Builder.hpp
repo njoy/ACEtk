@@ -3,10 +3,10 @@ class Builder{
       ContinuousEnergyNeutron::Builder::PhotonProductionReaction::Builder;
 
   std::reference_wrapper< ParentBuilder > parent;
-  std::optional< details::verify::Positive< 
-      details::verify::Sorted< std::vector< double > > > > energyGrid_;
+  std::optional< dvP< 
+      dvS< std::vector< double > > > > energyGrid_;
   std::optional< std::vector<
-    details::verify::Positive< std::array< double, 33 > > > > cosineBins_;
+    dvP< std::array< double, 33 > > > > cosineBins_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/construct.hpp"

@@ -1,16 +1,16 @@
 template< typename ParentBuilder >
 class Builder: 
-  public Tabulated< details::verify::Positive< std::vector< double > > >::
+  public Tabulated< dvP< std::vector< double > > >::
     Builder< Builder< ParentBuilder > >,
   public Base::Builder< Builder< ParentBuilder >, ParentBuilder > {
 
 
   using TabBuilder = Tabulated< 
-    details::verify::Positive< std::vector< double > > >::Builder< 
+    dvP< std::vector< double > > >::Builder< 
       Builder< ParentBuilder > >;
   using BaseBuilder = Base::Builder< Builder< ParentBuilder >, ParentBuilder >;
 
-  std::vector< details::verify::Positive< std::vector< double > > > tables_;
+  std::vector< dvP< std::vector< double > > > tables_;
 
 protected:
 

@@ -47,6 +47,8 @@ void ACEify( Table::Data& d, T&& t, Args&&... args ){
 }
 
 template< typename... Ts, typename... Args >
-void ACEify( Table::Data& data, std::variant< Ts... >& v, Args&&... args ){
+void ACEify( Table::Data& data, 
+             std::variant< Ts... >& v, 
+             Args&&... args ){
   std::visit( [ & ]( auto&& t ){ details::ACEify( data, t, args... ); }, v );
 }

@@ -5,6 +5,7 @@
 #include <istream>
 #include <iterator>
 #include <functional>
+#include <map>
 
 #ifdef USING_CPP17
   #include <optional>

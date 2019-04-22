@@ -11,8 +11,8 @@ struct AngularDistribution{
   >;
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp"
 
-  details::verify::Positive< 
-    details::verify::Sorted< std::vector< double > > > energyGrid;
+  dvP< 
+    dvS< std::vector< double > > > energyGrid;
   std::vector< Format > representations;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/src/ACEify.hpp"
