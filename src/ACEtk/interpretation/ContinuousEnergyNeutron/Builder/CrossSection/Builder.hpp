@@ -1,10 +1,10 @@
 template< typename ParentBuilder >
 class Builder{
 
-  using Range = std::vector< double >;
+ using dvPsvd = dvP< std::vector< double > >;
 
 public:
-  std::optional< dvP< Range > > values_;
+  std::optional< dvPsvd > values_;
   std::optional< Table::pizza > energyGrid_;
 
 protected:
