@@ -53,8 +53,9 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
 
           Table::Data data{};
           data.XSS().push_back( 0 );
-          static_assert( details::hasACEify< decltype( tabulated ), double& >:: value, "double barf" );
+          data.JXS()[ 8 ] = 1;
           tabulated.ACEify( data, data.XSS()[ 0 ] );
+
           CHECK( ranges::equal( aceified, data.XSS() ) );
         }
       }

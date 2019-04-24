@@ -55,8 +55,8 @@ SCENARIO( "Testing Builder::Reaction::AngularDistribution::Builder" ){
         aceified.push_back( grid.size() );
         aceified |= ranges::action::push_back( grid );
         aceified.push_back( 0 );      // LC_1
-        aceified.push_back( -19 );    // LC_2
-        aceified.push_back( 52 );     // LC_3
+        aceified.push_back( -8 );    // LC_2
+        aceified.push_back( 19 );     // LC_3
         // Isotropic distribution has no data
         // Tabulated distribution
         aceified.push_back( f );    // JJ
@@ -70,6 +70,9 @@ SCENARIO( "Testing Builder::Reaction::AngularDistribution::Builder" ){
         double LC{0};
         Table::Data data{};
         angDistribution.ACEify( data, LC );
+
+        njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
+        njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
 
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }

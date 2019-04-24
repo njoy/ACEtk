@@ -1,5 +1,5 @@
-void ACEify( Table::Data&, double& LC ){
-  LC = 1;
+void ACEify( Table::Data& tData, double& LC ){
+  LC = tData.XSS().size() - tData.JXS( 9 ) + 1;
 
-  // details::ACEify( tData, this->cosineBins );
+  details::ACEify( tData, this->cosineBins );
 }

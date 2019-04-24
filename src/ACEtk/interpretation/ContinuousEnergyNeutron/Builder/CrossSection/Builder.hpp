@@ -1,10 +1,8 @@
 template< typename ParentBuilder >
 class Builder{
 
- using dvPsvd = dvP< std::vector< double > >;
-
 public:
-  std::optional< dvPsvd > values_;
+  std::optional< dvP< std::vector< double > > > values_;
   std::optional< Table::pizza > energyGrid_;
 
 protected:
