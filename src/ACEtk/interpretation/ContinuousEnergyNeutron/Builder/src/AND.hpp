@@ -16,24 +16,19 @@ void AND(int indexJXS, Range&& reactions ){
 
   auto LXS = LED + NMT;
 
-  auto enumerated = ranges::view::enumerate( reactions );
-
   // AND Block
-  double LOCB{ 0 };
-  double distance{ 0 };
-
   jxs[ indexJXS + 1 ] = xss.size() + 1;
+  auto enumerated = ranges::view::enumerate( reactions );
   for( auto it = enumerated.begin(); it != enumerated.end(); ++it ){
-
     auto index = std::get< 0 >( *it );
     auto reac = std::get< 1 >( *it );
 
-    LOCB = 0;
+    Log::info( "index: {}, MT: {}", index, reac.MT );
 
+    double LOCB{ 0 };
     details::ACEify( tData, reac.angularDistribution, LOCB );
 
-    distance = xss.size() - LXS + 2;
-    LOCB *= distance;
     xss[ LED + index - 1 ] = LOCB;
   }
+  Log::info( "\tDone with AND." );
 }

@@ -109,7 +109,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .isotropic()
             .isotropic()
           .add() // angular distribution
-        .add(); // reaction 16
+        .add(); // reaction 2
     }
     /*
     { // MT=4
@@ -381,9 +381,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     }
 
     WHEN( "constructing a Table" ){
-    /*
 
-      // auto table = nc.construct();
+      auto table = nc.construct();
 
       auto header = table.header;
       auto data = table.data;
@@ -494,7 +493,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( landRef, land ) );
       }
-      */
       /*
       THEN( "the LSIGP Block can be checked" ){
         std::vector< double > lsigpRef{ 1 };

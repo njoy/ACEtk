@@ -1,13 +1,13 @@
 template< typename = int >
 void ACEify( Table::Data& tData, double& LOCB ) {
-  // njoy::Log::info( "AngularDistribution ACEify." );
-  
-  LOCB = 1;
+  njoy::Log::info( "AngularDistribution ACEify." );
 
-  auto& grid = this->energyGrid;
   auto& xss = tData.XSS();
-
   auto jxsRelative = tData.JXS( 9 );
+
+  LOCB = ( xss.size() - jxsRelative + 1 );
+  
+  auto& grid = this->energyGrid;
 
   xss.push_back( grid.size() );
   xss |= ranges::action::push_back( this->energyGrid );
@@ -19,9 +19,12 @@ void ACEify( Table::Data& tData, double& LOCB ) {
     decltype( auto ) index = std::get< 0 >( *it );
     decltype( auto ) distribution = std::get< 1 >( *it );
 
+    Log::info( "\tindex: {}", index );
+
     double LC{0};
     details::ACEify( tData, distribution, LC );
 
     xss[ jxsRelative + LXS + index - 1 ] = LC;
   }
+  Log::info( "\tDone aceifying angular distributions." );
 }
