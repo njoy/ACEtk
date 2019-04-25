@@ -6,6 +6,12 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
+template< typename Range1, typename Range2 >
+void printRanges( std::string name, Range1&& reference, Range2&& test ){
+  njoy::Log::info( "{}", name );
+  njoy::Log::info( "\treference: {}", reference | ranges::view::all );
+  njoy::Log::info( "\ttest     : {}", test | ranges::view::all );
+}
 SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder nc{};
 
@@ -388,7 +394,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        size_t size{ 236 };
+        long long size{ 236 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -414,8 +420,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 83 == data.JXS( 3  ) );
         CHECK( 86 == data.JXS( 4  ) );
         CHECK( 89 == data.JXS( 5  ) );
-        CHECK( 92 == data.JXS( 6  ) );
-        CHECK( 95 == data.JXS( 7  ) );
+        CHECK( 91 == data.JXS( 6  ) );
+        CHECK( 94 == data.JXS( 7  ) );
         CHECK( 124 == data.JXS( 8  ) );
         CHECK( 126 == data.JXS( 9  ) );
         // CHECK( 0 == data.JXS( 10 ) );
@@ -480,8 +486,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       }
       THEN( "the LSIG Block can be checked" ){
         std::vector< double > lsigRef{ 1, 13, 18 };
-        auto lsig = data.XSS( data.JXS( 7 ), NTR );
+        auto lsig = data.XSS( data.JXS( 6 ), NTR );
 
+        printRanges( "SIG", lsigRef, lsig );
         CHECK( ranges::equal( lsigRef, lsig ) );
       }
       THEN( "the LAND Block can be checked" ){

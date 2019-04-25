@@ -2,52 +2,39 @@ template< typename R1, typename R2,
           utility::Require< true, utility::is_range, R1 > = true,
           utility::Require< true, utility::is_range, R2 > = true
         >
-void SIG(int indexJXS, R1&& npReactions, R2&& nonnpReactions ){
+void SIG(int jxsIndex, R1&& npReactions, R2&& nonnpReactions ){
 
-  auto npSize = npReactions.size();
-  auto nnpSize = nonnpReactions.size();
-  auto NMT = npSize + nnpSize;
-
-  auto getXS = []( auto& reaction ) -> auto&
-  { return reaction.second.crossSection; };
+  auto NMT = npReactions.size() + nonnpReactions.size();
 
   auto& tData = this->tableData_.value();
   auto& xss = tData.XSS();
   auto& jxs = tData.JXS();
 
   // LSIG Block
-  auto LXS = xss.size() + 1;
-  jxs[ indexJXS ] = LXS;
+  auto LXS = xss.size();
+  auto LOCA_i = LXS;
+  jxs[ jxsIndex ] = LOCA_i;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
-  LXS += NMT;
 
-  // Neutron producing reactions
-  auto npEnumerated = npReactions
-    | ranges::view::transform( getXS )
-    | ranges::view::enumerate;
-  jxs[ indexJXS + 1 ] = xss.size() + 1;
-  for( auto it = npEnumerated.begin(); it != npEnumerated.end(); ++it ){
+  auto jxs7 = xss.size();
+  jxs[ jxsIndex + 1 ] = jxs7;
 
-    auto index = std::get< 0 >( *it );
-    auto crossSection = std::get< 1 >( *it );
-    xss[ LXS + index - 1 ] = xss.size() - LXS + 2;
+  auto ACEifyReactionList = [&]( auto& reactions ) -> void {
+    auto XS = reactions
+      | ranges::view::transform( 
+          []( auto& reaction ) { return reaction.second.crossSection; } );
+    auto enumeratedXS = XS | ranges::view::enumerate;
 
-    details::ACEify( tData, crossSection );
+    double LOCA{ 0 };
+    for( decltype( auto ) crossSection : XS ){
+      LOCA = xss.size() - jxs7 + 1;
+      xss[ LOCA_i -1 ] = xss.size() - jxs7 + 1;
 
-  }
-  // non neutron producing reactions
-  auto nnpEnumerated = nonnpReactions
-    | ranges::view::transform( getXS )
-    | ranges::view::enumerate;
+      details::ACEify( tData, crossSection );
+      LOCA_i +=1;
+    }
+  };
 
-  jxs[ indexJXS + 1 ] = xss.size() + 1;
-  for( auto it = nnpEnumerated.begin(); it != nnpEnumerated.end(); ++it ){
-
-    auto index = std::get< 0 >( *it );
-    auto crossSection = std::get< 1 >( *it );
-    xss[ LXS + index - 1 ] = xss.size() - LXS + 2;
-
-    details::ACEify( tData, crossSection );
-
-  }
+  ACEifyReactionList( npReactions );
+  ACEifyReactionList( nonnpReactions );
 }

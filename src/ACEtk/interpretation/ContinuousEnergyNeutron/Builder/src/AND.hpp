@@ -23,12 +23,9 @@ void AND(int indexJXS, Range&& reactions ){
     auto index = std::get< 0 >( *it );
     auto reac = std::get< 1 >( *it );
 
-    Log::info( "index: {}, MT: {}", index, reac.MT );
-
     double LOCB{ 0 };
     details::ACEify( tData, reac.angularDistribution, LOCB );
 
     xss[ LED + index - 1 ] = LOCB;
   }
-  Log::info( "\tDone with AND." );
 }
