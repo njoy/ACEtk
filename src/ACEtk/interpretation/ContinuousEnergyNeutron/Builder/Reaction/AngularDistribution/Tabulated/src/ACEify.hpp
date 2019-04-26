@@ -1,5 +1,5 @@
 void ACEify( Table::Data& tData, double& LC ){
-  LC = -1.0*( tData.XSS().size() - tData.JXS( 9 ) + 1 );
+  LC = -1.0*( tData.XSS().size() - tData.JXS( 9 ) + 2 );
 
   details::ACEify( tData, interpolationFlag );
   details::ACEify( tData, cosineGrid.size() );

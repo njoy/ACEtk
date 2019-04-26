@@ -53,9 +53,11 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
 
           Table::Data data{};
           data.XSS().push_back( 0 );
-          data.JXS()[ 8 ] = 1;
+          data.JXS()[ 8 ] = 2;
           tabulated.ACEify( data, data.XSS()[ 0 ] );
 
+          njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
+          njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
           CHECK( ranges::equal( aceified, data.XSS() ) );
         }
       }

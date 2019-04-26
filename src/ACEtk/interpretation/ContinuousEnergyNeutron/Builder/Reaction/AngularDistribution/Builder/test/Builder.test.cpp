@@ -69,10 +69,8 @@ SCENARIO( "Testing Builder::Reaction::AngularDistribution::Builder" ){
 
         double LC{0};
         Table::Data data{};
+        data.JXS()[ 8 ] = 1;
         angDistribution.ACEify( data, LC );
-
-        njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
-        njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
 
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }

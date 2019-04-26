@@ -11,12 +11,11 @@ void SIG(int jxsIndex, R1&& npReactions, R2&& nonnpReactions ){
   auto& jxs = tData.JXS();
 
   // LSIG Block
-  auto LXS = xss.size();
-  auto LOCA_i = LXS;
+  auto LOCA_i = xss.size() + 1;
   jxs[ jxsIndex ] = LOCA_i;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
-  auto jxs7 = xss.size();
+  auto jxs7 = LOCA_i + NMT;
   jxs[ jxsIndex + 1 ] = jxs7;
 
   auto ACEifyReactionList = [&]( auto& reactions ) -> void {
@@ -25,10 +24,8 @@ void SIG(int jxsIndex, R1&& npReactions, R2&& nonnpReactions ){
           []( auto& reaction ) { return reaction.second.crossSection; } );
     auto enumeratedXS = XS | ranges::view::enumerate;
 
-    double LOCA{ 0 };
     for( decltype( auto ) crossSection : XS ){
-      LOCA = xss.size() - jxs7 + 1;
-      xss[ LOCA_i -1 ] = xss.size() - jxs7 + 1;
+      xss[ LOCA_i - 1 ] = xss.size() - jxs7 + 2;
 
       details::ACEify( tData, crossSection );
       LOCA_i +=1;

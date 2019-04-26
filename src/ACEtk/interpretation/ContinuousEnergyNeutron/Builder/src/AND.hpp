@@ -1,7 +1,7 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true
         >
-void AND(int indexJXS, Range&& reactions ){
+void AND(int jxsIndex, Range&& reactions ){
 
   auto NMT = ranges::distance( reactions );
 
@@ -11,13 +11,11 @@ void AND(int indexJXS, Range&& reactions ){
 
   // LAND Block
   auto LED = xss.size() + 1;
-  jxs[ indexJXS ] = LED;
+  jxs[ jxsIndex ] = LED;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
-  auto LXS = LED + NMT;
-
   // AND Block
-  jxs[ indexJXS + 1 ] = xss.size() + 1;
+  jxs[ jxsIndex + 1 ] = xss.size() + 1;
   auto enumerated = ranges::view::enumerate( reactions );
   for( auto it = enumerated.begin(); it != enumerated.end(); ++it ){
     auto index = std::get< 0 >( *it );
