@@ -22,7 +22,6 @@ void SIG(int jxsIndex, R1&& npReactions, R2&& nonnpReactions ){
     auto XS = reactions
       | ranges::view::transform( 
           []( auto& reaction ) { return reaction.second.crossSection; } );
-    auto enumeratedXS = XS | ranges::view::enumerate;
 
     for( decltype( auto ) crossSection : XS ){
       xss[ LOCA_i - 1 ] = xss.size() - jxs7 + 2;

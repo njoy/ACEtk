@@ -9,10 +9,7 @@ void NU(){
   auto& nxs = tData.NXS();
   auto& jxs = tData.JXS();
 
-  auto nuVisitor = [&](auto& nubar ) -> void
-  {
-    nubar.ACEify( tData );
-  };
+  auto nuVisitor = [&](auto& nubar ) -> void { nubar.ACEify( tData ); };
 
   auto size = xss.size() + 1;
   jxs[ 1 ] = size;

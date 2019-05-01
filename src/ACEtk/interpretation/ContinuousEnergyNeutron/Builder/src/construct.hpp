@@ -5,9 +5,8 @@ Table construct(){
 
   this->ESZ();
 
-  auto getReaction = []( auto& pair ){ return pair.second; };
-  // auto getAD = []( auto& reaction ) -> auto&
-  // { return reaction.second.angularDistribution; };
+  auto getReaction = []( auto&& pair ){ return pair.second; };
+  auto getED = [](auto&& R ){ return R.energyDistribution; };
 
   // Get all reactions that are neutron producing (including elastic scattering)
   auto neutronProducingReactions = 
@@ -36,6 +35,8 @@ Table construct(){
              this->neutronProducingReactions_, 
              this->nonNeutronProducingReactions_ );
   this->AND( 7, neutronProducingReactions  );
+  this->DLW( 9, neutronProducingReactions 
+            | ranges::view::transform( getED ) );
 
   // auto nonMT2PhotonReactions = this->photonProductionReactions_
   //   | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );

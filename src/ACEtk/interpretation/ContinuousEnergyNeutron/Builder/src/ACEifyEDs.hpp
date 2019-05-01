@@ -9,21 +9,47 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true
         >
-void ACEifyEDs( Range& distributions,
+void ACEifyEDs( Range&& distributions,
                 Table::Data& tData, 
                 int LED, int NMT ) {
 
 
   auto& xss = tData.XSS();
   // Locators
-  xss |= ranges::action::push_back( 
-    ranges::view::repeat_n( 0, NMT )
-  );
+  xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
   auto JED = LED + NMT;
 
   auto N = distributions.size();
   int LOCC{ 0 };
+  auto inumerated = ranges::view::enumerate( distributions );
+  for( auto it = inumerated.begin(); it != inumerated.end(); ++it ){
+    auto index = std::get< 0 >( *it );
+    auto ed = std::get< 1 >( *it );
+
+    LOCC = ( xss.size() + 1 ) - JED + 1;
+    xss[ LED + index - 1 ] = LOCC;
+
+    int LNW_i{ 0 };
+    int LNW{ 0 };
+
+    auto kt = ed.begin();
+    for( ; kt != ranges::prev( ed.end() ); ++kt ){
+
+      xss.push_back( 0 ); // LNW
+      LNW_i = xss.size() - 1;
+
+      details::ACEify( tData, *kt, JED );
+
+      LNW = xss.size() - ( JED - 1 ) + 1;
+      xss[ LNW_i ] = LNW;
+
+    } // for kndex
+    xss.push_back( 0 ); // LNW
+    details::ACEify( tData, *kt, JED );
+
+  } // for index
+  /*
   for( size_t index = 0; index < N; index++ ){
 
     LOCC = ( xss.size() + 1 ) - JED + 1;
@@ -46,4 +72,5 @@ void ACEifyEDs( Range& distributions,
     } // for kndex
 
   } // for index
+  */
 }

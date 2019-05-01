@@ -449,8 +449,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 0 == data.JXS( 32 ) );
       }
 
-      // njoy::Log::info( "xss: {}", data.XSS() | ranges::view::all );
-
       int NTR = data.NXS( 4 );
       int NR = data.NXS( 5 );
       int NTRP = data.NXS( 6 );
@@ -497,16 +495,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         printRanges( "AND", landRef, land );
         CHECK( ranges::equal( landRef, land ) );
       }
-      /*
-      THEN( "the LSIGP Block can be checked" ){
-        std::vector< double > lsigpRef{ 1 };
-        auto lsigp = data.XSS( data.JXS( 15 ), NTRP );
-
-        njoy::Log::info( "lsigpR: {}" , lsigpRef | ranges::view::all );
-        njoy::Log::info( "lsigp : {}" , lsigp | ranges::view::all );
-        CHECK( ranges::equal( lsigpRef, lsigp ) );
-      }
-      */
 
     }
   } // GIVEN valid
