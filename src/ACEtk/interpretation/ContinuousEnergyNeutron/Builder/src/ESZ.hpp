@@ -46,9 +46,9 @@ void ESZ(){
     }
   }
 
-  auto& xss = this->tableData_.value().XSS();
-  auto& nxs = this->tableData_.value().NXS();
-  auto& jxs = this->tableData_.value().JXS();
+  decltype( auto ) xss = this->tableData_.value().XSS();
+  decltype( auto ) nxs = this->tableData_.value().NXS();
+  decltype( auto ) jxs = this->tableData_.value().JXS();
 
   try{
     nxs[ 1 ] = this->SZA_.value();

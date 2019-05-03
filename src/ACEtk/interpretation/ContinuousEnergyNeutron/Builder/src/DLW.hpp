@@ -9,11 +9,11 @@ void DLW(int jxsIndex, Range&& distributions ){
 
   decltype( auto ) NMT = distributions.size();
 
-  auto LED = xss.size() + 1;
+  decltype( auto ) LED = xss.size() + 1;
   jxs[ jxsIndex ] = LED;
 
   // Precursor energy distributions
   jxs[ jxsIndex + 1 ] = LED + NMT;
 
-  // this->ACEifyEDs( distributions, tData, LED, NMT );
+  this->ACEifyEDs( distributions, tData, LED, NMT );
 }

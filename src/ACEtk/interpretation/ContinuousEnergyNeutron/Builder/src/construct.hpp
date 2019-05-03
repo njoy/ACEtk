@@ -1,15 +1,17 @@
 Table construct(){
 
   this->tableData_ = Table::Data{};
-  auto& tableData = this->tableData_.value();
+  decltype( auto ) tableData = this->tableData_.value();
 
   this->ESZ();
 
-  auto getReaction = []( auto&& pair ){ return pair.second; };
-  auto getED = [](auto&& R ){ return R.energyDistribution; };
+  decltype( auto ) getReaction = []( auto&& pair ) -> decltype( auto )
+    { return pair.second; };
+  decltype( auto ) getED = []( auto&& R ) -> decltype( auto )
+    { return R.energyDistribution; };
 
   // Get all reactions that are neutron producing (including elastic scattering)
-  auto neutronProducingReactions = 
+  decltype( auto ) neutronProducingReactions = 
     ranges::view::concat( 
       ranges::view::single( this->elasticScattering_.value() ),
       this->neutronProducingReactions_ | ranges::view::transform( getReaction )
@@ -37,15 +39,6 @@ Table construct(){
   this->AND( 7, neutronProducingReactions  );
   this->DLW( 9, neutronProducingReactions 
             | ranges::view::transform( getED ) );
-
-  // auto nonMT2PhotonReactions = this->photonProductionReactions_
-  //   | ranges::view::filter( [](auto& pair ){ return pair.first != 2; } );
-
-  // int NTRP = ranges::distance( nonMT2PhotonReactions );
-  // tableData.NXS()[ 5 ] = NTRP;
-  // this->MTR( 12, nonMT2PhotonReactions );
-  // this->SIG( 14, NTRP, nonMT2PhotonReactions 
-  //                       | ranges::view::transform( getXS ) );
 
   try{
     tableData.NXS()[ 0 ] = tableData.XSS().size();

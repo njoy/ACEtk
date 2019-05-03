@@ -13,14 +13,13 @@ void ACEifyEDs( Range&& distributions,
                 Table::Data& tData, 
                 int LED, int NMT ) {
 
-
   decltype( auto ) xss = tData.XSS();
   // Locators
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
   int JED = LED + NMT;
 
-  auto inumerated = ranges::view::enumerate( distributions );
+  decltype( auto ) inumerated = ranges::view::enumerate( distributions );
   for( auto it = inumerated.begin(); it != inumerated.end(); ++it ){
     decltype( auto ) pair = *it;
     decltype( auto ) index = std::get< 0 >( pair );
@@ -33,16 +32,16 @@ void ACEifyEDs( Range&& distributions,
     for( ; kt != ranges::prev( ed.end() ); ++kt ){
 
       xss.push_back( 0 ); // LNW
-      auto LNW_i = xss.size() - 1;
+      long long LNW_i = xss.size() - 1;
 
       details::ACEify( tData, *kt, JED );
 
-      auto LNW = xss.size() - ( JED - 1 ) + 1;
+      auto LNW = static_cast< long long >( xss.size() ) - ( JED - 1 ) + 1;
       xss[ LNW_i ] = LNW;
 
     } // for kndex
     xss.push_back( 0 ); // LNW
-    details::ACEify( tData, *kt, JED );
+    // details::ACEify( tData, *kt, JED );
 
   } // for index
 }
