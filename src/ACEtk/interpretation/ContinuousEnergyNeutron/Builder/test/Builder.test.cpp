@@ -453,6 +453,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       int NR = data.NXS( 5 );
       int NTRP = data.NXS( 6 );
 
+      /*
       THEN( "the ESZ Block can be checked" ){
         auto ESZ = data.JXS( 1 );
         auto NES = data.NXS( 3 );
@@ -495,6 +496,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         printRanges( "AND", landRef, land );
         CHECK( ranges::equal( landRef, land ) );
       }
+      */
 
     }
   } // GIVEN valid

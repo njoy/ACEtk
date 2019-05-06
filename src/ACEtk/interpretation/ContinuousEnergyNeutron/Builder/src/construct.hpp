@@ -5,8 +5,10 @@ Table construct(){
 
   this->ESZ();
 
-  auto getReaction = []( auto&& pair ){ return pair.second; };
-  auto getED = [](auto&& R ){ return R.energyDistribution; };
+  auto getReaction = []( auto&& pair ) -> decltype( auto )
+    { return pair.second; };
+  auto getED = [](auto&& R ) -> decltype( auto )
+    { return R.energyDistribution; };
 
   // Get all reactions that are neutron producing (including elastic scattering)
   auto neutronProducingReactions = 

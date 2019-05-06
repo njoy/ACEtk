@@ -1,23 +1,18 @@
 void ACEify( Table::Data& tData ){
   auto& xss = tData.XSS();
 
-  if( parameters ){
-    auto p = parameters.value();
-    xss 
-      |= ranges::action::push_back( 
-          ranges::view::concat(
-            ranges::view::single( p.first.size() ), p.first, p.second
-          )
-        );
+  if( bool( parameters ) ){
+    decltype( auto ) p = parameters.value();
+    xss.push_back( p.first.size() );
+    xss |= ranges::action::push_back( p.first );
+    xss |= ranges::action::push_back( p.second );
   }
   else{
-    xss |= ranges::action::push_back( ranges::view::single( 0 ) );
+    xss.push_back( 0 );
   }
 
-  xss 
-    |= ranges::action::push_back( 
-      ranges::view::concat( ranges::view::single( x.size() ), x )
-      );
+  xss.push_back( x.size() );
+  xss |= ranges::action::push_back( x );
 
   details::ACEify( tData, this->y );
 

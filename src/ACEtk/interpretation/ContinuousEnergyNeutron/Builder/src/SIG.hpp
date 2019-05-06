@@ -4,24 +4,25 @@ template< typename R1, typename R2,
         >
 void SIG(int jxsIndex, R1&& npReactions, R2&& nonnpReactions ){
 
-  auto NMT = npReactions.size() + nonnpReactions.size();
+  decltype( auto ) NMT = npReactions.size() + nonnpReactions.size();
 
-  auto& tData = this->tableData_.value();
-  auto& xss = tData.XSS();
-  auto& jxs = tData.JXS();
+  decltype( auto ) tData = this->tableData_.value();
+  decltype( auto ) xss = tData.XSS();
+  decltype( auto ) jxs = tData.JXS();
 
   // LSIG Block
-  auto LOCA_i = xss.size() + 1;
+  decltype( auto ) LOCA_i = xss.size() + 1;
   jxs[ jxsIndex ] = LOCA_i;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
-  auto jxs7 = LOCA_i + NMT;
+  decltype( auto ) jxs7 = LOCA_i + NMT;
   jxs[ jxsIndex + 1 ] = jxs7;
 
-  auto ACEifyReactionList = [&]( auto& reactions ) -> void {
-    auto XS = reactions
+  decltype( auto ) ACEifyReactionList = [&]( auto&& reactions ) -> void {
+    decltype( auto ) XS = reactions
       | ranges::view::transform( 
-          []( auto& reaction ) { return reaction.second.crossSection; } );
+          []( auto&& reaction ) -> decltype( auto )
+          { return reaction.second.crossSection; } );
 
     for( decltype( auto ) crossSection : XS ){
       xss[ LOCA_i - 1 ] = xss.size() - jxs7 + 2;

@@ -13,35 +13,35 @@ void ACEifyEDs( Range&& distributions,
                 Table::Data& tData, 
                 int LED, int NMT ) {
 
-
-  auto& xss = tData.XSS();
+  decltype( auto ) xss = tData.XSS();
   // Locators
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
-  auto JED = LED + NMT;
+  int JED = LED + NMT;
 
-  auto N = distributions.size();
-  int LOCC{ 0 };
-  auto inumerated = ranges::view::enumerate( distributions );
+  decltype( auto ) inumerated = ranges::view::enumerate( distributions );
   for( auto it = inumerated.begin(); it != inumerated.end(); ++it ){
-    auto index = std::get< 0 >( *it );
-    auto ed = std::get< 1 >( *it );
+    decltype( auto ) pair = *it;
+    decltype( auto ) index = std::get< 0 >( pair );
+    decltype( auto ) ed = std::get< 1 >( pair );
 
-    LOCC = ( xss.size() + 1 ) - JED + 1;
+    auto LOCC = static_cast< long long >( xss.size() + 1 ) - JED + 1;
+    // Log::info( "LOCC: {}", LOCC );
+    // Log::info( "xss.size(): {}", xss.size() );
+    // Log::info( "index: {}: ", index );
+    // Log::info( "LED: {}", LED );
+    // Log::info( "math: {}", LED + index - 1 );
     xss[ LED + index - 1 ] = LOCC;
 
-    int LNW_i{ 0 };
-    int LNW{ 0 };
-
-    auto kt = ed.begin();
+    decltype( auto ) kt = ed.begin();
     for( ; kt != ranges::prev( ed.end() ); ++kt ){
 
       xss.push_back( 0 ); // LNW
-      LNW_i = xss.size() - 1;
+      auto LNW_i = xss.size() - 1;
 
       details::ACEify( tData, *kt, JED );
 
-      LNW = xss.size() - ( JED - 1 ) + 1;
+      auto LNW = xss.size() - ( JED - 1 ) + 1;
       xss[ LNW_i ] = LNW;
 
     } // for kndex
@@ -50,6 +50,7 @@ void ACEifyEDs( Range&& distributions,
 
   } // for index
   /*
+  auto N = distributions.size();
   for( size_t index = 0; index < N; index++ ){
 
     LOCC = ( xss.size() + 1 ) - JED + 1;

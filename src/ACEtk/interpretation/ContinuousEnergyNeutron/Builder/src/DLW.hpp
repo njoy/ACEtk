@@ -3,13 +3,13 @@ template< typename Range,
         >
 void DLW(int jxsIndex, Range&& distributions ){
 
-  auto& tData = this->tableData_.value();
-  auto& xss = tData.XSS();
-  auto& jxs = tData.JXS();
+  decltype( auto ) tData = this->tableData_.value();
+  decltype( auto ) xss = tData.XSS();
+  decltype( auto ) jxs = tData.JXS();
 
-  auto NMT = distributions.size();
+  decltype( auto ) NMT = distributions.size();
 
-  auto LED = xss.size() + 1;
+  decltype( auto ) LED = xss.size() + 1;
   jxs[ jxsIndex ] = LED;
 
   // Precursor energy distributions
