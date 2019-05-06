@@ -1,7 +1,7 @@
 void ACEify( Table::Data& tData ){
   decltype( auto ) xss = tData.XSS();
 
-  if( this->parameters ){
+  if( bool( this->parameters ) ){
     decltype( auto ) p = parameters.value();
     xss.push_back( p.first.size() );
     xss |= ranges::action::push_back( p.first );

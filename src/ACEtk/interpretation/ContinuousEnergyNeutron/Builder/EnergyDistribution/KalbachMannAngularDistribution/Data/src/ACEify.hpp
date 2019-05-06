@@ -1,23 +1,21 @@
 void ACEify( Table::Data& tData, int jxsRelative ){
-  auto& xss = tData.XSS();
+  decltype( auto ) xss = tData.XSS();
 
-  auto N_p = angularDistributions.size();
-  xss |= ranges::action::push_back( 
-    ranges::view::concat(
-      ranges::view::single( interpolationParameter ),
-      ranges::view::single( N_p ),
-      energies, pdf, cdf
-    )
-  );
+  long long N_p = angularDistributions.size();
+  xss.push_back( this->interpolationParameter );
+  xss.push_back(N_p );
+  xss |= ranges::action::push_back( energies );
+  xss |= ranges::action::push_back( pdf );
+  xss |= ranges::action::push_back( cdf );
   // Locators
-  auto L = xss.size();
+  long long L = xss.size();
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, N_p ));
 
-  auto K = xss.size();
-  for( size_t i = 0; i < N_p; i++ ){
+  long long K = xss.size();
+  for( long long i = 0; i < N_p; i++ ){
     // Set locator value
     K = xss.size();
-    auto sizeDiff = K - jxsRelative;
+    long long sizeDiff = K - jxsRelative;
     xss[ L + i ] = sizeDiff + 1;
 
     angularDistributions[ i ].ACEify( tData, jxsRelative );

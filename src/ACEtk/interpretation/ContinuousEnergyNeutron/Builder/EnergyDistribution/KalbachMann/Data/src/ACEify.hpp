@@ -1,11 +1,10 @@
 void ACEify( Table::Data& tData, int ){
-  tData.XSS()
-    |= ranges::action::push_back(
-      ranges::view::concat(
-        ranges::view::single( this->interpolationParameter ),
-        ranges::view::single( this->energies.size() ),
-        energies, pdf, cdf,
-        precompoundFraction, angularDistributionSlope
-      )
-    );
+  decltype( auto ) xss = tData.XSS();
+  xss.push_back( this->interpolationParameter );
+  xss.push_back( this->energies.size() );
+  xss |= ranges::action::push_back( this->energies );
+  xss |= ranges::action::push_back( this->pdf );
+  xss |= ranges::action::push_back( this->cdf );
+  xss |= ranges::action::push_back( this->precompoundFraction );
+  xss |= ranges::action::push_back( this->angularDistributionSlope );
 }

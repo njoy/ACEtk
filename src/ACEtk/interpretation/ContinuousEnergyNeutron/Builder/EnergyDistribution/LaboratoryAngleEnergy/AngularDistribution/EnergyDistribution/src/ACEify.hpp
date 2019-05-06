@@ -1,10 +1,8 @@
 void ACEify( Table::Data& tData, int ){
-  tData.XSS()
-    |= ranges::action::push_back(
-      ranges::view::concat(
-        ranges::view::single( this->interpolationParameter ),
-        ranges::view::single( this->energies.size() ),
-        energies, pdf, cdf
-      )
-    );
+  decltype( auto ) xss = tData.XSS();
+  xss.push_back( this->interpolationParameter );
+  xss.push_back( this->energies.size() );
+  xss |= ranges::action::push_back( energies );
+  xss |= ranges::action::push_back( pdf );
+  xss |= ranges::action::push_back( cdf );
 }

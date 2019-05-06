@@ -1,8 +1,8 @@
 void ACEify( Table::Data& tData, int jxsRelative){
-  auto& xss = tData.XSS();
+  decltype( auto ) xss = tData.XSS();
 
   if( tabulated.parameters ){
-    auto p = tabulated.parameters.value();
+    decltype( auto ) p = tabulated.parameters.value();
     xss 
       |= ranges::action::push_back( 
           ranges::view::concat(
@@ -23,14 +23,14 @@ void ACEify( Table::Data& tData, int jxsRelative){
   );
 
   // Locators
-  auto L = xss.size();
-  auto ySize = tabulated.y.size();
+  long long L = xss.size();
+  long long ySize = tabulated.y.size();
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, ySize ));
 
-  for( size_t i = 0; i < ySize; i++ ){
+  for( long long i = 0; i < ySize; i++ ){
     // Set locator value
-    auto K = xss.size();
-    auto sizeDiff = K - jxsRelative;
+    long long K = xss.size();
+    long long sizeDiff = K - jxsRelative;
     xss[ L + i ] = sizeDiff + 1;
 
     tabulated.y[ i ].ACEify( tData, jxsRelative );

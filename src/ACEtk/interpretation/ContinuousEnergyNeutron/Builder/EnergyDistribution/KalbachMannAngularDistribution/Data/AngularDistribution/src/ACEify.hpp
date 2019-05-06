@@ -1,10 +1,8 @@
 void ACEify( Table::Data& tData, int ){
-  tData.XSS()
-    |= ranges::action::push_back(
-      ranges::view::concat(
-        ranges::view::single( this->interpolationParameter ),
-        ranges::view::single( this->cosineGrid.size() ),
-        cosineGrid, pdf, cdf
-      )
-    );
+  decltype( auto ) xss = tData.XSS();
+  xss.push_back( this->interpolationParameter );
+  xss.push_back( this->cosineGrid.size() );
+  xss |= ranges::action::push_back( cosineGrid );
+  xss |= ranges::action::push_back( pdf );
+  xss |= ranges::action::push_back( cdf );
 }

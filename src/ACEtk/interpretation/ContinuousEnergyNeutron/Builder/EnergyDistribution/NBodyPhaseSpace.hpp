@@ -4,8 +4,5 @@ struct NBodyPhaseSpace {
   int numberBodies;
   double totalMassRatio;
 
-  void ACEify( Table::Data& tData, int ){
-    tData.XSS().push_back( this->numberBodies );
-    tData.XSS().push_back( this->totalMassRatio );
-  }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/NBodyPhaseSpace/src/ACEify.hpp"
 };
