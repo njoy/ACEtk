@@ -13,8 +13,6 @@ void ACEifyEDs( Range&& distributions,
                 Table::Data& tData, 
                 int LED, int NMT ) {
 
-  Log::info( "ACEifying EDs" );
-  Log::info( "distributions size: {}", ranges::distance( distributions ) );
   decltype( auto ) xss = tData.XSS();
   // Locators
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );

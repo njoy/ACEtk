@@ -98,53 +98,6 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
         CHECK( 14 == reaction.MT );
       }
     } // WHEN
-    WHEN( "creating another neutron producing reaction" ){
-      std::vector< double > energyGrid{ 
-        0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-      std::vector< double > elasticXS{ 
-        0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
-
-      // Angular distribution
-      std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
-      std::vector< double > cosine{ -0.1, 0.5, 0.8 };
-      std::vector< double > apdf{ 0.1, 0.5, 0.4 };
-      std::vector< double > acdf{ 0.1, 0.6, 1.0 };
-      std::vector< double > cosineBins{
-        0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
-        0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19,
-        0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
-        0.30, 0.31, 0.32
-      };
-
-      tb.Q( 0.0 )
-        .crossSection()
-          .values( njoy::utility::copy( elasticXS ) )
-          .energyGrid( njoy::ACEtk::Table::slice( energyGrid ) )
-        .add()  // crossSection
-        .angularDistribution()
-          .energyGrid( njoy::utility::copy( grid ) )
-          .isotropic()
-          .tabulated().interpolationFlag( 1 )
-                      .cosineGrid( njoy::utility::copy( cosine ) )
-                      .pdf( njoy::utility::copy( apdf ) )
-                      .cdf( njoy::utility::copy( acdf ) )
-          .add()  // tabulated
-          .equiprobableCosineBins().values( 
-              njoy::utility::copy( cosineBins ) )
-          .add() // equiprobableCosineBins
-          .isotropic()
-          .isotropic()
-        .add(); // angular distribution
-
-      auto reaction = tb.constructNeutronProducing();
-
-      THEN( "the constructed Reaction can be verified" ){
-        CHECK( 0.0 == reaction.Q );
-        CHECK( 0 == reaction.neutronYield );
-        CHECK( ranges::equal( elasticXS, reaction.crossSection.values ) );
-        CHECK( 14 == reaction.MT );
-      }
-    }
     WHEN( "creating a Reaction with isotropic distribution" ){
       std::vector< double > XS{ 1.0, 2.0, 3.0 };
 
@@ -182,6 +135,49 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     }
   } // GIVEN valid
   GIVEN( "invalid values" ){
+    WHEN( "creating neutron producing reaction without an energy distribution" ){
+      std::vector< double > energyGrid{ 
+        0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+      std::vector< double > elasticXS{ 
+        0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
+
+      // Angular distribution
+      std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0, 5.0 };
+      std::vector< double > cosine{ -0.1, 0.5, 0.8 };
+      std::vector< double > apdf{ 0.1, 0.5, 0.4 };
+      std::vector< double > acdf{ 0.1, 0.6, 1.0 };
+      std::vector< double > cosineBins{
+        0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
+        0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19,
+        0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
+        0.30, 0.31, 0.32
+      };
+
+      tb.Q( 0.0 )
+        .crossSection()
+          .values( njoy::utility::copy( elasticXS ) )
+          .energyGrid( njoy::ACEtk::Table::slice( energyGrid ) )
+        .add()  // crossSection
+        .angularDistribution()
+          .energyGrid( njoy::utility::copy( grid ) )
+          .isotropic()
+          .tabulated().interpolationFlag( 1 )
+                      .cosineGrid( njoy::utility::copy( cosine ) )
+                      .pdf( njoy::utility::copy( apdf ) )
+                      .cdf( njoy::utility::copy( acdf ) )
+          .add()  // tabulated
+          .equiprobableCosineBins().values( 
+              njoy::utility::copy( cosineBins ) )
+          .add() // equiprobableCosineBins
+          .isotropic()
+          .isotropic()
+        .add(); // angular distribution
+
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS( tb.constructNeutronProducing() );
+      }
+    }
     WHEN( "adding secondary distributions to non neutron producing reaction" ){
       std::vector< int > nonProducingMTs{ 4, 101, 104 };
       THEN( "an exception is thrown" ){

@@ -1,4 +1,12 @@
 Reaction::NeutronProducing constructNeutronProducing(){
+  if( this->energyDistribution_.empty() ){
+    if( this->MT_ != 2 ){
+      Log::error( "An EnergyDistribution must be specified for neutron "
+                   "producing reactions." );
+      throw std::exception();
+    }
+  }
+
   try{ 
     return Reaction::NeutronProducing{ 
       MT_, 

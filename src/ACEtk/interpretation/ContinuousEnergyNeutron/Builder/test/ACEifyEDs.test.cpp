@@ -839,7 +839,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       
       auto& xss = data.XSS();
       CHECK( NMT == EDs.size() );
-      printRanges( "EDs", aceified, xss );
       CHECK( ranges::equal( aceified, xss ) );
 
     }
