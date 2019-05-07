@@ -43,6 +43,5 @@ struct EnergyDistribution{
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/src/law2Int.hpp"
-
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/src/ACEify.hpp"
 };

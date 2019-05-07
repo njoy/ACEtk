@@ -10,7 +10,7 @@ void NU(){
   decltype( auto ) jxs = tData.JXS();
 
   decltype( auto ) nuVisitor = 
-      [&]( auto&& nubar ) -> void { nubar.ACEify( tData ); };
+    [&](auto& nubar ) -> void { nubar.ACEify( tData ); };
 
   decltype( auto ) size = xss.size() + 1;
   jxs[ 1 ] = size;
@@ -55,8 +55,7 @@ void NU(){
     // Precursor energy distributions
     decltype( auto ) EDs = this->delayedPrecursors_
       | ranges::view::transform(
-        []( auto&& dp ) -> decltype( auto )
-          { return dp.energyDistribution; }
+        []( auto&& dp ) -> decltype( auto ){ return dp.energyDistribution; }
       );
     decltype( auto ) NMT = EDs.size();
     nxs[ 7 ] = NMT;

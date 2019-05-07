@@ -26,6 +26,11 @@ void ACEifyEDs( Range&& distributions,
     decltype( auto ) ed = std::get< 1 >( pair );
 
     auto LOCC = static_cast< long long >( xss.size() + 1 ) - JED + 1;
+    // Log::info( "LOCC: {}", LOCC );
+    // Log::info( "xss.size(): {}", xss.size() );
+    // Log::info( "index: {}: ", index );
+    // Log::info( "LED: {}", LED );
+    // Log::info( "math: {}", LED + index - 1 );
     xss[ LED + index - 1 ] = LOCC;
 
     decltype( auto ) kt = ed.begin();
@@ -37,11 +42,11 @@ void ACEifyEDs( Range&& distributions,
       details::ACEify( tData, *kt, JED );
 
       auto LNW = static_cast< long long >( xss.size() ) - ( JED - 1 ) + 1;
-      xss[ LNW_i ] = LNW;
+      ss[ LNW_i ] = LNW;
 
     } // for kndex
     xss.push_back( 0 ); // LNW
-    // details::ACEify( tData, *kt, JED );
+    details::ACEify( tData, *kt, JED );
 
   } // for index
 }

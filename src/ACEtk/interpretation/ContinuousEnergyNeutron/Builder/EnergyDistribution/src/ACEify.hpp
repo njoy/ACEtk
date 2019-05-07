@@ -2,7 +2,7 @@ void ACEify( Table::Data& tData, int JED ) {
 
   decltype( auto ) xss = tData.XSS();
 
-  xss.push_back( law2Int( law ) );
+  xss.push_back( this->law2Int( this->law ) );
 
   decltype( auto ) IDAT_i = xss.size();
   xss.push_back( 0 ); // IDAT
