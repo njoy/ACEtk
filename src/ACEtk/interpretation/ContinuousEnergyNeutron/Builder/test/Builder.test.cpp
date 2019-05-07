@@ -424,8 +424,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 95 == data.JXS( 7  ) );
         CHECK( 124 == data.JXS( 8  ) );
         CHECK( 127 == data.JXS( 9  ) );
-        // CHECK( 0 == data.JXS( 10 ) );
-        // CHECK( 0 == data.JXS( 11 ) );
+        CHECK( 237 == data.JXS( 10 ) );
+        CHECK( 239 == data.JXS( 11 ) );
         // CHECK( 0 == data.JXS( 12 ) );
         // CHECK( 0 == data.JXS( 13 ) );
         // CHECK( 0 == data.JXS( 14 ) );
@@ -488,15 +488,18 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( lsigRef, lsig ) );
       }
-      /*
       THEN( "the LAND Block can be checked" ){
-        std::vector< double > landRef{ 1, 56 };
-        auto land = data.XSS( data.JXS( 8 ), NR );
+        std::vector< double > landRef{ 1, 56, 0 };
+        auto land = data.XSS( data.JXS( 8 ), NR  + 1);
 
-        printRanges( "AND", landRef, land );
         CHECK( ranges::equal( landRef, land ) );
       }
-      */
+      THEN( "the DLW Block can be checked " ){
+        std::vector< double > ldlwRef{ 1, 46 };
+        auto ldlw = data.XSS( data.JXS( 10 ), NR );
+
+        CHECK( ranges::equal( ldlwRef, ldlw ) );
+      }
 
     }
   } // GIVEN valid
