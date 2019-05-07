@@ -3,6 +3,7 @@ template< typename Range,
         >
 void DLW(int jxsIndex, Range&& distributions ){
 
+  Log::info( "DLW" );
   decltype( auto ) tData = this->tableData_.value();
   decltype( auto ) xss = tData.XSS();
   decltype( auto ) jxs = tData.JXS();

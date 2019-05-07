@@ -10,12 +10,19 @@ Table construct(){
   decltype( auto ) getED = []( auto&& R ) -> decltype( auto )
     { return R.energyDistribution; };
 
-  // Get all reactions that are neutron producing (including elastic scattering)
+  // Get all reactions that are neutron producing 
+  // (including elastic scattering)
+  decltype( auto ) standardR = this->neutronProducingReactions_ 
+      | ranges::view::transform( getReaction );
+  decltype( auto ) neutronProducingReactions = ranges::view::concat(
+    ranges::view::single( this->elasticScattering_.value() ), standardR );
+  /*
   decltype( auto ) neutronProducingReactions = 
     ranges::view::concat( 
       ranges::view::single( this->elasticScattering_.value() ),
       this->neutronProducingReactions_ | ranges::view::transform( getReaction )
     );
+  */
 
   int NTR = this->neutronProducingReactions_.size() + 
             this->nonNeutronProducingReactions_.size();
