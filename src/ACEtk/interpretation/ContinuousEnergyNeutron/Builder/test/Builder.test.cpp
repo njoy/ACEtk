@@ -44,7 +44,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
 
     int ZA{ 92235 };
-    nc.ZA( ZA );
+    nc.SZA( ZA );
 
     { // nubar 
       std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
@@ -403,11 +403,11 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 3 == data.NXS(  4 ) );
         CHECK( 2 == data.NXS(  5 ) );
         // CHECK( 10 == data.NXS(  6 ) );
-        CHECK( 0 == data.NXS(  7 ) );
-        CHECK( 1 == data.NXS(  8 ) );
-        // CHECK( 0 == data.NXS(  9 ) );
-        // CHECK( 0 == data.NXS( 10 ) );
-        // CHECK( 0 == data.NXS( 11 ) );
+        // CHECK( 0   == data.NXS(  7 ) );
+        CHECK( 1   == data.NXS(  8 ) );
+        CHECK( 0   == data.NXS(  9 ) );
+        CHECK( 92  == data.NXS( 10 ) );
+        CHECK( 235 == data.NXS( 11 ) );
         CHECK( 0 == data.NXS( 12 ) );
         CHECK( 0 == data.NXS( 13 ) );
         CHECK( 0 == data.NXS( 14 ) );

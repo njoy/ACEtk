@@ -1,7 +1,19 @@
 Table construct(){
 
   this->tableData_ = Table::Data{};
-  decltype( auto ) tableData = this->tableData_.value();
+  decltype( auto ) tData = this->tableData_.value();
+
+  if( this->SZA_ ){
+    int SZA = this->SZA_.value();
+
+    int A = SZA%int( 1E3 );
+    int Z = ( SZA%int( 1E6 ) - A )/int( 1E3 );
+    int S = ( SZA%int( 1E7 ) - Z*int( 1E3 ) - A )/int( 1E3 );
+
+    tData.NXS()[ 8  ] = S;
+    tData.NXS()[ 9  ] = Z;
+    tData.NXS()[ 10 ] = A;
+  }
 
   this->ESZ();
 
@@ -20,9 +32,9 @@ Table construct(){
 
   int NTR = this->neutronProducingReactions_.size() + 
             this->nonNeutronProducingReactions_.size();
-  tableData.NXS()[ 3 ] = NTR;
+  tData.NXS()[ 3 ] = NTR;
   int NR = ranges::distance( this->neutronProducingReactions_ );
-  tableData.NXS()[ 4 ] = NR;
+  tData.NXS()[ 4 ] = NR;
 
   this->NU();
   this->MTR( 2, 
@@ -43,7 +55,7 @@ Table construct(){
             | ranges::view::transform( getED ) );
 
   try{
-    tableData.NXS()[ 0 ] = tableData.XSS().size();
+    tData.NXS()[ 0 ] = tData.XSS().size();
     
     return 
       Table{ 
