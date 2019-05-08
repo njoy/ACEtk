@@ -35,6 +35,8 @@ Table construct(){
   tData.NXS()[ 3 ] = NTR;
   int NR = ranges::distance( this->neutronProducingReactions_ );
   tData.NXS()[ 4 ] = NR;
+  int NTRP = ranges::distance( this->photonProductionReactions_ );
+  tData.NXS()[ 5 ] = NTRP;
 
   this->NU();
   this->MTR( 2, 
@@ -53,6 +55,8 @@ Table construct(){
   this->DLW( 9, this->neutronProducingReactions_
             | ranges::view::transform( getReaction )
             | ranges::view::transform( getED ) );
+  // this->GPD(...);
+  this->MTRP( 12, this->photonProductionReactions_ );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();

@@ -394,7 +394,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 314 };
+        long long size{ 315 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -402,7 +402,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 10 == data.NXS(  3 ) );
         CHECK( 3 == data.NXS(  4 ) );
         CHECK( 2 == data.NXS(  5 ) );
-        // CHECK( 10 == data.NXS(  6 ) );
+        CHECK( 1 == data.NXS(  6 ) );
         // CHECK( 0   == data.NXS(  7 ) );
         CHECK( 1   == data.NXS(  8 ) );
         CHECK( 0   == data.NXS(  9 ) );
@@ -427,8 +427,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 237 == data.JXS( 10 ) );
         CHECK( 239 == data.JXS( 11 ) );
         // CHECK( 0 == data.JXS( 12 ) );
-        // CHECK( 0 == data.JXS( 13 ) );
-        // CHECK( 0 == data.JXS( 14 ) );
+        CHECK( 315 == data.JXS( 13 ) );
+        // CHECK( 316 == data.JXS( 14 ) );
         // CHECK( 0 == data.JXS( 15 ) );
         // CHECK( 0 == data.JXS( 16 ) );
         // CHECK( 0 == data.JXS( 17 ) );
