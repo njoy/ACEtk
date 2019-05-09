@@ -56,8 +56,12 @@ Table construct(){
             | ranges::view::transform( getReaction )
             | ranges::view::transform( getED ) );
   // this->GPD(...);
-  this->MTRP( 12, this->photonProductionReactions_ );
-  this->SIGP( 14, this->photonProductionReactions_ );
+  this->MTR( 12, this->photonProductionReactions_, 
+                 ranges::view::empty< 
+                  std::pair< int, PhotonProductionReaction > >() );
+  this->SIG( 14, this->photonProductionReactions_, 
+                 ranges::view::empty< 
+                  std::pair< int, PhotonProductionReaction > >() );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();
