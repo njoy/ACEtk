@@ -394,7 +394,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 315 };
+        long long size{ 332 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -428,9 +428,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 239 == data.JXS( 11 ) );
         // CHECK( 0 == data.JXS( 12 ) );
         CHECK( 315 == data.JXS( 13 ) );
-        // CHECK( 316 == data.JXS( 14 ) );
-        // CHECK( 0 == data.JXS( 15 ) );
-        // CHECK( 0 == data.JXS( 16 ) );
+        CHECK( 0 == data.JXS( 14 ) );
+        CHECK( 316 == data.JXS( 15 ) );
+        CHECK( 317 == data.JXS( 16 ) );
         // CHECK( 0 == data.JXS( 17 ) );
         // CHECK( 0 == data.JXS( 18 ) );
         // CHECK( 0 == data.JXS( 19 ) );
@@ -494,11 +494,17 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
         CHECK( ranges::equal( landRef, land ) );
       }
-      THEN( "the DLW Block can be checked " ){
+      THEN( "the LDLW Block can be checked " ){
         std::vector< double > ldlwRef{ 1, 46 };
         auto ldlw = data.XSS( data.JXS( 10 ), NR );
 
         CHECK( ranges::equal( ldlwRef, ldlw ) );
+      }
+      THEN( "the LSIGP Block can be checked " ){
+        std::vector< double > lsigpRef{ 1 };
+        auto lsigp = data.XSS( data.JXS( 10 ), NTRP );
+
+        CHECK( ranges::equal( lsigpRef, lsigp ) );
       }
 
     }

@@ -70,6 +70,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/AND.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/DLW.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/MTRP.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SIGP.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"

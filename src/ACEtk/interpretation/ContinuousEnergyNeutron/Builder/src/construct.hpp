@@ -57,6 +57,7 @@ Table construct(){
             | ranges::view::transform( getED ) );
   // this->GPD(...);
   this->MTRP( 12, this->photonProductionReactions_ );
+  this->SIGP( 14, this->photonProductionReactions_ );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();
