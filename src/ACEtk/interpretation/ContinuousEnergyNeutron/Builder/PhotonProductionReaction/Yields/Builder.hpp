@@ -4,6 +4,8 @@ class Builder: public Tabulated1D::Builder< Builder >{
   using BaseBuilder = Tabulated1D::Builder< Builder >;
 
   std::reference_wrapper< ParentBuilder > parent;
+  int MF;
+  int MT;
 
 protected:
 
@@ -11,13 +13,15 @@ protected:
   using BaseBuilder::y;
 
 public:
-  Builder( ParentBuilder& parent ):
-    parent( parent )
+  Builder( ParentBuilder& parent, int MF, int MT ):
+    parent( parent ),
+    MF( MF ),
+    MT( MT )
   { }
 
   Yields construct(){ 
 
-    return { BaseBuilder::construct() };
+    return { this->MF, this->MT, BaseBuilder::construct() };
   }
 
   ParentBuilder& add(){

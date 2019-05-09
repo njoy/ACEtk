@@ -3,6 +3,7 @@
 #include "catch.hpp"
 #include "ACEtk.hpp"
 
+using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
@@ -23,7 +24,7 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
     std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
     std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
-    TestBuilder tb{ parentBuilder };
+    TestBuilder tb{ parentBuilder, 12, 102 };
 
     WHEN( "creating a Yields photon production" ){
       tb.boundaries( njoy::utility::copy( boundaries ) )
@@ -38,6 +39,23 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
         CHECK( schemes == pair.second );
         CHECK( energies == tabu.tabulated.x );
         CHECK( values == tabu.tabulated.y );
+
+        AND_THEN( "the contents can be ACE-ified" ){
+          std::vector< double > aceified{};
+          aceified.push_back( 12 );
+          aceified.push_back( 102 );
+          aceified.push_back( boundaries.size() );  // N_R
+          aceified |= ranges::action::push_back( boundaries );
+          aceified |= ranges::action::push_back( schemes );
+          aceified.push_back( energies.size() );
+          aceified |= ranges::action::push_back( energies );
+          aceified |= ranges::action::push_back( values );
+
+          Table::Data data{};
+          tabu.ACEify( data );
+
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        }
       }
     }
     WHEN( "constructing a Yields photon production "
