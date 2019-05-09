@@ -33,11 +33,11 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
 
       THEN( "the members of Yields can be verified" ){
         auto tabu = tb.construct();
-        auto pair = tabu.parameters.value();
+        auto pair = tabu.tabulated.parameters.value();
         CHECK( boundaries == pair.first );
         CHECK( schemes == pair.second );
-        CHECK( energies == tabu.x );
-        CHECK( values == tabu.y );
+        CHECK( energies == tabu.tabulated.x );
+        CHECK( values == tabu.tabulated.y );
       }
     }
     WHEN( "constructing a Yields photon production "
@@ -46,11 +46,11 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
 
       THEN( "an exception is thrown" ){
         tb.energies( njoy::utility::copy( energies ) );
-        CHECK_THROWS( tb.construct() );
+        CHECK_THROWS_AS( tb.construct(), std::bad_optional_access& );
       }
       THEN( "an exception is thrown" ){
         tb.values( njoy::utility::copy( values ) );
-        CHECK_THROWS( tb.construct() );
+        CHECK_THROWS_AS( tb.construct(), std::bad_optional_access& );
       }
     }
   } // GIVEN

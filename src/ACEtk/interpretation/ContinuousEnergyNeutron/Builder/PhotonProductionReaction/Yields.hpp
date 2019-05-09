@@ -1,5 +1,5 @@
-struct Yields: protected ContinuousEnergyNeutron::Builder::Tabulated1D{
+struct Yields{
 
-public:
+  Tabulated1D tabulated;
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder.hpp"
 };

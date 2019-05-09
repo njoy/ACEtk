@@ -1,10 +1,7 @@
-class Builder: 
-  public ContinuousEnergyNeutron::Builder::Tabulated1D::Builder< Builder >{
+class Builder: public Tabulated1D::Builder< Builder >{
 
-  using ParentBuilder = ContinuousEnergyNeutron::Builder::
-      PhotonProductionReaction::Builder;
-  using BaseBuilder = ContinuousEnergyNeutron::Builder::
-      Tabulated1D::Builder< Builder >;
+  using ParentBuilder = PhotonProductionReaction::Builder;
+  using BaseBuilder = Tabulated1D::Builder< Builder >;
 
   std::reference_wrapper< ParentBuilder > parent;
 
@@ -17,6 +14,11 @@ public:
   Builder( ParentBuilder& parent ):
     parent( parent )
   { }
+
+  Yields construct(){ 
+
+    return { BaseBuilder::construct() };
+  }
 
   ParentBuilder& add(){
     return parent.get().addYields( this->construct() );

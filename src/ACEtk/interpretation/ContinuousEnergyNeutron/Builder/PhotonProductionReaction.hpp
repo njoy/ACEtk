@@ -1,10 +1,11 @@
 struct PhotonProductionReaction {
   class Builder;
 
-  using MFType = std::variant< CrossSection, Tabulated1D >;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution.hpp"
+
+  using MFType = std::variant< CrossSection, Yields >;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder.hpp"
 

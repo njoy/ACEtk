@@ -87,11 +87,11 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
       CHECK( ranges::equal( bins, angularDistribution.cosineBins ) );
 
       auto& yields = std::experimental::get< 1 >( ppReaction.crossSection );
-      auto& parameters = yields.parameters.value();
+      auto& parameters = yields.tabulated.parameters.value();
       CHECK( ranges::equal( boundaries, parameters.first ) );
       CHECK( ranges::equal( schemes, parameters.second ) );
-      CHECK( ranges::equal( energies, yields.x ) );
-      CHECK( ranges::equal( values, yields.y ) );
+      CHECK( ranges::equal( energies, yields.tabulated.x ) );
+      CHECK( ranges::equal( values, yields.tabulated.y ) );
     }
   }
   WHEN( "constructing MF=13 photon production reaction" ){
