@@ -35,7 +35,6 @@ struct EnergyDistribution{
     KalbachMannAngularDistribution,   // LAW=61
     NBodyPhaseSpace,                  // LAW=66
     LaboratoryAngleEnergy             // LAW=67
-    // EnergyDependentNeutronYields
                            >;
 
   Tabulated1D tab1;

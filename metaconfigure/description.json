@@ -407,7 +407,9 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/EnergyDependentNeutronYields.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/NonNeutronProducing.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/EnergyDependentNeutronYields/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Equiprobable.hpp",
@@ -443,6 +445,7 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/isotropic.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addEnergyDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addPhotonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Yields.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution.hpp",
@@ -938,6 +941,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.EnergyDependentNeutronYields.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/EnergyDependentNeutronYields/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.PhotonProduction.AngularDistribution.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution/Builder/test/Builder.test.cpp"

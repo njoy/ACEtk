@@ -12,6 +12,7 @@ private:
     Isotropic,
     AngularDistribution > angularDistribution_;
   std::vector< EnergyDistribution > energyDistribution_;
+  std::optional< Tabulated1D > energyDependentNeutronYields_;
   std::optional< PhotonProduction > photonProduction_;
 
 protected:
@@ -41,4 +42,5 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/isotropic.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/photonProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyDependentNeutronYields.hpp"
 };

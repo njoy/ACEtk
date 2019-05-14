@@ -1,6 +1,7 @@
 struct Reaction{
   class Builder;
 
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/EnergyDependentNeutronYields.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction.hpp"
 
