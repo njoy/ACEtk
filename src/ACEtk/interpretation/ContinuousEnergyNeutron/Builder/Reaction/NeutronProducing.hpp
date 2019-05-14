@@ -8,4 +8,5 @@ struct NeutronProducing{
                 AngularDistribution > angularDistribution;
   std::vector< EnergyDistribution > energyDistribution;
   std::optional< PhotonProduction > photonProduction;
+  std::optional< Tabulated1D > energyDependentNeutronYields;
 };

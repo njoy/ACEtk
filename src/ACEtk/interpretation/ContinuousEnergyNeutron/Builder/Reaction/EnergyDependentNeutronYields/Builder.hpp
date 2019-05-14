@@ -7,18 +7,22 @@ private:
   std::reference_wrapper< ParentBuilder > parent;
 
 protected:
-  friend Reaction::Builder;
+
+  using TabBuilder::construct;
 
 public:
   Builder( ParentBuilder& parent ):
     parent( parent )
   { }
 
+  ParentBuilder& add(){
+    return parent.get().addEnergyDependentNeutronYields( this->construct() );
+  }
+
   using TabBuilder::TabBuilder;
   using TabBuilder::energies;
   using TabBuilder::boundaries;
   using TabBuilder::schemes;
-  using TabBuilder::construct;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/EnergyDependentNeutronYields/Builder/src/yields.hpp"
 };
