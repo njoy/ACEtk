@@ -6,7 +6,8 @@ Reaction::NonNeutronProducing constructNonNeutronProducing(){
       neutronYield_.value_or( 0 )*
           static_cast< int >( neutronYieldReferenceFrame_.value_or( 
                   NeutronYieldReferenceFrame::LAB ) ),
-      std::move( this->crossSection_.value() )
+      std::move( this->crossSection_.value() ),
+      std::move( this->photonProduction_ )
     };
   } catch( std::bad_optional_access& ){
     Log::error( 

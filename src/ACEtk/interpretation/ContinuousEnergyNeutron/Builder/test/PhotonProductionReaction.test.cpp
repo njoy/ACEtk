@@ -4,7 +4,7 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
-SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Builder" ){
+SCENARIO( "PhotonProduction components of ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
   std::vector< int > boundaries{ 0, 3 };
   std::vector< int > schemes{ 2, 1 };
@@ -41,7 +41,8 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
     {
       int MF = 12;
       CHECK_NOTHROW(
-        ncBuilder.photonProductionReaction( MF, 102 )
+        ncBuilder.reaction( 102 )
+          .photonProduction( MF )
                  .yields()
                     .boundaries ( njoy::utility::copy ( boundaries )  ) 
                     .schemes    ( njoy::utility::copy ( schemes    )  ) 
@@ -87,13 +88,14 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
                      .add()
                    .add() // continuousTabularDistribution LAW=4
                  .add() // energy distribution
-              .add()  // photonProductionReaction
+              .add()  // photonProduction
       );
     }
     {
       int MF = 13;
       CHECK_NOTHROW(
-        ncBuilder.photonProductionReaction( MF, 103 )
+        ncBuilder.reaction( 103 )
+          .photonProduction( MF )
                  .crossSection()
                     .values( njoy::utility::copy( XS ) )
                     .energyGrid( ncBuilder.energyGrid() )
@@ -143,7 +145,8 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
     {
       int MF = 16;
       CHECK_NOTHROW(
-        ncBuilder.photonProductionReaction( MF, 106 )
+        ncBuilder.reaction( 106 )
+          .photonProduction( MF )
                  .yields()
                     .boundaries ( njoy::utility::copy ( boundaries )  ) 
                     .schemes    ( njoy::utility::copy ( schemes    )  ) 
@@ -199,7 +202,7 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
     for( auto MF : invalidMFs ){
       THEN( "an exception is thrown when MF = " + std::to_string( MF ) ){
         CHECK_THROWS_AS(
-          ncBuilder.photonProductionReaction( MF, 107 ),
+          ncBuilder.reaction( 107 ).photonProduction( MF ),
           std::range_error&
         );
       }
@@ -208,18 +211,18 @@ SCENARIO( "PhotonProductionReaction components of ContinuousEnergyNeutron::Build
   WHEN( "wrong sub-builder is called" ){
     THEN( "an exception is thrown" ){
       CHECK_THROWS_AS(
-        ncBuilder.photonProductionReaction( 13, 108 ).yields(),
+        ncBuilder.reaction( 108 ).photonProduction( 13 ).yields(),
         std::range_error&
       );
 
     }
     THEN( "an exception is thrown" ){
       CHECK_THROWS_AS(
-        ncBuilder.photonProductionReaction( 12, 109 ).crossSection(),
+        ncBuilder.reaction( 109 ).photonProduction( 12 ).crossSection(),
         std::range_error&
       );
       CHECK_THROWS_AS(
-        ncBuilder.photonProductionReaction( 16, 110 ).crossSection(),
+        ncBuilder.reaction( 110 ).photonProduction( 16 ).crossSection(),
         std::range_error&
       );
     }

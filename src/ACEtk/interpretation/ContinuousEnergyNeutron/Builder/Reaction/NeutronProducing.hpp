@@ -7,4 +7,5 @@ struct NeutronProducing{
                 Isotropic, 
                 AngularDistribution > angularDistribution;
   std::vector< EnergyDistribution > energyDistribution;
+  std::optional< PhotonProduction > photonProduction;
 };

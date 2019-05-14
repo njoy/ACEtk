@@ -1,4 +1,4 @@
-ContinuousEnergyNeutron::Builder::PhotonProductionReaction::Builder&
+Builder&
 addAngularDistribution( AngularDistribution&& angDist ){
   this->angularDistribution_ = std::move( angDist );
   return *this;

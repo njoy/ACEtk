@@ -12,11 +12,13 @@ private:
     Isotropic,
     AngularDistribution > angularDistribution_;
   std::vector< EnergyDistribution > energyDistribution_;
+  std::optional< PhotonProduction > photonProduction_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addCrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addAngularDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addEnergyDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addPhotonProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/constructNeutronProducing.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/constructNonNeutronProducing.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/isNeutronProducing.hpp"
@@ -24,6 +26,7 @@ protected:
   friend CrossSection::Builder< Builder >;
   friend AngularDistribution::Builder;
   friend EnergyDistribution::Builder< Builder >;
+  friend PhotonProduction::Builder;
 
 public:
   Builder( ContinuousEnergyNeutron::Builder& parent, int MT ):
@@ -37,4 +40,5 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/angularDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/isotropic.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/energyDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/photonProduction.hpp"
 };

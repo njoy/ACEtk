@@ -5,5 +5,5 @@ struct AngularDistribution {
   std::vector<
     dvP< std::array< double, 33 > > > cosineBins;
 
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution/Builder.hpp"
 };

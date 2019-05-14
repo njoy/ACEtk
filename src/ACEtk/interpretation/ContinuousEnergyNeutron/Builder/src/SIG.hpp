@@ -4,7 +4,8 @@ template< typename R1, typename R2,
         >
 void SIG(int jxsIndex, R1&& npReactions, R2&& nonnpReactions ){
 
-  decltype( auto ) NMT = npReactions.size() + nonnpReactions.size();
+  decltype( auto ) NMT = ranges::distance( npReactions ) + 
+                         ranges::distance( nonnpReactions );
 
   decltype( auto ) tData = this->tableData_.value();
   decltype( auto ) xss = tData.XSS();

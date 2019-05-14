@@ -30,8 +30,8 @@ void addEnergyDistribution( B& builder ){
 SCENARIO( "Testing PhotonProduction::Builder" ){
   ContinuousEnergyNeutron::Builder parentBuilder{};
 
-  using PPBuilder = decltype( 
-      parentBuilder.photonProductionReaction( 16, 102 ) );
+  auto reacBuilder = parentBuilder.reaction( 16 );
+  using PPBuilder = decltype( reacBuilder.photonProduction( 12 ) );
 
   struct TestBuilder : public PPBuilder {
     using PPBuilder::construct;
@@ -57,7 +57,7 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
   };
   WHEN( "constructing MF=12 (or 16) photon production reaction" ){
     int MF{ 12 };
-    TestBuilder ppB{ parentBuilder, MF, 102 };
+    TestBuilder ppB{ reacBuilder, MF, 102 };
 
     std::vector< int > boundaries{ 0, 3 };
     std::vector< int > schemes{ 2, 1 };
@@ -96,7 +96,7 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
   }
   WHEN( "constructing MF=13 photon production reaction" ){
     int MF{ 13 };
-    TestBuilder ppB{ parentBuilder, MF, 102 };
+    TestBuilder ppB{ reacBuilder, MF, 102 };
 
     std::vector< double > XS{ 1.0, 2.0, 3.0 };
     std::vector< double > energyGrid{ 4.0, 5.0, 6.0 };

@@ -8,12 +8,11 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
   GIVEN( "parent builder" ){
-    ContinuousEnergyNeutron::Builder grandparentBuilder{};
-    using ParentBuilder = decltype( 
-        grandparentBuilder.photonProductionReaction( 12, 102 ) );
-    ParentBuilder parentBuilder{ grandparentBuilder, 12, 102 };
+    using ParentBuilder = ContinuousEnergyNeutron::Builder;
+    ParentBuilder parentBuilder{};
 
-    using YieldsBuilder = decltype( parentBuilder.yields( ) );
+    auto ppBuilder = parentBuilder.reaction( 102 ).photonProduction( 16 );
+    using YieldsBuilder = decltype( ppBuilder.yields( ) );
 
     struct TestBuilder : YieldsBuilder{
       using YieldsBuilder::construct;
@@ -24,7 +23,7 @@ SCENARIO( "Testing PhotonProduction::Yields::Builder" ){
     std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
     std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
-    TestBuilder tb{ parentBuilder, 12, 102 };
+    TestBuilder tb{ ppBuilder, 12, 102 };
 
     WHEN( "creating a Yields photon production" ){
       tb.boundaries( njoy::utility::copy( boundaries ) )

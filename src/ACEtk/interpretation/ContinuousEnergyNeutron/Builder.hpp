@@ -16,7 +16,6 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Precursors.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp"
 
 protected:
@@ -38,13 +37,10 @@ protected:
   std::map< int, Reaction::NeutronProducing > neutronProducingReactions_;
   std::map< int, Reaction::NonNeutronProducing > nonNeutronProducingReactions_;
 
-  std::map< int, PhotonProductionReaction > photonProductionReactions_;
-
   std::optional< TotalGammaProduction > totalGammaProduction_;
   std::optional< ProbabilityTable > probabilityTable_;
 
   friend Reaction::Builder;
-  friend PhotonProductionReaction::Builder;
   friend Table::Header::Builder< Builder >;
   friend Precursors::Builder;
 
@@ -53,7 +49,6 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addElasticScattering.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp"
 
@@ -78,7 +73,6 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SZA.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/reaction.hpp"
 

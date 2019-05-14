@@ -1,4 +1,5 @@
-EnergyDistribution::Builder< Builder > energyDistribution(){ 
+EnergyDistribution::Builder< Builder > 
+energyDistribution(){ 
   if( this->isNeutronProducing() ){
     return EnergyDistribution::Builder< Builder >{ *this }; 
   } else {

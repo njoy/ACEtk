@@ -1,4 +1,5 @@
-AngularDistribution::Builder angularDistribution(){ 
+AngularDistribution::Builder 
+angularDistribution(){ 
   if( this->isNeutronProducing() ){
     return AngularDistribution::Builder{ *this }; 
   } else {

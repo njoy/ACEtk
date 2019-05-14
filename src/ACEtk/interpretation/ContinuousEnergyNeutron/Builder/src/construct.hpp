@@ -21,6 +21,8 @@ Table construct(){
     { return pair.second; };
   decltype( auto ) getED = []( auto&& R ) -> decltype( auto )
     { return R.energyDistribution; };
+  decltype( auto ) ppFilter = []( auto&& pair ) ->decltype( auto )
+    { return bool( pair.second.photonProduction ); };
 
   // Get all reactions that are neutron producing 
   // (including elastic scattering)
@@ -35,7 +37,11 @@ Table construct(){
   tData.NXS()[ 3 ] = NTR;
   int NR = ranges::distance( this->neutronProducingReactions_ );
   tData.NXS()[ 4 ] = NR;
-  int NTRP = ranges::distance( this->photonProductionReactions_ );
+  int NTRP = 
+    ranges::distance( this->neutronProducingReactions_ 
+                        | ranges::view::filter( ppFilter ) ) + 
+    ranges::distance( this->nonNeutronProducingReactions_ 
+                        | ranges::view::filter( ppFilter ) );
   tData.NXS()[ 5 ] = NTRP;
 
   this->NU();
@@ -56,12 +62,16 @@ Table construct(){
             | ranges::view::transform( getReaction )
             | ranges::view::transform( getED ) );
   // this->GPD(...);
-  this->MTR( 12, this->photonProductionReactions_, 
-                 ranges::view::empty< 
-                  std::pair< int, PhotonProductionReaction > >() );
-  this->SIG( 14, this->photonProductionReactions_, 
-                 ranges::view::empty< 
-                  std::pair< int, PhotonProductionReaction > >() );
+  this->MTR( 12, 
+             this->neutronProducingReactions_ 
+              | ranges::view::filter( ppFilter ),
+             this->nonNeutronProducingReactions_ 
+              | ranges::view::filter( ppFilter ) );
+  this->SIG( 14, 
+             this->neutronProducingReactions_ 
+              | ranges::view::filter( ppFilter ),
+             this->nonNeutronProducingReactions_ 
+              | ranges::view::filter( ppFilter ) );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();

@@ -401,28 +401,12 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Factors.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Precursors.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Isotropic.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/energyGrid.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/src/cosineBins.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addYields.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/yields.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addCrossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/crossSection.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/construct.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addAngularDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/src/addEnergyDistribution.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/src/ACEify.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/NeutronProducing.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/NonNeutronProducing.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Tabulated.hpp",
@@ -455,9 +439,26 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/crossSection.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/neutronYield.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addAngularDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/photonProduction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/isotropic.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/addEnergyDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/src/Q.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Yields.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution/Builder/src/energyGrid.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution/Builder/src/cosineBins.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/addYields.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/yields.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/addCrossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/crossSection.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/construct.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/addAngularDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/addEnergyDistribution.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Yields/Builder.hpp",
+    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Yields/src/ACEify.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/EvaporationSpectrum.hpp",
@@ -659,7 +660,6 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/TYR.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPhotonProductionReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addHeader.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ACEifyEDs.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SIG.hpp",
@@ -671,7 +671,6 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SZA.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addElasticScattering.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/photonProductionReaction.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp",
     "src/ACEtk/interpretation/EPR/Incoherent.hpp",
     "src/ACEtk/interpretation/EPR/Coherent.hpp",
@@ -922,15 +921,6 @@
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Isotropic": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Isotropic/test/Isotropic.test.cpp"
     ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.AngularDistribution.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/AngularDistribution/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Builder/test/Builder.test.cpp"
-    ],
-    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.PhotonProductionReaction.Yields.Builder": [
-      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/PhotonProductionReaction/Yields/Builder/test/Builder.test.cpp"
-    ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Precursors.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Precursors/Builder/test/Builder.test.cpp"
     ],
@@ -948,6 +938,15 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.PhotonProduction.AngularDistribution.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.PhotonProduction.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.Reaction.PhotonProduction.Yields.Builder": [
+      "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Yields/Builder/test/Builder.test.cpp"
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.TotalGammaProduction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/test/Builder.test.cpp"

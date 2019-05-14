@@ -10,7 +10,7 @@ SCENARIO( "Testing Builder::TotalGammaProduction::Builder" ){
   using ParentBuilder = ContinuousEnergyNeutron::Builder;
   ParentBuilder parentBuilder{};
 
-  auto ppBuilder = parentBuilder.photonProductionReaction( 16, 102 );
+  auto ppBuilder = parentBuilder.reaction( 102 ).photonProduction( 16 );
   using ADBuilder = decltype( ppBuilder.angularDistribution() );
 
   struct TestBuilder : public ADBuilder {

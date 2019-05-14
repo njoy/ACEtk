@@ -3,4 +3,5 @@ struct NonNeutronProducing{
   double Q;
   int neutronYield;
   ContinuousEnergyNeutron::Builder::CrossSection crossSection;
+  std::optional< PhotonProduction > photonProduction;
 };
