@@ -1,13 +1,13 @@
 
 add_executable( ACEtk.interpretation.ContinuousEnergyNeutron.Builder.test
                 ACEifyEDs.test.cpp
-                IncidentNeutronReaction.test.cpp
-                ProbabilityTable.test.cpp
-                GammaProduction.test.cpp
                 Builder.test.cpp
+                FissionMultiplicity.test.cpp
+                GammaProduction.test.cpp
+                ProbabilityTable.test.cpp
                 PhotonProductionReaction.test.cpp
-                energyGrid.test.cpp
-                FissionMultiplicity.test.cpp )
+                IncidentNeutronReaction.test.cpp
+                energyGrid.test.cpp )
 target_compile_options( ACEtk.interpretation.ContinuousEnergyNeutron.Builder.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}
