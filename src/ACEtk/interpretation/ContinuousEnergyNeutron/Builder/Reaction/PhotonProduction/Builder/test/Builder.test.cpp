@@ -124,8 +124,8 @@ SCENARIO( "Testing PhotonProduction::Builder" ){
 
       auto& crossSection = std::experimental::get< 0 >( 
           ppReaction.crossSection );
-      CHECK( ranges::equal( XS, crossSection.values ) );
-      CHECK( ranges::equal( grid, crossSection.energyGrid ) );
+      CHECK( ranges::equal( XS, crossSection.data.values ) );
+      CHECK( ranges::equal( grid, crossSection.data.energyGrid ) );
     }
   }
 } // SCENARIO

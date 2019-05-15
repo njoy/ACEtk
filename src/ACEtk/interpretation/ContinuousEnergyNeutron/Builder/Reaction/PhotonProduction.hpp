@@ -2,6 +2,7 @@ struct PhotonProduction {
   class Builder;
 
 
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/CrossSection.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Yields.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/AngularDistribution.hpp"
 

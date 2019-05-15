@@ -17,10 +17,14 @@ Table construct(){
 
   this->ESZ();
 
-  decltype( auto ) getReaction = []( auto&& pair ) -> decltype( auto )
-    { return pair.second; };
-  decltype( auto ) getED = []( auto&& R ) -> decltype( auto )
-    { return R.energyDistribution; };
+  decltype( auto ) getReaction = []( auto&& p ) -> decltype( auto )
+    { return p.second; };
+  decltype( auto ) getED = []( auto&& r ) -> decltype( auto )
+    { return r.energyDistribution; };
+  decltype( auto ) getXS = []( auto&& p ) -> decltype( auto )
+    { return p.second.crossSection; };
+  decltype( auto ) getPPXS = []( auto&& p ) -> decltype( auto )
+    { return p.second.photonProduction.value().crossSection; };
   decltype( auto ) ppFilter = []( auto&& pair ) ->decltype( auto )
     { return bool( pair.second.photonProduction ); };
 
@@ -55,8 +59,10 @@ Table construct(){
              this->neutronProducingReactions_, 
              this->nonNeutronProducingReactions_ );
   this->SIG( 5,
-             this->neutronProducingReactions_, 
-             this->nonNeutronProducingReactions_ );
+             this->neutronProducingReactions_
+              | ranges::view::transform( getXS ), 
+             this->nonNeutronProducingReactions_
+              | ranges::view::transform( getXS ) );
   this->AND( 7, neutronProducingReactions  );
   this->DLW( 9, this->neutronProducingReactions_
             | ranges::view::transform( getReaction )
@@ -67,11 +73,13 @@ Table construct(){
               | ranges::view::filter( ppFilter ),
              this->nonNeutronProducingReactions_ 
               | ranges::view::filter( ppFilter ) );
-  this->SIG( 14, 
+  this->SIG( 13, 
              this->neutronProducingReactions_ 
-              | ranges::view::filter( ppFilter ),
+              | ranges::view::filter( ppFilter )
+              | ranges::view::transform( getPPXS ), 
              this->nonNeutronProducingReactions_ 
-              | ranges::view::filter( ppFilter ) );
+              | ranges::view::filter( ppFilter )
+              | ranges::view::transform( getPPXS ) );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();

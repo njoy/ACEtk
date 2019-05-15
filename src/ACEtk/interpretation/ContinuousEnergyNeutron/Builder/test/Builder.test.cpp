@@ -16,11 +16,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder nc{};
 
   GIVEN( "valid data" ){
+    std::string zaid{ "92235.100nc" };
     nc.header()
          .processDate( date::year{2019}/3/14 )
          .temperature( 2.5301E-8*dimwits::mega( electronVolts ) )
          .atomicWeightRatio( 233.024800 )
-         .zaid( "92235.100nc" )
+         .zaid( zaid )
+         .source( "ENDF/B-77.9" ) 
       .add(); // header
 
     std::vector< double > energyGrid{ 
@@ -134,6 +136,155 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         .add(); // reaction 16
     }
     */
+    { // MT=5
+      std::vector< double > XS{ 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 };
+      auto grid = nc.energyGrid();
+      auto xsEnergies = grid 
+        | ranges::view::slice( 3l, ranges::distance( grid ) );
+
+      auto rB = nc.reaction( 5 );
+        rB.Q( 3.265 )
+          .crossSection()
+            .values( njoy::utility::copy( XS ) )
+            .energyGrid( xsEnergies )
+          .add();  // crossSection
+          // no angular distribution
+
+        { // Energy distribution
+          std::vector< int > boundaries{ 0, 3 };
+          std::vector< int > schemes{ 2, 1 };
+          std::vector< double > energies{ 1.0, 2.0 };
+          std::vector< double > probabilities{ 0.1, 0.2 };
+          std::vector< int > INTT{ 1, 2 };
+          std::vector< double > ene{ 1.0, 2.0};
+          std::vector< double > pdf{ 0.25, 0.75 };
+          std::vector< double > cdf{ 0.25, 1.0 };
+          std::vector< double > R{ 0.99, 0.01 };
+          std::vector< double > A{ 0.75, 0.22 };
+
+          rB.energyDistribution()
+              .boundaries( std::vector< int >{ 2 } )
+              .schemes( std::vector< int >{ 2 } )
+              .energies( std::vector< double >{5.320515E6, 2.0E7 } )
+              .probabilities( njoy::utility::copy( probabilities ) )
+              .kalbachMann()
+                .boundaries( njoy::utility::copy( boundaries ) )
+                .schemes( njoy::utility::copy( schemes ) )
+                .energies( njoy::utility::copy( energies ) )
+                .distributionData()
+                  .interpolationParameter( INTT[ 0 ] )
+                  .energies( njoy::utility::copy( ene ) )
+                  .pdf( njoy::utility::copy( pdf ) )
+                  .cdf( njoy::utility::copy( cdf ) )
+                  .precompoundFraction( njoy::utility::copy( R ) )
+                  .angularDistributionSlope( njoy::utility::copy( A ) )
+                .add() // distributionData
+                .distributionData()
+                  .interpolationParameter( INTT[ 1 ] )
+                  .energies( njoy::utility::copy( ene ) )
+                  .pdf( njoy::utility::copy( pdf ) )
+                  .cdf( njoy::utility::copy( cdf ) )
+                  .precompoundFraction( njoy::utility::copy( R ) )
+                  .angularDistributionSlope( njoy::utility::copy( A ) )
+                .add()    // distributionData
+              .add() // kalbachMann
+            .add();  // energyDistribution
+        }
+        { // Photon production
+          std::vector<double > ppGrid{ 1.0, 2.0, 5.0, 10.0 };
+          std::vector< double > XS{ 1.0, 2.0, 3.0, 4.0 };
+          std::vector< int > boundaries{ 0, 3 };
+          std::vector< int > schemes{ 2, 1 };
+          std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
+          std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
+          std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };
+          std::vector< double > ene{ 1.0, 2.0, 3.0};
+          std::vector< int > INTT{ 1, 2 };
+          std::vector< double > pdf{ 0.1, 0.5, 0.4 };
+          std::vector< double > cdf{ 0.1, 0.6, 1.0 };
+
+          std::vector< double > angularGrid{ 1.0, 2.0, 3.0 };
+          std::vector< std::array< double, 33 > > bins{
+            {{ 0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
+            0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19,
+            0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
+            0.30, 0.31, 0.32 }},
+
+            {{ 1.00, 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
+            1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19,
+            1.20, 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29,
+            1.30, 1.31, 1.32 }},
+
+            {{ 2.00, 2.01, 2.02, 2.03, 2.04, 2.05, 2.06, 2.07, 2.08, 2.09,
+            2.10, 2.11, 2.12, 2.13, 2.14, 2.15, 2.16, 2.17, 2.18, 2.19,
+            2.20, 2.21, 2.22, 2.23, 2.24, 2.25, 2.26, 2.27, 2.28, 2.29,
+            2.30, 2.31, 2.32 }}
+          };
+
+          rB.photonProduction( 13 )
+              .crossSection()
+                .values( njoy::utility::copy( XS ) )
+                .energyGrid( ppGrid 
+                  | ranges::view::slice( 0l, ranges::distance( ppGrid ) ) )
+              .add() // crossSection
+              .angularDistribution()
+                .energyGrid( njoy::utility::copy( angularGrid ) )
+                .cosineBins( njoy::utility::copy( bins ) )
+              .add() // angularDistribution
+              .energyDistribution()
+                .boundaries( njoy::utility::copy( boundaries ) )
+                .schemes( njoy::utility::copy( schemes ) )
+                .energies( njoy::utility::copy( energies ) )
+                .probabilities( njoy::utility::copy( probabilities ) )
+                .continuousTabularDistribution()
+                  .boundaries( njoy::utility::copy( boundaries ) )
+                  .schemes( njoy::utility::copy( schemes ) )
+                  .energies( njoy::utility::copy( energies ) )
+                  .distributionData()
+                    .interpolationParameter( INTT[ 0 ] )
+                    .energies( njoy::utility::copy( ene ) )
+                    .pdf( njoy::utility::copy( pdf ) )
+                    .cdf( njoy::utility::copy( cdf ) )
+                  .add() // distributionData
+                  .distributionData()
+                    .interpolationParameter( INTT[ 1 ] )
+                    .energies( njoy::utility::copy( ene ) )
+                    .pdf( njoy::utility::copy( pdf ) )
+                    .cdf( njoy::utility::copy( cdf ) )
+                  .add() // distributionData
+                  .distributionData()
+                    .interpolationParameter( INTT[ 0 ] )
+                    .energies( njoy::utility::copy( ene ) )
+                    .pdf( njoy::utility::copy( pdf ) )
+                    .cdf( njoy::utility::copy( cdf ) )
+                  .add() // distributionData
+                  .distributionData()
+                    .interpolationParameter( INTT[ 1 ] )
+                    .energies( njoy::utility::copy( ene ) )
+                    .pdf( njoy::utility::copy( pdf ) )
+                    .cdf( njoy::utility::copy( cdf ) )
+                  .add() // distributionData
+                .add() // continuousTabularDistribution LAW=4
+              .add() // energy distribution
+            .add(); // photonProduction
+        }
+        { // Energy-dependent neutron yields
+          std::vector< int > boundaries{ 0, 3 };
+          std::vector< int > schemes{ 2, 1 };
+          std::vector< double > energies{ 1.0, 2.0 };
+          std::vector< double > yields{ 1.45, 2.35 };
+
+          rB.energyDependentNeutronYields()
+              .boundaries( njoy::utility::copy( boundaries ) )
+              .schemes( njoy::utility::copy( schemes ) )
+              .energies( njoy::utility::copy( energies ) )
+              .yields( njoy::utility::copy( yields ) )
+            .add(); // energyDependentNeutronYields
+
+        }
+
+        rB.add(); // reaction 5
+    }
     { // MT=16
       std::vector< double > XS{ 
         0.16, 1.16, 2.16, 3.16, 4.16, 5.16, 6.16, 7.16, 8.16, 9.16 };
@@ -358,32 +509,32 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         .add(); // reaction 102
     }
     { // probability tables
-    int INT{ 2 };
-    int inelasticCompetition{ 3 };
-    int otherAbsorption{ 54 };
-    ContinuousEnergyNeutron::Builder::Factors factors{ 
-      ContinuousEnergyNeutron::Builder::Factors::CROSSSECTIONS };
-    std::vector< double > energies{ 1.0, 2.0, 3.0 };
-    std::vector< double > CDFs{ 0.1, 0.4, 1.0 };
-    std::vector< double > totalXS{ 10, 20, 30 };
-    std::vector< double > elasticXS{ 11, 21, 31 };
-    std::vector< double > fissionXS{ 12, 22, 32 };
-    std::vector< double > captureXS{ 13, 23, 33 };
-    std::vector< double > heating{ 14, 24, 34 };
-    
-    nc.probabilityTable()
-        .interpolationParameter( INT )
-        .inelasticCompetition( inelasticCompetition )
-        .otherAbsorption( otherAbsorption )
-        .factors( factors )
-        .incidentEnergies( njoy::utility::copy( energies ) )
-        .CDFs( njoy::utility::copy( CDFs ) )
-        .totalCrossSections( njoy::utility::copy( totalXS ) )
-        .elasticCrossSections( njoy::utility::copy( elasticXS ) )
-        .fissionCrossSections( njoy::utility::copy( fissionXS ) )
-        .captureCrossSections( njoy::utility::copy( captureXS ) )
-        .heating( njoy::utility::copy( heating ) )
-      .add(); // probabilityTable
+      int INT{ 2 };
+      int inelasticCompetition{ 3 };
+      int otherAbsorption{ 54 };
+      ContinuousEnergyNeutron::Builder::Factors factors{ 
+        ContinuousEnergyNeutron::Builder::Factors::CROSSSECTIONS };
+      std::vector< double > energies{ 1.0, 2.0, 3.0 };
+      std::vector< double > CDFs{ 0.1, 0.4, 1.0 };
+      std::vector< double > totalXS{ 10, 20, 30 };
+      std::vector< double > elasticXS{ 11, 21, 31 };
+      std::vector< double > fissionXS{ 12, 22, 32 };
+      std::vector< double > captureXS{ 13, 23, 33 };
+      std::vector< double > heating{ 14, 24, 34 };
+      
+      nc.probabilityTable()
+          .interpolationParameter( INT )
+          .inelasticCompetition( inelasticCompetition )
+          .otherAbsorption( otherAbsorption )
+          .factors( factors )
+          .incidentEnergies( njoy::utility::copy( energies ) )
+          .CDFs( njoy::utility::copy( CDFs ) )
+          .totalCrossSections( njoy::utility::copy( totalXS ) )
+          .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+          .fissionCrossSections( njoy::utility::copy( fissionXS ) )
+          .captureCrossSections( njoy::utility::copy( captureXS ) )
+          .heating( njoy::utility::copy( heating ) )
+        .add(); // probabilityTable
     }
 
     WHEN( "constructing a Table" ){
@@ -400,9 +551,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( size == data.NXS( 1 ) );
         CHECK( ZA == data.NXS( 2 ) );
         CHECK( 10 == data.NXS(  3 ) );
-        CHECK( 3 == data.NXS(  4 ) );
-        CHECK( 2 == data.NXS(  5 ) );
-        CHECK( 1 == data.NXS(  6 ) );
+        CHECK( 4 == data.NXS(  4 ) );
+        CHECK( 3 == data.NXS(  5 ) );
+        CHECK( 2 == data.NXS(  6 ) );
         // CHECK( 0   == data.NXS(  7 ) );
         CHECK( 1   == data.NXS(  8 ) );
         CHECK( 0   == data.NXS(  9 ) );
@@ -418,19 +569,19 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 1  == data.JXS( 1  ) );
         CHECK( 51 == data.JXS( 2  ) );
         CHECK( 83 == data.JXS( 3  ) );
-        CHECK( 86 == data.JXS( 4  ) );
-        CHECK( 89 == data.JXS( 5  ) );
-        CHECK( 92 == data.JXS( 6  ) );
-        CHECK( 95 == data.JXS( 7  ) );
-        CHECK( 124 == data.JXS( 8  ) );
-        CHECK( 127 == data.JXS( 9  ) );
-        CHECK( 237 == data.JXS( 10 ) );
-        CHECK( 239 == data.JXS( 11 ) );
+        CHECK( 87 == data.JXS( 4  ) );
+        CHECK( 91 == data.JXS( 5  ) );
+        CHECK( 95 == data.JXS( 6  ) );
+        CHECK( 99 == data.JXS( 7  ) );
+        CHECK( 137 == data.JXS( 8  ) );
+        CHECK( 141 == data.JXS( 9  ) );
+        CHECK( 251 == data.JXS( 10 ) );
+        CHECK( 254 == data.JXS( 11 ) );
         // CHECK( 0 == data.JXS( 12 ) );
-        CHECK( 315 == data.JXS( 13 ) );
-        CHECK( 0 == data.JXS( 14 ) );
-        CHECK( 316 == data.JXS( 15 ) );
-        CHECK( 317 == data.JXS( 16 ) );
+        CHECK( 375 == data.JXS( 13 ) );
+        CHECK( 377 == data.JXS( 14 ) );
+        CHECK( 379 == data.JXS( 15 ) );
+        // CHECK( 0 == data.JXS( 16 ) );
         // CHECK( 0 == data.JXS( 17 ) );
         // CHECK( 0 == data.JXS( 18 ) );
         // CHECK( 0 == data.JXS( 19 ) );
@@ -465,47 +616,61 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( ranges::equal( heating,    data.XSS( ESZ + 4*NES, NES ) ) );
       }
       THEN( "the MTR Block can be checked" ){
-        std::vector< double > mtrRef{ 16, 18, 102 };
+        std::vector< double > mtrRef{ 5, 16, 18, 102 };
         auto mtr = data.XSS( data.JXS( 3 ), NTR );
 
         CHECK( ranges::equal( mtrRef, mtr ) );
       }
       THEN( "the LQR Block can be checked" ){
-        std::vector< double > lqrRef{ -5.297781, 7.0, 6.5452 };
+        std::vector< double > lqrRef{ 3.265, -5.297781, 7.0, 6.5452 };
         auto lqr = data.XSS( data.JXS( 4 ), NTR );
 
         CHECK( ranges::equal( lqrRef, lqr ) );
       }
       THEN( "the TYR Block can be checked" ){
-        std::vector< double > tyrRef{ -2, 19, 0 };
+        std::vector< double > tyrRef{ 0, -2, 19, 0 };
         auto tyr = data.XSS( data.JXS( 5 ), NTR );
 
         CHECK( ranges::equal( tyrRef, tyr ) );
       }
       THEN( "the LSIG Block can be checked" ){
-        std::vector< double > lsigRef{ 1, 13, 18 };
+        std::vector< double > lsigRef{ 1, 10, 22, 27 };
         auto lsig = data.XSS( data.JXS( 6 ), NTR );
 
         CHECK( ranges::equal( lsigRef, lsig ) );
       }
       THEN( "the LAND Block can be checked" ){
-        std::vector< double > landRef{ 1, 56, 0 };
+        std::vector< double > landRef{ 1, 0, 56, 0 };
         auto land = data.XSS( data.JXS( 8 ), NR  + 1);
 
         CHECK( ranges::equal( landRef, land ) );
       }
       THEN( "the LDLW Block can be checked " ){
-        std::vector< double > ldlwRef{ 1, 46 };
+        std::vector< double > ldlwRef{ 1, 46, 91 };
         auto ldlw = data.XSS( data.JXS( 10 ), NR );
 
+        printRanges( "LDLW", ldlwRef, ldlw );
         CHECK( ranges::equal( ldlwRef, ldlw ) );
       }
-      THEN( "the LSIGP Block can be checked " ){
-        std::vector< double > lsigpRef{ 1 };
-        auto lsigp = data.XSS( data.JXS( 10 ), NTRP );
+      THEN( "the MTRP Block can be checked" ){
+        std::vector< double > mtrpRef{ 5, 102 };
+        auto mtrp = data.XSS( data.JXS( 13 ), NTRP );
 
+        CHECK( ranges::equal( mtrpRef, mtrp ) );
+      }
+      THEN( "the LSIGP Block can be checked " ){
+        std::vector< double > lsigpRef{ 1, 8 };
+        auto lsigp = data.XSS( data.JXS( 14 ), NTRP );
+
+        printRanges( "LSIGP", lsigpRef, lsigp );
         CHECK( ranges::equal( lsigpRef, lsigp ) );
       }
+
+      // Print the Table to a file
+      std::ofstream aceFile;
+      aceFile.open( zaid );
+      table.print<2,0,1>( aceFile );
+      aceFile.close();
 
     }
   } // GIVEN valid

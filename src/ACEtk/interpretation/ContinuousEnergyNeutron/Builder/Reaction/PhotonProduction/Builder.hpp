@@ -17,7 +17,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/addEnergyDistribution.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/construct.hpp"
 
-  friend CrossSection::Builder< Builder >;
+  friend ContinuousEnergyNeutron::Builder::CrossSection::Builder< Builder >;
   friend Yields::Builder;
   friend AngularDistribution::Builder;
   friend EnergyDistribution::Builder< Builder >;
