@@ -545,7 +545,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 328 };
+        long long size{ 401 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -662,7 +662,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         std::vector< double > lsigpRef{ 1, 8 };
         auto lsigp = data.XSS( data.JXS( 14 ), NTRP );
 
-        printRanges( "LSIGP", lsigpRef, lsigp );
         CHECK( ranges::equal( lsigpRef, lsigp ) );
       }
 
