@@ -61,6 +61,9 @@ void NU(){
     nxs[ 7 ] = NMT;
     jxs[ 26 ] = LED + NMT;
 
+    // Locators
+    xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
+
     this->ACEifyEDs( EDs, tData, LED, NMT );
   }
 }

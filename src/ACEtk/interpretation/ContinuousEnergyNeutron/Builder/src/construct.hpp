@@ -55,9 +55,6 @@ Table construct(){
   this->LQR( 3,
              this->neutronProducingReactions_, 
              this->nonNeutronProducingReactions_ );
-  this->TYR( 4,
-             this->neutronProducingReactions_, 
-             this->nonNeutronProducingReactions_ );
   this->SIG( 5,
              this->neutronProducingReactions_
               | ranges::view::transform( getXS ), 
@@ -65,8 +62,10 @@ Table construct(){
               | ranges::view::transform( getXS ) );
   this->AND( 7, neutronProducingReactions  );
   this->DLW( 9, this->neutronProducingReactions_
-            | ranges::view::transform( getReaction )
-            | ranges::view::transform( getED ) );
+            | ranges::view::transform( getReaction ) );
+  this->TYR( 4,
+             this->neutronProducingReactions_, 
+             this->nonNeutronProducingReactions_ );
   // this->GPD(...);
   this->MTR( 12, 
              this->neutronProducingReactions_ 

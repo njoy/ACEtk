@@ -14,8 +14,6 @@ void ACEifyEDs( Range&& distributions,
                 int LED, int NMT ) {
 
   decltype( auto ) xss = tData.XSS();
-  // Locators
-  xss |= ranges::action::push_back( ranges::view::repeat_n( 0, NMT ) );
 
   int JED = LED + NMT;
 
