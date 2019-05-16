@@ -19,8 +19,8 @@ Table construct(){
 
   decltype( auto ) getReaction = []( auto&& p ) -> decltype( auto )
     { return p.second; };
-  decltype( auto ) getED = []( auto&& r ) -> decltype( auto )
-    { return r.energyDistribution; };
+  // decltype( auto ) getED = []( auto&& r ) -> decltype( auto )
+  //   { return r.energyDistribution; };
   decltype( auto ) getXS = []( auto&& p ) -> decltype( auto )
     { return p.second.crossSection; };
   decltype( auto ) getPPXS = []( auto&& p ) -> decltype( auto )

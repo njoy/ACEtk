@@ -145,6 +145,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
             aceified.push_back( 3.14 );
 
       Table::Data data{};
+      data.XSS() |= ranges::action::push_back( ranges::view::repeat_n( 0, 2 ) );
       CENBuilder.ACEifyEDs( EDs, data, 1, 2 );
       
       CHECK( ranges::equal( aceified, data.XSS() ) );
@@ -284,6 +285,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           aceified.push_back( U_3 );
 
       Table::Data data{};
+      data.XSS() |= ranges::action::push_back( ranges::view::repeat_n( 0, 2 ) );
       CENBuilder.ACEifyEDs( EDs, data, 1, 2 );
       
       CHECK( ranges::equal( aceified, data.XSS() ) );
@@ -835,6 +837,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       Table::Data data{};
       int LED{ 1 };
       size_t NMT{ 15 };
+      data.XSS() |= ranges::action::push_back( 
+        ranges::view::repeat_n( 0, NMT ) );
       CENBuilder.ACEifyEDs( EDs, data, LED, NMT );
       
       auto& xss = data.XSS();
