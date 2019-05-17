@@ -10,7 +10,7 @@ protected:
   TotalGammaProduction construct(){
     return TotalGammaProduction{
       std::move( crossSection_.value() ),
-      std::move( outgoingEnergies_.value() )
+      std::move( outgoingEnergies_ )
     };
   }
 

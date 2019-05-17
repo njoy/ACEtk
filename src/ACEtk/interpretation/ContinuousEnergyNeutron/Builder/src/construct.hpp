@@ -66,7 +66,7 @@ Table construct(){
   this->TYR( 4,
              this->neutronProducingReactions_, 
              this->nonNeutronProducingReactions_ );
-  // this->GPD(...);
+  this->GPD();
   this->MTR( 12, 
              this->neutronProducingReactions_ 
               | ranges::view::filter( ppFilter ),

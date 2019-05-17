@@ -42,6 +42,12 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
     nc.totalDisappearanceCrossSection( 
         njoy::utility::copy( totalDisappearanceXS ) );
 
+    std::vector< double > totalGammaXS{
+      0.9, 1.9, 2.9, 3.9, 4.9, 5.9, 6.9, 7.9, 8.9, 9.9 };
+    nc.totalGammaProduction()
+         .crossSection( njoy::utility::copy( totalGammaXS ) )
+      .add();
+
     std::vector< double > elasticXS{ 
       0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
 
@@ -556,7 +562,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 411 };
+        long long size{ 421 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -588,10 +594,10 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 137 == data.JXS( 9  ) );
         CHECK( 247 == data.JXS( 10 ) );
         CHECK( 250 == data.JXS( 11 ) );
-        // CHECK( 0 == data.JXS( 12 ) );
-        CHECK( 385 == data.JXS( 13 ) );
-        CHECK( 387 == data.JXS( 14 ) );
-        CHECK( 389 == data.JXS( 15 ) );
+        CHECK( 385 == data.JXS( 12 ) );
+        CHECK( 395 == data.JXS( 13 ) );
+        CHECK( 397 == data.JXS( 14 ) );
+        CHECK( 399 == data.JXS( 15 ) );
         // CHECK( 0 == data.JXS( 16 ) );
         // CHECK( 0 == data.JXS( 17 ) );
         // CHECK( 0 == data.JXS( 18 ) );
