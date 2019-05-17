@@ -44,9 +44,10 @@ SCENARIO( "incident neutron reaction" ){
                         .values( njoy::utility::copy( XS ) )
                         .energyGrid( ncBuilder.energyGrid() )
                       .add() // crossSection
-                      .neutronYield( neutronYield, 
-                                ContinuousEnergyNeutron::Builder::
-                                    NeutronYieldReferenceFrame::CENTEROFMASS )
+                      .neutronYield( neutronYield )
+                      .neutronYieldReferenceFrame(
+                        ContinuousEnergyNeutron::Builder::
+                            NeutronYieldReferenceFrame::CENTEROFMASS )
                       .angularDistribution()
                         .energyGrid( grid )
                         .isotropic()
@@ -105,9 +106,10 @@ SCENARIO( "incident neutron reaction" ){
                     .values( njoy::utility::copy( XS ) )
                     .energyGrid( ncBuilder.energyGrid() )
                   .add() // crossSection
-                  .neutronYield( neutronYield, 
-                            ContinuousEnergyNeutron::Builder::
-                                NeutronYieldReferenceFrame::CENTEROFMASS )
+                  .neutronYield( neutronYield )
+                  .neutronYieldReferenceFrame(
+                    ContinuousEnergyNeutron::Builder::
+                        NeutronYieldReferenceFrame::CENTEROFMASS )
                   .Q( Qvalue )
                   .angularDistribution()
                     .energyGrid( grid )

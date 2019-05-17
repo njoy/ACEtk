@@ -11,9 +11,8 @@ Reaction::NeutronProducing constructNeutronProducing(){
     return Reaction::NeutronProducing{ 
       MT_, 
       Q_.value(),
-      neutronYield_.value_or( 0 )*
-          static_cast< int >( neutronYieldReferenceFrame_.value_or( 
-                  NeutronYieldReferenceFrame::LAB ) ),
+      neutronYield_.value(),
+      neutronYieldReferenceFrame_.value_or( NeutronYieldReferenceFrame::LAB ),
       std::move( this->crossSection_.value() ),
       std::move( this->angularDistribution_ ),
       std::move( this->energyDistribution_ ),

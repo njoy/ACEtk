@@ -103,6 +103,10 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .values( njoy::utility::copy( elasticXS ) )
             .energyGrid( nc.energyGrid() )
           .add()  // crossSection
+          .neutronYield( 2 )
+          .neutronYieldReferenceFrame(
+            ContinuousEnergyNeutron::Builder::
+                NeutronYieldReferenceFrame::CENTEROFMASS )
           .angularDistribution()
             .energyGrid( njoy::utility::copy( grid ) )
             .isotropic()
@@ -149,6 +153,11 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .energyGrid( xsEnergies )
           .add();  // crossSection
           // no angular distribution
+
+        rB.neutronYield( 0 )
+          .neutronYieldReferenceFrame(
+            ContinuousEnergyNeutron::Builder::
+                NeutronYieldReferenceFrame::CENTEROFMASS );
 
         { // Energy distribution
           std::vector< int > boundaries{ 0, 3 };
@@ -319,9 +328,10 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .values( XS )
             .energyGrid( nc.energyGrid() )
           .add()  // crossSection
-          .neutronYield( 2, 
-                    ContinuousEnergyNeutron::Builder::
-                        NeutronYieldReferenceFrame::CENTEROFMASS )
+          .neutronYield( 2 )
+          .neutronYieldReferenceFrame(
+            ContinuousEnergyNeutron::Builder::
+                NeutronYieldReferenceFrame::CENTEROFMASS )
           .angularDistribution()
             .energyGrid( njoy::utility::copy( grid ) )
             .isotropic()
@@ -389,9 +399,10 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             // .energyGrid( nc.energyGrid() )
             .energyGrid( xsEnergies )
           .add() // crossSection
-          .neutronYield( 19, 
-                    ContinuousEnergyNeutron::Builder::
-                        NeutronYieldReferenceFrame::LAB )
+          .neutronYield( 19 )
+          .neutronYieldReferenceFrame(
+            ContinuousEnergyNeutron::Builder::
+                NeutronYieldReferenceFrame::LAB )
           // Isotropic---no angular distribution needed
           .energyDistribution()
             .energies( std::move( energies ) )
@@ -545,7 +556,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 401 };
+        long long size{ 411 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -570,7 +581,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 51 == data.JXS( 2  ) );
         CHECK( 83 == data.JXS( 3  ) );
         CHECK( 87 == data.JXS( 4  ) );
-        CHECK( 371 == data.JXS( 5  ) );
+        CHECK( 381 == data.JXS( 5  ) );
         CHECK( 91 == data.JXS( 6  ) );
         CHECK( 95 == data.JXS( 7  ) );
         CHECK( 133 == data.JXS( 8  ) );
@@ -578,9 +589,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 247 == data.JXS( 10 ) );
         CHECK( 250 == data.JXS( 11 ) );
         // CHECK( 0 == data.JXS( 12 ) );
-        CHECK( 375 == data.JXS( 13 ) );
-        CHECK( 377 == data.JXS( 14 ) );
-        CHECK( 379 == data.JXS( 15 ) );
+        CHECK( 385 == data.JXS( 13 ) );
+        CHECK( 387 == data.JXS( 14 ) );
+        CHECK( 389 == data.JXS( 15 ) );
         // CHECK( 0 == data.JXS( 16 ) );
         // CHECK( 0 == data.JXS( 17 ) );
         // CHECK( 0 == data.JXS( 18 ) );
@@ -646,10 +657,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( ranges::equal( landRef, land ) );
       }
       THEN( "the LDLW Block can be checked " ){
-        std::vector< double > ldlwRef{ 1, 46, 91 };
+        std::vector< double > ldlwRef{ 11, 56, 101 };
         auto ldlw = data.XSS( data.JXS( 10 ), NR );
 
-        printRanges( "LDLW", ldlwRef, ldlw );
         CHECK( ranges::equal( ldlwRef, ldlw ) );
       }
       THEN( "the MTRP Block can be checked" ){
@@ -845,9 +855,10 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
               .values( XS )
               .energyGrid( nc.energyGrid() )
             .add()  // crossSection
-            .neutronYield( 2, 
-                      ContinuousEnergyNeutron::Builder::
-                          NeutronYieldReferenceFrame::CENTEROFMASS )
+            .neutronYield( 2 )
+            .neutronYieldReferenceFrame( 
+              ContinuousEnergyNeutron::Builder::
+                  NeutronYieldReferenceFrame::CENTEROFMASS )
             .angularDistribution()
               .energyGrid( njoy::utility::copy( grid ) )
               .isotropic()
@@ -912,9 +923,10 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
               .values( XS )
               .energyGrid( nc.energyGrid() )
             .add() // crossSection
-            .neutronYield( 19, 
-                      ContinuousEnergyNeutron::Builder::
-                          NeutronYieldReferenceFrame::LAB )
+            .neutronYield( 19 )
+            .neutronYieldReferenceFrame(
+              ContinuousEnergyNeutron::Builder::
+                  NeutronYieldReferenceFrame::LAB )
             // Isotropic---no angular distribution needed
             .energyDistribution()
               .energies( std::move( energies ) )

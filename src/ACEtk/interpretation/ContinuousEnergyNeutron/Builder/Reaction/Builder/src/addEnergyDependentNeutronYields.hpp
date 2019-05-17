@@ -1,5 +1,5 @@
 Builder& 
-addEnergyDependentNeutronYields( Tabulated1D&& yields ){
+addEnergyDependentNeutronYields( EnergyDependentNeutronYields&& yields ){
   this->energyDependentNeutronYields_ = std::move( yields );
   return *this;
 }

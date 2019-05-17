@@ -3,9 +3,7 @@ Reaction::NonNeutronProducing constructNonNeutronProducing(){
     return Reaction::NonNeutronProducing{ 
       MT_, 
       Q_.value(),
-      neutronYield_.value_or( 0 )*
-          static_cast< int >( neutronYieldReferenceFrame_.value_or( 
-                  NeutronYieldReferenceFrame::LAB ) ),
+      0,
       std::move( this->crossSection_.value() ),
       std::move( this->photonProduction_ )
     };

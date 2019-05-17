@@ -100,9 +100,10 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       tb.crossSection().values( njoy::utility::copy( XS ) )
                        .energyGrid( grid )
                        .add();
-      tb.neutronYield( neutronYield, 
-                       ContinuousEnergyNeutron::Builder::
-                          NeutronYieldReferenceFrame::CENTEROFMASS );
+      tb.neutronYield( neutronYield )
+        .neutronYieldReferenceFrame(
+          ContinuousEnergyNeutron::Builder::
+            NeutronYieldReferenceFrame::CENTEROFMASS );
       addAngularDistribution( tb );
       addEnergyDistribution( tb );
       auto ppB = tb.photonProduction( 13 );
@@ -120,7 +121,9 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       THEN( "the constructed Reaction can be verified" ){
         CHECK( Q == reaction.Q );
-        CHECK( -1*neutronYield == reaction.neutronYield );
+        CHECK( neutronYield == reaction.neutronYield );
+        CHECK( ContinuousEnergyNeutron::Builder::NeutronYieldReferenceFrame::
+                CENTEROFMASS == reaction.neutronYieldReferenceFrame );
         CHECK( XS == reaction.crossSection.values );
         CHECK( 14 == reaction.MT );
         CHECK( bool( reaction.photonProduction ) );
@@ -133,9 +136,10 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       tb.crossSection().values( njoy::utility::copy( XS ) )
                        .energyGrid( grid )
                        .add();
-      tb.neutronYield( neutronYield, 
-                       ContinuousEnergyNeutron::Builder::
-                          NeutronYieldReferenceFrame::CENTEROFMASS );
+      tb.neutronYield( neutronYield )
+        .neutronYieldReferenceFrame(
+            ContinuousEnergyNeutron::Builder::
+              NeutronYieldReferenceFrame::LAB );
       tb.isotropic();
       addEnergyDistribution( tb );
 
@@ -143,7 +147,9 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
 
       THEN( "the constructed Reaction can be verified" ){
         CHECK( Q == reaction.Q );
-        CHECK( -1*neutronYield == reaction.neutronYield );
+        CHECK( neutronYield == reaction.neutronYield );
+        CHECK( ContinuousEnergyNeutron::Builder::NeutronYieldReferenceFrame::
+                LAB == reaction.neutronYieldReferenceFrame );
         CHECK( XS == reaction.crossSection.values );
         CHECK( 14 == reaction.MT );
       }
@@ -154,10 +160,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       };
       for( auto yield : validYields ){
         THEN( "no exception is thrown when yield: " + std::to_string( yield ) ){
-          CHECK_NOTHROW( 
-            tb.neutronYield( yield, 
-                             ContinuousEnergyNeutron::Builder::
-                                NeutronYieldReferenceFrame::LAB ) );
+          CHECK_NOTHROW( tb.neutronYield( yield ));
         }
       }
     }
@@ -221,9 +224,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
       for( auto yield : invalidYields ){
         THEN( "an exception is thrown when yield: " + std::to_string( yield ) ){
           CHECK_THROWS_AS( 
-            tb.neutronYield ( yield, 
-                             ContinuousEnergyNeutron::Builder::
-                                NeutronYieldReferenceFrame::LAB ),
+            tb.neutronYield ( yield ),
             details::verify::exceptions::InvalidNeutronYield& 
           );
         }
@@ -241,11 +242,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder::Reaction::Builder" ){
     }
     WHEN( "neutron yield isn't correct" ){
       THEN( "an exception is thrown" ){
-        CHECK_THROWS(
-          tb.neutronYield( 0, 
-                          ContinuousEnergyNeutron::Builder::
-                              NeutronYieldReferenceFrame::CENTEROFMASS )
-        );
+        CHECK_THROWS( tb.neutronYield( 0 ) );
       }
 
     }

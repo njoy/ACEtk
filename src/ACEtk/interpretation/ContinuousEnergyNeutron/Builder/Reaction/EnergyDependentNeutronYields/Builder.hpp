@@ -8,7 +8,10 @@ private:
 
 protected:
 
-  using TabBuilder::construct;
+  EnergyDependentNeutronYields construct(){
+    auto tab = TabBuilder::construct();
+    return static_cast< EnergyDependentNeutronYields& >( tab );
+  }
 
 public:
   Builder( ParentBuilder& parent ):

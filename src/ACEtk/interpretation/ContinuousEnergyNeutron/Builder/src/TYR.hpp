@@ -9,10 +9,15 @@ void TYR(int indexJXS, R1&& npReactions, R2&& nonnpReactions ){
 
   jxs[ indexJXS ] = xss.size() + 1;
 
-  for( decltype( auto ) reac : npReactions ){ 
-    xss.push_back( reac.second.neutronYield );
+  decltype( auto ) getReac = []( auto&& p ){ return p.second; };
+
+  for( decltype( auto ) reac : 
+      npReactions | ranges::view::transform( getReac ) ){ 
+    xss.push_back( reac.neutronYield*
+                   static_cast< int >( reac.neutronYieldReferenceFrame ) );
   }
-  for( decltype( auto ) reac : nonnpReactions ){ 
-    xss.push_back( reac.second.neutronYield );
+  for( decltype( auto ) reac : 
+      nonnpReactions | ranges::view::transform( getReac ) ){ 
+    xss.push_back( reac.neutronYield );
   }
 }
