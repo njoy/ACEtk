@@ -25,6 +25,8 @@ Table construct(){
     { return p.second.crossSection; };
   decltype( auto ) getPPXS = []( auto&& p ) -> decltype( auto )
     { return p.second.photonProduction.value().crossSection; };
+  decltype( auto ) getPPAD = []( auto&& p ) -> decltype( auto )
+    { return p.second.photonProduction.value().angularDistribution; };
   decltype( auto ) ppFilter = []( auto&& pair ) ->decltype( auto )
     { return bool( pair.second.photonProduction ); };
 
@@ -79,6 +81,13 @@ Table construct(){
              this->nonNeutronProducingReactions_ 
               | ranges::view::filter( ppFilter )
               | ranges::view::transform( getPPXS ) );
+  this->ANDP( 15, 
+             this->neutronProducingReactions_ 
+              | ranges::view::filter( ppFilter )
+              | ranges::view::transform( getPPAD ), 
+             this->nonNeutronProducingReactions_ 
+              | ranges::view::filter( ppFilter )
+              | ranges::view::transform( getPPAD ) );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();

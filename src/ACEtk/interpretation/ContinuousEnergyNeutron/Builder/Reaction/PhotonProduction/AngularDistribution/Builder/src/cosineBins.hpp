@@ -1,19 +1,15 @@
-template< typename Ror >
-Builder& cosineBins( Ror&& bins ){
-
-  auto toPositive = []( auto&& r ){
-    return details::verify::positive( std::forward< decltype( r ) >( r ) );
-  };
+template< typename Range,
+          utility::Require< true, utility::is_range, Range > = true >
+Builder& cosineBins( int index, Range&& bins ){
 
   try{
-    this->cosineBins_ = bins
-      | ranges::view::transform(
-          hana::compose( toPositive, details::make_array< 33 > ) 
-        )
-      | ranges::to_vector;
+    this->cosineBins_[ index ] = std::make_optional< cosArray >(
+        details::make_array<33>( bins ) );
+
     return *this;
-  } catch( details::verify::exceptions::NotPositive& e ){
-    Log::info( "cosine bins must be all positive" );
+  } catch( details::verify::exceptions::InvalidCosine& e ){
+    Log::info( "Trouble adding cosine bins (at index: {}) "
+               "for photon production angular distribution", index );
     throw;
   }
 }

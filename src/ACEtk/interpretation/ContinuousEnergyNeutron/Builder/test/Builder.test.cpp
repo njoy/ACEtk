@@ -562,7 +562,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 421 };
+        long long size{ 629 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -598,8 +598,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 395 == data.JXS( 13 ) );
         CHECK( 397 == data.JXS( 14 ) );
         CHECK( 399 == data.JXS( 15 ) );
-        // CHECK( 0 == data.JXS( 16 ) );
-        // CHECK( 0 == data.JXS( 17 ) );
+        CHECK( 422 == data.JXS( 16 ) );
+        CHECK( 424 == data.JXS( 17 ) );
         // CHECK( 0 == data.JXS( 18 ) );
         // CHECK( 0 == data.JXS( 19 ) );
         // CHECK( 0 == data.JXS( 20 ) );
@@ -679,6 +679,14 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         auto lsigp = data.XSS( data.JXS( 14 ), NTRP );
 
         CHECK( ranges::equal( lsigpRef, lsigp ) );
+      }
+      THEN( "the LANDP Block can be checked" ){
+        std::vector< double > landpRef{ 1, 104 };
+        auto landp = data.XSS( data.JXS( 14 ), NTRP );
+
+        printRanges( "LANDP", landpRef, landp );
+        CHECK( ranges::equal( landpRef, landp ) );
+
       }
 
       // Print the Table to a file
