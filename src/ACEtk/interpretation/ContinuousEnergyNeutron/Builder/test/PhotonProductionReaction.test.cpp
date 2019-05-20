@@ -24,15 +24,15 @@ SCENARIO( "PhotonProduction components of ContinuousEnergyNeutron::Builder" ){
     0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
     0.30, 0.31, 0.32 }},
 
-    {{ 1.00, 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
-    1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19,
-    1.20, 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29,
-    1.30, 1.31, 1.32 }},
+    {{ 0.100, 0.101, 0.102, 0.103, 0.104, 0.105, 0.106, 0.107, 0.108, 0.109,
+    0.110, 0.111, 0.112, 0.113, 0.114, 0.115, 0.116, 0.117, 0.118, 0.119,
+    0.120, 0.121, 0.122, 0.123, 0.124, 0.125, 0.126, 0.127, 0.128, 0.129,
+    0.130, 0.131, 0.132 }},
 
-    {{ 2.00, 2.01, 2.02, 2.03, 2.04, 2.05, 2.06, 2.07, 2.08, 2.09,
-    2.10, 2.11, 2.12, 2.13, 2.14, 2.15, 2.16, 2.17, 2.18, 2.19,
-    2.20, 2.21, 2.22, 2.23, 2.24, 2.25, 2.26, 2.27, 2.28, 2.29,
-    2.30, 2.31, 2.32 }}
+    {{ 0.200, 0.201, 0.202, 0.203, 0.204, 0.205, 0.206, 0.207, 0.208, 0.209,
+    0.210, 0.211, 0.212, 0.213, 0.214, 0.215, 0.216, 0.217, 0.218, 0.219,
+    0.220, 0.221, 0.222, 0.223, 0.224, 0.225, 0.226, 0.227, 0.228, 0.229,
+    0.230, 0.231, 0.232 }}
   };
   std::vector< double > grid{ 1.0, 2.0, 3.0, 4.0 };
   ncBuilder.energyGrid( njoy::utility::copy( grid ) );
@@ -51,7 +51,9 @@ SCENARIO( "PhotonProduction components of ContinuousEnergyNeutron::Builder" ){
                  .add() // yields
                  .angularDistribution()
                     .energyGrid( njoy::utility::copy( angularGrid ) )
-                    .cosineBins( njoy::utility::copy( bins ) )
+                    .cosineBins( 0, njoy::utility::copy( bins[ 0 ] ) )
+                    .cosineBins( 1, njoy::utility::copy( bins[ 1 ] ) )
+                    .cosineBins( 2, njoy::utility::copy( bins[ 2 ] ) )
                  .add() // angularDistribution
                  .energyDistribution()
                    .boundaries( njoy::utility::copy( boundaries ) )
@@ -102,7 +104,9 @@ SCENARIO( "PhotonProduction components of ContinuousEnergyNeutron::Builder" ){
                  .add()
                  .angularDistribution()
                     .energyGrid( njoy::utility::copy( angularGrid ) )
-                    .cosineBins( njoy::utility::copy( bins ) )
+                    .cosineBins( 0, njoy::utility::copy( bins[ 0 ] ) )
+                    .cosineBins( 1, njoy::utility::copy( bins[ 1 ] ) )
+                    .cosineBins( 2, njoy::utility::copy( bins[ 2 ] ) )
                  .add()
                  .energyDistribution()
                    .boundaries( njoy::utility::copy( boundaries ) )
@@ -155,7 +159,9 @@ SCENARIO( "PhotonProduction components of ContinuousEnergyNeutron::Builder" ){
                     .add()
                  .angularDistribution()
                     .energyGrid( njoy::utility::copy( angularGrid ) )
-                    .cosineBins( njoy::utility::copy( bins ) )
+                    .cosineBins( 0, njoy::utility::copy( bins[ 0 ] ) )
+                    .cosineBins( 1, njoy::utility::copy( bins[ 1 ] ) )
+                    .cosineBins( 2, njoy::utility::copy( bins[ 2 ] ) )
                     .add()
                  .energyDistribution()
                    .boundaries( njoy::utility::copy( boundaries ) )
