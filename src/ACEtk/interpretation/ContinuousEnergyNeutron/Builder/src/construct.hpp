@@ -17,25 +17,28 @@ Table construct(){
 
   this->ESZ();
 
-  decltype( auto ) getReaction = []( auto&& p ) -> decltype( auto )
+  decltype( auto ) getRx = []( auto&& p ) -> decltype( auto )
     { return p.second; };
-  // decltype( auto ) getED = []( auto&& r ) -> decltype( auto )
-  //   { return r.energyDistribution; };
-  decltype( auto ) getXS = []( auto&& p ) -> decltype( auto )
-    { return p.second.crossSection; };
-  decltype( auto ) getPPXS = []( auto&& p ) -> decltype( auto )
-    { return p.second.photonProduction.value().crossSection; };
-  decltype( auto ) getPPAD = []( auto&& p ) -> decltype( auto )
-    { return p.second.photonProduction.value().angularDistribution; };
   decltype( auto ) ppFilter = []( auto&& pair ) ->decltype( auto )
     { return bool( pair.second.photonProduction ); };
+  decltype( auto ) getPP = []( auto&& p ) -> decltype( auto )
+    { return p.second.photonProduction.value(); };
+  decltype( auto ) npRPP = this->neutronProducingReactions_
+    | ranges::view::filter( ppFilter );
+  decltype( auto ) nonnpRPP = this->nonNeutronProducingReactions_
+    | ranges::view::filter( ppFilter );
+
+  decltype( auto ) ppReactions = ranges::view::concat(
+    npRPP | ranges::view::transform( getPP ),
+    nonnpRPP | ranges::view::transform( getPP )
+  );
 
   // Get all reactions that are neutron producing 
   // (including elastic scattering)
   decltype( auto ) neutronProducingReactions = 
     ranges::view::concat( 
       ranges::view::single( this->elasticScattering_.value() ),
-      this->neutronProducingReactions_ | ranges::view::transform( getReaction )
+      this->neutronProducingReactions_ | ranges::view::transform( getRx )
     );
 
   int NTR = this->neutronProducingReactions_.size() + 
@@ -59,35 +62,21 @@ Table construct(){
              this->nonNeutronProducingReactions_ );
   this->SIG( 5,
              this->neutronProducingReactions_
-              | ranges::view::transform( getXS ), 
+              | ranges::view::transform( getRx ), 
              this->nonNeutronProducingReactions_
-              | ranges::view::transform( getXS ) );
+              | ranges::view::transform( getRx ) );
   this->AND( 7, neutronProducingReactions  );
   this->DLW( 9, this->neutronProducingReactions_
-            | ranges::view::transform( getReaction ) );
+                  | ranges::view::transform( getRx ) );
   this->TYR( 4,
              this->neutronProducingReactions_, 
              this->nonNeutronProducingReactions_ );
   this->GPD();
-  this->MTR( 12, 
-             this->neutronProducingReactions_ 
-              | ranges::view::filter( ppFilter ),
-             this->nonNeutronProducingReactions_ 
-              | ranges::view::filter( ppFilter ) );
-  this->SIG( 13, 
-             this->neutronProducingReactions_ 
-              | ranges::view::filter( ppFilter )
-              | ranges::view::transform( getPPXS ), 
-             this->nonNeutronProducingReactions_ 
-              | ranges::view::filter( ppFilter )
-              | ranges::view::transform( getPPXS ) );
-  this->ANDP( 15, 
-             this->neutronProducingReactions_ 
-              | ranges::view::filter( ppFilter )
-              | ranges::view::transform( getPPAD ), 
-             this->nonNeutronProducingReactions_ 
-              | ranges::view::filter( ppFilter )
-              | ranges::view::transform( getPPAD ) );
+  this->MTR( 12, npRPP, nonnpRPP );
+  this->SIG( 13, npRPP | ranges::view::transform( getPP ), 
+                 nonnpRPP | ranges::view::transform( getPP ) 
+           );
+  this->AND( 15, ppReactions );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();

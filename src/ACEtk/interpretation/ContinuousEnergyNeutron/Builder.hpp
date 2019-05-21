@@ -65,7 +65,6 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/AND.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/DLW.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/GPD.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ANDP.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"

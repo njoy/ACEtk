@@ -671,7 +671,6 @@
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/TYR.hpp",
-    "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ANDP.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addHeader.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ACEifyEDs.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SIG.hpp",

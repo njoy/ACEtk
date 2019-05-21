@@ -20,12 +20,12 @@ void SIG(int jxsIndex, R1&& npReactions, R2&& nonnpReactions ){
   jxs[ jxsIndex + 1 ] = jxs7;
 
   decltype( auto ) ACEifyReactionList = 
-      [&]( auto&& xsList ) -> void {
+      [&]( auto&& rList ) -> void {
 
-    for( decltype( auto ) xs : xsList ){
+    for( decltype( auto ) reac : rList ){
       xss[ LOCA_i - 1 ] = xss.size() - jxs7 + 2;
 
-      details::ACEify( tData, xs );
+      details::ACEify( tData, reac.crossSection );
       LOCA_i +=1;
     }
   };

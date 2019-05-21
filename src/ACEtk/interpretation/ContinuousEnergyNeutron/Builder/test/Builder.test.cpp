@@ -207,7 +207,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         }
         { // Photon production
           std::vector<double > ppGrid{ 1.0, 2.0, 5.0, 10.0 };
-          std::vector< double > XS{ 1.0, 2.0, 3.0, 4.0 };
+          std::vector< double > ppXS{ 1.0, 2.0, 3.0, 4.0 };
           std::vector< int > boundaries{ 0, 3 };
           std::vector< int > schemes{ 2, 1 };
           std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
@@ -238,7 +238,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
           rB.photonProduction( 13 )
               .crossSection()
-                .values( njoy::utility::copy( XS ) )
+                .values( njoy::utility::copy( ppXS ) )
                 .energyGrid( ppGrid 
                   | ranges::view::slice( 0l, ranges::distance( ppGrid ) ) )
               .add() // crossSection
@@ -566,7 +566,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 629 };
+        long long size{ 635 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -685,10 +685,9 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( ranges::equal( lsigpRef, lsigp ) );
       }
       THEN( "the LANDP Block can be checked" ){
-        std::vector< double > landpRef{ 1, 104 };
+        std::vector< double > landpRef{ 1, 107 };
         auto landp = data.XSS( data.JXS( 16 ), NTRP );
 
-        printRanges( "LANDP", landpRef, landp );
         CHECK( ranges::equal( landpRef, landp ) );
 
       }
