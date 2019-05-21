@@ -13,5 +13,5 @@ struct PhotonProduction {
   int MT;
   MFType crossSection;
   AngularDistribution angularDistribution;
-  EnergyDistribution energyDistribution;
+  std::vector< EnergyDistribution > energyDistribution;
 };

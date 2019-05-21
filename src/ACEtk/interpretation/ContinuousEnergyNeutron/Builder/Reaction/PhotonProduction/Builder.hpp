@@ -8,7 +8,7 @@ private:
 
   std::optional< MFType > crossSection_;
   std::optional< AngularDistribution > angularDistribution_;
-  std::optional< EnergyDistribution > energyDistribution_;
+  std::vector< EnergyDistribution > energyDistribution_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/PhotonProduction/Builder/src/addCrossSection.hpp"

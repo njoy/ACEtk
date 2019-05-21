@@ -566,7 +566,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 635 };
+        long long size{ 790 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -575,7 +575,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 4 == data.NXS(  4 ) );
         CHECK( 3 == data.NXS(  5 ) );
         CHECK( 2 == data.NXS(  6 ) );
-        // CHECK( 0   == data.NXS(  7 ) );
+        CHECK( 0   == data.NXS(  7 ) );
         CHECK( 1   == data.NXS(  8 ) );
         CHECK( 0   == data.NXS(  9 ) );
         CHECK( 92  == data.NXS( 10 ) );
@@ -604,16 +604,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 399 == data.JXS( 15 ) );
         CHECK( 422 == data.JXS( 16 ) );
         CHECK( 424 == data.JXS( 17 ) );
-        // CHECK( 0 == data.JXS( 18 ) );
-        // CHECK( 0 == data.JXS( 19 ) );
-        // CHECK( 0 == data.JXS( 20 ) );
-        // CHECK( 0 == data.JXS( 21 ) );
-        // CHECK( 0 == data.JXS( 22 ) );
-        // CHECK( 0 == data.JXS( 23 ) );
-        // CHECK( 0 == data.JXS( 24 ) );
-        // CHECK( 0 == data.JXS( 25 ) );
+        CHECK( 636 == data.JXS( 18 ) );
+        CHECK( 638 == data.JXS( 19 ) );
+        CHECK( 788 == data.JXS( 20 ) );
+        CHECK( 0 == data.JXS( 21 ) );
+        CHECK( 0 == data.JXS( 22 ) );
+        CHECK( 0 == data.JXS( 23 ) );
+        CHECK( 56 == data.JXS( 24 ) );
+        CHECK( 0 == data.JXS( 25 ) );
         CHECK( 67 == data.JXS( 26 ) );
-        // CHECK( 0 == data.JXS( 27 ) );
+        CHECK( 68 == data.JXS( 27 ) );
         CHECK( 0 == data.JXS( 28 ) );
         CHECK( 0 == data.JXS( 29 ) );
         CHECK( 0 == data.JXS( 30 ) );
@@ -689,7 +689,18 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         auto landp = data.XSS( data.JXS( 16 ), NTRP );
 
         CHECK( ranges::equal( landpRef, landp ) );
+      }
+      THEN( "the LDLWP Block can be checked " ){
+        std::vector< double > ldlwpRef{ 1, 76 };
+        auto ldlwp = data.XSS( data.JXS( 18 ), NTRP );
 
+        CHECK( ranges::equal( ldlwpRef, ldlwp ) );
+      }
+      THEN( "the YP Block can be checked" ){
+        std::vector< double > yppRef{ 2, 5, 102 };
+        auto ypp = data.XSS( data.JXS( 20 ), 3 );
+
+        CHECK( ranges::equal( yppRef, ypp ) );
       }
 
       // Print the Table to a file

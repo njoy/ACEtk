@@ -2,9 +2,9 @@ PhotonProduction construct(){
   try{
     return PhotonProduction{
       MT,
-      crossSection_.value(),
-      angularDistribution_.value(),
-      energyDistribution_.value()
+      std::move( crossSection_.value() ),
+      std::move( angularDistribution_.value() ),
+      std::move( energyDistribution_ )
     };
   } catch( std::bad_optional_access& b ){
     Log::error( "Trouble when creating a PhotonProduction object" );

@@ -46,11 +46,7 @@ Table construct(){
   tData.NXS()[ 3 ] = NTR;
   int NR = ranges::distance( this->neutronProducingReactions_ );
   tData.NXS()[ 4 ] = NR;
-  int NTRP = 
-    ranges::distance( this->neutronProducingReactions_ 
-                        | ranges::view::filter( ppFilter ) ) + 
-    ranges::distance( this->nonNeutronProducingReactions_ 
-                        | ranges::view::filter( ppFilter ) );
+  int NTRP = ranges::distance( ppReactions );
   tData.NXS()[ 5 ] = NTRP;
 
   this->NU();
@@ -71,12 +67,18 @@ Table construct(){
   this->TYR( 4,
              this->neutronProducingReactions_, 
              this->nonNeutronProducingReactions_ );
-  this->GPD();
-  this->MTR( 12, npRPP, nonnpRPP );
-  this->SIG( 13, npRPP | ranges::view::transform( getPP ), 
-                 nonnpRPP | ranges::view::transform( getPP ) 
-           );
-  this->AND( 15, ppReactions );
+
+  // Gamma production
+  if( NTRP > 0 ){
+    this->GPD();
+    this->MTR( 12, npRPP, nonnpRPP );
+    this->SIG( 13, npRPP | ranges::view::transform( getPP ), 
+                  nonnpRPP | ranges::view::transform( getPP ) 
+            );
+    this->AND( 15, ppReactions );
+    this->DLWP( 17, ppReactions );
+    this->YP( 19, ppReactions );
+  }
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();
