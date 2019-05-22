@@ -5,8 +5,8 @@ struct Polynomial{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity/Polynomial/Builder.hpp"
 
   void ACEify( Table::Data& tData){
-    tData.XSS()
-      |= ranges::action::push_back(
-        ranges::view::concat( ranges::view::single( 1 ), this->coefficients ) );
+    decltype( auto ) xss = tData.XSS();
+    xss.push_back( 1 );
+    xss |= ranges::action::push_back( this->coefficients );
   }
 };

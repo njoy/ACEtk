@@ -13,4 +13,5 @@ struct ProbabilityTable{
   dvP< std::vector< double > > heating;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Builder.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/src/ACEify.hpp"
 };

@@ -572,8 +572,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto table = nc.construct();
       auto finish = std::chrono::high_resolution_clock::now();
       std::chrono::duration< double > elapsed = finish - start;
-      njoy::Log::info( "Time required to construct ACE Table: {}", 
-                       elapsed.count() );
+      njoy::Log::info( "Time required to construct ACE Table: {} (ms)", 
+                       elapsed.count()*1000 );
 
       auto header = table.header;
       auto data = table.data;
@@ -727,10 +727,17 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       }
 
       // Print the Table to a file
+      start = std::chrono::high_resolution_clock::now();
+
       std::ofstream aceFile;
       aceFile.open( zaid );
       table.print<2,0,1>( aceFile );
       aceFile.close();
+
+      finish = std::chrono::high_resolution_clock::now();
+      elapsed = finish - start;
+      njoy::Log::info( "Time required to 'print' ACE Table: {} (ms)", 
+                       elapsed.count()*1000 );
 
     }
   } // GIVEN valid

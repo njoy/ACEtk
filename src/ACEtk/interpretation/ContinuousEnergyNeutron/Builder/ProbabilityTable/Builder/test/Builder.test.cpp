@@ -62,6 +62,23 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
           CHECK( ranges::equal( fissionXS, pTable.fissionCrossSections ) );
           CHECK( ranges::equal( captureXS, pTable.captureCrossSections ) );
           CHECK( ranges::equal( heating, pTable.heating ) );
+
+          AND_THEN( "the contents can be ACE-ified" ){
+            std::vector< double > aceified{};
+            aceified |= ranges::action::push_back( CDFs );
+            aceified |= ranges::action::push_back( totalXS );
+            aceified |= ranges::action::push_back( elasticXS );
+            aceified |= ranges::action::push_back( fissionXS );
+            aceified |= ranges::action::push_back( captureXS );
+            aceified |= ranges::action::push_back( heating );
+
+            Table::Data data{};
+            pTable.ACEify( data );
+
+            njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
+            njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
+            CHECK( ranges::equal( aceified, data.XSS() ) );
+          }
         }
       }
     }
