@@ -38,6 +38,7 @@ protected:
   std::map< int, Reaction::NonNeutronProducing > nonNeutronProducingReactions_;
 
   std::optional< TotalGammaProduction > totalGammaProduction_;
+  std::optional< CrossSection > totalFissionXS_;
   std::optional< ProbabilityTable > probabilityTable_;
 
   friend Reaction::Builder;
@@ -51,11 +52,13 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addCrossSection.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ACEifyEDs.hpp"
 protected:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/check.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ESZ.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/NU.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/MTR.hpp"
@@ -67,6 +70,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/GPD.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/DLWP.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/YP.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/FIS.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"
@@ -79,9 +83,15 @@ public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/reaction.hpp"
 
+  CrossSection::Builder< Builder > totalFissionCrossSection(){
+    return { *this };
+  }
+
   ProbabilityTable::Builder probabilityTable(){ 
-    return ProbabilityTable::Builder{ *this }; }
+    return ProbabilityTable::Builder{ *this }; 
+  }
 
   Table::Header::Builder< Builder > header(){ 
-    return Table::Header::Builder< Builder >{ *this }; }
+    return Table::Header::Builder< Builder >{ *this }; 
+  }
 };

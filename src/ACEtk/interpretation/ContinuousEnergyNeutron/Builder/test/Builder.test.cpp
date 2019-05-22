@@ -48,6 +48,14 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
          .crossSection( njoy::utility::copy( totalGammaXS ) )
       .add();
 
+    std::vector< double > totalFissionXS{ 4.18, 5.18, 6.18, 7.18, 8.18, 9.18 };
+    decltype( auto ) grid = nc.energyGrid();
+    auto fEnergies = grid | ranges::view::slice( 4l, ranges::distance( grid ) );
+    nc.totalFissionCrossSection()
+        .values( njoy::utility::copy( totalFissionXS ) )
+        .energyGrid( fEnergies )
+      .add();
+
     std::vector< double > elasticXS{ 
       0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2, 9.2 };
 
@@ -560,40 +568,45 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
 
     WHEN( "constructing a Table" ){
 
+      auto start = std::chrono::high_resolution_clock::now();
       auto table = nc.construct();
+      auto finish = std::chrono::high_resolution_clock::now();
+      std::chrono::duration< double > elapsed = finish - start;
+      njoy::Log::info( "Time required to construct ACE Table: {}", 
+                       elapsed.count() );
 
       auto header = table.header;
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 790 };
+        long long size{ 798 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
-        CHECK( ZA == data.NXS( 2 ) );
-        CHECK( 10 == data.NXS(  3 ) );
-        CHECK( 4 == data.NXS(  4 ) );
-        CHECK( 3 == data.NXS(  5 ) );
-        CHECK( 2 == data.NXS(  6 ) );
+        CHECK( ZA  == data.NXS(  2 ) );
+        CHECK( 10  == data.NXS(  3 ) );
+        CHECK( 4   == data.NXS(  4 ) );
+        CHECK( 3   == data.NXS(  5 ) );
+        CHECK( 2   == data.NXS(  6 ) );
         CHECK( 0   == data.NXS(  7 ) );
         CHECK( 1   == data.NXS(  8 ) );
         CHECK( 0   == data.NXS(  9 ) );
         CHECK( 92  == data.NXS( 10 ) );
         CHECK( 235 == data.NXS( 11 ) );
-        CHECK( 0 == data.NXS( 12 ) );
-        CHECK( 0 == data.NXS( 13 ) );
-        CHECK( 0 == data.NXS( 14 ) );
-        CHECK( 0 == data.NXS( 15 ) );
-        CHECK( 0 == data.NXS( 16 ) );
+        CHECK( 0   == data.NXS( 12 ) );
+        CHECK( 0   == data.NXS( 13 ) );
+        CHECK( 0   == data.NXS( 14 ) );
+        CHECK( 0   == data.NXS( 15 ) );
+        CHECK( 0   == data.NXS( 16 ) );
       }
       THEN( "the JXS array can be checked " ){
-        CHECK( 1  == data.JXS( 1  ) );
-        CHECK( 51 == data.JXS( 2  ) );
-        CHECK( 83 == data.JXS( 3  ) );
-        CHECK( 87 == data.JXS( 4  ) );
+        CHECK( 1   == data.JXS( 1  ) );
+        CHECK( 51  == data.JXS( 2  ) );
+        CHECK( 83  == data.JXS( 3  ) );
+        CHECK( 87  == data.JXS( 4  ) );
         CHECK( 381 == data.JXS( 5  ) );
-        CHECK( 91 == data.JXS( 6  ) );
-        CHECK( 95 == data.JXS( 7  ) );
+        CHECK( 91  == data.JXS( 6  ) );
+        CHECK( 95  == data.JXS( 7  ) );
         CHECK( 133 == data.JXS( 8  ) );
         CHECK( 137 == data.JXS( 9  ) );
         CHECK( 247 == data.JXS( 10 ) );
@@ -607,18 +620,18 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 636 == data.JXS( 18 ) );
         CHECK( 638 == data.JXS( 19 ) );
         CHECK( 788 == data.JXS( 20 ) );
-        CHECK( 0 == data.JXS( 21 ) );
-        CHECK( 0 == data.JXS( 22 ) );
-        CHECK( 0 == data.JXS( 23 ) );
-        CHECK( 56 == data.JXS( 24 ) );
-        CHECK( 0 == data.JXS( 25 ) );
-        CHECK( 67 == data.JXS( 26 ) );
-        CHECK( 68 == data.JXS( 27 ) );
-        CHECK( 0 == data.JXS( 28 ) );
-        CHECK( 0 == data.JXS( 29 ) );
-        CHECK( 0 == data.JXS( 30 ) );
-        CHECK( 0 == data.JXS( 31 ) );
-        CHECK( 0 == data.JXS( 32 ) );
+        CHECK( 791 == data.JXS( 21 ) );
+        CHECK( 0   == data.JXS( 22 ) );
+        CHECK( 0   == data.JXS( 23 ) );
+        CHECK( 56  == data.JXS( 24 ) );
+        CHECK( 0   == data.JXS( 25 ) );
+        CHECK( 67  == data.JXS( 26 ) );
+        CHECK( 68  == data.JXS( 27 ) );
+        CHECK( 0   == data.JXS( 28 ) );
+        CHECK( 0   == data.JXS( 29 ) );
+        CHECK( 0   == data.JXS( 30 ) );
+        CHECK( 0   == data.JXS( 31 ) );
+        CHECK( 0   == data.JXS( 32 ) );
       }
 
       int NTR = data.NXS( 4 );
@@ -701,6 +714,16 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         auto ypp = data.XSS( data.JXS( 20 ), 3 );
 
         CHECK( ranges::equal( yppRef, ypp ) );
+      }
+      THEN( "the FIS Block can be checked" ){
+        std::vector< double > fisRef{};
+        fisRef.push_back( 5 );
+        fisRef.push_back( 6 );
+        fisRef |= ranges::action::push_back( totalFissionXS );
+
+        auto fis = data.XSS( data.JXS( 21 ), 8 );
+
+        CHECK( ranges::equal( fisRef, fis ) );
       }
 
       // Print the Table to a file

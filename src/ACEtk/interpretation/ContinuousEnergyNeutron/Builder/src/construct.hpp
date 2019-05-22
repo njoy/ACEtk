@@ -1,5 +1,7 @@
 Table construct(){
 
+  this->check();
+
   this->tableData_ = Table::Data{};
   decltype( auto ) tData = this->tableData_.value();
 
@@ -14,8 +16,6 @@ Table construct(){
     tData.NXS()[ 9  ] = Z;
     tData.NXS()[ 10 ] = A;
   }
-
-  this->ESZ();
 
   decltype( auto ) getRx = []( auto&& p ) -> decltype( auto )
     { return p.second; };
@@ -49,6 +49,7 @@ Table construct(){
   int NTRP = ranges::distance( ppReactions );
   tData.NXS()[ 5 ] = NTRP;
 
+  this->ESZ();
   this->NU();
   this->MTR( 2, 
              this->neutronProducingReactions_, 
@@ -79,6 +80,8 @@ Table construct(){
     this->DLWP( 17, ppReactions );
     this->YP( 19, ppReactions );
   }
+
+  this->FIS( );
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();

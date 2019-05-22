@@ -4,8 +4,7 @@ struct ProbabilityTable{
   int inelasticCompetition;
   int otherAbsorption;
   Factors factors;
-  dvP< 
-    dvS< std::vector< double > > > incidentEnergies;
+  dvP< dvS< std::vector< double > > > incidentEnergies;
   dvC< std::vector< double > > CDFs;
   dvP< std::vector< double > > totalCrossSections;
   dvP< std::vector< double > > elasticCrossSections;
