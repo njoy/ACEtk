@@ -71,6 +71,7 @@ protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/DLWP.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/YP.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/FIS.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/UNR.hpp"
 
 public:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"

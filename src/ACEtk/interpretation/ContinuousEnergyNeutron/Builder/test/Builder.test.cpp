@@ -557,12 +557,14 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           .otherAbsorption( otherAbsorption )
           .factors( factors )
           .incidentEnergies( njoy::utility::copy( energies ) )
-          .CDFs( njoy::utility::copy( CDFs ) )
-          .totalCrossSections( njoy::utility::copy( totalXS ) )
-          .elasticCrossSections( njoy::utility::copy( elasticXS ) )
-          .fissionCrossSections( njoy::utility::copy( fissionXS ) )
-          .captureCrossSections( njoy::utility::copy( captureXS ) )
-          .heating( njoy::utility::copy( heating ) )
+          .table()
+            .CDFs( njoy::utility::copy( CDFs ) )
+            .totalCrossSections( njoy::utility::copy( totalXS ) )
+            .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+            .fissionCrossSections( njoy::utility::copy( fissionXS ) )
+            .captureCrossSections( njoy::utility::copy( captureXS ) )
+            .heating( njoy::utility::copy( heating ) )
+          .add() // table
         .add(); // probabilityTable
     }
 
@@ -579,7 +581,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 798 };
+        long long size{ 825 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -622,7 +624,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         CHECK( 788 == data.JXS( 20 ) );
         CHECK( 791 == data.JXS( 21 ) );
         CHECK( 0   == data.JXS( 22 ) );
-        CHECK( 0   == data.JXS( 23 ) );
+        CHECK( 799 == data.JXS( 23 ) );
         CHECK( 56  == data.JXS( 24 ) );
         CHECK( 0   == data.JXS( 25 ) );
         CHECK( 67  == data.JXS( 26 ) );
@@ -724,6 +726,41 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         auto fis = data.XSS( data.JXS( 21 ), 8 );
 
         CHECK( ranges::equal( fisRef, fis ) );
+      }
+      THEN( "the UNR Block can be checked" ){
+        std::vector< double > unrRef{};
+        unrRef.push_back( 3 );      // N
+        unrRef.push_back( 1 );      // M
+        unrRef.push_back( 2 );      // INT
+        unrRef.push_back( 3 );      // ILF
+        unrRef.push_back( 54 );     // IOA
+        unrRef.push_back( 0 );      // IFF
+        unrRef.push_back( 1.0 );    // energies
+        unrRef.push_back( 2.0 );
+        unrRef.push_back( 3.0 );
+        unrRef.push_back( 0.1 );    // CDF_1
+        unrRef.push_back( 0.4 );
+        unrRef.push_back( 1.0 );
+        unrRef.push_back( 10 );    // total_1
+        unrRef.push_back( 20 );
+        unrRef.push_back( 30 );
+        unrRef.push_back( 11 );    // elastic_1
+        unrRef.push_back( 21 );
+        unrRef.push_back( 31 );
+        unrRef.push_back( 12 );    // fission_1
+        unrRef.push_back( 22 );
+        unrRef.push_back( 32 );
+        unrRef.push_back( 13 );    // capture_1
+        unrRef.push_back( 23 );
+        unrRef.push_back( 33 );
+        unrRef.push_back( 14 );    // heating_1
+        unrRef.push_back( 24 );
+        unrRef.push_back( 34 );
+
+
+        auto unr = data.XSS( data.JXS( 23 ), 27 );
+
+        CHECK( ranges::equal( unrRef, unr ) );
       }
 
       // Print the Table to a file
@@ -1006,34 +1043,6 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
               .add() // continuousTabularDistribution
             .add() // energyDistribution
           .add(); // reaction 18
-      }
-      { // probability tables
-      int INT{ 2 };
-      int inelasticCompetition{ 3 };
-      int otherAbsorption{ 54 };
-      ContinuousEnergyNeutron::Builder::Factors factors{ 
-        ContinuousEnergyNeutron::Builder::Factors::CROSSSECTIONS };
-      std::vector< double > energies{ 1.0, 2.0, 3.0 };
-      std::vector< double > CDFs{ 0.1, 0.4, 1.0 };
-      std::vector< double > totalXS{ 10, 20, 30 };
-      std::vector< double > elasticXS{ 11, 21, 31 };
-      std::vector< double > fissionXS{ 12, 22, 32 };
-      std::vector< double > captureXS{ 13, 23, 33 };
-      std::vector< double > heating{ 14, 24, 34 };
-      
-      nc.probabilityTable()
-          .interpolationParameter( INT )
-          .inelasticCompetition( inelasticCompetition )
-          .otherAbsorption( otherAbsorption )
-          .factors( factors )
-          .incidentEnergies( njoy::utility::copy( energies ) )
-          .CDFs( njoy::utility::copy( CDFs ) )
-          .totalCrossSections( njoy::utility::copy( totalXS ) )
-          .elasticCrossSections( njoy::utility::copy( elasticXS ) )
-          .fissionCrossSections( njoy::utility::copy( fissionXS ) )
-          .captureCrossSections( njoy::utility::copy( captureXS ) )
-          .heating( njoy::utility::copy( heating ) )
-        .add(); // probabilityTable
       }
 
       THEN( "an exception is thrown" ){

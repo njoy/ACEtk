@@ -82,6 +82,7 @@ Table construct(){
   }
 
   this->FIS( );
+  this->UNR();
 
   try{
     tData.NXS()[ 0 ] = tData.XSS().size();
