@@ -1,42 +1,21 @@
 ProbabilityTable construct(){
-
-  equalSize( this->CDFs_, "CDF" );
-  equalSize( this->totalXS_, "total cross section" );
-  equalSize( this->elasticXS_, "elastic cross section" );
-  if( this->fissionXS_ ){
-    equalSize( this->fissionXS_, "fission cross section" );
-  }
-  else{
-    this->fissionXS_ = std::make_optional<
-      dvP< std::vector< double > > >(
-        ranges::view::repeat_n( 0.0, this->incidentEnergies_.value().size() )
-          | ranges::to_vector 
-      );
-  }
-  equalSize( this->captureXS_, "capture cross section" );
-  if( this->heating_ ){
-    equalSize( this->heating_, "heating" );
-  }
-  else{
-    this->heating_ = std::make_optional<
-      dvP< std::vector< double > > >(
-        ranges::view::repeat_n( 
-          0.0, this->incidentEnergies_.value().size() ) | ranges::to_vector
-      );
+  try{
+    for( decltype( auto ) table : this->tables_ ){
+      details::verify::equalSize( this->incidentEnergies_.value(), table.CDFs );
+    }
+  } catch( std::range_error& e){
+    Log::info( "There must be the same number of incident energies as "
+               "CDF values in each of the probability tables." );
+    throw;
   }
 
   return ProbabilityTable{
-    interpolationParameter_.value(),
-    inelasticCompetition_.value(),
-    otherAbsorption_.value(),
-    factors_.value(),
-    incidentEnergies_.value(),
-    CDFs_.value(),
-    totalXS_.value(),
-    elasticXS_.value(),
-    fissionXS_.value(),
-    captureXS_.value(),
-    heating_.value()
+    std::move( interpolationParameter_.value() ),
+    std::move( inelasticCompetition_.value() ),
+    std::move( otherAbsorption_.value() ),
+    std::move( factors_.value() ),
+    std::move( incidentEnergies_.value() ),
+    std::move( tables_ )
   };
 }
 
