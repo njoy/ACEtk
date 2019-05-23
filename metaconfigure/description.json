@@ -378,8 +378,22 @@
     "src/ACEtk/Table.hpp",
     "src/ACEtk/interpretation/EPR.hpp",
     "src/ACEtk/interpretation/ContinuousEnergyNeutron.hpp",
+    "src/ACEtk/interpretation/DEDX1.hpp",
     "src/ACEtk/interpretation/MP1.hpp",
     "src/ACEtk/interpretation/EL03.hpp",
+    "src/ACEtk/interpretation/DEDX1/StandardWithCutoff.hpp",
+    "src/ACEtk/interpretation/DEDX1/BPS.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP.hpp",
+    "src/ACEtk/interpretation/DEDX1/StandardWithoutCutoff.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/S1.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/S0.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/S1/src/computeBounds.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/S1/src/lowerBound.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/S0/src/ceil.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/S0/src/lowerBound.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/S0/src/floor.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/src/stoppingPowers.hpp",
+    "src/ACEtk/interpretation/DEDX1/CRTP/src/outOfBounds.hpp",
     "src/ACEtk/interpretation/MP1/DiscreteData.hpp",
     "src/ACEtk/interpretation/MP1/src/findStartOfBlock.hpp",
     "src/ACEtk/interpretation/MP1/src/totalCrossSection.hpp",
@@ -981,6 +995,9 @@
     ],
     "ACEtk.interpretation.ContinuousEnergyNeutron.Builder.TotalGammaProduction.Builder": [
       "src/ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction/Builder/test/Builder.test.cpp"
+    ],
+    "ACEtk.interpretation.DEDX1": [
+      "src/ACEtk/interpretation/DEDX1/test/dedx1.test.cpp"
     ],
     "ACEtk.interpretation.EL03": [
       "src/ACEtk/interpretation/EL03/test/el03.test.cpp",
