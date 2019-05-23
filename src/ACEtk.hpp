@@ -8,7 +8,7 @@
 #include <map>
 #include <algorithm>
 
-#ifdef __cpp17
+#if __cplusplus >= 201703L
   #include <optional>
 #else 
   #include <experimental/optional>
