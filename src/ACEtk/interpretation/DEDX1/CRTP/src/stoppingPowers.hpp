@@ -1,19 +1,16 @@
-template<typename... T>
-static void f(T...){std::puts(__PRETTY_FUNCTION__);}
-
 auto stoppingPowers() const {
   // lift into protected method
-  auto logStoppingPowerRanges = [&self = *this]{
-    const auto& derived = static_cast<const Derived&>( self );
-    const auto& table = self.table.get();
+  auto logStoppingPowerRanges = [=]{
+    const auto& derived = static_cast<const Derived&>( *this );
+    const auto& table = this->table.get();
     
     const auto start = table.data.JXS( derived.startOfStoppingPower() );
     const auto length =
-      self.numEnergies() * self.numDensities() * self.numTemperatures();
+      this->numEnergies() * this->numDensities() * this->numTemperatures();
 
     return
       table.data.XSS( start, length )
-      | ranges::view::chunk( self.numEnergies() );
+      | ranges::view::chunk( this->numEnergies() );
   }();
 
   using LogEnergies = decltype(this->logEnergies());    
