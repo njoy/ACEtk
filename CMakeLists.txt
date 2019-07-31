@@ -58,7 +58,7 @@ endif()
 
 CMAKE_DEPENDENT_OPTION( static_libraries "Statically link component libraries" OFF "NOT static" ON )
 
-option( unit_tests "Compile the ACEtk unit tests and integrate with ctest" ON ) 
+option( unit_tests "Compile the ACEtk unit tests and integrate with ctest" OFF ) 
 
 if ( profile_generate AND profile_use )
     message( FATAL_ERROR "Cannot both generate and use execution profile in the same configuration" )

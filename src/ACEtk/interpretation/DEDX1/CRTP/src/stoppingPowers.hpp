@@ -36,12 +36,14 @@ auto stoppingPowers() const {
     auto logEnergies() const {return this->logEnergies_;}
     auto energies() const {
       return this->logEnergies()
-	| ranges::view::transform([](auto&& e){ return std::exp(e) * mev;});
+	| ranges::view::transform([](auto&& e){ return std::exp(e); })
+	| ranges::view::transform([](auto&& e){ return e * mev;} );
     }
     auto logValues() const {return this->logValues_;}
     auto values() const {
-      return this->logValues() |
-	ranges::view::transform([](auto&& v){ return std::exp(v) * (cm*cm*mev);});
+      return this->logValues() 
+	| ranges::view::transform([](auto&& v){ return std::exp(v); })
+	| ranges::view::transform([](auto&& v){ return v * (cm*cm*mev); });
     }      
   };
         

@@ -27,19 +27,7 @@ public:
     const auto start = this->gridStart();
     return this->table.get().data.XSS( start, length );    
   }
-  
-  auto energies() const {
-    return this->logEnergies()
-      | ranges::view::transform( []( auto&& entry ){
-	  return std::exp(entry) * mega(electronVolt); } );
-  }
 
-  auto densities() const {    
-    return this->logDensities()
-      | ranges::view::transform( [cc=this->cc]( auto&& entry ){
-	  return std::exp(entry)/cc; } );
-  }
-  
   auto logDensities() const {
     const auto length = this->numDensities();
     const auto start = this->gridStart() + this->numEnergies();
@@ -50,12 +38,30 @@ public:
     const auto length = this->numTemperatures();
     const auto start = this->gridStart() + this->numEnergies() + this->numDensities();
     return this->table.get().data.XSS( start, length );    
-  }  
+  }    
+  
+  auto energies() const {
+    return this->logEnergies()
+      | ranges::view::transform( []( auto&& entry ){
+	  return std::exp(entry); } )
+      | ranges::view::transform( []( auto&& entry ){
+	  return entry * mega(electronVolt); } );      
+  }
 
+  auto densities() const {    
+    return this->logDensities()
+      | ranges::view::transform( []( auto&& entry ){
+	  return std::exp(entry); } )
+      | ranges::view::transform( [cc=this->cc]( auto&& entry ){
+	  return entry/cc; } );      
+  }
+  
   auto temperatures() const {
     return this->logTemperatures()
       | ranges::view::transform( []( auto&& entry ){
-	  return std::exp(entry) * mega(electronVolt); } );
+	  return std::exp(entry); } )
+      | ranges::view::transform( []( auto&& entry ){
+	  return entry * mega(electronVolt); } );
   }      
 
   #include "ACEtk/interpretation/DEDX1/CRTP/src/stoppingPowers.hpp"    
