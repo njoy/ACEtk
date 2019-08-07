@@ -2,12 +2,10 @@ auto stoppingPowers() const {
   // lift into protected method
   auto logStoppingPowerRanges = [=]{
     const auto& derived = static_cast<const Derived&>( *this );
-    const auto& table = this->table.get();
-    
+    const auto& table = this->table.get();    
     const auto start = table.data.JXS( derived.startOfStoppingPower() );
     const auto length =
       this->numEnergies() * this->numDensities() * this->numTemperatures();
-
     return
       table.data.XSS( start, length )
       | ranges::view::chunk( this->numEnergies() );
