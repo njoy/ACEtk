@@ -7,6 +7,7 @@
 #include <functional>
 #include <map>
 #include <algorithm>
+#include <variant>
 
 #if __cplusplus >= 201703L
   #include <optional>
@@ -28,7 +29,6 @@
 #include "interpolation.hpp"
 #include "header-utilities.hpp"
 #include "Log.hpp"
-#include "hopscotch_map.h"
 
 namespace njoy {
 namespace ACEtk {

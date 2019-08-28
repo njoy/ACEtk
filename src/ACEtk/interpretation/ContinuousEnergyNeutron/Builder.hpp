@@ -29,7 +29,7 @@ protected:
   std::optional< dvP< std::vector< double > > > heating_;
 
   std::optional< int > SZA_;
-  tsl::hopscotch_map< std::string, Nubar > fissionMultiplicity_;
+  std::unordered_map< std::string, Nubar > fissionMultiplicity_;
 
   std::vector< Precursors > delayedPrecursors_;
 
