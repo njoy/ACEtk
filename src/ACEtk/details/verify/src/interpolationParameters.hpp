@@ -3,7 +3,7 @@ inline void interpolationParameter( const int& p ){
             ( ( p > 10 ) and ( p < 16 ) ) or
             ( ( p > 20 ) and ( p < 26 ) ) )
     ){
-    Log::error( "Invalid ENDF interpolation parameter: {}", p );
+    Log::error( "Invalid ENDF interpolation scheme: {}", p );
     throw details::verify::exceptions::InvalidENDFInterpolationParameter();
   }
 }
@@ -15,7 +15,7 @@ inline void interpolationParameters( Range&& ps ){
   try{
     ranges::for_each( ps, interpolationParameter );
   } catch( details::verify::exceptions::InvalidENDFInterpolationParameter& e ){
-    Log::info( "Invalid ENDF interpolation parameter found in array." );
+    Log::info( "Invalid ENDF interpolation scheme found in array." );
     throw e;
   }
 }

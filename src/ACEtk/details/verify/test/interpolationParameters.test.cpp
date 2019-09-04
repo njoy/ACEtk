@@ -6,7 +6,7 @@ using namespace njoy::ACEtk::details;
 SCENARIO( "Verifying ENDFInterpolationParameters" ){
   GIVEN( "valid interpolation parameters" ){
     std::vector< double > validINT{
-       1,  2,  3,  4,  5,  6, 11, 12, 13, 14, 15, 11, 21, 22, 23, 24, 25, 21
+       1,  2,  3,  4,  5,  6, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25,
     };
     WHEN( "constructing ENDFInterpolationParameters" ){
       THEN( "the parameters can be checked" ){

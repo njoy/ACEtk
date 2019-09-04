@@ -9,7 +9,7 @@ template< typename Arg,
 static decltype( auto ) check( Arg&& arg ){
   try{
     details::verify::cosines( arg );
-    return sorted( std::forward< Arg >( arg ) );
+    return details::verify::sorted( std::forward< Arg >( arg ) );
   } catch( details::verify::exceptions::Unsorted& s ){
     Log::info( "Cosine bins must be sorted" );
     throw details::verify::exceptions::InvalidCosine();
