@@ -2,7 +2,7 @@ template< typename ParentBuilder >
 class Builder{
 
 public:
-  std::optional< Table::pizza > energyGrid_;
+  std::optional< Table::Pizza > energyGrid_;
   std::optional< dvP< std::vector< double > > > values_;
 
 protected:

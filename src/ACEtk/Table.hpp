@@ -49,7 +49,7 @@ public:
   #include "ACEtk/Table/src/print.hpp"
 
   using Slice = decltype( std::declval< const Data >().XSS( 1, 2 ) );
-  using pizza = ranges::slice_view< Table::Slice >;
+  using Pizza = ranges::slice_view< Table::Slice >;
 
   static Slice slice( const std::vector< double >& S ){ 
     return { S.begin(), S.end() }; 

@@ -1,5 +1,5 @@
 struct CrossSection{
-  Table::pizza energyGrid;
+  Table::Pizza energyGrid;
   dvP< std::vector< double > > values;
 
 public:

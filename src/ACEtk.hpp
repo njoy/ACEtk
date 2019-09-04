@@ -7,7 +7,6 @@
 #include <functional>
 #include <map>
 #include <algorithm>
-#include <variant>
 
 #if __cplusplus >= 201703L
   #include <optional>
@@ -16,6 +15,15 @@
   namespace std {
     using namespace std::experimental;
   }
+#endif
+
+#ifdef __GNUC__
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
+#include <variant>   
+#ifdef __GNUC__
+  #pragma GCC diagnostic pop
 #endif
 
 #pragma GCC diagnostic push

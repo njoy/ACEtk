@@ -1,4 +1,4 @@
-Builder& energyGrid( Table::pizza energyGrid ){
+Builder& energyGrid( Table::Pizza energyGrid ){
   this->energyGrid_ = 
       details::verify::positive( details::verify::sorted( energyGrid ) );
   return *this;
