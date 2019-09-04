@@ -23,6 +23,8 @@ template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
 inline void cosines( Range&& cs ){
   try{
+    if( cs.empty() ){ return; }
+
     cosine( cs.front() );
     cosine( cs.back() );
   } catch( details::verify::exceptions::InvalidCosine& c ){

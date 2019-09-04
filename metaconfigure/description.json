@@ -754,8 +754,8 @@
     "src/ACEtk/details/verify/Sorted/src/check.hpp",
     "src/ACEtk/details/verify/Sorted/src/ctor.hpp",
     "src/ACEtk/details/verify/Sorted/src/assignment.hpp",
-    "src/ACEtk/details/verify/src/size.hpp",
     "src/ACEtk/details/verify/src/all.hpp",
+    "src/ACEtk/details/verify/src/equalSize.hpp",
     "src/ACEtk/details/verify/src/sorted.hpp",
     "src/ACEtk/details/verify/src/cosines.hpp",
     "src/ACEtk/details/verify/src/neutronYield.hpp",
@@ -794,6 +794,7 @@
     "src/ACEtk/Table/Header/Builder/src/source.hpp",
     "src/ACEtk/Table/Header/src/print.hpp",
     "src/ACEtk/Table/Header/src/parse.hpp",
+    "src/ACEtk/Table/src/Slice.hpp",
     "src/ACEtk/Table/src/print.hpp"
   ],
   "ignore pattern": "$^",

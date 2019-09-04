@@ -6,6 +6,13 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
+template< typename Range1, typename Range2 >
+void printRanges( std::string name, Range1&& reference, Range2&& test ){
+  njoy::Log::info( "{}", name );
+  njoy::Log::info( "\treference: {}", reference | ranges::view::all );
+  njoy::Log::info( "\ttest     : {}", test | ranges::view::all );
+}
+
 SCENARIO( "Testing EnergyDistribtion::TabularEquiprobableBins::Builder" ){
     ContinuousEnergyNeutron::Builder CENBuilder;
 
@@ -59,6 +66,7 @@ SCENARIO( "Testing EnergyDistribtion::TabularEquiprobableBins::Builder" ){
         aceified |= ranges::action::push_back( schemes ); // INT
         aceified.push_back( energies.size() ); // N_E
         aceified |= ranges::action::push_back( energies ); // E
+        aceified.push_back( eout_v.size() );
         aceified |= ranges::action::push_back( eout_v );
         aceified |= ranges::action::push_back( eout_a );
         aceified |= ranges::action::push_back( eout_a );
@@ -66,6 +74,7 @@ SCENARIO( "Testing EnergyDistribtion::TabularEquiprobableBins::Builder" ){
 
         Table::Data data{};
         distribution.ACEify( data, 0 );
+        printRanges( "aceified", aceified, data.XSS() );
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }
     }

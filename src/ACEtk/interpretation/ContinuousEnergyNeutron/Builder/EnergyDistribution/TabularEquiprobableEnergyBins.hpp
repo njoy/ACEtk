@@ -13,6 +13,7 @@ struct TabularEquiprobableEnergyBins:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEquiprobableEnergyBins/Builder.hpp"
 
   void ACEify( Table::Data& tData, int ){
-    return Parent::ACEify( tData );
+    Parent::ACEifywithNET( tData );
   }
+
 };
