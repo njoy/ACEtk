@@ -2,8 +2,8 @@ template< typename ParentBuilder >
 class Builder{
 
 public:
-  std::optional< dvP< std::vector< double > > > values_;
   std::optional< Table::pizza > energyGrid_;
+  std::optional< dvP< std::vector< double > > > values_;
 
 protected:
   std::reference_wrapper< ParentBuilder > parent;

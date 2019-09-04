@@ -1,6 +1,7 @@
 class Builder{
   template< typename T > using dvP = details::verify::Positive< T >;
   template< typename T > using dvS = details::verify::Sorted< T >;
+  template< typename T > using dvSP = details::verify::StrictlyPositive< T >;
   template< typename T > using dvC = details::verify::CDF< T >;
   template< typename T > using dvCB = details::verify::CosineBins< T >;
 

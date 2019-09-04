@@ -1,6 +1,6 @@
 Builder& energyGrid( Table::pizza energyGrid ){
   this->energyGrid_ = 
-      details::verify::sorted( details::verify::positive( energyGrid ) );
+      details::verify::positive( details::verify::sorted( energyGrid ) );
   return *this;
 }
 

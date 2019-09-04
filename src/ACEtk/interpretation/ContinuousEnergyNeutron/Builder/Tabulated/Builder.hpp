@@ -1,8 +1,8 @@
 template< typename Derived >
 class Builder {
 
-  std::optional< std::vector< int > > boundaries_;
-  std::optional< std::vector< int > > schemes_;
+  std::optional< dvSP< dvS< std::vector< int > > > > boundaries_;
+  std::optional< dvP< std::vector< int > > > schemes_;
   std::optional< std::vector< double > > x_;
   std::optional< std::vector< T > > y_;
 

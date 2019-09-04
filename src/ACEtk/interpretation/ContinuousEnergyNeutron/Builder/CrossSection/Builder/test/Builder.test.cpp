@@ -87,11 +87,11 @@ SCENARIO( "Testing ContinuousEnergyNeutron::CrossSection" ){
       }
     }
     WHEN( "energyGrid isn't sorted" ){
-      std::vector< double > energyGrid{ 1.0, -2.0, 3.0, 4.0, 5.0, 6.0 };
+      std::vector< double > energyGrid{ 1.0, 0.5, 3.0, 4.0, 5.0, 6.0 };
       njoy::ACEtk::Table::Slice grid = njoy::ACEtk::Table::slice( energyGrid );
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS(
-          tb.values( grid ),
+          tb.energyGrid( grid ),
           details::verify::exceptions::Unsorted&
         );
       }

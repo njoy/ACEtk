@@ -1,9 +1,9 @@
 template< typename T >
 struct Tabulated {
-  std::optional< 
-    std::pair<
-      std::vector< int >,
-      std::vector< int > > > parameters;
+  using opt_t = std::pair< 
+      dvSP< dvS< std::vector< int > > >,
+      dvP< std::vector< int > > >;
+  std::optional<  opt_t > parameters;
   std::vector< double > x;
   std::vector< T > y;
 
