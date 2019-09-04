@@ -1,8 +1,4 @@
-  Data():
-    jxs( decltype( jxs ){} ),
-    nxs( decltype( nxs ){} ),
-    izaw( decltype( izaw ){} )
-  { };
+  Data() = default;
   Data( const decltype(izaw)& izaw_,
         const decltype(nxs)& nxs_,
         const decltype(jxs)& jxs_,
@@ -24,16 +20,16 @@ protected:
     Data( state, izaw_, nxs_, Parse::JXS( state ) ){}
 
   template< typename Iterator >
-  Data( State<Iterator>& state,
+  Data( State<Iterator>& state, 
         const decltype(izaw)& izaw_ ) :
     Data( state, izaw_, Parse::NXS( state ) ){}
 
 public:
   template< typename Iterator >
   Data( State<Iterator>& state )
-    try :
-      Data( state, Parse::IZAW( state ) ){}
-    catch( std::exception& e ) {
-      Log::info("Error while constructing ACE Table Data");
-      throw e;
-    }
+  try :
+    Data( state, Parse::IZAW( state ) ){}
+  catch( std::exception& e ) {
+    Log::info("Error while constructing ACE Table Data");
+    throw e;
+  }

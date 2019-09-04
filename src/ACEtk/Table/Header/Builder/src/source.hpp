@@ -1,4 +1,4 @@
-Builder& source( std::string s ){
+Builder& source( const std::string& s ){
   try{ 
     this->source_ = std::make_optional< Source > ( s );
   } catch( std::exception& ){
