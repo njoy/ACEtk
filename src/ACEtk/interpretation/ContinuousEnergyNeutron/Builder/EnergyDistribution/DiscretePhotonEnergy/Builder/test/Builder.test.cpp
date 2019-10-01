@@ -10,11 +10,11 @@ SCENARIO( "Testing EnergyDistribtion::DiscretePhotonEnergy::Builder" ){
     ContinuousEnergyNeutron::Builder CENBuilder;
 
     auto parentBuilder = CENBuilder.reaction( 14 ).energyDistribution();
-    using dPEBuilder = decltype( parentBuilder.discretePhotonEnergy() );
+    using DPEBuilder = decltype( parentBuilder.discretePhotonEnergy() );
 
-    struct TestBuilder : public dPEBuilder {
-      using dPEBuilder::construct;
-      using dPEBuilder::dPEBuilder;
+    struct TestBuilder : public DPEBuilder {
+      using DPEBuilder::construct;
+      using DPEBuilder::DPEBuilder;
     };
 
   TestBuilder dPE( parentBuilder );
@@ -59,5 +59,19 @@ SCENARIO( "Testing EnergyDistribtion::DiscretePhotonEnergy::Builder" ){
         CHECK_THROWS( dPE.primaryFlag( 3 ) );
       }
     }
+    WHEN( "only part of the energy distribution has been built" ){
+      GIVEN( "just the primaryFlag" ){
+          dPE.primaryFlag( 1 );
+          THEN( "an exception is thrown" ){
+            CHECK_THROWS_AS( dPE.construct(), std::bad_optional_access& );
+          }
+        }
+      GIVEN( "just the energy" ){
+          dPE.energy( 1 );
+          THEN( "an exception is thrown" ){
+            CHECK_THROWS_AS( dPE.construct(), std::bad_optional_access& );
+          }
+        }
+      }
   }
 } // SCENARIO

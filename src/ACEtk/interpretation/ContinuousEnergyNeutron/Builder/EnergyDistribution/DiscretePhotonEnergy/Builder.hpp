@@ -8,9 +8,7 @@ class Builder: public Base::Builder< Builder< ParentBuilder >, ParentBuilder > {
   friend class Base::Builder< Builder, ParentBuilder >;
 
 protected:
-  DiscretePhotonEnergy construct(){
-    return { primaryFlag_.value(), energy_.value() };
-  }
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/DiscretePhotonEnergy/Builder/src/construct.hpp"
 
 public:
 
