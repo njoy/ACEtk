@@ -20,8 +20,9 @@ SCENARIO( "Testing EnergyDistribtion::LevelScattering::Builder" ){
   TestBuilder lSBuilder( parentBuilder );
 
   GIVEN( "valid inputs" ){
-    double awr{ 1.1 };
-    double QValue{ 2.2 };
+    double awr( 3 );
+    double QValue( -2.2 );
+    
     lSBuilder.atomicWeightRatio( awr )
              .QValue( QValue );
 
@@ -33,11 +34,12 @@ SCENARIO( "Testing EnergyDistribtion::LevelScattering::Builder" ){
 
       AND_THEN( "the contents can be ACE-ified" ){
         std::vector< double > aceified{};
-        aceified.push_back( QValue );
-        aceified.push_back( awr );
+        aceified.push_back( (( awr+1 )/awr )*abs( QValue ) );
+        aceified.push_back( 0.5625 );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );
+
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }
     }
