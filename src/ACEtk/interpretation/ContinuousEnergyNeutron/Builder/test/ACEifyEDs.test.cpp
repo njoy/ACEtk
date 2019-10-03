@@ -5,13 +5,6 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
-template< typename Range1, typename Range2 >
-void printRanges( std::string name, Range1&& reference, Range2&& test ){
-  njoy::Log::info( "{}", name );
-  njoy::Log::info( "\treference: {}", reference | ranges::view::all );
-  njoy::Log::info( "\ttest     : {}", test | ranges::view::all );
-}
-
 SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
   ContinuousEnergyNeutron::Builder CENBuilder;
   using ParentBuilder = decltype( CENBuilder.reaction( 14 ) );
@@ -116,8 +109,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           aceified |= ranges::action::push_back( energies );
           aceified |= ranges::action::push_back( probabilities );
           // Level scattering
-            aceified.push_back( 2.765 );
-            aceified.push_back( 235.98 );
+            aceified.push_back( 2.776717 );
+            aceified.push_back( 0.9915782 );
         // Second set of distributions
           aceified.push_back( 58 );       // LNW_1
           aceified.push_back( 3 );        // LAW_1
@@ -129,8 +122,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
           aceified |= ranges::action::push_back( energies );
           aceified |= ranges::action::push_back( probabilities );
           // Level scattering
-            aceified.push_back( 2.765 );
-            aceified.push_back( 235.98 );
+            aceified.push_back( 2.776717 );
+            aceified.push_back( 0.9915782 );
           aceified.push_back( 0 );        // LNW_2
           aceified.push_back( 2 );        // LAW_2
           aceified.push_back( 75 );       // IDAT_2
@@ -148,7 +141,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       data.XSS() |= ranges::action::push_back( ranges::view::repeat_n( 0, 2 ) );
       CENBuilder.ACEifyEDs( EDs, data, 1, 2 );
       
-      CHECK( ranges::equal( aceified, data.XSS() ) );
+      njoy::ACEtk::details::checkEqualRange( aceified, data.XSS() );
     }
   }
   GIVEN( "real-world example: 8017.800nc" ){
@@ -434,13 +427,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 6.097365E-1, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 6.097364E-1 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -451,8 +444,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -465,13 +458,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 6.871301E-1, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 6.871301E-1 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -482,8 +475,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -496,13 +489,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 9.31757E-1, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 9.31757E-1 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -513,8 +506,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -527,13 +520,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 1.598075, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 1.5987074 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -544,8 +537,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -558,13 +551,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 2.025832, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 2.025831 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -575,8 +568,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -589,13 +582,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 2.04152, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 2.041519 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -606,8 +599,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -620,13 +613,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 2.007499, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 2.007499 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -637,8 +630,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -651,13 +644,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 2.31344, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 2.31344 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -668,8 +661,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -682,13 +675,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 2.689953, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 2.689952 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -699,8 +692,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -713,13 +706,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 3.105160, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 3.105160 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -730,8 +723,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );
@@ -744,13 +737,13 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       std::vector< double > energies{ 3.200333, 20.0 };
       std::vector< double > probabilities{ 1.0, 1.0 };
       double Q{ 3.200332 };
-      double awr{ 0.9142246 };
+      double A{ 0.9142246 };
 
       tb.energies( njoy::utility::copy( energies ) )
         .probabilities( njoy::utility::copy( probabilities ) )
         .levelScattering()
           .QValue( Q )
-          .atomicWeightRatio( awr )
+          .atomicWeightRatio( A )
         .add(); // levelScattering
 
       aceified.push_back( 0 );                        // LNW_1
@@ -761,8 +754,8 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder::ACEifyEDs" ){
       aceified |= ranges::action::push_back( energies );
       aceified |= ranges::action::push_back( probabilities );
       // LAW data
-      aceified.push_back( Q );
-      aceified.push_back( awr );
+      aceified.push_back( ( A + 1 )/A*abs( Q ) );
+      aceified.push_back( std::pow( A/( A + 1 ), 2 ) );
 
       inner.emplace_back( tb.construct() );
       EDs.emplace_back( std::move( inner ) );

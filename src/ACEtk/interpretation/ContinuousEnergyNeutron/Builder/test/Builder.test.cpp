@@ -6,12 +6,6 @@
 using namespace njoy::ACEtk;
 using namespace njoy::ACEtk::interpretation;
 
-template< typename Range1, typename Range2 >
-void printRanges( std::string name, Range1&& reference, Range2&& test ){
-  njoy::Log::info( "{}", name );
-  njoy::Log::info( "\treference: {}", reference | ranges::view::all );
-  njoy::Log::info( "\ttest     : {}", test | ranges::view::all );
-}
 SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
   ContinuousEnergyNeutron::Builder nc{};
 

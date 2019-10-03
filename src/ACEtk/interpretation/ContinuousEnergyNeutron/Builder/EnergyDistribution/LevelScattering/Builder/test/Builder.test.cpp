@@ -50,5 +50,17 @@ SCENARIO( "Testing EnergyDistribtion::LevelScattering::Builder" ){
         CHECK_THROWS( lSBuilder.atomicWeightRatio( -1.0 ) );
       }
     }
+    WHEN( "atomic weight ratio isn't given" ){
+      lSBuilder.QValue( -2.3 );
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( lSBuilder.construct(), std::bad_optional_access& );
+      } // THEN
+    } // WHEN
+    WHEN( "Q-value isn't given" ){
+      lSBuilder.atomicWeightRatio( 3.0 );
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( lSBuilder.construct(), std::bad_optional_access& );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
