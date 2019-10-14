@@ -40,7 +40,7 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
       CHECK( ranges::equal( schemes, parameters->second ) );
       CHECK( ranges::equal( energies, tab.x ) );
       CHECK( ranges::equal( theta, tab.y ) );
-      CHECK( ranges::equal( X, distribution.x ) );
+      CHECK( ranges::equal( X, distribution.equiprobableBins ) );
 
       AND_THEN( "the contents can be ACE-ified" ){
         std::vector< double > aceified{};
@@ -50,6 +50,7 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
         aceified.push_back( energies.size() );
         aceified |= ranges::action::push_back( energies );
         aceified |= ranges::action::push_back( theta );
+        aceified.push_back( X.size() );
         aceified |= ranges::action::push_back( X );
 
         Table::Data data{};
@@ -86,6 +87,16 @@ SCENARIO( "Testing EnergyDistribtion::GeneralEvaporationSpectrum::Builder" ){
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           gES.effectiveTemperature( njoy::utility::copy( theta ) ),
+          details::verify::exceptions::NotPositive&
+        );
+      }
+    }
+    WHEN( "equiprobable bins are negative" ){
+      std::vector< double > X{ 1.0, 2.0, -5.0, 6.0 };
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( 
+          gES.equiprobableBins( njoy::utility::copy( X ) ),
           details::verify::exceptions::NotPositive&
         );
       }

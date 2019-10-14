@@ -6,7 +6,7 @@ class Builder:
   using BaseBuilder = Base::Builder< Builder< ParentBuilder >, ParentBuilder >;
   using TabBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
 
-  std::optional< std::vector< double > > equiprobableBins_;
+  std::optional< dvP< std::vector< double > > > equiprobableBins_;
 
 protected:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/GeneralEvaporationSpectrum/Builder/src/construct.hpp"

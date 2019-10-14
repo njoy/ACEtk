@@ -1,4 +1,5 @@
 void ACEify( Table::Data& tData, int ){
   tabulatedEffectiveTemperature.ACEify( tData );
-  tData.XSS() |= ranges::action::push_back( x );
+  tData.XSS().push_back( this->equiprobableBins.size() );
+  tData.XSS() |= ranges::action::push_back( this->equiprobableBins );
 }
