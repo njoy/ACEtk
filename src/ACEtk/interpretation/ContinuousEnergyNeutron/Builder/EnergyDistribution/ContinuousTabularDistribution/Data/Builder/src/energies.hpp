@@ -3,7 +3,7 @@ template< typename Range,
 Builder& energies( Range&& energies ){
   try{
     this->energies_ =  std::move( 
-      details::verify::sorted( details::verify::positive( energies ) ) );
+      details::verify::positive( details::verify::sorted( energies ) ) );
     return *this;
   } catch( details::verify::exceptions::NotPositive& e ){
     Log::info( "energy values must be all positive" );

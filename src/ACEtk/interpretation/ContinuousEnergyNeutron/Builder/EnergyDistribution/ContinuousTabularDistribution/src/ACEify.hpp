@@ -8,7 +8,7 @@ void ACEify( Table::Data& tData, int jxsRelative ){
     xss |= ranges::action::push_back( p.second );
   }
   else{
-    xss |= ranges::action::push_back( ranges::view::single( 0 ) );
+    xss.push_back( 0 );
   }
   
   // energies

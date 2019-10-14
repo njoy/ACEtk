@@ -13,6 +13,7 @@ Data construct(){
   try{
     return {
       std::move( interpolationParameter_.value() ),
+      std::move( numberDiscretePhotonLines_.value_or( 0 ) ),
       std::move( energies_.value() ),
       std::move( pdf_.value() ),
       std::move( cdf_.value() )

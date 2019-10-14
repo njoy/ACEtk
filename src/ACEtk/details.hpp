@@ -5,6 +5,9 @@ namespace details{
 #include "ACEtk/details/hasACEify.hpp"  
 #include "ACEtk/details/ACEify.hpp"  
 
+/*
+ This is intended for testing purposes.
+ */
 template< typename Range1, typename Range2 >
 void printRanges( std::string name, Range1&& reference, Range2&& test ){
   njoy::Log::info( "{}", name );

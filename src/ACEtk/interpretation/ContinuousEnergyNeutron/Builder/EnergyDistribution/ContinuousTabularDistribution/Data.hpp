@@ -1,8 +1,8 @@
 struct Data{
 
   int interpolationParameter;
-  dvS< 
-      dvP< std::vector< double > > > energies;
+  int numberDiscretePhotonLines;
+  dvS< dvP< std::vector< double > > > energies;
   dvP< std::vector< double > > pdf;
   dvC< std::vector< double > > cdf;
 

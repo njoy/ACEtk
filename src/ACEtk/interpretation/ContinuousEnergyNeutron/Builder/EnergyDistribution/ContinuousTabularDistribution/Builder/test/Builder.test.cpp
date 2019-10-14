@@ -31,18 +31,20 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
 
     std::vector< int > INTT{ 1, 2 };
     std::vector< double > ene{ 1.0, 2.0};
-    std::vector< double > pdf{ 0.25, 0.75 };
-    std::vector< double > cdf{ 0.25, 1.0 };
+    std::vector< double > pdf1{ 0.125, 0.175 };
+    std::vector< double > pdf2{ 0.225, 0.275 };
+    std::vector< double > cdf1{ 0.125, 1.1 };
+    std::vector< double > cdf2{ 0.225, 1.2 };
 
     cTB.distributionData().interpolationParameter( INTT[ 0 ] )
                           .energies( njoy::utility::copy( ene ) )
-                          .pdf( njoy::utility::copy( pdf ) )
-                          .cdf( njoy::utility::copy( cdf ) )
+                          .pdf( njoy::utility::copy( pdf1 ) )
+                          .cdf( njoy::utility::copy( cdf1 ) )
         .add()
        .distributionData().interpolationParameter( INTT[ 1 ] )
                           .energies( njoy::utility::copy( ene ) )
-                          .pdf( njoy::utility::copy( pdf ) )
-                          .cdf( njoy::utility::copy( cdf ) )
+                          .pdf( njoy::utility::copy( pdf2 ) )
+                          .cdf( njoy::utility::copy( cdf2 ) )
         .add();
 
     auto distribution = cTB.construct();
@@ -62,16 +64,16 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
         auto energyDistribution = y[ index ];
         CHECK( INTT[ index ] == energyDistribution.interpolationParameter );
         CHECK( ranges::equal( ene, energyDistribution.energies ) );
-        CHECK( ranges::equal( pdf, energyDistribution.pdf ) );
-        CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
+        CHECK( ranges::equal( pdf1, energyDistribution.pdf ) );
+        CHECK( ranges::equal( cdf1, energyDistribution.cdf ) );
       }
       index = 1;
       {
         auto energyDistribution = y[ index ];
         CHECK( INTT[ index ] == energyDistribution.interpolationParameter );
         CHECK( ranges::equal( ene, energyDistribution.energies ) );
-        CHECK( ranges::equal( pdf, energyDistribution.pdf ) );
-        CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
+        CHECK( ranges::equal( pdf2, energyDistribution.pdf ) );
+        CHECK( ranges::equal( cdf2, energyDistribution.cdf ) );
       }
 
       int N_R = boundaries.size();
@@ -90,14 +92,14 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
         aceified.push_back( INTT[ 0 ] );
         aceified.push_back( ene.size() );
         aceified |= ranges::action::push_back( ene ); 
-        aceified |= ranges::action::push_back( pdf );
-        aceified |= ranges::action::push_back( cdf );
+        aceified |= ranges::action::push_back( pdf1 );
+        aceified |= ranges::action::push_back( cdf1 );
         // distributionData 2
         aceified.push_back( INTT[ 1 ] );
         aceified.push_back( ene.size() );
         aceified |= ranges::action::push_back( ene ); 
-        aceified |= ranges::action::push_back( pdf ); 
-        aceified |= ranges::action::push_back( cdf );
+        aceified |= ranges::action::push_back( pdf2 ); 
+        aceified |= ranges::action::push_back( cdf2 );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );
