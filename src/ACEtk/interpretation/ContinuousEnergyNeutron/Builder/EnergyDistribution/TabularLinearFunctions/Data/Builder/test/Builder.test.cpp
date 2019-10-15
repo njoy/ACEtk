@@ -21,10 +21,11 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearFunctions::Data::Builder" ){
 
   TestBuilder dataB( parentBuilder );
 
+  std::vector< double > P{ 0.1, 0.2, 0.4 };
+  std::vector< double > T{ 1.1, 1.2, 1.4 };
+  std::vector< double > C{ 2.1, 2.2, 2.4 };
+
   GIVEN( "valid inputs" ){
-    std::vector< double > P{ 0.1, 0.2, 0.4 };
-    std::vector< double > T{ 1.1, 1.2, 1.4 };
-    std::vector< double > C{ 2.1, 2.2, 2.4 };
 
     dataB.P( njoy::utility::copy( P ) )
          .T( njoy::utility::copy( T ) )
@@ -39,12 +40,37 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearFunctions::Data::Builder" ){
       CHECK( ranges::equal( C, distribution.C ) );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat( P, T, C );
+        std::vector< double > aceified{};
+        aceified.push_back( P.size() );
+        aceified |= ranges::action::push_back( P );
+        aceified |= ranges::action::push_back( T );
+        aceified |= ranges::action::push_back( C );
 
         Table::Data data{};
-        distribution.ACEify( data );
+        distribution.ACEify( data, 0 );
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }
     }
   } // GIVEN valid
+
+  GIVEN( "incomplete inputs" ){
+    WHEN( "some component is not added" ){
+      dataB.P( njoy::utility::copy( P ) )
+          .C( njoy::utility::copy( C ) );
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( dataB.construct(), std::bad_optional_access& );
+      } // THEN
+    } // WHEN
+    WHEN( "some component is not the right size" ){
+      std::vector< double > T{ 1.1, 1.2, 1.4, 1.7 };
+      dataB.P( njoy::utility::copy( P ) )
+          .T( njoy::utility::copy( T ) )
+          .C( njoy::utility::copy( C ) );
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( dataB.construct(), std::range_error& );
+      } // THEN
+    } // WHEN
+  } // GIVEN
 } // SCENARIO

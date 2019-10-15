@@ -54,19 +54,29 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearFunctions::Builder" ){
       CHECK( 2 == y.size() );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        // auto aceified = ranges::view::concat(
-        //   ranges::view::single( boundaries.size() ),
-        //   boundaries,
-        //   schemes,
-        //   ranges::view::single( energies.size() ),
-        //   P, T, C,
-        //   P, T, C
-        // );
+        std::vector< double > aceified{};
+        aceified.push_back( boundaries.size() );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified.push_back( 11 ); // LOCE_1
+        aceified.push_back( 21 ); // LOCE_2
+          // Data_1
+          aceified.push_back( P.size() );
+          aceified |= ranges::action::push_back( P );
+          aceified |= ranges::action::push_back( T );
+          aceified |= ranges::action::push_back( C );
+          // Data_2
+          aceified.push_back( P.size() );
+          aceified |= ranges::action::push_back( P );
+          aceified |= ranges::action::push_back( T );
+          aceified |= ranges::action::push_back( C );
 
-        // Table::Data data{};
-        // distribution.ACEify( data, 0 );
+        Table::Data data{};
+        distribution.ACEify( data, 0 );
 
-        // CHECK( ranges::equal( aceified, data.XSS() ) );
+        CHECK( ranges::equal( aceified, data.XSS() ) );
       }
     }
 

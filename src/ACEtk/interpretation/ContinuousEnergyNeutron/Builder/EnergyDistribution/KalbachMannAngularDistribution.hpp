@@ -4,5 +4,8 @@ struct KalbachMannAngularDistribution {
   Tabulated< Data > tabulated;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/Builder.hpp"
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/KalbachMannAngularDistribution/src/ACEify.hpp"
+
+  void ACEify( Table::Data& tData, int jxsRelative ){
+    this->tabulated.ACEifywithLOC( tData, jxsRelative );
+  }
 };

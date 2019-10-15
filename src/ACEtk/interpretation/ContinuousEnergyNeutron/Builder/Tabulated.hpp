@@ -9,9 +9,10 @@ struct Tabulated {
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/Builder.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/src/ACEify.hpp"
-protected:
+
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/src/ACEifyNoty.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/src/ACEifywithNET.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated/src/ACEifywithLOC.hpp"
 };
 
 using Tabulated1D = Tabulated< double >;

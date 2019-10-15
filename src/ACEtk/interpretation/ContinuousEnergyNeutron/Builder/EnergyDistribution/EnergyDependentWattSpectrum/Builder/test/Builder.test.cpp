@@ -64,21 +64,20 @@ SCENARIO( "Testing EnergyDistribtion::EnergyDependentWattSpectrum::Builder" ){
       CHECK( restrictionEnergy == distribution.restrictionEnergy );
 
       AND_THEN( "the contents can be ACE-ified" ){
-        auto aceified = ranges::view::concat(
-            ranges::view::single( aBoundaries.size() ),
-            aBoundaries,
-            aSchemes,
-            ranges::view::single( aEnergies.size() ),
-            aEnergies,
-            a,
-            ranges::view::single( bBoundaries.size() ),
-            bBoundaries,
-            bSchemes,
-            ranges::view::single( bEnergies.size() ),
-            bEnergies,
-            b,
-            ranges::view::single( restrictionEnergy )
-          );
+        std::vector< double > aceified{};
+        aceified.push_back( aBoundaries.size() );
+        aceified |= ranges::action::push_back( aBoundaries );
+        aceified |= ranges::action::push_back( aSchemes );
+        aceified.push_back( aEnergies.size() );
+        aceified |= ranges::action::push_back( aEnergies );
+        aceified |= ranges::action::push_back( a );
+        aceified.push_back( bBoundaries.size() );
+        aceified |= ranges::action::push_back( bBoundaries );
+        aceified |= ranges::action::push_back( bSchemes );
+        aceified.push_back( bEnergies.size() );
+        aceified |= ranges::action::push_back( bEnergies );
+        aceified |= ranges::action::push_back( b );
+        aceified.push_back( restrictionEnergy );
 
         Table::Data data{};
         distribution.ACEify( data, 0 );
@@ -104,6 +103,10 @@ SCENARIO( "Testing EnergyDistribtion::EnergyDependentWattSpectrum::Builder" ){
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           eDWS.aTabulated().energies( njoy::utility::copy( energies ) ),
+          details::verify::exceptions::Unsorted&
+        );
+        CHECK_THROWS_AS( 
+          eDWS.bTabulated().energies( njoy::utility::copy( energies ) ),
           details::verify::exceptions::Unsorted&
         );
       }

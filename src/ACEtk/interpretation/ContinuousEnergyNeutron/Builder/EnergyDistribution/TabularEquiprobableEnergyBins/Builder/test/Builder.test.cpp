@@ -74,7 +74,6 @@ SCENARIO( "Testing EnergyDistribtion::TabularEquiprobableBins::Builder" ){
 
         Table::Data data{};
         distribution.ACEify( data, 0 );
-        printRanges( "aceified", aceified, data.XSS() );
         CHECK( ranges::equal( aceified, data.XSS() ) );
       }
     }
