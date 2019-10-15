@@ -14,6 +14,6 @@ struct TabularEnergyMultipliers:
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/TabularEnergyMultipliers/Builder.hpp"
 
   void ACEify( Table::Data& tData, int ){
-    Tab::ACEify( tData );
+    Tab::ACEifywithNET( tData );
   }
 };

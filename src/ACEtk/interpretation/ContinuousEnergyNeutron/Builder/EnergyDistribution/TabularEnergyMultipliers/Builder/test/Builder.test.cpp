@@ -48,6 +48,25 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearMultipliers::Builder" ){
         CHECK( ranges::equal( T1, y[1] ) );
         CHECK( ranges::equal( T2, y[2] ) );
         CHECK( ranges::equal( T2, y[3] ) );
+
+      AND_THEN( "the contents can be ACE-ified" ){
+        std::vector< double > aceified{};
+        aceified.push_back( boundaries.size() );
+        aceified |= ranges::action::push_back( boundaries );
+        aceified |= ranges::action::push_back( schemes );
+        aceified.push_back( energies.size() );
+        aceified |= ranges::action::push_back( energies );
+        aceified.push_back( T1.size() );
+        aceified |= ranges::action::push_back( T1 );
+        aceified |= ranges::action::push_back( T1 );
+        aceified |= ranges::action::push_back( T2 );
+        aceified |= ranges::action::push_back( T2 );
+
+        Table::Data data{};
+        distribution.ACEify( data, 0 );
+
+        CHECK( ranges::equal( aceified, data.XSS() ) );
+      }
       }
 
   } // GIVEN valid
