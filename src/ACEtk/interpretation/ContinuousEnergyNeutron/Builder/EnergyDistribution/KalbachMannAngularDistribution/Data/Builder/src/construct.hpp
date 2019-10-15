@@ -6,16 +6,9 @@ Data construct(){
         this->cdf_.value(),
         this->angularDistributions_
     );
-  } catch( std::range_error& e ){
-    Log::info( 
-      "Energies, pdf, cdf, and angular distributions "
-      "must all be the same size." );
-    throw;
-  }
-
-  try{
     return {
       std::move( interpolationParameter_.value() ),
+      std::move( numberDiscretePhotonLines_.value_or( 0 ) ),
       std::move( energies_.value() ),
       std::move( pdf_.value() ),
       std::move( cdf_.value() ),
@@ -25,5 +18,11 @@ Data construct(){
     Log::error( "Trouble when creating Kalbach Mann angular distribution data." );
     Log::info( "Some component has not been defined." );
     throw;
+  } catch( std::range_error& e ){
+    Log::info( 
+      "Energies, pdf, cdf, and angular distributions "
+      "must all be the same size." );
+    throw;
   }
+
 }

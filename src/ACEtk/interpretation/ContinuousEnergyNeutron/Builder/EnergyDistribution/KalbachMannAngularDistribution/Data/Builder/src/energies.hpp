@@ -3,7 +3,7 @@ template< typename Range,
 Builder& energies( Range&& energies ){
   try{
     this->energies_ =  std::make_optional< 
-      dvS< dvP< std::vector< double > > > >(
+      dvP< dvS< std::vector< double > > > >(
         std::move( energies ) | ranges::to_vector );
     return *this;
   } catch( details::verify::exceptions::NotPositive& e ){

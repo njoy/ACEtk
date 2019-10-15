@@ -8,4 +8,3 @@ Builder& interpolationParameter( int INTT ){
   this->interpolationParameter_ = INTT;
   return *this;
 }
-

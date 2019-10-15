@@ -2,7 +2,8 @@ void ACEify( Table::Data& tData, int jxsRelative ){
   decltype( auto ) xss = tData.XSS();
 
   long long N_p = angularDistributions.size();
-  xss.push_back( this->interpolationParameter );
+  xss.push_back( 10*this->numberDiscretePhotonLines + 
+                    this->interpolationParameter );
   xss.push_back(N_p );
   xss |= ranges::action::push_back( energies );
   xss |= ranges::action::push_back( pdf );
