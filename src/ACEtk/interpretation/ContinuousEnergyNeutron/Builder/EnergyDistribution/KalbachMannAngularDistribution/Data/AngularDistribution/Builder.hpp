@@ -5,7 +5,7 @@ class Builder {
 
   std::optional< int > interpolationParameter_;
   std::optional< dvCB< std::vector< double > > > cosineGrid_;
-  std::optional< dvP< std::vector< double > > >  pdf_;
+  std::optional< details::verify::PDF< std::vector< double > > >  pdf_;
   std::optional< dvC< std::vector< double > > > cdf_;
 
 protected:

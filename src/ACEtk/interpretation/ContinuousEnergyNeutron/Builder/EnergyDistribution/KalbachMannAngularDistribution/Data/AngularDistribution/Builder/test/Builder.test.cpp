@@ -57,6 +57,25 @@ SCENARIO(
     }
   } // GIVEN valid
   GIVEN( "invalid inputs" ){
+    WHEN( "something (e.g., cosines) are not the right size" ){
+      std::vector< double > cosines{ -0.99, 0.01, 0.75, 0.95 };
+      angDistribution.interpolationParameter( JJ )
+                    .cosineGrid( njoy::utility::copy( cosines ) )
+                    .pdf( njoy::utility::copy( pdf ) )
+                    .cdf( njoy::utility::copy( cdf ) );
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( angDistribution.construct(), std::range_error& );
+      } // THEN
+    } // WHEN
+    WHEN( "some component is missing" ){
+      angDistribution.interpolationParameter( JJ )
+                    .pdf( njoy::utility::copy( pdf ) )
+                    .cdf( njoy::utility::copy( cdf ) );
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( angDistribution.construct(), 
+                         std::bad_optional_access& );
+      } // THEN
+    } // WHEN
     WHEN( "cosines are out of range" ){
       std::vector< double > cosines{ -1.1, 1.1 };
 
@@ -83,7 +102,7 @@ SCENARIO(
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           angDistribution.pdf( njoy::utility::copy( pdf ) ),
-          details::verify::exceptions::NotPositive&
+          details::verify::exceptions::InvalidPDF&
         );
       }
     }

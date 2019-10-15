@@ -1,7 +1,11 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
 Builder& cosineGrid( Range&& cosines ){
-  this->cosineGrid_ = std::make_optional< dvCB< std::vector< double > > >( 
-    std::move( cosines ) | ranges::to_vector );
+  try {
+    this->cosineGrid_ = std::move( details::verify::cosineBins( cosines ) );
+  } catch( details::verify::exceptions::InvalidCosine& ){
+    Log::info( "Invalid cosine grid in Kalbach-Mann Angular Distribution." );
+    throw;
+  }
   return *this;
 }
