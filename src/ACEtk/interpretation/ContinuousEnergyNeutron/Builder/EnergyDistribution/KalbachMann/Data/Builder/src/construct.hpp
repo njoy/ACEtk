@@ -7,25 +7,24 @@ Data construct(){
       this->precompoundFraction_.value(),
       this->angularDistributionSlope_.value()
     );
-  } catch( std::range_error& e ){
-    Log::info( 
-      "Energies, pdf, cdf, precompound fraction, and angulardistribution slope"
-      " must all be the same size." );
-    throw;
-  }
-
-  try{
     return {
       std::move( interpolationParameter_.value() ),
+      std::move( numberDiscretePhotonLines_.value_or( 0 ) ),
       std::move( energies_.value() ),
       std::move( pdf_.value() ),
       std::move( cdf_.value() ),
       std::move( precompoundFraction_.value() ),
       std::move( angularDistributionSlope_.value() )
     };
+  } catch( std::range_error& e ){
+    Log::info( 
+      "Energies, pdf, cdf, precompound fraction, and angulardistribution slope"
+      " must all be the same size." );
+    throw;
   } catch( std::bad_optional_access& b ){
     Log::error( "Trouble when creating continuous tabular distribution data." );
     Log::info( "Some component has not been defined." );
     throw;
   }
+
 }

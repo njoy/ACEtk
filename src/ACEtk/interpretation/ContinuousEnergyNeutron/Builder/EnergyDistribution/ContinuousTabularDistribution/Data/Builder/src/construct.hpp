@@ -5,12 +5,6 @@ Data construct(){
       this->pdf_.value(),
       this->cdf_.value()
     );
-  } catch( std::range_error& e ){
-    Log::info( "Energies, pdf, and cdf must all be the same size." );
-    throw;
-  }
-
-  try{
     return {
       std::move( interpolationParameter_.value() ),
       std::move( numberDiscretePhotonLines_.value_or( 0 ) ),
@@ -22,5 +16,9 @@ Data construct(){
     Log::error( "Trouble when creating continuous tabular distribution data." );
     Log::info( "Some component has not been defined." );
     throw;
+  } catch( std::range_error& e ){
+    Log::info( "Energies, pdf, and cdf must all be the same size." );
+    throw;
   }
+
 }

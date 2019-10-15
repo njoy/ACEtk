@@ -23,45 +23,86 @@ SCENARIO(
   TestBuilder dataB( parentBuilder );
 
   GIVEN( "valid inputs" ){
-    int INTT{ 2 };
     std::vector< double > ene{ 1.0, 2.0};
     std::vector< double > pdf{ 0.25, 0.75 };
     std::vector< double > cdf{ 0.25, 1.0 };
     std::vector< double > R{ 0.99, 0.01 };
     std::vector< double > A{ 0.75, 0.22 };
 
-    dataB.interpolationParameter( INTT )
-         .energies( njoy::utility::copy( ene ) )
-         .pdf( njoy::utility::copy( pdf ) )
-         .cdf( njoy::utility::copy( cdf ) )
-         .precompoundFraction( njoy::utility::copy( R ) )
-         .angularDistributionSlope( njoy::utility::copy( A ) );
-
-    auto distribution = dataB.construct();
-    THEN( "the values can be verified" ){
-      CHECK( INTT == distribution.interpolationParameter );
-      CHECK( ranges::equal( ene, distribution.energies ) );
-      CHECK( ranges::equal( pdf, distribution.pdf ) );
-      CHECK( ranges::equal( cdf, distribution.cdf ) );
-      CHECK( ranges::equal( R, distribution.precompoundFraction ) );
-      CHECK( ranges::equal( A, distribution.angularDistributionSlope ) );
-
-      AND_THEN( "the contents can be ACE-ified" ){
-        std::vector< double > aceified{};
-        aceified.push_back( INTT );
-        aceified.push_back( ene.size() );
-        aceified |= ranges::action::push_back( ene );
-        aceified |= ranges::action::push_back( pdf );
-        aceified |= ranges::action::push_back( cdf );
-        aceified |= ranges::action::push_back( R );
-        aceified |= ranges::action::push_back( A );
-
-        Table::Data data{};
-        distribution.ACEify( data, 0 );
-
-        CHECK( ranges::equal( aceified, data.XSS() ) );
+    WHEN( "number of photon lines are given" ){
+      int INTT{ 1 };
+      int nPhotonLines{ 3 };
+      dataB.interpolationParameter( INTT )
+           .numberDiscretePhotonLines( nPhotonLines )
+           .energies( njoy::utility::copy( ene ) )
+           .pdf( njoy::utility::copy( pdf ) )
+           .cdf( njoy::utility::copy( cdf ) )
+           .precompoundFraction( njoy::utility::copy( R ) )
+           .angularDistributionSlope( njoy::utility::copy( A ) );
+      
+      auto distribution = dataB.construct();
+      THEN( "the values can be verified" ){
+        CHECK( INTT == distribution.interpolationParameter );
+        CHECK( nPhotonLines == distribution.numberDiscretePhotonLines );
+        CHECK( ranges::equal( ene, distribution.energies ) );
+        CHECK( ranges::equal( pdf, distribution.pdf ) );
+        CHECK( ranges::equal( cdf, distribution.cdf ) );
+        CHECK( ranges::equal( R, distribution.precompoundFraction ) );
+        CHECK( ranges::equal( A, distribution.angularDistributionSlope ) );
+      
+        AND_THEN( "the contents can be ACE-ified" ){
+          std::vector< double > aceified{};
+          aceified.push_back( 31 );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          aceified |= ranges::action::push_back( R );
+          aceified |= ranges::action::push_back( A );
+      
+          Table::Data data{};
+          distribution.ACEify( data, 0 );
+      
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        }
       }
-    }
+    } // WHEN
+    WHEN( "number of photon lines are NOT given" ){
+      int INTT{ 2 };
+      dataB.interpolationParameter( INTT )
+           .energies( njoy::utility::copy( ene ) )
+           .pdf( njoy::utility::copy( pdf ) )
+           .cdf( njoy::utility::copy( cdf ) )
+           .precompoundFraction( njoy::utility::copy( R ) )
+           .angularDistributionSlope( njoy::utility::copy( A ) );
+      
+      auto distribution = dataB.construct();
+      THEN( "the values can be verified" ){
+        CHECK( INTT == distribution.interpolationParameter );
+        CHECK( 0 == distribution.numberDiscretePhotonLines );
+        CHECK( ranges::equal( ene, distribution.energies ) );
+        CHECK( ranges::equal( pdf, distribution.pdf ) );
+        CHECK( ranges::equal( cdf, distribution.cdf ) );
+        CHECK( ranges::equal( R, distribution.precompoundFraction ) );
+        CHECK( ranges::equal( A, distribution.angularDistributionSlope ) );
+      
+        AND_THEN( "the contents can be ACE-ified" ){
+          std::vector< double > aceified{};
+          aceified.push_back( 2 );
+          aceified.push_back( ene.size() );
+          aceified |= ranges::action::push_back( ene );
+          aceified |= ranges::action::push_back( pdf );
+          aceified |= ranges::action::push_back( cdf );
+          aceified |= ranges::action::push_back( R );
+          aceified |= ranges::action::push_back( A );
+      
+          Table::Data data{};
+          distribution.ACEify( data, 0 );
+      
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        }
+      }
+    } // WHEN
   } // GIVEN valid
   GIVEN( "invalid inputs" ){
     WHEN( "energies are negative" ){
@@ -114,11 +155,17 @@ SCENARIO(
         );
       }
     }
-    WHEN( "interpolation parameter is <= 0 " ){
+    WHEN( "interpolation parameter is not 1 or 2 " ){
       THEN( "an exception is thrown" ){
-        CHECK_THROWS( dataB.interpolationParameter(  0 ) );
-        CHECK_THROWS( dataB.interpolationParameter( -1 ) );
+        CHECK_THROWS( dataB.interpolationParameter( 0 ) );
+        CHECK_THROWS( dataB.interpolationParameter( 3 ) );
       }
     }
+    WHEN( "number of discrete photon lines is < 0" ){
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS( dataB.numberDiscretePhotonLines(  0 ) );
+        CHECK_THROWS( dataB.numberDiscretePhotonLines( -1 ) );
+      } // THEN
+    } // WHEN
   } // GIVEN invalid
 } // SCENARIO

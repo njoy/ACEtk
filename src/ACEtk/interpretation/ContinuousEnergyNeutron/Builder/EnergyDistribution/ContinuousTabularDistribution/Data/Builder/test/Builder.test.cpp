@@ -39,6 +39,7 @@ SCENARIO(
       auto distribution = dataB.construct();
       THEN( "the values can be verified" ){
         CHECK( INTT == distribution.interpolationParameter );
+        CHECK( nPhotonLines == distribution.numberDiscretePhotonLines );
         CHECK( ranges::equal( ene, distribution.energies ) );
         CHECK( ranges::equal( pdf, distribution.pdf ) );
         CHECK( ranges::equal( cdf, distribution.cdf ) );
@@ -67,6 +68,7 @@ SCENARIO(
       auto distribution = dataB.construct();
       THEN( "the values can be verified" ){
         CHECK( INTT == distribution.interpolationParameter );
+        CHECK( 0 == distribution.numberPhotonLines )
         CHECK( ranges::equal( ene, distribution.energies ) );
         CHECK( ranges::equal( pdf, distribution.pdf ) );
         CHECK( ranges::equal( cdf, distribution.cdf ) );
