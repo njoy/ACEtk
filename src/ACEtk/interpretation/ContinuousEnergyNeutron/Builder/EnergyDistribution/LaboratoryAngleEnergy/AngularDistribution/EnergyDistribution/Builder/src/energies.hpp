@@ -2,14 +2,17 @@ template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
 Builder& energies( Range&& energies ){
   try{
-    this->energies_ =  std::make_optional<
-      dvS< dvP< std::vector< double > > > >(
-        std::move(  energies | ranges::to_vector ) );
+    this->energies_ = std::move(
+      details::verify::positive( details::verify::sorted( energies ) ) );
     return *this;
   } catch( details::verify::exceptions::NotPositive& e ){
+    Log::info( 
+      "Trouble adding energies to LAW=67 angular/energy distribution." );
     Log::info( "energy values must be all positive" );
     throw;
   } catch( details::verify::exceptions::Unsorted& e ){
+    Log::info( 
+      "Trouble adding energies to LAW=67 angular/energy distribution." );
     Log::info( "energy values must be sorted" );
     throw;
   }

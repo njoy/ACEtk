@@ -1,9 +1,9 @@
 Table construct(){
 
   try{ 
-  equalSize( this->totalXS_.value(), "total cross section" );
-  equalSize( this->elasticXS_.value(), "elastic cross section" );
-  equalSize( this->captureXS_.value(), "capture cross section" );
+    equalSize( this->totalXS_.value(), "total cross section" );
+    equalSize( this->elasticXS_.value(), "elastic cross section" );
+    equalSize( this->captureXS_.value(), "capture cross section" );
   } catch( std::bad_optional_access& ){
     Log::error( "Some component of probabilityTable::Table not created." );
     throw;
@@ -12,8 +12,7 @@ Table construct(){
   if( this->fissionXS_ ){
     equalSize( this->fissionXS_.value(), "fission cross section" );
   } else{
-    this->fissionXS_ = std::make_optional<
-      dvP< std::vector< double > > >(
+    this->fissionXS_ = details::verify::positive(
         ranges::view::repeat_n( 0.0, this->CDFs_.value().size() )
           | ranges::to_vector 
       );
@@ -23,8 +22,7 @@ Table construct(){
   if( this->heating_ ){
     equalSize( this->heating_.value(), "heating" );
   } else{
-    this->heating_ = std::make_optional<
-      dvP< std::vector< double > > >(
+    this->heating_ = details::verify::positive(
         ranges::view::repeat_n( 0.0, this->CDFs_.value().size() ) 
           | ranges::to_vector
       );

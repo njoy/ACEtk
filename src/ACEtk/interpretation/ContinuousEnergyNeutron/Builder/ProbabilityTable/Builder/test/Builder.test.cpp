@@ -135,7 +135,7 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
   } // GIVEN
   GIVEN( "invalid inputs" ){
     WHEN( "incident energies are not all positive" ){
-      std::vector< double > energies{ 1.0, -2.0, 3.0 };
+      std::vector< double > energies{ -1.0, 2.0, 3.0 };
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
             tb.incidentEnergies( energies ),

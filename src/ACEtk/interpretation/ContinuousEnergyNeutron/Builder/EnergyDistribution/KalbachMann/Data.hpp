@@ -2,7 +2,7 @@ struct Data {
   int interpolationParameter;
   int numberDiscretePhotonLines;
   dvP< dvS< std::vector< double > > > energies;
-  dvP< std::vector< double > > pdf;
+  details::verify::PDF< std::vector< double > > pdf;
   dvC< std::vector< double > > cdf;
   std::vector< double > precompoundFraction;
   std::vector< double > angularDistributionSlope;

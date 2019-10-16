@@ -4,8 +4,8 @@ class Builder {
   std::reference_wrapper< ParentBuilder > parent;
 
   std::optional< int > interpolationParameter_;
-  std::optional< dvS< dvP< std::vector< double > > > > energies_;
-  std::optional< dvP< std::vector< double > > >  pdf_;
+  std::optional< dvP< dvS< std::vector< double > > > > energies_;
+  std::optional< details::verify::PDF< std::vector< double > > >  pdf_;
   std::optional< dvC< std::vector< double > > > cdf_;
 
 protected:

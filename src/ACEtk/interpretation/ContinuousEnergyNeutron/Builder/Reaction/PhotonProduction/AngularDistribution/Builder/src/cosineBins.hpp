@@ -3,9 +3,8 @@ template< typename Range,
 Builder& cosineBins( int index, Range&& bins ){
 
   try{
-    this->cosineBins_[ index ] = std::make_optional< cosArray >(
-        details::make_array<33>( bins ) );
-
+    this->cosineBins_[ index ] = details::verify::cosineBins( 
+      std::move( bins ) );
     return *this;
   } catch( details::verify::exceptions::InvalidCosine& e ){
     Log::info( "Trouble adding cosine bins (at index: {}) "

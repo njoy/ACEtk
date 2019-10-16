@@ -25,8 +25,10 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
   std::vector< double > energies{ 1.0, 2.0 };
   std::vector< int > INTT{ 1, 2 };
   std::vector< double > ene{ 1.0, 2.0};
-  std::vector< double > pdf{ 0.25, 0.75 };
-  std::vector< double > cdf{ 0.25, 1.0 };
+  std::vector< double > pdf1{ 0.125, 0.175 };
+  std::vector< double > pdf2{ 0.225, 0.275 };
+  std::vector< double > cdf1{ 0.125, 1.10 };
+  std::vector< double > cdf2{ 0.225, 1.20 };
   int JJ{ 2 };
   std::vector< double > cosines{ -0.99, 0.01, 0.75 };
   std::vector< double > apdf{ 0.25, 0.65, 0.10 };
@@ -40,8 +42,8 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
       .distributionData()
          .interpolationParameter( INTT[ 0 ] )
          .energies( njoy::utility::copy( ene ) )
-         .pdf( njoy::utility::copy( pdf ) )
-         .cdf( njoy::utility::copy( cdf ) )
+         .pdf( njoy::utility::copy( pdf1 ) )
+         .cdf( njoy::utility::copy( cdf1 ) )
          .angularDistribution()
            .interpolationParameter( JJ )
            .cosineGrid( njoy::utility::copy( cosines ) )
@@ -58,8 +60,8 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
       .distributionData()
          .interpolationParameter( INTT[ 1 ] )
          .energies( njoy::utility::copy( ene ) )
-         .pdf( njoy::utility::copy( pdf ) )
-         .cdf( njoy::utility::copy( cdf ) )
+         .pdf( njoy::utility::copy( pdf2 ) )
+         .cdf( njoy::utility::copy( cdf2 ) )
          .angularDistribution()
            .interpolationParameter( JJ )
            .cosineGrid( njoy::utility::copy( cosines ) )
@@ -91,16 +93,16 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
         auto energyDistribution = y[ index ];
         CHECK( INTT[ index ] == energyDistribution.interpolationParameter );
         CHECK( ranges::equal( ene, energyDistribution.energies ) );
-        CHECK( ranges::equal( pdf, energyDistribution.pdf ) );
-        CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
+        CHECK( ranges::equal( pdf1, energyDistribution.pdf ) );
+        CHECK( ranges::equal( cdf1, energyDistribution.cdf ) );
       }
       index = 1;
       {
         auto energyDistribution = y[ index ];
         CHECK( INTT[ index ] == energyDistribution.interpolationParameter );
         CHECK( ranges::equal( ene, energyDistribution.energies ) );
-        CHECK( ranges::equal( pdf, energyDistribution.pdf ) );
-        CHECK( ranges::equal( cdf, energyDistribution.cdf ) );
+        CHECK( ranges::equal( pdf2, energyDistribution.pdf ) );
+        CHECK( ranges::equal( cdf2, energyDistribution.cdf ) );
       }
 
       AND_THEN( "the contents can be ACE-ified" ){
@@ -117,8 +119,8 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
         aceified.push_back( INTT[ 0 ] );
         aceified.push_back( ene.size() );
         aceified |= ranges::action::push_back( ene );
-        aceified |= ranges::action::push_back( pdf );
-        aceified |= ranges::action::push_back( cdf );
+        aceified |= ranges::action::push_back( pdf1 );
+        aceified |= ranges::action::push_back( cdf1 );
         aceified.push_back( 21 );
         aceified.push_back( 32 );
           // angularDistrubtion---size 11
@@ -137,8 +139,8 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
         aceified.push_back( INTT[ 1 ] );
         aceified.push_back( ene.size() );
         aceified |= ranges::action::push_back( ene );
-        aceified |= ranges::action::push_back( pdf );
-        aceified |= ranges::action::push_back( cdf );
+        aceified |= ranges::action::push_back( pdf2 );
+        aceified |= ranges::action::push_back( cdf2 );
         aceified.push_back( 53 );
         aceified.push_back( 64 );
           // angularDistrubtion---size 11
@@ -189,8 +191,8 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
         .distributionData()
           .interpolationParameter( INTT[ 0 ] )
           .energies( njoy::utility::copy( ene ) )
-          .pdf( njoy::utility::copy( pdf ) )
-          .cdf( njoy::utility::copy( cdf ) )
+          .pdf( njoy::utility::copy( pdf1 ) )
+          .cdf( njoy::utility::copy( cdf1 ) )
           .angularDistribution()
             .interpolationParameter( JJ )
             .cosineGrid( njoy::utility::copy( cosines ) )

@@ -1,8 +1,7 @@
 struct EnergyDistribution{
 
   int interpolationParameter;
-  dvS< dvP< 
-      std::vector< double > > > energies;
+  dvP< dvS< std::vector< double > > > energies;
   dvP< std::vector< double > > pdf;
   dvC< std::vector< double > > cdf;
 

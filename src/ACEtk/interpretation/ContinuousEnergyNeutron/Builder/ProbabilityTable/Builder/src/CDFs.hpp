@@ -7,9 +7,7 @@ Builder& CDFs( Range&& cdfs ){
       Log::info( "Final CDF value must be 1.0" );
       throw std::exception();
     }
-    this->CDFs_ = std::make_optional< 
-      dvC< std::vector< double > > >( 
-        std::move( cdfs ) | ranges::to_vector );
+    this->CDFs_ = std::move( details::verify::cdf( cdf ) );
     return *this;
   } catch( details::verify::exceptions::InvalidCDF& e ){
     Log::info( "Trouble constructing CDF values in probability table" );

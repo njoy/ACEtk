@@ -18,7 +18,7 @@ SCENARIO( "Testing ContinuousEnergyNeutron::Builder.energyGrid" ){
 
   GIVEN( "invalid data" ){
     WHEN( "the energy grid has negative components" ){
-      std::vector< double > grid{1.0, 2.0, 3.0, -4.0, 5.0};
+      std::vector< double > grid{-1.0, 2.0, 3.0, 4.0, 5.0};
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS(
           ncBuilder.energyGrid( njoy::utility::copy( grid ) ),

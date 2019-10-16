@@ -1,7 +1,7 @@
 void ACEify( Table::Data& tData, int jxsRelative ){
   decltype( auto ) xss = tData.XSS();
 
-  long long N_p = angularDistributions.size();
+  auto N_p = angularDistributions.size();
   xss.push_back( 10*this->numberDiscretePhotonLines + 
                     this->interpolationParameter );
   xss.push_back(N_p );
@@ -9,14 +9,12 @@ void ACEify( Table::Data& tData, int jxsRelative ){
   xss |= ranges::action::push_back( pdf );
   xss |= ranges::action::push_back( cdf );
   // Locators
-  long long L = xss.size();
+  auto L = xss.size();
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, N_p ));
 
-  long long K = xss.size();
-  for( long long i = 0; i < N_p; i++ ){
+  for( size_t i = 0; i < N_p; i++ ){
     // Set locator value
-    K = xss.size();
-    long long sizeDiff = K - jxsRelative;
+    auto sizeDiff = xss.size() - jxsRelative;
     xss[ L + i ] = sizeDiff + 1;
 
     angularDistributions[ i ].ACEify( tData, jxsRelative );

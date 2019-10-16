@@ -115,7 +115,7 @@ SCENARIO(
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           dataB.pdf( njoy::utility::copy( pdf ) ),
-          details::verify::exceptions::NotPositive&
+          details::verify::exceptions::InvalidPDF&
         );
       }
     }
