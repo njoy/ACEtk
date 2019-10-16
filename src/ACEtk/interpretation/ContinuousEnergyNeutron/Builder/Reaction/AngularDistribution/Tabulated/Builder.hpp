@@ -6,7 +6,7 @@ class Builder {
   std::reference_wrapper< ParentBuilder > parent;
   std::optional< int > interpolationFlag_;
   std::optional< dvCB< std::vector< double > > > cosineGrid_;
-  std::optional< dvP< std::vector< double > > > PDF_;
+  std::optional< details::verify::PDF< std::vector< double > > > PDF_;
   std::optional< dvC< std::vector< double > > > CDF_;
 
 protected:

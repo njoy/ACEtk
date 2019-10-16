@@ -84,7 +84,7 @@ SCENARIO( "Testing AngularDistribution::Builder::Tabulated::Builder" ){
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
           tb.pdf( njoy::utility::copy( pdf ) ),
-          details::verify::exceptions::NotPositive&
+          details::verify::exceptions::InvalidPDF&
         );
       }
     }
