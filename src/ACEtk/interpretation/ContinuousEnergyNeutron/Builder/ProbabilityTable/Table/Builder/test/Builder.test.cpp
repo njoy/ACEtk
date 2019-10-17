@@ -56,8 +56,6 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
           Table::Data data{};
           pTable.ACEify( data );
 
-          njoy::Log::info( "aceified: {}", aceified | ranges::view::all );
-          njoy::Log::info( "data.XSS: {}", data.XSS() | ranges::view::all );
           CHECK( ranges::equal( aceified, data.XSS() ) );
         }
       }

@@ -1,8 +1,11 @@
 Tabulated construct(){
-  equalSize( this->PDF_, "PDF" );
-  equalSize( this->CDF_, "CDF");
 
   try{
+    details::verify::equalSize(
+      this->cosineGrid_.value(),
+      this->PDF_.value(),
+      this->CDF_.value()
+    );
     return Tabulated{
       std::move( interpolationFlag_.value() ),
           std::move( cosineGrid_.value() ),
@@ -13,6 +16,11 @@ Tabulated construct(){
     Log::error( "Trouble when creating a "
                 "Reaction::AngularDistribution::Tabulated object" );
     Log::info( "Some component has not been defined" );
+    throw;
+  } catch( std::range_error& e ){
+    Log::error( "Trouble when creating a "
+                "Reaction::AngularDistribution::Tabulated object" );
+    Log::info( "cosine grid, pdf, and cdf, must all be the same size." );
     throw;
   }
 }

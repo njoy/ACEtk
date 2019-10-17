@@ -1,39 +1,43 @@
 Table construct(){
 
   try{ 
-    equalSize( this->totalXS_.value(), "total cross section" );
-    equalSize( this->elasticXS_.value(), "elastic cross section" );
-    equalSize( this->captureXS_.value(), "capture cross section" );
+    if( not this->fissionXS_ ){
+      this->fissionXS_ = details::verify::positive(
+          ranges::view::repeat_n( 0.0, this->CDFs_.value().size() )
+            | ranges::to_vector 
+        );
+    }
+
+
+    if( not this->heating_ ){
+      this->heating_ = details::verify::positive(
+          ranges::view::repeat_n( 0.0, this->CDFs_.value().size() ) 
+            | ranges::to_vector
+        );
+    }
+
+    details::verify::equalSize(
+      this->heating_.value(),
+      this->fissionXS_.value(),
+      this->totalXS_.value(),
+      this->elasticXS_.value(),
+      this->captureXS_.value()
+    );
+    return Table{
+      std::move( CDFs_.value() ),
+      std::move( totalXS_.value() ),
+      std::move( elasticXS_.value() ),
+      std::move( fissionXS_.value() ),
+      std::move( captureXS_.value() ),
+      std::move( heating_.value() )
+    };
+  } catch( std::range_error& e){
+    Log::info( "totalXS, elasticXS, captureXS, fissionXS, CDFs, and heating"
+               " must all be the same size." );
+    throw;
   } catch( std::bad_optional_access& ){
     Log::error( "Some component of probabilityTable::Table not created." );
     throw;
   }
 
-  if( this->fissionXS_ ){
-    equalSize( this->fissionXS_.value(), "fission cross section" );
-  } else{
-    this->fissionXS_ = details::verify::positive(
-        ranges::view::repeat_n( 0.0, this->CDFs_.value().size() )
-          | ranges::to_vector 
-      );
-  }
-
-
-  if( this->heating_ ){
-    equalSize( this->heating_.value(), "heating" );
-  } else{
-    this->heating_ = details::verify::positive(
-        ranges::view::repeat_n( 0.0, this->CDFs_.value().size() ) 
-          | ranges::to_vector
-      );
-  }
-
-  return Table{
-    std::move( CDFs_.value() ),
-    std::move( totalXS_.value() ),
-    std::move( elasticXS_.value() ),
-    std::move( fissionXS_.value() ),
-    std::move( captureXS_.value() ),
-    std::move( heating_.value() )
-  };
 }

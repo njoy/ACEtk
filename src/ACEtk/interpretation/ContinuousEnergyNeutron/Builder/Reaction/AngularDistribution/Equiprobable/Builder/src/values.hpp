@@ -1,9 +1,14 @@
 template< typename Range,
           utility::Require< true, utility::is_range, Range > = true >
 Builder& values( Range&& bins ){
+  if( ranges::distance( bins ) != 33 ){
+    Log::error( "There must be 33 values for equiprobable bin boundaries." );
+    Log::info( "Received {} bin values.", ranges::distance( bins ) );
+    throw std::exception();
+  }
   try{ 
     this->cosineBins_ = dvCB< std::array< double, 33 > >( 
-            details::make_array< 33 > (bins ) );
+            details::make_array< 33 > ( bins ) );
     return *this;
   } catch( details::verify::exceptions::InvalidCosine& c ){
     Log::info( "Trouble encountered constructing cosine bins" );

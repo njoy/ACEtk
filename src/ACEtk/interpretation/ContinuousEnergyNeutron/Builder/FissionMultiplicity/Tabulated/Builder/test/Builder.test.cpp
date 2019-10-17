@@ -28,7 +28,7 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
   std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };
 
   GIVEN( "valid data" ){
-    WHEN( "creating a Tabulated fission multiplicity" ){
+    WHEN( "creating a Tabulated fission multiplicity with boundaries" ){
       tb.boundaries( njoy::utility::copy( boundaries ) )
         .schemes( njoy::utility::copy( schemes ) )
         .energies( njoy::utility::copy( energies ) )
@@ -46,6 +46,30 @@ SCENARIO( "Testing FissionMultiplicity::Tabulated::Builder" ){
           aceified.push_back( 2 ); // N_R
           aceified |= ranges::action::push_back( boundaries ); // NBT
           aceified |= ranges::action::push_back( schemes ); // INT
+          aceified.push_back( energies.size() ); // N_E
+          aceified |= ranges::action::push_back( energies ); // E
+          aceified |= ranges::action::push_back( multiplicities ); // nubar
+
+          Table::Data data{};
+          tabu.ACEify( data );
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        }
+      }
+    }
+    WHEN( "creating a Tabulated fission multiplicity without boundaries" ){
+      tb.energies( njoy::utility::copy( energies ) )
+        .multiplicities( njoy::utility::copy( multiplicities ) );
+      auto tabu = tb.construct();
+      tb.add();
+
+      THEN( "the members of Tabulated can be verified" ){
+        CHECK( energies == tabu.x );
+        CHECK( multiplicities == tabu.y );
+
+        AND_THEN( "the contents can be ACE-ified" ){
+          std::vector< double > aceified{};
+          aceified.push_back( 2 ); // LNU
+          aceified.push_back( 0 ); // N_R
           aceified.push_back( energies.size() ); // N_E
           aceified |= ranges::action::push_back( energies ); // E
           aceified |= ranges::action::push_back( multiplicities ); // nubar

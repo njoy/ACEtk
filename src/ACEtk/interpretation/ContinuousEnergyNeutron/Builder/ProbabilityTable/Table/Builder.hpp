@@ -11,7 +11,6 @@ private:
   std::optional< dvP< std::vector< double > > > heating_;
 
 protected:
-  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Table/Builder/src/equalSize.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable/Table/Builder/src/construct.hpp"
 
 public:

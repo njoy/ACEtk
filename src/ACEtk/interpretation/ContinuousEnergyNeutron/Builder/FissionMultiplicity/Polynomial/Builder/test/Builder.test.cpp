@@ -35,7 +35,8 @@ SCENARIO( "Testing FissionMultiplicity::Polynomial::Builder" ){
 
         AND_THEN( "the contents can be ACE-ified" ){
           std::vector< double > aceified{};
-          aceified.push_back( 1 );
+          aceified.push_back( 1 ); // LNU
+          aceified.push_back( coefficients.size() ); // N_C
           aceified |= ranges::action::push_back( coefficients );
 
           Table::Data dataTable{};

@@ -7,6 +7,7 @@ struct Polynomial{
   void ACEify( Table::Data& tData){
     decltype( auto ) xss = tData.XSS();
     xss.push_back( 1 );
+    xss.push_back( this->coefficients.size() );
     xss |= ranges::action::push_back( this->coefficients );
   }
 };

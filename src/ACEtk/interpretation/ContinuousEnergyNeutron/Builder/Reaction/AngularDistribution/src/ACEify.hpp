@@ -13,10 +13,7 @@ void ACEify( Table::Data& tData, double& LOCB ) {
   auto LC_i = xss.size() + 1;
   xss |= ranges::action::push_back( ranges::view::repeat_n( 0, grid.size() ) );
 
-  auto enumerated = ranges::view::enumerate( this->representations );
-  for( auto it = enumerated.begin(); it != enumerated.end(); ++it ){
-    decltype( auto ) index = std::get< 0 >( *it );
-    decltype( auto ) distribution = std::get< 1 >( *it );
+  for( auto& distribution : this->representations ){
 
     double LC{0};
     details::ACEify( tData, distribution, LC );

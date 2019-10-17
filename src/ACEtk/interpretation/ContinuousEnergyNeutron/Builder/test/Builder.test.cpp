@@ -575,7 +575,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 825 };
+        long long size{ 826 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -598,31 +598,31 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       THEN( "the JXS array can be checked " ){
         CHECK( 1   == data.JXS( 1  ) );
         CHECK( 51  == data.JXS( 2  ) );
-        CHECK( 83  == data.JXS( 3  ) );
-        CHECK( 87  == data.JXS( 4  ) );
-        CHECK( 381 == data.JXS( 5  ) );
-        CHECK( 91  == data.JXS( 6  ) );
-        CHECK( 95  == data.JXS( 7  ) );
-        CHECK( 133 == data.JXS( 8  ) );
-        CHECK( 137 == data.JXS( 9  ) );
-        CHECK( 247 == data.JXS( 10 ) );
-        CHECK( 250 == data.JXS( 11 ) );
-        CHECK( 385 == data.JXS( 12 ) );
-        CHECK( 395 == data.JXS( 13 ) );
-        CHECK( 397 == data.JXS( 14 ) );
-        CHECK( 399 == data.JXS( 15 ) );
-        CHECK( 422 == data.JXS( 16 ) );
-        CHECK( 424 == data.JXS( 17 ) );
-        CHECK( 636 == data.JXS( 18 ) );
-        CHECK( 638 == data.JXS( 19 ) );
-        CHECK( 788 == data.JXS( 20 ) );
-        CHECK( 791 == data.JXS( 21 ) );
+        CHECK( 84  == data.JXS( 3  ) );
+        CHECK( 88  == data.JXS( 4  ) );
+        CHECK( 382 == data.JXS( 5  ) );
+        CHECK( 92  == data.JXS( 6  ) );
+        CHECK( 96  == data.JXS( 7  ) );
+        CHECK( 134 == data.JXS( 8  ) );
+        CHECK( 138 == data.JXS( 9  ) );
+        CHECK( 248 == data.JXS( 10 ) );
+        CHECK( 251 == data.JXS( 11 ) );
+        CHECK( 386 == data.JXS( 12 ) );
+        CHECK( 396 == data.JXS( 13 ) );
+        CHECK( 398 == data.JXS( 14 ) );
+        CHECK( 400 == data.JXS( 15 ) );
+        CHECK( 423 == data.JXS( 16 ) );
+        CHECK( 425 == data.JXS( 17 ) );
+        CHECK( 637 == data.JXS( 18 ) );
+        CHECK( 639 == data.JXS( 19 ) );
+        CHECK( 789 == data.JXS( 20 ) );
+        CHECK( 792 == data.JXS( 21 ) );
         CHECK( 0   == data.JXS( 22 ) );
-        CHECK( 799 == data.JXS( 23 ) );
-        CHECK( 56  == data.JXS( 24 ) );
+        CHECK( 800 == data.JXS( 23 ) );
+        CHECK( 57  == data.JXS( 24 ) );
         CHECK( 0   == data.JXS( 25 ) );
-        CHECK( 67  == data.JXS( 26 ) );
-        CHECK( 68  == data.JXS( 27 ) );
+        CHECK( 68  == data.JXS( 26 ) );
+        CHECK( 69  == data.JXS( 27 ) );
         CHECK( 0   == data.JXS( 28 ) );
         CHECK( 0   == data.JXS( 29 ) );
         CHECK( 0   == data.JXS( 30 ) );
