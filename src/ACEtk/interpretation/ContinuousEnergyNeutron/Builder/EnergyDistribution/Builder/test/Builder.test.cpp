@@ -9,7 +9,7 @@ using namespace njoy::ACEtk::interpretation;
 
 template< typename B >
 void LAW1( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > eout_v{ 1.1, 1.2, 1.3 };
@@ -44,7 +44,7 @@ void LAW3( B& ED ){
 
 template< typename B >
 void LAW4( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
 
@@ -74,7 +74,7 @@ void LAW4( B& ED ){
 
 template< typename B >
 void LAW5( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
   std::vector< double > theta{ 2.5, 3.7 };
@@ -92,7 +92,7 @@ void LAW5( B& ED ){
 template< typename B >
 void LAW7( B& ED ){
 
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
   std::vector< double > theta{ 2.5, 3.7 };
@@ -110,7 +110,7 @@ void LAW7( B& ED ){
 
 template< typename B >
 void LAW9( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
   std::vector< double > theta{ 2.5, 3.7 };
@@ -127,7 +127,7 @@ void LAW9( B& ED ){
 
 template< typename B >
 void LAW11( B& ED ){
-  std::vector< int > aBoundaries{ 0, 3 };
+  std::vector< int > aBoundaries{ 1, 3 };
   std::vector< int > bBoundaries{ 1, 4 };
   std::vector< int > aSchemes{ 2, 1 };
   std::vector< int > bSchemes{ 2, 3 };
@@ -156,7 +156,7 @@ void LAW11( B& ED ){
 
 template< typename B >
 void LAW22( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
   std::vector< double > P{ 0.1, 0.2, 0.4 };
@@ -182,7 +182,7 @@ void LAW22( B& ED ){
 
 template< typename B >
 void LAW24( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > T1{ 1.1, 1.2, 1.3 };
@@ -201,7 +201,7 @@ void LAW24( B& ED ){
 
 template< typename B >
 void LAW44( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
   std::vector< int > INTT{ 1, 2 };
@@ -236,7 +236,7 @@ void LAW44( B& ED ){
 
 template< typename B >
 void LAW61( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
   int INTT{ 1 };
@@ -301,7 +301,7 @@ void LAW66( B& ED ){
 
 template< typename B >
 void LAW67( B& ED ){
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
 
@@ -376,7 +376,7 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
     using EDBuilder::EDBuilder;
   };
 
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };

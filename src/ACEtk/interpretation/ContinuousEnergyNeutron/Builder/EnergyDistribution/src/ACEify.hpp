@@ -7,7 +7,7 @@ void ACEify( Table::Data& tData, int JED ) {
   decltype( auto ) IDAT_i = xss.size();
   xss.push_back( 0 ); // IDAT
 
-  details::ACEify( tData, tab1 );
+  details::ACEify( tData, this->probability );
 
   xss[ IDAT_i ] = xss.size() - ( JED - 1 ) + 1;
 

@@ -168,7 +168,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
                 NeutronYieldReferenceFrame::CENTEROFMASS );
 
         { // Energy distribution
-          std::vector< int > boundaries{ 0, 3 };
+          std::vector< int > boundaries{ 1, 3 };
           std::vector< int > schemes{ 2, 1 };
           std::vector< double > energies{ 1.0, 2.0 };
           std::vector< double > probabilities{ 0.1, 0.2 };
@@ -210,7 +210,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         { // Photon production
           std::vector<double > ppGrid{ 1.0, 2.0, 5.0, 10.0 };
           std::vector< double > ppXS{ 1.0, 2.0, 3.0, 4.0 };
-          std::vector< int > boundaries{ 0, 3 };
+          std::vector< int > boundaries{ 1, 3 };
           std::vector< int > schemes{ 2, 1 };
           std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
           std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
@@ -288,7 +288,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .add(); // photonProduction
         }
         { // Energy-dependent neutron yields
-          std::vector< int > boundaries{ 0, 3 };
+          std::vector< int > boundaries{ 1, 3 };
           std::vector< int > schemes{ 2, 1 };
           std::vector< double > energies{ 1.0, 2.0 };
           std::vector< double > yields{ 1.45, 2.35 };
@@ -321,7 +321,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       };
 
       // Energy distribution
-      std::vector< int > boundaries{ 0, 3 };
+      std::vector< int > boundaries{ 1, 3 };
       std::vector< int > schemes{ 2, 1 };
       std::vector< double > energies{ 1.0, 2.0 };
       std::vector< double > probabilities{ 0.1, 0.2 };
@@ -393,7 +393,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         | ranges::view::slice( 7l, ranges::distance( grid ) );
 
       // Energy distribution
-      std::vector< int > boundaries{ 0, 3 };
+      std::vector< int > boundaries{ 1, 3 };
       std::vector< int > schemes{ 2, 1 };
       std::vector< double > energies{ 1.0, 2.0 };
       std::vector< double > probabilities{ 0.1, 0.2 };
@@ -440,7 +440,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         0.102, 1.102, 2.102, 3.102, 4.102, 5.102, 6.102, 7.102, 8.102, 9.102 };
 
       // Photon production reaction
-      std::vector< int > boundaries{ 0, 3 };
+      std::vector< int > boundaries{ 1, 3 };
       std::vector< int > schemes{ 2, 1 };
       std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
       std::vector< double > values{ 2.1, 2.2, 2.5, 2.5 };
@@ -927,7 +927,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
         };
 
         // Energy distribution
-        std::vector< int > boundaries{ 0, 3 };
+        std::vector< int > boundaries{ 1, 3 };
         std::vector< int > schemes{ 2, 1 };
         std::vector< double > energies{ 1.0, 2.0 };
         std::vector< double > probabilities{ 0.1, 0.2 };
@@ -997,7 +997,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
           0.18, 1.18, 2.18, 3.18, 4.18, 5.18, 6.18, 7.18, 8.18, 9.18 };
         
         // Energy distribution
-        std::vector< int > boundaries{ 0, 3 };
+        std::vector< int > boundaries{ 1, 3 };
         std::vector< int > schemes{ 2, 1 };
         std::vector< double > energies{ 1.0, 2.0 };
         std::vector< double > probabilities{ 0.1, 0.2 };

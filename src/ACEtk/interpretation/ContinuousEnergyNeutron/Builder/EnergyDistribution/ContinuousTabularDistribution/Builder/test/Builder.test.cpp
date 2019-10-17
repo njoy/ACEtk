@@ -21,7 +21,7 @@ SCENARIO( "Testing EnergyDistribtion::ContinuousTabularDistribution::Builder" ){
   TestBuilder cTB( parentBuilder );
 
   GIVEN( "valid inputs" ){
-    std::vector< int > boundaries{ 0, 3 };
+    std::vector< int > boundaries{ 1, 3 };
     std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0 };
 

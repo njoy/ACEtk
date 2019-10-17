@@ -20,7 +20,7 @@ SCENARIO( "Testing EnergyDistribtion::EnergyDependentWattSpectrum::Builder" ){
   TestBuilder eDWS( parentBuilder );
 
   GIVEN( "valid inputs" ){
-    std::vector< int > aBoundaries{ 0, 3 };
+    std::vector< int > aBoundaries{ 1, 3 };
     std::vector< int > bBoundaries{ 1, 4 };
     std::vector< int > aSchemes{ 2, 1 };
     std::vector< int > bSchemes{ 2, 3 };

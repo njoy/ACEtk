@@ -27,7 +27,7 @@ SCENARIO( "fissionMultiplicity components ofContinuousEnergyNeutron::Builder" ){
         }
       }
       GIVEN( "tabulated fission multiplicity parameters: " + nuType ){
-        std::vector< int > boundaries{ 0, 3 };
+        std::vector< int > boundaries{ 1, 3 };
         std::vector< int > schemes{ 2, 1 };
         std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
         std::vector< double > multiplicities{ 2.1, 2.2, 2.5, 2.5 };

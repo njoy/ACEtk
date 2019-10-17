@@ -20,7 +20,7 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearFunctions::Builder" ){
   TestBuilder tLF( parentBuilder );
 
   GIVEN( "valid inputs" ){
-    std::vector< int > boundaries{ 0, 3 };
+    std::vector< int > boundaries{ 1, 3 };
     std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0 };
 
@@ -103,7 +103,7 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearFunctions::Builder" ){
       }
     }
     WHEN( "not enough Data members" ){
-      std::vector< int > boundaries{ 0, 3 };
+      std::vector< int > boundaries{ 1, 3 };
       std::vector< int > schemes{ 2, 1 };
       std::vector< double > energies{ 1.0, 2.0 };
 

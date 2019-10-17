@@ -18,7 +18,7 @@ SCENARIO( "Testing EnergyDistribtion::TabularLinearMultipliers::Builder" ){
     };
 
 
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
   std::vector< double > T1{ 1.1, 1.2, 1.3 };

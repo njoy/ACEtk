@@ -27,7 +27,7 @@ SCENARIO( "incident neutron reaction" ){
     std::vector< double > pdf{ 0.1, 0.5, 0.4 };
     std::vector< double > cdf{ 0.1, 0.6, 1.0 };
 
-    std::vector< int > boundaries{ 0, 3 };
+    std::vector< int > boundaries{ 1, 3 };
     std::vector< int > schemes{ 2, 1 };
     std::vector< double > energies{ 1.0, 2.0, 5.0, 6.0 };
     std::vector< double > probabilities{ 0.1, 0.2, 0.5, 0.2 };

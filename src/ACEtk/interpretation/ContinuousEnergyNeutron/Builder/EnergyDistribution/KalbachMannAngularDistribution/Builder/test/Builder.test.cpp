@@ -20,7 +20,7 @@ SCENARIO( "Testing EnergyDistribtion::KalbachMannAngularDistribution::Builder" )
 
   TestBuilder kM( parentBuilder );
 
-  std::vector< int > boundaries{ 0, 3 };
+  std::vector< int > boundaries{ 1, 3 };
   std::vector< int > schemes{ 2, 1 };
   std::vector< double > energies{ 1.0, 2.0 };
   std::vector< int > INTT{ 1, 2 };
