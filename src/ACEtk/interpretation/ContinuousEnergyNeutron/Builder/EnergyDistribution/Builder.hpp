@@ -5,7 +5,7 @@ class Builder:
   using TabBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
   using BaseBuilder = Tabulated1D::Builder< Builder< ParentBuilder > >;
 
-  std::optional< LAWS > law_;
+  std::optional< LAW > law_;
 
   template< typename Derived, typename PB >
   friend class Base::Builder;

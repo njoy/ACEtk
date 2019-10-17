@@ -20,7 +20,7 @@ struct EnergyDistribution{
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/NBodyPhaseSpace.hpp" // LAW=66
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/LaboratoryAngleEnergy.hpp" // LAW=67
 
-  using LAWS = std::variant< 
+  using LAW = std::variant< 
     TabularEquiprobableEnergyBins,    // LAW=1
     DiscretePhotonEnergy,             // LAW=2
     LevelScattering,                  // LAW=3
@@ -38,7 +38,7 @@ struct EnergyDistribution{
                            >;
 
   Tabulated1D tab1;
-  LAWS law;
+  LAW law;
 
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/Builder.hpp"
   #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution/src/law2Int.hpp"

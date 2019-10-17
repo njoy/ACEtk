@@ -3,24 +3,17 @@ void ACEify( Table::Data& tData, int jxsRelative){
 
   if( tabulated.parameters ){
     decltype( auto ) p = tabulated.parameters.value();
-    xss 
-      |= ranges::action::push_back( 
-          ranges::view::concat(
-            ranges::view::single( p.first.size() ), p.first, p.second
-          )
-        );
+    xss.push_back( p.first.size() );
+    xss |= ranges::action::push_back( p.first );
+    xss |= ranges::action::push_back( p.second );
   }
   else{
-    xss |= ranges::action::push_back( ranges::view::single( 0 ) );
+    xss.push_back( 0 );
   }
   
   // energies
-  xss |= ranges::action::push_back(
-    ranges::view::concat(
-      ranges::view::single( tabulated.x.size() ),
-      tabulated.x
-    )
-  );
+  xss.push_back( tabulated.x.size() );
+  xss |= ranges::action::push_back( tabulated.x );
 
   // Locators
   long long L = xss.size();

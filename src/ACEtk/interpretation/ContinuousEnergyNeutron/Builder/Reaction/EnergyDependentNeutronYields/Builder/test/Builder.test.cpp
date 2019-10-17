@@ -26,20 +26,62 @@ SCENARIO( "Testing Reaction::EnergyDependentNeutronYields::Builder" ){
     std::vector< double > energies{ 1.0, 2.0 };
     std::vector< double > yields{ 1.45, 2.35 };
 
-    tb.boundaries( njoy::utility::copy( boundaries ) )
-      .schemes( njoy::utility::copy( schemes ) )
-      .energies( njoy::utility::copy( energies ) )
-      .yields( njoy::utility::copy( yields ) );
-
-    auto tabulated = tb.construct();
-
-    THEN( "the values can be verified" ){
-      auto parameters = tabulated.parameters;
-      CHECK( ranges::equal( boundaries, parameters->first ) );
-      CHECK( ranges::equal( schemes, parameters->second ) );
-      CHECK( ranges::equal( energies, tabulated.x ) );
-      CHECK( ranges::equal( yields, tabulated.y ) );
-    }
+    WHEN( "boundaries and schemes are included" ){
+      tb.boundaries( njoy::utility::copy( boundaries ) )
+        .schemes( njoy::utility::copy( schemes ) )
+        .energies( njoy::utility::copy( energies ) )
+        .yields( njoy::utility::copy( yields ) );
+      
+      auto tabulated = tb.construct();
+      
+      THEN( "the values can be verified" ){
+        auto parameters = tabulated.parameters;
+        CHECK( ranges::equal( boundaries, parameters->first ) );
+        CHECK( ranges::equal( schemes, parameters->second ) );
+        CHECK( ranges::equal( energies, tabulated.x ) );
+        CHECK( ranges::equal( yields, tabulated.y ) );
+      
+        AND_THEN( "the contents can be ACE-ified" ){
+          std::vector< double > aceified{};
+          aceified.push_back( boundaries.size() );
+          aceified |= ranges::action::push_back( boundaries );
+          aceified |= ranges::action::push_back( schemes );
+          aceified.push_back( energies.size() );
+          aceified |= ranges::action::push_back( energies );
+          aceified |= ranges::action::push_back( yields );
+      
+          Table::Data data{};
+          tabulated.ACEify( data );
+      
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        } // AND_THEN
+      }
+    } // WHEN
+    WHEN( "boundaries and schemes are NOT included" ){
+      tb.energies( njoy::utility::copy( energies ) )
+        .yields( njoy::utility::copy( yields ) );
+      
+      auto tabulated = tb.construct();
+      
+      THEN( "the values can be verified" ){
+        CHECK( not tabulated.parameters );
+        CHECK( ranges::equal( energies, tabulated.x ) );
+        CHECK( ranges::equal( yields, tabulated.y ) );
+      
+        AND_THEN( "the contents can be ACE-ified" ){
+          std::vector< double > aceified{};
+          aceified.push_back( 0 );
+          aceified.push_back( energies.size() );
+          aceified |= ranges::action::push_back( energies );
+          aceified |= ranges::action::push_back( yields );
+      
+          Table::Data data{};
+          tabulated.ACEify( data );
+      
+          CHECK( ranges::equal( aceified, data.XSS() ) );
+        } // AND_THEN
+      }
+    } // WHEN
   } // GIVEN valid
   GIVEN( "invalid inputs" ){
     WHEN( "yields are negative" ){

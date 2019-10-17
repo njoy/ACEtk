@@ -384,106 +384,214 @@ SCENARIO( "Testing EnergyDistribtion::Builder" ){
   GIVEN( "valid inputs" ){
     TestBuilder tb{ parentBuilder };
 
-    tb.boundaries( njoy::utility::copy( boundaries ) )
-      .schemes( njoy::utility::copy( schemes ) )
-      .energies( njoy::utility::copy( energies ) )
-      .probabilities( njoy::utility::copy( probabilities ) );
-
-    std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, 24, 44, 61, 66, 67 };
-
-    for( auto LAW : LAWS ){
-      THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
-        njoy::Log::info( "Trying LAW={}", LAW );
-
-        switch( LAW ){
-          case 1:  LAW1( tb ); break;
-          case 2:  LAW2( tb ); break;
-          case 3:  LAW3( tb ); break;
-          case 4:  LAW4( tb ); break;
-          case 5:  LAW5( tb ); break;
-          case 7:  LAW7( tb ); break;
-          case 9:  LAW9( tb ); break;
-          case 11: LAW11( tb ); break;
-          case 22: LAW22( tb ); break;
-          case 24: LAW24( tb ); break;
-          case 44: LAW44( tb ); break;
-          case 61: LAW61( tb ); break;
-          case 66: LAW66( tb ); break;
-          case 67: LAW67( tb ); break;
-          default:
-            njoy::Log::info( "I don't know what to do with LAW={}", LAW );
-        }
-
-        auto energyDistribution = tb.construct();
-        CHECK( LAW == 
-          ContinuousEnergyNeutron::Builder::EnergyDistribution::law2Int( 
-              energyDistribution.law )
-        );
-
-        // We don't need to check every case
-        if( LAW == 4 ){
-
-          std::vector< double > aceified{};
-            aceified.push_back( 0 );                      // LNW_1
-            aceified.push_back( 4 );                      // LAW_1
-            aceified.push_back( 18 );                     // IDAT_1
-            // Energy distribution --- size 14
-            aceified.push_back( boundaries.size() );      // N_R
-            aceified |= ranges::action::push_back( boundaries );
-            aceified |= ranges::action::push_back( schemes );
-            aceified.push_back( energies.size() );        // N_E
-            aceified |= ranges::action::push_back( energies );
-            aceified |= ranges::action::push_back( probabilities ); 
-            // LAW=4
-              aceified.push_back( 2 );                    // N_R
-              aceified |= ranges::action::push_back( boundaries ); 
+    WHEN( "boundaries and schemes are given" ){
+      tb.boundaries( njoy::utility::copy( boundaries ) )
+        .schemes( njoy::utility::copy( schemes ) )
+        .energies( njoy::utility::copy( energies ) )
+        .probabilities( njoy::utility::copy( probabilities ) );
+      
+      std::vector< int > LAWS{ 1, 2, 3, 4, 5, 7, 9, 11, 22, 24, 44, 61, 66, 67 };
+      
+      for( auto LAW : LAWS ){
+        THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
+          njoy::Log::info( "Trying LAW={}", LAW );
+      
+          switch( LAW ){
+            case 1:  LAW1( tb ); break;
+            case 2:  LAW2( tb ); break;
+            case 3:  LAW3( tb ); break;
+            case 4:  LAW4( tb ); break;
+            case 5:  LAW5( tb ); break;
+            case 7:  LAW7( tb ); break;
+            case 9:  LAW9( tb ); break;
+            case 11: LAW11( tb ); break;
+            case 22: LAW22( tb ); break;
+            case 24: LAW24( tb ); break;
+            case 44: LAW44( tb ); break;
+            case 61: LAW61( tb ); break;
+            case 66: LAW66( tb ); break;
+            case 67: LAW67( tb ); break;
+            default:
+              njoy::Log::info( "I don't know what to do with LAW={}", LAW );
+          }
+      
+          auto energyDistribution = tb.construct();
+          CHECK( LAW == 
+            ContinuousEnergyNeutron::Builder::EnergyDistribution::law2Int( 
+                energyDistribution.law )
+          );
+      
+          // We don't need to check every case
+          // These are tested extensively elsewhere
+          if( LAW == 4 ){
+      
+            std::vector< double > aceified{};
+              aceified.push_back( 0 );                      // LNW_1
+              aceified.push_back( 4 );                      // LAW_1
+              aceified.push_back( 18 );                     // IDAT_1
+              // Energy distribution --- size 14
+              aceified.push_back( boundaries.size() );      // N_R
+              aceified |= ranges::action::push_back( boundaries );
               aceified |= ranges::action::push_back( schemes );
-              aceified.push_back( 2 );                    // N_E
-              // Energies
-              aceified.push_back( 1.0 );
-              aceified.push_back( 2.0 );
-              // Locators
-              aceified.push_back( 27 );
-              aceified.push_back( 35 );
-              // distribution -- size 8
-                aceified.push_back( 1 );                    // INTT
-                aceified.push_back( 2 );                    // N_p
+              aceified.push_back( energies.size() );        // N_E
+              aceified |= ranges::action::push_back( energies );
+              aceified |= ranges::action::push_back( probabilities ); 
+              // LAW=4
+                aceified.push_back( 2 );                    // N_R
+                aceified |= ranges::action::push_back( boundaries ); 
+                aceified |= ranges::action::push_back( schemes );
+                aceified.push_back( 2 );                    // N_E
                 // Energies
                 aceified.push_back( 1.0 );
                 aceified.push_back( 2.0 );
-                // PDF
-                aceified.push_back( 0.25 );
-                aceified.push_back( 0.75 );
-                // CDF
-                aceified.push_back( 0.25 );
-                aceified.push_back( 1.0 );
-              // distribution -- size 8
-                aceified.push_back( 2 );                    // INTT
-                aceified.push_back( 2 );                    // N_p
+                // Locators
+                aceified.push_back( 27 );
+                aceified.push_back( 35 );
+                // distribution -- size 8
+                  aceified.push_back( 1 );                    // INTT
+                  aceified.push_back( 2 );                    // N_p
+                  // Energies
+                  aceified.push_back( 1.0 );
+                  aceified.push_back( 2.0 );
+                  // PDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 0.75 );
+                  // CDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 1.0 );
+                // distribution -- size 8
+                  aceified.push_back( 2 );                    // INTT
+                  aceified.push_back( 2 );                    // N_p
+                  // Energies
+                  aceified.push_back( 1.0 );
+                  aceified.push_back( 2.0 );
+                  // PDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 0.75 );
+                  // CDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 1.0 );
+      
+      
+            Table::Data data{};
+            data.XSS().push_back( 0 );
+            energyDistribution.ACEify( data, 1 );
+      
+            CHECK( ranges::equal( aceified, data.XSS() ) );
+          }
+      
+        } // THEN a law can be given
+      } // for LAW
+    } // WHEN
+    WHEN( "boundaries and schemes are NOT given" ){
+      tb.energies( njoy::utility::copy( energies ) )
+        .probabilities( njoy::utility::copy( probabilities ) );
+      
+      std::vector< int > LAWS{
+        1, 2, 3, 4, 5, 7, 9, 11, 22, 24, 44, 61, 66, 67 };
+      
+      for( auto LAW : LAWS ){
+        THEN( "LAW=" + std::to_string( LAW ) + " can be given" ){
+          njoy::Log::info( "Trying LAW={}", LAW );
+      
+          switch( LAW ){
+            case 1:  LAW1( tb ); break;
+            case 2:  LAW2( tb ); break;
+            case 3:  LAW3( tb ); break;
+            case 4:  LAW4( tb ); break;
+            case 5:  LAW5( tb ); break;
+            case 7:  LAW7( tb ); break;
+            case 9:  LAW9( tb ); break;
+            case 11: LAW11( tb ); break;
+            case 22: LAW22( tb ); break;
+            case 24: LAW24( tb ); break;
+            case 44: LAW44( tb ); break;
+            case 61: LAW61( tb ); break;
+            case 66: LAW66( tb ); break;
+            case 67: LAW67( tb ); break;
+            default:
+              njoy::Log::info( "I don't know what to do with LAW={}", LAW );
+          }
+      
+          auto energyDistribution = tb.construct();
+          CHECK( LAW == 
+            ContinuousEnergyNeutron::Builder::EnergyDistribution::law2Int( 
+                energyDistribution.law )
+          );
+      
+          // We don't need to check every case
+          // These are tested extensively elsewhere
+          if( LAW == 4 ){
+      
+            std::vector< double > aceified{};
+              aceified.push_back( 0 );                      // LNW_1
+              aceified.push_back( 4 );                      // LAW_1
+              aceified.push_back( 14 );                     // IDAT_1
+              // Energy distribution --- size 14
+              aceified.push_back( 0 );      // N_R
+              aceified.push_back( energies.size() );        // N_E
+              aceified |= ranges::action::push_back( energies );
+              aceified |= ranges::action::push_back( probabilities ); 
+              // LAW=4
+                aceified.push_back( 2 );                    // N_R
+                aceified |= ranges::action::push_back( boundaries ); 
+                aceified |= ranges::action::push_back( schemes );
+                aceified.push_back( 2 );                    // N_E
                 // Energies
                 aceified.push_back( 1.0 );
                 aceified.push_back( 2.0 );
-                // PDF
-                aceified.push_back( 0.25 );
-                aceified.push_back( 0.75 );
-                // CDF
-                aceified.push_back( 0.25 );
-                aceified.push_back( 1.0 );
-
-
-          Table::Data data{};
-          data.XSS().push_back( 0 );
-          energyDistribution.ACEify( data, 1 );
-
-          CHECK( ranges::equal( aceified, data.XSS() ) );
-        }
-
-      } // THEN a law can be given
-    } // for LAW
+                // Locators
+                aceified.push_back( 23 );
+                aceified.push_back( 31 );
+                // distribution -- size 8
+                  aceified.push_back( 1 );                    // INTT
+                  aceified.push_back( 2 );                    // N_p
+                  // Energies
+                  aceified.push_back( 1.0 );
+                  aceified.push_back( 2.0 );
+                  // PDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 0.75 );
+                  // CDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 1.0 );
+                // distribution -- size 8
+                  aceified.push_back( 2 );                    // INTT
+                  aceified.push_back( 2 );                    // N_p
+                  // Energies
+                  aceified.push_back( 1.0 );
+                  aceified.push_back( 2.0 );
+                  // PDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 0.75 );
+                  // CDF
+                  aceified.push_back( 0.25 );
+                  aceified.push_back( 1.0 );
+      
+      
+            Table::Data data{};
+            data.XSS().push_back( 0 );
+            energyDistribution.ACEify( data, 1 );
+      
+            CHECK( ranges::equal( aceified, data.XSS() ) );
+          }
+      
+        } // THEN a law can be given
+      } // for LAW
+    } // WHEN
   } // GIVEN
   GIVEN( "invalid inputs" ){
     TestBuilder tb{ parentBuilder };
 
+    WHEN( "the law hasn't been added" ){
+      tb.boundaries( njoy::utility::copy( boundaries ) )
+        .schemes( njoy::utility::copy( schemes ) )
+        .energies( njoy::utility::copy( energies ) )
+        .probabilities( njoy::utility::copy( probabilities ) );
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( tb.construct(), std::bad_optional_access& );
+      } // THEN
+    } // WHEN
     WHEN( "energies are negative" ){
       std::vector< double > energies{ -1.0, 2.0, 5.0, 6.0 };
 
