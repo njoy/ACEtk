@@ -79,7 +79,6 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
     }
   } // GIVEN
   GIVEN( "invalid inputs" ){
-    /*
     WHEN( "CDFs are not all positive" ){
       std::vector< double > CDFs{ 0.1, -2.0, 1.0 };
       THEN( "an exception is thrown" ){
@@ -98,9 +97,8 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
         );
       }
     }
-     */
     WHEN( "CDFs don't end with 1.0" ){
-      std::vector< double > CDFs{ 0.2, 0.1, 1.0 };
+      std::vector< double > CDFs{ 0.2, 0.3, 0.9 };
       THEN( "an exception is thrown" ){
         CHECK_THROWS_AS( 
             tb.CDFs( CDFs ),
@@ -108,7 +106,6 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
         );
       }
     }
-    /*
     WHEN( "total cross section is not all positive" ){
       std::vector< double > totalXS{ 0.1, -2.0, 1.0 };
       THEN( "an exception is thrown" ){
@@ -229,6 +226,5 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
         );
       }
     }
-     */
   }
 } // SCENARIO
