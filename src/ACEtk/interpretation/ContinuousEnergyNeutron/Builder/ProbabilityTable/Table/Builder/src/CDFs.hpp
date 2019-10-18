@@ -5,7 +5,7 @@ Builder& CDFs( Range&& cdfs ){
     if( cdfs.back() != 1.0 ){
       Log::error( "Invalid final CDF value: {}", cdfs.back() );
       Log::info( "Final CDF value must be 1.0" );
-      throw std::exception();
+      throw details::verify::exceptions::InvalidCDF( "CDF must end with 1.0" );
     }
     this->CDFs_ = std::move( details::verify::cdf( cdfs ) );
     return *this;

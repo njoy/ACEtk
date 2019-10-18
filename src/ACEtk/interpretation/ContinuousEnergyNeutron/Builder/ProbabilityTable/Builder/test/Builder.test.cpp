@@ -56,6 +56,12 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
             .fissionCrossSections( njoy::utility::copy( fissionXS ) )
             .captureCrossSections( njoy::utility::copy( captureXS ) )
             .heating( njoy::utility::copy( heating ) )
+          .add()
+          .table()
+            .CDFs( njoy::utility::copy( CDFs ) )
+            .totalCrossSections( njoy::utility::copy( totalXS ) )
+            .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+            .captureCrossSections( njoy::utility::copy( captureXS ) )
           .add();
 
         auto pTable = tb.construct();
@@ -68,9 +74,11 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
           CHECK( ranges::equal( energies, pTable.incidentEnergies ) );
 
           AND_THEN( "the contents can be ACE-ified" ){
+            auto zeros = ranges::view::repeat_n( 0.0, totalXS.size() );
+
             std::vector< double > aceified{};
             aceified.push_back( 3 );
-            aceified.push_back( 2 );
+            aceified.push_back( 3 );
             aceified.push_back( INT );
             aceified.push_back( inelasticCompetition );
             aceified.push_back( otherAbsorption );
@@ -88,6 +96,12 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
             aceified |= ranges::action::push_back( fissionXS );
             aceified |= ranges::action::push_back( captureXS );
             aceified |= ranges::action::push_back( heating );
+            aceified |= ranges::action::push_back( CDFs );
+            aceified |= ranges::action::push_back( totalXS );
+            aceified |= ranges::action::push_back( elasticXS );
+            aceified |= ranges::action::push_back( zeros );
+            aceified |= ranges::action::push_back( captureXS );
+            aceified |= ranges::action::push_back( zeros );
 
             Table::Data data{};
             pTable.ACEify( data );
@@ -96,41 +110,6 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
           }
         }
       }
-    }
-    WHEN( "adding probability table without heating or fission values" ){
-        tb.interpolationParameter( INT )
-          .inelasticCompetition( inelasticCompetition )
-          .otherAbsorption( otherAbsorption )
-          .factors( factors )
-          .incidentEnergies( njoy::utility::copy( energies ) )
-          .table()
-            .CDFs( njoy::utility::copy( CDFs ) )
-            .totalCrossSections( njoy::utility::copy( totalXS ) )
-            .elasticCrossSections( njoy::utility::copy( elasticXS ) )
-            .captureCrossSections( njoy::utility::copy( captureXS ) )
-          .add()
-          .table()
-            .CDFs( njoy::utility::copy( CDFs ) )
-            .totalCrossSections( njoy::utility::copy( totalXS ) )
-            .elasticCrossSections( njoy::utility::copy( elasticXS ) )
-            .captureCrossSections( njoy::utility::copy( captureXS ) )
-          .add()
-          .table()
-            .CDFs( njoy::utility::copy( CDFs ) )
-            .totalCrossSections( njoy::utility::copy( totalXS ) )
-            .elasticCrossSections( njoy::utility::copy( elasticXS ) )
-            .captureCrossSections( njoy::utility::copy( captureXS ) )
-          .add();
-
-        auto pTable = tb.construct();
-
-        THEN( "the values can be verified" ){
-          CHECK( INT == pTable.interpolationParameter );
-          CHECK( inelasticCompetition == pTable.inelasticCompetition );
-          CHECK( otherAbsorption == pTable.otherAbsorption );
-          CHECK( factors == pTable.factors );
-          CHECK( ranges::equal( energies, pTable.incidentEnergies ) );
-        }
     }
   } // GIVEN
   GIVEN( "invalid inputs" ){
@@ -152,5 +131,53 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
         );
       }
     }
+    WHEN( "Not enough tables are given" ){
+      tb.interpolationParameter( INT )
+        .inelasticCompetition( inelasticCompetition )
+        .otherAbsorption( otherAbsorption )
+        .factors( factors )
+        .incidentEnergies( njoy::utility::copy( energies ) )
+        .table()
+          .CDFs( njoy::utility::copy( CDFs ) )
+          .totalCrossSections( njoy::utility::copy( totalXS ) )
+          .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+          .fissionCrossSections( njoy::utility::copy( fissionXS ) )
+          .captureCrossSections( njoy::utility::copy( captureXS ) )
+          .heating( njoy::utility::copy( heating ) )
+        .add();
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( tb.construct(), std::range_error& );
+      } // THEN
+    } // WHEN
+    WHEN( "Tables are not all the same size" ){
+      std::vector< double > badM{ 0.1, 1.0 };
+      tb.interpolationParameter( INT )
+        .inelasticCompetition( inelasticCompetition )
+        .otherAbsorption( otherAbsorption )
+        .factors( factors )
+        .incidentEnergies( njoy::utility::copy( energies ) )
+        .table()
+          .CDFs( njoy::utility::copy( CDFs ) )
+          .totalCrossSections( njoy::utility::copy( totalXS ) )
+          .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+          .fissionCrossSections( njoy::utility::copy( fissionXS ) )
+          .captureCrossSections( njoy::utility::copy( captureXS ) )
+          .heating( njoy::utility::copy( heating ) )
+        .add();
+
+      decltype( auto ) table = tb.table();
+        table
+          .CDFs( njoy::utility::copy( badM ) )
+          .totalCrossSections( njoy::utility::copy( badM ) )
+          .elasticCrossSections( njoy::utility::copy( badM ) )
+          .fissionCrossSections( njoy::utility::copy( badM ) )
+          .captureCrossSections( njoy::utility::copy( badM ) )
+          .heating( njoy::utility::copy( badM ) );
+
+      THEN( "an exception is thrown" ){
+        CHECK_THROWS_AS( table.add(), std::range_error&  );
+      } // THEN
+      
+    } // WHEN
   }
 } // SCENARIO

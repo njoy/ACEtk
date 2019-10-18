@@ -17,6 +17,7 @@ Table construct(){
     }
 
     details::verify::equalSize(
+      this->CDFs_.value(),
       this->heating_.value(),
       this->fissionXS_.value(),
       this->totalXS_.value(),

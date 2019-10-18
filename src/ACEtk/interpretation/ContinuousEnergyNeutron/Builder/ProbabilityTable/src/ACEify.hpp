@@ -2,7 +2,7 @@ void ACEify( ACEtk::Table::Data& tData){
   decltype( auto ) xss = tData.XSS();
 
   xss.push_back( this->incidentEnergies.size() );             // N
-  xss.push_back( this->tables.size() );                       // M
+  xss.push_back( this->tables[ 0 ].CDFs.size() );             // M
   xss.push_back( this->interpolationParameter );              // INT
   xss.push_back( this->inelasticCompetition );                // ILF
   xss.push_back( this->otherAbsorption );                     // IOA
