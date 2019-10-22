@@ -179,5 +179,15 @@ SCENARIO( "Testing Builder::ProbabilityTable::Builder" ){
       } // THEN
       
     } // WHEN
+    WHEN( "interpolation flag is not correct" ){
+      std::vector< int > invalidINTs{ 1, 3, 4, 6 };
+      for (auto INT : invalidINTs) {
+        THEN( "an exception is thrown with interpolation parameter: "
+              + std::to_string( INT ) ){
+          CHECK_THROWS_AS( tb.interpolationParameter( INT ), 
+                           std::range_error& );
+        } // THEN
+      }
+    } // WHEN
   }
 } // SCENARIO
