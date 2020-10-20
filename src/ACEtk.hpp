@@ -8,14 +8,7 @@
 #include <map>
 #include <algorithm>
 
-#if __cplusplus >= 201703L
-  #include <optional>
-#else 
-  #include <experimental/optional>
-  namespace std {
-    using namespace std::experimental;
-  }
-#endif
+#include <optional>
 
 #ifdef __GNUC__
   #pragma GCC diagnostic push
