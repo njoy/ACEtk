@@ -6,7 +6,6 @@ using namespace njoy::ACEtk::interpretation;
 
 SCENARIO( "Adding probability table" ){
   ContinuousEnergyNeutron::Builder ncBuilder{};
-  // auto ptBuilder = ncBuilder.probabilityTable();
 
   GIVEN( "valid data" ){
     int INT{ 2 };
@@ -36,6 +35,20 @@ SCENARIO( "Adding probability table" ){
                   .fissionCrossSections( njoy::utility::copy( fissionXS ) )
                   .captureCrossSections( njoy::utility::copy( captureXS ) )
                   .heating( njoy::utility::copy( heating ) )
+                .add()
+                .table()
+                  .CDFs( njoy::utility::copy( CDFs ) )
+                  .totalCrossSections( njoy::utility::copy( totalXS ) )
+                  .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+                  .fissionCrossSections( njoy::utility::copy( fissionXS ) )
+                  .captureCrossSections( njoy::utility::copy( captureXS ) )
+                  .heating( njoy::utility::copy( heating ) )
+                .add()
+                .table()
+                  .CDFs( njoy::utility::copy( CDFs ) )
+                  .totalCrossSections( njoy::utility::copy( totalXS ) )
+                  .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+                  .captureCrossSections( njoy::utility::copy( captureXS ) )
                 .add()
                .add()
     );

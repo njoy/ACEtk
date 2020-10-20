@@ -559,6 +559,20 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
             .captureCrossSections( njoy::utility::copy( captureXS ) )
             .heating( njoy::utility::copy( heating ) )
           .add() // table
+          .table()
+            .CDFs( njoy::utility::copy( CDFs ) )
+            .totalCrossSections( njoy::utility::copy( totalXS ) )
+            .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+            .fissionCrossSections( njoy::utility::copy( fissionXS ) )
+            .captureCrossSections( njoy::utility::copy( captureXS ) )
+            .heating( njoy::utility::copy( heating ) )
+          .add()
+          .table()
+            .CDFs( njoy::utility::copy( CDFs ) )
+            .totalCrossSections( njoy::utility::copy( totalXS ) )
+            .elasticCrossSections( njoy::utility::copy( elasticXS ) )
+            .captureCrossSections( njoy::utility::copy( captureXS ) )
+          .add()
         .add(); // probabilityTable
     }
 
@@ -575,7 +589,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       auto data = table.data;
 
       THEN( "the NXS array can be checked " ){
-        long long size{ 826 };
+        long long size{ 862 };
         CHECK( size == data.XSS().size() );
 
         CHECK( size == data.NXS( 1 ) );
@@ -724,7 +738,7 @@ SCENARIO( "Complete ContinuousEnergyNeutron::Builder" ){
       THEN( "the UNR Block can be checked" ){
         std::vector< double > unrRef{};
         unrRef.push_back( 3 );      // N
-        unrRef.push_back( 1 );      // M
+        unrRef.push_back( 3 );      // M
         unrRef.push_back( 2 );      // INT
         unrRef.push_back( 3 );      // ILF
         unrRef.push_back( 54 );     // IOA
