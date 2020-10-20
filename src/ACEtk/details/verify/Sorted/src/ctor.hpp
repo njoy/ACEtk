@@ -1,6 +1,11 @@
-template< typename Arg = Range,
-          utility::Require< true, std::is_constructible, Range, Arg > = true >
-Sorted( Arg&& arg ) : Range( check( std::forward< Arg >( arg ) ) ){}
+template< typename Arg = std::initializer_list< utility::value_t< Range > >,
+          utility::Require< false, IsSorted, Arg > = true,
+          utility::Require< true, utility::is_range, Arg > = true,
+          utility::Require< true, std::is_constructible, Range, Arg > = true
+        >
+Sorted( Arg&& arg ) :
+  Range( check( std::forward< Arg >( arg ) ) )
+{ }
 
 template< typename... Args,
           utility::Require< true,

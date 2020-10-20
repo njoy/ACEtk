@@ -1,3 +1,5 @@
 bin/
+bin-llvm/
+bin-gcc/
 subprojects/
 __pycache__/

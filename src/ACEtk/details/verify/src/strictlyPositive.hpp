@@ -9,5 +9,3 @@ auto strictlyPositive( Range&& r ){
   return StrictlyPositive< std::decay_t< Range > >
   { std::forward< Range >( r ) };
 }
-
-

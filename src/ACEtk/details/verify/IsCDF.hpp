@@ -7,4 +7,3 @@ struct IsCDF< T,
                                    and std::decay_t< T >::isPositive
                                    and std::decay_t< T >::isSorted > >
   : std::true_type {};
-

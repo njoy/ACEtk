@@ -5,7 +5,19 @@
 #include <istream>
 #include <iterator>
 #include <functional>
+#include <map>
 #include <algorithm>
+
+#include <optional>
+
+#ifdef __GNUC__
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
+#include <variant>   
+#ifdef __GNUC__
+  #pragma GCC diagnostic pop
+#endif
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsign-compare"
@@ -33,8 +45,8 @@ struct State{
   const Iterator end;
 };
 
-#include "ACEtk/details.hpp"
 #include "ACEtk/Table.hpp"
+#include "ACEtk/details.hpp"
 #include "ACEtk/interpretation.hpp"  
 
 }

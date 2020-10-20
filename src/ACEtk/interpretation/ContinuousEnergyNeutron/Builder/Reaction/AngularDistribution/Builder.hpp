@@ -1,0 +1,37 @@
+class Builder {
+  using ParentBuilder = ContinuousEnergyNeutron::Builder::Reaction::Builder;
+
+  std::reference_wrapper< ParentBuilder > parent;
+  std::optional< dvP< 
+      dvS< std::vector< double > > > > energyGrid_;
+  std::vector< Format > representations_;
+
+protected:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/construct.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/addTabulated.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/addEquiprobable.hpp"
+
+  friend Tabulated::Builder;
+  friend Equiprobable::Builder;
+
+public: 
+  Builder( ParentBuilder& parent ):
+    parent( parent )
+  { }
+
+  ParentBuilder& add() {
+    return parent.get().addAngularDistribution( this->construct() );
+  }
+
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/energyGrid.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction/AngularDistribution/Builder/src/isotropic.hpp"
+
+  Equiprobable::Builder equiprobableCosineBins(){
+    return Equiprobable::Builder{ *this };
+  }
+
+  Tabulated::Builder tabulated(){
+    return Tabulated::Builder{ *this };
+  }
+
+};

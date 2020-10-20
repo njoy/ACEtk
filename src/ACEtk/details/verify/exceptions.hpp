@@ -8,5 +8,6 @@ namespace exceptions{
 #include "ACEtk/details/verify/exceptions/InvalidPDF.hpp"
 #include "ACEtk/details/verify/exceptions/InvalidENDFInterpolationParameter.hpp"
 #include "ACEtk/details/verify/exceptions/InvalidNeutronYield.hpp"
+#include "ACEtk/details/verify/exceptions/InvalidCosine.hpp"
 
 }

@@ -21,7 +21,8 @@ public:
   template< typename... Arg >
   String( Arg... args ) : std::string( std::forward<Arg>(args)... ){
     if ( this->length() > maxLength ){
-      Log::error("Argument string exceeds maximum size for the field");
+      Log::error( "Argument string exceeds maximum size for the field" );
+      Log::info( "field size: {}", this->length() );
       Log::info( "maximum field size: {}", maxLength );
       throw std::exception();
     }

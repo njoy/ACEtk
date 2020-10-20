@@ -1,0 +1,99 @@
+class Builder{
+  template< typename T > using dvP = details::verify::Positive< T >;
+  template< typename T > using dvS = details::verify::Sorted< T >;
+  template< typename T > using dvSP = details::verify::StrictlyPositive< T >;
+  template< typename T > using dvC = details::verify::CDF< T >;
+  template< typename T > using dvCB = details::verify::CosineBins< T >;
+
+public:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/NeutronYieldReferenceFrame.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Factors.hpp"
+
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/CrossSection.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Tabulated.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Isotropic.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/EnergyDistribution.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Reaction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/TotalGammaProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/FissionMultiplicity.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/Precursors.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/ProbabilityTable.hpp"
+
+protected:
+  std::optional< Table::Header > header_;
+  std::optional< Table::Data > tableData_;
+
+  std::optional< dvP< dvS< std::vector< double > > > > energyGrid_;
+  std::optional< dvP< std::vector< double > > > totalXS_;
+  std::optional< dvP< std::vector< double > > > totalDisappearanceXS_;
+  std::optional< dvP< std::vector< double > > > elasticXS_;
+  std::optional< dvP< std::vector< double > > > heating_;
+
+  std::optional< int > SZA_;
+  std::unordered_map< std::string, Nubar > fissionMultiplicity_;
+
+  std::vector< Precursors > delayedPrecursors_;
+
+  std::optional< Reaction::NeutronProducing > elasticScattering_;
+  std::map< int, Reaction::NeutronProducing > neutronProducingReactions_;
+  std::map< int, Reaction::NonNeutronProducing > nonNeutronProducingReactions_;
+
+  std::optional< TotalGammaProduction > totalGammaProduction_;
+  std::optional< CrossSection > totalFissionXS_;
+  std::optional< ProbabilityTable > probabilityTable_;
+
+  friend Reaction::Builder;
+  friend Table::Header::Builder< Builder >;
+  friend Precursors::Builder;
+
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addHeader.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addReaction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addElasticScattering.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addFissionMultiplicity.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addTotalGammaProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addProbabilityTable.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addPrecursor.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/addCrossSection.hpp"
+
+public:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/energyGrid.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ACEifyEDs.hpp"
+protected:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/check.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/ESZ.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/NU.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/MTR.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/LQR.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/TYR.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SIG.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/AND.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/DLW.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/GPD.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/DLWP.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/YP.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/FIS.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/UNR.hpp"
+
+public:
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/construct.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalCrossSection.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalDisappearanceCrossSection.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/heating.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/SZA.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/fissionMultiplicity.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/totalGammaProduction.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/precursors.hpp"
+  #include "ACEtk/interpretation/ContinuousEnergyNeutron/Builder/src/reaction.hpp"
+
+  CrossSection::Builder< Builder > totalFissionCrossSection(){
+    return { *this };
+  }
+
+  ProbabilityTable::Builder probabilityTable(){ 
+    return ProbabilityTable::Builder{ *this }; 
+  }
+
+  Table::Header::Builder< Builder > header(){ 
+    return Table::Header::Builder< Builder >{ *this }; 
+  }
+};

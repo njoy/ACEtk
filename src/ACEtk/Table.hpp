@@ -46,6 +46,7 @@ public:
     Table( std::string{ std::istreambuf_iterator< char >{ istream },
                         std::istreambuf_iterator< char >{} } ){}
   
-public:
   #include "ACEtk/Table/src/print.hpp"
+  #include "ACEtk/Table/src/Slice.hpp"
+
 };
