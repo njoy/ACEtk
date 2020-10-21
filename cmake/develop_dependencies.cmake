@@ -6,43 +6,43 @@ include( FetchContent )
 #######################################################################
 
 FetchContent_Declare( Log
-    GIT_REPOSITORY  http://github.com/njoy/Log
+    GIT_REPOSITORY  https://github.com/njoy/Log
     GIT_TAG         origin/build/fetchcontent
     GIT_SHALLOW     TRUE
     )
 
 FetchContent_Declare( catch-adapter
-    GIT_REPOSITORY  http://github.com/njoy/catch-adapter
+    GIT_REPOSITORY  https://github.com/njoy/catch-adapter
     GIT_TAG         origin/build/fetchcontent
     GIT_SHALLOW     TRUE
     )
 
 FetchContent_Declare( date-adapter
-    GIT_REPOSITORY  http://github.com/njoy/date-adapter
+    GIT_REPOSITORY  https://github.com/njoy/date-adapter
     GIT_TAG         origin/update/subtree
     GIT_SHALLOW     TRUE
     )
 
-FetchContent_Declare( dimwits
-    GIT_REPOSITORY  http://github.com/njoy/dimwits
+FetchContent_Declare( disco
+    GIT_REPOSITORY  https://github.com/njoy/disco
     GIT_TAG         origin/build/fetchcontent
     GIT_SHALLOW     TRUE
     )
 
-FetchContent_Declare( disco
-    GIT_REPOSITORY  http://github.com/njoy/disco
+FetchContent_Declare( dimwits
+    GIT_REPOSITORY  https://github.com/njoy/DimensionalAnalysis
     GIT_TAG         origin/build/fetchcontent
     GIT_SHALLOW     TRUE
     )
 
 FetchContent_Declare( interpolation
-    GIT_REPOSITORY  http://github.com/njoy/interpolation
+    GIT_REPOSITORY  https://github.com/njoy/interpolation
     GIT_TAG         origin/build/fetchcontent
     GIT_SHALLOW     TRUE
     )
 
 FetchContent_Declare( range-v3-adapter
-    GIT_REPOSITORY  http://github.com/njoy/range-v3-adapter
+    GIT_REPOSITORY  https://github.com/njoy/range-v3-adapter
     GIT_TAG         origin/build/fetchcontent
     GIT_SHALLOW     TRUE
     )
