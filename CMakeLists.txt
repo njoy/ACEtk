@@ -54,6 +54,12 @@ endif()
 # Project targets
 ########################################################################
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# ACEtk : library
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+include_directories( src/ )
+
 add_library( ACEtk INTERFACE
     )
 target_include_directories( ACEtk INTERFACE src/ )
@@ -69,6 +75,21 @@ target_link_libraries( ACEtk
     INTERFACE range-v3-adapter
     )
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# ACEtk : python bindings
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+include_directories( python/src/ )
+
+pybind11_add_module( ACEtk.python
+    EXCLUDE_FROM_ALL
+    python/src/ACEtk.python.cpp
+)
+target_link_libraries( ACEtk.python PRIVATE ACEtk )
+target_compile_options( ACEtk.python PRIVATE "-fvisibility=hidden" )
+set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
+set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
+set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 #######################################################################
 # Top-level Only

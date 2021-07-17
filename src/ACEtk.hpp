@@ -7,10 +7,7 @@
 #include <functional>
 #include <algorithm>
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wsign-compare"
 #include "range/v3/all.hpp"
-#pragma GCC diagnostic pop
 
 #include "date.h"
 #include "disco.hpp"
