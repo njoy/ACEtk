@@ -1,7 +1,10 @@
+#include "ACEtk/State.hpp"
+#include "ACEtk/Table.hpp"
+#include "ACEtk/fromFile.hpp"
+
 #ifndef ACETK_HPP
 #define ACETK_HPP
 
-#include <regex>
 #include <istream>
 #include <iterator>
 #include <functional>
@@ -9,8 +12,6 @@
 
 #include "range/v3/all.hpp"
 
-#include "date.h"
-#include "disco.hpp"
 #include "dimwits.hpp"
 #include "interpolation.hpp"
 #include "header-utilities.hpp"
@@ -19,24 +20,12 @@
 namespace njoy {
 namespace ACEtk {
 
-using namespace date;
-using namespace disco;
 using namespace dimwits;
 
-template< typename Iterator >
-struct State{
-  long lineNumber = 1;
-  Iterator position;
-  const Iterator end;
-};
-
 #include "ACEtk/details.hpp"
-#include "ACEtk/Table.hpp"
 #include "ACEtk/interpretation.hpp"
 
 }
 }
 
 #endif
-
-#include "ACEtk/fromFile.hpp"

@@ -3,7 +3,7 @@
 #include <fstream>
 
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 

@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 
@@ -7,7 +7,7 @@ namespace {
 
 class Data : public Table::Data {
 public:
-  using Parse = Table::Data::Parse; 
+  using Parse = Table::Data::Parse;
 };
 
 }
@@ -38,7 +38,7 @@ SCENARIO("NXS parsing"){
      REQUIRE( result[14] ==      0 );
      REQUIRE( result[15] ==      0 );
   }
-  
+
   SECTION("A incorrect NXS"){
     std::string NXS =
       "  1637220    92238   157744       47       45        6        0        6\n"

@@ -1,3 +1,28 @@
+#ifndef NJOY_ACETK_TABLE
+#define NJOY_ACETK_TABLE
+
+// system includes
+#include <istream>
+#include <regex>
+#include <string>
+#include <vector>
+
+// other includes
+#include "ACEtk/State.hpp"
+#include "header-utilities.hpp"
+#include "date.h"
+#include "disco.hpp"
+#include "dimwits.hpp"
+#include "Log.hpp"
+#include "range/v3/all.hpp"
+
+namespace njoy {
+namespace ACEtk {
+
+using namespace date;
+using namespace disco;
+using namespace dimwits;
+
 class Table {
 public:
   /* nested classes */
@@ -6,7 +31,7 @@ public:
 
   Data data;
   Header header;
- 
+
   Table( Header&& header, Data&& data ) :
     data( std::move(data) ), header( std::move(header) ){}
 
@@ -45,7 +70,12 @@ public:
   Table( Istream&& istream ) :
     Table( std::string{ std::istreambuf_iterator< char >{ istream },
                         std::istreambuf_iterator< char >{} } ){}
-  
+
 public:
   #include "ACEtk/Table/src/print.hpp"
 };
+
+} // ACEtk namespace
+} // njoy namespace
+
+#endif

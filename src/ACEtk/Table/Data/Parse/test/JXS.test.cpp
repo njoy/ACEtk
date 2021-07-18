@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 
@@ -7,7 +7,7 @@ namespace {
 
 class Data : public Table::Data {
 public:
-  using Parse = Table::Data::Parse; 
+  using Parse = Table::Data::Parse;
 };
 
 }
@@ -44,7 +44,7 @@ SCENARIO("JXS parsing"){
      REQUIRE( result[17] == 1634042 );
      REQUIRE( result[18] == 1634048 );
      REQUIRE( result[19] == 1637218 );
-     REQUIRE( result[20] ==  789147 ); 
+     REQUIRE( result[20] ==  789147 );
      REQUIRE( result[21] == 1637220 );
      REQUIRE( result[22] == 1464171 );
      REQUIRE( result[23] == 1465923 );
@@ -57,7 +57,7 @@ SCENARIO("JXS parsing"){
      REQUIRE( result[30] ==       0 );
      REQUIRE( result[31] ==       0 );
   }
-  
+
   SECTION("A incorrect JXS"){
     std::string JXS =
       "        1   788721   788768   788815   788862   788909   788956  1270743\n"

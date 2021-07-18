@@ -1,10 +1,10 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 
 SCENARIO("parsing a 1.0.0 header"){
-  std::string retroHeader = 
+  std::string retroHeader =
     " 92235.80c  233.024800  2.5301E-08   12/19/12\n"
     "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
 
@@ -19,7 +19,7 @@ SCENARIO("parsing a 1.0.0 header"){
 }
 
 SCENARIO("parsing a 2.0.1 header"){
-  std::string modernHeader = 
+  std::string modernHeader =
     "     2.0.1            1095242.710nc              ENDFB-VII.1\n"
     "  239.980100   2.5301E-08 2012-12-13    3\n"
     "The next two lines are the first two lines of ’old-style’ ACE.    \n"
@@ -34,47 +34,47 @@ SCENARIO("parsing a 2.0.1 header"){
   REQUIRE( header.processDate.year() == date::year(2012) );
   REQUIRE( header.processDate.month() == date::month(12) );
   REQUIRE( header.processDate.day() == date::day(13) );
-  
+
 }
 
 SCENARIO("invalid 1.0.0 header"){
   SECTION("malformed atomic weight"){
-    std::string retroHeader = 
+    std::string retroHeader =
       " 92235.80c  233.0a4800  2.5301E-08   12/19/12\n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
- 
+
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
   SECTION("nonphysical atomic weight ratio"){
-    std::string retroHeader = 
+    std::string retroHeader =
       " 92235.80c -233.024800  2.5301E-08   12/19/12\n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
- 
+
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
   SECTION("nonphysical temperature"){
-    std::string retroHeader = 
+    std::string retroHeader =
       " 92235.80c  233.024800 -2.5301E-08   12/19/12\n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
- 
+
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
   SECTION("misformatted date"){
-    std::string retroHeader = 
+    std::string retroHeader =
       " 92235.80c  233.024800  2.5301E-08     121912\n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
- 
+
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
   SECTION("invalid date"){
-    std::string retroHeader = 
+    std::string retroHeader =
       " 92235.80c  233.024800  2.5301E-08   12/99/12\n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
- 
+
     State< std::string::iterator > s{ 1, retroHeader.begin(), retroHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
@@ -98,18 +98,18 @@ SCENARIO("invalid 2.0.1 header"){
       "The next two lines are the first two lines of 'old-style' ACE.        \n"
       " 92235.80c  233.024800  2.5301E-08   12/19/12                         \n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
- 
+
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
   SECTION("nonphysical temperature"){
-    std::string modernHeader = 
+    std::string modernHeader =
       "     2.0.1              92235.710nc              ENDFB-VII.1\n"
       "  233.024800  -2.5301E-08 2012-12-19    3\n"
       "The next two lines are the first two lines of 'old-style' ACE.        \n"
       " 92235.80c  233.024800  2.5301E-08   12/19/12                         \n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
- 
+
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
@@ -120,7 +120,7 @@ SCENARIO("invalid 2.0.1 header"){
       "The next two lines are the first two lines of 'old-style' ACE.        \n"
       " 92235.80c  233.024800  2.5301E-08   12/19/12                         \n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
- 
+
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
@@ -131,7 +131,7 @@ SCENARIO("invalid 2.0.1 header"){
       "The next two lines are the first two lines of 'old-style' ACE.        \n"
       " 92235.80c  233.024800  2.5301E-08   12/19/12                         \n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
- 
+
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }
@@ -142,7 +142,7 @@ SCENARIO("invalid 2.0.1 header"){
       "The next two lines are the first two lines of 'old-style' ACE.        \n"
       " 92235.80c  233.024800  2.5301E-08   12/19/12                         \n"
       "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53) \n";
- 
+
     State< std::string::iterator > s{ 1, modernHeader.begin(), modernHeader.end() };
     REQUIRE_THROWS( Table::Header::parse(s) );
   }

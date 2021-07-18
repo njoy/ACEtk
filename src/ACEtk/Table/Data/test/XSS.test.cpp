@@ -1,12 +1,12 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 
 extern Table::Data data;
 
 SCENARIO("XSS"){
-  const auto& cdata = data; 
+  const auto& cdata = data;
   REQUIRE( 1.0E-11 == data.XSS( 1) );
   REQUIRE( 1.375E-10 == data.XSS(84) );
   REQUIRE( data.XSS(1, 84)[0]

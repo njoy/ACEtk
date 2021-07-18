@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 
@@ -7,14 +7,14 @@ namespace {
 
 class Data : public Table::Data {
 public:
-  using Parse = Table::Data::Parse; 
+  using Parse = Table::Data::Parse;
 };
 
 }
 
 SCENARIO("XSS parsing"){
   int nEntries = 74;
-  
+
   SECTION("A correct XSS"){
     std::string XSS =
       "   1.00000000000E-11   1.03125000000E-11   1.06250000000E-11   1.09375000000E-11\n"
@@ -61,12 +61,12 @@ SCENARIO("XSS parsing"){
     State< std::string::iterator > s{ 1, XSS.begin(), XSS.end() };
     auto result = Data::Parse::XSS( s, nEntries );
     REQUIRE( s.lineNumber == 20 );
-    /*
+
     for ( unsigned i = 0; i < xss.size(); ++i ){
       auto error = std::abs( ( xss[i] - result[i] ) / xss[i] );
       REQUIRE( error < 1E-15 );
     }
-    */
+
   }
 
   SECTION("A incorrect XSS"){

@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 
@@ -8,7 +8,7 @@ extern Table::Data data;
 std::string reference();
 
 SCENARIO("print"){
-  const auto& cdata = data; 
+  const auto& cdata = data;
   std::ostringstream oss;
   data.print( oss );
   REQUIRE( oss.str() == reference() );

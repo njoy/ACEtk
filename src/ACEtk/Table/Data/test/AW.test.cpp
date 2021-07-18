@@ -1,12 +1,12 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 using namespace njoy::ACEtk;
 
 extern Table::Data data;
 
 SCENARIO("AW"){
-  const auto& cdata = data; 
+  const auto& cdata = data;
   REQUIRE( 0.0 == data.AW( 1) );
   REQUIRE( 0.0 == data.AW(16) );
   REQUIRE( 0.0 == cdata.AW( 1) );
