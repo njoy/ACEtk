@@ -78,7 +78,33 @@ void wrapTable( python::module& module, python::module& ) {
     },
     "Write the ACE table to a file\n\n"
     "Arguments:\n"
-    "    self        the tape\n"
+    "    self        the table\n"
     "    filename    the file name and path"
+  )
+  .def_static(
+
+    "from_string",
+    [] ( const std::string& string ) -> Component {
+
+      njoy::ACEtk::State< decltype(string.begin()) > state{ 1, string.begin(), string.end() };
+      return Component( state );
+    },
+    python::arg( "string" ),
+    "Read the ACE table from a string\n\n"
+    "An exception is raised if something goes wrong while reading the\n"
+    "table\n\n"
+    "Arguments:\n"
+    "    string    the string representing the ACE table"
+  )
+  .def(
+
+    "to_string",
+    [] ( const Component& self ) {
+
+      std::ostringstream out;
+      self.print< 1,0,0 >( out );
+      return out.str();
+    },
+    "Return the string representation of the ACE table"
   );
 }

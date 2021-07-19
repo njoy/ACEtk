@@ -128,5 +128,31 @@ void wrapData( python::module& module, python::module& ) {
     "Arguments:\n"
     "    self     the data arrays\n"
     "    index    the index (one-based)"
+  )
+  .def_static(
+
+    "from_string",
+    [] ( const std::string& string ) -> Component {
+
+      njoy::ACEtk::State< decltype(string.begin()) > state{ 1, string.begin(), string.end() };
+      return Component( state );
+    },
+    python::arg( "string" ),
+    "Read the ACE data arrays from a string\n\n"
+    "An exception is raised if something goes wrong while reading the\n"
+    "data arrays\n\n"
+    "Arguments:\n"
+    "    string    the string representing the ACE data arrays"
+  )
+  .def(
+
+    "to_string",
+    [] ( const Component& self ) {
+
+      std::ostringstream out;
+      self.print( out );
+      return out.str();
+    },
+    "Return the string representation of the ACE data arrays"
   );
 }
