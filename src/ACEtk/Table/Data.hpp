@@ -40,98 +40,112 @@ public:
   /**
    *  @brief Return the IZ array
    */
-  const auto& IZ() const {
-
-    return this->izaw_.first;
-  }
+  const auto& IZ() const { return this->izaw_.first; }
 
   /**
    *  @brief Return the AW array
    */
-  const auto& AW() const {
-
-    return this->izaw_.second;
-  }
+  const auto& AW() const { return this->izaw_.second; }
 
   /**
    *  @brief Return the NXS array
    */
-  const auto& NXS() const {
-
-    return this->nxs_;
-  }
+  const auto& NXS() const { return this->nxs_; }
 
   /**
    *  @brief Return the JXS array
    */
-  const auto& JXS() const {
+  const auto& JXS() const { return this->jxs_; }
 
-    return this->jxs_;
-  }
+  /**
+   *  @brief Return the XSS array
+   */
+  const auto& XSS() const { return this->xss_; }
+
+  /**
+   *  @brief Return the IZ array
+   */
+  auto& IZ() { return this->izaw_.first; }
+
+  /**
+   *  @brief Return the AW array
+   */
+  auto& AW() { return this->izaw_.second; }
+
+  /**
+   *  @brief Return the NXS array
+   */
+  auto& NXS() { return this->nxs_; }
+
+  /**
+   *  @brief Return the JXS array
+   */
+  auto& JXS() { return this->jxs_; }
+
+  /**
+   *  @brief Return the XSS array
+   */
+  auto& XSS() { return this->xss_; }
 
   /**
    *  @brief Return the IZ value at the requested index (the index is one-based)
    */
-  auto& IZ( std::size_t index ) {
-
-    return fetch( this->izaw_.first, index );
-  }
+  auto& IZ( std::size_t index ) { return fetch( this->izaw_.first, index ); }
 
   /**
    *  @brief Return the IZ value at the requested index (the index is one-based)
    */
-  auto IZ( std::size_t index ) const {
-
-    return fetch( this->izaw_.first, index );
-  }
+  auto IZ( std::size_t index ) const { return fetch( this->izaw_.first, index ); }
 
   /**
    *  @brief Return the AW value at the requested index (the index is one-based)
    */
-  auto& AW( std::size_t index ) {
-
-    return fetch( this->izaw_.second, index );
-  }
+  auto& AW( std::size_t index ) { return fetch( this->izaw_.second, index ); }
 
   /**
    *  @brief Return the AW value at the requested index (the index is one-based)
    */
-  auto AW( std::size_t index ) const {
-
-    return fetch( this->izaw_.second, index );
-  }
+  auto AW( std::size_t index ) const { return fetch( this->izaw_.second, index ); }
 
   /**
    *  @brief Return the NXS value at the requested index (the index is one-based)
    */
-  auto& NXS( std::size_t index ) {
-
-    return fetch( this->nxs_, index );
-  }
+  auto& NXS( std::size_t index ) { return fetch( this->nxs_, index ); }
 
   /**
    *  @brief Return the NXS value at the requested index (the index is one-based)
    */
-  auto NXS( std::size_t index ) const {
-
-    return fetch( this->nxs_, index );
-  }
+  auto NXS( std::size_t index ) const { return fetch( this->nxs_, index ); }
 
   /**
    *  @brief Return the JXS value at the requested index (the index is one-based)
    */
-  auto& JXS( std::size_t index ) {
-
-    return fetch( this->jxs_, index );
-  }
+  auto& JXS( std::size_t index ) { return fetch( this->jxs_, index ); }
 
   /**
    *  @brief Return the JXS value at the requested index (the index is one-based)
    */
-  auto JXS( std::size_t index ) const {
+  auto JXS( std::size_t index ) const { return fetch( this->jxs_, index ); }
 
-    return fetch( this->jxs_, index );
-  }
+  /**
+   *  @brief Return an XSS value
+   *
+   *  The index value is one-based.
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   */
+  auto& XSS( std::size_t index ) { return fetch( this->xss_, index ); }
+
+  /**
+   *  @brief Return an XSS value
+   *
+   *  The index value is one-based.
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   */
+  auto XSS( std::size_t index ) const { return fetch( this->xss_, index ); }
 
   #include "ACEtk/Table/Data/src/XSS.hpp"
 

@@ -12,7 +12,7 @@ using Data = Table::Data;
 std::string chunk();
 void verifyChunk( const Data& );
 
-SCENARIO( "IZ" ) {
+SCENARIO( "Data" ) {
 
   GIVEN( "valid data for a Data instance" ) {
 
