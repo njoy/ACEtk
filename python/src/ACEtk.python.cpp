@@ -8,8 +8,8 @@
 namespace python = pybind11;
 
 // declarations
-
-// declarations
+void wrapData( python::module&, python::module& );
+void wrapTable( python::module&, python::module& );
 
 /**
  *  @brief ACEtk python bindings
@@ -19,5 +19,14 @@ namespace python = pybind11;
  */
 PYBIND11_MODULE( ACEtk, module ) {
 
-  // nothing to see here - for now
+  // create the views submodule
+  python::module viewmodule = module.def_submodule(
+
+    "sequence",
+    "sequence - ACE sequences (internal use only)"
+  );
+
+  // wrap generic table components
+  wrapData( module, viewmodule );
+  wrapTable( module, viewmodule );
 }

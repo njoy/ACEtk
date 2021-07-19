@@ -84,6 +84,8 @@ include_directories( python/src/ )
 pybind11_add_module( ACEtk.python
     EXCLUDE_FROM_ALL
     python/src/ACEtk.python.cpp
+    python/src/Data.python.cpp
+    python/src/Table.python.cpp
 )
 target_link_libraries( ACEtk.python PRIVATE ACEtk )
 target_compile_options( ACEtk.python PRIVATE "-fvisibility=hidden" )

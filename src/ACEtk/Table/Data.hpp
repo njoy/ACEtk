@@ -88,62 +88,99 @@ public:
   auto& XSS() { return this->xss_; }
 
   /**
-   *  @brief Return the IZ value at the requested index (the index is one-based)
+   *  @brief Return a value from the IZ array
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto& IZ( std::size_t index ) { return fetch( this->izaw_.first, index ); }
 
   /**
-   *  @brief Return the IZ value at the requested index (the index is one-based)
+   *  @brief Return a value from the IZ array
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto IZ( std::size_t index ) const { return fetch( this->izaw_.first, index ); }
 
   /**
-   *  @brief Return the AW value at the requested index (the index is one-based)
+   *  @brief Return a value from the AW array
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto& AW( std::size_t index ) { return fetch( this->izaw_.second, index ); }
 
   /**
-   *  @brief Return the AW value at the requested index (the index is one-based)
+   *  @brief Return a value from the AW array
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto AW( std::size_t index ) const { return fetch( this->izaw_.second, index ); }
 
   /**
-   *  @brief Return the NXS value at the requested index (the index is one-based)
+   *  @brief Return a value from the NXS array
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto& NXS( std::size_t index ) { return fetch( this->nxs_, index ); }
 
   /**
-   *  @brief Return the NXS value at the requested index (the index is one-based)
+   *  @brief Return a value from the NXS array
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto NXS( std::size_t index ) const { return fetch( this->nxs_, index ); }
 
   /**
-   *  @brief Return the JXS value at the requested index (the index is one-based)
+   *  @brief Return a value from the JXS array
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto& JXS( std::size_t index ) { return fetch( this->jxs_, index ); }
 
   /**
-   *  @brief Return the JXS value at the requested index (the index is one-based)
+   *  @brief Return a value from the JXS array
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto JXS( std::size_t index ) const { return fetch( this->jxs_, index ); }
 
   /**
-   *  @brief Return an XSS value
-   *
-   *  The index value is one-based.
+   *  @brief Return a value from the XSS array
    *
    *  Range checking is only performed when NDEBUG is not defined. When the index
    *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto& XSS( std::size_t index ) { return fetch( this->xss_, index ); }
 
   /**
-   *  @brief Return an XSS value
-   *
-   *  The index value is one-based.
+   *  @brief Return a value from the XSS array
    *
    *  Range checking is only performed when NDEBUG is not defined. When the index
    *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
    */
   auto XSS( std::size_t index ) const { return fetch( this->xss_, index ); }
 

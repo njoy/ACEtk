@@ -25,7 +25,7 @@ using namespace dimwits;
 
 /**
  *  @class
- *  @brief The ACE table
+ *  @brief The generic ACE table
  *
  *  The Table class represents the generic ACE table, which can be of any type
  *  (e.g. continuous energy, thermal scattering, etc.). It contains a header
@@ -49,22 +49,22 @@ public:
   #include "ACEtk/Table/src/ctor.hpp"
 
   /**
-   *  @brief Return the header
+   *  @brief Return the header information
    */
   const auto& header() const { return this->header_; }
 
   /**
-   *  @brief Return the data
+   *  @brief Return the data arrays
    */
   const auto& data() const { return this->data_; }
 
   /**
-   *  @brief Return the header
+   *  @brief Return the header information
    */
   auto& header() { return this->header_; }
 
   /**
-   *  @brief Return the data
+   *  @brief Return the data arrays
    */
   auto& data() { return this->data_; }
 
