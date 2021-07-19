@@ -1,37 +1,139 @@
+/**
+ *  @class
+ *  @brief The data in an ACE table
+ *
+ *  The data in an ACE table consists of the following arrays:
+ *    - the IZAW array which contains 16 integer, double pairs
+ *    - the NXS array which contains information needed to properly interpret
+ *      the XSS array
+ *    - the JXS array which contains 32 locators to specific blocks in the
+ *      XSS array (the meaning of the JXS locators depend on the type of the
+ *      ACE table)
+ *    - the XSS array which contains the actual data
+ */
 class Data {
-private:
-  std::vector< double > xss;
-  std::array< int64_t, 32 > jxs;
-  std::array< int64_t, 16 > nxs;
-  std::pair< std::array< int32_t, 16 >,
-             std::array< double, 16 > > izaw;
 
-  /* helper typedef */
+  /* fields */
+  std::pair< std::array< int32_t, 16 >,
+             std::array< double, 16 > > izaw_;
+  std::array< int64_t, 16 > nxs_;
+  std::array< int64_t, 32 > jxs_;
+  std::vector< double > xss_;
+
+  /* type aliases */
   template< int index >
   using Index = std::integral_constant< int, index >;
 
+  /* auxiliary functions */
   #include "ACEtk/Table/Data/src/name.hpp"
   #include "ACEtk/Table/Data/src/verifyIndex.hpp"
   #include "ACEtk/Table/Data/src/fetch.hpp"
 
 protected:
+
   #include "ACEtk/Table/Data/Parse.hpp"
 
 public:
+
   #include "ACEtk/Table/Data/src/ctor.hpp"
 
-#define CONST_OVERLOAD( method )                        \
-  auto method( std::size_t index ) const {              \
-    return const_cast<Data&>(*this).method(index);      \
+  /**
+   *  @brief Return the IZ array
+   */
+  const auto& IZ() const {
+
+    return this->izaw_.first;
   }
 
-  #include "ACEtk/Table/Data/src/IZ.hpp"
-  #include "ACEtk/Table/Data/src/AW.hpp"
-  #include "ACEtk/Table/Data/src/NXS.hpp"
-  #include "ACEtk/Table/Data/src/JXS.hpp"
-  #include "ACEtk/Table/Data/src/XSS.hpp"
+  /**
+   *  @brief Return the AW array
+   */
+  const auto& AW() const {
 
-#undef CONST_OVERLOAD
+    return this->izaw_.second;
+  }
+
+  /**
+   *  @brief Return the NXS array
+   */
+  const auto& NXS() const {
+
+    return this->nxs_;
+  }
+
+  /**
+   *  @brief Return the JXS array
+   */
+  const auto& JXS() const {
+
+    return this->jxs_;
+  }
+
+  /**
+   *  @brief Return the IZ value at the requested index (the index is one-based)
+   */
+  auto& IZ( std::size_t index ) {
+
+    return fetch( this->izaw_.first, index );
+  }
+
+  /**
+   *  @brief Return the IZ value at the requested index (the index is one-based)
+   */
+  auto IZ( std::size_t index ) const {
+
+    return fetch( this->izaw_.first, index );
+  }
+
+  /**
+   *  @brief Return the AW value at the requested index (the index is one-based)
+   */
+  auto& AW( std::size_t index ) {
+
+    return fetch( this->izaw_.second, index );
+  }
+
+  /**
+   *  @brief Return the AW value at the requested index (the index is one-based)
+   */
+  auto AW( std::size_t index ) const {
+
+    return fetch( this->izaw_.second, index );
+  }
+
+  /**
+   *  @brief Return the NXS value at the requested index (the index is one-based)
+   */
+  auto& NXS( std::size_t index ) {
+
+    return fetch( this->nxs_, index );
+  }
+
+  /**
+   *  @brief Return the NXS value at the requested index (the index is one-based)
+   */
+  auto NXS( std::size_t index ) const {
+
+    return fetch( this->nxs_, index );
+  }
+
+  /**
+   *  @brief Return the JXS value at the requested index (the index is one-based)
+   */
+  auto& JXS( std::size_t index ) {
+
+    return fetch( this->jxs_, index );
+  }
+
+  /**
+   *  @brief Return the JXS value at the requested index (the index is one-based)
+   */
+  auto JXS( std::size_t index ) const {
+
+    return fetch( this->jxs_, index );
+  }
+
+  #include "ACEtk/Table/Data/src/XSS.hpp"
 
   #include "ACEtk/Table/Data/src/print.hpp"
 };
