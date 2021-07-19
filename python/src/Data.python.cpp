@@ -51,31 +51,31 @@ void wrapData( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "iz",
+    "iz_array",
     python::overload_cast<>( &Component::IZ, python::const_ ),
     "The iz array"
   )
   .def_property_readonly(
 
-    "aw",
+    "aw_array",
     python::overload_cast<>( &Component::AW, python::const_ ),
     "The aw array"
   )
   .def_property_readonly(
 
-    "nxs",
+    "nxs_array",
     python::overload_cast<>( &Component::NXS, python::const_ ),
     "The nxs array"
   )
   .def_property_readonly(
 
-    "jxs",
+    "jxs_array",
     python::overload_cast<>( &Component::JXS, python::const_ ),
     "The jxs array"
   )
   .def_property_readonly(
 
-    "xss",
+    "xss_array",
     python::overload_cast<>( &Component::XSS, python::const_ ),
     "The xss array"
   )
