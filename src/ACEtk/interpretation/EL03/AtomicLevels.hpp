@@ -1,10 +1,10 @@
 class AtomicLevels {
   const Table& table;
-  
+
   auto rawOccupationNumbers() const {
-    const auto length = this->table.data.NXS( 11 );
-    const auto start  = this->table.data.JXS( 11 );
-    return this->table.data.XSS( start, length );
+    const auto length = this->table.data().NXS( 11 );
+    const auto start  = this->table.data().JXS( 11 );
+    return this->table.data().XSS( start, length );
   }
 
 public:
@@ -14,18 +14,18 @@ public:
     return this->rawOccupationNumbers()
       | ranges::view::transform( []( const auto x )
 				 { return std::abs(x); } );
-  }  
+  }
 
   auto isLevelConductive() const {
     return this->rawOccupationNumbers()
       | ranges::view::transform( []( const auto entry )
 				 { return entry < 0; } );
-  }    
-  
+  }
+
   auto bindingEnergies() const {
-    const auto length = this->table.data.NXS( 11 );
-    const auto start  = this->table.data.JXS( 11 ) + length;
-    return this->table.data.XSS( start, length )
+    const auto length = this->table.data().NXS( 11 );
+    const auto start  = this->table.data().JXS( 11 ) + length;
+    return this->table.data().XSS( start, length )
       | ranges::view::transform( []( const auto entry )
 				 { return entry * electronVolt; } );
   }
@@ -35,5 +35,5 @@ public:
 			      this->isLevelConductive(),
 			      this->bindingEnergies() );
   }
-    
+
 };

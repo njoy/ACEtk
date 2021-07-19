@@ -2,25 +2,25 @@ class RadiativeStoppingPower {
   const Table& table;
 
   auto normalizedRadiativeStoppingPower() const {
-    const auto length = this->table.data.NXS( 3 );
-    const auto start  = this->table.data.JXS( 2 ) + length;
-    return this->table.data.XSS( start, length ) | ranges::view::reverse;
+    const auto length = this->table.data().NXS( 3 );
+    const auto start  = this->table.data().JXS( 2 ) + length;
+    return this->table.data().XSS( start, length ) | ranges::view::reverse;
   }
-  
+
   auto electronElectronBremsstrahlungCorrection() const {
-    const auto length = this->table.data.NXS( 3 );
-    const auto start  = this->table.data.JXS( 2 ) + 2 * length;
-    return this->table.data.XSS( start, length ) | ranges::view::reverse;
+    const auto length = this->table.data().NXS( 3 );
+    const auto start  = this->table.data().JXS( 2 ) + 2 * length;
+    return this->table.data().XSS( start, length ) | ranges::view::reverse;
   }
-  
+
 public:
   RadiativeStoppingPower( const Table& table ) : table( table ){}
-    
+
   auto energyGrid() const {
-    const auto length = this->table.data.NXS( 3 );
-    const auto start  = this->table.data.JXS( 2 );
+    const auto length = this->table.data().NXS( 3 );
+    const auto start  = this->table.data().JXS( 2 );
     return
-      this->table.data.XSS( start, length )
+      this->table.data().XSS( start, length )
       | ranges::view::reverse
       | ranges::view::transform( []( auto&& entry )
                                  { return entry * mega(electronVolt); } );
@@ -31,7 +31,7 @@ public:
       massEquivalent = constant::electronMass
                        * constant::lightSpeed
                        * constant::lightSpeed;
-    
+
     auto totalEnergy =
       this->energyGrid()
       | ranges::view::transform( [ massEquivalent ]( auto&& entry )

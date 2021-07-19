@@ -1,10 +1,10 @@
 /**
  *  @brief Constructor
  *
- *  @param[in] izaw   the IZAW array
- *  @param[in] NXS    the NXS array
- *  @param[in] JXS    the JXS array
- *  @param[in] XSS    the XSS array
+ *  @param[in] izaw   the IZAW arrays
+ *  @param[in] nxs    the NXS array
+ *  @param[in] jxs    the JXS array
+ *  @param[in] xss    the XSS array
  */
 Data( decltype(izaw_)&& izaw,
       decltype(nxs_)&& nxs,
@@ -12,6 +12,24 @@ Data( decltype(izaw_)&& izaw,
       decltype(xss_)&& xss ) :
   izaw_( std::move( izaw ) ), nxs_( std::move( nxs ) ),
   jxs_( std::move( jxs ) ), xss_( std::move( xss ) ) {}
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] iz     the IZ array
+ *  @param[in] aw     the AW array
+ *  @param[in] nxs    the NXS array
+ *  @param[in] jxs    the JXS array
+ *  @param[in] xss    the XSS array
+ */
+Data( decltype(izaw_.first)&& iz,
+      decltype(izaw_.second)&& aw,
+      decltype(nxs_)&& nxs,
+      decltype(jxs_)&& jxs,
+      decltype(xss_)&& xss ) :
+  izaw_( { std::move( iz ), std::move( aw ) } ), nxs_( std::move( nxs ) ),
+  jxs_( std::move( jxs ) ), xss_( std::move( xss ) ) {}
+
 
 private:
 

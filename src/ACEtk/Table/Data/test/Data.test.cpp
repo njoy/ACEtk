@@ -18,6 +18,43 @@ SCENARIO( "Data" ) {
 
     std::string string = chunk();
 
+    WHEN( "the data is given explicitly (5 arrays)" ) {
+
+      std::array< int32_t, 16 > IZ = {{ 0, 1, 2, 3, 4, 5, 6, 7,
+                                        8, 9, 10, 11, 12, 13, 14, 15 }};
+      std::array< double, 16 > AW ={{ 15., 14., 13., 12., 11., 10., 9., 8.,
+                                      7., 6., 5., 4., 3., 2., 1., 0. }};
+      std::array< int64_t, 16 > NXS = {{  6, 33074, 1595, 132, 46, 814, 2, 0,
+                                          0,     0,    0,   0,  0,   0, 0, 9 }};
+      std::array< int64_t, 32 > JXS = {{       1,  788721,  788768,  788815,
+                                          788862,  788909,  788956, 1270743,
+                                         1270789, 1363882, 1363927, 1475750,
+                                         1633494, 1633500, 1633506, 1634036,
+                                         1634042, 1634042, 1634048, 1637218,
+                                          789147, 1637220, 1464171, 1465923,
+                                         1465934, 1465976, 1465982,       0,
+                                               0,       0,       0,       8 }};
+      std::vector< double > XSS = { 1.00000000000E+00, 1.03125000000E+00,
+                                    1.06250000000E+00, 1.09375000000E+00,
+                                    1.12500000000E+00, 1.15625000000E+00 };
+
+      Table::Data chunk( std::move( IZ ), std::move( AW ), std::move( NXS ),
+                         std::move( JXS ), std::move( XSS ) );
+
+      THEN( "a Data can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "it can be printed" ) {
+
+        std::ostringstream oss;
+        chunk.print( oss );
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
+
     WHEN( "the data is given explicitly (4 arrays)" ) {
 
       std::pair< std::array< int32_t, 16 >,
@@ -75,7 +112,7 @@ SCENARIO( "Data" ) {
 
         CHECK( oss.str() == string );
       } // THEN
-    } //WHEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
