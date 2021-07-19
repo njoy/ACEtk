@@ -35,7 +35,7 @@ struct State{
 
 #include "ACEtk/details.hpp"
 #include "ACEtk/Table.hpp"
-#include "ACEtk/interpretation.hpp"  
+#include "ACEtk/interpretation.hpp"
 
 }
 }
