@@ -14,7 +14,7 @@ public:
     size_(size_) {}  
 
   auto floor(Unit parameter) const {
-    auto range = static_cast<SubRange>(*this);
+    auto range = static_cast<const SubRange&>(*this);
     const auto& projection = static_cast<const Projection&>(*this);    
     auto it = this->lowerBound(range, parameter);
     const bool match = projection(*it) == parameter;
@@ -22,7 +22,7 @@ public:
   }
 
   auto ceil(Unit parameter) {
-    auto range = static_cast<SubRange>(*this);    
+    auto range = static_cast<const SubRange&>(*this);    
     return *(this->lowerBound(range, parameter));
   }
 };

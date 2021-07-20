@@ -57,8 +57,9 @@ auto lowerBound(const Range& range,
 					      temperature,
 					      std::less<void>{},
 					      &StoppingPower::temperature ));
-  
-  std::size_t distance = ranges::distance( range.begin(), it.base() );
+
+  // std::size_t distance = ranges::distance( range.begin(), it.base() );
+  std::size_t distance = ranges::distance( ranges::begin( variesWithTemp ), it ) * this->nDensities;
 
   auto result =
     range | ranges::view::slice( distance, distance + this->nDensities );

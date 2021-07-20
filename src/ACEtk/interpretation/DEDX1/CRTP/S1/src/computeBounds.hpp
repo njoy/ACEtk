@@ -1,4 +1,4 @@
-auto computeBounds(const SubRange range,
+auto computeBounds(const SubRange& range,
 		   const Projection& projection) const {
   auto it = range.begin();
   decltype(auto) front = it[0];
