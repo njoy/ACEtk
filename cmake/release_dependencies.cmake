@@ -55,6 +55,11 @@ FetchContent_Declare( range-v3-adapter
     GIT_TAG         252679d4737c8f755d87c0e1eed6c37394a2ec59
     )
 
+FetchContent_Declare( range-v3
+    GIT_REPOSITORY  https://github.com/ericniebler/range-v3
+    GIT_TAG         4989f3e9ff2efee1852942bb9328ef121369ba02 # tag: 0.11.0
+    )
+
 FetchContent_Declare( spdlog
     GIT_REPOSITORY  https://github.com/gabime/spdlog
     GIT_TAG         a51b4856377a71f81b6d74b9af459305c4c644f8
@@ -75,5 +80,6 @@ FetchContent_MakeAvailable(
     Log
     pybind11
     range-v3-adapter
+    range-v3
     spdlog
     )
