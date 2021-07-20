@@ -37,7 +37,7 @@ FetchContent_Declare( disco
 
 FetchContent_Declare( interpolation
     GIT_REPOSITORY  https://github.com/njoy/interpolation
-    GIT_TAG         origin/master
+    GIT_TAG         develop
     GIT_SHALLOW     TRUE
     )
 
