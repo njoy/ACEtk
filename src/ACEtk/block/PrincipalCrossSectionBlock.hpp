@@ -26,7 +26,7 @@ namespace block {
 class PrincipalCrossSectionBlock : protected Base {
 
   /* fields */
-  int nes_;
+  unsigned int nes_;
 
   /* auxiliary functions */
   #include "ACEtk/block/PrincipalCrossSectionBlock/src/subrange.hpp"
@@ -39,13 +39,40 @@ public:
   #include "ACEtk/block/PrincipalCrossSectionBlock/src/ctor.hpp"
 
   /* methods */
-  int NES() const { return this->nes_; }
-  int numberEnergyPoints() const { return this->NES(); }
 
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int NES() const { return this->nes_; }
+
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int numberEnergyPoints() const { return this->NES(); }
+
+  /**
+   *  @brief Return the energy values
+   */
   auto energies() const { return this->subrange( 0 ); }
+
+  /**
+   *  @brief Return the total cross section values
+   */
   auto total() const { return this->subrange( 1 ); }
+
+  /**
+   *  @brief Return the projectile disappearance cross section values
+   */
   auto disappearance() const { return this->subrange( 2 ); }
+
+  /**
+   *  @brief Return the elastic cross section values
+   */
   auto elastic() const { return this->subrange( 3 ); }
+
+  /**
+   *  @brief Return the average heating cross section values
+   */
   auto heating() const { return this->subrange( 4 ); }
 
   using Base::name;

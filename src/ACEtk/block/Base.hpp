@@ -6,6 +6,10 @@
 #include <optional>
 
 // other includes
+#include "Log.hpp"
+#include "range/v3/all.hpp"
+// AFTER RANGES UPDATE
+// #include "range/v3/view/subrange.hpp"
 
 namespace njoy {
 namespace ACEtk {

@@ -8,9 +8,15 @@
 // namespace aliases
 namespace python = pybind11;
 
-// declarations
+// declarations - generic ACE table
 void wrapData( python::module&, python::module& );
 void wrapTable( python::module&, python::module& );
+
+// declarations - ACE table blocks
+namespace block {
+
+  void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
+}
 
 /**
  *  @brief ACEtk python bindings
@@ -36,7 +42,10 @@ PYBIND11_MODULE( ACEtk, module ) {
       viewmodule,
       "any_view< int, random_access >" );
 
-  // wrap generic table components
+  // wrap generic ACE table components
   wrapData( module, viewmodule );
   wrapTable( module, viewmodule );
+
+  // wrap ACE table blocks
+  block::wrapPrincipalCrossSectionBlock( module, viewmodule );
 }

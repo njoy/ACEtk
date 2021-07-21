@@ -51,8 +51,17 @@ public:
   // NXS information
   int length() const { return this->data().NXS(1); }
   int ZA() const { return this->data().NXS(2); }
+
+  /**
+   *  @brief Return the number of energy points
+   */
   int NES() const { return this->data().NXS(3); }
+
+  /**
+   *  @brief Return the number of energy points
+   */
   int numberEnergyPoints() const { return this->NES(); }
+
   int NTR() const { return this->data().NXS(4); }
   int numberReactionsExcludingElastic() const { return this->NTR(); }
   int NR() const { return this->data().NXS(5); }
