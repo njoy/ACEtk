@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/ContinuousEnergyTable.hpp"
 
 SCENARIO( "Testing interpretation:nc" ){
 
@@ -11,7 +11,7 @@ SCENARIO( "Testing interpretation:nc" ){
     auto ACETable = Table( njoy::utility::slurpFileToMemory("92235.710nc") );
     WHEN( "constructing a ContinuousEnergyNeutron interpretation" ){
 
-      const auto ncTable = interpretation::ContinuousEnergyNeutron( ACETable );
+      const auto ncTable = ContinuousEnergyTable( std::move( ACETable ) );
 
       THEN( "parameters can be extracted" ){
 
