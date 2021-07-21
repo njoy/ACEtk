@@ -7,9 +7,7 @@
 
 // other includes
 #include "Log.hpp"
-#include "range/v3/all.hpp"
-// AFTER RANGES UPDATE
-// #include "range/v3/view/subrange.hpp"
+#include "range/v3/view/subrange.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -74,7 +72,7 @@ public:
    */
   auto XSS() const {
 
-    return ranges::make_iterator_range( this->begin(), this->end() );
+    return ranges::make_subrange( this->begin(), this->end() );
   }
 
   /**
@@ -106,7 +104,7 @@ public:
     this->verifyIndex( index + length - 1 );
     const auto left = std::next( this->begin(), index - 1 );
     const auto right = left + length;
-    return ranges::make_iterator_range( left, right );
+    return ranges::make_subrange( left, right );
   }
 };
 
