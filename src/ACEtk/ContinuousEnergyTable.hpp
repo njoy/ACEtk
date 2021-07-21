@@ -6,6 +6,7 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
+#include "ACEtk/block/ReactionNumberBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,6 +22,7 @@ class ContinuousEnergyTable : protected Table {
 
   /* fields */
   block::ESZ esz_;
+  block::MTR mtr_;
 
   /* auxiliary functions */
   void generateBlocks() {
@@ -39,6 +41,7 @@ class ContinuousEnergyTable : protected Table {
     auto dlw = begin + this->data().JXS(11);
 
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
+    this->mtr_ = block::MTR( mtr, lqr, this->NTR() );
   }
 
 public:
@@ -75,26 +78,31 @@ public:
   int numberEnergyPoints() const { return this->NES(); }
 
   /**
-   *  @brief Return the number of reactions excluding elastic
+   *  @brief Return the number of available reactions (excluding elastic)
    */
   int NTR() const { return this->data().NXS(4); }
 
   /**
-   *  @brief Return the number of reactions excluding elastic
+   *  @brief Return the number of available reactions (excluding elastic)
    */
-  int numberReactionsExcludingElastic() const { return this->NTR(); }
+  int numberReactions() const { return this->NTR(); }
 
   /**
-   *  @brief Return the number of reactions excluding elastic that produce the
-   *         projectile
+   *  @brief Return the number of available reactions (including elastic)
+   */
+  int totalNumberReactions() const { return this->NTR() + 1; }
+
+  /**
+   *  @brief Return the number of reactions that produce the projectile
+   *         (excluding elastic )
    */
   int NR() const { return this->data().NXS(5); }
 
   /**
-   *  @brief Return the number of reactions excluding elastic that produce the
-   *         projectile
+   *  @brief Return the number of reactions that produce the projectile
+   *         (excluding elastic )
    */
-  int numberProjectileProductionReactionsExcludingElastic() const { return this->NR(); }
+  int numberProjectileProductionReactions() const { return this->NR(); }
 
   /**
    *  @brief Return the number of reactions that produce photons
@@ -171,6 +179,16 @@ public:
    *  @brief Return the principal cross section block
    */
   const block::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
+
+  /**
+   *  @brief Return the principal cross section block
+   */
+  const block::MTR& MTR() const { return this->mtr_; }
+
+  /**
+   *  @brief Return the principal cross section block
+   */
+  const block::MTR& reactionNumberBlock() const { return this->MTR(); }
 };
 
 } // ACEtk namespace

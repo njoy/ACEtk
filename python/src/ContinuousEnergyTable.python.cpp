@@ -172,6 +172,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     &Table::principalCrossSectionBlock,
     "The principal cross section block"
   )
+  //! @todo solve the header version print issue to add this to the table definitions instead
   .def(
 
     "to_file",
