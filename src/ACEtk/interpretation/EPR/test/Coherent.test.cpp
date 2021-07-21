@@ -28,7 +28,7 @@ SCENARIO( "Test interpretation::EPRdata::Coherent" ){
         { 519, 2.745299999992E+00 },
 	{ 584, 7.943300000026E+01 },
 	{ 646, 1.000000000000E+05 } };
-      
+
       const auto photonEnergies = eprdata.coherent().energies();
 
       for ( const auto& pair : referencePhotonEnergies ){
@@ -36,11 +36,11 @@ SCENARIO( "Test interpretation::EPRdata::Coherent" ){
 	const auto reference = pair.second;
 	REQUIRE( photonEnergies[ index ].value == Approx( reference ).epsilon( 1e-8 ) );
       }
-      
+
       using Energy_t = decltype( photonEnergies.front() );
       using Expected_t = dimwits::Quantity< dimwits::Mega< dimwits::ElectronVolt > >;
       constexpr bool same_v = std::is_same<Energy_t, Expected_t>::value;
-      REQUIRE( same_v );      
+      REQUIRE( same_v );
     }
 
     WHEN( "Querying for the coherent scattering cross sections" ){
@@ -56,9 +56,9 @@ SCENARIO( "Test interpretation::EPRdata::Coherent" ){
 	{ 520, 5.862947790958E-07 },
 	{ 585, 7.228371741121E-10 },
 	{ 646, 4.626159999988E-16 } };
-      
+
       const auto coherentScatteringXS = eprdata.coherent().crossSection();
-      
+
       for ( const auto& pair : referenceCoherentXS ){
 	const auto index = pair.first;
 	const auto reference = pair.second;
@@ -68,14 +68,14 @@ SCENARIO( "Test interpretation::EPRdata::Coherent" ){
       using XS_t = decltype( coherentScatteringXS.front() );
       using Expected_t = dimwits::Quantity< dimwits::Barn >;
       constexpr bool same_v = std::is_same<XS_t, Expected_t>::value;
-      REQUIRE( same_v );            
+      REQUIRE( same_v );
 
     }
-    
+
     const auto cohff = eprdata.coherent().formFactors();
     WHEN( "Querying for the independant variable for the photon coherent form factors" ) {
       auto var = cohff.scatteringCosines();
-      auto compairs = ranges::view::zip( refIndVarcoherentFormFactor, var );
+      auto compairs = ranges::views::zip( refIndVarcoherentFormFactor, var );
       for( const auto pair : compairs ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
@@ -83,15 +83,15 @@ SCENARIO( "Test interpretation::EPRdata::Coherent" ){
 
     WHEN( "Querying for the cumulative coherent form factors" ) {
       const auto cumulative = cohff.cumulative();
-      const auto compairs = ranges::view::zip( refCumulativeCoherentFormFactor, cumulative );
+      const auto compairs = ranges::views::zip( refCumulativeCoherentFormFactor, cumulative );
       for( const auto pair : compairs ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
-    
+
     WHEN( "Querying for the differential coherent form factors" ) {
       const auto differential = cohff.differential();
-      const auto compairs = ranges::view::zip( refDifferentialCoherentFormFactor, differential );
+      const auto compairs = ranges::views::zip( refDifferentialCoherentFormFactor, differential );
       for( const auto pair : compairs ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }

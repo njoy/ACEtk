@@ -12,13 +12,13 @@ public:
 
   auto occupationNumbers() const {
     return this->rawOccupationNumbers()
-      | ranges::view::transform( []( const auto x )
+      | ranges::cpp20::views::transform( []( const auto x )
 				 { return std::abs(x); } );
   }
 
   auto isLevelConductive() const {
     return this->rawOccupationNumbers()
-      | ranges::view::transform( []( const auto entry )
+      | ranges::cpp20::views::transform( []( const auto entry )
 				 { return entry < 0; } );
   }
 
@@ -26,12 +26,12 @@ public:
     const auto length = this->table.data().NXS( 11 );
     const auto start  = this->table.data().JXS( 11 ) + length;
     return this->table.data().XSS( start, length )
-      | ranges::view::transform( []( const auto entry )
+      | ranges::cpp20::views::transform( []( const auto entry )
 				 { return entry * electronVolt; } );
   }
 
   auto values() const {
-    return ranges::view::zip( this->occupationNumbers(),
+    return ranges::views::zip( this->occupationNumbers(),
 			      this->isLevelConductive(),
 			      this->bindingEnergies() );
   }

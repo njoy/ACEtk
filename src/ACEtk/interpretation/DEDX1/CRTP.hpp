@@ -30,13 +30,13 @@ public:
 
   auto energies() const {
     return this->logEnergies()
-      | ranges::view::transform( []( auto&& entry ){
+      | ranges::cpp20::views::transform( []( auto&& entry ){
 	  return std::exp(entry) * mega(electronVolt); } );
   }
 
   auto densities() const {
     return this->logDensities()
-      | ranges::view::transform( [cc=this->cc]( auto&& entry ){
+      | ranges::cpp20::views::transform( [cc=this->cc]( auto&& entry ){
 	  return std::exp(entry)/cc; } );
   }
 
@@ -54,7 +54,7 @@ public:
 
   auto temperatures() const {
     return this->logTemperatures()
-      | ranges::view::transform( []( auto&& entry ){
+      | ranges::cpp20::views::transform( []( auto&& entry ){
 	  return std::exp(entry) * mega(electronVolt); } );
   }
 
