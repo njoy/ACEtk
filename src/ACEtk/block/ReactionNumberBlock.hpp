@@ -46,6 +46,11 @@ public:
   unsigned int numberReactions() const { return this->NTR(); }
 
   /**
+   *  @brief Return the total number of available reactions (including elastic)
+   */
+  int totalNumberReactions() const { return this->NTR() + 1; }
+
+  /**
    *  @brief Return the reaction numbers
    */
   auto mts() const { return this->XSS( 1, this->NTR() ); }

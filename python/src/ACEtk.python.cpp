@@ -16,6 +16,7 @@ void wrapTable( python::module&, python::module& );
 namespace block {
 
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
+  void wrapReactionNumberBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -41,9 +42,9 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapBasicRandomAccessAnyViewOf< double >(
       viewmodule,
       "any_view< double, random_access >" );
-  wrapBasicRandomAccessAnyViewOf< int >(
+  wrapBasicRandomAccessAnyViewOf< unsigned int >(
       viewmodule,
-      "any_view< int, random_access >" );
+      "any_view< unsigned int, random_access >" );
 
   // wrap generic ACE table components
   wrapData( module, viewmodule );
@@ -51,6 +52,7 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
+  block::wrapReactionNumberBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );

@@ -26,9 +26,10 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 76518 == ncTable.NES() );
         CHECK( 76518 == ncTable.numberEnergyPoints() );
         CHECK( 48 == ncTable.NTR() );
-        CHECK( 48 == ncTable.numberReactionsExcludingElastic() );
+        CHECK( 48 == ncTable.numberReactions() );
+        CHECK( 49 == ncTable.totalNumberReactions() );
         CHECK( 45 == ncTable.NR() );
-        CHECK( 45 == ncTable.numberProjectileProductionReactionsExcludingElastic() );
+        CHECK( 45 == ncTable.numberProjectileProductionReactions() );
         CHECK( 33 == ncTable.NTRP() );
         CHECK( 33 == ncTable.numberPhotonProductionReactions() );
         CHECK( 0 == ncTable.NTYPE() );
@@ -51,6 +52,11 @@ SCENARIO( "ContinuousEnergyTable" ){
 
         CHECK( 1e-11 == Approx( ncTable.ESZ().XSS( 1 ) ) );
         CHECK( 76518 == ncTable.ESZ().XSS( 1, ncTable.NES() ).size() );
+
+        // MTR block
+        CHECK( 48 == ncTable.MTR().mts().size() );
+        CHECK( 16 == ncTable.MTR().mts()[0] );
+        CHECK( 4 == ncTable.MTR().mts()[47] );
       }
     }
   }

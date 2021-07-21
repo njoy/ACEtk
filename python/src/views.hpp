@@ -53,6 +53,7 @@ using RandomAccessAnyView = BasicRandomAccessAnyView< RefWrapper< Element > >;
 using DoubleRange = BasicRandomAccessAnyView< double >;
 using LongRange = BasicRandomAccessAnyView< long >;
 using IntRange = BasicRandomAccessAnyView< int >;
+using UnsignedIntRange = BasicRandomAccessAnyView< unsigned int >;
 using DoubleRange2D = BasicRandomAccessAnyView< DoubleRange >;
 using DoubleRange3D = BasicRandomAccessAnyView< DoubleRange2D >;
 using ComplexRange = BasicRandomAccessAnyView< std::complex< double > >;

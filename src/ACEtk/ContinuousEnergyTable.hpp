@@ -28,17 +28,17 @@ class ContinuousEnergyTable : protected Table {
   void generateBlocks() {
 
     auto begin = this->data().XSS().begin();
-    auto esz = begin + this->data().JXS(1);
-    auto nu = begin + this->data().JXS(2);
-    auto mtr = begin + this->data().JXS(3);
-    auto lqr = begin + this->data().JXS(4);
-    auto tyr = begin + this->data().JXS(5);
-    auto lsig = begin + this->data().JXS(6);
-    auto sig = begin + this->data().JXS(7);
-    auto land = begin + this->data().JXS(8);
-    auto and_ = begin + this->data().JXS(9);
-    auto ldlw = begin + this->data().JXS(10);
-    auto dlw = begin + this->data().JXS(11);
+    auto esz = begin + this->data().JXS(1) - 1;
+    auto nu = begin + this->data().JXS(2) - 1;
+    auto mtr = begin + this->data().JXS(3) - 1;
+    auto lqr = begin + this->data().JXS(4) - 1;
+    auto tyr = begin + this->data().JXS(5) - 1;
+    auto lsig = begin + this->data().JXS(6) - 1;
+    auto sig = begin + this->data().JXS(7) - 1;
+    auto land = begin + this->data().JXS(8) - 1;
+    auto and_ = begin + this->data().JXS(9) - 1;
+    auto ldlw = begin + this->data().JXS(10) - 1;
+    auto dlw = begin + this->data().JXS(11) - 1;
 
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
     this->mtr_ = block::MTR( mtr, lqr, this->NTR() );
@@ -88,7 +88,7 @@ public:
   int numberReactions() const { return this->NTR(); }
 
   /**
-   *  @brief Return the number of available reactions (including elastic)
+   *  @brief Return the total number of available reactions (including elastic)
    */
   int totalNumberReactions() const { return this->NTR() + 1; }
 

@@ -68,13 +68,19 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
     "NTR",
     &Table::NTR,
-    "The number of reactions excluding elastic"
+    "The number of available reactions (excluding elastic)"
   )
   .def_property_readonly(
 
-    "number_reactions_excluding_elastic",
-    &Table::numberReactionsExcludingElastic,
-    "The number of reactions excluding elastic"
+    "number_reactions",
+    &Table::numberReactions,
+    "The number of available reactions (excluding elastic)"
+  )
+  .def_property_readonly(
+
+    "total_number_reactions",
+    &Table::totalNumberReactions,
+    "The total number of available reactions (including elastic)"
   )
   .def_property_readonly(
 
@@ -85,7 +91,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   .def_property_readonly(
 
     "number_projectile_production_reactions_excluding_elastic",
-    &Table::numberProjectileProductionReactionsExcludingElastic,
+    &Table::numberProjectileProductionReactions,
     "The number of reactions excluding elastic that produce the projectile"
   )
   .def_property_readonly(
