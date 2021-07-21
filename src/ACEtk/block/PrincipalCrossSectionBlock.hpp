@@ -12,7 +12,7 @@ namespace block {
 
 /**
  *  @class
- *  @brief The ESZ block with the CE principal cross sections
+ *  @brief The continuous energy ESZ block with the principal cross sections
  *
  *  The PrincipalCrossSectionBlock class contains 5 arrays of the same length:
  *    - the energy points
@@ -22,8 +22,6 @@ namespace block {
  *    - the average heating numbers
  *
  *  The size of each (the total number of energy points) is stored in NXS(3).
- *  When constructing the XSS array, this block will provide the NES = NXS(3)
- *  value.
  */
 class PrincipalCrossSectionBlock : protected Base {
 
@@ -49,6 +47,10 @@ public:
   auto disappearance() const { return this->subrange( 2 ); }
   auto elastic() const { return this->subrange( 3 ); }
   auto heating() const { return this->subrange( 4 ); }
+
+  using Base::name;
+  using Base::length;
+  using Base::XSS;
 };
 
 using ESZ = PrincipalCrossSectionBlock;
