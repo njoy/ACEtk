@@ -41,6 +41,13 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 92 == ncTable.atomNumber() );
         CHECK( 235 == ncTable.A() );
         CHECK( 235 == ncTable.massNumber() );
+
+        // ESZ block
+        CHECK( 76518 == ncTable.ESZ().energies().size() );
+        CHECK( 76518 == ncTable.ESZ().total().size() );
+        CHECK( 76518 == ncTable.ESZ().disappearance().size() );
+        CHECK( 76518 == ncTable.ESZ().elastic().size() );
+        CHECK( 76518 == ncTable.ESZ().heating().size() );
       }
     }
   }

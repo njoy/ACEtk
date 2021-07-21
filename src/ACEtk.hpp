@@ -3,6 +3,9 @@
 #include "ACEtk/Table.hpp"
 #include "ACEtk/fromFile.hpp"
 
+// ACE data blocks
+#include "ACEtk/block.hpp"
+
 // interpretation ACE tables
 #include "ACEtk/ContinuousEnergyTable.hpp"
 
