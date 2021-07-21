@@ -1,4 +1,4 @@
-void verifyIndex( const std::size_t index ) {
+void verifyIndex( const std::size_t index ) const {
 
   if ( ( index < 1 ) || ( index > this->length_ ) ) {
 

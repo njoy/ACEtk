@@ -48,6 +48,9 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 76518 == ncTable.ESZ().disappearance().size() );
         CHECK( 76518 == ncTable.ESZ().elastic().size() );
         CHECK( 76518 == ncTable.ESZ().heating().size() );
+
+        CHECK( 1e-11 == Approx( ncTable.ESZ().XSS( 1 ) ) );
+        CHECK( 76518 == ncTable.ESZ().XSS( 1, ncTable.NES() ).size() );
       }
     }
   }

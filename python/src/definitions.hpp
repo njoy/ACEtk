@@ -41,6 +41,29 @@ void addStandardBlockDefinitions( PythonClass& component ) {
     [] ( const Block& self ) -> DoubleRange
        { return self.XSS(); },
     "The xss array of the block"
+  )
+  .def(
+
+    "xss",
+    [] ( const Block& self, std::size_t index )
+       { return self.XSS( index ); },
+    python::arg( "index" ),
+    "Return a value from the xss array of the block\n\n"
+    "Arguments:\n"
+    "    self     the data block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "xss",
+    [] ( const Block& self, std::size_t index, std::size_t length ) -> DoubleRange
+       { return self.XSS( index, length ); },
+    python::arg( "index" ), python::arg( "length" ),
+    "Return a subrange of a given length from the xss array of the block\n\n"
+    "Arguments:\n"
+    "    self      the data block\n"
+    "    index     the index (one-based)\n"
+    "    length    the length of the subrange"
   );
 }
 
