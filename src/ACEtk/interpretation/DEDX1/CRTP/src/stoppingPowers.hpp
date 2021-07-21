@@ -58,7 +58,10 @@ auto stoppingPowers() const {
 						   densAndTemps,
 						   logStoppingPowerRanges);
 
-  return this->makeS0( this->numDensities(),
+  return stoppingPowerRange;
+    /*
+    this->makeS0( this->numDensities(),
 		       this->numTemperatures(),
 		       std::move(stoppingPowerRange) );
+    */
 }

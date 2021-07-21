@@ -57,228 +57,228 @@ SCENARIO("test interpretation::DEDX1"){
         }
       }
       
-      AND_THEN("constraining on density with ceil"){
+      // AND_THEN("constraining on density with ceil"){
 	
-	GIVEN("first density in range"){
-	  auto firstDensity = sp.ceil(standard.densities().front());
-	  auto firstTemperature = firstDensity.front();
-	  auto trial = firstTemperature.logValues();
-	  auto reference = sp.front().logValues();
-	  REQUIRE( firstTemperature.density().value == Approx(2).epsilon(1e-12) );	
-	  REQUIRE( firstTemperature.temperature().value == Approx(10).epsilon(1e-12) );
-	  REQUIRE( ranges::equal(trial, reference) );
-	}
+      // 	GIVEN("first density in range"){
+      // 	  auto firstDensity = sp.ceil(standard.densities().front());
+      // 	  auto firstTemperature = firstDensity.front();
+      // 	  auto trial = firstTemperature.logValues();
+      // 	  auto reference = sp.front().logValues();
+      // 	  REQUIRE( firstTemperature.density().value == Approx(2).epsilon(1e-12) );	
+      // 	  REQUIRE( firstTemperature.temperature().value == Approx(10).epsilon(1e-12) );
+      // 	  REQUIRE( ranges::equal(trial, reference) );
+      // 	}
 	
-	auto makeRef = [](auto x){ return ranges::view::repeat_n(x, 2); };
-	GIVEN("each boundary density in range"){
-	  auto reference =
-	    ranges::view::iota(0,3)
-	    | ranges::view::transform( makeRef );
+      // 	auto makeRef = [](auto x){ return ranges::view::repeat_n(x, 2); };
+      // 	GIVEN("each boundary density in range"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(0,3)
+      // 	    | ranges::view::transform( makeRef );
 	  
-	  auto firstTemp = [&](auto&& den){
-	    return sp.ceil(den).front().logValues();
-	  };
+      // 	  auto firstTemp = [&](auto&& den){
+      // 	    return sp.ceil(den).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.densities() |
-	    ranges::view::slice(0, 3) |
-	    ranges::view::transform( firstTemp );
+      // 	  auto trial =
+      // 	    standard.densities() |
+      // 	    ranges::view::slice(0, 3) |
+      // 	    ranges::view::transform( firstTemp );
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
 
-	GIVEN("densities within each bin"){
-	  auto reference =
-	    ranges::view::iota(1,3)
-	    | ranges::view::transform( makeRef );
+      // 	GIVEN("densities within each bin"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(1,3)
+      // 	    | ranges::view::transform( makeRef );
 	  
-	  auto firstDensity = [&](auto&& den){
-	    return sp.ceil(den + 0.1/cc).front().logValues();
-	  };
+      // 	  auto firstDensity = [&](auto&& den){
+      // 	    return sp.ceil(den + 0.1/cc).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.densities() |
-	    ranges::view::slice(0, 2) |
-	    ranges::view::transform( firstDensity ) ;
+      // 	  auto trial =
+      // 	    standard.densities() |
+      // 	    ranges::view::slice(0, 2) |
+      // 	    ranges::view::transform( firstDensity ) ;
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
-      }
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
+      // }
 
-      AND_THEN("constraining on density with floor"){
+      // AND_THEN("constraining on density with floor"){
 	
-	GIVEN("first density in range"){
-	  auto lastDensity = sp.floor(standard.densities().back());
-	  auto firstTemperature = lastDensity.front();
-	  auto trial = firstTemperature.logValues();
-	  auto reference = ranges::begin(sp)[2].logValues();
-	  REQUIRE( firstTemperature.density().value == Approx(4).epsilon(1e-12) );	
-	  REQUIRE( firstTemperature.temperature().value == Approx(10).epsilon(1e-12) );
-	  REQUIRE( ranges::equal(trial, reference) );
-	}
+      // 	GIVEN("first density in range"){
+      // 	  auto lastDensity = sp.floor(standard.densities().back());
+      // 	  auto firstTemperature = lastDensity.front();
+      // 	  auto trial = firstTemperature.logValues();
+      // 	  auto reference = ranges::begin(sp)[2].logValues();
+      // 	  REQUIRE( firstTemperature.density().value == Approx(4).epsilon(1e-12) );	
+      // 	  REQUIRE( firstTemperature.temperature().value == Approx(10).epsilon(1e-12) );
+      // 	  REQUIRE( ranges::equal(trial, reference) );
+      // 	}
 	
-	auto makeRef = [](auto x){ return ranges::view::repeat_n(x, 2); };
-	GIVEN("each boundary density in range"){
-	  auto reference =
-	    ranges::view::iota(0,3)
-	    | ranges::view::transform( makeRef );
+      // 	auto makeRef = [](auto x){ return ranges::view::repeat_n(x, 2); };
+      // 	GIVEN("each boundary density in range"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(0,3)
+      // 	    | ranges::view::transform( makeRef );
 	  
-	  auto firstTemp = [&](auto&& den){
-	    return sp.floor(den).front().logValues();
-	  };
+      // 	  auto firstTemp = [&](auto&& den){
+      // 	    return sp.floor(den).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.densities() |
-	    ranges::view::slice(0, 3) |
-	    ranges::view::transform( firstTemp );
+      // 	  auto trial =
+      // 	    standard.densities() |
+      // 	    ranges::view::slice(0, 3) |
+      // 	    ranges::view::transform( firstTemp );
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
 	
-	GIVEN("densities within each bin"){
-	  auto reference =
-	    ranges::view::iota(0,2)
-	    | ranges::view::transform( makeRef );
+      // 	GIVEN("densities within each bin"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(0,2)
+      // 	    | ranges::view::transform( makeRef );
 	  
-	  auto firstDensity = [&](auto&& den){
-	    return sp.floor(den + 0.1/cc).front().logValues();
-	  };
+      // 	  auto firstDensity = [&](auto&& den){
+      // 	    return sp.floor(den + 0.1/cc).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.densities() |
-	    ranges::view::slice(0, 2) |
-	    ranges::view::transform( firstDensity ) ;
+      // 	  auto trial =
+      // 	    standard.densities() |
+      // 	    ranges::view::slice(0, 2) |
+      // 	    ranges::view::transform( firstDensity ) ;
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
 	
-      }
+      // }
       
-      AND_THEN("constraining on temperature with ceil"){
-	GIVEN("first temperature in range"){
-	  auto firstTemperature = sp.ceil(standard.temperatures().front());
-	  auto firstDensity = firstTemperature.front();
-	  auto trial = firstDensity.logValues();
-	  auto reference = sp.front().logValues();
-	  REQUIRE( firstDensity.density().value == Approx(2).epsilon(1e-12) );	
-	  REQUIRE( firstDensity.temperature().value == Approx(10).epsilon(1e-12) );
-	  REQUIRE( ranges::equal(trial, reference) );
-	}
+      // AND_THEN("constraining on temperature with ceil"){
+      // 	GIVEN("first temperature in range"){
+      // 	  auto firstTemperature = sp.ceil(standard.temperatures().front());
+      // 	  auto firstDensity = firstTemperature.front();
+      // 	  auto trial = firstDensity.logValues();
+      // 	  auto reference = sp.front().logValues();
+      // 	  REQUIRE( firstDensity.density().value == Approx(2).epsilon(1e-12) );	
+      // 	  REQUIRE( firstDensity.temperature().value == Approx(10).epsilon(1e-12) );
+      // 	  REQUIRE( ranges::equal(trial, reference) );
+      // 	}
 	
-	auto makeRef = [](auto x){ return ranges::view::repeat_n(x * 3, 2); };
-	GIVEN("each boundary temperature in range"){
-	  auto reference =
-	    ranges::view::iota(0,4)
-	    | ranges::view::transform( makeRef );
+      // 	auto makeRef = [](auto x){ return ranges::view::repeat_n(x * 3, 2); };
+      // 	GIVEN("each boundary temperature in range"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(0,4)
+      // 	    | ranges::view::transform( makeRef );
 	  
-	  auto firstDensity = [&](auto&& t){
-	    return sp.ceil(t).front().logValues();
-	  };
+      // 	  auto firstDensity = [&](auto&& t){
+      // 	    return sp.ceil(t).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.temperatures() |
-	    ranges::view::slice(0, 4) |
-	    ranges::view::transform( firstDensity ) ;
+      // 	  auto trial =
+      // 	    standard.temperatures() |
+      // 	    ranges::view::slice(0, 4) |
+      // 	    ranges::view::transform( firstDensity ) ;
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
 
-	GIVEN("temperatures within each bin"){
-	  auto reference =
-	    ranges::view::iota(1,4)
-	    | ranges::view::transform( makeRef );	    
+      // 	GIVEN("temperatures within each bin"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(1,4)
+      // 	    | ranges::view::transform( makeRef );	    
 	  
-	  auto firstDensity = [&](auto&& t){
-	    return sp.ceil(t + 1.0*mev).front().logValues();
-	  };
+      // 	  auto firstDensity = [&](auto&& t){
+      // 	    return sp.ceil(t + 1.0*mev).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.temperatures() |
-	    ranges::view::slice(0, 3) |
-	    ranges::view::transform( firstDensity ) ;
+      // 	  auto trial =
+      // 	    standard.temperatures() |
+      // 	    ranges::view::slice(0, 3) |
+      // 	    ranges::view::transform( firstDensity ) ;
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
-      }
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
+      // }
 
-      AND_THEN("constraining on temperature with floor"){
-	GIVEN("last temperature in range"){
-	  auto lastTemperature = sp.ceil(standard.temperatures().back());
-	  auto firstDensity = lastTemperature.front();
-	  auto trial = firstDensity.logValues();
-	  auto reference = std::vector<double>{ 9, 9 };
-	  REQUIRE( firstDensity.density().value == Approx(2).epsilon(1e-12) );	
-	  REQUIRE( firstDensity.temperature().value == Approx(10000).epsilon(1e-12) );
-	  REQUIRE( ranges::equal(trial, reference) );
-	}
+      // AND_THEN("constraining on temperature with floor"){
+      // 	GIVEN("last temperature in range"){
+      // 	  auto lastTemperature = sp.ceil(standard.temperatures().back());
+      // 	  auto firstDensity = lastTemperature.front();
+      // 	  auto trial = firstDensity.logValues();
+      // 	  auto reference = std::vector<double>{ 9, 9 };
+      // 	  REQUIRE( firstDensity.density().value == Approx(2).epsilon(1e-12) );	
+      // 	  REQUIRE( firstDensity.temperature().value == Approx(10000).epsilon(1e-12) );
+      // 	  REQUIRE( ranges::equal(trial, reference) );
+      // 	}
 	
-	auto makeRef = [](auto x){ return ranges::view::repeat_n(x * 3, 2); };
-	GIVEN("each boundary temperature in range"){
-	  auto reference =
-	    ranges::view::iota(0,4)
-	    | ranges::view::transform( makeRef );
+      // 	auto makeRef = [](auto x){ return ranges::view::repeat_n(x * 3, 2); };
+      // 	GIVEN("each boundary temperature in range"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(0,4)
+      // 	    | ranges::view::transform( makeRef );
 	  
-	  auto firstDensity = [&](auto&& t){
-	    return sp.floor(t).front().logValues();
-	  };
+      // 	  auto firstDensity = [&](auto&& t){
+      // 	    return sp.floor(t).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.temperatures() |
-	    ranges::view::slice(0, 4) |
-	    ranges::view::transform( firstDensity ) ;
+      // 	  auto trial =
+      // 	    standard.temperatures() |
+      // 	    ranges::view::slice(0, 4) |
+      // 	    ranges::view::transform( firstDensity ) ;
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
 	
-	GIVEN("temperatures within each bin"){
-	  auto reference =
-	    ranges::view::iota(0,3)
-	    | ranges::view::transform( makeRef );	    
+      // 	GIVEN("temperatures within each bin"){
+      // 	  auto reference =
+      // 	    ranges::view::iota(0,3)
+      // 	    | ranges::view::transform( makeRef );	    
 	  
-	  auto firstDensity = [&](auto&& t){
-	    return sp.floor(t + 1.0*mev).front().logValues();
-	  };
+      // 	  auto firstDensity = [&](auto&& t){
+      // 	    return sp.floor(t + 1.0*mev).front().logValues();
+      // 	  };
 	  
-	  auto trial =
-	    standard.temperatures() |
-	    ranges::view::slice(0, 3) |
-	    ranges::view::transform( firstDensity ) ;
+      // 	  auto trial =
+      // 	    standard.temperatures() |
+      // 	    ranges::view::slice(0, 3) |
+      // 	    ranges::view::transform( firstDensity ) ;
 	  
-	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
-	  RANGES_FOR(auto&& result, results){
-	    REQUIRE(result);
-	  }
-	}
-      }
+      // 	  auto results = ranges::view::zip_with( ranges::equal, reference, trial );
+      // 	  RANGES_FOR(auto&& result, results){
+      // 	    REQUIRE(result);
+      // 	  }
+      // 	}
+      // }
 
       
       
-      AND_THEN("constraining on density and temperature"){
-        auto ff = sp.floor(2.2/cc).floor(150.0*mev);
-        auto reference = std::vector<double>{3.0, 3.0};
-        REQUIRE( ranges::equal(ff.logValues(), reference) );
-      }
+    //   AND_THEN("constraining on density and temperature"){
+    //     auto ff = sp.floor(2.2/cc).floor(150.0*mev);
+    //     auto reference = std::vector<double>{3.0, 3.0};
+    //     REQUIRE( ranges::equal(ff.logValues(), reference) );
+    //   }
     }
   }
   
@@ -308,69 +308,69 @@ SCENARIO("test interpretation::DEDX1"){
   GIVEN("a standard model without a cutoff"){
     auto s0 = standard.stoppingPowers();
     
-    WHEN("Querying via the parameterized interface"){
+    // WHEN("Querying via the parameterized interface"){
 
-      auto hh = s0.ceil( 1.5 * mev ).ceil( 1.5e24 / cc );
-      REQUIRE( hh.logDensity() == 55.85901 );
-      REQUIRE( hh.logTemperature() ==  0.7675284);
+    //   auto hh = s0.ceil( 1.5 * mev ).ceil( 1.5e24 / cc );
+    //   REQUIRE( hh.logDensity() == 55.85901 );
+    //   REQUIRE( hh.logTemperature() ==  0.7675284);
 
-      hh = s0.ceil( 1.5e24 / cc ).ceil( 1.5 * mev );
-      REQUIRE( hh.logDensity() == 55.85901 );
-      REQUIRE( hh.logTemperature() ==  0.7675284);  
+    //   hh = s0.ceil( 1.5e24 / cc ).ceil( 1.5 * mev );
+    //   REQUIRE( hh.logDensity() == 55.85901 );
+    //   REQUIRE( hh.logTemperature() ==  0.7675284);  
     
-      auto hl = s0.ceil( 1.5 * mev ).floor( 1.5e24 / cc );
-      REQUIRE( hl.logDensity() == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( hl.logTemperature() ==  0.7675284);
+    //   auto hl = s0.ceil( 1.5 * mev ).floor( 1.5e24 / cc );
+    //   REQUIRE( hl.logDensity() == Approx(55.17676).epsilon(1e-15) );
+    //   REQUIRE( hl.logTemperature() ==  0.7675284);
     
-      hl = s0.floor( 1.5e24 / cc ).ceil( 1.5 * mev );
-      REQUIRE( hl.logDensity() == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( hl.logTemperature() ==  0.7675284);  
+    //   hl = s0.floor( 1.5e24 / cc ).ceil( 1.5 * mev );
+    //   REQUIRE( hl.logDensity() == Approx(55.17676).epsilon(1e-15) );
+    //   REQUIRE( hl.logTemperature() ==  0.7675284);  
     
-      auto ll = s0.floor( 1.5 * mev ).floor( 1.5e24 / cc );
-      REQUIRE( ll.logDensity() == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( ll.logTemperature() ==  0.08528093);
+    //   auto ll = s0.floor( 1.5 * mev ).floor( 1.5e24 / cc );
+    //   REQUIRE( ll.logDensity() == Approx(55.17676).epsilon(1e-15) );
+    //   REQUIRE( ll.logTemperature() ==  0.08528093);
     
-      ll = s0.floor( 1.5e24 / cc ).floor( 1.5 * mev );  
-      REQUIRE( ll.logDensity() == Approx(55.17676).epsilon(1e-15) );
-      REQUIRE( ll.logTemperature() ==  0.08528093);
+    //   ll = s0.floor( 1.5e24 / cc ).floor( 1.5 * mev );  
+    //   REQUIRE( ll.logDensity() == Approx(55.17676).epsilon(1e-15) );
+    //   REQUIRE( ll.logTemperature() ==  0.08528093);
     
-      auto lh = s0.floor( 1.5 * mev ).ceil( 1.5e24 / cc );
-      REQUIRE( lh.logDensity() == 55.85901 );  
-      REQUIRE( lh.logTemperature() ==  0.08528093);  
+    //   auto lh = s0.floor( 1.5 * mev ).ceil( 1.5e24 / cc );
+    //   REQUIRE( lh.logDensity() == 55.85901 );  
+    //   REQUIRE( lh.logTemperature() ==  0.08528093);  
     
-      lh = s0.ceil( 1.5e24 / cc ).floor( 1.5 * mev );
-      REQUIRE( lh.logDensity() == 55.85901 );  
-      REQUIRE( lh.logTemperature() ==  0.08528093);
-    }
+    //   lh = s0.ceil( 1.5e24 / cc ).floor( 1.5 * mev );
+    //   REQUIRE( lh.logDensity() == 55.85901 );  
+    //   REQUIRE( lh.logTemperature() ==  0.08528093);
+    // }
 
-    WHEN("Querying via the parameterized interface "
-         "for values outside of the range"){
+    // WHEN("Querying via the parameterized interface "
+    //      "for values outside of the range"){
         
-      auto tempBelow = 1e-24 * mev;
-      REQUIRE_THROWS( s0.ceil( tempBelow ) );
-      REQUIRE_THROWS( s0.floor( tempBelow ) );
-      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).ceil( tempBelow ) );
-      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );              
+    //   auto tempBelow = 1e-24 * mev;
+    //   REQUIRE_THROWS( s0.ceil( tempBelow ) );
+    //   REQUIRE_THROWS( s0.floor( tempBelow ) );
+    //   REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).ceil( tempBelow ) );
+    //   REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempBelow ) );              
 
-      auto tempAbove = 1e14 * mev;
-      REQUIRE_THROWS( s0.ceil( tempAbove ) );
-      REQUIRE_THROWS( s0.floor( tempAbove ) );
-      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).ceil( tempAbove ) );
-      REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );    
+    //   auto tempAbove = 1e14 * mev;
+    //   REQUIRE_THROWS( s0.ceil( tempAbove ) );
+    //   REQUIRE_THROWS( s0.floor( tempAbove ) );
+    //   REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).ceil( tempAbove ) );
+    //   REQUIRE_THROWS( s0.ceil( 1.5e24 / cc ).floor( tempAbove ) );    
 
-      auto denBelow = 1e14 / cc;
-      REQUIRE_THROWS( s0.ceil( denBelow ) );
-      REQUIRE_THROWS( s0.floor( denBelow ) );
-      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denBelow ) );
-      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denBelow ) );
+    //   auto denBelow = 1e14 / cc;
+    //   REQUIRE_THROWS( s0.ceil( denBelow ) );
+    //   REQUIRE_THROWS( s0.floor( denBelow ) );
+    //   REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denBelow ) );
+    //   REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denBelow ) );
         
-      auto denAbove = 1e36 / cc;                         
-      REQUIRE_THROWS( s0.ceil( denAbove ) );
-      REQUIRE_THROWS( s0.floor( denAbove ) );   
-      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denAbove ) );
-      REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denAbove ) );  
+    //   auto denAbove = 1e36 / cc;                         
+    //   REQUIRE_THROWS( s0.ceil( denAbove ) );
+    //   REQUIRE_THROWS( s0.floor( denAbove ) );   
+    //   REQUIRE_THROWS( s0.ceil( 1.5 * mev ).ceil( denAbove ) );
+    //   REQUIRE_THROWS( s0.ceil( 1.5 * mev ).floor( denAbove ) );  
 
-    }      
+    // }      
   
     auto refLogErgFirstFour = std::vector<double>{-8.517193,-8.363688,-8.210182,-8.056676};
     auto refLogErgMiddleFour = std::vector<double>{-2.376966, -2.223461, -2.069955, -1.916449};

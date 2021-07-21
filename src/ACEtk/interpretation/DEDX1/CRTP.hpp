@@ -10,8 +10,8 @@ class CRTP{
   using TempT = decltype( 1.0 * mev );
 
   #include "ACEtk/interpretation/DEDX1/CRTP/src/outOfBounds.hpp"
-  #include "ACEtk/interpretation/DEDX1/CRTP/S1.hpp"
-  #include "ACEtk/interpretation/DEDX1/CRTP/S0.hpp"
+  //#include "ACEtk/interpretation/DEDX1/CRTP/S1.hpp"
+  //#include "ACEtk/interpretation/DEDX1/CRTP/S0.hpp"
 
 protected:
   auto numEnergies() const {return this->table.get().data().NXS( 4 );}
