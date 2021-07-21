@@ -1,4 +1,4 @@
-auto lowerBound(const SubRange& range,
+auto lowerBound( const SubRange& range,
 		 const Unit parameter) const {
   const auto& projection = static_cast<const Projection&>(*this);
   { 

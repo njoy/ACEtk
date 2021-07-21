@@ -7,7 +7,7 @@
 
 // other includes
 #include "Log.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 namespace njoy {
 namespace ACEtk {

@@ -14,7 +14,7 @@
 #include "disco.hpp"
 #include "dimwits.hpp"
 #include "Log.hpp"
-#include "range/v3/all.hpp"
+#include "range/v3/view/subrange.hpp"
 
 namespace njoy {
 namespace ACEtk {

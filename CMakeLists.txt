@@ -72,7 +72,7 @@ target_link_libraries( ACEtk
     INTERFACE interpolation
     INTERFACE hana-adapter
     INTERFACE header-utilities
-    INTERFACE range-v3-adapter
+    INTERFACE range-v3
     )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

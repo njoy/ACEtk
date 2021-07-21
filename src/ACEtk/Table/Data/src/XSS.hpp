@@ -16,7 +16,7 @@ auto XSS( std::size_t index, std::size_t length ){
   #endif
   const auto left = std::next( this->xss_.begin(), index - 1 );
   const auto right = left + length;
-  return ranges::make_iterator_range( left, right );
+  return ranges::make_subrange( left, right );
 }
 
 /**
@@ -37,5 +37,5 @@ auto XSS( std::size_t index, std::size_t length ) const {
   #endif
   const auto left = std::next( this->xss_.begin(), index - 1 );
   const auto right = left + length;
-  return ranges::make_iterator_range( left, right );
+  return ranges::make_subrange( left, right );
 }

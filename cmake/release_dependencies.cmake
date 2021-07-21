@@ -37,7 +37,7 @@ FetchContent_Declare( header-utilities
 
 FetchContent_Declare( interpolation
     GIT_REPOSITORY  https://github.com/njoy/interpolation
-    GIT_TAG         2a76934a148bf379ab594f6cdd2cdf4c8c28e447 # tag: v0.1.0
+    GIT_TAG         32375a9ae0ff346cecf69d5acd32dbc0092e7d7a
     )
 
 FetchContent_Declare( Log
@@ -50,9 +50,9 @@ FetchContent_Declare( pybind11
     GIT_TAG         f1abf5d9159b805674197f6bc443592e631c9130 # tag: v2.6.1
     )
 
-FetchContent_Declare( range-v3-adapter
-    GIT_REPOSITORY  https://github.com/njoy/range-v3-adapter
-    GIT_TAG         252679d4737c8f755d87c0e1eed6c37394a2ec59
+FetchContent_Declare( range-v3
+    GIT_REPOSITORY  https://github.com/ericniebler/range-v3
+    GIT_TAG         4989f3e9ff2efee1852942bb9328ef121369ba02 # tag: 0.11.0
     )
 
 FetchContent_Declare( spdlog
@@ -74,6 +74,6 @@ FetchContent_MakeAvailable(
     interpolation
     Log
     pybind11
-    range-v3-adapter
+    range-v3
     spdlog
     )
