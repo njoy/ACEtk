@@ -18,6 +18,9 @@ namespace block {
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
 }
 
+// declarations - ACE table types
+void wrapContinuousEnergyTable( python::module&, python::module& );
+
 /**
  *  @brief ACEtk python bindings
  *
@@ -48,4 +51,7 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
+
+  // wrap ACE table types
+  wrapContinuousEnergyTable( module, viewmodule );
 }

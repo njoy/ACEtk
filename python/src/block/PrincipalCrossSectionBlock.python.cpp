@@ -101,7 +101,7 @@ void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
     "The average heating cross section values"
   );
 
-  // add standard lock definitions
+  // add standard block definitions
   addStandardBlockDefinitions< Block >( block );
 }
 

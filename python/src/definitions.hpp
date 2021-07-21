@@ -7,6 +7,7 @@
 // other includes
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include "ACEtk/fromFile.hpp"
 #include "views.hpp"
 
 namespace python = pybind11;
@@ -15,14 +16,53 @@ namespace python = pybind11;
  *  @brief Add standard lock definitions
  *
  *  This adds the following standard properties:
+ *    xss_array
+ *
+ *  @param[in] table   the table to which the definitions have to be added
+ */
+template < typename Table, typename PythonClass >
+void addStandardTableDefinitions( PythonClass& table ) {
+
+  table
+  .def_property_readonly(
+
+    "header",
+    [] ( const Table& self ) { return self.header(); },
+    "The header information"
+  )
+  .def_property_readonly(
+
+    "data",
+    [] ( const Table& self ) { return self.data(); },
+    "The data arrays"
+  )
+  .def_static(
+
+    "from_file",
+    [] ( const std::string& filename ) -> Table {
+
+      return Table( njoy::ACEtk::fromFile( filename ) );
+    },
+    "Read an ACE table from a file\n\n"
+    "An exception is raised if something goes wrong while reading the\n"
+    "table\n\n"
+    "Arguments:\n"
+    "    filename    the file name and path"
+  );
+}
+
+/**
+ *  @brief Add standard lock definitions
+ *
+ *  This adds the following standard properties:
  *    name, length, xss_array
  *
- *  @param[in] component   the block to which the definitions have to be added
+ *  @param[in] block   the block to which the definitions have to be added
  */
 template < typename Block, typename PythonClass >
-void addStandardBlockDefinitions( PythonClass& component ) {
+void addStandardBlockDefinitions( PythonClass& block ) {
 
-  component
+  block
   .def_property_readonly(
 
     "name",

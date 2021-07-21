@@ -3,7 +3,7 @@ protected:
 template< typename Ostream >
 void print( Ostream& ostream, Version< 2,0,1 > ) const {
   auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
-  
+
   using Line1 = disco::Record< disco::Character<10>,     // Format
                                disco::ColumnPosition<1>,
                                disco::Character<24>,     // SZAID
