@@ -5,7 +5,6 @@
 
 // other includes
 #include "ACEtk/block/Base.hpp"
-#include "range/v3/view/drop_exactly.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -22,17 +21,22 @@ namespace block {
  */
 class CrossSectionBlock : protected Base {
 
+public:
+
+  #include "ACEtk/block/CrossSectionBlock/CrossSectionData.hpp"
+
+private:
+
   /* fields */
   unsigned int ntr_; // the number of reactions (excluding elastic)
   Iterator sig_;     // the begin iterator of the SIG block
 
   /* auxiliary functions */
+  #include "ACEtk/block/CrossSectionBlock/src/generateXSS.hpp"
   #include "ACEtk/block/CrossSectionBlock/src/verifyReactionIndex.hpp"
   #include "ACEtk/block/CrossSectionBlock/src/verifySize.hpp"
 
 public:
-
-  #include "ACEtk/block/CrossSectionBlock/CrossSectionData.hpp"
 
   /* constructor */
   #include "ACEtk/block/CrossSectionBlock/src/ctor.hpp"
@@ -143,6 +147,8 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::begin;
+  using Base::end;
 };
 
 using SIG = CrossSectionBlock;

@@ -88,6 +88,8 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::begin;
+  using Base::end;
 };
 
 using MTR = ReactionNumberBlock;

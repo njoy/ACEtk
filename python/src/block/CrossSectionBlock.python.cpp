@@ -16,6 +16,7 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::block::CrossSectionBlock;
+  using CrossSectionData = njoy::ACEtk::block::CrossSectionBlock::CrossSectionData;
 
   // wrap views created by this block
 
@@ -33,15 +34,15 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
 
   // wrap the block
   block
-//  .def(
-//
-//    python::init< std::vector< unsigned int >&& >(),
-//    python::arg( "reactions" ),
-//    "Initialise the block\n\n"
-//    "Arguments:\n"
-//    "    self         the block\n"
-//    "    reactions    the MT numbers"
-//  )
+  .def(
+
+    python::init< std::vector< CrossSectionData >&& >(),
+    python::arg( "xs" ),
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self    the block\n"
+    "    xs      the cross section data"
+  )
   .def_property_readonly(
 
     "NTR",

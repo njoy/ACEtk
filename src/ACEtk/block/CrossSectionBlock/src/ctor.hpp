@@ -3,14 +3,14 @@ CrossSectionBlock() = default;
 CrossSectionBlock( const CrossSectionBlock& ) = default;
 CrossSectionBlock( CrossSectionBlock&& ) = default;
 
-// /**
-//  *  @brief Constructor
-//  *
-//  *  @param[in] mts    the MT numbers
-//  */
-// CrossSectionBlock( std::vector< unsigned int >&& reactions ) :
-//   Base( "MTR", generateXSS( std::move( reactions ) ) ),
-//   ntr_( reactions.size() ) {}
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] xs    the cross section data
+ */
+CrossSectionBlock( std::vector< CrossSectionData >&& xs ) :
+  Base( "SIG", generateXSS( std::move( xs ) ) ),
+  ntr_( xs.size() ) {}
 
 /**
  *  @brief Constructor
