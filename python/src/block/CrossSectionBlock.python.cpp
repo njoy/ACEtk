@@ -1,0 +1,108 @@
+// system includes
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
+// local includes
+#include "ACEtk/block/CrossSectionBlock.hpp"
+#include "views.hpp"
+#include "definitions.hpp"
+
+// namespace aliases
+namespace python = pybind11;
+
+namespace block {
+
+void wrapCrossSectionBlock( python::module& module, python::module& ) {
+
+  // type aliases
+  using Block = njoy::ACEtk::block::CrossSectionBlock;
+
+  // wrap views created by this block
+
+  // create the block
+  python::class_< Block > block(
+
+    module,
+    "CrossSectionBlock",
+    "The continuous energy LSIG and SIG block with the cross section data\n\n"
+    "The CrossSectionBlock class contains NXS(4) sets of cross section values,\n"
+    "one for each reaction number on the MTR block. The order of these cross\n"
+    "section data sets is the same as the order of the reaction numbers in the\n"
+    "MTR block."
+  );
+
+  // wrap the block
+  block
+//  .def(
+//
+//    python::init< std::vector< unsigned int >&& >(),
+//    python::arg( "reactions" ),
+//    "Initialise the block\n\n"
+//    "Arguments:\n"
+//    "    self         the block\n"
+//    "    reactions    the MT numbers"
+//  )
+  .def_property_readonly(
+
+    "NTR",
+    &Block::NTR,
+    "The number of available reactions (excluding elastic)"
+  )
+  .def_property_readonly(
+
+    "number_reactions",
+    &Block::numberReactions,
+    "The number of available reactions (excluding elastic)"
+  )
+  .def(
+
+    "lsig",
+    &Block::LSIG,
+    python::arg( "index" ),
+    "Return the relative cross section locator for a reaction index\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "cross_section_locator",
+    &Block::crossSectionLocator,
+    python::arg( "index" ),
+    "Return the relative cross section locator for a reaction index\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "energy_index",
+    &Block::energyIndex,
+    python::arg( "index" ),
+    "Return the energy index for a reaction index\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "number_values",
+    &Block::numberValues,
+    python::arg( "index" ),
+    "Return the number of cross section values for a reaction index\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "cross_sections",
+    [] ( const Block& self, std::size_t index ) -> DoubleRange
+       { return self.crossSections( index ); },
+    python::arg( "index" ),
+    "Return the number of cross section values for a reaction index\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  );
+
+  // add standard block definitions
+  addStandardBlockDefinitions< Block >( block );
+}
+
+} // block namespace

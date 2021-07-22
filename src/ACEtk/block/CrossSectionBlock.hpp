@@ -106,7 +106,7 @@ public:
   }
 
   /**
-   *  @brief Return the number of values for a reaction index
+   *  @brief Return the number of cross section values for a reaction index
    *
    *  When the index is out of range an std::out_of_range exception is thrown.
    *
@@ -120,7 +120,7 @@ public:
   }
 
   /**
-   *  @brief Return the number of values for a reaction index
+   *  @brief Return the cross section values for a reaction index
    *
    *  When the index is out of range an std::out_of_range exception is thrown.
    *

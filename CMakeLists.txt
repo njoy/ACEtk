@@ -88,6 +88,7 @@ pybind11_add_module( ACEtk.python
     python/src/Table.python.cpp
     python/src/block/PrincipalCrossSectionBlock.python.cpp
     python/src/block/ReactionNumberBlock.python.cpp
+    python/src/block/CrossSectionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
 )
 target_link_libraries( ACEtk.python PRIVATE ACEtk )
