@@ -35,11 +35,11 @@ void wrapReactionNumberBlock( python::module& module, python::module& ) {
   .def(
 
     python::init< std::vector< unsigned int >&& >(),
-    python::arg( "mts" ),
+    python::arg( "reactions" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self    the block\n"
-    "    mts     the MT numbers"
+    "    self         the block\n"
+    "    reactions    the MT numbers"
   )
   .def_property_readonly(
 
@@ -61,10 +61,28 @@ void wrapReactionNumberBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "mts",
+    "reaction_numbers",
     [] ( const Block& self ) -> UnsignedIntRange
-       { return self.mts(); },
+       { return self.reactionNumbers(); },
     "The reaction numbers"
+  )
+  .def(
+
+    "has_reaction_number",
+    &Block::hasReactionNumber,
+    python::arg( "reaction" ),
+    "Return whether or not the reaction number is present\n\n"
+    "    self        the block\n"
+    "    reaction    the reaction number"
+  )
+  .def(
+
+    "index",
+    &Block::index,
+    python::arg( "reaction" ),
+    "Return the index (one-based) of the reaction number\n\n"
+    "    self        the block\n"
+    "    reaction    the reaction number"
   );
 
   // add standard block definitions

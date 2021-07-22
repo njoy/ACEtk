@@ -50,13 +50,23 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 76518 == ncTable.ESZ().elastic().size() );
         CHECK( 76518 == ncTable.ESZ().heating().size() );
 
+        CHECK( 1e-11 == Approx( ncTable.ESZ().energies().front() ) );
+        CHECK( 20. == Approx( ncTable.ESZ().energies().back() ) );
+
         CHECK( 1e-11 == Approx( ncTable.ESZ().XSS( 1 ) ) );
         CHECK( 76518 == ncTable.ESZ().XSS( 1, ncTable.NES() ).size() );
 
         // MTR block
-        CHECK( 48 == ncTable.MTR().mts().size() );
-        CHECK( 16 == ncTable.MTR().mts()[0] );
-        CHECK( 4 == ncTable.MTR().mts()[47] );
+        CHECK( 48 == ncTable.MTR().reactionNumbers().size() );
+        CHECK( 16 == ncTable.MTR().reactionNumbers().front() );
+        CHECK( 4 == ncTable.MTR().reactionNumbers().back() );
+
+        CHECK( true == ncTable.MTR().hasReactionNumber( 16 ) );
+        CHECK( true == ncTable.MTR().hasReactionNumber( 4 ) );
+        CHECK( 1 == ncTable.MTR().index( 16 ) );
+        CHECK( 48 == ncTable.MTR().index( 4 ) );
+
+        CHECK_THROWS( ncTable.MTR().index( 103 ) );
       }
     }
   }

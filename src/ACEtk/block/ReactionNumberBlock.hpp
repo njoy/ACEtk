@@ -53,7 +53,36 @@ public:
   /**
    *  @brief Return the reaction numbers
    */
-  auto mts() const { return this->XSS( 1, this->NTR() ); }
+  auto reactionNumbers() const { return this->XSS( 1, this->NTR() ); }
+
+  /**
+   *  @brief Return whether or not the reaction number is present
+   *
+   *  @param[in] reaction    the reaction number
+   */
+  auto hasReactionNumber( unsigned int reaction ) const {
+
+    return std::find( this->begin(), this->end(), reaction ) != this->end();
+  }
+
+  /**
+   *  @brief Return the index (one-based) of the reaction number
+   *
+   *  @param[in] reaction    the reaction number
+   */
+  auto index( unsigned int reaction ) const {
+
+    auto iter = std::find( this->begin(), this->end(), reaction );
+    if ( iter != this->end() ) {
+
+      return std::distance( this->begin(), iter ) + 1;
+    }
+    else {
+
+      Log::error( "The requested reaction number MT{} is not present", reaction );
+      throw std::exception();
+    }
+  }
 
   using Base::name;
   using Base::length;

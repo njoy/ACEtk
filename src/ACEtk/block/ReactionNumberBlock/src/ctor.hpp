@@ -8,9 +8,9 @@ ReactionNumberBlock( ReactionNumberBlock&& ) = default;
  *
  *  @param[in] mts    the MT numbers
  */
-ReactionNumberBlock( std::vector< unsigned int >&& mts ) :
-  Base( "MTR", generateXSS( std::move( mts ) ) ),
-  ntr_( mts.size() ) {}
+ReactionNumberBlock( std::vector< unsigned int >&& reactions ) :
+  Base( "MTR", generateXSS( std::move( reactions ) ) ),
+  ntr_( reactions.size() ) {}
 
 /**
  *  @brief Constructor
