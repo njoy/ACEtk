@@ -12,6 +12,7 @@ class CrossSectionData : protected Base {
 
   /* auxiliary functions */
   #include "ACEtk/block/CrossSectionBlock/CrossSectionData/src/generateXSS.hpp"
+  #include "ACEtk/block/CrossSectionBlock/CrossSectionData/src/verifySize.hpp"
 
 public:
 

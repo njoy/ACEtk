@@ -88,16 +88,14 @@ public:
   auto crossSectionData( std::size_t index ) const {
 
     // sig : one-based index to the start of the SIG block
+    // sig + locator - 1 : one-based index to the start of cross section data
     std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
-    std::size_t locator = this->LSIG( index );
-    std::size_t length = this->XSS( sig + locator ) + 2;
-
-    #ifndef NDEBUG
-    this->verifyIndex( ( sig + locator - 1 ) + length - 1 );
-    #endif
-
-    const auto left = std::next( this->begin(), ( sig + locator - 1 ) - 1 );
-    const auto right = left + length;
+    const auto left = std::next( this->begin(),
+                                 ( sig + this->LSIG( index ) - 1 ) - 1 );
+    const auto right = index == this->NTR()
+                       ? this->end()
+                       : std::next( this->begin(),
+                                    ( sig + this->LSIG( index + 1 ) - 1 ) - 1 );
     return CrossSectionData( left, right );
   }
 
@@ -110,9 +108,10 @@ public:
    */
   std::size_t energyIndex( std::size_t index ) const {
 
-    auto locator = this->LSIG( index );
-    auto sig = std::distance( this->begin(), this->sig_ ) + 1;
-    return XSS( sig + locator - 1 );
+    // sig : one-based index to the start of the SIG block
+    // sig + locator - 1 : one-based index to the energy index
+    std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
+    return XSS( sig + this->LSIG( index ) - 1 );
   }
 
   /**
@@ -124,9 +123,10 @@ public:
    */
   std::size_t numberValues( std::size_t index ) const {
 
-    auto locator = this->LSIG( index );
+    // sig : one-based index to the start of the SIG block
+    // sig + locator - 1 + 1 : one-based index to the number of values
     auto sig = std::distance( this->begin(), this->sig_ ) + 1;
-    return XSS( sig + locator );
+    return XSS( sig + this->LSIG( index ) );
   }
 
   /**
@@ -138,6 +138,8 @@ public:
    */
   auto crossSections( std::size_t index ) const {
 
+    // sig : one-based index to the start of the SIG block
+    // sig + locator - 1 + 2 : one-based index to the first cross section value
     auto locator = this->LSIG( index );
     auto sig = std::distance( this->begin(), this->sig_ ) + 1;
     return XSS( sig + locator + 1,
