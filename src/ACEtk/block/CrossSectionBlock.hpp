@@ -83,12 +83,18 @@ public:
    */
   auto crossSectionData( std::size_t index ) const {
 
-    auto locator = this->LSIG( index );
-    auto sig = std::distance( this->begin(), this->sig_ ) + 1;
-    auto xss = XSS( sig + locator - 1,
-                    static_cast< std::size_t >( XSS( sig + locator ) ) + 2 );
-    using Chunk = decltype( xss );
-    return CrossSectionData< Chunk >( std::move( xss ) );
+    // sig : one-based index to the start of the SIG block
+    std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
+    std::size_t locator = this->LSIG( index );
+    std::size_t length = this->XSS( sig + locator ) + 2;
+
+    #ifndef NDEBUG
+    this->verifyIndex( ( sig + locator - 1 ) + length - 1 );
+    #endif
+
+    const auto left = std::next( this->begin(), ( sig + locator - 1 ) - 1 );
+    const auto right = left + length;
+    return CrossSectionData( left, right );
   }
 
   /**

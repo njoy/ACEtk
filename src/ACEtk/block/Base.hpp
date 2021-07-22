@@ -85,7 +85,9 @@ public:
    */
   auto XSS( std::size_t index ) const {
 
+    #ifndef NDEBUG
     this->verifyIndex( index );
+    #endif
     return *std::next( this->begin(), index - 1 );
   }
 
@@ -100,8 +102,10 @@ public:
    */
   auto XSS( std::size_t index, std::size_t length ) const {
 
+    #ifndef NDEBUG
     this->verifyIndex( index );
     this->verifyIndex( index + length - 1 );
+    #endif
     const auto left = std::next( this->begin(), index - 1 );
     const auto right = left + length;
     return ranges::make_subrange( left, right );

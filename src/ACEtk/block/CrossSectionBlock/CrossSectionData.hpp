@@ -2,32 +2,31 @@
  *  @class
  *  @brief Convenience interface for cross section data from the SIG block
  */
-template < typename Range >
-class CrossSectionData {
+class CrossSectionData : protected Base {
 
   /* fields */
-  Range chunk;
 
 public:
 
   /* constructor */
-  CrossSectionData( Range&& chunk ) : chunk( std::move( chunk ) ) {}
+  CrossSectionData( Iterator begin, Iterator end ) :
+    Base( "SIGMA", begin, end ) {}
 
   /**
    *  @brief Return the energy index
    */
-  std::size_t energyIndex() const { return this->chunk[0]; }
+  std::size_t energyIndex() const { return this->XSS( 1 ); }
 
   /**
    *  @brief Return the number of cross section values
    */
-  std::size_t numberValues() const { return this->chunk[1]; }
+  std::size_t numberValues() const { return this->XSS( 2 ); }
 
   /**
    *  @brief Return the cross section values
    */
   auto crossSections() const {
 
-    return this->chunk | ranges::views::drop_exactly( 2 );
+    return this->XSS( 3, this->numberValues() );
   }
 };
