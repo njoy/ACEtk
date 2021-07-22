@@ -74,6 +74,15 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
   )
   .def(
 
+    "cross_section_data",
+    &Block::crossSectionData,
+    python::arg( "index" ),
+    "Return the cross section data for a reaction index\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
     "energy_index",
     &Block::energyIndex,
     python::arg( "index" ),
@@ -96,7 +105,7 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
     [] ( const Block& self, std::size_t index ) -> DoubleRange
        { return self.crossSections( index ); },
     python::arg( "index" ),
-    "Return the number of cross section values for a reaction index\n\n"
+    "Return the cross section values for a reaction index\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
   );

@@ -1,16 +1,22 @@
 /**
  *  @class
- *  @brief Convenience interface for cross section data from the SIG block
+ *  @brief Cross section data from the SIG block for a single reaction
+ *
+ *  The CrossSectionData class contains the index of the energy point
+ *  corresponding to the first cross section value, the number of cross
+ *  section values and the actual cross section values.
  */
 class CrossSectionData : protected Base {
 
   /* fields */
 
+  /* auxiliary functions */
+  #include "ACEtk/block/CrossSectionBlock/CrossSectionData/src/generateXSS.hpp"
+
 public:
 
   /* constructor */
-  CrossSectionData( Iterator begin, Iterator end ) :
-    Base( "SIGMA", begin, end ) {}
+  #include "ACEtk/block/CrossSectionBlock/CrossSectionData/src/ctor.hpp"
 
   /**
    *  @brief Return the energy index
@@ -29,4 +35,8 @@ public:
 
     return this->XSS( 3, this->numberValues() );
   }
+
+  using Base::name;
+  using Base::length;
+  using Base::XSS;
 };
