@@ -68,6 +68,22 @@ public:
   auto end() const { return this->end_; }
 
   /**
+   *  @brief Return an iterator to an XSS element
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
+   */
+  Iterator iterator( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyIndex( index );
+    #endif
+    return std::next( this->begin(), index - 1 );
+  }
+
+  /**
    *  @brief Return the xss array of the block
    */
   auto XSS() const {
@@ -85,10 +101,7 @@ public:
    */
   auto XSS( std::size_t index ) const {
 
-    #ifndef NDEBUG
-    this->verifyIndex( index );
-    #endif
-    return *std::next( this->begin(), index - 1 );
+    return *( this->iterator( index ) );
   }
 
   /**
@@ -102,12 +115,8 @@ public:
    */
   auto XSS( std::size_t index, std::size_t length ) const {
 
-    #ifndef NDEBUG
-    this->verifyIndex( index );
-    this->verifyIndex( index + length - 1 );
-    #endif
-    const auto left = std::next( this->begin(), index - 1 );
-    const auto right = left + length;
+    const auto left = this->iterator( index );
+    const auto right = this->iterator( index + length - 1 ) + 1;
     return ranges::make_subrange( left, right );
   }
 };
