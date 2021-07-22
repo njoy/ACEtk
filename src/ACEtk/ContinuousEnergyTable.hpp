@@ -7,6 +7,7 @@
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
+#include "ACEtk/block/CrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,6 +24,7 @@ class ContinuousEnergyTable : protected Table {
   /* fields */
   block::ESZ esz_;
   block::MTR mtr_;
+  block::SIG sig_;
 
   /* auxiliary functions */
   void generateBlocks() {
@@ -42,6 +44,7 @@ class ContinuousEnergyTable : protected Table {
 
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
     this->mtr_ = block::MTR( mtr, lqr, this->NTR() );
+    this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
   }
 
 public:
@@ -189,6 +192,15 @@ public:
    *  @brief Return the principal cross section block
    */
   const block::MTR& reactionNumberBlock() const { return this->MTR(); }
+  /**
+   *  @brief Return the cross section block
+   */
+  const block::SIG& SIG() const { return this->sig_; }
+
+  /**
+   *  @brief Return the cross section block
+   */
+  const block::SIG& crossSectionBlock() const { return this->SIG(); }
 };
 
 } // ACEtk namespace

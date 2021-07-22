@@ -67,6 +67,38 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 48 == ncTable.MTR().index( 4 ) );
 
         CHECK_THROWS( ncTable.MTR().index( 103 ) );
+
+        // SIG block
+        CHECK( 48 == ncTable.SIG().NTR() );
+
+        CHECK( 1 == ncTable.SIG().LSIG( 1 ) );
+        CHECK( 236259 == ncTable.SIG().LSIG( 48 ) );
+
+        CHECK( 76460 == ncTable.SIG().energyIndex( 1 ) );
+        CHECK( 76095 == ncTable.SIG().energyIndex( 48 ) );
+
+        CHECK( 59 == ncTable.SIG().numberValues( 1 ) );
+        CHECK( 424 == ncTable.SIG().numberValues( 48 ) );
+
+        auto xs1 = ncTable.SIG().crossSectionData( 1 );
+        auto xs48 = ncTable.SIG().crossSectionData( 48 );
+        CHECK( 76460 == xs1.energyIndex() );
+        CHECK( 76095 == xs48.energyIndex() );
+        CHECK( 59 == xs1.numberValues() );
+        CHECK( 424 == xs48.numberValues() );
+        CHECK( 0. == Approx( xs1.crossSections().front() ) );
+        CHECK( 1.55512000000E-01 == Approx( xs1.crossSections().back() ) );
+        CHECK( 0. == Approx( xs48.crossSections().front() ) );
+        CHECK( 3.65016600000E-01 == Approx( xs48.crossSections().back() ) );
+
+        auto data1 = ncTable.SIG().crossSections( 1 );
+        auto data48 = ncTable.SIG().crossSections( 48 );
+        CHECK( 59 == data1.size() );
+        CHECK( 424 == data48.size() );
+        CHECK( 0. == Approx( data1.front() ) );
+        CHECK( 1.55512000000E-01 == Approx( data1.back() ) );
+        CHECK( 0. == Approx( data48.front() ) );
+        CHECK( 3.65016600000E-01 == Approx( data48.back() ) );
       }
     }
   }

@@ -2,6 +2,7 @@
 #define NJOY_ACETK_BLOCK_REACTIONNUMBERBLOCK
 
 // system includes
+#include <algorithm>
 
 // other includes
 #include "ACEtk/block/Base.hpp"
@@ -60,7 +61,7 @@ public:
    *
    *  @param[in] reaction    the reaction number
    */
-  auto hasReactionNumber( unsigned int reaction ) const {
+  bool hasReactionNumber( unsigned int reaction ) const {
 
     return std::find( this->begin(), this->end(), reaction ) != this->end();
   }
@@ -70,7 +71,7 @@ public:
    *
    *  @param[in] reaction    the reaction number
    */
-  auto index( unsigned int reaction ) const {
+  std::size_t index( unsigned int reaction ) const {
 
     auto iter = std::find( this->begin(), this->end(), reaction );
     if ( iter != this->end() ) {

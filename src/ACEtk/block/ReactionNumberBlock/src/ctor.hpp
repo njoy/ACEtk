@@ -15,12 +15,12 @@ ReactionNumberBlock( std::vector< unsigned int >&& reactions ) :
 /**
  *  @brief Constructor
  *
- *  @param[in] begin   the begin iterator of the ESZ block in the XSS array
- *  @param[in] end     the end iterator of the ESZ block in the XSS array
- *  @param[in] nes     the number of energy points
+ *  @param[in] mtr   the begin iterator of the MTR block in the XSS array
+ *  @param[in] end   the end iterator of the MTR block in the XSS array
+ *  @param[in] ntr   the number of reactions (excluding elastic)
  */
-ReactionNumberBlock( Iterator begin, Iterator end, unsigned int ntr ) :
-  Base( "ESZ", begin, end ), ntr_( ntr ) {
+ReactionNumberBlock( Iterator mtr, Iterator end, unsigned int ntr ) :
+  Base( "ESZ", mtr, end ), ntr_( ntr ) {
 
   verifySize( this->begin(), this->end(), this->ntr_ );
 }
