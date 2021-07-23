@@ -177,21 +177,6 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "principal_cross_section_block",
     &Table::principalCrossSectionBlock,
     "The principal cross section block"
-  )
-  //! @todo solve the header version print issue to add this to the table definitions instead
-  .def(
-
-    "to_file",
-    [] ( const Table& self, const std::string& filename ) {
-
-      std::ofstream out( filename );
-      self.print< 1, 0, 0 >( out );
-      out.close();
-    },
-    "Write the ACE table to a file\n\n"
-    "Arguments:\n"
-    "    self        the table\n"
-    "    filename    the file name and path"
   );
 
   // add standard block definitions

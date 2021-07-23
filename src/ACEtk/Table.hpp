@@ -2,6 +2,7 @@
 #define NJOY_ACETK_TABLE
 
 // system includes
+#include <cctype>
 #include <istream>
 #include <regex>
 #include <string>

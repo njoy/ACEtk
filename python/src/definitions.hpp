@@ -48,6 +48,20 @@ void addStandardTableDefinitions( PythonClass& table ) {
     "table\n\n"
     "Arguments:\n"
     "    filename    the file name and path"
+  )
+  .def(
+
+    "to_file",
+    [] ( const Table& self, const std::string& filename ) {
+
+      std::ofstream out( filename );
+      self.print( out );
+      out.close();
+    },
+    "Write the ACE table to a file\n\n"
+    "Arguments:\n"
+    "    self        the table\n"
+    "    filename    the file name and path"
   );
 }
 

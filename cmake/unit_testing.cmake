@@ -12,7 +12,6 @@ enable_testing()
 
 add_subdirectory( src/ACEtk/Table/Data/Parse/test )
 add_subdirectory( src/ACEtk/Table/Data/test )
-add_subdirectory( src/ACEtk/Table/Header/String/test )
 add_subdirectory( src/ACEtk/Table/Header/test )
 add_subdirectory( src/ACEtk/Table/test )
 add_subdirectory( src/ACEtk/ContinuousEnergyTable/test )

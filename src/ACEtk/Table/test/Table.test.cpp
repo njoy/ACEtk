@@ -47,7 +47,7 @@ SCENARIO( "Table" ) {
 //      THEN( "it can be printed" ) {
 //
 //        std::ostringstream oss;
-//        chunk.print< 1,0,0 >( oss );
+//        chunk.print( oss );
 //
 //        CHECK( oss.str() == string );
 //      } // THEN
@@ -66,7 +66,7 @@ SCENARIO( "Table" ) {
       THEN( "it can be printed" ) {
 
         std::ostringstream oss;
-        chunk.print< 1,0,0 >( oss );
+        chunk.print( oss );
 
         CHECK( oss.str() == string );
       } // THEN

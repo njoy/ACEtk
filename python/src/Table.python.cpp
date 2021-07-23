@@ -73,7 +73,7 @@ void wrapTable( python::module& module, python::module& ) {
     [] ( const Component& self, const std::string& filename ) {
 
       std::ofstream out( filename );
-      self.print< 1,0,0 >( out );
+      self.print( out );
       out.close();
     },
     "Write the ACE table to a file\n\n"
@@ -102,7 +102,7 @@ void wrapTable( python::module& module, python::module& ) {
     [] ( const Component& self ) {
 
       std::ostringstream out;
-      self.print< 1,0,0 >( out );
+      self.print( out );
       return out.str();
     },
     "Return the string representation of the ACE table"

@@ -27,7 +27,7 @@ public:
  */
 template< typename Iterator >
 Table( State< Iterator >& state )
-  try: Table( state, Header::parse( state ) ) {}
+  try: Table( state, Header( state ) ) {}
   catch( std::exception& e ) {
 
     Log::info("Error while constructing ACE Table");
