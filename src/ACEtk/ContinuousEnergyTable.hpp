@@ -7,6 +7,7 @@
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
+#include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
 
 namespace njoy {
@@ -24,6 +25,7 @@ class ContinuousEnergyTable : protected Table {
   /* fields */
   block::ESZ esz_;
   block::MTR mtr_;
+  block::LQR lqr_;
   block::SIG sig_;
 
   /* auxiliary functions */
@@ -44,6 +46,7 @@ class ContinuousEnergyTable : protected Table {
 
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
     this->mtr_ = block::MTR( mtr, lqr, this->NTR() );
+    this->lqr_ = block::LQR( lqr, tyr, this->NTR() );
     this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
   }
 
@@ -184,14 +187,25 @@ public:
   const block::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
 
   /**
-   *  @brief Return the principal cross section block
+   *  @brief Return the reaction number block
    */
   const block::MTR& MTR() const { return this->mtr_; }
 
   /**
-   *  @brief Return the principal cross section block
+   *  @brief Return the reaction number block
    */
   const block::MTR& reactionNumberBlock() const { return this->MTR(); }
+
+  /**
+   *  @brief Return the reaction Q value block
+   */
+  const block::LQR& LQR() const { return this->lqr_; }
+
+  /**
+   *  @brief Return the reaction Q value block
+   */
+  const block::LQR& reactionQValueBlock() const { return this->LQR(); }
+
   /**
    *  @brief Return the cross section block
    */

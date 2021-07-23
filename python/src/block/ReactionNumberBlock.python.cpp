@@ -53,11 +53,32 @@ void wrapReactionNumberBlock( python::module& module, python::module& ) {
     &Block::numberReactions,
     "The number of available reactions (excluding elastic)"
   )
+  .def(
+
+    "MT",
+    &Block::MT,
+    python::arg( "index" ),
+    "The reaction number for a reaction index\n\n"
+    "Arguments:\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "reaction_number",
+    &Block::reactionNumber,
+    python::arg( "index" ),
+    "The reaction number for a reaction index\n\n"
+    "Arguments:\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
   .def_property_readonly(
 
-    "total_number_reactions",
-    &Block::totalNumberReactions,
-    "The total number of available reactions (including elastic)"
+    "MTs",
+    [] ( const Block& self ) -> UnsignedIntRange
+       { return self.MTs(); },
+    "The reaction numbers"
   )
   .def_property_readonly(
 

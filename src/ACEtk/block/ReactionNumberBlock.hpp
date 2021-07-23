@@ -47,14 +47,38 @@ public:
   unsigned int numberReactions() const { return this->NTR(); }
 
   /**
-   *  @brief Return the total number of available reactions (including elastic)
+   *  @brief Return the reaction number for a reaction index
+   *
+   *  @param[in] index     the index (one-based)
    */
-  int totalNumberReactions() const { return this->NTR() + 1; }
+  auto MT( std::size_t index ) const { return this->XSS( index ); }
+
+  /**
+   *  @brief Return the reaction number for a reaction index
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  auto reactionNumber( std::size_t index ) const { return this->MT( index ); }
 
   /**
    *  @brief Return the reaction numbers
    */
-  auto reactionNumbers() const { return this->XSS( 1, this->NTR() ); }
+  auto MTs() const { return this->XSS( 1, this->NTR() ); }
+
+  /**
+   *  @brief Return the reaction numbers
+   */
+  auto reactionNumbers() const { return this->MTs(); }
+
+  /**
+   *  @brief Return whether or not the reaction number is present
+   *
+   *  @param[in] reaction    the reaction number
+   */
+  bool hasMT( unsigned int reaction ) const {
+
+    return std::find( this->begin(), this->end(), reaction ) != this->end();
+  }
 
   /**
    *  @brief Return whether or not the reaction number is present
@@ -63,7 +87,7 @@ public:
    */
   bool hasReactionNumber( unsigned int reaction ) const {
 
-    return std::find( this->begin(), this->end(), reaction ) != this->end();
+    return this->hasMT( reaction );
   }
 
   /**

@@ -57,16 +57,30 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 76518 == ncTable.ESZ().XSS( 1, ncTable.NES() ).size() );
 
         // MTR block
+        CHECK( 48 == ncTable.MTR().MTs().size() );
+        CHECK( 16 == ncTable.MTR().MTs().front() );
+        CHECK( 4 == ncTable.MTR().MTs().back() );
         CHECK( 48 == ncTable.MTR().reactionNumbers().size() );
         CHECK( 16 == ncTable.MTR().reactionNumbers().front() );
         CHECK( 4 == ncTable.MTR().reactionNumbers().back() );
+
+        CHECK( 16 == ncTable.MTR().MT( 1 ) );
+        CHECK( 4 == ncTable.MTR().MT( 48 ) );
+        CHECK( 16 == ncTable.MTR().reactionNumber( 1 ) );
+        CHECK( 4 == ncTable.MTR().reactionNumber( 48 ) );
 
         CHECK( true == ncTable.MTR().hasReactionNumber( 16 ) );
         CHECK( true == ncTable.MTR().hasReactionNumber( 4 ) );
         CHECK( 1 == ncTable.MTR().index( 16 ) );
         CHECK( 48 == ncTable.MTR().index( 4 ) );
 
-        CHECK_THROWS( ncTable.MTR().index( 103 ) );
+        // LQR block
+        CHECK( 48 == ncTable.LQR().QValues().size() );
+        CHECK( -5.297781 == ncTable.LQR().QValues().front() );
+        CHECK( 0. == ncTable.LQR().QValues().back() );
+
+        CHECK( -5.297781 == ncTable.LQR().QValue( 1 ) );
+        CHECK( 0. == ncTable.LQR().QValue( 48 ) );
 
         // SIG block
         CHECK( 48 == ncTable.SIG().NTR() );
