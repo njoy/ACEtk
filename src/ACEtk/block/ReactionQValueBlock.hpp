@@ -16,7 +16,8 @@ namespace block {
  *  @brief The continuous energy LQR block with the reaction Q values
  *
  *  The ReactionQValueBlock class contains the reaction Q values for all
- *  available reactions (excluding elastic)
+ *  available reactions (excluding elastic). The order of these Q values
+ *  is the same as the order of the reaction numbers in the MTR block.
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
