@@ -82,6 +82,19 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( -5.297781 == ncTable.LQR().QValue( 1 ) );
         CHECK( 0. == ncTable.LQR().QValue( 48 ) );
 
+        // TYR block
+        CHECK( 48 == ncTable.TYR().referenceFrames().size() );
+        CHECK( ReferenceFrame::CentreOfMass == ncTable.TYR().referenceFrames().front() );
+        CHECK( ReferenceFrame::Laboratory == ncTable.TYR().referenceFrames().back() );
+        CHECK( 48 == ncTable.TYR().multiplicities().size() );
+        CHECK( 2 == ncTable.TYR().multiplicities().front() );
+        CHECK( 0 == ncTable.TYR().multiplicities().back() );
+
+        CHECK( ReferenceFrame::CentreOfMass == ncTable.TYR().referenceFrame( 1 ) );
+        CHECK( ReferenceFrame::Laboratory == ncTable.TYR().referenceFrame( 48 ) );
+        CHECK( 2 == ncTable.TYR().multiplicity( 1 ) );
+        CHECK( 0 == ncTable.TYR().multiplicity( 48 ) );
+
         // SIG block
         CHECK( 48 == ncTable.SIG().NTR() );
 

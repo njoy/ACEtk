@@ -3,6 +3,9 @@
 #include "ACEtk/Table.hpp"
 #include "ACEtk/fromFile.hpp"
 
+// enumerators
+#include "ACEtk/ReferenceFrame.hpp"
+
 // ACE data blocks
 #include "ACEtk/block.hpp"
 

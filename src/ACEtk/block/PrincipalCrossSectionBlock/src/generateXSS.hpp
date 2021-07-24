@@ -1,9 +1,9 @@
-static std::vector< double > generateXSS(
-    std::vector< double >&& energies,
-    std::vector< double >&& total,
-    std::vector< double >&& disappearance,
-    std::vector< double >&& elastic,
-    std::vector< double >&& heating ) {
+static std::vector< double >
+generateXSS( std::vector< double >&& energies,
+             std::vector< double >&& total,
+             std::vector< double >&& disappearance,
+             std::vector< double >&& elastic,
+             std::vector< double >&& heating ) {
 
   std::vector< double > xss( std::move( energies ) );
   auto nes = xss.size();
