@@ -1,3 +1,5 @@
+#include "ACEtk/block/TabulatedData.hpp"
+
 #include "ACEtk/block/PolynomialFissionMultiplicity.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 
