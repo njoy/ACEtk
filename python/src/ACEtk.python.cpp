@@ -12,6 +12,9 @@ namespace python = pybind11;
 void wrapData( python::module&, python::module& );
 void wrapTable( python::module&, python::module& );
 
+// declarations - enumerators
+void wrapReferenceFrame( python::module&, python::module& );
+
 namespace block {
 
   // declarations - ACE data components

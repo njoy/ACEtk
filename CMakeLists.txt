@@ -86,6 +86,7 @@ pybind11_add_module( ACEtk.python
     python/src/ACEtk.python.cpp
     python/src/Data.python.cpp
     python/src/Table.python.cpp
+    python/src/ReferenceFrame.python.cpp
     python/src/block/CrossSectionData.python.cpp
     python/src/block/PrincipalCrossSectionBlock.python.cpp
     python/src/block/ReactionNumberBlock.python.cpp
