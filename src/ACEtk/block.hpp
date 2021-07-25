@@ -1,3 +1,5 @@
+#include "ACEtk/block/CrossSectionData.hpp"
+
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
 #include "ACEtk/block/ReactionQValueBlock.hpp"

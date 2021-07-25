@@ -5,6 +5,7 @@
 
 // other includes
 #include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/CrossSectionData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,12 +21,6 @@ namespace block {
  *  MTR block.
  */
 class CrossSectionBlock : protected Base {
-
-public:
-
-  #include "ACEtk/block/CrossSectionBlock/CrossSectionData.hpp"
-
-private:
 
   /* fields */
   unsigned int ntr_; // the number of reactions (excluding elastic)

@@ -1,3 +1,16 @@
+#ifndef NJOY_ACETK_BLOCK_CROSSSECTIONDATA
+#define NJOY_ACETK_BLOCK_CROSSSECTIONDATA
+
+// system includes
+
+// other includes
+#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/CrossSectionData.hpp"
+
+namespace njoy {
+namespace ACEtk {
+namespace block {
+
 /**
  *  @class
  *  @brief Cross section data from the SIG block for a single reaction
@@ -11,13 +24,13 @@ class CrossSectionData : protected Base {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/block/CrossSectionBlock/CrossSectionData/src/generateXSS.hpp"
-  #include "ACEtk/block/CrossSectionBlock/CrossSectionData/src/verifySize.hpp"
+  #include "ACEtk/block/CrossSectionData/src/generateXSS.hpp"
+  #include "ACEtk/block/CrossSectionData/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/CrossSectionBlock/CrossSectionData/src/ctor.hpp"
+  #include "ACEtk/block/CrossSectionData/src/ctor.hpp"
 
   /**
    *  @brief Return the energy index
@@ -43,3 +56,9 @@ public:
   using Base::begin;
   using Base::end;
 };
+
+} // block namespace
+} // ACEtk namespace
+} // njoy namespace
+
+#endif

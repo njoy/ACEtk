@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/block/CrossSectionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -15,7 +15,7 @@ namespace block {
 void wrapCrossSectionData( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::CrossSectionBlock::CrossSectionData;
+  using Block = njoy::ACEtk::block::CrossSectionData;
 
   // wrap views created by this block
 
