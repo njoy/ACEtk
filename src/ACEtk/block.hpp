@@ -1,3 +1,4 @@
+#include "ACEtk/block/PolynomialFissionMultiplicity.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"

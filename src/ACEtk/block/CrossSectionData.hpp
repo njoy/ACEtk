@@ -5,7 +5,6 @@
 
 // other includes
 #include "ACEtk/block/Base.hpp"
-#include "ACEtk/block/CrossSectionData.hpp"
 
 namespace njoy {
 namespace ACEtk {
