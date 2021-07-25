@@ -91,6 +91,7 @@ pybind11_add_module( ACEtk.python
     python/src/block/PrincipalCrossSectionBlock.python.cpp
     python/src/block/ReactionNumberBlock.python.cpp
     python/src/block/ReactionQValueBlock.python.cpp
+    python/src/block/FrameAndMultiplicityBlock.python.cpp
     python/src/block/CrossSectionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
 )

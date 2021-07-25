@@ -16,7 +16,7 @@ namespace block {
 /**
  *  @class
  *  @brief The continuous energy TYR block with the outgoing projectile
- *         multiplicity and reference frame
+ *         multiplicities and reference frames
  *
  *  The FrameAndMultiplicityBlock class contains the reference frame and
  *  outgoing projectile multiplicity. The order of this data is the same as
@@ -68,7 +68,7 @@ public:
 
     return this->XSS( 1, this->NTR() )
              | ranges::cpp20::views::transform(
-                 [] ( auto&& value )
+                 [] ( const auto& value ) -> ReferenceFrame
                     { return value < 0 ? ReferenceFrame::CentreOfMass
                                        : ReferenceFrame::Laboratory; } );
   }
@@ -84,13 +84,13 @@ public:
   }
 
   /**
-   *  @brief Return the multiplicity values
+   *  @brief Return the multiplicities
    */
   auto multiplicities() const {
 
     return this->XSS( 1, this->NTR() )
              | ranges::cpp20::views::transform(
-                 [] ( auto&& value ) { return std::abs( value ); } );
+                 [] ( const auto& value ) { return std::abs( value ); } );
   }
 
   using Base::name;

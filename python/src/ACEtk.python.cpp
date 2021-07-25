@@ -24,6 +24,7 @@ namespace block {
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
   void wrapReactionNumberBlock( python::module&, python::module& );
   void wrapReactionQValueBlock( python::module&, python::module& );
+  void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
   void wrapCrossSectionBlock( python::module&, python::module& );
 }
 
@@ -65,6 +66,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
   block::wrapReactionNumberBlock( module, viewmodule );
   block::wrapReactionQValueBlock( module, viewmodule );
+  block::wrapFrameAndMultiplicityBlock( module, viewmodule );
   block::wrapCrossSectionBlock( module, viewmodule );
 
   // wrap ACE table types
