@@ -1,10 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_TABULATEDDATA
-#define NJOY_ACETK_BLOCK_TABULATEDDATA
+#ifndef NJOY_ACETK_BLOCK_TABULATEDFISSIONMULTIPLICITY
+#define NJOY_ACETK_BLOCK_TABULATEDFISSIONMULTIPLICITY
 
 // system includes
 
 // other includes
 #include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/TabulatedData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -12,25 +13,28 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated data representing a function y = f(x)
+ *  @brief Tabulated fission multiplicity
+ *
+ *  The TabulatedFissionMultiplicity class contains the tabulated
+ *  representation of the fission multiplicity.
  */
-class TabulatedData : protected Base {
+class TabulatedFissionMultiplicity : protected Base {
 
   /* fields */
+  TabulatedData table_;
 
   /* auxiliary functions */
   #include "ACEtk/block/TabulatedData/src/generateXSS.hpp"
-  #include "ACEtk/block/TabulatedData/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/TabulatedData/src/ctor.hpp"
+  #include "ACEtk/block/TabulatedFissionMultiplicity/src/ctor.hpp"
 
   /**
    *  @brief Return the number of interpolation regions
    */
-  std::size_t NB() const { return this->XSS( 1 ); }
+  std::size_t NB() const { return this->table_.NB(); }
 
   /**
    *  @brief Return the number of interpolation regions
@@ -40,7 +44,7 @@ public:
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto NBT() const { return this->XSS( 2, this->NB() ); }
+  auto NBT() const { return this->table_.NBT(); }
 
   /**
    *  @brief Return the interpolation boundaries
@@ -50,11 +54,7 @@ public:
   /**
    *  @brief Return the interpolants
    */
-  auto INT() const {
-
-    std::size_t nb = this->NB();
-    return this->XSS( 2 + nb, nb );
-  }
+  auto INT() const { return this->table_.INT(); }
 
   /**
    *  @brief Return the interpolants
@@ -64,11 +64,7 @@ public:
   /**
    *  @brief Return the number of values
    */
-  std::size_t NE() const {
-
-    std::size_t nb = this->NB();
-    return this->XSS( 2 + 2 * nb );
-  }
+  std::size_t NE() const { return this->table_.NE(); }
 
   /**
    *  @brief Return the number of values
@@ -76,24 +72,24 @@ public:
   std::size_t numberValues() const { return this->NE(); }
 
   /**
-   *  @brief Return the x values
+   *  @brief Return the energy values
    */
-  auto x() const {
-
-    std::size_t nb = this->NB();
-    std::size_t ne = this->NE();
-    return this->XSS( 3 + 2 * nb, ne );
-  }
+  auto E() const { return this->table_.x(); }
 
   /**
-   *  @brief Return the y values
+   *  @brief Return the energy values
    */
-  auto y() const {
+  auto energies() const { return this->E(); }
 
-    std::size_t nb = this->NB();
-    std::size_t ne = this->NE();
-    return this->XSS( 3 + 2 * nb + ne, ne );
-  }
+  /**
+   *  @brief Return the multiplicities
+   */
+  auto NU() const { return this->table_.y(); }
+
+  /**
+   *  @brief Return the multiplicities
+   */
+  auto multiplicities() const { return this->NU(); }
 
   using Base::name;
   using Base::length;

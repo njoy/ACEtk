@@ -1,6 +1,7 @@
 #include "ACEtk/block/TabulatedData.hpp"
 
 #include "ACEtk/block/PolynomialFissionMultiplicity.hpp"
+#include "ACEtk/block/TabulatedFissionMultiplicity.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
