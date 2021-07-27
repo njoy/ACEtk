@@ -55,6 +55,9 @@ PYBIND11_MODULE( ACEtk, module ) {
       viewmodule,
       "any_view< unsigned int, random_access >" );
 
+  // wrap enumerators
+  wrapReferenceFrame( module, viewmodule );
+
   // wrap generic ACE table components
   wrapData( module, viewmodule );
   wrapTable( module, viewmodule );

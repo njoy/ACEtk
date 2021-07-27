@@ -69,111 +69,111 @@ public:
   /**
    *  @brief Return the total length of the XSS array
    */
-  int length() const { return this->data().NXS(1); }
+  unsigned int length() const { return this->data().NXS(1); }
 
   /**
    *  @brief Return the ZA of the target
    */
-  int ZA() const { return this->data().NXS(2); }
+  unsigned int ZA() const { return this->data().NXS(2); }
 
   /**
    *  @brief Return the number of energy points
    */
-  int NES() const { return this->data().NXS(3); }
+  unsigned int NES() const { return this->data().NXS(3); }
 
   /**
    *  @brief Return the number of energy points
    */
-  int numberEnergyPoints() const { return this->NES(); }
+  unsigned int numberEnergyPoints() const { return this->NES(); }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  int NTR() const { return this->data().NXS(4); }
+  unsigned int NTR() const { return this->data().NXS(4); }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  int numberReactions() const { return this->NTR(); }
+  unsigned int numberReactions() const { return this->NTR(); }
 
   /**
    *  @brief Return the total number of available reactions (including elastic)
    */
-  int totalNumberReactions() const { return this->NTR() + 1; }
+  unsigned int totalNumberReactions() const { return this->NTR() + 1; }
 
   /**
    *  @brief Return the number of reactions that produce the projectile
    *         (excluding elastic )
    */
-  int NR() const { return this->data().NXS(5); }
+  unsigned int NR() const { return this->data().NXS(5); }
 
   /**
    *  @brief Return the number of reactions that produce the projectile
    *         (excluding elastic )
    */
-  int numberProjectileProductionReactions() const { return this->NR(); }
+  unsigned int numberProjectileProductionReactions() const { return this->NR(); }
 
   /**
    *  @brief Return the number of reactions that produce photons
    */
-  int NTRP() const { return this->data().NXS(6); }
+  unsigned int NTRP() const { return this->data().NXS(6); }
 
   /**
    *  @brief Return the number of reactions that produce photons
    */
-  int numberPhotonProductionReactions() const { return this->NTRP(); }
+  unsigned int numberPhotonProductionReactions() const { return this->NTRP(); }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
    *         projectile)
    */
-  int NTYPE() const { return this->data().NXS(7); }
+  unsigned int NTYPE() const { return this->data().NXS(7); }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
    *         projectile)
    */
-  int numberAdditionalSecondaryParticleTypes() const { return this->NTYPE(); }
+  unsigned int numberAdditionalSecondaryParticleTypes() const { return this->NTYPE(); }
 
   /**
    *  @brief Return the number of delayed percursor families
    */
-  int NPCR() const { return this->data().NXS(8); }
+  unsigned int NPCR() const { return this->data().NXS(8); }
 
   /**
    *  @brief Return the number of delayed percursor families
    */
-  int numberDelayedPrecursors() const { return this->NPCR(); }
+  unsigned int numberDelayedPrecursors() const { return this->NPCR(); }
 
   /**
    *  @brief Return the excited state of the target
    */
-  int S() const { return this->data().NXS(9); }
+  unsigned int S() const { return this->data().NXS(9); }
 
   /**
    *  @brief Return the excited state of the target
    */
-  int excitedState() const { return this->S(); }
+  unsigned int excitedState() const { return this->S(); }
 
   /**
    *  @brief Return the atom number of the target
    */
-  int Z() const { return this->data().NXS(10); }
+  unsigned int Z() const { return this->data().NXS(10); }
 
   /**
    *  @brief Return the atom number of the target
    */
-  int atomNumber() const { return this->Z(); }
+  unsigned int atomNumber() const { return this->Z(); }
 
   /**
    *  @brief Return the mass number of the target
    */
-  int A() const { return this->data().NXS(11); }
+  unsigned int A() const { return this->data().NXS(11); }
 
   /**
    *  @brief Return the mass number of the target
    */
-  int massNumber() const { return this->A(); }
+  unsigned int massNumber() const { return this->A(); }
 
   // JXS information
 
