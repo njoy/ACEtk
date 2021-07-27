@@ -168,7 +168,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "esz",
+    "ESZ",
     &Table::ESZ,
     "The principal cross section block"
   )
@@ -177,6 +177,54 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "principal_cross_section_block",
     &Table::principalCrossSectionBlock,
     "The principal cross section block"
+  )
+  .def_property_readonly(
+
+    "MTR",
+    &Table::MTR,
+    "The reaction number block"
+  )
+  .def_property_readonly(
+
+    "reaction_number_block",
+    &Table::principalCrossSectionBlock,
+    "The reaction number block"
+  )
+  .def_property_readonly(
+
+    "LQR",
+    &Table::LQR,
+    "The reaction Q value block"
+  )
+  .def_property_readonly(
+
+    "reaction_qvalue_block",
+    &Table::reactionQValueBlock,
+    "The reaction Q value block"
+  )
+  .def_property_readonly(
+
+    "TYR",
+    &Table::TYR,
+    "The reference frame and multiplicity block"
+  )
+  .def_property_readonly(
+
+    "frame_and_multiplicity_block",
+    &Table::frameAndMultiplicityBlock,
+    "The reference frame and multiplicity block"
+  )
+  .def_property_readonly(
+
+    "SIG",
+    &Table::SIG,
+    "The cross section block"
+  )
+  .def_property_readonly(
+
+    "cross_section_block",
+    &Table::crossSectionBlock,
+    "The cross section block"
   );
 
   // add standard block definitions
