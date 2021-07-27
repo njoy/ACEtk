@@ -22,3 +22,13 @@ generateXSS( std::vector< std::vector< double > >&& columns ) {
 
   return xss;
 }
+
+static std::vector< double >
+generateXSS( std::vector< double >&& column1,
+             std::vector< double >&& column2 ) {
+
+  std::vector< std::vector< double > > columns;
+  columns.emplace_back( std::move( column1 ) );
+  columns.emplace_back( std::move( column2 ) );
+  return generateXSS( std::move( columns ) );
+}

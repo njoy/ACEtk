@@ -19,6 +19,7 @@ class InterpolationData : protected ColumnData {
   /* fields */
 
   /* auxiliary functions */
+  #include "ACEtk/block/InterpolationData/src/generateXSS.hpp"
 
 public:
 

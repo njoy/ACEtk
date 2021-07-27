@@ -22,12 +22,7 @@ ColumnData( std::string&& name, std::vector< std::vector< double > >&& columns )
 ColumnData( std::string&& name, std::vector< double >&& column1,
             std::vector< double >&& column2 ) :
   Base( std::move( name ),
-        [] ( std::vector< long >&& v1,
-             std::vector< long >&& v2 )
-           { std::vector< std::vector< double > > v;
-             v.push_back( v1 );
-             v.push_back( v2 );
-             return v; }( std::move( column1 ), std::move( column2 ) ) ) {}
+        generateXSS( std::move( column1 ), std::move( column2 ) ) ) {}
 
 /**
  *  @brief Constructor

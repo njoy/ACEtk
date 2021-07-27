@@ -13,8 +13,9 @@ InterpolationData( InterpolationData&& ) = default;
 InterpolationData( std::string&& name,
                    std::vector< long >&& boundaries,
                    std::vector< long >&& interpolants ) :
-  ColumnData( std::move( name ), std::move( boundaries ),
-              std::move( interpolants ) ) {}
+  ColumnData( std::move( name ),
+              generateXSS( std::move( boundaries ),
+                           std::move( interpolants ) ) ) {}
 
 /**
  *  @brief Constructor
