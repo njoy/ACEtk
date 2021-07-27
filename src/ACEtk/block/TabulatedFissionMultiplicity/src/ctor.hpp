@@ -19,7 +19,7 @@ TabulatedFissionMultiplicity( std::vector< long >&& boundaries,
         generateXSS( std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( multiplicities ) ) ) {
 
-  this->table_ = TabulatedData( "NU::TABLE", this->iterator( 2 ), this->end() );
+  this->generateBlocks();
 }
 
 /**
@@ -40,7 +40,10 @@ TabulatedFissionMultiplicity( std::vector< double >&& energies,
  *  @param[in] end      the end iterator of the SIG block in the XSS array
  */
 TabulatedFissionMultiplicity( std::string&& name, Iterator begin, Iterator end ) :
-  Base( std::move( name ), begin, end ), table_( "TABLE", begin + 1, end ) {}
+  Base( std::move( name ), begin, end ) {
+
+  this->generateBlocks();
+}
 
 TabulatedFissionMultiplicity& operator=( const TabulatedFissionMultiplicity& ) = default;
 TabulatedFissionMultiplicity& operator=( TabulatedFissionMultiplicity&& ) = default;

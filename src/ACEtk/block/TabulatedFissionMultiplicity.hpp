@@ -5,7 +5,8 @@
 
 // other includes
 #include "ACEtk/block/Base.hpp"
-#include "ACEtk/block/TabulatedData.hpp"
+#include "ACEtk/block/InterpolationData.hpp"
+#include "ACEtk/block/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,10 +22,12 @@ namespace block {
 class TabulatedFissionMultiplicity : protected Base {
 
   /* fields */
-  TabulatedData table_;
+  InterpolationData interpolation_;
+  ColumnData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/TabulatedData/src/generateXSS.hpp"
+  #include "ACEtk/block/TabulatedFissionMultiplicity/src/generateXSS.hpp"
+  #include "ACEtk/block/TabulatedFissionMultiplicity/src/generateBlocks.hpp"
 
 public:
 
@@ -34,7 +37,7 @@ public:
   /**
    *  @brief Return the number of interpolation regions
    */
-  std::size_t NB() const { return this->table_.NB(); }
+  std::size_t NB() const { return this->interpolation_.NB(); }
 
   /**
    *  @brief Return the number of interpolation regions
@@ -44,7 +47,7 @@ public:
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto NBT() const { return this->table_.NBT(); }
+  auto NBT() const { return this->interpolation_.NBT(); }
 
   /**
    *  @brief Return the interpolation boundaries
@@ -54,7 +57,7 @@ public:
   /**
    *  @brief Return the interpolants
    */
-  auto INT() const { return this->table_.INT(); }
+  auto INT() const { return this->interpolation_.INT(); }
 
   /**
    *  @brief Return the interpolants
@@ -64,7 +67,7 @@ public:
   /**
    *  @brief Return the number of values
    */
-  std::size_t NE() const { return this->table_.NE(); }
+  std::size_t NE() const { return this->data_.N(); }
 
   /**
    *  @brief Return the number of values
@@ -74,7 +77,7 @@ public:
   /**
    *  @brief Return the energy values
    */
-  auto E() const { return this->table_.x(); }
+  auto E() const { return this->data_.column( 1 ); }
 
   /**
    *  @brief Return the energy values
@@ -84,7 +87,7 @@ public:
   /**
    *  @brief Return the multiplicities
    */
-  auto NU() const { return this->table_.y(); }
+  auto NU() const { return this->data_.column( 2 ); }
 
   /**
    *  @brief Return the multiplicities
