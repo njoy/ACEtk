@@ -17,12 +17,6 @@ FetchContent_Declare( catch-adapter
     GIT_SHALLOW     TRUE
     )
 
-FetchContent_Declare( date-adapter
-    GIT_REPOSITORY  https://github.com/njoy/date-adapter
-    GIT_TAG         origin/master
-    GIT_SHALLOW     TRUE
-    )
-
 FetchContent_Declare( dimwits
     GIT_REPOSITORY  https://github.com/njoy/DimensionalAnalysis
     GIT_TAG         origin/master
@@ -70,7 +64,6 @@ FetchContent_Declare( pybind11
 FetchContent_MakeAvailable(
     Log
     catch-adapter
-    date-adapter
     dimwits
     disco
     interpolation

@@ -66,7 +66,6 @@ target_include_directories( ACEtk INTERFACE src/ )
 target_link_libraries( ACEtk
     INTERFACE Log
     INTERFACE catch-adapter
-    INTERFACE date-adapter
     INTERFACE dimwits
     INTERFACE disco
     INTERFACE interpolation
