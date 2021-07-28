@@ -19,6 +19,8 @@ namespace block {
 
   // declarations - ACE data components
   void wrapInterpolationData( python::module&, python::module& );
+  void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
+  void wrapPolynomialFissionMultiplicity( python::module&, python::module& );
   void wrapCrossSectionData( python::module&, python::module& );
 
   // declarations - ACE table blocks
@@ -65,6 +67,8 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // wrap data components
   block::wrapInterpolationData( module, viewmodule );
+  block::wrapTabulatedFissionMultiplicity( module, viewmodule );
+  block::wrapPolynomialFissionMultiplicity( module, viewmodule );
   block::wrapCrossSectionData( module, viewmodule );
 
   // wrap ACE table blocks

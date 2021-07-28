@@ -86,8 +86,11 @@ pybind11_add_module( ACEtk.python
     python/src/Data.python.cpp
     python/src/Table.python.cpp
     python/src/ReferenceFrame.python.cpp
+    python/src/block/InterpolationData.python.cpp
     python/src/block/CrossSectionData.python.cpp
     python/src/block/PrincipalCrossSectionBlock.python.cpp
+    python/src/block/PolynomialFissionMultiplicity.python.cpp
+    python/src/block/TabulatedFissionMultiplicity.python.cpp
     python/src/block/ReactionNumberBlock.python.cpp
     python/src/block/ReactionQValueBlock.python.cpp
     python/src/block/FrameAndMultiplicityBlock.python.cpp

@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/CrossSectionData.hpp"
+#include "ACEtk/block/PolynomialFissionMultiplicity.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapCrossSectionData( python::module& module, python::module& ) {
+void wrapPolynomialFissionMultiplicity( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::CrossSectionData;
+  using Block = njoy::ACEtk::block::PolynomialFissionMultiplicity;
 
   // wrap views created by this block
 
@@ -23,30 +23,49 @@ void wrapCrossSectionData( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "CrossSectionData",
-    "Convenience interface for cross section data from the SIG block"
+    "PolynomialFissionMultiplicity",
+    "Polynomial fission multiplicity"
   );
 
   // wrap the block
   block
   .def_property_readonly(
 
-    "energy_index",
-    &Block::energyIndex,
-    "The energy index"
+    "LNU",
+    &Block::LNU,
+    "The representation type (should always be 1)"
   )
   .def_property_readonly(
 
-    "number_values",
-    &Block::numberValues,
-    "The number of cross section values"
+    "type",
+    &Block::type,
+    "The representation type (should always be 1)"
   )
   .def_property_readonly(
 
-    "cross_sections",
+    "NC",
+    &Block::NC,
+    "The number of polynomial coefficients"
+  )
+  .def_property_readonly(
+
+    "number_coefficients",
+    &Block::numberCoefficients,
+    "The number of polynomial coefficients"
+  )
+  .def_property_readonly(
+
+    "C",
     [] ( const Block& self ) -> DoubleRange
-       { return self.crossSections(); },
-    "The cross section values"
+       { return self.C(); },
+    "The coefficients"
+  )
+  .def_property_readonly(
+
+    "coefficients",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.coefficients(); },
+    "The coefficients"
   );
 
   // add standard block definitions

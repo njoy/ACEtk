@@ -35,6 +35,16 @@ public:
   #include "ACEtk/block/TabulatedFissionMultiplicity/src/ctor.hpp"
 
   /**
+   *  @brief Return the representation type (should always be 2)
+   */
+  std::size_t LNU() const { return this->XSS( 1 ); }
+
+  /**
+   *  @brief Return the representation type (should always be 2)
+   */
+  std::size_t type() const { return this->LNU(); }
+
+  /**
    *  @brief Return the number of interpolation regions
    */
   std::size_t NB() const { return this->interpolation_.NB(); }
