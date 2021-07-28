@@ -18,6 +18,7 @@ void wrapReferenceFrame( python::module&, python::module& );
 namespace block {
 
   // declarations - ACE data components
+  void wrapInterpolationData( python::module&, python::module& );
   void wrapCrossSectionData( python::module&, python::module& );
 
   // declarations - ACE table blocks
@@ -63,6 +64,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapTable( module, viewmodule );
 
   // wrap data components
+  block::wrapInterpolationData( module, viewmodule );
   block::wrapCrossSectionData( module, viewmodule );
 
   // wrap ACE table blocks
