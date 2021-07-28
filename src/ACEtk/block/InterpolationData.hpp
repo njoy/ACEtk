@@ -37,6 +37,11 @@ public:
   std::size_t numberInterpolationRegions() const { return this->NB(); }
 
   /**
+   *  @brief Return whether or not the data is linear-linear interpolatable
+   */
+  bool isLinearLinear() const { return this->NB() == 0; }
+
+  /**
    *  @brief Return the interpolation boundaries
    */
   auto NBT() const { return this->column( 1 ); }
@@ -56,6 +61,7 @@ public:
    */
   auto interpolants() const { return this->INT(); }
 
+  using Base::empty;
   using ColumnData::name;
   using ColumnData::length;
   using ColumnData::XSS;

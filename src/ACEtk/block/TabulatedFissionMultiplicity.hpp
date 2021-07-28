@@ -94,6 +94,7 @@ public:
    */
   auto multiplicities() const { return this->NU(); }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

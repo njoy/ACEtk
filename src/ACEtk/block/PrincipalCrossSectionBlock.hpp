@@ -75,6 +75,7 @@ public:
    */
   auto heating() const { return this->subrange( 4 ); }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

@@ -45,7 +45,7 @@ public:
   auto C( std::size_t index ) const {
 
     auto number = this->N();
-    return this->XSS( 1 + index * number, number );
+    return this->XSS( 2 + ( index - 1 ) * number, number );
   }
 
   /**
@@ -55,6 +55,7 @@ public:
    */
   auto column( std::size_t index ) const { return this->C( index ); }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

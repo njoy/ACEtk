@@ -93,6 +93,7 @@ public:
                  [] ( const auto& value ) { return std::abs( value ); } );
   }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

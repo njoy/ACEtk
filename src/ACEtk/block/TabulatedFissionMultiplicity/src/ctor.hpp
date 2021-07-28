@@ -36,11 +36,11 @@ TabulatedFissionMultiplicity( std::vector< double >&& energies,
 /**
  *  @brief Constructor
  *
- *  @param[in] begin    the begin iterator of the SIG block in the XSS array
- *  @param[in] end      the end iterator of the SIG block in the XSS array
+ *  @param[in] begin    the begin iterator of the multiplicity data in the XSS array
+ *  @param[in] end      the end iterator of the multiplicity data in the XSS array
  */
-TabulatedFissionMultiplicity( std::string&& name, Iterator begin, Iterator end ) :
-  Base( std::move( name ), begin, end ) {
+TabulatedFissionMultiplicity( Iterator begin, Iterator end ) :
+  Base( "NU::TABLE", begin, end ) {
 
   this->generateBlocks();
 }

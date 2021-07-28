@@ -58,6 +58,7 @@ public:
    */
   auto QValues() const { return this->XSS( 1, this->NTR() ); }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

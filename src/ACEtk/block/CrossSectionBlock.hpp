@@ -57,7 +57,9 @@ public:
    */
   std::size_t LSIG( std::size_t index ) const {
 
+    #ifndef NDEBUG
     this->verifyReactionIndex( index );
+    #endif
     return XSS( index );
   }
 
@@ -141,6 +143,7 @@ public:
                 static_cast< std::size_t >( XSS( sig + locator ) ) );
   }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

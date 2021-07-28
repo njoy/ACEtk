@@ -44,6 +44,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 235 == ncTable.massNumber() );
 
         // ESZ block
+        CHECK( false == ncTable.ESZ().empty() );
         CHECK( 76518 == ncTable.ESZ().energies().size() );
         CHECK( 76518 == ncTable.ESZ().total().size() );
         CHECK( 76518 == ncTable.ESZ().disappearance().size() );
@@ -56,7 +57,30 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 1e-11 == Approx( ncTable.ESZ().XSS( 1 ) ) );
         CHECK( 76518 == ncTable.ESZ().XSS( 1, ncTable.NES() ).size() );
 
+        // NU block
+        CHECK( false == ncTable.NU().empty() );
+
+        CHECK( true == ncTable.NU().hasPromptAndTotalFissionMultiplicity() );
+
+        auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( ncTable.NU().promptFissionMultiplicity() );
+        auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( ncTable.NU().totalFissionMultiplicity() );
+
+        CHECK( 0 == prompt.NB() );
+        CHECK( 79 == prompt.NE() );
+        CHECK( 1e-11 == Approx( prompt.energies().front() ) );
+        CHECK( 20. == Approx( prompt.energies().back() ) );
+        CHECK( 2.42085 == Approx( prompt.multiplicities().front() ) );
+        CHECK( 5.200845 == Approx( prompt.multiplicities().back() ) );
+
+        CHECK( 0 == total.NB() );
+        CHECK( 79 == total.NE() );
+        CHECK( 1e-11 == Approx( total.energies().front() ) );
+        CHECK( 20. == Approx( total.energies().back() ) );
+        CHECK( 2.4367 == Approx( total.multiplicities().front() ) );
+        CHECK( 5.209845 == Approx( total.multiplicities().back() ) );
+
         // MTR block
+        CHECK( false == ncTable.MTR().empty() );
         CHECK( 48 == ncTable.MTR().MTs().size() );
         CHECK( 16 == ncTable.MTR().MTs().front() );
         CHECK( 4 == ncTable.MTR().MTs().back() );
@@ -75,6 +99,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 48 == ncTable.MTR().index( 4 ) );
 
         // LQR block
+        CHECK( false == ncTable.LQR().empty() );
         CHECK( 48 == ncTable.LQR().QValues().size() );
         CHECK( -5.297781 == ncTable.LQR().QValues().front() );
         CHECK( 0. == ncTable.LQR().QValues().back() );
@@ -83,6 +108,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 0. == ncTable.LQR().QValue( 48 ) );
 
         // TYR block
+        CHECK( false == ncTable.TYR().empty() );
         CHECK( 48 == ncTable.TYR().referenceFrames().size() );
         CHECK( ReferenceFrame::CentreOfMass == ncTable.TYR().referenceFrames().front() );
         CHECK( ReferenceFrame::Laboratory == ncTable.TYR().referenceFrames().back() );
@@ -96,6 +122,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 0 == ncTable.TYR().multiplicity( 48 ) );
 
         // SIG block
+        CHECK( false == ncTable.SIG().empty() );
         CHECK( 48 == ncTable.SIG().NTR() );
 
         CHECK( 1 == ncTable.SIG().LSIG( 1 ) );

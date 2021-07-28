@@ -49,6 +49,7 @@ public:
     return this->XSS( 3, this->numberValues() );
   }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

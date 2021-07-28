@@ -48,6 +48,11 @@ public:
   /* methods */
 
   /**
+   *  @brief Return whether or not the block is empty
+   */
+  bool empty() const { return this->begin_ == this->end_; }
+
+  /**
    *  @brief Return the name of the block
    */
   const std::string& name() const { return this->name_; }

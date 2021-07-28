@@ -64,6 +64,7 @@ public:
    */
   auto coefficients() const { return this->C(); }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

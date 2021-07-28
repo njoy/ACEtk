@@ -109,6 +109,7 @@ public:
     }
   }
 
+  using Base::empty;
   using Base::name;
   using Base::length;
   using Base::XSS;

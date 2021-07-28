@@ -6,6 +6,7 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
+#include "ACEtk/block/FissionMultiplicityBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
 #include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
@@ -25,6 +26,7 @@ class ContinuousEnergyTable : protected Table {
 
   /* fields */
   block::ESZ esz_;
+  block::NU nu_;
   block::MTR mtr_;
   block::LQR lqr_;
   block::TYR tyr_;
@@ -47,6 +49,7 @@ class ContinuousEnergyTable : protected Table {
     auto dlw = begin + this->data().JXS(11) - 1;
 
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
+    this->nu_ = block::NU( this->data().JXS(2) > 0 ? nu : mtr, mtr );
     this->mtr_ = block::MTR( mtr, lqr, this->NTR() );
     this->lqr_ = block::LQR( lqr, tyr, this->NTR() );
     this->tyr_ = block::TYR( tyr, lsig, this->NTR() );
@@ -188,6 +191,16 @@ public:
    *  @brief Return the principal cross section block
    */
   const block::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
+
+  /**
+   *  @brief Return the fission multiplicity block
+   */
+  const block::NU& NU() const { return this->nu_; }
+
+  /**
+   *  @brief Return the fission multiplicity block
+   */
+  const block::NU& fissionMultiplicityBlock() const { return this->NU(); }
 
   /**
    *  @brief Return the reaction number block
