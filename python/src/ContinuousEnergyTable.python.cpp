@@ -187,7 +187,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   .def_property_readonly(
 
     "reaction_number_block",
-    &Table::principalCrossSectionBlock,
+    &Table::reactionNumberBlock,
     "The reaction number block"
   )
   .def_property_readonly(
