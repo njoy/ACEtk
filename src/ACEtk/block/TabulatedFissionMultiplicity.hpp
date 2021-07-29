@@ -45,9 +45,14 @@ public:
   std::size_t type() const { return this->LNU(); }
 
   /**
+   *  @brief Return the interpolation data
+   */
+  auto interpolationData() const { return this->interpolation_; }
+
+  /**
    *  @brief Return the number of interpolation regions
    */
-  std::size_t NB() const { return this->interpolation_.NB(); }
+  std::size_t NB() const { return this->interpolationData().NB(); }
 
   /**
    *  @brief Return the number of interpolation regions
@@ -57,7 +62,7 @@ public:
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto NBT() const { return this->interpolation_.NBT(); }
+  auto NBT() const { return this->interpolationData().NBT(); }
 
   /**
    *  @brief Return the interpolation boundaries
@@ -67,7 +72,7 @@ public:
   /**
    *  @brief Return the interpolants
    */
-  auto INT() const { return this->interpolation_.INT(); }
+  auto INT() const { return this->interpolationData().INT(); }
 
   /**
    *  @brief Return the interpolants

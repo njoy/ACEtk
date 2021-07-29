@@ -91,6 +91,7 @@ pybind11_add_module( ACEtk.python
     python/src/block/PrincipalCrossSectionBlock.python.cpp
     python/src/block/PolynomialFissionMultiplicity.python.cpp
     python/src/block/TabulatedFissionMultiplicity.python.cpp
+    python/src/block/FissionMultiplicityBlock.python.cpp
     python/src/block/ReactionNumberBlock.python.cpp
     python/src/block/ReactionQValueBlock.python.cpp
     python/src/block/FrameAndMultiplicityBlock.python.cpp
