@@ -1,3 +1,14 @@
+private:
+
+/**
+ *  @brief Private constructor
+ */
+ReactionQValueBlock( std::vector< double >&& qvalues, std::size_t ntr ) :
+  Base( "LQR", std::move( qvalues ) ),
+  ntr_( ntr ) {}
+
+public:
+
 ReactionQValueBlock() = default;
 
 ReactionQValueBlock( const ReactionQValueBlock& ) = default;
@@ -9,8 +20,7 @@ ReactionQValueBlock( ReactionQValueBlock&& ) = default;
  *  @param[in] qvalues    the Q values
  */
 ReactionQValueBlock( std::vector< double >&& qvalues ) :
-  Base( "LQR", std::move( qvalues ) ),
-  ntr_( qvalues.size() ) {}
+  ReactionQValueBlock( std::move( qvalues ), qvalues.size() ) {}
 
 /**
  *  @brief Constructor

@@ -36,11 +36,11 @@ void wrapReactionQValueBlock( python::module& module, python::module& ) {
   .def(
 
     python::init< std::vector< double >&& >(),
-    python::arg( "reactions" ),
+    python::arg( "qvalues" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self         the block\n"
-    "    reactions    the MT numbers"
+    "    self       the block\n"
+    "    qvalues    the Q values"
   )
   .def_property_readonly(
 
@@ -56,7 +56,7 @@ void wrapReactionQValueBlock( python::module& module, python::module& ) {
   )
   .def(
 
-    "QValue",
+    "q_value",
     &Block::QValue,
     python::arg( "index" ),
     "The reaction Q value for a reaction index\n\n"
@@ -66,7 +66,7 @@ void wrapReactionQValueBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "QValues",
+    "q_values",
     [] ( const Block& self ) -> DoubleRange
        { return self.QValues(); },
     "The reaction Q values"
