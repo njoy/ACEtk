@@ -174,6 +174,15 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
 
         verifyChunk( chunk );
       } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
     } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
@@ -184,6 +193,15 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
             "be tested" ) {
 
         verifyChunk( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
       } // THEN
     } // WHEN
   } // GIVEN

@@ -9,6 +9,8 @@ from ACEtk import ReactionNumberBlock
 class Test_ACEtk_ReactionNumberBlock( unittest.TestCase ) :
     """Unit test for the ReactionNumberBlock class."""
 
+    chunk = [ 102, 204, 444 ]
+
     def test_component( self ) :
 
         def verify_chunk( self, chunk ) :
@@ -42,6 +44,12 @@ class Test_ACEtk_ReactionNumberBlock( unittest.TestCase ) :
             with self.assertRaises( Exception ) :
 
                 index = chunk.index(1)
+
+            # verify the xss array
+            xss = chunk.xss_array
+            for index in range( chunk.length ) :
+
+                self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
         chunk = ReactionNumberBlock( reactions = [ 102, 204, 444 ] )

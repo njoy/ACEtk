@@ -8,7 +8,7 @@
 namespace njoy {
 namespace ACEtk {
 
-  enum class ReferenceFrame : bool {
+  enum class ReferenceFrame : short {
 
     Laboratory,   // lab reference frame
     CentreOfMass  // com reference frame
