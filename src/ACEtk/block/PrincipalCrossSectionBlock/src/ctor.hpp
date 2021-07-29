@@ -3,6 +3,24 @@ PrincipalCrossSectionBlock() = default;
 PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
 PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
 
+private:
+
+/**
+ *  @brief Private constructor
+ */
+PrincipalCrossSectionBlock( std::vector< double >&& energies,
+                            std::vector< double >&& total,
+                            std::vector< double >&& disappearance,
+                            std::vector< double >&& elastic,
+                            std::vector< double >&& heating,
+                            std::size_t nes ) :
+  Base( "ESZ", generateXSS( std::move( energies ), std::move( total ),
+                            std::move( disappearance ), std::move( elastic ),
+                            std::move( heating ) ) ),
+  nes_( nes ) {}
+
+public:
+
 /**
  *  @brief Constructor
  *
@@ -17,11 +35,11 @@ PrincipalCrossSectionBlock( std::vector< double >&& energies,
                             std::vector< double >&& disappearance,
                             std::vector< double >&& elastic,
                             std::vector< double >&& heating ) :
-  Base( "ESZ",
-        generateXSS( std::move( energies ), std::move( total ),
-                     std::move( disappearance ), std::move( elastic ),
-                     std::move( heating ) ) ),
-  nes_( energies.size() ) {}
+  PrincipalCrossSectionBlock(
+      std::move( energies ), std::move( total ),
+      std::move( disappearance ), std::move( elastic ),
+      std::move( heating ),
+      energies.size() ) {}
 
 /**
  *  @brief Constructor

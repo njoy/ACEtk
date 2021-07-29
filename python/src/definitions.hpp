@@ -91,6 +91,12 @@ void addStandardBlockDefinitions( PythonClass& block ) {
   )
   .def_property_readonly(
 
+    "empty",
+    [] ( const Block& self ) { return self.empty(); },
+    "Whether or not the block is empty"
+  )
+  .def_property_readonly(
+
     "xss_array",
     [] ( const Block& self ) -> DoubleRange
        { return self.XSS(); },

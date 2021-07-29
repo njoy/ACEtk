@@ -10,11 +10,12 @@ enable_testing()
 # Unit testing directories
 #######################################################################
 
+add_subdirectory( src/ACEtk/ContinuousEnergyTable/test )
 add_subdirectory( src/ACEtk/Table/Data/Parse/test )
 add_subdirectory( src/ACEtk/Table/Data/test )
 add_subdirectory( src/ACEtk/Table/Header/test )
 add_subdirectory( src/ACEtk/Table/test )
-add_subdirectory( src/ACEtk/ContinuousEnergyTable/test )
+add_subdirectory( src/ACEtk/block/PrincipalCrossSectionBlock/test )
 add_subdirectory( src/ACEtk/details/verify/CDF/test )
 add_subdirectory( src/ACEtk/details/verify/Positive/test )
 add_subdirectory( src/ACEtk/details/verify/Sorted/test )
