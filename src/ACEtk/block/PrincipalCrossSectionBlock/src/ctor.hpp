@@ -1,8 +1,3 @@
-PrincipalCrossSectionBlock() = default;
-
-PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
-PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
-
 private:
 
 /**
@@ -20,6 +15,11 @@ PrincipalCrossSectionBlock( std::vector< double >&& energies,
   nes_( nes ) {}
 
 public:
+
+  PrincipalCrossSectionBlock() = default;
+
+  PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
+  PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
 
 /**
  *  @brief Constructor

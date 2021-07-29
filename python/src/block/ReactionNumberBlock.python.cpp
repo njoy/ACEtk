@@ -89,6 +89,15 @@ void wrapReactionNumberBlock( python::module& module, python::module& ) {
   )
   .def(
 
+    "has_MT",
+    &Block::hasMT,
+    python::arg( "reaction" ),
+    "Return whether or not the reaction number is present\n\n"
+    "    self        the block\n"
+    "    reaction    the reaction number"
+  )
+  .def(
+
     "has_reaction_number",
     &Block::hasReactionNumber,
     python::arg( "reaction" ),

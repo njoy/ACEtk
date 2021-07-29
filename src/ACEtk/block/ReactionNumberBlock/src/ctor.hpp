@@ -1,3 +1,14 @@
+private:
+
+/**
+ *  @brief Private constructor
+ */
+ReactionNumberBlock( std::vector< unsigned int >&& reactions, std::size_t ntr ) :
+  Base( "MTR", generateXSS( std::move( reactions ) ) ),
+  ntr_( ntr ) {}
+
+public:
+
 ReactionNumberBlock() = default;
 
 ReactionNumberBlock( const ReactionNumberBlock& ) = default;
@@ -9,8 +20,7 @@ ReactionNumberBlock( ReactionNumberBlock&& ) = default;
  *  @param[in] mts    the MT numbers
  */
 ReactionNumberBlock( std::vector< unsigned int >&& reactions ) :
-  Base( "MTR", generateXSS( std::move( reactions ) ) ),
-  ntr_( reactions.size() ) {}
+  ReactionNumberBlock( std::move( reactions ), reactions.size() ) {}
 
 /**
  *  @brief Constructor
@@ -20,7 +30,7 @@ ReactionNumberBlock( std::vector< unsigned int >&& reactions ) :
  *  @param[in] ntr   the number of reactions (excluding elastic)
  */
 ReactionNumberBlock( Iterator mtr, Iterator end, unsigned int ntr ) :
-  Base( "ESZ", mtr, end ), ntr_( ntr ) {
+  Base( "MTR", mtr, end ), ntr_( ntr ) {
 
   verifySize( this->begin(), this->end(), this->ntr_ );
 }

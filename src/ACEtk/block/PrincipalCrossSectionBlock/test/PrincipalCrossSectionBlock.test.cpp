@@ -326,6 +326,8 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
   CHECK( 495 == chunk.length() );
   CHECK( "ESZ" == chunk.name() );
 
+  CHECK( 495 == chunk.XSS().size() );
+
   CHECK( 99 == chunk.NES() );
   CHECK( 99 == chunk.numberEnergyPoints() );
   CHECK( 99 == chunk.energies().size() );
