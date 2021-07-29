@@ -1,3 +1,17 @@
+private:
+
+/**
+ *  @brief Private constructor
+ */
+CrossSectionBlock( std::vector< CrossSectionData >&& xs, std::size_t ntr ) :
+  Base( "SIG", generateXSS( std::move( xs ) ) ),
+  ntr_( ntr ) {
+
+  this->sig_ = this->begin() + this->ntr_;    
+}
+
+public:
+
 CrossSectionBlock() = default;
 
 CrossSectionBlock( const CrossSectionBlock& ) = default;
@@ -9,8 +23,7 @@ CrossSectionBlock( CrossSectionBlock&& ) = default;
  *  @param[in] xs    the cross section data
  */
 CrossSectionBlock( std::vector< CrossSectionData >&& xs ) :
-  Base( "SIG", generateXSS( std::move( xs ) ) ),
-  ntr_( xs.size() ) {}
+  CrossSectionBlock( std::move( xs ), xs.size() ) {}
 
 /**
  *  @brief Constructor

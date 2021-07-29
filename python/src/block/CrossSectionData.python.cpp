@@ -29,6 +29,16 @@ void wrapCrossSectionData( python::module& module, python::module& ) {
 
   // wrap the block
   block
+  .def(
+
+    python::init< std::size_t, std::vector< double >&& >(),
+    python::arg( "index" ), python::arg( "values" ),
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self      the block\n"
+    "    index     the energy index\n"
+    "    values    the cross section values"
+  )
   .def_property_readonly(
 
     "energy_index",

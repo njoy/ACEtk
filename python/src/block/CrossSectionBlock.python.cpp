@@ -57,7 +57,7 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
   )
   .def(
 
-    "lsig",
+    "LSIG",
     &Block::LSIG,
     python::arg( "index" ),
     "Return the relative cross section locator for a reaction index\n\n"
