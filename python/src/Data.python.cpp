@@ -4,6 +4,7 @@
 
 // local includes
 #include "ACEtk/Table.hpp"
+#include "views.hpp"
 
 // namespace aliases
 namespace python = pybind11;
@@ -128,6 +129,18 @@ void wrapData( python::module& module, python::module& ) {
     "Arguments:\n"
     "    self     the data arrays\n"
     "    index    the index (one-based)"
+  )
+  .def(
+
+    "xss",
+    [] ( const Component& self, std::size_t index, std::size_t length ) -> DoubleRange
+       { return self.XSS( index, length ); },
+    python::arg( "index" ), python::arg( "length" ),
+    "Return a subrange of a given length from the XSS array\n\n"
+    "Arguments:\n"
+    "    self      the data arrays\n"
+    "    index     the index (one-based)\n"
+    "    length    the length of the subrange"
   )
   .def_static(
 
