@@ -1,15 +1,7 @@
 ########################################################################
 # Preamble
 ########################################################################
-
 cmake_minimum_required( VERSION 3.14 )
-
-if(DEFINED PROJECT_NAME)
-  set(subproject ON)
-else()
-  set(subproject OFF)
-endif()
-
 project( ACEtk LANGUAGES CXX )
 
 ########################################################################
@@ -19,7 +11,7 @@ project( ACEtk LANGUAGES CXX )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-option( ACEtk_unit_tests "Compile the ACEtk unit tests and integrate with ctest" OFF )
+option(ACEtk_unit_tests "Build the ACEtk unit tests" OFF)
 option( ACEtk.python "Build ACEtk python bindings" ON )
 option( strict_compile
     "Treat all warnings as errors." ON
