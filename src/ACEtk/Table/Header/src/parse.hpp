@@ -48,10 +48,7 @@ static Header parse( State< Iterator >& state ) {
   Record< Character<10>, RetainCarriage >::read( state.position, state.end,
 					                                       firstField );
 
-  const std::regex
-  versionPattern( "\\s*[[:d:]]+\\.[[:d:]]+\\.[[:d:]]+",
-                  std::regex::optimize|std::regex::nosubs );
-
+  const std::regex versionPattern( "\\s*\\d+\\.\\d+\\.\\d+\\s*" );
   if ( !std::regex_match( firstField, versionPattern ) ) {
 
     state.position = begin;
