@@ -27,8 +27,9 @@ add_subdirectory( src/ACEtk/interpretation/EPR/test )
 add_subdirectory( src/ACEtk/interpretation/MP1/test )
 
 #######################################################################
-# python tests 
+# python tests
 #######################################################################
+
 if( ACEtk.python )
   add_subdirectory( python/test )
 endif()
