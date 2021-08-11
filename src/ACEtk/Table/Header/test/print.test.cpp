@@ -1,12 +1,12 @@
 #include "catch.hpp"
-#include "ACEtk.hpp"
+#include "ACEtk/Table.hpp"
 
 #include <sstream>
 
 using namespace njoy::ACEtk;
 
 SCENARIO("print a 1.0.0 header"){
-  std::string retroHeader = 
+  std::string retroHeader =
     " 92235.80c  233.024800  2.5301E-08   12/19/12\n"
     "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9228\n";
 
@@ -19,7 +19,7 @@ SCENARIO("print a 1.0.0 header"){
 }
 
 SCENARIO("2.0.1 header"){
-  std::string modernHeader = 
+  std::string modernHeader =
     "     2.0.1            1095242.710nc              ENDFB-VII.1\n"
     "  239.980100   2.5301E-08 2012-12-13    3\n"
     "The next two lines are the first two lines of ’old-style’ ACE.    \n"
