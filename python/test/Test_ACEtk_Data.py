@@ -123,6 +123,16 @@ class Test_ACEtk_Data( unittest.TestCase ) :
             self.assertAlmostEqual( 1.12500000000E+00, chunk.xss( 5 ) )
             self.assertAlmostEqual( 1.15625000000E+00, chunk.xss( 6 ) )
 
+            range = chunk.xss( 1, 2 )
+            self.assertEqual( 2, len( range ) );
+            self.assertAlmostEqual( 1.00000000000E+00, range[0] )
+            self.assertAlmostEqual( 1.03125000000E+00, range[1] )
+
+            range = chunk.xss( 2, 2 )
+            self.assertEqual( 2, len( range ) );
+            self.assertAlmostEqual( 1.03125000000E+00, range[0] )
+            self.assertAlmostEqual( 1.06250000000E+00, range[1] )
+
             # verify string
             self.assertEqual( self.chunk, chunk.to_string() )
 

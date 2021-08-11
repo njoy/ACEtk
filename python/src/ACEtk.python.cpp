@@ -3,6 +3,7 @@
 #include <pybind11/stl.h>
 
 // other includes
+#include "views.hpp"
 
 // namespace aliases
 namespace python = pybind11;
@@ -25,6 +26,15 @@ PYBIND11_MODULE( ACEtk, module ) {
     "sequence",
     "sequence - ACE sequences (internal use only)"
   );
+
+  // wrap some basic recurring views
+  // none of these are supposed to be created directly by the user
+  wrapBasicRandomAccessAnyViewOf< double >(
+      viewmodule,
+      "any_view< double, random_access >" );
+  wrapBasicRandomAccessAnyViewOf< int >(
+      viewmodule,
+      "any_view< int, random_access >" );
 
   // wrap generic table components
   wrapData( module, viewmodule );
