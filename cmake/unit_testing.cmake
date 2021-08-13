@@ -30,3 +30,11 @@ add_subdirectory( src/ACEtk/interpretation/DEDX1/test )
 add_subdirectory( src/ACEtk/interpretation/EL03/test )
 add_subdirectory( src/ACEtk/interpretation/EPR/test )
 add_subdirectory( src/ACEtk/interpretation/MP1/test )
+
+#######################################################################
+# python tests
+#######################################################################
+
+if( ACEtk.python )
+  add_subdirectory( python/test )
+endif()
