@@ -27,7 +27,7 @@ SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
         { 519, 2.745299999992E+00 },
 	{ 584, 7.943300000026E+01 },
 	{ 646, 1.000000000000E+05 } };
-      
+
       const auto energies = incoh.energies();
       for ( const auto& pair : referencePhotonEnergies ){
 	const auto index = pair.first;
@@ -35,7 +35,7 @@ SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
 	REQUIRE( energies[ index ].value == Approx( reference ).epsilon( 1e-8 ) );
       }
     }
-    
+
     WHEN( "Querying for the incoherent scattering cross sections" ){
       const std::map< int, double > referenceIncoherentXS{
 	{   0, 9.562300000011E-08 },
@@ -49,7 +49,7 @@ SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
 	{ 520, 1.196748005439E-01 },
 	{ 585, 9.876644877527E-03 },
 	{ 646, 1.704199999997E-05 } };
-      
+
       const auto incoherentScatteringXS = incoh.crossSection();
       for ( const auto& pair : referenceIncoherentXS ){
 	const auto index = pair.first;
@@ -57,11 +57,11 @@ SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
 	REQUIRE( incoherentScatteringXS[ index ].value == Approx( reference ) );
       }
     }
-    
-    const auto incohff = incoh.formFactors();    
+
+    const auto incohff = incoh.formFactors();
     WHEN( "Querying for the independant variable for the photon incoherent form factors" ) {
       const auto var = incohff.scatteringCosines();
-      auto compairs = ranges::view::zip( refIndVarIncoherentFF, var );
+      auto compairs = ranges::views::zip( refIndVarIncoherentFF, var );
       for( const auto pair : compairs ){
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
@@ -69,7 +69,7 @@ SCENARIO( "Test interpretation::EPRdata::Incoherent" ){
 
     WHEN( "Querying for the photon incoherent form factors" ) {
       const auto differential = incohff.differential();
-      auto compairs = ranges::view::zip( refIncoherentFF, differential );
+      auto compairs = ranges::views::zip( refIncoherentFF, differential );
       for( const auto pair : compairs ){
 	REQUIRE( pair.first == Approx( pair.second ) );
       }

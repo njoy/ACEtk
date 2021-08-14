@@ -26,28 +26,28 @@ namespace{
       3.000000000000E-02, 2.000000000000E-02, 1.500000000000E-02,
       1.000000000000E-02, 8.000000000000E-03, 6.000000000000E-03,
       5.000000000000E-03, 4.000000000000E-03, 3.000000000000E-03,
-      2.000000000000E-03, 1.500000000000E-03, 1.000000000000E-03 }};      
+      2.000000000000E-03, 1.500000000000E-03, 1.000000000000E-03 }};
 }
 
-SCENARIO("test interpretation::EL03"){  
+SCENARIO("test interpretation::EL03"){
   auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
-  
+
   GIVEN("An ACE Table for 1000.e03"){
     const auto el03 = interpretation::EL03( table );
 
     WHEN("querying for the target atomic number"){
       REQUIRE( el03.atomicNumber() == 1 );
     }
-    
+
     WHEN("Querying for the energy grid in MeV,"
 	 "on which the radiative stopping interpolation are evaluated") {
-      const auto trial = el03.radiativeStoppingPower().energyGrid(); 
-      const auto reference = referenceEnergyGrid | ranges::view::reverse;
-      for( const auto pair : ranges::view::zip( reference, trial ) ) {
+      const auto trial = el03.radiativeStoppingPower().energyGrid();
+      const auto reference = referenceEnergyGrid | ranges::cpp20::views::reverse;
+      for( const auto pair : ranges::views::zip( reference, trial ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
-    
+
     WHEN("Querying for the radiative stopping power evaluation points"){
       const std::map< int, double > mcnpReference{
         { 0, 1.5709714430603072E-003 },
@@ -60,7 +60,7 @@ SCENARIO("test interpretation::EL03"){
         const auto index = pair.first;
         const auto reference = pair.second;
         REQUIRE( stoppingPowers[index].value * 1e28
-                 ==  Approx( reference ).epsilon( 1e-4 ) );                 
+                 ==  Approx( reference ).epsilon( 1e-4 ) );
       }
     }
   }

@@ -2,6 +2,7 @@
 #define NJOY_ACETK_TABLE
 
 // system includes
+#include <cctype>
 #include <istream>
 #include <regex>
 #include <string>
@@ -10,7 +11,6 @@
 // other includes
 #include "ACEtk/State.hpp"
 #include "header-utilities.hpp"
-#include "date.h"
 #include "disco.hpp"
 #include "dimwits.hpp"
 #include "Log.hpp"
@@ -19,7 +19,6 @@
 namespace njoy {
 namespace ACEtk {
 
-using namespace date;
 using namespace disco;
 using namespace dimwits;
 

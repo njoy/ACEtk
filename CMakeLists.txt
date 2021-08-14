@@ -11,7 +11,7 @@ project( ACEtk LANGUAGES CXX )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-option(ACEtk_unit_tests "Build the ACEtk unit tests" OFF)
+option(ACEtk.tests "Build the ACEtk unit tests" OFF)
 option( ACEtk.python "Build ACEtk python bindings" ON )
 option( strict_compile
     "Treat all warnings as errors." ON
@@ -57,13 +57,11 @@ endif()
 
 include_directories( src/ )
 
-add_library( ACEtk INTERFACE
-    )
+add_library( ACEtk INTERFACE )
 target_include_directories( ACEtk INTERFACE src/ )
 target_link_libraries( ACEtk
     INTERFACE Log
     INTERFACE catch-adapter
-    INTERFACE date-adapter
     INTERFACE dimwits
     INTERFACE disco
     INTERFACE interpolation
@@ -81,7 +79,20 @@ if(ACEtk.python)
     python/src/ACEtk.python.cpp
     python/src/Data.python.cpp
     python/src/Table.python.cpp
+    python/src/ReferenceFrame.python.cpp
+    python/src/block/InterpolationData.python.cpp
+    python/src/block/CrossSectionData.python.cpp
+    python/src/block/PrincipalCrossSectionBlock.python.cpp
+    python/src/block/PolynomialFissionMultiplicity.python.cpp
+    python/src/block/TabulatedFissionMultiplicity.python.cpp
+    python/src/block/FissionMultiplicityBlock.python.cpp
+    python/src/block/ReactionNumberBlock.python.cpp
+    python/src/block/ReactionQValueBlock.python.cpp
+    python/src/block/FrameAndMultiplicityBlock.python.cpp
+    python/src/block/CrossSectionBlock.python.cpp
+    python/src/ContinuousEnergyTable.python.cpp
   )
+
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
   target_include_directories( ACEtk.python PRIVATE python/src )
   target_compile_options( ACEtk.python PRIVATE "-fvisibility=hidden" )
@@ -90,12 +101,8 @@ if(ACEtk.python)
   set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON)
 endif()
 
-#######################################################################
-# Top-level Only
-#######################################################################
-
 if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
-  if( ACEtk_unit_tests )
+  if( ACEtk.tests )
     include( cmake/unit_testing.cmake )
   endif()
 endif()

@@ -3,6 +3,6 @@ auto energyGrid() const {
   const auto start  = this->table.data().JXS( 2 );
   return
     this->table.data().XSS( start, length )
-    | ranges::view::transform( []( auto&& entry )
+    | ranges::cpp20::views::transform( []( auto&& entry )
 			       { return entry * mega(electronVolt); } );
 }

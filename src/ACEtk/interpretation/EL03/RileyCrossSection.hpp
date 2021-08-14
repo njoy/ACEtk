@@ -11,9 +11,9 @@ public:
     const auto start  = this->table.data().JXS( 4 );
     return
       this->table.data().XSS( start, RileyCrossSection::length )
-      | ranges::view::stride( params_per_energy() )
-      | ranges::view::reverse
-      | ranges::view::transform ( [] ( auto && entry )
+      | ranges::views::stride( params_per_energy() )
+      | ranges::cpp20::views::reverse
+      | ranges::cpp20::views::transform ( [] ( auto && entry )
 				  { return entry * kilo(electronVolt); } );
   }
 
@@ -21,10 +21,10 @@ public:
     const auto start = this->table.data().JXS( 4 );
     return
       this->table.data().XSS( start, RileyCrossSection::length )
-      | ranges::view::reverse
-      | ranges::view::chunk( params_per_energy() )
-      | ranges::view::transform( ranges::view::reverse )
-      | ranges::view::transform( ranges::view::drop_exactly(1) );
+      | ranges::cpp20::views::reverse
+      | ranges::views::chunk( params_per_energy() )
+      | ranges::cpp20::views::transform( ranges::cpp20::views::reverse )
+      | ranges::cpp20::views::transform( ranges::views::drop_exactly(1) );
   }
 
 };

@@ -8,9 +8,32 @@
 // namespace aliases
 namespace python = pybind11;
 
-// declarations
+// declarations - generic ACE table
 void wrapData( python::module&, python::module& );
 void wrapTable( python::module&, python::module& );
+
+// declarations - enumerators
+void wrapReferenceFrame( python::module&, python::module& );
+
+namespace block {
+
+  // declarations - ACE data components
+  void wrapInterpolationData( python::module&, python::module& );
+  void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
+  void wrapPolynomialFissionMultiplicity( python::module&, python::module& );
+  void wrapCrossSectionData( python::module&, python::module& );
+
+  // declarations - ACE table blocks
+  void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
+  void wrapFissionMultiplicityBlock( python::module&, python::module& );
+  void wrapReactionNumberBlock( python::module&, python::module& );
+  void wrapReactionQValueBlock( python::module&, python::module& );
+  void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
+  void wrapCrossSectionBlock( python::module&, python::module& );
+}
+
+// declarations - ACE table types
+void wrapContinuousEnergyTable( python::module&, python::module& );
 
 /**
  *  @brief ACEtk python bindings
@@ -32,11 +55,31 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapBasicRandomAccessAnyViewOf< double >(
       viewmodule,
       "any_view< double, random_access >" );
-  wrapBasicRandomAccessAnyViewOf< int >(
+  wrapBasicRandomAccessAnyViewOf< unsigned int >(
       viewmodule,
-      "any_view< int, random_access >" );
+      "any_view< unsigned int, random_access >" );
 
-  // wrap generic table components
+  // wrap enumerators
+  wrapReferenceFrame( module, viewmodule );
+
+  // wrap generic ACE table components
   wrapData( module, viewmodule );
   wrapTable( module, viewmodule );
+
+  // wrap data components
+  block::wrapInterpolationData( module, viewmodule );
+  block::wrapTabulatedFissionMultiplicity( module, viewmodule );
+  block::wrapPolynomialFissionMultiplicity( module, viewmodule );
+  block::wrapCrossSectionData( module, viewmodule );
+
+  // wrap ACE table blocks
+  block::wrapPrincipalCrossSectionBlock( module, viewmodule );
+  block::wrapFissionMultiplicityBlock( module, viewmodule );
+  block::wrapReactionNumberBlock( module, viewmodule );
+  block::wrapReactionQValueBlock( module, viewmodule );
+  block::wrapFrameAndMultiplicityBlock( module, viewmodule );
+  block::wrapCrossSectionBlock( module, viewmodule );
+
+  // wrap ACE table types
+  wrapContinuousEnergyTable( module, viewmodule );
 }

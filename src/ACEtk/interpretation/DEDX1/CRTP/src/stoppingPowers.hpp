@@ -13,7 +13,7 @@ auto stoppingPowers() const {
 
     return
       table.data().XSS( start, length )
-      | ranges::view::chunk( self.numEnergies() );
+      | ranges::views::chunk( self.numEnergies() );
   }();
 
   using LogEnergies = decltype(this->logEnergies());
@@ -36,12 +36,12 @@ auto stoppingPowers() const {
     auto logEnergies() const {return this->logEnergies_;}
     auto energies() const {
       return this->logEnergies()
-	| ranges::view::transform([](auto&& e){ return std::exp(e) * mev;});
+	| ranges::cpp20::views::transform([](auto&& e){ return std::exp(e) * mev;});
     }
     auto logValues() const {return this->logValues_;}
     auto values() const {
       return this->logValues() |
-	ranges::view::transform([](auto&& v){ return std::exp(v) * (cm*cm*mev);});
+	ranges::cpp20::views::transform([](auto&& v){ return std::exp(v) * (cm*cm*mev);});
     }
   };
 
@@ -51,10 +51,10 @@ auto stoppingPowers() const {
     return StoppingPower{logTemperature, logDensity, this->logEnergies(), rangeLogValues};
   };
 
-  auto densAndTemps = ranges::view::cartesian_product(this->logTemperatures(),
+  auto densAndTemps = ranges::views::cartesian_product(this->logTemperatures(),
 						      this->logDensities());
 
-  auto stoppingPowerRange = ranges::view::zip_with(makeStoppingPower,
+  auto stoppingPowerRange = ranges::views::zip_with(makeStoppingPower,
 						   densAndTemps,
 						   logStoppingPowerRanges);
 

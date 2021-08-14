@@ -3,9 +3,9 @@
  *
  *  @param[in] ostream   the output stream to write to
  */
-template< int... values, typename Ostream >
+template< typename Ostream >
 void print( Ostream& ostream ) const {
 
-  this->header_.print< values... >( ostream );
+  this->header_.print( ostream );
   this->data_.print( ostream );
 }

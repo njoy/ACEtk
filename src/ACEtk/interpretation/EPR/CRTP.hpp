@@ -18,7 +18,7 @@ public:
 
   auto energies() const {
     return this->logEnergies()
-      | ranges::view::transform( []( auto&& entry ){
+      | ranges::cpp20::views::transform( []( auto&& entry ){
 	  return std::exp(entry) * mega(electronVolt); } );
   }
 
@@ -28,7 +28,7 @@ public:
 
   auto crossSection() const {
     return this->logCrossSection()
-      | ranges::view::transform( []( auto&& entry ){
+      | ranges::cpp20::views::transform( []( auto&& entry ){
 	  return std::exp(entry) * barn; } );
   }
 

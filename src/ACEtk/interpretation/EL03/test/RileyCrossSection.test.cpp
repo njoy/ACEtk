@@ -8,7 +8,7 @@ namespace{
   std::array< double, 9 > referenceEnergyGrid = {{
       2.560000000000E+02, 1.280000000000E+02, 6.400000000000E+01,
       3.200000000000E+01, 1.600000000000E+01, 8.000000000000E+00,
-      4.000000000000E+00, 2.000000000000E+00, 1.000000000000E+00 }};      
+      4.000000000000E+00, 2.000000000000E+00, 1.000000000000E+00 }};
 
   std::array< double, 13 > referenceRileyScatteringParameters1 = {{
       4.073883650000E-09, -1.335501900000E+00, 1.045778020000E+00,
@@ -25,7 +25,7 @@ namespace{
 	8.057218860000E-03 }};
 }
 
-SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){  
+SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){
   auto table = Table( njoy::utility::slurpFileToMemory("1000.e03") );
 
   GIVEN( "an ACE Table for 1000.03e" ) {
@@ -34,22 +34,22 @@ SCENARIO( "test interpretation::EL03::RileyCrossSections.hpp" ){
     WHEN( "querying for the energy points, "
 	  "on which the Riley scattering cross section parameters are evaluated" ) {
       const auto rileyEnergy = el03.rileyCrossSection().energyGrid();
-      const auto reference = referenceEnergyGrid | ranges::view::reverse;
-      for ( const auto pair : ranges::view::zip( reference, rileyEnergy ) ) {
+      const auto reference = referenceEnergyGrid | ranges::cpp20::views::reverse;
+      for ( const auto pair : ranges::views::zip( reference, rileyEnergy ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
 
     WHEN( "querying for the Riley scattering cross section parameters at 1-keV" ) {
       const auto reference1 = referenceRileyScatteringParameters2;
-      for ( const auto pair : ranges::view::zip ( reference1, el03.rileyCrossSection().values()[0] ) ) {
-	REQUIRE( pair.first == Approx( pair.second ) );	
+      for ( const auto pair : ranges::views::zip ( reference1, el03.rileyCrossSection().values()[0] ) ) {
+	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
 
-    WHEN( "querying for the Riley scattering cross section parameters at 256-keV" ) {    
-      const auto reference2 = referenceRileyScatteringParameters1;      
-      for ( const auto pair : ranges::view::zip ( reference2, el03.rileyCrossSection().values()[8] ) ) {
+    WHEN( "querying for the Riley scattering cross section parameters at 256-keV" ) {
+      const auto reference2 = referenceRileyScatteringParameters1;
+      for ( const auto pair : ranges::views::zip ( reference2, el03.rileyCrossSection().values()[8] ) ) {
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }

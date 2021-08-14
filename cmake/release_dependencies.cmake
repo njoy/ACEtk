@@ -10,11 +10,6 @@ FetchContent_Declare( catch-adapter
     GIT_TAG         fb84b82ebf7a4789aa43cea560680cf745c6ee4f
     )
 
-FetchContent_Declare( date-adapter
-    GIT_REPOSITORY  https://github.com/njoy/date-adapter
-    GIT_TAG         c929fa53cacb9074b53360cb696c5a669df3723f
-    )
-
 FetchContent_Declare( dimwits
     GIT_REPOSITORY  https://github.com/njoy/DimensionalAnalysis
     GIT_TAG         acd794d373c8740a788f5c9d58a6eb8ba4d9861a
@@ -66,7 +61,6 @@ FetchContent_Declare( spdlog
 
 FetchContent_MakeAvailable(
     catch-adapter
-    date-adapter
     dimwits
     disco
     hana-adapter
