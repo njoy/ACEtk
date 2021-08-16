@@ -1,7 +1,7 @@
 
 add_executable( ACEtk.details.verify.test
-                size.test.cpp
-                verify.test.cpp )
+                verify.test.cpp 
+                size.test.cpp )
 target_compile_options( ACEtk.details.verify.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}

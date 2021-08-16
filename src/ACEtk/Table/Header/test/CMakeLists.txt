@@ -1,5 +1,5 @@
-add_executable( ACEtk.Table.Header.test Header.test.cpp )
 
+add_executable( ACEtk.Table.Header.test Header.test.cpp )
 target_compile_options( ACEtk.Table.Header.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}
