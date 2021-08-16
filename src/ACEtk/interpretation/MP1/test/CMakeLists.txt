@@ -4,7 +4,6 @@ add_executable( ACEtk.interpretation.MP1.test
                 cumulativeDistributions.test.cpp
                 deflectionCosines.test.cpp
                 energyGrid.test.cpp )
-
 target_compile_options( ACEtk.interpretation.MP1.test PRIVATE ${${PREFIX}_common_flags}
 $<$<BOOL:${strict}>:${${PREFIX}_strict_flags}>$<$<CONFIG:DEBUG>:
 ${${PREFIX}_DEBUG_flags}
