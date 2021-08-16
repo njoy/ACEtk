@@ -37,10 +37,13 @@ message( STATUS "Using ${REPOSITORIES} repositories" )
 
 if( REPOSITORIES STREQUAL "develop" )
     include( cmake/develop_dependencies.cmake )
+    
 elseif( REPOSITORIES STREQUAL "release" )
     include( cmake/release_dependencies.cmake )
+    
 elseif( REPOSITORIES STREQUAL "local" )
     include( cmake/local_dependencies.cmake )
+    
 endif()
 
 
