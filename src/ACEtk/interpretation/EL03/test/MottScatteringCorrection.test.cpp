@@ -23,31 +23,31 @@ namespace{
 
 }
 
-SCENARIO("Test interpretation::EL03::MottScatteringCorrection.hpp") {  
-  auto table = Table( njoy::utility::slurpFileToMemory( "1000.03e" ) );
-  
+SCENARIO("Test interpretation::EL03::MottScatteringCorrection.hpp") {
+  auto table = Table( njoy::utility::slurpFileToMemory( "1000.e03" ) );
+
   GIVEN("An ACE Table for 1000.03e") {
     const auto el03 = interpretation::EL03( table );
 
     WHEN("querying for the energy grid in MeV, "
 	 "on which the mott scattering correction data points are evaluated") {
-      const auto trial = el03.mottScatteringCorrection().energies();
-      const auto reference = referenceEnergyGrid | ranges::view::reverse;
-      for ( const auto pair : ranges::view::zip( reference, trial ) ) {
+      const auto trial = el03.mottScatteringCorrection().energyGrid();
+      const auto reference = referenceEnergyGrid | ranges::cpp20::views::reverse;
+      for ( const auto pair : ranges::views::zip( reference, trial ) ) {
 	REQUIRE( pair.first == Approx( pair.second.value ) );
       }
     }
-    
+
     WHEN("querying for the Mott scattering correction data at 1-GeV") {
-      auto testZip = ranges::view::zip( referenceMottCorrections1,
+      auto testZip = ranges::views::zip( referenceMottCorrections1,
 					el03.mottScatteringCorrection().values()[17] );
       RANGES_FOR( const auto pair, testZip ){
 	REQUIRE( pair.first == Approx( pair.second ) );
       }
     }
 
-    WHEN("querying for the Mott scattering correction data at 100-eV") {      
-      auto testZip = ranges::view::zip( referenceMottCorrections2,
+    WHEN("querying for the Mott scattering correction data at 100-eV") {
+      auto testZip = ranges::views::zip( referenceMottCorrections2,
 					el03.mottScatteringCorrection().values().front() );
       RANGES_FOR( const auto pair, testZip ){
 	REQUIRE( pair.first == Approx( pair.second ) );
@@ -55,4 +55,3 @@ SCENARIO("Test interpretation::EL03::MottScatteringCorrection.hpp") {
     }
   }
 }
-

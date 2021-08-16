@@ -1,0 +1,39 @@
+# GitHub workflow to enable continuous integration
+name: Continuous Integration
+
+# This workflow is triggered on pushes and pull requests to the repository.
+# This workflow will also run each Monday on the default branch (i.e. master)
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  push:
+    branches: '**'
+  pull_request:
+    branches: 'master'
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ ubuntu-18.04, macos-10.15 ]
+        cxx: [ clang++, g++-9 ]
+        build_type: [ Debug, Release ]
+
+    steps:
+    - name: which CXX
+      run: |
+        which ${{matrix.cxx}}
+        ${{matrix.cxx}} --version
+    - uses: actions/checkout@v2
+    - name: mkdir bin
+      run: mkdir bin
+    - name: cmake
+      run: cmake -DPYTHON_EXECUTABLE=$(which python3) -D CMAKE_CXX_COMPILER=`which ${{matrix.cxx}}` -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D ACEtk_unit_tests=ON ..
+      working-directory: ./bin
+    - name: make
+      run: make -j2
+      working-directory: ./bin
+    - name: ctest
+      run: ctest -j2
+      working-directory: ./bin

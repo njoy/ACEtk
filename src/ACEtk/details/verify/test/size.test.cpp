@@ -9,6 +9,6 @@ SCENARIO( "Testing size verification" ){
     std::vector< int > size4{ 1, 2, 4, 5 };
 
     REQUIRE_NOTHROW( verify::equalSize( size3, size3 ) );
-    REQUIRE_THROWS_AS( verify::equalSize( size4, size3 ), std::range_error );
+    REQUIRE_THROWS_AS( verify::equalSize( size4, size3 ), std::range_error& );
   } // GIVEN
 } // SCENARIO

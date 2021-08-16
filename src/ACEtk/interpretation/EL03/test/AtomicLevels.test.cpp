@@ -7,28 +7,28 @@ extern std::array< double, 22 > bindingEnergiesGold;
 extern std::array< double, 22 > occupationNumbersGold;
 extern std::array< bool, 22 > isConductiveGold;
 
-SCENARIO("test AtomicLevels"){  
+SCENARIO("test AtomicLevels"){
 
-  
-  GIVEN("An ACE Table for 1000.03e"){
-    auto table = Table( njoy::utility::slurpFileToMemory("1000.03e") );
+
+  GIVEN("An ACE Table for 1000.e03"){
+    auto table = Table( njoy::utility::slurpFileToMemory("1000.el03") );
     auto atomicLevel =
       interpretation::EL03::AtomicLevels( table ).values();
-    
-    REQUIRE( std::get<0>(atomicLevel[0]) == 1 );    
+
+    REQUIRE( std::get<0>(atomicLevel[0]) == 1 );
     REQUIRE( std::get<1>(atomicLevel[0]) == false );
     REQUIRE( std::get<2>(atomicLevel[0]) == 13.6 * electronVolt );
-    
+
   }
-  
+
 
   GIVEN("An ACE Table for 79000.03e"){
     auto table = Table( njoy::utility::slurpFileToMemory("79000.03e") );
     const auto atomicLevels = interpretation::EL03::AtomicLevels( table );
-    const auto compareThese = ranges::view::zip( occupationNumbersGold,
+    const auto compareThese = ranges::views::zip( occupationNumbersGold,
 						 isConductiveGold,
 						 bindingEnergiesGold );
-    for ( const auto pair : ranges::view::zip( atomicLevels.values(), compareThese ) ) {
+    for ( const auto pair : ranges::views::zip( atomicLevels.values(), compareThese ) ) {
 
       auto occNumRef = std::get<0>(pair.second);
       REQUIRE( std::get<0>(pair.first) == Approx( occNumRef ).epsilon(1e-15) );
@@ -37,10 +37,10 @@ SCENARIO("test AtomicLevels"){
       REQUIRE( std::get<1>(pair.first) == isCondRef );
 
       auto bindErgRef = std::get<2>(pair.second);
-      REQUIRE( std::get<2>(pair.first).value == Approx( bindErgRef ).epsilon(1e-15) );      
+      REQUIRE( std::get<2>(pair.first).value == Approx( bindErgRef ).epsilon(1e-15) );
 
     }
-	
+
   }
 }
 

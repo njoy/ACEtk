@@ -1,0 +1,8 @@
+add_test(NAME ACEtk.python.Data COMMAND python -m unittest discover -v -p "Test_ACEtk_Data.py")
+add_test(NAME ACEtk.python.Table COMMAND python -m unittest discover -v -p "Test_ACEtk_Table.py")
+add_test(NAME ACEtk.python.block.CrossSectionBlock COMMAND python -m unittest discover -v -p "block/Test_ACEtk_CrossSectionBlock.py")
+add_test(NAME ACEtk.python.block.CrossSectionTable COMMAND python -m unittest discover -v -p "block/Test_ACEtk_CrossSectionTable.py")
+add_test(NAME ACEtk.python.block.FrameAndMultiplicityBlock COMMAND python -m unittest discover -v -p "block/Test_ACEtk_FrameAndMultiplicityBlock.py")
+add_test(NAME ACEtk.python.block.PrincipalCrossSectionBlock COMMAND python -m unittest discover -v -p "block/Test_ACEtk_PrincipalCrossSectionBlock.py")
+add_test(NAME ACEtk.python.block.ReactionNumberBlock COMMAND python -m unittest discover -v -p "block/Test_ACEtk_ReactionNumberBlock.py")
+add_test(NAME ACEtk.python.block.ReactionQValuesBlock COMMAND python -m unittest discover -v -p "block/Test_ACEtk_ReactionQValuesBlock.py")
