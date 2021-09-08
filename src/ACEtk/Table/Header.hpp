@@ -65,7 +65,7 @@ public:
   Header( const std::string& zaid, double awr, double temperature,
           const std::string& date, const std::string& title,
           const std::string& material ) :
-    zaid_( strip( zaid ) ), awr_( awr ), temp_( temperature ),
+    zaid_( strip( zaid ) ), temp_( temperature ), awr_( awr ),
     date_( strip( date ) ),
     comments_( { left( title, 70 ) + right( material, 10 ) } ) {}
 
