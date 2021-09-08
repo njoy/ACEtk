@@ -1,8 +1,8 @@
 static void verifySize( Iterator begin, Iterator end,
                         std::size_t ne, std::size_t nc ) {
 
-  auto size = std::distance( begin, end );
-  auto minimum = 1 + ne * nc;
+  std::size_t size = std::distance( begin, end );
+  std::size_t minimum = 1 + ne * nc;
   if ( size < minimum ) {
 
     Log::error( "The size of the XSS subrange in the column data should be at "
