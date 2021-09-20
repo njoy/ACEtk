@@ -21,6 +21,9 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       THEN( "parameters can be extracted" ){
 
+        CHECK( "92235.80c" == ncTable.ZAID() );
+        CHECK( 2.5301e-8 == Approx( ncTable.temperature() ) );
+
         CHECK( 837481 == ncTable.length() );
         CHECK( 92235 == ncTable.ZA() );
         CHECK( 76518 == ncTable.NES() );

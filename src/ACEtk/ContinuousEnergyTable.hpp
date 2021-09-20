@@ -67,6 +67,16 @@ public:
   //! @todo projectile() function
   //! @todo target() function
 
+  /**
+   *  @brief Return the full ZAID or SZAID of the table
+   */
+  const std::string& ZAID() const { return this->header().ZAID(); }
+
+  /**
+   *  @brief Return the temperature of the table
+   */
+  double temperature() const { return this->header().temperature();}
+
   // NXS information
 
   /**

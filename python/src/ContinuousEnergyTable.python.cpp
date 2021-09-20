@@ -42,6 +42,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 //  )
   .def_property_readonly(
 
+    "zaid",
+    &Table::ZAID,
+    "The full ZAID or SZAID of the table"
+  )
+  .def_property_readonly(
+
+    "temperature",
+    &Table::temperature,
+    "The temperature of the table"
+  )
+  .def_property_readonly(
+
     "length",
     &Table::length,
     "The total length of the XSS array"
