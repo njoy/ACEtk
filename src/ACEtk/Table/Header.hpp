@@ -83,7 +83,17 @@ public:
 
       Log::info("Error while constructing ACE Table Header");
       throw e;
-    }
+  }
+
+  /**
+   *  @brief Return the full ZAID or SZAID of the table
+   */
+  const std::string& ZAID() const { return this->zaid_; }
+
+  /**
+   *  @brief Return the temperature of the table
+   */
+  double temperature() const { return this->temp_; }
 
   /* static methods */
   #include "ACEtk/Table/Header/src/print.hpp"
