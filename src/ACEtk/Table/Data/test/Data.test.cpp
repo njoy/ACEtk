@@ -38,8 +38,8 @@ SCENARIO( "Data" ) {
                                     1.06250000000E+00, 1.09375000000E+00,
                                     1.12500000000E+00, 1.15625000000E+00 };
 
-      Table::Data chunk( std::move( IZ ), std::move( AW ), std::move( NXS ),
-                         std::move( JXS ), std::move( XSS ) );
+      Data chunk( std::move( IZ ), std::move( AW ), std::move( NXS ),
+                  std::move( JXS ), std::move( XSS ) );
 
       THEN( "a Data can be constructed and members can be tested" ) {
 
@@ -78,8 +78,8 @@ SCENARIO( "Data" ) {
                                     1.06250000000E+00, 1.09375000000E+00,
                                     1.12500000000E+00, 1.15625000000E+00 };
 
-      Table::Data chunk( std::move( IZAW ), std::move( NXS ),
-                         std::move( JXS ), std::move( XSS ) );
+      Data chunk( std::move( IZAW ), std::move( NXS ),
+                  std::move( JXS ), std::move( XSS ) );
 
       THEN( "a Data can be constructed and members can be tested" ) {
 

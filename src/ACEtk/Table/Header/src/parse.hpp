@@ -1,5 +1,5 @@
 template< typename Iterator >
-static Header parseLegacy( State<Iterator>& state ) {
+static Header parseLegacyHeader( State<Iterator>& state ) {
 
   using Line1 = Record< Character< 10 >,
                         Scientific< 12, 6 >,
@@ -40,35 +40,51 @@ static Header parseLegacy( State<Iterator>& state ) {
 }
 
 template< typename Iterator >
-static Header parse( State< Iterator >& state ) {
+static bool hasNewHeader( State< Iterator >& state ) {
 
+  // read a line, reset state
+  using Line = Record< Character< 80 > >;
+  std::string line;
   auto begin = state.position;
+  Line::read( state.position, state.end, line );
+  state.position = begin;
 
-  std::string firstField;
-  Record< Character<10>, RetainCarriage >::read( state.position, state.end,
-					                                       firstField );
+  // extract the first substring
+  std::istringstream input( line );
+  std::string version;
+  input >> version;
 
-  const std::regex versionPattern( "\\s*\\d+\\.\\d+\\.\\d+\\s*" );
-  if ( !std::regex_match( firstField, versionPattern ) ) {
-
-    state.position = begin;
-    return parseLegacy( state );
-  }
-  else {
-
-    // skip two lines
-    using Line = Record< Character< 80 > >;
-    std::string comment;
-    state.position = begin;
-    Line::read( state.position, state.end, comment );
-    Line::read( state.position, state.end, comment );
-
-    return parseLegacy( state );
-  }
+  // compare to regex
+  const std::regex pattern( "\\s*\\d+\\.\\d+\\.\\d+\\s*" );
+  return std::regex_match( version, pattern );
 }
 
 template< typename Iterator >
-static Header parse( State< Iterator >&& state ) {
+static Header parse( State< Iterator >& state ) {
 
-  return parse( state );
+  if ( !hasNewHeader( state ) ) {
+
+    return parseLegacyHeader( state );
+  }
+  else {
+
+    // skip two lines and read the number of comment lines that follow
+    using Line = Record< Character< 80 > >;
+    std::string line;
+    Line::read( state.position, state.end, line );
+    Line::read( state.position, state.end, line );
+    std::istringstream input( line );
+    std::string temp;
+    unsigned int number;
+    input >> temp >> temp >> temp >> number;
+
+    // skip all but the last two lines
+    for ( unsigned int i = 0; i < number - 2; ++i ) {
+
+      Line::read( state.position, state.end, line );
+    }
+
+    // parse the legacy header
+    return parseLegacyHeader( state );
+  }
 }

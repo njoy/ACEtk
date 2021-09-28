@@ -9,9 +9,9 @@ void print( Ostream& ostream ) const {
                                disco::ColumnPosition< 1 >,
                                disco::Character< 10 > >;
 
-  Line1::write( it, right( this->zaid_, 10 ), this->awr_, this->temp_,
-                right( this->date_, 10 ) );
+  Line1::write( it, right( this->ZAID(), 10 ), this->AWR(), this->TEMP(),
+                right( this->date(), 10 ) );
 
-  using Line2 = disco::Record< disco::Character< 80 > >;
-  Line2::write( it, this->comments_[0] );
+  using Line2 = disco::Record< disco::Character< 70 >, disco::Character< 10 > >;
+  Line2::write( it, left( this->title(), 70 ), right( this->material(), 10 ) );
 }
