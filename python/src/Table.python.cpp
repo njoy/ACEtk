@@ -13,8 +13,8 @@ void wrapTable( python::module& module, python::module& ) {
 
   // type aliases
   using Component = njoy::ACEtk::Table;
-  using Header = njoy::ACEtk::Table::Header;
-  using Data = njoy::ACEtk::Table::Data;
+  //using Header = njoy::ACEtk::Table::Header;
+  //using Data = njoy::ACEtk::Table::Data;
 
   // wrap views created by this component
 

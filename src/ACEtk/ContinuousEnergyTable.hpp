@@ -44,9 +44,9 @@ class ContinuousEnergyTable : protected Table {
     auto lsig = begin + this->data().JXS(6) - 1;
     auto sig = begin + this->data().JXS(7) - 1;
     auto land = begin + this->data().JXS(8) - 1;
-    auto and_ = begin + this->data().JXS(9) - 1;
-    auto ldlw = begin + this->data().JXS(10) - 1;
-    auto dlw = begin + this->data().JXS(11) - 1;
+    // auto and_ = begin + this->data().JXS(9) - 1;
+    // auto ldlw = begin + this->data().JXS(10) - 1;
+    // auto dlw = begin + this->data().JXS(11) - 1;
 
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
     this->nu_ = block::NU( this->data().JXS(2) > 0 ? nu : mtr, mtr );
