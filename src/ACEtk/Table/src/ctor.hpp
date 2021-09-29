@@ -13,7 +13,7 @@ protected:
  *  @brief Private constructor
  */
 template< typename Iterator >
-Table( State< Iterator >& state, Header&& header ) :
+Table( Header&& header, State< Iterator >& state ) :
   Table( std::forward< decltype(header) >( header ), Data( state ) ){}
 
 public:
@@ -27,7 +27,7 @@ public:
  */
 template< typename Iterator >
 Table( State< Iterator >& state )
-  try: Table( state, Header( state ) ) {}
+  try: Table( Header( state ), state ) {}
   catch( std::exception& e ) {
 
     Log::info("Error while constructing ACE Table");
