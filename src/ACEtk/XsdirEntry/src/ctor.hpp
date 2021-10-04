@@ -1,4 +1,4 @@
-XsdirEntry() = default;
+XsdirEntry() = delete;
 XsdirEntry( const XsdirEntry& ) = default;
 XsdirEntry( XsdirEntry&& ) = default;
 

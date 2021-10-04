@@ -52,7 +52,7 @@ SCENARIO( "XsdirEntry" ) {
 
     WHEN( "the data is read from a string/stream" ) {
 
-      std::istringstream in ( string );
+      std::istringstream in( string );
       XsdirEntry chunk( in );
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
@@ -104,7 +104,7 @@ SCENARIO( "XsdirEntry" ) {
 
     WHEN( "the data is read from a string/stream" ) {
 
-      std::istringstream in ( string );
+      std::istringstream in( string );
       XsdirEntry chunk( in );
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
@@ -153,7 +153,7 @@ SCENARIO( "XsdirEntry" ) {
 
     WHEN( "the data is read from a string/stream" ) {
 
-      std::istringstream in ( string );
+      std::istringstream in( string );
       XsdirEntry chunk( in );
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
@@ -203,7 +203,7 @@ SCENARIO( "XsdirEntry" ) {
 
     WHEN( "the data is read from a string/stream" ) {
 
-      std::istringstream in ( string );
+      std::istringstream in( string );
       XsdirEntry chunk( in );
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {

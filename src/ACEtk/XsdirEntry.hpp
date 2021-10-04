@@ -50,6 +50,7 @@ class XsdirEntry {
 
 public:
 
+  /* constructor */
   #include "ACEtk/XsdirEntry/src/ctor.hpp"
 
   /**

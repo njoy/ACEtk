@@ -31,6 +31,7 @@ add_subdirectory( src/ACEtk/interpretation/EL03/test )
 add_subdirectory( src/ACEtk/interpretation/EPR/test )
 add_subdirectory( src/ACEtk/interpretation/MP1/test )
 add_subdirectory( src/ACEtk/XsdirEntry/test )
+add_subdirectory( src/ACEtk/Xsdir/test )
 
 #######################################################################
 # python tests

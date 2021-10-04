@@ -1,0 +1,78 @@
+#define CATCH_CONFIG_MAIN
+
+#include "catch.hpp"
+#include "ACEtk/Xsdir.hpp"
+
+// other includes
+
+// convenience typedefs
+using namespace njoy::ACEtk;
+
+std::string chunk();
+void verifyChunk( const Xsdir& );
+
+SCENARIO( "Xsdir" ) {
+
+  GIVEN( "valid data for an Xsdir instance" ) {
+
+    std::string string = chunk();
+
+    WHEN( "the data is given explicitly" ) {
+
+
+      std::vector< XsdirEntry > entries = {
+
+        XsdirEntry( "92234.00c", 235., "file", 5, 1000, 2.53e-8, true ),
+        XsdirEntry( "92235.00c", 234., "file2", 3, 2000, 2.53e-8, true ),
+        XsdirEntry( "92000.00p", 234., "file3", 4, 3000 )
+      };
+
+      Xsdir chunk( std::move( entries ) );
+
+      THEN( "an Xsdir can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+//      THEN( "it can be printed" ) {
+//
+//        std::ostringstream oss;
+//        chunk.print( oss );
+//
+//        CHECK( oss.str() == string );
+//      } // THEN
+    } // WHEN
+
+//    WHEN( "the data is read from a string/stream" ) {
+//
+//      std::istringstream in( string );
+//      Xsdir chunk( in );
+//
+//      THEN( "an Xsdir can be constructed and members can be tested" ) {
+//
+//        verifyChunk( chunk );
+//      } // THEN
+//
+//      THEN( "it can be printed" ) {
+//
+//        std::ostringstream oss;
+//        chunk.print( oss );
+//
+//        CHECK( oss.str() == string );
+//      } // THEN
+//    } // WHEN
+  } // GIVEN
+} // SCENARIO
+
+std::string chunk() {
+
+  return
+    "    92234.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08 ptable\n"
+    "    92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n"
+    "    92000.00p   235.000000 file3 0 1 4 3000\n";
+}
+
+void verifyChunk( const Xsdir& chunk ) {
+
+  CHECK( 3 == chunk.entries().size() );
+}
