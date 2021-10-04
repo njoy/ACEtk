@@ -63,6 +63,10 @@ static XsdirEntry parse( Istream& in ) {
         }
       }
     }
+    else {
+
+      xsdir.clear();
+    }
   }
 
   if ( !xsdir.fail() ) {
