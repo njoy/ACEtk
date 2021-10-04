@@ -1,3 +1,4 @@
+XsdirEntry() = default;
 XsdirEntry( const XsdirEntry& ) = default;
 XsdirEntry( XsdirEntry&& ) = default;
 
@@ -49,18 +50,19 @@ XsdirEntry( std::string zaid, double awr, std::string filename,
               1, address, length, std::move( access ),
               std::nullopt, std::nullopt, std::move( temperature ), ptable ) {}
 
-///**
-// *  @brief Constructor (from a buffer)
-// *
-// *  @tparam Iterator   a buffer iterator
-// *
-// *  @param[in] state   the buffer state
-// */
-//template< typename Iterator >
-//XsdirEntry( State< Iterator >& state )
-//  try : Header( parse( state ) ) {}
-//  catch( std::exception& e ) {
-//
-//    Log::info("Error while constructing ACE Table Header");
-//    throw e;
-//}
+/**
+ *  @brief Constructor (from a stream)
+ *
+ *  @param[in] in   the input stream
+ */
+template< typename Istream >
+XsdirEntry( Istream& in )
+  try : XsdirEntry( parse( in ) ) {}
+  catch( std::exception& e ) {
+
+    Log::info( "Error while constructing an xsdir entry" );
+    throw e;
+}
+
+XsdirEntry& operator=( const XsdirEntry& ) = default;
+XsdirEntry& operator=( XsdirEntry&& right ) = default;

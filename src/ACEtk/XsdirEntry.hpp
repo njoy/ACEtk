@@ -8,6 +8,7 @@
 #include <optional>
 
 // other includes
+#include "Log.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -31,6 +32,7 @@ namespace ACEtk {
  */
 class XsdirEntry {
 
+  /* fields */
   std::string zaid_;
   double awr_;
   std::string filename_;
@@ -42,6 +44,9 @@ class XsdirEntry {
   std::optional< unsigned int > entries_;
   std::optional< double > temperature_;
   bool ptable_;
+
+  /* auxiliary functions */
+  #include "ACEtk/XsdirEntry/src/parse.hpp"
 
 public:
 

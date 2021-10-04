@@ -45,25 +45,25 @@ SCENARIO( "XsdirEntry" ) {
         CHECK( oss.str() == string );
       } // THEN
     } // WHEN
-//
-//    WHEN( "the data is read from a string/stream" ) {
-//
-//      State< std::string::iterator > state{ 1, string.begin(), string.end() };
-//      XsdirEntry chunk( state );
-//
-//      THEN( "an XsdirEntry can be constructed and members can be tested" ) {
-//
-//        verifyChunk( chunk );
-//      } // THEN
-//
-//      THEN( "it can be printed" ) {
-//
-//        std::ostringstream oss;
-//        chunk.print( oss );
-//
-//        CHECK( oss.str() == string );
-//      } // THEN
-//    } // WHEN
+
+    WHEN( "the data is read from a string/stream" ) {
+
+      std::istringstream in ( string );
+      XsdirEntry chunk( in );
+
+      THEN( "an XsdirEntry can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "it can be printed" ) {
+
+        std::ostringstream oss;
+        chunk.print( oss );
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for an XsdirEntry instance printed on multiple lines" ) {
@@ -97,25 +97,25 @@ SCENARIO( "XsdirEntry" ) {
         CHECK( oss.str() == string );
       } // THEN
     } // WHEN
-//
-//    WHEN( "the data is read from a string/stream" ) {
-//
-//      State< std::string::iterator > state{ 1, string.begin(), string.end() };
-//      XsdirEntry chunk( state );
-//
-//      THEN( "an XsdirEntry can be constructed and members can be tested" ) {
-//
-//        verifyChunkWithSplit( chunk );
-//      } // THEN
-//
-//      THEN( "it can be printed" ) {
-//
-//        std::ostringstream oss;
-//        chunk.print( oss );
-//
-//        CHECK( oss.str() == string );
-//      } // THEN
-//    } // WHEN
+
+    WHEN( "the data is read from a string/stream" ) {
+
+      std::istringstream in ( string );
+      XsdirEntry chunk( in );
+
+      THEN( "an XsdirEntry can be constructed and members can be tested" ) {
+
+        verifyChunkWithSplit( chunk );
+      } // THEN
+
+      THEN( "it can be printed" ) {
+
+        std::ostringstream oss;
+        chunk.print( oss );
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
