@@ -1,4 +1,4 @@
-Xsdir() = delete;
+Xsdir() = default;
 Xsdir( const Xsdir& ) = default;
 Xsdir( Xsdir&& ) = default;
 

@@ -2,6 +2,7 @@
 #define NJOY_ACETK_XSDIR
 
 // system includes
+#include <algorithm>
 #include <map>
 #include <vector>
 
@@ -66,6 +67,8 @@ public:
     }
   }
 };
+
+#include "ACEtk/Xsdir/src/stream.hpp"
 
 } // ACEtk namespace
 } // njoy namespace

@@ -43,16 +43,17 @@ SCENARIO( "Xsdir" ) {
 //      } // THEN
     } // WHEN
 
-//    WHEN( "the data is read from a string/stream" ) {
-//
-//      std::istringstream in( string );
-//      Xsdir chunk( in );
-//
-//      THEN( "an Xsdir can be constructed and members can be tested" ) {
-//
-//        verifyChunk( chunk );
-//      } // THEN
-//
+    WHEN( "the data is read from a string/stream" ) {
+
+      std::istringstream in( string );
+      Xsdir chunk;
+      in >> chunk;
+
+      THEN( "an Xsdir can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
 //      THEN( "it can be printed" ) {
 //
 //        std::ostringstream oss;
@@ -60,13 +61,14 @@ SCENARIO( "Xsdir" ) {
 //
 //        CHECK( oss.str() == string );
 //      } // THEN
-//    } // WHEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
 std::string chunk() {
 
   return
+    "directory\n"
     "    92234.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08\n"
     "    92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n"
     "    92000.00p   235.000000 file3 0 1 4 3000\n";
