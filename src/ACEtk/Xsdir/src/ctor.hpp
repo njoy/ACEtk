@@ -18,13 +18,13 @@ Xsdir( std::vector< XsdirEntry > entries,
  *
  *  @param[in] in   the input stream
  */
-// Xsdir( std::istream& in )
-//   try : Xsdir( parse( in ) ) {}
-//   catch( std::exception& e ) {
-//
-//     Log::info( "Error while constructing an xsdir file" );
-//     throw e;
-// }
+Xsdir( std::istream& in )
+  try : Xsdir( parse( in ) ) {}
+  catch( std::exception& e ) {
+
+    Log::info( "Error while constructing an xsdir file" );
+    throw e;
+  }
 
 Xsdir& operator=( const Xsdir& ) = default;
 Xsdir& operator=( Xsdir&& right ) = default;

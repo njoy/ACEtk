@@ -28,77 +28,80 @@ inline std::istream &operator>>( std::istream& in, XsdirEntry& entry ) {
                             { return !std::isspace( c ); } );
   }
 
-  // data to be read
-  std::string zaid;
-  double awr;
-  std::string filename;
-  std::string access;
-  unsigned int filetype;
-  unsigned int address;
-  unsigned int length;
-  unsigned int recordlength = 0;
-  unsigned int entries = 0;
-  double temperature = 0.;
-  bool ptable = false;
+  if ( !in.eof() ) {
 
-  // read minimum of 7 entries, then read 3 more and a string after that
-  std::istringstream xsdir( line );
-  xsdir >> zaid >> awr >> filename >> access >> filetype >> address >> length;
-  if ( !xsdir.fail() ) {
+    // data to be read
+    std::string zaid;
+    double awr;
+    std::string filename;
+    std::string access;
+    unsigned int filetype;
+    unsigned int address;
+    unsigned int length;
+    unsigned int recordlength = 0;
+    unsigned int entries = 0;
+    double temperature = 0.;
+    bool ptable = false;
 
-    // read the next 3 or 4 entries
-    if ( xsdir >> recordlength ) {
+    // read minimum of 7 entries, then read 3 more and a string after that
+    std::istringstream xsdir( line );
+    xsdir >> zaid >> awr >> filename >> access >> filetype >> address >> length;
+    if ( !xsdir.fail() ) {
 
-      xsdir >> entries >> temperature;
-      if ( !xsdir.fail() ) {
+      // read the next 3 or 4 entries
+      if ( xsdir >> recordlength ) {
 
-        xsdir >> next;
-        if ( xsdir.fail() ) {
+        xsdir >> entries >> temperature;
+        if ( !xsdir.fail() ) {
 
-          xsdir.clear();
-        }
-        else {
+          xsdir >> next;
+          if ( xsdir.fail() ) {
 
-          if ( next == "ptable" ) {
-
-            ptable = true;
+            xsdir.clear();
           }
           else {
 
-            xsdir.setstate( std::ios::failbit );
+            if ( next == "ptable" ) {
+
+              ptable = true;
+            }
+            else {
+
+              xsdir.setstate( std::ios::failbit );
+            }
           }
         }
       }
+      else {
+
+        xsdir.clear();
+      }
+    }
+
+    if ( !xsdir.fail() ) {
+
+      entry = XsdirEntry( std::move( zaid ), awr, std::move( filename ),
+                          filetype, address, length,
+                          access == "0"
+                            ? std::nullopt
+                            : std::optional< std::string >( std::move( access ) ),
+                          recordlength == 0
+                            ? std::nullopt
+                            : std::optional< unsigned int >( recordlength ),
+                          entries == 0
+                            ? std::nullopt
+                            : std::optional< unsigned int >( entries ),
+                          temperature == 0
+                            ? std::nullopt
+                            : std::optional< double >( temperature ),
+                          ptable );
     }
     else {
 
-      xsdir.clear();
+      in.clear();
+      in.seekg( position );
+      in.setstate( std::ios::failbit );
     }
-  }
-
-  if ( !xsdir.fail() ) {
-
-    entry = XsdirEntry( std::move( zaid ), awr, std::move( filename ),
-                        filetype, address, length,
-                        access == "0"
-                          ? std::nullopt
-                          : std::optional< std::string >( std::move( access ) ),
-                        recordlength == 0
-                          ? std::nullopt
-                          : std::optional< unsigned int >( recordlength ),
-                        entries == 0
-                          ? std::nullopt
-                          : std::optional< unsigned int >( entries ),
-                        temperature == 0
-                          ? std::nullopt
-                          : std::optional< double >( temperature ),
-                        ptable );
-  }
-  else {
-
-    in.clear();
-    in.seekg( position );
-    in.setstate( std::ios::failbit );
   }
   return in;
 }
@@ -111,7 +114,7 @@ inline std::istream &operator>>( std::istream& in, XsdirEntry& entry ) {
  *
  *  @return the input stream
  */
-inline std::ostream &operator<<( std::ostream& out, XsdirEntry& entry ) {
+inline std::ostream &operator<<( std::ostream& out, const XsdirEntry& entry ) {
 
   entry.print( out );
   return out;

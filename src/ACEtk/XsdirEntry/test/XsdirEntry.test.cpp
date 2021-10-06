@@ -59,6 +59,9 @@ SCENARIO( "XsdirEntry" ) {
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
+
+        CHECK( false == in.eof() );
+        CHECK( false == in.fail() );
       } // THEN
 
       THEN( "it can be printed" ) {
@@ -112,6 +115,9 @@ SCENARIO( "XsdirEntry" ) {
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
         verifyChunkWithSplit( chunk );
+
+        CHECK( false == in.eof() );
+        CHECK( false == in.fail() );
       } // THEN
 
       THEN( "it can be printed" ) {
@@ -162,6 +168,9 @@ SCENARIO( "XsdirEntry" ) {
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
         verifyChunkWith7entries( chunk );
+
+        CHECK( false == in.eof() );
+        CHECK( false == in.fail() );
       } // THEN
 
       THEN( "it can be printed" ) {
@@ -213,6 +222,9 @@ SCENARIO( "XsdirEntry" ) {
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
         verifyChunkWith10entries( chunk );
+
+        CHECK( false == in.eof() );
+        CHECK( false == in.fail() );
       } // THEN
 
       THEN( "it can be printed" ) {

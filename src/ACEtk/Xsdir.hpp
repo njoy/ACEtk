@@ -30,6 +30,7 @@ class Xsdir {
   std::unordered_map< std::string, std::size_t > indices_;
 
   /* auxiliary functions */
+  #include "ACEtk/Xsdir/src/parse.hpp"
   #include "ACEtk/Xsdir/src/indices.hpp"
 
 public:
@@ -66,6 +67,8 @@ public:
       throw std::exception();
     }
   }
+
+  #include "ACEtk/Xsdir/src/print.hpp"
 };
 
 #include "ACEtk/Xsdir/src/stream.hpp"
