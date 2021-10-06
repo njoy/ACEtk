@@ -10,16 +10,15 @@ Xsdir( Xsdir&& ) = default;
  */
 Xsdir( std::vector< XsdirEntry > entries,
        std::optional< std::string > datapath = std::nullopt ) :
-  datapath_( std::move( datapath ) ), entries_( std::move( entries ) ),
-  indices_( indices( entries_ ) ) {}
+  datapath_( std::move( datapath ) ), awr_(),
+  entries_( std::move( entries ) ), indices_( indices( entries_ ) ) {}
 
 /**
  *  @brief Constructor (from a stream)
  *
  *  @param[in] in   the input stream
  */
-// template< typename Istream >
-// Xsdir( Istream& in )
+// Xsdir( std::istream& in )
 //   try : Xsdir( parse( in ) ) {}
 //   catch( std::exception& e ) {
 //

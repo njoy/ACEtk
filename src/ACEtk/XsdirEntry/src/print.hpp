@@ -3,13 +3,12 @@
  *
  *  @param[in] ostream   the output stream to write to
  */
-template< typename Ostream >
-void print( Ostream& ostream ) const {
+void print( std::ostream& ostream ) const {
 
   // print the entry
   std::ostringstream out;
   out << std::right;
-  out << std::setw( 13 ) << this->ZAID();
+  out << std::setw( 10 ) << this->ZAID();
   out << std::setw( 13 )<< std::fixed << std::setprecision( 6 ) << this->AWR();
   out << ' ' << this->fileName();
   out << ' ' << ( this->accessRoute() ? this->accessRoute().value() : "0" );

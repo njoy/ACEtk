@@ -1,5 +1,12 @@
-template < typename Istream >
-static XsdirEntry parse( Istream& in ) {
+/**
+ *  @brief operator>> for xsdir entries
+ *
+ *  @param[in] in       the input stream
+ *  @param[in] entry    the xsdir entry
+ *
+ *  @return the input stream
+ */
+inline std::istream &operator>>( std::istream& in, XsdirEntry& entry ) {
 
   auto position = in.tellg();
 
@@ -71,29 +78,41 @@ static XsdirEntry parse( Istream& in ) {
 
   if ( !xsdir.fail() ) {
 
-    return XsdirEntry( std::move( zaid ), awr, std::move( filename ),
-                       filetype, address, length,
-                       access == "0"
-                         ? std::nullopt
-                         : std::optional< std::string >( std::move( access ) ),
-                       recordlength == 0
-                         ? std::nullopt
-                         : std::optional< unsigned int >( recordlength ),
-                       entries == 0
-                         ? std::nullopt
-                         : std::optional< unsigned int >( entries ),
-                       temperature == 0
-                         ? std::nullopt
-                         : std::optional< double >( temperature ),
-                       ptable );
+    entry = XsdirEntry( std::move( zaid ), awr, std::move( filename ),
+                        filetype, address, length,
+                        access == "0"
+                          ? std::nullopt
+                          : std::optional< std::string >( std::move( access ) ),
+                        recordlength == 0
+                          ? std::nullopt
+                          : std::optional< unsigned int >( recordlength ),
+                        entries == 0
+                          ? std::nullopt
+                          : std::optional< unsigned int >( entries ),
+                        temperature == 0
+                          ? std::nullopt
+                          : std::optional< double >( temperature ),
+                        ptable );
   }
   else {
 
     in.clear();
     in.seekg( position );
     in.setstate( std::ios::failbit );
-
-    Log::info( "Error encountered while parsing an xsdir entry from a stream" );
-    throw std::exception();
   }
+  return in;
+}
+
+/**
+ *  @brief operator<< for xsdir entries
+ *
+ *  @param[in] in       the output stream
+ *  @param[in] entry    the xsdir entry
+ *
+ *  @return the input stream
+ */
+inline std::ostream &operator<<( std::ostream& out, XsdirEntry& entry ) {
+
+  entry.print( out );
+  return out;
 }

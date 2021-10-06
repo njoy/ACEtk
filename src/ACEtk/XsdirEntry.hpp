@@ -46,7 +46,6 @@ class XsdirEntry {
   bool ptable_;
 
   /* auxiliary functions */
-  #include "ACEtk/XsdirEntry/src/parse.hpp"
 
 public:
 
@@ -127,6 +126,8 @@ public:
 
   #include "ACEtk/XsdirEntry/src/print.hpp"
 };
+
+#include "ACEtk/XsdirEntry/src/stream.hpp"
 
 } // ACEtk namespace
 } // njoy namespace

@@ -1,4 +1,4 @@
-XsdirEntry() = delete;
+XsdirEntry() = default;
 XsdirEntry( const XsdirEntry& ) = default;
 XsdirEntry( XsdirEntry&& ) = default;
 
@@ -49,19 +49,6 @@ XsdirEntry( std::string zaid, double awr, std::string filename,
   XsdirEntry( std::move( zaid ), awr, std::move( filename ),
               1, address, length, std::move( access ),
               std::nullopt, std::nullopt, std::move( temperature ), ptable ) {}
-
-/**
- *  @brief Constructor (from a stream)
- *
- *  @param[in] in   the input stream
- */
-XsdirEntry( std::istream& in )
-  try : XsdirEntry( parse( in ) ) {}
-  catch( std::exception& e ) {
-
-    Log::info( "Error while constructing an xsdir entry" );
-    throw e;
-}
 
 XsdirEntry& operator=( const XsdirEntry& ) = default;
 XsdirEntry& operator=( XsdirEntry&& right ) = default;

@@ -2,6 +2,7 @@
 #define NJOY_ACETK_XSDIR
 
 // system includes
+#include <map>
 #include <vector>
 
 // other includes
@@ -23,6 +24,7 @@ class Xsdir {
 
   /* fields */
   std::optional< std::string > datapath_;
+  std::map< unsigned int, double > awr_;
   std::vector< XsdirEntry > entries_;
   std::unordered_map< std::string, std::size_t > indices_;
 

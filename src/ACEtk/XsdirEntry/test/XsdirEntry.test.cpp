@@ -44,7 +44,7 @@ SCENARIO( "XsdirEntry" ) {
       THEN( "it can be printed" ) {
 
         std::ostringstream oss;
-        chunk.print( oss );
+        oss << chunk;
 
         CHECK( oss.str() == string );
       } // THEN
@@ -53,7 +53,8 @@ SCENARIO( "XsdirEntry" ) {
     WHEN( "the data is read from a string/stream" ) {
 
       std::istringstream in( string );
-      XsdirEntry chunk( in );
+      XsdirEntry chunk;
+      in >> chunk;
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
@@ -63,7 +64,7 @@ SCENARIO( "XsdirEntry" ) {
       THEN( "it can be printed" ) {
 
         std::ostringstream oss;
-        chunk.print( oss );
+        oss << chunk;
 
         CHECK( oss.str() == string );
       } // THEN
@@ -96,7 +97,7 @@ SCENARIO( "XsdirEntry" ) {
       THEN( "it can be printed" ) {
 
         std::ostringstream oss;
-        chunk.print( oss );
+        oss << chunk;
 
         CHECK( oss.str() == string );
       } // THEN
@@ -105,7 +106,8 @@ SCENARIO( "XsdirEntry" ) {
     WHEN( "the data is read from a string/stream" ) {
 
       std::istringstream in( string );
-      XsdirEntry chunk( in );
+      XsdirEntry chunk;
+      in >> chunk;
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
@@ -154,7 +156,8 @@ SCENARIO( "XsdirEntry" ) {
     WHEN( "the data is read from a string/stream" ) {
 
       std::istringstream in( string );
-      XsdirEntry chunk( in );
+      XsdirEntry chunk;
+      in >> chunk;
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
@@ -204,7 +207,8 @@ SCENARIO( "XsdirEntry" ) {
     WHEN( "the data is read from a string/stream" ) {
 
       std::istringstream in( string );
-      XsdirEntry chunk( in );
+      XsdirEntry chunk;
+      in >> chunk;
 
       THEN( "an XsdirEntry can be constructed and members can be tested" ) {
 
@@ -225,7 +229,7 @@ SCENARIO( "XsdirEntry" ) {
 std::string chunk() {
 
   return
-    "    92235.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08 ptable\n";
+    " 92235.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08 ptable\n";
 }
 
 void verifyChunk( const XsdirEntry& chunk ) {
@@ -248,7 +252,7 @@ void verifyChunk( const XsdirEntry& chunk ) {
 std::string chunkWithSplit() {
 
   return
-    "    92235.00c   235.000000 filenamethatiswaaaaaaaaaaaaaaaaaaaaaaaaaytoolong +\n"
+    " 92235.00c   235.000000 filenamethatiswaaaaaaaaaaaaaaaaaaaaaaaaaytoolong +\n"
     "     accessnamethatisevenwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaylonger 1 5 1000 0 0 2.530000e-08 +\n"
     "     ptable\n";
 }
@@ -274,7 +278,7 @@ void verifyChunkWithSplit( const XsdirEntry& chunk ) {
 std::string chunkWith7entries() {
 
   return
-    "    92235.00c   235.000000 file 0 1 5 1000\n";
+    " 92235.00c   235.000000 file 0 1 5 1000\n";
 }
 
 void verifyChunkWith7entries( const XsdirEntry& chunk ) {
@@ -296,7 +300,7 @@ void verifyChunkWith7entries( const XsdirEntry& chunk ) {
 std::string chunkWith10entries() {
 
   return
-    "    92235.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08\n";
+    " 92235.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08\n";
 }
 
 void verifyChunkWith10entries( const XsdirEntry& chunk ) {
