@@ -24,8 +24,10 @@ class Xsdir {
   /* fields */
   std::optional< std::string > datapath_;
   std::vector< XsdirEntry > entries_;
+  std::unordered_map< std::string, std::size_t > indices_;
 
   /* auxiliary functions */
+  #include "ACEtk/Xsdir/src/indices.hpp"
 
 public:
 
@@ -50,12 +52,10 @@ public:
    */
   const XsdirEntry& entry( const std::string& zaid ) const {
 
-    auto iter = std::find_if( this->entries().begin(), this->entries().end(),
-                              [&] ( const auto& entry )
-                                  { return entry.ZAID() == zaid; } );
-    if ( iter != this->entries().end() ) {
+    auto iter = this->indices_.find( zaid );
+    if ( iter != this->indices_.end() ) {
 
-      return *iter;
+      return this->entries()[ iter->second ];
     }
     else {
 

@@ -1,3 +1,6 @@
+// xsdir
+#include "ACEtk/Xsdir.hpp"
+
 // generic ACE table
 #include "ACEtk/State.hpp"
 #include "ACEtk/Table.hpp"

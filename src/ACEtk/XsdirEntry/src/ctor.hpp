@@ -55,8 +55,7 @@ XsdirEntry( std::string zaid, double awr, std::string filename,
  *
  *  @param[in] in   the input stream
  */
-template< typename Istream >
-XsdirEntry( Istream& in )
+XsdirEntry( std::istream& in )
   try : XsdirEntry( parse( in ) ) {}
   catch( std::exception& e ) {
 
