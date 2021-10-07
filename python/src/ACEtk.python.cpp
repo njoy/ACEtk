@@ -17,6 +17,9 @@ void wrapReferenceFrame( python::module&, python::module& );
 
 namespace block {
 
+  // declarations - xsdir components
+  void wrapXsdirEntry( python::module&, python::module& );
+
   // declarations - ACE data components
   void wrapInterpolationData( python::module&, python::module& );
   void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
@@ -65,6 +68,9 @@ PYBIND11_MODULE( ACEtk, module ) {
   // wrap generic ACE table components
   wrapData( module, viewmodule );
   wrapTable( module, viewmodule );
+
+  // wrap xsdir components
+  block::wrapXsdirEntry( module, viewmodule );
 
   // wrap data components
   block::wrapInterpolationData( module, viewmodule );

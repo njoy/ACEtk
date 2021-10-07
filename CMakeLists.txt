@@ -75,8 +75,9 @@ target_link_libraries( ACEtk
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if(ACEtk.python)
-  pybind11_add_module( ACEtk.python 
+  pybind11_add_module( ACEtk.python
     python/src/ACEtk.python.cpp
+    python/src/XsdirEntry.python.cpp
     python/src/Data.python.cpp
     python/src/Table.python.cpp
     python/src/ReferenceFrame.python.cpp

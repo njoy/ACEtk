@@ -8,6 +8,7 @@ XsdirEntry( XsdirEntry&& ) = default;
  *  @param[in] zaid            the zaid
  *  @param[in] awr             the atomic weight ratio (to the neutron mass)
  *  @param[in] filename        the file name
+ *  @param[in] filetype        the file type
  *  @param[in] address         the starting address or line
  *  @param[in] length          the length of the file
  *  @param[in] access          the access path for the file (optional)
@@ -49,6 +50,20 @@ XsdirEntry( std::string zaid, double awr, std::string filename,
   XsdirEntry( std::move( zaid ), awr, std::move( filename ),
               1, address, length, std::move( access ),
               std::nullopt, std::nullopt, std::move( temperature ), ptable ) {}
+
+
+/**
+ *  @brief Constructor (from a stream)
+ *
+ *  @param[in] in   the input stream
+ */
+XsdirEntry( std::istream& in )
+  try : XsdirEntry( parse( in ) ) {}
+  catch( std::exception& e ) {
+
+    Log::info( "Error while constructing an xsdir entry" );
+    throw e;
+  }
 
 XsdirEntry& operator=( const XsdirEntry& ) = default;
 XsdirEntry& operator=( XsdirEntry&& right ) = default;
