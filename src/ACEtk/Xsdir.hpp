@@ -47,6 +47,14 @@ public:
   }
 
   /**
+   *  @brief Return the atomic weight ratios
+   */
+  const std::map< unsigned int, double >& atomicWeightRatios() const {
+
+    return this->awr_;
+  }
+
+  /**
    *  @brief Return the xsdir entries
    */
   const std::vector< XsdirEntry >& entries() const { return this->entries_; }

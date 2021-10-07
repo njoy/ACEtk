@@ -5,12 +5,13 @@ Xsdir( Xsdir&& ) = default;
 /**
  *  @brief Constructor
  *
- *  @param[in] weights    the atomic weight ratios
+ *  @param[in] ratios     the atomic weight ratios
  *  @param[in] entries    the file name
  */
-Xsdir( std::vector< XsdirEntry > entries,
+Xsdir( std::map< unsigned int, double > ratios,
+       std::vector< XsdirEntry > entries,
        std::optional< std::string > datapath = std::nullopt ) :
-  datapath_( std::move( datapath ) ), awr_(),
+  datapath_( std::move( datapath ) ), awr_( std::move( ratios ) ),
   entries_( std::move( entries ) ), indices_( indices( entries_ ) ) {}
 
 /**

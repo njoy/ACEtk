@@ -19,6 +19,18 @@ SCENARIO( "Xsdir" ) {
 
     WHEN( "the data is given explicitly" ) {
 
+      std::map< unsigned int, double > ratios = {
+
+        {       1,   1.00000000 },
+        {    1000,   0.99931697 },
+        {    1001,   0.99916733 },
+        {    1002,   1.99679968 },
+        {    1003,   2.99013997 },
+        {    1004,   3.99320563 },
+        {   92000, 235.98412800 },
+        {   92235, 233.02478975 },
+        { 1092235, 233.02478975 }
+      };
 
       std::vector< XsdirEntry > entries = {
 
@@ -27,7 +39,7 @@ SCENARIO( "Xsdir" ) {
         XsdirEntry( "92000.00p", 233., "file3", 4, 3000 )
       };
 
-      Xsdir chunk( std::move( entries ) );
+      Xsdir chunk( std::move( ratios ), std::move( entries ) );
 
       THEN( "an Xsdir can be constructed and members can be tested" ) {
 
@@ -71,6 +83,11 @@ SCENARIO( "Xsdir" ) {
 std::string chunk() {
 
   return
+    "atomic weight ratios\n"
+    "       1   1.00000000\n"
+    "    1000   0.99931697    1001   0.99916733    1002   1.99679968    1003   2.99013997\n"
+    "                         1004   3.99320563\n"
+    "   92000 235.98412800   92235 233.02478975 1092235 233.02478975\n"
     "directory\n"
     " 92234.00c   234.000000 file 0 1 5 1000 0 0 2.530000e-08\n"
     " 92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n"
@@ -80,6 +97,17 @@ std::string chunk() {
 void verifyChunk( const Xsdir& chunk ) {
 
   CHECK( std::nullopt == chunk.dataPath() );
+
+  CHECK( 9 == chunk.atomicWeightRatios().size() );
+  CHECK(   1.00000000 == Approx( chunk.atomicWeightRatios().at( 1 ) ) );
+  CHECK(   0.99931697 == Approx( chunk.atomicWeightRatios().at( 1000 ) ) );
+  CHECK(   0.99916733 == Approx( chunk.atomicWeightRatios().at( 1001 ) ) );
+  CHECK(   1.99679968 == Approx( chunk.atomicWeightRatios().at( 1002 ) ) );
+  CHECK(   2.99013997 == Approx( chunk.atomicWeightRatios().at( 1003 ) ) );
+  CHECK(   3.99320563 == Approx( chunk.atomicWeightRatios().at( 1004 ) ) );
+  CHECK( 235.98412800 == Approx( chunk.atomicWeightRatios().at( 92000 ) ) );
+  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatios().at( 92235 ) ) );
+  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatios().at( 1092235 ) ) );
 
   CHECK( 3 == chunk.entries().size() );
   CHECK( "92234.00c" == chunk.entries()[0].ZAID() );
