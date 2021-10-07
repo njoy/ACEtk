@@ -6,6 +6,13 @@
 void print( std::ostream& ostream ) const {
 
   // print the atomic weight ratios
+  if ( this->dataPath() ) {
+
+    ostream << "datapath=" << this->dataPath().value();
+  }
+  ostream << std::endl;
+
+  // print the atomic weight ratios
   ostream << "atomic weight ratios" << std::endl;
   int count = -1;
   for ( const auto& entry : this->atomicWeightRatios() ) {
@@ -30,6 +37,7 @@ void print( std::ostream& ostream ) const {
 
     ++count;
   }
+  ostream << std::endl;
 
   // print the directory
   ostream << std::endl;

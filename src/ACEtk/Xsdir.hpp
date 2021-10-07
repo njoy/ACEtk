@@ -55,6 +55,22 @@ public:
   }
 
   /**
+   *  @brief Return the atomic weight ratio for a given za
+   */
+  double atomicWeightRatio( unsigned int za ) const {
+
+    try {
+
+      return this->awr_.at( za );
+    }
+    catch ( ... ) {
+
+      Log::error( "The requested ZA is not present in the atomic weight ratios: {}", za );
+      throw std::exception();
+    }
+  }
+
+  /**
    *  @brief Return the xsdir entries
    */
   const std::vector< XsdirEntry >& entries() const { return this->entries_; }
@@ -71,7 +87,7 @@ public:
     }
     else {
 
-      Log::error( "The requested ZAID is not present: ", zaid );
+      Log::error( "The requested ZAID is not present: {}", zaid );
       throw std::exception();
     }
   }
