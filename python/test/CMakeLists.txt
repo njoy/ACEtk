@@ -1,3 +1,4 @@
+add_test(NAME ACEtk.python.XsdirEntry COMMAND python -m unittest discover -v -p "Test_ACEtk_XsdirEntry.py")
 add_test(NAME ACEtk.python.Data COMMAND python -m unittest discover -v -p "Test_ACEtk_Data.py")
 add_test(NAME ACEtk.python.Table COMMAND python -m unittest discover -v -p "Test_ACEtk_Table.py")
 add_test(NAME ACEtk.python.block.CrossSectionBlock COMMAND python -m unittest discover -v -p "block/Test_ACEtk_CrossSectionBlock.py")
