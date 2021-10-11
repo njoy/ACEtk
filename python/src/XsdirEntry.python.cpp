@@ -67,6 +67,29 @@ void wrapXsdirEntry( python::module& module, python::module& ) {
     "    temperature     the temperature of the file (optional)\n"
     "    ptable          flag to indicate if a probability table is present"
   )
+  .def(
+
+    python::init< std::string, double, std::string,
+                  unsigned int, unsigned int,
+                  std::optional< double >,
+                  bool, std::optional< std::string > >(),
+    python::arg( "zaid" ), python::arg( "awr" ), python::arg( "filename" ),
+    python::arg( "address" ), python::arg( "length" ),
+    python::arg( "temperature" ) = std::nullopt,
+    python::arg( "ptable" ) = false,
+    python::arg( "access" ) = std::nullopt,
+    "Initialise the component\n\n"
+    "Arguments:\n"
+    "    self            the xsdir entry\n"
+    "    zaid            the zaid\n"
+    "    awr             the atomic weight ratio (to the neutron mass)\n"
+    "    filename        the file name\n"
+    "    address         the starting address or line\n"
+    "    length          the length of the file\n"
+    "    temperature     the temperature of the file (optional)\n"
+    "    ptable          flag to indicate if a probability table is present\n"
+    "    access          the access path for the file (optional)"
+  )
   .def_property_readonly(
 
     "zaid",
