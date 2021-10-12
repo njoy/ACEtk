@@ -26,6 +26,7 @@ namespace block {
   void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
   void wrapPolynomialFissionMultiplicity( python::module&, python::module& );
   void wrapCrossSectionData( python::module&, python::module& );
+  void wrapEquiprobableAngularBins( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -79,6 +80,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapTabulatedFissionMultiplicity( module, viewmodule );
   block::wrapPolynomialFissionMultiplicity( module, viewmodule );
   block::wrapCrossSectionData( module, viewmodule );
+  block::wrapEquiprobableAngularBins( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
