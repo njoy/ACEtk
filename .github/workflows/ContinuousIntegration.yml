@@ -37,5 +37,5 @@ jobs:
     - name: ctest
       run: |
         cp *.so ../python
-        ctest -j2
+        ctest --rerun-failed --output-on-failure -j2
       working-directory: ./bin
