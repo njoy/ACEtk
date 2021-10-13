@@ -94,6 +94,7 @@ if(ACEtk.python)
     python/src/block/CrossSectionBlock.python.cpp
     python/src/block/EquiprobableAngularBins.python.cpp
     python/src/block/TabulatedAngularDistribution.python.cpp
+    python/src/block/IsotropicAngularDistribution.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
   )
 

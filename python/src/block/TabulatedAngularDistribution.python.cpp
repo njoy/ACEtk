@@ -40,7 +40,9 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
     "Arguments:\n"
     "    self        the block\n"
     "    incident    the incident energy value\n"
-    "    values      the cosine values (33 values)"
+    "    cosines     the cosine values\n"
+    "    pdf         the pdf values\n"
+    "    cdf         the cdf values"
   )
   .def_property_readonly(
 
