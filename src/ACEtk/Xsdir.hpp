@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <map>
 #include <vector>
+#include <fstream>
 
 // other includes
 #include "ACEtk/XsdirEntry.hpp"
