@@ -1,4 +1,4 @@
-static void trim( std::string string ) {
+static void trim( std::string& string ) {
 
   // useful lambdas
   auto isNotSpace = [] ( const auto& c ) { return !std::isspace( c ); };
@@ -10,13 +10,13 @@ static void trim( std::string string ) {
                 string.end() );
 }
 
-static void toLowerCase( std::string string ) {
+static void toLowerCase( std::string& string ) {
 
   std::transform( string.begin(), string.end(), string.begin(),
                   [] ( const auto& c ) { return std::tolower( c ); } );
 }
 
-static void trimToLowerCase( std::string string ) {
+static void trimToLowerCase( std::string& string ) {
 
   trim( string );
   toLowerCase( string );
@@ -34,6 +34,7 @@ static Xsdir parse( std::istream& in ) {
   if ( current.size() != 0 ) {
 
     std::string path = current.substr( 0, 8 );
+    toLowerCase( path );
     if ( path != "datapath" ) {
 
       in.clear();
