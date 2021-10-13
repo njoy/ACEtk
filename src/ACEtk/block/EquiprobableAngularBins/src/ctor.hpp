@@ -7,7 +7,7 @@ EquiprobableAngularBins( EquiprobableAngularBins&& ) = default;
  *  @brief Constructor
  *
  *  @param[in] incident   the incident energy value
- *  @param[in] values     the cosine values (33 values)
+ *  @param[in] cosines    the cosine values (33 values)
  */
 EquiprobableAngularBins( double incident, std::vector< double >&& cosines ) :
   Base( "AND::EquiprobableAngularBins", std::move( cosines ) ),
@@ -19,10 +19,11 @@ EquiprobableAngularBins( double incident, std::vector< double >&& cosines ) :
 /**
  *  @brief Constructor
  *
- *  @param[in] begin    the begin iterator of the equiprobable bin data
- *  @param[in] end      the end iterator of the equiprobable bin data
+ *  @param[in] incident   the incident energy value
+ *  @param[in] begin      the begin iterator of the equiprobable bin data
+ *  @param[in] end        the end iterator of the equiprobable bin data
  */
-EquiprobableAngularBins( Iterator begin, Iterator end, double incident ) :
+EquiprobableAngularBins( double incident, Iterator begin, Iterator end ) :
   Base( "AND::EquiprobableAngularBins", begin, end ),
   incident_( incident ) {
 

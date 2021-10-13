@@ -50,7 +50,7 @@ SCENARIO( "EquiprobableAngularBins" ) {
     WHEN( "the data is defined by iterators" ) {
 
       double incident = 2.1;
-      EquiprobableAngularBins chunk( xss.begin(), xss.end(), incident );
+      EquiprobableAngularBins chunk( incident, xss.begin(), xss.end() );
 
       THEN( "an EquiprobableAngularBins can be constructed and members can be tested" ) {
 
