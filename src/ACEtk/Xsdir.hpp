@@ -37,6 +37,7 @@ public:
 
   /* constructor */
   #include "ACEtk/Xsdir/src/ctor.hpp"
+  #include "ACEtk/Xsdir/src/fromFile.hpp"
 
   /**
    *  @brief Return the optional datapath
