@@ -15,7 +15,9 @@ inline std::istream &operator>>( std::istream& in, Xsdir& xsdir ) {
   }
   catch ( ... ) {
 
-    // nothing to do to recover from the error: in is already in fail state
+    // mimic standard library behaviour: stream position has not changed and
+    // stream state is in fail
+    // nothing to do here: the constructor handles the stream state
   }
 
   return in;
