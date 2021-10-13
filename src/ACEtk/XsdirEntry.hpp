@@ -78,7 +78,7 @@ public:
   const std::optional< std::string >& accessRoute() const { return this->access_; }
 
   /**
-   *  @brief Return the access route
+   *  @brief Return the file type
    */
   unsigned int fileType() const { return this->filetype_; }
 
