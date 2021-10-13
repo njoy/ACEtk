@@ -45,7 +45,7 @@ public:
   int interpolation() const { return this->XSS( 1 ); }
 
   /**
-   *  @brief Return the number of cross section values
+   *  @brief Return the number of cosine values
    */
   std::size_t numberValues() const { return this->XSS( 2 ); }
 

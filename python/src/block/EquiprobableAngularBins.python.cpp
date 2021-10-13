@@ -32,12 +32,12 @@ void wrapEquiprobableAngularBins( python::module& module, python::module& ) {
   .def(
 
     python::init< double, std::vector< double >&& >(),
-    python::arg( "incident" ), python::arg( "values" ),
+    python::arg( "incident" ), python::arg( "cosines" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self        the block\n"
     "    incident    the incident energy value\n"
-    "    values      the cosine values (33 values)"
+    "    cosines     the cosine values (33 values)"
   )
   .def_property_readonly(
 
