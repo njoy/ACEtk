@@ -1,4 +1,4 @@
-void verifyReactionIndex( const std::size_t index ) const {
+void verifyIncidentEnergyIndex( const std::size_t index ) const {
 
   if ( ( index < 1 ) || ( index > this->numberIncidentEnergies() ) ) {
 
