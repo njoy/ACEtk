@@ -11,6 +11,7 @@ using AngularDistributionData = block::AngularDistributionData;
 using IsotropicAngularDistribution = block::IsotropicAngularDistribution;
 using EquiprobableAngularBins = block::EquiprobableAngularBins;
 using TabulatedAngularDistribution = block::TabulatedAngularDistribution;
+using Distribution = AngularDistributionData::Distribution;
 
 std::vector< double > chunk();
 void verifyChunk( const AngularDistributionData& );
@@ -23,21 +24,35 @@ SCENARIO( "AngularDistributionData" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-//      AngularDistributionData chunk( std::move( xs ) );
+      std::vector< Distribution > distributions = {
+
+        IsotropicAngularDistribution( 1e-11 ),
+        EquiprobableAngularBins(
+          1.,
+          { -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.3, -0.2, -0.1, 0.0,
+            0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,
+            0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.925, 0.95,
+            0.9625, 0.975, 1.0 } ),
+        TabulatedAngularDistribution(
+          20., 2, { -1.0, 0.0, 1.0 }, { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } )
+      };
+      int locb = 6;
+
+      AngularDistributionData chunk( std::move( distributions ), locb );
 
       THEN( "an AngularDistributionData can be constructed and members can be "
             "tested" ) {
 
-//        verifyChunk( chunk );
+        verifyChunk( chunk );
       } // THEN
 
       THEN( "the XSS array is correct" ) {
 
-//        auto xss_chunk = chunk.XSS();
-//        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-//
-//          CHECK( xss[i] == Approx( xss_chunk[i] ) );
-//        }
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
       } // THEN
     } // WHEN
 

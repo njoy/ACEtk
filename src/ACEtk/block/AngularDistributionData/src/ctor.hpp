@@ -3,13 +3,16 @@ AngularDistributionData() = default;
 AngularDistributionData( const AngularDistributionData& ) = default;
 AngularDistributionData( AngularDistributionData&& ) = default;
 
-// /**
-//  *  @brief Constructor
-//  *
-//  *  @param[in] xs    the cross section data
-//  */
-// AngularDistributionData( std::vector< Distribution >&& distributions ) :
-//   AngularDistributionData( std::move( xs ), xs.size() ) {}
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] distributions    the distribution data
+ */
+AngularDistributionData( std::vector< Distribution >&& distributions,
+                         std::size_t locb = 1 ) :
+  Base( "AND::AngularDistributionData",
+        generateXSS( std::move( distributions ), locb ) ),
+  locb_( locb ) {}
 
 /**
  *  @brief Constructor

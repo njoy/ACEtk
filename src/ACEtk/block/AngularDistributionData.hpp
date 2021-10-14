@@ -5,6 +5,7 @@
 #include <variant>
 
 // other includes
+#include "utility/overload.hpp"
 #include "ACEtk/block/Base.hpp"
 #include "ACEtk/block/EquiprobableAngularBins.hpp"
 #include "ACEtk/block/TabulatedAngularDistribution.hpp"
@@ -21,20 +22,24 @@ namespace block {
  */
 class AngularDistributionData : protected Base {
 
-  /* fields */
-  std::size_t locb_;
-
-  /* auxiliary functions */
-//  #include "ACEtk/block/AngularDistributionData/src/generateXSS.hpp"
-  #include "ACEtk/block/AngularDistributionData/src/verifyIncidentEnergyIndex.hpp"
-  #include "ACEtk/block/AngularDistributionData/src/verifySize.hpp"
-
 public:
 
   /* type alias */
   using Distribution = std::variant< IsotropicAngularDistribution,
                                      EquiprobableAngularBins,
                                      TabulatedAngularDistribution >;
+
+private:
+
+  /* fields */
+  std::size_t locb_;
+
+  /* auxiliary functions */
+  #include "ACEtk/block/AngularDistributionData/src/generateXSS.hpp"
+  #include "ACEtk/block/AngularDistributionData/src/verifyIncidentEnergyIndex.hpp"
+  #include "ACEtk/block/AngularDistributionData/src/verifySize.hpp"
+
+public:
 
   /* constructor */
   #include "ACEtk/block/AngularDistributionData/src/ctor.hpp"
