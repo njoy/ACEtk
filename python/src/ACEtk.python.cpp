@@ -12,6 +12,10 @@ namespace python = pybind11;
 void wrapData( python::module&, python::module& );
 void wrapTable( python::module&, python::module& );
 
+// declarations - xsdir components
+void wrapXsdirEntry( python::module&, python::module& );
+void wrapXsdir( python::module&, python::module& );
+
 // declarations - enumerators
 void wrapReferenceFrame( python::module&, python::module& );
 
@@ -65,6 +69,10 @@ PYBIND11_MODULE( ACEtk, module ) {
   // wrap generic ACE table components
   wrapData( module, viewmodule );
   wrapTable( module, viewmodule );
+
+  // wrap xsdir components
+  wrapXsdirEntry( module, viewmodule );
+  wrapXsdir( module, viewmodule );
 
   // wrap data components
   block::wrapInterpolationData( module, viewmodule );

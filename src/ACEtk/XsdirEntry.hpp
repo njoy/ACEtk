@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <string>
 #include <optional>
+#include <sstream>
 
 // other includes
 #include "Log.hpp"
@@ -46,6 +47,7 @@ class XsdirEntry {
   bool ptable_;
 
   /* auxiliary functions */
+  #include "ACEtk/XsdirEntry/src/parse.hpp"
 
 public:
 
@@ -117,7 +119,8 @@ public:
   }
 
   /**
-   *  @brief Return whether or not a probability table is present
+   *  @brief Return the flag indicating whether or not a probability table is
+   *         present
    */
   bool ptable() const {
 

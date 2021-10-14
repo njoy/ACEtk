@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <map>
 #include <vector>
+#include <fstream>
 
 // other includes
 #include "ACEtk/XsdirEntry.hpp"
@@ -37,6 +38,7 @@ public:
 
   /* constructor */
   #include "ACEtk/Xsdir/src/ctor.hpp"
+  #include "ACEtk/Xsdir/src/fromFile.hpp"
 
   /**
    *  @brief Return the optional datapath

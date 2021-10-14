@@ -7,6 +7,7 @@ Xsdir( Xsdir&& ) = default;
  *
  *  @param[in] ratios     the atomic weight ratios
  *  @param[in] entries    the file name
+ *  @param[in] datapath   the optional datapath
  */
 Xsdir( std::map< unsigned int, double > ratios,
        std::vector< XsdirEntry > entries,
