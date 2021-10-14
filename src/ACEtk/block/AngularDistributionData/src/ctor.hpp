@@ -6,7 +6,8 @@ AngularDistributionData( AngularDistributionData&& ) = default;
 /**
  *  @brief Constructor
  *
- *  @param[in] distributions    the distribution data
+ *  @param[in] distributions    the angular distributions for each incident energy
+ *  @param[in] locb             the starting xss index with respect to the AND block
  */
 AngularDistributionData( std::vector< Distribution >&& distributions,
                          std::size_t locb = 1 ) :

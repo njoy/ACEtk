@@ -85,7 +85,7 @@ public:
    *  This locator is the value as stored in the XSS array. It is relative to
    *  the beginning of the AND block. The distribution type is determined from
    *  the sign of the locator:
-   *    - when the value if negative, it is a tabulated distributionwhen
+   *    - when the value if negative, it is a tabulated distribution
    *    - when the value if positive, it is an equiprobable distribution
    *    - when the value if zero, it is an isotropic distribution
    *
@@ -109,7 +109,7 @@ public:
    *  This locator is the value as stored in the XSS array. It is relative to
    *  the beginning of the AND block. The distribution type is determined from
    *  the sign of the locator:
-   *    - when the value if negative, it is a tabulated distributionwhen
+   *    - when the value if negative, it is a tabulated distribution
    *    - when the value if positive, it is an equiprobable distribution
    *    - when the value if zero, it is an isotropic distribution
    *
