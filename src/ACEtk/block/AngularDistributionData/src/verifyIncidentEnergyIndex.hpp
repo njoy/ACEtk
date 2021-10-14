@@ -6,7 +6,7 @@ void verifyReactionIndex( const std::size_t index ) const {
                 this->name() );
     Log::info( "Index value: {}", index );
     Log::info( "{} accepts a reaction index between 1 and {} inclusively",
-               this->name(), this->this->numberIncidentEnergies() );
+               this->name(), this->numberIncidentEnergies() );
     throw std::out_of_range( this->name() );
   }
 }

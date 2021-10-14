@@ -26,7 +26,8 @@ class AngularDistributionData : protected Base {
 
   /* auxiliary functions */
 //  #include "ACEtk/block/AngularDistributionData/src/generateXSS.hpp"
-//  #include "ACEtk/block/AngularDistributionData/src/verifySize.hpp"
+  #include "ACEtk/block/AngularDistributionData/src/verifyIncidentEnergyIndex.hpp"
+  #include "ACEtk/block/AngularDistributionData/src/verifySize.hpp"
 
 public:
 
@@ -41,7 +42,12 @@ public:
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t numberIncidentEnergies() const { return this->XSS( 1 ); }
+  std::size_t NE() const { return this->XSS( 1 ); }
+
+  /**
+   *  @brief Return the number of incident energy values
+   */
+  std::size_t numberIncidentEnergies() const { return this->NE(); }
 
   /**
    *  @brief Return the incident energy values
@@ -83,7 +89,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t LOCC( std::size_t index ) const {
+  int LOCC( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyIncidentEnergyIndex( index );
@@ -107,7 +113,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t angularDistributionLocator( std::size_t index ) const {
+  int angularDistributionLocator( std::size_t index ) const {
 
     return this->LOCC( index );
   }
@@ -126,7 +132,8 @@ public:
    */
   std::size_t relativeAngularDistributionLocator( std::size_t index ) const {
 
-    return this->LOCC( index ) - this->locb_ + 1;
+    const int locator = this->LOCC( index );
+    return locator == 0 ? locator : std::abs( locator ) - this->locb_ + 1;
   }
 
   /**
@@ -169,7 +176,7 @@ public:
       const auto right = index == this->numberIncidentEnergies()
           ? this->end()
           : std::next( this->begin(),
-                       ( this->relativeAngularDistributionLocator( index + 1 ) - 1 );
+                       ( this->relativeAngularDistributionLocator( index + 1 ) - 1 ) );
       if ( type == AngularDistributionType::Tabulated ) {
 
         return TabulatedAngularDistribution( incident, left, right );
