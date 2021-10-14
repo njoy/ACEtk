@@ -106,16 +106,7 @@ void wrapXsdir( python::module& module, python::module& ) {
   .def_static(
 
     "from_file",
-    [] ( const std::string& filename ) -> Component {
-
-      std::ifstream in( filename );
-      if ( not in ) {
-
-        njoy::Log::error( "Could not open file \'{}\'", filename );
-        throw std::exception();
-      }
-      return Component( in );
-    },
+    &Component::fromFile,
     "Read an xsdir from a file\n\n"
     "An exception is raised if something goes wrong while reading the xsdir\n\n"
     "Arguments:\n"
