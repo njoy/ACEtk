@@ -71,7 +71,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t LAND( std::size_t index ) const {
+  int LAND( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyReactionIndex( index );
@@ -88,7 +88,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t angularDistributionLocator( std::size_t index ) const {
+  int angularDistributionLocator( std::size_t index ) const {
 
     return this->LAND( index );
   }
@@ -154,7 +154,7 @@ public:
             break;
          }
         }
-        return AngularDistributionData( locator - xand, left, right );
+        return AngularDistributionData( locator - ( xand - 1 ), left, right );
       }
     }
     else {
