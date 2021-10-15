@@ -237,6 +237,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "cross_section_block",
     &Table::crossSectionBlock,
     "The cross section block"
+  )
+  .def_property_readonly(
+
+    "AND",
+    &Table::AND,
+    "The angular distribution block"
+  )
+  .def_property_readonly(
+
+    "angular_distribution_block",
+    &Table::angularDistributionBlock,
+    "The angular distribution block"
   );
 
   // add standard block definitions

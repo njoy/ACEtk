@@ -43,7 +43,7 @@ SCENARIO( "AngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 4 );
+      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 3 );
 
       THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
 
@@ -93,34 +93,34 @@ void verifyChunk( const AngularDistributionBlock& chunk ) {
   CHECK( 54 == chunk.length() );
   CHECK( "AND" == chunk.name() );
 
-  CHECK( 4 == chunk.NTR() );
-  CHECK( 4 == chunk.numberReactions() );
+  CHECK( 3 == chunk.NR() );
+  CHECK( 3 == chunk.numberProjectileProductionReactions() );
 
-  CHECK( 1 == chunk.LAND(1) );
-  CHECK( -1 == chunk.LAND(2) );
-  CHECK( 0 == chunk.LAND(3) );
-  CHECK( 25 == chunk.LAND(4) );
-  CHECK( 1 == chunk.angularDistributionLocator(1) );
-  CHECK( -1 == chunk.angularDistributionLocator(2) );
-  CHECK( 0 == chunk.angularDistributionLocator(3) );
-  CHECK( 25 == chunk.angularDistributionLocator(4) );
+  CHECK( 1 == chunk.LAND(0) ); // elastic
+  CHECK( -1 == chunk.LAND(1) );
+  CHECK( 0 == chunk.LAND(2) );
+  CHECK( 25 == chunk.LAND(3) );
+  CHECK( 1 == chunk.angularDistributionLocator(0) ); // elastic
+  CHECK( -1 == chunk.angularDistributionLocator(1) );
+  CHECK( 0 == chunk.angularDistributionLocator(2) );
+  CHECK( 25 == chunk.angularDistributionLocator(3) );
 
+  CHECK( false == chunk.isFullyIsotropic(0) ); // elastic
   CHECK( false == chunk.isFullyIsotropic(1) );
-  CHECK( false == chunk.isFullyIsotropic(2) );
-  CHECK( true == chunk.isFullyIsotropic(3) );
-  CHECK( false == chunk.isFullyIsotropic(4) );
+  CHECK( true == chunk.isFullyIsotropic(2) );
+  CHECK( false == chunk.isFullyIsotropic(3) );
 
-  CHECK( true == chunk.isGiven(1) );
-  CHECK( false == chunk.isGiven(2) );
+  CHECK( true == chunk.isGiven(0) ); // elastic
+  CHECK( false == chunk.isGiven(1) );
+  CHECK( true == chunk.isGiven(2) );
   CHECK( true == chunk.isGiven(3) );
-  CHECK( true == chunk.isGiven(4) );
 
-  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistributionData(1) ) );
-  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.angularDistributionData(2) ) );
-  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.angularDistributionData(3) ) );
-  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistributionData(4) ) );
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistributionData(0) ) ); // elastic
+  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.angularDistributionData(1) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.angularDistributionData(2) ) );
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistributionData(3) ) );
 
-  auto data1 = std::get< AngularDistributionData >( chunk.angularDistributionData(1) );
+  auto data1 = std::get< AngularDistributionData >( chunk.angularDistributionData(0) ); // elastic
   CHECK( 2 == data1.NE() );
   CHECK( 2 == data1.numberIncidentEnergies() );
   CHECK( 2 == data1.incidentEnergies().size() );
@@ -139,7 +139,7 @@ void verifyChunk( const AngularDistributionBlock& chunk ) {
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data1.angularDistributionData(1) ) );
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data1.angularDistributionData(2) ) );
 
-  auto data4 = std::get< AngularDistributionData >( chunk.angularDistributionData(4) );
+  auto data4 = std::get< AngularDistributionData >( chunk.angularDistributionData(3) );
   CHECK( 3 == data4.NE() );
   CHECK( 3 == data4.numberIncidentEnergies() );
   CHECK( 3 == data4.incidentEnergies().size() );

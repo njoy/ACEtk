@@ -37,8 +37,8 @@ public:
 private:
 
   /* fields */
-  unsigned int ntr_; // the number of reactions (excluding elastic)
-  Iterator and_;     // the begin iterator of the AND block
+  unsigned int nr_; // number of reactions that produce the projectile (excluding elastic)
+  Iterator and_;    // the begin iterator of the AND block
 
   /* auxiliary functions */
 //  #include "ACEtk/block/AngularDistributionBlock/src/generateXSS.hpp"
@@ -53,14 +53,16 @@ public:
   /* methods */
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of reactions that produce the projectile
+   *         (excluding elastic )
    */
-  unsigned int NTR() const { return this->ntr_; }
+  unsigned int NR() const { return this->nr_; }
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of reactions that produce the projectile
+   *         (excluding elastic )
    */
-  unsigned int numberReactions() const { return this->NTR(); }
+  unsigned int numberProjectileProductionReactions() const { return this->NR(); }
 
   /**
    *  @brief Return the relative angular distribution locator for a reaction
@@ -69,14 +71,14 @@ public:
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
-   *  @param[in] index     the index (one-based)
+   *  @param[in] index     the index (one-based, zero for elastic)
    */
   int LAND( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyReactionIndex( index );
     #endif
-    return XSS( index );
+    return XSS( index + 1 ); // elastic is index 0
   }
 
   /**
@@ -86,7 +88,7 @@ public:
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
-   *  @param[in] index     the index (one-based)
+   *  @param[in] index     the index (one-based, zero for elastic)
    */
   int angularDistributionLocator( std::size_t index ) const {
 
@@ -100,7 +102,7 @@ public:
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
-   *  @param[in] index     the index (one-based)
+   *  @param[in] index     the index (one-based, zero for elastic)
    */
   bool isFullyIsotropic( std::size_t index ) const {
 
@@ -114,7 +116,7 @@ public:
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
-   *  @param[in] index     the index (one-based)
+   *  @param[in] index     the index (one-based, zero for elastic)
    */
   bool isGiven( std::size_t index ) const {
 
@@ -127,7 +129,7 @@ public:
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
-   *  @param[in] index     the index (one-based)
+   *  @param[in] index     the index (one-based, zero for elastic)
    */
   DistributionData angularDistributionData( std::size_t index ) const {
 
@@ -145,7 +147,8 @@ public:
         const auto locator = xand + this->LAND( index ) - 1;
         const auto left = std::next( this->begin(), locator - 1 );
         auto right = this->end();
-        for ( auto next = index + 1; next <= this->numberReactions(); ++next ) {
+        for ( auto next = index + 1;
+              next <= this->numberProjectileProductionReactions(); ++next ) {
 
           auto nextlocator = xand + this->LAND( index ) - 1;
           if ( nextlocator > locator ) {
