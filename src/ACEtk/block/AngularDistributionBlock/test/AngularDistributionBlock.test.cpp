@@ -26,18 +26,37 @@ SCENARIO( "AngularDistributionBlock" ) {
 
     WHEN( "the data is given explicitly" ) {
 
+      std::vector< DistributionData > distributions = {
+
+        AngularDistributionData(
+          { TabulatedAngularDistribution( 1e-11, 2, { -1.0, 1.0 },
+                                          { 0.5, 0.5 }, { 0.0, 1.0 } ),
+            TabulatedAngularDistribution( 20., 2, { -1.0, 0.0, 1.0 },
+                                          { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ) } ),
+        DistributionGivenElsewhere(),
+        FullyIsotropicDistribution(),
+        AngularDistributionData(
+          { TabulatedAngularDistribution( 1e-11, 2, { -1.0, 0.0, 1.0 },
+                                          { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ),
+            IsotropicAngularDistribution( 1. ),
+            TabulatedAngularDistribution( 20., 2, { -1.0, 1.0 },
+                                          { 0.5, 0.5 }, { 0.0, 1.0 } ) } )
+      };
+
+      AngularDistributionBlock chunk( std::move( distributions ) );
+
       THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
 
-//        verifyChunk( chunk );
+        verifyChunk( chunk );
       } // THEN
 
       THEN( "the XSS array is correct" ) {
 
-//        auto xss_chunk = chunk.XSS();
-//        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-//
-//          CHECK( xss[i] == Approx( xss_chunk[i] ) );
-//        }
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
       } // THEN
     } // WHEN
 

@@ -41,7 +41,7 @@ private:
   Iterator and_;    // the begin iterator of the AND block
 
   /* auxiliary functions */
-//  #include "ACEtk/block/AngularDistributionBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/AngularDistributionBlock/src/generateXSS.hpp"
   #include "ACEtk/block/AngularDistributionBlock/src/verifyReactionIndex.hpp"
   #include "ACEtk/block/AngularDistributionBlock/src/verifySize.hpp"
 
