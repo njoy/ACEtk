@@ -4,6 +4,9 @@ import unittest
 # third party imports
 
 # local imports
+from ACEtk import AngularDistributionBlock
+from ACEtk import DistributionGivenElsewhere
+from ACEtk import FullyIsotropicDistribution
 from ACEtk import AngularDistributionData
 from ACEtk import IsotropicAngularDistribution
 from ACEtk import EquiprobableAngularBins
@@ -40,10 +43,10 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertEqual( 3, chunk.NR )
             self.assertEqual( 3, chunk.number_projectile_production_reactions )
 
-            self.assertEqual( 1, chunk.LOCC(0) )
-            self.assertEqual( -1, chunk.LOCC(1) )
-            self.assertEqual( 0, chunk.LOCC(2) )
-            self.assertEqual( 25, chunk.LOCC(3) )
+            self.assertEqual( 1, chunk.LAND(0) )
+            self.assertEqual( -1, chunk.LAND(1) )
+            self.assertEqual( 0, chunk.LAND(2) )
+            self.assertEqual( 25, chunk.LAND(3) )
             self.assertEqual( 1, chunk.angular_distribution_locator(0) )
             self.assertEqual( -1, chunk.angular_distribution_locator(1) )
             self.assertEqual( 0, chunk.angular_distribution_locator(2) )
@@ -68,10 +71,10 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertEqual( 2, data.NE )
             self.assertEqual( 2, data.number_incident_energies )
             self.assertEqual( 2, len( data.incident_energies ) )
-            self.assertAlmosEqual( 1e-11, data.incident_energies[0] )
-            self.assertAlmosEqual( 20., data.incident_energies[1] )
-            self.assertAlmosEqual( 1e-11, data.incident_energy(1) )
-            self.assertAlmosEqual( 20., data.incident_energy(2) )
+            self.assertAlmostEqual( 1e-11, data.incident_energies[0] )
+            self.assertAlmostEqual( 20., data.incident_energies[1] )
+            self.assertAlmostEqual( 1e-11, data.incident_energy(1) )
+            self.assertAlmostEqual( 20., data.incident_energy(2) )
             self.assertEqual( -6, data.LOCC(1) )
             self.assertEqual( -14, data.LOCC(2) )
             self.assertEqual( -6, data.angular_distribution_locator(1) )
@@ -80,8 +83,8 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertEqual( AngularDistributionType.Tabulated, data.angular_distribution_type(2) )
             self.assertEqual( 6, data.relative_angular_distribution_locator(1) )
             self.assertEqual( 14, data.relative_angular_distribution_locator(2) )
-            self.assertEqual( true, isinstance( data.angularDistributionData(1), TabulatedAngularDistribution ) )
-            self.assertEqual( true, isinstance( data.angularDistributionData(2), TabulatedAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.angular_distribution_data(1), TabulatedAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.angular_distribution_data(2), TabulatedAngularDistribution ) )
 
             data = chunk.angular_distribution_data(3)
             self.assertEqual( 3, data.NE )
@@ -105,9 +108,9 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertEqual( 8, data.relative_angular_distribution_locator(1) )
             self.assertEqual( 0, data.relative_angular_distribution_locator(2) )
             self.assertEqual( 19, data.relative_angular_distribution_locator(3) )
-            self.assertEqual( true, isinstance( data.angularDistributionData(1), TabulatedAngularDistribution ) )
-            self.assertEqual( true, isinstance( data.angularDistributionData(1), IsotropicAngularDistribution ) )
-            self.assertEqual( true, isinstance( data.angularDistributionData(2), TabulatedAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.angular_distribution_data(1), TabulatedAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.angular_distribution_data(2), IsotropicAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.angular_distribution_data(3), TabulatedAngularDistribution ) )
 
             # verify the xss array
             xss = chunk.xss_array
@@ -116,21 +119,23 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        # chunk = AngularDistributionData(
-        #             distributions = [
+        chunk = AngularDistributionBlock(
+                  distributions = [
+                      AngularDistributionData(
+                        [ TabulatedAngularDistribution( 1e-11, 2, [ -1.0, 1.0 ],
+                                                        [ 0.5, 0.5 ], [ 0.0, 1.0 ] ),
+                          TabulatedAngularDistribution( 20., 2, [ -1.0, 0.0, 1.0 ],
+                                                        [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ) ] ),
+                      DistributionGivenElsewhere(),
+                      FullyIsotropicDistribution(),
+                      AngularDistributionData(
+                        [ TabulatedAngularDistribution( 1e-11, 2, [ -1.0, 0.0, 1.0 ],
+                                                        [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ),
+                          IsotropicAngularDistribution( 1. ),
+                          TabulatedAngularDistribution( 20., 2, [ -1.0, 1.0 ],
+                                                        [ 0.5, 0.5 ], [ 0.0, 1.0 ] ) ] ) ] )
 
-        #               IsotropicAngularDistribution( 1e-11 ),
-        #               EquiprobableAngularBins(
-        #                 1.,
-        #                 [ -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.3, -0.2, -0.1, 0.0,
-        #                   0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,
-        #                   0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.925, 0.95,
-        #                   0.9625, 0.975, 1.0 ] ),
-        #               TabulatedAngularDistribution(
-        #                 20., 2, [ -1.0, 0.0, 1.0 ], [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ) ],
-        #            locb = 6 )
-
-        # verify_chunk( self, chunk )
+        verify_chunk( self, chunk )
 
 if __name__ == '__main__' :
 

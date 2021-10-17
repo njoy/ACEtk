@@ -102,7 +102,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "number_projectile_production_reactions_excluding_elastic",
+    "number_projectile_production_reactions",
     &Table::numberProjectileProductionReactions,
     "The number of reactions excluding elastic that produce the projectile"
   )
