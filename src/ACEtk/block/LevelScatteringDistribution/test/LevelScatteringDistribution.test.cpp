@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/LevelScattering.hpp"
+#include "ACEtk/block/LevelScatteringDistribution.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using LevelScattering = block::LevelScattering;
+using LevelScatteringDistribution = block::LevelScatteringDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const LevelScattering& );
+void verifyChunk( const LevelScatteringDistribution& );
 
-SCENARIO( "LevelScattering" ) {
+SCENARIO( "LevelScatteringDistribution" ) {
 
-  GIVEN( "valid data for a LevelScattering instance" ) {
+  GIVEN( "valid data for a LevelScatteringDistribution instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -25,9 +25,9 @@ SCENARIO( "LevelScattering" ) {
       double c1 = 7.712958e-05;
       double c2 = .9914722;
 
-      LevelScattering chunk( emin, emax, c1, c2 );
+      LevelScatteringDistribution chunk( emin, emax, c1, c2 );
 
-      THEN( "a LevelScattering can be constructed and members can "
+      THEN( "a LevelScatteringDistribution can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -45,9 +45,10 @@ SCENARIO( "LevelScattering" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      LevelScattering chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(),
+                                         2.249999e-3, 20. );
 
-      THEN( "a LevelScattering can be constructed and members can "
+      THEN( "a LevelScatteringDistribution can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -70,11 +71,11 @@ std::vector< double > chunk() {
   return { 7.71295800000E-05,   9.91472200000E-01 };
 }
 
-void verifyChunk( const LevelScattering& chunk ) {
+void verifyChunk( const LevelScatteringDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );
-  CHECK( "DLW::LevelScattering" == chunk.name() );
+  CHECK( "DLW::LevelScatteringDistribution" == chunk.name() );
 
   CHECK( 2.249999e-3 == Approx( chunk.minimumIncidentEnergy() ) );
   CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );

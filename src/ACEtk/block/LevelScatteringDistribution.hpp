@@ -23,19 +23,19 @@ namespace block {
  *
  *  The content of the XSS array are only C1 and C2
  */
-class LevelScattering : protected details::Base {
+class LevelScatteringDistribution : protected details::Base {
 
   /* fields */
   double emin_;
   double emax_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/LevelScattering/src/verifySize.hpp"
+  #include "ACEtk/block/LevelScatteringDistribution/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/LevelScattering/src/ctor.hpp"
+  #include "ACEtk/block/LevelScatteringDistribution/src/ctor.hpp"
 
   /**
    *  @brief Return the minimum incident energy for the distribution
