@@ -14,8 +14,8 @@ namespace block {
  *  @class
  *  @brief The energy distribution uses analytical level scattering
  *
- *  The LevelScattering class contains two parameter values that determine the
- *  level scattering distribution (in the centre of mass):
+ *  The LevelScatteringDistribution class contains two parameter values that
+ *  determine the level scattering distribution (in the centre of mass):
  *    Eprime = C2 * ( E - C1 )
  *  with:
  *    C1 = ( A + 1 ) / A * abs( Q )
@@ -64,6 +64,8 @@ public:
   using Base::begin;
   using Base::end;
 };
+
+using ACELAW3 = LevelScatteringDistribution;
 
 } // block namespace
 } // ACEtk namespace
