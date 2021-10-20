@@ -20,10 +20,12 @@ SCENARIO( "LevelScattering" ) {
 
     WHEN( "the data is given explicitly" ) {
 
+      double emin = 2.249999e-3;
+      double emax = 20.;
       double c1 = 7.712958e-05;
       double c2 = .9914722;
 
-      LevelScattering chunk( c1, c2 );
+      LevelScattering chunk( emin, emax, c1, c2 );
 
       THEN( "a LevelScattering can be constructed and members can "
             "be tested" ) {
@@ -43,7 +45,7 @@ SCENARIO( "LevelScattering" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      LevelScattering chunk( xss.begin(), xss.end() );
+      LevelScattering chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
 
       THEN( "a LevelScattering can be constructed and members can "
             "be tested" ) {
@@ -73,6 +75,9 @@ void verifyChunk( const LevelScattering& chunk ) {
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );
   CHECK( "DLW::LevelScattering" == chunk.name() );
+
+  CHECK( 2.249999e-3 == Approx( chunk.minimumIncidentEnergy() ) );
+  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
 
   CHECK( 7.71295800000E-05 == Approx( chunk.C1() ) );
   CHECK( .9914722 == Approx( chunk.C2() ) );

@@ -26,6 +26,8 @@ namespace block {
 class LevelScattering : protected details::Base {
 
   /* fields */
+  double emin_;
+  double emax_;
 
   /* auxiliary functions */
   #include "ACEtk/block/LevelScattering/src/verifySize.hpp"
@@ -34,6 +36,16 @@ public:
 
   /* constructor */
   #include "ACEtk/block/LevelScattering/src/ctor.hpp"
+
+  /**
+   *  @brief Return the minimum incident energy for the distribution
+   */
+  double minimumIncidentEnergy() const { return this->emin_; }
+
+  /**
+   *  @brief Return the maximum incident energy for the distribution
+   */
+  double maximumIncidentEnergy() const { return this->emax_; }
 
   /**
    *  @brief Return the value of C1 = ( A + 1 ) / A * abs( Q )
