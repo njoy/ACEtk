@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_BASE
-#define NJOY_ACETK_BLOCK_BASE
+#ifndef NJOY_ACETK_BLOCK_DETAILS_BASE
+#define NJOY_ACETK_BLOCK_DETAILS_BASE
 
 // system includes
 #include <vector>
@@ -12,6 +12,7 @@
 namespace njoy {
 namespace ACEtk {
 namespace block {
+namespace details {
 
 /**
  *  @class
@@ -38,10 +39,10 @@ private:
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/block/Base/src/verifyIndex.hpp"
+  #include "ACEtk/block/details/Base/src/verifyIndex.hpp"
 
   /* constructor */
-  #include "ACEtk/block/Base/src/ctor.hpp"
+  #include "ACEtk/block/details/Base/src/ctor.hpp"
 
 public:
 
@@ -126,6 +127,7 @@ public:
   }
 };
 
+} // details namespace
 } // block namespace
 } // ACEtk namespace
 } // njoy namespace

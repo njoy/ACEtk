@@ -1,14 +1,15 @@
-#ifndef NJOY_ACETK_BLOCK_COLUMNDATA
-#define NJOY_ACETK_BLOCK_COLUMNDATA
+#ifndef NJOY_ACETK_BLOCK_DETAILS_COLUMNDATA
+#define NJOY_ACETK_BLOCK_DETAILS_COLUMNDATA
 
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
 namespace block {
+namespace details {
 
 /**
  *  @class
@@ -19,13 +20,13 @@ class ColumnData : protected Base {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/block/ColumnData/src/generateXSS.hpp"
-  #include "ACEtk/block/ColumnData/src/verifySize.hpp"
+  #include "ACEtk/block/details/ColumnData/src/generateXSS.hpp"
+  #include "ACEtk/block/details/ColumnData/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/ColumnData/src/ctor.hpp"
+  #include "ACEtk/block/details/ColumnData/src/ctor.hpp"
 
   /**
    *  @brief Return the number of elements in a column
@@ -63,6 +64,7 @@ public:
   using Base::end;
 };
 
+} // details namespace
 } // block namespace
 } // ACEtk namespace
 } // njoy namespace

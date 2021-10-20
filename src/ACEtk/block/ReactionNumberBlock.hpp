@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,7 +20,7 @@ namespace block {
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
-class ReactionNumberBlock : protected Base {
+class ReactionNumberBlock : protected details::Base {
 
   /* fields */
   unsigned int ntr_;

@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 
 namespace njoy {
@@ -20,7 +20,7 @@ namespace block {
  *  section data sets is the same as the order of the reaction numbers in the
  *  MTR block.
  */
-class CrossSectionBlock : protected Base {
+class CrossSectionBlock : protected details::Base {
 
   /* fields */
   unsigned int ntr_; // the number of reactions (excluding elastic)

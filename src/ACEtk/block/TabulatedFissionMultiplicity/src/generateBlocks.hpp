@@ -5,5 +5,5 @@ void generateBlocks() {
   auto data = inter + 2 * static_cast< unsigned int >( *inter ) + 1;
 
   this->interpolation_ = block::InterpolationData( "NU::TABLE", inter, data );
-  this->data_ = block::ColumnData( "NU::TABLE", data, this->end(), 2 );
+  this->data_ = block::details::ColumnData( "NU::TABLE", data, this->end(), 2 );
 }

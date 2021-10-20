@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,7 +23,7 @@ namespace block {
  *
  *  The content of the XSS array are only C1 and C2
  */
-class LevelScattering : protected Base {
+class LevelScattering : protected details::Base {
 
   /* fields */
 

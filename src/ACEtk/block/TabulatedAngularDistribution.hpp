@@ -4,8 +4,8 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
-#include "ACEtk/block/ColumnData.hpp"
+#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,7 +20,7 @@ namespace block {
  *  function (PDF) and cumulative density function (CDF) as a function of
  *  cosine for the given incident energy.
  */
-class TabulatedAngularDistribution : protected Base {
+class TabulatedAngularDistribution : protected details::Base {
 
   /* fields */
   double incident_;

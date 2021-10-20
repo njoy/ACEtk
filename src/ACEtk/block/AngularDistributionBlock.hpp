@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 #include "ACEtk/block/AngularDistributionData.hpp"
 #include "ACEtk/block/FullyIsotropicDistribution.hpp"
 #include "ACEtk/block/DistributionGivenElsewhere.hpp"
@@ -25,7 +25,7 @@ namespace block {
  *  section data sets is the same as the order of the reaction numbers in the
  *  MTR block.
  */
-class AngularDistributionBlock : protected Base {
+class AngularDistributionBlock : protected details::Base {
 
 public:
 
