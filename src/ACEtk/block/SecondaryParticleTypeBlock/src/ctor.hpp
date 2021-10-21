@@ -4,9 +4,9 @@ private:
  *  @brief Private constructor
  */
 SecondaryParticleTypeBlock( std::vector< unsigned int >&& types,
-                            std::size_t ntr ) :
-  Base( "PTYPE", generateXSS( std::move( reactions ) ) ),
-  ntr_( ntr ) {}
+                            std::size_t ntype ) :
+  Base( "PTYPE", generateXSS( std::move( types ) ) ),
+  ntype_( ntype ) {}
 
 public:
 
@@ -31,7 +31,7 @@ SecondaryParticleTypeBlock( std::vector< unsigned int >&& types ) :
  *  @param[in] ntype   the number of secondary particle types
  */
 SecondaryParticleTypeBlock( Iterator ptype, Iterator end, unsigned int ntype ) :
-  Base( "PTYPE", ptype, end ), ntr_( ntr ) {
+  Base( "PTYPE", ptype, end ), ntype_( ntype ) {
 
   verifySize( this->begin(), this->end(), this->NTYPE() );
 }

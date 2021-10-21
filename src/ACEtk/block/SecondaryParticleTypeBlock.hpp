@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,7 +20,7 @@ namespace block {
  *
  *  The number of available particle types is stored in NXS(7).
  */
-class SecondaryParticleTypeBlock : protected details::Base {
+class SecondaryParticleTypeBlock : protected Base {
 
   /* fields */
   unsigned int ntype_;
@@ -40,7 +40,7 @@ public:
    *  @brief Return the number of secondary particle types (excluding the
    *         projectile)
    */
-  unsigned int NTYPE() const { return this->ntr_; }
+  unsigned int NTYPE() const { return this->ntype_; }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
@@ -73,7 +73,7 @@ public:
   /**
    *  @brief Return the particle types
    */
-  auto particleTypes() const { return this->MTs(); }
+  auto particleTypes() const { return this->IPs(); }
 
   /**
    *  @brief Return whether or not the particle type is present
