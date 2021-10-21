@@ -16,7 +16,7 @@ namespace block {
  *  @brief The continuous energy PTYPE block with the secondary particle types
  *
  *  The SecondaryParticleTypeBlock class contains the secondary particle types
- *  for which data is available.
+ *  for which data is available (excluding the incident particle type).
  *
  *  The number of available particle types is stored in NXS(7).
  */
@@ -90,7 +90,7 @@ public:
    *
    *  @param[in] type    the particle type
    */
-  bool hasReactionNumber( unsigned int reaction ) const {
+  bool hasParticleType( unsigned int reaction ) const {
 
     return this->hasIP( reaction );
   }

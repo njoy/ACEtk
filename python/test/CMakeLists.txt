@@ -8,3 +8,5 @@ add_test( NAME ACEtk.python.block.FrameAndMultiplicityBlock COMMAND ${PYTHON_EXE
 add_test( NAME ACEtk.python.block.PrincipalCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PrincipalCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ReactionNumberBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ReactionNumberBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ReactionQValuesBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ReactionQValueBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+
+add_test( NAME ACEtk.python.block.SecondaryParticleTypeBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleTypeBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

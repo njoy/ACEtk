@@ -237,6 +237,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "cross_section_block",
     &Table::crossSectionBlock,
     "The cross section block"
+  )
+  .def_property_readonly(
+
+    "PTYPE",
+    &Table::PTYPE,
+    "The secondary particle type block"
+  )
+  .def_property_readonly(
+
+    "secondary_particle_type_block",
+    &Table::secondaryParticleTypeBlock,
+    "The secondary particle type block"
   );
 
   // add standard block definitions

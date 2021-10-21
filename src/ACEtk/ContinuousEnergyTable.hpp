@@ -266,7 +266,7 @@ public:
   const block::PTYPE& PTYPE() const { return this->ptype_; }
 
   /**
-   *  @brief Return the cross section block
+   *  @brief Return the secondary particle type block
    */
   const block::PTYPE& secondaryParticleTypeBlock() const {
 

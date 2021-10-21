@@ -156,6 +156,9 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 1.55512000000E-01 == Approx( data1.back() ) );
         CHECK( 0. == Approx( data48.front() ) );
         CHECK( 3.65016600000E-01 == Approx( data48.back() ) );
+
+        // PTYPE block
+        CHECK( true == ncTable.PTYPE().empty() );
       }
     }
   }

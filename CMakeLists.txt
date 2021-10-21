@@ -92,6 +92,7 @@ if(ACEtk.python)
     python/src/block/ReactionQValueBlock.python.cpp
     python/src/block/FrameAndMultiplicityBlock.python.cpp
     python/src/block/CrossSectionBlock.python.cpp
+    python/src/block/SecondaryParticleTypeBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
   )
 
