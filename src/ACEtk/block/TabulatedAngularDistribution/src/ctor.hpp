@@ -33,7 +33,7 @@ TabulatedAngularDistribution( double incident, Iterator begin, Iterator end ) :
   Base( "AND::TabulatedAngularDistribution", begin, end ),
   incident_( incident ) {
 
-  verifySize( this->begin(), this->end(), this->numberValues() );
+  verifySize( this->begin(), this->end(), this->numberCosines() );
 }
 
 TabulatedAngularDistribution& operator=( const TabulatedAngularDistribution& ) = default;
