@@ -11,6 +11,7 @@
 #include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -32,6 +33,8 @@ class ContinuousEnergyTable : protected Table {
   block::TYR tyr_;
   block::SIG sig_;
 
+  block::PTYPE ptype_;
+
   /* auxiliary functions */
   void generateBlocks() {
 
@@ -48,12 +51,17 @@ class ContinuousEnergyTable : protected Table {
     // auto ldlw = begin + this->data().JXS(10) - 1;
     // auto dlw = begin + this->data().JXS(11) - 1;
 
+    auto ptype = begin + this->data().JXS(30) - 1;
+    auto ntro = begin + this->data().JXS(31) - 1;
+
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
     this->nu_ = block::NU( this->data().JXS(2) > 0 ? nu : mtr, mtr );
     this->mtr_ = block::MTR( mtr, lqr, this->NTR() );
     this->lqr_ = block::LQR( lqr, tyr, this->NTR() );
     this->tyr_ = block::TYR( tyr, lsig, this->NTR() );
     this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
+
+    this->ptype_ = block::PTYPE( ptype, ntro, this->NTYPE() );
   }
 
 public:
@@ -251,6 +259,19 @@ public:
    *  @brief Return the cross section block
    */
   const block::SIG& crossSectionBlock() const { return this->SIG(); }
+
+  /**
+   *  @brief Return the secondary particle type block
+   */
+  const block::PTYPE& PTYPE() const { return this->sig_; }
+
+  /**
+   *  @brief Return the cross section block
+   */
+  const block::PTYPE& secondaryParticleTypeBlock() const {
+
+    return this->PTYPE();
+  }
 };
 
 } // ACEtk namespace
