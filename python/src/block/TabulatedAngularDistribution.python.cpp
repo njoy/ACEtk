@@ -53,13 +53,13 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
   .def_property_readonly(
 
     "interpolation",
-    &Block::incidentEnergy,
+    &Block::interpolation,
     "The interpolation flag"
   )
   .def_property_readonly(
 
-    "number_values",
-    &Block::numberValues,
+    "number_cosines",
+    &Block::numberCosines,
     "The number of cosine values"
   )
   .def_property_readonly(

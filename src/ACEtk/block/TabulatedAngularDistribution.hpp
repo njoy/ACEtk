@@ -47,14 +47,14 @@ public:
   /**
    *  @brief Return the number of cosine values
    */
-  std::size_t numberValues() const { return this->XSS( 2 ); }
+  std::size_t numberCosines() const { return this->XSS( 2 ); }
 
   /**
    *  @brief Return the cosine values
    */
   auto cosines() const {
 
-    return this->XSS( 3, this->numberValues() );
+    return this->XSS( 3, this->numberCosines() );
   }
 
   /**
@@ -62,7 +62,7 @@ public:
    */
   auto pdf() const {
 
-    return this->XSS( 3 + this->numberValues(), this->numberValues() );
+    return this->XSS( 3 + this->numberCosines(), this->numberCosines() );
   }
 
   /**
@@ -70,7 +70,7 @@ public:
    */
   auto cdf() const {
 
-    return this->XSS( 3 + 2 * this->numberValues(), this->numberValues() );
+    return this->XSS( 3 + 2 * this->numberCosines(), this->numberCosines() );
   }
 
   using Base::empty;
