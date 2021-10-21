@@ -5,7 +5,7 @@ void verifyIncidentEnergyIndex( const std::size_t index ) const {
     Log::error( "Illegal incident energy index argument into {} block",
                 this->name() );
     Log::info( "Index value: {}", index );
-    Log::info( "{} accepts a reaction index between 1 and {} inclusively",
+    Log::info( "{} accepts an incident energy index between 1 and {} inclusively",
                this->name(), this->numberIncidentEnergies() );
     throw std::out_of_range( this->name() );
   }

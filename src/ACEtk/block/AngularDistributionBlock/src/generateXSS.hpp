@@ -35,7 +35,7 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
           int oldlocator = xss[ locposition ];
           int newlocator = oldlocator == 0
               ? 0
-              : offset + value.relativeAngularDistributionLocator(incident) - 1;
+              : offset + value.relativeDistributionLocator(incident) - 1;
           if ( oldlocator < 0 ) {
 
             newlocator *= -1;

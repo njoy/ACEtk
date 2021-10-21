@@ -18,10 +18,9 @@ AngularDistributionData( std::vector< Distribution >&& distributions,
 /**
  *  @brief Constructor
  *
- *  @param[in] lsig    the begin iterator of the LSIG block in the XSS array
- *  @param[in] sig     the begin iterator of the SIG block in the XSS array
- *  @param[in] end     the end iterator of the SIG block in the XSS array
- *  @param[in] ntr     the number of reactions (excluding elastic)
+ *  @param[in] locb    the starting xss index with respect to the AND block
+ *  @param[in] sig     the begin iterator of the block in the XSS array
+ *  @param[in] end     the end iterator of the block in the XSS array
  */
 AngularDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
   Base( "AND::AngularDistributionData", begin, end ), locb_( locb ) {

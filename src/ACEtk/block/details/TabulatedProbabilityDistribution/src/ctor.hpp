@@ -6,7 +6,7 @@ TabulatedProbabilityDistribution( TabulatedProbabilityDistribution&& ) = default
 /**
  *  @brief Constructor
  *
- *  @param[in] incident        the incident energy value
+ *  @param[in] name            the name of the block
  *  @param[in] interpolation   the interpolation type
  *  @param[in] values          the values (N values)
  *  @param[in] pdf             the pdf values (N values)

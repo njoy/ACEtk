@@ -91,8 +91,8 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
   )
   .def(
 
-    "angular_distribution_locator",
-    &Block::angularDistributionLocator,
+    "distribution_locator",
+    &Block::distributionLocator,
     python::arg( "index" ),
     "Return the angular distribution locator for an incident energy index\n\n"
     "This locator is the value as stored in the XSS array. It is relative to\n"
@@ -108,8 +108,8 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
   )
   .def(
 
-    "relative_angular_distribution_locator",
-    &Block::relativeAngularDistributionLocator,
+    "relative_distribution_locator",
+    &Block::relativeDistributionLocator,
     python::arg( "index" ),
     "Return the relative angular distribution locator for an incident energy index\n\n"
     "This is the locator relative to the beginning of the current angular\n"
@@ -121,8 +121,8 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
   )
   .def(
 
-    "angular_distribution_type",
-    &Block::angularDistributionType,
+    "distribution_type",
+    &Block::distributionType,
     python::arg( "index" ),
     "Return the angular distribution type for an incident energy index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
@@ -132,8 +132,8 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
   )
   .def(
 
-    "angular_distribution_data",
-    &Block::angularDistributionData,
+    "distribution",
+    &Block::distribution,
     python::arg( "index" ),
     "Return the angular distribution data for an incident energy index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
