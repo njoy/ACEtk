@@ -92,7 +92,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  int outgoingEnergyDistributionLocator( std::size_t index ) const {
+  int distributionLocator( std::size_t index ) const {
 
     return BaseDistributionData::distributionLocator( index );
   }
@@ -109,7 +109,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t relativeOutgoingEnergyDistributionLocator( std::size_t index ) const {
+  std::size_t relativeDistributionLocator( std::size_t index ) const {
 
     return BaseDistributionData::relativeDistributionLocator( index );
   }

@@ -17,9 +17,10 @@ BaseDistributionData( std::string&& name,
                       std::vector< long >&& interpolants,
                       std::vector< Distribution >&& distributions,
                       std::size_t locb = 1 ) :
-  Base( name, generateXSS( std::move( name ),
-                           std::move( boundaries ), std::move( interpolants ),
-                           std::move( distributions ), locb ) ),
+  Base( std::move( name ),
+        generateXSS( std::string( name ),
+                     std::move( boundaries ), std::move( interpolants ),
+                     std::move( distributions ), locb ) ),
   locb_( locb ) {
 
   this->generateBlocks();
@@ -28,6 +29,7 @@ BaseDistributionData( std::string&& name,
 /**
  *  @brief Constructor
  *
+ *  @param[in] name             the name of the block
  *  @param[in] locb    the starting xss index with respect to the superblock
  *  @param[in] sig     the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array

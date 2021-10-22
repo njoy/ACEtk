@@ -2,7 +2,7 @@ static std::vector< double >
 generateXSS( const std::string& name,
              std::vector< long >&& boundaries,
              std::vector< long >&& interpolants,
-             std::vector< Distributions >&& distributions,
+             std::vector< Distribution >&& distributions,
              std::size_t locb ) {
 
   // add the distribution data to the xss array
@@ -28,7 +28,7 @@ generateXSS( const std::string& name,
   }
 
   // insert the interpolation data in the front
-  InterpolationData interpolation( name,
+  InterpolationData interpolation( std::string( name ),
                                    std::move( boundaries ),
                                    std::move( interpolants ) );
   xss.insert( xss.begin(), interpolation.begin(), interpolation.end() );

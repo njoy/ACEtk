@@ -1,8 +1,11 @@
-void generateBlocks( const std::string& name ) {
+void generateBlocks() {
 
   auto begin = this->begin();
-  auto data = inter + 2 * static_cast< unsigned int >( *begin ) + 1;
+  auto data = begin + 2 * this->numberInterpolationRegions() + 1;
+  auto end = data + + 2 * this->numberIncidentEnergies() + 1;
 
-  this->interpolation_ = block::InterpolationData( name, begin, data );
-  this->data_ = block::details::ColumnData( name, data, this->end(), 2 );
+  this->interpolation_ = block::InterpolationData( std::string( this->name() ),
+                                                   begin, data );
+  this->data_ = block::details::ColumnData( std::string( this->name() ),
+                                            data, end, 2 );
 }

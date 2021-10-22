@@ -7,10 +7,13 @@
 // other includes
 #include "utility/overload.hpp"
 #include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/block/InterpolationData.hpp"
 
 namespace njoy {
 namespace ACEtk {
 namespace block {
+namespace details {
 
 /**
  *  @class
@@ -25,15 +28,15 @@ class BaseDistributionData : protected details::Base {
   details::ColumnData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/BaseDistributionData/src/generateXSS.hpp"
-  #include "ACEtk/block/BaseDistributionData/src/verifyIncidentEnergyIndex.hpp"
-  #include "ACEtk/block/BaseDistributionData/src/generateBlocks.hpp"
-  #include "ACEtk/block/BaseDistributionData/src/verifySize.hpp"
+  #include "ACEtk/block/details/BaseDistributionData/src/generateXSS.hpp"
+  #include "ACEtk/block/details/BaseDistributionData/src/verifyIncidentEnergyIndex.hpp"
+  #include "ACEtk/block/details/BaseDistributionData/src/generateBlocks.hpp"
+  #include "ACEtk/block/details/BaseDistributionData/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/BaseDistributionData/src/ctor.hpp"
+  #include "ACEtk/block/details/BaseDistributionData/src/ctor.hpp"
 
   /**
    *  @brief Return the interpolation data
@@ -98,7 +101,7 @@ public:
     #ifndef NDEBUG
     this->verifyIncidentEnergyIndex( index );
     #endif
-    return return this->data_.value( 1, index );
+    return this->data_.value( 1, index );
   }
 
   /**
@@ -117,7 +120,7 @@ public:
     #ifndef NDEBUG
     this->verifyIncidentEnergyIndex( index );
     #endif
-    return return this->data_.value( 2, index );
+    return this->data_.value( 2, index );
   }
 
   /**
@@ -131,7 +134,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  int angularDistributionLocator( std::size_t index ) const {
+  int distributionLocator( std::size_t index ) const {
 
     return this->LOCC( index );
   }
@@ -182,6 +185,7 @@ public:
   using Base::end;
 };
 
+} // details namespace
 } // block namespace
 } // ACEtk namespace
 } // njoy namespace
