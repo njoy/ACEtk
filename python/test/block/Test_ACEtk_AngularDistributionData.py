@@ -10,8 +10,8 @@ from ACEtk import EquiprobableAngularBins
 from ACEtk import TabulatedAngularDistribution
 from ACEtk import AngularDistributionType
 
-class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
-    """Unit test for the TabulatedAngularDistribution class."""
+class Test_ACEtk_AngularDistributionData( unittest.TestCase ) :
+    """Unit test for the AngularDistributionData class."""
 
     chunk = [                  3,  1.00000000000E-11,  1.00000000000E+00,  2.00000000000E+01,
                                0,                 13,               -46,  -1.00000000000E+00,

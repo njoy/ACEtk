@@ -123,7 +123,7 @@ public:
    *  @param[in] index     the index (one-based)
    */
   TabulatedOutgoingEnergyDistribution
-  outgoingEnergyDistribution( std::size_t index ) const {
+  distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
   }

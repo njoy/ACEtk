@@ -35,6 +35,7 @@ namespace block {
   void wrapDistributionGivenElsewhere( python::module&, python::module& );
   void wrapLevelScatteringDistribution( python::module&, python::module& );
   void wrapTabulatedOutgoingEnergyDistribution( python::module&, python::module& );
+  void wrapOutgoingEnergyDistributionData( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -98,6 +99,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapDistributionGivenElsewhere( module, viewmodule );
   block::wrapLevelScatteringDistribution( module, viewmodule );
   block::wrapTabulatedOutgoingEnergyDistribution( module, viewmodule );
+  block::wrapOutgoingEnergyDistributionData( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
