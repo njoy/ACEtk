@@ -16,10 +16,12 @@ TabulatedProbabilityDistribution( std::string&& name,
                                   int interpolation,
                                   std::vector< double >&& values,
                                   std::vector< double >&& pdf,
-                                  std::vector< double >&& cdf ) :
+                                  std::vector< double >&& cdf,
+                                  std::vector< std::vector< double > > data ) :
   Base( std::move( name ),
         generateXSS( interpolation,
-                     std::move( values ), std::move( pdf ), std::move( cdf ) ) ) {}
+                     std::move( values ), std::move( pdf ), std::move( cdf ),
+                     std::move( data ) ) ) {}
 
 /**
  *  @brief Constructor

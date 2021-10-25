@@ -17,8 +17,9 @@ namespace details {
  *  @brief Tabulated probability distribution data (base class)
  *
  *  The TabulatedProbabilityDistribution class contains the probability density
- *  function (PDF) and cumulative density function (CDF) as a function of
- *  cosine for the given incident energy.
+ *  function (PDF), the cumulative density function (CDF) and any number of
+ *  additional data columns as a function of cosine for the given incident
+ *  energy.
  */
 class TabulatedProbabilityDistribution : protected details::Base {
 
@@ -67,6 +68,15 @@ public:
   auto cdf() const {
 
     return this->XSS( 3 + 2 * this->numberValues(), this->numberValues() );
+  }
+
+  /**
+   *  @brief Return a column of the additional data
+   */
+  auto column( std::size_t index ) const {
+
+    return this->XSS( 3 + ( 3 + index ) * this->numberValues(),
+                      this->numberValues() );
   }
 
   using Base::empty;

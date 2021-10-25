@@ -22,7 +22,7 @@ TabulatedOutgoingEnergyDistribution( double incident,
   TabulatedProbabilityDistribution(
         "DLW::TabulatedOutgoingEnergyDistribution",
         discrete * 10 + interpolation, std::move( cosines ),
-        std::move( pdf ), std::move( cdf ) ),
+        std::move( pdf ), std::move( cdf ), {} ),
   incident_( incident ) {}
 
 /**

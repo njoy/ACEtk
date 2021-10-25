@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_TABULATEDOUTGOINGENERGYDISTRIBUTION
-#define NJOY_ACETK_BLOCK_TABULATEDOUTGOINGENERGYDISTRIBUTION
+#ifndef NJOY_ACETK_BLOCK_TABULATEDKALBACHMANNDISTRIBUTION
+#define NJOY_ACETK_BLOCK_TABULATEDKALBACHMANNDISTRIBUTION
 
 // system includes
 
@@ -12,14 +12,15 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated secondary energy distribution data from the DLW block for
+ *  @brief Tabulated Kalbach-Mann distribution data from the DLW block for
  *         a single reaction and incident energy
  *
- *  The TabulatedOutgoingEnergyDistribution class contains the probability
- *  density function (PDF) and cumulative density function (CDF) as a function
+ *  The TabulatedKalbachMannDistribution class contains the probability
+ *  density function (PDF), the cumulative density function (CDF), the
+ *  precompound fraction r and angular distribution slope a as a function
  *  of the outgoing energy for a single incident energy.
  */
-class TabulatedOutgoingEnergyDistribution :
+class TabulatedKalbachMannDistribution :
   protected details::TabulatedProbabilityDistribution {
 
   /* fields */
@@ -30,7 +31,7 @@ class TabulatedOutgoingEnergyDistribution :
 public:
 
   /* constructor */
-  #include "ACEtk/block/TabulatedOutgoingEnergyDistribution/src/ctor.hpp"
+  #include "ACEtk/block/TabulatedKalbachMannDistribution/src/ctor.hpp"
 
   /**
    *  @brief Return the incident energy value
@@ -86,6 +87,22 @@ public:
   auto cdf() const {
 
     return TabulatedProbabilityDistribution::cdf();
+  }
+
+  /**
+   *  @brief Return the precompound fraction values
+   */
+  auto precompoundFractionValues() const {
+
+    return this->column( 0 );
+  }
+
+  /**
+   *  @brief Return the angular distribution slope values
+   */
+  auto angularDistributionSlopeValues() const {
+
+    return this->column( 1 );
   }
 
   using TabulatedProbabilityDistribution::empty;
