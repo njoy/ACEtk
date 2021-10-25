@@ -29,7 +29,7 @@ SCENARIO( "OutgoingEnergyDistributionData" ) {
         TabulatedOutgoingEnergyDistribution(
             20., 2, { 0.0, 1.84 }, { .5, .5 }, { 0., 1. } )
       };
-      std::size_t locb = 20;
+      std::size_t locb = 21;
 
       OutgoingEnergyDistributionData chunk( std::move( distributions ), locb );
 
@@ -51,7 +51,7 @@ SCENARIO( "OutgoingEnergyDistributionData" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      OutgoingEnergyDistributionData chunk( 20, xss.begin(), xss.end() );
+      OutgoingEnergyDistributionData chunk( 21, xss.begin(), xss.end() );
 
       THEN( "an OutgoingEnergyDistributionData can be constructed and "
             "members can be tested" ) {
@@ -118,7 +118,7 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
 
   CHECK( 3 == data1.pdf().size() );
   CHECK( 2.364290E-01 == Approx( data1.pdf().front() ) );
-  CHECK( 1.050191E+00 == Approx( data1.pdf().back() ) );
+  CHECK( 0. == Approx( data1.pdf().back() ) );
 
   CHECK( 3 == data1.cdf().size() );
   CHECK( 0. == Approx( data1.cdf().front() ) );
