@@ -4,6 +4,7 @@ import unittest
 # third party imports
 
 # local imports
+from ACEtk import EnergyDistributionType
 from ACEtk import KalbachMannDistributionData
 from ACEtk import TabulatedKalbachMannDistribution
 
@@ -28,6 +29,9 @@ class Test_ACEtk_KalbachMannDistributionData( unittest.TestCase ) :
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 35, chunk.length )
             self.assertEqual( "DLW::KalbachMannDistributionData", chunk.name )
+
+            self.assertEqual( EnergyDistributionType.KalbachMann, chunk.LAW )
+            self.assertEqual( EnergyDistributionType.KalbachMann, chunk.type )
 
             self.assertEqual( 2, chunk.NE )
             self.assertEqual( 2, chunk.number_incident_energies )

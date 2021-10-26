@@ -50,6 +50,18 @@ void wrapLevelScatteringDistribution( python::module& module, python::module& ) 
   )
   .def_property_readonly(
 
+    "LAW",
+    [] ( const Block& self ) { return self.LAW(); },
+    "The distribution type"
+  )
+  .def_property_readonly(
+
+    "type",
+    [] ( const Block& self ) { return self.type(); },
+    "The distribution type"
+  )
+  .def_property_readonly(
+
     "minimum_incident_energy",
     &Block::minimumIncidentEnergy,
     "The minimum incident energy for the distribution"

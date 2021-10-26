@@ -19,6 +19,7 @@ void wrapXsdir( python::module&, python::module& );
 // declarations - enumerators
 void wrapReferenceFrame( python::module&, python::module& );
 void wrapAngularDistributionType( python::module&, python::module& );
+void wrapEnergyDistributionType( python::module&, python::module& );
 
 namespace block {
 
@@ -79,6 +80,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   // wrap enumerators
   wrapReferenceFrame( module, viewmodule );
   wrapAngularDistributionType( module, viewmodule );
+  wrapEnergyDistributionType( module, viewmodule );
 
   // wrap generic ACE table components
   wrapData( module, viewmodule );

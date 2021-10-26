@@ -88,6 +88,9 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 25 == chunk.length() );
   CHECK( "DLW::OutgoingEnergyDistributionData" == chunk.name() );
 
+  CHECK( EnergyDistributionType::TabulatedEnergy == chunk.LAW() );
+  CHECK( EnergyDistributionType::TabulatedEnergy == chunk.type() );
+
   CHECK( 2 == chunk.NE() );
   CHECK( 2 == chunk.numberIncidentEnergies() );
 

@@ -45,6 +45,18 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
   )
   .def_property_readonly(
 
+    "LAW",
+    [] ( const Block& self ) { return self.LAW(); },
+    "The distribution type"
+  )
+  .def_property_readonly(
+
+    "type",
+    [] ( const Block& self ) { return self.type(); },
+    "The distribution type"
+  )
+  .def_property_readonly(
+
     "NE",
     &Block::NE,
     "The number of incident energy values"

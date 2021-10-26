@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "utility/overload.hpp"
+#include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/BaseDistributionData.hpp"
 #include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
 
@@ -29,6 +29,22 @@ public:
 
   /* constructor */
   #include "ACEtk/block/OutgoingEnergyDistributionData/src/ctor.hpp"
+
+  /**
+   *  @brief Return the distribution type
+   */
+  static constexpr EnergyDistributionType LAW() {
+
+    return EnergyDistributionType::TabulatedEnergy;
+  }
+
+  /**
+   *  @brief Return the distribution type
+   */
+  static constexpr EnergyDistributionType type() {
+
+    return EnergyDistributionType::TabulatedEnergy;
+  }
 
   /**
    *  @brief Return the number of incident energy values

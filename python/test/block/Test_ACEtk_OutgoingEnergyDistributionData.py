@@ -4,6 +4,7 @@ import unittest
 # third party imports
 
 # local imports
+from ACEtk import EnergyDistributionType
 from ACEtk import OutgoingEnergyDistributionData
 from ACEtk import TabulatedOutgoingEnergyDistribution
 
@@ -26,6 +27,9 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 25, chunk.length )
             self.assertEqual( "DLW::OutgoingEnergyDistributionData", chunk.name )
+
+            self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.LAW )
+            self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.type )
 
             self.assertEqual( 2, chunk.NE )
             self.assertEqual( 2, chunk.number_incident_energies )
