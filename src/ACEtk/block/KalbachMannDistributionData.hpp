@@ -7,7 +7,7 @@
 // other includes
 #include "utility/overload.hpp"
 #include "ACEtk/block/details/BaseDistributionData.hpp"
-#include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedKalbachMannDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -15,11 +15,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief Outgoing energy distribution data from the DLW block for a single
- *         reaction using tabulated outgoing energy distributions
+ *  @brief Correlated outgoing energy-angle distribution data from the DLW block
+ *         for a single reaction using Kalbach-Mann systematics
  */
-class OutgoingEnergyDistributionData :
-  protected details::BaseDistributionData< TabulatedOutgoingEnergyDistribution > {
+class KalbachMannDistributionData :
+  protected details::BaseDistributionData< TabulatedKalbachMannDistribution > {
 
   /* fields */
 
@@ -28,7 +28,7 @@ class OutgoingEnergyDistributionData :
 public:
 
   /* constructor */
-  #include "ACEtk/block/OutgoingEnergyDistributionData/src/ctor.hpp"
+  #include "ACEtk/block/KalbachMannDistributionData/src/ctor.hpp"
 
   /**
    *  @brief Return the number of incident energy values
@@ -121,7 +121,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  TabulatedOutgoingEnergyDistribution
+  TabulatedKalbachMannDistribution
   distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
