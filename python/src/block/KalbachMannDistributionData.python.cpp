@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
+#include "ACEtk/block/KalbachMannDistributionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,12 +12,12 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapOutgoingEnergyDistributionData( python::module& module,
+void wrapKalbachMannDistributionData( python::module& module,
                                          python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::OutgoingEnergyDistributionData;
-  using Distribution = njoy::ACEtk::block::TabulatedOutgoingEnergyDistribution;
+  using Block = njoy::ACEtk::block::KalbachMannDistributionData;
+  using Distribution = njoy::ACEtk::block::TabulatedKalbachMannDistribution;
 
   // wrap views created by this block
 
@@ -25,9 +25,9 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
   python::class_< Block > block(
 
     module,
-    "OutgoingEnergyDistributionData",
+    "KalbachMannDistributionData",
     "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using tabulated outgoing energy distributions"
+    "DLW block for a single reaction using Kalbach-Mann systematics"
   );
 
   // wrap the block

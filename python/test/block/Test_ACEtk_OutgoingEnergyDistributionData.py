@@ -31,11 +31,11 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             self.assertEqual( 2, chunk.number_incident_energies )
 
             self.assertEqual( 2, len( chunk.incident_energies ) )
-            self.assertEqual( 1e-11, chunk.incident_energies[0] )
-            self.assertEqual( 20., chunk.incident_energies[1] )
+            self.assertAlmostEqual( 1e-11, chunk.incident_energies[0] )
+            self.assertAlmostEqual( 20., chunk.incident_energies[1] )
 
-            self.assertEqual( 1e-11, chunk.incident_energy(1) )
-            self.assertEqual( 20., chunk.incident_energy(2) )
+            self.assertAlmostEqual( 1e-11, chunk.incident_energy(1) )
+            self.assertAlmostEqual( 20., chunk.incident_energy(2) )
 
             self.assertEqual( 27, chunk.LOCC(1) );
             self.assertEqual( 38, chunk.LOCC(2) );
