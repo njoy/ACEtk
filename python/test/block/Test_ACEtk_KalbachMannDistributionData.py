@@ -43,6 +43,9 @@ class Test_ACEtk_KalbachMannDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 1.219437E+01, chunk.incident_energy(1) )
             self.assertAlmostEqual( 20., chunk.incident_energy(2) )
 
+            self.assertAlmostEqual( 1.219437E+01, chunk.minimum_incident_energy )
+            self.assertAlmostEqual( 20., chunk.maximum_incident_energy )
+
             self.assertEqual( 27, chunk.LOCC(1) );
             self.assertEqual( 39, chunk.LOCC(2) );
             self.assertEqual( 27, chunk.distribution_locator(1) );

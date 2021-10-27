@@ -17,7 +17,7 @@ namespace details {
 
 /**
  *  @class
- *  @brief Base class for distribution data as a function of incident energy
+ *  @brief Base class for energy distribution data as a function of incident energy
  */
 template< typename Distribution >
 class BaseDistributionData : protected details::Base {
@@ -104,6 +104,22 @@ public:
     this->verifyIncidentEnergyIndex( index );
     #endif
     return this->data_.value( 1, index );
+  }
+
+  /**
+   *  @brief Return the minimum incident energy for the distribution
+   */
+  double minimumIncidentEnergy() const {
+
+    return this->incidentEnergy( 1 );
+  }
+
+  /**
+   *  @brief Return the maximum incident energy for the distribution
+   */
+  double maximumIncidentEnergy() const {
+
+    return this->incidentEnergy( this->NE() );
   }
 
   /**

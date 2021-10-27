@@ -85,6 +85,18 @@ void wrapKalbachMannDistributionData( python::module& module,
     "    self     the block\n"
     "    index    the index (one-based)"
   )
+  .def_property_readonly(
+
+    "minimum_incident_energy",
+    &Block::minimumIncidentEnergy,
+    "The minimum incident energy for the distribution"
+  )
+  .def_property_readonly(
+
+    "maximum_incident_energy",
+    &Block::maximumIncidentEnergy,
+    "The maximum incident energy for the distribution"
+  )
   .def(
 
     "LOCC",

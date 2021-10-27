@@ -41,6 +41,9 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 1e-11, chunk.incident_energy(1) )
             self.assertAlmostEqual( 20., chunk.incident_energy(2) )
 
+            self.assertAlmostEqual( 1e-11, chunk.minimum_incident_energy )
+            self.assertAlmostEqual( 20., chunk.maximum_incident_energy )
+
             self.assertEqual( 27, chunk.LOCC(1) );
             self.assertEqual( 38, chunk.LOCC(2) );
             self.assertEqual( 27, chunk.distribution_locator(1) );

@@ -101,6 +101,9 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 1e-11 == Approx( chunk.incidentEnergy(1) ) );
   CHECK( 20. == Approx( chunk.incidentEnergy(2) ) );
 
+  CHECK( 1e-11 == Approx( chunk.minimumIncidentEnergy() ) );
+  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+
   CHECK( 27 == chunk.LOCC(1) );
   CHECK( 38 == chunk.LOCC(2) );
   CHECK( 27 == chunk.distributionLocator(1) );

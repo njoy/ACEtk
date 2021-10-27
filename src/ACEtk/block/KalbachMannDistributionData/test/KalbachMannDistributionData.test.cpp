@@ -107,6 +107,9 @@ void verifyChunk( const KalbachMannDistributionData& chunk ) {
   CHECK( 1.219437E+01 == Approx( chunk.incidentEnergy(1) ) );
   CHECK( 20. == Approx( chunk.incidentEnergy(2) ) );
 
+  CHECK( 1.219437E+01 == Approx( chunk.minimumIncidentEnergy() ) );
+  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+
   CHECK( 27 == chunk.LOCC(1) );
   CHECK( 39 == chunk.LOCC(2) );
   CHECK( 27 == chunk.distributionLocator(1) );

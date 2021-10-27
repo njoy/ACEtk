@@ -81,6 +81,22 @@ public:
   }
 
   /**
+   *  @brief Return the minimum incident energy for the distribution
+   */
+  double minimumIncidentEnergy() const {
+
+    return BaseDistributionData::minimumIncidentEnergy();
+  }
+
+  /**
+   *  @brief Return the maximum incident energy for the distribution
+   */
+  double maximumIncidentEnergy() const {
+
+    return BaseDistributionData::maximumIncidentEnergy();
+  }
+
+  /**
    *  @brief Return the distribution locator for an incident energy index
    *
    *  This locator is the value as stored in the XSS array. It is relative to
