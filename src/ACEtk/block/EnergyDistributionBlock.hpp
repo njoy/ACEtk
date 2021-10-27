@@ -40,7 +40,7 @@ private:
   Iterator dlw_;    // the begin iterator of the DLW block
 
   /* auxiliary functions */
-//  #include "ACEtk/block/EnergyDistributionBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/EnergyDistributionBlock/src/generateXSS.hpp"
   #include "ACEtk/block/EnergyDistributionBlock/src/verifySize.hpp"
 
 public:

@@ -1,15 +1,15 @@
 private:
 
-// /**
-//  *  @brief Private constructor
-//  */
-// EnergyDistributionBlock( std::vector< DistributionData >&& distributions,
-//                           std::size_t nr ) :
-//   Base( "DLW", generateXSS( std::move( distributions ) ) ),
-//   nr_( nr ) {
-//
-//   this->and_ = this->begin() + this->nr_ + 1;
-// }
+/**
+ *  @brief Private constructor
+ */
+EnergyDistributionBlock( std::vector< DistributionData >&& distributions,
+                          std::size_t nr ) :
+  Base( "DLW", generateXSS( std::move( distributions ) ) ),
+  nr_( nr ) {
+
+  this->dlw_ = this->begin() + this->nr_;
+}
 
 public:
 
@@ -18,14 +18,14 @@ EnergyDistributionBlock() = default;
 EnergyDistributionBlock( const EnergyDistributionBlock& ) = default;
 EnergyDistributionBlock( EnergyDistributionBlock&& ) = default;
 
-// /**
-//  *  @brief Constructor
-//  *
-//  *  @param[in] xs    the cross section data
-//  */
-// EnergyDistributionBlock( std::vector< DistributionData >&& distributions ) :
-//   EnergyDistributionBlock( std::move( distributions ),
-//                            distributions.size() - 1 ) {}
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] xs    the cross section data
+ */
+EnergyDistributionBlock( std::vector< DistributionData >&& distributions ) :
+  EnergyDistributionBlock( std::move( distributions ),
+                           distributions.size() ) {}
 
 /**
  *  @brief Constructor
@@ -37,7 +37,7 @@ EnergyDistributionBlock( EnergyDistributionBlock&& ) = default;
  *                     (excluding elastic)
  */
 EnergyDistributionBlock( Iterator ldlw, Iterator dlw, Iterator end,
-                          unsigned int nr ) :
+                         unsigned int nr ) :
   Base( "DLW", ldlw, end ), nr_( nr ), dlw_( dlw ) {
 
   verifySize( this->begin(), this->dlw_, this->end(), this->nr_ );

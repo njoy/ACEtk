@@ -47,6 +47,39 @@ public:
   }
 
   /**
+   *  @brief Return the number of interpolation regions
+   */
+  std::size_t NB() const { return BaseDistributionData::NB(); }
+
+  /**
+   *  @brief Return the number of interpolation regions
+   */
+  std::size_t numberInterpolationRegions() const {
+
+    return BaseDistributionData::numberInterpolationRegions();
+  }
+
+  /**
+   *  @brief Return the interpolation boundaries
+   */
+  auto NBT() const { return BaseDistributionData::NBT(); }
+
+  /**
+   *  @brief Return the interpolation boundaries
+   */
+  auto boundaries() const { return BaseDistributionData::boundaries(); }
+
+  /**
+   *  @brief Return the interpolants
+   */
+  auto INT() const { return BaseDistributionData::INT(); }
+
+  /**
+   *  @brief Return the interpolants
+   */
+  auto interpolants() const { return BaseDistributionData::interpolants(); }
+
+  /**
    *  @brief Return the number of incident energy values
    */
   std::size_t NE() const { return BaseDistributionData::NE(); }

@@ -25,15 +25,15 @@ class Base {
 
 public:
 
-  using Iterator = std::vector< double >::iterator;
+  using Iterator = std::vector< double >::const_iterator;
 
 private:
 
   /* fields */
   std::string name_;
   std::optional< std::vector< double > > xss_;
-  std::vector< double >::iterator begin_;
-  std::vector< double >::iterator end_;
+  Iterator begin_;
+  Iterator end_;
   std::size_t length_;
 
 protected:
