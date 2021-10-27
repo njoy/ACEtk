@@ -28,7 +28,6 @@ class CrossSectionBlock : protected details::Base {
 
   /* auxiliary functions */
   #include "ACEtk/block/CrossSectionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/CrossSectionBlock/src/verifyReactionIndex.hpp"
   #include "ACEtk/block/CrossSectionBlock/src/verifySize.hpp"
 
 public:
@@ -59,7 +58,7 @@ public:
   std::size_t LSIG( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index );
+    this->verifyReactionIndex( index, 1, this->NTR() );
     #endif
     return XSS( index );
   }

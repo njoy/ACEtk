@@ -33,10 +33,12 @@ class BaseDistributionData : protected details::Base {
   #include "ACEtk/block/details/BaseDistributionData/src/generateBlocks.hpp"
   #include "ACEtk/block/details/BaseDistributionData/src/verifySize.hpp"
 
-public:
+protected:
 
   /* constructor */
   #include "ACEtk/block/details/BaseDistributionData/src/ctor.hpp"
+
+public:
 
   /**
    *  @brief Return the interpolation data

@@ -51,7 +51,13 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto QValue( std::size_t index ) const { return this->XSS( index ); }
+  auto QValue( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyReactionIndex( index, 1, this->NTR() );
+    #endif
+    return this->XSS( index );
+  }
 
   /**
    *  @brief Return the Q values

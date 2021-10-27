@@ -19,11 +19,10 @@ namespace block {
  *  @brief The continuous energy LAND and AND block with the angular
  *         distribution data
  *
- *  The AngularDistributionBlock class contains NXS(4) sets of angular
- *  distribution data (either ),
- *  one for each reaction number on the MTR block. The order of these cross
- *  section data sets is the same as the order of the reaction numbers in the
- *  MTR block.
+ *  The AngularDistributionBlock class contains NXS(5) sets of angular
+ *  distribution data, one for each of the first NXS(5) reaction numbers on the
+ *  MTR block. The order of these distribution data sets is the same as the
+ *  order of the reaction numbers in the MTR block.
  */
 class AngularDistributionBlock : protected details::Base {
 
@@ -42,7 +41,6 @@ private:
 
   /* auxiliary functions */
   #include "ACEtk/block/AngularDistributionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/AngularDistributionBlock/src/verifyReactionIndex.hpp"
   #include "ACEtk/block/AngularDistributionBlock/src/verifySize.hpp"
 
 public:
@@ -76,7 +74,7 @@ public:
   int LAND( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index );
+    this->verifyReactionIndex( index, 0, this->NR() );
     #endif
     return XSS( index + 1 ); // elastic is index 0
   }

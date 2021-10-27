@@ -40,6 +40,7 @@ protected:
 
   /* auxiliary functions */
   #include "ACEtk/block/details/Base/src/verifyIndex.hpp"
+  #include "ACEtk/block/details/Base/src/verifyReactionIndex.hpp"
 
   /* constructor */
   #include "ACEtk/block/details/Base/src/ctor.hpp"
@@ -84,7 +85,7 @@ public:
   Iterator iterator( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyIndex( index );
+    this->verifyIndex( index, 1, this->length() );
     #endif
     return std::next( this->begin(), index - 1 );
   }

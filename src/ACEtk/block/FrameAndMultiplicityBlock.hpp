@@ -57,6 +57,9 @@ public:
    */
   ReferenceFrame referenceFrame( std::size_t index ) const {
 
+    #ifndef NDEBUG
+    this->verifyReactionIndex( index, 1, this->NTR() );
+    #endif
     return this->XSS( index ) < 0 ? ReferenceFrame::CentreOfMass
                                   : ReferenceFrame::Laboratory;
   }
@@ -80,6 +83,9 @@ public:
    */
   unsigned int multiplicity( std::size_t index ) const {
 
+    #ifndef NDEBUG
+    this->verifyReactionIndex( index, 1, this->NTR() );
+    #endif
     return std::abs( this->XSS( index ) );
   }
 
