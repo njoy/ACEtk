@@ -141,21 +141,22 @@ public:
 
         // xand : one-based index to the start of the AND block
         // xand + locator - 1 : one-based index to the start of distribution data
-        std::size_t xand = std::distance( this->begin(), this->and_ ) + 1;
-        const auto locator = xand + this->LAND( index ) - 1;
-        const auto left = std::next( this->begin(), locator - 1 );
+        const std::size_t xand = std::distance( this->begin(), this->and_ ) + 1;
+        const std::size_t land = this->LAND( index );
+        const auto locator = xand + land - 1;
+        const auto left = this->iterator( locator );
         auto right = this->end();
         for ( auto next = index + 1;
               next <= this->numberProjectileProductionReactions(); ++next ) {
 
-          auto nextlocator = xand + this->LAND( index ) - 1;
+          auto nextlocator = xand + this->LAND( next ) - 1;
           if ( nextlocator > locator ) {
 
-            right = std::next( this->begin(), nextlocator - 1 );
+            right = this->iterator( nextlocator );
             break;
-         }
+          }
         }
-        return AngularDistributionData( locator - ( xand - 1 ), left, right );
+        return AngularDistributionData( land, left, right );
       }
     }
     else {
