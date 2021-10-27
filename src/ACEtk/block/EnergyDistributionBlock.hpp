@@ -19,10 +19,10 @@ namespace block {
  *  @brief The continuous energy LDLW and DLW block with the energy
  *         distribution data
  *
- *  The EnergyDistributionBlock class contains NXS(5) sets of energy
- *  distribution data, one for each of the first NXS(5) reaction numbers on the
- *  MTR block. The order of these distribution data sets is the same as the
- *  order of the reaction numbers in the MTR block.
+ *  The EnergyDistributionBlock class contains energy distribution data,
+ *  one for each the first NXS(5) reaction numbers on the MTR block. The order
+ *  of the distribution data sets is the same as the order of the reaction
+ *  numbers in the MTR block.
  */
 class EnergyDistributionBlock : protected details::Base {
 

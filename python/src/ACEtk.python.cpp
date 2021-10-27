@@ -48,6 +48,7 @@ namespace block {
   void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
   void wrapCrossSectionBlock( python::module&, python::module& );
   void wrapAngularDistributionBlock( python::module&, python::module& );
+  void wrapEnergyDistributionBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -118,6 +119,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapFrameAndMultiplicityBlock( module, viewmodule );
   block::wrapCrossSectionBlock( module, viewmodule );
   block::wrapAngularDistributionBlock( module, viewmodule );
+  block::wrapEnergyDistributionBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );

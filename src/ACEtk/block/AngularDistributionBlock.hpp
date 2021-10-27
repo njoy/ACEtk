@@ -19,10 +19,12 @@ namespace block {
  *  @brief The continuous energy LAND and AND block with the angular
  *         distribution data
  *
- *  The AngularDistributionBlock class contains NXS(5) sets of angular
- *  distribution data, one for each of the first NXS(5) reaction numbers on the
- *  MTR block. The order of these distribution data sets is the same as the
- *  order of the reaction numbers in the MTR block.
+ *  The AngularDistributionBlock class contains angular distribution data,
+ *  one for each the first NXS(5) reaction numbers on the MTR block and
+ *  elastic as well (referenced using the reaction index 0). Elastic is always
+ *  the first reaction (hence the index 0 for this reaction) while the order
+ *  of the other distribution data sets is the same as the order of the reaction
+ *  numbers in the MTR block.
  */
 class AngularDistributionBlock : protected details::Base {
 
