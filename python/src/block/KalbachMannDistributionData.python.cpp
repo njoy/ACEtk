@@ -57,6 +57,52 @@ void wrapKalbachMannDistributionData( python::module& module,
   )
   .def_property_readonly(
 
+    "interpolation_data",
+    [] ( const Block& self ) { return self.interpolationData(); },
+    "The interpolation data"
+  )
+  .def_property_readonly(
+
+    "NB",
+    [] ( const Block& self ) { return self.NB(); },
+    "The number of interpolation regions"
+  )
+  .def_property_readonly(
+
+    "number_interpolation_regions",
+    [] ( const Block& self ) { return self.numberInterpolationRegions(); },
+    "The number of interpolation regions"
+  )
+  .def_property_readonly(
+
+    "NBT",
+    [] ( const Block& self ) -> LongRange
+       { return self.NBT(); },
+    "The interpolation boundaries"
+  )
+  .def_property_readonly(
+
+    "boundaries",
+    [] ( const Block& self ) -> LongRange
+       { return self.boundaries(); },
+    "The interpolation boundaries"
+  )
+  .def_property_readonly(
+
+    "INT",
+    [] ( const Block& self ) -> LongRange
+       { return self.INT(); },
+    "The interpolation type for each range"
+  )
+  .def_property_readonly(
+
+    "interpolants",
+    [] ( const Block& self ) -> LongRange
+       { return self.interpolants(); },
+    "The interpolation type for each range"
+  )
+  .def_property_readonly(
+
     "NE",
     &Block::NE,
     "The number of incident energy values"

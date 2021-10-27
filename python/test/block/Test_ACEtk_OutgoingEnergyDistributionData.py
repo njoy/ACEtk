@@ -31,6 +31,20 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.LAW )
             self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.type )
 
+            self.assertEqual( 0, chunk.interpolation_data.NB )
+            self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
+            self.assertEqual( 0, len( chunk.interpolation_data.INT ) )
+            self.assertEqual( 0, len( chunk.interpolation_data.interpolants ) )
+            self.assertEqual( 0, len( chunk.interpolation_data.NBT ) )
+            self.assertEqual( 0, len( chunk.interpolation_data.boundaries ) )
+
+            self.assertEqual( 0, chunk.NB )
+            self.assertEqual( 0, chunk.number_interpolation_regions )
+            self.assertEqual( 0, len( chunk.INT ) )
+            self.assertEqual( 0, len( chunk.interpolants ) )
+            self.assertEqual( 0, len( chunk.NBT ) )
+            self.assertEqual( 0, len( chunk.boundaries ) )
+
             self.assertEqual( 2, chunk.NE )
             self.assertEqual( 2, chunk.number_incident_energies )
 

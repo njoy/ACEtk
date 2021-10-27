@@ -49,27 +49,43 @@ void wrapInterpolationData( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "NB",
+    [] ( const Block& self ) { return self.NB(); },
+    "The number of interpolation regions"
+  )
+  .def_property_readonly(
+
+    "number_interpolation_regions",
+    [] ( const Block& self ) { return self.numberInterpolationRegions(); },
+    "The number of interpolation regions"
+  )
+  .def_property_readonly(
+
     "NBT",
-    &Block::NBT,
+    [] ( const Block& self ) -> LongRange
+       { return self.NBT(); },
     "The interpolation boundaries"
   )
   .def_property_readonly(
 
     "boundaries",
-    &Block::boundaries,
+    [] ( const Block& self ) -> LongRange
+       { return self.boundaries(); },
     "The interpolation boundaries"
   )
   .def_property_readonly(
 
     "INT",
-    &Block::INT,
-    "The interpolants"
+    [] ( const Block& self ) -> LongRange
+       { return self.INT(); },
+    "The interpolation type for each range"
   )
   .def_property_readonly(
 
     "interpolants",
-    &Block::interpolants,
-    "The interpolants"
+    [] ( const Block& self ) -> LongRange
+       { return self.interpolants(); },
+    "The interpolation type for each range"
   );
 
   // add standard block definitions

@@ -97,6 +97,20 @@ void verifyChunk( const KalbachMannDistributionData& chunk ) {
   CHECK( EnergyDistributionType::KalbachMann == chunk.LAW() );
   CHECK( EnergyDistributionType::KalbachMann == chunk.type() );
 
+  CHECK( 0 == chunk.interpolationData().NB() );
+  CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == chunk.interpolationData().INT().size() );
+  CHECK( 0 == chunk.interpolationData().interpolants().size() );
+  CHECK( 0 == chunk.interpolationData().NBT().size() );
+  CHECK( 0 == chunk.interpolationData().boundaries().size() );
+
+  CHECK( 0 == chunk.NB() );
+  CHECK( 0 == chunk.numberInterpolationRegions() );
+  CHECK( 0 == chunk.INT().size() );
+  CHECK( 0 == chunk.interpolants().size() );
+  CHECK( 0 == chunk.NBT().size() );
+  CHECK( 0 == chunk.boundaries().size() );
+
   CHECK( 2 == chunk.NE() );
   CHECK( 2 == chunk.numberIncidentEnergies() );
 

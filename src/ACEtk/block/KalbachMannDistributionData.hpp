@@ -47,6 +47,14 @@ public:
   }
 
   /**
+   *  @brief Return the interpolation data
+   */
+  auto interpolationData() const {
+
+    return BaseDistributionData::interpolationData();
+  }
+
+  /**
    *  @brief Return the number of interpolation regions
    */
   std::size_t NB() const { return BaseDistributionData::NB(); }
