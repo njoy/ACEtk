@@ -146,8 +146,7 @@ public:
         const auto locator = xand + land - 1;
         const auto left = this->iterator( locator );
         auto right = this->end();
-        for ( auto next = index + 1;
-              next <= this->numberProjectileProductionReactions(); ++next ) {
+        for ( auto next = index + 1; next <= this->NR(); ++next ) {
 
           auto nextlocator = xand + this->LAND( next ) - 1;
           if ( nextlocator > locator ) {
