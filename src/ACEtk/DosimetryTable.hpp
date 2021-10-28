@@ -70,16 +70,6 @@ public:
   unsigned int ZA() const { return this->data().NXS(2); }
 
   /**
-   *  @brief Return the number of energy points
-   */
-  unsigned int NES() const { return this->data().NXS(3); }
-
-  /**
-   *  @brief Return the number of energy points
-   */
-  unsigned int numberEnergyPoints() const { return this->NES(); }
-
-  /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
   unsigned int NTR() const { return this->data().NXS(4); }
@@ -111,12 +101,12 @@ public:
   /**
    *  @brief Return the cross section block
    */
-  const block::SIGD& SIG() const { return this->sig_; }
+  const block::SIGD& SIGD() const { return this->sig_; }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIGD& crossSectionBlock() const { return this->SIG(); }
+  const block::SIGD& crossSectionBlock() const { return this->SIGD(); }
 };
 
 } // ACEtk namespace

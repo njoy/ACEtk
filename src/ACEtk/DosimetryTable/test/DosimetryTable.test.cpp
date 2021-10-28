@@ -50,12 +50,22 @@ SCENARIO( "DosimetryTable" ){
         CHECK( 2 == ncTable.MTR().index( 107 ) );
 
         // SIGD block
-        CHECK( false == ncTable.SIG().empty() );
-        CHECK( 2 == ncTable.SIG().NTR() );
+        CHECK( false == ncTable.SIGD().empty() );
+        CHECK( 2 == ncTable.SIGD().NTR() );
 
-        CHECK( 1 == ncTable.SIG().LSIG( 1 ) );
-        CHECK( 615 == ncTable.SIG().LSIG( 2 ) );
+        CHECK( 1 == ncTable.SIGD().LSIG( 1 ) );
+        CHECK( 615 == ncTable.SIGD().LSIG( 2 ) );
+        CHECK( 1 == ncTable.SIGD().crossSectionLocator( 1 ) );
+        CHECK( 615 == ncTable.SIGD().crossSectionLocator( 2 ) );
 
+        auto xs1 = ncTable.SIGD().crossSectionData( 1 );
+        auto xs2 = ncTable.SIGD().crossSectionData( 2 );
+        CHECK( 306 == xs1.numberEnergyPoints() );
+        CHECK( 272 == xs2.numberEnergyPoints() );
+        CHECK( 0. == Approx( xs1.crossSections().front() ) );
+        CHECK( 0.0322 == Approx( xs1.crossSections().back() ) );
+        CHECK( 0. == Approx( xs2.crossSections().front() ) );
+        CHECK( 0.038 == Approx( xs2.crossSections().back() ) );
       }
     }
   }
