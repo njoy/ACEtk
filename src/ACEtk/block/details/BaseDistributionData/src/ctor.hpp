@@ -38,7 +38,7 @@ BaseDistributionData( std::string&& name,
 /**
  *  @brief Constructor
  *
- *  @param[in] name             the name of the block
+ *  @param[in] name    the name of the block
  *  @param[in] locb    the starting xss index with respect to the superblock
  *  @param[in] sig     the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array
