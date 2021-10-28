@@ -1,13 +1,12 @@
-#ifndef NJOY_ACETK_CONTINUOUSENERGYTABLE
-#define NJOY_ACETK_CONTINUOUSENERGYTABLE
+#ifndef NJOY_ACETK_DOSIMETRYYTABLE
+#define NJOY_ACETK_DOSIMETRYYTABLE
 
 // system includes
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
-#include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/block/DosimetryCrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,22 +20,20 @@ namespace ACEtk {
 class DosimetryTable : protected Table {
 
   /* fields */
-  block::ESZ esz_;
   block::MTR mtr_;
-  block::SIG sig_;
+  block::SIGD sig_;
 
   /* auxiliary functions */
   void generateBlocks() {
 
     auto begin = this->data().XSS().begin();
-    auto esz = begin + this->data().JXS(1) - 1;
     auto mtr = begin + this->data().JXS(3) - 1;
     auto lsig = begin + this->data().JXS(6) - 1;
     auto sig = begin + this->data().JXS(7) - 1;
+    auto end = this->data().XSS().end();
 
-    this->esz_ = block::ESZ( esz, mtr, this->NES() );
     this->mtr_ = block::MTR( mtr, lsig, this->NTR() );
-    this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
+    this->sig_ = block::SIGD( lsig, sig, end, this->NTR() );
   }
 
 public:
@@ -102,16 +99,6 @@ public:
   // XSS blocks
 
   /**
-   *  @brief Return the principal cross section block
-   */
-  const block::ESZ& ESZ() const { return this->esz_; }
-
-  /**
-   *  @brief Return the principal cross section block
-   */
-  const block::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
-
-  /**
    *  @brief Return the reaction number block
    */
   const block::MTR& MTR() const { return this->mtr_; }
@@ -124,12 +111,12 @@ public:
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& SIG() const { return this->sig_; }
+  const block::SIGD& SIG() const { return this->sig_; }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& crossSectionBlock() const { return this->SIG(); }
+  const block::SIGD& crossSectionBlock() const { return this->SIG(); }
 };
 
 } // ACEtk namespace
