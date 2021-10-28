@@ -85,7 +85,8 @@ public:
   Iterator iterator( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyIndex( index, 1, this->length() );
+    // an iterator may point to the position after the last one
+    this->verifyIndex( index, 1, this->length() + 1 );
     #endif
     return std::next( this->begin(), index - 1 );
   }
@@ -108,7 +109,10 @@ public:
    */
   auto XSS( std::size_t index ) const {
 
-    return *( this->iterator( index ) );
+    #ifndef NDEBUG
+    this->verifyIndex( index, 1, this->length() );
+    #endif
+    return *std::next( this->begin(), index - 1 );
   }
 
   /**
