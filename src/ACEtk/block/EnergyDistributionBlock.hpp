@@ -143,7 +143,8 @@ public:
         }
         default : {
 
-          throw std::runtime_error( "DLW law currently not implemented" );
+          throw std::runtime_error( "DLW law currently not implemented: "
+                                    + std::to_string( static_cast< short >( law ) ) );
         }
       }
     }

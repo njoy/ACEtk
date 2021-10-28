@@ -10,6 +10,8 @@ using namespace njoy::ACEtk;
 using AngularDistributionData = block::AngularDistributionData;
 using FullyIsotropicDistribution = block::FullyIsotropicDistribution;
 using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
+using LevelScatteringDistribution = block::LevelScatteringDistribution;
+using KalbachMannDistributionData = block::KalbachMannDistributionData;
 
 std::string chunk();
 void verifyChunk( const Table& );
@@ -173,6 +175,18 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( ncTable.AND().angularDistributionData( 3 ) ) );
         CHECK( true == std::holds_alternative< AngularDistributionData >( ncTable.AND().angularDistributionData( 44 ) ) );
         CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( ncTable.AND().angularDistributionData( 45 ) ) );
+
+        // DLW block
+        CHECK( false == ncTable.DLW().empty() );
+        CHECK( 45 == ncTable.DLW().NR() );
+
+        CHECK( 1 == ncTable.DLW().LDLW( 1 ) );
+        CHECK( 48133 == ncTable.DLW().LDLW( 44 ) );
+        CHECK( 48144 == ncTable.DLW().LDLW( 45 ) );
+
+        CHECK( true == std::holds_alternative< KalbachMannDistributionData >( ncTable.DLW().energyDistributionData( 1 ) ) );
+        CHECK( true == std::holds_alternative< LevelScatteringDistribution >( ncTable.DLW().energyDistributionData( 44 ) ) );
+        CHECK( true == std::holds_alternative< KalbachMannDistributionData >( ncTable.DLW().energyDistributionData( 45 ) ) );
       }
     }
   }
