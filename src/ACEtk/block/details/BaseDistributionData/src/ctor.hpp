@@ -56,13 +56,11 @@ BaseDistributionData( std::string&& name, std::size_t locb,
 BaseDistributionData& operator=( const BaseDistributionData& base ) {
 
   new (this) BaseDistributionData( base );
-  this->generateBlocks();
   return *this;
 }
 
 BaseDistributionData& operator=( BaseDistributionData&& base ) {
 
   new (this) BaseDistributionData( std::move( base ) );
-  this->generateBlocks();
   return *this;
 }

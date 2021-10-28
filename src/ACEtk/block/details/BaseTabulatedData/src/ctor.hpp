@@ -53,13 +53,11 @@ BaseTabulatedData( std::string&& name, Iterator begin, Iterator end ) :
 BaseTabulatedData& operator=( const BaseTabulatedData& base ) {
 
   new (this) BaseTabulatedData( base );
-  this->generateBlocks();
   return *this;
 }
 
 BaseTabulatedData& operator=( BaseTabulatedData&& base ) {
 
   new (this) BaseTabulatedData( std::move( base ) );
-  this->generateBlocks();
   return *this;
 }

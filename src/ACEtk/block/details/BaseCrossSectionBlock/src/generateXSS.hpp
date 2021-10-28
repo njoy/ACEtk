@@ -1,4 +1,4 @@
-static std::vector< double > generateXSS( std::vector< CrossSectionData >&& xs ) {
+static std::vector< double > generateXSS( std::vector< Data >&& xs ) {
 
   std::size_t ntr = xs.size();
   std::vector< double > xss( ntr );
