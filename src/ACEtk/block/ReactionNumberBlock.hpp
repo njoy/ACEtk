@@ -51,12 +51,12 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto MT( std::size_t index ) const {
+  unsigned int MT( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyReactionIndex( index, 1, this->NTR() );
     #endif
-    return this->XSS( index );
+    return static_cast< unsigned int >( this->XSS( index ) );
   }
 
   /**
@@ -64,7 +64,10 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto reactionNumber( std::size_t index ) const { return this->MT( index ); }
+  unsigned int reactionNumber( std::size_t index ) const {
+
+    return this->MT( index );
+  }
 
   /**
    *  @brief Return the reaction numbers
