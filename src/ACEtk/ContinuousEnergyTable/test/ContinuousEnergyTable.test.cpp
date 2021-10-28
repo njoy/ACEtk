@@ -27,7 +27,14 @@ SCENARIO( "ContinuousEnergyTable" ){
       THEN( "parameters can be extracted" ){
 
         CHECK( "92235.80c" == ncTable.ZAID() );
-        CHECK( 2.5301e-8 == Approx( ncTable.temperature() ) );
+        CHECK( 233.024800 == Approx( ncTable.AWR() ) );
+        CHECK( 233.024800 == Approx( ncTable.atomicWeightRatio() ) );
+        CHECK( 2.5301E-08 == Approx( ncTable.TEMP() ) );
+        CHECK( 2.5301E-08 == Approx( ncTable.temperature() ) );
+
+        CHECK( "12/19/12" == ncTable.date() );
+        CHECK( "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)" == ncTable.title() );
+        CHECK( "mat9228" == ncTable.material() );
 
         CHECK( 837481 == ncTable.length() );
         CHECK( 92235 == ncTable.ZA() );

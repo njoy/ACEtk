@@ -23,9 +23,16 @@ SCENARIO( "DosimetryTable" ){
       THEN( "parameters can be extracted" ){
 
         CHECK( "13027.24y" == ncTable.ZAID() );
+        CHECK( 26.75 == Approx( ncTable.AWR() ) );
+        CHECK( 26.75 == Approx( ncTable.atomicWeightRatio() ) );
+        CHECK( 0. == Approx( ncTable.TEMP() ) );
         CHECK( 0. == Approx( ncTable.temperature() ) );
 
-        CHECK( 1165 == ncTable.length() );
+        CHECK( "" == ncTable.date() );
+        CHECK( "" == ncTable.title() );
+        CHECK( "" == ncTable.material() );
+
+        CHECK( 1164 == ncTable.length() );
         CHECK( 13027 == ncTable.ZA() );
         CHECK( 2 == ncTable.NTR() );
         CHECK( 2 == ncTable.numberReactions() );
