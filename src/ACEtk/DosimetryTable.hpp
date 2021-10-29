@@ -78,12 +78,12 @@ public:
   const std::string& date() const { return this->header().date(); }
 
   /**
-   *  @brief Return the titla string
+   *  @brief Return the title
    */
   const std::string& title() const { return this->header().title(); }
 
   /**
-   *  @brief Return the material string
+   *  @brief Return the material
    */
   const std::string& material() const { return this->header().material(); }
 

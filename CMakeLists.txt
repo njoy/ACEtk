@@ -110,6 +110,7 @@ if(ACEtk.python)
     python/src/block/KalbachMannDistributionData.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
+    python/src/DosimetryTable.python.cpp
   )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )

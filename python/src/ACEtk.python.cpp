@@ -55,6 +55,7 @@ namespace block {
 
 // declarations - ACE table types
 void wrapContinuousEnergyTable( python::module&, python::module& );
+void wrapDosimetryTable( python::module&, python::module& );
 
 /**
  *  @brief ACEtk python bindings
@@ -127,4 +128,5 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
+  wrapDosimetryTable( module, viewmodule );
 }
