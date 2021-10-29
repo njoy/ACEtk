@@ -9,6 +9,7 @@
 namespace python = pybind11;
 
 // declarations - generic ACE table
+void wrapHeader( python::module&, python::module& );
 void wrapData( python::module&, python::module& );
 void wrapTable( python::module&, python::module& );
 
@@ -90,6 +91,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapEnergyDistributionType( module, viewmodule );
 
   // wrap generic ACE table components
+  wrapHeader( module, viewmodule );
   wrapData( module, viewmodule );
   wrapTable( module, viewmodule );
 
