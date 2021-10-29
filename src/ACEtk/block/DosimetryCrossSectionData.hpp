@@ -72,12 +72,12 @@ public:
   auto interpolants() const { return BaseTabulatedData::interpolants(); }
 
   /**
-   *  @brief Return the number of energy points
+   *  @brief Return the number of energy values
    */
   std::size_t NE() const { return BaseTabulatedData::N(); }
 
   /**
-   *  @brief Return the number of elements
+   *  @brief Return the number of energy values
    */
   std::size_t numberEnergyPoints() const { return this->NE(); }
 

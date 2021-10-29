@@ -86,6 +86,7 @@ if(ACEtk.python)
     python/src/EnergyDistributionType.python.cpp
     python/src/block/InterpolationData.python.cpp
     python/src/block/CrossSectionData.python.cpp
+    python/src/block/DosimetryCrossSectionData.python.cpp
     python/src/block/PrincipalCrossSectionBlock.python.cpp
     python/src/block/PolynomialFissionMultiplicity.python.cpp
     python/src/block/TabulatedFissionMultiplicity.python.cpp
