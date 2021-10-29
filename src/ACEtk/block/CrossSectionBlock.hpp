@@ -51,7 +51,8 @@ public:
   /**
    *  @brief Return the relative cross section locator for a reaction index
    *
-   *  When the index is out of range an std::out_of_range exception is thrown.
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
@@ -66,7 +67,8 @@ public:
   /**
    *  @brief Return the relative cross section locator for a reaction index
    *
-   *  When the index is out of range an std::out_of_range exception is thrown.
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
@@ -78,7 +80,8 @@ public:
   /**
    *  @brief Return the cross section data for a reaction index
    *
-   *  When the index is out of range an std::out_of_range exception is thrown.
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
@@ -99,7 +102,8 @@ public:
   /**
    *  @brief Return the energy index for a reaction index
    *
-   *  When the index is out of range an std::out_of_range exception is thrown.
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
@@ -114,7 +118,8 @@ public:
   /**
    *  @brief Return the number of cross section values for a reaction index
    *
-   *  When the index is out of range an std::out_of_range exception is thrown.
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
@@ -129,7 +134,8 @@ public:
   /**
    *  @brief Return the cross section values for a reaction index
    *
-   *  When the index is out of range an std::out_of_range exception is thrown.
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */

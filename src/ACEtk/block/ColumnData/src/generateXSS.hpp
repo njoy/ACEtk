@@ -13,7 +13,7 @@ generateXSS( std::vector< std::vector< double > >&& columns ) {
 
       Log::error( "The size of the column with index {} is not equal to the "
                   "expected value", i + 1 );
-      Log::info( "Exepcted size = {}", ne );
+      Log::info( "Expected size = {}", ne );
       Log::info( "Found size = {}", columns[i].size() );
       throw std::exception();
     }
@@ -30,5 +30,17 @@ generateXSS( std::vector< double >&& column1,
   std::vector< std::vector< double > > columns;
   columns.emplace_back( std::move( column1 ) );
   columns.emplace_back( std::move( column2 ) );
+  return generateXSS( std::move( columns ) );
+}
+
+static std::vector< double >
+generateXSS( std::vector< double >&& column1,
+             std::vector< double >&& column2,
+             std::vector< double >&& column3 ) {
+
+  std::vector< std::vector< double > > columns;
+  columns.emplace_back( std::move( column1 ) );
+  columns.emplace_back( std::move( column2 ) );
+  columns.emplace_back( std::move( column3 ) );
   return generateXSS( std::move( columns ) );
 }

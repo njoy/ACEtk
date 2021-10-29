@@ -82,6 +82,7 @@ if(ACEtk.python)
     python/src/Data.python.cpp
     python/src/Table.python.cpp
     python/src/ReferenceFrame.python.cpp
+    python/src/AngularDistributionType.python.cpp
     python/src/block/InterpolationData.python.cpp
     python/src/block/CrossSectionData.python.cpp
     python/src/block/PrincipalCrossSectionBlock.python.cpp
@@ -93,6 +94,10 @@ if(ACEtk.python)
     python/src/block/FrameAndMultiplicityBlock.python.cpp
     python/src/block/CrossSectionBlock.python.cpp
     python/src/block/SecondaryParticleTypeBlock.python.cpp
+    python/src/block/EquiprobableAngularBins.python.cpp
+    python/src/block/TabulatedAngularDistribution.python.cpp
+    python/src/block/IsotropicAngularDistribution.python.cpp
+    python/src/block/AngularDistributionData.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
   )
 
