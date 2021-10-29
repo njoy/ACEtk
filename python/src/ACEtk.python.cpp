@@ -18,6 +18,7 @@ void wrapXsdir( python::module&, python::module& );
 
 // declarations - enumerators
 void wrapReferenceFrame( python::module&, python::module& );
+void wrapAngularDistributionType( python::module&, python::module& );
 
 namespace block {
 
@@ -26,6 +27,10 @@ namespace block {
   void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
   void wrapPolynomialFissionMultiplicity( python::module&, python::module& );
   void wrapCrossSectionData( python::module&, python::module& );
+  void wrapEquiprobableAngularBins( python::module&, python::module& );
+  void wrapTabulatedAngularDistribution( python::module&, python::module& );
+  void wrapIsotropicAngularDistribution( python::module&, python::module& );
+  void wrapAngularDistributionData( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -65,6 +70,7 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // wrap enumerators
   wrapReferenceFrame( module, viewmodule );
+  wrapAngularDistributionType( module, viewmodule );
 
   // wrap generic ACE table components
   wrapData( module, viewmodule );
@@ -79,6 +85,10 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapTabulatedFissionMultiplicity( module, viewmodule );
   block::wrapPolynomialFissionMultiplicity( module, viewmodule );
   block::wrapCrossSectionData( module, viewmodule );
+  block::wrapEquiprobableAngularBins( module, viewmodule );
+  block::wrapTabulatedAngularDistribution( module, viewmodule );
+  block::wrapIsotropicAngularDistribution( module, viewmodule );
+  block::wrapAngularDistributionData( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );

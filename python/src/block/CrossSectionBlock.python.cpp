@@ -61,6 +61,8 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
     &Block::LSIG,
     python::arg( "index" ),
     "Return the relative cross section locator for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
   )
@@ -70,6 +72,8 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
     &Block::crossSectionLocator,
     python::arg( "index" ),
     "Return the relative cross section locator for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
   )
@@ -79,6 +83,8 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
     &Block::crossSectionData,
     python::arg( "index" ),
     "Return the cross section data for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
   )
@@ -88,6 +94,8 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
     &Block::energyIndex,
     python::arg( "index" ),
     "Return the energy index for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
   )
@@ -97,6 +105,8 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
     &Block::numberValues,
     python::arg( "index" ),
     "Return the number of cross section values for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
   )
@@ -107,6 +117,8 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
        { return self.crossSections( index ); },
     python::arg( "index" ),
     "Return the cross section values for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
   );
