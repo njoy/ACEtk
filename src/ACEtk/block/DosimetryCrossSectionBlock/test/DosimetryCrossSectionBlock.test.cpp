@@ -19,29 +19,35 @@ SCENARIO( "DosimetryCrossSectionBlock" ) {
 
     std::vector< double > xss = chunk();
 
-//    WHEN( "the data is given explicitly" ) {
-//
-//      std::vector< DosimetryCrossSectionData > xs = {
-//
-//        DosimetryDosimetryCrossSectionData(   ),
-//        DosimetryDosimetryCrossSectionData(   ) };
-//
-//      DosimetryCrossSectionBlock chunk( std::move( xs ) );
-//
-//      THEN( "a DosimetryCrossSectionBlock can be constructed and members can be tested" ) {
-//
-//        verifyChunk( chunk );
-//      } // THEN
-//
-//      THEN( "the XSS array is correct" ) {
-//
-//        auto xss_chunk = chunk.XSS();
-//        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-//
-//          CHECK( xss[i] == Approx( xss_chunk[i] ) );
-//        }
-//      } // THEN
-//    } // WHEN
+    WHEN( "the data is given explicitly" ) {
+
+      std::vector< DosimetryCrossSectionData > xs = {
+
+        DosimetryCrossSectionData(
+          { 1.896100000000E+00,  2.000000000000E+00,
+            2.050000000000E+00,  2.000000000000E+01 },
+          { 0.000000000000E+00,  9.090000000000E-15,
+            3.638500000000E-02,  3.220000000000E-02 } ),
+        DosimetryCrossSectionData(
+          { 3.248700000000E+00,  3.600000000000E+00,  2.000000000000E+01 },
+          { 0.000000000000E+00,  5.653700000000E-02,  4.980000000000E-02 } ) };
+
+      DosimetryCrossSectionBlock chunk( std::move( xs ) );
+
+      THEN( "a DosimetryCrossSectionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
 
