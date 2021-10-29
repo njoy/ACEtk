@@ -36,6 +36,8 @@ class DosimetryTable : protected Table {
     this->sig_ = block::SIGD( lsig, sig, end, this->NTR() );
   }
 
+  #include "ACEtk/DosimetryTable/src/generateData.hpp"
+
 public:
 
   #include "ACEtk/DosimetryTable/src/ctor.hpp"

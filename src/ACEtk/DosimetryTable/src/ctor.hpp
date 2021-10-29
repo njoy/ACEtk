@@ -31,3 +31,20 @@ DosimetryTable& operator=( DosimetryTable&& base ) {
   new (this) DosimetryTable( std::move( base ) );
   return *this;
 }
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] z         the Z number of the nuclide
+ *  @param[in] a         the A number of the nuclide
+ *  @param[in] header    the header for the table
+ *  @param[in] mtr       the reaction number block
+ *  @param[in] sigd      the cross section data block
+ */
+DosimetryTable( unsigned int z, unsigned int a,
+                Header&& header, block::MTR&& mtr, block::SIGD&& sigd ) :
+  Table( std::move( header ),
+         generateData( z, a, std::move( mtr ), std::move( sigd ) ) ) {
+
+  this->generateBlocks();
+}
