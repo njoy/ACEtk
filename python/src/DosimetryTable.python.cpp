@@ -3,6 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
+#include "ACEtk/Table.hpp"
 #include "ACEtk/DosimetryTable.hpp"
 #include "ACEtk/fromFile.hpp"
 #include "definitions.hpp"
@@ -14,7 +15,10 @@ namespace python = pybind11;
 void wrapDosimetryTable( python::module& module, python::module& ) {
 
   // type aliases
+  using Header = njoy::ACEtk::Table::Header;
   using Table = njoy::ACEtk::DosimetryTable;
+  using MTR = njoy::ACEtk::block::MTR;
+  using SIGD = njoy::ACEtk::block::SIGD;
 
   // wrap views created by this table
 
@@ -29,16 +33,23 @@ void wrapDosimetryTable( python::module& module, python::module& ) {
 
   // wrap the table
   table
-//  .def(
-//
-//    python::init< Header&&, Data&& >(),
-//    python::arg( "header" ), python::arg( "data" ),
-//    "Initialise the table\n\n"
-//    "Arguments:\n"
-//    "    self     the table\n"
-//    "    header   the header information\n"
-//    "    data     the ACE data"
-//  )
+  .def(
+
+    python::init( [] ( unsigned int z, unsigned int a,
+                       Header header, MTR mtr, SIGD sigd )
+                      { return Table( z, a, std::move( header ),
+                                      std::move( mtr ), std::move( sigd ) ); } ),
+    python::arg( "z" ), python::arg( "a" ),
+    python::arg( "header" ), python::arg( "mtr" ), python::arg( "sigd" ),
+    "Initialise the table\n\n"
+    "Arguments:\n"
+    "    self      the table\n"
+    "    z         the Z number of the nuclide\n"
+    "    a         the A number of the nuclide\n"
+    "    header    the header for the table\n"
+    "    mtr       the reaction number block\n"
+    "    sigd      the cross section data block"
+  )
   .def_property_readonly(
 
     "zaid",
