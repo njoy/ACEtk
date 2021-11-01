@@ -187,6 +187,9 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( true == std::holds_alternative< KalbachMannDistributionData >( ncTable.DLW().energyDistributionData( 1 ) ) );
         CHECK( true == std::holds_alternative< LevelScatteringDistribution >( ncTable.DLW().energyDistributionData( 44 ) ) );
         CHECK( true == std::holds_alternative< KalbachMannDistributionData >( ncTable.DLW().energyDistributionData( 45 ) ) );
+
+        // PTYPE block
+        CHECK( true == ncTable.PTYPE().empty() );
       }
     }
   }
