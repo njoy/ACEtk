@@ -4,8 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
-#include "ACEtk/block/ColumnData.hpp"
+#include "ACEtk/block/details/TabulatedProbabilityDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,14 +19,13 @@ namespace block {
  *  function (PDF) and cumulative density function (CDF) as a function of
  *  cosine for the given incident energy.
  */
-class TabulatedAngularDistribution : protected Base {
+class TabulatedAngularDistribution :
+  protected details::TabulatedProbabilityDistribution {
 
   /* fields */
   double incident_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/TabulatedAngularDistribution/src/generateXSS.hpp"
-  #include "ACEtk/block/TabulatedAngularDistribution/src/verifySize.hpp"
 
 public:
 
@@ -42,19 +40,25 @@ public:
   /**
    *  @brief Return the interpolation flag
    */
-  int interpolation() const { return this->XSS( 1 ); }
+  int interpolation() const {
+
+    return TabulatedProbabilityDistribution::interpolation();
+  }
 
   /**
    *  @brief Return the number of cosine values
    */
-  std::size_t numberCosines() const { return this->XSS( 2 ); }
+  std::size_t numberCosines() const {
+
+    return TabulatedProbabilityDistribution::numberValues();
+  }
 
   /**
    *  @brief Return the cosine values
    */
   auto cosines() const {
 
-    return this->XSS( 3, this->numberCosines() );
+    return TabulatedProbabilityDistribution::values();
   }
 
   /**
@@ -62,7 +66,7 @@ public:
    */
   auto pdf() const {
 
-    return this->XSS( 3 + this->numberCosines(), this->numberCosines() );
+    return TabulatedProbabilityDistribution::pdf();
   }
 
   /**
@@ -70,15 +74,15 @@ public:
    */
   auto cdf() const {
 
-    return this->XSS( 3 + 2 * this->numberCosines(), this->numberCosines() );
+    return TabulatedProbabilityDistribution::cdf();
   }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using TabulatedProbabilityDistribution::empty;
+  using TabulatedProbabilityDistribution::name;
+  using TabulatedProbabilityDistribution::length;
+  using TabulatedProbabilityDistribution::XSS;
+  using TabulatedProbabilityDistribution::begin;
+  using TabulatedProbabilityDistribution::end;
 };
 
 } // block namespace

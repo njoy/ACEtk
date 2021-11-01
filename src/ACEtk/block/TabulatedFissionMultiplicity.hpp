@@ -4,9 +4,9 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ColumnData.hpp"
 #include "ACEtk/block/InterpolationData.hpp"
-#include "ACEtk/block/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,11 +19,11 @@ namespace block {
  *  The TabulatedFissionMultiplicity class contains the tabulated
  *  representation of the fission multiplicity.
  */
-class TabulatedFissionMultiplicity : protected Base {
+class TabulatedFissionMultiplicity : protected details::Base {
 
   /* fields */
   InterpolationData interpolation_;
-  ColumnData data_;
+  details::ColumnData data_;
 
   /* auxiliary functions */
   #include "ACEtk/block/TabulatedFissionMultiplicity/src/generateXSS.hpp"

@@ -102,7 +102,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "number_projectile_production_reactions_excluding_elastic",
+    "number_projectile_production_reactions",
     &Table::numberProjectileProductionReactions,
     "The number of reactions excluding elastic that produce the projectile"
   )
@@ -237,6 +237,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "cross_section_block",
     &Table::crossSectionBlock,
     "The cross section block"
+  )
+  .def_property_readonly(
+
+    "AND",
+    &Table::AND,
+    "The angular distribution block"
+  )
+  .def_property_readonly(
+
+    "angular_distribution_block",
+    &Table::angularDistributionBlock,
+    "The angular distribution block"
   )
   .def_property_readonly(
 

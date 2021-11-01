@@ -31,6 +31,9 @@ namespace block {
   void wrapTabulatedAngularDistribution( python::module&, python::module& );
   void wrapIsotropicAngularDistribution( python::module&, python::module& );
   void wrapAngularDistributionData( python::module&, python::module& );
+  void wrapFullyIsotropicDistribution( python::module&, python::module& );
+  void wrapDistributionGivenElsewhere( python::module&, python::module& );
+  void wrapLevelScatteringDistribution( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -39,6 +42,7 @@ namespace block {
   void wrapReactionQValueBlock( python::module&, python::module& );
   void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
   void wrapCrossSectionBlock( python::module&, python::module& );
+  void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapSecondaryParticleTypeBlock( python::module&, python::module& );
 }
 
@@ -90,6 +94,9 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapTabulatedAngularDistribution( module, viewmodule );
   block::wrapIsotropicAngularDistribution( module, viewmodule );
   block::wrapAngularDistributionData( module, viewmodule );
+  block::wrapFullyIsotropicDistribution( module, viewmodule );
+  block::wrapDistributionGivenElsewhere( module, viewmodule );
+  block::wrapLevelScatteringDistribution( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
@@ -98,6 +105,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapReactionQValueBlock( module, viewmodule );
   block::wrapFrameAndMultiplicityBlock( module, viewmodule );
   block::wrapCrossSectionBlock( module, viewmodule );
+  block::wrapAngularDistributionBlock( module, viewmodule );
   block::wrapSecondaryParticleTypeBlock( module, viewmodule );
 
   // wrap ACE table types

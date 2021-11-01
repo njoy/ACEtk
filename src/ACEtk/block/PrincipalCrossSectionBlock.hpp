@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,7 +23,7 @@ namespace block {
  *
  *  The size of each (the total number of energy points) is stored in NXS(3).
  */
-class PrincipalCrossSectionBlock : protected Base {
+class PrincipalCrossSectionBlock : protected details::Base {
 
   /* fields */
   unsigned int nes_;

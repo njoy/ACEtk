@@ -7,6 +7,9 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
+using AngularDistributionData = block::AngularDistributionData;
+using FullyIsotropicDistribution = block::FullyIsotropicDistribution;
+using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
 
 std::string chunk();
 void verifyChunk( const Table& );
@@ -156,6 +159,20 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( 1.55512000000E-01 == Approx( data1.back() ) );
         CHECK( 0. == Approx( data48.front() ) );
         CHECK( 3.65016600000E-01 == Approx( data48.back() ) );
+
+        // AND block
+        CHECK( false == ncTable.AND().empty() );
+        CHECK( 45 == ncTable.AND().NR() );
+
+        CHECK( 1 == ncTable.AND().LAND( 0 ) ); // elastic
+        CHECK( 0 == ncTable.AND().LAND( 3 ) );
+        CHECK( 63802 == ncTable.AND().LAND( 44 ) );
+        CHECK( -1 == ncTable.AND().LAND( 45 ) );
+
+        CHECK( true == std::holds_alternative< AngularDistributionData >( ncTable.AND().angularDistributionData( 0 ) ) ); // elastic
+        CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( ncTable.AND().angularDistributionData( 3 ) ) );
+        CHECK( true == std::holds_alternative< AngularDistributionData >( ncTable.AND().angularDistributionData( 44 ) ) );
+        CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( ncTable.AND().angularDistributionData( 45 ) ) );
 
         // PTYPE block
         CHECK( true == ncTable.PTYPE().empty() );

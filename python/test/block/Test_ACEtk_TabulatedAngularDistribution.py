@@ -23,7 +23,6 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertEqual( "AND::TabulatedAngularDistribution", chunk.name )
 
             self.assertEqual( 2.1, chunk.incident_energy )
-            self.assertEqual( 2, chunk.interpolation )
             self.assertEqual( 3, chunk.number_cosines )
 
             self.assertEqual( 3, len( chunk.cosines ) )

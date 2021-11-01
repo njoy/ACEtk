@@ -6,7 +6,7 @@
 
 // other includes
 #include "utility/overload.hpp"
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 #include "ACEtk/block/EquiprobableAngularBins.hpp"
 #include "ACEtk/block/TabulatedAngularDistribution.hpp"
 #include "ACEtk/block/IsotropicAngularDistribution.hpp"
@@ -20,7 +20,7 @@ namespace block {
  *  @class
  *  @brief Angular distribution data from the AND block for a single reaction
  */
-class AngularDistributionData : protected Base {
+class AngularDistributionData : protected details::Base {
 
 public:
 
@@ -169,7 +169,6 @@ public:
   Distribution angularDistributionData( std::size_t index ) const {
 
     const auto type = this->angularDistributionType( index );
-    const auto locator = this->relativeAngularDistributionLocator( index );
     const double incident = this->incidentEnergy( index );
     if ( type == AngularDistributionType::Isotropic ) {
 
@@ -177,11 +176,18 @@ public:
     }
     else {
 
+      const auto locator = this->relativeAngularDistributionLocator( index );
       const auto left = std::next( this->begin(), locator - 1 );
-      const auto right = index == this->numberIncidentEnergies()
-          ? this->end()
-          : std::next( this->begin(),
-                       ( this->relativeAngularDistributionLocator( index + 1 ) - 1 ) );
+      auto right = this->end();
+      for ( auto next = index + 1; next <= this->numberIncidentEnergies(); ++next ) {
+
+        auto nextlocator = this->relativeAngularDistributionLocator( next );
+        if ( nextlocator > locator ) {
+
+          right = std::next( this->begin(), nextlocator - 1 );
+          break;
+        }
+      }
       if ( type == AngularDistributionType::Tabulated ) {
 
         return TabulatedAngularDistribution( incident, left, right );
