@@ -173,6 +173,9 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( ncTable.AND().angularDistributionData( 3 ) ) );
         CHECK( true == std::holds_alternative< AngularDistributionData >( ncTable.AND().angularDistributionData( 44 ) ) );
         CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( ncTable.AND().angularDistributionData( 45 ) ) );
+
+        // PTYPE block
+        CHECK( true == ncTable.PTYPE().empty() );
       }
     }
   }
