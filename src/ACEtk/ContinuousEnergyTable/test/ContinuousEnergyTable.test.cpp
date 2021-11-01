@@ -92,14 +92,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 void verifyChunk( const ContinuousEnergyTable& chunk ) {
 
   CHECK( "92235.80c" == chunk.ZAID() );
-  CHECK( 233.024800 == Approx( chunk.AWR() ) );
-  CHECK( 233.024800 == Approx( chunk.atomicWeightRatio() ) );
-  CHECK( 2.5301E-08 == Approx( chunk.TEMP() ) );
-  CHECK( 2.5301E-08 == Approx( chunk.temperature() ) );
-
-  CHECK( "12/19/12" == chunk.date() );
-  CHECK( "U235 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)" == chunk.title() );
-  CHECK( "mat9228" == chunk.material() );
+  CHECK( 2.5301e-8 == Approx( chunk.temperature() ) );
 
   CHECK( 837481 == chunk.length() );
   CHECK( 92235 == chunk.ZA() );
@@ -259,4 +252,7 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 1 ) ) );
   CHECK( true == std::holds_alternative< LevelScatteringDistribution >( chunk.DLW().energyDistributionData( 44 ) ) );
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 45 ) ) );
+
+  // PTYPE block
+  CHECK( true == chunk.PTYPE().empty() );
 }

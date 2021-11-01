@@ -13,6 +13,7 @@
 #include "ACEtk/block/CrossSectionBlock.hpp"
 #include "ACEtk/block/AngularDistributionBlock.hpp"
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -36,6 +37,8 @@ class ContinuousEnergyTable : protected Table {
   block::AND and_;
   block::DLW dlw_;
 
+  block::PTYPE ptype_;
+
   /* auxiliary functions */
   void generateBlocks() {
 
@@ -52,6 +55,9 @@ class ContinuousEnergyTable : protected Table {
     auto ldlw = begin + this->data().JXS(10) - 1;
     auto dlw = begin + this->data().JXS(11) - 1;
 
+    auto ptype = begin + this->data().JXS(30) - 1;
+    auto ntro = begin + this->data().JXS(31) - 1;
+
     this->esz_ = block::ESZ( esz, this->data().JXS(2) > 0 ? nu : mtr, this->NES() );
     this->nu_ = block::NU( this->data().JXS(2) > 0 ? nu : mtr, mtr );
     this->mtr_ = block::MTR( mtr, lqr, this->NTR() );
@@ -60,6 +66,8 @@ class ContinuousEnergyTable : protected Table {
     this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
     this->and_ = block::AND( land, xand, ldlw, this->NR() );
     this->dlw_ = block::DLW( ldlw, dlw, this->data().XSS().end(), this->NR() );
+
+    this->ptype_ = block::PTYPE( ptype, ntro, this->NTYPE() );
   }
 
 public:
@@ -307,6 +315,19 @@ public:
    *  @brief Return the energy distribution block
    */
   const block::DLW& energyDistributionBlock() const { return this->DLW(); }
+
+  /**
+   *  @brief Return the secondary particle type block
+   */
+  const block::PTYPE& PTYPE() const { return this->ptype_; }
+
+  /**
+   *  @brief Return the secondary particle type block
+   */
+  const block::PTYPE& secondaryParticleTypeBlock() const {
+
+    return this->PTYPE();
+  }
 };
 
 } // ACEtk namespace
