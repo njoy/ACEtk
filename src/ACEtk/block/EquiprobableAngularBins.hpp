@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -18,7 +18,7 @@ namespace block {
  *  The EquiprobableAngularBins class contains the cosine values that make up
  *  the equiprobable bins (there are 33 values for defining 32 bins).
  */
-class EquiprobableAngularBins : protected Base {
+class EquiprobableAngularBins : protected details::Base {
 
   /* fields */
   double incident_;

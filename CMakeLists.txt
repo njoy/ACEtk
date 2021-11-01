@@ -100,6 +100,7 @@ if(ACEtk.python)
     python/src/block/FullyIsotropicDistribution.python.cpp
     python/src/block/DistributionGivenElsewhere.python.cpp
     python/src/block/AngularDistributionBlock.python.cpp
+    python/src/block/LevelScatteringDistribution.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
   )
 

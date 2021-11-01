@@ -17,9 +17,10 @@ TabulatedAngularDistribution( double incident,
                               std::vector< double >&& cosines,
                               std::vector< double >&& pdf,
                               std::vector< double >&& cdf ) :
-  Base( "AND::TabulatedAngularDistribution",
-        generateXSS( interpolation,
-                     std::move( cosines ), std::move( pdf ), std::move( cdf ) ) ),
+  TabulatedProbabilityDistribution(
+        "AND::TabulatedAngularDistribution",
+        interpolation, std::move( cosines ),
+        std::move( pdf ), std::move( cdf ) ),
   incident_( incident ) {}
 
 /**
@@ -30,11 +31,9 @@ TabulatedAngularDistribution( double incident,
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
 TabulatedAngularDistribution( double incident, Iterator begin, Iterator end ) :
-  Base( "AND::TabulatedAngularDistribution", begin, end ),
-  incident_( incident ) {
-
-  verifySize( this->begin(), this->end(), this->numberCosines() );
-}
+  TabulatedProbabilityDistribution( "AND::TabulatedAngularDistribution",
+                                    begin, end ),
+  incident_( incident ) {}
 
 TabulatedAngularDistribution& operator=( const TabulatedAngularDistribution& ) = default;
 TabulatedAngularDistribution& operator=( TabulatedAngularDistribution&& ) = default;

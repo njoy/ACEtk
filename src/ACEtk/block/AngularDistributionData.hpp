@@ -6,7 +6,7 @@
 
 // other includes
 #include "utility/overload.hpp"
-#include "ACEtk/block/Base.hpp"
+#include "ACEtk/block/details/Base.hpp"
 #include "ACEtk/block/EquiprobableAngularBins.hpp"
 #include "ACEtk/block/TabulatedAngularDistribution.hpp"
 #include "ACEtk/block/IsotropicAngularDistribution.hpp"
@@ -20,7 +20,7 @@ namespace block {
  *  @class
  *  @brief Angular distribution data from the AND block for a single reaction
  */
-class AngularDistributionData : protected Base {
+class AngularDistributionData : protected details::Base {
 
 public:
 

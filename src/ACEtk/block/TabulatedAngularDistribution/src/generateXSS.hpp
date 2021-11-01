@@ -6,8 +6,9 @@ static std::vector< double > generateXSS(
 
   std::vector< double > xss = { static_cast< double >( interpolation ) };
   xss.reserve( 2 + 3 * cosines.size() );
-  ColumnData data( "AND::TabulatedAngularDistribution",
-                   std::move( cosines ), std::move( pdf ), std::move( cdf ) );
+  details::ColumnData data( "AND::TabulatedAngularDistribution",
+                            std::move( cosines ), std::move( pdf ),
+                            std::move( cdf ) );
   xss.insert( xss.end(), data.begin(), data.end() );
 
   return xss;

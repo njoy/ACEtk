@@ -1,4 +1,6 @@
-#include "ACEtk/block/ColumnData.hpp"
+#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ColumnData.hpp"
+
 #include "ACEtk/block/InterpolationData.hpp"
 
 #include "ACEtk/block/PolynomialFissionMultiplicity.hpp"

@@ -33,6 +33,7 @@ namespace block {
   void wrapAngularDistributionData( python::module&, python::module& );
   void wrapFullyIsotropicDistribution( python::module&, python::module& );
   void wrapDistributionGivenElsewhere( python::module&, python::module& );
+  void wrapLevelScatteringDistribution( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -94,6 +95,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapAngularDistributionData( module, viewmodule );
   block::wrapFullyIsotropicDistribution( module, viewmodule );
   block::wrapDistributionGivenElsewhere( module, viewmodule );
+  block::wrapLevelScatteringDistribution( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
