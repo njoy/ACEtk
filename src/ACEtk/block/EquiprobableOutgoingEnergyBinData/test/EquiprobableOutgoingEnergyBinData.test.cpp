@@ -119,7 +119,7 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk ) {
   CHECK( 4 == chunk.NET() );
   CHECK( 3 == chunk.numberBins() );
 
-  auto bins1 = chunk.bins(1);
+  auto bins1 = chunk.distribution(1);
   CHECK( 1e-5 == Approx( bins1.incidentEnergy() ) );
   CHECK( 3 == bins1.numberBins() );
   CHECK( 4 == bins1.energies().size() );
@@ -128,7 +128,7 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk ) {
   CHECK( 10. == Approx( bins1.energies()[2] ) );
   CHECK( 20. == Approx( bins1.energies()[3] ) );
 
-  auto bins2 = chunk.bins(2);
+  auto bins2 = chunk.distribution(2);
   CHECK( 20. == Approx( bins2.incidentEnergy() ) );
   CHECK( 3 == bins2.numberBins() );
   CHECK( 4 == bins2.energies().size() );

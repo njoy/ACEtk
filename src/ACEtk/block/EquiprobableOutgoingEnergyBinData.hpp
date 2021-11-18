@@ -145,14 +145,14 @@ public:
   int numberBins() const { return this->NET() - 1; }
 
   /**
-   *  @brief Return the outgoing energy bin values for an incident energy index
+   *  @brief Return the distribution for an incident energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
-  auto bins( std::size_t index ) const {
+  auto distribution( std::size_t index ) const {
 
     return EquiprobableOutgoingEnergyBins(
                this->incidentEnergy( index ),
