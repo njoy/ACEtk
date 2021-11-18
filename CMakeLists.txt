@@ -106,6 +106,7 @@ if(ACEtk.python)
     python/src/block/DistributionGivenElsewhere.python.cpp
     python/src/block/AngularDistributionBlock.python.cpp
     python/src/block/LevelScatteringDistribution.python.cpp
+    python/src/block/DiscretePhotonDistribution.python.cpp
     python/src/block/TabulatedOutgoingEnergyDistribution.python.cpp
     python/src/block/OutgoingEnergyDistributionData.python.cpp
     python/src/block/TabulatedKalbachMannDistribution.python.cpp

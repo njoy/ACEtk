@@ -40,6 +40,8 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
           // instead of what was already there
           auto ne = std::visit( utility::overload{
 
+                                  [] ( const DiscretePhotonDistribution& ) -> std::size_t
+                                     { return 0; },
                                   [] ( const LevelScatteringDistribution& ) -> std::size_t
                                      { return 0; },
                                   [] ( const auto& value ) -> std::size_t
@@ -48,6 +50,8 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
                                 distribution );
           auto nr = std::visit( utility::overload{
 
+                                  [] ( const DiscretePhotonDistribution& ) -> std::size_t
+                                     { return 0; },
                                   [] ( const LevelScatteringDistribution& ) -> std::size_t
                                      { return 0; },
                                   [] ( const auto& value ) -> std::size_t
@@ -60,6 +64,8 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
             std::size_t relativeloc =
                 std::visit( utility::overload{
 
+                              [] ( const DiscretePhotonDistribution& ) -> std::size_t
+                                 { return 0; },
                               [] ( const LevelScatteringDistribution& ) -> std::size_t
                                  { return 0; },
                               [incident] ( const auto& value ) -> std::size_t
