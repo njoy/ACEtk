@@ -28,6 +28,7 @@ class EquiprobableOutgoingEnergyBinData : protected details::Base {
 
   /* auxiliary functions */
   #include "ACEtk/block/EquiprobableOutgoingEnergyBinData/src/verifySize.hpp"
+  #include "ACEtk/block/EquiprobableOutgoingEnergyBinData/src/verifyIncidentEnergyIndex.hpp"
   #include "ACEtk/block/EquiprobableOutgoingEnergyBinData/src/generateBlocks.hpp"
   #include "ACEtk/block/EquiprobableOutgoingEnergyBinData/src/generateXSS.hpp"
 
