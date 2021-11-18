@@ -208,6 +208,8 @@ public:
   using Base::end;
 };
 
+using ACELAW4 = OutgoingEnergyDistributionData;
+
 } // block namespace
 } // ACEtk namespace
 } // njoy namespace

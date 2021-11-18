@@ -6,6 +6,7 @@
 
 // other includes
 #include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
@@ -32,7 +33,8 @@ class EnergyDistributionBlock : protected details::Base {
 public:
 
   /* type alias */
-  using DistributionData = std::variant< DiscretePhotonDistribution,
+  using DistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
+                                         DiscretePhotonDistribution,
                                          LevelScatteringDistribution,
                                          OutgoingEnergyDistributionData,
                                          KalbachMannDistributionData >;
@@ -133,6 +135,10 @@ public:
       // switch on the law and return the appropriate data
       switch ( law ) {
 
+        case EnergyDistributionType::Equiprobable : {
+
+          return EquiprobableOutgoingEnergyBinData( left, right );
+        }
         case EnergyDistributionType::DiscretePhoton : {
 
           return DiscretePhotonDistribution( left, right, emin, emax );

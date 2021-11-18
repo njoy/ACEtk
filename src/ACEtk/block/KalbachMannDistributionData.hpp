@@ -208,6 +208,8 @@ public:
   using Base::end;
 };
 
+using ACELAW44 = KalbachMannDistributionData;
+
 } // block namespace
 } // ACEtk namespace
 } // njoy namespace
