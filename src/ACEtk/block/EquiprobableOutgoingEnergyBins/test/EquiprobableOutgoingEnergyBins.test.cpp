@@ -75,14 +75,14 @@ void verifyChunk( const EquiprobableOutgoingEnergyBins& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 4 == chunk.length() );
-  CHECK( "AND::EquiprobableOutgoingEnergyBins" == chunk.name() );
+  CHECK( "DLW::EquiprobableOutgoingEnergyBins" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
   CHECK( 3 == chunk.numberBins() );
 
-  CHECK( 4 == chunk.outgoingEnergies().size() );
-  CHECK( 1e-5 == Approx( chunk.outgoingEnergies()[0] ) );
-  CHECK( .02 == Approx( chunk.outgoingEnergies()[1] ) );
-  CHECK( 1. == Approx( chunk.outgoingEnergies()[2] ) );
-  CHECK( 20. == Approx( chunk.outgoingEnergies()[3] ) );
+  CHECK( 4 == chunk.energies().size() );
+  CHECK( 1e-5 == Approx( chunk.energies()[0] ) );
+  CHECK( .02 == Approx( chunk.energies()[1] ) );
+  CHECK( 1. == Approx( chunk.energies()[2] ) );
+  CHECK( 20. == Approx( chunk.energies()[3] ) );
 }

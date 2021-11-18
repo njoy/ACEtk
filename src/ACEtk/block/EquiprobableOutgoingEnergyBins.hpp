@@ -43,7 +43,7 @@ public:
   /**
    *  @brief Return the cosine values
    */
-  auto outgoingEnergies() const {
+  auto energies() const {
 
     return this->XSS( 1, this->numberBins() + 1 );
   }

@@ -31,6 +31,7 @@ namespace block {
   void wrapCrossSectionData( python::module&, python::module& );
   void wrapDosimetryCrossSectionData( python::module&, python::module& );
   void wrapEquiprobableAngularBins( python::module&, python::module& );
+  void wrapEquiprobableOutgoingEnergyBins( python::module&, python::module& );
   void wrapTabulatedAngularDistribution( python::module&, python::module& );
   void wrapIsotropicAngularDistribution( python::module&, python::module& );
   void wrapAngularDistributionData( python::module&, python::module& );
@@ -108,6 +109,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapCrossSectionData( module, viewmodule );
   block::wrapDosimetryCrossSectionData( module, viewmodule );
   block::wrapEquiprobableAngularBins( module, viewmodule );
+  block::wrapEquiprobableOutgoingEnergyBins( module, viewmodule );
   block::wrapTabulatedAngularDistribution( module, viewmodule );
   block::wrapIsotropicAngularDistribution( module, viewmodule );
   block::wrapAngularDistributionData( module, viewmodule );
