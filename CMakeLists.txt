@@ -113,6 +113,7 @@ if(ACEtk.python)
     python/src/block/OutgoingEnergyDistributionData.python.cpp
     python/src/block/TabulatedKalbachMannDistribution.python.cpp
     python/src/block/KalbachMannDistributionData.python.cpp
+    python/src/block/GeneralEvaporationSpectrum.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp

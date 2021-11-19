@@ -25,7 +25,7 @@ class GeneralEvaporationSpectrum : protected details::Base {
   details::ColumnData bins_;
 
   /* auxiliary functions */
-//  #include "ACEtk/block/GeneralEvaporationSpectrum/src/verifySize.hpp"
+  #include "ACEtk/block/GeneralEvaporationSpectrum/src/verifySize.hpp"
   #include "ACEtk/block/GeneralEvaporationSpectrum/src/generateBlocks.hpp"
   #include "ACEtk/block/GeneralEvaporationSpectrum/src/generateXSS.hpp"
 
@@ -150,7 +150,7 @@ public:
   using Base::end;
 };
 
-using ACELAW1 = GeneralEvaporationSpectrum;
+using ACELAW5 = GeneralEvaporationSpectrum;
 
 } // block namespace
 } // ACEtk namespace

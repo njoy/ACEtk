@@ -11,6 +11,7 @@
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
+#include "ACEtk/block/GeneralEvaporationSpectrum.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -37,7 +38,8 @@ public:
                                          DiscretePhotonDistribution,
                                          LevelScatteringDistribution,
                                          OutgoingEnergyDistributionData,
-                                         KalbachMannDistributionData >;
+                                         KalbachMannDistributionData,
+                                         GeneralEvaporationSpectrum >;
 
 private:
 
@@ -154,6 +156,10 @@ public:
         case EnergyDistributionType::KalbachMann : {
 
           return KalbachMannDistributionData( idat, left, right );
+        }
+        case EnergyDistributionType::GeneralEvaporation : {
+
+          return GeneralEvaporationSpectrum( left, right );
         }
         default : {
 
