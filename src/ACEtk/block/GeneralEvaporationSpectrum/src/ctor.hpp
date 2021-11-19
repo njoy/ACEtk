@@ -1,0 +1,80 @@
+GeneralEvaporationSpectrum() = default;
+
+GeneralEvaporationSpectrum( const GeneralEvaporationSpectrum& base ) :
+  Base( base ) {
+
+  this->generateBlocks();
+}
+
+GeneralEvaporationSpectrum( GeneralEvaporationSpectrum&& base ) :
+  Base( std::move( base ) ) {
+
+  this->generateBlocks();
+}
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] boundaries      the interpolation range boundaries
+ *  @param[in] interpolants    the interpolation types for each range
+ *  @param[in] energies        the energy values
+ *  @param[in] temperatures    the temperature values
+ *  @param[in] bins            the x bin values
+ */
+GeneralEvaporationSpectrum(
+    std::vector< long >&& boundaries,
+    std::vector< long >&& interpolants,
+    std::vector< double >&& energies,
+    std::vector< double >&& temperatures,
+    std::vector< double >&& bins ) :
+  Base( "DLW::GeneralEvaporationSpectrum",
+        generateXSS( std::move( boundaries ), std::move( interpolants ),
+                     std::move( energies ), std::move( temperatures ),
+                     std::move( bins ) ) ) {
+
+  this->generateBlocks();
+}
+
+/**
+ *  @brief Constructor without interpolation data
+ *
+ *  @param[in] energies        the energy values
+ *  @param[in] temperatures    the temperature values
+ *  @param[in] bins            the x bin values
+ */
+GeneralEvaporationSpectrum(
+    std::vector< double >&& energies,
+    std::vector< double >&& temperatures,
+    std::vector< double >&& bins ) :
+  GeneralEvaporationSpectrum( {}, {},
+                              std::move( energies ), std::move( temperatures ),
+                              std::move( bins ) ) {}
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] locb    the starting xss index with respect to the superblock
+ *  @param[in] sig     the begin iterator of the block in the XSS array
+ *  @param[in] end     the end iterator of the block in the XSS array
+ */
+GeneralEvaporationSpectrum( Iterator begin, Iterator end ) :
+  Base( "DLW::GeneralEvaporationSpectrum", begin, end ) {
+
+//  std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
+//  std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );
+//  std::size_t nb = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 + ne + 1 ) );
+//  verifySize( this->begin(), this->end(), nr, ne, nb );
+  this->generateBlocks();
+}
+
+GeneralEvaporationSpectrum& operator=( const GeneralEvaporationSpectrum& base ) {
+
+  new (this) GeneralEvaporationSpectrum( base );
+  return *this;
+}
+
+GeneralEvaporationSpectrum& operator=( GeneralEvaporationSpectrum&& base ) {
+
+  new (this) GeneralEvaporationSpectrum( std::move( base ) );
+  return *this;
+}
