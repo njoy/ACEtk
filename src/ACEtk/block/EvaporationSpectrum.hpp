@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_SIMPLEMAXWELLIANFISSIONSPECTRUM
-#define NJOY_ACETK_BLOCK_SIMPLEMAXWELLIANFISSIONSPECTRUM
+#ifndef NJOY_ACETK_BLOCK_EVAPORATIONSPECTRUM
+#define NJOY_ACETK_BLOCK_EVAPORATIONSPECTRUM
 
 // system includes
 
@@ -13,10 +13,10 @@ namespace block {
 
 /**
  *  @class
- *  @brief A simple Maxwellian fission spectrum from the DLW block for a single
+ *  @brief An evaporation spectrum from the DLW block for a single
  *         reaction
  */
-class SimpleMaxwellianFissionSpectrum : protected details::BaseEvaporationSpectrum {
+class EvaporationSpectrum : protected details::BaseEvaporationSpectrum {
 
   /* fields */
 
@@ -25,7 +25,7 @@ class SimpleMaxwellianFissionSpectrum : protected details::BaseEvaporationSpectr
 public:
 
   /* constructor */
-  #include "ACEtk/block/SimpleMaxwellianFissionSpectrum/src/ctor.hpp"
+  #include "ACEtk/block/EvaporationSpectrum/src/ctor.hpp"
 
   /**
    *  @brief Return the distribution type
@@ -144,7 +144,7 @@ public:
   using BaseEvaporationSpectrum::end;
 };
 
-using ACELAW5 = SimpleMaxwellianFissionSpectrum;
+using ACELAW5 = EvaporationSpectrum;
 
 } // block namespace
 } // ACEtk namespace

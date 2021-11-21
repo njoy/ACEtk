@@ -26,4 +26,5 @@ add_test( NAME ACEtk.python.block.TabulatedKalbachMannDistribution COMMAND ${PYT
 add_test( NAME ACEtk.python.block.KalbachMannDistributionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_KalbachMannDistributionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.GeneralEvaporationSpectrum COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_GeneralEvaporationSpectrum.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.SimpleMaxwellianFissionSpectrum COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SimpleMaxwellianFissionSpectrum.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.EvaporationSpectrum COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EvaporationSpectrum.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.EnergyDistributionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EnergyDistributionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

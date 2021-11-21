@@ -115,6 +115,7 @@ if(ACEtk.python)
     python/src/block/KalbachMannDistributionData.python.cpp
     python/src/block/GeneralEvaporationSpectrum.python.cpp
     python/src/block/SimpleMaxwellianFissionSpectrum.python.cpp
+    python/src/block/EvaporationSpectrum.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
