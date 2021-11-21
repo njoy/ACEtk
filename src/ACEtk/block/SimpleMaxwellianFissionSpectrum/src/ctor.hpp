@@ -1,16 +1,7 @@
 SimpleMaxwellianFissionSpectrum() = default;
 
-SimpleMaxwellianFissionSpectrum( const SimpleMaxwellianFissionSpectrum& base ) :
-  Base( base ) {
-
-  this->generateBlocks();
-}
-
-SimpleMaxwellianFissionSpectrum( SimpleMaxwellianFissionSpectrum&& base ) :
-  Base( std::move( base ) ) {
-
-  this->generateBlocks();
-}
+SimpleMaxwellianFissionSpectrum( const SimpleMaxwellianFissionSpectrum& ) = default;
+SimpleMaxwellianFissionSpectrum( SimpleMaxwellianFissionSpectrum&& ) = default;
 
 /**
  *  @brief Constructor
@@ -27,13 +18,12 @@ SimpleMaxwellianFissionSpectrum(
     std::vector< double >&& energies,
     std::vector< double >&& temperatures,
     double energy ) :
-  Base( "DLW::SimpleMaxwellianFissionSpectrum",
-        generateXSS( std::move( boundaries ), std::move( interpolants ),
-                     std::move( energies ), std::move( temperatures ),
-                     energy ) ) {
-
-  this->generateBlocks();
-}
+  BaseEvaporationSpectrum(
+        "DLW::SimpleMaxwellianFissionSpectrum",
+        EnergyDistributionType::SimpleMaxwellianFission,
+        std::move( boundaries ), std::move( interpolants ),
+        std::move( energies ), std::move( temperatures ),
+        energy ) {}
 
 /**
  *  @brief Constructor without interpolation data
@@ -57,22 +47,9 @@ SimpleMaxwellianFissionSpectrum(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 SimpleMaxwellianFissionSpectrum( Iterator begin, Iterator end ) :
-  Base( "DLW::SimpleMaxwellianFissionSpectrum", begin, end ) {
+  BaseEvaporationSpectrum( "DLW::SimpleMaxwellianFissionSpectrum",
+                           EnergyDistributionType::SimpleMaxwellianFission,
+                           begin, end ) {}
 
-  std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
-  std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );
-  verifySize( this->begin(), this->end(), nr, ne );
-  this->generateBlocks();
-}
-
-SimpleMaxwellianFissionSpectrum& operator=( const SimpleMaxwellianFissionSpectrum& base ) {
-
-  new (this) SimpleMaxwellianFissionSpectrum( base );
-  return *this;
-}
-
-SimpleMaxwellianFissionSpectrum& operator=( SimpleMaxwellianFissionSpectrum&& base ) {
-
-  new (this) SimpleMaxwellianFissionSpectrum( std::move( base ) );
-  return *this;
-}
+SimpleMaxwellianFissionSpectrum& operator=( const SimpleMaxwellianFissionSpectrum& ) = default;
+SimpleMaxwellianFissionSpectrum& operator=( SimpleMaxwellianFissionSpectrum&& base ) = default;

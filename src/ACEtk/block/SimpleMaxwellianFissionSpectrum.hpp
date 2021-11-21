@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/BaseTabulatedData.hpp"
+#include "ACEtk/block/details/BaseEvaporationSpectrum.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -16,15 +16,11 @@ namespace block {
  *  @brief A general evaporation spectrum from the DLW block for a single
  *         reaction
  */
-class SimpleMaxwellianFissionSpectrum : protected details::Base {
+class SimpleMaxwellianFissionSpectrum : protected details::BaseEvaporationSpectrum {
 
   /* fields */
-  details::BaseTabulatedData tabulated_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/SimpleMaxwellianFissionSpectrum/src/verifySize.hpp"
-  #include "ACEtk/block/SimpleMaxwellianFissionSpectrum/src/generateBlocks.hpp"
-  #include "ACEtk/block/SimpleMaxwellianFissionSpectrum/src/generateXSS.hpp"
 
 public:
 
@@ -34,17 +30,17 @@ public:
   /**
    *  @brief Return the distribution type
    */
-  static constexpr EnergyDistributionType LAW() {
+  EnergyDistributionType LAW() const {
 
-    return EnergyDistributionType::SimpleMaxwellianFission;
+    return BaseEvaporationSpectrum::LAW();
   }
 
   /**
    *  @brief Return the distribution type
    */
-  static constexpr EnergyDistributionType type() {
+  EnergyDistributionType type() const {
 
-    return EnergyDistributionType::SimpleMaxwellianFission;
+    return BaseEvaporationSpectrum::type();
   }
 
   /**
@@ -52,68 +48,71 @@ public:
    */
   auto interpolationData() const {
 
-    return this->tabulated_.interpolationData();
+    return BaseEvaporationSpectrum::interpolationData();
   }
 
   /**
    *  @brief Return the number of interpolation regions
    */
-  std::size_t NB() const { return this->tabulated_.NB(); }
+  std::size_t NB() const { return BaseEvaporationSpectrum::NB(); }
 
   /**
    *  @brief Return the number of interpolation regions
    */
   std::size_t numberInterpolationRegions() const {
 
-    return this->tabulated_.numberInterpolationRegions();
+    return BaseEvaporationSpectrum::numberInterpolationRegions();
   }
 
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto NBT() const { return this->tabulated_.NBT(); }
+  auto NBT() const { return BaseEvaporationSpectrum::NBT(); }
 
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto boundaries() const { return this->tabulated_.boundaries(); }
+  auto boundaries() const { return BaseEvaporationSpectrum::boundaries(); }
 
   /**
    *  @brief Return the interpolants
    */
-  auto INT() const { return this->tabulated_.INT(); }
+  auto INT() const { return BaseEvaporationSpectrum::INT(); }
 
   /**
    *  @brief Return the interpolants
    */
-  auto interpolants() const { return this->tabulated_.interpolants(); }
+  auto interpolants() const { return BaseEvaporationSpectrum::interpolants(); }
 
   /**
    *  @brief Return the number of energy values
    */
-  std::size_t NE() const { return this->tabulated_.N(); }
+  std::size_t NE() const { return BaseEvaporationSpectrum::NE(); }
 
   /**
    *  @brief Return the number of energy values
    */
-  std::size_t numberEnergyPoints() const { return this->NE(); }
+  std::size_t numberEnergyPoints() const {
+
+    return BaseEvaporationSpectrum::numberEnergyPoints();
+  }
 
   /**
    *  @brief Return the energy values
    */
-  auto energies() const { return this->tabulated_.x(); }
+  auto energies() const { return BaseEvaporationSpectrum::energies(); }
 
   /**
    *  @brief Return the cross section values
    */
-  auto temperatures() const { return this->tabulated_.y(); }
+  auto temperatures() const { return BaseEvaporationSpectrum::temperatures(); }
 
   /**
    *  @brief Return the minimum incident energy for the distribution
    */
   double minimumIncidentEnergy() const {
 
-    return this->energies().front();
+    return BaseEvaporationSpectrum::minimumIncidentEnergy();
   }
 
   /**
@@ -121,25 +120,28 @@ public:
    */
   double maximumIncidentEnergy() const {
 
-    return this->energies().back();
+    return BaseEvaporationSpectrum::maximumIncidentEnergy();
   }
 
   /**
    *  @brief Return the restriction energy
    */
-  double U() const { return *this->tabulated_.end(); }
+  double U() const { return BaseEvaporationSpectrum::U(); }
 
   /**
    *  @brief Return the restriction energy
    */
-  double restrictionEnergy() const { return this->U(); }
+  double restrictionEnergy() const {
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+    return BaseEvaporationSpectrum::restrictionEnergy();
+  }
+
+  using BaseEvaporationSpectrum::empty;
+  using BaseEvaporationSpectrum::name;
+  using BaseEvaporationSpectrum::length;
+  using BaseEvaporationSpectrum::XSS;
+  using BaseEvaporationSpectrum::begin;
+  using BaseEvaporationSpectrum::end;
 };
 
 using ACELAW5 = SimpleMaxwellianFissionSpectrum;
