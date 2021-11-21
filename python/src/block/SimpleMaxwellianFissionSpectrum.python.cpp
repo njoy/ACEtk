@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/GeneralEvaporationSpectrum.hpp"
+#include "ACEtk/block/SimpleMaxwellianFissionSpectrum.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapGeneralEvaporationSpectrum( python::module& module,
-                                     python::module& ) {
+void wrapSimpleMaxwellianFissionSpectrum( python::module& module,
+                                          python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::GeneralEvaporationSpectrum;
+  using Block = njoy::ACEtk::block::SimpleMaxwellianFissionSpectrum;
 
   // wrap views created by this block
 
@@ -24,9 +24,9 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
   python::class_< Block > block(
 
     module,
-    "GeneralEvaporationSpectrum",
+    "SimpleMaxwellianFissionSpectrum",
     "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using a general evaporation spectrum"
+    "DLW block for a single reaction using a simple Maxwellian fission spectrum"
   );
 
   // wrap the block
@@ -35,10 +35,10 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
 
     python::init< std::vector< long >&&, std::vector< long >&&,
                   std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&& >(),
+                  double >(),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
     python::arg( "energies" ), python::arg( "temperatures" ),
-    python::arg( "bins" ),
+    python::arg( "energy" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self            the block\n"
@@ -46,7 +46,7 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
     "    interpolants    the interpolation types for each range\n"
     "    energies        the energy values\n"
     "    temperatures    the temperature values\n"
-    "    bins            the x bin values"
+    "    energy          the restriction energy"
   )
   .def_property_readonly(
 
@@ -146,22 +146,15 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
   )
   .def_property_readonly(
 
-    "NET",
-    &Block::NET,
-    "The number of x values"
+    "U",
+    &Block::U,
+    "The restriction energy"
   )
   .def_property_readonly(
 
-    "number_bins",
-    &Block::numberBins,
-    "The number of x bins"
-  )
-  .def_property_readonly(
-
-    "bins",
-    [] ( const Block& self ) -> DoubleRange
-       { return self.bins(); },
-    "The equiprobable x bins"
+    "restriction_energy",
+    &Block::restrictionEnergy,
+    "The restriction energy"
   );
 
   // add standard block definitions
