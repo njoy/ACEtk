@@ -144,7 +144,7 @@ public:
   using BaseEvaporationSpectrum::end;
 };
 
-using ACELAW5 = EvaporationSpectrum;
+using ACELAW9 = EvaporationSpectrum;
 
 } // block namespace
 } // ACEtk namespace

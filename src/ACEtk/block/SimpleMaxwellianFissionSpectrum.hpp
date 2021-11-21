@@ -144,7 +144,7 @@ public:
   using BaseEvaporationSpectrum::end;
 };
 
-using ACELAW5 = SimpleMaxwellianFissionSpectrum;
+using ACELAW7 = SimpleMaxwellianFissionSpectrum;
 
 } // block namespace
 } // ACEtk namespace
