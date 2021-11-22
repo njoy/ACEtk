@@ -49,6 +49,7 @@ namespace block {
   void wrapParameterData( python::module&, python::module& );
   void wrapEnergyDependentWattSpectrum( python::module&, python::module& );
   void wrapTabulatedKalbachMannDistribution( python::module&, python::module& );
+  void wrapNBodyPhaseSpaceDistribution( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -133,6 +134,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapParameterData( module, viewmodule );
   block::wrapEnergyDependentWattSpectrum( module, viewmodule );
   block::wrapKalbachMannDistributionData( module, viewmodule );
+  block::wrapNBodyPhaseSpaceDistribution( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );

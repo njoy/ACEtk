@@ -54,6 +54,8 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
                                      { return 0; },
                                   [] ( const EnergyDependentWattSpectrum& ) -> std::size_t
                                      { return 0; },
+                                  [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
+                                     { return 0; },
                                   [] ( const auto& value ) -> std::size_t
                                      { return value.NE(); }
                                 },
@@ -73,6 +75,8 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
                                   [] ( const EvaporationSpectrum& ) -> std::size_t
                                      { return 0; },
                                   [] ( const EnergyDependentWattSpectrum& ) -> std::size_t
+                                     { return 0; },
+                                  [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
                                      { return 0; },
                                   [] ( const auto& value ) -> std::size_t
                                      { return value.NB(); }
@@ -97,6 +101,8 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
                               [] ( const EvaporationSpectrum& ) -> std::size_t
                                  { return 0; },
                               [] ( const EnergyDependentWattSpectrum& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
                                  { return 0; },
                               [incident] ( const auto& value ) -> std::size_t
                                  { return value.relativeDistributionLocator(incident); }

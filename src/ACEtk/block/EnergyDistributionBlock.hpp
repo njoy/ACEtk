@@ -15,6 +15,7 @@
 #include "ACEtk/block/EvaporationSpectrum.hpp"
 #include "ACEtk/block/EnergyDependentWattSpectrum.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
+#include "ACEtk/block/NBodyPhaseSpaceDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -45,7 +46,8 @@ public:
                                          SimpleMaxwellianFissionSpectrum,
                                          EvaporationSpectrum,
                                          EnergyDependentWattSpectrum,
-                                         KalbachMannDistributionData >;
+                                         KalbachMannDistributionData,
+                                         NBodyPhaseSpaceDistribution >;
 
 private:
 
@@ -143,10 +145,6 @@ public:
       // switch on the law and return the appropriate data
       switch ( law ) {
 
-        case EnergyDistributionType::Equiprobable : {
-
-          return EquiprobableOutgoingEnergyBinData( left, right );
-        }
         case EnergyDistributionType::DiscretePhoton : {
 
           return DiscretePhotonDistribution( left, right, emin, emax );
@@ -155,6 +153,10 @@ public:
 
           return LevelScatteringDistribution( left, right, emin, emax );
         }
+        case EnergyDistributionType::NBodyPhaseSpace : {
+
+          return NBodyPhaseSpaceDistribution( left, right, emin, emax );
+        }
         case EnergyDistributionType::TabulatedEnergy : {
 
           return OutgoingEnergyDistributionData( idat, left, right );
@@ -162,6 +164,10 @@ public:
         case EnergyDistributionType::KalbachMann : {
 
           return KalbachMannDistributionData( idat, left, right );
+        }
+        case EnergyDistributionType::Equiprobable : {
+
+          return EquiprobableOutgoingEnergyBinData( left, right );
         }
         case EnergyDistributionType::GeneralEvaporation : {
 
