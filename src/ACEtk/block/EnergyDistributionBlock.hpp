@@ -10,10 +10,11 @@
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
-#include "ACEtk/block/KalbachMannDistributionData.hpp"
 #include "ACEtk/block/GeneralEvaporationSpectrum.hpp"
 #include "ACEtk/block/SimpleMaxwellianFissionSpectrum.hpp"
 #include "ACEtk/block/EvaporationSpectrum.hpp"
+#include "ACEtk/block/EnergyDependentWattSpectrum.hpp"
+#include "ACEtk/block/KalbachMannDistributionData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -43,6 +44,7 @@ public:
                                          GeneralEvaporationSpectrum,
                                          SimpleMaxwellianFissionSpectrum,
                                          EvaporationSpectrum,
+                                         EnergyDependentWattSpectrum,
                                          KalbachMannDistributionData >;
 
 private:
@@ -172,6 +174,10 @@ public:
         case EnergyDistributionType::Evaporation : {
 
           return EvaporationSpectrum( left, right );
+        }
+        case EnergyDistributionType::Watt : {
+
+          return EnergyDependentWattSpectrum( left, right );
         }
         default : {
 

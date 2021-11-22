@@ -47,6 +47,7 @@ namespace block {
   void wrapSimpleMaxwellianFissionSpectrum( python::module&, python::module& );
   void wrapEvaporationSpectrum( python::module&, python::module& );
   void wrapParameterData( python::module&, python::module& );
+  void wrapEnergyDependentWattSpectrum( python::module&, python::module& );
   void wrapTabulatedKalbachMannDistribution( python::module&, python::module& );
 
   // declarations - ACE table blocks
@@ -130,6 +131,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapSimpleMaxwellianFissionSpectrum( module, viewmodule );
   block::wrapEvaporationSpectrum( module, viewmodule );
   block::wrapParameterData( module, viewmodule );
+  block::wrapEnergyDependentWattSpectrum( module, viewmodule );
   block::wrapKalbachMannDistributionData( module, viewmodule );
 
   // wrap ACE table blocks
