@@ -22,7 +22,8 @@ namespace ACEtk {
     KalbachMann = 44,            // ACE LAW = 44 - Kalbach-Mann systematics
     TabulatedEnergyAngle = 61,   // ACE LAW = 61 - tabulated E,Eprime,mu
     NBodyPhaseSpace = 66,        // ACE LAW = 66 - N-body phase space
-    TabulatedAngleEnergy = 67    // ACE LAW = 67 - tabulated E,mu,Eprime
+    TabulatedAngleEnergy = 67,   // ACE LAW = 67 - tabulated E,mu,Eprime
+    MultiDistribution            // multiple distributions
   };
 
 } // ACEtk namespace

@@ -125,7 +125,7 @@ public:
     const std::size_t locator = dlw + this->LDLW( index ) - 1;
 
     // left points to the LNW value - single law if zero
-    std::size_t lnw = static_cast< std::size_t >( this->XSS( locator ) );
+    unsigned int lnw = static_cast< unsigned int >( this->XSS( locator ) );
     if ( lnw == 0 ) {
 
       EnergyDistributionType law =

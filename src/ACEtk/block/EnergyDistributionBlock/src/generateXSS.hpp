@@ -26,67 +26,17 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
                   xss.push_back( value.maximumIncidentEnergy() );        // E[1]
                   xss.push_back( 1. );                                   // P[0]
                   xss.push_back( 1. );                                   // P[1]
-                  std::vector< double > temp( value.length() );
-                  std::copy( value.begin(), value.end(), temp.begin() );
-                  xss.insert( xss.end(), temp.begin(), temp.end() );
+                  xss.insert( xss.end(), value.begin(), value.end() );
                 },
                 distribution );
 
-        // for those distributions holding internal locators
-        if ( std::holds_alternative< OutgoingEnergyDistributionData >( distribution ) ||
-             std::holds_alternative< KalbachMannDistributionData >( distribution ) ) {
+    // for those distributions holding internal locators
+    if ( std::holds_alternative< OutgoingEnergyDistributionData >( distribution ) ||
+         std::holds_alternative< KalbachMannDistributionData >( distribution ) ) {
 
-          // adjust internal locators to start from the beginning of the DLW block
-          // instead of what was already there
-          auto ne = std::visit( utility::overload{
-
-                                  [] ( const EquiprobableOutgoingEnergyBinData& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const DiscretePhotonDistribution& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const LevelScatteringDistribution& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const GeneralEvaporationSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const SimpleMaxwellianFissionSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const EvaporationSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const EnergyDependentWattSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const auto& value ) -> std::size_t
-                                     { return value.NE(); }
-                                },
-                                distribution );
-          auto nr = std::visit( utility::overload{
-
-                                  [] ( const EquiprobableOutgoingEnergyBinData& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const DiscretePhotonDistribution& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const LevelScatteringDistribution& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const GeneralEvaporationSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const SimpleMaxwellianFissionSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const EvaporationSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const EnergyDependentWattSpectrum& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
-                                     { return 0; },
-                                  [] ( const auto& value ) -> std::size_t
-                                     { return value.NB(); }
-                                },
-                                distribution );
-          for ( std::size_t incident = 1; incident < ne + 1; ++incident ) {
-
-            std::size_t locposition = size + idat + 1 + 2 * nr + ne + incident - 1;
-            std::size_t relativeloc =
-                std::visit( utility::overload{
+      // adjust internal locators to start from the beginning of the DLW block
+      // instead of what was already there
+      auto ne = std::visit( utility::overload{
 
                               [] ( const EquiprobableOutgoingEnergyBinData& ) -> std::size_t
                                  { return 0; },
@@ -104,14 +54,62 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
                                  { return 0; },
                               [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
                                  { return 0; },
-                              [incident] ( const auto& value ) -> std::size_t
-                                 { return value.relativeDistributionLocator(incident); }
+                              [] ( const auto& value ) -> std::size_t
+                                 { return value.NE(); }
                             },
                             distribution );
-            std::size_t newlocator = idat + relativeloc - 1;
-            xss[ locposition ] = newlocator;
-          }
-        }
+      auto nr = std::visit( utility::overload{
+
+                              [] ( const EquiprobableOutgoingEnergyBinData& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const DiscretePhotonDistribution& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const LevelScatteringDistribution& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const GeneralEvaporationSpectrum& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const SimpleMaxwellianFissionSpectrum& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const EvaporationSpectrum& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const EnergyDependentWattSpectrum& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
+                                 { return 0; },
+                              [] ( const auto& value ) -> std::size_t
+                                 { return value.NB(); }
+                            },
+                            distribution );
+      for ( std::size_t incident = 1; incident < ne + 1; ++incident ) {
+
+        std::size_t locposition = size + idat + 1 + 2 * nr + ne + incident - 1;
+        std::size_t relativeloc =
+            std::visit( utility::overload{
+
+                          [] ( const EquiprobableOutgoingEnergyBinData& ) -> std::size_t
+                             { return 0; },
+                          [] ( const DiscretePhotonDistribution& ) -> std::size_t
+                             { return 0; },
+                          [] ( const LevelScatteringDistribution& ) -> std::size_t
+                             { return 0; },
+                          [] ( const GeneralEvaporationSpectrum& ) -> std::size_t
+                             { return 0; },
+                          [] ( const SimpleMaxwellianFissionSpectrum& ) -> std::size_t
+                             { return 0; },
+                          [] ( const EvaporationSpectrum& ) -> std::size_t
+                             { return 0; },
+                          [] ( const EnergyDependentWattSpectrum& ) -> std::size_t
+                             { return 0; },
+                          [] ( const NBodyPhaseSpaceDistribution& ) -> std::size_t
+                             { return 0; },
+                          [incident] ( const auto& value ) -> std::size_t
+                             { return value.relativeDistributionLocator(incident); }
+                        },
+                        distribution );
+        std::size_t newlocator = idat + relativeloc - 1;
+        xss[ locposition ] = newlocator;
+      }
+    }
 
     ++index;
   }
