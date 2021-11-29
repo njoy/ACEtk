@@ -12,9 +12,9 @@ KalbachMannDistributionData( KalbachMannDistributionData&& ) = default;
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
 KalbachMannDistributionData(
-    std::vector< long >&& boundaries,
-    std::vector< long >&& interpolants,
-    std::vector< TabulatedKalbachMannDistribution >&& distributions,
+    std::vector< long > boundaries,
+    std::vector< long > interpolants,
+    std::vector< TabulatedKalbachMannDistribution > distributions,
     std::size_t locb = 1 ) :
   BaseDistributionData( "DLW::KalbachMannDistributionData",
                         std::move( boundaries ), std::move( interpolants ),
@@ -27,7 +27,7 @@ KalbachMannDistributionData(
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
 KalbachMannDistributionData(
-    std::vector< TabulatedKalbachMannDistribution >&& distributions,
+    std::vector< TabulatedKalbachMannDistribution > distributions,
     std::size_t locb = 1 ) :
   KalbachMannDistributionData( {}, {}, std::move( distributions ), locb ) {}
 

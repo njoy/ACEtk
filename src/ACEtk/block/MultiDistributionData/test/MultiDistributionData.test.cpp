@@ -9,6 +9,7 @@
 using namespace njoy::ACEtk;
 using MultiDistributionData = block::MultiDistributionData;
 using DistributionProbability = block::DistributionProbability;
+using DistributionData = MultiDistributionData::DistributionData;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
 using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
 using GeneralEvaporationSpectrum = block::GeneralEvaporationSpectrum;
@@ -22,40 +23,54 @@ SCENARIO( "MultiDistributionData" ) {
 
     std::vector< double > xss = chunk();
 
-//    WHEN( "the data is given explicitly" ) {
-//
-//      std::vector< TabulatedKalbachMannDistribution > distributions  = {
-//
-//        TabulatedKalbachMannDistribution(
-//            1.219437E+01, 1, { 0.000000E+00, 1.866919E-02 },
-//            { 5.356419E+01, 0.000000E+00 }, { 0., 1. }, { 0., 0. },
-//            { 2.391154E-01, 2.398743E-01 } ),
-//        TabulatedKalbachMannDistribution(
-//            20., 2, { 0.000000E+00, 1.120151E+00, 7.592137E+00 },
-//            { 7.738696E-02, 4.209016E-01, 1.226090E-11 },
-//            { 0.000000E+00, 5.382391E-01, 1.000000E+00 },
-//            { 2.491475E-03, 1.510768E-02, 9.775367E-01 },
-//            { 2.391154E-01, 2.847920E-01, 5.592013E-01 } )
-//      };
-//      std::size_t locb = 21;
-//
-//      MultiDistributionData chunk( std::move( distributions ), locb );
-//
-//      THEN( "a MultiDistributionData can be constructed and "
-//            "members can be tested" ) {
-//
-//        verifyChunk( chunk );
-//      } // THEN
-//
-//      THEN( "the XSS array is correct" ) {
-//
-//        auto xss_chunk = chunk.XSS();
-//        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-//
-//          CHECK( xss[i] == Approx( xss_chunk[i] ) );
-//        }
-//      } // THEN
-//    } // WHEN
+    WHEN( "the data is given explicitly" ) {
+
+      std::vector< DistributionProbability > probabilities  = {
+
+        DistributionProbability( { 1.219437E+01, 2.000000E+01 },
+                                 { 2.500000E-01, 7.500000E-01 } ),
+        DistributionProbability( { 1e-5, 2.000000E+01 },
+                                 { 7.500000E-01, 2.500000E-01 } ),
+      };
+
+      std::vector< DistributionData > distributions  = {
+
+        KalbachMannDistributionData(
+
+          { TabulatedKalbachMannDistribution(
+                1.219437E+01, 1, { 0.000000E+00, 1.866919E-02 },
+                { 5.356419E+01, 0.000000E+00 }, { 0., 1. }, { 0., 0. },
+                { 2.391154E-01, 2.398743E-01 } ),
+            TabulatedKalbachMannDistribution(
+                20., 2, { 0.000000E+00, 1.120151E+00, 7.592137E+00 },
+                { 7.738696E-02, 4.209016E-01, 1.226090E-11 },
+                { 0.000000E+00, 5.382391E-01, 1.000000E+00 },
+                { 2.491475E-03, 1.510768E-02, 9.775367E-01 },
+                { 2.391154E-01, 2.847920E-01, 5.592013E-01 } ) } ),
+        GeneralEvaporationSpectrum(
+
+          { 1e-5, 1., 10., 20. }, { 1., 2., 3., 4. }, { 5., 6., 7. } )
+      };
+      std::size_t locb = 12;
+
+      MultiDistributionData chunk( std::move( probabilities ),
+                                   std::move( distributions ), locb );
+
+      THEN( "a MultiDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
 
@@ -118,10 +133,64 @@ void verifyChunk( const MultiDistributionData& chunk ) {
   CHECK( 2 == chunk.probabilities().size() );
   CHECK( 2 == chunk.distributions().size() );
 
+  auto probability1 = chunk.probability( 1 );
+  CHECK( 0 == probability1.interpolationData().NB() );
+  CHECK( 0 == probability1.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == probability1.interpolationData().INT().size() );
+  CHECK( 0 == probability1.interpolationData().interpolants().size() );
+  CHECK( 0 == probability1.interpolationData().NBT().size() );
+  CHECK( 0 == probability1.interpolationData().boundaries().size() );
+
+  CHECK( 0 == probability1.NB() );
+  CHECK( 0 == probability1.numberInterpolationRegions() );
+  CHECK( 0 == probability1.INT().size() );
+  CHECK( 0 == probability1.interpolants().size() );
+  CHECK( 0 == probability1.NBT().size() );
+  CHECK( 0 == probability1.boundaries().size() );
+
+  CHECK( 2 == probability1.NE() );
+  CHECK( 2 == probability1.numberEnergyPoints() );
+
+  CHECK( 2 == probability1.energies().size() );
+  CHECK( 1.219437E+01 == Approx( probability1.energies()[0] ) );
+  CHECK( 20. == Approx( probability1.energies()[1] ) );
+
+  CHECK( 2 == probability1.probabilities().size() );
+  CHECK( 0.25 == Approx( probability1.probabilities()[0] ) );
+  CHECK( 0.75 == Approx( probability1.probabilities()[1] ) );
+
+  auto probability2 = chunk.probability( 2 );
+  CHECK( 0 == probability2.interpolationData().NB() );
+  CHECK( 0 == probability2.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == probability2.interpolationData().INT().size() );
+  CHECK( 0 == probability2.interpolationData().interpolants().size() );
+  CHECK( 0 == probability2.interpolationData().NBT().size() );
+  CHECK( 0 == probability2.interpolationData().boundaries().size() );
+
+  CHECK( 0 == probability2.NB() );
+  CHECK( 0 == probability2.numberInterpolationRegions() );
+  CHECK( 0 == probability2.INT().size() );
+  CHECK( 0 == probability2.interpolants().size() );
+  CHECK( 0 == probability2.NBT().size() );
+  CHECK( 0 == probability2.boundaries().size() );
+
+  CHECK( 2 == probability2.NE() );
+  CHECK( 2 == probability2.numberEnergyPoints() );
+
+  CHECK( 2 == probability2.energies().size() );
+  CHECK( 1e-5 == Approx( probability2.energies()[0] ) );
+  CHECK( 20. == Approx( probability2.energies()[1] ) );
+
+  CHECK( 2 == probability2.probabilities().size() );
+  CHECK( 0.75 == Approx( probability2.probabilities()[0] ) );
+  CHECK( 0.25 == Approx( probability2.probabilities()[1] ) );
+
+  CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.distribution( 1 ) ) );
+  CHECK( true == std::holds_alternative< GeneralEvaporationSpectrum >( chunk.distribution( 2 ) ) );
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.distributions()[0] ) );
   CHECK( true == std::holds_alternative< GeneralEvaporationSpectrum >( chunk.distributions()[1] ) );
 
-  auto distribution1 = std::get< KalbachMannDistributionData >( chunk.distributions()[0] );
+  auto distribution1 = std::get< KalbachMannDistributionData >( chunk.distribution( 1 ) );
   CHECK( 0 == distribution1.interpolationData().NB() );
   CHECK( 0 == distribution1.interpolationData().numberInterpolationRegions() );
   CHECK( 0 == distribution1.interpolationData().INT().size() );
@@ -209,7 +278,7 @@ void verifyChunk( const MultiDistributionData& chunk ) {
   CHECK( 2.391154E-01 == Approx( data2.angularDistributionSlopeValues().front() ) );
   CHECK( 5.592013E-01 == Approx( data2.angularDistributionSlopeValues().back() ) );
 
-  auto distribution2 = std::get< GeneralEvaporationSpectrum >( chunk.distributions()[1] );
+  auto distribution2 = std::get< GeneralEvaporationSpectrum >( chunk.distribution( 2 ) );
   CHECK( 0 == distribution2.interpolationData().NB() );
   CHECK( 0 == distribution2.interpolationData().numberInterpolationRegions() );
   CHECK( 0 == distribution2.interpolationData().INT().size() );

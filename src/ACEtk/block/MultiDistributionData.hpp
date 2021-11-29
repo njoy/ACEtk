@@ -53,7 +53,8 @@ private:
   /* auxiliary functions */
 //  #include "ACEtk/block/MultiDistributionData/src/verifySize.hpp"
   #include "ACEtk/block/MultiDistributionData/src/generateBlocks.hpp"
-//  #include "ACEtk/block/MultiDistributionData/src/generateXSS.hpp"
+  #include "ACEtk/block/MultiDistributionData/src/verifyDistributionIndex.hpp"
+  #include "ACEtk/block/MultiDistributionData/src/generateXSS.hpp"
 
 public:
 
@@ -77,11 +78,35 @@ public:
   }
 
   /**
+   *  @brief Return the number of distributions
+   */
+  std::size_t numberDistributions() const {
+
+    return this->distributions_.size();
+  }
+
+  /**
    *  @brief Return the probability for each distribution
    */
   const std::vector< DistributionProbability >& probabilities() const {
 
     return this->probabilities_;
+  }
+
+  /**
+   *  @brief Return the probability data for a given distribution index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const DistributionProbability& probability( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDistributionIndex( index );
+    #endif
+    return this->probabilities_[ index - 1 ];
   }
 
   /**
@@ -93,9 +118,20 @@ public:
   }
 
   /**
-   *  @brief Return the number of distributions
+   *  @brief Return the distribution data for a given distribution index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
    */
-  auto numberDistributions() const { return this->distributions().size(); }
+  const DistributionData& distribution( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDistributionIndex( index );
+    #endif
+    return this->distributions_[ index - 1 ];
+  }
 
   using Base::empty;
   using Base::name;

@@ -19,16 +19,17 @@ MultiDistributionData( MultiDistributionData&& base ) :
  *  @param[in] interpolants     the interpolation types for each range
  *  @param[in] distributions    the distributions for each incident energy
  */
-//MultiDistributionData(
-//    std::vector< DistributionProbability >&& probabilities,
-//    std::vector< DistributionData >&& distributions,
-//    std::size_t locb = 0 ) :
-//  Base( "DLW::MultiDistributionData",
-//        generateXSS( std::move( probabilities ), std::move( distributions ) ) ),
-//  locb_( locb ) {
-//
-//  this->generateBlocks();
-//}
+MultiDistributionData(
+    std::vector< DistributionProbability > probabilities,
+    std::vector< DistributionData > distributions,
+    std::size_t locb = 1 ) :
+  Base( "DLW::MultiDistributionData",
+        generateXSS( std::move( probabilities ), std::move( distributions ),
+                     locb ) ),
+  locb_( locb ) {
+
+  this->generateBlocks();
+}
 
 /**
  *  @brief Constructor
