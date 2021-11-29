@@ -16,6 +16,7 @@
 #include "ACEtk/block/EnergyDependentWattSpectrum.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
 #include "ACEtk/block/NBodyPhaseSpaceDistribution.hpp"
+#include "ACEtk/block/MultiDistributionData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -47,7 +48,8 @@ public:
                                          EvaporationSpectrum,
                                          EnergyDependentWattSpectrum,
                                          KalbachMannDistributionData,
-                                         NBodyPhaseSpaceDistribution >;
+                                         NBodyPhaseSpaceDistribution,
+                                         MultiDistributionData >;
 
 private:
 

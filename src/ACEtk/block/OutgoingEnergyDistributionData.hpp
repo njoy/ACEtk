@@ -187,6 +187,14 @@ public:
   }
 
   /**
+   *  @brief Return the distributions
+   */
+  const std::vector< TabulatedOutgoingEnergyDistribution >& distributions() const {
+
+    return BaseDistributionData::distributions();
+  }
+
+  /**
    *  @brief Return the distribution for an incident energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
@@ -194,18 +202,17 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  TabulatedOutgoingEnergyDistribution
-  distribution( std::size_t index ) const {
+  const TabulatedOutgoingEnergyDistribution& distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
   }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using BaseDistributionData::empty;
+  using BaseDistributionData::name;
+  using BaseDistributionData::length;
+  using BaseDistributionData::XSS;
+  using BaseDistributionData::begin;
+  using BaseDistributionData::end;
 };
 
 using ACELAW4 = OutgoingEnergyDistributionData;
