@@ -32,8 +32,8 @@ void wrapEvaporationSpectrum( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< long >&&, std::vector< long >&&,
-                  std::vector< double >&&, std::vector< double >&&,
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< double >, std::vector< double >,
                   double >(),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
     python::arg( "energies" ), python::arg( "temperatures" ),

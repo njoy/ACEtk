@@ -34,7 +34,7 @@ void wrapEquiprobableOutgoingEnergyBinData( python::module& module,
   block
   .def(
 
-    python::init< std::vector< Distribution >&& >(),
+    python::init< std::vector< Distribution > >(),
     python::arg( "distributions" ),
     "Initialise the block\n\n"
     "Arguments:\n"

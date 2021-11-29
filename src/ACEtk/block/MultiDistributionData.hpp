@@ -94,7 +94,7 @@ public:
   }
 
   /**
-   *  @brief Return the probability data for a given distribution index
+   *  @brief Return the probability data for a distribution index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
@@ -118,7 +118,7 @@ public:
   }
 
   /**
-   *  @brief Return the distribution data for a given distribution index
+   *  @brief Return the distribution data for a distribution index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).

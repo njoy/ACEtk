@@ -34,7 +34,7 @@ void wrapSecondaryParticleTypeBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< unsigned int >&& >(),
+    python::init< std::vector< unsigned int > >(),
     python::arg( "types" ),
     "Initialise the block\n\n"
     "Arguments:\n"

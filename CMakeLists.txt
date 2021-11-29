@@ -120,6 +120,7 @@ if(ACEtk.python)
     python/src/block/KalbachMannDistributionData.python.cpp
     python/src/block/NBodyPhaseSpaceDistribution.python.cpp
     python/src/block/DistributionProbability.python.cpp
+    python/src/block/MultiDistributionData.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp

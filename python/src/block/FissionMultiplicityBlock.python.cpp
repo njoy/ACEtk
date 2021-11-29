@@ -32,7 +32,7 @@ void wrapFissionMultiplicityBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< FissionMultiplicityData&& >(),
+    python::init< FissionMultiplicityData >(),
     python::arg( "prompt" ),
     "Initialise the block\n\n"
     "Arguments:\n"
@@ -41,7 +41,7 @@ void wrapFissionMultiplicityBlock( python::module& module, python::module& ) {
   )
   .def(
 
-    python::init< FissionMultiplicityData&&, FissionMultiplicityData&& >(),
+    python::init< FissionMultiplicityData, FissionMultiplicityData >(),
     python::arg( "prompt" ), python::arg( "total" ),
     "Initialise the block\n\n"
     "Arguments:\n"

@@ -33,9 +33,9 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
   block
   .def(
 
-    python::init< std::vector< long >&&, std::vector< long >&&,
-                  std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&& >(),
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< double >, std::vector< double >,
+                  std::vector< double > >(),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
     python::arg( "energies" ), python::arg( "temperatures" ),
     python::arg( "bins" ),
@@ -44,6 +44,19 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
     "    self            the block\n"
     "    boundaries      the interpolation range boundaries\n"
     "    interpolants    the interpolation types for each range\n"
+    "    energies        the energy values\n"
+    "    temperatures    the temperature values\n"
+    "    bins            the x bin values"
+  )
+  .def(
+
+    python::init< std::vector< double >, std::vector< double >,
+                  std::vector< double > >(),
+    python::arg( "energies" ), python::arg( "temperatures" ),
+    python::arg( "bins" ),
+    "Initialise the block without interpolation data\n\n"
+    "Arguments:\n"
+    "    self            the block\n"
     "    energies        the energy values\n"
     "    temperatures    the temperature values\n"
     "    bins            the x bin values"

@@ -30,7 +30,7 @@ SCENARIO( "MultiDistributionData" ) {
         DistributionProbability( { 1.219437E+01, 2.000000E+01 },
                                  { 2.500000E-01, 7.500000E-01 } ),
         DistributionProbability( { 1e-5, 2.000000E+01 },
-                                 { 7.500000E-01, 2.500000E-01 } ),
+                                 { 7.500000E-01, 2.500000E-01 } )
       };
 
       std::vector< DistributionData > distributions  = {

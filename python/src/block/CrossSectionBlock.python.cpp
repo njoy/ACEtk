@@ -36,7 +36,7 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< CrossSectionData >&& >(),
+    python::init< std::vector< CrossSectionData > >(),
     python::arg( "xs" ),
     "Initialise the block\n\n"
     "Arguments:\n"

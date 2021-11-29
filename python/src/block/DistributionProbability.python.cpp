@@ -32,7 +32,7 @@ void wrapDistributionProbability( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< double >&&, std::vector< double >&& >(),
+    python::init< std::vector< double >, std::vector< double > >(),
     python::arg( "energies" ), python::arg( "probabilities" ),
     "Initialise the block assuming linear interpolation\n\n"
     "Arguments:\n"
@@ -42,10 +42,10 @@ void wrapDistributionProbability( python::module& module, python::module& ) {
   )
   .def(
 
-    python::init< std::vector< long >&&, std::vector< long >&&,
-                  std::vector< double >&&, std::vector< double >&& >(),
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< double >, std::vector< double > >(),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
-    python::arg( "energies" ), python::arg( "xs" ),
+    python::arg( "energies" ), python::arg( "probabilities" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self            the block\n"

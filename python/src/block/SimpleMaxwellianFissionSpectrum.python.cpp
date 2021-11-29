@@ -33,8 +33,8 @@ void wrapSimpleMaxwellianFissionSpectrum( python::module& module,
   block
   .def(
 
-    python::init< std::vector< long >&&, std::vector< long >&&,
-                  std::vector< double >&&, std::vector< double >&&,
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< double >, std::vector< double >,
                   double >(),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
     python::arg( "energies" ), python::arg( "temperatures" ),
@@ -44,6 +44,19 @@ void wrapSimpleMaxwellianFissionSpectrum( python::module& module,
     "    self            the block\n"
     "    boundaries      the interpolation range boundaries\n"
     "    interpolants    the interpolation types for each range\n"
+    "    energies        the energy values\n"
+    "    temperatures    the temperature values\n"
+    "    energy          the restriction energy"
+  )
+  .def(
+
+    python::init< std::vector< double >, std::vector< double >,
+                  double >(),
+    python::arg( "energies" ), python::arg( "temperatures" ),
+    python::arg( "energy" ),
+    "Initialise the block without interpolation data\n\n"
+    "Arguments:\n"
+    "    self            the block\n"
     "    energies        the energy values\n"
     "    temperatures    the temperature values\n"
     "    energy          the restriction energy"

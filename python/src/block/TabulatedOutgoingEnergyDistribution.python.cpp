@@ -32,8 +32,8 @@ void wrapTabulatedOutgoingEnergyDistribution( python::module& module, python::mo
   block
   .def(
 
-    python::init< double, int, std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&&, std::size_t >(),
+    python::init< double, int, std::vector< double >, std::vector< double >,
+                  std::vector< double >, std::size_t >(),
     python::arg( "incident" ), python::arg( "interpolation" ),
     python::arg( "cosines" ), python::arg( "pdf" ), python::arg( "cdf" ),
     python::arg( "discrete" ) = 0,

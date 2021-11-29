@@ -31,7 +31,7 @@ void wrapEquiprobableOutgoingEnergyBins( python::module& module, python::module&
   block
   .def(
 
-    python::init< double, std::vector< double >&& >(),
+    python::init< double, std::vector< double > >(),
     python::arg( "incident" ), python::arg( "energies" ),
     "Initialise the block\n\n"
     "Arguments:\n"

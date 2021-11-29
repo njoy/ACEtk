@@ -32,9 +32,9 @@ void wrapTabulatedKalbachMannDistribution( python::module& module, python::modul
   block
   .def(
 
-    python::init< double, int, std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&&, std::size_t >(),
+    python::init< double, int, std::vector< double >, std::vector< double >,
+                  std::vector< double >, std::vector< double >,
+                  std::vector< double >, std::size_t >(),
     python::arg( "incident" ), python::arg( "interpolation" ),
     python::arg( "cosines" ), python::arg( "pdf" ), python::arg( "cdf" ),
     python::arg( "r" ), python::arg( "a" ), python::arg( "discrete" ) = 0,

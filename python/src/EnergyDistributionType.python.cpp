@@ -38,5 +38,6 @@ void wrapEnergyDistributionType( python::module& module, python::module& ) {
   .value( "KalbachMann",             Component::KalbachMann )
   .value( "TabulatedEnergyAngle",    Component::TabulatedEnergyAngle )
   .value( "NBodyPhaseSpace",         Component::NBodyPhaseSpace )
-  .value( "TabulatedAngleEnergy",    Component::TabulatedAngleEnergy );
+  .value( "TabulatedAngleEnergy",    Component::TabulatedAngleEnergy )
+  .value( "MultiDistribution",       Component::MultiDistribution );
 }

@@ -38,9 +38,9 @@ void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&& >(),
+    python::init< std::vector< double >, std::vector< double >,
+                  std::vector< double >, std::vector< double >,
+                  std::vector< double > >(),
     python::arg( "energies" ), python::arg( "total" ),
     python::arg( "disappearance" ), python::arg( "elastic" ),
     python::arg( "heating" ),

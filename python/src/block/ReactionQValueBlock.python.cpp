@@ -35,7 +35,7 @@ void wrapReactionQValueBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< double >&& >(),
+    python::init< std::vector< double > >(),
     python::arg( "qvalues" ),
     "Initialise the block\n\n"
     "Arguments:\n"

@@ -15,9 +15,9 @@ MultiDistributionData( MultiDistributionData&& base ) :
 /**
  *  @brief Constructor
  *
- *  @param[in] boundaries       the interpolation range boundaries
- *  @param[in] interpolants     the interpolation types for each range
- *  @param[in] distributions    the distributions for each incident energy
+ *  @param[in] probabilities    the probabilities
+ *  @param[in] distributions    the distributions
+ *  @param[in] locb             the starting xss index with respect to the superblock
  */
 MultiDistributionData(
     std::vector< DistributionProbability > probabilities,
