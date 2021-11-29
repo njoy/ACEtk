@@ -23,7 +23,7 @@ AngularDistributionBlock( AngularDistributionBlock&& ) = default;
  *
  *  @param[in] xs    the cross section data
  */
-AngularDistributionBlock( std::vector< DistributionData >&& distributions ) :
+AngularDistributionBlock( std::vector< DistributionData > distributions ) :
   AngularDistributionBlock( std::move( distributions ),
                             distributions.size() - 1 ) {}
 

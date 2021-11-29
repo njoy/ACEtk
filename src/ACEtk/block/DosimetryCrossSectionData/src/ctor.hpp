@@ -11,10 +11,10 @@ DosimetryCrossSectionData( DosimetryCrossSectionData&& ) = default;
  *  @param[in] energies        the energy values
  *  @param[in] xs              the xs values
  */
-DosimetryCrossSectionData( std::vector< long >&& boundaries,
-                           std::vector< long >&& interpolants,
-                           std::vector< double >&& energies,
-                           std::vector< double >&& xs ) :
+DosimetryCrossSectionData( std::vector< long > boundaries,
+                           std::vector< long > interpolants,
+                           std::vector< double > energies,
+                           std::vector< double > xs ) :
   BaseTabulatedData( "SIGD::DosimetryCrossSectionData",
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( xs ) ) {}
@@ -25,8 +25,8 @@ DosimetryCrossSectionData( std::vector< long >&& boundaries,
  *  @param[in] energies        the energy values
  *  @param[in] xs              the xs values
  */
-DosimetryCrossSectionData( std::vector< double >&& energies,
-                           std::vector< double >&& xs ) :
+DosimetryCrossSectionData( std::vector< double > energies,
+                           std::vector< double > xs ) :
   DosimetryCrossSectionData( {}, {}, std::move( energies ), std::move( xs ) ) {}
 
 /**

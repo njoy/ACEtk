@@ -30,11 +30,11 @@ public:
  *  @param[in] elastic          the elastic cross section values
  *  @param[in] heating          the average heating cross section values
  */
-PrincipalCrossSectionBlock( std::vector< double >&& energies,
-                            std::vector< double >&& total,
-                            std::vector< double >&& disappearance,
-                            std::vector< double >&& elastic,
-                            std::vector< double >&& heating ) :
+PrincipalCrossSectionBlock( std::vector< double > energies,
+                            std::vector< double > total,
+                            std::vector< double > disappearance,
+                            std::vector< double > elastic,
+                            std::vector< double > heating ) :
   PrincipalCrossSectionBlock(
       std::move( energies ), std::move( total ),
       std::move( disappearance ), std::move( elastic ),

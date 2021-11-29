@@ -20,8 +20,8 @@ EnergyDependentWattSpectrum( EnergyDependentWattSpectrum&& base ) :
  *  @param[in] energy    the restriction energy
  */
 EnergyDependentWattSpectrum(
-    ParameterData&& a,
-    ParameterData&& b,
+    ParameterData a,
+    ParameterData b,
     double energy ) :
   Base( "DLW::EnergyDependentWattSpectrum",
         generateXSS( std::move( a ), std::move( b ), energy ) ) {

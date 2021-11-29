@@ -20,7 +20,7 @@ SecondaryParticleTypeBlock( SecondaryParticleTypeBlock&& ) = default;
  *
  *  @param[in] types    the secondary particle types
  */
-SecondaryParticleTypeBlock( std::vector< unsigned int >&& types ) :
+SecondaryParticleTypeBlock( std::vector< unsigned int > types ) :
   SecondaryParticleTypeBlock( std::move( types ), types.size() ) {}
 
 /**

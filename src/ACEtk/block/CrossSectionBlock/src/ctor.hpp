@@ -8,7 +8,7 @@ CrossSectionBlock( CrossSectionBlock&& ) = default;
  *
  *  @param[in] xs    the cross section data
  */
-CrossSectionBlock( std::vector< CrossSectionData >&& xs ) :
+CrossSectionBlock( std::vector< CrossSectionData > xs ) :
   BaseCrossSectionBlock( "SIG", std::move( xs ) ) {}
 
 /**

@@ -17,11 +17,11 @@ TabulatedKalbachMannDistribution( TabulatedKalbachMannDistribution&& ) = default
  */
 TabulatedKalbachMannDistribution( double incident,
                                   int interpolation,
-                                  std::vector< double >&& cosines,
-                                  std::vector< double >&& pdf,
-                                  std::vector< double >&& cdf,
-                                  std::vector< double >&& r,
-                                  std::vector< double >&& a,
+                                  std::vector< double > cosines,
+                                  std::vector< double > pdf,
+                                  std::vector< double > cdf,
+                                  std::vector< double > r,
+                                  std::vector< double > a,
                                   std::size_t discrete = 0 ) :
   TabulatedProbabilityDistribution(
         "DLW::TabulatedKalbachMannDistribution",

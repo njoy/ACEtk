@@ -22,8 +22,8 @@ FrameAndMultiplicityBlock( FrameAndMultiplicityBlock&& ) = default;
  *  @param[in] frames            the reference frames
  *  @param[in] multiplicities    the multiplicities
  */
-FrameAndMultiplicityBlock( std::vector< ReferenceFrame >&& frames,
-                           std::vector< unsigned int >&& multiplicities ) :
+FrameAndMultiplicityBlock( std::vector< ReferenceFrame > frames,
+                           std::vector< unsigned int > multiplicities ) :
   FrameAndMultiplicityBlock( std::move( frames ), std::move( multiplicities ),
                              frames.size() ) {}
 

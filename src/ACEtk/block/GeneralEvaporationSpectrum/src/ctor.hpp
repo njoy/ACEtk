@@ -22,11 +22,11 @@ GeneralEvaporationSpectrum( GeneralEvaporationSpectrum&& base ) :
  *  @param[in] bins            the x bin values
  */
 GeneralEvaporationSpectrum(
-    std::vector< long >&& boundaries,
-    std::vector< long >&& interpolants,
-    std::vector< double >&& energies,
-    std::vector< double >&& temperatures,
-    std::vector< double >&& bins ) :
+    std::vector< long > boundaries,
+    std::vector< long > interpolants,
+    std::vector< double > energies,
+    std::vector< double > temperatures,
+    std::vector< double > bins ) :
   Base( "DLW::GeneralEvaporationSpectrum",
         generateXSS( std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( temperatures ),
@@ -43,9 +43,9 @@ GeneralEvaporationSpectrum(
  *  @param[in] bins            the x bin values
  */
 GeneralEvaporationSpectrum(
-    std::vector< double >&& energies,
-    std::vector< double >&& temperatures,
-    std::vector< double >&& bins ) :
+    std::vector< double > energies,
+    std::vector< double > temperatures,
+    std::vector< double > bins ) :
   GeneralEvaporationSpectrum( {}, {},
                               std::move( energies ), std::move( temperatures ),
                               std::move( bins ) ) {}

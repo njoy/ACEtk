@@ -9,7 +9,7 @@ EquiprobableAngularBins( EquiprobableAngularBins&& ) = default;
  *  @param[in] incident   the incident energy value
  *  @param[in] cosines    the cosine values (33 values)
  */
-EquiprobableAngularBins( double incident, std::vector< double >&& cosines ) :
+EquiprobableAngularBins( double incident, std::vector< double > cosines ) :
   Base( "AND::EquiprobableAngularBins", std::move( cosines ) ),
   incident_( incident ) {
 

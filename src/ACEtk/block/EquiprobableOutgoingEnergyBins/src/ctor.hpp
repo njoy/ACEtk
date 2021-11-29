@@ -10,7 +10,7 @@ EquiprobableOutgoingEnergyBins( EquiprobableOutgoingEnergyBins&& ) = default;
  *  @param[in] energies   the outgoing energy values
  */
 EquiprobableOutgoingEnergyBins( double incident,
-                                std::vector< double >&& energies ) :
+                                std::vector< double > energies ) :
   Base( "DLW::EquiprobableOutgoingEnergyBins", std::move( energies ) ),
   incident_( incident ) {}
 

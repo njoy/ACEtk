@@ -11,10 +11,10 @@ DistributionProbability( DistributionProbability&& ) = default;
  *  @param[in] energies         the energy values
  *  @param[in] probabilities    the probability values values
  */
-DistributionProbability( std::vector< long >&& boundaries,
-                         std::vector< long >&& interpolants,
-                         std::vector< double >&& energies,
-                         std::vector< double >&& probabilities ) :
+DistributionProbability( std::vector< long > boundaries,
+                         std::vector< long > interpolants,
+                         std::vector< double > energies,
+                         std::vector< double > probabilities ) :
   BaseTabulatedData( "DLW::DistributionProbability",
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( probabilities ) ) {}

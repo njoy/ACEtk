@@ -19,7 +19,7 @@ ReactionQValueBlock( ReactionQValueBlock&& ) = default;
  *
  *  @param[in] qvalues    the Q values
  */
-ReactionQValueBlock( std::vector< double >&& qvalues ) :
+ReactionQValueBlock( std::vector< double > qvalues ) :
   ReactionQValueBlock( std::move( qvalues ), qvalues.size() ) {}
 
 /**

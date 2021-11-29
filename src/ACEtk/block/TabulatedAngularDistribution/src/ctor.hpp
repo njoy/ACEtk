@@ -14,9 +14,9 @@ TabulatedAngularDistribution( TabulatedAngularDistribution&& ) = default;
  */
 TabulatedAngularDistribution( double incident,
                               int interpolation,
-                              std::vector< double >&& cosines,
-                              std::vector< double >&& pdf,
-                              std::vector< double >&& cdf ) :
+                              std::vector< double > cosines,
+                              std::vector< double > pdf,
+                              std::vector< double > cdf ) :
   TabulatedProbabilityDistribution(
         "AND::TabulatedAngularDistribution",
         interpolation, std::move( cosines ),

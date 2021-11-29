@@ -11,10 +11,10 @@ TabulatedFissionMultiplicity( TabulatedFissionMultiplicity&& ) = default;
  *  @param[in] energies          the energy values
  *  @param[in] multiplicities    the multiplicity values
  */
-TabulatedFissionMultiplicity( std::vector< long >&& boundaries,
-                              std::vector< long >&& interpolants,
-                              std::vector< double >&& energies,
-                              std::vector< double >&& multiplicities ) :
+TabulatedFissionMultiplicity( std::vector< long > boundaries,
+                              std::vector< long > interpolants,
+                              std::vector< double > energies,
+                              std::vector< double > multiplicities ) :
   Base( "NU::TABLE",
         generateXSS( std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( multiplicities ) ) ) {
@@ -28,8 +28,8 @@ TabulatedFissionMultiplicity( std::vector< long >&& boundaries,
  *  @param[in] energies          the energy values
  *  @param[in] multiplicities    the multiplicity values
  */
-TabulatedFissionMultiplicity( std::vector< double >&& energies,
-                              std::vector< double >&& multiplicities ) :
+TabulatedFissionMultiplicity( std::vector< double > energies,
+                              std::vector< double > multiplicities ) :
  TabulatedFissionMultiplicity( {}, {}, std::move( energies ),
                                std::move( multiplicities ) ) {}
 
