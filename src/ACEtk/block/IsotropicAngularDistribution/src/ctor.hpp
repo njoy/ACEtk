@@ -6,10 +6,10 @@ IsotropicAngularDistribution( IsotropicAngularDistribution&& ) = default;
 /**
  *  @brief Constructor
  *
- *  @param[in] incident        the incident energy value
+ *  @param[in] energy    the associated energy value
  */
-IsotropicAngularDistribution( double incident ) :
-  incident_( incident ) {}
+IsotropicAngularDistribution( double energy ) :
+  energy_( energy ) {}
 
 IsotropicAngularDistribution& operator=( const IsotropicAngularDistribution& ) = default;
 IsotropicAngularDistribution& operator=( IsotropicAngularDistribution&& ) = default;

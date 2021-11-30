@@ -17,9 +17,9 @@ SCENARIO( "IsotropicAngularDistribution" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      double incident = 2.1;
+      double energy = 2.1;
 
-      IsotropicAngularDistribution chunk( incident );
+      IsotropicAngularDistribution chunk( energy );
 
       THEN( "a IsotropicAngularDistribution can be constructed and members can "
             "be tested" ) {
@@ -32,5 +32,5 @@ SCENARIO( "IsotropicAngularDistribution" ) {
 
 void verifyChunk( const IsotropicAngularDistribution& chunk ) {
 
-  CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
+  CHECK( 2.1 == Approx( chunk.energy() ) );
 }

@@ -14,10 +14,10 @@ class Test_ACEtk_IsotropicAngularDistribution( unittest.TestCase ) :
         def verify_chunk( self, chunk ) :
 
             # verify content
-            self.assertEqual( 2.1, chunk.incident_energy )
+            self.assertEqual( 2.1, chunk.energy )
 
         # the data is given explicitly
-        chunk = IsotropicAngularDistribution( incident = 2.1 )
+        chunk = IsotropicAngularDistribution( energy = 2.1 )
 
         verify_chunk( self, chunk )
 

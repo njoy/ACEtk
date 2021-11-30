@@ -28,7 +28,7 @@ class Test_ACEtk_EquiprobableAngularBins( unittest.TestCase ) :
             self.assertEqual( 33, chunk.length )
             self.assertEqual( "AND::EquiprobableAngularBins", chunk.name )
 
-            self.assertEqual( 2.1, chunk.incident_energy )
+            self.assertEqual( 2.1, chunk.energy )
             self.assertEqual( 32, chunk.number_bins )
 
             self.assertEqual( 33, len( chunk.cosines ) )
@@ -43,7 +43,7 @@ class Test_ACEtk_EquiprobableAngularBins( unittest.TestCase ) :
 
         # the data is given explicitly
         chunk = EquiprobableAngularBins(
-                    incident = 2.1,
+                    energy = 2.1,
                     cosines = [ -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.3, -0.2, -0.1, 0.0,
                                 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,
                                 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.925, 0.95,

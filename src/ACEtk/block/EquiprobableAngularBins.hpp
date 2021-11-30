@@ -21,7 +21,7 @@ namespace block {
 class EquiprobableAngularBins : protected details::Base {
 
   /* fields */
-  double incident_;
+  double energy_;
 
   /* auxiliary functions */
   #include "ACEtk/block/EquiprobableAngularBins/src/verifySize.hpp"
@@ -32,9 +32,9 @@ public:
   #include "ACEtk/block/EquiprobableAngularBins/src/ctor.hpp"
 
   /**
-   *  @brief Return the incident energy value
+   *  @brief Return the associated energy value
    */
-  double incidentEnergy() const { return this->incident_; }
+  double energy() const { return this->energy_; }
 
   /**
    *  @brief Return the number of equiprobable angular bins
