@@ -20,13 +20,13 @@ SCENARIO( "TabulatedAngularDistribution" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      double incident = 2.1;
+      double energy = 2.1;
       int interpolation = 2;
       std::vector< double > cosines = { -1.0, 0.0, 1.0 };
       std::vector< double > pdf = { 0.5, 0.5, 0.5 };
       std::vector< double > cdf = { 0.0, 0.5, 1.0 };
 
-      TabulatedAngularDistribution chunk( incident, interpolation,
+      TabulatedAngularDistribution chunk( energy, interpolation,
                                           std::move( cosines ),
                                           std::move( pdf ), std::move( cdf ) );
 
@@ -48,8 +48,8 @@ SCENARIO( "TabulatedAngularDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      double incident = 2.1;
-      TabulatedAngularDistribution chunk( incident, xss.begin(), xss.end() );
+      double energy = 2.1;
+      TabulatedAngularDistribution chunk( energy, xss.begin(), xss.end() );
 
       THEN( "a TabulatedAngularDistribution can be constructed and members can be tested" ) {
 
@@ -81,7 +81,7 @@ void verifyChunk( const TabulatedAngularDistribution& chunk ) {
   CHECK( 11 == chunk.length() );
   CHECK( "AND::TabulatedAngularDistribution" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
+  CHECK( 2.1 == Approx( chunk.energy() ) );
   CHECK( 2 == chunk.interpolation() );
   CHECK( 3 == chunk.numberCosines() );
 

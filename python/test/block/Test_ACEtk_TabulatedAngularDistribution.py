@@ -22,7 +22,7 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertEqual( 11, chunk.length )
             self.assertEqual( "AND::TabulatedAngularDistribution", chunk.name )
 
-            self.assertEqual( 2.1, chunk.incident_energy )
+            self.assertEqual( 2.1, chunk.energy )
             self.assertEqual( 2, chunk.interpolation )
             self.assertEqual( 3, chunk.number_cosines )
 
@@ -46,7 +46,7 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
 
         # the data is given explicitly
         chunk = TabulatedAngularDistribution(
-                    incident = 2.1,
+                    energy = 2.1,
                     interpolation = 2,
                     cosines = [ -1.0, 0.0, 1.0 ],
                     pdf = [ 0.5, 0.5, 0.5 ],

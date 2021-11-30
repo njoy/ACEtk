@@ -23,7 +23,7 @@ class TabulatedAngularDistribution :
   protected details::TabulatedProbabilityDistribution {
 
   /* fields */
-  double incident_;
+  double energy_;
 
   /* auxiliary functions */
 
@@ -33,9 +33,9 @@ public:
   #include "ACEtk/block/TabulatedAngularDistribution/src/ctor.hpp"
 
   /**
-   *  @brief Return the incident energy value
+   *  @brief Return the associated energy value
    */
-  double incidentEnergy() const { return this->incident_; }
+  double energy() const { return this->energy_; }
 
   /**
    *  @brief Return the interpolation flag

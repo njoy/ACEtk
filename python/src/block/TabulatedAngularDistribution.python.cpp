@@ -34,21 +34,21 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
 
     python::init< double, int, std::vector< double >, std::vector< double >,
                   std::vector< double > >(),
-    python::arg( "incident" ), python::arg( "interpolation" ),
+    python::arg( "energy" ), python::arg( "interpolation" ),
     python::arg( "cosines" ), python::arg( "pdf" ), python::arg( "cdf" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self        the block\n"
-    "    incident    the incident energy value\n"
+    "    energy      the associated energy value\n"
     "    cosines     the cosine values\n"
     "    pdf         the pdf values\n"
     "    cdf         the cdf values"
   )
   .def_property_readonly(
 
-    "incident_energy",
-    &Block::incidentEnergy,
-    "The incident energy"
+    "energy",
+    &Block::energy,
+    "The associated energy value"
   )
   .def_property_readonly(
 
