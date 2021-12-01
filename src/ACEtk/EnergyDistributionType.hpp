@@ -18,7 +18,7 @@ namespace ACEtk {
     SimpleMaxwellianFission = 7, // ACE LAW = 7 - simple Maxwellian fission spectrum
     Evaporation = 9,             // ACE LAW = 9 - evaporation spectrum
     Watt = 11,                   // ACE LAW = 11 - energy dependent Watt spectrum
-    XXXXX = 33,                  // ACE LAW = 33 - xxxx
+    TwoBodyTransfer = 33,        // ACE LAW = 33 - two body transfer distribution
     KalbachMann = 44,            // ACE LAW = 44 - Kalbach-Mann systematics
     TabulatedEnergyAngle = 61,   // ACE LAW = 61 - tabulated E,Eprime,mu
     NBodyPhaseSpace = 66,        // ACE LAW = 66 - N-body phase space

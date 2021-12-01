@@ -34,7 +34,7 @@ void wrapEnergyDistributionType( python::module& module, python::module& ) {
   .value( "SimpleMaxwellianFission", Component::SimpleMaxwellianFission )
   .value( "Evaporation",             Component::Evaporation )
   .value( "Watt",                    Component::Watt )
-  .value( "XXXXX",                   Component::XXXXX )
+  .value( "TwoBodyTransfer",         Component::TwoBodyTransfer )
   .value( "KalbachMann",             Component::KalbachMann )
   .value( "TabulatedEnergyAngle",    Component::TabulatedEnergyAngle )
   .value( "NBodyPhaseSpace",         Component::NBodyPhaseSpace )
