@@ -26,7 +26,7 @@ class Test_ACEtk_EquiprobableAngularBins( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 33, chunk.length )
-            self.assertEqual( "AND::EquiprobableAngularBins", chunk.name )
+            self.assertEqual( "EquiprobableAngularBins", chunk.name )
 
             self.assertEqual( 2.1, chunk.energy )
             self.assertEqual( 32, chunk.number_bins )

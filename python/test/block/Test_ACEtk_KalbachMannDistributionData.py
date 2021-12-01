@@ -28,7 +28,7 @@ class Test_ACEtk_KalbachMannDistributionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 35, chunk.length )
-            self.assertEqual( "DLW::KalbachMannDistributionData", chunk.name )
+            self.assertEqual( "KalbachMannDistributionData", chunk.name )
 
             self.assertEqual( EnergyDistributionType.KalbachMann, chunk.LAW )
             self.assertEqual( EnergyDistributionType.KalbachMann, chunk.type )

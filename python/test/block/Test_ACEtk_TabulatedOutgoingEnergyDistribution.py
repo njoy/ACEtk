@@ -20,7 +20,7 @@ class Test_ACEtk_TabulatedOutgoingEnergyDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 11, chunk.length )
-            self.assertEqual( "DLW::TabulatedOutgoingEnergyDistribution", chunk.name )
+            self.assertEqual( "TabulatedOutgoingEnergyDistribution", chunk.name )
 
             self.assertEqual( 2.1, chunk.energy_or_cosine )
             self.assertEqual( 2, chunk.interpolation )

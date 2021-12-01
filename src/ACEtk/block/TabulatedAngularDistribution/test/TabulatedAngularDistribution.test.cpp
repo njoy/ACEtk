@@ -79,7 +79,7 @@ void verifyChunk( const TabulatedAngularDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
-  CHECK( "AND::TabulatedAngularDistribution" == chunk.name() );
+  CHECK( "TabulatedAngularDistribution" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.energy() ) );
   CHECK( 2 == chunk.interpolation() );

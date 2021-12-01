@@ -89,7 +89,7 @@ void verifyChunk( const EquiprobableAngularBins& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 33 == chunk.length() );
-  CHECK( "AND::EquiprobableAngularBins" == chunk.name() );
+  CHECK( "EquiprobableAngularBins" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.energy() ) );
   CHECK( 32 == chunk.numberBins() );

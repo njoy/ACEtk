@@ -75,7 +75,7 @@ void verifyChunk( const DiscretePhotonDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );
-  CHECK( "DLW::DiscretePhotonDistribution" == chunk.name() );
+  CHECK( "DiscretePhotonDistribution" == chunk.name() );
 
   CHECK( EnergyDistributionType::DiscretePhoton == chunk.LAW() );
   CHECK( EnergyDistributionType::DiscretePhoton == chunk.type() );

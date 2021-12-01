@@ -10,7 +10,7 @@ CrossSectionData( CrossSectionData&& ) = default;
  *  @param[in] values    the cross section values
  */
 CrossSectionData( std::size_t index, std::vector< double > values ) :
-  Base( "SIG::XS", generateXSS( index, std::move( values ) ) ) {}
+  Base( "CrossSectionData", generateXSS( index, std::move( values ) ) ) {}
 
 /**
  *  @brief Constructor
@@ -19,7 +19,7 @@ CrossSectionData( std::size_t index, std::vector< double > values ) :
  *  @param[in] end      the end iterator of the cross section data
  */
 CrossSectionData( Iterator begin, Iterator end ) :
-  Base( "SIG::XS", begin, end ) {
+  Base( "CrossSectionData", begin, end ) {
 
   verifySize( this->begin(), this->end(), this->numberValues() );
 }

@@ -25,7 +25,7 @@ class Test_ACEtk_EquiprobableOutgoingEnergyBinData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 13, chunk.length )
-            self.assertEqual( "DLW::EquiprobableOutgoingEnergyBinData", chunk.name )
+            self.assertEqual( "EquiprobableOutgoingEnergyBinData", chunk.name )
 
             self.assertEqual( EnergyDistributionType.Equiprobable, chunk.LAW )
             self.assertEqual( EnergyDistributionType.Equiprobable, chunk.type )

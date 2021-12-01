@@ -124,7 +124,7 @@ void verifyChunk( const CrossSectionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 101 == chunk.length() );
-  CHECK( "SIG::XS" == chunk.name() );
+  CHECK( "CrossSectionData" == chunk.name() );
 
   CHECK( 1 == chunk.energyIndex() );
   CHECK( 99 == chunk.numberValues() );

@@ -22,7 +22,7 @@ class Test_ACEtk_EnergyDependentWattSpectrum( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 19, chunk.length )
-            self.assertEqual( "DLW::EnergyDependentWattSpectrum", chunk.name )
+            self.assertEqual( "EnergyDependentWattSpectrum", chunk.name )
 
             self.assertEqual( EnergyDistributionType.Watt, chunk.LAW )
             self.assertEqual( EnergyDistributionType.Watt, chunk.type )

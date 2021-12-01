@@ -89,7 +89,7 @@ void verifyChunk( const TabulatedKalbachMannDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 17 == chunk.length() );
-  CHECK( "DLW::TabulatedKalbachMannDistribution" == chunk.name() );
+  CHECK( "TabulatedKalbachMannDistribution" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
   CHECK( 2 == chunk.interpolation() );

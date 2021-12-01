@@ -13,8 +13,7 @@ DiscretePhotonDistribution( DiscretePhotonDistribution&& ) = default;
  */
 DiscretePhotonDistribution( double emin, double emax,
                             unsigned int lp, double energy ) :
-  Base( "DLW::DiscretePhotonDistribution", { static_cast< double >( lp ),
-                                             energy } ),
+  Base( "DiscretePhotonDistribution", { static_cast< double >( lp ), energy } ),
   emin_( emin ), emax_( emax ) {}
 
 /**
@@ -27,7 +26,7 @@ DiscretePhotonDistribution( double emin, double emax,
  */
 DiscretePhotonDistribution( Iterator begin, Iterator end,
                             double emin, double emax ) :
-  Base( "DLW::DiscretePhotonDistribution", begin, end ),
+  Base( "DiscretePhotonDistribution", begin, end ),
   emin_( emin ), emax_( emax ) {
 
   verifySize( this->begin(), this->end() );

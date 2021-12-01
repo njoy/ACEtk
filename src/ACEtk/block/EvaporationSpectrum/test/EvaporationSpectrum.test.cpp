@@ -77,7 +77,7 @@ void verifyChunk( const EvaporationSpectrum& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
-  CHECK( "DLW::EvaporationSpectrum" == chunk.name() );
+  CHECK( "EvaporationSpectrum" == chunk.name() );
 
   CHECK( EnergyDistributionType::Evaporation == chunk.LAW() );
   CHECK( EnergyDistributionType::Evaporation == chunk.type() );

@@ -75,7 +75,7 @@ void verifyChunk( const DosimetryCrossSectionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
-  CHECK( "SIGD::DosimetryCrossSectionData" == chunk.name() );
+  CHECK( "DosimetryCrossSectionData" == chunk.name() );
 
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );

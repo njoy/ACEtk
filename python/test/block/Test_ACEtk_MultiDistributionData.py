@@ -40,7 +40,7 @@ class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 67, chunk.length )
-            self.assertEqual( "DLW::MultiDistributionData", chunk.name )
+            self.assertEqual( "MultiDistributionData", chunk.name )
 
             self.assertEqual( EnergyDistributionType.MultiDistribution, chunk.LAW )
             self.assertEqual( EnergyDistributionType.MultiDistribution, chunk.type )

@@ -24,7 +24,7 @@ TabulatedKalbachMannDistribution( double incident,
                                   std::vector< double > a,
                                   std::size_t discrete = 0 ) :
   TabulatedProbabilityDistribution(
-        "DLW::TabulatedKalbachMannDistribution",
+        "TabulatedKalbachMannDistribution",
         discrete * 10 + interpolation, std::move( cosines ),
         std::move( pdf ), std::move( cdf ), { std::move( r ), std::move( a ) } ),
   incident_( incident ) {}
@@ -37,7 +37,7 @@ TabulatedKalbachMannDistribution( double incident,
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
 TabulatedKalbachMannDistribution( double incident, Iterator begin, Iterator end ) :
-  TabulatedProbabilityDistribution( "DLW::TabulatedKalbachMannDistribution",
+  TabulatedProbabilityDistribution( "TabulatedKalbachMannDistribution",
                                     begin, end ),
   incident_( incident ) {}
 

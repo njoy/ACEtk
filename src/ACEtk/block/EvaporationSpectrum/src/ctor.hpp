@@ -19,7 +19,7 @@ EvaporationSpectrum(
     std::vector< double > temperatures,
     double energy ) :
   BaseEvaporationSpectrum(
-        "DLW::EvaporationSpectrum",
+        "EvaporationSpectrum",
         EnergyDistributionType::Evaporation,
         std::move( boundaries ), std::move( interpolants ),
         std::move( energies ), std::move( temperatures ),
@@ -47,7 +47,7 @@ EvaporationSpectrum(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 EvaporationSpectrum( Iterator begin, Iterator end ) :
-  BaseEvaporationSpectrum( "DLW::EvaporationSpectrum",
+  BaseEvaporationSpectrum( "EvaporationSpectrum",
                            EnergyDistributionType::Evaporation,
                            begin, end ) {}
 

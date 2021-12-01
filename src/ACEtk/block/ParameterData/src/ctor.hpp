@@ -15,7 +15,7 @@ ParameterData( std::vector< long > boundaries,
                std::vector< long > interpolants,
                std::vector< double > energies,
                std::vector< double > values ) :
-  BaseTabulatedData( "DLW::ParameterData",
+  BaseTabulatedData( "ParameterData",
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( values ) ) {}
 
@@ -36,7 +36,7 @@ ParameterData( std::vector< double > energies,
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 ParameterData( Iterator begin, Iterator end ) :
-  BaseTabulatedData( "DLW::ParameterData", begin, end ) {}
+  BaseTabulatedData( "ParameterData", begin, end ) {}
 
 ParameterData& operator=( const ParameterData& ) = default;
 ParameterData& operator=( ParameterData&& ) = default;

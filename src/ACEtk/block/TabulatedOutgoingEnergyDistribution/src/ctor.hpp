@@ -20,7 +20,7 @@ TabulatedOutgoingEnergyDistribution( double incident,
                                      std::vector< double > cdf,
                                      std::size_t discrete = 0 ) :
   TabulatedProbabilityDistribution(
-        "DLW::TabulatedOutgoingEnergyDistribution",
+        "TabulatedOutgoingEnergyDistribution",
         discrete * 10 + interpolation, std::move( cosines ),
         std::move( pdf ), std::move( cdf ), {} ),
   incident_( incident ) {}
@@ -34,7 +34,7 @@ TabulatedOutgoingEnergyDistribution( double incident,
  */
 TabulatedOutgoingEnergyDistribution( double incident,
                                      Iterator begin, Iterator end ) :
-  TabulatedProbabilityDistribution( "DLW::TabulatedOutgoingEnergyDistribution",
+  TabulatedProbabilityDistribution( "TabulatedOutgoingEnergyDistribution",
                                     begin, end ),
   incident_( incident ) {}
 

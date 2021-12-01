@@ -12,7 +12,7 @@ LevelScatteringDistribution( LevelScatteringDistribution&& ) = default;
  *  @param[in] c2      the value of C2 = ( A / ( A + 1 ) )^2
  */
 LevelScatteringDistribution( double emin, double emax, double c1, double c2 ) :
-  Base( "DLW::LevelScatteringDistribution", { c1, c2 } ),
+  Base( "LevelScatteringDistribution", { c1, c2 } ),
   emin_( emin ), emax_( emax ) {}
 
 /**
@@ -25,7 +25,7 @@ LevelScatteringDistribution( double emin, double emax, double c1, double c2 ) :
  */
 LevelScatteringDistribution( Iterator begin, Iterator end,
                              double emin, double emax ) :
-  Base( "DLW::LevelScatteringDistribution", begin, end ),
+  Base( "LevelScatteringDistribution", begin, end ),
   emin_( emin ), emax_( emax ) {
 
   verifySize( this->begin(), this->end() );

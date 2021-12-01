@@ -15,7 +15,7 @@ TabulatedFissionMultiplicity( std::vector< long > boundaries,
                               std::vector< long > interpolants,
                               std::vector< double > energies,
                               std::vector< double > multiplicities ) :
-  Base( "NU::TABLE",
+  Base( "TabulatedFissionMultiplicity",
         generateXSS( std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( multiplicities ) ) ) {
 
@@ -40,7 +40,7 @@ TabulatedFissionMultiplicity( std::vector< double > energies,
  *  @param[in] end      the end iterator of the multiplicity data in the XSS array
  */
 TabulatedFissionMultiplicity( Iterator begin, Iterator end ) :
-  Base( "NU::TABLE", begin, end ) {
+  Base( "TabulatedFissionMultiplicity", begin, end ) {
 
   this->generateBlocks();
 }

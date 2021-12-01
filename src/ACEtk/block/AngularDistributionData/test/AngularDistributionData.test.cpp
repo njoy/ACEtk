@@ -105,7 +105,7 @@ void verifyChunk( const AngularDistributionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 51 == chunk.length() );
-  CHECK( "AND::AngularDistributionData" == chunk.name() );
+  CHECK( "AngularDistributionData" == chunk.name() );
 
   CHECK( 3 == chunk.NE() );
   CHECK( 3 == chunk.numberIncidentEnergies() );

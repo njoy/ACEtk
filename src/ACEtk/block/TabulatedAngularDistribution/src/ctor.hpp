@@ -18,7 +18,7 @@ TabulatedAngularDistribution( double energy,
                               std::vector< double > pdf,
                               std::vector< double > cdf ) :
   TabulatedProbabilityDistribution(
-        "AND::TabulatedAngularDistribution",
+        "TabulatedAngularDistribution",
         interpolation, std::move( cosines ),
         std::move( pdf ), std::move( cdf ), {} ),
   energy_( energy ) {}
@@ -31,7 +31,7 @@ TabulatedAngularDistribution( double energy,
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
 TabulatedAngularDistribution( double energy, Iterator begin, Iterator end ) :
-  TabulatedProbabilityDistribution( "AND::TabulatedAngularDistribution",
+  TabulatedProbabilityDistribution( "TabulatedAngularDistribution",
                                     begin, end ),
   energy_( energy ) {}
 

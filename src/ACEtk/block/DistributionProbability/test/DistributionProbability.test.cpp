@@ -77,7 +77,7 @@ void verifyChunk( const DistributionProbability& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
-  CHECK( "DLW::DistributionProbability" == chunk.name() );
+  CHECK( "DistributionProbability" == chunk.name() );
 
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );

@@ -83,7 +83,7 @@ void verifyChunk( const TabulatedOutgoingEnergyDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
-  CHECK( "DLW::TabulatedOutgoingEnergyDistribution" == chunk.name() );
+  CHECK( "TabulatedOutgoingEnergyDistribution" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.energyOrCosine() ) );
   CHECK( 2 == chunk.interpolation() );

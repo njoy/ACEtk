@@ -11,7 +11,7 @@ AngularDistributionData( AngularDistributionData&& ) = default;
  */
 AngularDistributionData( std::vector< Distribution > distributions,
                          std::size_t locb = 1 ) :
-  Base( "AND::AngularDistributionData",
+  Base( "AngularDistributionData",
         generateXSS( std::move( distributions ), locb ) ),
   locb_( locb ) {}
 
@@ -23,7 +23,7 @@ AngularDistributionData( std::vector< Distribution > distributions,
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 AngularDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
-  Base( "AND::AngularDistributionData", begin, end ), locb_( locb ) {
+  Base( "AngularDistributionData", begin, end ), locb_( locb ) {
 
   verifySize( this->begin(), this->end(), this->numberIncidentEnergies() );
 }

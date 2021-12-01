@@ -15,7 +15,7 @@ generateXSS(
                  { return left.incidentEnergy() < right.incidentEnergy(); } );
 
   // insert the interpolation data
-  InterpolationData interpolation( "DLW::EquiprobableOutgoingEnergyBinData",
+  InterpolationData interpolation( "EquiprobableOutgoingEnergyBinData",
                                    std::move( boundaries ),
                                    std::move( interpolants ) );
   xss.insert( xss.begin(), interpolation.begin(), interpolation.end() );

@@ -23,7 +23,7 @@ EquiprobableOutgoingEnergyBinData(
     std::vector< long > boundaries,
     std::vector< long > interpolants,
     std::vector< EquiprobableOutgoingEnergyBins > distributions ) :
-  Base( "DLW::EquiprobableOutgoingEnergyBinData",
+  Base( "EquiprobableOutgoingEnergyBinData",
         generateXSS( std::move( boundaries ), std::move( interpolants ),
                      std::move( distributions ) ) ) {
 
@@ -47,7 +47,7 @@ EquiprobableOutgoingEnergyBinData(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 EquiprobableOutgoingEnergyBinData( Iterator begin, Iterator end ) :
-  Base( "DLW::EquiprobableOutgoingEnergyBinData", begin, end ) {
+  Base( "EquiprobableOutgoingEnergyBinData", begin, end ) {
 
   std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
   std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );

@@ -26,7 +26,7 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 25, chunk.length )
-            self.assertEqual( "DLW::OutgoingEnergyDistributionData", chunk.name )
+            self.assertEqual( "OutgoingEnergyDistributionData", chunk.name )
 
             self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.LAW )
             self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.type )
