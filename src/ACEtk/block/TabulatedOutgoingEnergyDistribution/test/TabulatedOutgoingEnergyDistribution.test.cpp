@@ -20,14 +20,14 @@ SCENARIO( "TabulatedOutgoingEnergyDistribution" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      double incident = 2.1;
+      double value = 2.1;
       int interpolation = 2;
       std::size_t discrete = 3;
       std::vector< double > cosines = { 1e-11, 1.0, 20.0 };
       std::vector< double > pdf = { 0.5, 0.5, 0.5 };
       std::vector< double > cdf = { 0.0, 0.5, 1.0 };
 
-      TabulatedOutgoingEnergyDistribution chunk( incident, interpolation,
+      TabulatedOutgoingEnergyDistribution chunk( value, interpolation,
                                                  std::move( cosines ),
                                                  std::move( pdf ),
                                                  std::move( cdf ),
@@ -51,8 +51,8 @@ SCENARIO( "TabulatedOutgoingEnergyDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      double incident = 2.1;
-      TabulatedOutgoingEnergyDistribution chunk( incident, xss.begin(), xss.end() );
+      double value = 2.1;
+      TabulatedOutgoingEnergyDistribution chunk( value, xss.begin(), xss.end() );
 
       THEN( "a TabulatedOutgoingEnergyDistribution can be constructed and "
             "members can be tested" ) {
@@ -85,7 +85,7 @@ void verifyChunk( const TabulatedOutgoingEnergyDistribution& chunk ) {
   CHECK( 11 == chunk.length() );
   CHECK( "DLW::TabulatedOutgoingEnergyDistribution" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
+  CHECK( 2.1 == Approx( chunk.energyOrCosine() ) );
   CHECK( 2 == chunk.interpolation() );
   CHECK( 3 == chunk.numberDiscretePhotonLines() );
   CHECK( 3 == chunk.numberOutgoingEnergies() );

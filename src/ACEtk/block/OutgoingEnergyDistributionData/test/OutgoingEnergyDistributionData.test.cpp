@@ -127,7 +127,7 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 18 == chunk.relativeDistributionLocator(2) );
 
   auto data1 = chunk.distribution(1);
-  CHECK( 1e-11 == Approx( data1.incidentEnergy() ) );
+  CHECK( 1e-11 == Approx( data1.energyOrCosine() ) );
   CHECK( 2 == data1.interpolation() );
   CHECK( 0 == data1.numberDiscretePhotonLines() );
   CHECK( 3 == data1.numberOutgoingEnergies() );
@@ -145,7 +145,7 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 1. == Approx( data1.cdf().back() ) );
 
   auto data2 = chunk.distribution(2);
-  CHECK( 20. == Approx( data2.incidentEnergy() ) );
+  CHECK( 20. == Approx( data2.energyOrCosine() ) );
   CHECK( 2 == data2.interpolation() );
   CHECK( 0 == data2.numberDiscretePhotonLines() );
   CHECK( 2 == data2.numberOutgoingEnergies() );

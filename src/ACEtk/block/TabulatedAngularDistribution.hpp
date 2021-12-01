@@ -12,12 +12,13 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated angular distirbution data from the AND block for a single
- *         reaction and incident energy
+ *  @brief Tabulated angular distribution data for a single incident or outgoing
+ *         energy
  *
  *  The TabulatedAngularDistribution class contains the probability density
  *  function (PDF) and cumulative density function (CDF) as a function of
- *  cosine for the given incident energy.
+ *  cosine for the given energy. It is used in the AND block and in the
+ *  OutgoingEnergyAngleDistributionData (ACE LAW 61) in the DLW block.
  */
 class TabulatedAngularDistribution :
   protected details::TabulatedProbabilityDistribution {
@@ -32,10 +33,13 @@ public:
   /* constructor */
   #include "ACEtk/block/TabulatedAngularDistribution/src/ctor.hpp"
 
+  // generic function used internally
+  double value() const { return this->energy_; }
+
   /**
    *  @brief Return the associated energy value
    */
-  double energy() const { return this->energy_; }
+  double energy() const { return this->value(); }
 
   /**
    *  @brief Return the interpolation flag

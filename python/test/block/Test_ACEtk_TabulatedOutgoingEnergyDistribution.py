@@ -22,7 +22,7 @@ class Test_ACEtk_TabulatedOutgoingEnergyDistribution( unittest.TestCase ) :
             self.assertEqual( 11, chunk.length )
             self.assertEqual( "DLW::TabulatedOutgoingEnergyDistribution", chunk.name )
 
-            self.assertEqual( 2.1, chunk.incident_energy )
+            self.assertEqual( 2.1, chunk.energy_or_cosine )
             self.assertEqual( 2, chunk.interpolation )
             self.assertEqual( 3, chunk.number_discrete_photon_lines )
             self.assertEqual( 3, chunk.number_outgoing_energies )
@@ -47,7 +47,7 @@ class Test_ACEtk_TabulatedOutgoingEnergyDistribution( unittest.TestCase ) :
 
         # the data is given explicitly
         chunk = TabulatedOutgoingEnergyDistribution(
-                    incident = 2.1,
+                    value = 2.1,
                     interpolation = 2,
                     cosines = [ 1e-11, 1., 20. ],
                     pdf = [ 0.5, 0.5, 0.5 ],

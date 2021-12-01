@@ -14,8 +14,8 @@ generateXSS( const std::string& name,
   std::size_t offset = 1 + 2 * nr + locb;
   for ( const auto& distribution : distributions ) {
 
-    // set the energy value
-    xss[index] = distribution.incidentEnergy();
+    // set the associated value
+    xss[index] = distribution.value();
 
     // set the locator
     xss[index + ne] = xss.size() + offset;

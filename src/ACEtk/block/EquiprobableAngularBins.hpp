@@ -12,11 +12,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief Equiprobable angular bin data from the AND block for a single
- *         reaction and incident energy
+ *  @brief Equiprobable angular bin data for an associated incident energy value
  *
  *  The EquiprobableAngularBins class contains the cosine values that make up
- *  the equiprobable bins (there are 33 values for defining 32 bins).
+ *  the equiprobable bins (there are 33 values for defining 32 bins). It is used
+ *  in the AND block.
  */
 class EquiprobableAngularBins : protected details::Base {
 
