@@ -7,7 +7,7 @@
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/BaseDistributionData.hpp"
-#include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,7 +23,7 @@ namespace block {
  *  the DLW block as ACE LAW 4.
  */
 class OutgoingEnergyDistributionData :
-  protected details::BaseDistributionData< TabulatedOutgoingEnergyDistribution > {
+  protected details::BaseDistributionData< TabulatedEnergyDistribution > {
 
   /* fields */
 
@@ -193,7 +193,7 @@ public:
   /**
    *  @brief Return the distributions
    */
-  const std::vector< TabulatedOutgoingEnergyDistribution >& distributions() const {
+  const std::vector< TabulatedEnergyDistribution >& distributions() const {
 
     return BaseDistributionData::distributions();
   }
@@ -206,7 +206,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const TabulatedOutgoingEnergyDistribution& distribution( std::size_t index ) const {
+  const TabulatedEnergyDistribution& distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
   }

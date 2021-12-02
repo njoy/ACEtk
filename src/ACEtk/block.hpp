@@ -18,7 +18,7 @@
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/TabulatedKalbachMannDistribution.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
-#include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
 #include "ACEtk/block/DosimetryCrossSectionData.hpp"
 

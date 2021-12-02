@@ -20,7 +20,7 @@ add_test( NAME ACEtk.python.block.EquiprobableOutgoingEnergyBins COMMAND ${PYTHO
 add_test( NAME ACEtk.python.block.EquiprobableOutgoingEnergyBinData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EquiprobableOutgoingEnergyBinData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.LevelScatteringDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_LevelScatteringDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.DiscretePhotonDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DiscretePhotonDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
-add_test( NAME ACEtk.python.block.TabulatedOutgoingEnergyDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedOutgoingEnergyDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.TabulatedEnergyDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedEnergyDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.OutgoingEnergyDistributionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_OutgoingEnergyDistributionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.GeneralEvaporationSpectrum COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_GeneralEvaporationSpectrum.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.SimpleMaxwellianFissionSpectrum COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SimpleMaxwellianFissionSpectrum.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

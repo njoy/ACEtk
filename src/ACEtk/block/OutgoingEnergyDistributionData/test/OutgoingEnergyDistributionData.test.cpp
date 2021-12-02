@@ -8,7 +8,7 @@
 // convenience typedefs
 using namespace njoy::ACEtk;
 using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
-using TabulatedOutgoingEnergyDistribution = block::TabulatedOutgoingEnergyDistribution;
+using TabulatedEnergyDistribution = block::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const OutgoingEnergyDistributionData& );
@@ -21,12 +21,12 @@ SCENARIO( "OutgoingEnergyDistributionData" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< TabulatedOutgoingEnergyDistribution > distributions  = {
+      std::vector< TabulatedEnergyDistribution > distributions  = {
 
-        TabulatedOutgoingEnergyDistribution(
+        TabulatedEnergyDistribution(
             1e-11, 2, { 0.0, .31, 1.84 },
             { 2.364290E-01, 1.050191E+00, 0. }, { 0., 4.932501E-01, 1. } ),
-        TabulatedOutgoingEnergyDistribution(
+        TabulatedEnergyDistribution(
             20., 2, { 0.0, 1.84 }, { .5, .5 }, { 0., 1. } )
       };
       std::size_t locb = 21;

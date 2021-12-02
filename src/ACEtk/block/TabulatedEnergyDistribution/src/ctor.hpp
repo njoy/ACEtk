@@ -1,7 +1,7 @@
-TabulatedOutgoingEnergyDistribution() = default;
+TabulatedEnergyDistribution() = default;
 
-TabulatedOutgoingEnergyDistribution( const TabulatedOutgoingEnergyDistribution& ) = default;
-TabulatedOutgoingEnergyDistribution( TabulatedOutgoingEnergyDistribution&& ) = default;
+TabulatedEnergyDistribution( const TabulatedEnergyDistribution& ) = default;
+TabulatedEnergyDistribution( TabulatedEnergyDistribution&& ) = default;
 
 /**
  *  @brief Constructor
@@ -13,14 +13,14 @@ TabulatedOutgoingEnergyDistribution( TabulatedOutgoingEnergyDistribution&& ) = d
  *  @param[in] cdf             the cdf values (N values)
  *  @param[in] discrete        the number discrete photon lines (defaults to 0)
  */
-TabulatedOutgoingEnergyDistribution( double incident,
+TabulatedEnergyDistribution( double incident,
                                      int interpolation,
                                      std::vector< double > cosines,
                                      std::vector< double > pdf,
                                      std::vector< double > cdf,
                                      std::size_t discrete = 0 ) :
   TabulatedProbabilityDistribution(
-        "TabulatedOutgoingEnergyDistribution",
+        "TabulatedEnergyDistribution",
         discrete * 10 + interpolation, std::move( cosines ),
         std::move( pdf ), std::move( cdf ), {} ),
   incident_( incident ) {}
@@ -32,11 +32,11 @@ TabulatedOutgoingEnergyDistribution( double incident,
  *  @param[in] begin      the begin iterator of the tabulated distribution data
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
-TabulatedOutgoingEnergyDistribution( double incident,
+TabulatedEnergyDistribution( double incident,
                                      Iterator begin, Iterator end ) :
-  TabulatedProbabilityDistribution( "TabulatedOutgoingEnergyDistribution",
+  TabulatedProbabilityDistribution( "TabulatedEnergyDistribution",
                                     begin, end ),
   incident_( incident ) {}
 
-TabulatedOutgoingEnergyDistribution& operator=( const TabulatedOutgoingEnergyDistribution& ) = default;
-TabulatedOutgoingEnergyDistribution& operator=( TabulatedOutgoingEnergyDistribution&& ) = default;
+TabulatedEnergyDistribution& operator=( const TabulatedEnergyDistribution& ) = default;
+TabulatedEnergyDistribution& operator=( TabulatedEnergyDistribution&& ) = default;

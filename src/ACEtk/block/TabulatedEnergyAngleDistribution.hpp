@@ -17,12 +17,12 @@ namespace block {
  *  @brief Tabulated outgoing energy and angle distribution data for a single
  *         incident energy
  *
- *  The TabulatedOutgoingEnergyAngleDistribution class contains the
+ *  The TabulatedEnergyAngleDistribution class contains the
  *  tabulated angular distributions for a set of outgoing energy values and
  *  associated incident energy value. It is used in the
  *  OutgoingEnergyAngleDistributionData (ACE LAW 61) in the DLW block.
  */
-class TabulatedOutgoingEnergyAngleDistribution :
+class TabulatedEnergyAngleDistribution :
   protected details::BaseDistributionData< TabulatedAngularDistribution > {
 
   /* fields */
@@ -33,7 +33,7 @@ class TabulatedOutgoingEnergyAngleDistribution :
 public:
 
   /* constructor */
-  #include "ACEtk/block/TabulatedOutgoingEnergyAngleDistribution/src/ctor.hpp"
+  #include "ACEtk/block/TabulatedEnergyAngleDistribution/src/ctor.hpp"
 
   // generic function used internally
   double value() const { return this->incident_; }

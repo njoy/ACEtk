@@ -109,7 +109,7 @@ if(ACEtk.python)
     python/src/block/EquiprobableOutgoingEnergyBinData.python.cpp
     python/src/block/LevelScatteringDistribution.python.cpp
     python/src/block/DiscretePhotonDistribution.python.cpp
-    python/src/block/TabulatedOutgoingEnergyDistribution.python.cpp
+    python/src/block/TabulatedEnergyDistribution.python.cpp
     python/src/block/OutgoingEnergyDistributionData.python.cpp
     python/src/block/GeneralEvaporationSpectrum.python.cpp
     python/src/block/SimpleMaxwellianFissionSpectrum.python.cpp

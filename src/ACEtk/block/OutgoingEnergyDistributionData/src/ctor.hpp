@@ -14,7 +14,7 @@ OutgoingEnergyDistributionData( OutgoingEnergyDistributionData&& ) = default;
 OutgoingEnergyDistributionData(
     std::vector< long > boundaries,
     std::vector< long > interpolants,
-    std::vector< TabulatedOutgoingEnergyDistribution > distributions,
+    std::vector< TabulatedEnergyDistribution > distributions,
     std::size_t locb = 1 ) :
   BaseDistributionData( "OutgoingEnergyDistributionData",
                         std::move( boundaries ), std::move( interpolants ),
@@ -27,7 +27,7 @@ OutgoingEnergyDistributionData(
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
 OutgoingEnergyDistributionData(
-    std::vector< TabulatedOutgoingEnergyDistribution > distributions,
+    std::vector< TabulatedEnergyDistribution > distributions,
     std::size_t locb = 1 ) :
   OutgoingEnergyDistributionData( {}, {}, std::move( distributions ), locb ) {}
 

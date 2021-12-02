@@ -1,7 +1,7 @@
-TabulatedOutgoingEnergyAngleDistribution() = default;
+TabulatedEnergyAngleDistribution() = default;
 
-TabulatedOutgoingEnergyAngleDistribution( const TabulatedOutgoingEnergyAngleDistribution& ) = default;
-TabulatedOutgoingEnergyAngleDistribution( TabulatedOutgoingEnergyAngleDistribution&& ) = default;
+TabulatedEnergyAngleDistribution( const TabulatedEnergyAngleDistribution& ) = default;
+TabulatedEnergyAngleDistribution( TabulatedEnergyAngleDistribution&& ) = default;
 
 /**
  *  @brief Constructor
@@ -12,13 +12,13 @@ TabulatedOutgoingEnergyAngleDistribution( TabulatedOutgoingEnergyAngleDistributi
  *  @param[in] distributions    the distributions for each outgoing energy
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
-TabulatedOutgoingEnergyAngleDistribution(
+TabulatedEnergyAngleDistribution(
     double incident,
     std::vector< long > boundaries,
     std::vector< long > interpolants,
     std::vector< TabulatedAngularDistribution > distributions,
     std::size_t locb = 1 ) :
-  BaseDistributionData( "TabulatedOutgoingEnergyAngleDistribution",
+  BaseDistributionData( "TabulatedEnergyAngleDistribution",
                         std::move( boundaries ), std::move( interpolants ),
                         std::move( distributions ), locb ),
   incident_( incident ) {}
@@ -30,11 +30,11 @@ TabulatedOutgoingEnergyAngleDistribution(
  *  @param[in] distributions    the distributions for each incident energy
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
-TabulatedOutgoingEnergyAngleDistribution(
+TabulatedEnergyAngleDistribution(
     double incident,
     std::vector< TabulatedAngularDistribution > distributions,
     std::size_t locb = 1 ) :
-  TabulatedOutgoingEnergyAngleDistribution(
+  TabulatedEnergyAngleDistribution(
     incident, {}, {}, std::move( distributions ), locb ) {}
 
 /**
@@ -44,11 +44,11 @@ TabulatedOutgoingEnergyAngleDistribution(
  *  @param[in] sig     the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array
  */
-TabulatedOutgoingEnergyAngleDistribution( double incident, std::size_t locb,
+TabulatedEnergyAngleDistribution( double incident, std::size_t locb,
                                           Iterator begin, Iterator end ) :
-  BaseDistributionData( "TabulatedOutgoingEnergyAngleDistribution", locb,
+  BaseDistributionData( "TabulatedEnergyAngleDistribution", locb,
                         begin, end ),
   incident_( incident ) {}
 
-TabulatedOutgoingEnergyAngleDistribution& operator=( const TabulatedOutgoingEnergyAngleDistribution& ) = default;
-TabulatedOutgoingEnergyAngleDistribution& operator=( TabulatedOutgoingEnergyAngleDistribution&& ) = default;
+TabulatedEnergyAngleDistribution& operator=( const TabulatedEnergyAngleDistribution& ) = default;
+TabulatedEnergyAngleDistribution& operator=( TabulatedEnergyAngleDistribution&& ) = default;

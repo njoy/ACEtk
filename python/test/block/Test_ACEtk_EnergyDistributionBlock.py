@@ -5,10 +5,8 @@ import unittest
 
 # local imports
 from ACEtk import EnergyDistributionBlock
-from ACEtk import TabulatedOutgoingEnergyDistribution
 from ACEtk import TabulatedKalbachMannDistribution
 from ACEtk import LevelScatteringDistribution
-from ACEtk import OutgoingEnergyDistributionData
 from ACEtk import KalbachMannDistributionData
 from ACEtk import EnergyDistributionType
 

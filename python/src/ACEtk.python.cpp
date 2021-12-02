@@ -40,7 +40,7 @@ namespace block {
   void wrapEquiprobableOutgoingEnergyBinData( python::module&, python::module& );
   void wrapLevelScatteringDistribution( python::module&, python::module& );
   void wrapDiscretePhotonDistribution( python::module&, python::module& );
-  void wrapTabulatedOutgoingEnergyDistribution( python::module&, python::module& );
+  void wrapTabulatedEnergyDistribution( python::module&, python::module& );
   void wrapOutgoingEnergyDistributionData( python::module&, python::module& );
   void wrapKalbachMannDistributionData( python::module&, python::module& );
   void wrapGeneralEvaporationSpectrum( python::module&, python::module& );
@@ -128,7 +128,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapEquiprobableOutgoingEnergyBins( module, viewmodule );
   block::wrapEquiprobableOutgoingEnergyBinData( module, viewmodule );
   block::wrapDiscretePhotonDistribution( module, viewmodule );
-  block::wrapTabulatedOutgoingEnergyDistribution( module, viewmodule );
+  block::wrapTabulatedEnergyDistribution( module, viewmodule );
   block::wrapOutgoingEnergyDistributionData( module, viewmodule );
   block::wrapTabulatedKalbachMannDistribution( module, viewmodule );
   block::wrapGeneralEvaporationSpectrum( module, viewmodule );

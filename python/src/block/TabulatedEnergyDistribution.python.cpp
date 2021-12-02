@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapTabulatedOutgoingEnergyDistribution( python::module& module, python::module& ) {
+void wrapTabulatedEnergyDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedOutgoingEnergyDistribution;
+  using Block = njoy::ACEtk::block::TabulatedEnergyDistribution;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapTabulatedOutgoingEnergyDistribution( python::module& module, python::mo
   python::class_< Block > block(
 
     module,
-    "TabulatedOutgoingEnergyDistribution",
+    "TabulatedEnergyDistribution",
     "Tabulated angular distribution data for a single incident energy or "
     "cosine value\n\n"
-    "The TabulatedOutgoingEnergyDistribution class contains the probability\n"
+    "The TabulatedEnergyDistribution class contains the probability\n"
     "density function (PDF) and cumulative density function (CDF) as a function\n"
     "of the outgoing energy for the given incident energy or cosine value. It is\n"
     "used in the OutgoingEnergyDistributionData (ACE LAW 4 for a given incident\n"

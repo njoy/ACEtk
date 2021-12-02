@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import TabulatedOutgoingEnergyDistribution
+from ACEtk import TabulatedEnergyDistribution
 
-class Test_ACEtk_TabulatedOutgoingEnergyDistribution( unittest.TestCase ) :
-    """Unit test for the TabulatedOutgoingEnergyDistribution class."""
+class Test_ACEtk_TabulatedEnergyDistribution( unittest.TestCase ) :
+    """Unit test for the TabulatedEnergyDistribution class."""
 
     chunk = [                32,                  3,  1.00000000000E-11,  1.00000000000E+00,
               2.00000000000E+01,  0.50000000000E+00,  0.50000000000E+00,  0.50000000000E+00,
@@ -20,7 +20,7 @@ class Test_ACEtk_TabulatedOutgoingEnergyDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 11, chunk.length )
-            self.assertEqual( "TabulatedOutgoingEnergyDistribution", chunk.name )
+            self.assertEqual( "TabulatedEnergyDistribution", chunk.name )
 
             self.assertEqual( 2.1, chunk.energy_or_cosine )
             self.assertEqual( 2, chunk.interpolation )
@@ -46,7 +46,7 @@ class Test_ACEtk_TabulatedOutgoingEnergyDistribution( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = TabulatedOutgoingEnergyDistribution(
+        chunk = TabulatedEnergyDistribution(
                     value = 2.1,
                     interpolation = 2,
                     cosines = [ 1e-11, 1., 20. ],

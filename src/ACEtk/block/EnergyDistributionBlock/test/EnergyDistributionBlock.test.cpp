@@ -9,8 +9,6 @@
 using namespace njoy::ACEtk;
 using EnergyDistributionBlock = block::EnergyDistributionBlock;
 using LevelScatteringDistribution = block::LevelScatteringDistribution;
-using TabulatedOutgoingEnergyDistribution = block::TabulatedOutgoingEnergyDistribution;
-using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
 using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
 using DistributionData = EnergyDistributionBlock::DistributionData;

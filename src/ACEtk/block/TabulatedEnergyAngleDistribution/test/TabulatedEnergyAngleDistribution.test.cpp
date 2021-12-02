@@ -1,21 +1,21 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/TabulatedOutgoingEnergyAngleDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyAngleDistribution.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using TabulatedOutgoingEnergyAngleDistribution = block::TabulatedOutgoingEnergyAngleDistribution;
+using TabulatedEnergyAngleDistribution = block::TabulatedEnergyAngleDistribution;
 using TabulatedAngularDistribution = block::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedOutgoingEnergyAngleDistribution& );
+void verifyChunk( const TabulatedEnergyAngleDistribution& );
 
-SCENARIO( "TabulatedOutgoingEnergyAngleDistribution" ) {
+SCENARIO( "TabulatedEnergyAngleDistribution" ) {
 
-  GIVEN( "valid data for a TabulatedOutgoingEnergyAngleDistribution instance" ) {
+  GIVEN( "valid data for a TabulatedEnergyAngleDistribution instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -30,11 +30,11 @@ SCENARIO( "TabulatedOutgoingEnergyAngleDistribution" ) {
       };
       std::size_t locb = 21;
 
-      TabulatedOutgoingEnergyAngleDistribution chunk( 1.1,
+      TabulatedEnergyAngleDistribution chunk( 1.1,
                                                       std::move( distributions ),
                                                       locb );
 
-      THEN( "a TabulatedOutgoingEnergyAngleDistribution can be constructed and "
+      THEN( "a TabulatedEnergyAngleDistribution can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -52,10 +52,10 @@ SCENARIO( "TabulatedOutgoingEnergyAngleDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      TabulatedOutgoingEnergyAngleDistribution chunk( 1.1, 21,
+      TabulatedEnergyAngleDistribution chunk( 1.1, 21,
                                                       xss.begin(), xss.end() );
 
-      THEN( "a TabulatedOutgoingEnergyAngleDistribution can be constructed and "
+      THEN( "a TabulatedEnergyAngleDistribution can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -84,11 +84,11 @@ std::vector< double > chunk() {
             1.000000E+00 };
 }
 
-void verifyChunk( const TabulatedOutgoingEnergyAngleDistribution& chunk ) {
+void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 25 == chunk.length() );
-  CHECK( "TabulatedOutgoingEnergyAngleDistribution" == chunk.name() );
+  CHECK( "TabulatedEnergyAngleDistribution" == chunk.name() );
 
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
