@@ -13,8 +13,9 @@ DiscretePhotonDistribution( DiscretePhotonDistribution&& ) = default;
  */
 DiscretePhotonDistribution( double emin, double emax,
                             unsigned int lp, double energy ) :
-  Base( "DiscretePhotonDistribution", { static_cast< double >( lp ), energy } ),
-  emin_( emin ), emax_( emax ) {}
+  BaseTwoParameterDistribution( "DiscretePhotonDistribution",
+                                emin, emax,
+                                static_cast< double >( lp ), energy ) {}
 
 /**
  *  @brief Constructor
@@ -26,11 +27,8 @@ DiscretePhotonDistribution( double emin, double emax,
  */
 DiscretePhotonDistribution( Iterator begin, Iterator end,
                             double emin, double emax ) :
-  Base( "DiscretePhotonDistribution", begin, end ),
-  emin_( emin ), emax_( emax ) {
-
-  verifySize( this->begin(), this->end() );
-}
+  BaseTwoParameterDistribution( "DiscretePhotonDistribution",
+                                begin, end, emin, emax ) {}
 
 DiscretePhotonDistribution& operator=( const DiscretePhotonDistribution& ) = default;
 DiscretePhotonDistribution& operator=( DiscretePhotonDistribution&& ) = default;
