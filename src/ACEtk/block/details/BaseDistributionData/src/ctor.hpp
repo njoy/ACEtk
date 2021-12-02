@@ -27,9 +27,9 @@ BaseDistributionData( std::string&& name,
                       std::vector< Distribution >&& distributions,
                       std::size_t locb = 1 ) :
   Base( std::move( name ),
-        generateXSS( std::string( name ),
-                     std::move( boundaries ), std::move( interpolants ),
-                     std::move( distributions ), locb ) ),
+        this->generateXSS( std::string( name ),
+                           std::move( boundaries ), std::move( interpolants ),
+                           std::move( distributions ), locb ) ),
   locb_( locb ) {
 
   this->generateBlocks();
