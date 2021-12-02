@@ -15,8 +15,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief Correlated outgoing energy-angle distribution data from the DLW block
- *         for a single reaction using Kalbach-Mann systematics
+ *  @brief Correlated outgoing energy-angle distribution data using Kalbach-Mann
+ *         systematics
+ *
+ *  The KalbachMannDistributionData class contains the Kalbach-Mann distributions
+ *  for a set of incident energy values. It is used in the DLW block as ACE LAW 44.
  */
 class KalbachMannDistributionData :
   protected details::BaseDistributionData< TabulatedKalbachMannDistribution > {

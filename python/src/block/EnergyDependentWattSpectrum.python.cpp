@@ -25,8 +25,10 @@ void wrapEnergyDependentWattSpectrum( python::module& module, python::module& ) 
 
     module,
     "EnergyDependentWattSpectrum",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using an energy dependent Watt spectrum"
+    "An energy dependent Watt spectrum\n\n"
+    "The EnergyDependentWattSpectrum class contains the tabulated values for the\n"
+    "energy dependent a and b parameters as well as the restriction energy U used\n"
+    "to describe the Watt spectrum. It is used in the DLW block as ACE LAW 11."
   );
 
   // wrap the block

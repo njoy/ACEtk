@@ -26,8 +26,10 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
 
     module,
     "OutgoingEnergyDistributionData",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using tabulated outgoing energy distributions"
+    "Outgoing energy distribution data using tabulated outgoing energy distributions\n\n"
+    "The OutgoingEnergyDistributionData class contains the tabulated outgoing\n"
+    "energy distributions for a set of incident energy values. It is used in\n"
+    "the DLW block as ACE LAW 4."
   );
 
   // wrap the block

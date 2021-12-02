@@ -24,8 +24,9 @@ void wrapFullyIsotropicDistribution( python::module& module, python::module& ) {
 
     module,
     "FullyIsotropicDistribution",
-    "Convenience interface for when the angular distributions for a single\n"
-    "reaction are isotropic for the entire incident energy range"
+    "Fully isotropic angular distribution\n\n"
+    "The FullyIsotropicDistribution class contains contains no data. It is a\n"
+    "convenience interface object used in the AND block."
   );
 
   // wrap the block

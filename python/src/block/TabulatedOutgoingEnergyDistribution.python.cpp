@@ -24,8 +24,14 @@ void wrapTabulatedOutgoingEnergyDistribution( python::module& module, python::mo
 
     module,
     "TabulatedOutgoingEnergyDistribution",
-    "Convenience interface for tabulated outgoing energy distribution data "
-    "for a single incident energy or cosine value"
+    "Tabulated angular distribution data for a single incident energy or "
+    "cosine value\n\n"
+    "The TabulatedOutgoingEnergyDistribution class contains the probability\n"
+    "density function (PDF) and cumulative density function (CDF) as a function\n"
+    "of the outgoing energy for the given incident energy or cosine value. It is\n"
+    "used in the OutgoingEnergyDistributionData (ACE LAW 4 for a given incident\n"
+    "energy) and in the OutgoingAngleEnergyDistributionData (ACE LAW 67 for a\n"
+    "given cosine) in the DLW block."
   );
 
   // wrap the block

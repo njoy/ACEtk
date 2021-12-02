@@ -23,7 +23,7 @@ namespace ACEtk {
     TabulatedEnergyAngle = 61,   // ACE LAW = 61 - tabulated E,Eprime,mu
     NBodyPhaseSpace = 66,        // ACE LAW = 66 - N-body phase space
     TabulatedAngleEnergy = 67,   // ACE LAW = 67 - tabulated E,mu,Eprime
-    MultiDistribution            // multiple distributions
+    MultiDistribution = 666      // multiple distributions
   };
 
 } // ACEtk namespace

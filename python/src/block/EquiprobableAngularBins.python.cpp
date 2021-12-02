@@ -24,7 +24,11 @@ void wrapEquiprobableAngularBins( python::module& module, python::module& ) {
 
     module,
     "EquiprobableAngularBins",
-    "Convenience interface for equiprobable cosine bin data from the AND block"
+    "Equiprobable angular bin data for a single incident energy value\n\n"
+    "The EquiprobableAngularBins class contains the cosine values that make up\n"
+    "the equiprobable bins (there are 33 values for defining 32 bins) for the\n"
+    "assocoiated incident energy. It is used in the AND block. This \n"
+    "format is only used in old ACE data."
   );
 
   // wrap the block

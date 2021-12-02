@@ -24,8 +24,7 @@ void wrapParameterData( python::module& module, python::module& ) {
 
     module,
     "ParameterData",
-    "Convenience interface for Watt spectrum parameter data from the\n"
-    "DLW block"
+    "Parameter data for a Watt spectrum"
   );
 
   // wrap the block

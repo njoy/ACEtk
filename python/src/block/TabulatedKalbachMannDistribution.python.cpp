@@ -24,8 +24,13 @@ void wrapTabulatedKalbachMannDistribution( python::module& module, python::modul
 
     module,
     "TabulatedKalbachMannDistribution",
-    "Convenience interface for tabulated Kalbach-Mann distribution data "
-    "from the DLW block"
+    "Tabulated Kalbach-Mann distribution data for a single incident energy\n\n"
+    "The TabulatedKalbachMannDistribution class contains the probability\n"
+    "density function (PDF), the cumulative density function (CDF), the\n"
+    "precompound fraction r and angular distribution slope a as a function\n"
+    "of the outgoing energy for a single incident energy. It is\n"
+    "used in the KalbachMannDistributionData (ACE LAW 44 for a given incident\n"
+    "energy) in the DLW block."
   );
 
   // wrap the block

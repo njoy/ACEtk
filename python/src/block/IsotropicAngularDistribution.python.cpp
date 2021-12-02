@@ -24,8 +24,9 @@ void wrapIsotropicAngularDistribution( python::module& module, python::module& )
 
     module,
     "IsotropicAngularDistribution",
-    "Convenience interface for an isotropic angular distribution from the "
-    "AND block"
+    "Isotropic angular distribution\n\n"
+    "The IsotropicAngularDistribution class contains contains no data other than\n"
+    "the incident energy. It is a convenience interface object used in the AND block"
   );
 
   // wrap the block

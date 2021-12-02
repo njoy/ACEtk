@@ -11,11 +11,10 @@ namespace block {
 
 /**
  *  @class
- *  @brief Isotropic angular distribution from the AND block for a single
- *         reaction and incident energy
+ *  @brief Isotropic angular distribution
  *
  *  The IsotropicAngularDistribution class contains contains no data other than
- *  the incident energy. It is a convenience interface object.
+ *  the incident energy. It is a convenience interface object used in the AND block.
  */
 class IsotropicAngularDistribution {
 

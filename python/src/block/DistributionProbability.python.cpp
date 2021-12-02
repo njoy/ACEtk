@@ -24,8 +24,7 @@ void wrapDistributionProbability( python::module& module, python::module& ) {
 
     module,
     "DistributionProbability",
-    "Convenience interface for the tabulated probability that a distribution "
-    "for a single reaction will occur in the DLW block"
+    "The probability for a distribution to occur"
   );
 
   // wrap the block

@@ -25,7 +25,14 @@ namespace block {
 
 /**
  *  @class
- *  @brief
+ *  @brief The distribution is a combination of multiple distributions
+ *
+ *  The MultiDistributionData class contains a set of distributions and
+ *  associated probabilities to represent the particle's distribution data.
+ *  This type of distribution is rarely used, and when it happens it is often
+ *  used for higher chance fission spectra. It is used in the DLW block (there
+ *  is no ACE LAW associated to this distribution type, but internally in ACEtk
+ *  we refer to it as ACE LAW 666 because it is evil).
  */
 class MultiDistributionData : protected details::Base {
 

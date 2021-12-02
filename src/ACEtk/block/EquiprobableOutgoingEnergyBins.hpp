@@ -12,11 +12,12 @@ namespace block {
 
 /**
  *  @class
- *  @brief Equiprobable outgoing energy bin data from the DLW block for a single
- *         reaction and incident energy
+ *  @brief Equiprobable outgoing energy bin data for a single incident energy
  *
  *  The EquiprobableOutgoingEnergyBins class contains the outgoing energy values
- *  that make up the equiprobable bins
+ *  that make up the equiprobable bins and the associated incident energy. It is
+ *  used in the EquiprobableOutgoingEnergyBinData (ACE LAW 1 for a given incident
+ *  energy) in the DLW block. This format is only used in old ACE data.
  */
 class EquiprobableOutgoingEnergyBins : protected details::Base {
 

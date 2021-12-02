@@ -24,7 +24,11 @@ void wrapEquiprobableOutgoingEnergyBins( python::module& module, python::module&
 
     module,
     "EquiprobableOutgoingEnergyBins",
-    "Convenience interface for equiprobable cosine bin data from the DLW block"
+    "Equiprobable outgoing energy bin data for a single incident energy\n\n"
+    "The EquiprobableOutgoingEnergyBins class contains the outgoing energy values\n"
+    "that make up the equiprobable bins and the associated incident energy. It is\n"
+    "used in the EquiprobableOutgoingEnergyBinData (ACE LAW 1 for a given incident\n"
+    "energy) in the DLW block. This format is only used in old ACE data."
   );
 
   // wrap the block

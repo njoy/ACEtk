@@ -15,7 +15,8 @@ namespace block {
  *  @brief Polynomial fission multiplicity
  *
  *  The PolynomialFissionMultiplicity class contains the polynomial
- *  representation of fission multiplicity.
+ *  representation (LNU = 1) of the fission multiplicity. It is
+ *  used in the NU block.
  */
 class PolynomialFissionMultiplicity : protected details::Base {
 

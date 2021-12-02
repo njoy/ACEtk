@@ -17,7 +17,7 @@ namespace block {
  *
  *  The DiscretePhotonDistribution class contains the photon energy if the
  *  photon is a primary photon or the binding energy when the photon is not a
- *  primary photon.
+ *  primary photon. It is used in the DLW block as ACE LAW 2.
  */
 class DiscretePhotonDistribution : protected details::Base {
 

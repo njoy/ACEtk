@@ -26,8 +26,10 @@ void wrapEquiprobableOutgoingEnergyBinData( python::module& module,
 
     module,
     "EquiprobableOutgoingEnergyBinData",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using equiprobable outgoing energy bins"
+    "Equiprobable outgoing energy bin data\n\n"
+    "The EquiprobableOutgoingEnergyBinData class contains the equiprobable bins\n"
+    "for a set of incident energy values. It is used in the AND block. This\n"
+    "format is only used in old ACE data."
   );
 
   // wrap the block

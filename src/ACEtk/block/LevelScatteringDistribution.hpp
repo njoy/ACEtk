@@ -22,7 +22,7 @@ namespace block {
  *    C1 = ( A + 1 ) / A * abs( Q )
  *    C2 = ( A / ( A + 1 ) )^2
  *
- *  The content of the XSS array are only C1 and C2
+ *  It is used in the DLW block as ACE LAW 3.
  */
 class LevelScatteringDistribution : protected details::Base {
 

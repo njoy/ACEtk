@@ -13,8 +13,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief An evaporation spectrum from the DLW block for a single
- *         reaction
+ *  @brief An evaporation spectrum
+ *
+ *  The EvaporationSpectrum class contains the tabulated energy and
+ *  temperature values as well as the restriction energy U used to describe the
+ *  evaporation spectrum. It is used in the DLW block as ACE LAW 9.
  */
 class EvaporationSpectrum : protected details::BaseEvaporationSpectrum {
 

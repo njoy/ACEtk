@@ -15,8 +15,12 @@ namespace block {
 
 /**
  *  @class
- *  @brief Outgoing energy distribution data from the DLW block for a single
- *         reaction using tabulated outgoing energy distributions
+ *  @brief Outgoing energy distribution data using tabulated outgoing energy
+ *         distributions
+ *
+ *  The OutgoingEnergyDistributionData class contains the tabulated outgoing
+ *  energy distributions for a set of incident energy values. It is used in
+ *  the DLW block as ACE LAW 4.
  */
 class OutgoingEnergyDistributionData :
   protected details::BaseDistributionData< TabulatedOutgoingEnergyDistribution > {

@@ -24,8 +24,11 @@ void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
 
     module,
     "DosimetryCrossSectionData",
-    "Convenience interface for dosimetry cross section data from the\n"
-    "SIGD block for a single reaction"
+    "Cross section data from the SIGD block for a single reaction\n\n"
+    "The DosimetryCrossSectionData class contains the interpolation regions (if\n"
+    "any are defined) along with the energy and cross section values. The\n"
+    "dosimetry cross sections are different from the other cross section data\n"
+    "blocks in that the data is not given on a common energy grid."
   );
 
   // wrap the block

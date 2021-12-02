@@ -24,8 +24,9 @@ void wrapDistributionGivenElsewhere( python::module& module, python::module& ) {
 
     module,
     "DistributionGivenElsewhere",
-    "Convenience interface for when the angular distributions for a single\n"
-    "reaction are given in the DLW block"
+    "The angular distribution is given in a different block\n\n"
+    "The DistributionGivenElsewhere class contains contains no data. It is a\n"
+    "convenience interface object used in the AND block."
   );
 
   // wrap the block

@@ -24,8 +24,11 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
 
     module,
     "TabulatedAngularDistribution",
-    "Convenience interface for tabulated angular distribution data from the "
-    "AND block"
+    "Tabulated angular distribution data for a single incident or outgoing energy\n"
+    "The TabulatedAngularDistribution class contains the probability density\n"
+    "function (PDF) and cumulative density function (CDF) as a function of\n"
+    "cosine for the given energy. It is used in the AND block and in the\n"
+    "OutgoingEnergyAngleDistributionData (ACE LAW 61) in the DLW block."
   );
 
   // wrap the block

@@ -15,8 +15,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief A general evaporation spectrum from the DLW block for a single
- *         reaction
+ *  @brief A general evaporation spectrum
+ *
+ *  The GeneralEvaporationSpectrum class contains the tabulated energy and
+ *  temperature values as well as the bin date used to describe the
+ *  general evaporation spectrum. It is used in the DLW block as ACE LAW 5.
  */
 class GeneralEvaporationSpectrum : protected details::Base {
 

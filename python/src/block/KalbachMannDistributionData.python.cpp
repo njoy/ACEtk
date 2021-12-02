@@ -26,8 +26,9 @@ void wrapKalbachMannDistributionData( python::module& module,
 
     module,
     "KalbachMannDistributionData",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using Kalbach-Mann systematics"
+    "Correlated outgoing energy-angle distribution data using Kalbach-Mann systematics\n\n"
+    "The KalbachMannDistributionData class contains the Kalbach-Mann distributions\n"
+    "for a set of incident energy values. It is used in the DLW block as ACE LAW 44."
   );
 
   // wrap the block

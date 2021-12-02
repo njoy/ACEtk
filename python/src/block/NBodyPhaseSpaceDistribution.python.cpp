@@ -27,7 +27,7 @@ void wrapNBodyPhaseSpaceDistribution( python::module& module, python::module& ) 
     "The energy distribution uses the N-body phase space formalism\n\n"
     "The NBodyPhaseSpaceDistribution class contains two parameter values that\n"
     "determine the distribution: the number of particles in the system and the\n"
-    "total mass ratio."
+    "total mass ratio. It is used in the DLW block as ACE LAW 66."
   );
 
   // wrap the block
