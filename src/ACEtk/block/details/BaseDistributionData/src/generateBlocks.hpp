@@ -8,17 +8,17 @@ void generateBlocks() {
 
   this->interpolation_ = block::InterpolationData( std::string( this->name() ),
                                                    begin, data );
-  this->incident_ = block::details::ColumnData( std::string( this->name() ),
-                                                data, end, 2 );
-  for ( unsigned int index = 1; index <= this->incident_.N(); ++index ) {
+  this->values_ = block::details::ColumnData( std::string( this->name() ),
+                                              data, end, 2 );
+  for ( unsigned int index = 1; index <= this->values_.N(); ++index ) {
 
-    const double incident = this->incidentEnergy( index );
+    const double value = this->value( index );
     const auto locator = this->relativeDistributionLocator( index );
     const auto left = std::next( this->begin(), locator - 1 );
-    const auto right = index == this->numberIncidentEnergies()
+    const auto right = index == this->numberValues()
                        ? this->end()
                        : std::next( this->begin(),
                          this->relativeDistributionLocator( index + 1 ) - 1 );
-    this->distributions_.emplace_back( Distribution( incident, left, right ) );
+    this->distributions_.emplace_back( Distribution( value, left, right ) );
   }
 }

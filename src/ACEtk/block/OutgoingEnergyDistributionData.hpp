@@ -94,14 +94,14 @@ public:
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t NE() const { return BaseDistributionData::NE(); }
+  std::size_t NE() const { return BaseDistributionData::N(); }
 
   /**
    *  @brief Return the number of incident energy values
    */
   std::size_t numberIncidentEnergies() const {
 
-    return BaseDistributionData::numberIncidentEnergies();
+    return BaseDistributionData::numberValues();
   }
 
   /**
@@ -109,7 +109,7 @@ public:
    */
   auto incidentEnergies() const {
 
-    return BaseDistributionData::incidentEnergies();
+    return BaseDistributionData::values();
   }
 
   /**
@@ -122,7 +122,7 @@ public:
    */
   double incidentEnergy( std::size_t index ) const {
 
-    return BaseDistributionData::incidentEnergy( index );
+    return BaseDistributionData::value( index );
   }
 
   /**
@@ -130,7 +130,7 @@ public:
    */
   double minimumIncidentEnergy() const {
 
-    return BaseDistributionData::minimumIncidentEnergy();
+    return this->incidentEnergy( 1 );
   }
 
   /**
@@ -138,7 +138,7 @@ public:
    */
   double maximumIncidentEnergy() const {
 
-    return BaseDistributionData::maximumIncidentEnergy();
+    return this->incidentEnergy( this->NE() );
   }
 
   /**
