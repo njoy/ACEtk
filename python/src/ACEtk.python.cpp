@@ -50,6 +50,7 @@ namespace block {
   void wrapEnergyDependentWattSpectrum( python::module&, python::module& );
   void wrapTabulatedKalbachMannDistribution( python::module&, python::module& );
   void wrapNBodyPhaseSpaceDistribution( python::module&, python::module& );
+  void wrapTwoBodyTransferDistribution( python::module&, python::module& );
   void wrapDistributionProbability( python::module&, python::module& );
   void wrapMultiDistributionData( python::module&, python::module& );
 
@@ -137,6 +138,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapEnergyDependentWattSpectrum( module, viewmodule );
   block::wrapKalbachMannDistributionData( module, viewmodule );
   block::wrapNBodyPhaseSpaceDistribution( module, viewmodule );
+  block::wrapTwoBodyTransferDistribution( module, viewmodule );
   block::wrapDistributionProbability( module, viewmodule );
   block::wrapMultiDistributionData( module, viewmodule );
 
