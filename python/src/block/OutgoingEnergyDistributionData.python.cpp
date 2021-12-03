@@ -45,6 +45,21 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
     "    locb             the starting xss index with respect to the DLW block\n"
     "                     (default = 1, the relative locators get recalculated)"
   )
+  .def(
+
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< Distribution >, std::size_t >(),
+    python::arg( "boundaries" ), python::arg( "interpolants" ),
+    python::arg( "distributions" ), python::arg( "locb" ) = 1,
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self             the block\n"
+    "    boundaries       the interpolation range boundaries\n"
+    "    interpolants     the interpolation types for each range\n"
+    "    distributions    the distributions for each incident energy\n"
+    "    locb             the starting xss index with respect to the DLW block\n"
+    "                     (default = 1, the relative locators get recalculated)"
+  )
   .def_property_readonly(
 
     "LAW",
