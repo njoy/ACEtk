@@ -176,7 +176,7 @@ public:
   const Distribution& distribution( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyIncidentEnergyIndex( index );
+    this->verifyValueIndex( index );
     #endif
     return this->distributions_[ index - 1 ];
   }
