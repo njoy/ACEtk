@@ -41,5 +41,17 @@ TabulatedKalbachMannDistribution( double incident, Iterator begin, Iterator end 
                                     begin, end ),
   incident_( incident ) {}
 
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] incident   the incident energy value
+ *  @param[in] locb       the starting xss index with respect to the superblock
+ *  @param[in] begin      the begin iterator of the tabulated distribution data
+ *  @param[in] end        the end iterator of the tabulated distribution data
+ */
+TabulatedKalbachMannDistribution( double incident, std::size_t,
+                                  Iterator begin, Iterator end ) :
+  TabulatedKalbachMannDistribution( incident, begin, end ) {}
+
 TabulatedKalbachMannDistribution& operator=( const TabulatedKalbachMannDistribution& ) = default;
 TabulatedKalbachMannDistribution& operator=( TabulatedKalbachMannDistribution&& ) = default;

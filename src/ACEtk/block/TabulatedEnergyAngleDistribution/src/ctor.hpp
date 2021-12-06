@@ -40,12 +40,13 @@ TabulatedEnergyAngleDistribution(
 /**
  *  @brief Constructor
  *
- *  @param[in] locb    the starting xss index with respect to the superblock
- *  @param[in] sig     the begin iterator of the block in the XSS array
- *  @param[in] end     the end iterator of the block in the XSS array
+ *  @param[in] incident   the incident energy value
+ *  @param[in] locb       the starting xss index with respect to the superblock
+ *  @param[in] sig        the begin iterator of the block in the XSS array
+ *  @param[in] end        the end iterator of the block in the XSS array
  */
 TabulatedEnergyAngleDistribution( double incident, std::size_t locb,
-                                          Iterator begin, Iterator end ) :
+                                  Iterator begin, Iterator end ) :
   BaseDistributionData( "TabulatedEnergyAngleDistribution", locb,
                         begin, end ),
   incident_( incident ) {}

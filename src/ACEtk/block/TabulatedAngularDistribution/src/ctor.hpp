@@ -35,5 +35,17 @@ TabulatedAngularDistribution( double energy, Iterator begin, Iterator end ) :
                                     begin, end ),
   energy_( energy ) {}
 
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] energy     the associated energy value
+ *  @param[in] locb       the starting xss index with respect to the superblock
+ *  @param[in] begin      the begin iterator of the tabulated distribution data
+ *  @param[in] end        the end iterator of the tabulated distribution data
+ */
+TabulatedAngularDistribution( double energy, std::size_t,
+                              Iterator begin, Iterator end ) :
+  TabulatedAngularDistribution( energy, begin, end ) {}
+
 TabulatedAngularDistribution& operator=( const TabulatedAngularDistribution& ) = default;
 TabulatedAngularDistribution& operator=( TabulatedAngularDistribution&& ) = default;

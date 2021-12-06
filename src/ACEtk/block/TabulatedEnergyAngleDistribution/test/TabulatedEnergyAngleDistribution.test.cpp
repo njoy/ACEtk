@@ -52,8 +52,7 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      TabulatedEnergyAngleDistribution chunk( 1.1, 21,
-                                                      xss.begin(), xss.end() );
+      TabulatedEnergyAngleDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
 
       THEN( "a TabulatedEnergyAngleDistribution can be constructed and "
             "members can be tested" ) {

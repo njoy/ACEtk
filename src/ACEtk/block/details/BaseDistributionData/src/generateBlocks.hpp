@@ -13,12 +13,13 @@ void generateBlocks() {
   for ( unsigned int index = 1; index <= this->values_.N(); ++index ) {
 
     const double value = this->value( index );
+    const auto locb = this->distributionLocator( index );
     const auto locator = this->relativeDistributionLocator( index );
     const auto left = std::next( this->begin(), locator - 1 );
     const auto right = index == this->numberValues()
                        ? this->end()
                        : std::next( this->begin(),
                          this->relativeDistributionLocator( index + 1 ) - 1 );
-    this->distributions_.emplace_back( Distribution( value, left, right ) );
+    this->distributions_.emplace_back( Distribution( value, locb, left, right ) );
   }
 }

@@ -14,11 +14,11 @@ TabulatedEnergyDistribution( TabulatedEnergyDistribution&& ) = default;
  *  @param[in] discrete        the number discrete photon lines (defaults to 0)
  */
 TabulatedEnergyDistribution( double incident,
-                                     int interpolation,
-                                     std::vector< double > cosines,
-                                     std::vector< double > pdf,
-                                     std::vector< double > cdf,
-                                     std::size_t discrete = 0 ) :
+                             int interpolation,
+                             std::vector< double > cosines,
+                             std::vector< double > pdf,
+                             std::vector< double > cdf,
+                             std::size_t discrete = 0 ) :
   TabulatedProbabilityDistribution(
         "TabulatedEnergyDistribution",
         discrete * 10 + interpolation, std::move( cosines ),
@@ -32,11 +32,22 @@ TabulatedEnergyDistribution( double incident,
  *  @param[in] begin      the begin iterator of the tabulated distribution data
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
-TabulatedEnergyDistribution( double incident,
-                                     Iterator begin, Iterator end ) :
+TabulatedEnergyDistribution( double incident, Iterator begin, Iterator end ) :
   TabulatedProbabilityDistribution( "TabulatedEnergyDistribution",
                                     begin, end ),
   incident_( incident ) {}
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] incident   the incident energy value
+ *  @param[in] locb       the starting xss index with respect to the superblock
+ *  @param[in] begin      the begin iterator of the tabulated distribution data
+ *  @param[in] end        the end iterator of the tabulated distribution data
+ */
+TabulatedEnergyDistribution( double incident, std::size_t,
+                             Iterator begin, Iterator end ) :
+  TabulatedEnergyDistribution( incident, begin, end ) {}
 
 TabulatedEnergyDistribution& operator=( const TabulatedEnergyDistribution& ) = default;
 TabulatedEnergyDistribution& operator=( TabulatedEnergyDistribution&& ) = default;
