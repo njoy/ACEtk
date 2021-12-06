@@ -31,5 +31,7 @@ add_test( NAME ACEtk.python.block.TabulatedKalbachMannDistribution COMMAND ${PYT
 add_test( NAME ACEtk.python.block.KalbachMannDistributionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_KalbachMannDistributionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.NBodyPhaseSpaceDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_NBodyPhaseSpaceDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.TwoBodyTransferDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TwoBodyTransferDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.TabulatedEnergyAngleDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedEnergyAngleDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.TabulatedAngleEnergyDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedAngleEnergyDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.MultiDistributionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_MultiDistributionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.EnergyDistributionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EnergyDistributionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

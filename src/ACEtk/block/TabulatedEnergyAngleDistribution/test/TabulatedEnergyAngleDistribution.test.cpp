@@ -90,14 +90,14 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
   CHECK( 25 == chunk.length() );
   CHECK( "TabulatedEnergyAngleDistribution" == chunk.name() );
 
+  CHECK( 1.1 == Approx( chunk.incidentEnergy() ) );
+
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
   CHECK( 0 == chunk.interpolationData().INT().size() );
   CHECK( 0 == chunk.interpolationData().interpolants().size() );
   CHECK( 0 == chunk.interpolationData().NBT().size() );
   CHECK( 0 == chunk.interpolationData().boundaries().size() );
-
-  CHECK( 1.1 == Approx( chunk.incidentEnergy() ) );
 
   CHECK( 0 == chunk.NB() );
   CHECK( 0 == chunk.numberInterpolationRegions() );
