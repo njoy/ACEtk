@@ -1,12 +1,12 @@
-#ifndef NJOY_ACETK_BLOCK_ENERGYANGLEDISTRIBUTIONDATA
-#define NJOY_ACETK_BLOCK_ENERGYANGLEDISTRIBUTIONDATA
+#ifndef NJOY_ACETK_BLOCK_ANGLEENERGYDISTRIBUTIONDATA
+#define NJOY_ACETK_BLOCK_ANGLEENERGYDISTRIBUTIONDATA
 
 // system includes
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/BaseDistributionData.hpp"
-#include "ACEtk/block/TabulatedEnergyAngleDistribution.hpp"
+#include "ACEtk/block/TabulatedAngleEnergyDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -15,29 +15,29 @@ namespace block {
 /**
  *  @class
  *  @brief Correlated outgoing energy-angle distribution data using tabulated
- *         distributions ordered as E, E', mu
+ *         distributions ordered as E, mu, E'
  *
- *  The EnergyAngleDistributionData class contains the energy-angle distributions
- *  for a set of incident energy values. It is used in the DLW block as ACE LAW 61.
+ *  The AngleEnergyDistributionData class contains the energy-angle distributions
+ *  for a set of incident energy values. It is used in the DLW block as ACE LAW 67.
  */
-class EnergyAngleDistributionData :
-  protected details::BaseDistributionData< EnergyAngleDistributionData,
-                                           TabulatedEnergyAngleDistribution > {
+class AngleEnergyDistributionData :
+  protected details::BaseDistributionData< AngleEnergyDistributionData,
+                                           TabulatedAngleEnergyDistribution > {
 
-  friend class details::BaseDistributionData< EnergyAngleDistributionData,
-                                              TabulatedEnergyAngleDistribution >;
+  friend class details::BaseDistributionData< AngleEnergyDistributionData,
+                                              TabulatedAngleEnergyDistribution >;
 
   /* fields */
 
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/block/EnergyAngleDistributionData/src/generateXSS.hpp"
+  #include "ACEtk/block/AngleEnergyDistributionData/src/generateXSS.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/EnergyAngleDistributionData/src/ctor.hpp"
+  #include "ACEtk/block/AngleEnergyDistributionData/src/ctor.hpp"
 
   /**
    *  @brief Return the distribution type
@@ -198,7 +198,7 @@ public:
   /**
    *  @brief Return the distributions
    */
-  const std::vector< TabulatedEnergyAngleDistribution >& distributions() const {
+  const std::vector< TabulatedAngleEnergyDistribution >& distributions() const {
 
     return BaseDistributionData::distributions();
   }
@@ -211,7 +211,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const TabulatedEnergyAngleDistribution& distribution( std::size_t index ) const {
+  const TabulatedAngleEnergyDistribution& distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
   }
@@ -224,7 +224,7 @@ public:
   using BaseDistributionData::end;
 };
 
-using ACELAW61 = EnergyAngleDistributionData;
+using ACELAW67 = AngleEnergyDistributionData;
 
 } // block namespace
 } // ACEtk namespace
