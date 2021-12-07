@@ -22,7 +22,11 @@ namespace block {
  *  for a set of incident energy values. It is used in the DLW block as ACE LAW 44.
  */
 class KalbachMannDistributionData :
-  protected details::BaseDistributionData< TabulatedKalbachMannDistribution > {
+  protected details::BaseDistributionData< KalbachMannDistributionData,
+                                           TabulatedKalbachMannDistribution > {
+
+  friend class details::BaseDistributionData< KalbachMannDistributionData,
+                                              TabulatedKalbachMannDistribution >;
 
   /* fields */
 

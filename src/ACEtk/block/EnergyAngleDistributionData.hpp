@@ -1,12 +1,13 @@
-#ifndef NJOY_ACETK_BLOCK_TABULATEDOUTGOINGANGLEENERGYDISTRIBUTION
-#define NJOY_ACETK_BLOCK_TABULATEDOUTGOINGANGLEENERGYDISTRIBUTION
+#ifndef NJOY_ACETK_BLOCK_ENERGYANGLEDISTRIBUTIONDATA
+#define NJOY_ACETK_BLOCK_ENERGYANGLEDISTRIBUTIONDATA
 
 // system includes
 #include <variant>
 
 // other includes
+#include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/BaseDistributionData.hpp"
-#include "ACEtk/block/TabulatedEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyAngleDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -14,38 +15,46 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated outgoing energy and angle distribution data for a single
- *         incident energy
+ *  @brief Correlated outgoing energy-angle distribution data using tabulated
+ *         distributions ordered as E, E', mu
  *
- *  The TabulatedAngleEnergyDistribution class contains the
- *  tabulated outgoing energy distributions for a set of cosine values and
- *  associated incident energy value. It is used in the
- *  AngleEnergyDistributionData (ACE LAW 67) in the DLW block.
+ *  The EnergyAngleDistributionData class contains the energy-angle distributions
+ *  for a set of incident energy values. It is used in the DLW block as ACE LAW 61.
  */
-class TabulatedAngleEnergyDistribution :
-  protected details::BaseDistributionData< TabulatedAngleEnergyDistribution,
-                                           TabulatedEnergyDistribution > {
+class EnergyAngleDistributionData :
+  protected details::BaseDistributionData< EnergyAngleDistributionData,
+                                           TabulatedEnergyAngleDistribution > {
 
-  friend class details::BaseDistributionData< TabulatedAngleEnergyDistribution,
-                                              TabulatedEnergyDistribution >;
+  friend class details::BaseDistributionData< EnergyAngleDistributionData,
+                                              TabulatedEnergyAngleDistribution >;
 
   /* fields */
-  double incident_;
+
+protected:
 
   /* auxiliary functions */
+  #include "ACEtk/block/EnergyAngleDistributionData/src/generateXSS.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/TabulatedAngleEnergyDistribution/src/ctor.hpp"
-
-  // generic function used internally
-  double value() const { return this->incident_; }
+  #include "ACEtk/block/EnergyAngleDistributionData/src/ctor.hpp"
 
   /**
-   *  @brief Return the incident energy value
+   *  @brief Return the distribution type
    */
-  double incidentEnergy() const { return this->value(); }
+  static constexpr EnergyDistributionType LAW() {
+
+    return EnergyDistributionType::TabulatedEnergyAngle;
+  }
+
+  /**
+   *  @brief Return the distribution type
+   */
+  static constexpr EnergyDistributionType type() {
+
+    return EnergyDistributionType::TabulatedEnergyAngle;
+  }
 
   /**
    *  @brief Return the interpolation data
@@ -89,41 +98,57 @@ public:
   auto interpolants() const { return BaseDistributionData::interpolants(); }
 
   /**
-   *  @brief Return the number of cosine values
+   *  @brief Return the number of incident energy values
    */
-  std::size_t NC() const { return BaseDistributionData::N(); }
+  std::size_t NE() const { return BaseDistributionData::N(); }
 
   /**
-   *  @brief Return the number of outgoing cosine values
+   *  @brief Return the number of incident energy values
    */
-  std::size_t numberCosines() const {
+  std::size_t numberIncidentEnergies() const {
 
     return BaseDistributionData::numberValues();
   }
 
   /**
-   *  @brief Return the outgoing cosine values
+   *  @brief Return the incident energy values
    */
-  auto cosines() const {
+  auto incidentEnergies() const {
 
     return BaseDistributionData::values();
   }
 
   /**
-   *  @brief Return the cosine value for a given index
+   *  @brief Return the incident energy for a given index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
-  double cosine( std::size_t index ) const {
+  double incidentEnergy( std::size_t index ) const {
 
     return BaseDistributionData::value( index );
   }
 
   /**
-   *  @brief Return the distribution locator for a cosine index
+   *  @brief Return the minimum incident energy for the distribution
+   */
+  double minimumIncidentEnergy() const {
+
+    return this->incidentEnergy( 1 );
+  }
+
+  /**
+   *  @brief Return the maximum incident energy for the distribution
+   */
+  double maximumIncidentEnergy() const {
+
+    return this->incidentEnergy( this->NE() );
+  }
+
+  /**
+   *  @brief Return the distribution locator for an incident energy index
    *
    *  This locator is the value as stored in the XSS array. It is relative to
    *  the beginning of the DLW block.
@@ -139,7 +164,7 @@ public:
   }
 
   /**
-   *  @brief Return the distribution locator for a cosine index
+   *  @brief Return the distribution locator for an incident energy index
    *
    *  This locator is the value as stored in the XSS array. It is relative to
    *  the beginning of the DLW block.
@@ -155,7 +180,8 @@ public:
   }
 
   /**
-   *  @brief Return the relative distribution locator for cosine index
+   *  @brief Return the relative distribution locator for an incident energy
+   *         index
    *
    *  This is the locator relative to the beginning of the current
    *  distribution block in the DLW block.
@@ -173,20 +199,20 @@ public:
   /**
    *  @brief Return the distributions
    */
-  const std::vector< TabulatedEnergyDistribution >& distributions() const {
+  const std::vector< TabulatedEnergyAngleDistribution >& distributions() const {
 
     return BaseDistributionData::distributions();
   }
 
   /**
-   *  @brief Return the distribution for a cosine index
+   *  @brief Return the distribution for an incident energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
-  const TabulatedEnergyDistribution& distribution( std::size_t index ) const {
+  const TabulatedEnergyAngleDistribution& distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
   }
@@ -198,6 +224,8 @@ public:
   using BaseDistributionData::begin;
   using BaseDistributionData::end;
 };
+
+using ACELAW61 = EnergyAngleDistributionData;
 
 } // block namespace
 } // ACEtk namespace

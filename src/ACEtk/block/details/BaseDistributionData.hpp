@@ -19,7 +19,7 @@ namespace details {
  *  @class
  *  @brief Base class for distribution data as a function of values
  */
-template< typename Distribution >
+template< typename Derived, typename Distribution >
 class BaseDistributionData : protected details::Base {
 
   /* fields */
@@ -29,12 +29,14 @@ class BaseDistributionData : protected details::Base {
   std::vector< Distribution > distributions_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseDistributionData/src/generateXSS.hpp"
   #include "ACEtk/block/details/BaseDistributionData/src/verifyValueIndex.hpp"
   #include "ACEtk/block/details/BaseDistributionData/src/generateBlocks.hpp"
   #include "ACEtk/block/details/BaseDistributionData/src/verifySize.hpp"
 
 protected:
+
+  /* auxiliary functions */
+  #include "ACEtk/block/details/BaseDistributionData/src/generateXSS.hpp"
 
   /* constructor */
   #include "ACEtk/block/details/BaseDistributionData/src/ctor.hpp"
