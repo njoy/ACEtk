@@ -108,6 +108,9 @@ void verifyChunk( const EnergyAngleDistributionData& chunk ) {
   CHECK( 56 == chunk.length() );
   CHECK( "EnergyAngleDistributionData" == chunk.name() );
 
+  CHECK( EnergyDistributionType::TabulatedEnergyAngle == chunk.LAW() );
+  CHECK( EnergyDistributionType::TabulatedEnergyAngle == chunk.type() );
+
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
   CHECK( 0 == chunk.interpolationData().INT().size() );
