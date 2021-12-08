@@ -35,10 +35,7 @@ void wrapDosimetryTable( python::module& module, python::module& ) {
   table
   .def(
 
-    python::init( [] ( unsigned int z, unsigned int a,
-                       Header header, MTR mtr, SIGD sigd )
-                      { return Table( z, a, std::move( header ),
-                                      std::move( mtr ), std::move( sigd ) ); } ),
+    python::init< unsigned int, unsigned int, Header, MTR, SIGD >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "mtr" ), python::arg( "sigd" ),
     "Initialise the table\n\n"

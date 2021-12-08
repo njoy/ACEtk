@@ -14,7 +14,16 @@ namespace python = pybind11;
 void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
   // type aliases
+  using Header = njoy::ACEtk::Table::Header;
   using Table = njoy::ACEtk::ContinuousEnergyTable;
+  using ESZ = njoy::ACEtk::block::ESZ;
+  using NU = njoy::ACEtk::block::NU;
+  using MTR = njoy::ACEtk::block::MTR;
+  using LQR = njoy::ACEtk::block::LQR;
+  using TYR = njoy::ACEtk::block::TYR;
+  using SIG = njoy::ACEtk::block::SIG;
+  using AND = njoy::ACEtk::block::AND;
+  using DLW = njoy::ACEtk::block::DLW;
 
   // wrap views created by this table
 
@@ -30,16 +39,31 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
   // wrap the table
   table
-//  .def(
-//
-//    python::init< Header&&, Data&& >(),
-//    python::arg( "header" ), python::arg( "data" ),
-//    "Initialise the table\n\n"
-//    "Arguments:\n"
-//    "    self     the table\n"
-//    "    header   the header information\n"
-//    "    data     the ACE data"
-//  )
+  .def(
+
+    python::init< unsigned int, unsigned int, Header,
+                  ESZ, std::optional< NU >, MTR, LQR, TYR,
+                  SIG, AND, DLW >(),
+    python::arg( "z" ), python::arg( "a" ),
+    python::arg( "header" ), python::arg( "esz" ),
+    python::arg( "nu" ) = std::nullopt,
+    python::arg( "mtr" ), python::arg( "lqr" ), python::arg( "tyr" ),
+    python::arg( "sig" ), python::arg( "ang" ), python::arg( "dlw" ),
+    "Initialise the table\n\n"
+    "Arguments:\n"
+    "    self      the table\n"
+    "    z         the Z number of the nuclide\n"
+    "    a         the A number of the nuclide\n"
+    "    header    the header for the table\n"
+    "    esz       the principal cross section block\n"
+    "    nu        the optional fission multiplicity block\n"
+    "    mtr       the reaction number block\n"
+    "    lqr       the reaction Q value block\n"
+    "    tyr       the reference frame and multiplicity block\n"
+    "    sig       the cross section data block\n"
+    "    ang       the angular distribution data block\n"
+    "    dlw       the energy distribution data block"
+  )
   .def_property_readonly(
 
     "zaid",

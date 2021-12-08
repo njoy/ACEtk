@@ -8,14 +8,14 @@ DosimetryTable( Table&& table ): Table( std::move( table ) ) {
   this->generateBlocks();
 }
 
-DosimetryTable( const DosimetryTable& cetable ) :
-  Table( cetable ) {
+DosimetryTable( const DosimetryTable& dostable ) :
+  Table( dostable ) {
 
   this->generateBlocks();
 }
 
-DosimetryTable( DosimetryTable&& cetable ) :
-  Table( std::move( cetable ) ) {
+DosimetryTable( DosimetryTable&& dostable ) :
+  Table( std::move( dostable ) ) {
 
   this->generateBlocks();
 }
@@ -42,9 +42,7 @@ DosimetryTable& operator=( DosimetryTable&& base ) {
  *  @param[in] sigd      the cross section data block
  */
 DosimetryTable( unsigned int z, unsigned int a,
-                Header&& header, block::MTR&& mtr, block::SIGD&& sigd ) :
-  Table( std::move( header ),
-         generateData( z, a, std::move( mtr ), std::move( sigd ) ) ) {
-
-  this->generateBlocks();
-}
+                Header header, block::MTR mtr, block::SIGD sigd ) :
+  DosimetryTable( Table( std::move( header ),
+                         generateData( z, a, std::move( mtr ),
+                                       std::move( sigd ) ) ) ) {}

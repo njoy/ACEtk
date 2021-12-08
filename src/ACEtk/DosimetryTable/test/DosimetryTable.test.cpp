@@ -86,7 +86,7 @@ SCENARIO( "DosimetryTable" ){
       } // THEN
     } // WHEN
 
-    WHEN( "constructing a DosimetryTable from scratch" ){
+    WHEN( "constructing a DosimetryTable from scratch" ) {
 
       unsigned int z = 13;
       unsigned int a = 27;
