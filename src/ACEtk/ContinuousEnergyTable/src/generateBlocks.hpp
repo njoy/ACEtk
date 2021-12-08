@@ -12,6 +12,9 @@ void generateBlocks() {
   auto ang = begin + this->data().JXS(9) - 1;
   auto ldlw = begin + this->data().JXS(10) - 1;
   auto dlw = begin + this->data().JXS(11) - 1;
+  auto gpd = begin + this->data().JXS(12) - 1;
+  auto mtrp = this->NTRP() > 0 ? begin + this->data().JXS(13) - 1 : begin;
+  auto lsigp = this->NTRP() > 0 ? begin + this->data().JXS(14) - 1 : begin;
 
   auto ptype = begin + this->data().JXS(30) - 1;
   auto ntro = begin + this->data().JXS(31) - 1;
@@ -23,7 +26,11 @@ void generateBlocks() {
   this->tyr_ = block::TYR( tyr, lsig, this->NTR() );
   this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
   this->and_ = block::AND( land, ang, ldlw, this->NR() );
-  this->dlw_ = block::DLW( ldlw, dlw, this->data().XSS().end(), this->NR() );
+  this->dlw_ = block::DLW( ldlw, dlw, gpd, this->NR() );
 
+  // secondary photon data
+  this->mtrp_ = block::MTR( mtrp, lsigp, this->NTRP() );
+
+  // secondary particle data
   this->ptype_ = block::PTYPE( ptype, ntro, this->NTYPE() );
 }

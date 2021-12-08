@@ -37,6 +37,8 @@ class ContinuousEnergyTable : protected Table {
   block::AND and_;
   block::DLW dlw_;
 
+  block::MTR mtrp_;
+
   block::PTYPE ptype_;
 
   /* auxiliary functions */
@@ -288,6 +290,19 @@ public:
    *  @brief Return the energy distribution block
    */
   const block::DLW& energyDistributionBlock() const { return this->DLW(); }
+
+  /**
+   *  @brief Return the photon production reaction number block
+   */
+  const block::MTR& MTRP() const { return this->mtrp_; }
+
+  /**
+   *  @brief Return the photon production reaction number block
+   */
+  const block::MTR& photonProductionReactionNumberBlock() const {
+
+    return this->MTRP();
+  }
 
   /**
    *  @brief Return the secondary particle type block

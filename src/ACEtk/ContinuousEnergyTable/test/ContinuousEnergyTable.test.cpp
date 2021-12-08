@@ -253,6 +253,25 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< LevelScatteringDistribution >( chunk.DLW().energyDistributionData( 44 ) ) );
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 45 ) ) );
 
+  // MTRP block
+  CHECK( false == chunk.MTRP().empty() );
+  CHECK( 33 == chunk.MTRP().MTs().size() );
+  CHECK( 4001 == chunk.MTRP().MTs().front() );
+  CHECK( 3001 == chunk.MTRP().MTs().back() );
+  CHECK( 33 == chunk.MTRP().reactionNumbers().size() );
+  CHECK( 4001 == chunk.MTRP().reactionNumbers().front() );
+  CHECK( 3001 == chunk.MTRP().reactionNumbers().back() );
+
+  CHECK( 4001 == chunk.MTRP().MT( 1 ) );
+  CHECK( 3001 == chunk.MTRP().MT( 33 ) );
+  CHECK( 4001 == chunk.MTRP().reactionNumber( 1 ) );
+  CHECK( 3001 == chunk.MTRP().reactionNumber( 33 ) );
+
+  CHECK( true == chunk.MTRP().hasReactionNumber( 4001 ) );
+  CHECK( true == chunk.MTRP().hasReactionNumber( 3001 ) );
+  CHECK( 1 == chunk.MTRP().index( 4001 ) );
+  CHECK( 33 == chunk.MTRP().index( 3001 ) );
+
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
 }
