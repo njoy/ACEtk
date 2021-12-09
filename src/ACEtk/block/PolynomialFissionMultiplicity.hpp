@@ -35,12 +35,15 @@ public:
   /**
    *  @brief Return the representation type (should always be 1)
    */
-  std::size_t LNU() const { return this->XSS( 1 ); }
+  unsigned int LNU() const {
+
+    return static_cast< unsigned int >( this->XSS( 1 ) );
+  }
 
   /**
    *  @brief Return the representation type (should always be 1)
    */
-  std::size_t type() const { return this->LNU(); }
+  unsigned int type() const { return this->LNU(); }
 
   /**
    *  @brief Return the number of polynomial coefficients

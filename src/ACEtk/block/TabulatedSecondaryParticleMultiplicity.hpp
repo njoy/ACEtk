@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_TABULATEDFISSIONMULTIPLICITY
-#define NJOY_ACETK_BLOCK_TABULATEDFISSIONMULTIPLICITY
+#ifndef NJOY_ACETK_BLOCK_TABULATEDSECONDARYPARTICLEMULTIPLICITY
+#define NJOY_ACETK_BLOCK_TABULATEDSECONDARYPARTICLEMULTIPLICITY
 
 // system includes
 
@@ -13,38 +13,51 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated fission multiplicity
+ *  @brief Tabulated secondary particle multiplicity
  *
- *  The TabulatedFissionMultiplicity class contains the tabulated
- *  representation (LNU = 2) of the fission multiplicity. It is
- *  used in the NU block.
+ *  The TabulatedSecondaryParticleMultiplicity class contains tabulated
+ *  multiplcities for a secondary particle (MFMULT = 12 or 16). It contains the
+ *  MT number of the associated reaction.
  */
-class TabulatedFissionMultiplicity : protected details::Base {
+class TabulatedSecondaryParticleMultiplicity : protected details::Base {
 
   /* fields */
   details::BaseTabulatedData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/TabulatedFissionMultiplicity/src/generateXSS.hpp"
-  #include "ACEtk/block/TabulatedFissionMultiplicity/src/generateBlocks.hpp"
+  #include "ACEtk/block/TabulatedSecondaryParticleMultiplicity/src/generateXSS.hpp"
+  #include "ACEtk/block/TabulatedSecondaryParticleMultiplicity/src/generateBlocks.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/TabulatedFissionMultiplicity/src/ctor.hpp"
+  #include "ACEtk/block/TabulatedSecondaryParticleMultiplicity/src/ctor.hpp"
 
   /**
-   *  @brief Return the representation type (should always be 2)
+   *  @brief Return the representation type (should always be 12 or 16)
    */
-  unsigned int LNU() const {
+  unsigned int MFTYPE() const {
 
     return static_cast< unsigned int >( this->XSS( 1 ) );
   }
 
   /**
-   *  @brief Return the representation type (should always be 2)
+   *  @brief Return the representation type (should always be 12 or 16)
    */
-  std::size_t type() const { return this->LNU(); }
+  unsigned int type() const { return this->MFTYPE(); }
+
+  /**
+   *  @brief Return the associated reaction number
+   */
+  unsigned int MT() const {
+
+    return static_cast< unsigned int >( this->XSS( 2 ) );
+  }
+
+  /**
+   *  @brief Return the associated reaction number
+   */
+  unsigned int reactionNumber() const { return this->MT(); }
 
   /**
    *  @brief Return the interpolation data
