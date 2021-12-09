@@ -14,7 +14,7 @@ namespace block {
 /**
  *  @class
  *  @brief The continuous energy YP block with the reaction MT numbers required
- *         for multiplicity calculation
+ *         for production cross section calculation
  *
  *  The MultiplicityReactionNumberBlock class contains the reaction MT numbers
  *  that are needed in production cross section calculations using multiplicity

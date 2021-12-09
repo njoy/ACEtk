@@ -69,6 +69,7 @@ namespace block {
   void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapEnergyDistributionBlock( python::module&, python::module& );
   void wrapPhotonProductionBlock( python::module&, python::module& );
+  void wrapMultiplicityReactionNumberBlock( python::module&, python::module& );
   void wrapSecondaryParticleTypeBlock( python::module&, python::module& );
 }
 
@@ -162,6 +163,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapAngularDistributionBlock( module, viewmodule );
   block::wrapEnergyDistributionBlock( module, viewmodule );
   block::wrapPhotonProductionBlock( module, viewmodule );
+  block::wrapMultiplicityReactionNumberBlock( module, viewmodule );
   block::wrapSecondaryParticleTypeBlock( module, viewmodule );
 
   // wrap ACE table types
