@@ -324,6 +324,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "GPD",
+    &Table::GPD,
+    "The photon production block"
+  )
+  .def_property_readonly(
+
+    "photon_production_block",
+    &Table::photonProductionBlock,
+    "The photon production block"
+  )
+  .def_property_readonly(
+
     "MTRP",
     &Table::MTRP,
     "The photon production reaction number block"
@@ -332,7 +344,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
     "photon_production_reaction_number_block",
     &Table::photonProductionReactionNumberBlock,
-    "The production reaction reaction number block"
+    "The photon production reaction number block"
   )
   .def_property_readonly(
 
