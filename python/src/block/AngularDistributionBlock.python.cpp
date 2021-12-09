@@ -38,6 +38,16 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
   block
   .def(
 
+    python::init< DistributionData, std::vector< DistributionData > >(),
+    python::arg( "elastic" ), python::arg( "distributions" ),
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self             the block\n"
+    "    elastic          the angular distribution data for elastic\n"
+    "    distributions    the angular distribution data"
+  )
+  .def(
+
     python::init< std::vector< DistributionData > >(),
     python::arg( "distributions" ),
     "Initialise the block\n\n"
