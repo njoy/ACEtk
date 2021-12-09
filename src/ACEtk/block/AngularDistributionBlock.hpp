@@ -78,7 +78,7 @@ public:
   int LAND( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index, this->offset_ == 1 ? 1 : 0, this->NR() );
+    this->verifyReactionIndex( index, this->offset_ == 1 ? 0 : 1, this->NR() );
     #endif
     return XSS( index + this->offset_ ); // elastic is index 0
   }
