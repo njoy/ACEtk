@@ -272,6 +272,18 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( 1 == chunk.MTRP().index( 4001 ) );
   CHECK( 33 == chunk.MTRP().index( 3001 ) );
 
+  // ANDP block
+  CHECK( false == chunk.ANDP().empty() );
+  CHECK( 33 == chunk.ANDP().NR() );
+
+  CHECK( 0 == chunk.ANDP().LAND( 1 ) );
+  CHECK( 0 == chunk.ANDP().LAND( 3 ) );
+  CHECK( 0 == chunk.ANDP().LAND( 33 ) );
+
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 33 ) ) );
+
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
 }

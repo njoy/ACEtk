@@ -15,6 +15,10 @@ void generateBlocks() {
   auto gpd = begin + this->data().JXS(12) - 1;
   auto mtrp = this->NTRP() > 0 ? begin + this->data().JXS(13) - 1 : begin;
   auto lsigp = this->NTRP() > 0 ? begin + this->data().JXS(14) - 1 : begin;
+  auto sigp = this->NTRP() > 0 ? begin + this->data().JXS(15) - 1 : begin;
+  auto landp = this->NTRP() > 0 ? begin + this->data().JXS(16) - 1 : begin;
+  auto andp = this->NTRP() > 0 ? begin + this->data().JXS(17) - 1 : begin;
+  auto ldlwp = this->NTRP() > 0 ? begin + this->data().JXS(18) - 1 : begin;
 
   auto ptype = begin + this->data().JXS(30) - 1;
   auto ntro = begin + this->data().JXS(31) - 1;
@@ -25,11 +29,12 @@ void generateBlocks() {
   this->lqr_ = block::LQR( lqr, tyr, this->NTR() );
   this->tyr_ = block::TYR( tyr, lsig, this->NTR() );
   this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
-  this->and_ = block::AND( land, ang, ldlw, this->NR() );
+  this->and_ = block::AND( land, ang, ldlw, this->NR(), 1 );
   this->dlw_ = block::DLW( ldlw, dlw, gpd, this->NR() );
 
   // secondary photon data
   this->mtrp_ = block::MTR( mtrp, lsigp, this->NTRP() );
+  this->andp_ = block::AND( landp, andp, ldlwp, this->NTRP(), 0 );
 
   // secondary particle data
   this->ptype_ = block::PTYPE( ptype, ntro, this->NTYPE() );

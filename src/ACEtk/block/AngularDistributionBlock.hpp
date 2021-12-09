@@ -40,8 +40,10 @@ private:
   /* fields */
   unsigned int nr_; // number of reactions that produce the projectile (excluding elastic)
   Iterator and_;    // the begin iterator of the AND block
+  std::size_t offset_;
 
   /* auxiliary functions */
+  #include "ACEtk/block/AngularDistributionBlock/src/insertElastic.hpp"
   #include "ACEtk/block/AngularDistributionBlock/src/generateXSS.hpp"
   #include "ACEtk/block/AngularDistributionBlock/src/verifySize.hpp"
 
@@ -76,9 +78,9 @@ public:
   int LAND( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index, 0, this->NR() );
+    this->verifyReactionIndex( index, this->offset_ == 1 ? 1 : 0, this->NR() );
     #endif
-    return XSS( index + 1 ); // elastic is index 0
+    return XSS( index + this->offset_ ); // elastic is index 0
   }
 
   /**

@@ -17,10 +17,75 @@ using IsotropicAngularDistribution = block::IsotropicAngularDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const AngularDistributionBlock& );
+void verifyChunkWithoutElastic( const AngularDistributionBlock& );
 
 SCENARIO( "AngularDistributionBlock" ) {
 
-  GIVEN( "valid data for a AngularDistributionBlock instance" ) {
+  GIVEN( "valid data for a AngularDistributionBlock instance with elastic data" ) {
+
+    std::vector< double > xss = chunk();
+
+    WHEN( "the data is given explicitly" ) {
+
+      DistributionData elastic =
+        AngularDistributionData(
+          { TabulatedAngularDistribution( 1e-11, 2, { -1.0, 1.0 },
+                                          { 0.5, 0.5 }, { 0.0, 1.0 } ),
+            TabulatedAngularDistribution( 20., 2, { -1.0, 0.0, 1.0 },
+                                          { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ) } );
+
+      std::vector< DistributionData > distributions = {
+
+        DistributionGivenElsewhere(),
+        FullyIsotropicDistribution(),
+        AngularDistributionData(
+          { TabulatedAngularDistribution( 1e-11, 2, { -1.0, 0.0, 1.0 },
+                                          { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ),
+            IsotropicAngularDistribution( 1. ),
+            TabulatedAngularDistribution( 20., 2, { -1.0, 1.0 },
+                                          { 0.5, 0.5 }, { 0.0, 1.0 } ) } )
+      };
+
+      AngularDistributionBlock chunk( std::move( elastic ),
+                                      std::move( distributions ) );
+
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+    WHEN( "the data is defined by iterators" ) {
+
+      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(),
+                                      3, 1 );
+
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+  } // GIVEN
+
+  GIVEN( "valid data for a AngularDistributionBlock instance without elastic data" ) {
 
     std::vector< double > xss = chunk();
 
@@ -47,7 +112,7 @@ SCENARIO( "AngularDistributionBlock" ) {
 
       THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunkWithoutElastic( chunk );
       } // THEN
 
       THEN( "the XSS array is correct" ) {
@@ -62,11 +127,12 @@ SCENARIO( "AngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 3 );
+      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(),
+                                      4, 0 );
 
       THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunkWithoutElastic( chunk );
       } // THEN
 
       THEN( "the XSS array is correct" ) {
@@ -159,6 +225,85 @@ void verifyChunk( const AngularDistributionBlock& chunk ) {
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data1.distribution(2) ) );
 
   auto data4 = std::get< AngularDistributionData >( chunk.angularDistributionData(3) );
+  CHECK( 3 == data4.NE() );
+  CHECK( 3 == data4.numberIncidentEnergies() );
+  CHECK( 3 == data4.incidentEnergies().size() );
+  CHECK( 1e-11 == Approx( data4.incidentEnergies()[0] ) );
+  CHECK( 1. == Approx( data4.incidentEnergies()[1] ) );
+  CHECK( 20. == Approx( data4.incidentEnergies()[2] ) );
+  CHECK( 1e-11 == Approx( data4.incidentEnergy(1) ) );
+  CHECK( 1. == Approx( data4.incidentEnergy(2) ) );
+  CHECK( 20. == Approx( data4.incidentEnergy(3) ) );
+  CHECK( -32 == data4.LOCC(1) );
+  CHECK( 0 == data4.LOCC(2) );
+  CHECK( -43 == data4.LOCC(3) );
+  CHECK( -32 == data4.distributionLocator(1) );
+  CHECK( 0 == data4.distributionLocator(2) );
+  CHECK( -43 == data4.distributionLocator(3) );
+  CHECK( AngularDistributionType::Tabulated == data4.distributionType(1) );
+  CHECK( AngularDistributionType::Isotropic == data4.distributionType(2) );
+  CHECK( AngularDistributionType::Tabulated == data4.distributionType(3) );
+  CHECK( 8 == data4.relativeDistributionLocator(1) );
+  CHECK( 0 == data4.relativeDistributionLocator(2) );
+  CHECK( 19 == data4.relativeDistributionLocator(3) );
+  CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data4.distribution(1) ) );
+  CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( data4.distribution(2) ) );
+  CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data4.distribution(3) ) );
+}
+
+void verifyChunkWithoutElastic( const AngularDistributionBlock& chunk ) {
+
+  CHECK( false == chunk.empty() );
+  CHECK( 54 == chunk.length() );
+  CHECK( "AND" == chunk.name() );
+
+  CHECK( 4 == chunk.NR() );
+  CHECK( 4 == chunk.numberProjectileProductionReactions() );
+
+  CHECK( 1 == chunk.LAND(1) );
+  CHECK( -1 == chunk.LAND(2) );
+  CHECK( 0 == chunk.LAND(3) );
+  CHECK( 25 == chunk.LAND(4) );
+  CHECK( 1 == chunk.angularDistributionLocator(1) );
+  CHECK( -1 == chunk.angularDistributionLocator(2) );
+  CHECK( 0 == chunk.angularDistributionLocator(3) );
+  CHECK( 25 == chunk.angularDistributionLocator(4) );
+
+  CHECK( false == chunk.isFullyIsotropic(1) );
+  CHECK( false == chunk.isFullyIsotropic(2) );
+  CHECK( true == chunk.isFullyIsotropic(3) );
+  CHECK( false == chunk.isFullyIsotropic(4) );
+
+  CHECK( true == chunk.isGiven(1) );
+  CHECK( false == chunk.isGiven(2) );
+  CHECK( true == chunk.isGiven(3) );
+  CHECK( true == chunk.isGiven(4) );
+
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistributionData(1) ) );
+  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.angularDistributionData(2) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.angularDistributionData(3) ) );
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistributionData(4) ) );
+
+  auto data1 = std::get< AngularDistributionData >( chunk.angularDistributionData(1) );
+  CHECK( 2 == data1.NE() );
+  CHECK( 2 == data1.numberIncidentEnergies() );
+  CHECK( 2 == data1.incidentEnergies().size() );
+  CHECK( 1e-11 == Approx( data1.incidentEnergies()[0] ) );
+  CHECK( 20. == Approx( data1.incidentEnergies()[1] ) );
+  CHECK( 1e-11 == Approx( data1.incidentEnergy(1) ) );
+  CHECK( 20. == Approx( data1.incidentEnergy(2) ) );
+  CHECK( -6 == data1.LOCC(1) );
+  CHECK( -14 == data1.LOCC(2) );
+  CHECK( -6 == data1.distributionLocator(1) );
+  CHECK( -14 == data1.distributionLocator(2) );
+  CHECK( AngularDistributionType::Tabulated == data1.distributionType(1) );
+  CHECK( AngularDistributionType::Tabulated == data1.distributionType(2) );
+  CHECK( 6 == data1.relativeDistributionLocator(1) );
+  CHECK( 14 == data1.relativeDistributionLocator(2) );
+  CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data1.distribution(1) ) );
+  CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data1.distribution(2) ) );
+
+  auto data4 = std::get< AngularDistributionData >( chunk.angularDistributionData(4) );
   CHECK( 3 == data4.NE() );
   CHECK( 3 == data4.numberIncidentEnergies() );
   CHECK( 3 == data4.incidentEnergies().size() );
