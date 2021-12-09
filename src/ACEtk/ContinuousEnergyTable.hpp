@@ -39,6 +39,7 @@ class ContinuousEnergyTable : protected Table {
 
   block::MTR mtrp_;
   block::AND andp_;
+  block::DLW dlwp_;
 
   block::PTYPE ptype_;
 
@@ -316,6 +317,19 @@ public:
   const block::AND& photonProductionAngularDistributionBlock() const {
 
     return this->ANDP();
+  }
+
+  /**
+   *  @brief Return the photon production energy distribution block
+   */
+  const block::DLW& DLWP() const { return this->dlwp_; }
+
+  /**
+   *  @brief Return the photon production energy distribution block
+   */
+  const block::DLW& photonProductionEnergyDistributionBlock() const {
+
+    return this->DLWP();
   }
 
   /**

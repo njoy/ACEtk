@@ -13,6 +13,8 @@ using FullyIsotropicDistribution = block::FullyIsotropicDistribution;
 using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
 using LevelScatteringDistribution = block::LevelScatteringDistribution;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
+using DiscretePhotonDistribution = block::DiscretePhotonDistribution;
+using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
 
 void verifyChunk( const ContinuousEnergyTable& );
 
@@ -283,6 +285,18 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 1 ) ) );
   CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 3 ) ) );
   CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 33 ) ) );
+
+  // DLWP block
+  CHECK( false == chunk.DLWP().empty() );
+  CHECK( 33 == chunk.DLWP().NR() );
+
+  CHECK( 1 == chunk.DLWP().LDLW( 1 ) );
+  CHECK( 23 == chunk.DLWP().LDLW( 3 ) );
+  CHECK( 1139 == chunk.DLWP().LDLW( 33 ) );
+
+  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP().energyDistributionData( 33 ) ) );
 
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );

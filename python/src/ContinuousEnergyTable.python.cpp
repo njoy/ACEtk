@@ -347,6 +347,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "The photon production angular distribution block"
   )
   .def_property_readonly(
+
+    "DLWP",
+    &Table::DLWP,
+    "The photon production energy distribution block"
+  )
+  .def_property_readonly(
+
+    "photon_production_energy_distribution_block",
+    &Table::photonProductionEnergyDistributionBlock,
+    "The photon production energy distribution block"
+  )
+  .def_property_readonly(
     "PTYPE",
     &Table::PTYPE,
     "The secondary particle type block"
