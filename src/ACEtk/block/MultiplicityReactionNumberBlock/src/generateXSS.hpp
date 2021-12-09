@@ -1,8 +1,8 @@
 static std::vector< double > generateXSS( std::vector< unsigned int >&& mts ) {
 
-  std::vector< double > xss;
-  auto ntr = mts.size();
-  xss.reserve( ntr );
+  auto nyp = mts.size();
+  std::vector< double > xss{ static_cast< double >( nyp ) };
+  xss.reserve( nyp + 1 );
   xss.insert( xss.end(), mts.begin(), mts.end() );
   return xss;
 }
