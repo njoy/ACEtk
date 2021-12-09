@@ -17,7 +17,7 @@ class Test_ACEtk_MultiplicityReactionNumberBlock( unittest.TestCase ) :
 
             # verify content
             self.assertEqual( False, chunk.empty )
-            self.assertEqual( 3, chunk.length )
+            self.assertEqual( 4, chunk.length )
             self.assertEqual( "YP", chunk.name )
 
             self.assertEqual( 3, chunk.NYP )

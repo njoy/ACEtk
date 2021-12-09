@@ -16,8 +16,8 @@ namespace block {
  *  @brief Tabulated secondary particle multiplicity
  *
  *  The TabulatedSecondaryParticleMultiplicity class contains tabulated
- *  multiplcities for a secondary particle (MFMULT = 12 or 16). It contains the
- *  MT number of the associated reaction.
+ *  multiplicities for a secondary particle (MFMULT = 12 or 16). It also
+ *  contains the MT number of the associated reaction.
  */
 class TabulatedSecondaryParticleMultiplicity : protected details::Base {
 

@@ -111,7 +111,7 @@ void verifyChunk( const TabulatedSecondaryParticleMultiplicity& chunk ) {
   CHECK( 7 == chunk.numberValues() );
 
   CHECK( 7 == chunk.energies().size() );
-  CHECK( 7.74238100000E-01 == Approx( chunk.energies().front() ) );
+  CHECK( 0.7742381 == Approx( chunk.energies().front() ) );
   CHECK( 1. == Approx( chunk.energies()[3] ) );
   CHECK( 20. == Approx( chunk.energies().back() ) );
 

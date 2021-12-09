@@ -57,6 +57,7 @@ namespace block {
   void wrapAngleEnergyDistributionData( python::module&, python::module& );
   void wrapDistributionProbability( python::module&, python::module& );
   void wrapMultiDistributionData( python::module&, python::module& );
+  void wrapTabulatedSecondaryParticleMultiplicity( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -151,6 +152,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapAngleEnergyDistributionData( module, viewmodule );
   block::wrapDistributionProbability( module, viewmodule );
   block::wrapMultiDistributionData( module, viewmodule );
+  block::wrapTabulatedSecondaryParticleMultiplicity( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );

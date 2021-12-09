@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/TabulatedFissionMultiplicity.hpp"
+#include "ACEtk/block/TabulatedSecondaryParticleMultiplicity.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapTabulatedFissionMultiplicity( python::module& module, python::module& ) {
+void wrapTabulatedSecondaryParticleMultiplicity( python::module& module,
+                                                 python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedFissionMultiplicity;
+  using Block = njoy::ACEtk::block::TabulatedSecondaryParticleMultiplicity;
 
   // wrap views created by this block
 
@@ -23,50 +24,76 @@ void wrapTabulatedFissionMultiplicity( python::module& module, python::module& )
   python::class_< Block > block(
 
     module,
-    "TabulatedFissionMultiplicity",
-    "Tabulated fission multiplicity\n\n"
-    "The TabulatedFissionMultiplicity class contains the tabulated\n"
-    "representation (LNU = 2) of the fission multiplicity. It is\n"
-    "used in the NU block."
+    "TabulatedSecondaryParticleMultiplicity",
+    "Tabulated secondary particle multiplicity\n\n"
+    "The TabulatedSecondaryParticleMultiplicity class contains tabulated\n"
+    "multiplicities for a secondary particle (MFMULT = 12 or 16). It also\n"
+    "contains the MT number of the associated reaction."
   );
 
   // wrap the block
   block
   .def(
 
-    python::init< std::vector< double >, std::vector< double > >(),
+    python::init< unsigned int, unsigned int,
+                  std::vector< double >, std::vector< double > >(),
+    python::arg( "mftype" ), python::arg( "mt" ),
     python::arg( "energies" ), python::arg( "multiplicities" ),
     "Initialise the block assuming linear interpolation\n\n"
     "Arguments:\n"
     "    self             the block\n"
+    "    mftype           the type (12 or 16)\n"
+    "    mt               the associated reaction number\n"
     "    energies         the energy values\n"
     "    multiplicities   the multiplicity values"
   )
   .def(
 
-    python::init< std::vector< long >, std::vector< long >,
+    python::init< unsigned int, unsigned int,
+                  std::vector< long >, std::vector< long >,
                   std::vector< double >, std::vector< double > >(),
+    python::arg( "mftype" ), python::arg( "mt" ),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
     python::arg( "energies" ), python::arg( "xs" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self            the block\n"
+    "    mftype           the type (12 or 16)\n"
+    "    mt               the associated reaction number\n"
     "    boundaries      the interpolation range boundaries\n"
     "    interpolants    the interpolation types for each range\n"
     "    energies        the energy values\n"
-    "    multiplicities   the multiplicity values"
+    "    xs              the xs values"
   )
   .def_property_readonly(
 
-    "LNU",
-    &Block::LNU,
-    "The representation type (should always be 2)"
+    "MFTYPE",
+    &Block::MFTYPE,
+    "The representation type (should always be 12 or 16))"
   )
   .def_property_readonly(
 
     "type",
     &Block::type,
-    "The representation type (should always be 2)"
+    "The representation type (should always be 12 or 16))"
+  )
+  .def_property_readonly(
+
+    "MT",
+    &Block::MT,
+    "The associated reaction number"
+  )
+  .def_property_readonly(
+
+    "reaction_number",
+    &Block::reactionNumber,
+    "The associated reaction number"
+  )
+  .def_property_readonly(
+
+    "interpolation_data",
+    &Block::interpolationData,
+    "The interpolation data"
   )
   .def_property_readonly(
 

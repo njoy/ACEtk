@@ -38,4 +38,5 @@ add_test( NAME ACEtk.python.block.AngleEnergyDistributionData COMMAND ${PYTHON_E
 add_test( NAME ACEtk.python.block.MultiDistributionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_MultiDistributionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.EnergyDistributionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EnergyDistributionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotonProductionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonProductionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
-add_test( NAME ACEtk.python.block.MultiplicityReactionNumberBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonProductionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.MultiplicityReactionNumberBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_MultiplicityReactionNumberBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.TabulatedSecondaryParticleMultiplicity COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedSecondaryParticleMultiplicity.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
