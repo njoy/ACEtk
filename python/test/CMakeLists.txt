@@ -6,6 +6,7 @@ add_test( NAME ACEtk.python.block.CrossSectionBlock COMMAND ${PYTHON_EXECUTABLE}
 add_test( NAME ACEtk.python.block.CrossSectionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_CrossSectionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.DosimetryCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DosimetryCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.DosimetryCrossSectionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DosimetryCrossSectionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.TabulatedFissionMultiplicity COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedFissionMultiplicity.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.FrameAndMultiplicityBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_FrameAndMultiplicityBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PrincipalCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PrincipalCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ReactionNumberBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ReactionNumberBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

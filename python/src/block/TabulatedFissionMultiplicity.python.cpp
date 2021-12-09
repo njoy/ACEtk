@@ -70,6 +70,12 @@ void wrapTabulatedFissionMultiplicity( python::module& module, python::module& )
   )
   .def_property_readonly(
 
+    "interpolation_data",
+    &Block::interpolationData,
+    "The interpolation data"
+  )
+  .def_property_readonly(
+
     "NB",
     &Block::NB,
     "The number of interpolation regions"
