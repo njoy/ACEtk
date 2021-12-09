@@ -21,10 +21,10 @@ BaseDistributionData( BaseDistributionData&& base ) :
  *  @param[in] distributions    the distributions for each incident energy
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
-BaseDistributionData( std::string&& name,
-                      std::vector< long >&& boundaries,
-                      std::vector< long >&& interpolants,
-                      std::vector< Distribution >&& distributions,
+BaseDistributionData( std::string name,
+                      std::vector< long > boundaries,
+                      std::vector< long > interpolants,
+                      std::vector< Distribution > distributions,
                       std::size_t locb = 1 ) :
   Base( std::move( name ),
         Derived::generateXSS( std::string( name ),

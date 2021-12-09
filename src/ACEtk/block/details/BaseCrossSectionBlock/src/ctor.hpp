@@ -33,7 +33,7 @@ BaseCrossSectionBlock( BaseCrossSectionBlock&& base ) :
  *  @param[in] name    the block name
  *  @param[in] xs      the cross section data
  */
-BaseCrossSectionBlock( std::string&& name, std::vector< Data >&& xs ) :
+BaseCrossSectionBlock( std::string name, std::vector< Data > xs ) :
   BaseCrossSectionBlock( std::move( name ), std::move( xs ), xs.size() ) {}
 
 /**
@@ -45,7 +45,7 @@ BaseCrossSectionBlock( std::string&& name, std::vector< Data >&& xs ) :
  *  @param[in] end     the end iterator of the SIG block in the XSS array
  *  @param[in] ntr     the number of reactions (excluding elastic)
  */
-BaseCrossSectionBlock( std::string&& name,
+BaseCrossSectionBlock( std::string name,
                        Iterator lsig, Iterator sig, Iterator end,
                        unsigned int ntr ) :
   Base( std::move( name ), lsig, end ), ntr_( ntr ), sig_( sig ) {

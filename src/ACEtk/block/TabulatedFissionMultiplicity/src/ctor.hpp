@@ -1,7 +1,16 @@
 TabulatedFissionMultiplicity() = default;
 
-TabulatedFissionMultiplicity( const TabulatedFissionMultiplicity& ) = default;
-TabulatedFissionMultiplicity( TabulatedFissionMultiplicity&& ) = default;
+TabulatedFissionMultiplicity( const TabulatedFissionMultiplicity& base ) :
+  Base( base ) {
+
+  this->generateBlocks();
+}
+
+TabulatedFissionMultiplicity( TabulatedFissionMultiplicity&& base ) :
+  Base( std::move( base ) ) {
+
+  this->generateBlocks();
+}
 
 /**
  *  @brief Constructor
@@ -45,5 +54,14 @@ TabulatedFissionMultiplicity( Iterator begin, Iterator end ) :
   this->generateBlocks();
 }
 
-TabulatedFissionMultiplicity& operator=( const TabulatedFissionMultiplicity& ) = default;
-TabulatedFissionMultiplicity& operator=( TabulatedFissionMultiplicity&& ) = default;
+TabulatedFissionMultiplicity& operator=( const TabulatedFissionMultiplicity& base ) {
+
+  new (this) TabulatedFissionMultiplicity( base );
+  return *this;
+}
+
+TabulatedFissionMultiplicity& operator=( TabulatedFissionMultiplicity&& base ) {
+
+  new (this) TabulatedFissionMultiplicity( std::move( base ) );
+  return *this;
+}

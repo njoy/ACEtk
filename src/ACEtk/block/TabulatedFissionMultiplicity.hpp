@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/block/details/BaseTabulatedData.hpp"
 #include "ACEtk/block/InterpolationData.hpp"
 
 namespace njoy {
@@ -23,8 +23,7 @@ namespace block {
 class TabulatedFissionMultiplicity : protected details::Base {
 
   /* fields */
-  InterpolationData interpolation_;
-  details::ColumnData data_;
+  details::BaseTabulatedData data_;
 
   /* auxiliary functions */
   #include "ACEtk/block/TabulatedFissionMultiplicity/src/generateXSS.hpp"
@@ -48,7 +47,7 @@ public:
   /**
    *  @brief Return the interpolation data
    */
-  auto interpolationData() const { return this->interpolation_; }
+  auto interpolationData() const { return this->data_.interpolationData(); }
 
   /**
    *  @brief Return the number of interpolation regions
@@ -93,7 +92,7 @@ public:
   /**
    *  @brief Return the energy values
    */
-  auto E() const { return this->data_.column( 1 ); }
+  auto E() const { return this->data_.x(); }
 
   /**
    *  @brief Return the energy values
@@ -103,7 +102,7 @@ public:
   /**
    *  @brief Return the multiplicities
    */
-  auto NU() const { return this->data_.column( 2 ); }
+  auto NU() const { return this->data_.y(); }
 
   /**
    *  @brief Return the multiplicities

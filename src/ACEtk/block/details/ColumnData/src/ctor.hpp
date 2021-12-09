@@ -9,7 +9,7 @@ ColumnData( ColumnData&& ) = default;
  *  @param[in] name           the name of the data
  *  @param[in] columns        the columns
  */
-ColumnData( std::string&& name, std::vector< std::vector< double > >&& columns ) :
+ColumnData( std::string name, std::vector< std::vector< double > > columns ) :
   Base( std::move( name ), generateXSS( std::move( columns ) ) ) {}
 
 /**
@@ -19,8 +19,8 @@ ColumnData( std::string&& name, std::vector< std::vector< double > >&& columns )
  *  @param[in] column1        the first column
  *  @param[in] column2        the second column
  */
-ColumnData( std::string&& name, std::vector< double >&& column1,
-            std::vector< double >&& column2 ) :
+ColumnData( std::string name, std::vector< double > column1,
+            std::vector< double > column2 ) :
   Base( std::move( name ),
         generateXSS( std::move( column1 ), std::move( column2 ) ) ) {}
 
@@ -32,8 +32,8 @@ ColumnData( std::string&& name, std::vector< double >&& column1,
  *  @param[in] column2        the second column
  *  @param[in] column3        the third column
  */
-ColumnData( std::string&& name, std::vector< double >&& column1,
-            std::vector< double >&& column2, std::vector< double >&& column3 ) :
+ColumnData( std::string name, std::vector< double > column1,
+            std::vector< double > column2, std::vector< double > column3 ) :
   Base( std::move( name ),
         generateXSS( std::move( column1 ), std::move( column2 ),
                      std::move( column3 ) ) ) {}
@@ -46,7 +46,7 @@ ColumnData( std::string&& name, std::vector< double >&& column1,
  *  @param[in] end      the end iterator of the SIG block in the XSS array
  *  @param[in] nc       the number of columns
  */
-ColumnData( std::string&& name, Iterator begin, Iterator end, std::size_t nc ) :
+ColumnData( std::string name, Iterator begin, Iterator end, std::size_t nc ) :
   Base( std::move( name ), begin, end ) {
 
   verifySize( this->begin(), this->end(),

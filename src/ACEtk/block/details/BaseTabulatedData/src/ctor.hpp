@@ -21,13 +21,13 @@ BaseTabulatedData( BaseTabulatedData&& base ) :
  *  @param[in] x               the x values
  *  @param[in] y               the y values
  */
-BaseTabulatedData( std::string&& name,
-                   std::vector< long >&& boundaries,
-                   std::vector< long >&& interpolants,
-                   std::vector< double >&& x,
-                   std::vector< double >&& y ) :
+BaseTabulatedData( std::string name,
+                   std::vector< long > boundaries,
+                   std::vector< long > interpolants,
+                   std::vector< double > x,
+                   std::vector< double > y ) :
   Base( std::move( name ),
-        generateXSS( std::string( name ),
+        generateXSS( name,
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( x ), std::move( y ) ) ) {
 
@@ -41,7 +41,7 @@ BaseTabulatedData( std::string&& name,
  *  @param[in] sig     the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array
  */
-BaseTabulatedData( std::string&& name, Iterator begin, Iterator end ) :
+BaseTabulatedData( std::string name, Iterator begin, Iterator end ) :
   Base( std::move( name ), begin, end ) {
 
   std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
