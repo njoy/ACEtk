@@ -255,6 +255,13 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< LevelScatteringDistribution >( chunk.DLW().energyDistributionData( 44 ) ) );
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 45 ) ) );
 
+  // GPD block
+  CHECK( false == chunk.GPD().empty() );
+  CHECK( 76518 == chunk.GPD().totalProduction().size() );
+
+  CHECK( 2.433297E+05 == Approx( chunk.GPD().totalProduction().front() ) );
+  CHECK( 31.07 == Approx( chunk.GPD().totalProduction().back() ) );
+
   // MTRP block
   CHECK( false == chunk.MTRP().empty() );
   CHECK( 33 == chunk.MTRP().MTs().size() );

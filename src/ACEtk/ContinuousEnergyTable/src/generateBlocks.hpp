@@ -34,6 +34,7 @@ void generateBlocks() {
   this->dlw_ = block::DLW( ldlw, dlw, gpd, this->NR() );
 
   // secondary photon data
+  this->gpd_ = block::GPD( gpd, mtrp, this->NES() );
   this->mtrp_ = block::MTR( mtrp, lsigp, this->NTRP() );
   this->andp_ = block::AND( landp, andp, ldlwp, this->NTRP(), 0 );
   this->dlwp_ = block::DLW( ldlwp, dlwp, this->data().XSS().end(), this->NTRP() );
