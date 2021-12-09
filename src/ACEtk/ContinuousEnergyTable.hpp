@@ -14,6 +14,7 @@
 #include "ACEtk/block/AngularDistributionBlock.hpp"
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotonProductionBlock.hpp"
+#include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
 #include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 
 namespace njoy {
@@ -42,6 +43,7 @@ class ContinuousEnergyTable : protected Table {
   block::MTR mtrp_;
   block::AND andp_;
   block::DLW dlwp_;
+  block::YP yp_;
 
   block::PTYPE ptype_;
 
@@ -342,6 +344,19 @@ public:
   const block::DLW& photonProductionEnergyDistributionBlock() const {
 
     return this->DLWP();
+  }
+
+  /**
+   *  @brief Return the photon multiplicity reaction number block
+   */
+  const block::YP& YP() const { return this->yp_; }
+
+  /**
+   *  @brief Return the photon multiplicity reaction number block
+   */
+  const block::YP& photonMultiplicityReactionNumberBlock() const {
+
+    return this->YP();
   }
 
   /**

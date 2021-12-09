@@ -20,6 +20,7 @@ void generateBlocks() {
   auto andp = this->NTRP() > 0 ? begin + this->data().JXS(17) - 1 : begin;
   auto ldlwp = this->NTRP() > 0 ? begin + this->data().JXS(18) - 1 : begin;
   auto dlwp = this->NTRP() > 0 ? begin + this->data().JXS(19) - 1 : begin;
+  auto yp = this->NTRP() > 0 ? begin + this->data().JXS(20) - 1 : begin;
 
   auto ptype = begin + this->data().JXS(30) - 1;
   auto ntro = begin + this->data().JXS(31) - 1;
@@ -37,7 +38,8 @@ void generateBlocks() {
   this->gpd_ = block::GPD( gpd, mtrp, this->NES() );
   this->mtrp_ = block::MTR( mtrp, lsigp, this->NTRP() );
   this->andp_ = block::AND( landp, andp, ldlwp, this->NTRP(), 0 );
-  this->dlwp_ = block::DLW( ldlwp, dlwp, this->data().XSS().end(), this->NTRP() );
+  this->dlwp_ = block::DLW( ldlwp, dlwp, yp, this->NTRP() );
+  this->yp_ = block::YP( yp, this->data().XSS().end() );
 
   // secondary particle data
   this->ptype_ = block::PTYPE( ptype, ntro, this->NTYPE() );

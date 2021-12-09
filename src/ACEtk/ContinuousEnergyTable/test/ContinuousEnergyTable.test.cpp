@@ -305,6 +305,27 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 3 ) ) );
   CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP().energyDistributionData( 33 ) ) );
 
+  // YP block
+  CHECK( false == chunk.YP().empty() );
+  CHECK( 3 == chunk.YP().MTs().size() );
+  CHECK( 4 == chunk.YP().MTs().front() );
+  CHECK( 102 == chunk.YP().MTs().back() );
+  CHECK( 3 == chunk.YP().reactionNumbers().size() );
+  CHECK( 4 == chunk.YP().reactionNumbers().front() );
+  CHECK( 102 == chunk.YP().reactionNumbers().back() );
+
+  CHECK( 4 == chunk.YP().MT( 1 ) );
+  CHECK( 102 == chunk.YP().MT( 3 ) );
+  CHECK( 4 == chunk.YP().reactionNumber( 1 ) );
+  CHECK( 102 == chunk.YP().reactionNumber( 3 ) );
+
+  CHECK( true == chunk.YP().hasReactionNumber( 4 ) );
+  CHECK( true == chunk.YP().hasReactionNumber( 18 ) );
+  CHECK( true == chunk.YP().hasReactionNumber( 102 ) );
+  CHECK( 1 == chunk.YP().index( 4 ) );
+  CHECK( 2 == chunk.YP().index( 18 ) );
+  CHECK( 3 == chunk.YP().index( 102 ) );
+
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
 }

@@ -128,7 +128,7 @@ public:
   using Base::end;
 };
 
-using MTR = MultiplicityReactionNumberBlock;
+using YP = MultiplicityReactionNumberBlock;
 
 } // block namespace
 } // ACEtk namespace

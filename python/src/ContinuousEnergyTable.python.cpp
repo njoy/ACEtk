@@ -371,6 +371,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "The photon production energy distribution block"
   )
   .def_property_readonly(
+
+    "YP",
+    &Table::YP,
+    "The photon multiplicity reaction number block"
+  )
+  .def_property_readonly(
+
+    "photon_multiplicity_reaction_number_block",
+    &Table::photonMultiplicityReactionNumberBlock,
+    "The photon multiplicity reaction number block"
+  )
+  .def_property_readonly(
     "PTYPE",
     &Table::PTYPE,
     "The secondary particle type block"
