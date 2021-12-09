@@ -323,6 +323,30 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "The energy distribution block"
   )
   .def_property_readonly(
+
+    "MTRP",
+    &Table::MTRP,
+    "The photon production reaction number block"
+  )
+  .def_property_readonly(
+
+    "photon_production_reaction_number_block",
+    &Table::photonProductionReactionNumberBlock,
+    "The production reaction reaction number block"
+  )
+  .def_property_readonly(
+
+    "ANDP",
+    &Table::ANDP,
+    "The photon production angular distribution block"
+  )
+  .def_property_readonly(
+
+    "photon_production_angular_distribution_block",
+    &Table::photonProductionAngularDistributionBlock,
+    "The photon production angular distribution block"
+  )
+  .def_property_readonly(
     "PTYPE",
     &Table::PTYPE,
     "The secondary particle type block"

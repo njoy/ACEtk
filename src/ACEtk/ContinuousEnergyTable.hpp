@@ -313,7 +313,7 @@ public:
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const block::AND& photonProdictionAngularDistributionBlock() const {
+  const block::AND& photonProductionAngularDistributionBlock() const {
 
     return this->ANDP();
   }
