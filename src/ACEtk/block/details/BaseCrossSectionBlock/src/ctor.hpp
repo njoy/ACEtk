@@ -9,6 +9,7 @@ BaseCrossSectionBlock( std::string&& name, std::vector< Data >&& xs,
   ntr_( ntr ) {
 
   this->sig_ = this->begin() + this->ntr_;
+  this->generateBlocks();
 }
 
 public:
@@ -19,12 +20,14 @@ BaseCrossSectionBlock( const BaseCrossSectionBlock& base ) :
   Base( base ), ntr_( base.ntr_ ) {
 
   this->sig_ = this->begin() + this->ntr_;
+  this->generateBlocks();
 }
 
 BaseCrossSectionBlock( BaseCrossSectionBlock&& base ) :
   Base( std::move( base ) ), ntr_( base.ntr_ ) {
 
   this->sig_ = this->begin() + this->ntr_;
+  this->generateBlocks();
 }
 
 /**
@@ -51,6 +54,7 @@ BaseCrossSectionBlock( std::string name,
   Base( std::move( name ), lsig, end ), ntr_( ntr ), sig_( sig ) {
 
   verifySize( this->begin(), this->sig_, this->end(), this->ntr_ );
+  this->generateBlocks();
 }
 
 BaseCrossSectionBlock& operator=( const BaseCrossSectionBlock& base ) {

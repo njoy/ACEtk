@@ -36,6 +36,7 @@ class PhotonProductionCrossSectionBlock :
 
   /* auxiliary functions */
   #include "ACEtk/block/PhotonProductionCrossSectionBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/PhotonProductionCrossSectionBlock/src/generateData.hpp"
 
 public:
 
@@ -91,23 +92,9 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  PhotonProductionData crossSectionData( std::size_t index ) const {
+  const PhotonProductionData& crossSectionData( std::size_t index ) const {
 
-    // sig : one-based index to the start of the SIG block
-    // sig + locator - 1 : one-based index to the start of cross section data
-    std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
-    const auto left = this->iterator( sig + this->LSIG( index ) - 1 );
-    const auto right = index == this->NTR()
-                       ? this->end()
-                       : this->iterator( sig + this->LSIG( index + 1 ) - 1 );
-    if ( *left == 13 ) {
-
-      return PhotonProductionCrossSectionData( left, right );
-    }
-    else {
-
-      return TabulatedSecondaryParticleMultiplicity( left, right );
-    }
+    return BaseCrossSectionBlock::crossSectionData( index );
   }
 
   using BaseCrossSectionBlock::empty;

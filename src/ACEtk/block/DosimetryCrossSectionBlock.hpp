@@ -86,7 +86,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto crossSectionData( std::size_t index ) const {
+  const DosimetryCrossSectionData& crossSectionData( std::size_t index ) const {
 
     return BaseCrossSectionBlock::crossSectionData( index );
   }
