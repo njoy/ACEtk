@@ -28,6 +28,8 @@ class BaseCrossSectionBlock : protected details::Base {
 
 protected:
 
+  /* fields */
+
   /* constructor */
   #include "ACEtk/block/details/BaseCrossSectionBlock/src/ctor.hpp"
 

@@ -15,6 +15,8 @@ using LevelScatteringDistribution = block::LevelScatteringDistribution;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
 using DiscretePhotonDistribution = block::DiscretePhotonDistribution;
 using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
+using PhotonProductionCrossSectionData = block::PhotonProductionCrossSectionData;
+using TabulatedSecondaryParticleMultiplicity = block::TabulatedSecondaryParticleMultiplicity;
 
 void verifyChunk( const ContinuousEnergyTable& );
 
@@ -280,6 +282,18 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( true == chunk.MTRP().hasReactionNumber( 3001 ) );
   CHECK( 1 == chunk.MTRP().index( 4001 ) );
   CHECK( 33 == chunk.MTRP().index( 3001 ) );
+
+  // SIGP block
+  CHECK( false == chunk.SIGP().empty() );
+  CHECK( 33 == chunk.SIGP().NTRP() );
+
+  CHECK( 1 == chunk.SIGP().LSIG( 1 ) );
+  CHECK( 37 == chunk.SIGP().LSIG( 3 ) );
+  CHECK( 1155 == chunk.SIGP().LSIG( 33 ) );
+
+  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP().crossSectionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP().crossSectionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP().crossSectionData( 33 ) ) );
 
   // ANDP block
   CHECK( false == chunk.ANDP().empty() );

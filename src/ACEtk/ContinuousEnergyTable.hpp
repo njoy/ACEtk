@@ -15,6 +15,7 @@
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotonProductionBlock.hpp"
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
+#include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 
 namespace njoy {
@@ -41,6 +42,7 @@ class ContinuousEnergyTable : protected Table {
 
   block::GPD gpd_;
   block::MTR mtrp_;
+  block::SIGP sigp_;
   block::AND andp_;
   block::DLW dlwp_;
   block::YP yp_;
@@ -318,6 +320,19 @@ public:
   const block::MTR& photonProductionReactionNumberBlock() const {
 
     return this->MTRP();
+  }
+
+  /**
+   *  @brief Return the photon production cross section block
+   */
+  const block::SIGP& SIGP() const { return this->sigp_; }
+
+  /**
+   *  @brief Return the photon production cross section block
+   */
+  const block::SIGP& photonProductionCrossSectionBlock() const {
+
+    return this->SIGP();
   }
 
   /**
