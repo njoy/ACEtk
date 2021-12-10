@@ -129,6 +129,7 @@ if(ACEtk.python)
     python/src/block/PhotonProductionBlock.python.cpp
     python/src/block/MultiplicityReactionNumberBlock.python.cpp
     python/src/block/TabulatedSecondaryParticleMultiplicity.python.cpp
+    python/src/block/PhotonProductionCrossSectionData.python.cpp
     python/src/block/SecondaryParticleTypeBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp

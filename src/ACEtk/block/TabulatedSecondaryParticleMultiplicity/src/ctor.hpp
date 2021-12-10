@@ -15,7 +15,7 @@ TabulatedSecondaryParticleMultiplicity( TabulatedSecondaryParticleMultiplicity&&
 /**
  *  @brief Constructor
  *
- *  @param[in] mfmult            the type (12 or 16)
+ *  @param[in] mftype            the type (12 or 16)
  *  @param[in] mt                the associated reaction number
  *  @param[in] boundaries        the interpolation range boundaries
  *  @param[in] interpolants      the interpolation types for each range
