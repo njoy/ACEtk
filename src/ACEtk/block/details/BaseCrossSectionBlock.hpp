@@ -15,7 +15,7 @@ namespace details {
  *  @class
  *  @brief The base class for a LSIG and SIG block with cross section data
  */
-template < typename Data >
+template < typename Derived, typename Data >
 class BaseCrossSectionBlock : protected details::Base {
 
   /* fields */

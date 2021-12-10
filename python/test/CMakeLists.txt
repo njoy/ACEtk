@@ -41,3 +41,4 @@ add_test( NAME ACEtk.python.block.EnergyDistributionBlock COMMAND ${PYTHON_EXECU
 add_test( NAME ACEtk.python.block.PhotonProductionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonProductionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.MultiplicityReactionNumberBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_MultiplicityReactionNumberBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.TabulatedSecondaryParticleMultiplicity COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedSecondaryParticleMultiplicity.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.PhotonProductionCrossSectionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonProductionCrossSectionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

@@ -22,7 +22,11 @@ namespace block {
  *  the MTR block.
  */
 class DosimetryCrossSectionBlock :
-    protected details::BaseCrossSectionBlock< DosimetryCrossSectionData > {
+    protected details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+                                              DosimetryCrossSectionData > {
+
+  friend class details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+                                               DosimetryCrossSectionData >;
 
   /* fields */
 

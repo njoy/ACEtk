@@ -5,7 +5,7 @@ private:
  */
 BaseCrossSectionBlock( std::string&& name, std::vector< Data >&& xs,
                        std::size_t ntr ) :
-  Base( std::move( name ), generateXSS( std::move( xs ) ) ),
+  Base( std::move( name ), Derived::generateXSS( std::move( xs ) ) ),
   ntr_( ntr ) {
 
   this->sig_ = this->begin() + this->ntr_;

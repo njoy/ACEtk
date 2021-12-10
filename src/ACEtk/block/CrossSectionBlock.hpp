@@ -21,7 +21,11 @@ namespace block {
  *  MTR block.
  */
 class CrossSectionBlock :
-    protected details::BaseCrossSectionBlock< CrossSectionData > {
+    protected details::BaseCrossSectionBlock< CrossSectionBlock,
+                                              CrossSectionData > {
+
+  friend class details::BaseCrossSectionBlock< CrossSectionBlock,
+                                               CrossSectionData >;
 
   /* fields */
 
