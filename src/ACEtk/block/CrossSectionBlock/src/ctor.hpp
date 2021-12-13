@@ -9,7 +9,7 @@ CrossSectionBlock( CrossSectionBlock&& ) = default;
  *  @param[in] xs    the cross section data
  */
 CrossSectionBlock( std::vector< CrossSectionData > xs ) :
-  BaseCrossSectionBlock( "SIG", std::move( xs ) ) {}
+  BaseBlockWithLocators( "SIG", std::move( xs ) ) {}
 
 /**
  *  @brief Constructor
@@ -21,7 +21,7 @@ CrossSectionBlock( std::vector< CrossSectionData > xs ) :
  */
 CrossSectionBlock( Iterator lsig, Iterator sig, Iterator end,
                    unsigned int ntr ) :
-  BaseCrossSectionBlock( "SIG", lsig, sig, end, ntr ) {}
+  BaseBlockWithLocators( "SIG", lsig, sig, end, ntr ) {}
 
 CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
 CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;

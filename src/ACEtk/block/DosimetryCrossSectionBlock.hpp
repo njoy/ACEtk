@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/BaseCrossSectionBlock.hpp"
+#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
 #include "ACEtk/block/DosimetryCrossSectionData.hpp"
 
 namespace njoy {
@@ -22,10 +22,10 @@ namespace block {
  *  the MTR block.
  */
 class DosimetryCrossSectionBlock :
-    protected details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+    protected details::BaseBlockWithLocators< DosimetryCrossSectionBlock,
                                               DosimetryCrossSectionData > {
 
-  friend class details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+  friend class details::BaseBlockWithLocators< DosimetryCrossSectionBlock,
                                                DosimetryCrossSectionData >;
 
   /* fields */
@@ -42,14 +42,14 @@ public:
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int NTR() const { return BaseCrossSectionBlock::NTR(); }
+  unsigned int NTR() const { return BaseBlockWithLocators::NTR(); }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
   unsigned int numberReactions() const {
 
-    return BaseCrossSectionBlock::numberReactions();
+    return BaseBlockWithLocators::numberReactions();
   }
 
   /**
@@ -62,7 +62,7 @@ public:
    */
   std::size_t LSIG( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::LSIG( index );
+    return BaseBlockWithLocators::LLOC( index );
   }
 
   /**
@@ -75,7 +75,7 @@ public:
    */
   std::size_t crossSectionLocator( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::crossSectionLocator( index );
+    return BaseBlockWithLocators::locator( index );
   }
 
   /**
@@ -88,15 +88,15 @@ public:
    */
   const DosimetryCrossSectionData& crossSectionData( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::crossSectionData( index );
+    return BaseBlockWithLocators::data( index );
   }
 
-  using BaseCrossSectionBlock::empty;
-  using BaseCrossSectionBlock::name;
-  using BaseCrossSectionBlock::length;
-  using BaseCrossSectionBlock::XSS;
-  using BaseCrossSectionBlock::begin;
-  using BaseCrossSectionBlock::end;
+  using BaseBlockWithLocators::empty;
+  using BaseBlockWithLocators::name;
+  using BaseBlockWithLocators::length;
+  using BaseBlockWithLocators::XSS;
+  using BaseBlockWithLocators::begin;
+  using BaseBlockWithLocators::end;
 };
 
 using SIGD = DosimetryCrossSectionBlock;

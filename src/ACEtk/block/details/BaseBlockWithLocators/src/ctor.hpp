@@ -3,30 +3,30 @@ private:
 /**
  *  @brief Private constructor
  */
-BaseCrossSectionBlock( std::string&& name, std::vector< Data >&& xs,
+BaseBlockWithLocators( std::string&& name, std::vector< Data >&& xs,
                        std::size_t ntr ) :
   Base( std::move( name ), Derived::generateXSS( std::move( xs ) ) ),
   ntr_( ntr ) {
 
-  this->sig_ = this->begin() + this->ntr_;
+  this->iterator_ = this->begin() + this->ntr_;
   this->generateBlocks();
 }
 
 public:
 
-BaseCrossSectionBlock() = default;
+BaseBlockWithLocators() = default;
 
-BaseCrossSectionBlock( const BaseCrossSectionBlock& base ) :
+BaseBlockWithLocators( const BaseBlockWithLocators& base ) :
   Base( base ), ntr_( base.ntr_ ) {
 
-  this->sig_ = this->begin() + this->ntr_;
+  this->iterator_ = this->begin() + this->ntr_;
   this->generateBlocks();
 }
 
-BaseCrossSectionBlock( BaseCrossSectionBlock&& base ) :
+BaseBlockWithLocators( BaseBlockWithLocators&& base ) :
   Base( std::move( base ) ), ntr_( base.ntr_ ) {
 
-  this->sig_ = this->begin() + this->ntr_;
+  this->iterator_ = this->begin() + this->ntr_;
   this->generateBlocks();
 }
 
@@ -36,35 +36,35 @@ BaseCrossSectionBlock( BaseCrossSectionBlock&& base ) :
  *  @param[in] name    the block name
  *  @param[in] xs      the cross section data
  */
-BaseCrossSectionBlock( std::string name, std::vector< Data > xs ) :
-  BaseCrossSectionBlock( std::move( name ), std::move( xs ), xs.size() ) {}
+BaseBlockWithLocators( std::string name, std::vector< Data > xs ) :
+  BaseBlockWithLocators( std::move( name ), std::move( xs ), xs.size() ) {}
 
 /**
  *  @brief Constructor
  *
  *  @param[in] name    the block name
- *  @param[in] lsig    the begin iterator of the LSIG block in the XSS array
- *  @param[in] sig     the begin iterator of the SIG block in the XSS array
+ *  @param[in] loc     the begin iterator of the LSIG block in the XSS array
+ *  @param[in] data    the begin iterator of the SIG block in the XSS array
  *  @param[in] end     the end iterator of the SIG block in the XSS array
  *  @param[in] ntr     the number of reactions (excluding elastic)
  */
-BaseCrossSectionBlock( std::string name,
-                       Iterator lsig, Iterator sig, Iterator end,
+BaseBlockWithLocators( std::string name,
+                       Iterator loc, Iterator data, Iterator end,
                        unsigned int ntr ) :
-  Base( std::move( name ), lsig, end ), ntr_( ntr ), sig_( sig ) {
+  Base( std::move( name ), loc, end ), ntr_( ntr ), iterator_( data ) {
 
-  verifySize( this->begin(), this->sig_, this->end(), this->ntr_ );
+  verifySize( this->begin(), this->iterator_, this->end(), this->ntr_ );
   this->generateBlocks();
 }
 
-BaseCrossSectionBlock& operator=( const BaseCrossSectionBlock& base ) {
+BaseBlockWithLocators& operator=( const BaseBlockWithLocators& base ) {
 
-  new (this) BaseCrossSectionBlock( base );
+  new (this) BaseBlockWithLocators( base );
   return *this;
 }
 
-BaseCrossSectionBlock& operator=( BaseCrossSectionBlock&& base ) {
+BaseBlockWithLocators& operator=( BaseBlockWithLocators&& base ) {
 
-  new (this) BaseCrossSectionBlock( std::move( base ) );
+  new (this) BaseBlockWithLocators( std::move( base ) );
   return *this;
 }

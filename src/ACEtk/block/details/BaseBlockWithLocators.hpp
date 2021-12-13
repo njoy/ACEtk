@@ -21,8 +21,8 @@ class BaseBlockWithLocators : protected details::Base {
 
   /* fields */
   unsigned int ntr_;  // the number of reactions
-  Iterator data_;     // the begin iterator of the data block
-  std::vector< Data > xs_;
+  Iterator iterator_; // the begin iterator of the data block
+  std::vector< Data > data_;
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateXSS.hpp"
@@ -41,7 +41,7 @@ protected:
   /**
    *  @brief Return the iterator to the start of the sig block
    */
-  Iterator sig() const { return this->data_; }
+  Iterator iter() const { return this->iterator_; }
 
 public:
 
@@ -87,6 +87,14 @@ public:
   }
 
   /**
+   *  @brief Return the data vector
+   */
+  const std::vector< Data >& data() const {
+
+    return this->data_;
+  }
+
+  /**
    *  @brief Return the cross section data for a reaction index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
@@ -99,7 +107,7 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    return this->xs_[ index - 1 ];
+    return this->data_[ index - 1 ];
   }
 
   using Base::empty;

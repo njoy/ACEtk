@@ -9,7 +9,7 @@ DosimetryCrossSectionBlock( DosimetryCrossSectionBlock&& ) = default;
  *  @param[in] xs    the cross section data
  */
 DosimetryCrossSectionBlock( std::vector< DosimetryCrossSectionData > xs ) :
-  BaseCrossSectionBlock( "SIGD", std::move( xs ) ) {}
+  BaseBlockWithLocators( "SIGD", std::move( xs ) ) {}
 
 /**
  *  @brief Constructor
@@ -21,7 +21,7 @@ DosimetryCrossSectionBlock( std::vector< DosimetryCrossSectionData > xs ) :
  */
 DosimetryCrossSectionBlock( Iterator lsig, Iterator sig, Iterator end,
                    unsigned int ntr ) :
-  BaseCrossSectionBlock( "SIGD", lsig, sig, end, ntr ) {}
+  BaseBlockWithLocators( "SIGD", lsig, sig, end, ntr ) {}
 
 DosimetryCrossSectionBlock& operator=( const DosimetryCrossSectionBlock& ) = default;
 DosimetryCrossSectionBlock& operator=( DosimetryCrossSectionBlock&& ) = default;

@@ -9,7 +9,7 @@ PhotonProductionCrossSectionBlock( PhotonProductionCrossSectionBlock&& ) = defau
  *  @param[in] xs    the cross section data
  */
 PhotonProductionCrossSectionBlock( std::vector< PhotonProductionData > xs ) :
-  BaseCrossSectionBlock( "SIGP", std::move( xs ) ) {}
+  BaseBlockWithLocators( "SIGP", std::move( xs ) ) {}
 
 /**
  *  @brief Constructor
@@ -21,7 +21,7 @@ PhotonProductionCrossSectionBlock( std::vector< PhotonProductionData > xs ) :
  */
 PhotonProductionCrossSectionBlock( Iterator lsigp, Iterator sigp, Iterator end,
                                    unsigned int ntr ) :
-  BaseCrossSectionBlock( "SIGP", lsigp, sigp, end, ntr ) {}
+  BaseBlockWithLocators( "SIGP", lsigp, sigp, end, ntr ) {}
 
 PhotonProductionCrossSectionBlock& operator=( const PhotonProductionCrossSectionBlock& ) = default;
 PhotonProductionCrossSectionBlock& operator=( PhotonProductionCrossSectionBlock&& ) = default;

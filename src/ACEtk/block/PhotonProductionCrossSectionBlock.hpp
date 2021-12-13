@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/BaseCrossSectionBlock.hpp"
+#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionData.hpp"
 #include "ACEtk/block/TabulatedSecondaryParticleMultiplicity.hpp"
 
@@ -18,18 +18,19 @@ using PhotonProductionData = std::variant<
 
 /**
  *  @class
- *  @brief The continuous energy LSIG and SIG block with the cross section data
+ *  @brief The continuous energy LSIGP and SIGP block with the photon
+ *         production cross section data
  *
- *  The CrossSectionBlock class contains NXS(4) sets of cross section values,
- *  one for each reaction number on the MTR block. The order of these cross
- *  section data sets is the same as the order of the reaction numbers in the
- *  MTR block.
+ *  The PhotonProductionCrossSectionBlock class contains NXS(6) sets of photon
+ *  production data, one for each reaction number on the MTRP block. The order
+ *  of these cross section data sets is the same as the order of the reaction
+ *  numbers in the MTRP block.
  */
 class PhotonProductionCrossSectionBlock :
-    protected details::BaseCrossSectionBlock< PhotonProductionCrossSectionBlock,
+    protected details::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
                                               PhotonProductionData > {
 
-  friend class details::BaseCrossSectionBlock< PhotonProductionCrossSectionBlock,
+  friend class details::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
                                                PhotonProductionData >;
 
   /* fields */
@@ -48,14 +49,14 @@ public:
   /**
    *  @brief Return the number of photon production reactions
    */
-  unsigned int NTRP() const { return BaseCrossSectionBlock::NTR(); }
+  unsigned int NTRP() const { return BaseBlockWithLocators::NTR(); }
 
   /**
    *  @brief Return the number of photon production reactions
    */
   unsigned int numberPhotonProductionReactions() const {
 
-    return BaseCrossSectionBlock::numberReactions();
+    return BaseBlockWithLocators::numberReactions();
   }
 
   /**
@@ -68,7 +69,7 @@ public:
    */
   std::size_t LSIG( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::LSIG( index );
+    return BaseBlockWithLocators::LLOC( index );
   }
 
   /**
@@ -81,7 +82,7 @@ public:
    */
   std::size_t crossSectionLocator( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::crossSectionLocator( index );
+    return BaseBlockWithLocators::locator( index );
   }
 
   /**
@@ -94,15 +95,15 @@ public:
    */
   const PhotonProductionData& crossSectionData( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::crossSectionData( index );
+    return BaseBlockWithLocators::data( index );
   }
 
-  using BaseCrossSectionBlock::empty;
-  using BaseCrossSectionBlock::name;
-  using BaseCrossSectionBlock::length;
-  using BaseCrossSectionBlock::XSS;
-  using BaseCrossSectionBlock::begin;
-  using BaseCrossSectionBlock::end;
+  using BaseBlockWithLocators::empty;
+  using BaseBlockWithLocators::name;
+  using BaseBlockWithLocators::length;
+  using BaseBlockWithLocators::XSS;
+  using BaseBlockWithLocators::begin;
+  using BaseBlockWithLocators::end;
 };
 
 using SIGP = PhotonProductionCrossSectionBlock;
