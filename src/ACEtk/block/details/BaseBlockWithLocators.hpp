@@ -20,7 +20,7 @@ template < typename Derived, typename Data >
 class BaseBlockWithLocators : protected details::Base {
 
   /* fields */
-  unsigned int ntr_;  // the number of reactions
+  unsigned int nr_;  // the number of reactions
   Iterator iterator_; // the begin iterator of the data block
   std::vector< Data > data_;
 
@@ -50,12 +50,12 @@ public:
   /**
    *  @brief Return the number of available reactions
    */
-  unsigned int NTR() const { return this->ntr_; }
+  unsigned int NR() const { return this->nr_; }
 
   /**
    *  @brief Return the number of available reactions
    */
-  unsigned int numberReactions() const { return this->NTR(); }
+  unsigned int numberReactions() const { return this->NR(); }
 
   /**
    *  @brief Return the relative cross section locator for a reaction index
@@ -68,7 +68,7 @@ public:
   std::size_t LLOC( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index, 1, this->NTR() );
+    this->verifyReactionIndex( index, 1, this->NR() );
     #endif
     return XSS( index );
   }

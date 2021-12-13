@@ -4,11 +4,11 @@ private:
  *  @brief Private constructor
  */
 BaseBlockWithLocators( std::string&& name, std::vector< Data >&& xs,
-                       std::size_t ntr ) :
+                       std::size_t nr ) :
   Base( std::move( name ), Derived::generateXSS( std::move( xs ) ) ),
-  ntr_( ntr ) {
+  nr_( nr ) {
 
-  this->iterator_ = this->begin() + this->ntr_;
+  this->iterator_ = this->begin() + this->nr_;
   this->generateBlocks();
 }
 
@@ -17,16 +17,16 @@ public:
 BaseBlockWithLocators() = default;
 
 BaseBlockWithLocators( const BaseBlockWithLocators& base ) :
-  Base( base ), ntr_( base.ntr_ ) {
+  Base( base ), nr_( base.nr_ ) {
 
-  this->iterator_ = this->begin() + this->ntr_;
+  this->iterator_ = this->begin() + this->nr_;
   this->generateBlocks();
 }
 
 BaseBlockWithLocators( BaseBlockWithLocators&& base ) :
-  Base( std::move( base ) ), ntr_( base.ntr_ ) {
+  Base( std::move( base ) ), nr_( base.nr_ ) {
 
-  this->iterator_ = this->begin() + this->ntr_;
+  this->iterator_ = this->begin() + this->nr_;
   this->generateBlocks();
 }
 
@@ -46,14 +46,14 @@ BaseBlockWithLocators( std::string name, std::vector< Data > xs ) :
  *  @param[in] loc     the begin iterator of the LSIG block in the XSS array
  *  @param[in] data    the begin iterator of the SIG block in the XSS array
  *  @param[in] end     the end iterator of the SIG block in the XSS array
- *  @param[in] ntr     the number of reactions (excluding elastic)
+ *  @param[in] nr     the number of reactions (excluding elastic)
  */
 BaseBlockWithLocators( std::string name,
                        Iterator loc, Iterator data, Iterator end,
-                       unsigned int ntr ) :
-  Base( std::move( name ), loc, end ), ntr_( ntr ), iterator_( data ) {
+                       unsigned int nr ) :
+  Base( std::move( name ), loc, end ), nr_( nr ), iterator_( data ) {
 
-  verifySize( this->begin(), this->iterator_, this->end(), this->ntr_ );
+  verifySize( this->begin(), this->iterator_, this->end(), this->nr_ );
   this->generateBlocks();
 }
 

@@ -49,7 +49,7 @@ public:
   /**
    *  @brief Return the number of photon production reactions
    */
-  unsigned int NTRP() const { return BaseBlockWithLocators::NTR(); }
+  unsigned int NTRP() const { return BaseBlockWithLocators::NR(); }
 
   /**
    *  @brief Return the number of photon production reactions

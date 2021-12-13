@@ -40,12 +40,12 @@ public:
   /* methods */
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of available reactions
    */
-  unsigned int NTR() const { return BaseBlockWithLocators::NTR(); }
+  unsigned int NTR() const { return BaseBlockWithLocators::NR(); }
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of available reactions
    */
   unsigned int numberReactions() const {
 
