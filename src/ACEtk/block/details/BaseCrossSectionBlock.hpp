@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_BASECROSSSECTIONBLOCK
-#define NJOY_ACETK_BLOCK_DETAILS_BASECROSSSECTIONBLOCK
+#ifndef NJOY_ACETK_BLOCK_DETAILS_BASEBLOCKWITHLOCATORS
+#define NJOY_ACETK_BLOCK_DETAILS_BASEBLOCKWITHLOCATORS
 
 // system includes
 
@@ -13,46 +13,47 @@ namespace details {
 
 /**
  *  @class
- *  @brief The base class for a LSIG and SIG block with cross section data
+ *  @brief The base class for a combined locator and data block like the
+ *         LSI&SIG, LAND&AND, LDLW&DLW, etc. blocks
  */
 template < typename Derived, typename Data >
-class BaseCrossSectionBlock : protected details::Base {
+class BaseBlockWithLocators : protected details::Base {
 
   /* fields */
-  unsigned int ntr_; // the number of reactions (excluding elastic)
-  Iterator sig_;     // the begin iterator of the SIG block
+  unsigned int ntr_;  // the number of reactions
+  Iterator data_;     // the begin iterator of the data block
   std::vector< Data > xs_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseCrossSectionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/details/BaseCrossSectionBlock/src/generateData.hpp"
-  #include "ACEtk/block/details/BaseCrossSectionBlock/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseCrossSectionBlock/src/verifyCrossSectionIndex.hpp"
-  #include "ACEtk/block/details/BaseCrossSectionBlock/src/verifySize.hpp"
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/generateXSS.hpp"
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/generateData.hpp"
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/generateBlocks.hpp"
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/verifyDataIndex.hpp"
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/verifySize.hpp"
 
 protected:
 
   /* fields */
 
   /* constructor */
-  #include "ACEtk/block/details/BaseCrossSectionBlock/src/ctor.hpp"
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/ctor.hpp"
 
   /**
    *  @brief Return the iterator to the start of the sig block
    */
-  Iterator sig() const { return this->sig_; }
+  Iterator sig() const { return this->data_; }
 
 public:
 
   /* methods */
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of available reactions
    */
   unsigned int NTR() const { return this->ntr_; }
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of available reactions
    */
   unsigned int numberReactions() const { return this->NTR(); }
 
@@ -64,7 +65,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t LSIG( std::size_t index ) const {
+  std::size_t LLOC( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyReactionIndex( index, 1, this->NTR() );
@@ -80,9 +81,9 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t crossSectionLocator( std::size_t index ) const {
+  std::size_t locator( std::size_t index ) const {
 
-    return this->LSIG( index );
+    return this->LLOC( index );
   }
 
   /**
@@ -93,10 +94,10 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const Data& crossSectionData( std::size_t index ) const {
+  const Data& data( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyCrossSectionIndex( index );
+    this->verifyDataIndex( index );
     #endif
     return this->xs_[ index - 1 ];
   }
