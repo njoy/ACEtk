@@ -23,11 +23,13 @@ class BaseBlockWithLocators : protected details::Base {
   unsigned int nr_;  // the number of reactions
   Iterator iterator_; // the begin iterator of the data block
   std::vector< Data > data_;
+  bool zero_index_;
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateXSS.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateData.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateBlocks.hpp"
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/insertZero.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/verifyDataIndex.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/verifySize.hpp"
 
@@ -68,9 +70,10 @@ public:
   std::size_t LLOC( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index, 1, this->NR() );
+    this->verifyDataIndex( index );
     #endif
-    return XSS( index );
+    std::size_t offset = this->zero_index_ ? 1 : 0;
+    return XSS( index + offset );
   }
 
   /**
@@ -107,7 +110,8 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    return this->data_[ index - 1 ];
+    std::size_t offset = this->zero_index_ ? 0 : 1;
+    return this->data_[ index - offset ];
   }
 
   using Base::empty;
