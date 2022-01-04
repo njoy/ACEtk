@@ -37,9 +37,12 @@ private:
 
   /* fields */
   std::size_t locb_;
+  details::ColumnData values_;
+  std::vector< Distribution > distributions_;
 
   /* auxiliary functions */
   #include "ACEtk/block/AngularDistributionData/src/generateXSS.hpp"
+  #include "ACEtk/block/AngularDistributionData/src/generateBlocks.hpp"
   #include "ACEtk/block/AngularDistributionData/src/verifyIncidentEnergyIndex.hpp"
   #include "ACEtk/block/AngularDistributionData/src/verifySize.hpp"
 
@@ -51,7 +54,7 @@ public:
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t NE() const { return this->XSS( 1 ); }
+  std::size_t NE() const { return this->values_.N(); }
 
   /**
    *  @brief Return the number of incident energy values
@@ -63,7 +66,7 @@ public:
    */
   auto incidentEnergies() const {
 
-    return this->XSS( 2, this->numberIncidentEnergies() );
+    return this->values_.column( 1 );
   }
 
   /**
@@ -79,7 +82,7 @@ public:
     #ifndef NDEBUG
     this->verifyIncidentEnergyIndex( index );
     #endif
-    return this->XSS( 1 + index );
+    return this->values_.value( 1, index );
   }
 
   /**
@@ -103,7 +106,7 @@ public:
     #ifndef NDEBUG
     this->verifyIncidentEnergyIndex( index );
     #endif
-    return XSS( 1 + this->numberIncidentEnergies() + index );
+    return this->values_.value( 2, index );
   }
 
   /**
@@ -170,37 +173,20 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  Distribution distribution( std::size_t index ) const {
+  const Distribution& distribution( std::size_t index ) const {
 
-    const auto type = this->distributionType( index );
-    const double incident = this->incidentEnergy( index );
-    if ( type == AngularDistributionType::Isotropic ) {
+    #ifndef NDEBUG
+    this->verifyIncidentEnergyIndex( index );
+    #endif
+    return this->distributions_[ index - 1 ];
+  }
 
-        return IsotropicAngularDistribution( incident );
-    }
-    else {
+  /**
+   *  @brief Return the distribution vector
+   */
+  const std::vector< Distribution >& distributions() const {
 
-      const auto locator = this->relativeDistributionLocator( index );
-      const auto left = std::next( this->begin(), locator - 1 );
-      auto right = this->end();
-      for ( auto next = index + 1; next <= this->numberIncidentEnergies(); ++next ) {
-
-        auto nextlocator = this->relativeDistributionLocator( next );
-        if ( nextlocator > locator ) {
-
-          right = std::next( this->begin(), nextlocator - 1 );
-          break;
-        }
-      }
-      if ( type == AngularDistributionType::Tabulated ) {
-
-        return TabulatedAngularDistribution( incident, left, right );
-      }
-      else {
-
-        return EquiprobableAngularBins( incident, left, right );
-      }
-    }
+    return this->distributions_;
   }
 
   using Base::empty;

@@ -14,7 +14,7 @@ namespace details {
 /**
  *  @class
  *  @brief The base class for a combined locator and data block like the
- *         LSI&SIG, LAND&AND, LDLW&DLW, etc. blocks
+ *         LSI&SIG, LDLW&DLW, etc. blocks
  */
 template < typename Derived, typename Data >
 class BaseBlockWithLocators : protected details::Base {
@@ -23,13 +23,11 @@ class BaseBlockWithLocators : protected details::Base {
   unsigned int nr_;  // the number of reactions
   Iterator iterator_; // the begin iterator of the data block
   std::vector< Data > data_;
-  bool zero_index_;
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateXSS.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateData.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/insertZero.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/verifyDataIndex.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/verifySize.hpp"
 
@@ -72,8 +70,7 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    std::size_t offset = this->zero_index_ ? 1 : 0;
-    return XSS( index + offset );
+    return XSS( index );
   }
 
   /**
@@ -110,8 +107,7 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    std::size_t offset = this->zero_index_ ? 0 : 1;
-    return this->data_[ index - offset ];
+    return this->data_[ index - 1 ];
   }
 
   using Base::empty;

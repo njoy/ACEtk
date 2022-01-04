@@ -1,7 +1,6 @@
 void generateBlocks() {
 
-  for ( unsigned int index = this->zero_index_ ? 0 : 1;
-        index <= this->NR(); ++index ) {
+  for ( unsigned int index = 1; index <= this->NR(); ++index ) {
 
     // data : one-based index to the start of the data block
     // data + locator - 1 : one-based index to the start of cross section data

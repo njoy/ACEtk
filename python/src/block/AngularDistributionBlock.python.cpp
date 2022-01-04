@@ -46,15 +46,6 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
     "    elastic          the angular distribution data for elastic\n"
     "    distributions    the angular distribution data"
   )
-  .def(
-
-    python::init< std::vector< DistributionData > >(),
-    python::arg( "distributions" ),
-    "Initialise the block\n\n"
-    "Arguments:\n"
-    "    self             the block\n"
-    "    distributions    the angular distribution data"
-  )
   .def_property_readonly(
 
     "NR",
@@ -65,6 +56,12 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
 
     "number_projectile_production_reactions",
     &Block::numberProjectileProductionReactions,
+    "The number of reactions excluding elastic that produce the projectile"
+  )
+  .def_property_readonly(
+
+    "total_number_projectile_production_reactions",
+    &Block::totalNumberProjectileProductionReactions,
     "The number of reactions excluding elastic that produce the projectile"
   )
   .def(
