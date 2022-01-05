@@ -57,6 +57,7 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
 
             self.assertEqual( 2, chunk.NE )
             self.assertEqual( 2, chunk.number_incident_energies )
+            self.assertEqual( 2, len( chunk.distributions ) )
 
             self.assertEqual( 2, len( chunk.incident_energies ) )
             self.assertAlmostEqual( 1e-5, chunk.incident_energies[0] )
@@ -78,6 +79,9 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
 
             self.assertEqual( True, isinstance( chunk.distribution(1), TabulatedEnergyAngleDistribution )  )
             self.assertEqual( True, isinstance( chunk.distribution(2), TabulatedEnergyAngleDistribution ) )
+
+            self.assertEqual( True, isinstance( chunk.distributions[0], TabulatedEnergyAngleDistribution )  )
+            self.assertEqual( True, isinstance( chunk.distributions[1], TabulatedEnergyAngleDistribution ) )
 
             data1 = chunk.distribution(1)
             self.assertAlmostEqual( 1e-5, data1.incident_energy )

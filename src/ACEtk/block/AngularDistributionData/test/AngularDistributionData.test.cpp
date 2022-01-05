@@ -109,6 +109,7 @@ void verifyChunk( const AngularDistributionData& chunk ) {
 
   CHECK( 3 == chunk.NE() );
   CHECK( 3 == chunk.numberIncidentEnergies() );
+  CHECK( 3 == chunk.distributions().size() );
 
   CHECK( 3 == chunk.incidentEnergies().size() );
   CHECK( 1e-11 == Approx( chunk.incidentEnergies()[0] ) );
@@ -136,4 +137,8 @@ void verifyChunk( const AngularDistributionData& chunk ) {
   CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( chunk.distribution(1) ) );
   CHECK( true == std::holds_alternative< EquiprobableAngularBins >( chunk.distribution(2) ) );
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( chunk.distribution(3) ) );
+
+  CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( chunk.distributions()[0] ) );
+  CHECK( true == std::holds_alternative< EquiprobableAngularBins >( chunk.distributions()[1] ) );
+  CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( chunk.distributions()[2] ) );
 }

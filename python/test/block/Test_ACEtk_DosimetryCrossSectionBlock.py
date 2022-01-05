@@ -28,6 +28,7 @@ class Test_ACEtk_DosimetryCrossSectionBlock( unittest.TestCase ) :
 
             self.assertEqual( 2, chunk.NTR )
             self.assertEqual( 2, chunk.number_reactions )
+            self.assertEqual( 2, len( chunk.data ) )
 
             self.assertEqual( 1, chunk.LSIG(1) )
             self.assertEqual( 11, chunk.LSIG(2) )
@@ -45,6 +46,26 @@ class Test_ACEtk_DosimetryCrossSectionBlock( unittest.TestCase ) :
             self.assertAlmostEqual( 0.0322, xs.cross_sections[-1] )
 
             xs = chunk.cross_section_data(2)
+            self.assertEqual( 0, xs.NB )
+            self.assertEqual( 3, xs.number_energy_points )
+            self.assertEqual( 3, len( xs.energies ) )
+            self.assertEqual( 3, len( xs.cross_sections ) )
+            self.assertAlmostEqual( 3.2487, xs.energies[0] )
+            self.assertAlmostEqual( 20., xs.energies[-1] )
+            self.assertAlmostEqual( 0., xs.cross_sections[0] )
+            self.assertAlmostEqual( 0.0498, xs.cross_sections[-1] )
+
+            xs = chunk.data[0]
+            self.assertEqual( 0, xs.NB )
+            self.assertEqual( 4, xs.number_energy_points )
+            self.assertEqual( 4, len( xs.energies ) )
+            self.assertEqual( 4, len( xs.cross_sections ) )
+            self.assertAlmostEqual( 1.8961, xs.energies[0] )
+            self.assertAlmostEqual( 20., xs.energies[-1] )
+            self.assertAlmostEqual( 0., xs.cross_sections[0] )
+            self.assertAlmostEqual( 0.0322, xs.cross_sections[-1] )
+
+            xs = chunk.data[1]
             self.assertEqual( 0, xs.NB )
             self.assertEqual( 3, xs.number_energy_points )
             self.assertEqual( 3, len( xs.energies ) )

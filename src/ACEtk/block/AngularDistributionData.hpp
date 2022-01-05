@@ -166,6 +166,14 @@ public:
   }
 
   /**
+   *  @brief Return the distributions
+   */
+  const std::vector< Distribution >& distributions() const {
+
+    return this->distributions_;
+  }
+
+  /**
    *  @brief Return the angular distribution data for an incident energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
@@ -179,14 +187,6 @@ public:
     this->verifyIncidentEnergyIndex( index );
     #endif
     return this->distributions_[ index - 1 ];
-  }
-
-  /**
-   *  @brief Return the distribution vector
-   */
-  const std::vector< Distribution >& distributions() const {
-
-    return this->distributions_;
   }
 
   using Base::empty;

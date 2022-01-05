@@ -77,6 +77,12 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
     "    self     the block\n"
     "    index    the index (one-based)"
   )
+  .def_property_readonly(
+
+    "data",
+    &Block::data,
+    "The cross section data"
+  )
   .def(
 
     "cross_section_data",

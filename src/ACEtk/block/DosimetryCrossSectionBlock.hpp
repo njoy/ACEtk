@@ -79,6 +79,14 @@ public:
   }
 
   /**
+   *  @brief Return all cross section data
+   */
+  const std::vector< DosimetryCrossSectionData >& data() const {
+
+    return BaseBlockWithLocators::data();
+  }
+
+  /**
    *  @brief Return the cross section data for a reaction index
    *
    *  When the index is out of range an std::out_of_range exception is thrown

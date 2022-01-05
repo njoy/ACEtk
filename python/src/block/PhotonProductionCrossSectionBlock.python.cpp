@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/DosimetryCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapDosimetryCrossSectionBlock( python::module& module, python::module& ) {
+void wrapPhotonProductionCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::DosimetryCrossSectionBlock;
-  using DosimetryCrossSectionData = njoy::ACEtk::block::DosimetryCrossSectionData;
+  using Block = njoy::ACEtk::block::PhotonProductionCrossSectionBlock;
+  using PhotonProductionData = njoy::ACEtk::block::PhotonProductionData;
 
   // wrap views created by this block
 
@@ -24,19 +24,18 @@ void wrapDosimetryCrossSectionBlock( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "DosimetryCrossSectionBlock",
-    "The continuous energy LSIG and SIGD block with the dosimetry cross section data\n\n"
-    "The DosimetryCrossSectionBlock class contains NXS(4) sets of cross section data,\n"
-    "one for each reaction number on the MTR block. The order of these cross\n"
-    "section data sets is the same as the order of the reaction numbers in the\n"
-    "MTR block."
+    "PhotonProductionCrossSectionBlock",
+    "The PhotonProductionCrossSectionBlock class contains NXS(6) sets of photon\n"
+    "production data, one for each reaction number on the MTRP block. The order\n"
+    "of these cross section data sets is the same as the order of the reaction\n"
+    "numbers in the MTRP block."
   );
 
   // wrap the block
   block
   .def(
 
-    python::init< std::vector< DosimetryCrossSectionData > >(),
+    python::init< std::vector< PhotonProductionData > >(),
     python::arg( "xs" ),
     "Initialise the block\n\n"
     "Arguments:\n"
@@ -45,15 +44,15 @@ void wrapDosimetryCrossSectionBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "NTR",
-    &Block::NTR,
-    "The number of available reactions"
+    "NTRP",
+    &Block::NTRP,
+    "The number of photon production reactions"
   )
   .def_property_readonly(
 
-    "number_reactions",
-    &Block::numberReactions,
-    "The number of available reactions"
+    "number_photon_production_reactions",
+    &Block::numberPhotonProductionReactions,
+    "The number of photon production reactions"
   )
   .def(
 

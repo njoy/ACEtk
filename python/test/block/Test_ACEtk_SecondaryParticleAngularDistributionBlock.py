@@ -13,8 +13,8 @@ from ACEtk import EquiprobableAngularBins
 from ACEtk import TabulatedAngularDistribution
 from ACEtk import AngularDistributionType
 
-class Test_ACEtk_AngularDistributionBlock( unittest.TestCase ) :
-    """Unit test for the AngularDistributionBlock class."""
+class Test_ACEtk_SecondaryParticleAngularDistributionBlock( unittest.TestCase ) :
+    """Unit test for the SecondaryParticleAngularDistributionBlock class."""
 
     chunk = [                  1,                 -1,                  0,                 25,
                                2,  1.00000000000E-11,  2.00000000000E+01,                 -6,

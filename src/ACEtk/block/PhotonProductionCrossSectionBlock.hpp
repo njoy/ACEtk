@@ -2,6 +2,7 @@
 #define NJOY_ACETK_BLOCK_PHOTONPRODUCTIONCROSSSECTIONBLOCK
 
 // system includes
+#include <variant>
 
 // other includes
 #include "ACEtk/block/details/BaseBlockWithLocators.hpp"
@@ -83,6 +84,14 @@ public:
   std::size_t crossSectionLocator( std::size_t index ) const {
 
     return BaseBlockWithLocators::locator( index );
+  }
+
+  /**
+   *  @brief Return all cross section data
+   */
+  const std::vector< PhotonProductionData >& data() const {
+
+    return BaseBlockWithLocators::data();
   }
 
   /**
