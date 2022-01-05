@@ -59,6 +59,7 @@ namespace block {
   void wrapMultiDistributionData( python::module&, python::module& );
   void wrapTabulatedSecondaryParticleMultiplicity( python::module&, python::module& );
   void wrapPhotonProductionCrossSectionData( python::module&, python::module& );
+  void wrapDelayedNeutronPrecursorData( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -157,6 +158,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapMultiDistributionData( module, viewmodule );
   block::wrapTabulatedSecondaryParticleMultiplicity( module, viewmodule );
   block::wrapPhotonProductionCrossSectionData( module, viewmodule );
+  block::wrapDelayedNeutronPrecursorData( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );

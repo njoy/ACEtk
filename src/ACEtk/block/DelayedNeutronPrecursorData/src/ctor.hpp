@@ -15,19 +15,19 @@ DelayedNeutronPrecursorData( DelayedNeutronPrecursorData&& base ) :
 /**
  *  @brief Constructor
  *
- *  @param[in] lambda            the precursor group's decay constant
+ *  @param[in] constant          the precursor group's decay constant
  *  @param[in] boundaries        the interpolation range boundaries
  *  @param[in] interpolants      the interpolation types for each range
  *  @param[in] energies          the energy values
  *  @param[in] multiplicities    the multiplicity values
  */
-DelayedNeutronPrecursorData( double lambda,
+DelayedNeutronPrecursorData( double constant,
                              std::vector< long > boundaries,
                              std::vector< long > interpolants,
                              std::vector< double > energies,
                              std::vector< double > multiplicities ) :
   Base( "DelayedNeutronPrecursorData",
-        generateXSS( lambda,
+        generateXSS( constant,
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( multiplicities ) ) ) {
 
@@ -37,14 +37,14 @@ DelayedNeutronPrecursorData( double lambda,
 /**
  *  @brief Constructor
  *
- *  @param[in] lambda            the precursor group's decay constant
+ *  @param[in] constant          the precursor group's decay constant
  *  @param[in] energies          the energy values
  *  @param[in] multiplicities    the multiplicity values
  */
-DelayedNeutronPrecursorData( double lambda,
+DelayedNeutronPrecursorData( double constant,
                              std::vector< double > energies,
                              std::vector< double > multiplicities ) :
- DelayedNeutronPrecursorData( lambda, {}, {}, std::move( energies ),
+ DelayedNeutronPrecursorData( constant, {}, {}, std::move( energies ),
                               std::move( multiplicities ) ) {}
 
 /**
