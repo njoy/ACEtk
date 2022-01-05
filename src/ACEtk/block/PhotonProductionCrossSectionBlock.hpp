@@ -13,6 +13,7 @@ namespace njoy {
 namespace ACEtk {
 namespace block {
 
+/* type alias */
 using PhotonProductionData = std::variant<
                                  PhotonProductionCrossSectionData,
                                  TabulatedSecondaryParticleMultiplicity >;

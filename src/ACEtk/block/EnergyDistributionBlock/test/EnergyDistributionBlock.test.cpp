@@ -11,7 +11,7 @@ using EnergyDistributionBlock = block::EnergyDistributionBlock;
 using LevelScatteringDistribution = block::LevelScatteringDistribution;
 using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
-using DistributionData = EnergyDistributionBlock::DistributionData;
+using EnergyDistributionData = block::EnergyDistributionData;
 
 std::vector< double > chunk();
 void verifyChunk( const EnergyDistributionBlock& );
@@ -24,7 +24,7 @@ SCENARIO( "EnergyDistributionBlock" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< DistributionData > distributions = {
+      std::vector< EnergyDistributionData > distributions = {
 
         LevelScatteringDistribution( 2.249999e-3, 20.,
                                      7.71295800000E-05, .9914722 ),
@@ -113,7 +113,8 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
   CHECK( "DLW" == chunk.name() );
 
   CHECK( 2 == chunk.NR() );
-  CHECK( 2 == chunk.numberProjectileProductionReactions() );
+  CHECK( 2 == chunk.numberReactions() );
+  CHECK( 2 == chunk.data().size() );
 
   CHECK( 1 == chunk.LDLW(1) );
   CHECK( 12 == chunk.LDLW(2) );
@@ -122,6 +123,9 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
 
   CHECK( true == std::holds_alternative< LevelScatteringDistribution >( chunk.energyDistributionData(1) ) );
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.energyDistributionData(2) ) );
+
+  CHECK( true == std::holds_alternative< LevelScatteringDistribution >( chunk.data()[0] ) );
+  CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.data()[1] ) );
 
   auto data1 = std::get< LevelScatteringDistribution >( chunk.energyDistributionData(1) );
   CHECK( EnergyDistributionType::LevelScattering == data1.LAW() );
