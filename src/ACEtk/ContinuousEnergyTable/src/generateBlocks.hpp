@@ -38,7 +38,7 @@ void generateBlocks() {
   this->gpd_ = block::GPD( gpd, mtrp, this->NES() );
   this->mtrp_ = block::MTR( mtrp, lsigp, this->NTRP() );
   this->sigp_ = block::SIGP( lsigp, sigp, landp, this->NTRP() );
-//  this->andp_ = block::AND( landp, andp, ldlwp, this->NTRP() );
+  this->andp_ = block::ANDH( landp, andp, ldlwp, this->NTRP() );
   this->dlwp_ = block::DLW( ldlwp, dlwp, yp, this->NTRP() );
   this->yp_ = block::YP( yp, this->data().XSS().end() );
 

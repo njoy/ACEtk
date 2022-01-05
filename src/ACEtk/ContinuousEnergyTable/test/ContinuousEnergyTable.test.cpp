@@ -296,16 +296,16 @@ void verifyChunk( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP().crossSectionData( 33 ) ) );
 
   // ANDP block
-//  CHECK( false == chunk.ANDP().empty() );
-//  CHECK( 33 == chunk.ANDP().NR() );
-//
-//  CHECK( 0 == chunk.ANDP().LAND( 1 ) );
-//  CHECK( 0 == chunk.ANDP().LAND( 3 ) );
-//  CHECK( 0 == chunk.ANDP().LAND( 33 ) );
-//
-//  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 1 ) ) );
-//  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 3 ) ) );
-//  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 33 ) ) );
+  CHECK( false == chunk.ANDP().empty() );
+  CHECK( 33 == chunk.ANDP().NR() );
+
+  CHECK( 0 == chunk.ANDP().LAND( 1 ) );
+  CHECK( 0 == chunk.ANDP().LAND( 3 ) );
+  CHECK( 0 == chunk.ANDP().LAND( 33 ) );
+
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 33 ) ) );
 
   // DLWP block
   CHECK( false == chunk.DLWP().empty() );

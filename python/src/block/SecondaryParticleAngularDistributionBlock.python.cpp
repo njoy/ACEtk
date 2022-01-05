@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/AngularDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapAngularDistributionBlock( python::module& module, python::module& ) {
+void wrapSecondaryParticleAngularDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::AngularDistributionBlock;
+  using Block = njoy::ACEtk::block::SecondaryParticleAngularDistributionBlock;
   using DistributionData = Block::DistributionData;
 
   // wrap views created by this block
@@ -24,25 +24,23 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "AngularDistributionBlock",
-    "The AngularDistributionBlock class contains angular distribution data,\n"
-    "one for each the first NXS(5) reaction numbers on the MTR block and\n"
-    "elastic as well (referenced using the reaction index 0). Elastic is always\n"
-    "the first reaction (hence the index 0 for this reaction) while the order\n"
-    "of the other distribution data sets is the same as the order of the reaction\n"
-    "numbers in the MTR block."
+    "SecondaryParticleAngularDistributionBlock",
+    "The SecondaryParticleAngularDistributionBlock class contains angular\n"
+    "distribution data, one for each the NXS(6) reaction numbers on the MTRP\n"
+    "block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on\n"
+    "the MTRH(ITYPE) block. The order of the distribution data sets is the same\n"
+    "as the order of the reaction numbers in the corresponding MTR block."
   );
 
   // wrap the block
   block
   .def(
 
-    python::init< DistributionData, std::vector< DistributionData > >(),
-    python::arg( "elastic" ), python::arg( "distributions" ),
+    python::init< std::vector< DistributionData > >(),
+    python::arg( "distributions" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
-    "    elastic          the angular distribution data for elastic\n"
     "    distributions    the angular distribution data"
   )
   .def_property_readonly(
@@ -53,14 +51,8 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "number_projectile_production_reactions",
-    &Block::numberProjectileProductionReactions,
-    "The number of reactions excluding elastic that produce the projectile"
-  )
-  .def_property_readonly(
-
-    "total_number_projectile_production_reactions",
-    &Block::totalNumberProjectileProductionReactions,
+    "number_reactions",
+    &Block::numberReactions,
     "The number of reactions excluding elastic that produce the projectile"
   )
   .def(

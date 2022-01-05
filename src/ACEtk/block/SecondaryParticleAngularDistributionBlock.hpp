@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_ANGULARDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_ANGULARDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_BLOCK_SECONDARYPARTICLEANGULARDISTRIBUTIONBLOCK
+#define NJOY_ACETK_BLOCK_SECONDARYPARTICLEANGULARDISTRIBUTIONBLOCK
 
 // system includes
 #include <variant>
@@ -13,17 +13,18 @@ namespace block {
 
 /**
  *  @class
- *  @brief The continuous energy LAND and AND block with the angular
- *         distribution data
+ *  @brief The continuous energy LANDP,ANDP and LANDH,ANDH blocks with the
+ *         angular distribution data for secondary particles that are not the
+ *         incident particle type
  *
- *  The AngularDistributionBlock class contains angular distribution data,
- *  one for each the first NXS(5) reaction numbers on the MTR block and
- *  elastic as well (referenced using the reaction index 0). Elastic is always
- *  the first reaction (hence the index 0 for this reaction) while the order
- *  of the other distribution data sets is the same as the order of the reaction
- *  numbers in the MTR block.
+ *  The SecondaryParticleAngularDistributionBlock class contains angular
+ *  distribution data, one for each the NXS(6) reaction numbers on the MTRP
+ *  block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on
+ *  the MTRH(ITYPE) block. The order of the distribution data sets is the same
+ *  as the order of the reaction numbers in the corresponding MTR block.
  */
-class AngularDistributionBlock : protected details::BaseAngularDistributionBlock {
+class SecondaryParticleAngularDistributionBlock :
+    protected details::BaseAngularDistributionBlock {
 
   /* fields */
 
@@ -35,7 +36,7 @@ public:
   using DistributionData = details::BaseAngularDistributionBlock::DistributionData;
 
   /* constructor */
-  #include "ACEtk/block/AngularDistributionBlock/src/ctor.hpp"
+  #include "ACEtk/block/SecondaryParticleAngularDistributionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -52,18 +53,9 @@ public:
    *  @brief Return the number of reactions that produce the projectile
    *         (excluding elastic)
    */
-  unsigned int numberProjectileProductionReactions() const {
+  unsigned int numberReactions() const {
 
     return BaseAngularDistributionBlock::numberReactions();
-  }
-
-  /**
-   *  @brief Return the total number of reactions that produce the projectile
-   *         (including elastic)
-   */
-  unsigned int totalNumberProjectileProductionReactions() const {
-
-    return this->NR() + 1;
   }
 
   /**
@@ -151,7 +143,7 @@ public:
   using BaseAngularDistributionBlock::end;
 };
 
-using AND = AngularDistributionBlock;
+using ANDH = SecondaryParticleAngularDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

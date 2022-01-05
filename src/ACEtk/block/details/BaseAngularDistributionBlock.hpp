@@ -123,7 +123,7 @@ public:
   /**
    *  @brief Return the data vector
    */
-  const std::vector< DistributionData >& angularDistributionData() const {
+  const std::vector< DistributionData >& data() const {
 
     return this->data_;
   }

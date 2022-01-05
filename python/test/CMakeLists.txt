@@ -17,6 +17,7 @@ add_test( NAME ACEtk.python.block.TabulatedAngularDistribution COMMAND ${PYTHON_
 add_test( NAME ACEtk.python.block.IsotropicAngularDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_IsotropicAngularDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.AngularDistributionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_AngularDistributionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.AngularDistributionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_AngularDistributionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.SecondaryParticleAngularDistributionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleAngularDistributionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.EquiprobableOutgoingEnergyBins COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EquiprobableOutgoingEnergyBins.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.EquiprobableOutgoingEnergyBinData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EquiprobableOutgoingEnergyBinData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.LevelScatteringDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_LevelScatteringDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
