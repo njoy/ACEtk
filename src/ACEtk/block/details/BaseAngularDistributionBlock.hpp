@@ -42,6 +42,7 @@ private:
   #include "ACEtk/block/details/BaseAngularDistributionBlock/src/generateXSS.hpp"
   #include "ACEtk/block/details/BaseAngularDistributionBlock/src/generateBlocks.hpp"
   #include "ACEtk/block/details/BaseAngularDistributionBlock/src/verifySize.hpp"
+  #include "ACEtk/block/details/BaseAngularDistributionBlock/src/verifyDataIndex.hpp"
 
 public:
 
