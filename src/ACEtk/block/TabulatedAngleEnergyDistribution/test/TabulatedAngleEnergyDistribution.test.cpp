@@ -108,6 +108,7 @@ void verifyChunk( const TabulatedAngleEnergyDistribution& chunk ) {
 
   CHECK( 2 == chunk.NC() );
   CHECK( 2 == chunk.numberCosines() );
+  CHECK( 2 == chunk.distributions().size() );
 
   CHECK( 2 == chunk.cosines().size() );
   CHECK( -1. == Approx( chunk.cosines()[0] ) );

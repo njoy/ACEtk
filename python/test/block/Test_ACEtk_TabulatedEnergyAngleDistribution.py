@@ -46,6 +46,7 @@ class Test_ACEtk_TabulatedEnergyAngleDistribution( unittest.TestCase ) :
 
             self.assertEqual( 2, chunk.NE )
             self.assertEqual( 2, chunk.number_outgoing_energies )
+            self.assertEqual( 2, len( chunk.distributions ) )
 
             self.assertEqual( 2, len( chunk.outgoing_energies ) )
             self.assertAlmostEqual( 2.1, chunk.outgoing_energies[0] )
