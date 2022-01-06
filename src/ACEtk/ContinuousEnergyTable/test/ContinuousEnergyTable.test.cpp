@@ -228,6 +228,20 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 2.4367 == Approx( total.multiplicities().front() ) );
   CHECK( 5.209845 == Approx( total.multiplicities().back() ) );
 
+  // DNU block
+  CHECK( false == chunk.DNU().empty() );
+
+  CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
+
+  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().promptFissionMultiplicity() );
+
+  CHECK( 0 == delayed.NB() );
+  CHECK( 6 == delayed.NE() );
+  CHECK( 1e-11 == Approx( delayed.energies().front() ) );
+  CHECK( 20. == Approx( delayed.energies().back() ) );
+  CHECK( 0.01585 == Approx( delayed.multiplicities().front() ) );
+  CHECK( 0.009 == Approx( delayed.multiplicities().back() ) );
+
   // MTR block
   CHECK( false == chunk.MTR().empty() );
   CHECK( 48 == chunk.MTR().MTs().size() );
@@ -459,6 +473,9 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   // NU block
   CHECK( true == chunk.NU().empty() );
+
+  // DNU block
+  CHECK( true == chunk.DNU().empty() );
 
   // LQR block
   CHECK( false == chunk.LQR().empty() );

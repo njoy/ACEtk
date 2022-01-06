@@ -34,6 +34,7 @@ class ContinuousEnergyTable : protected Table {
   /* fields */
   block::ESZ esz_;
   block::NU nu_;
+  block::NU dnu_;
   block::MTR mtr_;
   block::LQR lqr_;
   block::TYR tyr_;
@@ -239,6 +240,16 @@ public:
    *  @brief Return the fission multiplicity block
    */
   const block::NU& fissionMultiplicityBlock() const { return this->NU(); }
+
+  /**
+   *  @brief Return the delayed fission multiplicity block
+   */
+  const block::NU& DNU() const { return this->dnu_; }
+
+  /**
+   *  @brief Return the fission multiplicity block
+   */
+  const block::NU& delayedFissionMultiplicityBlock() const { return this->DNU(); }
 
   /**
    *  @brief Return the reaction number block
