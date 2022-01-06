@@ -122,6 +122,14 @@ void generateBlocks() {
                            present ? iterators.second : begin,
                            this->NPCR() );
 
+  // secondary photon data: photon energy distributions
+  locators = block( 26 );
+  iterators = block( 27 );
+  this->dned_ = block::DLW( present ? locators.first : begin,
+                            present ? iterators.first : begin,
+                            present ? iterators.second : begin,
+                            this->NPCR() );
+
   // secondary particle data: available particle types
   iterators = block( 30 );
   present = ( this->NTYPE() > 0 );

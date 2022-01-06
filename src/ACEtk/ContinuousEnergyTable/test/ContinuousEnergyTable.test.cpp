@@ -435,6 +435,15 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 1.33360E-10 == Approx( chunk.BDD().precursorGroup( 1 ).DEC() ) );
   CHECK( 2.85300E-08 == Approx( chunk.BDD().precursorGroup( 6 ).DEC() ) );
 
+  // DNED block
+  CHECK( false == chunk.DNED().empty() );
+
+  CHECK( 1 == chunk.DNED().LDLW( 1 ) );
+  CHECK( 7944 == chunk.DNED().LDLW( 6 ) );
+
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 6 ) ) );
+
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
 }
@@ -574,6 +583,9 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   // BDD block
   CHECK( true == chunk.BDD().empty() );
+
+  // DNED block
+  CHECK( true == chunk.DNED().empty() );
 
   // PTYPE block
   CHECK( false == chunk.PTYPE().empty() );

@@ -51,6 +51,7 @@ class ContinuousEnergyTable : protected Table {
 
   block::NU dnu_;
   block::BDD bdd_;
+  block::DLW dned_;
 
   block::PTYPE ptype_;
 
@@ -385,7 +386,7 @@ public:
   const block::NU& DNU() const { return this->dnu_; }
 
   /**
-   *  @brief Return the fission multiplicity block
+   *  @brief Return the delayed fission multiplicity block
    */
   const block::NU& delayedFissionMultiplicityBlock() const { return this->DNU(); }
 
@@ -398,6 +399,19 @@ public:
    *  @brief Return the delayed neutron precursor block
    */
   const block::BDD& delayedNeutronPrecursorBlock() const { return this->BDD(); }
+
+  /**
+   *  @brief Return the delayed neutron energy distribution block
+   */
+  const block::DLW& DNED() const { return this->dned_; }
+
+  /**
+   *  @brief Return the delayed neutron energy distribution block
+   */
+  const block::DLW& delayedNeutronEnergyDistributionBlock() const {
+
+    return this->DNED();
+  }
 
   /**
    *  @brief Return the secondary particle type block
