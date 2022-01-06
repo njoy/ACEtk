@@ -430,10 +430,10 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( false == chunk.BDD().empty() );
 
   CHECK( 6 == chunk.BDD().NPCR() );
-  CHECK( 6 == chunk.BDD().numberPrecursorGroups() );
+  CHECK( 6 == chunk.BDD().numberDelayedPrecursors() );
 
-  CHECK( 1.33360E-10 == Approx( chunk.BDD().precursorGroup( 1 ).DEC() ) );
-  CHECK( 2.85300E-08 == Approx( chunk.BDD().precursorGroup( 6 ).DEC() ) );
+  CHECK( 1.33360E-10 == Approx( chunk.BDD().precursorGroupData( 1 ).DEC() ) );
+  CHECK( 2.85300E-08 == Approx( chunk.BDD().precursorGroupData( 6 ).DEC() ) );
 
   // DNED block
   CHECK( false == chunk.DNED().empty() );

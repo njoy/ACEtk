@@ -45,3 +45,4 @@ add_test( NAME ACEtk.python.block.MultiplicityReactionNumberBlock COMMAND ${PYTH
 add_test( NAME ACEtk.python.block.TabulatedSecondaryParticleMultiplicity COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedSecondaryParticleMultiplicity.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotonProductionCrossSectionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonProductionCrossSectionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.DelayedNeutronPrecursorData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DelayedNeutronPrecursorData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.DelayedNeutronPrecursorBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DelayedNeutronPrecursorBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

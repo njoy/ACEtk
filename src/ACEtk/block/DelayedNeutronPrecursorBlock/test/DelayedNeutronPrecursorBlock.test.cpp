@@ -87,10 +87,10 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
   CHECK( "BDD" == chunk.name() );
 
   CHECK( 2 == chunk.NPCR() );
-  CHECK( 2 == chunk.numberPrecursorGroups() );
+  CHECK( 2 == chunk.numberDelayedPrecursors() );
   CHECK( 2 == chunk.data().size() );
 
-  decltype(auto) group1 = chunk.precursorGroup( 1 );
+  decltype(auto) group1 = chunk.precursorGroupData( 1 );
   CHECK( 2.3e-4 == Approx( group1.DEC() ) );
   CHECK( 2.3e-4 == Approx( group1.decayConstant() ) );
 
@@ -121,7 +121,7 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
   CHECK( 2.5e-2 == Approx( group1.probabilities()[1] ) );
   CHECK( 1. == Approx( group1.probabilities()[2] ) );
 
-  decltype(auto) group2 = chunk.precursorGroup( 2 );
+  decltype(auto) group2 = chunk.precursorGroupData( 2 );
   CHECK( 3.2e-4 == Approx( group2.DEC() ) );
   CHECK( 3.2e-4 == Approx( group2.decayConstant() ) );
 

@@ -44,7 +44,7 @@ public:
   /**
    *  @brief Return the number of delayed neutron precursor groups
    */
-  unsigned int numberPrecursorGroups() const {
+  unsigned int numberDelayedPrecursors() const {
 
     return this->NPCR();
   }
@@ -65,7 +65,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const DelayedNeutronPrecursorData& precursorGroup( std::size_t index ) const {
+  const DelayedNeutronPrecursorData& precursorGroupData( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyGroupIndex( index );

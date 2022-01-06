@@ -252,6 +252,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "NU",
+    &Table::NU,
+    "The fission multiplicity block"
+  )
+  .def_property_readonly(
+
+    "fission_multiplicity_block",
+    &Table::fissionMultiplicityBlock,
+    "The fission multiplicity block"
+  )
+  .def_property_readonly(
+
     "MTR",
     &Table::MTR,
     "The reaction number block"
@@ -381,6 +393,42 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "photon_multiplicity_reaction_number_block",
     &Table::photonMultiplicityReactionNumberBlock,
     "The photon multiplicity reaction number block"
+  )
+  .def_property_readonly(
+
+    "DNU",
+    &Table::DNU,
+    "The delayed fission multiplicity block"
+  )
+  .def_property_readonly(
+
+    "delayed_fission_multiplicity_block",
+    &Table::delayedFissionMultiplicityBlock,
+    "The delayed fission multiplicity block"
+  )
+  .def_property_readonly(
+
+    "BDD",
+    &Table::BDD,
+    "The delayed neutron precursor block"
+  )
+  .def_property_readonly(
+
+    "delayed_neutron_precursor_block",
+    &Table::delayedNeutronPrecursorBlock,
+    "The delayed neutron precursor block"
+  )
+  .def_property_readonly(
+
+    "DNED",
+    &Table::DNED,
+    "The delayed neutron energy distribution block"
+  )
+  .def_property_readonly(
+
+    "delayed_neutron_energy_distribution_block",
+    &Table::delayedNeutronEnergyDistributionBlock,
+    "The delayed neutron energy distribution block"
   )
   .def_property_readonly(
     "PTYPE",
