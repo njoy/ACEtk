@@ -228,20 +228,6 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 2.4367 == Approx( total.multiplicities().front() ) );
   CHECK( 5.209845 == Approx( total.multiplicities().back() ) );
 
-  // DNU block
-  CHECK( false == chunk.DNU().empty() );
-
-  CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
-
-  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().promptFissionMultiplicity() );
-
-  CHECK( 0 == delayed.NB() );
-  CHECK( 6 == delayed.NE() );
-  CHECK( 1e-11 == Approx( delayed.energies().front() ) );
-  CHECK( 20. == Approx( delayed.energies().back() ) );
-  CHECK( 0.01585 == Approx( delayed.multiplicities().front() ) );
-  CHECK( 0.009 == Approx( delayed.multiplicities().back() ) );
-
   // MTR block
   CHECK( false == chunk.MTR().empty() );
   CHECK( 48 == chunk.MTR().MTs().size() );
@@ -426,6 +412,29 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 2 == chunk.YP().index( 18 ) );
   CHECK( 3 == chunk.YP().index( 102 ) );
 
+  // DNU block
+  CHECK( false == chunk.DNU().empty() );
+
+  CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
+
+  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().promptFissionMultiplicity() );
+
+  CHECK( 0 == delayed.NB() );
+  CHECK( 6 == delayed.NE() );
+  CHECK( 1e-11 == Approx( delayed.energies().front() ) );
+  CHECK( 20. == Approx( delayed.energies().back() ) );
+  CHECK( 0.01585 == Approx( delayed.multiplicities().front() ) );
+  CHECK( 0.009 == Approx( delayed.multiplicities().back() ) );
+
+  // BDD block
+  CHECK( false == chunk.BDD().empty() );
+
+  CHECK( 6 == chunk.BDD().NPCR() );
+  CHECK( 6 == chunk.BDD().numberPrecursorGroups() );
+
+  CHECK( 1.33360E-10 == Approx( chunk.BDD().precursorGroup( 1 ).DEC() ) );
+  CHECK( 2.85300E-08 == Approx( chunk.BDD().precursorGroup( 6 ).DEC() ) );
+
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
 }
@@ -473,9 +482,6 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   // NU block
   CHECK( true == chunk.NU().empty() );
-
-  // DNU block
-  CHECK( true == chunk.DNU().empty() );
 
   // LQR block
   CHECK( false == chunk.LQR().empty() );
@@ -562,6 +568,12 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   // YP block
   CHECK( true == chunk.YP().empty() );
+
+  // DNU block
+  CHECK( true == chunk.DNU().empty() );
+
+  // BDD block
+  CHECK( true == chunk.BDD().empty() );
 
   // PTYPE block
   CHECK( false == chunk.PTYPE().empty() );

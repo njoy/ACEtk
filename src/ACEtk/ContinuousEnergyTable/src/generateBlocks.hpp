@@ -37,12 +37,6 @@ void generateBlocks() {
   this->nu_ = block::NU( present ? iterators.first : begin,
                          present ? iterators.second : begin );
 
-  // delayed nubar for fissile isotopes
-  iterators = block( 24 );
-  present = ( this->data().JXS(24) > 0 );
-  this->dnu_ = block::NU( present ? iterators.first : begin,
-                          present ? iterators.second : begin );
-
   // reaction number block
   iterators = block( 3 );
   this->mtr_ = block::MTR( iterators.first, iterators.second, this->NTR() );
@@ -114,6 +108,19 @@ void generateBlocks() {
   iterators = block( 20 );
   this->yp_ = block::YP( present ? iterators.first : begin,
                          present ? iterators.second : begin );
+
+  // delayed neutron data: delayed nubar for fissile isotopes
+  iterators = block( 24 );
+  present = ( this->data().JXS(24) > 0 );
+  this->dnu_ = block::NU( present ? iterators.first : begin,
+                          present ? iterators.second : begin );
+
+  // delayed neutron data: precursor data
+  iterators = block( 25 );
+  present = ( this->NPCR() > 0 );
+  this->bdd_ = block::BDD( present ? iterators.first : begin,
+                           present ? iterators.second : begin,
+                           this->NPCR() );
 
   // secondary particle data: available particle types
   iterators = block( 30 );

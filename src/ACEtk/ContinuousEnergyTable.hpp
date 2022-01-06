@@ -18,6 +18,7 @@
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
+#include "ACEtk/block/DelayedNeutronPrecursorBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -34,7 +35,6 @@ class ContinuousEnergyTable : protected Table {
   /* fields */
   block::ESZ esz_;
   block::NU nu_;
-  block::NU dnu_;
   block::MTR mtr_;
   block::LQR lqr_;
   block::TYR tyr_;
@@ -48,6 +48,9 @@ class ContinuousEnergyTable : protected Table {
   block::ANDH andp_;
   block::DLW dlwp_;
   block::YP yp_;
+
+  block::NU dnu_;
+  block::BDD bdd_;
 
   block::PTYPE ptype_;
 
@@ -242,16 +245,6 @@ public:
   const block::NU& fissionMultiplicityBlock() const { return this->NU(); }
 
   /**
-   *  @brief Return the delayed fission multiplicity block
-   */
-  const block::NU& DNU() const { return this->dnu_; }
-
-  /**
-   *  @brief Return the fission multiplicity block
-   */
-  const block::NU& delayedFissionMultiplicityBlock() const { return this->DNU(); }
-
-  /**
    *  @brief Return the reaction number block
    */
   const block::MTR& MTR() const { return this->mtr_; }
@@ -385,6 +378,26 @@ public:
 
     return this->YP();
   }
+
+  /**
+   *  @brief Return the delayed fission multiplicity block
+   */
+  const block::NU& DNU() const { return this->dnu_; }
+
+  /**
+   *  @brief Return the fission multiplicity block
+   */
+  const block::NU& delayedFissionMultiplicityBlock() const { return this->DNU(); }
+
+  /**
+   *  @brief Return the delayed neutron precursor block
+   */
+  const block::BDD& BDD() const { return this->bdd_; }
+
+  /**
+   *  @brief Return the delayed neutron precursor block
+   */
+  const block::BDD& delayedNeutronPrecursorBlock() const { return this->BDD(); }
 
   /**
    *  @brief Return the secondary particle type block
