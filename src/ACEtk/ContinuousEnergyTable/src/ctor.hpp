@@ -51,8 +51,9 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        block::ESZ esz, std::optional< block::NU > nu,
                        block::MTR mtr, block::LQR lqr, block::TYR tyr,
                        block::SIG sig, block::AND ang, block::DLW dlw ) :
-  ContinuousEnergyTable( Table( std::move( header ),
-                         generateData( z, a, std::move( esz ), std::move( nu ),
-                                       std::move( mtr ), std::move( lqr ),
-                                       std::move( tyr ), std::move( sig ),
-                                       std::move( ang ), std::move( dlw ) ) ) ) {}
+  ContinuousEnergyTable(
+      Table( std::move( header ),
+             generateData( z, a, std::move( esz ), std::move( nu ),
+                           std::move( mtr ), std::move( lqr ),
+                           std::move( tyr ), std::move( sig ),
+                           std::move( ang ), std::move( dlw ) ) ) ) {}
