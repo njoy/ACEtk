@@ -40,7 +40,7 @@ public:
    */
   unsigned int NYP() const {
 
-    return static_cast< unsigned int >( this->XSS(1) );
+    return this->empty() ? 0 : static_cast< unsigned int >( this->XSS(1) );
   }
 
   /**
