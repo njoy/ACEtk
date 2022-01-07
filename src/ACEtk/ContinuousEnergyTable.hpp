@@ -20,6 +20,7 @@
 #include "ACEtk/block/DelayedNeutronPrecursorBlock.hpp"
 #include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 #include "ACEtk/block/SecondaryParticleInformationBlock.hpp"
+#include "ACEtk/block/SecondaryParticleLocatorBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -56,6 +57,7 @@ class ContinuousEnergyTable : protected Table {
 
   block::PTYPE ptype_;
   block::NTRO ntro_;
+  block::IXS ixs_;
 
   /* auxiliary functions */
   #include "ACEtk/ContinuousEnergyTable/src/generateBlocks.hpp"
@@ -439,6 +441,19 @@ public:
   const block::NTRO& secondaryParticleInformationBlock() const {
 
     return this->NTRO();
+  }
+
+  /**
+   *  @brief Return the secondary particle locator block
+   */
+  const block::IXS& IXS() const { return this->ixs_; }
+
+  /**
+   *  @brief Return the secondary particle locator block
+   */
+  const block::IXS& secondaryParticleLocatorBlock() const {
+
+    return this->IXS();
   }
 };
 

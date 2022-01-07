@@ -449,6 +449,9 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   // NTRO block
   CHECK( true == chunk.NTRO().empty() );
+
+  // IXS block
+  CHECK( true == chunk.IXS().empty() );
 }
 
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
@@ -605,4 +608,19 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 1 == chunk.NTRO().NP( 1 ) );
   CHECK( 1 == chunk.NTRO().NPs().front() );
+
+  // IXS block
+  CHECK( false == chunk.IXS().empty() );
+  CHECK( 1 == chunk.IXS().NTYPE() );
+
+  CHECK(  8564 == chunk.IXS().HPD( 1 ) );
+  CHECK(  9952 == chunk.IXS().MTRH( 1 ) );
+  CHECK(  9953 == chunk.IXS().TYRH( 1 ) );
+  CHECK(  9954 == chunk.IXS().LSIGH( 1 ) );
+  CHECK(  9955 == chunk.IXS().SIGH( 1 ) );
+  CHECK(  9963 == chunk.IXS().LANDH( 1 ) );
+  CHECK(  9964 == chunk.IXS().ANDH( 1 ) );
+  CHECK(  9991 == chunk.IXS().LDLWH( 1 ) );
+  CHECK(  9992 == chunk.IXS().DLWH( 1 ) );
+  CHECK( 10003 == chunk.IXS().YP( 1 ) );
 }

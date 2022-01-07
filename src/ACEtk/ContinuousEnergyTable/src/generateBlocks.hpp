@@ -137,10 +137,17 @@ void generateBlocks() {
                                present ? iterators.second : begin,
                                this->NTYPE() );
 
-  // secondary particle data: available particle types
+  // secondary particle data: number of reactions per type
   iterators = block( 31 );
   present = ( this->NTYPE() > 0 );
   this->ntro_ = block::NTRO( present ? iterators.first : begin,
                              present ? iterators.second : begin,
                              this->NTYPE() );
+
+  // secondary particle data: number of reactions per type
+  iterators = block( 32 );
+  present = ( this->NTYPE() > 0 );
+  this->ixs_ = block::IXS( present ? iterators.first : begin,
+                           present ? iterators.second : begin,
+                           this->NTYPE() );
 }
