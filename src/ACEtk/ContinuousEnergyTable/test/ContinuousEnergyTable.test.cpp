@@ -446,6 +446,9 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
+
+  // NTRO block
+  CHECK( true == chunk.NTRO().empty() );
 }
 
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
@@ -594,4 +597,12 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 34 == chunk.PTYPE().IP( 1 ) );
   CHECK( 34 == chunk.PTYPE().IPs().front() );
+
+  // NTRO block
+  CHECK( false == chunk.NTRO().empty() );
+  CHECK( 1 == chunk.NTRO().NTYPE() );
+  CHECK( 1 == chunk.NTRO().NPs().size() );
+
+  CHECK( 1 == chunk.NTRO().NP( 1 ) );
+  CHECK( 1 == chunk.NTRO().NPs().front() );
 }

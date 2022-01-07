@@ -136,4 +136,11 @@ void generateBlocks() {
   this->ptype_ = block::PTYPE( present ? iterators.first : begin,
                                present ? iterators.second : begin,
                                this->NTYPE() );
+
+  // secondary particle data: available particle types
+  iterators = block( 31 );
+  present = ( this->NTYPE() > 0 );
+  this->ntro_ = block::NTRO( present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             this->NTYPE() );
 }

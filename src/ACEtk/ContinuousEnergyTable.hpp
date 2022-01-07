@@ -17,8 +17,9 @@
 #include "ACEtk/block/PhotonProductionBlock.hpp"
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 #include "ACEtk/block/DelayedNeutronPrecursorBlock.hpp"
+#include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
+#include "ACEtk/block/SecondaryParticleInformationBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -54,6 +55,7 @@ class ContinuousEnergyTable : protected Table {
   block::DLW dned_;
 
   block::PTYPE ptype_;
+  block::NTRO ntro_;
 
   /* auxiliary functions */
   #include "ACEtk/ContinuousEnergyTable/src/generateBlocks.hpp"
@@ -424,6 +426,19 @@ public:
   const block::PTYPE& secondaryParticleTypeBlock() const {
 
     return this->PTYPE();
+  }
+
+  /**
+   *  @brief Return the secondary particle information block
+   */
+  const block::NTRO& NTRO() const { return this->ntro_; }
+
+  /**
+   *  @brief Return the secondary particle information block
+   */
+  const block::NTRO& secondaryParticleInformationBlock() const {
+
+    return this->NTRO();
   }
 };
 
