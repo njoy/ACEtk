@@ -16,7 +16,7 @@ namespace block {
  *         each secondary particle type
  *
  *  The SecondaryParticleInformationBlock class contains the number of reactions
- *  that produce each secondary particle type as given on the PTYPE.
+ *  that produce each secondary particle type as given on the PTYPE block.
  *
  *  The number of available particle types is stored in NXS(7).
  */
