@@ -440,6 +440,17 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "secondary_particle_type_block",
     &Table::secondaryParticleTypeBlock,
     "The secondary particle type block"
+  )
+  .def_property_readonly(
+    "NTRO",
+    &Table::NTRO,
+    "The secondary particle information block"
+  )
+  .def_property_readonly(
+
+    "secondary_particle_information_block",
+    &Table::secondaryParticleInformationBlock,
+    "The secondary particle information block"
   );
 
   // add standard block definitions

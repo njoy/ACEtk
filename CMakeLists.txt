@@ -135,6 +135,7 @@ if(ACEtk.python)
     python/src/block/PhotonProductionCrossSectionData.python.cpp
     python/src/block/DelayedNeutronPrecursorBlock.python.cpp
     python/src/block/SecondaryParticleTypeBlock.python.cpp
+    python/src/block/SecondaryParticleInformationBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
   )

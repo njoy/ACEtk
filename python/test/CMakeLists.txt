@@ -11,7 +11,6 @@ add_test( NAME ACEtk.python.block.FrameAndMultiplicityBlock COMMAND ${PYTHON_EXE
 add_test( NAME ACEtk.python.block.PrincipalCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PrincipalCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ReactionNumberBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ReactionNumberBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ReactionQValuesBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ReactionQValueBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
-add_test( NAME ACEtk.python.block.SecondaryParticleTypeBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleTypeBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.EquiprobableAngularBins COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EquiprobableAngularBins.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.TabulatedAngularDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedAngularDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.IsotropicAngularDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_IsotropicAngularDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
@@ -46,3 +45,5 @@ add_test( NAME ACEtk.python.block.TabulatedSecondaryParticleMultiplicity COMMAND
 add_test( NAME ACEtk.python.block.PhotonProductionCrossSectionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonProductionCrossSectionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.DelayedNeutronPrecursorData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DelayedNeutronPrecursorData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.DelayedNeutronPrecursorBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DelayedNeutronPrecursorBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.SecondaryParticleTypeBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleTypeBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.SecondaryParticleInformationBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleInformationBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
