@@ -20,13 +20,13 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< std::array< unsigned int, 10 > > numbers = {
+      std::vector< std::array< unsigned int, 10 > > locators = {
 
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-        { 101, 102, 103, 104, 105, 106, 107, 108, 109, 110 },
+        { 101, 102, 103, 104, 105, 106, 107, 108, 109, 110 }
       };
 
-      SecondaryParticleLocatorBlock chunk( std::move( numbers ) );
+      SecondaryParticleLocatorBlock chunk( std::move( locators ) );
 
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {

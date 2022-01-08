@@ -47,3 +47,4 @@ add_test( NAME ACEtk.python.block.DelayedNeutronPrecursorData COMMAND ${PYTHON_E
 add_test( NAME ACEtk.python.block.DelayedNeutronPrecursorBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_DelayedNeutronPrecursorBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.SecondaryParticleTypeBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleTypeBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.SecondaryParticleInformationBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleInformationBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.SecondaryParticleLocatorBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleInformationBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
