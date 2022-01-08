@@ -451,6 +451,94 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "secondary_particle_information_block",
     &Table::secondaryParticleInformationBlock,
     "The secondary particle information block"
+  )
+  .def(
+
+    "MTRH",
+    &Table::MTRH,
+    python::arg( "index" ),
+    "Return the reaction number block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_reaction_number_block",
+    &Table::secondaryParticleReactionNumberBlock,
+    python::arg( "index" ),
+    "Return the reaction number block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "TYRH",
+    &Table::TYRH,
+    python::arg( "index" ),
+    "Return the reference frame and multiplicity block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_frame_and_multiplicity_block",
+    &Table::secondaryParticleFrameAndMultiplicityBlock,
+    python::arg( "index" ),
+    "Return the reference frame and multiplicity block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "ANDH",
+    &Table::ANDH,
+    python::arg( "index" ),
+    "Return the angular distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_angular_distribution_block",
+    &Table::secondaryParticleAngularDistributionBlock,
+    python::arg( "index" ),
+    "Return the angular distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "DLWH",
+    &Table::DLWH,
+    python::arg( "index" ),
+    "Return the energy distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_energy_distribution_block",
+    &Table::secondaryParticleEnergyDistributionBlock,
+    python::arg( "index" ),
+    "Return the energy distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
   );
 
   // add standard block definitions

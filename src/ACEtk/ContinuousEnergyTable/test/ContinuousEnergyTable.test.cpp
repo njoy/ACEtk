@@ -17,6 +17,7 @@ using DiscretePhotonDistribution = block::DiscretePhotonDistribution;
 using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
 using PhotonProductionCrossSectionData = block::PhotonProductionCrossSectionData;
 using TabulatedSecondaryParticleMultiplicity = block::TabulatedSecondaryParticleMultiplicity;
+using TwoBodyTransferDistribution = block::TwoBodyTransferDistribution;
 
 void verifyChunkU235( const ContinuousEnergyTable& );
 void verifyChunkHe3( const ContinuousEnergyTable& );
@@ -623,4 +624,39 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK(  9991 == chunk.IXS().LDLWH( 1 ) );
   CHECK(  9992 == chunk.IXS().DLWH( 1 ) );
   CHECK( 10003 == chunk.IXS().YP( 1 ) );
+
+  // MTRH(1) block
+  CHECK( false == chunk.MTRH(1).empty() );
+  CHECK( 1 == chunk.MTRH(1).MTs().size() );
+  CHECK( 102 == chunk.MTRH(1).MTs().front() );
+  CHECK( 1 == chunk.MTRH(1).reactionNumbers().size() );
+  CHECK( 102 == chunk.MTRH(1).reactionNumbers().front() );
+
+  CHECK( 102 == chunk.MTRH(1).MT( 1 ) );
+  CHECK( 102 == chunk.MTRH(1).reactionNumber( 1 ) );
+
+  CHECK( true == chunk.MTRH(1).hasReactionNumber( 102 ) );
+  CHECK( 1 == chunk.MTRH(1).index( 102 ) );
+
+  // TYRH(1) block
+  CHECK( false == chunk.TYRH(1).empty() );
+  CHECK( 1 == chunk.TYRH(1).referenceFrames().size() );
+  CHECK( ReferenceFrame::Laboratory == chunk.TYRH(1).referenceFrames().front() );
+  CHECK( ReferenceFrame::Laboratory == chunk.TYRH(1).referenceFrame( 1 ) );
+
+  // ANDH(1) block
+  CHECK( false == chunk.ANDH(1).empty() );
+  CHECK( 1 == chunk.ANDH(1).NR() );
+
+  CHECK( 1 == chunk.ANDH(1).LAND( 1 ) );
+
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.ANDH(1).angularDistributionData( 1 ) ) );
+
+  // DLWH(1) block
+  CHECK( false == chunk.DLWH(1).empty() );
+  CHECK( 1 == chunk.DLWH(1).NR() );
+
+  CHECK( 1 == chunk.DLWH(1).LDLW( 1 ) );
+
+  CHECK( true == std::holds_alternative< TwoBodyTransferDistribution >( chunk.DLWH(1).energyDistributionData( 1 ) ) );
 }

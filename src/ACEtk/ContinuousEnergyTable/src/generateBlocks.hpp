@@ -5,16 +5,48 @@ auto block( std::size_t index ) const {
   auto begin = this->data().XSS().begin();
   std::size_t start = this->data().JXS( index );
 
-  // look for the first value that is larger then or equal to the start locator
-  auto iter = std::find_if( this->data().JXS().begin() + index,
-                            this->data().JXS().end(),
-                            [start] ( auto&& value ) { return value >= start; } );
   std::size_t end = 0;
-  if ( iter != this->data().JXS().end() ) {
+  if ( index != 32 ) {
 
-    // JXS(22) is not a locator, it points to the last value of the conventional
-    // XSS array (i.e. before the secondary particle data)
-    end = *iter != this->data().JXS(22) ? *iter : *iter + 1;
+    // look for the first value that is larger then or equal to the start locator
+    auto iter = std::find_if( this->data().JXS().begin() + index,
+                              this->data().JXS().end(),
+                              [start] ( auto&& value ) { return value >= start; } );
+    if ( iter != this->data().JXS().end() ) {
+
+      // JXS(22) is not a locator, it points to the last value of the conventional
+      // XSS array (i.e. before the secondary particle data)
+      end = *iter != this->data().JXS(22) ? *iter : *iter + 1;
+    }
+  }
+  else {
+
+    if ( this->NTYPE() != 0 ) {
+
+      end = start + this->NTYPE() * 10 + 1;
+    }
+  }
+
+  return std::make_pair(
+             begin + start - 1,
+             end != 0 ? begin + end - 1 : this->data().XSS().end() );
+}
+
+auto block( std::size_t particle, std::size_t index ) const {
+
+  // assumption: blocks are stored in sequence!
+
+  auto begin = this->data().XSS().begin();
+  std::size_t start = this->IXS().LLOC( particle, index );
+
+  // look for the first value that is larger then or equal to the start locator
+  std::size_t end = 0;
+  auto iter = std::find_if( this->IXS().begin() + ( particle - 1 ) * 10 + index,
+                            this->IXS().end(),
+                            [start] ( auto&& value ) { return value >= start; } );
+  if ( iter != this->IXS().end() ) {
+
+    end = *iter;
   }
 
   return std::make_pair(
@@ -150,4 +182,36 @@ void generateBlocks() {
   this->ixs_ = block::IXS( present ? iterators.first : begin,
                            present ? iterators.second : begin,
                            this->NTYPE() );
+
+  // secondary particle data: data blocks
+  for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
+
+    // secondary particle data: reaction numbers
+    iterators = block( index, 2 );
+    this->mtrh_.emplace_back( iterators.first, iterators.second,
+                              this->NTRO().NP( index ) );
+
+    // secondary particle data: reference frame and multiplicity
+    iterators = block( index, 3 );
+    this->tyrh_.emplace_back( iterators.first, iterators.second,
+                              this->NTRO().NP( index ) );
+
+//    // secondary particle data: production cross section data
+//    locators = block( index, 4 );
+//    iterators = block( index, 5 );
+//    this->sigh_.emplace_back( locators.first, iterators.first, iterators.second,
+//                              this->NTRO().NP( index ) );
+
+    // secondary particle data: angular distributions
+    locators = block( index, 6 );
+    iterators = block( index, 7 );
+    this->andh_.emplace_back( locators.first, iterators.first, iterators.second,
+                              this->NTRO().NP( index ) );
+
+    // secondary particle data: energy distributions
+    locators = block( index, 8 );
+    iterators = block( index, 9 );
+    this->dlwh_.emplace_back( locators.first, iterators.first, iterators.second,
+                              this->NTRO().NP( index ) );
+  }
 }
