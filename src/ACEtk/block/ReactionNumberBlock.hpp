@@ -127,6 +127,8 @@ public:
 };
 
 using MTR = ReactionNumberBlock;
+using MTRP = ReactionNumberBlock;
+using MTRH = ReactionNumberBlock;
 
 } // block namespace
 } // ACEtk namespace

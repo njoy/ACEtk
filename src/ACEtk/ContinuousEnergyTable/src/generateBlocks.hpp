@@ -108,9 +108,9 @@ void generateBlocks() {
 
   // secondary photon data: photon production reaction numbers
   iterators = block( 13 );
-  this->mtrp_ = block::MTR( present ? iterators.first : begin,
-                            present ? iterators.second : begin,
-                            this->NTRP() );
+  this->mtrp_ = block::MTRP( present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             this->NTRP() );
 
   // secondary photon data: photon production cross sections
   locators = block( 14 );
@@ -123,7 +123,7 @@ void generateBlocks() {
   // secondary photon data: photon angular distributions
   locators = block( 16 );
   iterators = block( 17 );
-  this->andp_ = block::ANDH( present ? locators.first : begin,
+  this->andp_ = block::ANDP( present ? locators.first : begin,
                              present ? iterators.first : begin,
                              present ? iterators.second : begin,
                              this->NTRP() );
@@ -131,10 +131,10 @@ void generateBlocks() {
   // secondary photon data: photon energy distributions
   locators = block( 18 );
   iterators = block( 19 );
-  this->dlwp_ = block::DLW( present ? locators.first : begin,
-                            present ? iterators.first : begin,
-                            present ? iterators.second : begin,
-                            this->NTRP() );
+  this->dlwp_ = block::DLWP( present ? locators.first : begin,
+                             present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             this->NTRP() );
 
   // secondary photon data: photon yield data
   iterators = block( 20 );
@@ -157,10 +157,10 @@ void generateBlocks() {
   // secondary photon data: photon energy distributions
   locators = block( 26 );
   iterators = block( 27 );
-  this->dned_ = block::DLW( present ? locators.first : begin,
-                            present ? iterators.first : begin,
-                            present ? iterators.second : begin,
-                            this->NPCR() );
+  this->dned_ = block::DLWP( present ? locators.first : begin,
+                             present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             this->NPCR() );
 
   // secondary particle data: available particle types
   iterators = block( 30 );
@@ -213,5 +213,9 @@ void generateBlocks() {
     iterators = block( index, 9 );
     this->dlwh_.emplace_back( locators.first, iterators.first, iterators.second,
                               this->NTRO().NP( index ) );
+
+    // secondary particle data: multiplicity reaction numbers
+    iterators = block( index, 10 );
+    this->yh_.emplace_back( iterators.first, iterators.second );
   }
 }

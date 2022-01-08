@@ -659,4 +659,13 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 1 == chunk.DLWH(1).LDLW( 1 ) );
 
   CHECK( true == std::holds_alternative< TwoBodyTransferDistribution >( chunk.DLWH(1).energyDistributionData( 1 ) ) );
+
+  // YH(1) block
+  CHECK( false == chunk.YH(1).empty() );
+  CHECK( 1 == chunk.YH(1).MTs().size() );
+  CHECK( 102 == chunk.YH(1).MTs().front() );
+  CHECK( 1 == chunk.YH(1).reactionNumbers().size() );
+  CHECK( 102 == chunk.YH(1).reactionNumbers().front() );
+
+  CHECK( 102 == chunk.YH(1).MT( 1 ) );
 }

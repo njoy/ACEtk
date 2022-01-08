@@ -129,6 +129,7 @@ public:
 };
 
 using YP = MultiplicityReactionNumberBlock;
+using YH = MultiplicityReactionNumberBlock;
 
 } // block namespace
 } // ACEtk namespace

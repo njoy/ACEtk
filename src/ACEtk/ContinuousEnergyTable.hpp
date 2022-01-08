@@ -46,10 +46,10 @@ class ContinuousEnergyTable : protected Table {
   block::DLW dlw_;
 
   block::GPD gpd_;
-  block::MTR mtrp_;
+  block::MTRP mtrp_;
   block::SIGP sigp_;
-  block::ANDH andp_;
-  block::DLW dlwp_;
+  block::ANDP andp_;
+  block::DLWP dlwp_;
   block::YP yp_;
 
   block::NU dnu_;
@@ -59,11 +59,12 @@ class ContinuousEnergyTable : protected Table {
   block::PTYPE ptype_;
   block::NTRO ntro_;
   block::IXS ixs_;
-  std::vector< block::MTR > mtrh_;
-  std::vector< block::TYR > tyrh_;
+  std::vector< block::MTRH > mtrh_;
+  std::vector< block::TYRH > tyrh_;
 //  std::vector< block::SIGH > sigh_;
   std::vector< block::ANDH > andh_;
-  std::vector< block::DLW > dlwh_;
+  std::vector< block::DLWH > dlwh_;
+  std::vector< block::YH > yh_;
 
   /* auxiliary functions */
   #include "ACEtk/ContinuousEnergyTable/src/generateBlocks.hpp"
@@ -354,12 +355,12 @@ public:
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const block::ANDH& ANDP() const { return this->andp_; }
+  const block::ANDP& ANDP() const { return this->andp_; }
 
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const block::ANDH& photonProductionAngularDistributionBlock() const {
+  const block::ANDP& photonProductionAngularDistributionBlock() const {
 
     return this->ANDP();
   }
@@ -367,12 +368,12 @@ public:
   /**
    *  @brief Return the photon production energy distribution block
    */
-  const block::DLW& DLWP() const { return this->dlwp_; }
+  const block::DLWP& DLWP() const { return this->dlwp_; }
 
   /**
    *  @brief Return the photon production energy distribution block
    */
-  const block::DLW& photonProductionEnergyDistributionBlock() const {
+  const block::DLWP& photonProductionEnergyDistributionBlock() const {
 
     return this->DLWP();
   }
@@ -470,7 +471,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::MTR& MTRH( std::size_t index ) const {
+  const block::MTRH& MTRH( std::size_t index ) const {
 
     return this->mtrh_[ index - 1 ];
   }
@@ -483,7 +484,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::MTR& secondaryParticleReactionNumberBlock( std::size_t index ) const {
+  const block::MTRH& secondaryParticleReactionNumberBlock( std::size_t index ) const {
 
     return this->MTRH( index );
   }
@@ -497,7 +498,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::TYR& TYRH( std::size_t index ) const {
+  const block::TYRH& TYRH( std::size_t index ) const {
 
     return this->tyrh_[ index - 1 ];
   }
@@ -511,7 +512,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::TYR& secondaryParticleFrameAndMultiplicityBlock( std::size_t index ) const {
+  const block::TYRH& secondaryParticleFrameAndMultiplicityBlock( std::size_t index ) const {
 
     return this->TYRH( index );
   }
@@ -581,7 +582,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::DLW& DLWH( std::size_t index ) const {
+  const block::DLWH& DLWH( std::size_t index ) const {
 
     return this->dlwh_[ index - 1 ];
   }
@@ -595,9 +596,37 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::DLW& secondaryParticleEnergyDistributionBlock( std::size_t index ) const {
+  const block::DLWH& secondaryParticleEnergyDistributionBlock( std::size_t index ) const {
 
     return this->DLWH( index );
+  }
+
+  /**
+   *  @brief Return the multiplicity reaction number block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::YH& YH( std::size_t index ) const {
+
+    return this->yh_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the multiplicity reaction number block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::YH& secondaryParticleMultiplicityReactionNumberBlock( std::size_t index ) const {
+
+    return this->YH( index );
   }
 };
 
