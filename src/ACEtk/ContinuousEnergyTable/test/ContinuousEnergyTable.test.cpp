@@ -625,6 +625,16 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK(  9992 == chunk.IXS().DLWH( 1 ) );
   CHECK( 10003 == chunk.IXS().YP( 1 ) );
 
+  // HPD(1) block
+  CHECK( false == chunk.HPD(1).empty() );
+
+  CHECK( 1 == chunk.HPD(1).energyIndex() );
+  CHECK( 693 == chunk.HPD(1).numberValues() );
+  CHECK( 2.76519500000E-03 == Approx( chunk.HPD(1).totalProduction().front() ) );
+  CHECK( 2.86200000000E-05 == Approx( chunk.HPD(1).totalProduction().back() ) );
+  CHECK( 0. == Approx( chunk.HPD(1).heating().front() ) );
+  CHECK( 1.68611800000E-04 == Approx( chunk.HPD(1).heating().back() ) );
+
   // MTRH(1) block
   CHECK( false == chunk.MTRH(1).empty() );
   CHECK( 1 == chunk.MTRH(1).MTs().size() );

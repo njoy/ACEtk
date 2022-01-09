@@ -21,6 +21,7 @@
 #include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 #include "ACEtk/block/SecondaryParticleInformationBlock.hpp"
 #include "ACEtk/block/SecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/block/SecondaryParticleProductionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
 
 namespace njoy {
@@ -59,6 +60,7 @@ class ContinuousEnergyTable : protected Table {
   block::PTYPE ptype_;
   block::NTRO ntro_;
   block::IXS ixs_;
+  std::vector< block::HPD > hpd_;
   std::vector< block::MTRH > mtrh_;
   std::vector< block::TYRH > tyrh_;
 //  std::vector< block::SIGH > sigh_;
@@ -461,6 +463,34 @@ public:
   const block::IXS& secondaryParticleLocatorBlock() const {
 
     return this->IXS();
+  }
+
+  /**
+   *  @brief Return the total production cross section block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::HPD& HPD( std::size_t index ) const {
+
+    return this->hpd_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the total production cross section block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::HPD& secondaryParticleProductionBlock( std::size_t index ) const {
+
+    return this->HPD( index );
   }
 
   /**

@@ -186,6 +186,10 @@ void generateBlocks() {
   // secondary particle data: data blocks
   for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
 
+    // secondary particle data: total production cross section
+    iterators = block( index, 1 );
+    this->hpd_.emplace_back( iterators.first, iterators.second );
+
     // secondary particle data: reaction numbers
     iterators = block( index, 2 );
     this->mtrh_.emplace_back( iterators.first, iterators.second,
