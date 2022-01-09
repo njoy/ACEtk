@@ -63,7 +63,10 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto numberReactions( std::size_t index ) const { return this->NP( index ); }
+  auto numberSecondaryParticleProductionReactions( std::size_t index ) const {
+
+    return this->NP( index );
+  }
 
   /**
    *  @brief Return the number of reactions for all secondary particle types
@@ -73,7 +76,7 @@ public:
   /**
    *  @brief Return the number of reactions for all secondary particle types
    */
-  auto numberReactionsForAllTypes() const { return this->NPs(); }
+  auto numberReactions() const { return this->NPs(); }
 
   using Base::empty;
   using Base::name;

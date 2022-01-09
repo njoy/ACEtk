@@ -22,6 +22,7 @@
 #include "ACEtk/block/SecondaryParticleInformationBlock.hpp"
 #include "ACEtk/block/SecondaryParticleLocatorBlock.hpp"
 #include "ACEtk/block/SecondaryParticleProductionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
 
 namespace njoy {
@@ -63,7 +64,7 @@ class ContinuousEnergyTable : protected Table {
   std::vector< block::HPD > hpd_;
   std::vector< block::MTRH > mtrh_;
   std::vector< block::TYRH > tyrh_;
-//  std::vector< block::SIGH > sigh_;
+  std::vector< block::SIGH > sigh_;
   std::vector< block::ANDH > andh_;
   std::vector< block::DLWH > dlwh_;
   std::vector< block::YH > yh_;
@@ -547,33 +548,33 @@ public:
     return this->TYRH( index );
   }
 
-//  /**
-//   *  @brief Return the production cross section block for a secondary
-//   *         particle index
-//   *
-//   *  When the index is out of range an std::out_of_range exception is thrown
-//   *  (debug mode only).
-//   *
-//   *  @param[in] index     the index (one-based)
-//   */
-//  const block::SIG& SIGH( std::size_t index ) const {
-//
-//    return this->sigh_[ index - 1 ];
-//  }
-//
-//  /**
-//   *  @brief Return the production cross section block for a secondary
-//   *         particle index
-//   *
-//   *  When the index is out of range an std::out_of_range exception is thrown
-//   *  (debug mode only).
-//   *
-//   *  @param[in] index     the index (one-based)
-//   */
-//  const block::SIG& secondaryParticleProductionCrossSectionBlock( std::size_t index ) const {
-//
-//    return this->SIGH( index );
-//  }
+  /**
+   *  @brief Return the production cross section block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::SIGH& SIGH( std::size_t index ) const {
+
+    return this->sigh_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the production cross section block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::SIGH& secondaryParticleProductionCrossSectionBlock( std::size_t index ) const {
+
+    return this->SIGH( index );
+  }
 
   /**
    *  @brief Return the angular distribution block for a secondary

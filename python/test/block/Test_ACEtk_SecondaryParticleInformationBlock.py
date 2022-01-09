@@ -26,18 +26,18 @@ class Test_ACEtk_SecondaryParticleInformationBlock( unittest.TestCase ) :
             self.assertEqual( 3, chunk.NP(1) )
             self.assertEqual( 2, chunk.NP(2) )
             self.assertEqual( 4, chunk.NP(3) )
-            self.assertEqual( 3, chunk.number_reactions(1) )
-            self.assertEqual( 2, chunk.number_reactions(2) )
-            self.assertEqual( 4, chunk.number_reactions(3) )
+            self.assertEqual( 3, chunk.number_secondary_particle_production_reactions(1) )
+            self.assertEqual( 2, chunk.number_secondary_particle_production_reactions(2) )
+            self.assertEqual( 4, chunk.number_secondary_particle_production_reactions(3) )
 
             self.assertEqual( 3, len( chunk.NPs ) )
-            self.assertEqual( 3, len( chunk.number_reactions_for_all_types ) )
+            self.assertEqual( 3, len( chunk.number_reactions ) )
             self.assertEqual( 3, chunk.NPs[0] )
             self.assertEqual( 2, chunk.NPs[1] )
             self.assertEqual( 4, chunk.NPs[2] )
-            self.assertEqual( 3, chunk.number_reactions_for_all_types[0] )
-            self.assertEqual( 2, chunk.number_reactions_for_all_types[1] )
-            self.assertEqual( 4, chunk.number_reactions_for_all_types[2] )
+            self.assertEqual( 3, chunk.number_reactions[0] )
+            self.assertEqual( 2, chunk.number_reactions[1] )
+            self.assertEqual( 4, chunk.number_reactions[2] )
 
             with self.assertRaises( Exception ) :
 

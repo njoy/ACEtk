@@ -654,6 +654,40 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( ReferenceFrame::Laboratory == chunk.TYRH(1).referenceFrames().front() );
   CHECK( ReferenceFrame::Laboratory == chunk.TYRH(1).referenceFrame( 1 ) );
 
+  // SIGH(1) block
+  CHECK( false == chunk.SIGH(1).empty() );
+
+  auto multiplicity = chunk.SIGH(1).crossSectionData( 1 );
+  CHECK( 12 == multiplicity.MFTYPE() );
+  CHECK( 12 == multiplicity.type() );
+  CHECK( 102 == multiplicity.MT() );
+  CHECK( 102 == multiplicity.reactionNumber() );
+
+  CHECK( 0 == multiplicity.interpolationData().NB() );
+  CHECK( 0 == multiplicity.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == multiplicity.interpolationData().INT().size() );
+  CHECK( 0 == multiplicity.interpolationData().interpolants().size() );
+  CHECK( 0 == multiplicity.interpolationData().NBT().size() );
+  CHECK( 0 == multiplicity.interpolationData().boundaries().size() );
+
+  CHECK( 0 == multiplicity.NB() );
+  CHECK( 0 == multiplicity.numberInterpolationRegions() );
+  CHECK( 0 == multiplicity.INT().size() );
+  CHECK( 0 == multiplicity.interpolants().size() );
+  CHECK( 0 == multiplicity.NBT().size() );
+  CHECK( 0 == multiplicity.boundaries().size() );
+
+  CHECK( 2 == multiplicity.NE() );
+  CHECK( 2 == multiplicity.numberValues() );
+
+  CHECK( 2 == multiplicity.energies().size() );
+  CHECK( 1e-5 == Approx( multiplicity.energies().front() ) );
+  CHECK( 20. == Approx( multiplicity.energies().back() ) );
+
+  CHECK( 2 == multiplicity.multiplicities().size() );
+  CHECK( 1. == Approx( multiplicity.multiplicities().front() ) );
+  CHECK( 1. == Approx( multiplicity.multiplicities().back() ) );
+
   // ANDH(1) block
   CHECK( false == chunk.ANDH(1).empty() );
   CHECK( 1 == chunk.ANDH(1).NR() );

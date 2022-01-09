@@ -66,8 +66,8 @@ void wrapSecondaryParticleInformationBlock( python::module& module, python::modu
   )
   .def(
 
-    "number_reactions",
-    &Block::numberReactions,
+    "number_secondary_particle_production_reactions",
+    &Block::numberSecondaryParticleProductionReactions,
     python::arg( "index" ),
     "The number of reactions for a secondary particle index\n\n"
     "Arguments:\n"
@@ -83,9 +83,9 @@ void wrapSecondaryParticleInformationBlock( python::module& module, python::modu
   )
   .def_property_readonly(
 
-    "number_reactions_for_all_types",
+    "number_reactions",
     [] ( const Block& self ) -> UnsignedIntRange
-       { return self.numberReactionsForAllTypes(); },
+       { return self.numberReactions(); },
     "The number of reactions for each particle type"
   );
 

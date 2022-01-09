@@ -80,7 +80,7 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "HPD",
     &Block::HPD,
     python::arg( "index" ),
-    "The locator locator to the HPD block for a secondary particle index\n\n"
+    "The locator to the HPD block for a secondary particle index\n\n"
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"
@@ -90,7 +90,7 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "MTRH",
     &Block::MTRH,
     python::arg( "index" ),
-    "The locator locator to the MTRH block for a secondary particle index\n\n"
+    "The locator to the MTRH block for a secondary particle index\n\n"
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"
@@ -100,7 +100,17 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "TYRH",
     &Block::TYRH,
     python::arg( "index" ),
-    "The locator locator to the TYRH block for a secondary particle index\n\n"
+    "The locator to the TYRH block for a secondary particle index\n\n"
+    "Arguments:\n"
+    "    self     the block\n"
+    "    index    the secondary particle index (one-based)"
+  )
+  .def(
+
+    "LSIGH",
+    &Block::LSIGH,
+    python::arg( "index" ),
+    "The locator to the LSIGH block for a secondary particle index\n\n"
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"
@@ -110,7 +120,17 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "SIGH",
     &Block::SIGH,
     python::arg( "index" ),
-    "The locator locator to the SIGH block for a secondary particle index\n\n"
+    "The locator to the SIGH block for a secondary particle index\n\n"
+    "Arguments:\n"
+    "    self     the block\n"
+    "    index    the secondary particle index (one-based)"
+  )
+  .def(
+
+    "LANDH",
+    &Block::LANDH,
+    python::arg( "index" ),
+    "The locator to the LANDH block for a secondary particle index\n\n"
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"
@@ -120,7 +140,17 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "ANDH",
     &Block::ANDH,
     python::arg( "index" ),
-    "The locator locator to the ANDH block for a secondary particle index\n\n"
+    "The locator to the ANDH block for a secondary particle index\n\n"
+    "Arguments:\n"
+    "    self     the block\n"
+    "    index    the secondary particle index (one-based)"
+  )
+  .def(
+
+    "LDLWH",
+    &Block::LDLWH,
+    python::arg( "index" ),
+    "The locator to the LDLWH block for a secondary particle index\n\n"
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"
@@ -130,7 +160,7 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "DLWH",
     &Block::DLWH,
     python::arg( "index" ),
-    "The locator locator to the DLWH block for a secondary particle index\n\n"
+    "The locator to the DLWH block for a secondary particle index\n\n"
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"
@@ -140,7 +170,7 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "YP",
     &Block::YP,
     python::arg( "index" ),
-    "The locator locator to the YP block for a secondary particle index\n\n"
+    "The locator to the YP block for a secondary particle index\n\n"
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"

@@ -200,11 +200,11 @@ void generateBlocks() {
     this->tyrh_.emplace_back( iterators.first, iterators.second,
                               this->NTRO().NP( index ) );
 
-//    // secondary particle data: production cross section data
-//    locators = block( index, 4 );
-//    iterators = block( index, 5 );
-//    this->sigh_.emplace_back( locators.first, iterators.first, iterators.second,
-//                              this->NTRO().NP( index ) );
+    // secondary particle data: production cross section data
+    locators = block( index, 4 );
+    iterators = block( index, 5 );
+    this->sigh_.emplace_back( locators.first, iterators.first, iterators.second,
+                              this->NTRO().NP( index ) );
 
     // secondary particle data: angular distributions
     locators = block( index, 6 );
