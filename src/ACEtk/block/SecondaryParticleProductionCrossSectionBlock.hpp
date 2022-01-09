@@ -14,13 +14,13 @@ namespace block {
 
 /**
  *  @class
- *  @brief The continuous energy LSIGP and SIGP block with the photon
- *         production cross section data
+ *  @brief The continuous energy LSIGH and SIGH block with the secondary
+ *         particle production cross section data (multiplicity data only)
  *
- *  The SecondaryParticleProductionCrossSectionBlock class contains NXS(6) sets of photon
- *  production data, one for each reaction number on the MTRP block. The order
- *  of these cross section data sets is the same as the order of the reaction
- *  numbers in the MTRP block.
+ *  The SecondaryParticleProductionCrossSectionBlock class contains NTRO.NP sets
+ *  of secodnary particle production data, one for each reaction number on the
+ *  MTRH block. The order of these cross section data sets is the same as the
+ *  order of the reaction numbers in the MTRH block.
  */
 class SecondaryParticleProductionCrossSectionBlock :
     protected details::BaseBlockWithLocators< SecondaryParticleProductionCrossSectionBlock,

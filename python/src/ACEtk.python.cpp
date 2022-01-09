@@ -80,6 +80,7 @@ namespace block {
   void wrapSecondaryParticleInformationBlock( python::module&, python::module& );
   void wrapSecondaryParticleLocatorBlock( python::module&, python::module& );
   void wrapSecondaryParticleProductionBlock( python::module&, python::module& );
+  void wrapSecondaryParticleProductionCrossSectionBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -183,6 +184,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapSecondaryParticleInformationBlock( module, viewmodule );
   block::wrapSecondaryParticleLocatorBlock( module, viewmodule );
   block::wrapSecondaryParticleProductionBlock( module, viewmodule );
+  block::wrapSecondaryParticleProductionCrossSectionBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
