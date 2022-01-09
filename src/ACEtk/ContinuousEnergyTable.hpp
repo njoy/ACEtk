@@ -466,7 +466,7 @@ public:
   }
 
   /**
-   *  @brief Return the total production cross section block for a secondary
+   *  @brief Return the secondary particle production block for a secondary
    *         particle index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
@@ -480,7 +480,7 @@ public:
   }
 
   /**
-   *  @brief Return the total production cross section block for a secondary
+   *  @brief Return secondary particle production block for a secondary
    *         particle index
    *
    *  When the index is out of range an std::out_of_range exception is thrown

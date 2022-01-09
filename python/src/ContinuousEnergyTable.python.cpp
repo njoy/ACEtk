@@ -454,6 +454,28 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def(
 
+    "HPD",
+    &Table::HPD,
+    python::arg( "index" ),
+    "Return the secondary particle production block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_production_block",
+    &Table::secondaryParticleProductionBlock,
+    python::arg( "index" ),
+    "Return the secondary particle production block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
     "MTRH",
     &Table::MTRH,
     python::arg( "index" ),

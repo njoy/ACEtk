@@ -52,7 +52,7 @@ public:
   }
 
   /**
-   *  @brief Return the heating values
+   *  @brief Return the heating numbers
    */
   auto heating() const {
 
