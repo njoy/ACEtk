@@ -15,7 +15,11 @@ ProbabilityTableBlock( ProbabilityTableBlock&& base ) :
 /**
  *  @brief Constructor
  *
- *  @param[in] tables    the data for the probability tables
+ *  @param[in] interpolation    the interpolation type
+ *  @param[in] inelastic        the inelastic competition flag
+ *  @param[in] absorption       the absorption competition flag
+ *  @param[in] type             the probability table type
+ *  @param[in] tables           the probability tables
  */
 ProbabilityTableBlock( unsigned int interpolation, int inelastic,
                        int absorption, unsigned int type,
