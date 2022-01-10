@@ -50,3 +50,4 @@ add_test( NAME ACEtk.python.block.SecondaryParticleInformationBlock COMMAND ${PY
 add_test( NAME ACEtk.python.block.SecondaryParticleLocatorBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleInformationBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.SecondaryParticleProductionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleProductionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.SecondaryParticleProductionCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleProductionCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.ProbabilityTable COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ProbabilityTable.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
