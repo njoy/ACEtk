@@ -110,7 +110,7 @@ public:
    */
   int absorptionCompetion() const {
 
-    return this->ILF();
+    return this->IOA();
   }
 
   /**

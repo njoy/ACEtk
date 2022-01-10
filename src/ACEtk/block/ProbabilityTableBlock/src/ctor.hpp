@@ -34,7 +34,7 @@ ProbabilityTableBlock( unsigned int interpolation, int inelastic,
  *  @param[in] npcr   the number of delayed probability tables
  */
 ProbabilityTableBlock( Iterator bdd, Iterator end ) :
-  Base( "BDD", bdd, end ) {
+  Base( "UNR", bdd, end ) {
 
   this->generateBlocks();
 }
