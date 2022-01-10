@@ -396,6 +396,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "UNR",
+    &Table::UNR,
+    "The unresolved probability table block"
+  )
+  .def_property_readonly(
+
+    "probability_table_block",
+    &Table::probabilityTableBlock,
+    "The unresolved probability table block"
+  )
+  .def_property_readonly(
+
     "DNU",
     &Table::DNU,
     "The delayed fission multiplicity block"

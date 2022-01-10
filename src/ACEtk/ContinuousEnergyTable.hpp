@@ -18,6 +18,7 @@
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
 #include "ACEtk/block/DelayedNeutronPrecursorBlock.hpp"
+#include "ACEtk/block/ProbabilityTableBlock.hpp"
 #include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 #include "ACEtk/block/SecondaryParticleInformationBlock.hpp"
 #include "ACEtk/block/SecondaryParticleLocatorBlock.hpp"
@@ -53,6 +54,8 @@ class ContinuousEnergyTable : protected Table {
   block::ANDP andp_;
   block::DLWP dlwp_;
   block::YP yp_;
+
+  block::UNR unr_;
 
   block::NU dnu_;
   block::BDD bdd_;
@@ -392,6 +395,19 @@ public:
   const block::YP& photonMultiplicityReactionNumberBlock() const {
 
     return this->YP();
+  }
+
+  /**
+   *  @brief Return the unresoved probability table block
+   */
+  const block::UNR& UNR() const { return this->unr_; }
+
+  /**
+   *  @brief Return the unresoved probability table block
+   */
+  const block::UNR& probabilityTableBlock() const {
+
+    return this->UNR();
   }
 
   /**

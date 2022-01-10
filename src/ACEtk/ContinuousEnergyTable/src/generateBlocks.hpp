@@ -142,6 +142,12 @@ void generateBlocks() {
                          present ? iterators.second : begin );
 
   // delayed neutron data: delayed nubar for fissile isotopes
+  iterators = block( 23 );
+  present = ( this->data().JXS(23) > 0 );
+  this->unr_ = block::UNR( present ? iterators.first : begin,
+                           present ? iterators.second : begin );
+
+  // delayed neutron data: delayed nubar for fissile isotopes
   iterators = block( 24 );
   present = ( this->data().JXS(24) > 0 );
   this->dnu_ = block::NU( present ? iterators.first : begin,

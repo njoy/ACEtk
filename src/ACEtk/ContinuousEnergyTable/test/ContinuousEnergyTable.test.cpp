@@ -414,6 +414,22 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 3 == chunk.YP().index( 102 ) );
 
   // DNU block
+  CHECK( false == chunk.UNR().empty() );
+
+  CHECK( 19 == chunk.UNR().numberIncidentEnergies() );
+
+  auto unr1 = chunk.UNR().probabilityTable( 1 );
+  auto unr19 = chunk.UNR().probabilityTable( 19 );
+  CHECK( 2.25000100000E-03 == Approx( unr1.incidentEnergy() ) );
+  CHECK( 2.49999900000E-02 == Approx( unr19.incidentEnergy() ) );
+  CHECK( 16 == unr1.numberBins() );
+  CHECK( 16 == unr19.numberBins() );
+  CHECK( 1. == Approx( unr1.heating().front() ) );
+  CHECK( 1. == Approx( unr1.heating().back() ) );
+  CHECK( 1. == Approx( unr19.heating().front() ) );
+  CHECK( 1. == Approx( unr19.heating().back() ) );
+
+  // DNU block
   CHECK( false == chunk.DNU().empty() );
 
   CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
@@ -584,6 +600,9 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   // YP block
   CHECK( true == chunk.YP().empty() );
+
+  // BDD block
+  CHECK( true == chunk.UNR().empty() );
 
   // DNU block
   CHECK( true == chunk.DNU().empty() );
