@@ -360,6 +360,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "SIGP",
+    &Table::SIGP,
+    "The photon production cross section block"
+  )
+  .def_property_readonly(
+
+    "photon_production_cross_section_block",
+    &Table::crossSectionBlock,
+    "The photon production cross section block"
+  )
+  .def_property_readonly(
+
     "ANDP",
     &Table::ANDP,
     "The photon production angular distribution block"
@@ -525,6 +537,28 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     &Table::secondaryParticleFrameAndMultiplicityBlock,
     python::arg( "index" ),
     "Return the reference frame and multiplicity block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "SIGH",
+    &Table::SIGH,
+    python::arg( "index" ),
+    "Return the production cross section block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_production_cross_section_block",
+    &Table::secondaryParticleFrameAndMultiplicityBlock,
+    python::arg( "index" ),
+    "Return the production cross section block for a secondary particle index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"
