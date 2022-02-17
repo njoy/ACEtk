@@ -46,14 +46,29 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] sig       the cross section data block
  *  @param[in] ang       the angular distribution data block
  *  @param[in] dlw       the energy distribution data block
+ *  @param[in] gpd       the photon production block
+ *  @param[in] mtrp      the photon production reaction number block
+ *  @param[in] sigp      the photon production cross section data block
+ *  @param[in] angp      the photon production angular distribution data block
+ *  @param[in] dlwp      the photon production energy distribution data block
+ *  @param[in] yp        the photon multiplicity reaction number block
  */
 ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        block::ESZ esz, std::optional< block::NU > nu,
                        block::MTR mtr, block::LQR lqr, block::TYR tyr,
-                       block::SIG sig, block::AND ang, block::DLW dlw ) :
+                       block::SIG sig, block::AND ang, block::DLW dlw,
+                       std::optional< block::GPD > gpd,
+                       std::optional< block::MTRP > mtrp,
+                       std::optional< block::SIGP > sigp,
+                       std::optional< block::ANDP > andp,
+                       std::optional< block::DLWP > dlwp,
+                       std::optional< block::YP > yp ) :
   ContinuousEnergyTable(
       Table( std::move( header ),
              generateData( z, a, std::move( esz ), std::move( nu ),
                            std::move( mtr ), std::move( lqr ),
                            std::move( tyr ), std::move( sig ),
-                           std::move( ang ), std::move( dlw ) ) ) ) {}
+                           std::move( ang ), std::move( dlw ),
+                           std::move( gpd ), std::move( mtrp ),
+                           std::move( sigp ), std::move( andp ),
+                           std::move( dlwp ), std::move( yp ) ) ) ) {}

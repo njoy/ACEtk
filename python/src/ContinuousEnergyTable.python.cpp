@@ -24,6 +24,12 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   using SIG = njoy::ACEtk::block::SIG;
   using AND = njoy::ACEtk::block::AND;
   using DLW = njoy::ACEtk::block::DLW;
+  using GPD = njoy::ACEtk::block::GPD;
+  using MTRP = njoy::ACEtk::block::MTRP;
+  using SIGP = njoy::ACEtk::block::SIGP;
+  using ANDP = njoy::ACEtk::block::ANDP;
+  using DLWP = njoy::ACEtk::block::DLWP;
+  using YP = njoy::ACEtk::block::YP;
 
   // wrap views created by this table
 
@@ -43,12 +49,17 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
     python::init< unsigned int, unsigned int, Header,
                   ESZ, std::optional< NU >, MTR, LQR, TYR,
-                  SIG, AND, DLW >(),
+                  SIG, AND, DLW, std::optional< GPD >,
+                  std::optional< MTRP >, std::optional< SIGP >,
+                  std::optional< ANDP >, std::optional< DLWP >,
+                  std::optional< YP > >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "esz" ),
     python::arg( "nu" ) = std::nullopt,
     python::arg( "mtr" ), python::arg( "lqr" ), python::arg( "tyr" ),
     python::arg( "sig" ), python::arg( "ang" ), python::arg( "dlw" ),
+    python::arg( "gpd" ), python::arg( "mtrp" ), python::arg( "sigp" ),
+    python::arg( "andp" ), python::arg( "dlwp" ), python::arg( "yp" ),
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -62,7 +73,13 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    tyr       the reference frame and multiplicity block\n"
     "    sig       the cross section data block\n"
     "    ang       the angular distribution data block\n"
-    "    dlw       the energy distribution data block"
+    "    dlw       the energy distribution data block\n"
+    "    gpd       the photon production block\n"
+    "    mtrp      the photon production reaction number block\n"
+    "    sigp      the photon production cross section data block\n"
+    "    angp      the photon production angular distribution data block\n"
+    "    dlwp      the photon production energy distribution data block\n"
+    "    yp        the photon multiplicity reaction number block"
   )
   .def_property_readonly(
 
