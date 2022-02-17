@@ -147,6 +147,7 @@ public:
 
 using DLW = EnergyDistributionBlock;
 using DLWP = EnergyDistributionBlock;
+using DNED = EnergyDistributionBlock;
 using DLWH = EnergyDistributionBlock;
 
 } // block namespace

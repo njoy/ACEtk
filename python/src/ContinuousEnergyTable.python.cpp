@@ -25,6 +25,8 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   using SIG = njoy::ACEtk::block::SIG;
   using AND = njoy::ACEtk::block::AND;
   using DLW = njoy::ACEtk::block::DLW;
+  using BDD = njoy::ACEtk::block::BDD;
+  using DNED = njoy::ACEtk::block::DNED;
   using GPD = njoy::ACEtk::block::GPD;
   using MTRP = njoy::ACEtk::block::MTRP;
   using SIGP = njoy::ACEtk::block::SIGP;
@@ -51,15 +53,18 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
     python::init< unsigned int, unsigned int, Header,
                   ESZ, std::optional< NU >, std::optional< DNU >,
-                  MTR, LQR, TYR, SIG, AND, DLW, std::optional< GPD >,
-                  std::optional< MTRP >, std::optional< SIGP >,
-                  std::optional< ANDP >, std::optional< DLWP >,
-                  std::optional< YP >, std::optional< UNR > >(),
+                  MTR, LQR, TYR, SIG, AND, DLW,
+                  std::optional< BDD >, std::optional< DNED >,
+                  std::optional< GPD >, std::optional< MTRP >,
+                  std::optional< SIGP >, std::optional< ANDP >,
+                  std::optional< DLWP >, std::optional< YP >,
+                  std::optional< UNR > >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "esz" ),
     python::arg( "nu" ) = std::nullopt, python::arg( "dnu" ) = std::nullopt,
     python::arg( "mtr" ), python::arg( "lqr" ), python::arg( "tyr" ),
     python::arg( "sig" ), python::arg( "ang" ), python::arg( "dlw" ),
+    python::arg( "bdd" ) = std::nullopt, python::arg( "dned" ) = std::nullopt,
     python::arg( "gpd" ) = std::nullopt, python::arg( "mtrp" ) = std::nullopt,
     python::arg( "sigp" ) = std::nullopt, python::arg( "andp" ) = std::nullopt,
     python::arg( "dlwp" ) = std::nullopt, python::arg( "yp" ) = std::nullopt,
@@ -79,6 +84,8 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    sig       the cross section data block\n"
     "    ang       the angular distribution data block\n"
     "    dlw       the energy distribution data block\n"
+    "    bdd       the delayed fission neutron precursor data block\n"
+    "    dned      the delayed fission neutron energy distribution data block\n"
     "    gpd       the photon production block\n"
     "    mtrp      the photon production reaction number block\n"
     "    sigp      the photon production cross section data block\n"

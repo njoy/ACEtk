@@ -9,7 +9,9 @@ Data generateData( unsigned int z, unsigned int a,
                    std::optional< block::DLWP >&& dlwp,
                    std::optional< block::YP >&& yp,
                    std::optional< block::UNR >&& unr,
-                   std::optional< block::DNU >&& dnu ) {
+                   std::optional< block::DNU >&& dnu,
+                   std::optional< block::BDD >&& bdd,
+                   std::optional< block::DNED >&& dned ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -26,10 +28,15 @@ Data generateData( unsigned int z, unsigned int a,
   //  - AND and DLW have the same NR
   //  - when fission is present, the NU block should be defined
   //  - when one of the photon production blocks is defined, all of them should be
+  //  - ANDP and DLWP have the same NTRP
   //  - when delayed nubar is defined, it can only be tabulated
+  //  - when one of the delayed neutron blocks is defined, all of them should be
+  //  - BDD and DNED have the same NPCR
   unsigned int ntr = mtr.NTR();
   unsigned int nr = ang.NR();
   unsigned int ntrp = mtrp ? mtrp->NTR() : 0;
+  unsigned int ntype = 0;
+  unsigned int npcr = bdd ? bdd->NPCR() : 0;
   if ( ( ntr != lqr.NTR() ) || ( ntr != tyr.NTR() ) ||
        ( ntr != sig.NTR() ) ) {
 
@@ -65,6 +72,16 @@ Data generateData( unsigned int z, unsigned int a,
     Log::info( yp ? "YP is defined" : "YP is not defined" );
     throw std::exception();
   }
+  if ( gpd ) {
+
+    if ( ( ntrp != andp->NR() ) || ( ntrp != dlwp->NR() ) ) {
+
+      Log::error( "Inconsistent NTRP between the different blocks" );
+      Log::info( "ANDP NTRP value = {}", andp->NR() );
+      Log::info( "DLWP NTRP value = {}", dlwp->NR() );
+      throw std::exception();
+    }
+  }
   if ( dnu ) {
 
     if ( dnu->hasPromptAndTotalFissionMultiplicity() ) {
@@ -73,12 +90,32 @@ Data generateData( unsigned int z, unsigned int a,
                   "sets of multiplicity data which is not allowed" );
       throw std::exception();
     }
-    if ( dnu->promptFissionMultiplicity().LNU() != 2 ) {
+    unsigned int lnu = std::visit( [] ( const auto& nu ) { return nu.LNU(); },
+                                   dnu->promptFissionMultiplicity() );
+    if ( lnu != 2 ) {
 
       Log::error( "The delayed fission neutron multiplicity data is not given "
                   "as tabulated data" );
       Log::info( "Expected LNU = 2" );
-      Log::info( "Found LNU = {}", dnu->promptFissionMultiplicity().LNU() );
+      Log::info( "Found LNU = {}", lnu );
+      throw std::exception();
+    }
+  }
+  if ( ( dnu || bdd || dned ) && !( dnu && bdd && dned ) ) {
+
+    Log::error( "Not all delayed neutron blocks are defined" );
+    Log::info( dnu ? "DNU is defined" : "DNU is not defined" );
+    Log::info( bdd ? "BDD is defined" : "BDD is not defined" );
+    Log::info( dned ? "DNED is defined" : "DNED is not defined" );
+    throw std::exception();
+  }
+  if ( bdd ) {
+
+    if ( ( npcr != bdd->NPCR() ) || ( npcr != dned->NR() ) ) {
+
+      Log::error( "Inconsistent NPCR between the different blocks" );
+      Log::info( "BDD NPCR value = {}", bdd->NPCR() );
+      Log::info( "DNED NPCR value = {}", dned->NR() );
       throw std::exception();
     }
   }
@@ -138,17 +175,31 @@ Data generateData( unsigned int z, unsigned int a,
 
     jxs[23] = xss.size() + 1;
     xss.insert( xss.end(), dnu->begin(), dnu->end() );
+    jxs[24] = xss.size() + 1;
+    xss.insert( xss.end(), bdd->begin(), bdd->end() );
+    jxs[25] = xss.size() + 1;
+    jxs[26] = xss.size() + npcr + 1;
+    xss.insert( xss.end(), dned->begin(), dned->end() );
   }
 
   // set the nxs values for the continuous energy table
   // NXS(1) = length
   // NXS(2) = za
-  // NXS(4) = NTR
+  // NXS(3) = NES (number energies)
+  // NXS(4) = NTR (total number of reactions)
+  // NXS(5) = NR (number of reactions with angular and energy distribution data,
+  //              excluding elastic)
+  // NXS(6) = NTRP (number of photon production reactions)
+  // NXS(7) = NTYPE (number of secondary particle types)
+  // NXS(8) = NPCR (number of delayed precursor groups)
   nxs[0] = xss.size();
   nxs[1] = z * 1000 + a;
+  nxs[2] = esz.energies().size();
   nxs[3] = ntr;
   nxs[4] = nr;
   nxs[5] = ntrp;
+  nxs[6] = ntype;
+  nxs[7] = npcr;
 
   return { std::move( iz ), std::move( aw ),
            std::move( nxs ), std::move( jxs ), std::move( xss ) };
