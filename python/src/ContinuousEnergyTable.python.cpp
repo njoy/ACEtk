@@ -30,6 +30,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   using ANDP = njoy::ACEtk::block::ANDP;
   using DLWP = njoy::ACEtk::block::DLWP;
   using YP = njoy::ACEtk::block::YP;
+  using UNR = njoy::ACEtk::block::UNR;
 
   // wrap views created by this table
 
@@ -52,7 +53,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
                   SIG, AND, DLW, std::optional< GPD >,
                   std::optional< MTRP >, std::optional< SIGP >,
                   std::optional< ANDP >, std::optional< DLWP >,
-                  std::optional< YP > >(),
+                  std::optional< YP >, std::optional< UNR > >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "esz" ),
     python::arg( "nu" ) = std::nullopt,
@@ -60,6 +61,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     python::arg( "sig" ), python::arg( "ang" ), python::arg( "dlw" ),
     python::arg( "gpd" ), python::arg( "mtrp" ), python::arg( "sigp" ),
     python::arg( "andp" ), python::arg( "dlwp" ), python::arg( "yp" ),
+    python::arg( "unr" ),
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -79,7 +81,8 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    sigp      the photon production cross section data block\n"
     "    angp      the photon production angular distribution data block\n"
     "    dlwp      the photon production energy distribution data block\n"
-    "    yp        the photon multiplicity reaction number block"
+    "    yp        the photon multiplicity reaction number block\n"
+    "    unr       the unresolved resonance probability table block"
   )
   .def_property_readonly(
 

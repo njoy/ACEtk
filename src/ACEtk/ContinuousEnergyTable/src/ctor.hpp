@@ -52,6 +52,7 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] angp      the photon production angular distribution data block
  *  @param[in] dlwp      the photon production energy distribution data block
  *  @param[in] yp        the photon multiplicity reaction number block
+ *  @param[in] unr       the unresolved resonance probability table block
  */
 ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        block::ESZ esz, std::optional< block::NU > nu,
@@ -62,7 +63,8 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        std::optional< block::SIGP > sigp,
                        std::optional< block::ANDP > andp,
                        std::optional< block::DLWP > dlwp,
-                       std::optional< block::YP > yp ) :
+                       std::optional< block::YP > yp,
+                       std::optional< block::UNR > unr ) :
   ContinuousEnergyTable(
       Table( std::move( header ),
              generateData( z, a, std::move( esz ), std::move( nu ),
@@ -71,4 +73,5 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                            std::move( ang ), std::move( dlw ),
                            std::move( gpd ), std::move( mtrp ),
                            std::move( sigp ), std::move( andp ),
-                           std::move( dlwp ), std::move( yp ) ) ) ) {}
+                           std::move( dlwp ), std::move( yp ),
+                           std::move( unr ) ) ) ) {}

@@ -7,7 +7,8 @@ Data generateData( unsigned int z, unsigned int a,
                    std::optional< block::SIGP >&& sigp,
                    std::optional< block::ANDP >&& andp,
                    std::optional< block::DLWP >&& dlwp,
-                   std::optional< block::YP >&& yp ) {
+                   std::optional< block::YP >&& yp,
+                   std::optional< block::UNR >&& unr ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -69,7 +70,7 @@ Data generateData( unsigned int z, unsigned int a,
   if ( nu ) {
 
     jxs[1] = xss.size() + 1;
-    xss.insert( xss.end(), nu.value().begin(), nu.value().end() );
+    xss.insert( xss.end(), nu->begin(), nu->end() );
   }
   jxs[2] = xss.size() + 1;
   xss.insert( xss.end(), mtr.begin(), mtr.end() );
@@ -101,12 +102,19 @@ Data generateData( unsigned int z, unsigned int a,
     jxs[17] = xss.size() + 1;
     jxs[18] = xss.size() + ntrp + 1;
     xss.insert( xss.end(), dlwp->begin(), dlwp->end() );
+    jxs[19] = xss.size() + 1;
+    xss.insert( xss.end(), yp->begin(), yp->end() );
   }
   if ( mtr.hasReactionNumber( 18 ) ) {
 
     jxs[20] = jxs[8] + sig.crossSectionLocator( mtr.index( 18 ) ) - 1;
   }
   jxs[21] = xss.size() + 1;
+  if ( unr ) {
+
+    jxs[22] = xss.size() + 1;
+    xss.insert( xss.end(), unr->begin(), unr->end() );
+  }
 
   // set the nxs values for the continuous energy table
   // NXS(1) = length
