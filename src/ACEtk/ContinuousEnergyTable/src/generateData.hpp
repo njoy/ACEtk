@@ -23,6 +23,7 @@ Data generateData( unsigned int z, unsigned int a,
   //  - MTR, LQR, TYR and SIG have the same NTR
   //  - AND and DLW have the same NR
   //  - when fission is present, the NU block should be defined
+  //  - when one of the photon production blocks is defined, all of them should be
   unsigned int ntr = mtr.NTR();
   unsigned int nr = ang.NR();
   unsigned int ntrp = mtrp ? mtrp->NTR() : 0;
@@ -47,6 +48,18 @@ Data generateData( unsigned int z, unsigned int a,
 
     Log::error( "The fission reaction is defined but the fission multiplicity "
                 "block is missin" );
+    throw std::exception();
+  }
+  if ( ( gpd || mtrp || sigp || andp || dlwp || yp ) &&
+       !( gpd && mtrp && sigp && andp && dlwp && yp ) ) {
+
+    Log::error( "Not all photon production blocks are defined" );
+    Log::info( gpd ? "GPD is defined" : "GPD is not defined" );
+    Log::info( mtrp ? "MTRP is defined" : "MTRP is not defined" );
+    Log::info( sigp ? "SIGP is defined" : "SIGP is not defined" );
+    Log::info( andp ? "ANDP is defined" : "ANDP is not defined" );
+    Log::info( dlwp ? "DLWP is defined" : "DLWP is not defined" );
+    Log::info( yp ? "YP is defined" : "YP is not defined" );
     throw std::exception();
   }
 
