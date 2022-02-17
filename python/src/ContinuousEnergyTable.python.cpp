@@ -18,6 +18,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   using Table = njoy::ACEtk::ContinuousEnergyTable;
   using ESZ = njoy::ACEtk::block::ESZ;
   using NU = njoy::ACEtk::block::NU;
+  using DNU = njoy::ACEtk::block::DNU;
   using MTR = njoy::ACEtk::block::MTR;
   using LQR = njoy::ACEtk::block::LQR;
   using TYR = njoy::ACEtk::block::TYR;
@@ -49,19 +50,20 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   .def(
 
     python::init< unsigned int, unsigned int, Header,
-                  ESZ, std::optional< NU >, MTR, LQR, TYR,
-                  SIG, AND, DLW, std::optional< GPD >,
+                  ESZ, std::optional< NU >, std::optional< DNU >,
+                  MTR, LQR, TYR, SIG, AND, DLW, std::optional< GPD >,
                   std::optional< MTRP >, std::optional< SIGP >,
                   std::optional< ANDP >, std::optional< DLWP >,
                   std::optional< YP >, std::optional< UNR > >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "esz" ),
-    python::arg( "nu" ) = std::nullopt,
+    python::arg( "nu" ) = std::nullopt, python::arg( "dnu" ) = std::nullopt,
     python::arg( "mtr" ), python::arg( "lqr" ), python::arg( "tyr" ),
     python::arg( "sig" ), python::arg( "ang" ), python::arg( "dlw" ),
-    python::arg( "gpd" ), python::arg( "mtrp" ), python::arg( "sigp" ),
-    python::arg( "andp" ), python::arg( "dlwp" ), python::arg( "yp" ),
-    python::arg( "unr" ),
+    python::arg( "gpd" ) = std::nullopt, python::arg( "mtrp" ) = std::nullopt,
+    python::arg( "sigp" ) = std::nullopt, python::arg( "andp" ) = std::nullopt,
+    python::arg( "dlwp" ) = std::nullopt, python::arg( "yp" ) = std::nullopt,
+    python::arg( "unr" ) = std::nullopt,
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -69,7 +71,8 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    a         the A number of the nuclide\n"
     "    header    the header for the table\n"
     "    esz       the principal cross section block\n"
-    "    nu        the optional fission multiplicity block\n"
+    "    nu        the optional fission neutron multiplicity block\n"
+    "    dnu       the optional delayed fission neutron multiplicity block\n"
     "    mtr       the reaction number block\n"
     "    lqr       the reaction Q value block\n"
     "    tyr       the reference frame and multiplicity block\n"

@@ -8,7 +8,8 @@ Data generateData( unsigned int z, unsigned int a,
                    std::optional< block::ANDP >&& andp,
                    std::optional< block::DLWP >&& dlwp,
                    std::optional< block::YP >&& yp,
-                   std::optional< block::UNR >&& unr ) {
+                   std::optional< block::UNR >&& unr,
+                   std::optional< block::DNU >&& dnu ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -25,6 +26,7 @@ Data generateData( unsigned int z, unsigned int a,
   //  - AND and DLW have the same NR
   //  - when fission is present, the NU block should be defined
   //  - when one of the photon production blocks is defined, all of them should be
+  //  - when delayed nubar is defined, it can only be tabulated
   unsigned int ntr = mtr.NTR();
   unsigned int nr = ang.NR();
   unsigned int ntrp = mtrp ? mtrp->NTR() : 0;
@@ -62,6 +64,23 @@ Data generateData( unsigned int z, unsigned int a,
     Log::info( dlwp ? "DLWP is defined" : "DLWP is not defined" );
     Log::info( yp ? "YP is defined" : "YP is not defined" );
     throw std::exception();
+  }
+  if ( dnu ) {
+
+    if ( dnu->hasPromptAndTotalFissionMultiplicity() ) {
+
+      Log::error( "The delayed fission neutron multiplicity block has two "
+                  "sets of multiplicity data which is not allowed" );
+      throw std::exception();
+    }
+    if ( dnu->promptFissionMultiplicity().LNU() != 2 ) {
+
+      Log::error( "The delayed fission neutron multiplicity data is not given "
+                  "as tabulated data" );
+      Log::info( "Expected LNU = 2" );
+      Log::info( "Found LNU = {}", dnu->promptFissionMultiplicity().LNU() );
+      throw std::exception();
+    }
   }
 
   // generate the xss array and set the locators in the jxs array as we go
@@ -114,6 +133,11 @@ Data generateData( unsigned int z, unsigned int a,
 
     jxs[22] = xss.size() + 1;
     xss.insert( xss.end(), unr->begin(), unr->end() );
+  }
+  if ( dnu ) {
+
+    jxs[23] = xss.size() + 1;
+    xss.insert( xss.end(), dnu->begin(), dnu->end() );
   }
 
   // set the nxs values for the continuous energy table

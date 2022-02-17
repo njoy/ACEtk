@@ -39,7 +39,8 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] a         the A number of the nuclide
  *  @param[in] header    the header for the table
  *  @param[in] esz       the principal cross section block
- *  @param[in] nu        the optional fission multiplicity block
+ *  @param[in] nu        the optional fission neutron multiplicity block
+ *  @param[in] dnu       the optional delayed fission neutron multiplicity block
  *  @param[in] mtr       the reaction number block
  *  @param[in] lqr       the reaction Q value block
  *  @param[in] tyr       the reference frame and multiplicity block
@@ -56,6 +57,7 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  */
 ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        block::ESZ esz, std::optional< block::NU > nu,
+                       std::optional< block::DNU > dnu,
                        block::MTR mtr, block::LQR lqr, block::TYR tyr,
                        block::SIG sig, block::AND ang, block::DLW dlw,
                        std::optional< block::GPD > gpd,
@@ -74,4 +76,4 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                            std::move( gpd ), std::move( mtrp ),
                            std::move( sigp ), std::move( andp ),
                            std::move( dlwp ), std::move( yp ),
-                           std::move( unr ) ) ) ) {}
+                           std::move( unr ), std::move( dnu ) ) ) ) {}
