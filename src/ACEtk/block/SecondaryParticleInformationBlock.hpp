@@ -56,14 +56,14 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto NP( std::size_t index ) const { return this->XSS( index ); }
+  unsigned int NP( std::size_t index ) const { return this->XSS( index ); }
 
   /**
    *  @brief Return the number of reactions for a secondary particle index
    *
    *  @param[in] index     the index (one-based)
    */
-  auto numberSecondaryParticleProductionReactions( std::size_t index ) const {
+  unsigned int numberSecondaryParticleProductionReactions( std::size_t index ) const {
 
     return this->NP( index );
   }

@@ -47,7 +47,7 @@ Data generateData( unsigned int z, unsigned int a,
     Log::info( "SIG NTR value = {}", sig.NTR() );
     throw std::exception();
   }
-  if ( ( nr != ang.NR() ) || ( ntr != dlw.NR() ) ) {
+  if ( ( nr != ang.NR() ) || ( nr != dlw.NR() ) ) {
 
     Log::error( "Inconsistent NR between the different blocks" );
     Log::info( "AND NTR value = {}", ang.NR() );
