@@ -93,7 +93,7 @@ void generateBlocks() {
   this->and_ = block::AND( locators.first, iterators.first, iterators.second,
                            this->NR() );
 
-  // angular distribution block
+  // energy distribution block
   locators = block( 10 );
   iterators = block( 11 );
   this->dlw_ = block::DLW( locators.first, iterators.first, iterators.second,

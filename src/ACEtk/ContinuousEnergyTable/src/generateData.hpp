@@ -138,7 +138,7 @@ Data generateData( unsigned int z, unsigned int a,
   jxs[6] = xss.size() + ntr + 1;
   xss.insert( xss.end(), sig.begin(), sig.end() );
   jxs[7] = xss.size() + 1;
-  jxs[8] = xss.size() + nr + 1;
+  jxs[8] = xss.size() + ( nr + 1 ) + 1;
   xss.insert( xss.end(), ang.begin(), ang.end() );
   jxs[9] = xss.size() + 1;
   jxs[10] = xss.size() + nr + 1;
