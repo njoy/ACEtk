@@ -187,6 +187,21 @@ Data generateData( unsigned int z, unsigned int a,
   jxs[9] = xss.size() + 1;
   jxs[10] = xss.size() + nr + 1;
   xss.insert( xss.end(), dlw.begin(), dlw.end() );
+  if ( unr ) {
+
+    jxs[22] = xss.size() + 1;
+    xss.insert( xss.end(), unr->begin(), unr->end() );
+  }
+  if ( dnu ) {
+
+    jxs[23] = xss.size() + 1;
+    xss.insert( xss.end(), dnu->begin(), dnu->end() );
+    jxs[24] = xss.size() + 1;
+    xss.insert( xss.end(), bdd->begin(), bdd->end() );
+    jxs[25] = xss.size() + 1;
+    jxs[26] = xss.size() + npcr + 1;
+    xss.insert( xss.end(), dned->begin(), dned->end() );
+  }
   if ( gpd ) {
 
     jxs[11] = xss.size() + 1;
@@ -207,24 +222,9 @@ Data generateData( unsigned int z, unsigned int a,
   }
   if ( mtr.hasReactionNumber( 18 ) ) {
 
-    jxs[20] = jxs[8] + sig.crossSectionLocator( mtr.index( 18 ) ) - 1;
+    jxs[20] = jxs[6] + sig.crossSectionLocator( mtr.index( 18 ) ) - 1;
   }
   jxs[21] = xss.size();
-  if ( unr ) {
-
-    jxs[22] = xss.size() + 1;
-    xss.insert( xss.end(), unr->begin(), unr->end() );
-  }
-  if ( dnu ) {
-
-    jxs[23] = xss.size() + 1;
-    xss.insert( xss.end(), dnu->begin(), dnu->end() );
-    jxs[24] = xss.size() + 1;
-    xss.insert( xss.end(), bdd->begin(), bdd->end() );
-    jxs[25] = xss.size() + 1;
-    jxs[26] = xss.size() + npcr + 1;
-    xss.insert( xss.end(), dned->begin(), dned->end() );
-  }
   if ( ptype ) {
 
     std::vector< unsigned int > numbers;
@@ -289,6 +289,8 @@ Data generateData( unsigned int z, unsigned int a,
   nxs[5] = ntrp;
   nxs[6] = ntype;
   nxs[7] = npcr;
+  nxs[9] = z;
+  nxs[10] = a;
 
   return { std::move( iz ), std::move( aw ),
            std::move( nxs ), std::move( jxs ), std::move( xss ) };
