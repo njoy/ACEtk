@@ -34,6 +34,14 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   using DLWP = njoy::ACEtk::block::DLWP;
   using YP = njoy::ACEtk::block::YP;
   using UNR = njoy::ACEtk::block::UNR;
+  using PTYPE = njoy::ACEtk::block::PTYPE;
+  using HPD = njoy::ACEtk::block::HPD;
+  using MTRH = njoy::ACEtk::block::MTRH;
+  using TYRH = njoy::ACEtk::block::TYRH;
+  using SIGH = njoy::ACEtk::block::SIGH;
+  using ANDH = njoy::ACEtk::block::ANDH;
+  using DLWH = njoy::ACEtk::block::DLWH;
+  using YH = njoy::ACEtk::block::YH;
 
   // wrap views created by this table
 
@@ -58,7 +66,14 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
                   std::optional< GPD >, std::optional< MTRP >,
                   std::optional< SIGP >, std::optional< ANDP >,
                   std::optional< DLWP >, std::optional< YP >,
-                  std::optional< UNR > >(),
+                  std::optional< UNR >, std::optional< PTYPE >,
+                  std::optional< std::vector< HPD > >,
+                  std::optional< std::vector< MTRH > >,
+                  std::optional< std::vector< TYRH > >,
+                  std::optional< std::vector< SIGH > >,
+                  std::optional< std::vector< ANDH > >,
+                  std::optional< std::vector< DLWH > >,
+                  std::optional< std::vector< YH > > >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "esz" ),
     python::arg( "nu" ) = std::nullopt, python::arg( "dnu" ) = std::nullopt,
@@ -68,7 +83,11 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     python::arg( "gpd" ) = std::nullopt, python::arg( "mtrp" ) = std::nullopt,
     python::arg( "sigp" ) = std::nullopt, python::arg( "andp" ) = std::nullopt,
     python::arg( "dlwp" ) = std::nullopt, python::arg( "yp" ) = std::nullopt,
-    python::arg( "unr" ) = std::nullopt,
+    python::arg( "unr" ) = std::nullopt, python::arg( "ptype" ) = std::nullopt,
+    python::arg( "hpd" ) = std::nullopt, python::arg( "mtrh" ) = std::nullopt,
+    python::arg( "tyrh" ) = std::nullopt, python::arg( "sigh" ) = std::nullopt,
+    python::arg( "andh" ) = std::nullopt, python::arg( "dlwh" ) = std::nullopt,
+    python::arg( "yh" ) = std::nullopt,
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -92,7 +111,15 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    angp      the photon production angular distribution data block\n"
     "    dlwp      the photon production energy distribution data block\n"
     "    yp        the photon multiplicity reaction number block\n"
-    "    unr       the unresolved resonance probability table block"
+    "    unr       the unresolved resonance probability table block\n"
+    "    ptype     the secondary particle type block\n"
+    "    hpd       the secondary particle production blocks\n"
+    "    mtrh      the secondary particle production reaction number blocks\n"
+    "    tyrh      the secondary particle productionreference frame blocks\n"
+    "    sigh      the secondary particle production cross section data blocks\n"
+    "    angh      the secondary particle angular distribution data blocks\n"
+    "    dlwh      the secondary particle energy distribution data blocks\n"
+    "    yh        the secondary particle multiplicity reaction number blocks"
   )
   .def_property_readonly(
 

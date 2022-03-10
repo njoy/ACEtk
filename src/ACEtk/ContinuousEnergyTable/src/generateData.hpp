@@ -11,7 +11,15 @@ Data generateData( unsigned int z, unsigned int a,
                    std::optional< block::UNR >&& unr,
                    std::optional< block::DNU >&& dnu,
                    std::optional< block::BDD >&& bdd,
-                   std::optional< block::DNED >&& dned ) {
+                   std::optional< block::DNED >&& dned,
+                   std::optional< block::PTYPE >&& ptype,
+                   std::optional< std::vector< block::HPD > >&& hpd,
+                   std::optional< std::vector< block::MTRH > >&& mtrh,
+                   std::optional< std::vector< block::TYRH > >&& tyrh,
+                   std::optional< std::vector< block::SIGH > >&& sigh,
+                   std::optional< std::vector< block::ANDH > >&& andh,
+                   std::optional< std::vector< block::DLWH > >&& dlwh,
+                   std::optional< std::vector< block::YH > >&& yh ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -32,10 +40,12 @@ Data generateData( unsigned int z, unsigned int a,
   //  - when delayed nubar is defined, it can only be tabulated
   //  - when one of the delayed neutron blocks is defined, all of them should be
   //  - BDD and DNED have the same NPCR
+  //  - when one of the secondary particle blocks is defined, all of them should be
+  //  - the number of secondary particle production blocks is correct
   unsigned int ntr = mtr.NTR();
   unsigned int nr = ang.NR();
   unsigned int ntrp = mtrp ? mtrp->NTR() : 0;
-  unsigned int ntype = 0;
+  unsigned int ntype = ptype ? ptype->NTYPE() : 0;
   unsigned int npcr = bdd ? bdd->NPCR() : 0;
   if ( ( ntr != lqr.NTR() ) || ( ntr != tyr.NTR() ) ||
        ( ntr != sig.NTR() ) ) {
@@ -57,7 +67,7 @@ Data generateData( unsigned int z, unsigned int a,
   if ( mtr.hasReactionNumber( 18 ) && !nu ) {
 
     Log::error( "The fission reaction is defined but the fission multiplicity "
-                "block is missin" );
+                "block is missing" );
     throw std::exception();
   }
   if ( ( gpd || mtrp || sigp || andp || dlwp || yp ) &&
@@ -119,6 +129,40 @@ Data generateData( unsigned int z, unsigned int a,
       throw std::exception();
     }
   }
+  if ( ( ptype || hpd || mtrh || tyrh || sigh || andh || dlwh || yh ) &&
+       !( ptype && hpd && mtrh && tyrh && sigh && andh && dlwh && yh ) ) {
+
+    Log::error( "Not all secondary particle production blocks are defined" );
+    Log::info( ptype ? "PTYPE is defined" : "PTYPE is not defined" );
+    Log::info( hpd ? "HPD is defined" : "HPD is not defined" );
+    Log::info( mtrh ? "MTRH is defined" : "MTRH is not defined" );
+    Log::info( tyrh ? "TYRH is defined" : "TYRH is not defined" );
+    Log::info( sigh ? "SIGH is defined" : "SIGH is not defined" );
+    Log::info( andh ? "ANDH is defined" : "ANDH is not defined" );
+    Log::info( dlwh ? "DLWH is defined" : "DLWH is not defined" );
+    Log::info( dlwh ? "YH is defined" : "YH is not defined" );
+    throw std::exception();
+  }
+  if ( ptype ) {
+
+    if ( ( ntype != hpd->size() ) || ( ntype != mtrh->size() ) ||
+         ( ntype != tyrh->size() ) || ( ntype != sigh->size() ) ||
+         ( ntype != andh->size() ) || ( ntype != dlwh->size() ) ||
+         ( ntype != yh->size() ) ) {
+
+      Log::error( "Inconsistent size between the different secondary "
+                  "particle production blocks" );
+      Log::info( "PTYPE NTRP value = {}", ntype );
+      Log::info( "Number HPD blocks = {}", hpd->size() );
+      Log::info( "Number MTRH blocks = {}", mtrh->size() );
+      Log::info( "Number TYRH blocks = {}", tyrh->size() );
+      Log::info( "Number SIGH blocks = {}", sigh->size() );
+      Log::info( "Number ANDH blocks = {}", andh->size() );
+      Log::info( "Number DLWH blocks = {}", dlwh->size() );
+      Log::info( "Number YH blocks = {}", yh->size() );
+      throw std::exception();
+    }
+  }
 
   // generate the xss array and set the locators in the jxs array as we go
   jxs[0] = 1;
@@ -165,7 +209,7 @@ Data generateData( unsigned int z, unsigned int a,
 
     jxs[20] = jxs[8] + sig.crossSectionLocator( mtr.index( 18 ) ) - 1;
   }
-  jxs[21] = xss.size() + 1;
+  jxs[21] = xss.size();
   if ( unr ) {
 
     jxs[22] = xss.size() + 1;
@@ -180,6 +224,51 @@ Data generateData( unsigned int z, unsigned int a,
     jxs[25] = xss.size() + 1;
     jxs[26] = xss.size() + npcr + 1;
     xss.insert( xss.end(), dned->begin(), dned->end() );
+  }
+  if ( ptype ) {
+
+    std::vector< unsigned int > numbers;
+    for ( const auto& element : mtrh.value() ) {
+
+      numbers.push_back( element.NTR() );
+    }
+    block::NTRO ntro( std::move( numbers ) );
+
+    jxs[29] = xss.size() + 1;
+    xss.insert( xss.end(), ptype->begin(), ptype->end() );
+    jxs[30] = xss.size() + 1;
+    xss.insert( xss.end(), ntro.begin(), ntro.end() );
+    jxs[31] = xss.size() + 1;
+
+    auto size = ntype * 10;
+    auto ixs_position = xss.size();
+    std::vector< std::array< unsigned int, 10 > > ixs( ntype );
+
+    for ( std::size_t index = 0; index < ntype; ++index ) {
+
+      auto number = mtrh.value()[index].NTR();
+
+      ixs[index][0] = xss.size() + size + 1;
+      xss.insert( xss.end(), hpd.value()[index].begin(), hpd.value()[index].end() );
+      ixs[index][1] = xss.size() + size + 1;
+      xss.insert( xss.end(), mtrh.value()[index].begin(), mtrh.value()[index].end() );
+      ixs[index][2] = xss.size() + size + 1;
+      xss.insert( xss.end(), tyrh.value()[index].begin(), tyrh.value()[index].end() );
+      ixs[index][3] = xss.size() + size + 1;
+      ixs[index][4] = xss.size() + size + number + 1;
+      xss.insert( xss.end(), sigh.value()[index].begin(), sigh.value()[index].end() );
+      ixs[index][5] = xss.size() + size + 1;
+      ixs[index][6] = xss.size() + size + number + 1;
+      xss.insert( xss.end(), andh.value()[index].begin(), andh.value()[index].end() );
+      ixs[index][7] = xss.size() + size + 1;
+      ixs[index][8] = xss.size() + size + number + 1;
+      xss.insert( xss.end(), dlwh.value()[index].begin(), dlwh.value()[index].end() );
+      ixs[index][9] = xss.size() + size + 1;
+      xss.insert( xss.end(), yh.value()[index].begin(), yh.value()[index].end() );
+    }
+
+    block::IXS locators( std::move( ixs ) );
+    xss.insert( xss.begin() + ixs_position, locators.begin(), locators.end() );
   }
 
   // set the nxs values for the continuous energy table
