@@ -131,6 +131,7 @@ if(ACEtk.python)
     python/src/block/PhotonProductionBlock.python.cpp
     python/src/block/PhotonProductionCrossSectionBlock.python.cpp
     python/src/block/MultiplicityReactionNumberBlock.python.cpp
+    python/src/block/TabulatedMultiplicity.python.cpp
     python/src/block/TabulatedSecondaryParticleMultiplicity.python.cpp
     python/src/block/PhotonProductionCrossSectionData.python.cpp
     python/src/block/DelayedNeutronPrecursorBlock.python.cpp

@@ -32,8 +32,8 @@ ParameterData( std::vector< double > energies,
 /**
  *  @brief Constructor
  *
- *  @param[in] sig     the begin iterator of the block in the XSS array
- *  @param[in] end     the end iterator of the block in the XSS array
+ *  @param[in] begin    the begin iterator of the block in the XSS array
+ *  @param[in] end      the end iterator of the block in the XSS array
  */
 ParameterData( Iterator begin, Iterator end ) :
   BaseTabulatedData( "ParameterData", begin, end ) {}
