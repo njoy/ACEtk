@@ -39,7 +39,7 @@ public:
   /**
    *  @brief Return the associated energy value
    */
-  double energy() const { return this->value(); }
+  double energy() const { return this->energy_; }
 
   /**
    *  @brief Return the interpolation flag

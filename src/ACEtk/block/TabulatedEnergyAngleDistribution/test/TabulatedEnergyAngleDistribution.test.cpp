@@ -31,8 +31,8 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
       std::size_t locb = 21;
 
       TabulatedEnergyAngleDistribution chunk( 1.1,
-                                                      std::move( distributions ),
-                                                      locb );
+                                              std::move( distributions ),
+                                              locb );
 
       THEN( "a TabulatedEnergyAngleDistribution can be constructed and "
             "members can be tested" ) {
