@@ -24,9 +24,15 @@ class BaseDistributionData : protected details::Base {
 
   /* fields */
   std::size_t locb_;
+  std::size_t nc_;
+
+protected:
+
   InterpolationData interpolation_;
   details::ColumnData values_;
   std::vector< Distribution > distributions_;
+
+private:
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseDistributionData/src/verifyValueIndex.hpp"
@@ -79,19 +85,27 @@ public:
   auto interpolants() const { return this->INT(); }
 
   /**
-   *  @brief Return the number of values
+   *  @brief Return the number of values in each column
    */
   std::size_t N() const { return this->values_.N(); }
 
   /**
-   *  @brief Return the number of values
+   *  @brief Return the number of values in each column
    */
   std::size_t numberValues() const { return this->N(); }
 
   /**
-   *  @brief Return the values
+   *  @brief Return the values for a given column index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] column    the column index (one-based)
    */
-  auto values() const { return this->values_.column( 1 ); }
+  auto values( std::size_t column ) const {
+
+    return this->values_.column( column );
+  }
 
   /**
    *  @brief Return the value for a given index
@@ -99,14 +113,15 @@ public:
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
+   *  @param[in] column    the column index (one-based)
    *  @param[in] index     the index (one-based)
    */
-  double value( std::size_t index ) const {
+  double value( std::size_t column, std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyValueIndex( index );
     #endif
-    return this->values_.value( 1, index );
+    return this->values_.value( column, index );
   }
 
   /**
@@ -121,10 +136,7 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    #ifndef NDEBUG
-    this->verifyValueIndex( index );
-    #endif
-    return this->values_.value( 2, index );
+    return this->value( this->nc_, index );
   }
 
   /**
