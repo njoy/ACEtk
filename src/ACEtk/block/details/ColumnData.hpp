@@ -18,6 +18,7 @@ namespace details {
 class ColumnData : protected Base {
 
   /* fields */
+  std::size_t nc_;
 
   /* auxiliary functions */
   #include "ACEtk/block/details/ColumnData/src/generateXSS.hpp"
@@ -27,6 +28,16 @@ public:
 
   /* constructor */
   #include "ACEtk/block/details/ColumnData/src/ctor.hpp"
+
+  /**
+   *  @brief Return the number of columns
+   */
+  std::size_t NC() const { return this->nc_; }
+
+  /**
+   *  @brief Return the number of columns
+   */
+  std::size_t numberColumns() const { return this->NC(); }
 
   /**
    *  @brief Return the number of elements in a column

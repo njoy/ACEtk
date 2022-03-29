@@ -18,7 +18,7 @@ KalbachMannDistributionData(
     std::size_t locb = 1 ) :
   BaseDistributionData( "KalbachMannDistributionData",
                         std::move( boundaries ), std::move( interpolants ),
-                        std::move( distributions ), locb ) {}
+                        std::move( distributions ), 2, locb ) {}
 
 /**
  *  @brief Constructor without interpolation data
@@ -39,7 +39,7 @@ KalbachMannDistributionData(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 KalbachMannDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
-  BaseDistributionData( "KalbachMannDistributionData", locb,
+  BaseDistributionData( "KalbachMannDistributionData", 2, locb,
                         begin, end ) {}
 
 KalbachMannDistributionData& operator=( const KalbachMannDistributionData& ) = default;
