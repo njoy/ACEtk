@@ -20,7 +20,7 @@ TabulatedEnergyAngleDistribution(
     std::size_t locb = 1 ) :
   BaseDistributionData( "TabulatedEnergyAngleDistribution",
                         std::move( boundaries ), std::move( interpolants ),
-                        std::move( distributions ), locb ),
+                        std::move( distributions ), 2, locb ),
   incident_( incident ) {}
 
 /**
@@ -47,7 +47,7 @@ TabulatedEnergyAngleDistribution(
  */
 TabulatedEnergyAngleDistribution( double incident, std::size_t locb,
                                   Iterator begin, Iterator end ) :
-  BaseDistributionData( "TabulatedEnergyAngleDistribution", locb,
+  BaseDistributionData( "TabulatedEnergyAngleDistribution", 2, locb,
                         begin, end ),
   incident_( incident ) {}
 

@@ -3,6 +3,7 @@ generateXSS( const std::string& name,
              std::vector< long >&& boundaries,
              std::vector< long >&& interpolants,
              std::vector< TabulatedEnergyAngleDistribution >&& distributions,
+             std::size_t,
              std::size_t locb ) {
 
   // add the distribution data to the xss array

@@ -20,7 +20,7 @@ TabulatedAngleEnergyDistribution(
     std::size_t locb = 1 ) :
   BaseDistributionData( "TabulatedAngleEnergyDistribution",
                         std::move( boundaries ), std::move( interpolants ),
-                        std::move( distributions ), locb ),
+                        std::move( distributions ), 2, locb ),
   incident_( incident ) {}
 
 /**
@@ -45,8 +45,8 @@ TabulatedAngleEnergyDistribution(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 TabulatedAngleEnergyDistribution( double incident, std::size_t locb,
-                                          Iterator begin, Iterator end ) :
-  BaseDistributionData( "TabulatedAngleEnergyDistribution", locb,
+                                  Iterator begin, Iterator end ) :
+  BaseDistributionData( "TabulatedAngleEnergyDistribution", 2, locb,
                         begin, end ),
   incident_( incident ) {}
 
