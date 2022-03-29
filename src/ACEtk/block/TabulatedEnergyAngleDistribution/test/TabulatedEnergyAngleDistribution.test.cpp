@@ -8,7 +8,7 @@
 // convenience typedefs
 using namespace njoy::ACEtk;
 using TabulatedEnergyAngleDistribution = block::TabulatedEnergyAngleDistribution;
-using TabulatedAngularDistribution = block::TabulatedAngularDistribution;
+using TabulatedAngularDistributionWithProbability = block::TabulatedAngularDistributionWithProbability;
 
 std::vector< double > chunk();
 void verifyChunk( const TabulatedEnergyAngleDistribution& );
@@ -21,12 +21,12 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< TabulatedAngularDistribution > distributions  = {
+      std::vector< TabulatedAngularDistributionWithProbability > distributions  = {
 
-        TabulatedAngularDistribution(
-            2.1, 2, { -1.0, 0.0, 1.0 }, { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ),
-        TabulatedAngularDistribution(
-            20., 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } )
+        TabulatedAngularDistributionWithProbability(
+            2.1, 0.5, 0.5, 2, { -1.0, 0.0, 1.0 }, { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ),
+        TabulatedAngularDistributionWithProbability(
+            20., 0.5, 1., 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } )
       };
       std::size_t locb = 21;
 
@@ -75,7 +75,8 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
 std::vector< double > chunk() {
 
   return {             0,             2,  2.100000E+00,  2.000000E+01,
-                      27,            38,             2,             3,
+            0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
+                      31,            42,             2,             3,
            -1.000000E+00,  0.000000E+00,  1.000000E+00,  0.500000E+00,
             0.500000E+00,  0.500000E+00,  0.000000E+00,  0.500000E+00,
             1.000000E+00,             1,             2, -1.000000E+00,
@@ -86,7 +87,7 @@ std::vector< double > chunk() {
 void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
-  CHECK( 25 == chunk.length() );
+  CHECK( 29 == chunk.length() );
   CHECK( "TabulatedEnergyAngleDistribution" == chunk.name() );
 
   CHECK( 1.1 == Approx( chunk.incidentEnergy() ) );
@@ -112,19 +113,35 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
   CHECK( 2.1 == Approx( chunk.outgoingEnergies()[0] ) );
   CHECK( 20. == Approx( chunk.outgoingEnergies()[1] ) );
 
+  CHECK( 2 == chunk.pdf().size() );
+  CHECK( 0.5 == Approx( chunk.pdf()[0] ) );
+  CHECK( 0.5 == Approx( chunk.pdf()[1] ) );
+
+  CHECK( 2 == chunk.cdf().size() );
+  CHECK( 0.5 == Approx( chunk.cdf()[0] ) );
+  CHECK( 1.0 == Approx( chunk.cdf()[1] ) );
+
   CHECK( 2.1 == Approx( chunk.outgoingEnergy(1) ) );
   CHECK( 20. == Approx( chunk.outgoingEnergy(2) ) );
 
-  CHECK( 27 == chunk.LOCC(1) );
-  CHECK( 38 == chunk.LOCC(2) );
-  CHECK( 27 == chunk.distributionLocator(1) );
-  CHECK( 38 == chunk.distributionLocator(2) );
+  CHECK( 0.5 == Approx( chunk.probability(1) ) );
+  CHECK( 0.5 == Approx( chunk.probability(2) ) );
 
-  CHECK( 7 == chunk.relativeDistributionLocator(1) );
-  CHECK( 18 == chunk.relativeDistributionLocator(2) );
+  CHECK( 0.5 == Approx( chunk.cumulativeProbability(1) ) );
+  CHECK( 1.0 == Approx( chunk.cumulativeProbability(2) ) );
+
+  CHECK( 31 == chunk.LOCC(1) );
+  CHECK( 42 == chunk.LOCC(2) );
+  CHECK( 31 == chunk.distributionLocator(1) );
+  CHECK( 42 == chunk.distributionLocator(2) );
+
+  CHECK( 11 == chunk.relativeDistributionLocator(1) );
+  CHECK( 22 == chunk.relativeDistributionLocator(2) );
 
   auto data1 = chunk.distribution(1);
   CHECK( 2.1 == Approx( data1.energy() ) );
+  CHECK( 0.5 == Approx( data1.probability() ) );
+  CHECK( 0.5 == Approx( data1.cumulativeProbability() ) );
   CHECK( 2 == data1.interpolation() );
   CHECK( 3 == data1.numberCosines() );
 
@@ -142,6 +159,8 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
 
   auto data2 = chunk.distribution(2);
   CHECK( 20 == Approx( data2.energy() ) );
+  CHECK( 0.5 == Approx( data1.probability() ) );
+  CHECK( 0.5 == Approx( data1.cumulativeProbability() ) );
   CHECK( 1 == data2.interpolation() );
   CHECK( 2 == data2.numberCosines() );
 

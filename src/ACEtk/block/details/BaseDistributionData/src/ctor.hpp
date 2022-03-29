@@ -3,13 +3,13 @@ BaseDistributionData() = default;
 BaseDistributionData( const BaseDistributionData& base ) :
   Base( base ), locb_( base.locb_ ), nc_( base.nc_ ) {
 
-  this->generateBlocks();
+  static_cast< Derived* >( this )->generateBlocks();
 }
 
 BaseDistributionData( BaseDistributionData&& base ) :
   Base( std::move( base ) ), locb_( base.locb_ ), nc_( base.nc_ ) {
 
-  this->generateBlocks();
+    static_cast< Derived* >( this )->generateBlocks();
 }
 
 /**
@@ -30,10 +30,10 @@ BaseDistributionData( std::string&& name,
   Base( std::move( name ),
         Derived::generateXSS( std::string( name ),
                               std::move( boundaries ), std::move( interpolants ),
-                              std::move( distributions ), nc, locb ) ),
+                              std::move( distributions ), locb ) ),
   locb_( locb ), nc_( nc ) {
 
-  this->generateBlocks();
+  static_cast< Derived* >( this )->generateBlocks();
 }
 
 /**
@@ -51,7 +51,7 @@ BaseDistributionData( std::string&& name, std::size_t nc, std::size_t locb,
   std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
   std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );
   verifySize( this->begin(), this->end(), nr, ne, nc );
-  this->generateBlocks();
+  static_cast< Derived* >( this )->generateBlocks();
 }
 
 BaseDistributionData& operator=( const BaseDistributionData& base ) {

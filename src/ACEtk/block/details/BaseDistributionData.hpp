@@ -25,9 +25,14 @@ class BaseDistributionData : protected details::Base {
   /* fields */
   std::size_t locb_;
   std::size_t nc_;
+
+protected:
+
   InterpolationData interpolation_;
   details::ColumnData values_;
   std::vector< Distribution > distributions_;
+
+private:
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseDistributionData/src/verifyValueIndex.hpp"

@@ -16,11 +16,11 @@ TabulatedEnergyAngleDistribution(
     double incident,
     std::vector< long > boundaries,
     std::vector< long > interpolants,
-    std::vector< TabulatedAngularDistribution > distributions,
+    std::vector< TabulatedAngularDistributionWithProbability > distributions,
     std::size_t locb = 1 ) :
   BaseDistributionData( "TabulatedEnergyAngleDistribution",
                         std::move( boundaries ), std::move( interpolants ),
-                        std::move( distributions ), 2, locb ),
+                        std::move( distributions ), 4, locb ),
   incident_( incident ) {}
 
 /**
@@ -32,7 +32,7 @@ TabulatedEnergyAngleDistribution(
  */
 TabulatedEnergyAngleDistribution(
     double incident,
-    std::vector< TabulatedAngularDistribution > distributions,
+    std::vector< TabulatedAngularDistributionWithProbability > distributions,
     std::size_t locb = 1 ) :
   TabulatedEnergyAngleDistribution(
     incident, {}, {}, std::move( distributions ), locb ) {}
@@ -47,7 +47,7 @@ TabulatedEnergyAngleDistribution(
  */
 TabulatedEnergyAngleDistribution( double incident, std::size_t locb,
                                   Iterator begin, Iterator end ) :
-  BaseDistributionData( "TabulatedEnergyAngleDistribution", 2, locb,
+  BaseDistributionData( "TabulatedEnergyAngleDistribution", 4, locb,
                         begin, end ),
   incident_( incident ) {}
 

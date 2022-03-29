@@ -17,7 +17,7 @@ void wrapTabulatedEnergyAngleDistribution( python::module& module,
 
   // type aliases
   using Block = njoy::ACEtk::block::TabulatedEnergyAngleDistribution;
-  using Distribution = njoy::ACEtk::block::TabulatedAngularDistribution;
+  using Distribution = njoy::ACEtk::block::TabulatedAngularDistributionWithProbability;
 
   // wrap views created by this block
 
@@ -136,12 +136,48 @@ void wrapTabulatedEnergyAngleDistribution( python::module& module,
        { return self.outgoingEnergies(); },
     "The outgoing energy values"
   )
+  .def_property_readonly(
+
+    "pdf",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.pdf(); },
+    "The associated probability values"
+  )
+  .def_property_readonly(
+
+    "cdf",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.cdf(); },
+    "The associated cumulative probability values"
+  )
   .def(
 
     "outgoing_energy",
     &Block::outgoingEnergy,
     python::arg( "index" ),
     "Return the outgoing energy for a given index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "probability",
+    &Block::probability,
+    python::arg( "index" ),
+    "Return the probability for a given index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "cumulative_probability",
+    &Block::cumulativeProbability,
+    python::arg( "index" ),
+    "Return the cumulative probability for a given index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"

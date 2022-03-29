@@ -1,12 +1,12 @@
-#ifndef NJOY_ACETK_BLOCK_TABULATEDOUTGOINGENERGYANGLEDISTRIBUTION
-#define NJOY_ACETK_BLOCK_TABULATEDOUTGOINGENERGYANGLEDISTRIBUTION
+#ifndef NJOY_ACETK_BLOCK_TABULATEDENERGYANGLEDISTRIBUTION
+#define NJOY_ACETK_BLOCK_TABULATEDENERGYANGLEDISTRIBUTION
 
 // system includes
 #include <variant>
 
 // other includes
 #include "ACEtk/block/details/BaseDistributionData.hpp"
-#include "ACEtk/block/TabulatedAngularDistribution.hpp"
+#include "ACEtk/block/TabulatedAngularDistributionWithProbability.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -24,15 +24,17 @@ namespace block {
  */
 class TabulatedEnergyAngleDistribution :
   protected details::BaseDistributionData< TabulatedEnergyAngleDistribution,
-                                           TabulatedAngularDistribution > {
+                                           TabulatedAngularDistributionWithProbability > {
 
   friend class details::BaseDistributionData< TabulatedEnergyAngleDistribution,
-                                              TabulatedAngularDistribution >;
+                                              TabulatedAngularDistributionWithProbability >;
 
   /* fields */
   double incident_;
 
   /* auxiliary functions */
+  #include "ACEtk/block/TabulatedEnergyAngleDistribution/src/generateXSS.hpp"
+  #include "ACEtk/block/TabulatedEnergyAngleDistribution/src/generateBlocks.hpp"
 
 public:
 
@@ -110,6 +112,22 @@ public:
   }
 
   /**
+   *  @brief Return the associated probability values
+   */
+  auto pdf() const {
+
+    return BaseDistributionData::values( 2 );
+  }
+
+  /**
+   *  @brief Return the associated cumulative probability values
+   */
+  auto cdf() const {
+
+    return BaseDistributionData::values( 3 );
+  }
+
+  /**
    *  @brief Return the outgoing energy for a given index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
@@ -120,6 +138,32 @@ public:
   double outgoingEnergy( std::size_t index ) const {
 
     return BaseDistributionData::value( 1, index );
+  }
+
+  /**
+   *  @brief Return the probability for a given index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  double probability( std::size_t index ) const {
+
+    return BaseDistributionData::value( 2, index );
+  }
+
+  /**
+   *  @brief Return the cumulative probability for a given index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  double cumulativeProbability( std::size_t index ) const {
+
+    return BaseDistributionData::value( 3, index );
   }
 
   /**
@@ -174,7 +218,8 @@ public:
   /**
    *  @brief Return the distributions
    */
-  const std::vector< TabulatedAngularDistribution >& distributions() const {
+  const std::vector< TabulatedAngularDistributionWithProbability >&
+  distributions() const {
 
     return BaseDistributionData::distributions();
   }
@@ -187,7 +232,8 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const TabulatedAngularDistribution& distribution( std::size_t index ) const {
+  const TabulatedAngularDistributionWithProbability&
+  distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
   }

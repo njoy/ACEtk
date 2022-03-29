@@ -2,32 +2,28 @@ static std::vector< double >
 generateXSS( const std::string& name,
              std::vector< long >&& boundaries,
              std::vector< long >&& interpolants,
-             std::vector< TabulatedAngleEnergyDistribution >&& distributions,
+             std::vector< TabulatedAngularDistributionWithProbability >&& distributions,
              std::size_t locb ) {
 
   // add the distribution data to the xss array
   std::size_t nr = boundaries.size();
   std::size_t ne = distributions.size();
-  std::vector< double > xss( 1 + 2 * ne );
+  std::vector< double > xss( 1 + 4 * ne );
   xss[0] = ne;
   std::size_t index = 1;
   std::size_t offset = 1 + 2 * nr + locb;
   for ( const auto& distribution : distributions ) {
 
-    // set the associated value
-    xss[index] = distribution.value();
+    // set the associated energy, probability and cumulative probability value
+    xss[index] = distribution.energy();
+    xss[index + ne] = distribution.probability();
+    xss[index + 2 * ne] = distribution.cumulativeProbability();
 
     // set the locator
-    xss[index + ne] = xss.size() + offset;
+    xss[index + 3 * ne] = xss.size() + offset;
 
-    // remake the internal xss array with the proper locators
-    TabulatedAngleEnergyDistribution temp(
-        distribution.value(),
-        { boundaries.begin(), boundaries.end() },
-        { interpolants.begin(), interpolants.end() },
-        std::move( distribution.distributions() ),
-        xss[index + ne] );
-    xss.insert( xss.end(), temp.begin(), temp.end() );
+    // insert the xss array
+    xss.insert( xss.end(), distribution.begin(), distribution.end() );
 
     // on to the next distribution
     ++index;

@@ -3,13 +3,12 @@ generateXSS( const std::string& name,
              std::vector< long >&& boundaries,
              std::vector< long >&& interpolants,
              std::vector< Distribution >&& distributions,
-             std::size_t nc,
              std::size_t locb ) {
 
   // add the distribution data to the xss array
   std::size_t nr = boundaries.size();
   std::size_t ne = distributions.size();
-  std::vector< double > xss( 1 + nc * ne );
+  std::vector< double > xss( 1 + 2 * ne );
   xss[0] = ne;
   std::size_t index = 1;
   std::size_t offset = 1 + 2 * nr + locb;
@@ -19,7 +18,7 @@ generateXSS( const std::string& name,
     xss[index] = distribution.value();
 
     // set the locator
-    xss[index + ( nc - 1 ) * ne] = xss.size() + offset;
+    xss[index + ne] = xss.size() + offset;
 
     // insert the xss array
     xss.insert( xss.end(), distribution.begin(), distribution.end() );
