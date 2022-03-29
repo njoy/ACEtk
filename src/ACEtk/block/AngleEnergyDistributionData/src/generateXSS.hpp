@@ -23,8 +23,7 @@ generateXSS( const std::string& name,
     // remake the internal xss array with the proper locators
     TabulatedAngleEnergyDistribution temp(
         distribution.value(),
-        { boundaries.begin(), boundaries.end() },
-        { interpolants.begin(), interpolants.end() },
+        distribution.interpolation(),
         std::move( distribution.distributions() ),
         xss[index + ne] );
     xss.insert( xss.end(), temp.begin(), temp.end() );

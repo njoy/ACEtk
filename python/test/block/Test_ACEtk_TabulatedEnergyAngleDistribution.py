@@ -11,7 +11,7 @@ from ACEtk import TabulatedAngularDistributionWithProbability
 class Test_ACEtk_TabulatedEnergyAngleDistribution( unittest.TestCase ) :
     """Unit test for the TabulatedEnergyAngleDistribution class."""
 
-    chunk = [             0,             2,  2.100000E+00,  2.000000E+01,
+    chunk = [             2,             2,  2.100000E+00,  2.000000E+01,
                0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
                          31,            42,             2,             3,
               -1.000000E+00,  0.000000E+00,  1.000000E+00,  0.500000E+00,
@@ -31,19 +31,7 @@ class Test_ACEtk_TabulatedEnergyAngleDistribution( unittest.TestCase ) :
 
             self.assertEqual( 1.1, chunk.incident_energy )
 
-            self.assertEqual( 0, chunk.interpolation_data.NB )
-            self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
-            self.assertEqual( 0, len( chunk.interpolation_data.INT ) )
-            self.assertEqual( 0, len( chunk.interpolation_data.interpolants ) )
-            self.assertEqual( 0, len( chunk.interpolation_data.NBT ) )
-            self.assertEqual( 0, len( chunk.interpolation_data.boundaries ) )
-
-            self.assertEqual( 0, chunk.NB )
-            self.assertEqual( 0, chunk.number_interpolation_regions )
-            self.assertEqual( 0, len( chunk.INT ) )
-            self.assertEqual( 0, len( chunk.interpolants ) )
-            self.assertEqual( 0, len( chunk.NBT ) )
-            self.assertEqual( 0, len( chunk.boundaries ) )
+            self.assertEqual( 2, chunk.interpolation )
 
             self.assertEqual( 2, chunk.NE )
             self.assertEqual( 2, chunk.number_outgoing_energies )
@@ -128,6 +116,7 @@ class Test_ACEtk_TabulatedEnergyAngleDistribution( unittest.TestCase ) :
         # the data is given explicitly
         chunk = TabulatedEnergyAngleDistribution(
                     incident = 1.1,
+                    interpolation = 2,
                     distributions = [
 
                       TabulatedAngularDistributionWithProbability(

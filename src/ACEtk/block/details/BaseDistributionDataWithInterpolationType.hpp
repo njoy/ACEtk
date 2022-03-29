@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_DISTRIBUTIONDATABASE
-#define NJOY_ACETK_BLOCK_DETAILS_DISTRIBUTIONDATABASE
+#ifndef NJOY_ACETK_BLOCK_DETAILS_BASEDISTRIBUTIONDATAWITHINTERPOLATIONTYPE
+#define NJOY_ACETK_BLOCK_DETAILS_BASEDISTRIBUTIONDATAWITHINTERPOLATIONTYPE
 
 // system includes
 #include <variant>
@@ -17,72 +17,41 @@ namespace details {
 
 /**
  *  @class
- *  @brief Base class for distribution data as a function of values using
- *         ENDF style interpolation data
+ *  @brief Base class for distribution data as a function of values using an
+ *         interpolation type flag
  */
 template< typename Derived, typename Distribution >
-class BaseDistributionData : protected details::Base {
+class BaseDistributionDataWithInterpolationType : protected details::Base {
 
   /* fields */
   std::size_t locb_;
 
 protected:
 
-  InterpolationData interpolation_;
   details::ColumnData values_;
   std::vector< Distribution > distributions_;
 
 private:
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseDistributionData/src/verifyValueIndex.hpp"
-  #include "ACEtk/block/details/BaseDistributionData/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseDistributionData/src/verifySize.hpp"
+  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/verifyValueIndex.hpp"
+  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/generateBlocks.hpp"
+  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/verifySize.hpp"
 
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseDistributionData/src/generateXSS.hpp"
+  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/generateXSS.hpp"
 
   /* constructor */
-  #include "ACEtk/block/details/BaseDistributionData/src/ctor.hpp"
+  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/ctor.hpp"
 
 public:
 
   /**
-   *  @brief Return the interpolation data
+   *  @brief Return the interpolation flag
    */
-  auto interpolationData() const { return this->interpolation_; }
-
-  /**
-   *  @brief Return the number of interpolation regions
-   */
-  std::size_t NB() const { return this->interpolationData().NB(); }
-
-  /**
-   *  @brief Return the number of interpolation regions
-   */
-  std::size_t numberInterpolationRegions() const { return this->NB(); }
-
-  /**
-   *  @brief Return the interpolation boundaries
-   */
-  auto NBT() const { return this->interpolationData().NBT(); }
-
-  /**
-   *  @brief Return the interpolation boundaries
-   */
-  auto boundaries() const { return this->NBT(); }
-
-  /**
-   *  @brief Return the interpolants
-   */
-  auto INT() const { return this->interpolationData().INT(); }
-
-  /**
-   *  @brief Return the interpolants
-   */
-  auto interpolants() const { return this->INT(); }
+  int interpolation() const { return this->XSS( 1 ); }
 
   /**
    *  @brief Return the number of values in each column
