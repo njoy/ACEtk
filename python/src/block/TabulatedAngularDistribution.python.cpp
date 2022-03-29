@@ -40,11 +40,12 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
     python::arg( "cosines" ), python::arg( "pdf" ), python::arg( "cdf" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self        the block\n"
-    "    energy      the associated energy value\n"
-    "    cosines     the cosine values\n"
-    "    pdf         the pdf values\n"
-    "    cdf         the cdf values"
+    "    self            the block\n"
+    "    energy          the associated energy value\n"
+    "    interpolation   the interpolation type\n"
+    "    cosines         the cosine values\n"
+    "    pdf             the pdf values\n"
+    "    cdf             the cdf values"
   )
   .def_property_readonly(
 

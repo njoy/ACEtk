@@ -18,7 +18,7 @@ OutgoingEnergyDistributionData(
     std::size_t locb = 1 ) :
   BaseDistributionData( "OutgoingEnergyDistributionData",
                         std::move( boundaries ), std::move( interpolants ),
-                        std::move( distributions ), 2, locb ) {}
+                        std::move( distributions ), locb ) {}
 
 /**
  *  @brief Constructor without interpolation data
@@ -39,7 +39,7 @@ OutgoingEnergyDistributionData(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 OutgoingEnergyDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
-  BaseDistributionData( "OutgoingEnergyDistributionData", 2, locb,
+  BaseDistributionData( "OutgoingEnergyDistributionData", locb,
                         begin, end ) {}
 
 OutgoingEnergyDistributionData& operator=( const OutgoingEnergyDistributionData& ) = default;

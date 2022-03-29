@@ -14,7 +14,7 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
 
     chunk = [              0,             2,  1.000000E-05,  2.000000E+01,
                           27,            56,
-                           0,             2,  2.100000E+00,  2.000000E+01,
+                           2,             2,  2.100000E+00,  2.000000E+01,
                 0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
                           37,            48,             2,             3,
                -1.000000E+00,  0.000000E+00,  1.000000E+00,  0.500000E+00,
@@ -22,7 +22,7 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
                 1.000000E+00,             1,             2, -1.000000E+00,
                 1.000000E+00,  0.500000E+00,  0.500000E+00,  0.000000E+00,
                 1.000000E+00,
-                           0,             2,  1.100000E+00,  1.500000E+01,
+                           2,             2,  1.100000E+00,  1.500000E+01,
                 0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
                           66,            74,             1,             2,
                -1.000000E+00,  1.000000E+00,  0.500000E+00,  0.500000E+00,
@@ -84,19 +84,7 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
             data1 = chunk.distribution(1)
             self.assertAlmostEqual( 1e-5, data1.incident_energy )
 
-            self.assertEqual( 0, data1.interpolation_data.NB )
-            self.assertEqual( 0, data1.interpolation_data.number_interpolation_regions )
-            self.assertEqual( 0, len( data1.interpolation_data.INT ) )
-            self.assertEqual( 0, len( data1.interpolation_data.interpolants ) )
-            self.assertEqual( 0, len( data1.interpolation_data.NBT ) )
-            self.assertEqual( 0, len( data1.interpolation_data.boundaries ) )
-
-            self.assertEqual( 0, data1.NB )
-            self.assertEqual( 0, data1.number_interpolation_regions )
-            self.assertEqual( 0, len( data1.INT ) )
-            self.assertEqual( 0, len( data1.interpolants ) )
-            self.assertEqual( 0, len( data1.NBT ) )
-            self.assertEqual( 0, len( data1.boundaries ) )
+            self.assertEqual( 2, data1.interpolation )
 
             self.assertEqual( 2, data1.NE )
             self.assertEqual( 2, data1.number_outgoing_energies )
@@ -171,19 +159,7 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
             data2 = chunk.distribution(2)
             self.assertAlmostEqual( 20., data2.incident_energy )
 
-            self.assertEqual( 0, data2.interpolation_data.NB )
-            self.assertEqual( 0, data2.interpolation_data.number_interpolation_regions )
-            self.assertEqual( 0, len( data2.interpolation_data.INT ) )
-            self.assertEqual( 0, len( data2.interpolation_data.interpolants ) )
-            self.assertEqual( 0, len( data2.interpolation_data.NBT ) )
-            self.assertEqual( 0, len( data2.interpolation_data.boundaries ) )
-
-            self.assertEqual( 0, data2.NB )
-            self.assertEqual( 0, data2.number_interpolation_regions )
-            self.assertEqual( 0, len( data2.INT ) )
-            self.assertEqual( 0, len( data2.interpolants ) )
-            self.assertEqual( 0, len( data2.NBT ) )
-            self.assertEqual( 0, len( data2.boundaries ) )
+            self.assertEqual( 2, data2.interpolation )
 
             self.assertEqual( 2, data2.NE )
             self.assertEqual( 2, data2.number_outgoing_energies )
@@ -266,13 +242,13 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
                     distributions = [
 
                       TabulatedEnergyAngleDistribution(
-                        1e-5,
+                        1e-5, 2,
                         [ TabulatedAngularDistributionWithProbability(
                             2.1, 0.5, 0.5, 2, [ -1.0, 0.0, 1.0 ], [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ),
                           TabulatedAngularDistributionWithProbability(
                             20., 0.5, 1.0, 1, [ -1.0, 1.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ) ] ),
                       TabulatedEnergyAngleDistribution(
-                        20.,
+                        20., 2,
                         [ TabulatedAngularDistributionWithProbability(
                             1.1, 0.5, 0.5, 1, [ -1.0, 1.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ),
                           TabulatedAngularDistributionWithProbability(
