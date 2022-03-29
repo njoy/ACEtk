@@ -21,6 +21,7 @@ SCENARIO( "TabulatedAngleEnergyDistribution" ) {
 
     WHEN( "the data is given explicitly" ) {
 
+      unsigned int interpolation = 2;
       std::vector< TabulatedEnergyDistribution > distributions  = {
 
         TabulatedEnergyDistribution(
@@ -31,6 +32,7 @@ SCENARIO( "TabulatedAngleEnergyDistribution" ) {
       std::size_t locb = 21;
 
       TabulatedAngleEnergyDistribution chunk( 1.1,
+                                              interpolation,
                                               std::move( distributions ),
                                               locb );
 
@@ -52,8 +54,7 @@ SCENARIO( "TabulatedAngleEnergyDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      TabulatedAngleEnergyDistribution chunk( 1.1, 21,
-                                                      xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
 
       THEN( "a TabulatedAngleEnergyDistribution can be constructed and "
             "members can be tested" ) {
@@ -75,7 +76,7 @@ SCENARIO( "TabulatedAngleEnergyDistribution" ) {
 
 std::vector< double > chunk() {
 
-  return {             0,             2, -1.000000E+00,  1.000000E+00,
+  return {             2,             2, -1.000000E+00,  1.000000E+00,
                       27,            38,             2,             3,
             1.000000E-05,  1.000000E+00,  2.000000E+01,  0.500000E+00,
             0.500000E+00,  0.500000E+00,  0.000000E+00,  0.500000E+00,
@@ -92,19 +93,7 @@ void verifyChunk( const TabulatedAngleEnergyDistribution& chunk ) {
 
   CHECK( 1.1 == Approx( chunk.incidentEnergy() ) );
 
-  CHECK( 0 == chunk.interpolationData().NB() );
-  CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
-  CHECK( 0 == chunk.interpolationData().INT().size() );
-  CHECK( 0 == chunk.interpolationData().interpolants().size() );
-  CHECK( 0 == chunk.interpolationData().NBT().size() );
-  CHECK( 0 == chunk.interpolationData().boundaries().size() );
-
-  CHECK( 0 == chunk.NB() );
-  CHECK( 0 == chunk.numberInterpolationRegions() );
-  CHECK( 0 == chunk.INT().size() );
-  CHECK( 0 == chunk.interpolants().size() );
-  CHECK( 0 == chunk.NBT().size() );
-  CHECK( 0 == chunk.boundaries().size() );
+  CHECK( 2 == chunk.interpolation() );
 
   CHECK( 2 == chunk.NC() );
   CHECK( 2 == chunk.numberCosines() );

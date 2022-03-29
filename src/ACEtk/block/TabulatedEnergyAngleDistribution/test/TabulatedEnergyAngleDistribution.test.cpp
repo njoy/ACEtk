@@ -21,6 +21,7 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
 
     WHEN( "the data is given explicitly" ) {
 
+      unsigned int interpolation = 2;
       std::vector< TabulatedAngularDistributionWithProbability > distributions  = {
 
         TabulatedAngularDistributionWithProbability(
@@ -31,6 +32,7 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
       std::size_t locb = 21;
 
       TabulatedEnergyAngleDistribution chunk( 1.1,
+                                              interpolation,
                                               std::move( distributions ),
                                               locb );
 
@@ -74,7 +76,7 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
 
 std::vector< double > chunk() {
 
-  return {             0,             2,  2.100000E+00,  2.000000E+01,
+  return {             2,             2,  2.100000E+00,  2.000000E+01,
             0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
                       31,            42,             2,             3,
            -1.000000E+00,  0.000000E+00,  1.000000E+00,  0.500000E+00,
@@ -92,19 +94,7 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
 
   CHECK( 1.1 == Approx( chunk.incidentEnergy() ) );
 
-  CHECK( 0 == chunk.interpolationData().NB() );
-  CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
-  CHECK( 0 == chunk.interpolationData().INT().size() );
-  CHECK( 0 == chunk.interpolationData().interpolants().size() );
-  CHECK( 0 == chunk.interpolationData().NBT().size() );
-  CHECK( 0 == chunk.interpolationData().boundaries().size() );
-
-  CHECK( 0 == chunk.NB() );
-  CHECK( 0 == chunk.numberInterpolationRegions() );
-  CHECK( 0 == chunk.INT().size() );
-  CHECK( 0 == chunk.interpolants().size() );
-  CHECK( 0 == chunk.NBT().size() );
-  CHECK( 0 == chunk.boundaries().size() );
+  CHECK( 2 == chunk.interpolation() );
 
   CHECK( 2 == chunk.NE() );
   CHECK( 2 == chunk.numberOutgoingEnergies() );

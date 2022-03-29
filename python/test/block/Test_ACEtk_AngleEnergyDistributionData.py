@@ -14,14 +14,14 @@ class Test_ACEtk_AngleEnergyDistributionData( unittest.TestCase ) :
 
     chunk = [              0,             2,  1.000000E-05,  2.000000E+01,
                           27,            52,
-                           0,             2, -1.000000E+00,  1.000000E+00,
+                           2,             2, -1.000000E+00,  1.000000E+00,
                           33,            44,             2,             3,
                 1.000000E-05,  1.000000E+00,  2.000000E+01,  0.500000E+00,
                 0.500000E+00,  0.500000E+00,  0.000000E+00,  0.500000E+00,
                 1.000000E+00,             1,             2,  1.000000E-03,
                 1.500000E+01,  0.500000E+00,  0.500000E+00,  0.000000E+00,
                 1.000000E+00,
-                           0,             2, -9.000000E-01,  9.000000E-01,
+                           2,             2, -9.000000E-01,  9.000000E-01,
                           58,            66,             1,             2,
                 1.000000E-04,  1.200000E+01,  0.500000E+00,  0.500000E+00,
                 0.000000E+00,  1.000000E+00,             2,             3,
@@ -82,19 +82,7 @@ class Test_ACEtk_AngleEnergyDistributionData( unittest.TestCase ) :
             data1 = chunk.distribution(1)
             self.assertAlmostEqual( 1e-5, data1.incident_energy )
 
-            self.assertEqual( 0, data1.interpolation_data.NB )
-            self.assertEqual( 0, data1.interpolation_data.number_interpolation_regions )
-            self.assertEqual( 0, len( data1.interpolation_data.INT ) )
-            self.assertEqual( 0, len( data1.interpolation_data.interpolants ) )
-            self.assertEqual( 0, len( data1.interpolation_data.NBT ) )
-            self.assertEqual( 0, len( data1.interpolation_data.boundaries ) )
-
-            self.assertEqual( 0, data1.NB )
-            self.assertEqual( 0, data1.number_interpolation_regions )
-            self.assertEqual( 0, len( data1.INT ) )
-            self.assertEqual( 0, len( data1.interpolants ) )
-            self.assertEqual( 0, len( data1.NBT ) )
-            self.assertEqual( 0, len( data1.boundaries ) )
+            self.assertEqual( 2, data1.interpolation )
 
             self.assertEqual( 2, data1.NC )
             self.assertEqual( 2, data1.number_cosines )
@@ -151,19 +139,7 @@ class Test_ACEtk_AngleEnergyDistributionData( unittest.TestCase ) :
             data2 = chunk.distribution(2)
             self.assertAlmostEqual( 20., data2.incident_energy )
 
-            self.assertEqual( 0, data2.interpolation_data.NB )
-            self.assertEqual( 0, data2.interpolation_data.number_interpolation_regions )
-            self.assertEqual( 0, len( data2.interpolation_data.INT ) )
-            self.assertEqual( 0, len( data2.interpolation_data.interpolants ) )
-            self.assertEqual( 0, len( data2.interpolation_data.NBT ) )
-            self.assertEqual( 0, len( data2.interpolation_data.boundaries ) )
-
-            self.assertEqual( 0, data2.NB )
-            self.assertEqual( 0, data2.number_interpolation_regions )
-            self.assertEqual( 0, len( data2.INT ) )
-            self.assertEqual( 0, len( data2.interpolants ) )
-            self.assertEqual( 0, len( data2.NBT ) )
-            self.assertEqual( 0, len( data2.boundaries ) )
+            self.assertEqual( 2, data2.interpolation )
 
             self.assertEqual( 2, data2.NC )
             self.assertEqual( 2, data2.number_cosines )
@@ -228,13 +204,13 @@ class Test_ACEtk_AngleEnergyDistributionData( unittest.TestCase ) :
                     distributions = [
 
                       TabulatedAngleEnergyDistribution(
-                        1e-5,
+                        1e-5, 2,
                         [ TabulatedEnergyDistribution(
                             -1., 2, [ 1e-5, 1.0, 20.0 ], [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ),
                           TabulatedEnergyDistribution(
                             1., 1, [ 1e-3, 15.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ) ] ),
                       TabulatedAngleEnergyDistribution(
-                        20.,
+                        20., 2,
                         [ TabulatedEnergyDistribution(
                             -0.9, 1, [ 1e-4, 12.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ),
                           TabulatedEnergyDistribution(

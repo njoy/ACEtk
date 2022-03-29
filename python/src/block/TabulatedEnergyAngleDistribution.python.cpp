@@ -37,30 +37,14 @@ void wrapTabulatedEnergyAngleDistribution( python::module& module,
   block
   .def(
 
-    python::init< double, std::vector< long >, std::vector< long >,
-                  std::vector< Distribution >, std::size_t >(),
-    python::arg( "incident" ), python::arg( "boundaries" ),
-    python::arg( "interpolants" ), python::arg( "distributions" ),
-    python::arg( "locb" ) = 1,
+    python::init< double, int, std::vector< Distribution >, std::size_t >(),
+    python::arg( "incident" ), python::arg( "interpolation" ),
+    python::arg( "distributions" ), python::arg( "locb" ) = 1,
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
     "    incident         the incident energy value\n"
-    "    boundaries       the interpolation range boundaries\n"
-    "    interpolants     the interpolation types for each range\n"
-    "    distributions    the distributions for each outgoing energy\n"
-    "    locb             the starting xss index with respect to the DLW block\n"
-    "                     (default = 1, the relative locators get recalculated)"
-  )
-  .def(
-
-    python::init< double, std::vector< Distribution >, std::size_t >(),
-    python::arg( "incident" ), python::arg( "distributions" ),
-    python::arg( "locb" ) = 1,
-    "Initialise the block\n\n"
-    "Arguments:\n"
-    "    self             the block\n"
-    "    incident         the incident energy value\n"
+    "    interpolation    the interpolation type\n"
     "    distributions    the distributions for each outgoing energy\n"
     "    locb             the starting xss index with respect to the DLW block\n"
     "                     (default = 1, the relative locators get recalculated)"
@@ -73,49 +57,9 @@ void wrapTabulatedEnergyAngleDistribution( python::module& module,
   )
   .def_property_readonly(
 
-    "interpolation_data",
-    &Block::interpolationData,
-    "The interpolation data"
-  )
-  .def_property_readonly(
-
-    "NB",
-    &Block::NB,
-    "The number of interpolation regions"
-  )
-  .def_property_readonly(
-
-    "number_interpolation_regions",
-    &Block::numberInterpolationRegions,
-    "The number of interpolation regions"
-  )
-  .def_property_readonly(
-
-    "NBT",
-    [] ( const Block& self ) -> LongRange
-       { return self.NBT(); },
-    "The interpolation boundaries"
-  )
-  .def_property_readonly(
-
-    "boundaries",
-    [] ( const Block& self ) -> LongRange
-       { return self.boundaries(); },
-    "The interpolation boundaries"
-  )
-  .def_property_readonly(
-
-    "INT",
-    [] ( const Block& self ) -> LongRange
-       { return self.INT(); },
-    "The interpolation type for each range"
-  )
-  .def_property_readonly(
-
-    "interpolants",
-    [] ( const Block& self ) -> LongRange
-       { return self.interpolants(); },
-    "The interpolation type for each range"
+    "interpolation",
+    &Block::interpolation,
+    "The interpolation type"
   )
   .def_property_readonly(
 

@@ -25,13 +25,13 @@ SCENARIO( "EnergyAngleDistributionData" ) {
       std::vector< TabulatedEnergyAngleDistribution > distributions  = {
 
         TabulatedEnergyAngleDistribution(
-          1e-5,
+          1e-5, 2,
           { TabulatedAngularDistributionWithProbability(
               2.1, 0.5, 0.5, 2, { -1.0, 0.0, 1.0 }, { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ),
             TabulatedAngularDistributionWithProbability(
               20., 0.5, 1.0, 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ) } ),
         TabulatedEnergyAngleDistribution(
-          20.,
+          20., 2,
           { TabulatedAngularDistributionWithProbability(
               1.1, 0.5, 0.5, 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
             TabulatedAngularDistributionWithProbability(
@@ -85,7 +85,7 @@ std::vector< double > chunk() {
                        0,             2,  1.000000E-05,  2.000000E+01,
                       27,            56,
            // distribution data for incident energy 1
-                       0,             2,  2.100000E+00,  2.000000E+01,
+                       2,             2,  2.100000E+00,  2.000000E+01,
             0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
                       37,            48,             2,             3,
            -1.000000E+00,  0.000000E+00,  1.000000E+00,  0.500000E+00,
@@ -94,7 +94,7 @@ std::vector< double > chunk() {
             1.000000E+00,  0.500000E+00,  0.500000E+00,  0.000000E+00,
             1.000000E+00,
            // distribution data for incident energy 2
-                       0,             2,  1.100000E+00,  1.500000E+01,
+                       2,             2,  1.100000E+00,  1.500000E+01,
             0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
                       66,            74,             1,             2,
            -1.000000E+00,  1.000000E+00,  0.500000E+00,  0.500000E+00,
@@ -149,19 +149,7 @@ void verifyChunk( const EnergyAngleDistributionData& chunk ) {
 
   CHECK( 1e-5 == Approx( data1.incidentEnergy() ) );
 
-  CHECK( 0 == data1.interpolationData().NB() );
-  CHECK( 0 == data1.interpolationData().numberInterpolationRegions() );
-  CHECK( 0 == data1.interpolationData().INT().size() );
-  CHECK( 0 == data1.interpolationData().interpolants().size() );
-  CHECK( 0 == data1.interpolationData().NBT().size() );
-  CHECK( 0 == data1.interpolationData().boundaries().size() );
-
-  CHECK( 0 == data1.NB() );
-  CHECK( 0 == data1.numberInterpolationRegions() );
-  CHECK( 0 == data1.INT().size() );
-  CHECK( 0 == data1.interpolants().size() );
-  CHECK( 0 == data1.NBT().size() );
-  CHECK( 0 == data1.boundaries().size() );
+  CHECK( 2 == data1.interpolation() );
 
   CHECK( 2 == data1.NE() );
   CHECK( 2 == data1.numberOutgoingEnergies() );
@@ -237,19 +225,7 @@ void verifyChunk( const EnergyAngleDistributionData& chunk ) {
 
   CHECK( 20. == Approx( data2.incidentEnergy() ) );
 
-  CHECK( 0 == data2.interpolationData().NB() );
-  CHECK( 0 == data2.interpolationData().numberInterpolationRegions() );
-  CHECK( 0 == data2.interpolationData().INT().size() );
-  CHECK( 0 == data2.interpolationData().interpolants().size() );
-  CHECK( 0 == data2.interpolationData().NBT().size() );
-  CHECK( 0 == data2.interpolationData().boundaries().size() );
-
-  CHECK( 0 == data2.NB() );
-  CHECK( 0 == data2.numberInterpolationRegions() );
-  CHECK( 0 == data2.INT().size() );
-  CHECK( 0 == data2.interpolants().size() );
-  CHECK( 0 == data2.NBT().size() );
-  CHECK( 0 == data2.boundaries().size() );
+  CHECK( 2 == data2.interpolation() );
 
   CHECK( 2 == data2.NE() );
   CHECK( 2 == data2.numberOutgoingEnergies() );
