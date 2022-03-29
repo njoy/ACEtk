@@ -1,13 +1,13 @@
 BaseDistributionData() = default;
 
 BaseDistributionData( const BaseDistributionData& base ) :
-  Base( base ), locb_( base.locb_ ), nc_( base.nc_ ) {
+  Base( base ), locb_( base.locb_ ) {
 
   static_cast< Derived* >( this )->generateBlocks();
 }
 
 BaseDistributionData( BaseDistributionData&& base ) :
-  Base( std::move( base ) ), locb_( base.locb_ ), nc_( base.nc_ ) {
+  Base( std::move( base ) ), locb_( base.locb_ ) {
 
     static_cast< Derived* >( this )->generateBlocks();
 }
@@ -25,13 +25,12 @@ BaseDistributionData( std::string name,
                       std::vector< long > boundaries,
                       std::vector< long > interpolants,
                       std::vector< Distribution > distributions,
-                      std::size_t nc,
                       std::size_t locb ) :
   Base( std::move( name ),
         Derived::generateXSS( std::string( name ),
                               std::move( boundaries ), std::move( interpolants ),
                               std::move( distributions ), locb ) ),
-  locb_( locb ), nc_( nc ) {
+  locb_( locb ) {
 
   static_cast< Derived* >( this )->generateBlocks();
 }
@@ -44,13 +43,13 @@ BaseDistributionData( std::string name,
  *  @param[in] sig     the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array
  */
-BaseDistributionData( std::string&& name, std::size_t nc, std::size_t locb,
+BaseDistributionData( std::string name, std::size_t locb,
                       Iterator begin, Iterator end ) :
-  Base( std::move( name ), begin, end ), locb_( locb ), nc_( nc ) {
+  Base( std::move( name ), begin, end ), locb_( locb ) {
 
   std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
   std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );
-  verifySize( this->begin(), this->end(), nr, ne, nc );
+  verifySize( this->begin(), this->end(), nr, ne );
   static_cast< Derived* >( this )->generateBlocks();
 }
 
