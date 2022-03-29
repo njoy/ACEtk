@@ -7,22 +7,24 @@ import unittest
 from ACEtk import EnergyDistributionType
 from ACEtk import EnergyAngleDistributionData
 from ACEtk import TabulatedEnergyAngleDistribution
-from ACEtk import TabulatedAngularDistribution
+from ACEtk import TabulatedAngularDistributionWithProbability
 
 class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
     """Unit test for the KalbachMannDistributionData class."""
 
     chunk = [              0,             2,  1.000000E-05,  2.000000E+01,
-                          27,            52,
+                          27,            56,
                            0,             2,  2.100000E+00,  2.000000E+01,
-                          33,            44,             2,             3,
+                0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
+                          37,            48,             2,             3,
                -1.000000E+00,  0.000000E+00,  1.000000E+00,  0.500000E+00,
                 0.500000E+00,  0.500000E+00,  0.000000E+00,  0.500000E+00,
                 1.000000E+00,             1,             2, -1.000000E+00,
                 1.000000E+00,  0.500000E+00,  0.500000E+00,  0.000000E+00,
                 1.000000E+00,
                            0,             2,  1.100000E+00,  1.500000E+01,
-                          58,            66,             1,             2,
+                0.500000E+00,  0.500000E+00,  0.500000E+00,  1.000000E+00,
+                          66,            74,             1,             2,
                -1.000000E+00,  1.000000E+00,  0.500000E+00,  0.500000E+00,
                 0.000000E+00,  1.000000E+00,             2,             3,
                -1.000000E+00,  0.000000E+00,  1.000000E+00,  0.500000E+00,
@@ -35,7 +37,7 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
 
             # verify content
             self.assertEqual( False, chunk.empty )
-            self.assertEqual( 56, chunk.length )
+            self.assertEqual( 64, chunk.length )
             self.assertEqual( "EnergyAngleDistributionData", chunk.name )
 
             self.assertEqual( EnergyDistributionType.TabulatedEnergyAngle, chunk.LAW )
@@ -70,12 +72,12 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 20., chunk.maximum_incident_energy )
 
             self.assertEqual( 27, chunk.LOCC(1) );
-            self.assertEqual( 52, chunk.LOCC(2) );
+            self.assertEqual( 56, chunk.LOCC(2) );
             self.assertEqual( 27, chunk.distribution_locator(1) );
-            self.assertEqual( 52, chunk.distribution_locator(2) );
+            self.assertEqual( 56, chunk.distribution_locator(2) );
 
             self.assertEqual( 7, chunk.relative_distribution_locator(1) );
-            self.assertEqual( 32, chunk.relative_distribution_locator(2) );
+            self.assertEqual( 36, chunk.relative_distribution_locator(2) );
 
             self.assertEqual( True, isinstance( chunk.distribution(1), TabulatedEnergyAngleDistribution )  )
             self.assertEqual( True, isinstance( chunk.distribution(2), TabulatedEnergyAngleDistribution ) )
@@ -107,19 +109,35 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 2.1, data1.outgoing_energies[0] )
             self.assertAlmostEqual( 20., data1.outgoing_energies[-1] )
 
+            self.assertEqual( 2, len( data1.pdf ) )
+            self.assertAlmostEqual( 0.5, data1.pdf[0] )
+            self.assertAlmostEqual( 0.5, data1.pdf[-1] )
+
+            self.assertEqual( 2, len( data1.cdf ) )
+            self.assertAlmostEqual( 0.5, data1.cdf[0] )
+            self.assertAlmostEqual( 1.0, data1.cdf[-1] )
+
             self.assertAlmostEqual( 2.1, data1.outgoing_energy(1) )
             self.assertAlmostEqual( 20., data1.outgoing_energy(2) )
 
-            self.assertEqual( 33, data1.LOCC(1) );
-            self.assertEqual( 44, data1.LOCC(2) );
-            self.assertEqual( 33, data1.distribution_locator(1) );
-            self.assertEqual( 44, data1.distribution_locator(2) );
+            self.assertAlmostEqual( 0.5, data1.probability(1) )
+            self.assertAlmostEqual( 0.5, data1.probability(2) )
 
-            self.assertEqual( 7, data1.relative_distribution_locator(1) );
-            self.assertEqual( 18, data1.relative_distribution_locator(2) );
+            self.assertAlmostEqual( 0.5, data1.cumulative_probability(1) )
+            self.assertAlmostEqual( 1.0, data1.cumulative_probability(2) )
+
+            self.assertEqual( 37, data1.LOCC(1) );
+            self.assertEqual( 48, data1.LOCC(2) );
+            self.assertEqual( 37, data1.distribution_locator(1) );
+            self.assertEqual( 48, data1.distribution_locator(2) );
+
+            self.assertEqual( 11, data1.relative_distribution_locator(1) );
+            self.assertEqual( 22, data1.relative_distribution_locator(2) );
 
             data11 = data1.distribution(1)
             self.assertAlmostEqual( 2.1, data11.energy )
+            self.assertAlmostEqual( 0.5, data11.probability )
+            self.assertAlmostEqual( 0.5, data11.cumulative_probability )
             self.assertEqual( 2, data11.interpolation )
             self.assertEqual( 3, data11.number_cosines )
 
@@ -137,6 +155,8 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
 
             data12 = data1.distribution(2)
             self.assertEqual( 20, data12.energy )
+            self.assertAlmostEqual( 0.5, data12.probability )
+            self.assertAlmostEqual( 1.0, data12.cumulative_probability )
             self.assertEqual( 1, data12.interpolation )
             self.assertEqual( 2, data12.number_cosines )
 
@@ -176,19 +196,35 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 1.1, data2.outgoing_energies[0] )
             self.assertAlmostEqual( 15., data2.outgoing_energies[-1] )
 
+            self.assertEqual( 2, len( data2.pdf ) )
+            self.assertAlmostEqual( 0.5, data2.pdf[0] )
+            self.assertAlmostEqual( 0.5, data2.pdf[-1] )
+
+            self.assertEqual( 2, len( data2.cdf ) )
+            self.assertAlmostEqual( 0.5, data2.cdf[0] )
+            self.assertAlmostEqual( 1.0, data2.cdf[-1] )
+
             self.assertAlmostEqual( 1.1, data2.outgoing_energy(1) )
             self.assertAlmostEqual( 15., data2.outgoing_energy(2) )
 
-            self.assertEqual( 58, data2.LOCC(1) );
-            self.assertEqual( 66, data2.LOCC(2) );
-            self.assertEqual( 58, data2.distribution_locator(1) );
-            self.assertEqual( 66, data2.distribution_locator(2) );
+            self.assertAlmostEqual( 0.5, data2.probability(1) )
+            self.assertAlmostEqual( 0.5, data2.probability(2) )
 
-            self.assertEqual( 7, data2.relative_distribution_locator(1) );
-            self.assertEqual( 15, data2.relative_distribution_locator(2) );
+            self.assertAlmostEqual( 0.5, data2.cumulative_probability(1) )
+            self.assertAlmostEqual( 1.0, data2.cumulative_probability(2) )
+
+            self.assertEqual( 66, data2.LOCC(1) );
+            self.assertEqual( 74, data2.LOCC(2) );
+            self.assertEqual( 66, data2.distribution_locator(1) );
+            self.assertEqual( 74, data2.distribution_locator(2) );
+
+            self.assertEqual( 11, data2.relative_distribution_locator(1) );
+            self.assertEqual( 19, data2.relative_distribution_locator(2) );
 
             data21 = data2.distribution(1)
             self.assertAlmostEqual( 1.1, data21.energy )
+            self.assertAlmostEqual( 0.5, data21.probability )
+            self.assertAlmostEqual( 0.5, data21.cumulative_probability )
             self.assertEqual( 1, data21.interpolation )
             self.assertEqual( 2, data21.number_cosines )
 
@@ -206,6 +242,8 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
 
             data22 = data2.distribution(2)
             self.assertEqual( 15, data22.energy )
+            self.assertAlmostEqual( 0.5, data22.probability )
+            self.assertAlmostEqual( 1.0, data22.cumulative_probability )
             self.assertEqual( 2, data22.interpolation )
             self.assertEqual( 3, data22.number_cosines )
 
@@ -233,16 +271,16 @@ class Test_ACEtk_EnergyAngleDistributionData( unittest.TestCase ) :
 
                       TabulatedEnergyAngleDistribution(
                         1e-5,
-                        [ TabulatedAngularDistribution(
-                            2.1, 2, [ -1.0, 0.0, 1.0 ], [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ),
-                          TabulatedAngularDistribution(
-                            20., 1, [ -1.0, 1.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ) ] ),
+                        [ TabulatedAngularDistributionWithProbability(
+                            2.1, 0.5, 0.5, 2, [ -1.0, 0.0, 1.0 ], [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ),
+                          TabulatedAngularDistributionWithProbability(
+                            20., 0.5, 1.0, 1, [ -1.0, 1.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ) ] ),
                       TabulatedEnergyAngleDistribution(
                         20.,
-                        [ TabulatedAngularDistribution(
-                            1.1, 1, [ -1.0, 1.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ),
-                          TabulatedAngularDistribution(
-                            15., 2, [ -1.0, 0.0, 1.0 ], [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ) ] ) ],
+                        [ TabulatedAngularDistributionWithProbability(
+                            1.1, 0.5, 0.5, 1, [ -1.0, 1.0 ], [ 0.5, 0.5 ], [ 0.0, 1.0 ] ),
+                          TabulatedAngularDistributionWithProbability(
+                            15., 0.5, 1.0, 2, [ -1.0, 0.0, 1.0 ], [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ) ] ) ],
                    locb = 21 )
 
         verify_chunk( self, chunk )

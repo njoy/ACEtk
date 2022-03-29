@@ -8,6 +8,7 @@
 #include "ACEtk/block/CrossSectionData.hpp"
 #include "ACEtk/block/EquiprobableAngularBins.hpp"
 #include "ACEtk/block/TabulatedAngularDistribution.hpp"
+#include "ACEtk/block/TabulatedAngularDistributionWithProbability.hpp"
 #include "ACEtk/block/IsotropicAngularDistribution.hpp"
 #include "ACEtk/block/AngularDistributionData.hpp"
 #include "ACEtk/block/FullyIsotropicDistribution.hpp"
