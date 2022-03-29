@@ -14,6 +14,7 @@ add_test( NAME ACEtk.python.block.ReactionQValuesBlock COMMAND ${PYTHON_EXECUTAB
 add_test( NAME ACEtk.python.block.SecondaryParticleTypeBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleTypeBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.EquiprobableAngularBins COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_EquiprobableAngularBins.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.TabulatedAngularDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedAngularDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.TabulatedAngularDistributionWithProbability COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_TabulatedAngularDistributionWithProbability.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.IsotropicAngularDistribution COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_IsotropicAngularDistribution.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.AngularDistributionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_AngularDistributionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.AngularDistributionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_AngularDistributionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
