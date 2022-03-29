@@ -17,8 +17,7 @@ namespace block {
  *
  *  The TabulatedAngularDistribution class contains the probability density
  *  function (PDF) and cumulative density function (CDF) as a function of
- *  cosine for the given energy. It is used in the AND block and in the
- *  OutgoingEnergyAngleDistributionData (ACE LAW 61) in the DLW block.
+ *  cosine for the given energy. It is used in the AND block.
  */
 class TabulatedAngularDistribution :
   protected details::TabulatedProbabilityDistribution {
