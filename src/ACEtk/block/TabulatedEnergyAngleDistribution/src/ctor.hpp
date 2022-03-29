@@ -7,35 +7,19 @@ TabulatedEnergyAngleDistribution( TabulatedEnergyAngleDistribution&& ) = default
  *  @brief Constructor
  *
  *  @param[in] incident         the incident energy value
- *  @param[in] boundaries       the interpolation range boundaries
- *  @param[in] interpolants     the interpolation types for each range
+ *  @param[in] interpolation    the interpolation type
  *  @param[in] distributions    the distributions for each outgoing energy
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
 TabulatedEnergyAngleDistribution(
     double incident,
-    std::vector< long > boundaries,
-    std::vector< long > interpolants,
+    int interpolation,
     std::vector< TabulatedAngularDistributionWithProbability > distributions,
     std::size_t locb = 1 ) :
-  BaseDistributionData( "TabulatedEnergyAngleDistribution",
-                        std::move( boundaries ), std::move( interpolants ),
-                        std::move( distributions ), 4, locb ),
+  BaseDistributionDataWithInterpolationType( "TabulatedEnergyAngleDistribution",
+                                             interpolation,
+                                             std::move( distributions ), locb ),
   incident_( incident ) {}
-
-/**
- *  @brief Constructor without interpolation data
- *
- *  @param[in] incident         the incident energy value
- *  @param[in] distributions    the distributions for each incident energy
- *  @param[in] locb             the starting xss index with respect to the superblock
- */
-TabulatedEnergyAngleDistribution(
-    double incident,
-    std::vector< TabulatedAngularDistributionWithProbability > distributions,
-    std::size_t locb = 1 ) :
-  TabulatedEnergyAngleDistribution(
-    incident, {}, {}, std::move( distributions ), locb ) {}
 
 /**
  *  @brief Constructor
@@ -47,8 +31,8 @@ TabulatedEnergyAngleDistribution(
  */
 TabulatedEnergyAngleDistribution( double incident, std::size_t locb,
                                   Iterator begin, Iterator end ) :
-  BaseDistributionData( "TabulatedEnergyAngleDistribution", 4, locb,
-                        begin, end ),
+  BaseDistributionDataWithInterpolationType( "TabulatedEnergyAngleDistribution",
+                                             locb, begin, end ),
   incident_( incident ) {}
 
 TabulatedEnergyAngleDistribution& operator=( const TabulatedEnergyAngleDistribution& ) = default;

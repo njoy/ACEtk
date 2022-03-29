@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseDistributionData.hpp"
+#include "ACEtk/block/details/BaseDistributionDataWithInterpolationType.hpp"
 #include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 
 namespace njoy {
@@ -23,11 +23,13 @@ namespace block {
  *  AngleEnergyDistributionData (ACE LAW 67) in the DLW block.
  */
 class TabulatedAngleEnergyDistribution :
-  protected details::BaseDistributionData< TabulatedAngleEnergyDistribution,
-                                           TabulatedEnergyDistribution > {
+  protected details::BaseDistributionDataWithInterpolationType<
+                TabulatedAngleEnergyDistribution,
+                TabulatedEnergyDistribution > {
 
-  friend class details::BaseDistributionData< TabulatedAngleEnergyDistribution,
-                                              TabulatedEnergyDistribution >;
+  friend class details::BaseDistributionDataWithInterpolationType<
+                   TabulatedAngleEnergyDistribution,
+                  TabulatedEnergyDistribution >;
 
   /* fields */
   double incident_;
@@ -48,57 +50,27 @@ public:
   double incidentEnergy() const { return this->value(); }
 
   /**
-   *  @brief Return the interpolation data
+   *  @brief Return the interpolation type
    */
-  auto interpolationData() const {
+  int interpolation() const {
 
-    return BaseDistributionData::interpolationData();
+    return BaseDistributionDataWithInterpolationType::interpolation();
   }
-
-  /**
-   *  @brief Return the number of interpolation regions
-   */
-  std::size_t NB() const { return BaseDistributionData::NB(); }
-
-  /**
-   *  @brief Return the number of interpolation regions
-   */
-  std::size_t numberInterpolationRegions() const {
-
-    return BaseDistributionData::numberInterpolationRegions();
-  }
-
-  /**
-   *  @brief Return the interpolation boundaries
-   */
-  auto NBT() const { return BaseDistributionData::NBT(); }
-
-  /**
-   *  @brief Return the interpolation boundaries
-   */
-  auto boundaries() const { return BaseDistributionData::boundaries(); }
-
-  /**
-   *  @brief Return the interpolants
-   */
-  auto INT() const { return BaseDistributionData::INT(); }
-
-  /**
-   *  @brief Return the interpolants
-   */
-  auto interpolants() const { return BaseDistributionData::interpolants(); }
 
   /**
    *  @brief Return the number of cosine values
    */
-  std::size_t NC() const { return BaseDistributionData::N(); }
+  std::size_t NC() const {
+
+    return BaseDistributionDataWithInterpolationType::N();
+  }
 
   /**
    *  @brief Return the number of outgoing cosine values
    */
   std::size_t numberCosines() const {
 
-    return BaseDistributionData::numberValues();
+    return BaseDistributionDataWithInterpolationType::numberValues();
   }
 
   /**
@@ -106,7 +78,7 @@ public:
    */
   auto cosines() const {
 
-    return BaseDistributionData::values( 1 );
+    return BaseDistributionDataWithInterpolationType::values( 1 );
   }
 
   /**
@@ -119,7 +91,7 @@ public:
    */
   double cosine( std::size_t index ) const {
 
-    return BaseDistributionData::value( 1, index );
+    return BaseDistributionDataWithInterpolationType::value( 1, index );
   }
 
   /**
@@ -135,7 +107,7 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    return BaseDistributionData::LOCC( index );
+    return BaseDistributionDataWithInterpolationType::LOCC( index );
   }
 
   /**
@@ -151,7 +123,7 @@ public:
    */
   int distributionLocator( std::size_t index ) const {
 
-    return BaseDistributionData::distributionLocator( index );
+    return BaseDistributionDataWithInterpolationType::distributionLocator( index );
   }
 
   /**
@@ -167,7 +139,7 @@ public:
    */
   std::size_t relativeDistributionLocator( std::size_t index ) const {
 
-    return BaseDistributionData::relativeDistributionLocator( index );
+    return BaseDistributionDataWithInterpolationType::relativeDistributionLocator( index );
   }
 
   /**
@@ -175,7 +147,7 @@ public:
    */
   const std::vector< TabulatedEnergyDistribution >& distributions() const {
 
-    return BaseDistributionData::distributions();
+    return BaseDistributionDataWithInterpolationType::distributions();
   }
 
   /**
@@ -188,15 +160,15 @@ public:
    */
   const TabulatedEnergyDistribution& distribution( std::size_t index ) const {
 
-    return BaseDistributionData::distribution( index );
+    return BaseDistributionDataWithInterpolationType::distribution( index );
   }
 
-  using BaseDistributionData::empty;
-  using BaseDistributionData::name;
-  using BaseDistributionData::length;
-  using BaseDistributionData::XSS;
-  using BaseDistributionData::begin;
-  using BaseDistributionData::end;
+  using BaseDistributionDataWithInterpolationType::empty;
+  using BaseDistributionDataWithInterpolationType::name;
+  using BaseDistributionDataWithInterpolationType::length;
+  using BaseDistributionDataWithInterpolationType::XSS;
+  using BaseDistributionDataWithInterpolationType::begin;
+  using BaseDistributionDataWithInterpolationType::end;
 };
 
 } // block namespace
