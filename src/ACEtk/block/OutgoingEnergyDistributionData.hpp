@@ -113,7 +113,7 @@ public:
    */
   auto incidentEnergies() const {
 
-    return BaseDistributionData::values();
+    return BaseDistributionData::values( 1 );
   }
 
   /**
@@ -126,7 +126,7 @@ public:
    */
   double incidentEnergy( std::size_t index ) const {
 
-    return BaseDistributionData::value( index );
+    return BaseDistributionData::value( 1, index );
   }
 
   /**

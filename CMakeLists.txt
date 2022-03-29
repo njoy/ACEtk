@@ -99,6 +99,7 @@ if(ACEtk.python)
     python/src/block/DosimetryCrossSectionBlock.python.cpp
     python/src/block/EquiprobableAngularBins.python.cpp
     python/src/block/TabulatedAngularDistribution.python.cpp
+    python/src/block/TabulatedAngularDistributionWithProbability.python.cpp
     python/src/block/IsotropicAngularDistribution.python.cpp
     python/src/block/AngularDistributionData.python.cpp
     python/src/block/FullyIsotropicDistribution.python.cpp
