@@ -1,15 +1,27 @@
 AngularDistributionData() = default;
 
 AngularDistributionData( const AngularDistributionData& base ) :
-  Base( base ), locb_( base.locb_ ) {
+  Base( base ), locb_( base.locb_ ),
+  values_( base.values_ ),
+  distributions_( base.distributions_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->distributions_.clear();
+    this->generateBlocks();
+  }
 }
 
 AngularDistributionData( AngularDistributionData&& base ) :
-  Base( std::move( base ) ), locb_( base.locb_ ) {
+  Base( std::move( base ) ), locb_( base.locb_ ),
+  values_( std::move( base.values_ ) ),
+  distributions_( std::move( base.distributions_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->distributions_.clear();
+    this->generateBlocks();
+  }
 }
 
 /**

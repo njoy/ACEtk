@@ -1,15 +1,29 @@
 BaseDistributionData() = default;
 
 BaseDistributionData( const BaseDistributionData& base ) :
-  Base( base ), locb_( base.locb_ ) {
+  Base( base ), locb_( base.locb_ ),
+  interpolation_( base.interpolation_ ),
+  values_( base.values_ ),
+  distributions_( base.distributions_ ) {
 
-  static_cast< Derived* >( this )->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->distributions_.clear();
+    static_cast< Derived* >( this )->generateBlocks();
+  }
 }
 
 BaseDistributionData( BaseDistributionData&& base ) :
-  Base( std::move( base ) ), locb_( base.locb_ ) {
+  Base( std::move( base ) ), locb_( base.locb_ ),
+  interpolation_( std::move( base.interpolation_ ) ),
+  values_( std::move( base.values_ ) ),
+  distributions_( std::move( base.distributions_ ) ) {
 
+  if ( Base::owner() ) {
+
+    this->distributions_.clear();
     static_cast< Derived* >( this )->generateBlocks();
+  }
 }
 
 /**
