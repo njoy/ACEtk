@@ -23,7 +23,6 @@ public:
 ProbabilityTable() = default;
 
 ProbabilityTable( const ProbabilityTable& ) = default;
-
 ProbabilityTable( ProbabilityTable&& ) = default;
 
 /**
