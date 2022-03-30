@@ -1,7 +1,6 @@
 SecondaryParticleAngularDistributionBlock() = default;
 
 SecondaryParticleAngularDistributionBlock( const SecondaryParticleAngularDistributionBlock& ) = default;
-
 SecondaryParticleAngularDistributionBlock( SecondaryParticleAngularDistributionBlock&& ) = default;
 
 /**

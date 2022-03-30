@@ -50,6 +50,11 @@ public:
   /* methods */
 
   /**
+   *  @brief Check whether or not this objects owns the xss array
+   */
+  bool owner() const { return this->xss_ ? true : false; }
+
+  /**
    *  @brief Return whether or not the block is empty
    */
   bool empty() const { return this->begin_ == this->end_; }
