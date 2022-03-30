@@ -16,15 +16,25 @@ public:
 DelayedNeutronPrecursorBlock() = default;
 
 DelayedNeutronPrecursorBlock( const DelayedNeutronPrecursorBlock& base ) :
-  Base( base ), npcr_( base.npcr_ ) {
+  Base( base ), npcr_( base.npcr_ ),
+  data_( base.data_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->data_.clear();
+    this->generateBlocks();
+  }
 }
 
 DelayedNeutronPrecursorBlock( DelayedNeutronPrecursorBlock&& base ) :
-  Base( std::move( base ) ), npcr_( base.npcr_ ) {
+  Base( std::move( base ) ), npcr_( base.npcr_ ),
+  data_( std::move( base.data_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->data_.clear();
+    this->generateBlocks();
+  }
 }
 
 /**

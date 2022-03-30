@@ -1,15 +1,23 @@
 ProbabilityTableBlock() = default;
 
 ProbabilityTableBlock( const ProbabilityTableBlock& base ) :
-  Base( base ) {
+  Base( base ), data_( base.data_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->data_.clear();
+    this->generateBlocks();
+  }
 }
 
 ProbabilityTableBlock( ProbabilityTableBlock&& base ) :
-  Base( std::move( base ) ) {
+  Base( std::move( base ) ), data_( std::move( base.data_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->data_.clear();
+    this->generateBlocks();
+  }
 }
 
 /**

@@ -1,15 +1,21 @@
 TabulatedSecondaryParticleMultiplicity() = default;
 
 TabulatedSecondaryParticleMultiplicity( const TabulatedSecondaryParticleMultiplicity& base ) :
-  Base( base ) {
+  Base( base ), data_( base.data_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 TabulatedSecondaryParticleMultiplicity( TabulatedSecondaryParticleMultiplicity&& base ) :
-  Base( std::move( base ) ) {
+  Base( std::move( base ) ), data_( std::move( base.data_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 /**
