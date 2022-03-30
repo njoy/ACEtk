@@ -4,14 +4,6 @@ AngularDistributionBlock( const AngularDistributionBlock& ) = default;
 
 AngularDistributionBlock( AngularDistributionBlock&& ) = default;
 
-// /**
-//  *  @brief Constructor for a block without a zero index
-//  *
-//  *  @param[in] data    the ditribution data for all reactions
-//  */
-// SecondaryParticleAngularDistributionBlock( std::vector< DistributionData > data ) :
-//   BaseAngularDistributionBlock( "ANDH", std::move( data ) ) {}
-
 /**
  *  @brief Constructor
  *

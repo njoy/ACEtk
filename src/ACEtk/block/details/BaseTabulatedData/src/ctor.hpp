@@ -1,15 +1,23 @@
 BaseTabulatedData() = default;
 
 BaseTabulatedData( const BaseTabulatedData& base ) :
-  Base( base ) {
+  Base( base ), interpolation_( base.interpolation_ ),
+  data_( base.data_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 BaseTabulatedData( BaseTabulatedData&& base ) :
-  Base( std::move( base ) ) {
+  Base( std::move( base ) ), interpolation_( std::move( base.interpolation_ ) ),
+  data_( std::move( base.data_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 /**

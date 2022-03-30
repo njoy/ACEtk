@@ -1,15 +1,27 @@
 BaseDistributionDataWithInterpolationType() = default;
 
 BaseDistributionDataWithInterpolationType( const BaseDistributionDataWithInterpolationType& base ) :
-  Base( base ), locb_( base.locb_ ) {
+  Base( base ), locb_( base.locb_ ),
+  values_( base.values_ ),
+  distributions_( base.distributions_ ) {
 
-  static_cast< Derived* >( this )->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->distributions_.clear();
+    static_cast< Derived* >( this )->generateBlocks();
+  }
 }
 
 BaseDistributionDataWithInterpolationType( BaseDistributionDataWithInterpolationType&& base ) :
-  Base( std::move( base ) ), locb_( base.locb_ ) {
+  Base( std::move( base ) ), locb_( base.locb_ ),
+  values_( std::move( base.values_ ) ),
+  distributions_( std::move( base.distributions_ ) ) {
 
+  if ( Base::owner() ) {
+
+    this->distributions_.clear();
     static_cast< Derived* >( this )->generateBlocks();
+  }
 }
 
 /**

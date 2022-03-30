@@ -1,15 +1,29 @@
 MultiDistributionData() = default;
 
 MultiDistributionData( const MultiDistributionData& base ) :
-  Base( base ) {
+  Base( base ), locb_( base.locb_ ),
+  probabilities_( base.probabilities_ ),
+  distributions_( base.distributions_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->probabilities_.clear();
+    this->distributions_.clear();
+    this->generateBlocks();
+  }
 }
 
 MultiDistributionData( MultiDistributionData&& base ) :
-  Base( std::move( base ) ) {
+  Base( std::move( base ) ), locb_( base.locb_ ),
+  probabilities_( std::move( base.probabilities_ ) ),
+  distributions_( std::move( base.distributions_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->probabilities_.clear();
+    this->distributions_.clear();
+    this->generateBlocks();
+  }
 }
 
 /**
