@@ -1,15 +1,23 @@
 EnergyDependentWattSpectrum() = default;
 
 EnergyDependentWattSpectrum( const EnergyDependentWattSpectrum& base ) :
-  Base( base ) {
+  Base( base ), a_( base.a_ ), b_( base.b_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 EnergyDependentWattSpectrum( EnergyDependentWattSpectrum&& base ) :
-  Base( std::move( base ) ) {
+  Base( std::move( base ) ),
+  a_( std::move( base.a_ ) ),
+  b_( std::move( base.b_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 /**

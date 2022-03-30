@@ -30,17 +30,27 @@ public:
 BaseAngularDistributionBlock() = default;
 
 BaseAngularDistributionBlock( const BaseAngularDistributionBlock& base ) :
-  Base( base ), nr_( base.nr_ ), zero_index_( base.zero_index_ ) {
+  Base( base ), nr_( base.nr_ ), iterator_( base.iterator_ ),
+  data_( base.data_ ), zero_index_( base.zero_index_ ) {
 
-  this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->data_.clear();
+    this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
+    this->generateBlocks();
+  }
 }
 
 BaseAngularDistributionBlock( BaseAngularDistributionBlock&& base ) :
-  Base( std::move( base ) ), nr_( base.nr_ ), zero_index_( base.zero_index_ ) {
+  Base( std::move( base ) ), nr_( base.nr_ ), iterator_( base.iterator_ ),
+  data_( std::move( base.data_ ) ), zero_index_( base.zero_index_ ) {
 
-  this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->data_.clear();
+    this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
+    this->generateBlocks();
+  }
 }
 
 /**

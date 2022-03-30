@@ -17,17 +17,27 @@ public:
 BaseBlockWithLocators() = default;
 
 BaseBlockWithLocators( const BaseBlockWithLocators& base ) :
-  Base( base ), nr_( base.nr_ ) {
+  Base( base ), nr_( base.nr_ ), iterator_( base.iterator_ ),
+  data_( base.data_ ) {
 
-  this->iterator_ = this->begin() + this->nr_;
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->iterator_ = this->begin() + this->nr_;
+    this->data_.clear();
+    this->generateBlocks();
+  }
 }
 
 BaseBlockWithLocators( BaseBlockWithLocators&& base ) :
-  Base( std::move( base ) ), nr_( base.nr_ ) {
+  Base( std::move( base ) ), nr_( base.nr_ ), iterator_( base.iterator_ ),
+  data_( std::move( base.data_ ) ) {
 
-  this->iterator_ = this->begin() + this->nr_;
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->iterator_ = this->begin() + this->nr_;
+    this->data_.clear();
+    this->generateBlocks();
+  }
 }
 
 /**
