@@ -9,7 +9,7 @@ BaseBlockWithLocators( std::string&& name, std::vector< Data >&& xs,
   nr_( nr ) {
 
   this->iterator_ = this->begin() + this->nr_;
-  this->generateBlocks();
+  static_cast< Derived* >( this )->generateBlocks();
 }
 
 public:
@@ -24,7 +24,7 @@ BaseBlockWithLocators( const BaseBlockWithLocators& base ) :
 
     this->iterator_ = this->begin() + this->nr_;
     this->data_.clear();
-    this->generateBlocks();
+    static_cast< Derived* >( this )->generateBlocks();
   }
 }
 
@@ -36,7 +36,7 @@ BaseBlockWithLocators( BaseBlockWithLocators&& base ) :
 
     this->iterator_ = this->begin() + this->nr_;
     this->data_.clear();
-    this->generateBlocks();
+    static_cast< Derived* >( this )->generateBlocks();
   }
 }
 
@@ -65,7 +65,7 @@ BaseBlockWithLocators( std::string name,
   nr_( nr ), iterator_( data ) {
 
   verifySize( this->begin(), this->iterator_, this->end(), this->nr_ );
-  this->generateBlocks();
+  static_cast< Derived* >( this )->generateBlocks();
 }
 
 BaseBlockWithLocators& operator=( const BaseBlockWithLocators& base ) {
