@@ -17,6 +17,9 @@
 #include "ACEtk/block/EnergyDependentWattSpectrum.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
 #include "ACEtk/block/NBodyPhaseSpaceDistribution.hpp"
+#include "ACEtk/block/TwoBodyTransferDistribution.hpp"
+#include "ACEtk/block/EnergyAngleDistributionData.hpp"
+#include "ACEtk/block/AngleEnergyDistributionData.hpp"
 #include "ACEtk/block/DistributionProbability.hpp"
 
 namespace njoy {
@@ -48,7 +51,10 @@ public:
                                          EvaporationSpectrum,
                                          EnergyDependentWattSpectrum,
                                          KalbachMannDistributionData,
-                                         NBodyPhaseSpaceDistribution >;
+                                         NBodyPhaseSpaceDistribution,
+                                         TwoBodyTransferDistribution,
+                                         EnergyAngleDistributionData,
+                                         AngleEnergyDistributionData >;
 
 private:
 
@@ -58,7 +64,6 @@ private:
   std::vector< DistributionData > distributions_;
 
   /* auxiliary functions */
-//  #include "ACEtk/block/MultiDistributionData/src/verifySize.hpp"
   #include "ACEtk/block/MultiDistributionData/src/generateBlocks.hpp"
   #include "ACEtk/block/MultiDistributionData/src/verifyDistributionIndex.hpp"
   #include "ACEtk/block/MultiDistributionData/src/generateXSS.hpp"
