@@ -203,7 +203,7 @@ void generateBlocks() {
   // secondary photon data: photon energy distributions
   locators = block( 26 );
   iterators = block( 27 );
-  this->dned_ = block::DLWP( present ? locators.first : begin,
+  this->dned_ = block::DNED( present ? locators.first : begin,
                              present ? iterators.first : begin,
                              present ? iterators.second : begin,
                              this->NPCR() );

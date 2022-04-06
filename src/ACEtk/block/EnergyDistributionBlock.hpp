@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/block/details/Base.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
@@ -21,6 +21,8 @@
 #include "ACEtk/block/AngleEnergyDistributionData.hpp"
 #include "ACEtk/block/TwoBodyTransferDistribution.hpp"
 #include "ACEtk/block/MultiDistributionData.hpp"
+#include "ACEtk/block/TabulatedMultiplicity.hpp"
+#include "ACEtk/ReferenceFrame.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -41,6 +43,7 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
                                              EnergyAngleDistributionData,
                                              AngleEnergyDistributionData,
                                              MultiDistributionData >;
+using MultiplicityData = std::variant< unsigned int, TabulatedMultiplicity >;
 
 /**
  *  @class
@@ -52,18 +55,25 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
  *  of the distribution data sets is the same as the order of the reaction
  *  numbers in the MTR block.
  */
-class EnergyDistributionBlock :
-    protected details::BaseBlockWithLocators< EnergyDistributionBlock,
-                                              EnergyDistributionData > {
-
-  friend class details::BaseBlockWithLocators< EnergyDistributionBlock,
-                                               EnergyDistributionData >;
+class EnergyDistributionBlock : protected details::Base {
 
   /* fields */
+  unsigned int nr_;   // the number of reactions
+  Iterator iterator_; // the begin iterator of the data block
+  std::vector< EnergyDistributionData > data_;
+  std::vector< MultiplicityData > multiplicities_;
+  std::vector< ReferenceFrame > frames_;
 
   /* auxiliary functions */
   #include "ACEtk/block/EnergyDistributionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/EnergyDistributionBlock/src/generateData.hpp"
+  #include "ACEtk/block/EnergyDistributionBlock/src/generateBlocks.hpp"
+  #include "ACEtk/block/EnergyDistributionBlock/src/verifyDataIndex.hpp"
+  #include "ACEtk/block/EnergyDistributionBlock/src/verifySize.hpp"
+
+  /**
+   *  @brief Return the iterator to the start of the sig block
+   */
+  Iterator iter() const { return this->iterator_; }
 
 public:
 
@@ -76,15 +86,13 @@ public:
    *  @brief Return the number of reactions that produce the projectile
    *         (excluding elastic )
    */
-  unsigned int NR() const { return BaseBlockWithLocators::NR(); }
+  unsigned int NR() const { return this->nr_; }
 
   /**
-   *  @brief Return the number of reactions
+   *  @brief Return the number of reactions that produce the projectile
+   *         (excluding elastic )
    */
-  unsigned int numberReactions() const {
-
-    return BaseBlockWithLocators::numberReactions();
-  }
+  unsigned int numberReactions() const { return this->NR(); }
 
   /**
    *  @brief Return the relative energy distribution locator for a reaction
@@ -97,7 +105,10 @@ public:
    */
   int LDLW( std::size_t index ) const {
 
-    return BaseBlockWithLocators::LLOC( index );
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return XSS( index );
   }
 
   /**
@@ -111,7 +122,7 @@ public:
    */
   int energyDistributionLocator( std::size_t index ) const {
 
-    return BaseBlockWithLocators::locator( index );
+    return this->LDLW( index );
   }
 
   /**
@@ -119,7 +130,7 @@ public:
    */
   const std::vector< EnergyDistributionData >& data() const {
 
-    return BaseBlockWithLocators::data();
+    return this->data_;
   }
 
   /**
@@ -132,7 +143,10 @@ public:
    */
   const EnergyDistributionData& energyDistributionData( std::size_t index ) const {
 
-    return BaseBlockWithLocators::data( index );
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->data_[ index - 1 ];
   }
 
   using Base::empty;
@@ -144,9 +158,6 @@ public:
 };
 
 using DLW = EnergyDistributionBlock;
-using DLWP = EnergyDistributionBlock;
-using DNED = EnergyDistributionBlock;
-using DLWH = EnergyDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

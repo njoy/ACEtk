@@ -60,7 +60,7 @@ class ContinuousEnergyTable : protected Table {
 
   block::NU dnu_;
   block::BDD bdd_;
-  block::DLW dned_;
+  block::DNED dned_;
 
   block::PTYPE ptype_;
   block::NTRO ntro_;
@@ -434,12 +434,12 @@ public:
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const block::DLW& DNED() const { return this->dned_; }
+  const block::DNED& DNED() const { return this->dned_; }
 
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const block::DLW& delayedNeutronEnergyDistributionBlock() const {
+  const block::DNED& delayedNeutronEnergyDistributionBlock() const {
 
     return this->DNED();
   }
