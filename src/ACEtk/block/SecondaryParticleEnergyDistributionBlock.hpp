@@ -51,8 +51,6 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
  *  one for each the first NXS(5) reaction numbers on the MTR block. The order
  *  of the distribution data sets is the same as the order of the reaction
  *  numbers in the MTR block.
- *
- *  @todo verify if DiscretePhotonDistribution can appear here
  */
 class EnergyDistributionBlock :
     protected details::BaseBlockWithLocators< EnergyDistributionBlock,
