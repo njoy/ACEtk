@@ -25,6 +25,9 @@ void wrapSecondaryParticleAngularDistributionBlock( python::module& module, pyth
 
     module,
     "SecondaryParticleAngularDistributionBlock",
+    "The continuous energy LANDP,ANDP and LANDH,ANDH blocks with the\n"
+    "angular distribution data for secondary particles that are not the\n"
+    "incident particle type\n\n"
     "The SecondaryParticleAngularDistributionBlock class contains angular\n"
     "distribution data, one for each the NXS(6) reaction numbers on the MTRP\n"
     "block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on\n"
@@ -47,13 +50,13 @@ void wrapSecondaryParticleAngularDistributionBlock( python::module& module, pyth
 
     "NR",
     &Block::NR,
-    "The number of reactions excluding elastic that produce the projectile"
+    "The number of reactions with angular distribution data"
   )
   .def_property_readonly(
 
     "number_reactions",
     &Block::numberReactions,
-    "The number of reactions excluding elastic that produce the projectile"
+    "The number of reactions with angular distribution data"
   )
   .def(
 

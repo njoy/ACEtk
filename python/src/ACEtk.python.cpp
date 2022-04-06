@@ -76,6 +76,7 @@ namespace block {
   void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapSecondaryParticleAngularDistributionBlock( python::module&, python::module& );
   void wrapEnergyDistributionBlock( python::module&, python::module& );
+  void wrapSecondaryParticleEnergyDistributionBlock( python::module&, python::module& );
   void wrapPhotonProductionBlock( python::module&, python::module& );
   void wrapMultiplicityReactionNumberBlock( python::module&, python::module& );
   void wrapDelayedNeutronPrecursorBlock( python::module&, python::module& );

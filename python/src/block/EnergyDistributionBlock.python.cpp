@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
+#include "ACEtk/block/EnergyDistributionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
-                                                   python::module& ) {
+void wrapEnergyDistributionBlock( python::module& module, python::module& ) { 
 
   // type aliases
-  using Block = njoy::ACEtk::block::SecondaryParticleEnergyDistributionBlock;
+  using Block = njoy::ACEtk::block::EnergyDistributionBlock;
   using EnergyDistributionData = njoy::ACEtk::block::EnergyDistributionData;
 
   // wrap views created by this block
@@ -25,15 +24,12 @@ void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
   python::class_< Block > block(
 
     module,
-    "SecondaryParticleEnergyDistributionBlock",
-    "The continuous energy LDLWP,DLWP and LDLWH,DLWH blocks with the\n"
-    "energy distribution data for secondary particles that are not the\n"
-    "incident particle type\n\n"
-    "The SecondaryParticleAngularDistributionBlock class contains energy\n"
-    "distribution data, one for each the NXS(6) reaction numbers on the MTRP\n"
-    "block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on\n"
-    "the MTRH(ITYPE) block. The order of the distribution data sets is the same\n"
-    "as the order of the reaction numbers in the corresponding MTR block."
+    "EnergyDistributionBlock",
+    "The continuous energy LDLW and DLW block with the energy distribution data\n\n"
+    "The EnergyDistributionBlock class contains energy distribution data,\n"
+    "one for each the first NXS(5) reaction numbers on the MTR block. The order\n"
+    "of the distribution data sets is the same as the order of the reaction\n"
+    "numbers in the MTR block."
   );
 
   // wrap the block
@@ -51,13 +47,13 @@ void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
 
     "NR",
     &Block::NR,
-    "The number of reactions with energy distribution data"
+    "The number of reactions excluding elastic that produce the projectile"
   )
   .def_property_readonly(
 
     "number_reactions",
     &Block::numberReactions,
-    "The number of reactions with energy distribution data"
+    "The number of reactions excluding elastic that produce the projectile"
   )
   .def(
 
