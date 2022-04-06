@@ -14,6 +14,7 @@
 #include "ACEtk/block/AngularDistributionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotonProductionBlock.hpp"
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"

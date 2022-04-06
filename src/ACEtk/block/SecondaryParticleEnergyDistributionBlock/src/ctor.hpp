@@ -1,15 +1,16 @@
-EnergyDistributionBlock() = default;
+SecondaryParticleEnergyDistributionBlock() = default;
 
-EnergyDistributionBlock( const EnergyDistributionBlock& ) = default;
-EnergyDistributionBlock( EnergyDistributionBlock&& ) = default;
+SecondaryParticleEnergyDistributionBlock( const SecondaryParticleEnergyDistributionBlock& ) = default;
+SecondaryParticleEnergyDistributionBlock( SecondaryParticleEnergyDistributionBlock&& ) = default;
 
 /**
  *  @brief Constructor
  *
  *  @param[in] distributions    the energy distribution data
  */
-EnergyDistributionBlock( std::vector< EnergyDistributionData > distributions ) :
-  BaseBlockWithLocators( "DLW", std::move( distributions ) ) {}
+SecondaryParticleEnergyDistributionBlock(
+    std::vector< EnergyDistributionData > distributions ) :
+  BaseBlockWithLocators( "DLWH", std::move( distributions ) ) {}
 
 /**
  *  @brief Constructor
@@ -19,9 +20,10 @@ EnergyDistributionBlock( std::vector< EnergyDistributionData > distributions ) :
  *  @param[in] end     the end iterator of the DLW block in the XSS array
  *  @param[in] nr      the number of reactions
  */
-EnergyDistributionBlock( Iterator lsig, Iterator sig, Iterator end,
-                         unsigned int nr ) :
-  BaseBlockWithLocators( "DLW", lsig, sig, end, nr ) {}
+SecondaryParticleEnergyDistributionBlock(
+    Iterator lsig, Iterator sig, Iterator end,
+    unsigned int nr ) :
+  BaseBlockWithLocators( "DLWH", lsig, sig, end, nr ) {}
 
-EnergyDistributionBlock& operator=( const EnergyDistributionBlock& ) = default;
-EnergyDistributionBlock& operator=( EnergyDistributionBlock&& ) = default;
+SecondaryParticleEnergyDistributionBlock& operator=( const SecondaryParticleEnergyDistributionBlock& ) = default;
+SecondaryParticleEnergyDistributionBlock& operator=( SecondaryParticleEnergyDistributionBlock&& ) = default;

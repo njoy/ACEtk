@@ -44,42 +44,43 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
 
 /**
  *  @class
- *  @brief The continuous energy LDLW and DLW block with the energy
- *         distribution data
+ *  @brief The continuous energy LDLWP,DLWP and LDLWH,DLWH blocks with the
+ *         energy distribution data for secondary particles that are not the
+ *         incident particle type
  *
- *  The EnergyDistributionBlock class contains energy distribution data,
- *  one for each the first NXS(5) reaction numbers on the MTR block. The order
- *  of the distribution data sets is the same as the order of the reaction
- *  numbers in the MTR block.
+ *  The SecondaryParticleAngularDistributionBlock class contains energy
+ *  distribution data, one for each the NXS(6) reaction numbers on the MTRP
+ *  block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on
+ *  the MTRH(ITYPE) block. The order of the distribution data sets is the same
+ *  as the order of the reaction numbers in the corresponding MTR block.
  */
-class EnergyDistributionBlock :
-    protected details::BaseBlockWithLocators< EnergyDistributionBlock,
+class SecondaryParticleEnergyDistributionBlock :
+    protected details::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
                                               EnergyDistributionData > {
 
-  friend class details::BaseBlockWithLocators< EnergyDistributionBlock,
+  friend class details::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
                                                EnergyDistributionData >;
 
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/block/EnergyDistributionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/EnergyDistributionBlock/src/generateData.hpp"
+  #include "ACEtk/block/SecondaryParticleEnergyDistributionBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/SecondaryParticleEnergyDistributionBlock/src/generateData.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/EnergyDistributionBlock/src/ctor.hpp"
+  #include "ACEtk/block/SecondaryParticleEnergyDistributionBlock/src/ctor.hpp"
 
   /* methods */
 
   /**
-   *  @brief Return the number of reactions that produce the projectile
-   *         (excluding elastic )
+   *  @brief Return the number of reactions with energy distribution data
    */
   unsigned int NR() const { return BaseBlockWithLocators::NR(); }
 
   /**
-   *  @brief Return the number of reactions
+   *  @brief Return the number of reactions with energy distribution data
    */
   unsigned int numberReactions() const {
 
@@ -143,10 +144,9 @@ public:
   using Base::end;
 };
 
-using DLW = EnergyDistributionBlock;
-using DLWP = EnergyDistributionBlock;
-using DNED = EnergyDistributionBlock;
-using DLWH = EnergyDistributionBlock;
+using DLWP = SecondaryParticleEnergyDistributionBlock;
+using DNED = SecondaryParticleEnergyDistributionBlock;
+using DLWH = SecondaryParticleEnergyDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

@@ -72,7 +72,7 @@ generateData( std::size_t locator, Iterator left, Iterator right ) {
       }
       default : {
 
-        throw std::runtime_error( "DLW law currently not implemented: "
+        throw std::runtime_error( "DLWH law currently not implemented: "
                                   + std::to_string( static_cast< short >( law ) ) );
       }
     }

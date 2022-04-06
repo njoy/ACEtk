@@ -1,24 +1,24 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/EnergyDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using EnergyDistributionBlock = block::EnergyDistributionBlock;
+using SecondaryParticleEnergyDistributionBlock = block::SecondaryParticleEnergyDistributionBlock;
 using LevelScatteringDistribution = block::LevelScatteringDistribution;
 using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
 using EnergyDistributionData = block::EnergyDistributionData;
 
 std::vector< double > chunk();
-void verifyChunk( const EnergyDistributionBlock& );
+void verifyChunk( const SecondaryParticleEnergyDistributionBlock& );
 
-SCENARIO( "EnergyDistributionBlock" ) {
+SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
 
-  GIVEN( "valid data for an EnergyDistributionBlock instance" ) {
+  GIVEN( "valid data for an SecondaryParticleEnergyDistributionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -41,9 +41,9 @@ SCENARIO( "EnergyDistributionBlock" ) {
               { 2.391154E-01, 2.847920E-01, 5.592013E-01 } ) } )
       };
 
-      EnergyDistributionBlock chunk( std::move( distributions ) );
+      SecondaryParticleEnergyDistributionBlock chunk( std::move( distributions ) );
 
-      THEN( "an EnergyDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -60,9 +60,10 @@ SCENARIO( "EnergyDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      SecondaryParticleEnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                      xss.end(), 2 );
 
-      THEN( "an EnergyDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -106,7 +107,7 @@ std::vector< double > chunk() {
                 9.775367E-01,       2.391154E-01,       2.847920E-01,       5.592013E-01 };
 }
 
-void verifyChunk( const EnergyDistributionBlock& chunk ) {
+void verifyChunk( const SecondaryParticleEnergyDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 57 == chunk.length() );
