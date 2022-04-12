@@ -100,7 +100,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       ContinuousEnergyTable chunk( 92, 235, base.header(),
                                    base.ESZ(), base.NU(), base.DNU(),
-                                   base.MTR(), base.LQR(), base.TYR(),
+                                   base.MTR(), base.LQR(),
                                    base.SIG(), base.AND(), base.DLW(),
                                    base.BDD(), base.DNED(),
                                    base.GPD(), base.MTRP(), base.SIGP(),
@@ -261,7 +261,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       ContinuousEnergyTable chunk( 2, 3, base.header(),
                                    base.ESZ(), std::nullopt, std::nullopt,
-                                   base.MTR(), base.LQR(), base.TYR(),
+                                   base.MTR(), base.LQR(),
                                    base.SIG(), base.AND(), base.DLW(),
                                    std::nullopt, std::nullopt,
                                    std::nullopt, std::nullopt, std::nullopt,

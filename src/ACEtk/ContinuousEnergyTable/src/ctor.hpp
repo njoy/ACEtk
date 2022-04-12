@@ -73,7 +73,6 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] dnu       the optional delayed fission neutron multiplicity block
  *  @param[in] mtr       the reaction number block
  *  @param[in] lqr       the reaction Q value block
- *  @param[in] tyr       the reference frame and multiplicity block
  *  @param[in] sig       the cross section data block
  *  @param[in] ang       the angular distribution data block
  *  @param[in] dlw       the energy distribution data block
@@ -98,7 +97,7 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
 ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        block::ESZ esz, std::optional< block::NU > nu,
                        std::optional< block::DNU > dnu,
-                       block::MTR mtr, block::LQR lqr, block::TYR tyr,
+                       block::MTR mtr, block::LQR lqr,
                        block::SIG sig, block::AND ang, block::DLW dlw,
                        std::optional< block::BDD > bdd,
                        std::optional< block::DNED > dned,
@@ -121,7 +120,7 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
       Table( std::move( header ),
              generateData( z, a, std::move( esz ), std::move( nu ),
                            std::move( mtr ), std::move( lqr ),
-                           std::move( tyr ), std::move( sig ),
+                           std::move( sig ),
                            std::move( ang ), std::move( dlw ),
                            std::move( gpd ), std::move( mtrp ),
                            std::move( sigp ), std::move( andp ),

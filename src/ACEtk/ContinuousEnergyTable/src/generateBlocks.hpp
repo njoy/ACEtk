@@ -137,7 +137,7 @@ void generateBlocks() {
   locators = block( 10 );
   iterators = block( 11 );
   this->dlw_ = block::DLW( locators.first, iterators.first, iterators.second,
-                           this->NR() );
+                           this->TYR(), this->NR() );
 
   // secondary photon data: total photon production cross section
   present = ( this->NTRP() > 0 );

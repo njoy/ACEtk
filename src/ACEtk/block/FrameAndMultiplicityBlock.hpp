@@ -96,7 +96,8 @@ public:
 
     return this->XSS( 1, this->NTR() )
              | ranges::cpp20::views::transform(
-                 [] ( const auto& value ) { return std::abs( value ); } );
+                 [] ( const auto& value )
+                    { return static_cast< unsigned int >( std::abs( value ) ); } );
   }
 
   using Base::empty;

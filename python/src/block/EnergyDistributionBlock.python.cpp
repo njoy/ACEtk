@@ -12,11 +12,13 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapEnergyDistributionBlock( python::module& module, python::module& ) { 
+void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::block::EnergyDistributionBlock;
   using EnergyDistributionData = njoy::ACEtk::block::EnergyDistributionData;
+  using MultiplicityData = njoy::ACEtk::block::MultiplicityData;
+  using ReferenceFrame = njoy::ACEtk::ReferenceFrame;
 
   // wrap views created by this block
 
@@ -36,8 +38,11 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< EnergyDistributionData > >(),
-    python::arg( "distributions" ),
+    python::init< std::vector< EnergyDistributionData >,
+                  std::vector< MultiplicityData >,
+                  std::vector< ReferenceFrame > >(),
+    python::arg( "distributions" ), python::arg( "multiplicities" ),
+    python::arg( "frames" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
@@ -89,6 +94,40 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
     &Block::energyDistributionData,
     python::arg( "index" ),
     "Return the energy distribution data for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def_property_readonly(
+
+    "multiplicities",
+    &Block::multiplicities,
+    "The multiplicity data"
+  )
+  .def(
+
+    "multiplicity_data",
+    &Block::multiplicityData,
+    python::arg( "index" ),
+    "Return the multiplicity data for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def_property_readonly(
+
+    "reference_frames",
+    &Block::referenceFrames,
+    "The reference frames"
+  )
+  .def(
+
+    "reference_frame",
+    &Block::referenceFrame,
+    python::arg( "index" ),
+    "Return the reference frame for a reaction index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"

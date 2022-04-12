@@ -6,6 +6,7 @@
 
 // other includes
 #include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
@@ -60,6 +61,7 @@ class EnergyDistributionBlock : protected details::Base {
   /* fields */
   unsigned int nr_;   // the number of reactions
   Iterator iterator_; // the begin iterator of the data block
+  block::TYR tyr_;    // the associated TYR block
   std::vector< EnergyDistributionData > data_;
   std::vector< MultiplicityData > multiplicities_;
   std::vector< ReferenceFrame > frames_;
@@ -74,6 +76,14 @@ class EnergyDistributionBlock : protected details::Base {
    *  @brief Return the iterator to the start of the sig block
    */
   Iterator iter() const { return this->iterator_; }
+
+  /**
+   *  @brief Return the associated TYR block
+   *
+   *  Note: this TYR block may not be completely compatible with the normal TYR
+   *        block since can be the wrong expected size.
+   */
+  const block::TYR& TYR() const { return this->tyr_; }
 
 public:
 
@@ -147,6 +157,62 @@ public:
     this->verifyDataIndex( index );
     #endif
     return this->data_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return all multiplicity data
+   */
+  const std::vector< MultiplicityData >& multiplicities() const {
+
+    return this->multiplicities_;
+  }
+
+  /**
+   *  @brief Return the multiplicity data for a reaction index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const MultiplicityData& multiplicityData( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->multiplicities_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return all reference frames
+   */
+  const std::vector< ReferenceFrame >& referenceFrames() const {
+
+    return this->frames_;
+  }
+
+  /**
+   *  @brief Return the reference frame for a reaction index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const ReferenceFrame& referenceFrame( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->frames_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the associated TYR multiplicity entries
+   */
+  auto tyrMultiplicities() const {
+
+    return this->tyr_.multiplicities();
   }
 
   using Base::empty;

@@ -91,10 +91,24 @@ void generateBlocks() {
     // data + locator - 1 : one-based index to the start of cross section data
     std::size_t data = std::distance( this->begin(), this->iter() ) + 1;
     std::size_t locator = this->LDLW( index );
+    std::size_t multiplicity = this->TYR().multiplicity( index + 1 );
     const auto left = this->iterator( data + locator - 1 );
     const auto right = index == this->NR()
                        ? this->end()
-                       : this->iterator( data + this->LDLW( index + 1 ) - 1 );
+                       : multiplicity < 100
+                           ? this->iterator( data + this->LDLW( index + 1 ) - 1 )
+                           : this->iterator( data + multiplicity - 100 - 1 );
     this->data_.emplace_back( generateData( locator, left, right ) );
+    multiplicity = this->TYR().multiplicity( index );
+    if ( multiplicity > 100 ) {
+
+      auto mleft = this->iterator( data + multiplicity - 100 - 1 );
+      this->multiplicities_.emplace_back( TabulatedMultiplicity( mleft, left ) );
+    }
+    else {
+
+      this->multiplicities_.emplace_back( static_cast< unsigned int >( multiplicity ) );
+    }
+    this->frames_.emplace_back( this->TYR().referenceFrame( index ) );
   }
 }

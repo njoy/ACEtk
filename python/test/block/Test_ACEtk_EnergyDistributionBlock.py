@@ -9,21 +9,26 @@ from ACEtk import TabulatedKalbachMannDistribution
 from ACEtk import LevelScatteringDistribution
 from ACEtk import KalbachMannDistributionData
 from ACEtk import EnergyDistributionType
+from ACEtk import ReferenceFrame
+from ACEtk import TabulatedMultiplicity
 
 class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
     """Unit test for the EnergyDistributionBlock class."""
 
     chunk = [ # LDLW
-                              1,                 12,
-              # DLW - reaction 1 - LNW = 0, LAW = 3, IDAT = 10
-                              0,                  3,                 10,                  0,
+                              7,                 18,
+              # DLW - reaction 1 - energy dependent multiplicity
+                              0,                  2,  1.00000000000E-11,  2.00000000000E+01,
+              1.00000000000E+00,  1.00000000000E+00,
+              # DLW - reaction 1 - LNW = 0, LAW = 3, IDAT = 16
+                              0,                  3,                 16,                  0,
                               2,        2.249999e-3,  2.00000000000E+01,  1.00000000000E+00,
               1.00000000000E+00,  7.71295800000E-05,           .9914722,
-              # DLW - reaction 1 - LNW = 0, LAW = 44, IDAT = 21
-                              0,                 44,                 21,                  0,
+              # DLW - reaction 1 - LNW = 0, LAW = 44, IDAT = 27
+                              0,                 44,                 27,                  0,
                               2,       1.219437E+01,  2.00000000000E+01,  1.00000000000E+00,
               1.00000000000E+00,                  0,                  2,       1.219437E+01,
-                   2.000000E+01,                 27,                 39,                  1,
+                   2.000000E+01,                 33,                 45,                  1,
                               2,       0.000000E+00,       1.866919E-02,       5.356419E+01,
                    0.000000E+00,       0.000000E+00,       1.000000E+00,       0.000000E+00,
                    0.000000E+00,       2.391154E-01,       2.398743E-01,                  2,
@@ -38,17 +43,17 @@ class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
 
             # verify content
             self.assertEqual( False, chunk.empty )
-            self.assertEqual( 57, chunk.length )
+            self.assertEqual( 63, chunk.length )
             self.assertEqual( "DLW", chunk.name )
 
             self.assertEqual( 2, chunk.NR )
             self.assertEqual( 2, chunk.number_reactions )
             self.assertEqual( 2, len( chunk.data ) )
 
-            self.assertEqual( 1, chunk.LDLW(1) )
-            self.assertEqual( 12, chunk.LDLW(2) )
-            self.assertEqual( 1, chunk.energy_distribution_locator(1) )
-            self.assertEqual( 12, chunk.energy_distribution_locator(2) )
+            self.assertEqual( 7, chunk.LDLW(1) )
+            self.assertEqual( 18, chunk.LDLW(2) )
+            self.assertEqual( 7, chunk.energy_distribution_locator(1) )
+            self.assertEqual( 18, chunk.energy_distribution_locator(2) )
 
             self.assertEqual( True, isinstance( chunk.energy_distribution_data(1), LevelScatteringDistribution ) )
             self.assertEqual( True, isinstance( chunk.energy_distribution_data(2), KalbachMannDistributionData ) )
@@ -76,10 +81,10 @@ class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
             self.assertAlmostEqual( 20., data2.incident_energy(2) )
             self.assertAlmostEqual( 1.219437E+01, data2.minimum_incident_energy )
             self.assertAlmostEqual( 20., data2.maximum_incident_energy )
-            self.assertEqual( 27, data2.LOCC(1) )
-            self.assertEqual( 39, data2.LOCC(2) )
-            self.assertEqual( 27, data2.distribution_locator(1) )
-            self.assertEqual( 39, data2.distribution_locator(2) )
+            self.assertEqual( 33, data2.LOCC(1) )
+            self.assertEqual( 45, data2.LOCC(2) )
+            self.assertEqual( 33, data2.distribution_locator(1) )
+            self.assertEqual( 45, data2.distribution_locator(2) )
             self.assertEqual( 7, data2.relative_distribution_locator(1) )
             self.assertEqual( 19, data2.relative_distribution_locator(2) )
             data21 = data2.distribution(1)
@@ -123,6 +128,41 @@ class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
             self.assertAlmostEqual( 2.391154E-01, data22.angular_distribution_slope_values[0] )
             self.assertAlmostEqual( 5.592013E-01, data22.angular_distribution_slope_values[-1] )
 
+            self.assertEqual( ReferenceFrame.Laboratory, chunk.reference_frame(1) )
+            self.assertEqual( ReferenceFrame.CentreOfMass, chunk.reference_frame(2) )
+
+            self.assertEqual( True, isinstance( chunk.multiplicity_data(1), TabulatedMultiplicity ) )
+            self.assertEqual( True, isinstance( chunk.multiplicity_data(2), int ) )
+
+            multiplicity1 = chunk.multiplicity_data(1)
+            self.assertEqual( 0, multiplicity1.interpolation_data.NB )
+            self.assertEqual( 0, multiplicity1.interpolation_data.number_interpolation_regions )
+            self.assertEqual( 0, len( multiplicity1.interpolation_data.INT ) )
+            self.assertEqual( 0, len( multiplicity1.interpolation_data.interpolants ) )
+            self.assertEqual( 0, len( multiplicity1.interpolation_data.NBT ) )
+            self.assertEqual( 0, len( multiplicity1.interpolation_data.boundaries ) )
+
+            self.assertEqual( 0, multiplicity1.NB )
+            self.assertEqual( 0, multiplicity1.number_interpolation_regions )
+            self.assertEqual( 0, len( multiplicity1.INT ) )
+            self.assertEqual( 0, len( multiplicity1.interpolants ) )
+            self.assertEqual( 0, len( multiplicity1.NBT ) )
+            self.assertEqual( 0, len( multiplicity1.boundaries ) )
+
+            self.assertEqual( 2, multiplicity1.NE )
+            self.assertEqual( 2, multiplicity1.number_energy_points )
+
+            self.assertEqual( 2, len( multiplicity1.energies ) )
+            self.assertAlmostEqual( 1e-11, multiplicity1.energies[0] )
+            self.assertAlmostEqual( 20., multiplicity1.energies[1] )
+
+            self.assertEqual( 2, len( multiplicity1.multiplicities ) )
+            self.assertEqual( 1., multiplicity1.multiplicities[0] )
+            self.assertEqual( 1., multiplicity1.multiplicities[1] )
+
+            multiplicity2 = chunk.multiplicity_data(2)
+            self.assertEqual( 1, multiplicity2 );
+
             # verify the xss array
             xss = chunk.xss_array
             for index in range( chunk.length ) :
@@ -144,7 +184,12 @@ class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
                             [ 7.738696E-02, 4.209016E-01, 1.226090E-11 ],
                             [ 0.000000E+00, 5.382391E-01, 1.000000E+00 ],
                             [ 2.491475E-03, 1.510768E-02, 9.775367E-01 ],
-                            [ 2.391154E-01, 2.847920E-01, 5.592013E-01 ] ) ] ) ] )
+                            [ 2.391154E-01, 2.847920E-01, 5.592013E-01 ] ) ] ) ],
+                  frames = [ ReferenceFrame.Laboratory,
+                             ReferenceFrame.CentreOfMass ],
+                  multiplicities = [
+                      TabulatedMultiplicity( [ 1e-11, 20. ], [ 1., 1. ] ),
+                      1 ] )
 
         verify_chunk( self, chunk )
 
