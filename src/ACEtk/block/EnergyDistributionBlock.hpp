@@ -208,7 +208,7 @@ public:
   }
 
   /**
-   *  @brief Return the associated TYR multiplicity entries
+   *  @brief Return the associated TYR multiplicity entries (internal only)
    */
   auto tyrMultiplicities() const {
 

@@ -251,8 +251,8 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
   auto multiplicity2 = std::get< unsigned int >( chunk.multiplicityData(2) );
   CHECK( 1 == multiplicity2 );
 
-  std::vector< double > tyr = chunk.tyr();
+  decltype(auto) tyr = chunk.tyrMultiplicities();
   CHECK( 2 == tyr.size() );
-  CHECK( 101. == Approx( tyr[0] ) );
-  CHECK( -1. == Approx( tyr[1] ) );
+  CHECK( 101 == Approx( tyr[0] ) );
+  CHECK( 1 == Approx( tyr[1] ) );
 }
