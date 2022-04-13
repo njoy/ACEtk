@@ -188,6 +188,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotonProductionBlock( module, viewmodule );
   block::wrapMultiplicityReactionNumberBlock( module, viewmodule );
   block::wrapDelayedNeutronPrecursorBlock( module, viewmodule );
+  block::wrapSecondaryParticleEnergyDistributionBlock( module, viewmodule );
   block::wrapSecondaryParticleTypeBlock( module, viewmodule );
   block::wrapSecondaryParticleInformationBlock( module, viewmodule );
   block::wrapSecondaryParticleLocatorBlock( module, viewmodule );
