@@ -6,6 +6,7 @@
 
 // other includes
 #include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
@@ -62,6 +63,8 @@ class SecondaryParticleEnergyDistributionBlock :
                                                EnergyDistributionData >;
 
   /* fields */
+  block::TYRH tyr_;
+  std::vector< ReferenceFrame > frames_;
 
   /* auxiliary functions */
   #include "ACEtk/block/SecondaryParticleEnergyDistributionBlock/src/generateXSS.hpp"

@@ -9,6 +9,13 @@ FrameAndMultiplicityBlock( std::vector< ReferenceFrame >&& frames,
   Base( "TYR", generateXSS( std::move( frames ), std::move( multiplicities ) ) ),
   ntr_( ntr ) {}
 
+/**
+ *  @brief Private constructor
+ */
+FrameAndMultiplicityBlock( std::vector< ReferenceFrame >&& frames,
+                           std::size_t ntr ) :
+  Base( "TYR", generateXSS( std::move( frames ) ) ), ntr_( ntr ) {}
+
 public:
 
 FrameAndMultiplicityBlock() = default;
@@ -26,6 +33,14 @@ FrameAndMultiplicityBlock( std::vector< ReferenceFrame > frames,
                            std::vector< unsigned int > multiplicities ) :
   FrameAndMultiplicityBlock( std::move( frames ), std::move( multiplicities ),
                              frames.size() ) {}
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] frames            the reference frames
+ */
+FrameAndMultiplicityBlock( std::vector< ReferenceFrame > frames ) :
+  FrameAndMultiplicityBlock( std::move( frames ), frames.size() ) {}
 
 /**
  *  @brief Constructor

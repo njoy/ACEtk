@@ -46,11 +46,20 @@ void wrapFrameAndMultiplicityBlock( python::module& module,
     python::init< std::vector< ReferenceFrame >,
                   std::vector< unsigned int > >(),
     python::arg( "frames" ), python::arg( "multiplicities" ),
-    "Initialise the block\n\n"
+    "Initialise the TYR block\n\n"
     "Arguments:\n"
     "    self              the block\n"
     "    frames            the reference frames\n"
     "    multiplicities    the multiplicities"
+  )
+  .def(
+
+    python::init< std::vector< ReferenceFrame > >(),
+    python::arg( "frames" ), 
+    "Initialise the TYRH block\n\n"
+    "Arguments:\n"
+    "    self              the block\n"
+    "    frames            the reference frames"
   )
   .def_property_readonly(
 
