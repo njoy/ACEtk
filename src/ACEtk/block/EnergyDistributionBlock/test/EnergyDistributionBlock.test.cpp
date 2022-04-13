@@ -79,7 +79,7 @@ SCENARIO( "EnergyDistributionBlock" ) {
                                      { 101, 1 } );
 
       EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(),
-                              tyr, 2 );
+                                     tyr, 2 );
 
       THEN( "an EnergyDistributionBlock can be constructed and members can be tested" ) {
 

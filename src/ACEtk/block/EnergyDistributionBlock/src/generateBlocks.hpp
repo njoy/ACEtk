@@ -91,7 +91,9 @@ void generateBlocks() {
     // data + locator - 1 : one-based index to the start of cross section data
     std::size_t data = std::distance( this->begin(), this->iter() ) + 1;
     std::size_t locator = this->LDLW( index );
-    std::size_t multiplicity = this->TYR().multiplicity( index + 1 );
+    std::size_t multiplicity = index == this->NR()
+                               ? 0
+                               : this->TYR().multiplicity( index + 1 );
     const auto left = this->iterator( data + locator - 1 );
     const auto right = index == this->NR()
                        ? this->end()
