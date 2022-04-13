@@ -55,7 +55,7 @@ void wrapFrameAndMultiplicityBlock( python::module& module,
   .def(
 
     python::init< std::vector< ReferenceFrame > >(),
-    python::arg( "frames" ), 
+    python::arg( "frames" ),
     "Initialise the TYRH block\n\n"
     "Arguments:\n"
     "    self              the block\n"
@@ -96,15 +96,13 @@ void wrapFrameAndMultiplicityBlock( python::module& module,
   .def_property_readonly(
 
     "reference_frames",
-    [] ( const Block& self ) -> ReferenceFrameRange
-       { return self.referenceFrames(); },
+    &Block::referenceFrames,
     "The reference frames"
   )
   .def_property_readonly(
 
     "multiplicities",
-    [] ( const Block& self ) -> UnsignedIntRange
-       { return self.multiplicities(); },
+    &Block::multiplicities,
     "The reference frames"
   );
 

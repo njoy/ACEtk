@@ -111,6 +111,8 @@ void generateBlocks() {
 
       this->multiplicities_.emplace_back( static_cast< unsigned int >( multiplicity ) );
     }
-    this->frames_.emplace_back( this->TYR().referenceFrame( index ) );
   }
+  this->frames_.insert( this->frames_.end(),
+                        this->TYR().referenceFrames().begin(),
+                        this->TYR().referenceFrames().begin() + this->NR() );
 }
