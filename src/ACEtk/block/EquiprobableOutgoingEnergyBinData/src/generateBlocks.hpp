@@ -11,5 +11,11 @@ void generateBlocks() {
                                                    begin, incident );
   this->energies_ = block::details::ColumnData( this->name(),
                                                 incident, bins, 1 );
-  this->bins_ = block::details::ColumnData( this->name(), bins, end, ne );
+
+  for ( unsigned int index = 1; index <= ne; ++index ) {
+
+    this->bins_.emplace_back( this->incidentEnergy( index ),
+                              bins + 1 + this->NET() * ( index - 1 ),
+                              bins + 1 + this->NET() * index );
+  }
 }

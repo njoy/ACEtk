@@ -2,20 +2,24 @@ EquiprobableOutgoingEnergyBinData() = default;
 
 EquiprobableOutgoingEnergyBinData( const EquiprobableOutgoingEnergyBinData& base ) :
   Base( base ), interpolation_( base.interpolation_ ),
-  energies_( base.energies_ ), bins_( base.bins_ ) {
+  energies_( base.energies_ ),
+  bins_( base.bins_ ) {
 
   if ( Base::owner() ) {
 
+    this->bins_.clear();
     this->generateBlocks();
   }
 }
 
 EquiprobableOutgoingEnergyBinData( EquiprobableOutgoingEnergyBinData&& base ) :
   Base( std::move( base ) ), interpolation_( std::move( base.interpolation_ ) ),
-  energies_( std::move( base.energies_ ) ), bins_( std::move( base.bins_ ) ) {
+  energies_( std::move( base.energies_ ) ),
+  bins_( std::move( base.bins_ ) ) {
 
   if ( Base::owner() ) {
 
+    this->bins_.clear();
     this->generateBlocks();
   }
 }

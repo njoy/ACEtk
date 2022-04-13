@@ -60,7 +60,9 @@ class Test_ACEtk_EquiprobableOutgoingEnergyBinData( unittest.TestCase ) :
             self.assertEqual( True, isinstance( chunk.distribution(1), EquiprobableOutgoingEnergyBins )  )
             self.assertEqual( True, isinstance( chunk.distribution(2), EquiprobableOutgoingEnergyBins ) )
 
-            data1 = chunk.distribution(1);
+            self.assertEqual( 2, len( chunk.distributions ) )
+
+            data1 = chunk.distributions[0]
             self.assertAlmostEqual( 1e-5, data1.incident_energy )
             self.assertEqual( 3, data1.number_bins )
             self.assertEqual( 4, len( data1.energies ) )
@@ -69,7 +71,25 @@ class Test_ACEtk_EquiprobableOutgoingEnergyBinData( unittest.TestCase ) :
             self.assertAlmostEqual( 10., data1.energies[2] )
             self.assertAlmostEqual( 20., data1.energies[3] )
 
-            data2 = chunk.distribution(2);
+            data2 = chunk.distributions[1]
+            self.assertAlmostEqual( 20., data2.incident_energy )
+            self.assertEqual( 3, data2.number_bins )
+            self.assertEqual( 4, len( data2.energies ) )
+            self.assertAlmostEqual( 1e-5, data2.energies[0] )
+            self.assertAlmostEqual( 3., data2.energies[1] )
+            self.assertAlmostEqual( 12., data2.energies[2] )
+            self.assertAlmostEqual( 20., data2.energies[3] )
+
+            data1 = chunk.distribution(1)
+            self.assertAlmostEqual( 1e-5, data1.incident_energy )
+            self.assertEqual( 3, data1.number_bins )
+            self.assertEqual( 4, len( data1.energies ) )
+            self.assertAlmostEqual( 1e-4, data1.energies[0] )
+            self.assertAlmostEqual( 1., data1.energies[1] )
+            self.assertAlmostEqual( 10., data1.energies[2] )
+            self.assertAlmostEqual( 20., data1.energies[3] )
+
+            data2 = chunk.distribution(2)
             self.assertAlmostEqual( 20., data2.incident_energy )
             self.assertEqual( 3, data2.number_bins )
             self.assertEqual( 4, len( data2.energies ) )

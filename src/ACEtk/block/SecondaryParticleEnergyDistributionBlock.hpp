@@ -63,7 +63,7 @@ class SecondaryParticleEnergyDistributionBlock :
                                                EnergyDistributionData >;
 
   /* fields */
-  block::TYRH tyr_;
+  block::TYRH tyrh_;
   std::vector< ReferenceFrame > frames_;
 
   /* auxiliary functions */

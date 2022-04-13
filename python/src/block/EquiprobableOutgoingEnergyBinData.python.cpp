@@ -155,6 +155,12 @@ void wrapEquiprobableOutgoingEnergyBinData( python::module& module,
     &Block::numberBins,
     "The number of equiprobable outgoing energy bins"
   )
+  .def_property_readonly(
+
+    "distributions",
+    &Block::distributions,
+    "Return the distributions"
+  )
   .def(
 
     "distribution",
