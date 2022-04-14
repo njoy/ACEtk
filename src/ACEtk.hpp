@@ -1,4 +1,5 @@
 // xsdir
+#include "ACEtk/XsdirEntry.hpp"
 #include "ACEtk/Xsdir.hpp"
 
 // generic ACE table
@@ -7,6 +8,8 @@
 #include "ACEtk/fromFile.hpp"
 
 // enumerators
+#include "ACEtk/AngularDistributionType.hpp"
+#include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/ReferenceFrame.hpp"
 
 // ACE data blocks
@@ -14,6 +17,7 @@
 
 // interpretation ACE tables
 #include "ACEtk/ContinuousEnergyTable.hpp"
+#include "ACEtk/DosimetryTable.hpp"
 
 #ifndef ACETK_HPP
 #define ACETK_HPP
