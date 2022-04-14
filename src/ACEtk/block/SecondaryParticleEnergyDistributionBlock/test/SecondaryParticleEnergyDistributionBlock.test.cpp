@@ -12,6 +12,7 @@ using LevelScatteringDistribution = block::LevelScatteringDistribution;
 using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
 using EnergyDistributionData = block::EnergyDistributionData;
+using FrameAndMultiplicityBlock = block::FrameAndMultiplicityBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const SecondaryParticleEnergyDistributionBlock& );
@@ -22,7 +23,7 @@ SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
 
     std::vector< double > xss = chunk();
 
-    WHEN( "the data is given explicitly" ) {
+    WHEN( "the data is given explicitly for a DLWH" ) {
 
       std::vector< EnergyDistributionData > distributions = {
 
@@ -40,8 +41,13 @@ SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
               { 2.491475E-03, 1.510768E-02, 9.775367E-01 },
               { 2.391154E-01, 2.847920E-01, 5.592013E-01 } ) } )
       };
+      std::vector< ReferenceFrame > frames = {
 
-      SecondaryParticleEnergyDistributionBlock chunk( std::move( distributions ) );
+        ReferenceFrame::Laboratory, ReferenceFrame::CentreOfMass
+      };
+
+      SecondaryParticleEnergyDistributionBlock chunk( std::move( distributions ),
+                                                      std::move( frames ) );
 
       THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and members can be tested" ) {
 
@@ -58,10 +64,13 @@ SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
       } // THEN
     } // WHEN
 
-    WHEN( "the data is defined by iterators" ) {
+    WHEN( "the data is defined by iterators and the TYRH" ) {
+
+      FrameAndMultiplicityBlock tyrh( { ReferenceFrame::Laboratory,
+                                        ReferenceFrame::CentreOfMass } );
 
       SecondaryParticleEnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2,
-                                                      xss.end(), 2 );
+                                                      xss.end(), tyrh, 2 );
 
       THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and members can be tested" ) {
 
@@ -194,4 +203,7 @@ void verifyChunk( const SecondaryParticleEnergyDistributionBlock& chunk ) {
   CHECK( 3 == data22.angularDistributionSlopeValues().size() );
   CHECK( 2.391154E-01 == Approx( data22.angularDistributionSlopeValues().front() ) );
   CHECK( 5.592013E-01 == Approx( data22.angularDistributionSlopeValues().back() ) );
+
+  CHECK( ReferenceFrame::Laboratory == chunk.referenceFrame(1).value() );
+  CHECK( ReferenceFrame::CentreOfMass == chunk.referenceFrame(2).value() );
 }

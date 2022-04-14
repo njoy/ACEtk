@@ -12,6 +12,27 @@ block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
   return { std::move( frames ), std::move( multiplicities ) };
 }
 
+std::optional< std::vector< block::TYRH > >
+generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
+
+  std::optional< std::vector< block::TYRH > > tyrh = std::nullopt;
+  if ( dlwh ) {
+
+    tyrh = std::vector< block::TYRH >{};
+    for ( const auto& element : dlwh.value() ) {
+
+      std::vector< ReferenceFrame > frames;
+      std::transform( element.referenceFrames().begin(),
+                      element.referenceFrames().end(),
+                      std::back_inserter( frames ),
+                      [] ( auto&& optional ) -> ReferenceFrame
+                         { return optional.value(); } );
+      tyrh->emplace_back( frames );
+    }
+  }
+  return tyrh;
+}
+
 Data generateData( unsigned int z, unsigned int a,
                    block::ESZ&& esz, std::optional< block::NU >&& nu,
                    block::MTR&& mtr, block::LQR&& lqr,
@@ -29,7 +50,6 @@ Data generateData( unsigned int z, unsigned int a,
                    std::optional< block::PTYPE >&& ptype,
                    std::optional< std::vector< block::HPD > >&& hpd,
                    std::optional< std::vector< block::MTRH > >&& mtrh,
-                   std::optional< std::vector< block::TYRH > >&& tyrh,
                    std::optional< std::vector< block::SIGH > >&& sigh,
                    std::optional< std::vector< block::ANDH > >&& andh,
                    std::optional< std::vector< block::DLWH > >&& dlwh,
@@ -54,6 +74,7 @@ Data generateData( unsigned int z, unsigned int a,
 
   // generate blocks we don't have yet
   block::TYR tyr = generateTYR( dlw, ntr );
+  std::optional< std::vector< block::TYRH > > tyrh = generateTYRH( dlwh );
 
   // verify some stuff:
   //  - MTR, LQR, TYR and SIG have the same NTR

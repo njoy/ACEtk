@@ -63,12 +63,18 @@ class SecondaryParticleEnergyDistributionBlock :
                                                EnergyDistributionData >;
 
   /* fields */
-  block::TYRH tyrh_;
-  std::vector< ReferenceFrame > frames_;
+  std::optional< block::TYRH > tyrh_;
+  std::vector< std::optional< ReferenceFrame > > frames_;
 
   /* auxiliary functions */
   #include "ACEtk/block/SecondaryParticleEnergyDistributionBlock/src/generateXSS.hpp"
   #include "ACEtk/block/SecondaryParticleEnergyDistributionBlock/src/generateData.hpp"
+  #include "ACEtk/block/SecondaryParticleEnergyDistributionBlock/src/generateFrames.hpp"
+
+  /**
+   *  @brief Return the associated TYRH block
+   */
+  const std::optional< block::TYRH >& TYRH() const { return this->tyrh_; }
 
 public:
 
@@ -137,6 +143,30 @@ public:
   const EnergyDistributionData& energyDistributionData( std::size_t index ) const {
 
     return BaseBlockWithLocators::data( index );
+  }
+
+  /**
+   *  @brief Return all reference frames
+   */
+  const std::vector< std::optional< ReferenceFrame > >& referenceFrames() const {
+
+    return this->frames_;
+  }
+
+  /**
+   *  @brief Return the reference frame for a reaction index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const std::optional< ReferenceFrame >& referenceFrame( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->frames_[ index - 1 ];
   }
 
   using Base::empty;

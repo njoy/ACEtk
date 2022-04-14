@@ -108,7 +108,7 @@ SCENARIO( "ContinuousEnergyTable" ){
                                    base.UNR(),
                                    std::nullopt, std::nullopt, std::nullopt,
                                    std::nullopt, std::nullopt, std::nullopt,
-                                   std::nullopt, std::nullopt );
+                                   std::nullopt );
 
       THEN( "a ContinuousEnergyTable can be constructed and members can be "
             "tested" ) {
@@ -243,7 +243,6 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       std::optional< std::vector< block::HPD > > hpd = std::vector< block::HPD >{};
       std::optional< std::vector< block::MTRH > > mtrh = std::vector< block::MTRH >{};
-      std::optional< std::vector< block::TYRH > > tyrh = std::vector< block::TYRH >{};
       std::optional< std::vector< block::SIGH > > sigh = std::vector< block::SIGH >{};
       std::optional< std::vector< block::ANDH > > andh = std::vector< block::ANDH >{};
       std::optional< std::vector< block::DLWH > > dlwh = std::vector< block::DLWH >{};
@@ -252,7 +251,6 @@ SCENARIO( "ContinuousEnergyTable" ){
 
         hpd->push_back( base.HPD( index ) );
         mtrh->push_back( base.MTRH( index ) );
-        tyrh->push_back( base.TYRH( index ) );
         sigh->push_back( base.SIGH( index ) );
         andh->push_back( base.ANDH( index ) );
         dlwh->push_back( base.DLWH( index ) );
@@ -268,7 +266,7 @@ SCENARIO( "ContinuousEnergyTable" ){
                                    std::nullopt, std::nullopt, std::nullopt,
                                    std::nullopt,
                                    base.PTYPE(), std::move( hpd ),
-                                   std::move( mtrh ), std::move( tyrh ),
+                                   std::move( mtrh ),
                                    std::move( sigh ), std::move( andh ),
                                    std::move( dlwh ), std::move( yh ) );
 
@@ -626,6 +624,9 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 1 ) ) );
   CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 6 ) ) );
 
+  CHECK( std::nullopt == chunk.DNED().referenceFrame( 1 ) );
+  CHECK( std::nullopt == chunk.DNED().referenceFrame( 6 ) );
+
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
 
@@ -887,6 +888,8 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 1 == chunk.DLWH(1).LDLW( 1 ) );
 
   CHECK( true == std::holds_alternative< TwoBodyTransferDistribution >( chunk.DLWH(1).energyDistributionData( 1 ) ) );
+
+  CHECK( ReferenceFrame::Laboratory == chunk.DLWH(1).referenceFrame( 1 ).value() );
 
   // YH(1) block
   CHECK( false == chunk.YH(1).empty() );

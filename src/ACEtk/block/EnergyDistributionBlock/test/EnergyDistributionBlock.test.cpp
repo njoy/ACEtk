@@ -244,7 +244,7 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
   CHECK( 1e-11 == Approx( multiplicity1.energies()[0] ) );
   CHECK( 20. == Approx( multiplicity1.energies()[1] ) );
 
-  CHECK( 2 == chunk.multiplicities().size() );
+  CHECK( 2 == multiplicity1.multiplicities().size() );
   CHECK( 1. == Approx( multiplicity1.multiplicities()[0] ) );
   CHECK( 1. == Approx( multiplicity1.multiplicities()[1] ) );
 

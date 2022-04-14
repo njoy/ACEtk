@@ -45,8 +45,10 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
     python::arg( "frames" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self             the block\n"
-    "    distributions    the energy distribution data"
+    "    self              the block\n"
+    "    distributions     the energy distribution data\n"
+    "    multiplicities    the multiplicity data\n"
+    "    frames            the reference frames"
   )
   .def_property_readonly(
 

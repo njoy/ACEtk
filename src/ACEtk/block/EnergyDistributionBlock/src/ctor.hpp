@@ -89,7 +89,8 @@ EnergyDistributionBlock( std::vector< EnergyDistributionData > distributions,
  */
 EnergyDistributionBlock( Iterator loc, Iterator data, Iterator end,
                          block::TYR tyr, unsigned int nr ) :
-  Base( "DLW", loc, end ), nr_( nr ), iterator_( data ), tyr_( tyr ) {
+  Base( "DLW", loc, end ), nr_( nr ), iterator_( data ),
+  tyr_( std::move( tyr ) ) {
 
   verifySize( this->begin(), this->iterator_, this->end(), this->nr_ );
   this->generateBlocks();

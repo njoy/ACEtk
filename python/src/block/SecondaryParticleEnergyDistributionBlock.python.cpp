@@ -18,6 +18,7 @@ void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
   // type aliases
   using Block = njoy::ACEtk::block::SecondaryParticleEnergyDistributionBlock;
   using EnergyDistributionData = njoy::ACEtk::block::EnergyDistributionData;
+  using ReferenceFrame = njoy::ACEtk::ReferenceFrame;
 
   // wrap views created by this block
 
@@ -41,11 +42,22 @@ void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
   .def(
 
     python::init< std::vector< EnergyDistributionData > >(),
-    python::arg( "distributions" ),
-    "Initialise the block\n\n"
+    python::arg( "distributions" ), 
+    "Initialise the DNED block\n\n"
     "Arguments:\n"
-    "    self             the block\n"
-    "    distributions    the energy distribution data"
+    "    self              the block\n"
+    "    distributions     the energy distribution data"
+  )
+  .def(
+
+    python::init< std::vector< EnergyDistributionData >,
+                  std::vector< ReferenceFrame > >(),
+    python::arg( "distributions" ), python::arg( "frames" ),
+    "Initialise the DLWH block\n\n"
+    "Arguments:\n"
+    "    self              the block\n"
+    "    distributions     the energy distribution data\n"
+    "    frames            the reference frames"
   )
   .def_property_readonly(
 
@@ -93,6 +105,23 @@ void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
     &Block::energyDistributionData,
     python::arg( "index" ),
     "Return the energy distribution data for a reaction index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def_property_readonly(
+
+    "reference_frames",
+    &Block::referenceFrames,
+    "The reference frames"
+  )
+  .def(
+
+    "reference_frame",
+    &Block::referenceFrame,
+    python::arg( "index" ),
+    "Return the reference frame for a reaction index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"

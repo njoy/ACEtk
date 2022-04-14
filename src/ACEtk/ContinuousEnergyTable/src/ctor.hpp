@@ -88,7 +88,6 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] ptype     the secondary particle type block
  *  @param[in] hpd       the secondary particle production blocks
  *  @param[in] mtrh      the secondary particle production reaction number blocks
- *  @param[in] tyrh      the secondary particle productionreference frame blocks
  *  @param[in] sigh      the secondary particle production cross section data blocks
  *  @param[in] angh      the secondary particle angular distribution data blocks
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
@@ -111,7 +110,6 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        std::optional< block::PTYPE > ptype,
                        std::optional< std::vector< block::HPD > > hpd,
                        std::optional< std::vector< block::MTRH > > mtrh,
-                       std::optional< std::vector< block::TYRH > > tyrh,
                        std::optional< std::vector< block::SIGH > > sigh,
                        std::optional< std::vector< block::ANDH > > andh,
                        std::optional< std::vector< block::DLWH > > dlwh,
@@ -128,6 +126,6 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                            std::move( unr ), std::move( dnu ),
                            std::move( bdd ), std::move( dned ),
                            std::move( ptype ), std::move( hpd ),
-                           std::move( mtrh ), std::move( tyrh ),
+                           std::move( mtrh ),
                            std::move( sigh ), std::move( andh ),
                            std::move( dlwh ), std::move( yh ) ) ) ) {}

@@ -262,7 +262,7 @@ void generateBlocks() {
     locators = block( index, 8 );
     iterators = block( index, 9 );
     this->dlwh_.emplace_back( locators.first, iterators.first, iterators.second,
-                              this->NTRO().NP( index ) );
+                              this->TYRH( index ), this->NTRO().NP( index ) );
 
     // secondary particle data: multiplicity reaction numbers
     iterators = block( index, 10 );

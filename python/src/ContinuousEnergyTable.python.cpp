@@ -36,7 +36,6 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   using PTYPE = njoy::ACEtk::block::PTYPE;
   using HPD = njoy::ACEtk::block::HPD;
   using MTRH = njoy::ACEtk::block::MTRH;
-  using TYRH = njoy::ACEtk::block::TYRH;
   using SIGH = njoy::ACEtk::block::SIGH;
   using ANDH = njoy::ACEtk::block::ANDH;
   using DLWH = njoy::ACEtk::block::DLWH;
@@ -68,7 +67,6 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
                   std::optional< UNR >, std::optional< PTYPE >,
                   std::optional< std::vector< HPD > >,
                   std::optional< std::vector< MTRH > >,
-                  std::optional< std::vector< TYRH > >,
                   std::optional< std::vector< SIGH > >,
                   std::optional< std::vector< ANDH > >,
                   std::optional< std::vector< DLWH > >,
@@ -84,7 +82,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     python::arg( "dlwp" ) = std::nullopt, python::arg( "yp" ) = std::nullopt,
     python::arg( "unr" ) = std::nullopt, python::arg( "ptype" ) = std::nullopt,
     python::arg( "hpd" ) = std::nullopt, python::arg( "mtrh" ) = std::nullopt,
-    python::arg( "tyrh" ) = std::nullopt, python::arg( "sigh" ) = std::nullopt,
+    python::arg( "sigh" ) = std::nullopt,
     python::arg( "andh" ) = std::nullopt, python::arg( "dlwh" ) = std::nullopt,
     python::arg( "yh" ) = std::nullopt,
     "Initialise the table\n\n"
@@ -113,7 +111,6 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    ptype     the secondary particle type block\n"
     "    hpd       the secondary particle production blocks\n"
     "    mtrh      the secondary particle production reaction number blocks\n"
-    "    tyrh      the secondary particle productionreference frame blocks\n"
     "    sigh      the secondary particle production cross section data blocks\n"
     "    angh      the secondary particle angular distribution data blocks\n"
     "    dlwh      the secondary particle energy distribution data blocks\n"
