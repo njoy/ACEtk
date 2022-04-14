@@ -28,12 +28,12 @@ class BaseBlockWithLocators : protected details::Base {
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateXSS.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateData.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/verifyDataIndex.hpp"
   #include "ACEtk/block/details/BaseBlockWithLocators/src/verifySize.hpp"
 
 protected:
 
-  /* fields */
+  /* auxiliary functions */
+  #include "ACEtk/block/details/BaseBlockWithLocators/src/verifyDataIndex.hpp"
 
   /* constructor */
   #include "ACEtk/block/details/BaseBlockWithLocators/src/ctor.hpp"
