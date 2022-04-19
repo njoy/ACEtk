@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import InelasticScatteringCrossSectionBlock
+from ACEtk import ThermalScatteringCrossSectionBlock
 
-class Test_ACEtk_InelasticScatteringCrossSectionBlock( unittest.TestCase ) :
-    """Unit test for the InelasticScatteringCrossSectionBlock class."""
+class Test_ACEtk_ThermalScatteringCrossSectionBlock( unittest.TestCase ) :
+    """Unit test for the ThermalScatteringCrossSectionBlock class."""
 
     chunk = [                 4,  1.00000000000E+01,  2.00000000000E+01,  3.00000000000E+01,
               4.00000000000E+01,  1.00000000000E+00,  2.00000000000E+00,  3.00000000000E+00,
@@ -20,10 +20,10 @@ class Test_ACEtk_InelasticScatteringCrossSectionBlock( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 9, chunk.length )
-            self.assertEqual( "ITIE", chunk.name )
+            self.assertEqual( "ThermalScatteringCrossSectionBlock", chunk.name )
 
-            self.assertEqual( 4, chunk.NIN )
-            self.assertEqual( 4, chunk.number_inelastic_energies )
+            self.assertEqual( 4, chunk.NE )
+            self.assertEqual( 4, chunk.number_energies )
 
             self.assertEqual( 4, len( chunk.energies ) )
             self.assertAlmostEqual( 10., chunk.energies[0] )
@@ -40,7 +40,7 @@ class Test_ACEtk_InelasticScatteringCrossSectionBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = InelasticScatteringCrossSectionBlock(
+        chunk = ThermalScatteringCrossSectionBlock(
                     energies = [ 10., 20., 30., 40. ],
                     xs = [ 1., 2., 3., 4. ] )
 

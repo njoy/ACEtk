@@ -55,4 +55,4 @@ add_test( NAME ACEtk.python.block.SecondaryParticleProductionBlock COMMAND ${PYT
 add_test( NAME ACEtk.python.block.SecondaryParticleProductionCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_SecondaryParticleProductionCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ProbabilityTable COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ProbabilityTable.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ProbabilityTableBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ProbabilityTableBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
-add_test( NAME ACEtk.python.block.InelasticScatteringCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_InelasticScatteringCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.ThermalScatteringCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ThermalScatteringCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

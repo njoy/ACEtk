@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/InelasticScatteringCrossSectionBlock.hpp"
+#include "ACEtk/block/ThermalScatteringCrossSectionBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using InelasticScatteringCrossSectionBlock = block::InelasticScatteringCrossSectionBlock;
+using ThermalScatteringCrossSectionBlock = block::ThermalScatteringCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const InelasticScatteringCrossSectionBlock& );
+void verifyChunk( const ThermalScatteringCrossSectionBlock& );
 
-SCENARIO( "InelasticScatteringCrossSectionBlock" ) {
+SCENARIO( "ThermalScatteringCrossSectionBlock" ) {
 
-  GIVEN( "valid data for an InelasticScatteringCrossSectionBlock instance" ) {
+  GIVEN( "valid data for a ThermalScatteringCrossSectionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -23,10 +23,10 @@ SCENARIO( "InelasticScatteringCrossSectionBlock" ) {
       std::vector< double > energies = { 10., 20., 30., 40. };
       std::vector< double > xs = { 1., 2., 3., 4. };
 
-      InelasticScatteringCrossSectionBlock chunk( std::move( energies ),
+      ThermalScatteringCrossSectionBlock chunk( std::move( energies ),
                                                   std::move( xs ) );
 
-      THEN( "an InelasticScatteringCrossSectionBlock can be constructed and "
+      THEN( "a ThermalScatteringCrossSectionBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -44,9 +44,9 @@ SCENARIO( "InelasticScatteringCrossSectionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      InelasticScatteringCrossSectionBlock chunk( xss.begin(), xss.end() );
+      ThermalScatteringCrossSectionBlock chunk( xss.begin(), xss.end() );
 
-      THEN( "an InelasticScatteringCrossSectionBlock can be constructed and "
+      THEN( "a ThermalScatteringCrossSectionBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -74,14 +74,14 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const InelasticScatteringCrossSectionBlock& chunk ) {
+void verifyChunk( const ThermalScatteringCrossSectionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 9 == chunk.length() );
-  CHECK( "ITIE" == chunk.name() );
+  CHECK( "ThermalScatteringCrossSectionBlock" == chunk.name() );
 
-  CHECK( 4 == chunk.NIN() );
-  CHECK( 4 == chunk.numberInelasticEnergies() );
+  CHECK( 4 == chunk.NE() );
+  CHECK( 4 == chunk.numberEnergies() );
 
   CHECK( 4 == chunk.energies().size() );
   CHECK( 10. == Approx( chunk.energies().front() ) );

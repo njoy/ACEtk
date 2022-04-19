@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/InelasticScatteringCrossSectionBlock.hpp"
+#include "ACEtk/block/ThermalScatteringCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapInelasticScatteringCrossSectionBlock( python::module& module,
+void wrapThermalScatteringCrossSectionBlock( python::module& module,
                                                python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::InelasticScatteringCrossSectionBlock;
+  using Block = njoy::ACEtk::block::ThermalScatteringCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -24,7 +24,7 @@ void wrapInelasticScatteringCrossSectionBlock( python::module& module,
   python::class_< Block > block(
 
     module,
-    "InelasticScatteringCrossSectionBlock",
+    "ThermalScatteringCrossSectionBlock",
     "The inelastic thermal scattering cross section block"
   );
 
@@ -42,15 +42,15 @@ void wrapInelasticScatteringCrossSectionBlock( python::module& module,
   )
   .def_property_readonly(
 
-    "NIN",
-    &Block::NIN,
-    "The number of inelastic energies"
+    "NE",
+    &Block::NE,
+    "The number of energies"
   )
   .def_property_readonly(
 
-    "number_inelastic_energies",
-    &Block::numberInelasticEnergies,
-    "The number of inelastic energies"
+    "number_energies",
+    &Block::numberEnergies,
+    "The number of energies"
   )
   .def_property_readonly(
 
