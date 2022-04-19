@@ -66,7 +66,7 @@ void addStandardTableDefinitions( PythonClass& table ) {
 }
 
 /**
- *  @brief Add standard lock definitions
+ *  @brief Add standard block definitions
  *
  *  This adds the following standard properties:
  *    name, length, xss_array

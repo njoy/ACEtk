@@ -146,6 +146,7 @@ if(ACEtk.python)
     python/src/block/ProbabilityTableBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
+    python/src/ThermalScatteringTable.python.cpp
   )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
