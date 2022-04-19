@@ -96,13 +96,13 @@ std::vector< double > chunk() {
   //   - for reaction 1 : 1 law -> level scattering data
   //   - for reaction 2 : 1 law -> Kalbach-Mann systematics for two incident energies
   return {
-           // LDLW
+           // LDLWH
                            1,                 12,
-           // DLW - reaction 1 - LNW = 0, LAW = 3, IDAT = 10
+           // DLWH - reaction 1 - LNW = 0, LAW = 3, IDAT = 10
                            0,                  3,                 10,                  0,
                            2,        2.249999e-3,  2.00000000000E+01,  1.00000000000E+00,
            1.00000000000E+00,  7.71295800000E-05,           .9914722,
-           // DLW - reaction 1 - LNW = 0, LAW = 44, IDAT = 21
+           // DLWH - reaction 2 - LNW = 0, LAW = 44, IDAT = 21
                            0,                 44,                 21,                  0,
                            2,       1.219437E+01,  2.00000000000E+01,  1.00000000000E+00,
            1.00000000000E+00,                  0,                  2,       1.219437E+01,
