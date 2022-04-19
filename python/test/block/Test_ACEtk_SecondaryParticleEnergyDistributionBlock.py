@@ -14,20 +14,17 @@ from ACEtk import ReferenceFrame
 class Test_ACEtk_SecondaryParticleEnergyDistributionBlock( unittest.TestCase ) :
     """Unit test for the SecondaryParticleEnergyDistributionBlock class."""
 
-    chunk = [ # LDLW
-                              7,                 18,
-              # DLW - reaction 1 - energy dependent multiplicity
-                              0,                  2,  1.00000000000E-11,  2.00000000000E+01,
-              1.00000000000E+00,  1.00000000000E+00,
-              # DLW - reaction 1 - LNW = 0, LAW = 3, IDAT = 16
-                              0,                  3,                 16,                  0,
+    chunk = [ # LDLWH
+                              1,                 12,
+              # DLWH - reaction 1 - LNW = 0, LAW = 3, IDAT = 10
+                              0,                  3,                 10,                  0,
                               2,        2.249999e-3,  2.00000000000E+01,  1.00000000000E+00,
               1.00000000000E+00,  7.71295800000E-05,           .9914722,
-              # DLW - reaction 1 - LNW = 0, LAW = 44, IDAT = 27
-                              0,                 44,                 27,                  0,
+              # DLWH - reaction 2 - LNW = 0, LAW = 44, IDAT = 27
+                              0,                 44,                 21,                  0,
                               2,       1.219437E+01,  2.00000000000E+01,  1.00000000000E+00,
               1.00000000000E+00,                  0,                  2,       1.219437E+01,
-                   2.000000E+01,                 33,                 45,                  1,
+                   2.000000E+01,                 27,                 39,                  1,
                               2,       0.000000E+00,       1.866919E-02,       5.356419E+01,
                    0.000000E+00,       0.000000E+00,       1.000000E+00,       0.000000E+00,
                    0.000000E+00,       2.391154E-01,       2.398743E-01,                  2,
@@ -42,17 +39,17 @@ class Test_ACEtk_SecondaryParticleEnergyDistributionBlock( unittest.TestCase ) :
 
             # verify content
             self.assertEqual( False, chunk.empty )
-            self.assertEqual( 63, chunk.length )
-            self.assertEqual( "DLW", chunk.name )
+            self.assertEqual( 57, chunk.length )
+            self.assertEqual( "DLWH", chunk.name )
 
             self.assertEqual( 2, chunk.NR )
             self.assertEqual( 2, chunk.number_reactions )
             self.assertEqual( 2, len( chunk.data ) )
 
-            self.assertEqual( 7, chunk.LDLW(1) )
-            self.assertEqual( 18, chunk.LDLW(2) )
-            self.assertEqual( 7, chunk.energy_distribution_locator(1) )
-            self.assertEqual( 18, chunk.energy_distribution_locator(2) )
+            self.assertEqual( 1, chunk.LDLW(1) )
+            self.assertEqual( 12, chunk.LDLW(2) )
+            self.assertEqual( 1, chunk.energy_distribution_locator(1) )
+            self.assertEqual( 12, chunk.energy_distribution_locator(2) )
 
             self.assertEqual( True, isinstance( chunk.energy_distribution_data(1), LevelScatteringDistribution ) )
             self.assertEqual( True, isinstance( chunk.energy_distribution_data(2), KalbachMannDistributionData ) )
@@ -80,10 +77,10 @@ class Test_ACEtk_SecondaryParticleEnergyDistributionBlock( unittest.TestCase ) :
             self.assertAlmostEqual( 20., data2.incident_energy(2) )
             self.assertAlmostEqual( 1.219437E+01, data2.minimum_incident_energy )
             self.assertAlmostEqual( 20., data2.maximum_incident_energy )
-            self.assertEqual( 33, data2.LOCC(1) )
-            self.assertEqual( 45, data2.LOCC(2) )
-            self.assertEqual( 33, data2.distribution_locator(1) )
-            self.assertEqual( 45, data2.distribution_locator(2) )
+            self.assertEqual( 27, data2.LOCC(1) )
+            self.assertEqual( 39, data2.LOCC(2) )
+            self.assertEqual( 27, data2.distribution_locator(1) )
+            self.assertEqual( 39, data2.distribution_locator(2) )
             self.assertEqual( 7, data2.relative_distribution_locator(1) )
             self.assertEqual( 19, data2.relative_distribution_locator(2) )
             data21 = data2.distribution(1)
