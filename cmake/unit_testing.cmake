@@ -12,6 +12,7 @@ enable_testing()
 
 add_subdirectory( src/ACEtk/ContinuousEnergyTable/test )
 add_subdirectory( src/ACEtk/DosimetryTable/test )
+add_subdirectory( src/ACEtk/ThermalScatteringTable/test )
 add_subdirectory( src/ACEtk/Table/Data/Parse/test )
 add_subdirectory( src/ACEtk/Table/Data/test )
 add_subdirectory( src/ACEtk/Table/Header/test )
