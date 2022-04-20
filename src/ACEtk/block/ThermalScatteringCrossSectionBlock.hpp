@@ -53,6 +53,10 @@ public:
   using ColumnData::end;
 };
 
+using ITIE = ThermalScatteringCrossSectionBlock;
+using ITCE = ThermalScatteringCrossSectionBlock;
+using ITCEI = ThermalScatteringCrossSectionBlock;
+
 } // block namespace
 } // ACEtk namespace
 } // njoy namespace

@@ -168,6 +168,42 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
     "secondary_energy_mode",
     &Table::secondaryEnergyMode,
     "The secondary energy mode"
+  )
+  .def_property_readonly(
+
+    "ITIE",
+    &Table::ITIE,
+    "The inelastic thermal scattering cross section block"
+  )
+  .def_property_readonly(
+
+    "inelastic_cross_section_block",
+    &Table::inelasticCrossSectionBlock,
+    "The inelastic thermal scattering cross section block"
+  )
+  .def_property_readonly(
+
+    "ITCE",
+    &Table::ITCE,
+    "The coherent elastic thermal scattering cross section block"
+  )
+  .def_property_readonly(
+
+    "coherent_elastic_cross_section_block",
+    &Table::coherentElasticCrossSectionBlock,
+    "The coherent elastic thermal scattering cross section block"
+  )
+  .def_property_readonly(
+
+    "ITCEI",
+    &Table::ITCEI,
+    "The incoherent elastic thermal scattering cross section block"
+  )
+  .def_property_readonly(
+
+    "incoherent_elastic_cross_section_block",
+    &Table::coherentElasticCrossSectionBlock,
+    "The incoherent elastic thermal scattering cross section block"
   );
 
   // add standard block definitions

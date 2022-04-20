@@ -55,14 +55,14 @@ void wrapThermalScatteringCrossSectionBlock( python::module& module,
   .def_property_readonly(
 
     "energies",
-    [] ( const Block& self ) -> LongRange
+    [] ( const Block& self ) -> DoubleRange
        { return self.energies(); },
     "The inelastic energies"
   )
   .def_property_readonly(
 
     "cross_sections",
-    [] ( const Block& self ) -> LongRange
+    [] ( const Block& self ) -> DoubleRange
        { return self.crossSections(); },
     "The inelastic cross section values"
   );

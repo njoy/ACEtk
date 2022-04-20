@@ -5,6 +5,7 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
+#include "ACEtk/block/ThermalScatteringCrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,12 +20,12 @@ namespace ACEtk {
 class ThermalScatteringTable : protected Table {
 
   /* fields */
-  // std::optional< block::ITIE > itie_;
-  // std::optional< block::ITXE > itxe_;
-  // std::optional< block::ITCE > itce_;
-  // std::optional< block::ITCA > itca_;
-  // std::optional< block::ITCE > itcei_;
-  // std::optional< block::ITCA > itcai_;
+  block::ITIE itie_;
+  // block::ITXE itxe_;
+  block::ITCE itce_;
+  // block::ITCA itca_;
+  block::ITCEI itcei_;
+  // block::ITCA itcai_;
 
   /* auxiliary functions */
   #include "ACEtk/ThermalScatteringTable/src/generateBlocks.hpp"
@@ -159,6 +160,44 @@ public:
 
   // XSS blocks
 
+  /**
+   *  @brief Return the inelastic thermal scattering cross section block
+   */
+  const block::ITIE& ITIE() const { return this->itie_; }
+
+  /**
+   *  @brief Return the inelastic thermal scattering cross section block
+   */
+  const block::ITIE& inelasticCrossSectionBlock() const {
+
+    return this->ITIE();
+  }
+
+  /**
+   *  @brief Return the coherent elastic thermal scattering cross section block
+   */
+  const block::ITCE& ITCE() const { return this->itce_; }
+
+  /**
+   *  @brief Return the coherent elastic thermal scattering cross section block
+   */
+  const block::ITCE& coherentElasticCrossSectionBlock() const {
+
+    return this->ITCE();
+  }
+
+  /**
+   *  @brief Return the incoherent elastic thermal scattering cross section block
+   */
+  const block::ITCEI& ITCEI() const { return this->itcei_; }
+
+  /**
+   *  @brief Return the incoherent elastic thermal scattering cross section block
+   */
+  const block::ITCEI& incoherentElasticCrossSectionBlock() const {
+
+    return this->ITCEI();
+  }
 };
 
 } // ACEtk namespace

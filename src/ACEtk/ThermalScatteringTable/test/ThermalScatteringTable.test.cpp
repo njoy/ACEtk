@@ -106,4 +106,23 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
   CHECK( 2 == chunk.IFENG() );
   CHECK( 2 == chunk.secondaryEnergyMode() );
 
+  // ITIE block
+  CHECK( false == chunk.ITIE().empty() );
+
+  CHECK( 118 == chunk.ITIE().NE() );
+  CHECK( 118 == chunk.ITIE().numberEnergies() );
+
+  CHECK( 118 == chunk.ITIE().energies().size() );
+  CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
+  CHECK( 1e-5 == Approx( chunk.ITIE().energies().back() ) );
+
+  CHECK( 118 == chunk.ITIE().crossSections().size() );
+  CHECK( 500.5451 == Approx( chunk.ITIE().crossSections().front() ) );
+  CHECK( 20.53782 == Approx( chunk.ITIE().crossSections().back() ) );
+
+  // ITCE block
+  CHECK( true == chunk.ITCE().empty() );
+
+  // ITCEI block
+  CHECK( true == chunk.ITCEI().empty() );
 }
