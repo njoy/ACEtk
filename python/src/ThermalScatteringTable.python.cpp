@@ -195,6 +195,18 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "ITCA",
+    &Table::ITCA,
+    "The coherent elastic thermal scattering angular distribution block"
+  )
+  .def_property_readonly(
+
+    "coherent_elastic_angular_distribution_block",
+    &Table::coherentElasticAngularDistributionBlock,
+    "The incoherent elastic thermal scattering angular distribution block"
+  )
+  .def_property_readonly(
+
     "ITCEI",
     &Table::ITCEI,
     "The incoherent elastic thermal scattering cross section block"
@@ -204,6 +216,18 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
     "incoherent_elastic_cross_section_block",
     &Table::coherentElasticCrossSectionBlock,
     "The incoherent elastic thermal scattering cross section block"
+  )
+  .def_property_readonly(
+
+    "ITCAI",
+    &Table::ITCAI,
+    "The incoherent elastic thermal scattering angular distribution block"
+  )
+  .def_property_readonly(
+
+    "incoherent_elastic_angular_distribution_block",
+    &Table::incoherentElasticAngularDistributionBlock,
+    "The incoherent elastic thermal scattering angular distribution block"
   );
 
   // add standard block definitions

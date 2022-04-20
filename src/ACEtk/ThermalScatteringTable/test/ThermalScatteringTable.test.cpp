@@ -339,8 +339,14 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
   // ITCE block
   CHECK( true == chunk.ITCE().empty() );
 
+  // ITCA block
+  CHECK( true == chunk.ITCA().empty() );
+
   // ITCEI block
   CHECK( true == chunk.ITCEI().empty() );
+
+  // ITCAI block
+  CHECK( true == chunk.ITCAI().empty() );
 }
 
 void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
@@ -381,6 +387,9 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   // ITCE block
   CHECK( true == chunk.ITCE().empty() );
 
+  // ITCA block
+  CHECK( true == chunk.ITCA().empty() );
+
   // ITCEI block
   CHECK( false == chunk.ITCEI().empty() );
 
@@ -394,6 +403,18 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 91 == chunk.ITCEI().crossSections().size() );
   CHECK( 6.337617 == Approx( chunk.ITCEI().crossSections().front() ) );
   CHECK( 0.82849246 == Approx( chunk.ITCEI().crossSections().back() ) );
+
+  // ITCAI block
+  CHECK( false == chunk.ITCAI().empty() );
+  CHECK( 1820 == chunk.ITCAI().length() );
+
+  CHECK( 91 == chunk.ITCAI().NE() );
+  CHECK( 91 == chunk.ITCAI().numberEnergies() );
+  CHECK( 20 == chunk.ITCAI().NC() );
+  CHECK( 20 == chunk.ITCAI().numberDiscreteCosines() );
+
+  CHECK( -.9499973 == Approx( chunk.ITCAI().cosines( 1 )[0] ) );
+  CHECK( .99335678 == Approx( chunk.ITCAI().cosines( 91 )[19] ) );
 }
 
 void verifyChunkAl( const ThermalScatteringTable& chunk ) {
@@ -445,8 +466,14 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( 5.10384187842E-09 == Approx( chunk.ITCE().crossSections().front() ) );
   CHECK( 7.15617224626E-08 == Approx( chunk.ITCE().crossSections().back() ) );
 
+  // ITCA block
+  CHECK( true == chunk.ITCA().empty() );
+
   // ITCEI block
   CHECK( true == chunk.ITCEI().empty() );
+
+  // ITCAI block
+  CHECK( true == chunk.ITCAI().empty() );
 }
 
 void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
@@ -498,6 +525,9 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 3.75735379520E-09 == Approx( chunk.ITCE().crossSections().front() ) );
   CHECK( 8.39439776800E-08 == Approx( chunk.ITCE().crossSections().back() ) );
 
+  // ITCA block
+  CHECK( true == chunk.ITCA().empty() );
+
   // ITCEI block
   CHECK( false == chunk.ITCEI().empty() );
 
@@ -511,4 +541,15 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 117 == chunk.ITCEI().crossSections().size() );
   CHECK( 1.026886 == Approx( chunk.ITCEI().crossSections().front() ) );
   CHECK( 2.48815555289E-03 == Approx( chunk.ITCEI().crossSections().back() ) );
+
+  // ITCAI block
+  CHECK( false == chunk.ITCAI().empty() );
+
+  CHECK( 117 == chunk.ITCAI().NE() );
+  CHECK( 117 == chunk.ITCAI().numberEnergies() );
+  CHECK( 20 == chunk.ITCAI().NC() );
+  CHECK( 20 == chunk.ITCAI().numberDiscreteCosines() );
+
+  CHECK( -9.49989880639E-01 == Approx( chunk.ITCAI().cosines( 1 )[0] ) );
+  CHECK( 9.99876836853E-01 == Approx( chunk.ITCAI().cosines( 117 )[19] ) );
 }

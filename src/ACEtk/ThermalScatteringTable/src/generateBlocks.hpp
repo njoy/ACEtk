@@ -22,7 +22,9 @@ auto block( std::size_t index ) const {
 
   return std::make_pair(
              begin + start - 1,
-             end != 0 ? begin + end - 1 : this->data().XSS().end() );
+             end != 0 ? begin + end - 1
+                      : start != 0 ? this->data().XSS().end()
+                                   : begin + end - 1 );
 }
 
 void generateBlocks() {
@@ -42,9 +44,23 @@ void generateBlocks() {
   this->itce_ = block::ITCE( present ? iterators.first : begin,
                              present ? iterators.second : begin );
 
+  iterators = block( 6 );
+  this->itca_ = block::ITCA( present ? this->ITCE().NE() : 0,
+                             present ? this->NCL() + 1 : 0,
+                             present ? iterators.first : begin,
+                             present ? iterators.second : begin );
+
   // incoherent elastic thermal scattering data
   present = this->IDPNC() == 3 || this->IDPNC() == 5 ? true : false;
   iterators = this->IDPNC() == 3 ? block( 4 ) : block( 7 );
   this->itcei_ = block::ITCEI( present ? iterators.first : begin,
                                present ? iterators.second : begin );
+
+  iterators = this->IDPNC() == 3 ? block( 6 ) : block( 9 );
+  this->itcai_ = block::ITCA( present ? this->ITCEI().NE() : 0,
+                              present ? this->IDPNC() == 3 ? this->NCL() + 1
+                                                           : this->NCLI() + 1
+                                      : 0,
+                              present ? iterators.first : begin,
+                              present ? iterators.second : begin );
 }

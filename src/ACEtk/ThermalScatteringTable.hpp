@@ -6,6 +6,7 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/ThermalScatteringCrossSectionBlock.hpp"
+#include "ACEtk/block/ThermalScatteringElasticAngularDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,9 +24,9 @@ class ThermalScatteringTable : protected Table {
   block::ITIE itie_;
   // block::ITXE itxe_;
   block::ITCE itce_;
-  // block::ITCA itca_;
+  block::ITCA itca_;
   block::ITCEI itcei_;
-  // block::ITCA itcai_;
+  block::ITCAI itcai_;
 
   /* auxiliary functions */
   #include "ACEtk/ThermalScatteringTable/src/generateBlocks.hpp"
@@ -187,6 +188,21 @@ public:
   }
 
   /**
+   *  @brief Return the coherent elastic thermal scattering angular distribution
+   *         block
+   */
+  const block::ITCA& ITCA() const { return this->itca_; }
+
+  /**
+   *  @brief Return the coherent elastic thermal scattering angular distribution
+   *         block
+   */
+  const block::ITCA& coherentElasticAngularDistributionBlock() const {
+
+    return this->ITCA();
+  }
+
+  /**
    *  @brief Return the incoherent elastic thermal scattering cross section block
    */
   const block::ITCEI& ITCEI() const { return this->itcei_; }
@@ -197,6 +213,21 @@ public:
   const block::ITCEI& incoherentElasticCrossSectionBlock() const {
 
     return this->ITCEI();
+  }
+
+  /**
+   *  @brief Return the incoherent elastic thermal scattering angular distribution
+   *         block
+   */
+  const block::ITCAI& ITCAI() const { return this->itcai_; }
+
+  /**
+   *  @brief Return the incoherent elastic thermal scattering angular distribution
+   *         block
+   */
+  const block::ITCAI& incoherentElasticAngularDistributionBlock() const {
+
+    return this->ITCAI();
   }
 };
 
