@@ -38,13 +38,13 @@ void generateBlocks() {
 
   // coherent elastic thermal scattering data
   present = this->IDPNC() > 3 ? true : false;
-  iterators = block( 3 );
+  iterators = block( 4 );
   this->itce_ = block::ITCE( present ? iterators.first : begin,
                              present ? iterators.second : begin );
 
   // incoherent elastic thermal scattering data
   present = this->IDPNC() == 3 || this->IDPNC() == 5 ? true : false;
-  iterators = this->IDPNC() == 3 ? block( 3 ) : block( 7 );
+  iterators = this->IDPNC() == 3 ? block( 4 ) : block( 7 );
   this->itcei_ = block::ITCEI( present ? iterators.first : begin,
                                present ? iterators.second : begin );
 }
