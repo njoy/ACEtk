@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ThermalScatteringEquiprobableAngularBins.hpp"
+#include "ACEtk/block/ThermalScatteringDiscreteCosines.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapThermalScatteringEquiprobableAngularBins( python::module& module, python::module& ) {
+void wrapThermalScatteringDiscreteCosines( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ThermalScatteringEquiprobableAngularBins;
+  using Block = njoy::ACEtk::block::ThermalScatteringDiscreteCosines;
 
   // wrap views created by this block
 
@@ -23,12 +23,12 @@ void wrapThermalScatteringEquiprobableAngularBins( python::module& module, pytho
   python::class_< Block > block(
 
     module,
-    "ThermalScatteringEquiprobableAngularBins",
-    "Equiprobable angular bin data for a single outgoing energy value\n\n"
-    "The ThermalScatteringEquiprobableAngularBins class contains the outgoing\n"
-    "energy value and the cosine values that make up the equiprobable bins\n"
-    "(contrary to the AND block, the number of bins is not fixed and can vary).\n"
-    "It is used in the ITXE block (for inelastic thermal scattering data)."
+    "ThermalScatteringDiscreteCosines",
+    "Discrete cosines for a single outgoing energy value used in thermal "
+    "scattering secondary particle distributions\n\n"
+    "The ThermalScatteringDiscreteCosines class contains an outgoing\n"
+    "energy value and the associated discrete cosine values. It is used in the\n"
+    "ITXE block (for inelastic thermal scattering data) when IFENG = 0 or 1."
   );
 
   // wrap the block
@@ -51,9 +51,9 @@ void wrapThermalScatteringEquiprobableAngularBins( python::module& module, pytho
   )
   .def_property_readonly(
 
-    "number_bins",
-    [] ( const Block& self ) { return self.numberBins(); },
-    "The number of equiprobable angular bins"
+    "number_discrete_cosines",
+    &Block::numberDiscreteCosines,
+    "The number of discrete cosines"
   )
   .def_property_readonly(
 

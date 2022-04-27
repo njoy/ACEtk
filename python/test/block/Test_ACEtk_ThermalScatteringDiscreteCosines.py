@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import ThermalScatteringEquiprobableAngularBins
+from ACEtk import ThermalScatteringDiscreteCosines
 
-class Test_ACEtk_ThermalScatteringEquiprobableAngularBins( unittest.TestCase ) :
-    """Unit test for the ThermalScatteringEquiprobableAngularBins class."""
+class Test_ACEtk_ThermalScatteringDiscreteCosines( unittest.TestCase ) :
+    """Unit test for the ThermalScatteringDiscreteCosines class."""
 
     chunk = [  2.10000000000E+00,
               -1.00000000000E+00, -0.90000000000E+00, -0.80000000000E+00, -0.70000000000E+00,
@@ -27,10 +27,10 @@ class Test_ACEtk_ThermalScatteringEquiprobableAngularBins( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 34, chunk.length )
-            self.assertEqual( "ThermalScatteringEquiprobableAngularBins", chunk.name )
+            self.assertEqual( "ThermalScatteringDiscreteCosines", chunk.name )
 
             self.assertEqual( 2.1, chunk.energy )
-            self.assertEqual( 32, chunk.number_bins )
+            self.assertEqual( 33, chunk.number_discrete_cosines )
 
             self.assertEqual( 33, len( chunk.cosines ) )
             self.assertAlmostEqual( -1, chunk.cosines[0] )
@@ -43,7 +43,7 @@ class Test_ACEtk_ThermalScatteringEquiprobableAngularBins( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = ThermalScatteringEquiprobableAngularBins(
+        chunk = ThermalScatteringDiscreteCosines(
                     energy = 2.1,
                     cosines = [ -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.3, -0.2, -0.1, 0.0,
                                 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,

@@ -63,7 +63,7 @@ namespace block {
   void wrapPhotonProductionCrossSectionData( python::module&, python::module& );
   void wrapDelayedNeutronPrecursorData( python::module&, python::module& );
   void wrapProbabilityTable( python::module&, python::module& );
-  void wrapThermalScatteringEquiprobableAngularBins( python::module&, python::module& );
+  void wrapThermalScatteringDiscreteCosines( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -175,7 +175,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotonProductionCrossSectionData( module, viewmodule );
   block::wrapDelayedNeutronPrecursorData( module, viewmodule );
   block::wrapProbabilityTable( module, viewmodule );
-  block::wrapThermalScatteringEquiprobableAngularBins( module, viewmodule );
+  block::wrapThermalScatteringDiscreteCosines( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );

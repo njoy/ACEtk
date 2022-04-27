@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/ThermalScatteringEquiprobableAngularBins.hpp"
+#include "ACEtk/block/ThermalScatteringDiscreteCosines.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ThermalScatteringEquiprobableAngularBins = block::ThermalScatteringEquiprobableAngularBins;
+using ThermalScatteringDiscreteCosines = block::ThermalScatteringDiscreteCosines;
 
 std::vector< double > chunk();
-void verifyChunk( const ThermalScatteringEquiprobableAngularBins& );
+void verifyChunk( const ThermalScatteringDiscreteCosines& );
 
-SCENARIO( "ThermalScatteringEquiprobableAngularBins" ) {
+SCENARIO( "ThermalScatteringDiscreteCosines" ) {
 
-  GIVEN( "valid data for a ThermalScatteringEquiprobableAngularBins instance" ) {
+  GIVEN( "valid data for a ThermalScatteringDiscreteCosines instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -29,10 +29,10 @@ SCENARIO( "ThermalScatteringEquiprobableAngularBins" ) {
         0.9625, 0.975, 1.0
       };
 
-      ThermalScatteringEquiprobableAngularBins chunk( energy,
+      ThermalScatteringDiscreteCosines chunk( energy,
                                                       std::move( cosines ) );
 
-      THEN( "a ThermalScatteringEquiprobableAngularBins can be constructed "
+      THEN( "a ThermalScatteringDiscreteCosines can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -50,9 +50,9 @@ SCENARIO( "ThermalScatteringEquiprobableAngularBins" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringEquiprobableAngularBins chunk( 32, xss.begin(), xss.end() );
+      ThermalScatteringDiscreteCosines chunk( 33, xss.begin(), xss.end() );
 
-      THEN( "a ThermalScatteringEquiprobableAngularBins can be constructed "
+      THEN( "a ThermalScatteringDiscreteCosines can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -87,14 +87,14 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const ThermalScatteringEquiprobableAngularBins& chunk ) {
+void verifyChunk( const ThermalScatteringDiscreteCosines& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );
-  CHECK( "ThermalScatteringEquiprobableAngularBins" == chunk.name() );
+  CHECK( "ThermalScatteringDiscreteCosines" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.energy() ) );
-  CHECK( 32 == chunk.numberBins() );
+  CHECK( 33 == chunk.numberDiscreteCosines() );
 
   CHECK( 33 == chunk.cosines().size() );
   CHECK( -1. == Approx( chunk.cosines().front() ) );

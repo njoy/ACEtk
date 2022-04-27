@@ -72,7 +72,7 @@ add_subdirectory( src/ACEtk/block/SecondaryParticleProductionCrossSectionBlock/t
 add_subdirectory( src/ACEtk/block/ProbabilityTable/test )
 add_subdirectory( src/ACEtk/block/ProbabilityTableBlock/test )
 add_subdirectory( src/ACEtk/block/ThermalScatteringCrossSectionBlock/test )
-add_subdirectory( src/ACEtk/block/ThermalScatteringEquiprobableAngularBins/test )
+add_subdirectory( src/ACEtk/block/ThermalScatteringDiscreteCosines/test )
 add_subdirectory( src/ACEtk/block/ThermalScatteringElasticAngularDistributionBlock/test )
 add_subdirectory( src/ACEtk/details/verify/CDF/test )
 add_subdirectory( src/ACEtk/details/verify/Positive/test )
