@@ -44,7 +44,7 @@ public:
   std::size_t numberDiscreteCosines() const { return this->ncosines_; }
 
   /**
-   *  @brief Return the cosine values
+   *  @brief Return the discrete cosine values
    */
   auto cosines() const {
 
