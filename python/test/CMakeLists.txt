@@ -57,3 +57,4 @@ add_test( NAME ACEtk.python.block.ProbabilityTable COMMAND ${PYTHON_EXECUTABLE} 
 add_test( NAME ACEtk.python.block.ProbabilityTableBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ProbabilityTableBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ThermalScatteringCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ThermalScatteringCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.ThermalScatteringDiscreteCosines COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ThermalScatteringDiscreteCosines.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.ThermalScatteringDiscreteCosinesWithProbability COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_ThermalScatteringDiscreteCosinesWithProbability.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

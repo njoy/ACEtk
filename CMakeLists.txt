@@ -146,6 +146,7 @@ if(ACEtk.python)
     python/src/block/ProbabilityTableBlock.python.cpp
     python/src/block/ThermalScatteringCrossSectionBlock.python.cpp
     python/src/block/ThermalScatteringDiscreteCosines.python.cpp
+    python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp
