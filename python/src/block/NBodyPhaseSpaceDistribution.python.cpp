@@ -34,16 +34,23 @@ void wrapNBodyPhaseSpaceDistribution( python::module& module, python::module& ) 
   block
   .def(
 
-    python::init< double, double, unsigned int, double >(),
+    python::init< double, double, unsigned int, double, unsigned int,
+                  std::vector< double >, std::vector< double >,
+                  std::vector< double > >(),
     python::arg( "emin" ), python::arg( "emax" ),
-    python::arg( "npsx" ), python::arg( "ap" ),
+    python::arg( "npsx" ), python::arg( "ap" ), python::arg( "interpolation" ),
+    python::arg( "values" ), python::arg( "pdf" ), python::arg( "cdf" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self    the block\n"
-    "    emin    the minimum energy for the distribution\n"
-    "    emax    the maximum energy for the distribution\n"
-    "    npsx    the number of particles in the system\n"
-    "    ap      the total mass ratio"
+    "    self             the block\n"
+    "    emin             the minimum energy for the distribution\n"
+    "    emax             the maximum energy for the distribution\n"
+    "    npsx             the number of particles in the system\n"
+    "    ap               the total mass ratio\n"
+    "    interpolation    the interpolation flag\n"
+    "    values           the xi values\n"
+    "    pdf              the pdf values\n"
+    "    cdf              the cdf values"
   )
   .def_property_readonly(
 
@@ -92,6 +99,39 @@ void wrapNBodyPhaseSpaceDistribution( python::module& module, python::module& ) 
     "total_mass_ratio",
     &Block::totalMassRatio,
     "The total mass ratio"
+  )
+  .def_property_readonly(
+
+    "interpolation",
+    &Block::interpolation,
+    "The interpolation flag"
+  )
+  .def_property_readonly(
+
+    "number_values",
+    &Block::numberValues,
+    "The number of values"
+  )
+  .def_property_readonly(
+
+    "values",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.values(); },
+    "The values"
+  )
+  .def_property_readonly(
+
+    "pdf",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.pdf(); },
+    "The pdf values"
+  )
+  .def_property_readonly(
+
+    "cdf",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.cdf(); },
+    "The cdf values"
   );
 
   // add standard block definitions

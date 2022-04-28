@@ -12,9 +12,14 @@ NBodyPhaseSpaceDistribution( NBodyPhaseSpaceDistribution&& ) = default;
  *  @param[in] ap      the total mass ratio
  */
 NBodyPhaseSpaceDistribution( double emin, double emax,
-                             unsigned int npsx, double ap ) :
+                             unsigned int npsx, double ap,
+                             unsigned int interpolation,
+                             std::vector< double > values,
+                             std::vector< double > pdf,
+                             std::vector< double > cdf ) :
   Base( "NBodyPhaseSpaceDistribution",
-        { static_cast< double >( npsx ), ap } ),
+        generateXSS( npsx, ap, interpolation, std::move( values ),
+                     std::move( pdf ), std::move( cdf ) ) ),
   emin_( emin ), emax_( emax ) {}
 
 /**
