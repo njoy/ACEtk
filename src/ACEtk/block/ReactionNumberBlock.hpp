@@ -56,7 +56,7 @@ public:
     #ifndef NDEBUG
     this->verifyReactionIndex( index, 1, this->NTR() );
     #endif
-    return static_cast< unsigned int >( this->XSS( index ) );
+    return static_cast< unsigned int >( round( this->XSS( index ) ) );
   }
 
   /**

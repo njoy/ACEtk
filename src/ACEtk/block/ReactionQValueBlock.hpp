@@ -51,7 +51,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto QValue( std::size_t index ) const {
+  double QValue( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyReactionIndex( index, 1, this->NTR() );

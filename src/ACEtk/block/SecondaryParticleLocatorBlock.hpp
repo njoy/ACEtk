@@ -56,9 +56,9 @@ public:
    *  @param[in] particle    the secondary particle index (one-based)
    *  @param[in] index       the block index (one-based)
    */
-  auto LLOC( std::size_t particle, std::size_t index ) const {
+  std::size_t LLOC( std::size_t particle, std::size_t index ) const {
 
-    return this->XSS( ( particle - 1 ) * 10 + index );
+    return round( this->XSS( ( particle - 1 ) * 10 + index ) );
   }
 
   /**
@@ -67,9 +67,9 @@ public:
    *  @param[in] particle    the secondary particle index (one-based)
    *  @param[in] index       the block index (one-based)
    */
-  auto locator( std::size_t particle, std::size_t index ) const {
+  std::size_t locator( std::size_t particle, std::size_t index ) const {
 
-    return this->XSS( ( particle - 1 ) * 10 + index );
+    return this->LLOC( particle, index );
   }
 
   /**
@@ -77,7 +77,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto HPD( std::size_t index ) const {
+  std::size_t HPD( std::size_t index ) const {
 
     return this->LLOC( index, 1 );
   }
@@ -87,7 +87,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto MTRH( std::size_t index ) const {
+  std::size_t MTRH( std::size_t index ) const {
 
     return this->LLOC( index, 2 );
   }
@@ -97,7 +97,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto TYRH( std::size_t index ) const {
+  std::size_t TYRH( std::size_t index ) const {
 
     return this->LLOC( index, 3 );
   }
@@ -107,7 +107,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto LSIGH( std::size_t index ) const {
+  std::size_t LSIGH( std::size_t index ) const {
 
     return this->LLOC( index, 4 );
   }
@@ -117,7 +117,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto SIGH( std::size_t index ) const {
+  std::size_t SIGH( std::size_t index ) const {
 
     return this->LLOC( index, 5 );
   }
@@ -127,7 +127,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto LANDH( std::size_t index ) const {
+  std::size_t LANDH( std::size_t index ) const {
 
     return this->LLOC( index, 6 );
   }
@@ -137,7 +137,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto ANDH( std::size_t index ) const {
+  std::size_t ANDH( std::size_t index ) const {
 
     return this->LLOC( index, 7 );
   }
@@ -147,7 +147,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto LDLWH( std::size_t index ) const {
+  std::size_t LDLWH( std::size_t index ) const {
 
     return this->LLOC( index, 8 );
   }
@@ -157,7 +157,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto DLWH( std::size_t index ) const {
+  std::size_t DLWH( std::size_t index ) const {
 
     return this->LLOC( index, 9 );
   }
@@ -167,7 +167,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto YP( std::size_t index ) const {
+  std::size_t YP( std::size_t index ) const {
 
     return this->LLOC( index, 10 );
   }

@@ -52,8 +52,8 @@ BaseTabulatedData( std::string name,
 BaseTabulatedData( std::string name, Iterator begin, Iterator end ) :
   Base( std::move( name ), begin, end ) {
 
-  std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
-  std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );
+  std::size_t nr = static_cast< std::size_t >( round( this->XSS( 1 ) ) );
+  std::size_t ne = static_cast< std::size_t >( round( this->XSS( 1 + 2 * nr + 1 ) ) );
   verifySize( this->begin(), this->end(), nr, ne );
   this->generateBlocks();
 }

@@ -68,9 +68,9 @@ GeneralEvaporationSpectrum(
 GeneralEvaporationSpectrum( Iterator begin, Iterator end ) :
   Base( "GeneralEvaporationSpectrum", begin, end ) {
 
-  std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
-  std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );
-  std::size_t nb = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 + 2 * ne + 1 ) );
+  std::size_t nr = static_cast< std::size_t >( round( this->XSS( 1 ) ) );
+  std::size_t ne = static_cast< std::size_t >( round( this->XSS( 1 + 2 * nr + 1 ) ) );
+  std::size_t nb = static_cast< std::size_t >( round( this->XSS( 1 + 2 * nr + 1 + 2 * ne + 1 ) ) );
   verifySize( this->begin(), this->end(), nr, ne, nb );
   this->generateBlocks();
 }

@@ -51,7 +51,7 @@ public:
   /**
    *  @brief Return the interpolation flag
    */
-  int interpolation() const { return this->XSS( 1 ); }
+  int interpolation() const { return round( this->XSS( 1 ) ); }
 
   /**
    *  @brief Return the number of values in each column

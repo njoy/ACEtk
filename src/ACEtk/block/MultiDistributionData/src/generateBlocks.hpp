@@ -5,10 +5,10 @@ void generateBlocks() {
   do {
 
     // lnw, law and idat from xss array (one based index starting at locb)
-    lnw = static_cast< std::size_t >( this->XSS( locator ) );
+    lnw = static_cast< std::size_t >( round( this->XSS( locator ) ) );
     EnergyDistributionType law =
-        static_cast< EnergyDistributionType >( this->XSS( locator + 1 ) );
-    std::size_t idat = static_cast< std::size_t >( this->XSS( locator + 2 ) );
+        static_cast< EnergyDistributionType >( round( this->XSS( locator + 1 ) ) );
+    std::size_t idat = static_cast< std::size_t >( round( this->XSS( locator + 2 ) ) );
 
     // iterators into the xss array (zero based index into internal xss array)
     auto pbegin = this->begin() + locator + 3 - 1;

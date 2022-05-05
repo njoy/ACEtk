@@ -56,7 +56,10 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  unsigned int NP( std::size_t index ) const { return this->XSS( index ); }
+  unsigned int NP( std::size_t index ) const {
+
+    return round( this->XSS( index ) );
+  }
 
   /**
    *  @brief Return the number of reactions for a secondary particle index

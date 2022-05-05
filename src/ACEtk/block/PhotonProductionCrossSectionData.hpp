@@ -33,7 +33,7 @@ public:
    */
   unsigned int MFTYPE() const {
 
-    return static_cast< unsigned int >( this->XSS( 1 ) );
+    return static_cast< unsigned int >( round( this->XSS( 1 ) ) );
   }
 
   /**
@@ -44,12 +44,12 @@ public:
   /**
    *  @brief Return the energy index
    */
-  std::size_t energyIndex() const { return this->XSS( 2 ); }
+  std::size_t energyIndex() const { return round( this->XSS( 2 ) ); }
 
   /**
    *  @brief Return the number of cross section values
    */
-  std::size_t numberValues() const { return this->XSS( 3 ); }
+  std::size_t numberValues() const { return round( this->XSS( 3 ) ); }
 
   /**
    *  @brief Return the cross section values

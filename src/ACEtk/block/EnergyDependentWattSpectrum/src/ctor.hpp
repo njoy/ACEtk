@@ -48,11 +48,11 @@ EnergyDependentWattSpectrum(
 EnergyDependentWattSpectrum( Iterator begin, Iterator end ) :
   Base( "EnergyDependentWattSpectrum", begin, end ) {
 
-  std::size_t nra = static_cast< std::size_t >( this->XSS( 1 ) );
-  std::size_t nea = static_cast< std::size_t >( this->XSS( 1 + 2 * nra + 1 ) );
+  std::size_t nra = static_cast< std::size_t >( round( this->XSS( 1 ) ) );
+  std::size_t nea = static_cast< std::size_t >( round( this->XSS( 1 + 2 * nra + 1 ) ) );
   std::size_t size = 2 + 2 * nra + 2 * nea;
-  std::size_t nrb = static_cast< std::size_t >( this->XSS( size + 1 ) );
-  std::size_t neb = static_cast< std::size_t >( this->XSS( size + 1 + 2 * nrb + 1 ) );
+  std::size_t nrb = static_cast< std::size_t >( round( this->XSS( size + 1 ) ) );
+  std::size_t neb = static_cast< std::size_t >( round( this->XSS( size + 1 + 2 * nrb + 1 ) ) );
   verifySize( this->begin(), this->end(), nra, nea, nrb, neb );
   this->generateBlocks();
 }
