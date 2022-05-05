@@ -181,7 +181,7 @@ void generateBlocks() {
   this->yp_ = block::YP( present ? iterators.first : begin,
                          present ? iterators.second : begin );
 
-  // delayed neutron data: delayed nubar for fissile isotopes
+  // delayed neutron data: unresolved resonance tables
   iterators = block( 23 );
   present = ( this->data().JXS(23) > 0 );
   this->unr_ = block::UNR( present ? iterators.first : begin,
@@ -200,7 +200,7 @@ void generateBlocks() {
                            present ? iterators.second : begin,
                            this->NPCR() );
 
-  // secondary photon data: photon energy distributions
+  // delayed neutron data: spectra
   locators = block( 26 );
   iterators = block( 27 );
   this->dned_ = block::DNED( present ? locators.first : begin,

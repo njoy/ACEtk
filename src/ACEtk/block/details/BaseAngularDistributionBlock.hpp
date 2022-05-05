@@ -76,7 +76,7 @@ public:
     this->verifyReactionIndex( index, this->zero_index_ ? 0 : 1, this->NR() );
     #endif
     std::size_t offset = this->zero_index_ ? 1 : 0;
-    return XSS( index + offset ); // elastic is index 0
+    return round( XSS( index + offset ) ); // elastic is index 0
   }
 
   /**
