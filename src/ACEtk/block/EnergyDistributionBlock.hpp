@@ -118,7 +118,7 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    return round( XSS( index ) );
+    return this->IXSS( index );
   }
 
   /**

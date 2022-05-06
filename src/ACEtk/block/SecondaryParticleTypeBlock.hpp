@@ -56,14 +56,17 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  unsigned int IP( std::size_t index ) const { return round( this->XSS( index ) ); }
+  unsigned int IP( std::size_t index ) const { return this->IXSS( index ); }
 
   /**
    *  @brief Return the particle type for a secondary particle index
    *
    *  @param[in] index     the index (one-based)
    */
-  unsigned int particleType( std::size_t index ) const { return this->IP( index ); }
+  unsigned int particleType( std::size_t index ) const {
+
+    return this->IP( index );
+  }
 
   /**
    *  @brief Return the particle types

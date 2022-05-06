@@ -40,7 +40,7 @@ public:
    */
   unsigned int NYP() const {
 
-    return this->empty() ? 0 : static_cast< unsigned int >( round( this->XSS(1) ) );
+    return this->empty() ? 0 : static_cast< unsigned int >( this->IXSS(1) );
   }
 
   /**
@@ -58,7 +58,7 @@ public:
     #ifndef NDEBUG
     this->verifyReactionIndex( index, 1, this->NYP() );
     #endif
-    return static_cast< unsigned int >( round( this->XSS( index + 1 ) ) );
+    return static_cast< unsigned int >( this->IXSS( index + 1 ) );
   }
 
   /**

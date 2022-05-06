@@ -58,7 +58,7 @@ public:
    */
   std::size_t LLOC( std::size_t particle, std::size_t index ) const {
 
-    return round( this->XSS( ( particle - 1 ) * 10 + index ) );
+    return this->IXSS( ( particle - 1 ) * 10 + index );
   }
 
   /**

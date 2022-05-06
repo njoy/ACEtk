@@ -1,7 +1,7 @@
 void generateBlocks() {
 
-  std::size_t nr = static_cast< std::size_t >( round( this->XSS( 1 ) ) );
-  std::size_t ne = static_cast< std::size_t >( round( this->XSS( 1 + 2 * nr + 1 ) ) );
+  std::size_t nr = static_cast< std::size_t >( this->IXSS( 1 ) );
+  std::size_t ne = static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 ) );
   auto begin = this->begin();
   auto incident = begin + 2 * nr + 1;
   auto bins = incident + ne + 1;

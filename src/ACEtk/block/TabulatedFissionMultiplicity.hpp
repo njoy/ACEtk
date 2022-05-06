@@ -38,7 +38,7 @@ public:
    */
   unsigned int LNU() const {
 
-    return static_cast< unsigned int >( round( this->XSS( 1 ) ) );
+    return static_cast< unsigned int >( this->IXSS( 1 ) );
   }
 
   /**

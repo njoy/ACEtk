@@ -64,7 +64,7 @@ public:
   /**
    *  @brief Return the number of particles in the system
    */
-  unsigned int NPSX() const { return round( this->XSS( 1 ) ); }
+  unsigned int NPSX() const { return this->IXSS( 1 ); }
 
   /**
    *  @brief Return the number of particles in the system
@@ -84,12 +84,12 @@ public:
   /**
    *  @brief Return the interpolation flag
    */
-  int interpolation() const { return round( this->XSS( 3 ) ); }
+  int interpolation() const { return this->IXSS( 3 ); }
 
   /**
    *  @brief Return the number of xi values
    */
-  std::size_t numberValues() const { return round( this->XSS( 4 ) ); }
+  std::size_t numberValues() const { return this->IXSS( 4 ); }
 
   /**
    *  @brief Return the xi values

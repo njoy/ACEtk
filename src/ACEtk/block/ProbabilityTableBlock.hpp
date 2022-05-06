@@ -38,7 +38,7 @@ public:
    */
   unsigned int N() const {
 
-    return this->empty() ? 0 : static_cast< unsigned int >( round( this->XSS( 1 ) ) );
+    return this->empty() ? 0 : static_cast< unsigned int >( this->IXSS( 1 ) );
   }
 
   /**
@@ -54,7 +54,7 @@ public:
    */
   unsigned int M() const {
 
-    return this->empty() ? 0 : static_cast< unsigned int >( round( this->XSS( 2 ) ) );
+    return this->empty() ? 0 : static_cast< unsigned int >( this->IXSS( 2 ) );
   }
 
   /**
@@ -70,7 +70,7 @@ public:
    */
   unsigned int INT() const {
 
-    return this->empty() ? 0 : static_cast< unsigned int >( round( this->XSS( 3 ) ) );
+    return this->empty() ? 0 : static_cast< unsigned int >( this->IXSS( 3 ) );
   }
 
   /**
@@ -86,7 +86,7 @@ public:
    */
   int ILF() const {
 
-    return this->empty() ? 0 : static_cast< int >( round( this->XSS( 4 ) ) );
+    return this->empty() ? 0 : static_cast< int >( this->IXSS( 4 ) );
   }
 
   /**
@@ -102,7 +102,7 @@ public:
    */
   int IOA() const {
 
-    return this->empty() ? 0 : static_cast< int >( round( this->XSS( 5 ) ) );
+    return this->empty() ? 0 : static_cast< int >( this->IXSS( 5 ) );
   }
 
   /**
@@ -118,7 +118,7 @@ public:
    */
   unsigned int IFF() const {
 
-    return this->empty() ? 0 : static_cast< unsigned int >( round( this->XSS( 6 ) ) );
+    return this->empty() ? 0 : static_cast< unsigned int >( this->IXSS( 6 ) );
   }
 
   /**

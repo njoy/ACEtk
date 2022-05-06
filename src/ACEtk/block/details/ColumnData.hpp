@@ -42,7 +42,7 @@ public:
   /**
    *  @brief Return the number of elements in a column
    */
-  std::size_t N() const { return round( this->XSS( 1 ) ); }
+  std::size_t N() const { return this->IXSS( 1 ); }
 
   /**
    *  @brief Return the number of elements in a column
@@ -83,6 +83,7 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::IXSS;
   using Base::begin;
   using Base::end;
 };

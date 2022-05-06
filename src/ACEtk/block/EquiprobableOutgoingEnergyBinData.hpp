@@ -145,7 +145,7 @@ public:
 
     std::size_t nr = this->NB();
     std::size_t ne = this->NE();
-    return static_cast< std::size_t >( round( this->XSS( 1 + 2 * nr + 1 + ne + 1 ) ) );
+    return static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 + ne + 1 ) );
   }
 
   /**

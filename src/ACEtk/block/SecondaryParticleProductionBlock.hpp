@@ -36,12 +36,12 @@ public:
   /**
    *  @brief Return the energy index
    */
-  std::size_t energyIndex() const { return round( this->XSS( 1 ) ); }
+  std::size_t energyIndex() const { return this->XSS( 1 ); }
 
   /**
    *  @brief Return the number of cross section values
    */
-  std::size_t numberValues() const { return round( this->XSS( 2 ) ); }
+  std::size_t numberValues() const { return this->XSS( 2 ); }
 
   /**
    *  @brief Return the total production cross section values
