@@ -266,6 +266,6 @@ void verifyChunk( const Data& chunk ) {
   CHECK_THROWS( chunk.JXS( 33 ) );
 
   CHECK_THROWS( chunk.XSS( 0 ) );
-  CHECK_THROWS( chunk.XSS( 7 ) );
+  CHECK_THROWS( chunk.XSS( 8 ) );
 #endif
 }
