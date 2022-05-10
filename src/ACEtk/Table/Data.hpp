@@ -184,6 +184,19 @@ public:
    */
   auto XSS( std::size_t index ) const { return fetch( this->xss_, index ); }
 
+  /**
+   *  @brief Return a value from the XSS array as an integer value
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
+   */
+  auto IXSS( std::size_t index ) const {
+
+    return round( fetch( this->xss_, index ) );
+  }
+
   #include "ACEtk/Table/Data/src/XSS.hpp"
 
   #include "ACEtk/Table/Data/src/print.hpp"

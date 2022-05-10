@@ -42,7 +42,7 @@ void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
   .def(
 
     python::init< std::vector< EnergyDistributionData > >(),
-    python::arg( "distributions" ), 
+    python::arg( "distributions" ),
     "Initialise the DNED block\n\n"
     "Arguments:\n"
     "    self              the block\n"

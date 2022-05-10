@@ -70,7 +70,7 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    return XSS( index );
+    return this->IXSS( index );
   }
 
   /**
@@ -114,6 +114,7 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::IXSS;
   using Base::begin;
   using Base::end;
 };

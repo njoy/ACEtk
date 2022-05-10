@@ -136,7 +136,7 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    return this->value( this->values_.NC(), index );
+    return round( this->value( this->values_.NC(), index ) );
   }
 
   /**
@@ -199,6 +199,7 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::IXSS;
   using Base::begin;
   using Base::end;
 };
