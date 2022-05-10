@@ -2,10 +2,10 @@ void generateBlocks() {
 
   std::size_t ne = static_cast< std::size_t >( this->IXSS( 1 ) );
   auto begin = this->begin();
-  auto end = begin + 2 * ne + 1;
+  auto end = this->iterator( 2 * ne + 2 );
 
   this->values_ = block::details::ColumnData( this->name(), begin, end, 2 );
-  for ( unsigned int index = 1; index <= this->values_.N(); ++index ) {
+  for ( unsigned int index = 1; index <= this->numberIncidentEnergies(); ++index ) {
 
     const auto type = this->distributionType( index );
     const double incident = this->incidentEnergy( index );
@@ -16,14 +16,14 @@ void generateBlocks() {
     else {
 
       const auto locator = this->relativeDistributionLocator( index );
-      const auto left = std::next( this->begin(), locator - 1 );
+      const auto left = this->iterator( locator );
       auto right = this->end();
       for ( auto next = index + 1; next <= this->numberIncidentEnergies(); ++next ) {
 
         auto nextlocator = this->relativeDistributionLocator( next );
         if ( nextlocator > locator ) {
 
-          right = std::next( this->begin(), nextlocator - 1 );
+          right = this->iterator( nextlocator );
           break;
         }
       }

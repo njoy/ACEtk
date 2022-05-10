@@ -2,7 +2,7 @@ static EnergyDistributionData
 generateData( std::size_t locator, Iterator left, Iterator right ) {
 
   // left points to the LNW value - single law if zero
-  unsigned int lnw = static_cast< unsigned int >( *left );
+  unsigned int lnw = static_cast< unsigned int >( round( *left ) );
   if ( lnw == 0 ) {
 
     EnergyDistributionType law = static_cast< EnergyDistributionType >( round( *( left + 1 ) ) );
