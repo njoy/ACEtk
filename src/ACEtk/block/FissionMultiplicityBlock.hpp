@@ -62,12 +62,12 @@ public:
 
     if ( this->hasPromptAndTotalFissionMultiplicity() ) {
 
-      auto knu = static_cast<unsigned int>( std::abs( *begin ) ) + 1;
+      auto knu = static_cast<unsigned int>( std::abs( round( *begin ) ) ) + 1;
       end = std::next( begin, knu );
       begin = std::next( begin );
     }
 
-    unsigned int LNU = static_cast< unsigned int >( *begin );
+    unsigned int LNU = static_cast< unsigned int >( round( *begin ) );
     switch (LNU) {
 
       case 1: return PolynomialFissionMultiplicity( begin, end );
@@ -95,11 +95,11 @@ public:
 
     if ( this->hasPromptAndTotalFissionMultiplicity() ) {
 
-      auto knu = static_cast<unsigned int>( std::abs( *begin ) ) + 1;
+      auto knu = static_cast<unsigned int>( std::abs( round( *begin ) ) ) + 1;
       begin = std::next( begin, knu );
     }
 
-    unsigned int LNU = static_cast< unsigned int >( *begin );
+    unsigned int LNU = static_cast< unsigned int >( round( *begin ) );
     switch (LNU) {
 
       case 1: return PolynomialFissionMultiplicity( begin, end );

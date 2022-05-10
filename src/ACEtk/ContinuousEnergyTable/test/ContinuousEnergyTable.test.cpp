@@ -21,6 +21,7 @@ using TwoBodyTransferDistribution = block::TwoBodyTransferDistribution;
 
 void verifyChunkU235( const ContinuousEnergyTable& );
 void verifyChunkHe3( const ContinuousEnergyTable& );
+void verifyChunkNJOY99U238( const ContinuousEnergyTable& );
 
 SCENARIO( "ContinuousEnergyTable" ){
 
@@ -327,6 +328,86 @@ SCENARIO( "ContinuousEnergyTable" ){
       } // THEN
     } // WHEN
   } // GIVEN
+
+  GIVEN( "valid data for a ContinuousEnergyTable - NJOY99 U238" ) {
+
+    // the ASCII representation of the XSS array uses no integer values
+
+    auto table = fromFile( "92238.69c" );
+    std::array< int32_t, 16 > iz = table.data().IZ();
+    std::array< double, 16 > aw = table.data().AW();
+    std::array< int64_t, 16 > nxs = table.data().NXS();
+    std::array< int64_t, 32 > jxs = table.data().JXS();
+    std::vector< double > xss = table.data().XSS();
+
+    WHEN( "constructing a ContinuousEnergyTable from a table" ) {
+
+      ContinuousEnergyTable chunk( std::move( table ) );
+
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkNJOY99U238( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+    // no test to reconstruct this ACE table: older NJOY99 evaluations do not
+    // duplicate delayed neutron energy distributions (resulting in two locators
+    // that are the same in the DNED block). ACEtk duplicates the data and as
+    // such will result in a different XSS array if we reconstruct it from its
+    // componenents.
+
+  } // GIVEN
 } // SCENARIO
 
 void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
@@ -576,7 +657,7 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 2 == chunk.YP().index( 18 ) );
   CHECK( 3 == chunk.YP().index( 102 ) );
 
-  // DNU block
+  // UNR block
   CHECK( false == chunk.UNR().empty() );
 
   CHECK( 19 == chunk.UNR().numberIncidentEnergies() );
@@ -767,7 +848,7 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   // YP block
   CHECK( true == chunk.YP().empty() );
 
-  // BDD block
+  // UNR block
   CHECK( true == chunk.UNR().empty() );
 
   // DNU block
@@ -899,4 +980,314 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 102 == chunk.YH(1).reactionNumbers().front() );
 
   CHECK( 102 == chunk.YH(1).MT( 1 ) );
+}
+
+void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
+
+  CHECK( "92238.69c" == chunk.ZAID() );
+  CHECK( 2.5301e-8 == Approx( chunk.temperature() ) );
+
+  CHECK( 874492 == chunk.length() );
+  CHECK( 92238 == chunk.ZA() );
+  CHECK( 78709 == chunk.NES() );
+  CHECK( 78709 == chunk.numberEnergyPoints() );
+  CHECK( 47 == chunk.NTR() );
+  CHECK( 47 == chunk.numberReactions() );
+  CHECK( 48 == chunk.totalNumberReactions() );
+  CHECK( 45 == chunk.NR() );
+  CHECK( 45 == chunk.numberProjectileProductionReactions() );
+  CHECK( 6 == chunk.NTRP() );
+  CHECK( 6 == chunk.numberPhotonProductionReactions() );
+  CHECK( 0 == chunk.NTYPE() );
+  CHECK( 0 == chunk.numberAdditionalSecondaryParticleTypes() );
+  CHECK( 6 == chunk.NPCR() );
+  CHECK( 6 == chunk.numberDelayedPrecursors() );
+  CHECK( 0 == chunk.S() );
+  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.Z() );
+  CHECK( 0 == chunk.atomNumber() );
+  CHECK( 0 == chunk.A() );
+  CHECK( 0 == chunk.massNumber() );
+
+  // ESZ block
+  CHECK( false == chunk.ESZ().empty() );
+  CHECK( 78709 == chunk.ESZ().energies().size() );
+  CHECK( 78709 == chunk.ESZ().total().size() );
+  CHECK( 78709 == chunk.ESZ().disappearance().size() );
+  CHECK( 78709 == chunk.ESZ().elastic().size() );
+  CHECK( 78709 == chunk.ESZ().heating().size() );
+
+  CHECK( 1e-11 == Approx( chunk.ESZ().energies().front() ) );
+  CHECK( 30. == Approx( chunk.ESZ().energies().back() ) );
+
+  CHECK( 1e-11 == Approx( chunk.ESZ().XSS( 1 ) ) );
+  CHECK( 78709 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
+
+  // NU block
+  CHECK( false == chunk.NU().empty() );
+
+  CHECK( true == chunk.NU().hasPromptAndTotalFissionMultiplicity() );
+
+  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().promptFissionMultiplicity() );
+  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().totalFissionMultiplicity() );
+
+  CHECK( 0 == prompt.NB() );
+  CHECK( 6 == prompt.NE() );
+  CHECK( 1e-11 == Approx( prompt.energies().front() ) );
+  CHECK( 30. == Approx( prompt.energies().back() ) );
+  CHECK( 2.448088 == Approx( prompt.multiplicities().front() ) );
+  CHECK( 6.4 == Approx( prompt.multiplicities().back() ) );
+
+  CHECK( 0 == total.NB() );
+  CHECK( 8 == total.NE() );
+  CHECK( 1e-11 == Approx( total.energies().front() ) );
+  CHECK( 30. == Approx( total.energies().back() ) );
+  CHECK( 2.492088 == Approx( total.multiplicities().front() ) );
+  CHECK( 6.426 == Approx( total.multiplicities().back() ) );
+
+  // MTR block
+  CHECK( false == chunk.MTR().empty() );
+  CHECK( 47 == chunk.MTR().MTs().size() );
+  CHECK( 16 == chunk.MTR().MTs().front() );
+  CHECK( 444 == chunk.MTR().MTs().back() );
+  CHECK( 47 == chunk.MTR().reactionNumbers().size() );
+  CHECK( 16 == chunk.MTR().reactionNumbers().front() );
+  CHECK( 444 == chunk.MTR().reactionNumbers().back() );
+
+  CHECK( 16 == chunk.MTR().MT( 1 ) );
+  CHECK( 444 == chunk.MTR().MT( 47 ) );
+  CHECK( 16 == chunk.MTR().reactionNumber( 1 ) );
+  CHECK( 444 == chunk.MTR().reactionNumber( 47 ) );
+
+  CHECK( true == chunk.MTR().hasReactionNumber( 16 ) );
+  CHECK( true == chunk.MTR().hasReactionNumber( 444 ) );
+  CHECK( 1 == chunk.MTR().index( 16 ) );
+  CHECK( 47 == chunk.MTR().index( 444 ) );
+
+  // LQR block
+  CHECK( false == chunk.LQR().empty() );
+  CHECK( 47 == chunk.LQR().QValues().size() );
+  CHECK( -6.1528 == chunk.LQR().QValues().front() );
+  CHECK( 0. == chunk.LQR().QValues().back() );
+
+  CHECK( -6.1528 == chunk.LQR().QValue( 1 ) );
+  CHECK( 0. == chunk.LQR().QValue( 47 ) );
+
+  // TYR block
+  CHECK( false == chunk.TYR().empty() );
+  CHECK( 47 == chunk.TYR().referenceFrames().size() );
+  CHECK( ReferenceFrame::CentreOfMass == chunk.TYR().referenceFrames().front() );
+  CHECK( ReferenceFrame::Laboratory == chunk.TYR().referenceFrames().back() );
+  CHECK( 47 == chunk.TYR().multiplicities().size() );
+  CHECK( 2 == chunk.TYR().multiplicities().front() );
+  CHECK( 0 == chunk.TYR().multiplicities().back() );
+
+  CHECK( ReferenceFrame::CentreOfMass == chunk.TYR().referenceFrame( 1 ) );
+  CHECK( ReferenceFrame::Laboratory == chunk.TYR().referenceFrame( 47 ) );
+  CHECK( 2 == chunk.TYR().multiplicity( 1 ) );
+  CHECK( 0 == chunk.TYR().multiplicity( 47 ) );
+
+  // SIG block
+  CHECK( false == chunk.SIG().empty() );
+  CHECK( 47 == chunk.SIG().NTR() );
+
+  CHECK( 1 == chunk.SIG().LSIG( 1 ) );
+  CHECK( 165936 == chunk.SIG().LSIG( 47 ) );
+
+  CHECK( 78604 == chunk.SIG().energyIndex( 1 ) );
+  CHECK( 1 == chunk.SIG().energyIndex( 47 ) );
+
+  CHECK( 106 == chunk.SIG().numberValues( 1 ) );
+  CHECK( 78709 == chunk.SIG().numberValues( 47 ) );
+
+  auto xs1 = chunk.SIG().crossSectionData( 1 );
+  auto xs47 = chunk.SIG().crossSectionData( 47 );
+  CHECK( 78604 == xs1.energyIndex() );
+  CHECK( 1 == xs47.energyIndex() );
+  CHECK( 106 == xs1.numberValues() );
+  CHECK( 78709 == xs47.numberValues() );
+  CHECK( 0. == Approx( xs1.crossSections().front() ) );
+  CHECK( 1.387829e-1 == Approx( xs1.crossSections().back() ) );
+  CHECK( 6.560634e-4 == Approx( xs47.crossSections().front() ) );
+  CHECK( 3.159912e-1 == Approx( xs47.crossSections().back() ) );
+
+  auto data1 = chunk.SIG().crossSections( 1 );
+  auto data47 = chunk.SIG().crossSections( 47 );
+  CHECK( 106 == data1.size() );
+  CHECK( 78709 == data47.size() );
+  CHECK( 0. == Approx( data1.front() ) );
+  CHECK( 1.387829e-1 == Approx( data1.back() ) );
+  CHECK( 6.560634e-4 == Approx( data47.front() ) );
+  CHECK( 3.159912e-1 == Approx( data47.back() ) );
+
+  // AND block
+  CHECK( false == chunk.AND().empty() );
+  CHECK( 45 == chunk.AND().NR() );
+
+  CHECK( 1 == chunk.AND().LAND( 0 ) ); // elastic
+  CHECK( -1 == chunk.AND().LAND( 2 ) );
+  CHECK( 0 == chunk.AND().LAND( 3 ) );
+  CHECK( 44014 == chunk.AND().LAND( 44 ) );
+  CHECK( -1 == chunk.AND().LAND( 45 ) );
+
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.AND().angularDistributionData( 0 ) ) ); // elastic
+  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.AND().angularDistributionData( 2 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.AND().angularDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.AND().angularDistributionData( 44 ) ) );
+  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.AND().angularDistributionData( 45 ) ) );
+
+  // DLW block
+  CHECK( false == chunk.DLW().empty() );
+  CHECK( 45 == chunk.DLW().NR() );
+
+  CHECK( 1 == chunk.DLW().LDLW( 1 ) );
+  CHECK( 71788 == chunk.DLW().LDLW( 44 ) );
+  CHECK( 71799 == chunk.DLW().LDLW( 45 ) );
+
+  CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< LevelScatteringDistribution >( chunk.DLW().energyDistributionData( 44 ) ) );
+  CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 45 ) ) );
+
+  // GPD block
+  CHECK( false == chunk.GPD().empty() );
+  CHECK( 78709 == chunk.GPD().totalProduction().size() );
+
+  CHECK( 589.4728 == Approx( chunk.GPD().totalProduction().front() ) );
+  CHECK( 17.12507 == Approx( chunk.GPD().totalProduction().back() ) );
+
+  // MTRP block
+  CHECK( false == chunk.MTRP().empty() );
+  CHECK( 6 == chunk.MTRP().MTs().size() );
+  CHECK( 18001 == chunk.MTRP().MTs().front() );
+  CHECK( 3004 == chunk.MTRP().MTs().back() );
+  CHECK( 6 == chunk.MTRP().reactionNumbers().size() );
+  CHECK( 18001 == chunk.MTRP().reactionNumbers().front() );
+  CHECK( 3004 == chunk.MTRP().reactionNumbers().back() );
+
+  CHECK( 18001 == chunk.MTRP().MT( 1 ) );
+  CHECK( 3004 == chunk.MTRP().MT( 6 ) );
+  CHECK( 18001 == chunk.MTRP().reactionNumber( 1 ) );
+  CHECK( 3004 == chunk.MTRP().reactionNumber( 6 ) );
+
+  CHECK( true == chunk.MTRP().hasReactionNumber( 18001 ) );
+  CHECK( true == chunk.MTRP().hasReactionNumber( 3004 ) );
+  CHECK( 1 == chunk.MTRP().index( 18001 ) );
+  CHECK( 6 == chunk.MTRP().index( 3004 ) );
+
+//  // SIGP block
+//  CHECK( false == chunk.SIGP().empty() );
+//  CHECK( 33 == chunk.SIGP().NTRP() );
+//
+//  CHECK( 1 == chunk.SIGP().LSIG( 1 ) );
+//  CHECK( 37 == chunk.SIGP().LSIG( 3 ) );
+//  CHECK( 1155 == chunk.SIGP().LSIG( 33 ) );
+//
+//  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP().crossSectionData( 1 ) ) );
+//  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP().crossSectionData( 3 ) ) );
+//  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP().crossSectionData( 33 ) ) );
+//
+//  // ANDP block
+//  CHECK( false == chunk.ANDP().empty() );
+//  CHECK( 33 == chunk.ANDP().NR() );
+//
+//  CHECK( 0 == chunk.ANDP().LAND( 1 ) );
+//  CHECK( 0 == chunk.ANDP().LAND( 3 ) );
+//  CHECK( 0 == chunk.ANDP().LAND( 33 ) );
+//
+//  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 1 ) ) );
+//  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 3 ) ) );
+//  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 33 ) ) );
+//
+//  // DLWP block
+//  CHECK( false == chunk.DLWP().empty() );
+//  CHECK( 33 == chunk.DLWP().NR() );
+//
+//  CHECK( 1 == chunk.DLWP().LDLW( 1 ) );
+//  CHECK( 23 == chunk.DLWP().LDLW( 3 ) );
+//  CHECK( 1139 == chunk.DLWP().LDLW( 33 ) );
+//
+//  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 1 ) ) );
+//  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 3 ) ) );
+//  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP().energyDistributionData( 33 ) ) );
+//
+//  // YP block
+//  CHECK( false == chunk.YP().empty() );
+//  CHECK( 3 == chunk.YP().MTs().size() );
+//  CHECK( 4 == chunk.YP().MTs().front() );
+//  CHECK( 102 == chunk.YP().MTs().back() );
+//  CHECK( 3 == chunk.YP().reactionNumbers().size() );
+//  CHECK( 4 == chunk.YP().reactionNumbers().front() );
+//  CHECK( 102 == chunk.YP().reactionNumbers().back() );
+//
+//  CHECK( 4 == chunk.YP().MT( 1 ) );
+//  CHECK( 102 == chunk.YP().MT( 3 ) );
+//  CHECK( 4 == chunk.YP().reactionNumber( 1 ) );
+//  CHECK( 102 == chunk.YP().reactionNumber( 3 ) );
+//
+//  CHECK( true == chunk.YP().hasReactionNumber( 4 ) );
+//  CHECK( true == chunk.YP().hasReactionNumber( 18 ) );
+//  CHECK( true == chunk.YP().hasReactionNumber( 102 ) );
+//  CHECK( 1 == chunk.YP().index( 4 ) );
+//  CHECK( 2 == chunk.YP().index( 18 ) );
+//  CHECK( 3 == chunk.YP().index( 102 ) );
+//
+//  // UNR block
+//  CHECK( false == chunk.UNR().empty() );
+//
+//  CHECK( 19 == chunk.UNR().numberIncidentEnergies() );
+//
+//  auto unr1 = chunk.UNR().probabilityTable( 1 );
+//  auto unr19 = chunk.UNR().probabilityTable( 19 );
+//  CHECK( 2.25000100000E-03 == Approx( unr1.incidentEnergy() ) );
+//  CHECK( 2.49999900000E-02 == Approx( unr19.incidentEnergy() ) );
+//  CHECK( 16 == unr1.numberBins() );
+//  CHECK( 16 == unr19.numberBins() );
+//  CHECK( 1. == Approx( unr1.heating().front() ) );
+//  CHECK( 1. == Approx( unr1.heating().back() ) );
+//  CHECK( 1. == Approx( unr19.heating().front() ) );
+//  CHECK( 1. == Approx( unr19.heating().back() ) );
+//
+//  // DNU block
+//  CHECK( false == chunk.DNU().empty() );
+//
+//  CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
+//
+//  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().promptFissionMultiplicity() );
+//
+//  CHECK( 0 == delayed.NB() );
+//  CHECK( 6 == delayed.NE() );
+//  CHECK( 1e-11 == Approx( delayed.energies().front() ) );
+//  CHECK( 20. == Approx( delayed.energies().back() ) );
+//  CHECK( 0.01585 == Approx( delayed.multiplicities().front() ) );
+//  CHECK( 0.009 == Approx( delayed.multiplicities().back() ) );
+//
+//  // BDD block
+//  CHECK( false == chunk.BDD().empty() );
+//
+//  CHECK( 6 == chunk.BDD().NPCR() );
+//  CHECK( 6 == chunk.BDD().numberDelayedPrecursors() );
+//
+//  CHECK( 1.33360E-10 == Approx( chunk.BDD().precursorGroupData( 1 ).DEC() ) );
+//  CHECK( 2.85300E-08 == Approx( chunk.BDD().precursorGroupData( 6 ).DEC() ) );
+//
+//  // DNED block
+//  CHECK( false == chunk.DNED().empty() );
+//
+//  CHECK( 1 == chunk.DNED().LDLW( 1 ) );
+//  CHECK( 7944 == chunk.DNED().LDLW( 6 ) );
+//
+//  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 1 ) ) );
+//  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 6 ) ) );
+//
+//  CHECK( std::nullopt == chunk.DNED().referenceFrame( 1 ) );
+//  CHECK( std::nullopt == chunk.DNED().referenceFrame( 6 ) );
+
+  // PTYPE block
+  CHECK( true == chunk.PTYPE().empty() );
+
+  // NTRO block
+  CHECK( true == chunk.NTRO().empty() );
+
+  // IXS block
+  CHECK( true == chunk.IXS().empty() );
 }

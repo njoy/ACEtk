@@ -6,6 +6,6 @@ void generateBlocks() {
                                 ? ReferenceFrame::CentreOfMass
                                 : ReferenceFrame::Laboratory );
     this->multiplicities_.emplace_back(
-               static_cast< unsigned int >( std::abs( this->XSS( index ) ) ) );
+               static_cast< unsigned int >( std::abs( this->IXSS( index ) ) ) );
   }
 }
