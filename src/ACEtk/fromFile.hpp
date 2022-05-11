@@ -13,11 +13,11 @@ namespace njoy {
 namespace ACEtk {
 
   /**
-   *  @brief Factory function to make an ACE table from a file
+   *  @brief Utility function to read the content of a file to a string
    *
    *  @param[in] filename   the file name
    */
-  inline auto fromFile( const std::string& filename ) {
+  inline auto readContentFromFile( const std::string& filename ) {
 
     std::string content;
     std::ifstream in( filename,
@@ -32,7 +32,42 @@ namespace ACEtk {
     in.seekg( 0, std::ios::beg );
     content.resize( file_size / sizeof( char ) );
     in.read( &( content[ 0 ] ), file_size );
+    return content;
+  }
+
+  /**
+   *  @brief Factory function to make an ACE table from a file
+   *
+   *  If this function is applied to a concatenated ACE file, only the first
+   *  table is read.
+   *
+   *  @param[in] filename   the file name
+   */
+  inline auto fromFile( const std::string& filename ) {
+
+    std::string content = readContentFromFile( filename );
     return njoy::ACEtk::Table( content );
+  }
+
+  /**
+   *  @brief Factory function to make ACE tables from a concatenated file
+   *
+   *  @param[in] filename   the file name
+   */
+  inline auto fromConcatenatedFile( const std::string& filename ) {
+
+    std::string content = readContentFromFile( filename );
+
+    using Iterator = decltype( content.begin() );
+    State< Iterator > state{ 1, content.begin(), content.end() };
+
+    std::vector< Table > tables;
+    while ( state.position != state.end ) {
+
+      tables.emplace_back( state );
+    }
+
+    return tables;
   }
 
 } // ENDFtk namespace
