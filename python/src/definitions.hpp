@@ -49,6 +49,26 @@ void addStandardTableDefinitions( PythonClass& table ) {
     "Arguments:\n"
     "    filename    the file name and path"
   )
+  .def_static(
+
+    "from_concatenated_file",
+    [] ( const std::string& filename ) -> std::vector< Table > {
+
+      std::vector< Table > tables;
+      auto content = njoy::ACEtk::fromConcatenatedFile( filename );
+      for ( auto&& table : content ) {
+
+        std::cout << table.header().ZAID() << std::endl;
+        tables.emplace_back( std::move( table ) );
+      }
+      return tables;
+    },
+    "Read ACE tables from a concatenated file\n\n"
+    "An exception is raised if something goes wrong while reading the\n"
+    "table\n\n"
+    "Arguments:\n"
+    "    filename    the file name and path"
+  )
   .def(
 
     "to_file",
