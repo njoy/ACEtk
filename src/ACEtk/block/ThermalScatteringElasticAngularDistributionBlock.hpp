@@ -36,14 +36,14 @@ public:
   #include "ACEtk/block/ThermalScatteringElasticAngularDistributionBlock/src/ctor.hpp"
 
   /**
-   *  @brief Return the number of energy values
+   *  @brief Return the number of incident energy values
    */
   std::size_t NE() const { return this->ne_; }
 
   /**
-   *  @brief Return the number of energy values
+   *  @brief Return the number of incident energy values
    */
-  std::size_t numberEnergies() const { return this->NE(); }
+  std::size_t numberIncidentEnergies() const { return this->NE(); }
 
   /**
    *  @brief Return the number of equiprobable discrete cosine values for each

@@ -326,7 +326,7 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITIE().empty() );
 
   CHECK( 118 == chunk.ITIE().NE() );
-  CHECK( 118 == chunk.ITIE().numberEnergies() );
+  CHECK( 118 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 118 == chunk.ITIE().energies().size() );
   CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
@@ -374,7 +374,7 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITIE().empty() );
 
   CHECK( 91 == chunk.ITIE().NE() );
-  CHECK( 91 == chunk.ITIE().numberEnergies() );
+  CHECK( 91 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 91 == chunk.ITIE().energies().size() );
   CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
@@ -394,7 +394,7 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITCEI().empty() );
 
   CHECK( 91 == chunk.ITCEI().NE() );
-  CHECK( 91 == chunk.ITCEI().numberEnergies() );
+  CHECK( 91 == chunk.ITCEI().numberIncidentEnergies() );
 
   CHECK( 91 == chunk.ITCEI().energies().size() );
   CHECK( 1e-11 == Approx( chunk.ITCEI().energies().front() ) );
@@ -409,7 +409,7 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 1820 == chunk.ITCAI().length() );
 
   CHECK( 91 == chunk.ITCAI().NE() );
-  CHECK( 91 == chunk.ITCAI().numberEnergies() );
+  CHECK( 91 == chunk.ITCAI().numberIncidentEnergies() );
   CHECK( 20 == chunk.ITCAI().NC() );
   CHECK( 20 == chunk.ITCAI().numberDiscreteCosines() );
 
@@ -442,7 +442,7 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITIE().empty() );
 
   CHECK( 100 == chunk.ITIE().NE() );
-  CHECK( 100 == chunk.ITIE().numberEnergies() );
+  CHECK( 100 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 100 == chunk.ITIE().energies().size() );
   CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
@@ -456,7 +456,7 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITCE().empty() );
 
   CHECK( 119 == chunk.ITCE().NE() );
-  CHECK( 119 == chunk.ITCE().numberEnergies() );
+  CHECK( 119 == chunk.ITCE().numberIncidentEnergies() );
 
   CHECK( 119 == chunk.ITCE().energies().size() );
   CHECK( 3.759019e-9 == Approx( chunk.ITCE().energies().front() ) );
@@ -501,7 +501,7 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITIE().empty() );
 
   CHECK( 117 == chunk.ITIE().NE() );
-  CHECK( 117 == chunk.ITIE().numberEnergies() );
+  CHECK( 117 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 117 == chunk.ITIE().energies().size() );
   CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
@@ -515,7 +515,7 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITCE().empty() );
 
   CHECK( 72 == chunk.ITCE().NE() );
-  CHECK( 72 == chunk.ITCE().numberEnergies() );
+  CHECK( 72 == chunk.ITCE().numberIncidentEnergies() );
 
   CHECK( 72 == chunk.ITCE().energies().size() );
   CHECK( 3.70672e-9 == Approx( chunk.ITCE().energies().front() ) );
@@ -532,7 +532,7 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITCEI().empty() );
 
   CHECK( 117 == chunk.ITCEI().NE() );
-  CHECK( 117 == chunk.ITCEI().numberEnergies() );
+  CHECK( 117 == chunk.ITCEI().numberIncidentEnergies() );
 
   CHECK( 117 == chunk.ITCEI().energies().size() );
   CHECK( 1e-11 == Approx( chunk.ITCEI().energies().front() ) );
@@ -546,7 +546,7 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( false == chunk.ITCAI().empty() );
 
   CHECK( 117 == chunk.ITCAI().NE() );
-  CHECK( 117 == chunk.ITCAI().numberEnergies() );
+  CHECK( 117 == chunk.ITCAI().numberIncidentEnergies() );
   CHECK( 20 == chunk.ITCAI().NC() );
   CHECK( 20 == chunk.ITCAI().numberDiscreteCosines() );
 

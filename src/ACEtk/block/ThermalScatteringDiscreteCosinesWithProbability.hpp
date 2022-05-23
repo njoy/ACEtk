@@ -53,7 +53,12 @@ public:
   /**
    *  @brief Return the number of discrete cosines
    */
-  std::size_t numberDiscreteCosines() const { return this->ncosines_; }
+  std::size_t NC() const { return this->ncosines_; }
+
+  /**
+   *  @brief Return the number of discrete cosines
+   */
+  std::size_t numberDiscreteCosines() const { return this->NC(); }
 
   /**
    *  @brief Return the discrete cosine values

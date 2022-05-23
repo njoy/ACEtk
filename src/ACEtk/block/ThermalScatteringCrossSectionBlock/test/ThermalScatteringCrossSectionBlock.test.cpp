@@ -81,7 +81,7 @@ void verifyChunk( const ThermalScatteringCrossSectionBlock& chunk ) {
   CHECK( "ThermalScatteringCrossSectionBlock" == chunk.name() );
 
   CHECK( 4 == chunk.NE() );
-  CHECK( 4 == chunk.numberEnergies() );
+  CHECK( 4 == chunk.numberIncidentEnergies() );
 
   CHECK( 4 == chunk.energies().size() );
   CHECK( 10. == Approx( chunk.energies().front() ) );

@@ -23,7 +23,7 @@ class Test_ACEtk_ThermalScatteringCrossSectionBlock( unittest.TestCase ) :
             self.assertEqual( "ThermalScatteringCrossSectionBlock", chunk.name )
 
             self.assertEqual( 4, chunk.NE )
-            self.assertEqual( 4, chunk.number_energies )
+            self.assertEqual( 4, chunk.number_incident_energies )
 
             self.assertEqual( 4, len( chunk.energies ) )
             self.assertAlmostEqual( 10., chunk.energies[0] )

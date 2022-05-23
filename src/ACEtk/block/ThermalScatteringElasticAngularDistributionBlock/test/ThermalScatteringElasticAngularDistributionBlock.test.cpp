@@ -74,7 +74,7 @@ std::vector< double > chunk() {
     -1.00000000000E+00, -0.90000000000E+00,  1.00000000000E+00,
     -1.00000000000E+00,  0.00000000000E+00,  1.00000000000E+00,
     -1.00000000000E+00,  0.50000000000E+00,  1.00000000000E+00,
-    -1.00000000000E+00,  0.90000000000E+00,  1.00000000000E+00,
+    -1.00000000000E+00,  0.90000000000E+00,  1.00000000000E+00
   };
 }
 
@@ -85,7 +85,7 @@ void verifyChunk( const ThermalScatteringElasticAngularDistributionBlock& chunk 
   CHECK( "ThermalScatteringElasticAngularDistributionBlock" == chunk.name() );
 
   CHECK( 4 == chunk.NE() );
-  CHECK( 4 == chunk.numberEnergies() );
+  CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
 

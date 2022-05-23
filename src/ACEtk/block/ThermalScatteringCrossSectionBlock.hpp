@@ -31,12 +31,12 @@ public:
   std::size_t NE() const { return this->N(); }
 
   /**
-   *  @brief Return the number of energies
+   *  @brief Return the number of incident energies
    */
-  std::size_t numberEnergies() const { return this->NE(); }
+  std::size_t numberIncidentEnergies() const { return this->NE(); }
 
   /**
-   *  @brief Return the energies
+   *  @brief Return the incident energies
    */
   auto energies() const { return this->column( 1 ); }
 

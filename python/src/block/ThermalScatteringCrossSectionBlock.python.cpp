@@ -48,8 +48,8 @@ void wrapThermalScatteringCrossSectionBlock( python::module& module,
   )
   .def_property_readonly(
 
-    "number_energies",
-    &Block::numberEnergies,
+    "number_incident_energies",
+    &Block::numberIncidentEnergies,
     "The number of energies"
   )
   .def_property_readonly(
