@@ -92,7 +92,9 @@ ThermalScatteringInelasticAngularDistributionBlock(
     unsigned int ifeng, std::size_t nieb, std::size_t nc, std::size_t ne,
     Iterator begin, Iterator end ) :
   Base( "ThermalScatteringInelasticAngularDistributionBlock", begin, end ),
-  ifeng_( ifeng ), nc_( nc ), nieb_( nieb ), ne_( ne ) {
+  ifeng_( ifeng ), nc_( nc ),
+  nieb_( ifeng < 2 ? std::optional< std::size_t >( nieb ) : std::nullopt ),
+  ne_( ne ) {
 
   if ( ifeng < 2 ) {
 

@@ -38,6 +38,14 @@ void generateBlocks() {
   this->itie_ = block::ITIE( present ? iterators.first : begin,
                              present ? iterators.second : begin );
 
+  iterators = block( 3 );
+  this->itxe_ = block::ITXE( present ? this->IFENG() : 0,
+                             present ? this->IFENG() < 2 ? this->NIEB() : 0 : 0,
+                             present ? this->NIL() + 1 : 0,
+                             present ? this->ITIE().NE() : 0,
+                             present ? iterators.first : begin,
+                             present ? iterators.second : begin );
+
   // coherent elastic thermal scattering data
   present = this->IDPNC() > 3 ? true : false;
   iterators = block( 4 );

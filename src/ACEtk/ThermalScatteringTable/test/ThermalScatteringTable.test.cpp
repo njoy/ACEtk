@@ -336,6 +336,20 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
   CHECK( 500.5451 == Approx( chunk.ITIE().crossSections().front() ) );
   CHECK( 20.53782 == Approx( chunk.ITIE().crossSections().back() ) );
 
+  // ITXE block
+  CHECK( false == chunk.ITXE().empty() );
+
+  CHECK( 2 == chunk.ITXE().IFENG() );
+  CHECK( 2 == chunk.ITXE().secondaryEnergyMode() );
+  CHECK( 22 == chunk.ITXE().NC() );
+  CHECK( 22 == chunk.ITXE().numberDiscreteCosines() );
+  CHECK( 21 == chunk.ITXE().NIL() );
+  CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
+  CHECK( 118 == chunk.ITXE().NE() );
+  CHECK( 118 == chunk.ITXE().numberIncidentEnergies() );
+  CHECK( std::nullopt == chunk.ITXE().NIEB() );
+  CHECK( std::nullopt == chunk.ITXE().numberOutgoingEnergies() );
+
   // ITCE block
   CHECK( true == chunk.ITCE().empty() );
 
@@ -383,6 +397,20 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 91 == chunk.ITIE().crossSections().size() );
   CHECK( 2.619597 == Approx( chunk.ITIE().crossSections().front() ) );
   CHECK( 5.3698962 == Approx( chunk.ITIE().crossSections().back() ) );
+
+  // ITXE block
+  CHECK( false == chunk.ITXE().empty() );
+
+  CHECK( 2 == chunk.ITXE().IFENG() );
+  CHECK( 2 == chunk.ITXE().secondaryEnergyMode() );
+  CHECK( 22 == chunk.ITXE().NC() );
+  CHECK( 22 == chunk.ITXE().numberDiscreteCosines() );
+  CHECK( 21 == chunk.ITXE().NIL() );
+  CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
+  CHECK( 91 == chunk.ITXE().NE() );
+  CHECK( 91 == chunk.ITXE().numberIncidentEnergies() );
+  CHECK( std::nullopt == chunk.ITXE().NIEB() );
+  CHECK( std::nullopt == chunk.ITXE().numberOutgoingEnergies() );
 
   // ITCE block
   CHECK( true == chunk.ITCE().empty() );
@@ -452,6 +480,20 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( 1.677347 == Approx( chunk.ITIE().crossSections().front() ) );
   CHECK( 1.31533352198 == Approx( chunk.ITIE().crossSections().back() ) );
 
+  // ITXE block
+  CHECK( false == chunk.ITXE().empty() );
+
+  CHECK( 2 == chunk.ITXE().IFENG() );
+  CHECK( 2 == chunk.ITXE().secondaryEnergyMode() );
+  CHECK( 22 == chunk.ITXE().NC() );
+  CHECK( 22 == chunk.ITXE().numberDiscreteCosines() );
+  CHECK( 21 == chunk.ITXE().NIL() );
+  CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
+  CHECK( 100 == chunk.ITXE().NE() );
+  CHECK( 100 == chunk.ITXE().numberIncidentEnergies() );
+  CHECK( std::nullopt == chunk.ITXE().NIEB() );
+  CHECK( std::nullopt == chunk.ITXE().numberOutgoingEnergies() );
+
   // ITCE block
   CHECK( false == chunk.ITCE().empty() );
 
@@ -510,6 +552,20 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 117 == chunk.ITIE().crossSections().size() );
   CHECK( 14.55274 == Approx( chunk.ITIE().crossSections().front() ) );
   CHECK( 1.68978156625 == Approx( chunk.ITIE().crossSections().back() ) );
+
+  // ITXE block
+  CHECK( false == chunk.ITXE().empty() );
+
+  CHECK( 1 == chunk.ITXE().IFENG() );
+  CHECK( 1 == chunk.ITXE().secondaryEnergyMode() );
+  CHECK( 20 == chunk.ITXE().NC() );
+  CHECK( 20 == chunk.ITXE().numberDiscreteCosines() );
+  CHECK( 19 == chunk.ITXE().NIL() );
+  CHECK( 19 == chunk.ITXE().inelasticDimensioningParameter() );
+  CHECK( 117 == chunk.ITXE().NE() );
+  CHECK( 117 == chunk.ITXE().numberIncidentEnergies() );
+  CHECK( 20 == chunk.ITXE().NIEB() );
+  CHECK( 20 == chunk.ITXE().numberOutgoingEnergies() );
 
   // ITCE block
   CHECK( false == chunk.ITCE().empty() );

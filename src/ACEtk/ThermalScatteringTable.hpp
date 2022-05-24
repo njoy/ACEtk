@@ -6,6 +6,7 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/ThermalScatteringCrossSectionBlock.hpp"
+#include "ACEtk/block/ThermalScatteringInelasticAngularDistributionBlock.hpp"
 #include "ACEtk/block/ThermalScatteringElasticAngularDistributionBlock.hpp"
 
 namespace njoy {
@@ -22,7 +23,7 @@ class ThermalScatteringTable : protected Table {
 
   /* fields */
   block::ITIE itie_;
-  // block::ITXE itxe_;
+  block::ITXE itxe_;
   block::ITCE itce_;
   block::ITCA itca_;
   block::ITCEI itcei_;
@@ -172,6 +173,19 @@ public:
   const block::ITIE& inelasticCrossSectionBlock() const {
 
     return this->ITIE();
+  }
+
+  /**
+   *  @brief Return the inelastic thermal scattering angular distribution block
+   */
+  const block::ITXE& ITXE() const { return this->itxe_; }
+
+  /**
+   *  @brief Return the inelastic thermal scattering angular distribution block
+   */
+  const block::ITXE& inelasticAngularDistributionBlock() const {
+
+    return this->ITXE();
   }
 
   /**
