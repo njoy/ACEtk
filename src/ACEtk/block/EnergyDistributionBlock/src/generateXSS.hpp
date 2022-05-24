@@ -17,18 +17,18 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
   for ( auto&& distribution : distributions ) {
 
     // current value of a locator into the xss array
-    std::size_t offset = xss.size() - size + 1;
+    std::size_t locator = xss.size() - size + 1;
 
     // handle multiplicity
     std::visit(
 
       utility::overload{
 
-        [ &xss, &tyr, &offset, size ] ( const TabulatedMultiplicity& value ) {
+        [ &xss, &tyr, &locator, size ] ( const TabulatedMultiplicity& value ) {
 
-          tyr.insert( tyr.end(), 100 + offset );
+          tyr.insert( tyr.end(), 100 + locator );
           xss.insert( xss.end(), value.begin(), value.end() );
-          offset = xss.size() - size + 1;
+          locator = xss.size() - size + 1;
         },
         [ &tyr ] ( const unsigned int& value ) {
 
@@ -39,7 +39,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
     );
 
     // set the locator for the current distribution
-    xss[index] = offset;
+    xss[index] = locator;
 
     // multi-law data needs no dummy probabilities
     if ( std::holds_alternative< MultiDistributionData >( distribution ) ) {
@@ -48,13 +48,13 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
 
         utility::overload{
 
-          [ &xss, offset ] ( const MultiDistributionData& value ) {
+          [ &xss, locator ] ( const MultiDistributionData& value ) {
 
             // remake the internal xss array with the proper locators
             MultiDistributionData temp(
                 std::move( value.probabilities() ),
                 std::move( value.distributions() ),
-                offset );
+                locator );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
           [] ( const auto& ) { /* nothing to do here */ }
@@ -71,9 +71,9 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
         utility::overload{
 
           [] ( const MultiDistributionData& ) { /* nothing to do here */ },
-          [ &xss, &idat, offset ] ( const auto& value ) {
+          [ &xss, &idat, locator ] ( const auto& value ) {
 
-            idat = offset + 3 + 1 + 5;
+            idat = locator + 3 + 1 + 5;
             xss.push_back( 0 );                                    // LNW
             xss.push_back( static_cast< short >( value.LAW() ) );  // LAW
             xss.push_back( idat );                                 // IDAT

@@ -9,10 +9,11 @@ ThermalScatteringInelasticAngularDistributionBlock(
     unsigned int ifeng,
     unsigned int nc,
     std::optional< unsigned int > nieb,
-    unsigned int ne ) :
+    unsigned int ne,
+    std::size_t locb ) :
   Base( "ThermalScatteringInelasticAngularDistributionBlock",
-        generateXSS( std::move( cosines ) ) ),
-  ifeng_( ifeng ), nc_( nc ), nieb_( nieb ), ne_( ne ) {
+        generateXSS( std::move( cosines ), locb ) ),
+  ifeng_( ifeng ), nc_( nc ), nieb_( nieb ), ne_( ne ), locb_( locb ) {
 
   this->generateBlocks();
 }
@@ -24,8 +25,8 @@ ThermalScatteringInelasticAngularDistributionBlock() = default;
 ThermalScatteringInelasticAngularDistributionBlock(
     const ThermalScatteringInelasticAngularDistributionBlock& base ) :
   Base( base ), ifeng_( base.ifeng_ ),
-  nc_( base.nc_ ), nieb_( base.nieb_ ),
-  ne_( base.ne_ ), data_( base.data_ ) {
+  nc_( base.nc_ ), nieb_( base.nieb_ ), ne_( base.ne_ ),
+  locb_( base.locb_ ), data_( base.data_ ) {
 
   if ( Base::owner() ) {
 
@@ -37,8 +38,8 @@ ThermalScatteringInelasticAngularDistributionBlock(
 ThermalScatteringInelasticAngularDistributionBlock(
     ThermalScatteringInelasticAngularDistributionBlock&& base ) :
   Base( std::move( base ) ), ifeng_( base.ifeng_ ),
-  nc_( base.nc_ ), nieb_( base.nieb_ ),
-  ne_( base.ne_ ), data_( std::move( base.data_ ) ) {
+  nc_( base.nc_ ), nieb_( base.nieb_ ), ne_( base.ne_ ),
+  locb_( base.locb_ ), data_( std::move( base.data_ ) ) {
 
   if ( Base::owner() ) {
 
@@ -57,13 +58,14 @@ ThermalScatteringInelasticAngularDistributionBlock(
  */
 ThermalScatteringInelasticAngularDistributionBlock(
     std::vector< std::vector< ThermalScatteringDiscreteCosines > > cosines,
-    bool skewed ) :
+    bool skewed, std::size_t locb = 1 ) :
   ThermalScatteringInelasticAngularDistributionBlock(
       std::move( cosines ),
       static_cast< unsigned int >( skewed ),
       cosines.front().front().NC(),
       cosines.front().size(),
-      cosines.size() ) {}
+      cosines.size(),
+      locb ) {}
 
 /**
  *  @brief Constructor
@@ -74,10 +76,11 @@ ThermalScatteringInelasticAngularDistributionBlock(
  *                        skewed or equiprobable
  */
 ThermalScatteringInelasticAngularDistributionBlock(
-    std::vector< std::vector< ThermalScatteringDiscreteCosinesWithProbability > > cosines ) :
+    std::vector< std::vector< ThermalScatteringDiscreteCosinesWithProbability > > cosines,
+    std::size_t locb = 1 ) :
   ThermalScatteringInelasticAngularDistributionBlock(
       std::move( cosines ), 2, cosines.front().front().NC(),
-      std::nullopt, cosines.size() ) {}
+      std::nullopt, cosines.size(), locb ) {}
 
 /**
  *  @brief Constructor
@@ -90,11 +93,11 @@ ThermalScatteringInelasticAngularDistributionBlock(
  */
 ThermalScatteringInelasticAngularDistributionBlock(
     unsigned int ifeng, std::size_t nieb, std::size_t nc, std::size_t ne,
-    Iterator begin, Iterator end ) :
+    std::size_t locb, Iterator begin, Iterator end ) :
   Base( "ThermalScatteringInelasticAngularDistributionBlock", begin, end ),
   ifeng_( ifeng ), nc_( nc ),
   nieb_( ifeng < 2 ? std::optional< std::size_t >( nieb ) : std::nullopt ),
-  ne_( ne ) {
+  ne_( ne ),locb_( locb ) {
 
   if ( ifeng < 2 ) {
 

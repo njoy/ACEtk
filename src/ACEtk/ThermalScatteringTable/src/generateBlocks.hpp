@@ -44,7 +44,8 @@ void generateBlocks() {
                              present ? this->NIL() + 1 : 0,
                              present ? this->ITIE().NE() : 0,
                              present ? iterators.first : begin,
-                             present ? iterators.second : begin );
+                             present ? iterators.second : begin,
+                             present ? this->data().JXS(3) : 1 );
 
   // coherent elastic thermal scattering data
   present = this->IDPNC() > 3 ? true : false;

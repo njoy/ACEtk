@@ -1,6 +1,7 @@
 static std::vector< double >
 generateXSS(
-  std::vector< std::vector< ThermalScatteringDiscreteCosines > >&& cosines ) {
+  std::vector< std::vector< ThermalScatteringDiscreteCosines > >&& cosines,
+  std::size_t ) {
 
   std::vector< double > xss;
   auto ne = cosines.size();
@@ -28,8 +29,32 @@ generateXSS(
 
 static std::vector< double >
 generateXSS(
-  std::vector< std::vector< ThermalScatteringDiscreteCosinesWithProbability > >&& cosines ) {
+  std::vector< std::vector< ThermalScatteringDiscreteCosinesWithProbability > >&& cosines,
+  std::size_t locb ) {
 
-  std::vector< double > xss;
+  std::size_t size = cosines.size();
+  std::vector< double > xss( size * 2 );
+  std::size_t index = 0;
+  for ( auto&& data : cosines ) {
+
+    // current value of a locator into the xss array
+    // these locators are the actual one-based indices into the xss array
+    // so we need to know the size of the xss array prior to this being created
+    std::size_t locator = xss.size() + 1;
+
+    // set the locator and number of outgoing energies for the current incident
+    // energy
+    xss[index] = locator + locb - 1;
+    xss[size + index] = data.size();
+
+    // insert every set of discrete cosines
+    for ( auto&& entry : data ) {
+
+      xss.insert( xss.end(), entry.begin(), entry.end() );
+    }
+
+    ++index;
+  }
+
   return xss;
 }

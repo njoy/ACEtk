@@ -38,6 +38,7 @@ private:
   std::size_t nc_;
   std::optional< std::size_t > nieb_;
   std::size_t ne_;
+  std::size_t locb_;
   std::vector< std::vector< AngularDistributionData > > data_;
 
   /* auxiliary functions */
@@ -45,6 +46,66 @@ private:
   #include "ACEtk/block/ThermalScatteringInelasticAngularDistributionBlock/src/verifyIndices.hpp"
   #include "ACEtk/block/ThermalScatteringInelasticAngularDistributionBlock/src/verifySize.hpp"
   #include "ACEtk/block/ThermalScatteringInelasticAngularDistributionBlock/src/generateXSS.hpp"
+
+  /**
+   *  @brief Return the distribution locator for an incident energy index
+   *
+   *  This locator is the value as stored in the XSS array.
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  int LOCC( std::size_t index ) const {
+
+    return this->IXSS( index );
+  }
+
+  /**
+   *  @brief Return the distribution locator for an incident energy index
+   *
+   *  This locator is the value as stored in the XSS array.
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  int distributionLocator( std::size_t index ) const {
+
+    return this->LOCC( index );
+  }
+
+  /**
+   *  @brief Return the relative distribution locator for a value index
+   *
+   *  This is the locator relative to the beginning of the current distribution
+   *  block.
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  std::size_t relativeDistributionLocator( std::size_t index ) const {
+
+    const int locator = this->LOCC( index );
+    return locator - this->locb_ + 1;
+  }
+
+  /**
+   *  @brief Return the number of secondary energies for an incident energy index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  int N( std::size_t index ) const {
+
+    return this->IXSS( this->NE() + index );
+  }
 
 public:
 
