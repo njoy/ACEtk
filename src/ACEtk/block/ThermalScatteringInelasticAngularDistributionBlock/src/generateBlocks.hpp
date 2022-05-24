@@ -34,13 +34,6 @@ void generateBlocks() {
       for ( unsigned int outgoing = 1; outgoing <= nieb; ++outgoing ) {
 
         end = outgoing == nieb ? next : current + nc + 3;
-        if ( next < end ) {
-
-          Log::error( "The size of the XSS array in the {} "
-                      "block is smaller than expected", this->name() );
-          Log::info( "XSS.size(): {}", this->length() );
-          throw std::exception();
-        }
         data.emplace_back( ThermalScatteringDiscreteCosinesWithProbability( nc, current, end ) );
         current = end;
       }

@@ -168,6 +168,14 @@ public:
   }
 
   /**
+   *  @brief Return all angular distribution data
+   */
+  const std::vector< std::vector< AngularDistributionData > >& data() const {
+
+    return this->data_;
+  }
+
+  /**
    *  @brief Return the discrete cosine data for an incident and outgoing energy
    *         index
    *
