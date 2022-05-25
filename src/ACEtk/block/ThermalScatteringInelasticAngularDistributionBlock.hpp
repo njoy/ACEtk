@@ -16,11 +16,10 @@ namespace block {
 /**
  *  @class
  *  @brief The angular distribution block for inelastic thermal scattering
- *         using equiprobable discrete cosines or a skewed distribution of
- *         discrete cosines
  *
  *  The ThermalScatteringInelasticAngularDistributionBlock class contains
- *  the equiprobable set or skewed distribution of discrete cosines.
+ *  the equiprobable set or a skewed distribution of discrete cosines, or a
+ *  tabulated probability distribution.
  */
 class ThermalScatteringInelasticAngularDistributionBlock : protected details::Base {
 

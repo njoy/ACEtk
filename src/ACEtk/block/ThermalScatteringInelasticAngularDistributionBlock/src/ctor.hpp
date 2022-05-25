@@ -55,6 +55,7 @@ ThermalScatteringInelasticAngularDistributionBlock(
  *                        energy value
  *  @param[in] skewed     flag to indicate whether or not the distribution is
  *                        skewed or equiprobable
+ *  @param[in] locb       the starting xss index for the ITXE block (default = 1)
  */
 ThermalScatteringInelasticAngularDistributionBlock(
     std::vector< std::vector< ThermalScatteringDiscreteCosines > > cosines,
@@ -72,8 +73,7 @@ ThermalScatteringInelasticAngularDistributionBlock(
  *
  *  @param[in] cosines    the discrete cosine data for each incident and outgoing
  *                        energy value
- *  @param[in] skewed     flag to indicate whether or not the distribution is
- *                        skewed or equiprobable
+ *  @param[in] locb       the starting xss index for the ITXE block (default = 1)
  */
 ThermalScatteringInelasticAngularDistributionBlock(
     std::vector< std::vector< ThermalScatteringDiscreteCosinesWithProbability > > cosines,
