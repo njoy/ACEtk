@@ -70,7 +70,8 @@ void wrapThermalScatteringElasticAngularDistributionBlock( python::module& modul
   .def(
 
     "cosines",
-    &Block::cosines,
+    [] ( const Block& self, std::size_t index ) -> DoubleRange
+       { return self.cosines( index ); },
     python::arg( "index" ),
     "The cosine values for an incident energy index\n\n"
     "When the index is out of range an std::out_of_range exception is thrown\n"

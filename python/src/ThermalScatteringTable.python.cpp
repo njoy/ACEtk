@@ -183,6 +183,18 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "ITXE",
+    &Table::ITXE,
+    "The inelastic thermal scattering angular distribution block"
+  )
+  .def_property_readonly(
+
+    "inelastic_angular_distribution_block",
+    &Table::inelasticAngularDistributionBlock,
+    "The inelastic thermal scattering angular distribution block"
+  )
+  .def_property_readonly(
+
     "ITCE",
     &Table::ITCE,
     "The coherent elastic thermal scattering cross section block"
