@@ -68,6 +68,12 @@ void wrapThermalScatteringDiscreteCosinesWithProbability( python::module& module
   )
   .def_property_readonly(
 
+    "NC",
+    &Block::NC,
+    "The number of discrete cosines"
+  )
+  .def_property_readonly(
+
     "number_discrete_cosines",
     &Block::numberDiscreteCosines,
     "The number of discrete cosines"
