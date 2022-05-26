@@ -13,12 +13,15 @@ generateXSS( FissionMultiplicityData&& prompt,
              FissionMultiplicityData&& total ) {
 
   std::vector< double > xss(1);
+  std::cout << xss[0] << std::endl;
   std::visit( [&xss] ( auto&& data )
                      { xss.insert( xss.end(), data.begin(), data.end() ); },
               prompt );
-  xss[0] = -( xss.size() + 1 );
+  xss[0] = -static_cast< double >( xss.size() + 1 );
+  std::cout << xss.size() << ' ' << xss[0] << std::endl;
   std::visit( [&xss] ( auto&& data )
                      { xss.insert( xss.end(), data.begin(), data.end() ); },
               total );
+  std::cout << xss[0] << std::endl;
   return xss;
 }
