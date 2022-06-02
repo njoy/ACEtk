@@ -85,6 +85,72 @@ SCENARIO( "ThermalScatteringTable" ){
         }
       } // THEN
     } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable from its components" ) {
+
+      ThermalScatteringTable base( std::move( table ) );
+
+      ThermalScatteringTable chunk( base.header(), { 1001 },
+                                    base.ITIE(), base.ITXE(),
+                                    std::nullopt, std::nullopt,
+                                    std::nullopt, std::nullopt );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a ThermalScatteringTable - Zr-ZrH" ) {
@@ -99,6 +165,73 @@ SCENARIO( "ThermalScatteringTable" ){
     WHEN( "constructing a ThermalScatteringTable from a table" ) {
 
       ThermalScatteringTable chunk( std::move( table ) );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable from its components" ) {
+
+      ThermalScatteringTable base( std::move( table ) );
+
+      ThermalScatteringTable chunk( base.header(),
+                                    { 40090, 40091, 40092, 40094, 40096, 40000 },
+                                    base.ITIE(), base.ITXE(),
+                                    std::nullopt, std::nullopt,
+                                    base.ITCEI(), base.ITCAI() );
 
       THEN( "a ThermalScatteringTable can be constructed and members can be "
             "tested" ) {
@@ -227,6 +360,72 @@ SCENARIO( "ThermalScatteringTable" ){
         }
       } // THEN
     } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable from its components" ) {
+
+      ThermalScatteringTable base( std::move( table ) );
+
+      ThermalScatteringTable chunk( base.header(), { 13027 },
+                                    base.ITIE(), base.ITXE(),
+                                    base.ITCE(), base.ITCA(),
+                                    std::nullopt, std::nullopt );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a ThermalScatteringTable - D-LiD" ) {
@@ -298,6 +497,72 @@ SCENARIO( "ThermalScatteringTable" ){
         }
       } // THEN
     } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable from its components" ) {
+
+      ThermalScatteringTable base( std::move( table ) );
+
+      ThermalScatteringTable chunk( base.header(), { 1002 },
+                                    base.ITIE(), base.ITXE(),
+                                    base.ITCE(), base.ITCA(),
+                                    base.ITCEI(), base.ITCAI() );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -311,8 +576,8 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
   CHECK( 3 == chunk.inelasticScatteringMode() );
   CHECK( 21 == chunk.NIL() );
   CHECK( 21 == chunk.inelasticDimensioningParameter() );
-  CHECK( 80 == chunk.NIEB() );
-  CHECK( 80 == chunk.numberInelasticOutgoingEnergies() );
+  CHECK( 0 == chunk.NIEB() );
+  CHECK( 0 == chunk.numberInelasticOutgoingEnergies() );
   CHECK( 0 == chunk.IDPNC() );
   CHECK( 0 == chunk.elasticScatteringMode() );
   CHECK( 0 == chunk.NCL() );
@@ -373,8 +638,8 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 3 == chunk.inelasticScatteringMode() );
   CHECK( 21 == chunk.NIL() );
   CHECK( 21 == chunk.inelasticDimensioningParameter() );
-  CHECK( 80 == chunk.NIEB() );
-  CHECK( 80 == chunk.numberInelasticOutgoingEnergies() );
+  CHECK( 0 == chunk.NIEB() );
+  CHECK( 0 == chunk.numberInelasticOutgoingEnergies() );
   CHECK( 3 == chunk.IDPNC() );
   CHECK( 3 == chunk.elasticScatteringMode() );
   CHECK( 19 == chunk.NCL() );
@@ -455,8 +720,8 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( 3 == chunk.inelasticScatteringMode() );
   CHECK( 21 == chunk.NIL() );
   CHECK( 21 == chunk.inelasticDimensioningParameter() );
-  CHECK( 80 == chunk.NIEB() );
-  CHECK( 80 == chunk.numberInelasticOutgoingEnergies() );
+  CHECK( 0 == chunk.NIEB() );
+  CHECK( 0 == chunk.numberInelasticOutgoingEnergies() );
   CHECK( 4 == chunk.IDPNC() );
   CHECK( 4 == chunk.elasticScatteringMode() );
   CHECK( -1 == chunk.NCL() );

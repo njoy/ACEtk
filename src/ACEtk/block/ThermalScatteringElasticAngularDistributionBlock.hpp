@@ -58,6 +58,16 @@ public:
   std::size_t numberDiscreteCosines() const { return this->NC(); }
 
   /**
+   *  @brief Return the elastic dimensioning parameter
+   */
+  std::size_t NCL() const { return this->NC() - 1; }
+
+  /**
+   *  @brief Return the elastic dimensioning parameter
+   */
+  std::size_t elasticDimensioningParameter() const { return this->NCL(); }
+
+  /**
    *  @brief Return the cosine values for an incident energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown

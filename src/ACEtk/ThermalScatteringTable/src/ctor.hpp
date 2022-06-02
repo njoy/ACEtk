@@ -61,3 +61,27 @@ ThermalScatteringTable& operator=( ThermalScatteringTable&& base ) {
   new (this) ThermalScatteringTable( std::move( base ) );
   return *this;
 }
+
+/**
+ *  @brief Constructor (from scratch)
+ *
+ *  @param[in] header    the header for the table
+ *  @param[in] itie      the inelastic thermal scattering cross section block
+ *  @param[in] itxe      the inelastic thermal scattering angular distribution block
+ *  @param[in] itce      the coherent elastic thermal scattering cross section block
+ *  @param[in] itca      the coherent elastic thermal scattering angular distribution block
+ *  @param[in] itcei     the incoherent elastic thermal scattering cross section block
+ *  @param[in] itcai     the incoherent elastic thermal scattering angular distribution block
+ */
+ThermalScatteringTable( Header header, std::vector< unsigned int > za,
+                        block::ITIE itie, block::ITXE itxe,
+                        std::optional< block::ITCE > itce,
+                        std::optional< block::ITCA > itca,
+                        std::optional< block::ITCEI > itcei,
+                        std::optional< block::ITCAI > itcai ) :
+  ThermalScatteringTable(
+      Table( std::move( header ),
+             generateData( std::move( za ),
+                           std::move( itie ), std::move( itxe ),
+                           std::move( itce ), std::move( itca ),
+                           std::move( itcei ), std::move( itcai ) ) ) ) {}
