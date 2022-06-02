@@ -66,6 +66,7 @@ ThermalScatteringTable& operator=( ThermalScatteringTable&& base ) {
  *  @brief Constructor (from scratch)
  *
  *  @param[in] header    the header for the table
+ *  @param[in] za        the list of ZA values
  *  @param[in] itie      the inelastic thermal scattering cross section block
  *  @param[in] itxe      the inelastic thermal scattering angular distribution block
  *  @param[in] itce      the coherent elastic thermal scattering cross section block

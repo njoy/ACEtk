@@ -16,6 +16,12 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
   // type aliases
   using Header = njoy::ACEtk::Table::Header;
   using Table = njoy::ACEtk::ThermalScatteringTable;
+  using ITIE = njoy::ACEtk::block::ITIE;
+  using ITXE = njoy::ACEtk::block::ITXE;
+  using ITCE = njoy::ACEtk::block::ITCE;
+  using ITCA = njoy::ACEtk::block::ITCA;
+  using ITCEI = njoy::ACEtk::block::ITCEI;
+  using ITCAI = njoy::ACEtk::block::ITCAI;
 
   // wrap views created by this table
 
@@ -31,6 +37,28 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
 
   // wrap the table
   table
+  .def(
+
+    python::init< Header, std::vector< unsigned int >,
+                  ITIE, ITXE,
+                  std::optional< ITCE >, std::optional< ITCA >,
+                  std::optional< ITCEI >, std::optional< ITCAI > >(),
+    python::arg( "header" ), python::arg( "za" ),
+    python::arg( "itie" ), python::arg( "itxe" ),
+    python::arg( "itce" ) = std::nullopt, python::arg( "itca" ) = std::nullopt,
+    python::arg( "itcei" ) = std::nullopt, python::arg( "itcai" ) = std::nullopt,
+    "Initialise the table\n\n"
+    "Arguments:\n"
+    "    self      the table\n"
+    "    header    the header for the table\n"
+    "    za        the list of ZA values\n"
+    "    itie      the inelastic thermal scattering cross section block\n"
+    "    itxe      the inelastic thermal scattering angular distribution block\n"
+    "    itce      the coherent elastic thermal scattering cross section block\n"
+    "    itca      the coherent elastic thermal scattering angular distribution block\n"
+    "    itcei     the incoherent elastic thermal scattering cross section block\n"
+    "    itcai     the incoherent elastic thermal scattering angular distribution block"
+  )
   .def_property_readonly(
 
     "zaid",
