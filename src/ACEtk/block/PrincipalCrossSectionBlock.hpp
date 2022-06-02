@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,15 +23,11 @@ namespace block {
  *
  *  The size of each (the total number of energy points) is stored in NXS(3).
  */
-class PrincipalCrossSectionBlock : protected details::Base {
+class PrincipalCrossSectionBlock : protected details::ArrayData {
 
   /* fields */
-  unsigned int nes_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/PrincipalCrossSectionBlock/src/subrange.hpp"
-  #include "ACEtk/block/PrincipalCrossSectionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/PrincipalCrossSectionBlock/src/verifySize.hpp"
 
 public:
 
@@ -43,7 +39,7 @@ public:
   /**
    *  @brief Return the number of energy points
    */
-  unsigned int NES() const { return this->nes_; }
+  unsigned int NES() const { return this->N(); }
 
   /**
    *  @brief Return the number of energy points
@@ -53,34 +49,34 @@ public:
   /**
    *  @brief Return the energy values
    */
-  auto energies() const { return this->subrange( 0 ); }
+  auto energies() const { return this->array( 1 ); }
 
   /**
    *  @brief Return the total cross section values
    */
-  auto total() const { return this->subrange( 1 ); }
+  auto total() const { return this->array( 2 ); }
 
   /**
    *  @brief Return the projectile disappearance cross section values
    */
-  auto disappearance() const { return this->subrange( 2 ); }
+  auto disappearance() const { return this->array( 3 ); }
 
   /**
    *  @brief Return the elastic cross section values
    */
-  auto elastic() const { return this->subrange( 3 ); }
+  auto elastic() const { return this->array( 4 ); }
 
   /**
    *  @brief Return the average heating cross section values
    */
-  auto heating() const { return this->subrange( 4 ); }
+  auto heating() const { return this->array( 5 ); }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using ESZ = PrincipalCrossSectionBlock;

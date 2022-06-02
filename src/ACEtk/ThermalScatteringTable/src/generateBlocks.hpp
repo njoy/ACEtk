@@ -54,10 +54,10 @@ void generateBlocks() {
                              present ? iterators.second : begin );
 
   iterators = block( 6 );
-  this->itca_ = block::ITCA( present ? this->ITCE().NE() : 0,
-                             present ? this->NCL() + 1 : 0,
-                             present ? iterators.first : begin,
-                             present ? iterators.second : begin );
+  this->itca_ = block::ITCA( present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             present ? this->ITCE().NE() : 0,
+                             present ? this->NCL() + 1 : 0 );
 
   // incoherent elastic thermal scattering data
   present = this->IDPNC() == 3 || this->IDPNC() == 5 ? true : false;
@@ -66,10 +66,10 @@ void generateBlocks() {
                                present ? iterators.second : begin );
 
   iterators = this->IDPNC() == 3 ? block( 6 ) : block( 9 );
-  this->itcai_ = block::ITCA( present ? this->ITCEI().NE() : 0,
+  this->itcai_ = block::ITCA( present ? iterators.first : begin,
+                              present ? iterators.second : begin,
+                              present ? this->ITCEI().NE() : 0,
                               present ? this->IDPNC() == 3 ? this->NCL() + 1
                                                            : this->NCLI() + 1
-                                      : 0,
-                              present ? iterators.first : begin,
-                              present ? iterators.second : begin );
+                                      : 0 );
 }
