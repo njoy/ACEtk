@@ -456,8 +456,8 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   CHECK( true == chunk.NU().hasPromptAndTotalFissionMultiplicity() );
 
-  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().promptFissionMultiplicity() );
-  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().totalFissionMultiplicity() );
+  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().multiplicity() );
+  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().totalFissionMultiplicity().value() );
 
   CHECK( 0 == prompt.NB() );
   CHECK( 79 == prompt.NE() );
@@ -678,7 +678,7 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
 
-  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().promptFissionMultiplicity() );
+  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().multiplicity() );
 
   CHECK( 0 == delayed.NB() );
   CHECK( 6 == delayed.NE() );
@@ -1028,8 +1028,8 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   CHECK( true == chunk.NU().hasPromptAndTotalFissionMultiplicity() );
 
-  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().promptFissionMultiplicity() );
-  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().totalFissionMultiplicity() );
+  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().multiplicity() );
+  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().totalFissionMultiplicity().value() );
 
   CHECK( 0 == prompt.NB() );
   CHECK( 6 == prompt.NE() );
@@ -1250,7 +1250,7 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
 
-  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().promptFissionMultiplicity() );
+  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().multiplicity() );
 
   CHECK( 0 == delayed.NB() );
   CHECK( 4 == delayed.NE() );

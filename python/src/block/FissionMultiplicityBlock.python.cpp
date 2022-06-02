@@ -57,8 +57,8 @@ void wrapFissionMultiplicityBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "prompt_fission_multiplicity",
-    &Block::promptFissionMultiplicity,
+    "multiplicity",
+    &Block::multiplicity,
     "The prompt fission multiplicity\n"
     "This returns the prompt fission multiplicity when both prompt and total\n"
     "are given or just the available multiplicity data if only one of these is\n"

@@ -141,7 +141,7 @@ Data generateData( unsigned int z, unsigned int a,
       throw std::exception();
     }
     unsigned int lnu = std::visit( [] ( const auto& nu ) { return nu.LNU(); },
-                                   dnu->promptFissionMultiplicity() );
+                                   dnu->multiplicity() );
     if ( lnu != 2 ) {
 
       Log::error( "The delayed fission neutron multiplicity data is not given "
