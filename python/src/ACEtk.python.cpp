@@ -91,6 +91,7 @@ namespace block {
   void wrapThermalScatteringCrossSectionBlock( python::module&, python::module& );
   void wrapThermalScatteringElasticAngularDistributionBlock( python::module&, python::module& );
   void wrapThermalScatteringInelasticAngularDistributionBlock( python::module&, python::module& );
+  void wrapPhotoAtomicPrincipalCrossSectionBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -206,6 +207,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapThermalScatteringCrossSectionBlock( module, viewmodule );
   block::wrapThermalScatteringElasticAngularDistributionBlock( module, viewmodule );
   block::wrapThermalScatteringInelasticAngularDistributionBlock( module, viewmodule );
+  block::wrapPhotoAtomicPrincipalCrossSectionBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );

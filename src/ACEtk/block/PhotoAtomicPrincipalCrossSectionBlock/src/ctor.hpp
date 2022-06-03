@@ -6,11 +6,11 @@ PhotoAtomicPrincipalCrossSectionBlock( PhotoAtomicPrincipalCrossSectionBlock&& )
 /**
  *  @brief Constructor
  *
- *  @param[in] energies         the energy values
- *  @param[in] incoherent       the incoherent cross section values
- *  @param[in] coherent         the coherent cross section values
- *  @param[in] photoelectric    the photo-electric cross section values
- *  @param[in] photoelectric    the pair production cross section values
+ *  @param[in] energies          the energy values
+ *  @param[in] incoherent        the incoherent cross section values
+ *  @param[in] coherent          the coherent cross section values
+ *  @param[in] photoelectric     the photo-electric cross section values
+ *  @param[in] pairproduction    the pair production cross section values
  */
 PhotoAtomicPrincipalCrossSectionBlock( std::vector< double > energies,
                                        std::vector< double > incoherent,
