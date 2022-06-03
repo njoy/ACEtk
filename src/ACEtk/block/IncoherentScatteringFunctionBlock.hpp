@@ -16,7 +16,7 @@ namespace block {
  *  @brief The photoatomic JINC block with the incoherent scattering function values
  *
  *  The IncoherentScatteringFunctionBlock class contains the scattering functions
- *  tabulated on a fixed grid of the recoil electron momentum (in inverse
+ *  tabulated on a fixed grid of the recoil electron momentum transfer (in inverse
  *  angstroms).
  */
 class IncoherentScatteringFunctionBlock : protected details::ArrayData {
