@@ -13,7 +13,7 @@ namespace block {
 
 /**
  *  @class
- *  @brief The incoherent scattering function values in photoatomic data
+ *  @brief The photoatomic JINC block with the incoherent scattering function values
  *
  *  The IncoherentScatteringFunctionBlock class contains the scattering functions
  *  tabulated on a fixed grid of the recoil electron momentum (in inverse
@@ -33,12 +33,12 @@ public:
   /* methods */
 
   /**
-   *  @brief Return the number of electron recoil momentum values
+   *  @brief Return the number of values
    */
   constexpr unsigned int NM() const { return 21; }
 
   /**
-   *  @brief Return the number of electron recoil momentum values
+   *  @brief Return the number of values
    */
   constexpr unsigned int numberValues() const { return this->NM(); }
 
