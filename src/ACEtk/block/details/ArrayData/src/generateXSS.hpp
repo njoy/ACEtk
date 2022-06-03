@@ -1,5 +1,6 @@
+template < typename Number >
 static std::vector< double >
-generateXSS( std::vector< std::vector< double > >&& arrays ) {
+generateXSS( std::vector< std::vector< Number > >&& arrays ) {
 
   std::vector< double > xss;
   auto n = arrays.front().size();

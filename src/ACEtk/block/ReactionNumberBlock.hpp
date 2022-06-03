@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,14 +20,11 @@ namespace block {
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
-class ReactionNumberBlock : protected details::Base {
+class ReactionNumberBlock : protected details::ArrayData {
 
   /* fields */
-  unsigned int ntr_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/ReactionNumberBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/ReactionNumberBlock/src/verifySize.hpp"
 
 public:
 
@@ -39,7 +36,7 @@ public:
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int NTR() const { return this->ntr_; }
+  unsigned int NTR() const { return this->N(); }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
@@ -53,10 +50,7 @@ public:
    */
   unsigned int MT( std::size_t index ) const {
 
-    #ifndef NDEBUG
-    this->verifyReactionIndex( index, 1, this->NTR() );
-    #endif
-    return static_cast< unsigned int >( this->IXSS( index ) );
+    return static_cast< unsigned int >( this->ivalue( 1, index ) );
   }
 
   /**
@@ -72,7 +66,7 @@ public:
   /**
    *  @brief Return the reaction numbers
    */
-  auto MTs() const { return this->XSS( 1, this->NTR() ); }
+  auto MTs() const { return this->array( 1 ); }
 
   /**
    *  @brief Return the reaction numbers
@@ -86,7 +80,9 @@ public:
    */
   bool hasMT( unsigned int reaction ) const {
 
-    return std::find( this->begin(), this->end(), reaction ) != this->end();
+    return std::find( this->begin(),
+                      this->begin() + this->NTR(),
+                      reaction ) != this->end();
   }
 
   /**
@@ -106,7 +102,7 @@ public:
    */
   std::size_t index( unsigned int reaction ) const {
 
-    auto iter = std::find( this->begin(), this->end(), reaction );
+    auto iter = std::find( this->begin(), this->begin() + this->NTR(), reaction );
     if ( iter != this->end() ) {
 
       return std::distance( this->begin(), iter ) + 1;
@@ -118,12 +114,12 @@ public:
     }
   }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using MTR = ReactionNumberBlock;

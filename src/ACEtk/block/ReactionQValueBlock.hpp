@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,13 +21,11 @@ namespace block {
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
-class ReactionQValueBlock : protected details::Base {
+class ReactionQValueBlock : protected details::ArrayData {
 
   /* fields */
-  unsigned int ntr_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/ReactionQValueBlock/src/verifySize.hpp"
 
 public:
 
@@ -39,7 +37,7 @@ public:
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int NTR() const { return this->ntr_; }
+  unsigned int NTR() const { return this->N(); }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
@@ -51,25 +49,19 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  double QValue( std::size_t index ) const {
-
-    #ifndef NDEBUG
-    this->verifyReactionIndex( index, 1, this->NTR() );
-    #endif
-    return this->XSS( index );
-  }
+  double QValue( std::size_t index ) const { return this->dvalue( 1, index ); }
 
   /**
    *  @brief Return the Q values
    */
-  auto QValues() const { return this->XSS( 1, this->NTR() ); }
+  auto QValues() const { return this->array( 1 ); }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using LQR = ReactionQValueBlock;

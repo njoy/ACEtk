@@ -1,6 +1,7 @@
 private:
 
-ArrayData( std::string&& name, std::vector< std::vector< double > >&& values,
+template < typename Number >
+ArrayData( std::string&& name, std::vector< std::vector< Number > >&& values,
            unsigned int n, unsigned int m ) :
   Base( std::move( name ), generateXSS( std::move( values ) ) ),
   nelements_( n ), narrays_( m ) {}
@@ -13,12 +14,13 @@ ArrayData( const ArrayData& ) = default;
 ArrayData( ArrayData&& ) = default;
 
 /**
- *  @brief Constructor
+ *  @brief Convenience constructor
  *
  *  @param[in] name     the name of the block
  *  @param[in] values   the values
  */
-ArrayData( std::string&& name, std::vector< std::vector< double > >&& values ) :
+template < typename Number >
+ArrayData( std::string&& name, std::vector< std::vector< Number > >&& values ) :
   ArrayData( std::move( name ), std::move( values ), values.front().size(),
              values.size() ) {}
 
@@ -32,16 +34,20 @@ ArrayData( std::string&& name, std::vector< std::vector< double > >&& values ) :
  *  @param[in] array4   the values for array 4
  *  @param[in] array5   the values for array 5
  */
+template < typename Number >
 ArrayData( std::string&& name,
-           std::vector< double >&& array1,
-           std::vector< double >&& array2,
-           std::vector< double >&& array3,
-           std::vector< double >&& array4,
-           std::vector< double >&& array5 ) :
+           std::vector< Number >&& array1,
+           std::vector< Number >&& array2,
+           std::vector< Number >&& array3,
+           std::vector< Number >&& array4,
+           std::vector< Number >&& array5 ) :
   ArrayData( std::move( name ),
-             { std::move( array1 ), std::move( array2 ),
+             std::vector< std::vector< Number > >{
+
+               std::move( array1 ), std::move( array2 ),
                std::move( array3 ), std::move( array4 ),
-               std::move( array5 ) } ) {}
+               std::move( array5 )
+             } ) {}
 
 /**
  *  @brief Convenience constructor
@@ -54,17 +60,21 @@ ArrayData( std::string&& name,
  *  @param[in] array5   the values for array 5
  *  @param[in] array5   the values for array 6
  */
+template < typename Number >
 ArrayData( std::string&& name,
-           std::vector< double >&& array1,
-           std::vector< double >&& array2,
-           std::vector< double >&& array3,
-           std::vector< double >&& array4,
-           std::vector< double >&& array5,
-           std::vector< double >&& array6 ) :
+           std::vector< Number >&& array1,
+           std::vector< Number >&& array2,
+           std::vector< Number >&& array3,
+           std::vector< Number >&& array4,
+           std::vector< Number >&& array5,
+           std::vector< Number >&& array6 ) :
   ArrayData( std::move( name ),
-             { std::move( array1 ), std::move( array2 ),
+             std::vector< std::vector< Number > >{
+
+               std::move( array1 ), std::move( array2 ),
                std::move( array3 ), std::move( array4 ),
-               std::move( array5 ), std::move( array6 ) } ) {}
+               std::move( array5 ), std::move( array6 )
+             } ) {}
 
 /**
  *  @brief Constructor

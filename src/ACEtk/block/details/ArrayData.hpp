@@ -56,7 +56,37 @@ public:
   unsigned int numberArrays() const { return this->M(); }
 
   /**
-   *  @brief Return the array with a given index (one based)
+   *  @brief Return a double value
+   *
+   *  @param[in] array      the array index (one-based)
+   *  @param[in] index      the index in the array (one-based)
+   */
+  double dvalue( std::size_t array, std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyIndex( array, index );
+    #endif
+    return this->XSS( ( array - 1 ) * this->N() + index );
+  }
+
+  /**
+   *  @brief Return an integer value
+   *
+   *  @param[in] array      the array index (one-based)
+   *  @param[in] index      the index in the array (one-based)
+   */
+  double ivalue( std::size_t array, std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyIndex( array, index );
+    #endif
+    return this->IXSS( ( array - 1 ) * this->N() + index );
+  }
+
+  /**
+   *  @brief Return an array
+   *
+   *  @param[in] index      the array index (one-based)
    */
   auto array( std::size_t index ) const {
 
@@ -70,6 +100,7 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::IXSS;
   using Base::begin;
   using Base::end;
 };
