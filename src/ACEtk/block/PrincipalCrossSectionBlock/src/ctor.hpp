@@ -25,12 +25,12 @@ PrincipalCrossSectionBlock( std::vector< double > energies,
 /**
  *  @brief Constructor
  *
- *  @param[in] esz   the begin iterator of the ESZ block in the XSS array
- *  @param[in] end   the end iterator of the ESZ block in the XSS array
- *  @param[in] nes   the number of energy points
+ *  @param[in] begin   the begin iterator of the ESZ block in the XSS array
+ *  @param[in] end     the end iterator of the ESZ block in the XSS array
+ *  @param[in] nes     the number of energy points
  */
-PrincipalCrossSectionBlock( Iterator esz, Iterator end, unsigned int nes ) :
-  ArrayData( "ESZ", esz, end, nes, 5 ) {}
+PrincipalCrossSectionBlock( Iterator begin, Iterator end, unsigned int nes ) :
+  ArrayData( "ESZ", begin, end, nes, 5 ) {}
 
 PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
 PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;
