@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,15 +19,12 @@ namespace block {
  *  values for the total, elastic, fission and capture cross sections and the
  *  heating numbers.
  */
-class ProbabilityTable : protected details::Base {
+class ProbabilityTable : protected details::ArrayData {
 
   /* fields */
   double incident_;
-  unsigned int bins_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/ProbabilityTable/src/generateXSS.hpp"
-  #include "ACEtk/block/ProbabilityTable/src/verifySize.hpp"
 
 public:
 
@@ -42,62 +39,44 @@ public:
   /**
    *  @brief Return the number of bins in the table
    */
-  unsigned int numberBins() const { return this->bins_; }
+  unsigned int numberBins() const { return this->N(); }
 
   /**
    *  @brief Return the cumulative probability values
    */
-  auto cumulativeProbabilities() const {
-
-    return this->XSS( 1, this->numberBins() );
-  }
+  auto cumulativeProbabilities() const { return this->array( 1 ); }
 
   /**
    *  @brief Return the total cross section values
    */
-  auto total() const {
-
-    return this->XSS( 1 + this->numberBins(), this->numberBins() );
-  }
+  auto total() const { return this->array( 2 ); }
 
   /**
    *  @brief Return the elastic cross section values
    */
-  auto elastic() const {
-
-    return this->XSS( 1 + 2 * this->numberBins(), this->numberBins() );
-  }
+  auto elastic() const { return this->array( 3 ); }
 
   /**
    *  @brief Return the fission cross section values
    */
-  auto fission() const {
-
-    return this->XSS( 1 + 3 * this->numberBins(), this->numberBins() );
-  }
+  auto fission() const { return this->array( 4 ); }
 
   /**
    *  @brief Return the capture cross section values
    */
-  auto capture() const {
-
-    return this->XSS( 1 + 4 * this->numberBins(), this->numberBins() );
-  }
+  auto capture() const { return this->array( 5 ); }
 
   /**
    *  @brief Return the heating numbers
    */
-  auto heating() const {
+  auto heating() const { return this->array( 6 ); }
 
-    return this->XSS( 1 + 5 * this->numberBins(), this->numberBins() );
-  }
-
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 } // block namespace

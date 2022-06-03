@@ -1,25 +1,3 @@
-private:
-
-/**
- *  @brief private constructor
- */
-ProbabilityTable( double incident,
-                  std::vector< double >&& probabilities,
-                  std::vector< double >&& total,
-                  std::vector< double >&& elastic,
-                  std::vector< double >&& fission,
-                  std::vector< double >&& capture,
-                  std::vector< double >&& heating,
-                  std::size_t bins ) :
-  Base( "ProbabilityTable",
-        generateXSS( std::move( probabilities ), std::move( total ),
-                     std::move( elastic ), std::move( fission ),
-                     std::move( capture ), std::move( heating ) ) ),
-  incident_( incident ),
-  bins_( bins ) {}
-
-public:
-
 ProbabilityTable() = default;
 
 ProbabilityTable( const ProbabilityTable& ) = default;
@@ -43,10 +21,11 @@ ProbabilityTable( double incident,
                   std::vector< double > fission,
                   std::vector< double > capture,
                   std::vector< double > heating ) :
-  ProbabilityTable( incident, std::move( probabilities ), std::move( total ),
-                    std::move( elastic ), std::move( fission ),
-                    std::move( capture ), std::move( heating ),
-                    probabilities.size() ) {}
+  ArrayData( "ProbabilityTable",
+             std::move( probabilities ), std::move( total ),
+             std::move( elastic ), std::move( fission ),
+             std::move( capture ), std::move( heating ) ),
+  incident_( incident ) {}
 
 /**
  *  @brief Constructor
@@ -78,11 +57,8 @@ ProbabilityTable( double incident,
  */
 ProbabilityTable( Iterator begin, Iterator end,
                   double incident, std::size_t bins ) :
-  Base( "ProbabilityTable", begin, end ),
-  incident_( incident ), bins_( bins ) {
-
-  this->verifySize( begin, end, bins );
-}
+  ArrayData( "ProbabilityTable", begin, end, bins, 6 ),
+  incident_( incident ) {}
 
 ProbabilityTable& operator=( const ProbabilityTable& ) = default;
 

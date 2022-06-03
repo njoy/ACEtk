@@ -44,6 +44,29 @@ ArrayData( std::string&& name,
                std::move( array5 ) } ) {}
 
 /**
+ *  @brief Convenience constructor
+ *
+ *  @param[in] name     the name of the block
+ *  @param[in] array1   the values for array 1
+ *  @param[in] array2   the values for array 2
+ *  @param[in] array3   the values for array 3
+ *  @param[in] array4   the values for array 4
+ *  @param[in] array5   the values for array 5
+ *  @param[in] array5   the values for array 6
+ */
+ArrayData( std::string&& name,
+           std::vector< double >&& array1,
+           std::vector< double >&& array2,
+           std::vector< double >&& array3,
+           std::vector< double >&& array4,
+           std::vector< double >&& array5,
+           std::vector< double >&& array6 ) :
+  ArrayData( std::move( name ),
+             { std::move( array1 ), std::move( array2 ),
+               std::move( array3 ), std::move( array4 ),
+               std::move( array5 ), std::move( array6 ) } ) {}
+
+/**
  *  @brief Constructor
  *
  *  @param[in] begin   the begin iterator of the array data in the XSS array
