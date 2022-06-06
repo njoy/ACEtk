@@ -152,6 +152,7 @@ if(ACEtk.python)
     python/src/block/PhotoAtomicPrincipalCrossSectionBlock.python.cpp
     python/src/block/IncoherentScatteringFunctionBlock.python.cpp
     python/src/block/CoherentFormFactorBlock.python.cpp
+    python/src/block/PhotoAtomicHeatingNumbersBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp

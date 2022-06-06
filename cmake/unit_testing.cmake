@@ -80,6 +80,7 @@ add_subdirectory( src/ACEtk/block/ThermalScatteringInelasticAngularDistributionB
 add_subdirectory( src/ACEtk/block/PhotoAtomicPrincipalCrossSectionBlock/test )
 add_subdirectory( src/ACEtk/block/IncoherentScatteringFunctionBlock/test )
 add_subdirectory( src/ACEtk/block/CoherentFormFactorBlock/test )
+add_subdirectory( src/ACEtk/block/PhotoAtomicHeatingNumbersBlock/test )
 add_subdirectory( src/ACEtk/details/verify/CDF/test )
 add_subdirectory( src/ACEtk/details/verify/Positive/test )
 add_subdirectory( src/ACEtk/details/verify/Sorted/test )
