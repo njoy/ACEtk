@@ -15,10 +15,9 @@ namespace ACEtk {
 
 /**
  *  @class
- *  @brief The thermal scattering ACE table
+ *  @brief The photoatomic ACE table
  *
- *  The PhotoAtomicTable class represents the ACE table for the thermal
- *  scattering data.
+ *  The PhotoAtomicTable class represents the ACE table for the photoatomic data.
  */
 class PhotoAtomicTable : protected Table {
 
@@ -129,7 +128,7 @@ public:
   /**
    *  @brief Return the coherent form factor block
    */
-  const block::JCOH& coherentScatteringFunctionBlock() const { return this->JCOH(); }
+  const block::JCOH& coherentFormFactorBlock() const { return this->JCOH(); }
 
   /**
    *  @brief Return the heating numbers block

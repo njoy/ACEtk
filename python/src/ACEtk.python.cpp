@@ -101,6 +101,7 @@ namespace block {
 void wrapContinuousEnergyTable( python::module&, python::module& );
 void wrapDosimetryTable( python::module&, python::module& );
 void wrapThermalScatteringTable( python::module&, python::module& );
+void wrapPhotoAtomicTable( python::module&, python::module& );
 
 /**
  *  @brief ACEtk python bindings
@@ -219,4 +220,5 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapContinuousEnergyTable( module, viewmodule );
   wrapDosimetryTable( module, viewmodule );
   wrapThermalScatteringTable( module, viewmodule );
+  wrapPhotoAtomicTable( module, viewmodule );
 }

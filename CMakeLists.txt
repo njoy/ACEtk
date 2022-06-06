@@ -156,6 +156,7 @@ if(ACEtk.python)
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp
+    python/src/PhotoAtomicTable.python.cpp
   )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )

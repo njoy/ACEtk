@@ -67,12 +67,11 @@ PhotoAtomicTable& operator=( PhotoAtomicTable&& base ) {
  *
  *  @param[in] header    the header for the table
  *  @param[in] za        the list of ZA values
- *  @param[in] itie      the inelastic thermal scattering cross section block
- *  @param[in] itxe      the inelastic thermal scattering angular distribution block
- *  @param[in] itce      the coherent elastic thermal scattering cross section block
- *  @param[in] itca      the coherent elastic thermal scattering angular distribution block
- *  @param[in] itcei     the incoherent elastic thermal scattering cross section block
- *  @param[in] itcai     the incoherent elastic thermal scattering angular distribution block
+ *  @param[in] awr       the list of atomic mass values
+ *  @param[in] eszg      the principal cross section block
+ *  @param[in] jinc      the incoherent scattering function block
+ *  @param[in] jcoh      the coherent form factor block
+ *  @param[in] lhnm      the heating numbers block
  */
 PhotoAtomicTable( Header header,
                   std::vector< unsigned int > za, std::vector< double > awr,
