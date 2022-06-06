@@ -22,7 +22,7 @@ CoherentFormFactorBlock( std::vector< double > integrated,
  *  @param[in] end     the end iterator of the JINC block in the XSS array
  */
 CoherentFormFactorBlock( Iterator begin, Iterator end ) :
-  ArrayData( "JCOH", begin, end, 55, 1 ) {}
+  ArrayData( "JCOH", begin, end, 55, 2 ) {}
 
 CoherentFormFactorBlock& operator=( const CoherentFormFactorBlock& ) = default;
 CoherentFormFactorBlock& operator=( CoherentFormFactorBlock&& ) = default;
