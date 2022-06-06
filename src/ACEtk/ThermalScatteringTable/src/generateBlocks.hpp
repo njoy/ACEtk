@@ -8,7 +8,7 @@ auto block( std::size_t index ) const {
   std::size_t end = 0;
   if ( start != 0 ) {
 
-    // look for the first value that is larger then or equal to the start locator
+    // look for the first value that is larger than or equal to the start locator
     auto iter = std::find_if( index == 1 || index == 4 || index == 7
                                 ? this->data().JXS().begin() + index + 1
                                 : this->data().JXS().begin() + index,
