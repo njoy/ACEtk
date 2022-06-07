@@ -153,6 +153,7 @@ if(ACEtk.python)
     python/src/block/IncoherentScatteringFunctionBlock.python.cpp
     python/src/block/CoherentFormFactorBlock.python.cpp
     python/src/block/PhotoAtomicHeatingNumbersBlock.python.cpp
+    python/src/block/PhotoAtomicElectronShellBlock.python.cpp
     python/src/block/PhotoAtomicComptonProfile.python.cpp
     python/src/block/PhotoAtomicComptonProfileBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp

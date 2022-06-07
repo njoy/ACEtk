@@ -35,17 +35,17 @@ public:
   /**
    *  @brief Return the number of values
    */
-  constexpr unsigned int NM() const { return 21; }
+  static constexpr unsigned int NM() { return 21; }
 
   /**
    *  @brief Return the number of values
    */
-  constexpr unsigned int numberValues() const { return this->NM(); }
+  static constexpr unsigned int numberValues() { return NM(); }
 
   /**
    *  @brief Return the electron recoil momentum values
    */
-  constexpr std::array< double, 21 > momentum() const {
+  static constexpr std::array< double, 21 > momentum() {
 
     return {{ 0., .005, .01, .05, .1, .15, .2,
               .3, .4, .5, .6, .7, .8, .9, 1., 1.5, 2., 3., 4., 5., 8. }};
