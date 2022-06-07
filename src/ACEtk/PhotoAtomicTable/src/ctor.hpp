@@ -72,13 +72,16 @@ PhotoAtomicTable& operator=( PhotoAtomicTable&& base ) {
  *  @param[in] jinc      the incoherent scattering function block
  *  @param[in] jcoh      the coherent form factor block
  *  @param[in] lhnm      the heating numbers block
+ *  @param[in] swd       the compton profile block
  */
 PhotoAtomicTable( Header header,
                   std::vector< unsigned int > za, std::vector< double > awr,
                   block::ESZG eszg, block::JINC jinc,
-                  block::JCOH jcoh, block::LHNM lhnm ) :
+                  block::JCOH jcoh, block::LHNM lhnm,
+                  std::optional< block::SWD > swd ) :
   PhotoAtomicTable(
       Table( std::move( header ),
              generateData( std::move( za ), std::move( awr ),
                            std::move( eszg ), std::move( jinc ),
-                           std::move( jcoh ), std::move( lhnm ) ) ) ) {}
+                           std::move( jcoh ), std::move( lhnm ),
+                           std::move( swd ) ) ) ) {}

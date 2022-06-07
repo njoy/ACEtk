@@ -10,6 +10,8 @@
 #include "ACEtk/block/CoherentFormFactorBlock.hpp"
 #include "ACEtk/block/PhotoAtomicHeatingNumbersBlock.hpp"
 
+#include "ACEtk/block/PhotoAtomicComptonProfileBlock.hpp"
+
 namespace njoy {
 namespace ACEtk {
 
@@ -26,6 +28,8 @@ class PhotoAtomicTable : protected Table {
   block::JINC jinc_;
   block::JCOH jcoh_;
   block::LHNM lhnm_;
+
+  block::SWD swd_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoAtomicTable/src/generateBlocks.hpp"
@@ -96,6 +100,16 @@ public:
    */
   unsigned int numberEnergyPoints() const { return this->NES(); }
 
+  /**
+   *  @brief Return the number of electron shells
+   */
+  unsigned int NSH() const { return this->data().NXS(5); }
+
+  /**
+   *  @brief Return the number of electron shells
+   */
+  unsigned int numberElectronShells() const { return this->NSH(); }
+
   // JXS information
 
   // XSS blocks
@@ -139,6 +153,16 @@ public:
    *  @brief Return the heating numbers block
    */
   const block::LHNM& heatingNumbersBlock() const { return this->LHNM(); }
+
+  /**
+   *  @brief Return the compton profile block
+   */
+  const block::SWD& SWD() const { return this->swd_; }
+
+  /**
+   *  @brief Return the compton profile block
+   */
+  const block::SWD& comptonProfileBlock() const { return this->SWD(); }
 };
 
 } // ACEtk namespace

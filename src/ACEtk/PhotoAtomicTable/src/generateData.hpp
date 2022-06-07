@@ -1,6 +1,7 @@
 Data generateData( std::vector< unsigned int > za, std::vector< double > awr,
                    block::ESZG&& eszg, block::JINC&& jinc,
-                   block::JCOH&& jcoh, block::LHNM&& lhnm ) {
+                   block::JCOH&& jcoh, block::LHNM&& lhnm,
+                   std::optional< block::SWD >&& swd ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -21,6 +22,7 @@ Data generateData( std::vector< unsigned int > za, std::vector< double > awr,
 
   // some size values
   unsigned int ne = eszg.NES();
+  unsigned int nsh = swd ? swd->NSH() : 0;
 
   // verify some stuff:
   //  - same number of ZA and atomic mass values
@@ -50,11 +52,19 @@ Data generateData( std::vector< unsigned int > za, std::vector< double > awr,
   jxs[4] = xss.size() + 1;
   xss.insert( xss.end(), lhnm.begin(), lhnm.end() );
 
+  if ( swd ) {
+
+    jxs[8] = xss.size() + 1;
+    jxs[9] = xss.size() + nsh + 1;
+    xss.insert( xss.end(), swd->begin(), swd->end() );
+  }
+
   // set the nxs values for the continuous energy table
   // NXS(1) = length
   // NXS(3) = NE
   nxs[0] = xss.size();
   nxs[2] = ne;
+  nxs[4] = nsh;
 
   return { std::move( iz ), std::move( aw ),
            std::move( nxs ), std::move( jxs ), std::move( xss ) };

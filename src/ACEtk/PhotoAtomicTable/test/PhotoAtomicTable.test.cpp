@@ -91,7 +91,8 @@ SCENARIO( "PhotoAtomicTable" ){
                               { 1001, 1002, 1003 },
                               { 0.999167, 1.996800, 2.990140 },
                               base.ESZG(), base.JINC(),
-                              base.JCOH(), base.LHNM() );
+                              base.JCOH(), base.LHNM(),
+                              std::nullopt );
 
       THEN( "a PhotoAtomicTable can be constructed and members can be "
             "tested" ) {
@@ -225,4 +226,7 @@ void verifyChunk( const PhotoAtomicTable& chunk ) {
 
   CHECK( 9.457315870945E-04 == Approx( chunk.LHNM().heating().front() ) );
   CHECK( 9.086036433693E+01 == Approx( chunk.LHNM().heating().back() ) );
+
+  // SWD block
+  CHECK( true == chunk.SWD().empty() );
 }
