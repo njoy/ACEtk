@@ -1,4 +1,5 @@
-Data generateData( std::vector< unsigned int > za, std::vector< double > awr,
+Data generateData( unsigned int z,
+                   std::vector< unsigned int > za, std::vector< double > awr,
                    block::ESZG&& eszg, block::JINC&& jinc,
                    block::JCOH&& jcoh, block::LHNM&& lhnm,
                    std::optional< block::SWD >&& swd ) {
@@ -63,6 +64,7 @@ Data generateData( std::vector< unsigned int > za, std::vector< double > awr,
   // NXS(1) = length
   // NXS(3) = NE
   nxs[0] = xss.size();
+  nxs[1] = z;
   nxs[2] = ne;
   nxs[4] = nsh;
 

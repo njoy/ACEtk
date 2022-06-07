@@ -74,14 +74,14 @@ PhotoAtomicTable& operator=( PhotoAtomicTable&& base ) {
  *  @param[in] lhnm      the heating numbers block
  *  @param[in] swd       the compton profile block
  */
-PhotoAtomicTable( Header header,
+PhotoAtomicTable( unsigned int z, Header header,
                   std::vector< unsigned int > za, std::vector< double > awr,
                   block::ESZG eszg, block::JINC jinc,
                   block::JCOH jcoh, block::LHNM lhnm,
                   std::optional< block::SWD > swd ) :
   PhotoAtomicTable(
       Table( std::move( header ),
-             generateData( std::move( za ), std::move( awr ),
+             generateData( z, std::move( za ), std::move( awr ),
                            std::move( eszg ), std::move( jinc ),
                            std::move( jcoh ), std::move( lhnm ),
                            std::move( swd ) ) ) ) {}

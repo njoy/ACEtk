@@ -88,7 +88,7 @@ SCENARIO( "PhotoAtomicTable" ){
 
       PhotoAtomicTable base( std::move( table ) );
 
-      PhotoAtomicTable chunk( base.header(),
+      PhotoAtomicTable chunk( 1, base.header(),
                               { 1001, 1002, 1003 },
                               { 0.999167, 1.996800, 2.990140 },
                               base.ESZG(), base.JINC(),
@@ -227,7 +227,7 @@ SCENARIO( "PhotoAtomicTable" ){
 
       PhotoAtomicTable base( std::move( table ) );
 
-      PhotoAtomicTable chunk( base.header(),
+      PhotoAtomicTable chunk( 3, base.header(),
                               {  },
                               {  },
                               base.ESZG(), base.JINC(),
