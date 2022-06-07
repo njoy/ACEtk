@@ -95,6 +95,7 @@ namespace block {
   void wrapIncoherentScatteringFunctionBlock( python::module&, python::module& );
   void wrapCoherentFormFactorBlock( python::module&, python::module& );
   void wrapPhotoAtomicHeatingNumbersBlock( python::module&, python::module& );
+  void wrapPhotoAtomicComptonProfile( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -185,6 +186,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapProbabilityTable( module, viewmodule );
   block::wrapThermalScatteringDiscreteCosines( module, viewmodule );
   block::wrapThermalScatteringDiscreteCosinesWithProbability( module, viewmodule );
+  block::wrapPhotoAtomicComptonProfile( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
