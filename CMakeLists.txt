@@ -154,6 +154,7 @@ if(ACEtk.python)
     python/src/block/CoherentFormFactorBlock.python.cpp
     python/src/block/PhotoAtomicHeatingNumbersBlock.python.cpp
     python/src/block/PhotoAtomicComptonProfile.python.cpp
+    python/src/block/PhotoAtomicComptonProfileBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp
