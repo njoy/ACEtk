@@ -2,6 +2,7 @@ Data generateData( unsigned int z,
                    std::vector< unsigned int > za, std::vector< double > awr,
                    block::ESZG&& eszg, block::JINC&& jinc,
                    block::JCOH&& jcoh, block::LHNM&& lhnm,
+                   std::optional< block::JFLO >&& jflo,
                    std::optional< block::EPS >&& eps,
                    std::optional< block::SWD >&& swd ) {
 
@@ -25,6 +26,7 @@ Data generateData( unsigned int z,
   // some size values
   unsigned int ne = eszg.NES();
   unsigned int nsh = swd ? swd->NSH() : 0;
+  unsigned int nflo = jflo ? jflo->NFLO() : 0;
 
   // verify some stuff:
   //  - same number of ZA and atomic mass values
@@ -51,6 +53,11 @@ Data generateData( unsigned int z,
   xss.insert( xss.end(), jinc.begin(), jinc.end() );
   jxs[2] = xss.size() + 1;
   xss.insert( xss.end(), jcoh.begin(), jcoh.end() );
+  if ( jflo ) {
+
+    jxs[3] = xss.size() + 1;
+    xss.insert( xss.end(), jflo->begin(), jflo->end() );
+  }
   jxs[4] = xss.size() + 1;
   xss.insert( xss.end(), lhnm.begin(), lhnm.end() );
   if ( eps ) {
@@ -73,6 +80,7 @@ Data generateData( unsigned int z,
   nxs[0] = xss.size();
   nxs[1] = z;
   nxs[2] = ne;
+  nxs[3] = nflo;
   nxs[4] = nsh;
 
   return { std::move( iz ), std::move( aw ),

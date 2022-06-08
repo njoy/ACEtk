@@ -94,6 +94,7 @@ SCENARIO( "PhotoAtomicTable" ){
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
                               std::nullopt,
+                              std::nullopt,
                               std::nullopt );
 
       THEN( "a PhotoAtomicTable can be constructed and members can be "
@@ -233,6 +234,7 @@ SCENARIO( "PhotoAtomicTable" ){
                               {  },
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
+                              std::nullopt,
                               base.EPS(), base.SWD() );
 
       THEN( "a PhotoAtomicTable can be constructed and members can be "
@@ -241,55 +243,55 @@ SCENARIO( "PhotoAtomicTable" ){
         verifyChunkMcplib03( chunk );
       }
 
-//      THEN( "the IZ array is correct" ) {
-//
-//        decltype(auto) iz_chunk = chunk.data().IZ();
-//        CHECK( iz.size() == iz_chunk.size() );
-//        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-//
-//          CHECK( iz[i] == Approx( iz_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the AW array is correct" ) {
-//
-//        decltype(auto) aw_chunk = chunk.data().AW();
-//        CHECK( aw.size() == aw_chunk.size() );
-//        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-//
-//          CHECK( aw[i] == Approx( aw_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the NXS array is correct" ) {
-//
-//        decltype(auto) nxs_chunk = chunk.data().NXS();
-//        CHECK( nxs.size() == nxs_chunk.size() );
-//        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-//
-//          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the JXS array is correct" ) {
-//
-//        decltype(auto) jxs_chunk = chunk.data().JXS();
-//        CHECK( jxs.size() == jxs_chunk.size() );
-//        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-//
-//          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the XSS array is correct" ) {
-//
-//        decltype(auto) xss_chunk = chunk.data().XSS();
-//        CHECK( xss.size() == xss_chunk.size() );
-//        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-//
-//          CHECK( xss[i] == Approx( xss_chunk[i] ) );
-//        }
-//      } // THEN
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
     } // WHEN
   } // GIVEN
 } // SCENARIO
@@ -302,6 +304,10 @@ void verifyChunkMcplib( const PhotoAtomicTable& chunk ) {
   CHECK( 389 == chunk.length() );
   CHECK( 43 == chunk.NES() );
   CHECK( 43 == chunk.numberEnergyPoints() );
+  CHECK( 0 == chunk.NFLO() );
+  CHECK( 0 == chunk.numberFluorescenceEdges() );
+  CHECK( 0 == chunk.NSH() );
+  CHECK( 0 == chunk.numberElectronShells() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -358,6 +364,9 @@ void verifyChunkMcplib( const PhotoAtomicTable& chunk ) {
   CHECK( 1. == Approx( chunk.JCOH().formFactors().front() ) );
   CHECK( 6.282390000000E-06 == Approx( chunk.JCOH().formFactors().back() ) );
 
+  // JFLO block
+  CHECK( true == chunk.JFLO().empty() );
+
   // LHNM block
   CHECK( false == chunk.LHNM().empty() );
 
@@ -380,9 +389,13 @@ void verifyChunkMcplib03( const PhotoAtomicTable& chunk ) {
   CHECK( "3000.03p" == chunk.ZAID() );
   CHECK( 0. == Approx( chunk.temperature() ) );
 
-//  CHECK( 821 == chunk.length() );
+  CHECK( 821 == chunk.length() );
   CHECK( 82 == chunk.NES() );
   CHECK( 82 == chunk.numberEnergyPoints() );
+  CHECK( 0 == chunk.NFLO() );
+  CHECK( 0 == chunk.numberFluorescenceEdges() );
+  CHECK( 2 == chunk.NSH() );
+  CHECK( 2 == chunk.numberElectronShells() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -438,6 +451,9 @@ void verifyChunkMcplib03( const PhotoAtomicTable& chunk ) {
   CHECK( 55 == chunk.JCOH().formFactors().size() );
   CHECK( 3. == Approx( chunk.JCOH().formFactors().front() ) );
   CHECK( 7.806310000000E-04 == Approx( chunk.JCOH().formFactors().back() ) );
+
+  // JFLO block
+  CHECK( true == chunk.JFLO().empty() );
 
   // LHNM block
   CHECK( false == chunk.LHNM().empty() );

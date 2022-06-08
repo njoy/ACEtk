@@ -15,7 +15,7 @@ namespace block {
  *  @brief The photoatomic LNEPS, LBEPS and LPIPS block with the electron shell
  *         data
  *
- *  The PhotoAtomicPrincipalCrossSectionBlock class contains 3 arrays of the
+ *  The PhotoAtomicElectronShellBlock class contains 3 arrays of the
  *  same length:
  *    - the number of electrons for each shell
  *    - the binding energy for each shell
@@ -35,7 +35,7 @@ public:
   #include "ACEtk/block/PhotoAtomicElectronShellBlock/src/ctor.hpp"
 
   /**
-   *  @brief Return the number of electron shelld
+   *  @brief Return the number of electron shells
    */
   unsigned int NSH() const { return this->N(); }
 
@@ -55,22 +55,22 @@ public:
   auto numberElectrons() const { return this->LNEPS(); }
 
   /**
-   *  @brief Return the binding energy for each shell (except the last one)
+   *  @brief Return the binding energy for each shell
    */
   auto LBEPS() const { return this->array( 2 ); }
 
   /**
-   *  @brief Return the binding energy for each shell (except the last one)
+   *  @brief Return the binding energy for each shell
    */
   auto bindingEnergies() const { return this->LBEPS(); }
 
   /**
-   *  @brief Return the interaction probability for each shell (except the last one)
+   *  @brief Return the interaction probability for each shell
    */
   auto LPIPS() const { return this->array( 3 ); }
 
   /**
-   *  @brief Return the interaction probability for each shell (except the last one)
+   *  @brief Return the interaction probability for each shell
    */
   auto interactionProbabilities() const { return this->LPIPS(); }
 

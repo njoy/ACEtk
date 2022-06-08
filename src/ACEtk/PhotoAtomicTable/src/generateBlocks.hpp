@@ -38,9 +38,16 @@ void generateBlocks() {
   iterators = block( 2 );
   this->jinc_ = block::JINC( iterators.first, iterators.second );
 
-  // coherent form factpr
+  // coherent form factor
   iterators = block( 3 );
   this->jcoh_ = block::JCOH( iterators.first, iterators.second );
+
+  // fluorescence data block
+  iterators = block( 4 );
+  bool present = ( this->NFLO() > 0 );
+  this->jflo_ = block::JFLO( present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             this->NFLO() );
 
   // heating numbers
   iterators = block( 5 );
@@ -49,7 +56,7 @@ void generateBlocks() {
   // electron shell block
   auto locators = block( 6 );
   iterators = block( 8 );
-  bool present = ( this->NSH() > 0 );
+  present = ( this->NSH() > 0 );
   this->eps_ = block::EPS( present ? locators.first : begin,
                            present ? iterators.second : begin,
                            this->NSH() );

@@ -8,6 +8,7 @@
 #include "ACEtk/block/PhotoAtomicPrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/IncoherentScatteringFunctionBlock.hpp"
 #include "ACEtk/block/CoherentFormFactorBlock.hpp"
+#include "ACEtk/block/PhotoAtomicFluorescenceDataBlock.hpp"
 #include "ACEtk/block/PhotoAtomicHeatingNumbersBlock.hpp"
 #include "ACEtk/block/PhotoAtomicElectronShellBlock.hpp"
 #include "ACEtk/block/PhotoAtomicComptonProfileBlock.hpp"
@@ -27,6 +28,7 @@ class PhotoAtomicTable : protected Table {
   block::ESZG eszg_;
   block::JINC jinc_;
   block::JCOH jcoh_;
+  block::JFLO jflo_;
   block::LHNM lhnm_;
   block::EPS eps_;
   block::SWD swd_;
@@ -101,6 +103,16 @@ public:
   unsigned int numberEnergyPoints() const { return this->NES(); }
 
   /**
+   *  @brief Return the number of fluorescence edges
+   */
+  unsigned int NFLO() const { return this->data().NXS(4); }
+
+  /**
+   *  @brief Return the number of fluorescence edges
+   */
+  unsigned int numberFluorescenceEdges() const { return this->NFLO(); }
+
+  /**
    *  @brief Return the number of electron shells
    */
   unsigned int NSH() const { return this->data().NXS(5); }
@@ -143,6 +155,16 @@ public:
    *  @brief Return the coherent form factor block
    */
   const block::JCOH& coherentFormFactorBlock() const { return this->JCOH(); }
+
+  /**
+   *  @brief Return the fluoresence data block
+   */
+  const block::JFLO& JFLO() const { return this->jflo_; }
+
+  /**
+   *  @brief Return the fluoresence data block
+   */
+  const block::JFLO& fluorescenceDataBloock() const { return this->JFLO(); }
 
   /**
    *  @brief Return the heating numbers block
