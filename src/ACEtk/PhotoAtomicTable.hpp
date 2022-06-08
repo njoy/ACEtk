@@ -93,6 +93,16 @@ public:
   unsigned int length() const { return this->data().NXS(1); }
 
   /**
+   *  @brief Return the atom number of the element
+   */
+  unsigned int Z() const { return this->data().NXS(2); }
+
+  /**
+   *  @brief Return the atom number of the element
+   */
+  unsigned int atomNumber() const { return this->Z(); }
+
+  /**
    *  @brief Return the number of energy points
    */
   unsigned int NES() const { return this->data().NXS(3); }
@@ -164,7 +174,7 @@ public:
   /**
    *  @brief Return the fluoresence data block
    */
-  const block::JFLO& fluorescenceDataBloock() const { return this->JFLO(); }
+  const block::JFLO& fluorescenceDataBlock() const { return this->JFLO(); }
 
   /**
    *  @brief Return the heating numbers block

@@ -17,7 +17,7 @@ auto block( std::size_t index ) const {
       end = *iter;
     }
   }
-
+std::cout << index << ' ' << start << ' ' << end << std::endl;
   return std::make_pair(
              begin + start - 1,
              end != 0 ? begin + end - 1

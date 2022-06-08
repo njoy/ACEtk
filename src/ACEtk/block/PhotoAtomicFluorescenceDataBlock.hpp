@@ -60,7 +60,7 @@ public:
   auto PHI() const { return this->array( 2 ); }
 
   /**
-   *  @brief Return relative ejection probabilities
+   *  @brief Return the relative ejection probabilities
    */
   auto relativeEjectionProbabilities() const { return this->PHI(); }
 

@@ -94,6 +94,7 @@ namespace block {
   void wrapPhotoAtomicPrincipalCrossSectionBlock( python::module&, python::module& );
   void wrapIncoherentScatteringFunctionBlock( python::module&, python::module& );
   void wrapCoherentFormFactorBlock( python::module&, python::module& );
+  void wrapPhotoAtomicFluorescenceDataBlock( python::module&, python::module& );
   void wrapPhotoAtomicHeatingNumbersBlock( python::module&, python::module& );
   void wrapPhotoAtomicElectronShellBlock( python::module&, python::module& );
   void wrapPhotoAtomicComptonProfile( python::module&, python::module& );
@@ -218,6 +219,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotoAtomicPrincipalCrossSectionBlock( module, viewmodule );
   block::wrapIncoherentScatteringFunctionBlock( module, viewmodule );
   block::wrapCoherentFormFactorBlock( module, viewmodule );
+  block::wrapPhotoAtomicFluorescenceDataBlock( module, viewmodule );
   block::wrapPhotoAtomicHeatingNumbersBlock( module, viewmodule );
   block::wrapPhotoAtomicElectronShellBlock( module, viewmodule );
   block::wrapPhotoAtomicComptonProfileBlock( module, viewmodule );

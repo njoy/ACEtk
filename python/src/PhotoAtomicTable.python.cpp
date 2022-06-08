@@ -19,6 +19,7 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
   using ESZG = njoy::ACEtk::block::ESZG;
   using JINC = njoy::ACEtk::block::JINC;
   using JCOH = njoy::ACEtk::block::JCOH;
+  using JFLO = njoy::ACEtk::block::JFLO;
   using LHNM = njoy::ACEtk::block::LHNM;
   using EPS = njoy::ACEtk::block::EPS;
   using SWD = njoy::ACEtk::block::SWD;
@@ -40,12 +41,13 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
 
     python::init< unsigned int, Header,
                   std::vector< unsigned int >, std::vector< double >,
-                  ESZG, JINC, JCOH, LHNM, std::optional< EPS >,
-                  std::optional< SWD > >(),
+                  ESZG, JINC, JCOH, LHNM, std::optional< JFLO >,
+                  std::optional< EPS >, std::optional< SWD > >(),
     python::arg( "z" ), python::arg( "header" ),
     python::arg( "za" ), python::arg( "awr" ),
     python::arg( "eszg" ), python::arg( "jinc" ),
     python::arg( "jcoh" ), python::arg( "lhnm" ),
+    python::arg( "jflo" ) = std::nullopt,
     python::arg( "eps" ) = std::nullopt,
     python::arg( "swd" ) = std::nullopt,
     "Initialise the table\n\n"
@@ -58,6 +60,7 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
     "    jinc      the incoherent scattering function block\n"
     "    jcoh      the coherent form factor block\n"
     "    lhnm      the heating numbers block\n"
+    "    lhnm      the fluorescence data block\n"
     "    eps       the electron shell block\n"
     "    swd       the compton profile block"
   )
@@ -117,6 +120,18 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "Z",
+    &Table::Z,
+    "The atom number of the element"
+  )
+  .def_property_readonly(
+
+    "atom_number",
+    &Table::atomNumber,
+    "The atom number of the element"
+  )
+  .def_property_readonly(
+
     "NES",
     &Table::NES,
     "The number of energy points"
@@ -126,6 +141,42 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
     "number_energy_points",
     &Table::numberEnergyPoints,
     "The number of energy points"
+  )
+  .def_property_readonly(
+
+    "Z",
+    &Table::Z,
+    "The atom number of the element"
+  )
+  .def_property_readonly(
+
+    "atom_number",
+    &Table::atomNumber,
+    "The atom number of the element"
+  )
+  .def_property_readonly(
+
+    "NFLO",
+    &Table::NFLO,
+    "The number of fluorescence edges"
+  )
+  .def_property_readonly(
+
+    "number_fluorescence_edges",
+    &Table::numberFluorescenceEdges,
+    "The number of fluorescence edges"
+  )
+  .def_property_readonly(
+
+    "NSH",
+    &Table::NSH,
+    "The number of electron shells"
+  )
+  .def_property_readonly(
+
+    "number_electron_shells",
+    &Table::numberElectronShells,
+    "The number of electron shells"
   )
   .def_property_readonly(
 
@@ -162,6 +213,18 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
     "coherent_form_factor_block",
     &Table::coherentFormFactorBlock,
     "The coherent form factor block"
+  )
+  .def_property_readonly(
+
+    "JFLO",
+    &Table::JFLO,
+    "The fluorescence data block"
+  )
+  .def_property_readonly(
+
+    "fluorescence_data_block",
+    &Table::fluorescenceDataBlock,
+    "The fluorescence data block"
   )
   .def_property_readonly(
 
