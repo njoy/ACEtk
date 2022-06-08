@@ -108,7 +108,7 @@ void wrapPhotoAtomicFluorescenceDataBlock( python::module& module, python::modul
 
     "F",
     [] ( const Block& self ) -> DoubleRange
-       { return self.Y(); },
+       { return self.F(); },
     "The fluorescent energies"
   )
   .def_property_readonly(

@@ -28,7 +28,7 @@ PhotoAtomicFluorescenceDataBlock( std::vector< double > edges,
  *  @param[in] nflo    the number of edges
  */
 PhotoAtomicFluorescenceDataBlock( Iterator begin, Iterator end, unsigned int nflo ) :
-  ArrayData( "EPS", begin, end, nflo, 4 ) {}
+  ArrayData( "JFLO", begin, end, nflo, 4 ) {}
 
 PhotoAtomicFluorescenceDataBlock& operator=( const PhotoAtomicFluorescenceDataBlock& ) = default;
 PhotoAtomicFluorescenceDataBlock& operator=( PhotoAtomicFluorescenceDataBlock&& ) = default;
