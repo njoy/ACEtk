@@ -93,6 +93,7 @@ SCENARIO( "PhotoAtomicTable" ){
                               { 0.999167, 1.996800, 2.990140 },
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
+                              std::nullopt,
                               std::nullopt );
 
       THEN( "a PhotoAtomicTable can be constructed and members can be "
@@ -232,7 +233,7 @@ SCENARIO( "PhotoAtomicTable" ){
                               {  },
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
-                              base.SWD() );
+                              base.EPS(), base.SWD() );
 
       THEN( "a PhotoAtomicTable can be constructed and members can be "
             "tested" ) {
@@ -367,6 +368,9 @@ void verifyChunkMcplib( const PhotoAtomicTable& chunk ) {
   CHECK( 9.457315870945E-04 == Approx( chunk.LHNM().heating().front() ) );
   CHECK( 9.086036433693E+01 == Approx( chunk.LHNM().heating().back() ) );
 
+  // EPS block
+  CHECK( true == chunk.EPS().empty() );
+
   // SWD block
   CHECK( true == chunk.SWD().empty() );
 }
@@ -444,6 +448,26 @@ void verifyChunkMcplib03( const PhotoAtomicTable& chunk ) {
 
   CHECK( 9.978170710722E-04 == Approx( chunk.LHNM().heating().front() ) );
   CHECK( 9.999428234605E+04 == Approx( chunk.LHNM().heating().back() ) );
+
+  // EPS block
+  CHECK( false == chunk.EPS().empty() );
+
+  CHECK( 2 == chunk.EPS().NSH() );
+  CHECK( 2 == chunk.EPS().numberElectronShells() );
+
+  CHECK( 2 == Approx( chunk.EPS().numberElectrons()[0] ) );
+  CHECK( 1 == Approx( chunk.EPS().numberElectrons()[1] ) );
+  CHECK( 5.480000000000e-05 == Approx( chunk.EPS().bindingEnergies()[0] ) );
+  CHECK( 1.000000000000e-06 == Approx( chunk.EPS().bindingEnergies()[1] ) );
+  CHECK( 6.666666666667e-01 == Approx( chunk.EPS().interactionProbabilities()[0] ) );
+  CHECK( 3.333333333333e-01 == Approx( chunk.EPS().interactionProbabilities()[1] ) );
+
+  CHECK( 2 == chunk.EPS().numberElectronsPerShell( 1 ) );
+  CHECK( 1 == chunk.EPS().numberElectronsPerShell( 2 ) );
+  CHECK( 5.480000000000e-05 == Approx( chunk.EPS().bindingEnergy( 1 ) ) );
+  CHECK( 1.000000000000e-06 == Approx( chunk.EPS().bindingEnergy( 2 ) ) );
+  CHECK( 6.666666666667e-01 == Approx( chunk.EPS().interactionProbability( 1 ) ) );
+  CHECK( 3.333333333333e-01 == Approx( chunk.EPS().interactionProbability( 2 ) ) );
 
   // SWD block
   CHECK( false == chunk.SWD().empty() );

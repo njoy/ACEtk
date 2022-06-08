@@ -9,7 +9,7 @@
 #include "ACEtk/block/IncoherentScatteringFunctionBlock.hpp"
 #include "ACEtk/block/CoherentFormFactorBlock.hpp"
 #include "ACEtk/block/PhotoAtomicHeatingNumbersBlock.hpp"
-
+#include "ACEtk/block/PhotoAtomicElectronShellBlock.hpp"
 #include "ACEtk/block/PhotoAtomicComptonProfileBlock.hpp"
 
 namespace njoy {
@@ -28,7 +28,7 @@ class PhotoAtomicTable : protected Table {
   block::JINC jinc_;
   block::JCOH jcoh_;
   block::LHNM lhnm_;
-
+  block::EPS eps_;
   block::SWD swd_;
 
   /* auxiliary functions */
@@ -153,6 +153,16 @@ public:
    *  @brief Return the heating numbers block
    */
   const block::LHNM& heatingNumbersBlock() const { return this->LHNM(); }
+
+  /**
+   *  @brief Return the electron shell block
+   */
+  const block::EPS& EPS() const { return this->eps_; }
+
+  /**
+   *  @brief Return the electron shell block
+   */
+  const block::EPS& electronShellBlock() const { return this->EPS(); }
 
   /**
    *  @brief Return the compton profile block

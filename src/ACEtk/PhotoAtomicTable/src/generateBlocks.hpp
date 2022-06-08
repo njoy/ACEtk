@@ -46,10 +46,18 @@ void generateBlocks() {
   iterators = block( 5 );
   this->lhnm_ = block::LHNM( iterators.first, iterators.second, this->NES() );
 
-  // compton profile block
-  auto locators = block( 9 );
-  iterators = block( 10 );
+  // electron shell block
+  auto locators = block( 6 );
+  iterators = block( 8 );
   bool present = ( this->NSH() > 0 );
+  this->eps_ = block::EPS( present ? locators.first : begin,
+                           present ? iterators.second : begin,
+                           this->NSH() );
+
+  // compton profile block
+  locators = block( 9 );
+  iterators = block( 10 );
+  present = ( this->NSH() > 0 );
   this->swd_ = block::SWD( present ? locators.first : begin,
                            present ? iterators.first : begin,
                            present ? iterators.second : begin,

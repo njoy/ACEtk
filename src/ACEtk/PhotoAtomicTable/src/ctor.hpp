@@ -78,10 +78,11 @@ PhotoAtomicTable( unsigned int z, Header header,
                   std::vector< unsigned int > za, std::vector< double > awr,
                   block::ESZG eszg, block::JINC jinc,
                   block::JCOH jcoh, block::LHNM lhnm,
+                  std::optional< block::EPS > eps,
                   std::optional< block::SWD > swd ) :
   PhotoAtomicTable(
       Table( std::move( header ),
              generateData( z, std::move( za ), std::move( awr ),
                            std::move( eszg ), std::move( jinc ),
                            std::move( jcoh ), std::move( lhnm ),
-                           std::move( swd ) ) ) ) {}
+                           std::move( eps ), std::move( swd ) ) ) ) {}

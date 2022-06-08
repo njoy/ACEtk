@@ -20,6 +20,7 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
   using JINC = njoy::ACEtk::block::JINC;
   using JCOH = njoy::ACEtk::block::JCOH;
   using LHNM = njoy::ACEtk::block::LHNM;
+  using EPS = njoy::ACEtk::block::EPS;
   using SWD = njoy::ACEtk::block::SWD;
 
   // wrap views created by this table
@@ -39,11 +40,13 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
 
     python::init< unsigned int, Header,
                   std::vector< unsigned int >, std::vector< double >,
-                  ESZG, JINC, JCOH, LHNM, std::optional< SWD > >(),
+                  ESZG, JINC, JCOH, LHNM, std::optional< EPS >,
+                  std::optional< SWD > >(),
     python::arg( "z" ), python::arg( "header" ),
     python::arg( "za" ), python::arg( "awr" ),
     python::arg( "eszg" ), python::arg( "jinc" ),
     python::arg( "jcoh" ), python::arg( "lhnm" ),
+    python::arg( "eps" ) = std::nullopt,
     python::arg( "swd" ) = std::nullopt,
     "Initialise the table\n\n"
     "Arguments:\n"
@@ -54,7 +57,8 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
     "    eszg      the principal cross section block\n"
     "    jinc      the incoherent scattering function block\n"
     "    jcoh      the coherent form factor block\n"
-    "    lhnm      the heating numbers block"
+    "    lhnm      the heating numbers block\n"
+    "    eps       the electron shell block\n"
     "    swd       the compton profile block"
   )
   .def_property_readonly(
@@ -158,6 +162,18 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
     "coherent_form_factor_block",
     &Table::coherentFormFactorBlock,
     "The coherent form factor block"
+  )
+  .def_property_readonly(
+
+    "EPS",
+    &Table::EPS,
+    "The electron shell block"
+  )
+  .def_property_readonly(
+
+    "heating_numbers_block",
+    &Table::electronShellBlock,
+    "The electron shell block"
   )
   .def_property_readonly(
 

@@ -44,19 +44,19 @@ void wrapIncoherentScatteringFunctionBlock( python::module& module, python::modu
   .def_property_readonly(
 
     "NM",
-    &Block::NM,
+    [] ( const Block& self ) { return self.NM(); },
     "The number of values"
   )
   .def_property_readonly(
 
     "number_values",
-    &Block::numberValues,
+    [] ( const Block& self ) { return self.numberValues(); },
     "The number of values"
   )
   .def_property_readonly(
 
     "momentum",
-    &Block::momentum,
+    [] ( const Block& self ) { return self.momentum(); },
     "The electron recoil momentum values"
   )
   .def_property_readonly(

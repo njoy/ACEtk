@@ -2,6 +2,7 @@ Data generateData( unsigned int z,
                    std::vector< unsigned int > za, std::vector< double > awr,
                    block::ESZG&& eszg, block::JINC&& jinc,
                    block::JCOH&& jcoh, block::LHNM&& lhnm,
+                   std::optional< block::EPS >&& eps,
                    std::optional< block::SWD >&& swd ) {
 
   std::array< int32_t, 16 > iz;
@@ -52,7 +53,13 @@ Data generateData( unsigned int z,
   xss.insert( xss.end(), jcoh.begin(), jcoh.end() );
   jxs[4] = xss.size() + 1;
   xss.insert( xss.end(), lhnm.begin(), lhnm.end() );
+  if ( eps ) {
 
+    jxs[5] = xss.size() + 1;
+    jxs[6] = xss.size() + nsh + 1;
+    jxs[7] = xss.size() + 2 * nsh + 1;
+    xss.insert( xss.end(), eps->begin(), eps->end() );
+  }
   if ( swd ) {
 
     jxs[8] = xss.size() + 1;
