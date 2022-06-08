@@ -58,7 +58,6 @@ void addStandardTableDefinitions( PythonClass& table ) {
       auto content = njoy::ACEtk::fromConcatenatedFile( filename );
       for ( auto&& table : content ) {
 
-        std::cout << table.header().ZAID() << std::endl;
         tables.emplace_back( std::move( table ) );
       }
       return tables;
