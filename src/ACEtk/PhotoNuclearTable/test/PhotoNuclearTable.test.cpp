@@ -85,78 +85,91 @@ SCENARIO( "PhotoNuclearTable" ){
       } // THEN
     } // WHEN
 
-//    WHEN( "constructing a PhotoNuclearTable from its components" ) {
-//
-//      PhotoNuclearTable base( std::move( table ) );
-//
-//      PhotoNuclearTable chunk( 92, 235, base.header(),
-//                                   base.ESZ(), base.NU(), base.DNU(),
-//                                   base.MTR(), base.LQR(),
-//                                   base.SIG(), base.AND(), base.DLW(),
-//                                   base.BDD(), base.DNED(),
-//                                   base.GPD(), base.MTRP(), base.SIGP(),
-//                                   base.ANDP(), base.DLWP(), base.YP(),
-//                                   base.UNR(),
-//                                   std::nullopt, std::nullopt, std::nullopt,
-//                                   std::nullopt, std::nullopt, std::nullopt,
-//                                   std::nullopt );
-//
-//      THEN( "a PhotoNuclearTable can be constructed and members can be "
-//            "tested" ) {
-//
-//        verifyChunk( chunk );
-//      }
-//
-//      THEN( "the IZ array is correct" ) {
-//
-//        decltype(auto) iz_chunk = chunk.data().IZ();
-//        CHECK( iz.size() == iz_chunk.size() );
-//        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-//
-//          CHECK( iz[i] == Approx( iz_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the AW array is correct" ) {
-//
-//        decltype(auto) aw_chunk = chunk.data().AW();
-//        CHECK( aw.size() == aw_chunk.size() );
-//        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-//
-//          CHECK( aw[i] == Approx( aw_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the NXS array is correct" ) {
-//
-//        decltype(auto) nxs_chunk = chunk.data().NXS();
-//        CHECK( nxs.size() == nxs_chunk.size() );
-//        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-//
-//          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the JXS array is correct" ) {
-//
-//        decltype(auto) jxs_chunk = chunk.data().JXS();
-//        CHECK( jxs.size() == jxs_chunk.size() );
-//        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-//
-//          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
-//        }
-//      } // THEN
-//
-//      THEN( "the XSS array is correct" ) {
-//
-//        decltype(auto) xss_chunk = chunk.data().XSS();
-//        CHECK( xss.size() == xss_chunk.size() );
-//        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-//
-//          CHECK( xss[i] == Approx( xss_chunk[i] ) );
-//        }
-//      } // THEN
-//    } // WHEN
+    WHEN( "constructing a PhotoNuclearTable from its components" ) {
+
+      PhotoNuclearTable base( std::move( table ) );
+
+      std::optional< std::vector< unsigned int > > ptype = std::vector< unsigned int >{};
+      std::optional< std::vector< block::CrossSectionData > > pxs = std::vector< block::CrossSectionData >{};
+      std::optional< std::vector< block::CrossSectionData > > phn = std::vector< block::CrossSectionData >{};
+      std::optional< std::vector< block::MTRH > > mtrh = std::vector< block::MTRH >{};
+      std::optional< std::vector< block::SIGH > > sigh = std::vector< block::SIGH >{};
+      std::optional< std::vector< block::ANDH > > andh = std::vector< block::ANDH >{};
+      std::optional< std::vector< block::DLWH > > dlwh = std::vector< block::DLWH >{};
+      for ( unsigned int index = 1; index <= base.NTYPE(); ++index ) {
+
+        ptype->push_back( base.IXS().IP( index ) );
+        pxs->push_back( base.PXS( index ) );
+        phn->push_back( base.PHN( index ) );
+        mtrh->push_back( base.MTRH( index ) );
+        sigh->push_back( base.SIGH( index ) );
+        andh->push_back( base.ANDH( index ) );
+        dlwh->push_back( base.DLWH( index ) );
+      }
+
+      PhotoNuclearTable chunk( 94, 239, base.header(),
+                               base.ESZ(), base.MTR(), base.LQR(),
+                               base.SIG(), std::move( ptype ),
+                               std::move( pxs ), std::move( phn ),
+                               std::move( mtrh ), std::move( sigh ),
+                               std::move( andh ), std::move( dlwh ) );
+
+      THEN( "a PhotoNuclearTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 

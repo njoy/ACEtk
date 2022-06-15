@@ -44,7 +44,7 @@ class PhotoNuclearTable : protected Table {
 
   /* auxiliary functions */
   #include "ACEtk/PhotoNuclearTable/src/generateBlocks.hpp"
-//  #include "ACEtk/PhotoNuclearTable/src/generateData.hpp"
+  #include "ACEtk/PhotoNuclearTable/src/generateData.hpp"
 
 public:
 
