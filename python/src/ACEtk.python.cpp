@@ -100,6 +100,7 @@ namespace block {
   void wrapPhotoAtomicElectronShellBlock( python::module&, python::module& );
   void wrapPhotoAtomicComptonProfileBlock( python::module&, python::module& );
   void wrapPhotoNuclearPrincipalCrossSectionBlock( python::module&, python::module& );
+  void wrapPhotoNuclearSecondaryParticleLocatorBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -226,6 +227,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotoAtomicElectronShellBlock( module, viewmodule );
   block::wrapPhotoAtomicComptonProfileBlock( module, viewmodule );
   block::wrapPhotoNuclearPrincipalCrossSectionBlock( module, viewmodule );
+  block::wrapPhotoNuclearSecondaryParticleLocatorBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
