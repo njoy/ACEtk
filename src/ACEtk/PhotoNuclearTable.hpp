@@ -5,6 +5,7 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
+#include "ACEtk/block/PhotoNuclearPrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
 #include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
@@ -21,7 +22,7 @@ namespace ACEtk {
 class PhotoNuclearTable : protected Table {
 
   /* fields */
-//  block::ESZU eszu_;
+  block::ESZU eszu_;
   block::MTR mtr_;
   block::LQR lqr_;
   block::SIG sig_;
@@ -127,15 +128,15 @@ public:
 
   // XSS blocks
 
-//  /**
-//   *  @brief Return the principal cross section block
-//   */
-//  const block::ESZ& ESZ() const { return this->esz_; }
-//
-//  /**
-//   *  @brief Return the principal cross section block
-//   */
-//  const block::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
+  /**
+   *  @brief Return the principal cross section block
+   */
+  const block::ESZU& ESZ() const { return this->eszu_; }
+
+  /**
+   *  @brief Return the principal cross section block
+   */
+  const block::ESZU& principalCrossSectionBlock() const { return this->ESZ(); }
 
   /**
    *  @brief Return the reaction number block

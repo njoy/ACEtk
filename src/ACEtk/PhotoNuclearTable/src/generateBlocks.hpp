@@ -52,8 +52,18 @@ void generateBlocks() {
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
 
-  // reaction number block
+  // principal cross section block
+  unsigned int size = 3;
+  if ( this->data().JXS(4) != 0 ) {
+
+    size += 1;
+  }
+  auto locators = block( 1 );
   auto iterators = block( 6 );
+  this->eszu_ = block::ESZU( locators.first, iterators.first, this->NES(), size );
+
+  // reaction number block
+  iterators = block( 6 );
   this->mtr_ = block::MTR( iterators.first, iterators.second, this->NTR() );
 
   // Q value block
@@ -61,7 +71,7 @@ void generateBlocks() {
   this->lqr_ = block::LQR( iterators.first, iterators.second, this->NTR() );
 
   // cross section block
-  auto locators = block( 8 );
+  locators = block( 8 );
   iterators = block( 9 );
   this->sig_ = block::SIG( locators.first, iterators.first, iterators.second,
                            this->NTR() );

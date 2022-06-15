@@ -16,6 +16,7 @@ void wrapPhotoNuclearTable( python::module& module, python::module& ) {
   // type aliases
   using Header = njoy::ACEtk::Table::Header;
   using Table = njoy::ACEtk::PhotoNuclearTable;
+  using ESZU = njoy::ACEtk::block::ESZU;
   using MTR = njoy::ACEtk::block::MTR;
   using LQR = njoy::ACEtk::block::LQR;
   using SIG = njoy::ACEtk::block::SIG;
@@ -36,8 +37,7 @@ void wrapPhotoNuclearTable( python::module& module, python::module& ) {
 //  .def(
 //
 //    python::init< unsigned int, unsigned int, Header,
-//                  ESZ, std::optional< NU >, std::optional< DNU >,
-//                  MTR, LQR, SIG, AND, DLW,
+//                  ESZU, MTR, LQR, SIG,
 //                  std::optional< BDD >, std::optional< DNED >,
 //                  std::optional< GPD >, std::optional< MTRP >,
 //                  std::optional< SIGP >, std::optional< ANDP >,
@@ -190,18 +190,18 @@ void wrapPhotoNuclearTable( python::module& module, python::module& ) {
     &Table::numberSecondaryParticleTypes,
     "The number of secondary particle types"
   )
-//  .def_property_readonly(
-//
-//    "ESZ",
-//    &Table::ESZ,
-//    "The principal cross section block"
-//  )
-//  .def_property_readonly(
-//
-//    "principal_cross_section_block",
-//    &Table::principalCrossSectionBlock,
-//    "The principal cross section block"
-//  )
+  .def_property_readonly(
+
+    "ESZ",
+    &Table::ESZ,
+    "The principal cross section block"
+  )
+  .def_property_readonly(
+
+    "principal_cross_section_block",
+    &Table::principalCrossSectionBlock,
+    "The principal cross section block"
+  )
   .def_property_readonly(
 
     "MTR",

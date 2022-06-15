@@ -173,18 +173,17 @@ void verifyChunk( const PhotoNuclearTable& chunk ) {
   CHECK( 7 == chunk.numberSecondaryParticleTypes() );
 
   // ESZ block
-//  CHECK( false == chunk.ESZ().empty() );
-//  CHECK( 76518 == chunk.ESZ().energies().size() );
-//  CHECK( 76518 == chunk.ESZ().total().size() );
-//  CHECK( 76518 == chunk.ESZ().disappearance().size() );
-//  CHECK( 76518 == chunk.ESZ().elastic().size() );
-//  CHECK( 76518 == chunk.ESZ().heating().size() );
-//
-//  CHECK( 1e-11 == Approx( chunk.ESZ().energies().front() ) );
-//  CHECK( 20. == Approx( chunk.ESZ().energies().back() ) );
-//
-//  CHECK( 1e-11 == Approx( chunk.ESZ().XSS( 1 ) ) );
-//  CHECK( 76518 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
+  CHECK( false == chunk.ESZ().empty() );
+  CHECK( 90 == chunk.ESZ().energies().size() );
+  CHECK( 90 == chunk.ESZ().total().size() );
+  CHECK( 0 == chunk.ESZ().elastic().size() );
+  CHECK( 90 == chunk.ESZ().heating().size() );
+
+  CHECK( 1. == Approx( chunk.ESZ().energies().front() ) );
+  CHECK( 200. == Approx( chunk.ESZ().energies().back() ) );
+
+  CHECK( 1. == Approx( chunk.ESZ().XSS( 1 ) ) );
+  CHECK( 90 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
 
   // MTR block
   CHECK( false == chunk.MTR().empty() );
