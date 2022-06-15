@@ -157,6 +157,7 @@ if(ACEtk.python)
     python/src/block/PhotoAtomicElectronShellBlock.python.cpp
     python/src/block/PhotoAtomicComptonProfile.python.cpp
     python/src/block/PhotoAtomicComptonProfileBlock.python.cpp
+    python/src/block/PhotoNuclearPrincipalCrossSectionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp

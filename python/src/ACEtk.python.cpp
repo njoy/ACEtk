@@ -65,6 +65,7 @@ namespace block {
   void wrapProbabilityTable( python::module&, python::module& );
   void wrapThermalScatteringDiscreteCosines( python::module&, python::module& );
   void wrapThermalScatteringDiscreteCosinesWithProbability( python::module&, python::module& );
+  void wrapPhotoAtomicComptonProfile( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -97,8 +98,8 @@ namespace block {
   void wrapPhotoAtomicFluorescenceDataBlock( python::module&, python::module& );
   void wrapPhotoAtomicHeatingNumbersBlock( python::module&, python::module& );
   void wrapPhotoAtomicElectronShellBlock( python::module&, python::module& );
-  void wrapPhotoAtomicComptonProfile( python::module&, python::module& );
   void wrapPhotoAtomicComptonProfileBlock( python::module&, python::module& );
+  void wrapPhotoNuclearPrincipalCrossSectionBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -224,6 +225,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotoAtomicHeatingNumbersBlock( module, viewmodule );
   block::wrapPhotoAtomicElectronShellBlock( module, viewmodule );
   block::wrapPhotoAtomicComptonProfileBlock( module, viewmodule );
+  block::wrapPhotoNuclearPrincipalCrossSectionBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );

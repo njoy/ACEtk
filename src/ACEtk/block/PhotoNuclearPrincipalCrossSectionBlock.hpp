@@ -14,7 +14,7 @@ namespace block {
  *  @class
  *  @brief The photonuclear ESZU block with the principal cross sections
  *
- *  The PhotoNuclearPrincipalCrossSectionBlock class contains 5 arrays of the
+ *  The PhotoNuclearPrincipalCrossSectionBlock class contains 3 or 4 arrays of the
  *  same length (all values are stored as the natural logarithm):
  *    - the energy points
  *    - the total cross section
