@@ -192,6 +192,202 @@ public:
    *  @brief Return the secondary particle information and locator block
    */
   const block::IXSU& secondaryParticleLocatorBlock() const { return this->IXS(); }
+
+  /**
+   *  @brief Return the secondary particle production cross section for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::CrossSectionData& PXS( std::size_t index ) const {
+
+    return this->pxs_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the secondary particle production cross section for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::CrossSectionData&
+  secondaryParticleProductionCrossSection( std::size_t index ) const {
+
+    return this->PXS( index );
+  }
+
+  /**
+   *  @brief Return the secondary particle average heating cross section for a
+   *         secondary particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::CrossSectionData& PHN( std::size_t index ) const {
+
+    return this->phn_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the secondary particle average heating cross section for a
+   *         secondary particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::CrossSectionData&
+  secondaryParticleHeatingCrossSection( std::size_t index ) const {
+
+    return this->PHN( index );
+  }
+
+  /**
+   *  @brief Return the reaction number block for a secondary particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::MTRH& MTRH( std::size_t index ) const {
+
+    return this->mtrh_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the reaction number block for a secondary particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::MTRH& secondaryParticleReactionNumberBlock( std::size_t index ) const {
+
+    return this->MTRH( index );
+  }
+
+  /**
+   *  @brief Return the multiplicity and reference frame block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::TYRH& TYRH( std::size_t index ) const {
+
+    return this->tyrh_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the multiplicity and reference frame block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::TYRH& secondaryParticleFrameAndMultiplicityBlock( std::size_t index ) const {
+
+    return this->TYRH( index );
+  }
+
+  /**
+   *  @brief Return the production cross section block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::SIGH& SIGH( std::size_t index ) const {
+
+    return this->sigh_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the production cross section block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::SIGH& secondaryParticleProductionCrossSectionBlock( std::size_t index ) const {
+
+    return this->SIGH( index );
+  }
+
+  /**
+   *  @brief Return the angular distribution block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::ANDH& ANDH( std::size_t index ) const {
+
+    return this->andh_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the angular distribution block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::ANDH& secondaryParticleAngularDistributionBlock( std::size_t index ) const {
+
+    return this->ANDH( index );
+  }
+
+  /**
+   *  @brief Return the energy distribution block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::DLWH& DLWH( std::size_t index ) const {
+
+    return this->dlwh_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the energy distribution block for a secondary
+   *         particle index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::DLWH& secondaryParticleEnergyDistributionBlock( std::size_t index ) const {
+
+    return this->DLWH( index );
+  }
 };
 
 } // ACEtk namespace

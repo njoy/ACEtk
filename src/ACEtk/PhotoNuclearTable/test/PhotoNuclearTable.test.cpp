@@ -8,6 +8,8 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
+using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
+using EnergyAngleDistributionData = block::EnergyAngleDistributionData;
 
 void verifyChunk( const PhotoNuclearTable& );
 
@@ -289,4 +291,156 @@ void verifyChunk( const PhotoNuclearTable& chunk ) {
   CHECK( 863658 == chunk.IXS().ANDH( 7 ) );
   CHECK( 863658 == chunk.IXS().LDLWH( 7 ) );
   CHECK( 863659 == chunk.IXS().DLWH( 7 ) );
+
+  // PXS(1) block
+  CHECK( false == chunk.PXS(1).empty() );
+
+  CHECK( 1 == chunk.PXS(1).energyIndex() );
+  CHECK( 90 == chunk.PXS(1).numberValues() );
+  CHECK( 0.00000000000E+00 == Approx( chunk.PXS(1).crossSections().front() ) );
+  CHECK( 1.21479700000E-01 == Approx( chunk.PXS(1).crossSections().back() ) );
+
+  // PHN(1) block
+  CHECK( false == chunk.PHN(1).empty() );
+
+  CHECK( 1 == chunk.PHN(1).energyIndex() );
+  CHECK( 90 == chunk.PHN(1).numberValues() );
+  CHECK( 0.00000000000E+00 == Approx( chunk.PHN(1).crossSections().front() ) );
+  CHECK( 7.91132000000E+01 == Approx( chunk.PHN(1).crossSections().back() ) );
+
+  // MTRH(1) block
+  CHECK( false == chunk.MTRH(1).empty() );
+  CHECK( 2 == chunk.MTRH(1).NTR() );
+
+  CHECK( 5 == chunk.MTRH(1).MT( 1 ) );
+  CHECK( 18 == chunk.MTRH(1).MT( 2 ) );
+  CHECK( 5 == chunk.MTRH(1).reactionNumber( 1 ) );
+  CHECK( 18 == chunk.MTRH(1).reactionNumber( 2 ) );
+
+  // TYRH(1) block
+  CHECK( false == chunk.TYRH(1).empty() );
+  CHECK( 2 == chunk.TYRH(1).NTR() );
+
+  CHECK( ReferenceFrame::CentreOfMass == chunk.TYRH(1).referenceFrame( 1 ) );
+  CHECK( ReferenceFrame::CentreOfMass == chunk.TYRH(1).referenceFrame( 2 ) );
+
+  // SIGH(1) block
+  CHECK( false == chunk.SIGH(1).empty() );
+  CHECK( 2 == chunk.SIGH(1).NP() );
+
+  auto multiplicity = chunk.SIGH(1).crossSectionData( 1 );
+  CHECK( 6 == multiplicity.MFTYPE() );
+  CHECK( 6 == multiplicity.type() );
+  CHECK( 5 == multiplicity.MT() );
+  CHECK( 5 == multiplicity.reactionNumber() );
+
+  CHECK( 0 == multiplicity.interpolationData().NB() );
+
+  CHECK( 84 == multiplicity.NE() );
+  CHECK( 84 == multiplicity.numberValues() );
+
+  CHECK( 84 == multiplicity.energies().size() );
+  CHECK( 1.00000000000E+00 == Approx( multiplicity.energies().front() ) );
+  CHECK( 2.00000000000E+02 == Approx( multiplicity.energies().back() ) );
+
+  CHECK( 84 == multiplicity.multiplicities().size() );
+  CHECK( 0.00000000000E+00 == Approx( multiplicity.multiplicities().front() ) );
+  CHECK( 1.26229500000E+02 == Approx( multiplicity.multiplicities().back() ) );
+
+  multiplicity = chunk.SIGH(1).crossSectionData( 2 );
+  CHECK( 6 == multiplicity.MFTYPE() );
+  CHECK( 6 == multiplicity.type() );
+  CHECK( 18 == multiplicity.MT() );
+  CHECK( 18 == multiplicity.reactionNumber() );
+
+  CHECK( 0 == multiplicity.interpolationData().NB() );
+
+  CHECK( 88 == multiplicity.NE() );
+  CHECK( 88 == multiplicity.numberValues() );
+
+  CHECK( 88 == multiplicity.energies().size() );
+  CHECK( 1.00000000000E+00 == Approx( multiplicity.energies().front() ) );
+  CHECK( 2.00000000000E+02 == Approx( multiplicity.energies().back() ) );
+
+  CHECK( 88 == multiplicity.multiplicities().size() );
+  CHECK( 1.94030000000E+00 == Approx( multiplicity.multiplicities().front() ) );
+  CHECK( 1.18857000000E+01 == Approx( multiplicity.multiplicities().back() ) );
+
+  // ANDH(1) block
+  CHECK( false == chunk.ANDH(1).empty() );
+  CHECK( 2 == chunk.ANDH(1).NR() );
+
+  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.ANDH(1).angularDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.ANDH(1).angularDistributionData( 2 ) ) );
+
+  // DLWH(1) block
+  CHECK( false == chunk.DLWH(1).empty() );
+  CHECK( 2 == chunk.DLWH(1).NR() );
+
+  CHECK( true == std::holds_alternative< EnergyAngleDistributionData >( chunk.DLWH(1).energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< EnergyAngleDistributionData >( chunk.DLWH(1).energyDistributionData( 2 ) ) );
+
+  // PXS(7) block
+  CHECK( false == chunk.PXS(7).empty() );
+
+  CHECK( 1 == chunk.PXS(7).energyIndex() );
+  CHECK( 90 == chunk.PXS(7).numberValues() );
+  CHECK( 0.00000000000E+00 == Approx( chunk.PXS(7).crossSections().front() ) );
+  CHECK( 1.63503800000E-03 == Approx( chunk.PXS(7).crossSections().back() ) );
+
+  // PHN(7) block
+  CHECK( false == chunk.PHN(7).empty() );
+
+  CHECK( 1 == chunk.PHN(7).energyIndex() );
+  CHECK( 90 == chunk.PHN(7).numberValues() );
+  CHECK( 0.00000000000E+00 == Approx( chunk.PHN(7).crossSections().front() ) );
+  CHECK( 5.97042200000E+00 == Approx( chunk.PHN(7).crossSections().back() ) );
+
+  // MTRH(7) block
+  CHECK( false == chunk.MTRH(7).empty() );
+  CHECK( 1 == chunk.MTRH(7).NTR() );
+
+  CHECK( 5 == chunk.MTRH(7).MT( 1 ) );
+  CHECK( 5 == chunk.MTRH(7).reactionNumber( 1 ) );
+
+  // TYRH(7) block
+  CHECK( false == chunk.TYRH(7).empty() );
+  CHECK( 1 == chunk.TYRH(7).NTR() );
+
+  CHECK( ReferenceFrame::CentreOfMass == chunk.TYRH(7).referenceFrame( 1 ) );
+
+  // SIGH(7) block
+  CHECK( false == chunk.SIGH(7).empty() );
+  CHECK( 1 == chunk.SIGH(7).NP() );
+
+  multiplicity = chunk.SIGH(7).crossSectionData( 1 );
+  CHECK( 6 == multiplicity.MFTYPE() );
+  CHECK( 6 == multiplicity.type() );
+  CHECK( 5 == multiplicity.MT() );
+  CHECK( 5 == multiplicity.reactionNumber() );
+
+  CHECK( 0 == multiplicity.interpolationData().NB() );
+
+  CHECK( 90 == multiplicity.NE() );
+  CHECK( 90 == multiplicity.numberValues() );
+
+  CHECK( 90 == multiplicity.energies().size() );
+  CHECK( 1.00000000000E+00 == Approx( multiplicity.energies().front() ) );
+  CHECK( 2.00000000000E+02 == Approx( multiplicity.energies().back() ) );
+
+  CHECK( 90 == multiplicity.multiplicities().size() );
+  CHECK( 0.00000000000E+00 == Approx( multiplicity.multiplicities().front() ) );
+  CHECK( 4.87221700000E+00 == Approx( multiplicity.multiplicities().back() ) );
+
+  // ANDH(7) block
+  CHECK( false == chunk.ANDH(7).empty() );
+  CHECK( 1 == chunk.ANDH(7).NR() );
+
+  CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.ANDH(7).angularDistributionData( 1 ) ) );
+
+  // DLWH(7) block
+  CHECK( false == chunk.DLWH(7).empty() );
+  CHECK( 1 == chunk.DLWH(7).NR() );
+
+  CHECK( true == std::holds_alternative< EnergyAngleDistributionData >( chunk.DLWH(7).energyDistributionData( 1 ) ) );
 }

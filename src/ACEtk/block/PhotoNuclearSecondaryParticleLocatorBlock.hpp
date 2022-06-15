@@ -29,6 +29,26 @@ class PhotoNuclearSecondaryParticleLocatorBlock : protected details::Base {
   #include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock/src/generateXSS.hpp"
   #include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock/src/verifySize.hpp"
 
+public:
+
+  /* constructor */
+  #include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock/src/ctor.hpp"
+
+  /* methods */
+
+  /**
+   *  @brief Return the number of secondary particle types
+   */
+  unsigned int NTYPE() const { return this->ntype_; }
+
+  /**
+   *  @brief Return the number of secondary particle types
+   */
+  unsigned int numberAdditionalSecondaryParticleTypes() const {
+
+    return this->NTYPE();
+  }
+
   /**
    *  @brief Return the locator for a secondary particle index and block index
    *
@@ -49,26 +69,6 @@ class PhotoNuclearSecondaryParticleLocatorBlock : protected details::Base {
   std::size_t locator( std::size_t particle, std::size_t index ) const {
 
     return this->LLOC( particle, index );
-  }
-
-public:
-
-  /* constructor */
-  #include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock/src/ctor.hpp"
-
-  /* methods */
-
-  /**
-   *  @brief Return the number of secondary particle types
-   */
-  unsigned int NTYPE() const { return this->ntype_; }
-
-  /**
-   *  @brief Return the number of secondary particle types
-   */
-  unsigned int numberAdditionalSecondaryParticleTypes() const {
-
-    return this->NTYPE();
   }
 
   /**
