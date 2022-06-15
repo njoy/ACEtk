@@ -528,6 +528,17 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     &Table::secondaryParticleInformationBlock,
     "The secondary particle information block"
   )
+  .def_property_readonly(
+    "IXS",
+    &Table::IXS,
+    "The secondary particle locator block"
+  )
+  .def_property_readonly(
+
+    "secondary_particle_locator_block",
+    &Table::secondaryParticleLocatorBlock,
+    "The secondary particle locator block"
+  )
   .def(
 
     "HPD",
