@@ -32,7 +32,7 @@ auto block( std::size_t index ) const {
 //   auto begin = this->data().XSS().begin();
 //   std::size_t start = this->IXS().LLOC( particle, index );
 //
-//   // look for the first value that is larger then or equal to the start locator
+//   // look for the first value that is larger than or equal to the start locator
 //   std::size_t end = 0;
 //   auto iter = std::find_if( this->IXS().begin() + ( particle - 1 ) * 10 + index,
 //                             this->IXS().end(),
@@ -75,4 +75,11 @@ void generateBlocks() {
   iterators = block( 9 );
   this->sig_ = block::SIG( locators.first, iterators.first, iterators.second,
                            this->NTR() );
+
+  // secondary particle information and locator block
+  iterators = block( 10 );
+  bool present = ( this->NTYPE() > 0 );
+  this->ixsu_ = block::IXSU( present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             this->NTYPE() );
 }

@@ -12,9 +12,7 @@
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
 #include "ACEtk/block/AngularDistributionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotonProductionBlock.hpp"
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
@@ -26,6 +24,7 @@
 #include "ACEtk/block/SecondaryParticleProductionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {

@@ -9,6 +9,12 @@
 #include "ACEtk/block/ReactionNumberBlock.hpp"
 #include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/block/CrossSectionData.hpp"
+#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
+#include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -26,6 +32,15 @@ class PhotoNuclearTable : protected Table {
   block::MTR mtr_;
   block::LQR lqr_;
   block::SIG sig_;
+
+  block::IXSU ixsu_;
+  std::vector< block::CrossSectionData > pxs_;
+  std::vector< block::CrossSectionData > phn_;
+  std::vector< block::MTRH > mtrh_;
+  std::vector< block::TYRH > tyrh_;
+  std::vector< block::SIGH > sigh_;
+  std::vector< block::ANDH > andh_;
+  std::vector< block::DLWH > dlwh_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoNuclearTable/src/generateBlocks.hpp"
@@ -167,6 +182,16 @@ public:
    *  @brief Return the cross section block
    */
   const block::SIG& crossSectionBlock() const { return this->SIG(); }
+
+  /**
+   *  @brief Return the secondary particle information and locator block
+   */
+  const block::IXSU& IXS() const { return this->ixsu_; }
+
+  /**
+   *  @brief Return the secondary particle information and locator block
+   */
+  const block::IXSU& secondaryParticleLocatorBlock() const { return this->IXS(); }
 };
 
 } // ACEtk namespace
