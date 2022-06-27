@@ -254,7 +254,7 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
   .def_property_readonly(
 
     "incoherent_elastic_cross_section_block",
-    &Table::coherentElasticCrossSectionBlock,
+    &Table::incoherentElasticCrossSectionBlock,
     "The incoherent elastic thermal scattering cross section block"
   )
   .def_property_readonly(
