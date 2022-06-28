@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoAtomicComptonProfile.hpp"
+#include "ACEtk/block/PhotoatomicComptonProfile.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoAtomicComptonProfile( python::module& module, python::module& ) {
+void wrapPhotoatomicComptonProfile( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoAtomicComptonProfile;
+  using Block = njoy::ACEtk::block::PhotoatomicComptonProfile;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapPhotoAtomicComptonProfile( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "PhotoAtomicComptonProfile",
+    "PhotoatomicComptonProfile",
     "Tabulated Compton profile data for a given electron shell\n\n"
-    "The PhotoAtomicComptonProfile class contains the probability density\n"
+    "The PhotoatomicComptonProfile class contains the probability density\n"
     "function (PDF) and cumulative density function (CDF) as a function of\n"
     "momentum. It is used in the LSWD block."
   );

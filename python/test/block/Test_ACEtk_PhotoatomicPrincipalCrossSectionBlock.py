@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoAtomicPrincipalCrossSectionBlock
+from ACEtk import PhotoatomicPrincipalCrossSectionBlock
 
-class Test_ACEtk_PhotoAtomicPrincipalCrossSectionBlock( unittest.TestCase ) :
-    """Unit test for the PhotoAtomicPrincipalCrossSectionBlock class."""
+class Test_ACEtk_PhotoatomicPrincipalCrossSectionBlock( unittest.TestCase ) :
+    """Unit test for the PhotoatomicPrincipalCrossSectionBlock class."""
 
     chunk = [ -6.907755278982E+00, -6.502290170874E+00, -6.214608098422E+00, -5.809142990314E+00,
               -5.521460917862E+00, -5.298317366548E+00, -5.115995809754E+00, -4.828313737302E+00,
@@ -101,7 +101,7 @@ class Test_ACEtk_PhotoAtomicPrincipalCrossSectionBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoAtomicPrincipalCrossSectionBlock(
+        chunk = PhotoatomicPrincipalCrossSectionBlock(
           energies =  [ -6.907755278982E+00, -6.502290170874E+00, -6.214608098422E+00, -5.809142990314E+00,
                         -5.521460917862E+00, -5.298317366548E+00, -5.115995809754E+00, -4.828313737302E+00,
                         -4.605170185988E+00, -4.199705077880E+00, -3.912023005428E+00, -3.506557897320E+00,

@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoAtomicComptonProfileBlock.hpp"
+#include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoAtomicComptonProfileBlock( python::module& module, python::module& ) {
+void wrapPhotoatomicComptonProfileBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoAtomicComptonProfileBlock;
-  using PhotoAtomicComptonProfile = njoy::ACEtk::block::PhotoAtomicComptonProfile;
+  using Block = njoy::ACEtk::block::PhotoatomicComptonProfileBlock;
+  using PhotoatomicComptonProfile = njoy::ACEtk::block::PhotoatomicComptonProfile;
 
   // wrap views created by this block
 
@@ -24,9 +24,9 @@ void wrapPhotoAtomicComptonProfileBlock( python::module& module, python::module&
   python::class_< Block > block(
 
     module,
-    "PhotoAtomicComptonProfileBlock",
+    "PhotoatomicComptonProfileBlock",
     "The photoatomic LSWD and SWD block with the compton profile data\n\n"
-    "The PhotoAtomicComptonProfileBlock class contains NXS(5) sets of compton\n"
+    "The PhotoatomicComptonProfileBlock class contains NXS(5) sets of compton\n"
     "profiles, one for each electron shell."
   );
 
@@ -34,7 +34,7 @@ void wrapPhotoAtomicComptonProfileBlock( python::module& module, python::module&
   block
   .def(
 
-    python::init< std::vector< PhotoAtomicComptonProfile > >(),
+    python::init< std::vector< PhotoatomicComptonProfile > >(),
     python::arg( "profiles" ),
     "Initialise the block\n\n"
     "Arguments:\n"

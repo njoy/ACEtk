@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoAtomicFluorescenceDataBlock.hpp"
+#include "ACEtk/block/PhotoatomicFluorescenceDataBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoAtomicFluorescenceDataBlock( python::module& module, python::module& ) {
+void wrapPhotoatomicFluorescenceDataBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoAtomicFluorescenceDataBlock;
+  using Block = njoy::ACEtk::block::PhotoatomicFluorescenceDataBlock;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapPhotoAtomicFluorescenceDataBlock( python::module& module, python::modul
   python::class_< Block > block(
 
     module,
-    "PhotoAtomicFluorescenceDataBlock",
+    "PhotoatomicFluorescenceDataBlock",
     "The photoatomic JFLO block with the fluorescence data\n\n"
-    "The PhotoAtomicFluorescenceDataBlock class contains 4 arrays of the\n"
+    "The PhotoatomicFluorescenceDataBlock class contains 4 arrays of the\n"
     "same length:\n"
     "  - the fluoresence edge energies\n"
     "  - the relative ejection probabilities\n"

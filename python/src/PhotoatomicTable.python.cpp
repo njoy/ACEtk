@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/PhotoAtomicTable.hpp"
+#include "ACEtk/PhotoatomicTable.hpp"
 #include "ACEtk/fromFile.hpp"
 #include "definitions.hpp"
 #include "views.hpp"
@@ -11,11 +11,11 @@
 // namespace aliases
 namespace python = pybind11;
 
-void wrapPhotoAtomicTable( python::module& module, python::module& ) {
+void wrapPhotoatomicTable( python::module& module, python::module& ) {
 
   // type aliases
   using Header = njoy::ACEtk::Table::Header;
-  using Table = njoy::ACEtk::PhotoAtomicTable;
+  using Table = njoy::ACEtk::PhotoatomicTable;
   using ESZG = njoy::ACEtk::block::ESZG;
   using JINC = njoy::ACEtk::block::JINC;
   using JCOH = njoy::ACEtk::block::JCOH;
@@ -30,9 +30,9 @@ void wrapPhotoAtomicTable( python::module& module, python::module& ) {
   python::class_< Table > table(
 
     module,
-    "PhotoAtomicTable",
+    "PhotoatomicTable",
     "A thermal scattering ACE table\n\n"
-    "The PhotoAtomicTable class represents the ACE table for photoatomic data."
+    "The PhotoatomicTable class represents the ACE table for photoatomic data."
   );
 
   // wrap the table

@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoAtomicHeatingNumbersBlock
+from ACEtk import PhotoatomicHeatingNumbersBlock
 
-class Test_ACEtk_PhotoAtomicHeatingNumbersBlock( unittest.TestCase ) :
-    """Unit test for the PhotoAtomicHeatingNumbersBlock class."""
+class Test_ACEtk_PhotoatomicHeatingNumbersBlock( unittest.TestCase ) :
+    """Unit test for the PhotoatomicHeatingNumbersBlock class."""
 
     chunk = [                                           9.457315870945E-04,  1.225405765983E-03,
               1.256045266042E-03,  9.011338843679E-04,  5.697552004817E-04,  3.847584963574E-04,
@@ -47,7 +47,7 @@ class Test_ACEtk_PhotoAtomicHeatingNumbersBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoAtomicHeatingNumbersBlock(
+        chunk = PhotoatomicHeatingNumbersBlock(
           heating = [                                           9.457315870945E-04,  1.225405765983E-03,
                       1.256045266042E-03,  9.011338843679E-04,  5.697552004817E-04,  3.847584963574E-04,
                       2.911895331229E-04,  2.335442942103E-04,  2.531421561301E-04,  4.380333557943E-04,

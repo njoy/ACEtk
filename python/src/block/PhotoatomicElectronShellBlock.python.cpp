@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoAtomicElectronShellBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoAtomicElectronShellBlock( python::module& module, python::module& ) {
+void wrapPhotoatomicElectronShellBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoAtomicElectronShellBlock;
+  using Block = njoy::ACEtk::block::PhotoatomicElectronShellBlock;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapPhotoAtomicElectronShellBlock( python::module& module, python::module& 
   python::class_< Block > block(
 
     module,
-    "PhotoAtomicElectronShellBlock",
+    "PhotoatomicElectronShellBlock",
     "The photoatomic LNEPS, LBEPS and LPIPS block with the electron shell data\n\n"
-    "The PhotoAtomicPrincipalCrossSectionBlock class contains 3 arrays of the\n"
+    "The PhotoatomicPrincipalCrossSectionBlock class contains 3 arrays of the\n"
     "same length:\n"
     "  - the number of electrons for each shell\n"
     "  - the binding energy for each shell\n"

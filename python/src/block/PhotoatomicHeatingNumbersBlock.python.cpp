@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoAtomicHeatingNumbersBlock.hpp"
+#include "ACEtk/block/PhotoatomicHeatingNumbersBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoAtomicHeatingNumbersBlock( python::module& module, python::module& ) {
+void wrapPhotoatomicHeatingNumbersBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoAtomicHeatingNumbersBlock;
+  using Block = njoy::ACEtk::block::PhotoatomicHeatingNumbersBlock;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapPhotoAtomicHeatingNumbersBlock( python::module& module, python::module&
   python::class_< Block > block(
 
     module,
-    "PhotoAtomicHeatingNumbersBlock",
+    "PhotoatomicHeatingNumbersBlock",
     "The photoatomic LHNM block with the heating numbers\n\n"
-    "The PhotoAtomicHeatingNumbersBlock class contains the heating numbers.\n"
+    "The PhotoatomicHeatingNumbersBlock class contains the heating numbers.\n"
     "The size of the array is stored in NXS(3) and the corresponding energy\n"
     "points can be found in the ESZG block."
   );
