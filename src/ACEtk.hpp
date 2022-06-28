@@ -18,6 +18,7 @@
 // interpretation ACE tables
 #include "ACEtk/ContinuousEnergyTable.hpp"
 #include "ACEtk/DosimetryTable.hpp"
+#include "ACEtk/PhotoatomicTable.hpp"
 #include "ACEtk/ThermalScatteringTable.hpp"
 
 #ifndef ACETK_HPP

@@ -42,7 +42,7 @@ public:
   /**
    *  @brief Return the number of elements in a column
    */
-  std::size_t N() const { return this->IXSS( 1 ); }
+  std::size_t N() const { return this->empty() ? 0 : this->IXSS( 1 ); }
 
   /**
    *  @brief Return the number of elements in a column
