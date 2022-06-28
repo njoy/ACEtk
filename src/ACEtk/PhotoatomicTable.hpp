@@ -5,13 +5,13 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PhotoAtomicPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicPrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/IncoherentScatteringFunctionBlock.hpp"
 #include "ACEtk/block/CoherentFormFactorBlock.hpp"
-#include "ACEtk/block/PhotoAtomicFluorescenceDataBlock.hpp"
-#include "ACEtk/block/PhotoAtomicHeatingNumbersBlock.hpp"
-#include "ACEtk/block/PhotoAtomicElectronShellBlock.hpp"
-#include "ACEtk/block/PhotoAtomicComptonProfileBlock.hpp"
+#include "ACEtk/block/PhotoatomicFluorescenceDataBlock.hpp"
+#include "ACEtk/block/PhotoatomicHeatingNumbersBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
+#include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,9 +20,9 @@ namespace ACEtk {
  *  @class
  *  @brief The photoatomic ACE table
  *
- *  The PhotoAtomicTable class represents the ACE table for the photoatomic data.
+ *  The PhotoatomicTable class represents the ACE table for the photoatomic data.
  */
-class PhotoAtomicTable : protected Table {
+class PhotoatomicTable : protected Table {
 
   /* fields */
   block::ESZG eszg_;
@@ -34,12 +34,12 @@ class PhotoAtomicTable : protected Table {
   block::SWD swd_;
 
   /* auxiliary functions */
-  #include "ACEtk/PhotoAtomicTable/src/generateBlocks.hpp"
-  #include "ACEtk/PhotoAtomicTable/src/generateData.hpp"
+  #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
+  #include "ACEtk/PhotoatomicTable/src/generateData.hpp"
 
 public:
 
-  #include "ACEtk/PhotoAtomicTable/src/ctor.hpp"
+  #include "ACEtk/PhotoatomicTable/src/ctor.hpp"
 
   using Table::header;
   using Table::data;

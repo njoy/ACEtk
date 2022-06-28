@@ -2,19 +2,19 @@
 
 #include "catch.hpp"
 #include "ACEtk/fromFile.hpp"
-#include "ACEtk/PhotoAtomicTable.hpp"
+#include "ACEtk/PhotoatomicTable.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
 
-void verifyChunkMcplib( const PhotoAtomicTable& );
-void verifyChunkMcplib03( const PhotoAtomicTable& );
+void verifyChunkMcplib( const PhotoatomicTable& );
+void verifyChunkMcplib03( const PhotoatomicTable& );
 
-SCENARIO( "PhotoAtomicTable" ){
+SCENARIO( "PhotoatomicTable" ){
 
-  GIVEN( "valid data for a PhotoAtomicTable - mcplib" ) {
+  GIVEN( "valid data for a PhotoatomicTable - mcplib" ) {
 
     auto table = fromFile( "1000.01p" );
     std::array< int32_t, 16 > iz = table.data().IZ();
@@ -23,11 +23,11 @@ SCENARIO( "PhotoAtomicTable" ){
     std::array< int64_t, 32 > jxs = table.data().JXS();
     std::vector< double > xss = table.data().XSS();
 
-    WHEN( "constructing a PhotoAtomicTable from a table" ) {
+    WHEN( "constructing a PhotoatomicTable from a table" ) {
 
-      PhotoAtomicTable chunk( std::move( table ) );
+      PhotoatomicTable chunk( std::move( table ) );
 
-      THEN( "a PhotoAtomicTable can be constructed and members can be "
+      THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkMcplib( chunk );
@@ -84,11 +84,11 @@ SCENARIO( "PhotoAtomicTable" ){
       } // THEN
     } // WHEN
 
-    WHEN( "constructing a PhotoAtomicTable from its components" ) {
+    WHEN( "constructing a PhotoatomicTable from its components" ) {
 
-      PhotoAtomicTable base( std::move( table ) );
+      PhotoatomicTable base( std::move( table ) );
 
-      PhotoAtomicTable chunk( 1, base.header(),
+      PhotoatomicTable chunk( 1, base.header(),
                               { 1001, 1002, 1003 },
                               { 0.999167, 1.996800, 2.990140 },
                               base.ESZG(), base.JINC(),
@@ -97,7 +97,7 @@ SCENARIO( "PhotoAtomicTable" ){
                               std::nullopt,
                               std::nullopt );
 
-      THEN( "a PhotoAtomicTable can be constructed and members can be "
+      THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkMcplib( chunk );
@@ -155,7 +155,7 @@ SCENARIO( "PhotoAtomicTable" ){
     } // WHEN
   } // GIVEN
 
-  GIVEN( "valid data for a PhotoAtomicTable - mcplib03" ) {
+  GIVEN( "valid data for a PhotoatomicTable - mcplib03" ) {
 
     auto table = fromFile( "3000.03p" );
     std::array< int32_t, 16 > iz = table.data().IZ();
@@ -164,11 +164,11 @@ SCENARIO( "PhotoAtomicTable" ){
     std::array< int64_t, 32 > jxs = table.data().JXS();
     std::vector< double > xss = table.data().XSS();
 
-    WHEN( "constructing a PhotoAtomicTable from a table" ) {
+    WHEN( "constructing a PhotoatomicTable from a table" ) {
 
-      PhotoAtomicTable chunk( std::move( table ) );
+      PhotoatomicTable chunk( std::move( table ) );
 
-      THEN( "a PhotoAtomicTable can be constructed and members can be "
+      THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkMcplib03( chunk );
@@ -225,11 +225,11 @@ SCENARIO( "PhotoAtomicTable" ){
       } // THEN
     } // WHEN
 
-    WHEN( "constructing a PhotoAtomicTable from its components" ) {
+    WHEN( "constructing a PhotoatomicTable from its components" ) {
 
-      PhotoAtomicTable base( std::move( table ) );
+      PhotoatomicTable base( std::move( table ) );
 
-      PhotoAtomicTable chunk( 3, base.header(),
+      PhotoatomicTable chunk( 3, base.header(),
                               {  },
                               {  },
                               base.ESZG(), base.JINC(),
@@ -237,7 +237,7 @@ SCENARIO( "PhotoAtomicTable" ){
                               std::nullopt,
                               base.EPS(), base.SWD() );
 
-      THEN( "a PhotoAtomicTable can be constructed and members can be "
+      THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkMcplib03( chunk );
@@ -296,7 +296,7 @@ SCENARIO( "PhotoAtomicTable" ){
   } // GIVEN
 } // SCENARIO
 
-void verifyChunkMcplib( const PhotoAtomicTable& chunk ) {
+void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   CHECK( "1000.01p" == chunk.ZAID() );
   CHECK( 0. == Approx( chunk.temperature() ) );
@@ -384,7 +384,7 @@ void verifyChunkMcplib( const PhotoAtomicTable& chunk ) {
   CHECK( true == chunk.SWD().empty() );
 }
 
-void verifyChunkMcplib03( const PhotoAtomicTable& chunk ) {
+void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   CHECK( "3000.03p" == chunk.ZAID() );
   CHECK( 0. == Approx( chunk.temperature() ) );

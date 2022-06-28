@@ -3,7 +3,7 @@
  *
  *  @param[in] table    the generic table to be copied
  */
-PhotoAtomicTable( const Table& table ): Table( table ) {
+PhotoatomicTable( const Table& table ): Table( table ) {
 
   this->generateBlocks();
 }
@@ -13,7 +13,7 @@ PhotoAtomicTable( const Table& table ): Table( table ) {
  *
  *  @param[in] table    the generic table to be moved
  */
-PhotoAtomicTable( Table&& table ): Table( std::move( table ) ) {
+PhotoatomicTable( Table&& table ): Table( std::move( table ) ) {
 
   this->generateBlocks();
 }
@@ -23,7 +23,7 @@ PhotoAtomicTable( Table&& table ): Table( std::move( table ) ) {
  *
  *  @param[in] table    the thermal scattering table to be copied
  */
-PhotoAtomicTable( const PhotoAtomicTable& table ) :
+PhotoatomicTable( const PhotoatomicTable& table ) :
   Table( table ) {
 
   this->generateBlocks();
@@ -34,7 +34,7 @@ PhotoAtomicTable( const PhotoAtomicTable& table ) :
  *
  *  @param[in] table    the thermal scattering table to be moved
  */
-PhotoAtomicTable( PhotoAtomicTable&& table ) :
+PhotoatomicTable( PhotoatomicTable&& table ) :
   Table( std::move( table ) ) {
 
   this->generateBlocks();
@@ -45,9 +45,9 @@ PhotoAtomicTable( PhotoAtomicTable&& table ) :
  *
  *  @param[in] table    the thermal scattering table to be copied
  */
-PhotoAtomicTable& operator=( const PhotoAtomicTable& base ) {
+PhotoatomicTable& operator=( const PhotoatomicTable& base ) {
 
-  new (this) PhotoAtomicTable( base );
+  new (this) PhotoatomicTable( base );
   return *this;
 }
 
@@ -56,9 +56,9 @@ PhotoAtomicTable& operator=( const PhotoAtomicTable& base ) {
  *
  *  @param[in] table    the thermal scattering table to be moved
  */
-PhotoAtomicTable& operator=( PhotoAtomicTable&& base ) {
+PhotoatomicTable& operator=( PhotoatomicTable&& base ) {
 
-  new (this) PhotoAtomicTable( std::move( base ) );
+  new (this) PhotoatomicTable( std::move( base ) );
   return *this;
 }
 
@@ -76,14 +76,14 @@ PhotoAtomicTable& operator=( PhotoAtomicTable&& base ) {
  *  @param[in] eps       the electron shell data block
  *  @param[in] swd       the compton profile block
  */
-PhotoAtomicTable( unsigned int z, Header header,
+PhotoatomicTable( unsigned int z, Header header,
                   std::vector< unsigned int > za, std::vector< double > awr,
                   block::ESZG eszg, block::JINC jinc,
                   block::JCOH jcoh, block::LHNM lhnm,
                   std::optional< block::JFLO > jflo,
                   std::optional< block::EPS > eps,
                   std::optional< block::SWD > swd ) :
-  PhotoAtomicTable(
+  PhotoatomicTable(
       Table( std::move( header ),
              generateData( z, std::move( za ), std::move( awr ),
                            std::move( eszg ), std::move( jinc ),
