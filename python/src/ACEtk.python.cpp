@@ -98,7 +98,6 @@ namespace block {
   void wrapPhotoatomicFluorescenceDataBlock( python::module&, python::module& );
   void wrapPhotoatomicHeatingNumbersBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronShellBlock( python::module&, python::module& );
-  void wrapPhotoatomicComptonProfile( python::module&, python::module& );
   void wrapPhotoatomicComptonProfileBlock( python::module&, python::module& );
   void wrapPhotoNuclearPrincipalCrossSectionBlock( python::module&, python::module& );
   void wrapPhotoNuclearSecondaryParticleLocatorBlock( python::module&, python::module& );
