@@ -36,6 +36,7 @@ class PhotoatomicTable : protected Table {
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
   #include "ACEtk/PhotoatomicTable/src/generateData.hpp"
+  #include "ACEtk/PhotoatomicTable/src/verifyType.hpp"
 
 public:
 

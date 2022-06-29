@@ -5,6 +5,7 @@
  */
 ThermalScatteringTable( const Table& table ): Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -15,6 +16,7 @@ ThermalScatteringTable( const Table& table ): Table( table ) {
  */
 ThermalScatteringTable( Table&& table ): Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -26,6 +28,7 @@ ThermalScatteringTable( Table&& table ): Table( std::move( table ) ) {
 ThermalScatteringTable( const ThermalScatteringTable& table ) :
   Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -37,6 +40,7 @@ ThermalScatteringTable( const ThermalScatteringTable& table ) :
 ThermalScatteringTable( ThermalScatteringTable&& table ) :
   Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
