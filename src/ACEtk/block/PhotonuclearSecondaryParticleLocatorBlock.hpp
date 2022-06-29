@@ -15,24 +15,24 @@ namespace block {
  *  @brief The photonuclear IXSU block with the secondary particle information
  *         and locators
  *
- *  The PhotoNuclearSecondaryParticleLocatorBlock class contains a particle type,
+ *  The PhotonuclearSecondaryParticleLocatorBlock class contains a particle type,
  *  a number of reactions and 10 locators for each secondary particle type.
  *
  *  The number of available particle types is stored in NXS(5).
  */
-class PhotoNuclearSecondaryParticleLocatorBlock : protected details::Base {
+class PhotonuclearSecondaryParticleLocatorBlock : protected details::Base {
 
   /* fields */
   unsigned int ntype_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock/src/verifySize.hpp"
+  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock/src/ctor.hpp"
+  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -219,7 +219,7 @@ public:
   using Base::end;
 };
 
-using IXSU = PhotoNuclearSecondaryParticleLocatorBlock;
+using IXSU = PhotonuclearSecondaryParticleLocatorBlock;
 
 } // block namespace
 } // ACEtk namespace
