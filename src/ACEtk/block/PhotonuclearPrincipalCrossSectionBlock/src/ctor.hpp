@@ -1,7 +1,7 @@
-PhotoNuclearPrincipalCrossSectionBlock() = default;
+PhotonuclearPrincipalCrossSectionBlock() = default;
 
-PhotoNuclearPrincipalCrossSectionBlock( const PhotoNuclearPrincipalCrossSectionBlock& ) = default;
-PhotoNuclearPrincipalCrossSectionBlock( PhotoNuclearPrincipalCrossSectionBlock&& ) = default;
+PhotonuclearPrincipalCrossSectionBlock( const PhotonuclearPrincipalCrossSectionBlock& ) = default;
+PhotonuclearPrincipalCrossSectionBlock( PhotonuclearPrincipalCrossSectionBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -11,7 +11,7 @@ PhotoNuclearPrincipalCrossSectionBlock( PhotoNuclearPrincipalCrossSectionBlock&&
  *  @param[in] elastic          the elastic cross section values
  *  @param[in] heating          the average heating cross section values
  */
-PhotoNuclearPrincipalCrossSectionBlock( std::vector< double > energies,
+PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,
                                         std::vector< double > total,
                                         std::vector< double > elastic,
                                         std::vector< double > heating ) :
@@ -28,7 +28,7 @@ PhotoNuclearPrincipalCrossSectionBlock( std::vector< double > energies,
  *  @param[in] elastic          the elastic cross section values
  *  @param[in] heating          the average heating cross section values
  */
-PhotoNuclearPrincipalCrossSectionBlock( std::vector< double > energies,
+PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,
                                         std::vector< double > total,
                                         std::vector< double > heating ) :
   ArrayData( "ESZU",
@@ -42,9 +42,9 @@ PhotoNuclearPrincipalCrossSectionBlock( std::vector< double > energies,
  *  @param[in] end     the end iterator of the ESZ block in the XSS array
  *  @param[in] nes     the number of energy points
  */
-PhotoNuclearPrincipalCrossSectionBlock( Iterator begin, Iterator end,
+PhotonuclearPrincipalCrossSectionBlock( Iterator begin, Iterator end,
                                         unsigned int nes, unsigned int size ) :
   ArrayData( "ESZU", begin, end, nes, size ) {}
 
-PhotoNuclearPrincipalCrossSectionBlock& operator=( const PhotoNuclearPrincipalCrossSectionBlock& ) = default;
-PhotoNuclearPrincipalCrossSectionBlock& operator=( PhotoNuclearPrincipalCrossSectionBlock&& ) = default;
+PhotonuclearPrincipalCrossSectionBlock& operator=( const PhotonuclearPrincipalCrossSectionBlock& ) = default;
+PhotonuclearPrincipalCrossSectionBlock& operator=( PhotonuclearPrincipalCrossSectionBlock&& ) = default;

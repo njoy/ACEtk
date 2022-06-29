@@ -157,13 +157,13 @@ if(ACEtk.python)
     python/src/block/PhotoatomicElectronShellBlock.python.cpp
     python/src/block/PhotoatomicComptonProfile.python.cpp
     python/src/block/PhotoatomicComptonProfileBlock.python.cpp
-    python/src/block/PhotoNuclearPrincipalCrossSectionBlock.python.cpp
-    python/src/block/PhotoNuclearSecondaryParticleLocatorBlock.python.cpp
+    python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
+    python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp
     python/src/PhotoatomicTable.python.cpp
-    python/src/PhotoNuclearTable.python.cpp
+    python/src/PhotonuclearTable.python.cpp
   )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )

@@ -3,7 +3,7 @@
  *
  *  @param[in] table    the generic table to be copied
  */
-PhotoNuclearTable( const Table& table ): Table( table ) {
+PhotonuclearTable( const Table& table ): Table( table ) {
 
   this->generateBlocks();
 }
@@ -13,7 +13,7 @@ PhotoNuclearTable( const Table& table ): Table( table ) {
  *
  *  @param[in] table    the generic table to be moved
  */
-PhotoNuclearTable( Table&& table ): Table( std::move( table ) ) {
+PhotonuclearTable( Table&& table ): Table( std::move( table ) ) {
 
   this->generateBlocks();
 }
@@ -23,7 +23,7 @@ PhotoNuclearTable( Table&& table ): Table( std::move( table ) ) {
  *
  *  @param[in] table    the continuous energy table to be copied
  */
-PhotoNuclearTable( const PhotoNuclearTable& table ) :
+PhotonuclearTable( const PhotonuclearTable& table ) :
   Table( table ) {
 
   this->generateBlocks();
@@ -34,7 +34,7 @@ PhotoNuclearTable( const PhotoNuclearTable& table ) :
  *
  *  @param[in] table    the continuous energy table to be moved
  */
-PhotoNuclearTable( PhotoNuclearTable&& table ) :
+PhotonuclearTable( PhotonuclearTable&& table ) :
   Table( std::move( table ) ) {
 
   this->generateBlocks();
@@ -45,9 +45,9 @@ PhotoNuclearTable( PhotoNuclearTable&& table ) :
  *
  *  @param[in] table    the continuous energy table to be copied
  */
-PhotoNuclearTable& operator=( const PhotoNuclearTable& base ) {
+PhotonuclearTable& operator=( const PhotonuclearTable& base ) {
 
-  new (this) PhotoNuclearTable( base );
+  new (this) PhotonuclearTable( base );
   return *this;
 }
 
@@ -56,9 +56,9 @@ PhotoNuclearTable& operator=( const PhotoNuclearTable& base ) {
  *
  *  @param[in] table    the continuous energy table to be moved
  */
-PhotoNuclearTable& operator=( PhotoNuclearTable&& base ) {
+PhotonuclearTable& operator=( PhotonuclearTable&& base ) {
 
-  new (this) PhotoNuclearTable( std::move( base ) );
+  new (this) PhotonuclearTable( std::move( base ) );
   return *this;
 }
 
@@ -80,7 +80,7 @@ PhotoNuclearTable& operator=( PhotoNuclearTable&& base ) {
  *  @param[in] andh      the secondary particle angular distribution data blocks
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
  */
-PhotoNuclearTable( unsigned int z, unsigned int a, Header header,
+PhotonuclearTable( unsigned int z, unsigned int a, Header header,
                    block::ESZU eszu, block::MTR mtr, block::LQR lqr,
                    block::SIG sig,
                    std::optional< std::vector< unsigned int > > ptype,
@@ -90,7 +90,7 @@ PhotoNuclearTable( unsigned int z, unsigned int a, Header header,
                    std::optional< std::vector< block::SIGH > > sigh,
                    std::optional< std::vector< block::ANDH > > andh,
                    std::optional< std::vector< block::DLWH > > dlwh ) :
-  PhotoNuclearTable(
+  PhotonuclearTable(
       Table( std::move( header ),
              generateData( z, a, std::move( eszu ),
                            std::move( mtr ), std::move( lqr ),

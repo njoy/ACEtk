@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoNuclearPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoNuclearPrincipalCrossSectionBlock = block::PhotoNuclearPrincipalCrossSectionBlock;
+using PhotonuclearPrincipalCrossSectionBlock = block::PhotonuclearPrincipalCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoNuclearPrincipalCrossSectionBlock& );
+void verifyChunk( const PhotonuclearPrincipalCrossSectionBlock& );
 
-SCENARIO( "PhotoNuclearPrincipalCrossSectionBlock" ) {
+SCENARIO( "PhotonuclearPrincipalCrossSectionBlock" ) {
 
-  GIVEN( "valid data for a PhotoNuclearPrincipalCrossSectionBlock instance" ) {
+  GIVEN( "valid data for a PhotonuclearPrincipalCrossSectionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -99,11 +99,11 @@ SCENARIO( "PhotoNuclearPrincipalCrossSectionBlock" ) {
         3.05302600000E+02,   3.09883800000E+02
       };
 
-      PhotoNuclearPrincipalCrossSectionBlock chunk( std::move( energies ),
+      PhotonuclearPrincipalCrossSectionBlock chunk( std::move( energies ),
                                                     std::move( total ),
                                                     std::move( heating ) );
 
-      THEN( "a PhotoNuclearPrincipalCrossSectionBlock can be constructed and members can "
+      THEN( "a PhotonuclearPrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -121,9 +121,9 @@ SCENARIO( "PhotoNuclearPrincipalCrossSectionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoNuclearPrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 90, 3 );
+      PhotonuclearPrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 90, 3 );
 
-      THEN( "a PhotoNuclearPrincipalCrossSectionBlock can be constructed and members can "
+      THEN( "a PhotonuclearPrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -216,7 +216,7 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotoNuclearPrincipalCrossSectionBlock& chunk ) {
+void verifyChunk( const PhotonuclearPrincipalCrossSectionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 270 == chunk.length() );

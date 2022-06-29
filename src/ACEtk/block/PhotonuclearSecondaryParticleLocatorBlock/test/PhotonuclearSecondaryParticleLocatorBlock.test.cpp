@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoNuclearSecondaryParticleLocatorBlock = block::PhotoNuclearSecondaryParticleLocatorBlock;
+using PhotonuclearSecondaryParticleLocatorBlock = block::PhotonuclearSecondaryParticleLocatorBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoNuclearSecondaryParticleLocatorBlock& );
+void verifyChunk( const PhotonuclearSecondaryParticleLocatorBlock& );
 
-SCENARIO( "PhotoNuclearSecondaryParticleLocatorBlock" ) {
+SCENARIO( "PhotonuclearSecondaryParticleLocatorBlock" ) {
 
-  GIVEN( "valid data for a PhotoNuclearSecondaryParticleLocatorBlock instance" ) {
+  GIVEN( "valid data for a PhotonuclearSecondaryParticleLocatorBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -53,11 +53,11 @@ SCENARIO( "PhotoNuclearSecondaryParticleLocatorBlock" ) {
           863658,              863659 }
       };
 
-      PhotoNuclearSecondaryParticleLocatorBlock chunk( std::move( types ),
+      PhotonuclearSecondaryParticleLocatorBlock chunk( std::move( types ),
                                                        std::move( numbers ),
                                                        std::move( locators ) );
 
-      THEN( "a PhotoNuclearSecondaryParticleLocatorBlock can be constructed and members "
+      THEN( "a PhotonuclearSecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
         verifyChunk( chunk );
@@ -75,9 +75,9 @@ SCENARIO( "PhotoNuclearSecondaryParticleLocatorBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoNuclearSecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      PhotonuclearSecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
 
-      THEN( "a PhotoNuclearSecondaryParticleLocatorBlock can be constructed and members "
+      THEN( "a PhotonuclearSecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
         verifyChunk( chunk );
@@ -124,7 +124,7 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotoNuclearSecondaryParticleLocatorBlock& chunk ) {
+void verifyChunk( const PhotonuclearSecondaryParticleLocatorBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 84 == chunk.length() );

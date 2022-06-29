@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/PhotoNuclearTable.hpp"
+#include "ACEtk/PhotonuclearTable.hpp"
 #include "ACEtk/fromFile.hpp"
 #include "definitions.hpp"
 #include "views.hpp"
@@ -11,11 +11,11 @@
 // namespace aliases
 namespace python = pybind11;
 
-void wrapPhotoNuclearTable( python::module& module, python::module& ) {
+void wrapPhotonuclearTable( python::module& module, python::module& ) {
 
   // type aliases
   using Header = njoy::ACEtk::Table::Header;
-  using Table = njoy::ACEtk::PhotoNuclearTable;
+  using Table = njoy::ACEtk::PhotonuclearTable;
   using ESZU = njoy::ACEtk::block::ESZU;
   using MTR = njoy::ACEtk::block::MTR;
   using LQR = njoy::ACEtk::block::LQR;
@@ -33,9 +33,9 @@ void wrapPhotoNuclearTable( python::module& module, python::module& ) {
   python::class_< Table > table(
 
     module,
-    "PhotoNuclearTable",
+    "PhotonuclearTable",
     "A continuous energy ACE table\n\n"
-    "The PhotoNuclearTable class represents the ACE table for the photonuclear data."
+    "The PhotonuclearTable class represents the ACE table for the photonuclear data."
   );
 
   // wrap the table

@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoNuclearPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoNuclearPrincipalCrossSectionBlock( python::module& module, python::module& ) {
+void wrapPhotonuclearPrincipalCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoNuclearPrincipalCrossSectionBlock;
+  using Block = njoy::ACEtk::block::PhotonuclearPrincipalCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapPhotoNuclearPrincipalCrossSectionBlock( python::module& module, python:
   python::class_< Block > block(
 
     module,
-    "PhotoNuclearPrincipalCrossSectionBlock",
+    "PhotonuclearPrincipalCrossSectionBlock",
     "The photoatomic ESZG block with the principal cross sections\n\n"
-    "The PhotoNuclearPrincipalCrossSectionBlock class contains 3 or 4 arrays of the\n"
+    "The PhotonuclearPrincipalCrossSectionBlock class contains 3 or 4 arrays of the\n"
     "same length (all values are stored as the natural logarithm):\n"
     "  - the energy points\n"
     "  - the total cross section\n"

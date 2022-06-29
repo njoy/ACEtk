@@ -2,7 +2,7 @@
 
 #include "catch.hpp"
 #include "ACEtk/fromFile.hpp"
-#include "ACEtk/PhotoNuclearTable.hpp"
+#include "ACEtk/PhotonuclearTable.hpp"
 
 // other includes
 
@@ -11,11 +11,11 @@ using namespace njoy::ACEtk;
 using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
 using EnergyAngleDistributionData = block::EnergyAngleDistributionData;
 
-void verifyChunk( const PhotoNuclearTable& );
+void verifyChunk( const PhotonuclearTable& );
 
-SCENARIO( "PhotoNuclearTable" ){
+SCENARIO( "PhotonuclearTable" ){
 
-  GIVEN( "valid data for a PhotoNuclearTable" ) {
+  GIVEN( "valid data for a PhotonuclearTable" ) {
 
     auto table = fromFile( "94239.31u" );
     std::array< int32_t, 16 > iz = table.data().IZ();
@@ -24,11 +24,11 @@ SCENARIO( "PhotoNuclearTable" ){
     std::array< int64_t, 32 > jxs = table.data().JXS();
     std::vector< double > xss = table.data().XSS();
 
-    WHEN( "constructing a PhotoNuclearTable from a table" ) {
+    WHEN( "constructing a PhotonuclearTable from a table" ) {
 
-      PhotoNuclearTable chunk( std::move( table ) );
+      PhotonuclearTable chunk( std::move( table ) );
 
-      THEN( "a PhotoNuclearTable can be constructed and members can be "
+      THEN( "a PhotonuclearTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunk( chunk );
@@ -85,9 +85,9 @@ SCENARIO( "PhotoNuclearTable" ){
       } // THEN
     } // WHEN
 
-    WHEN( "constructing a PhotoNuclearTable from its components" ) {
+    WHEN( "constructing a PhotonuclearTable from its components" ) {
 
-      PhotoNuclearTable base( std::move( table ) );
+      PhotonuclearTable base( std::move( table ) );
 
       std::optional< std::vector< unsigned int > > ptype = std::vector< unsigned int >{};
       std::optional< std::vector< block::CrossSectionData > > pxs = std::vector< block::CrossSectionData >{};
@@ -107,14 +107,14 @@ SCENARIO( "PhotoNuclearTable" ){
         dlwh->push_back( base.DLWH( index ) );
       }
 
-      PhotoNuclearTable chunk( 94, 239, base.header(),
+      PhotonuclearTable chunk( 94, 239, base.header(),
                                base.ESZ(), base.MTR(), base.LQR(),
                                base.SIG(), std::move( ptype ),
                                std::move( pxs ), std::move( phn ),
                                std::move( mtrh ), std::move( sigh ),
                                std::move( andh ), std::move( dlwh ) );
 
-      THEN( "a PhotoNuclearTable can be constructed and members can be "
+      THEN( "a PhotonuclearTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunk( chunk );
@@ -173,7 +173,7 @@ SCENARIO( "PhotoNuclearTable" ){
   } // GIVEN
 } // SCENARIO
 
-void verifyChunk( const PhotoNuclearTable& chunk ) {
+void verifyChunk( const PhotonuclearTable& chunk ) {
 
   CHECK( "94239.31u" == chunk.ZAID() );
   CHECK( 0.0 == Approx( chunk.temperature() ) );

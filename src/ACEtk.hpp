@@ -19,6 +19,7 @@
 #include "ACEtk/ContinuousEnergyTable.hpp"
 #include "ACEtk/DosimetryTable.hpp"
 #include "ACEtk/PhotoatomicTable.hpp"
+#include "ACEtk/PhotonuclearTable.hpp"
 #include "ACEtk/ThermalScatteringTable.hpp"
 
 #ifndef ACETK_HPP

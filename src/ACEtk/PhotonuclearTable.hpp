@@ -5,11 +5,11 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PhotoNuclearPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
 #include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
-#include "ACEtk/block/PhotoNuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
@@ -25,7 +25,7 @@ namespace ACEtk {
  *
  *  The PhotoAtomicTable class represents the ACE table for the photonuclear data.
  */
-class PhotoNuclearTable : protected Table {
+class PhotonuclearTable : protected Table {
 
   /* fields */
   block::ESZU eszu_;
@@ -43,12 +43,12 @@ class PhotoNuclearTable : protected Table {
   std::vector< block::DLWH > dlwh_;
 
   /* auxiliary functions */
-  #include "ACEtk/PhotoNuclearTable/src/generateBlocks.hpp"
-  #include "ACEtk/PhotoNuclearTable/src/generateData.hpp"
+  #include "ACEtk/PhotonuclearTable/src/generateBlocks.hpp"
+  #include "ACEtk/PhotonuclearTable/src/generateData.hpp"
 
 public:
 
-  #include "ACEtk/PhotoNuclearTable/src/ctor.hpp"
+  #include "ACEtk/PhotonuclearTable/src/ctor.hpp"
 
   using Table::header;
   using Table::data;
