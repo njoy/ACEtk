@@ -65,6 +65,7 @@ namespace block {
   void wrapProbabilityTable( python::module&, python::module& );
   void wrapThermalScatteringDiscreteCosines( python::module&, python::module& );
   void wrapThermalScatteringDiscreteCosinesWithProbability( python::module&, python::module& );
+  void wrapPhotoatomicComptonProfile( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -97,7 +98,6 @@ namespace block {
   void wrapPhotoatomicFluorescenceDataBlock( python::module&, python::module& );
   void wrapPhotoatomicHeatingNumbersBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronShellBlock( python::module&, python::module& );
-  void wrapPhotoatomicComptonProfile( python::module&, python::module& );
   void wrapPhotoatomicComptonProfileBlock( python::module&, python::module& );
 }
 
