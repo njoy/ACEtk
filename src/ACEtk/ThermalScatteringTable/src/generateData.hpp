@@ -112,7 +112,7 @@ Data generateData( std::vector< unsigned int > za,
   nxs[0] = xss.size();
   nxs[1] = 3;
   nxs[2] = itxe.NIL();
-  nxs[3] = bool( itxe.NIEB() ) ? itxe.NIEB().value() : 0;
+  nxs[3] = itxe.IFENG() < 2 ? itxe.NIEB( 1 ) : 0;
   nxs[4] = idpnc;
   nxs[5] = ncl;
   nxs[6] = itxe.IFENG();

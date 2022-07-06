@@ -4,11 +4,11 @@ void generateBlocks() {
   auto nc = this->NC();
   if ( this->IFENG() < 2 ) {
 
-    auto nieb = this->NIEB().value();
     auto current = this->begin();
     auto end = current;
     for ( unsigned int incident = 1; incident <= ne; ++incident ) {
 
+      auto nieb = this->NIEB( incident );
       std::vector< AngularDistributionData > data;
       for ( unsigned int outgoing = 1; outgoing <= nieb; ++outgoing ) {
 
@@ -27,7 +27,7 @@ void generateBlocks() {
     for ( unsigned int incident = 1; incident <= ne; ++incident ) {
 
       locator = this->relativeDistributionLocator( incident + 1 );
-      auto nieb = this->N( incident );
+      auto nieb = this->NIEB( incident );
       auto next = incident == ne ? this->end() : this->iterator( locator );
 
       std::vector< AngularDistributionData > data;

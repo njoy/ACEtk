@@ -102,7 +102,7 @@ ThermalScatteringInelasticAngularDistributionBlock(
   if ( ifeng < 2 ) {
 
     this->verifySize( this->begin(), this->end(), this->NE(),
-                      this->NIEB().value(), this->NC() );
+                      this->nieb_.value(), this->NC() );
   }
   this->generateBlocks();
 }
