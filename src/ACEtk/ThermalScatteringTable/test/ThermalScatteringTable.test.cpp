@@ -612,8 +612,6 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
   CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
   CHECK( 118 == chunk.ITXE().NE() );
   CHECK( 118 == chunk.ITXE().numberIncidentEnergies() );
-  CHECK( std::nullopt == chunk.ITXE().NIEB() );
-  CHECK( std::nullopt == chunk.ITXE().numberOutgoingEnergies() );
 
   // ITCE block
   CHECK( true == chunk.ITCE().empty() );
@@ -674,8 +672,6 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
   CHECK( 91 == chunk.ITXE().NE() );
   CHECK( 91 == chunk.ITXE().numberIncidentEnergies() );
-  CHECK( std::nullopt == chunk.ITXE().NIEB() );
-  CHECK( std::nullopt == chunk.ITXE().numberOutgoingEnergies() );
 
   // ITCE block
   CHECK( true == chunk.ITCE().empty() );
@@ -756,8 +752,6 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
   CHECK( 100 == chunk.ITXE().NE() );
   CHECK( 100 == chunk.ITXE().numberIncidentEnergies() );
-  CHECK( std::nullopt == chunk.ITXE().NIEB() );
-  CHECK( std::nullopt == chunk.ITXE().numberOutgoingEnergies() );
 
   // ITCE block
   CHECK( false == chunk.ITCE().empty() );
@@ -829,8 +823,6 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 19 == chunk.ITXE().inelasticDimensioningParameter() );
   CHECK( 117 == chunk.ITXE().NE() );
   CHECK( 117 == chunk.ITXE().numberIncidentEnergies() );
-  CHECK( 20 == chunk.ITXE().NIEB() );
-  CHECK( 20 == chunk.ITXE().numberOutgoingEnergies() );
 
   // ITCE block
   CHECK( false == chunk.ITCE().empty() );
