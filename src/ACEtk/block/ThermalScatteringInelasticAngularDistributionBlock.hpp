@@ -157,7 +157,7 @@ public:
     else {
 
       #ifndef NDEBUG
-      this->verifyIndex( incident );
+      this->verifyIndex( index );
       #endif
       return this->IXSS( this->NE() + index );
     }
