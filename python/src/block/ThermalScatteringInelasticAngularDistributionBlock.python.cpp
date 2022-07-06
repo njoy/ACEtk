@@ -106,17 +106,25 @@ void wrapThermalScatteringInelasticAngularDistributionBlock( python::module& mod
     &Block::numberIncidentEnergies,
     "The number of incident energy values"
   )
-  .def_property_readonly(
+  .def(
 
     "NIEB",
     &Block::NIEB,
-    "The number of outgoing energy values (not used for ifeng = 2)"
+    python::arg( "index" ),
+    "The number of secondary energies for an incident energy index\n\n"
+    "When the index is out of range an std::out_of_range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "index    the incident energy index (one-based)"
   )
-  .def_property_readonly(
+  .def(
 
     "number_outgoing_energies",
     &Block::numberOutgoingEnergies,
-    "The number of outgoing energy values (not used for ifeng = 2)"
+    python::arg( "index" ),
+    "The number of secondary energies for an incident energy index\n\n"
+    "When the index is out of range an std::out_of_range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "index    the incident energy index (one-based)"
   )
   .def_property_readonly(
 
