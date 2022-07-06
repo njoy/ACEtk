@@ -192,8 +192,15 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
-  CHECK( 2 == chunk.NIEB() );
-  CHECK( 2 == chunk.numberOutgoingEnergies() );
+
+  CHECK( 2 == chunk.NIEB( 1 ) );
+  CHECK( 2 == chunk.NIEB( 2 ) );
+  CHECK( 2 == chunk.NIEB( 3 ) );
+  CHECK( 2 == chunk.NIEB( 4 ) );
+  CHECK( 2 == chunk.numberOutgoingEnergies( 1 ) );
+  CHECK( 2 == chunk.numberOutgoingEnergies( 2 ) );
+  CHECK( 2 == chunk.numberOutgoingEnergies( 3 ) );
+  CHECK( 2 == chunk.numberOutgoingEnergies( 4 ) );
 
   auto data11 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 1, 1 ) );
   CHECK( 3 == data11.NC() );
@@ -272,8 +279,15 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
-  CHECK( std::nullopt == chunk.NIEB() );
-  CHECK( std::nullopt == chunk.numberOutgoingEnergies() );
+
+  CHECK( 2 == chunk.NIEB( 1 ) );
+  CHECK( 4 == chunk.NIEB( 2 ) );
+  CHECK( 3 == chunk.NIEB( 3 ) );
+  CHECK( 3 == chunk.NIEB( 4 ) );
+  CHECK( 2 == chunk.numberOutgoingEnergies( 1 ) );
+  CHECK( 4 == chunk.numberOutgoingEnergies( 2 ) );
+  CHECK( 3 == chunk.numberOutgoingEnergies( 3 ) );
+  CHECK( 3 == chunk.numberOutgoingEnergies( 4 ) );
 
   auto data11 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 1, 1 ) );
   CHECK( 3 == data11.NC() );

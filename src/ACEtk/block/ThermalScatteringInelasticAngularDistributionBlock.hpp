@@ -93,19 +93,6 @@ private:
     return locator - this->locb_ + 1;
   }
 
-  /**
-   *  @brief Return the number of secondary energies for an incident energy index
-   *
-   *  When the index is out of range an std::out_of_range exception is thrown
-   *  (debug mode only).
-   *
-   *  @param[in] index     the index (one-based)
-   */
-  int N( std::size_t index ) const {
-
-    return this->IXSS( this->NE() + index );
-  }
-
 public:
 
   /* constructor */
@@ -154,16 +141,39 @@ public:
   std::size_t numberIncidentEnergies() const { return this->NE(); }
 
   /**
-   *  @brief Return the number of outgoing energy values (not used for ifeng = 2)
+   *  @brief Return the number of secondary energies for an incident energy index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
    */
-  const std::optional< std::size_t >& NIEB() const { return this->nieb_; }
+  std::size_t NIEB( std::size_t index ) const {
+
+    if ( this->nieb_ ) {
+
+      return this->nieb_.value();
+    }
+    else {
+
+      #ifndef NDEBUG
+      this->verifyIndex( incident );
+      #endif
+      return this->IXSS( this->NE() + index );
+    }
+  }
 
   /**
-   *  @brief Return the number of outgoing energy values (not used for ifeng = 2)
+   *  @brief Return the number of secondary energies for an incident energy index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
    */
-  const std::optional< std::size_t >& numberOutgoingEnergies() const {
+  std::size_t numberOutgoingEnergies( std::size_t index ) const {
 
-    return this->NIEB();
+    return this->NIEB( index );
   }
 
   /**
