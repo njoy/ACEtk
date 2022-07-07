@@ -47,7 +47,7 @@ public:
   /**
    *  @brief Return the number of electrons for each shell
    */
-  auto LNEPS() const { return this->array( 1 ); }
+  auto LNEPS() const { return this->darray( 1 ); }
 
   /**
    *  @brief Return the number of electrons for each shell
@@ -57,7 +57,7 @@ public:
   /**
    *  @brief Return the binding energy for each shell
    */
-  auto LBEPS() const { return this->array( 2 ); }
+  auto LBEPS() const { return this->darray( 2 ); }
 
   /**
    *  @brief Return the binding energy for each shell
@@ -67,7 +67,7 @@ public:
   /**
    *  @brief Return the interaction probability for each shell
    */
-  auto LPIPS() const { return this->array( 3 ); }
+  auto LPIPS() const { return this->darray( 3 ); }
 
   /**
    *  @brief Return the interaction probability for each shell

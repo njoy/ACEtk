@@ -46,7 +46,7 @@ public:
   /**
    *  @brief Return the total photon production cross section values
    */
-  auto totalProduction() const { return this->array( 1 ); }
+  auto totalProduction() const { return this->darray( 1 ); }
 
   using ArrayData::empty;
   using ArrayData::name;

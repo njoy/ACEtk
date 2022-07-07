@@ -44,32 +44,32 @@ public:
   /**
    *  @brief Return the cumulative probability values
    */
-  auto cumulativeProbabilities() const { return this->array( 1 ); }
+  auto cumulativeProbabilities() const { return this->darray( 1 ); }
 
   /**
    *  @brief Return the total cross section values
    */
-  auto total() const { return this->array( 2 ); }
+  auto total() const { return this->darray( 2 ); }
 
   /**
    *  @brief Return the elastic cross section values
    */
-  auto elastic() const { return this->array( 3 ); }
+  auto elastic() const { return this->darray( 3 ); }
 
   /**
    *  @brief Return the fission cross section values
    */
-  auto fission() const { return this->array( 4 ); }
+  auto fission() const { return this->darray( 4 ); }
 
   /**
    *  @brief Return the capture cross section values
    */
-  auto capture() const { return this->array( 5 ); }
+  auto capture() const { return this->darray( 5 ); }
 
   /**
    *  @brief Return the heating numbers
    */
-  auto heating() const { return this->array( 6 ); }
+  auto heating() const { return this->darray( 6 ); }
 
   using ArrayData::empty;
   using ArrayData::name;

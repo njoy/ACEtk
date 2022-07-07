@@ -68,7 +68,7 @@ public:
   /**
    *  @brief Return the particle types
    */
-  auto IPs() const { return this->array( 1 ); }
+  auto IPs() const { return this->iarray( 1 ); }
 
   /**
    *  @brief Return the particle types

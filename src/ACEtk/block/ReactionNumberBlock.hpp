@@ -66,7 +66,7 @@ public:
   /**
    *  @brief Return the reaction numbers
    */
-  auto MTs() const { return this->array( 1 ); }
+  auto MTs() const { return this->iarray( 1 ); }
 
   /**
    *  @brief Return the reaction numbers

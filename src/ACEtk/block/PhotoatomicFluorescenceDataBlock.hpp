@@ -47,7 +47,7 @@ public:
   /**
    *  @brief Return the fluoresence edge energies
    */
-  auto E() const { return this->array( 1 ); }
+  auto E() const { return this->darray( 1 ); }
 
   /**
    *  @brief Return the fluoresence edge energies
@@ -57,7 +57,7 @@ public:
   /**
    *  @brief Return the relative ejection probabilities
    */
-  auto PHI() const { return this->array( 2 ); }
+  auto PHI() const { return this->darray( 2 ); }
 
   /**
    *  @brief Return the relative ejection probabilities
@@ -67,7 +67,7 @@ public:
   /**
    *  @brief Return the yields
    */
-  auto Y() const { return this->array( 3 ); }
+  auto Y() const { return this->darray( 3 ); }
 
   /**
    *  @brief Return the yields
@@ -77,7 +77,7 @@ public:
   /**
    *  @brief Return the fluorescent energies
    */
-  auto F() const { return this->array( 4 ); }
+  auto F() const { return this->darray( 4 ); }
 
   /**
    *  @brief Return the fluorescent energies

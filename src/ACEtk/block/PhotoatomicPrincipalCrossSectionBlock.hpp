@@ -50,27 +50,27 @@ public:
   /**
    *  @brief Return the energy values
    */
-  auto energies() const { return this->array( 1 ); }
+  auto energies() const { return this->darray( 1 ); }
 
   /**
    *  @brief Return the incoherent cross section values
    */
-  auto incoherent() const { return this->array( 2 ); }
+  auto incoherent() const { return this->darray( 2 ); }
 
   /**
    *  @brief Return the coherent cross section values
    */
-  auto coherent() const { return this->array( 3 ); }
+  auto coherent() const { return this->darray( 3 ); }
 
   /**
    *  @brief Return the photo-electric cross section values
    */
-  auto photoelectric() const { return this->array( 4 ); }
+  auto photoelectric() const { return this->darray( 4 ); }
 
   /**
    *  @brief Return the pair production cross section values
    */
-  auto pairproduction() const { return this->array( 5 ); }
+  auto pairproduction() const { return this->darray( 5 ); }
 
   using ArrayData::empty;
   using ArrayData::name;

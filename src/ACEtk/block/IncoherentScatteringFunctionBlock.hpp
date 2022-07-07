@@ -54,7 +54,7 @@ public:
   /**
    *  @brief Return the scattering function values
    */
-  auto values() const { return this->array( 1 ); }
+  auto values() const { return this->darray( 1 ); }
 
   using ArrayData::empty;
   using ArrayData::name;

@@ -54,7 +54,7 @@ public:
   /**
    *  @brief Return the Q values
    */
-  auto QValues() const { return this->array( 1 ); }
+  auto QValues() const { return this->darray( 1 ); }
 
   using ArrayData::empty;
   using ArrayData::name;
