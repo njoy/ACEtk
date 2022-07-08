@@ -58,7 +58,7 @@ private:
    */
   int LOCC( std::size_t index ) const {
 
-    return this->IXSS( index );
+    return this->IXSS( index ) + 1;
   }
 
   /**
@@ -90,7 +90,7 @@ private:
   std::size_t relativeDistributionLocator( std::size_t index ) const {
 
     const int locator = this->LOCC( index );
-    return locator - this->locb_ + 1;
+    return locator - ( this->locb_ - 1 );
   }
 
 public:
