@@ -58,7 +58,7 @@ private:
    */
   int LOCC( std::size_t index ) const {
 
-    return this->IXSS( index );
+    return this->IXSS( index ) + 1;
   }
 
   /**
@@ -90,7 +90,7 @@ private:
   std::size_t relativeDistributionLocator( std::size_t index ) const {
 
     const int locator = this->LOCC( index );
-    return locator - this->locb_ + 1;
+    return locator - ( this->locb_ - 1 );
   }
 
 public:
@@ -122,11 +122,18 @@ public:
 
   /**
    *  @brief Return the inelastic dimensioning parameter
+   *
+   *  For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,
+   *  for IFENG = 2 this will be equal to NC + 1
    */
-  std::size_t NIL() const { return this->NC() - 1; }
+  std::size_t NIL() const { return this->IFENG() < 2 ? this->NC() - 1
+                                                     : this->NC() + 1; }
 
   /**
    *  @brief Return the inelastic dimensioning parameter
+   *
+   *  For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,
+   *  for IFENG = 2 this will be equal to NC + 1
    */
   std::size_t inelasticDimensioningParameter() const { return this->NIL(); }
 
