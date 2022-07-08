@@ -122,11 +122,18 @@ public:
 
   /**
    *  @brief Return the inelastic dimensioning parameter
+   *
+   *  For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,
+   *  for IFENG = 2 this will be equal to NC + 1
    */
-  std::size_t NIL() const { return this->NC() - 1; }
+  std::size_t NIL() const { return this->IFENG() < 2 ? this->NC() - 1
+                                                     : this->NC() + 1; }
 
   /**
    *  @brief Return the inelastic dimensioning parameter
+   *
+   *  For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,
+   *  for IFENG = 2 this will be equal to NC + 1
    */
   std::size_t inelasticDimensioningParameter() const { return this->NIL(); }
 

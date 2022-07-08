@@ -59,11 +59,15 @@ public:
 
   /**
    *  @brief Return the elastic dimensioning parameter
+   *
+   *  The elastic dimensioning parameter is equal to NC - 1
    */
   std::size_t NCL() const { return this->NC() - 1; }
 
   /**
    *  @brief Return the elastic dimensioning parameter
+   *
+   *  The elastic dimensioning parameter is equal to NC - 1
    */
   std::size_t elasticDimensioningParameter() const { return this->NCL(); }
 

@@ -192,6 +192,8 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
+  CHECK( 2 == chunk.NIL() );
+  CHECK( 2 == chunk.inelasticDimensioningParameter() );
 
   CHECK( 2 == chunk.NIEB( 1 ) );
   CHECK( 2 == chunk.NIEB( 2 ) );
@@ -279,6 +281,8 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
+  CHECK( 4 == chunk.NIL() );
+  CHECK( 4 == chunk.inelasticDimensioningParameter() );
 
   CHECK( 2 == chunk.NIEB( 1 ) );
   CHECK( 4 == chunk.NIEB( 2 ) );
