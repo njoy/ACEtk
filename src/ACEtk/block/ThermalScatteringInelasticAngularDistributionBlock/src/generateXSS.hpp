@@ -44,7 +44,8 @@ generateXSS(
 
     // set the locator and number of outgoing energies for the current incident
     // energy
-    xss[index] = locator + locb - 1;
+    // Note: historically, these locators are off by 1
+    xss[index] = locator + ( locb - 1 ) - 1;
     xss[size + index] = data.size();
 
     // insert every set of discrete cosines

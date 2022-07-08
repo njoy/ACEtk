@@ -163,7 +163,7 @@ std::vector< double > chunkWithIFENG2() {
 
   return {
 
-                    17,                 29,                 53,                 71,
+                    16,                 28,                 52,                 70,
                      2,                  4,                  3,                  3,
      1.00000000000E+00,  5.00000000000E-01,  0.00000000000E+00, -1.00000000000E+00, -0.90000000000E+00,  1.00000000000E+00,
      2.00000000000E+00,  5.00000000000E-01,  1.00000000000E+00, -1.00000000000E+00,  0.00000000000E+00,  1.00000000000E+00,
@@ -192,6 +192,8 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
+  CHECK( 2 == chunk.NIL() );
+  CHECK( 2 == chunk.inelasticDimensioningParameter() );
 
   CHECK( 2 == chunk.NIEB( 1 ) );
   CHECK( 2 == chunk.NIEB( 2 ) );
@@ -279,6 +281,8 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
+  CHECK( 4 == chunk.NIL() );
+  CHECK( 4 == chunk.inelasticDimensioningParameter() );
 
   CHECK( 2 == chunk.NIEB( 1 ) );
   CHECK( 4 == chunk.NIEB( 2 ) );

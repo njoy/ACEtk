@@ -86,13 +86,17 @@ void wrapThermalScatteringInelasticAngularDistributionBlock( python::module& mod
 
     "NIL",
     &Block::NIL,
-    "The inelastic dimensioning parameter"
+    "The inelastic dimensioning parameter\n\n"
+    "For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,\n"
+    "for IFENG = 2 this will be equal to NC + 1\n"
   )
   .def_property_readonly(
 
     "inelastic_dimensioning_parameter",
     &Block::inelasticDimensioningParameter,
-    "The inelastic dimensioning parameter"
+    "The inelastic dimensioning parameter\n\n"
+    "For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,\n"
+    "for IFENG = 2 this will be equal to NC + 1\n"
   )
   .def_property_readonly(
 

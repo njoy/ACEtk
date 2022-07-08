@@ -88,6 +88,8 @@ void verifyChunk( const ThermalScatteringElasticAngularDistributionBlock& chunk 
   CHECK( 4 == chunk.numberIncidentEnergies() );
   CHECK( 3 == chunk.NC() );
   CHECK( 3 == chunk.numberDiscreteCosines() );
+  CHECK( 2 == chunk.NCL() );
+  CHECK( 2 == chunk.elasticDimensioningParameter() );
 
   auto cosines = chunk.cosines( 1 );
   CHECK( 3 == cosines.size() );

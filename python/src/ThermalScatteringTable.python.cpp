@@ -129,13 +129,17 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
 
     "NIL",
     &Table::NIL,
-    "The inelastic dimensioning parameter"
+    "The inelastic dimensioning parameter\n\n"
+    "For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,\n"
+    "for IFENG = 2 this will be equal to NC + 1\n"
   )
   .def_property_readonly(
 
     "inelastic_dimensioning_parameter",
     &Table::inelasticDimensioningParameter,
     "The inelastic dimensioning parameter"
+    "For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,\n"
+    "for IFENG = 2 this will be equal to NC + 1\n"
   )
   .def_property_readonly(
 
@@ -165,25 +169,29 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
 
     "NCL",
     &Table::NCL,
-    "The first elastic dimensioning parameter"
+    "The first elastic dimensioning parameter\n\n"
+    "The elastic dimensioning parameter is equal to NC - 1"
   )
   .def_property_readonly(
 
     "first_elastic_dimensioning_parameter",
     &Table::firstElasticDimensioningParameter,
-    "The first elastic dimensioning parameter"
+    "The first elastic dimensioning parameter\n\n"
+    "The elastic dimensioning parameter is equal to NC - 1"
   )
   .def_property_readonly(
 
     "NCLI",
     &Table::NCLI,
-    "The second elastic dimensioning parameter"
+    "The second elastic dimensioning parameter\n\n"
+    "The elastic dimensioning parameter is equal to NC - 1"
   )
   .def_property_readonly(
 
     "second_elastic_dimensioning_parameter",
     &Table::secondElasticDimensioningParameter,
-    "The first elastic dimensioning parameter"
+    "The second elastic dimensioning parameter\n\n"
+    "The elastic dimensioning parameter is equal to NC - 1"
   )
   .def_property_readonly(
 

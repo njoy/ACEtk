@@ -20,7 +20,7 @@ class Test_ACEtk_ThermalScatteringInelasticAngularDistributionBlock( unittest.Te
                7.00000000000E+00, -1.00000000000E+00,  0.30000000000E+00,  1.00000000000E+00,
                8.00000000000E+00, -1.00000000000E+00,  0.70000000000E+00,  1.00000000000E+00 ]
 
-    chunk_with_ifeng_2 = [                  17,                 29,                 53,                 71,
+    chunk_with_ifeng_2 = [                  16,                 28,                 52,                 70,
                                              2,                  4,                  3,                  3,
                              1.00000000000E+00,  5.00000000000E-01,  0.00000000000E+00, -1.00000000000E+00, -0.90000000000E+00,  1.00000000000E+00,
                              2.00000000000E+00,  5.00000000000E-01,  1.00000000000E+00, -1.00000000000E+00,  0.00000000000E+00,  1.00000000000E+00,
@@ -50,6 +50,8 @@ class Test_ACEtk_ThermalScatteringInelasticAngularDistributionBlock( unittest.Te
             self.assertEqual( 4, chunk.number_incident_energies )
             self.assertEqual( 3, chunk.NC )
             self.assertEqual( 3, chunk.number_discrete_cosines )
+            self.assertEqual( 2, chunk.NIL )
+            self.assertEqual( 2, chunk.inelastic_dimensioning_parameter )
 
             self.assertEqual( 2, chunk.NIEB( 1 ) )
             self.assertEqual( 2, chunk.NIEB( 2 ) )
@@ -151,6 +153,8 @@ class Test_ACEtk_ThermalScatteringInelasticAngularDistributionBlock( unittest.Te
             self.assertEqual( 4, chunk.number_incident_energies )
             self.assertEqual( 3, chunk.NC )
             self.assertEqual( 3, chunk.number_discrete_cosines )
+            self.assertEqual( 4, chunk.NIL )
+            self.assertEqual( 4, chunk.inelastic_dimensioning_parameter )
 
             self.assertEqual( 2, chunk.NIEB( 1 ) )
             self.assertEqual( 4, chunk.NIEB( 2 ) )
