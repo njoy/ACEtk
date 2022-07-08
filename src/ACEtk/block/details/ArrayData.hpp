@@ -106,7 +106,7 @@ public:
     #ifndef NDEBUG
     this->verifyIndex( index );
     #endif
-    return this->XSS( 1 + ( index - 1 ) * this->N(), this->N() );
+    return this->IXSS( 1 + ( index - 1 ) * this->N(), this->N() );
   }
 
   /**
