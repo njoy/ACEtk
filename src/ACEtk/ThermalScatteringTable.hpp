@@ -101,11 +101,17 @@ public:
 
   /**
    *  @brief Return the inelastic dimensioning parameter
+   *
+   *  For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,
+   *  for IFENG = 2 this will be equal to NC + 1
    */
   unsigned int NIL() const { return this->data().NXS(3); }
 
   /**
    *  @brief Return the inelastic dimensioning parameter
+   *
+   *  For IFENG < 2, the inelastic dimensioning parameter will be equal to NC - 1,
+   *  for IFENG = 2 this will be equal to NC + 1
    */
   unsigned int inelasticDimensioningParameter() const { return this->NIL(); }
 
@@ -131,21 +137,29 @@ public:
 
   /**
    *  @brief Return the first elastic dimensioning parameter
+   *
+   *  The elastic dimensioning parameter is equal to NC - 1
    */
   unsigned int NCL() const { return this->data().NXS(6); }
 
   /**
    *  @brief Return the first elastic dimensioning parameter
+   *
+   *  The elastic dimensioning parameter is equal to NC - 1
    */
   unsigned int firstElasticDimensioningParameter() const { return this->NCL(); }
 
   /**
    *  @brief Return the second elastic dimensioning parameter
+   *
+   *  The elastic dimensioning parameter is equal to NC - 1
    */
   unsigned int NCLI() const { return this->data().NXS(8); }
 
   /**
-   *  @brief Return the first elastic dimensioning parameter
+   *  @brief Return the second elastic dimensioning parameter
+   *
+   *  The elastic dimensioning parameter is equal to NC - 1
    */
   unsigned int secondElasticDimensioningParameter() const { return this->NCLI(); }
 
