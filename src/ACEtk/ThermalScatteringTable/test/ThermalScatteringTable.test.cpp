@@ -606,8 +606,8 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
 
   CHECK( 2 == chunk.ITXE().IFENG() );
   CHECK( 2 == chunk.ITXE().secondaryEnergyMode() );
-  CHECK( 22 == chunk.ITXE().NC() );
-  CHECK( 22 == chunk.ITXE().numberDiscreteCosines() );
+  CHECK( 20 == chunk.ITXE().NC() );
+  CHECK( 20 == chunk.ITXE().numberDiscreteCosines() );
   CHECK( 21 == chunk.ITXE().NIL() );
   CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
   CHECK( 118 == chunk.ITXE().NE() );
@@ -666,8 +666,8 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
 
   CHECK( 2 == chunk.ITXE().IFENG() );
   CHECK( 2 == chunk.ITXE().secondaryEnergyMode() );
-  CHECK( 22 == chunk.ITXE().NC() );
-  CHECK( 22 == chunk.ITXE().numberDiscreteCosines() );
+  CHECK( 20 == chunk.ITXE().NC() );
+  CHECK( 20 == chunk.ITXE().numberDiscreteCosines() );
   CHECK( 21 == chunk.ITXE().NIL() );
   CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
   CHECK( 91 == chunk.ITXE().NE() );
@@ -746,8 +746,8 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
 
   CHECK( 2 == chunk.ITXE().IFENG() );
   CHECK( 2 == chunk.ITXE().secondaryEnergyMode() );
-  CHECK( 22 == chunk.ITXE().NC() );
-  CHECK( 22 == chunk.ITXE().numberDiscreteCosines() );
+  CHECK( 20 == chunk.ITXE().NC() );
+  CHECK( 20 == chunk.ITXE().numberDiscreteCosines() );
   CHECK( 21 == chunk.ITXE().NIL() );
   CHECK( 21 == chunk.ITXE().inelasticDimensioningParameter() );
   CHECK( 100 == chunk.ITXE().NE() );

@@ -27,6 +27,8 @@ class Test_ACEtk_ThermalScatteringElasticAngularDistributionBlock( unittest.Test
             self.assertEqual( 4, chunk.number_incident_energies )
             self.assertEqual( 3, chunk.NC )
             self.assertEqual( 3, chunk.number_discrete_cosines )
+            self.assertEqual( 2, chunk.NCL )
+            self.assertEqual( 2, chunk.elastic_dimensioning_parameter )
 
             cosines = chunk.cosines( 1 )
             self.assertEqual( 3, len( cosines ) )

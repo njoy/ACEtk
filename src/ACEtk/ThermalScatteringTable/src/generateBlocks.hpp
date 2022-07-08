@@ -41,7 +41,9 @@ void generateBlocks() {
   iterators = block( 3 );
   this->itxe_ = block::ITXE( present ? this->IFENG() : 0,
                              present ? this->IFENG() < 2 ? this->NIEB() : 0 : 0,
-                             present ? this->NIL() + 1 : 0,
+                             present ? this->IFENG() < 2 ? this->NIL() + 1
+                                                         : this->NIL() - 1
+                                     : 0,
                              present ? this->ITIE().NE() : 0,
                              present ? this->data().JXS(3) : 1,
                              present ? iterators.first : begin,

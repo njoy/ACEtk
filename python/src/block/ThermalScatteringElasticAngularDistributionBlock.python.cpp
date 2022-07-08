@@ -67,6 +67,20 @@ void wrapThermalScatteringElasticAngularDistributionBlock( python::module& modul
     "The number of equiprobable discrete cosine values for each incident and "
     "outgoing energy pair"
   )
+  .def_property_readonly(
+
+    "NCL",
+    &Block::NCL,
+    "The elastic dimensioning parameter\n\n"
+    "The elastic dimensioning parameter is equal to NC - 1"
+  )
+  .def_property_readonly(
+
+    "elastic_dimensioning_parameter",
+    &Block::elasticDimensioningParameter,
+    "The elastic dimensioning parameter\n\n"
+    "The elastic dimensioning parameter is equal to NC - 1"
+  )
   .def(
 
     "cosines",
