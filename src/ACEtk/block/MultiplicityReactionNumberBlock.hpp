@@ -88,7 +88,13 @@ public:
    */
   bool hasMT( unsigned int reaction ) const {
 
-    return std::find( this->begin() + 1, this->end(), reaction ) != this->end();
+    return std::find_if(
+               this->begin() + 1, this->end(),
+               [reaction] ( auto&& value ) {
+
+                 return static_cast< unsigned int >( std::round( value ) )
+                        == reaction;
+               } ) != this->end();
   }
 
   /**
@@ -108,7 +114,13 @@ public:
    */
   std::size_t index( unsigned int reaction ) const {
 
-    auto iter = std::find( this->begin() + 1, this->end(), reaction );
+    auto iter = std::find_if(
+                    this->begin() + 1, this->end(),
+                    [reaction] ( auto&& value ) {
+
+                      return static_cast< unsigned int >( std::round( value ) )
+                             == reaction;
+                    } );
     if ( iter != this->end() ) {
 
       return std::distance( this->begin() + 1, iter ) + 1;
