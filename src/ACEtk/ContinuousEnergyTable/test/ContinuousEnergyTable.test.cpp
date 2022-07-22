@@ -443,6 +443,15 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.angularDistribution( 91 ) ) );
 
       } // THEN
+
+      THEN( "we can ask for the common energy grid used in the ACE file" ) {
+       
+        CHECK( chunk.ESZ().energies().front() == chunk.commonEnergyGrid().front() ); 
+        CHECK( chunk.ESZ().energies().back() == chunk.commonEnergyGrid().back() );
+        CHECK( chunk.ESZ().numberEnergyPoints() == chunk.commonEnergyGrid().size() );
+
+      } // THEN
+
     } // WHEN
   } // GIVEN
 } // SCENARIO

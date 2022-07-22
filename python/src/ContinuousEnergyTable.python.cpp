@@ -539,6 +539,13 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     &Table::secondaryParticleLocatorBlock,
     "The secondary particle locator block"
   )
+  .def_property_readonly(
+
+    "common_energy_grid",
+    [] ( const Table& self ) -> DoubleRange
+       { return self.commonEnergyGrid(); },
+    "The common energy grid for all non-threshold reactions present in the ACE file"
+  )
   .def(
 
     "HPD",

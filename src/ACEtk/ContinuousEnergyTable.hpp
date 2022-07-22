@@ -720,6 +720,12 @@ public:
   
       return this->AND().angularDistributionData( index );
   }
+  /**
+   *   @brief Return the common energy grid for all non-threshold reactions present
+   *              in the ACE file 
+  */
+  auto commonEnergyGrid() const { return this->ESZ().energies(); }
+
 };
 
 } // ACEtk namespace
