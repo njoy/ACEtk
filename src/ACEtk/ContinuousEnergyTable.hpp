@@ -88,6 +88,9 @@ public:
   //! @todo projectile() function
   //! @todo target() function
 
+  //! G. Siemers --------------------------
+  //! @todo cross_section_from_MT() function
+
   /**
    *  @brief Return the full ZAID or SZAID of the table
    */
@@ -675,6 +678,47 @@ public:
   const block::YH& secondaryParticleMultiplicityReactionNumberBlock( std::size_t index ) const {
 
     return this->YH( index );
+  }
+
+  /**
+   *   @brief Return the cross section data for a specific MT number 
+   * 
+   *  When MT is not found in ACE file std::execption will be thrown
+   * 
+   *   @param[in] MT       The MT reaction number of interest
+   */
+  const block::CrossSectionData& crossSection( std::size_t MT ) const {
+
+    auto index = this->MTR().index( MT );
+
+    return this->SIG().crossSectionData( index );
+  }
+
+  /**
+   *   @brief Return the angular distribution data for specific MT number 
+   * 
+   *  When MT is not found in ACE file std::execption will be thrown
+   * 
+   *   @param[in] MT       The MT reaction number of interest
+   */
+  const block::AngularDistributionBlock::DistributionData& angularDistribution( std::size_t MT ) 
+    const {
+
+      // for MT = 2 (elastic) the index of the AD block is always 0
+      int index = 0;
+
+      // for all other reactions
+      if (MT != 2 ) {
+        index = this->MTR().index( MT );
+      }
+
+      // verify MT number has data which is present in the AND block
+      if ( index > this-> NR() ){ 
+           Log::error( "The MT number {} is not present in the ACE file ", MT );
+           throw std::exception();
+      }
+  
+      return this->AND().angularDistributionData( index );
   }
 };
 

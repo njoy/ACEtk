@@ -408,6 +408,43 @@ SCENARIO( "ContinuousEnergyTable" ){
     // componenents.
 
   } // GIVEN
+
+  GIVEN( "a ContinuousEnergyTable" ) {
+
+    auto table = fromFile( "92235.710nc" );
+
+    ContinuousEnergyTable chunk( std::move( table ) );
+
+    WHEN( "using the convenience interface functions" ) {
+
+
+      THEN( "we can ask for the cross section data of a specific MT number" ) {
+
+        // MT 16
+        CHECK( 76460  == chunk.crossSection( 16 ).energyIndex() );
+        CHECK( 59 == chunk.crossSection( 16 ).numberValues() );
+        CHECK( 0. == Approx( chunk.crossSection( 16 ).crossSections().front() ) );
+        CHECK( 1.55512000000E-01 == Approx( chunk.crossSection( 16 ).crossSections().back() ) );
+
+        // MT 4
+        CHECK( 76095  == chunk.crossSection( 4 ).energyIndex() );
+        CHECK( 424 == chunk.crossSection( 4 ).numberValues() );
+        CHECK( 0. == Approx( chunk.crossSection( 4 ).crossSections().front() ) );
+        CHECK( 3.65016600000E-01 == Approx( chunk.crossSection( 4 ).crossSections().back() ) );
+
+      } // THEN
+
+      THEN( "we can ask for the angular distrubtion data of a specific MT number" ) {
+
+        // AND block          
+        CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistribution( 2 ) ) ); // elastic
+        CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.angularDistribution( 18 ) ) );
+        CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.angularDistribution( 90 ) ) );
+        CHECK( true == std::holds_alternative< DistributionGivenElsewhere >( chunk.angularDistribution( 91 ) ) );
+
+      } // THEN
+    } // WHEN
+  } // GIVEN
 } // SCENARIO
 
 void verifyChunkU235( const ContinuousEnergyTable& chunk ) {

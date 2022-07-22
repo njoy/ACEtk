@@ -692,6 +692,26 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
+  )
+  .def(
+
+    "cross_section",
+    &Table::crossSection,
+    python::arg( "mt" ),
+    "Return the cross section data for a specific MT number\n\n"
+    "When MT is not found in ACE file std::execption will be thrown\n\n"
+    "    self    The block\n"
+    "    mt      The MT reaction number of interest"
+  )  
+  .def(
+
+    "angular_distribution",
+    &Table::angularDistribution,
+    python::arg( "mt" ),
+    "Return the angular distribution data for a specific MT number\n\n"
+    "When MT is not found in ACE file std::execption will be thrown\n\n"
+    "    self    The block\n"
+    "    mt      The MT reaction number of interest"
   );
 
   // add standard block definitions
