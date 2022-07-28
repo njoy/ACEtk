@@ -452,12 +452,12 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 76518 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
 
   // NU block
-  CHECK( false == chunk.NU().empty() );
+  CHECK( false == chunk.NU()->empty() );
 
-  CHECK( true == chunk.NU().hasPromptAndTotalFissionMultiplicity() );
+  CHECK( true == chunk.NU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().multiplicity() );
-  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().totalFissionMultiplicity().value() );
+  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->multiplicity() );
+  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->totalFissionMultiplicity().value() );
 
   CHECK( 0 == prompt.NB() );
   CHECK( 79 == prompt.NE() );
@@ -575,95 +575,95 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 45 ) ) );
 
   // GPD block
-  CHECK( false == chunk.GPD().empty() );
-  CHECK( 76518 == chunk.GPD().totalProduction().size() );
+  CHECK( false == chunk.GPD()->empty() );
+  CHECK( 76518 == chunk.GPD()->totalProduction().size() );
 
-  CHECK( 2.433297E+05 == Approx( chunk.GPD().totalProduction().front() ) );
-  CHECK( 31.07 == Approx( chunk.GPD().totalProduction().back() ) );
+  CHECK( 2.433297E+05 == Approx( chunk.GPD()->totalProduction().front() ) );
+  CHECK( 31.07 == Approx( chunk.GPD()->totalProduction().back() ) );
 
   // MTRP block
-  CHECK( false == chunk.MTRP().empty() );
-  CHECK( 33 == chunk.MTRP().MTs().size() );
-  CHECK( 4001 == chunk.MTRP().MTs().front() );
-  CHECK( 3001 == chunk.MTRP().MTs().back() );
-  CHECK( 33 == chunk.MTRP().reactionNumbers().size() );
-  CHECK( 4001 == chunk.MTRP().reactionNumbers().front() );
-  CHECK( 3001 == chunk.MTRP().reactionNumbers().back() );
+  CHECK( false == chunk.MTRP()->empty() );
+  CHECK( 33 == chunk.MTRP()->MTs().size() );
+  CHECK( 4001 == chunk.MTRP()->MTs().front() );
+  CHECK( 3001 == chunk.MTRP()->MTs().back() );
+  CHECK( 33 == chunk.MTRP()->reactionNumbers().size() );
+  CHECK( 4001 == chunk.MTRP()->reactionNumbers().front() );
+  CHECK( 3001 == chunk.MTRP()->reactionNumbers().back() );
 
-  CHECK( 4001 == chunk.MTRP().MT( 1 ) );
-  CHECK( 3001 == chunk.MTRP().MT( 33 ) );
-  CHECK( 4001 == chunk.MTRP().reactionNumber( 1 ) );
-  CHECK( 3001 == chunk.MTRP().reactionNumber( 33 ) );
+  CHECK( 4001 == chunk.MTRP()->MT( 1 ) );
+  CHECK( 3001 == chunk.MTRP()->MT( 33 ) );
+  CHECK( 4001 == chunk.MTRP()->reactionNumber( 1 ) );
+  CHECK( 3001 == chunk.MTRP()->reactionNumber( 33 ) );
 
-  CHECK( true == chunk.MTRP().hasReactionNumber( 4001 ) );
-  CHECK( true == chunk.MTRP().hasReactionNumber( 3001 ) );
-  CHECK( 1 == chunk.MTRP().index( 4001 ) );
-  CHECK( 33 == chunk.MTRP().index( 3001 ) );
+  CHECK( true == chunk.MTRP()->hasReactionNumber( 4001 ) );
+  CHECK( true == chunk.MTRP()->hasReactionNumber( 3001 ) );
+  CHECK( 1 == chunk.MTRP()->index( 4001 ) );
+  CHECK( 33 == chunk.MTRP()->index( 3001 ) );
 
   // SIGP block
-  CHECK( false == chunk.SIGP().empty() );
-  CHECK( 33 == chunk.SIGP().NTRP() );
+  CHECK( false == chunk.SIGP()->empty() );
+  CHECK( 33 == chunk.SIGP()->NTRP() );
 
-  CHECK( 1 == chunk.SIGP().LSIG( 1 ) );
-  CHECK( 37 == chunk.SIGP().LSIG( 3 ) );
-  CHECK( 1155 == chunk.SIGP().LSIG( 33 ) );
+  CHECK( 1 == chunk.SIGP()->LSIG( 1 ) );
+  CHECK( 37 == chunk.SIGP()->LSIG( 3 ) );
+  CHECK( 1155 == chunk.SIGP()->LSIG( 33 ) );
 
-  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP().crossSectionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP().crossSectionData( 3 ) ) );
-  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP().crossSectionData( 33 ) ) );
+  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP()->crossSectionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP()->crossSectionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP()->crossSectionData( 33 ) ) );
 
   // ANDP block
-  CHECK( false == chunk.ANDP().empty() );
-  CHECK( 33 == chunk.ANDP().NR() );
+  CHECK( false == chunk.ANDP()->empty() );
+  CHECK( 33 == chunk.ANDP()->NR() );
 
-  CHECK( 0 == chunk.ANDP().LAND( 1 ) );
-  CHECK( 0 == chunk.ANDP().LAND( 3 ) );
-  CHECK( 0 == chunk.ANDP().LAND( 33 ) );
+  CHECK( 0 == chunk.ANDP()->LAND( 1 ) );
+  CHECK( 0 == chunk.ANDP()->LAND( 3 ) );
+  CHECK( 0 == chunk.ANDP()->LAND( 33 ) );
 
-  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 3 ) ) );
-  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 33 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP()->angularDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP()->angularDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP()->angularDistributionData( 33 ) ) );
 
   // DLWP block
-  CHECK( false == chunk.DLWP().empty() );
-  CHECK( 33 == chunk.DLWP().NR() );
+  CHECK( false == chunk.DLWP()->empty() );
+  CHECK( 33 == chunk.DLWP()->NR() );
 
-  CHECK( 1 == chunk.DLWP().LDLW( 1 ) );
-  CHECK( 23 == chunk.DLWP().LDLW( 3 ) );
-  CHECK( 1139 == chunk.DLWP().LDLW( 33 ) );
+  CHECK( 1 == chunk.DLWP()->LDLW( 1 ) );
+  CHECK( 23 == chunk.DLWP()->LDLW( 3 ) );
+  CHECK( 1139 == chunk.DLWP()->LDLW( 33 ) );
 
-  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 3 ) ) );
-  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP().energyDistributionData( 33 ) ) );
+  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP()->energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP()->energyDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP()->energyDistributionData( 33 ) ) );
 
   // YP block
-  CHECK( false == chunk.YP().empty() );
-  CHECK( 3 == chunk.YP().MTs().size() );
-  CHECK( 4 == chunk.YP().MTs().front() );
-  CHECK( 102 == chunk.YP().MTs().back() );
-  CHECK( 3 == chunk.YP().reactionNumbers().size() );
-  CHECK( 4 == chunk.YP().reactionNumbers().front() );
-  CHECK( 102 == chunk.YP().reactionNumbers().back() );
+  CHECK( false == chunk.YP()->empty() );
+  CHECK( 3 == chunk.YP()->MTs().size() );
+  CHECK( 4 == chunk.YP()->MTs().front() );
+  CHECK( 102 == chunk.YP()->MTs().back() );
+  CHECK( 3 == chunk.YP()->reactionNumbers().size() );
+  CHECK( 4 == chunk.YP()->reactionNumbers().front() );
+  CHECK( 102 == chunk.YP()->reactionNumbers().back() );
 
-  CHECK( 4 == chunk.YP().MT( 1 ) );
-  CHECK( 102 == chunk.YP().MT( 3 ) );
-  CHECK( 4 == chunk.YP().reactionNumber( 1 ) );
-  CHECK( 102 == chunk.YP().reactionNumber( 3 ) );
+  CHECK( 4 == chunk.YP()->MT( 1 ) );
+  CHECK( 102 == chunk.YP()->MT( 3 ) );
+  CHECK( 4 == chunk.YP()->reactionNumber( 1 ) );
+  CHECK( 102 == chunk.YP()->reactionNumber( 3 ) );
 
-  CHECK( true == chunk.YP().hasReactionNumber( 4 ) );
-  CHECK( true == chunk.YP().hasReactionNumber( 18 ) );
-  CHECK( true == chunk.YP().hasReactionNumber( 102 ) );
-  CHECK( 1 == chunk.YP().index( 4 ) );
-  CHECK( 2 == chunk.YP().index( 18 ) );
-  CHECK( 3 == chunk.YP().index( 102 ) );
+  CHECK( true == chunk.YP()->hasReactionNumber( 4 ) );
+  CHECK( true == chunk.YP()->hasReactionNumber( 18 ) );
+  CHECK( true == chunk.YP()->hasReactionNumber( 102 ) );
+  CHECK( 1 == chunk.YP()->index( 4 ) );
+  CHECK( 2 == chunk.YP()->index( 18 ) );
+  CHECK( 3 == chunk.YP()->index( 102 ) );
 
   // UNR block
-  CHECK( false == chunk.UNR().empty() );
+  CHECK( false == chunk.UNR()->empty() );
 
-  CHECK( 19 == chunk.UNR().numberIncidentEnergies() );
+  CHECK( 19 == chunk.UNR()->numberIncidentEnergies() );
 
-  auto unr1 = chunk.UNR().probabilityTable( 1 );
-  auto unr19 = chunk.UNR().probabilityTable( 19 );
+  auto unr1 = chunk.UNR()->probabilityTable( 1 );
+  auto unr19 = chunk.UNR()->probabilityTable( 19 );
   CHECK( 2.25000100000E-03 == Approx( unr1.incidentEnergy() ) );
   CHECK( 2.49999900000E-02 == Approx( unr19.incidentEnergy() ) );
   CHECK( 16 == unr1.numberBins() );
@@ -674,11 +674,11 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 1. == Approx( unr19.heating().back() ) );
 
   // DNU block
-  CHECK( false == chunk.DNU().empty() );
+  CHECK( false == chunk.DNU()->empty() );
 
-  CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
+  CHECK( false == chunk.DNU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().multiplicity() );
+  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU()->multiplicity() );
 
   CHECK( 0 == delayed.NB() );
   CHECK( 6 == delayed.NE() );
@@ -688,34 +688,34 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 0.009 == Approx( delayed.multiplicities().back() ) );
 
   // BDD block
-  CHECK( false == chunk.BDD().empty() );
+  CHECK( false == chunk.BDD()->empty() );
 
-  CHECK( 6 == chunk.BDD().NPCR() );
-  CHECK( 6 == chunk.BDD().numberDelayedPrecursors() );
+  CHECK( 6 == chunk.BDD()->NPCR() );
+  CHECK( 6 == chunk.BDD()->numberDelayedPrecursors() );
 
-  CHECK( 1.33360E-10 == Approx( chunk.BDD().precursorGroupData( 1 ).DEC() ) );
-  CHECK( 2.85300E-08 == Approx( chunk.BDD().precursorGroupData( 6 ).DEC() ) );
+  CHECK( 1.33360E-10 == Approx( chunk.BDD()->precursorGroupData( 1 ).DEC() ) );
+  CHECK( 2.85300E-08 == Approx( chunk.BDD()->precursorGroupData( 6 ).DEC() ) );
 
   // DNED block
-  CHECK( false == chunk.DNED().empty() );
+  CHECK( false == chunk.DNED()->empty() );
 
-  CHECK( 1 == chunk.DNED().LDLW( 1 ) );
-  CHECK( 7944 == chunk.DNED().LDLW( 6 ) );
+  CHECK( 1 == chunk.DNED()->LDLW( 1 ) );
+  CHECK( 7944 == chunk.DNED()->LDLW( 6 ) );
 
-  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 6 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 6 ) ) );
 
-  CHECK( std::nullopt == chunk.DNED().referenceFrame( 1 ) );
-  CHECK( std::nullopt == chunk.DNED().referenceFrame( 6 ) );
+  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 1 ) );
+  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 6 ) );
 
   // PTYPE block
-  CHECK( true == chunk.PTYPE().empty() );
+  CHECK( std::nullopt == chunk.PTYPE() );
 
   // NTRO block
-  CHECK( true == chunk.NTRO().empty() );
+  CHECK( std::nullopt == chunk.NTRO() );
 
   // IXS block
-  CHECK( true == chunk.IXS().empty() );
+  CHECK( std::nullopt == chunk.IXS() );
 }
 
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
@@ -760,7 +760,7 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 693 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
 
   // NU block
-  CHECK( true == chunk.NU().empty() );
+  CHECK( std::nullopt == chunk.NU() );
 
   // LQR block
   CHECK( false == chunk.LQR().empty() );
@@ -831,65 +831,65 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 0 == chunk.DLW().NR() );
 
   // GPD block
-  CHECK( true == chunk.GPD().empty() );
+  CHECK( std::nullopt == chunk.GPD() );
 
   // MTRP block
-  CHECK( true == chunk.MTRP().empty() );
+  CHECK( std::nullopt == chunk.MTRP() );
 
   // SIGP block
-  CHECK( true == chunk.SIGP().empty() );
+  CHECK( std::nullopt == chunk.SIGP() );
 
   // ANDP block
-  CHECK( true == chunk.ANDP().empty() );
+  CHECK( std::nullopt == chunk.ANDP() );
 
   // DLWP block
-  CHECK( true == chunk.DLWP().empty() );
+  CHECK( std::nullopt == chunk.DLWP() );
 
   // YP block
-  CHECK( true == chunk.YP().empty() );
+  CHECK( std::nullopt == chunk.YP() );
 
   // UNR block
-  CHECK( true == chunk.UNR().empty() );
+  CHECK( std::nullopt == chunk.UNR() );
 
   // DNU block
-  CHECK( true == chunk.DNU().empty() );
+  CHECK( std::nullopt == chunk.DNU() );
 
   // BDD block
-  CHECK( true == chunk.BDD().empty() );
+  CHECK( std::nullopt == chunk.BDD() );
 
   // DNED block
-  CHECK( true == chunk.DNED().empty() );
+  CHECK( std::nullopt == chunk.DNED() );
 
   // PTYPE block
-  CHECK( false == chunk.PTYPE().empty() );
-  CHECK( 1 == chunk.PTYPE().NTYPE() );
-  CHECK( 1 == chunk.PTYPE().IPs().size() );
+  CHECK( false == chunk.PTYPE()->empty() );
+  CHECK( 1 == chunk.PTYPE()->NTYPE() );
+  CHECK( 1 == chunk.PTYPE()->IPs().size() );
 
-  CHECK( 34 == chunk.PTYPE().IP( 1 ) );
-  CHECK( 34 == chunk.PTYPE().IPs().front() );
+  CHECK( 34 == chunk.PTYPE()->IP( 1 ) );
+  CHECK( 34 == chunk.PTYPE()->IPs().front() );
 
   // NTRO block
-  CHECK( false == chunk.NTRO().empty() );
-  CHECK( 1 == chunk.NTRO().NTYPE() );
-  CHECK( 1 == chunk.NTRO().NPs().size() );
+  CHECK( false == chunk.NTRO()->empty() );
+  CHECK( 1 == chunk.NTRO()->NTYPE() );
+  CHECK( 1 == chunk.NTRO()->NPs().size() );
 
-  CHECK( 1 == chunk.NTRO().NP( 1 ) );
-  CHECK( 1 == chunk.NTRO().NPs().front() );
+  CHECK( 1 == chunk.NTRO()->NP( 1 ) );
+  CHECK( 1 == chunk.NTRO()->NPs().front() );
 
   // IXS block
-  CHECK( false == chunk.IXS().empty() );
-  CHECK( 1 == chunk.IXS().NTYPE() );
+  CHECK( false == chunk.IXS()->empty() );
+  CHECK( 1 == chunk.IXS()->NTYPE() );
 
-  CHECK(  8564 == chunk.IXS().HPD( 1 ) );
-  CHECK(  9952 == chunk.IXS().MTRH( 1 ) );
-  CHECK(  9953 == chunk.IXS().TYRH( 1 ) );
-  CHECK(  9954 == chunk.IXS().LSIGH( 1 ) );
-  CHECK(  9955 == chunk.IXS().SIGH( 1 ) );
-  CHECK(  9963 == chunk.IXS().LANDH( 1 ) );
-  CHECK(  9964 == chunk.IXS().ANDH( 1 ) );
-  CHECK(  9991 == chunk.IXS().LDLWH( 1 ) );
-  CHECK(  9992 == chunk.IXS().DLWH( 1 ) );
-  CHECK( 10003 == chunk.IXS().YP( 1 ) );
+  CHECK(  8564 == chunk.IXS()->HPD( 1 ) );
+  CHECK(  9952 == chunk.IXS()->MTRH( 1 ) );
+  CHECK(  9953 == chunk.IXS()->TYRH( 1 ) );
+  CHECK(  9954 == chunk.IXS()->LSIGH( 1 ) );
+  CHECK(  9955 == chunk.IXS()->SIGH( 1 ) );
+  CHECK(  9963 == chunk.IXS()->LANDH( 1 ) );
+  CHECK(  9964 == chunk.IXS()->ANDH( 1 ) );
+  CHECK(  9991 == chunk.IXS()->LDLWH( 1 ) );
+  CHECK(  9992 == chunk.IXS()->DLWH( 1 ) );
+  CHECK( 10003 == chunk.IXS()->YP( 1 ) );
 
   // HPD(1) block
   CHECK( false == chunk.HPD(1).empty() );
@@ -1024,12 +1024,12 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 78709 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
 
   // NU block
-  CHECK( false == chunk.NU().empty() );
+  CHECK( false == chunk.NU()->empty() );
 
-  CHECK( true == chunk.NU().hasPromptAndTotalFissionMultiplicity() );
+  CHECK( true == chunk.NU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().multiplicity() );
-  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU().totalFissionMultiplicity().value() );
+  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->multiplicity() );
+  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->totalFissionMultiplicity().value() );
 
   CHECK( 0 == prompt.NB() );
   CHECK( 6 == prompt.NE() );
@@ -1149,93 +1149,93 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.DLW().energyDistributionData( 45 ) ) );
 
   // GPD block
-  CHECK( false == chunk.GPD().empty() );
-  CHECK( 78709 == chunk.GPD().totalProduction().size() );
+  CHECK( false == chunk.GPD()->empty() );
+  CHECK( 78709 == chunk.GPD()->totalProduction().size() );
 
-  CHECK( 589.4728 == Approx( chunk.GPD().totalProduction().front() ) );
-  CHECK( 17.12507 == Approx( chunk.GPD().totalProduction().back() ) );
+  CHECK( 589.4728 == Approx( chunk.GPD()->totalProduction().front() ) );
+  CHECK( 17.12507 == Approx( chunk.GPD()->totalProduction().back() ) );
 
   // MTRP block
-  CHECK( false == chunk.MTRP().empty() );
-  CHECK( 6 == chunk.MTRP().MTs().size() );
-  CHECK( 18001 == chunk.MTRP().MTs().front() );
-  CHECK( 3004 == chunk.MTRP().MTs().back() );
-  CHECK( 6 == chunk.MTRP().reactionNumbers().size() );
-  CHECK( 18001 == chunk.MTRP().reactionNumbers().front() );
-  CHECK( 3004 == chunk.MTRP().reactionNumbers().back() );
+  CHECK( false == chunk.MTRP()->empty() );
+  CHECK( 6 == chunk.MTRP()->MTs().size() );
+  CHECK( 18001 == chunk.MTRP()->MTs().front() );
+  CHECK( 3004 == chunk.MTRP()->MTs().back() );
+  CHECK( 6 == chunk.MTRP()->reactionNumbers().size() );
+  CHECK( 18001 == chunk.MTRP()->reactionNumbers().front() );
+  CHECK( 3004 == chunk.MTRP()->reactionNumbers().back() );
 
-  CHECK( 18001 == chunk.MTRP().MT( 1 ) );
-  CHECK( 3004 == chunk.MTRP().MT( 6 ) );
-  CHECK( 18001 == chunk.MTRP().reactionNumber( 1 ) );
-  CHECK( 3004 == chunk.MTRP().reactionNumber( 6 ) );
+  CHECK( 18001 == chunk.MTRP()->MT( 1 ) );
+  CHECK( 3004 == chunk.MTRP()->MT( 6 ) );
+  CHECK( 18001 == chunk.MTRP()->reactionNumber( 1 ) );
+  CHECK( 3004 == chunk.MTRP()->reactionNumber( 6 ) );
 
-  CHECK( true == chunk.MTRP().hasReactionNumber( 18001 ) );
-  CHECK( true == chunk.MTRP().hasReactionNumber( 3004 ) );
-  CHECK( 1 == chunk.MTRP().index( 18001 ) );
-  CHECK( 6 == chunk.MTRP().index( 3004 ) );
+  CHECK( true == chunk.MTRP()->hasReactionNumber( 18001 ) );
+  CHECK( true == chunk.MTRP()->hasReactionNumber( 3004 ) );
+  CHECK( 1 == chunk.MTRP()->index( 18001 ) );
+  CHECK( 6 == chunk.MTRP()->index( 3004 ) );
 
   // SIGP block
-  CHECK( false == chunk.SIGP().empty() );
-  CHECK( 6 == chunk.SIGP().NTRP() );
+  CHECK( false == chunk.SIGP()->empty() );
+  CHECK( 6 == chunk.SIGP()->NTRP() );
 
-  CHECK( 1 == chunk.SIGP().LSIG( 1 ) );
-  CHECK( 19 == chunk.SIGP().LSIG( 3 ) );
-  CHECK( 273 == chunk.SIGP().LSIG( 6 ) );
+  CHECK( 1 == chunk.SIGP()->LSIG( 1 ) );
+  CHECK( 19 == chunk.SIGP()->LSIG( 3 ) );
+  CHECK( 273 == chunk.SIGP()->LSIG( 6 ) );
 
-  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP().crossSectionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP().crossSectionData( 3 ) ) );
-  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP().crossSectionData( 6 ) ) );
+  CHECK( true == std::holds_alternative< TabulatedSecondaryParticleMultiplicity >( chunk.SIGP()->crossSectionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP()->crossSectionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< PhotonProductionCrossSectionData >( chunk.SIGP()->crossSectionData( 6 ) ) );
 
   // ANDP block
-  CHECK( false == chunk.ANDP().empty() );
-  CHECK( 6 == chunk.ANDP().NR() );
+  CHECK( false == chunk.ANDP()->empty() );
+  CHECK( 6 == chunk.ANDP()->NR() );
 
-  CHECK( 0 == chunk.ANDP().LAND( 1 ) );
-  CHECK( 0 == chunk.ANDP().LAND( 3 ) );
-  CHECK( 0 == chunk.ANDP().LAND( 6 ) );
+  CHECK( 0 == chunk.ANDP()->LAND( 1 ) );
+  CHECK( 0 == chunk.ANDP()->LAND( 3 ) );
+  CHECK( 0 == chunk.ANDP()->LAND( 6 ) );
 
-  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 3 ) ) );
-  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP().angularDistributionData( 6 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP()->angularDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP()->angularDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< FullyIsotropicDistribution >( chunk.ANDP()->angularDistributionData( 6 ) ) );
 
   // DLWP block
-  CHECK( false == chunk.DLWP().empty() );
-  CHECK( 6 == chunk.DLWP().NR() );
+  CHECK( false == chunk.DLWP()->empty() );
+  CHECK( 6 == chunk.DLWP()->NR() );
 
-  CHECK( 1 == chunk.DLWP().LDLW( 1 ) );
-  CHECK( 759 == chunk.DLWP().LDLW( 3 ) );
-  CHECK( 792 == chunk.DLWP().LDLW( 6 ) );
+  CHECK( 1 == chunk.DLWP()->LDLW( 1 ) );
+  CHECK( 759 == chunk.DLWP()->LDLW( 3 ) );
+  CHECK( 792 == chunk.DLWP()->LDLW( 6 ) );
 
-  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP().energyDistributionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP().energyDistributionData( 3 ) ) );
-  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP().energyDistributionData( 6 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP()->energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< DiscretePhotonDistribution >( chunk.DLWP()->energyDistributionData( 3 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DLWP()->energyDistributionData( 6 ) ) );
 
   // YP block
-  CHECK( false == chunk.YP().empty() );
-  CHECK( 2 == chunk.YP().MTs().size() );
-  CHECK( 18 == chunk.YP().MTs().front() );
-  CHECK( 102 == chunk.YP().MTs().back() );
-  CHECK( 2 == chunk.YP().reactionNumbers().size() );
-  CHECK( 18 == chunk.YP().reactionNumbers().front() );
-  CHECK( 102 == chunk.YP().reactionNumbers().back() );
+  CHECK( false == chunk.YP()->empty() );
+  CHECK( 2 == chunk.YP()->MTs().size() );
+  CHECK( 18 == chunk.YP()->MTs().front() );
+  CHECK( 102 == chunk.YP()->MTs().back() );
+  CHECK( 2 == chunk.YP()->reactionNumbers().size() );
+  CHECK( 18 == chunk.YP()->reactionNumbers().front() );
+  CHECK( 102 == chunk.YP()->reactionNumbers().back() );
 
-  CHECK( 18 == chunk.YP().MT( 1 ) );
-  CHECK( 102 == chunk.YP().MT( 2 ) );
-  CHECK( 18 == chunk.YP().reactionNumber( 1 ) );
-  CHECK( 102 == chunk.YP().reactionNumber( 2 ) );
+  CHECK( 18 == chunk.YP()->MT( 1 ) );
+  CHECK( 102 == chunk.YP()->MT( 2 ) );
+  CHECK( 18 == chunk.YP()->reactionNumber( 1 ) );
+  CHECK( 102 == chunk.YP()->reactionNumber( 2 ) );
 
-  CHECK( true == chunk.YP().hasReactionNumber( 18 ) );
-  CHECK( true == chunk.YP().hasReactionNumber( 102 ) );
-  CHECK( 1 == chunk.YP().index( 18 ) );
-  CHECK( 2 == chunk.YP().index( 102 ) );
+  CHECK( true == chunk.YP()->hasReactionNumber( 18 ) );
+  CHECK( true == chunk.YP()->hasReactionNumber( 102 ) );
+  CHECK( 1 == chunk.YP()->index( 18 ) );
+  CHECK( 2 == chunk.YP()->index( 102 ) );
 
   // UNR block
-  CHECK( false == chunk.UNR().empty() );
+  CHECK( false == chunk.UNR()->empty() );
 
-  CHECK( 23 == chunk.UNR().numberIncidentEnergies() );
+  CHECK( 23 == chunk.UNR()->numberIncidentEnergies() );
 
-  auto unr1 = chunk.UNR().probabilityTable( 1 );
-  auto unr23 = chunk.UNR().probabilityTable( 23 );
+  auto unr1 = chunk.UNR()->probabilityTable( 1 );
+  auto unr23 = chunk.UNR()->probabilityTable( 23 );
   CHECK( 1.000001E-02 == Approx( unr1.incidentEnergy() ) );
   CHECK( 1.490287E-01 == Approx( unr23.incidentEnergy() ) );
   CHECK( 20 == unr1.numberBins() );
@@ -1246,11 +1246,11 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 1.02349211485 == Approx( unr23.heating().back() ) );
 
   // DNU block
-  CHECK( false == chunk.DNU().empty() );
+  CHECK( false == chunk.DNU()->empty() );
 
-  CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
+  CHECK( false == chunk.DNU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().multiplicity() );
+  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU()->multiplicity() );
 
   CHECK( 0 == delayed.NB() );
   CHECK( 4 == delayed.NE() );
@@ -1260,32 +1260,32 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 0.026 == Approx( delayed.multiplicities().back() ) );
 
   // BDD block
-  CHECK( false == chunk.BDD().empty() );
+  CHECK( false == chunk.BDD()->empty() );
 
-  CHECK( 6 == chunk.BDD().NPCR() );
-  CHECK( 6 == chunk.BDD().numberDelayedPrecursors() );
+  CHECK( 6 == chunk.BDD()->NPCR() );
+  CHECK( 6 == chunk.BDD()->numberDelayedPrecursors() );
 
-  CHECK( 1.249817E-10 == Approx( chunk.BDD().precursorGroupData( 1 ).DEC() ) );
-  CHECK( 4.984604E-08 == Approx( chunk.BDD().precursorGroupData( 6 ).DEC() ) );
+  CHECK( 1.249817E-10 == Approx( chunk.BDD()->precursorGroupData( 1 ).DEC() ) );
+  CHECK( 4.984604E-08 == Approx( chunk.BDD()->precursorGroupData( 6 ).DEC() ) );
 
   // DNED block
-  CHECK( false == chunk.DNED().empty() );
+  CHECK( false == chunk.DNED()->empty() );
 
-  CHECK( 1 == chunk.DNED().LDLW( 1 ) );
-  CHECK( 4010 == chunk.DNED().LDLW( 6 ) );
+  CHECK( 1 == chunk.DNED()->LDLW( 1 ) );
+  CHECK( 4010 == chunk.DNED()->LDLW( 6 ) );
 
-  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 1 ) ) );
-  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 6 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 6 ) ) );
 
-  CHECK( std::nullopt == chunk.DNED().referenceFrame( 1 ) );
-  CHECK( std::nullopt == chunk.DNED().referenceFrame( 6 ) );
+  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 1 ) );
+  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 6 ) );
 
   // PTYPE block
-  CHECK( true == chunk.PTYPE().empty() );
+  CHECK( std::nullopt == chunk.PTYPE() );
 
   // NTRO block
-  CHECK( true == chunk.NTRO().empty() );
+  CHECK( std::nullopt == chunk.NTRO() );
 
   // IXS block
-  CHECK( true == chunk.IXS().empty() );
+  CHECK( std::nullopt == chunk.IXS() );
 }

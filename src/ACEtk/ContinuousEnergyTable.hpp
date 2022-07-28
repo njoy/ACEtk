@@ -40,7 +40,7 @@ class ContinuousEnergyTable : protected Table {
 
   /* fields */
   block::ESZ esz_;
-  block::NU nu_;
+  std::optional< block::NU > nu_;
   block::MTR mtr_;
   block::LQR lqr_;
   block::TYR tyr_;
@@ -48,22 +48,22 @@ class ContinuousEnergyTable : protected Table {
   block::AND and_;
   block::DLW dlw_;
 
-  block::GPD gpd_;
-  block::MTRP mtrp_;
-  block::SIGP sigp_;
-  block::ANDP andp_;
-  block::DLWP dlwp_;
-  block::YP yp_;
+  std::optional< block::GPD > gpd_;
+  std::optional< block::MTRP > mtrp_;
+  std::optional< block::SIGP > sigp_;
+  std::optional< block::ANDP > andp_;
+  std::optional< block::DLWP > dlwp_;
+  std::optional< block::YP > yp_;
 
-  block::UNR unr_;
+  std::optional< block::UNR > unr_;
 
-  block::NU dnu_;
-  block::BDD bdd_;
-  block::DNED dned_;
+  std::optional< block::NU > dnu_;
+  std::optional< block::BDD > bdd_;
+  std::optional< block::DNED > dned_;
 
-  block::PTYPE ptype_;
-  block::NTRO ntro_;
-  block::IXS ixs_;
+  std::optional< block::PTYPE > ptype_;
+  std::optional< block::NTRO > ntro_;
+  std::optional< block::IXS > ixs_;
   std::vector< block::HPD > hpd_;
   std::vector< block::MTRH > mtrh_;
   std::vector< block::TYRH > tyrh_;
@@ -256,12 +256,15 @@ public:
   /**
    *  @brief Return the fission multiplicity block
    */
-  const block::NU& NU() const { return this->nu_; }
+  const std::optional< block::NU >& NU() const { return this->nu_; }
 
   /**
    *  @brief Return the fission multiplicity block
    */
-  const block::NU& fissionMultiplicityBlock() const { return this->NU(); }
+  const std::optional< block::NU >& fissionMultiplicityBlock() const {
+
+    return this->NU();
+  }
 
   /**
    *  @brief Return the reaction number block
@@ -326,22 +329,25 @@ public:
   /**
    *  @brief Return the photon production block
    */
-  const block::GPD& GPD() const { return this->gpd_; }
+  const std::optional< block::GPD >& GPD() const { return this->gpd_; }
 
   /**
    *  @brief Return the photon production block
    */
-  const block::GPD& photonProductionBlock() const { return this->GPD(); }
+  const std::optional< block::GPD >& photonProductionBlock() const {
+
+    return this->GPD();
+  }
 
   /**
    *  @brief Return the photon production reaction number block
    */
-  const block::MTR& MTRP() const { return this->mtrp_; }
+  const std::optional< block::MTR >& MTRP() const { return this->mtrp_; }
 
   /**
    *  @brief Return the photon production reaction number block
    */
-  const block::MTR& photonProductionReactionNumberBlock() const {
+  const std::optional< block::MTR >& photonProductionReactionNumberBlock() const {
 
     return this->MTRP();
   }
@@ -349,12 +355,12 @@ public:
   /**
    *  @brief Return the photon production cross section block
    */
-  const block::SIGP& SIGP() const { return this->sigp_; }
+  const std::optional< block::SIGP >& SIGP() const { return this->sigp_; }
 
   /**
    *  @brief Return the photon production cross section block
    */
-  const block::SIGP& photonProductionCrossSectionBlock() const {
+  const std::optional< block::SIGP >& photonProductionCrossSectionBlock() const {
 
     return this->SIGP();
   }
@@ -362,12 +368,12 @@ public:
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const block::ANDP& ANDP() const { return this->andp_; }
+  const std::optional< block::ANDP >& ANDP() const { return this->andp_; }
 
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const block::ANDP& photonProductionAngularDistributionBlock() const {
+  const std::optional< block::ANDP >& photonProductionAngularDistributionBlock() const {
 
     return this->ANDP();
   }
@@ -375,12 +381,12 @@ public:
   /**
    *  @brief Return the photon production energy distribution block
    */
-  const block::DLWP& DLWP() const { return this->dlwp_; }
+  const std::optional< block::DLWP >& DLWP() const { return this->dlwp_; }
 
   /**
    *  @brief Return the photon production energy distribution block
    */
-  const block::DLWP& photonProductionEnergyDistributionBlock() const {
+  const std::optional< block::DLWP >& photonProductionEnergyDistributionBlock() const {
 
     return this->DLWP();
   }
@@ -388,12 +394,12 @@ public:
   /**
    *  @brief Return the photon multiplicity reaction number block
    */
-  const block::YP& YP() const { return this->yp_; }
+  const std::optional< block::YP >& YP() const { return this->yp_; }
 
   /**
    *  @brief Return the photon multiplicity reaction number block
    */
-  const block::YP& photonMultiplicityReactionNumberBlock() const {
+  const std::optional< block::YP >& photonMultiplicityReactionNumberBlock() const {
 
     return this->YP();
   }
@@ -401,12 +407,12 @@ public:
   /**
    *  @brief Return the unresoved probability table block
    */
-  const block::UNR& UNR() const { return this->unr_; }
+  const std::optional< block::UNR >& UNR() const { return this->unr_; }
 
   /**
    *  @brief Return the unresoved probability table block
    */
-  const block::UNR& probabilityTableBlock() const {
+  const std::optional< block::UNR >& probabilityTableBlock() const {
 
     return this->UNR();
   }
@@ -414,32 +420,38 @@ public:
   /**
    *  @brief Return the delayed fission multiplicity block
    */
-  const block::NU& DNU() const { return this->dnu_; }
+  const std::optional< block::NU >& DNU() const { return this->dnu_; }
 
   /**
    *  @brief Return the delayed fission multiplicity block
    */
-  const block::NU& delayedFissionMultiplicityBlock() const { return this->DNU(); }
+  const std::optional< block::NU >& delayedFissionMultiplicityBlock() const {
+
+    return this->DNU();
+  }
 
   /**
    *  @brief Return the delayed neutron precursor block
    */
-  const block::BDD& BDD() const { return this->bdd_; }
+  const std::optional< block::BDD >& BDD() const { return this->bdd_; }
 
   /**
    *  @brief Return the delayed neutron precursor block
    */
-  const block::BDD& delayedNeutronPrecursorBlock() const { return this->BDD(); }
+  const std::optional< block::BDD >& delayedNeutronPrecursorBlock() const {
+
+    return this->BDD();
+  }
 
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const block::DNED& DNED() const { return this->dned_; }
+  const std::optional< block::DNED >& DNED() const { return this->dned_; }
 
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const block::DNED& delayedNeutronEnergyDistributionBlock() const {
+  const std::optional< block::DNED >& delayedNeutronEnergyDistributionBlock() const {
 
     return this->DNED();
   }
@@ -447,12 +459,12 @@ public:
   /**
    *  @brief Return the secondary particle type block
    */
-  const block::PTYPE& PTYPE() const { return this->ptype_; }
+  const std::optional< block::PTYPE >& PTYPE() const { return this->ptype_; }
 
   /**
    *  @brief Return the secondary particle type block
    */
-  const block::PTYPE& secondaryParticleTypeBlock() const {
+  const std::optional< block::PTYPE >& secondaryParticleTypeBlock() const {
 
     return this->PTYPE();
   }
@@ -460,12 +472,12 @@ public:
   /**
    *  @brief Return the secondary particle information block
    */
-  const block::NTRO& NTRO() const { return this->ntro_; }
+  const std::optional< block::NTRO >& NTRO() const { return this->ntro_; }
 
   /**
    *  @brief Return the secondary particle information block
    */
-  const block::NTRO& secondaryParticleInformationBlock() const {
+  const std::optional< block::NTRO >& secondaryParticleInformationBlock() const {
 
     return this->NTRO();
   }
@@ -473,12 +485,12 @@ public:
   /**
    *  @brief Return the secondary particle locator block
    */
-  const block::IXS& IXS() const { return this->ixs_; }
+  const std::optional< block::IXS >& IXS() const { return this->ixs_; }
 
   /**
    *  @brief Return the secondary particle locator block
    */
-  const block::IXS& secondaryParticleLocatorBlock() const {
+  const std::optional< block::IXS >& secondaryParticleLocatorBlock() const {
 
     return this->IXS();
   }
