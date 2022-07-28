@@ -33,7 +33,7 @@ class PhotonuclearTable : protected Table {
   block::LQR lqr_;
   block::SIG sig_;
 
-  block::IXSU ixsu_;
+  std::optional< block::IXSU > ixsu_;
   std::vector< block::CrossSectionData > pxs_;
   std::vector< block::CrossSectionData > phn_;
   std::vector< block::MTRH > mtrh_;
@@ -187,12 +187,15 @@ public:
   /**
    *  @brief Return the secondary particle information and locator block
    */
-  const block::IXSU& IXS() const { return this->ixsu_; }
+  const std::optional< block::IXSU >& IXS() const { return this->ixsu_; }
 
   /**
    *  @brief Return the secondary particle information and locator block
    */
-  const block::IXSU& secondaryParticleLocatorBlock() const { return this->IXS(); }
+  const std::optional< block::IXSU >& secondaryParticleLocatorBlock() const {
+
+    return this->IXS();
+  }
 
   /**
    *  @brief Return the secondary particle production cross section for a secondary
