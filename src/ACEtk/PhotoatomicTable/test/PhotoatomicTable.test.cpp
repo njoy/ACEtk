@@ -365,7 +365,7 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 6.282390000000E-06 == Approx( chunk.JCOH().formFactors().back() ) );
 
   // JFLO block
-  CHECK( true == chunk.JFLO().empty() );
+  CHECK( std::nullopt == chunk.JFLO() );
 
   // LHNM block
   CHECK( false == chunk.LHNM().empty() );
@@ -378,10 +378,10 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 9.086036433693E+01 == Approx( chunk.LHNM().heating().back() ) );
 
   // EPS block
-  CHECK( true == chunk.EPS().empty() );
+  CHECK( std::nullopt == chunk.EPS() );
 
   // SWD block
-  CHECK( true == chunk.SWD().empty() );
+  CHECK( std::nullopt == chunk.SWD() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -453,7 +453,7 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 7.806310000000E-04 == Approx( chunk.JCOH().formFactors().back() ) );
 
   // JFLO block
-  CHECK( true == chunk.JFLO().empty() );
+  CHECK( std::nullopt == chunk.JFLO() );
 
   // LHNM block
   CHECK( false == chunk.LHNM().empty() );
@@ -466,34 +466,34 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 9.999428234605E+04 == Approx( chunk.LHNM().heating().back() ) );
 
   // EPS block
-  CHECK( false == chunk.EPS().empty() );
+  CHECK( false == chunk.EPS()->empty() );
 
-  CHECK( 2 == chunk.EPS().NSH() );
-  CHECK( 2 == chunk.EPS().numberElectronShells() );
+  CHECK( 2 == chunk.EPS()->NSH() );
+  CHECK( 2 == chunk.EPS()->numberElectronShells() );
 
-  CHECK( 2 == Approx( chunk.EPS().numberElectrons()[0] ) );
-  CHECK( 1 == Approx( chunk.EPS().numberElectrons()[1] ) );
-  CHECK( 5.480000000000e-05 == Approx( chunk.EPS().bindingEnergies()[0] ) );
-  CHECK( 1.000000000000e-06 == Approx( chunk.EPS().bindingEnergies()[1] ) );
-  CHECK( 6.666666666667e-01 == Approx( chunk.EPS().interactionProbabilities()[0] ) );
-  CHECK( 3.333333333333e-01 == Approx( chunk.EPS().interactionProbabilities()[1] ) );
+  CHECK( 2 == Approx( chunk.EPS()->numberElectrons()[0] ) );
+  CHECK( 1 == Approx( chunk.EPS()->numberElectrons()[1] ) );
+  CHECK( 5.480000000000e-05 == Approx( chunk.EPS()->bindingEnergies()[0] ) );
+  CHECK( 1.000000000000e-06 == Approx( chunk.EPS()->bindingEnergies()[1] ) );
+  CHECK( 6.666666666667e-01 == Approx( chunk.EPS()->interactionProbabilities()[0] ) );
+  CHECK( 3.333333333333e-01 == Approx( chunk.EPS()->interactionProbabilities()[1] ) );
 
-  CHECK( 2 == chunk.EPS().numberElectronsPerShell( 1 ) );
-  CHECK( 1 == chunk.EPS().numberElectronsPerShell( 2 ) );
-  CHECK( 5.480000000000e-05 == Approx( chunk.EPS().bindingEnergy( 1 ) ) );
-  CHECK( 1.000000000000e-06 == Approx( chunk.EPS().bindingEnergy( 2 ) ) );
-  CHECK( 6.666666666667e-01 == Approx( chunk.EPS().interactionProbability( 1 ) ) );
-  CHECK( 3.333333333333e-01 == Approx( chunk.EPS().interactionProbability( 2 ) ) );
+  CHECK( 2 == chunk.EPS()->numberElectronsPerShell( 1 ) );
+  CHECK( 1 == chunk.EPS()->numberElectronsPerShell( 2 ) );
+  CHECK( 5.480000000000e-05 == Approx( chunk.EPS()->bindingEnergy( 1 ) ) );
+  CHECK( 1.000000000000e-06 == Approx( chunk.EPS()->bindingEnergy( 2 ) ) );
+  CHECK( 6.666666666667e-01 == Approx( chunk.EPS()->interactionProbability( 1 ) ) );
+  CHECK( 3.333333333333e-01 == Approx( chunk.EPS()->interactionProbability( 2 ) ) );
 
   // SWD block
-  CHECK( false == chunk.SWD().empty() );
+  CHECK( false == chunk.SWD()->empty() );
 
-  CHECK( 2 == chunk.SWD().NSH() );
+  CHECK( 2 == chunk.SWD()->NSH() );
 
-  CHECK( 1 == chunk.SWD().LSWD( 1 ) );
-  CHECK( 96 == chunk.SWD().LSWD( 2 ) );
+  CHECK( 1 == chunk.SWD()->LSWD( 1 ) );
+  CHECK( 96 == chunk.SWD()->LSWD( 2 ) );
 
-  auto profile = chunk.SWD().comptonProfile(1);
+  auto profile = chunk.SWD()->comptonProfile(1);
   CHECK( 2 == profile.interpolation() );
   CHECK( 31 == profile.numberValues() );
   CHECK( 31 == profile.momentum().size() );
@@ -506,7 +506,7 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0. == Approx( profile.cdf().front() ) );
   CHECK( 1. == Approx( profile.cdf().back() ) );
 
-  profile = chunk.SWD().comptonProfile(2);
+  profile = chunk.SWD()->comptonProfile(2);
   CHECK( 2 == profile.interpolation() );
   CHECK( 31 == profile.numberValues() );
   CHECK( 31 == profile.momentum().size() );

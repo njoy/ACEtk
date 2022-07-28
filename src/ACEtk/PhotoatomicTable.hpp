@@ -28,10 +28,10 @@ class PhotoatomicTable : protected Table {
   block::ESZG eszg_;
   block::JINC jinc_;
   block::JCOH jcoh_;
-  block::JFLO jflo_;
+  std::optional< block::JFLO > jflo_;
   block::LHNM lhnm_;
-  block::EPS eps_;
-  block::SWD swd_;
+  std::optional< block::EPS > eps_;
+  std::optional< block::SWD > swd_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -155,7 +155,10 @@ public:
   /**
    *  @brief Return the incoherent scattering function block
    */
-  const block::JINC& incoherentScatteringFunctionBlock() const { return this->JINC(); }
+  const block::JINC& incoherentScatteringFunctionBlock() const {
+
+    return this->JINC();
+  }
 
   /**
    *  @brief Return the coherent form factor block
@@ -170,12 +173,15 @@ public:
   /**
    *  @brief Return the fluoresence data block
    */
-  const block::JFLO& JFLO() const { return this->jflo_; }
+  const std::optional< block::JFLO >& JFLO() const { return this->jflo_; }
 
   /**
    *  @brief Return the fluoresence data block
    */
-  const block::JFLO& fluorescenceDataBlock() const { return this->JFLO(); }
+  const std::optional< block::JFLO >& fluorescenceDataBlock() const {
+
+    return this->JFLO();
+  }
 
   /**
    *  @brief Return the heating numbers block
@@ -190,22 +196,28 @@ public:
   /**
    *  @brief Return the electron shell block
    */
-  const block::EPS& EPS() const { return this->eps_; }
+  const std::optional< block::EPS >& EPS() const { return this->eps_; }
 
   /**
    *  @brief Return the electron shell block
    */
-  const block::EPS& electronShellBlock() const { return this->EPS(); }
+  const std::optional< block::EPS >& electronShellBlock() const {
+
+    return this->EPS();
+  }
 
   /**
    *  @brief Return the compton profile block
    */
-  const block::SWD& SWD() const { return this->swd_; }
+  const std::optional< block::SWD >& SWD() const { return this->swd_; }
 
   /**
    *  @brief Return the compton profile block
    */
-  const block::SWD& comptonProfileBlock() const { return this->SWD(); }
+  const std::optional< block::SWD >& comptonProfileBlock() const {
+
+    return this->SWD();
+  }
 };
 
 } // ACEtk namespace
