@@ -64,7 +64,6 @@ class Test_ACEtk_PhotoatomicFluorescenceDataBlock( unittest.TestCase ) :
                   yields = [ 0.000000000000E+00,  2.542671170140E-02 ],
                   energies = [ 0.000000000000E+00,  1.238156190380E-03 ] )
 
-        print( chunk.xss_array.to_list() )
         verify_chunk( self, chunk )
 
 if __name__ == '__main__' :
