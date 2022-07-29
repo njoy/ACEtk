@@ -30,6 +30,8 @@ class Test_ACEtk_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
             self.assertEqual( 2, len( chunk.data ) )
 
             group = chunk.precursor_group_data( 1 );
+            self.assertEqual( 1, group.number )
+
             self.assertAlmostEqual( 2.3e-4, group.DEC )
             self.assertAlmostEqual( 2.3e-4, group.decay_constant )
 
@@ -61,6 +63,8 @@ class Test_ACEtk_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
             self.assertAlmostEqual( 1., group.probabilities[2] )
 
             group = chunk.precursor_group_data( 2 );
+            self.assertEqual( 2, group.number )
+
             self.assertAlmostEqual( 3.2e-4, group.DEC )
             self.assertAlmostEqual( 3.2e-4, group.decay_constant )
 
@@ -98,12 +102,14 @@ class Test_ACEtk_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
         # the data is given explicitly
         chunk = DelayedNeutronPrecursorBlock(
                   groups = [
-                      DelayedNeutronPrecursorData( constant = 2.3e-4,
-                                                   energies = [ 1e-11, 1., 20. ],
-                                                   probabilities = [ 1.2e-3, 2.5e-2, 1. ] ),
-                      DelayedNeutronPrecursorData( constant = 3.2e-4,
+                      DelayedNeutronPrecursorData( number = 2,
+                                                   constant = 3.2e-4,
                                                    energies = [ 1e-11, 20. ],
-                                                   probabilities = [ 2.4e-3, 2. ] ) ] )
+                                                   probabilities = [ 2.4e-3, 2. ] ),
+                      DelayedNeutronPrecursorData( number = 1,
+                                                   constant = 2.3e-4,
+                                                   energies = [ 1e-11, 1., 20. ],
+                                                   probabilities = [ 1.2e-3, 2.5e-2, 1. ] ) ] )
 
         verify_chunk( self, chunk )
 

@@ -21,6 +21,7 @@ namespace block {
 class DelayedNeutronPrecursorData : protected details::Base {
 
   /* fields */
+  unsigned int number_;
   details::BaseTabulatedData data_;
 
   /* auxiliary functions */
@@ -31,6 +32,11 @@ public:
 
   /* constructor */
   #include "ACEtk/block/DelayedNeutronPrecursorData/src/ctor.hpp"
+
+  /**
+   *  @brief Return the delayed precursor group number
+   */
+  unsigned int number() const { return this->number_; }
 
   /**
    *  @brief Return the decay constant

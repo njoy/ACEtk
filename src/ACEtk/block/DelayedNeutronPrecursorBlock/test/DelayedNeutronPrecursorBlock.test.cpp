@@ -23,12 +23,12 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
 
       std::vector< DelayedNeutronPrecursorData > groups = {
 
-        DelayedNeutronPrecursorData( 2.3e-4,
-                                     { 1e-5, 1., 20. },
-                                     { 1.2e-3, 2.5e-2, 1. } ),
-        DelayedNeutronPrecursorData( 3.2e-4,
+        DelayedNeutronPrecursorData( 2, 3.2e-4,
                                      { 1e-5, 20. },
                                      { 2.4e-3, 2. } ),
+        DelayedNeutronPrecursorData( 1, 2.3e-4,
+                                     { 1e-5, 1., 20. },
+                                     { 1.2e-3, 2.5e-2, 1. } )
       };
 
       DelayedNeutronPrecursorBlock chunk( std::move( groups ) );
@@ -51,7 +51,7 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      DelayedNeutronPrecursorBlock chunk( xss.begin(), xss.end(), 2);
+      DelayedNeutronPrecursorBlock chunk( xss.begin(), xss.end(), 2 );
 
       THEN( "a DelayedNeutronPrecursorBlock can be constructed and "
             "members can be tested" ) {
@@ -91,6 +91,8 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
   CHECK( 2 == chunk.data().size() );
 
   decltype(auto) group1 = chunk.precursorGroupData( 1 );
+  CHECK( 1 == group1.number() );
+
   CHECK( 2.3e-4 == Approx( group1.DEC() ) );
   CHECK( 2.3e-4 == Approx( group1.decayConstant() ) );
 
@@ -122,6 +124,8 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
   CHECK( 1. == Approx( group1.probabilities()[2] ) );
 
   decltype(auto) group2 = chunk.precursorGroupData( 2 );
+  CHECK( 2 == group2.number() );
+
   CHECK( 3.2e-4 == Approx( group2.DEC() ) );
   CHECK( 3.2e-4 == Approx( group2.decayConstant() ) );
 
