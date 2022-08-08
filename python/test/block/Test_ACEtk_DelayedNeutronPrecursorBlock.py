@@ -102,14 +102,14 @@ class Test_ACEtk_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
         # the data is given explicitly
         chunk = DelayedNeutronPrecursorBlock(
                   groups = [
-                      DelayedNeutronPrecursorData( number = 2,
-                                                   constant = 3.2e-4,
-                                                   energies = [ 1e-11, 20. ],
-                                                   probabilities = [ 2.4e-3, 2. ] ),
                       DelayedNeutronPrecursorData( number = 1,
                                                    constant = 2.3e-4,
                                                    energies = [ 1e-11, 1., 20. ],
-                                                   probabilities = [ 1.2e-3, 2.5e-2, 1. ] ) ] )
+                                                   probabilities = [ 1.2e-3, 2.5e-2, 1. ] ),
+                      DelayedNeutronPrecursorData( number = 2,
+                                                   constant = 3.2e-4,
+                                                   energies = [ 1e-11, 20. ],
+                                                   probabilities = [ 2.4e-3, 2. ] ) ] )
 
         verify_chunk( self, chunk )
 

@@ -23,12 +23,12 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
 
       std::vector< DelayedNeutronPrecursorData > groups = {
 
-        DelayedNeutronPrecursorData( 2, 3.2e-4,
-                                     { 1e-5, 20. },
-                                     { 2.4e-3, 2. } ),
         DelayedNeutronPrecursorData( 1, 2.3e-4,
                                      { 1e-5, 1., 20. },
-                                     { 1.2e-3, 2.5e-2, 1. } )
+                                     { 1.2e-3, 2.5e-2, 1. } ),
+        DelayedNeutronPrecursorData( 2, 3.2e-4,
+                                     { 1e-5, 20. },
+                                     { 2.4e-3, 2. } )
       };
 
       DelayedNeutronPrecursorBlock chunk( std::move( groups ) );
