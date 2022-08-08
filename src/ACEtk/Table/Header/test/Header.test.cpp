@@ -115,6 +115,8 @@ std::string chunk() {
 
 void verifyChunk( const Header& chunk ) {
 
+  CHECK( "1.0.0" == chunk.VERS() );
+  CHECK( "1.0.0" == chunk.version() );
   CHECK( "92238.80c" == chunk.ZAID() );
   CHECK( 236.0058 == Approx( chunk.AWR() ) );
   CHECK( 236.0058 == Approx( chunk.atomicWeightRatio() ) );
