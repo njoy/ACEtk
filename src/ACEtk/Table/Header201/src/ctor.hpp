@@ -14,7 +14,7 @@ Header201( Header201&& ) = default;
 Header201( const std::string& szaid, const std::string& source,
            double awr, double temperature, const std::string& date,
            const std::vector< std::string >& comments ) :
-  vers_( "2.0.1" ), szaid_( strip( szaid ) ), src_( strip( source ) ),
+  szaid_( strip( szaid ) ), src_( strip( source ) ),
   awr_( awr ), temp_( temperature ), date_( strip( date ) ),
   comments_( std::move( comments ) ) {}
 

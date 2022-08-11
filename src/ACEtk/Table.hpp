@@ -6,6 +6,7 @@
 #include <istream>
 #include <regex>
 #include <string>
+#include <variant>
 #include <vector>
 
 // other includes
@@ -39,10 +40,15 @@ public:
   #include "ACEtk/Table/Header201.hpp"
   #include "ACEtk/Table/Data.hpp"
 
+  using HeaderVariant = std::variant< Header, Header201 >;
+
 private:
 
   Data data_;
-  Header header_;
+  HeaderVariant header_;
+
+  /* auxiliary functions */
+  #include "ACEtk/Table/src/parse.hpp"
 
 public:
 

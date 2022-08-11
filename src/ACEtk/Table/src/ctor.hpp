@@ -4,7 +4,7 @@
  *  @param[in] header   the header information
  *  @param[in] data     the ACE data
  */
-Table( Header&& header, Data&& data ) :
+Table( HeaderVariant&& header, Data&& data ) :
   data_( std::move(data) ), header_( std::move(header) ){}
 
 protected:
@@ -13,8 +13,8 @@ protected:
  *  @brief Private constructor
  */
 template< typename Iterator >
-Table( Header&& header, State< Iterator >& state ) :
-  Table( std::forward< decltype(header) >( header ), Data( state ) ){}
+Table( HeaderVariant&& header, State< Iterator >& state ) :
+  Table( std::move( header ), Data( state ) ){}
 
 public:
 
@@ -27,7 +27,7 @@ public:
  */
 template< typename Iterator >
 Table( State< Iterator >& state )
-  try: Table( Header( state ), state ) {}
+  try: Table( parse( state ), state ) {}
   catch( std::exception& e ) {
 
     Log::info("Error while constructing ACE Table");

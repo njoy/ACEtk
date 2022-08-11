@@ -20,7 +20,7 @@
 class Header201 {
 
   /* fields */
-  std::string vers_;
+  std::string vers_{ "2.0.1" };
   std::string szaid_;
   std::string src_;
   double temp_;

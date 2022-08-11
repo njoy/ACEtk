@@ -88,7 +88,7 @@ void verifyChunk( const Header201& chunk ) {
   CHECK( 2.5301E-08 == Approx( chunk.TEMP() ) );
   CHECK( 2.5301E-08 == Approx( chunk.temperature() ) );
   CHECK( "2018-05-01" == chunk.date() );
-//  CHECK( "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)"
-//         == chunk.title() );
-//  CHECK( "mat9237" == chunk.material() );
+  CHECK( " 92238.80c  236.005800  2.5301E-08   12/13/12" == chunk.comments()[0] );
+  CHECK( "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9237"
+         == chunk.comments()[1] );
 }
