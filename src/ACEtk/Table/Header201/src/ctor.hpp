@@ -27,7 +27,7 @@ Header201& operator=( Header201&& ) = default;
  *  @param[in] awr           the atomic weight ratio (to the neutron mass)
  *  @param[in] temperature   the temperature in MeV
  *  @param[in] date          the date (max 10 characters)
- *  @param[in] comments      the material (max 10 characters)
+ *  @param[in] comments      the comments
  */
 Header201( const std::string& szaid, const std::string& source,
            double awr, double temperature, const std::string& date,
