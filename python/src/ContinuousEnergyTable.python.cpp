@@ -14,7 +14,7 @@ namespace python = pybind11;
 void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
   // type aliases
-  using Header = njoy::ACEtk::Table::Header;
+  using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::ContinuousEnergyTable;
   using ESZ = njoy::ACEtk::block::ESZ;
   using NU = njoy::ACEtk::block::NU;
@@ -57,7 +57,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   table
   .def(
 
-    python::init< unsigned int, unsigned int, Header,
+    python::init< unsigned int, unsigned int, HeaderVariant,
                   ESZ, std::optional< NU >, std::optional< DNU >,
                   MTR, LQR, SIG, AND, DLW,
                   std::optional< BDD >, std::optional< DNED >,
@@ -151,18 +151,6 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "date",
     &Table::date,
     "The date"
-  )
-  .def_property_readonly(
-
-    "title",
-    &Table::title,
-    "The title"
-  )
-  .def_property_readonly(
-
-    "material",
-    &Table::material,
-    "The material"
   )
   .def_property_readonly(
 

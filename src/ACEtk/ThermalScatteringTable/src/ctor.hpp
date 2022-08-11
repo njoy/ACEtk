@@ -78,7 +78,7 @@ ThermalScatteringTable& operator=( ThermalScatteringTable&& base ) {
  *  @param[in] itcei     the incoherent elastic thermal scattering cross section block
  *  @param[in] itcai     the incoherent elastic thermal scattering angular distribution block
  */
-ThermalScatteringTable( Header header, std::vector< unsigned int > za,
+ThermalScatteringTable( HeaderVariant header, std::vector< unsigned int > za,
                         block::ITIE itie, block::ITXE itxe,
                         std::optional< block::ITCE > itce,
                         std::optional< block::ITCA > itca,

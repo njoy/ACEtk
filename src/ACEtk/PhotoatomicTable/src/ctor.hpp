@@ -80,7 +80,7 @@ PhotoatomicTable& operator=( PhotoatomicTable&& base ) {
  *  @param[in] eps       the electron shell data block
  *  @param[in] swd       the compton profile block
  */
-PhotoatomicTable( unsigned int z, Header header,
+PhotoatomicTable( unsigned int z, HeaderVariant header,
                   std::vector< unsigned int > za, std::vector< double > awr,
                   block::ESZG eszg, block::JINC jinc,
                   block::JCOH jcoh, block::LHNM lhnm,

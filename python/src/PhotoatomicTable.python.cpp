@@ -14,7 +14,7 @@ namespace python = pybind11;
 void wrapPhotoatomicTable( python::module& module, python::module& ) {
 
   // type aliases
-  using Header = njoy::ACEtk::Table::Header;
+  using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::PhotoatomicTable;
   using ESZG = njoy::ACEtk::block::ESZG;
   using JINC = njoy::ACEtk::block::JINC;
@@ -39,7 +39,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   table
   .def(
 
-    python::init< unsigned int, Header,
+    python::init< unsigned int, HeaderVariant,
                   std::vector< unsigned int >, std::vector< double >,
                   ESZG, JINC, JCOH, LHNM, std::optional< JFLO >,
                   std::optional< EPS >, std::optional< SWD > >(),
@@ -99,18 +99,6 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "date",
     &Table::date,
     "The date"
-  )
-  .def_property_readonly(
-
-    "title",
-    &Table::title,
-    "The title"
-  )
-  .def_property_readonly(
-
-    "material",
-    &Table::material,
-    "The material"
   )
   .def_property_readonly(
 

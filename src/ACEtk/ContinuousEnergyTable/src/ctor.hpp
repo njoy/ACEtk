@@ -97,7 +97,7 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
  *  @param[in] yh        the secondary particle multiplicity reaction number blocks
  */
-ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
+ContinuousEnergyTable( unsigned int z, unsigned int a, HeaderVariant header,
                        block::ESZ esz, std::optional< block::NU > nu,
                        std::optional< block::DNU > dnu,
                        block::MTR mtr, block::LQR lqr,
