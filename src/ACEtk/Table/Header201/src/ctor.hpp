@@ -1,3 +1,9 @@
+Header201() = default;
+Header201( const Header201& ) = default;
+Header201( Header201&& ) = default;
+Header201& operator=( const Header201& ) = default;
+Header201& operator=( Header201&& ) = default;
+
 private:
 
 /**
@@ -12,12 +18,6 @@ Header201( const std::string& version, const std::string& szaid,
   comments_( std::move( comments ) ) {}
 
 public:
-
-Header201() = default;
-Header201( const Header201& ) = default;
-Header201( Header201&& ) = default;
-Header201& operator=( const Header201& ) = default;
-Header201& operator=( Header201&& ) = default;
 
 /**
  *  @brief Constructor
