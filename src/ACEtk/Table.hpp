@@ -36,6 +36,7 @@ class Table {
 public:
 
   #include "ACEtk/Table/Header.hpp"
+  #include "ACEtk/Table/Header201.hpp"
   #include "ACEtk/Table/Data.hpp"
 
 private:
