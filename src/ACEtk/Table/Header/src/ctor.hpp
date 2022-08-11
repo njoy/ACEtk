@@ -1,5 +1,8 @@
+Header() = default;
 Header( const Header& ) = default;
 Header( Header&& ) = default;
+Header& operator=( const Header& ) = default;
+Header& operator=( Header&& ) = default;
 
 /**
  *  @brief Constructor (legacy header)
