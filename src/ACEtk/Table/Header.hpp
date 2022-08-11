@@ -14,7 +14,7 @@
 class Header {
 
   /* fields */
-  std::string vers_{ "1.0.0" };
+  std::string vers_;
   std::string zaid_;
   double temp_;
   double awr_;
