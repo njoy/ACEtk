@@ -19,11 +19,11 @@ template< typename Iterator >
 static HeaderVariant parse( State< Iterator >& state ) {
 
   std::string version = readVersion( state );
-  if ( version == "2.0.1" ) {
+  if ( ( version == "2.0.0" ) || ( version == "2.0.1" ) ) {
 
     return Header201( state );
   }
-  else {
+  else{
 
     return Header( state );
   }

@@ -14,29 +14,26 @@ Header201 parse( State< Iterator >& state ) {
   Line1::read( state.position, state.end, version, szaid, source );
   ++state.lineNumber;
 
-  if ( strip( version ) != "2.0.1" ) {
+  version = strip( version );
+  if ( ( version != "2.0.0" ) && ( version != "2.0.1" ) ) {
 
     Log::error( "The header version is not as expected" );
-    Log::info( "Expected version: \'{}\'", "2.0.1" );
+    Log::info( "Expected version 2.0.0 or 2.0.1" );
     Log::info( "Found version: \'{}\'", strip( version ) );
     throw std::exception();
   }
 
-  using Line2 = Record< Scientific< 12, 6 >,
-                        ColumnPosition< 1 >,
-                        Scientific< 12, 6 >,
-                        ColumnPosition< 1 >,
-                        Character< 10 >,
-                        ColumnPosition< 1 >,
-                        Integer< 10 > >;
+  using Line = Record< Character< 80 > >;
 
   double awr;
   double temp;
   std::string date;
   int number;
 
-  Line2::read( state.position, state.end, awr, temp, date, number );
-  ++state.lineNumber;
+  std::string line;
+  Line::read( state.position, state.end, line );
+  std::istringstream input( line );
+  input >> awr >> temp >> date >> number;
 
   if ( awr < 0.0 ) {
 
@@ -56,10 +53,7 @@ Header201 parse( State< Iterator >& state ) {
     throw std::exception();
   }
 
-  using Line = Record< Character< 80 > >;
-
   std::vector< std::string > comments;
-  std::string line;
   auto notspace = [] ( char c ) { return !std::isspace( c ); };
   for ( unsigned int i = 0; i < static_cast< unsigned int >( number ); ++i ) {
 
@@ -69,6 +63,7 @@ Header201 parse( State< Iterator >& state ) {
     comments.push_back( line );
   }
 
-  return  Header201( std::move( szaid ), std::move( source ), awr, temp,
+  return  Header201( std::move( version ), std::move( szaid ),
+                     std::move( source ), awr, temp,
                      std::move( date ), std::move( comments ) );
 }
