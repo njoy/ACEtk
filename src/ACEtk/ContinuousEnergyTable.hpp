@@ -88,9 +88,6 @@ public:
   //! @todo projectile() function
   //! @todo target() function
 
-  //! G. Siemers --------------------------
-  //! @todo cross_section_from_MT() function
-
   /**
    *  @brief Return the full ZAID or SZAID of the table
    */
@@ -725,6 +722,20 @@ public:
    *              in the ACE file 
   */
   auto commonEnergyGrid() const { return this->ESZ().energies(); }
+
+  /**
+   *   @brief Return the multiplicity for a specific MT number 
+   * 
+   *  When MT is not found in ACE file std::execption will be thrown
+   * 
+   *   @param[in] MT       The MT reaction number of interest
+   */
+  auto multiplicity( std::size_t MT ) const {
+
+    auto index = this->MTR().index( MT );
+
+    return this->DLW().multiplicityData( index );
+  }
 
 };
 

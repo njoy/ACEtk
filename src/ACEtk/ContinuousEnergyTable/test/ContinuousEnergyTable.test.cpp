@@ -452,6 +452,23 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       } // THEN
 
+      THEN( "we can ask for the multiplicity of a specific MT number" ){
+
+        CHECK( true == std::holds_alternative< unsigned int >( chunk.multiplicity(16) ) );
+        CHECK( true == std::holds_alternative< unsigned int >( chunk.multiplicity(17) ) );
+        CHECK( true == std::holds_alternative< unsigned int >( chunk.multiplicity(37) ) );
+
+        auto multiplicity1 = std::get< unsigned int >( chunk.multiplicity(16) );
+        CHECK( 2 == multiplicity1 );
+
+        auto multiplicity2 = std::get< unsigned int >( chunk.multiplicity(17) );
+        CHECK( 3 == multiplicity2 );
+
+        auto multiplicity3 = std::get< unsigned int >( chunk.multiplicity(37) );
+        CHECK( 4 == multiplicity3 );
+
+      } //THEN
+
     } // WHEN
   } // GIVEN
 } // SCENARIO

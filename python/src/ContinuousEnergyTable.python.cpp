@@ -719,6 +719,16 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "When MT is not found in ACE file std::execption will be thrown\n\n"
     "    self    The block\n"
     "    mt      The MT reaction number of interest"
+  )
+  .def(
+
+    "reaction_multiplicity",
+    &Table::multiplicity,
+    python::arg( "mt" ),
+    "The multiplicity for a specific MT number\n\n"
+    "When MT is not found in ACE file std::execption will be thrown\n\n"
+    "    self    The block\n"
+    "    mt      The MT reaction number of interest"    
   );
 
   // add standard block definitions
