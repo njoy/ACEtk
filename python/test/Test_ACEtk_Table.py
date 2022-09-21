@@ -8,8 +8,8 @@ from ACEtk import Header
 from ACEtk import Data
 from ACEtk import Table
 
-class Test_ACEtk_Data( unittest.TestCase ) :
-    """Unit test for the Data class."""
+class Test_ACEtk_Table( unittest.TestCase ) :
+    """Unit test for the Table class."""
 
     chunk = ( ' 92238.80c  236.005800  2.5301E-08   12/13/12\n'
               'U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9237\n'
