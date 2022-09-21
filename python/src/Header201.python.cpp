@@ -97,5 +97,31 @@ void wrapHeader201( python::module& module, python::module& ) {
     "comments",
     &Component::comments,
     "The comments"
+  )
+  .def_static(
+
+    "from_string",
+    [] ( const std::string& string ) -> Component {
+
+      njoy::ACEtk::State< decltype(string.begin()) > state{ 1, string.begin(), string.end() };
+      return Component( state );
+    },
+    python::arg( "string" ),
+    "Read the ACE header from a string\n\n"
+    "An exception is raised if something goes wrong while reading the\n"
+    "header\n\n"
+    "Arguments:\n"
+    "    string    the string representing the ACE header"
+  )
+  .def(
+
+    "to_string",
+    [] ( const Component& self ) {
+
+      std::ostringstream out;
+      self.print( out );
+      return out.str();
+    },
+    "Return the string representation of the ACE table"
   );
 }

@@ -1,5 +1,6 @@
 add_test( NAME ACEtk.python.XsdirEntry COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/Test_ACEtk_XsdirEntry.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.Xsdir COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/Test_ACEtk_Xsdir.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.Header COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/Test_ACEtk_Header.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.Data COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/Test_ACEtk_Data.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.Table COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/Test_ACEtk_Table.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.CrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_CrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
