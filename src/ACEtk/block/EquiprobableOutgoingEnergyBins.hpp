@@ -22,7 +22,7 @@ namespace block {
 class EquiprobableOutgoingEnergyBins : protected details::Base {
 
   /* fields */
-  double incident_;
+  double incident_ = 0.0;
 
   /* auxiliary functions */
 

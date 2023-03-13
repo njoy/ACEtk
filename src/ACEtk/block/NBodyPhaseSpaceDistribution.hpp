@@ -23,8 +23,8 @@ namespace block {
 class NBodyPhaseSpaceDistribution : protected details::Base {
 
   /* fields */
-  double emin_;
-  double emax_;
+  double emin_ = 0.0;
+  double emax_ = 0.0;
 
   /* auxiliary functions */
   #include "ACEtk/block/NBodyPhaseSpaceDistribution/src/generateXSS.hpp"

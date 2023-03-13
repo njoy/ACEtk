@@ -23,7 +23,7 @@ namespace block {
 class SecondaryParticleInformationBlock : protected details::Base {
 
   /* fields */
-  unsigned int ntype_;
+  unsigned int ntype_ = 0;
 
   /* auxiliary functions */
   #include "ACEtk/block/SecondaryParticleInformationBlock/src/generateXSS.hpp"

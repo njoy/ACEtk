@@ -36,7 +36,7 @@ public:
 private:
 
   /* fields */
-  std::size_t locb_;
+  std::size_t locb_ = 1;
   details::ColumnData values_;
   std::vector< Distribution > distributions_;
 

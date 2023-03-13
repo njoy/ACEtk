@@ -168,7 +168,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t relativeDistributionLocator( std::size_t index ) const {
+  int relativeDistributionLocator( std::size_t index ) const {
 
     const int locator = this->LOCC( index );
     return locator - this->locb_ + 1;
