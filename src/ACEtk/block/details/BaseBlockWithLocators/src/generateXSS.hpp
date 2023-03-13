@@ -1,11 +1,11 @@
 static std::vector< double > generateXSS( std::vector< Data >&& xs ) {
 
-  std::size_t nr = xs.size();
-  std::vector< double > xss( nr );
+  const auto nr = xs.size();
+  std::vector< double > xss( static_cast< double >( nr ) );
   std::size_t index = 0;
   for ( const auto& data : xs ) {
 
-    xss[index] = xss.size() - nr + 1;
+    xss[index] = static_cast< double >( xss.size() - nr + 1 );
     xss.insert( xss.end(), data.begin(), data.end() );
     ++index;
   }

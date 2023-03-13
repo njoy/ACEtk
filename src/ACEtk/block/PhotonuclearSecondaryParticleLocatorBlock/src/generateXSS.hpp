@@ -4,7 +4,7 @@ generateXSS( std::vector< unsigned int >&& types,
              std::vector< std::array< unsigned int, 10 > >&& locators ) {
 
   std::vector< double > xss;
-  auto ntype = locators.size();
+  const auto ntype = locators.size();
   xss.reserve( ntype * 12 );
 
   if ( ( types.size() != ntype ) || ( numbers.size() != ntype ) ) {
@@ -20,8 +20,8 @@ generateXSS( std::vector< unsigned int >&& types,
 
   for ( unsigned int index = 0; index < ntype; ++index ) {
 
-    xss.push_back( types[index] );
-    xss.push_back( numbers[index] );
+    xss.push_back( static_cast< double >( types[index] ) );
+    xss.push_back( static_cast< double >( numbers[index] ) );
     xss.insert( xss.end(), locators[index].begin(), locators[index].end() );
   }
   return xss;

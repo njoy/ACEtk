@@ -1,7 +1,7 @@
 static std::vector< double >
 generateXSS( std::vector< Distribution >&& distributions, std::size_t locb ) {
 
-  std::size_t ne = distributions.size();
+  const auto ne = distributions.size();
   std::vector< double > xss( 1 + 2 * ne );
 
   auto incidentEnergy = [] ( const auto& value )

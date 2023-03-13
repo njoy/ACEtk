@@ -52,7 +52,10 @@ public:
   /**
    *  @brief Return the interpolation data
    */
-  auto interpolationData() const { return this->interpolation_; }
+  const InterpolationData& interpolationData() const {
+
+    return this->interpolation_;
+  }
 
   /**
    *  @brief Return the number of interpolation regions

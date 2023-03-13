@@ -3,7 +3,7 @@ static std::vector< double > generateXSS(
     std::vector< double >&& production,
     std::vector< double >&& heating ) {
 
-  std::size_t size = production.size();
+  const auto size = production.size();
   if ( heating.size() != size ) {
 
     Log::error( "The number of heating values is not equal to the number of "

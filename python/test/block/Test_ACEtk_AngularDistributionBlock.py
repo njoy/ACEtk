@@ -9,7 +9,6 @@ from ACEtk import DistributionGivenElsewhere
 from ACEtk import FullyIsotropicDistribution
 from ACEtk import AngularDistributionData
 from ACEtk import IsotropicAngularDistribution
-from ACEtk import EquiprobableAngularBins
 from ACEtk import TabulatedAngularDistribution
 from ACEtk import AngularDistributionType
 

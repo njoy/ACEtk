@@ -4,7 +4,7 @@ generateXSS( std::vector< DistributionProbability >&& probabilities,
              std::size_t locb ) {
 
   std::vector< double > xss;
-  std::size_t size = probabilities.size();
+  const auto size = probabilities.size();
   if ( distributions.size() != size ) {
 
     Log::error( "The number of distributions and probabilities is not the same" );
@@ -17,15 +17,15 @@ generateXSS( std::vector< DistributionProbability >&& probabilities,
   // set lnw and idat appropriately
   for ( unsigned int i = 0; i < size; ++i ) {
 
-    std::size_t offset = xss.size();
+    const auto offset = xss.size();
     xss.push_back( 0 ); // lnw
     std::visit(
         [ &xss ] ( const auto& value )
                  { xss.push_back( static_cast< double >( value.LAW() ) ); },
         distributions[i] );
-    xss.push_back( 1 ); // idat
+    xss.push_back( 1. ); // idat
     xss.insert( xss.end(), probabilities[i].begin(), probabilities[i].end() );
-    xss[ offset + 2 ] = xss.size() + locb; // idat
+    xss[ offset + 2 ] = static_cast< double >( xss.size() + locb ); // idat
     std::visit(
 
       utility::overload{
@@ -35,11 +35,11 @@ generateXSS( std::vector< DistributionProbability >&& probabilities,
           // remake the internal xss array with the proper locators
           decltype(auto) boundaries = value.boundaries();
           decltype(auto) interpolants = value.interpolants();
-          OutgoingEnergyDistributionData temp(
-              { boundaries.begin(), boundaries.end() },
-              { interpolants.begin(), interpolants.end() },
-              std::move( value.distributions() ),
-              xss[ offset + 2 ] );
+          const OutgoingEnergyDistributionData temp(
+                    { boundaries.begin(), boundaries.end() },
+                    { interpolants.begin(), interpolants.end() },
+                    std::move( value.distributions() ),
+                    xss[ offset + 2 ] );
           xss.insert( xss.end(), temp.begin(), temp.end() );
         },
         [ &xss, offset ] ( const KalbachMannDistributionData& value ) {
@@ -47,11 +47,11 @@ generateXSS( std::vector< DistributionProbability >&& probabilities,
           // remake the internal xss array with the proper locators
           decltype(auto) boundaries = value.boundaries();
           decltype(auto) interpolants = value.interpolants();
-          KalbachMannDistributionData temp(
-              { boundaries.begin(), boundaries.end() },
-              { interpolants.begin(), interpolants.end() },
-              std::move( value.distributions() ),
-              xss[ offset + 2 ] );
+          const KalbachMannDistributionData temp(
+                    { boundaries.begin(), boundaries.end() },
+                    { interpolants.begin(), interpolants.end() },
+                    std::move( value.distributions() ),
+                    xss[ offset + 2 ] );
           xss.insert( xss.end(), temp.begin(), temp.end() );
         },
         [ &xss ] ( const auto& value ) {

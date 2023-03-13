@@ -3,7 +3,7 @@ static std::vector< double >
 generateXSS( std::vector< std::vector< Number > >&& arrays ) {
 
   std::vector< double > xss;
-  auto n = arrays.front().size();
+  const auto n = arrays.front().size();
   xss.reserve( arrays.size() * n );
 
   unsigned int index = 1;

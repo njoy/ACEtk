@@ -5,18 +5,18 @@ generateXSS( const std::string& name,
              std::size_t locb ) {
 
   // add the distribution data to the xss array
-  std::size_t ne = distributions.size();
-  std::vector< double > xss( 1 + 2 * ne );
+  const auto ne = distributions.size();
+  std::vector< double > xss( static_cast< double >( 1 + 2 * ne ) );
   xss[0] = ne;
   std::size_t index = 1;
-  std::size_t offset = 1 + locb;
+  const auto offset = 1 + locb;
   for ( const auto& distribution : distributions ) {
 
     // set the associated value
     xss[index] = distribution.value();
 
     // set the locator
-    xss[index + ne] = xss.size() + offset;
+    xss[index + ne] = static_cast< double >( xss.size() + offset );
 
     // insert the xss array
     xss.insert( xss.end(), distribution.begin(), distribution.end() );

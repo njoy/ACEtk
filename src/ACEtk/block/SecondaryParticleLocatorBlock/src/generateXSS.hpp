@@ -2,7 +2,7 @@ static std::vector< double >
 generateXSS( std::vector< std::array< unsigned int, 10 > >&& locators ) {
 
   std::vector< double > xss;
-  auto ntype = locators.size();
+  const auto ntype = locators.size();
   xss.reserve( ntype * 10 );
   for ( const auto& array : locators ) {
 

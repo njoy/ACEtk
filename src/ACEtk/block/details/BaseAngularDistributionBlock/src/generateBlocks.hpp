@@ -20,7 +20,7 @@ void generateBlocks() {
         auto right = this->end();
         for ( auto next = index + 1; next <= this->NR(); ++next ) {
 
-          auto nextlocator = xand + this->LAND( next ) - 1;
+          const auto nextlocator = xand + this->LAND( next ) - 1;
           if ( nextlocator > locator ) {
 
             right = this->iterator( nextlocator );

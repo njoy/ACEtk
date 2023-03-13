@@ -2,10 +2,10 @@ static std::vector< double >
 generateXSS( std::vector< std::vector< double > >&& columns ) {
 
   std::vector< double > xss;
-  auto nc = columns.size();
-  auto ne = columns[0].size();
+  const auto nc = columns.size();
+  const auto ne = columns[0].size();
   xss.reserve( 1 + ne * nc );
-  xss.push_back( ne );
+  xss.push_back( static_cast< double >( ne ) );
 
   for ( unsigned int i = 0; i < nc; ++i ) {
 
