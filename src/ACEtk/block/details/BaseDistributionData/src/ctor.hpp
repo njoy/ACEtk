@@ -61,8 +61,8 @@ BaseDistributionData( std::string name, std::size_t locb,
                       Iterator begin, Iterator end ) :
   Base( std::move( name ), begin, end ), locb_( locb ) {
 
-  const auto nr = static_cast< std::size_t >( round( this->XSS( 1 ) ) );
-  const auto ne = static_cast< std::size_t >( round( this->XSS( 1 + 2 * nr + 1 ) ) );
+  const auto nr = static_cast< std::size_t >( std::round( this->XSS( 1 ) ) );
+  const auto ne = static_cast< std::size_t >( std::round( this->XSS( 1 + 2 * nr + 1 ) ) );
   verifySize( this->begin(), this->end(), nr, ne );
   static_cast< Derived* >( this )->generateBlocks();
 }

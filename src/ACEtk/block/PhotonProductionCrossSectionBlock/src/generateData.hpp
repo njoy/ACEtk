@@ -1,7 +1,7 @@
 static PhotonProductionData
 generateData( std::size_t, Iterator left, Iterator right ) {
 
-  if ( round( *left ) == 13 ) {
+  if ( static_cast< int >( std::round( *left ) ) == 13 ) {
 
     return PhotonProductionCrossSectionData( left, right );
   }

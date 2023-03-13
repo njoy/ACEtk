@@ -105,7 +105,8 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    return round( this->value( this->values_.NC(), index ) );
+    return static_cast< int >( std::round( this->value( this->values_.NC(),
+                                                        index ) ) );
   }
 
   /**

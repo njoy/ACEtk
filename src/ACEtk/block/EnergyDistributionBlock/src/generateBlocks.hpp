@@ -2,13 +2,13 @@ static EnergyDistributionData
 generateData( std::size_t locator, Iterator left, Iterator right ) {
 
   // left points to the LNW value - single law if zero
-  unsigned int lnw = static_cast< unsigned int >( round( *left ) );
+  unsigned int lnw = static_cast< unsigned int >( std::round( *left ) );
   if ( lnw == 0 ) {
 
-    EnergyDistributionType law = static_cast< EnergyDistributionType >( round( *( left + 1 ) ) );
-    std::size_t idat = static_cast< std::size_t >( round( *( left + 2 ) ) );
-    std::size_t nr = static_cast< std::size_t >( round( *( left + 3 ) ) );
-    std::size_t ne = static_cast< std::size_t >( round( *( left + 3 + 2 * nr + 1 ) ) );
+    const EnergyDistributionType law = static_cast< EnergyDistributionType >( std::round( *( left + 1 ) ) );
+    std::size_t idat = static_cast< std::size_t >( std::round( *( left + 2 ) ) );
+    const std::size_t nr = static_cast< std::size_t >( std::round( *( left + 3 ) ) );
+    const std::size_t ne = static_cast< std::size_t >( std::round( *( left + 3 + 2 * nr + 1 ) ) );
     double emin = *( left + 3 + 2 * nr + 1 + 1 );
     double emax = *( left + 3 + 2 * nr + 1 + ne );
 
