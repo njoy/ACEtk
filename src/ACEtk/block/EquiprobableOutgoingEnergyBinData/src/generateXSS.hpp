@@ -7,7 +7,7 @@ generateXSS(
   // reserve size in the vector
   const auto nr = boundaries.size();
   const auto ne = distributions.size();
-  std::vector< double > xss( static_cast< double >( 2 + ne ) ); // NE, list of energies, NET
+  std::vector< double > xss( 2 + ne ); // NE, list of energies, NET
 
   // sort distributions
   std::sort( distributions.begin(), distributions.end(),

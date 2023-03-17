@@ -8,7 +8,7 @@ generateXSS( const std::string& name,
   // add the distribution data to the xss array
   const auto nr = boundaries.size();
   const auto ne = distributions.size();
-  std::vector< double > xss( static_cast< double >( 1 + 2 * ne ) );
+  std::vector< double > xss( 1 + 2 * ne );
   xss[0] = ne;
   std::size_t index = 1;
   const auto offset = 1 + 2 * nr + locb;

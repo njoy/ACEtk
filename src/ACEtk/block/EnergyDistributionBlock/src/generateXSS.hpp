@@ -11,7 +11,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
   }
 
   const auto size = distributions.size();
-  std::vector< double > xss( static_cast< double >( size ) );
+  std::vector< double > xss( size );
   std::vector< unsigned int > tyr;
   std::size_t index = 0;
   for ( auto&& distribution : distributions ) {

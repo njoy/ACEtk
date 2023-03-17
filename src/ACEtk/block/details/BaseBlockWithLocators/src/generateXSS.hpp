@@ -1,7 +1,7 @@
 static std::vector< double > generateXSS( std::vector< Data >&& xs ) {
 
   const auto nr = xs.size();
-  std::vector< double > xss( static_cast< double >( nr ) );
+  std::vector< double > xss( nr );
   std::size_t index = 0;
   for ( const auto& data : xs ) {
 

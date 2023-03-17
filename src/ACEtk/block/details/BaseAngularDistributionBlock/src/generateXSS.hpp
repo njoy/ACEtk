@@ -2,7 +2,7 @@ static std::vector< double >
 generateXSS( std::vector< DistributionData >&& distributions ) {
 
   const auto nr = distributions.size();
-  std::vector< double > xss( static_cast< double >( nr ) );
+  std::vector< double > xss( nr );
   std::size_t index = 0;
   for ( const auto& distribution : distributions ) {
 
