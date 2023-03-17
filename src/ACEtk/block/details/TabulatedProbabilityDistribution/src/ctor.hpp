@@ -6,7 +6,7 @@ TabulatedProbabilityDistribution( TabulatedProbabilityDistribution&& ) = default
 /**
  *  @brief Constructor
  *
- *  @param[in] incident        the incident energy value
+ *  @param[in] name            the name of the block
  *  @param[in] interpolation   the interpolation type
  *  @param[in] values          the values (N values)
  *  @param[in] pdf             the pdf values (N values)
@@ -16,10 +16,12 @@ TabulatedProbabilityDistribution( std::string&& name,
                                   int interpolation,
                                   std::vector< double >&& values,
                                   std::vector< double >&& pdf,
-                                  std::vector< double >&& cdf ) :
+                                  std::vector< double >&& cdf,
+                                  std::vector< std::vector< double > > data ) :
   Base( std::move( name ),
         generateXSS( interpolation,
-                     std::move( values ), std::move( pdf ), std::move( cdf ) ) ) {}
+                     std::move( values ), std::move( pdf ), std::move( cdf ),
+                     std::move( data ) ) ) {}
 
 /**
  *  @brief Constructor

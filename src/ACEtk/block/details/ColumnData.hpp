@@ -41,20 +41,32 @@ public:
   /**
    *  @brief Return the column
    *
-   *  @param[in] index     the column index (one-based)
+   *  @param[in] column     the column index (one-based)
    */
-  auto C( std::size_t index ) const {
+  auto C( std::size_t column ) const {
 
     auto number = this->N();
-    return this->XSS( 2 + ( index - 1 ) * number, number );
+    return this->XSS( 2 + ( column - 1 ) * number, number );
   }
 
   /**
    *  @brief Return the column
    *
-   *  @param[in] index     the column index (one-based)
+   *  @param[in] column     the column index (one-based)
    */
-  auto column( std::size_t index ) const { return this->C( index ); }
+  auto column( std::size_t column ) const { return this->C( column ); }
+
+  /**
+   *  @brief Return a value
+   *
+   *  @param[in] column     the column index (one-based)
+   *  @param[in] index      the index in the column (one-based)
+   */
+  auto value( std::size_t column, std::size_t index ) const {
+
+    auto number = this->N();
+    return this->XSS( 2 + ( column - 1 ) * number + index - 1 );
+  }
 
   using Base::empty;
   using Base::name;

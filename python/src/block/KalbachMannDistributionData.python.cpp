@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/AngularDistributionData.hpp"
+#include "ACEtk/block/KalbachMannDistributionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,12 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapAngularDistributionData( python::module& module, python::module& ) {
+void wrapKalbachMannDistributionData( python::module& module,
+                                         python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::AngularDistributionData;
-  using Distribution = Block::Distribution;
+  using Block = njoy::ACEtk::block::KalbachMannDistributionData;
+  using Distribution = njoy::ACEtk::block::TabulatedKalbachMannDistribution;
 
   // wrap views created by this block
 
@@ -24,9 +25,9 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "AngularDistributionData",
-    "Convenience interface for angular distribution data for a single reaction "
-    "from the AND block"
+    "KalbachMannDistributionData",
+    "Convenience interface for outgoing energy distribution data from the\n"
+    "DLW block for a single reaction using Kalbach-Mann systematics"
   );
 
   // wrap the block
@@ -38,8 +39,8 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
-    "    distributions    the angular distributions for each incident energy\n"
-    "    locb             the starting xss index with respect to the AND block\n"
+    "    distributions    the distributions for each incident energy\n"
+    "    locb             the starting xss index with respect to the DLW block\n"
     "                     (default = 1, the relative locators get recalculated)"
   )
   .def_property_readonly(
@@ -77,13 +78,9 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
     "LOCC",
     &Block::LOCC,
     python::arg( "index" ),
-    "Return the the angular distribution locator for an incident energy index\n\n"
+    "Return the the distribution locator for an incident energy index\n\n"
     "This locator is the value as stored in the XSS array. It is relative to\n"
-    "the beginning of the AND block. The distribution type is determined from\n"
-    "the sign of the locator:\n"
-    "  - when the value if negative, it is a tabulated distribution\n"
-    "  - when the value if positive, it is an equiprobable distribution\n"
-    "  - when the value if zero, it is an isotropic distribution\n\n"
+    "the beginning of the DLW block.\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"
@@ -94,13 +91,9 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
     "distribution_locator",
     &Block::distributionLocator,
     python::arg( "index" ),
-    "Return the angular distribution locator for an incident energy index\n\n"
+    "Return the the distribution locator for an incident energy index\n\n"
     "This locator is the value as stored in the XSS array. It is relative to\n"
-    "the beginning of the AND block. The distribution type is determined from\n"
-    "the sign of the locator:\n"
-    "  - when the value if negative, it is a tabulated distribution\n"
-    "  - when the value if positive, it is an equiprobable distribution\n"
-    "  - when the value if zero, it is an isotropic distribution\n\n"
+    "the beginning of the DLW block.\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"
@@ -111,20 +104,9 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
     "relative_distribution_locator",
     &Block::relativeDistributionLocator,
     python::arg( "index" ),
-    "Return the relative angular distribution locator for an incident energy index\n\n"
+    "Return the relative distribution locator for an incident energy index\n\n"
     "This is the locator relative to the beginning of the current angular\n"
-    "distribution block in the AND block. It is always positive.\n\n"
-    "When the index is out of range an out of range exception is thrown\n"
-    "(debug mode only).\n\n"
-    "    self     the block\n"
-    "    index    the index (one-based)"
-  )
-  .def(
-
-    "distribution_type",
-    &Block::distributionType,
-    python::arg( "index" ),
-    "Return the angular distribution type for an incident energy index\n\n"
+    "distribution block in the DLW block. It is always positive.\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"
@@ -135,7 +117,7 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
     "distribution",
     &Block::distribution,
     python::arg( "index" ),
-    "Return the angular distribution data for an incident energy index\n\n"
+    "Return the distribution data for an incident energy index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"

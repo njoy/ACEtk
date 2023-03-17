@@ -122,18 +122,18 @@ void verifyChunk( const AngularDistributionData& chunk ) {
   CHECK( 0 == chunk.LOCC(1) );
   CHECK( 13 == chunk.LOCC(2) );
   CHECK( -46 == chunk.LOCC(3) );
-  CHECK( 0 == chunk.angularDistributionLocator(1) );
-  CHECK( 13 == chunk.angularDistributionLocator(2) );
-  CHECK( -46 == chunk.angularDistributionLocator(3) );
+  CHECK( 0 == chunk.distributionLocator(1) );
+  CHECK( 13 == chunk.distributionLocator(2) );
+  CHECK( -46 == chunk.distributionLocator(3) );
 
-  CHECK( AngularDistributionType::Isotropic == chunk.angularDistributionType(1) );
-  CHECK( AngularDistributionType::Equiprobable == chunk.angularDistributionType(2) );
-  CHECK( AngularDistributionType::Tabulated == chunk.angularDistributionType(3) );
-  CHECK( 0 == chunk.relativeAngularDistributionLocator(1) );
-  CHECK( 8 == chunk.relativeAngularDistributionLocator(2) );
-  CHECK( 41 == chunk.relativeAngularDistributionLocator(3) );
+  CHECK( AngularDistributionType::Isotropic == chunk.distributionType(1) );
+  CHECK( AngularDistributionType::Equiprobable == chunk.distributionType(2) );
+  CHECK( AngularDistributionType::Tabulated == chunk.distributionType(3) );
+  CHECK( 0 == chunk.relativeDistributionLocator(1) );
+  CHECK( 8 == chunk.relativeDistributionLocator(2) );
+  CHECK( 41 == chunk.relativeDistributionLocator(3) );
 
-  CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( chunk.angularDistributionData(1) ) );
-  CHECK( true == std::holds_alternative< EquiprobableAngularBins >( chunk.angularDistributionData(2) ) );
-  CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( chunk.angularDistributionData(3) ) );
+  CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( chunk.distribution(1) ) );
+  CHECK( true == std::holds_alternative< EquiprobableAngularBins >( chunk.distribution(2) ) );
+  CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( chunk.distribution(3) ) );
 }

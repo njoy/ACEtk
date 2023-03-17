@@ -13,8 +13,8 @@ from ACEtk import EquiprobableAngularBins
 from ACEtk import TabulatedAngularDistribution
 from ACEtk import AngularDistributionType
 
-class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
-    """Unit test for the TabulatedAngularDistribution class."""
+class Test_ACEtk_AngularDistributionBlock( unittest.TestCase ) :
+    """Unit test for the AngularDistributionBlock class."""
 
     chunk = [                  1,                 -1,                  0,                 25,
                                2,  1.00000000000E-11,  2.00000000000E+01,                 -6,
@@ -77,14 +77,14 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertAlmostEqual( 20., data.incident_energy(2) )
             self.assertEqual( -6, data.LOCC(1) )
             self.assertEqual( -14, data.LOCC(2) )
-            self.assertEqual( -6, data.angular_distribution_locator(1) )
-            self.assertEqual( -14, data.angular_distribution_locator(2) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.angular_distribution_type(1) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.angular_distribution_type(2) )
-            self.assertEqual( 6, data.relative_angular_distribution_locator(1) )
-            self.assertEqual( 14, data.relative_angular_distribution_locator(2) )
-            self.assertEqual( True, isinstance( data.angular_distribution_data(1), TabulatedAngularDistribution ) )
-            self.assertEqual( True, isinstance( data.angular_distribution_data(2), TabulatedAngularDistribution ) )
+            self.assertEqual( -6, data.distribution_locator(1) )
+            self.assertEqual( -14, data.distribution_locator(2) )
+            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(1) )
+            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(2) )
+            self.assertEqual( 6, data.relative_distribution_locator(1) )
+            self.assertEqual( 14, data.relative_distribution_locator(2) )
+            self.assertEqual( True, isinstance( data.distribution(1), TabulatedAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.distribution(2), TabulatedAngularDistribution ) )
 
             data = chunk.angular_distribution_data(3)
             self.assertEqual( 3, data.NE )
@@ -99,18 +99,18 @@ class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
             self.assertEqual( -32, data.LOCC(1) )
             self.assertEqual( 0, data.LOCC(2) )
             self.assertEqual( -43, data.LOCC(3) )
-            self.assertEqual( -32, data.angular_distribution_locator(1) )
-            self.assertEqual( 0, data.angular_distribution_locator(2) )
-            self.assertEqual( -43, data.angular_distribution_locator(3) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.angular_distribution_type(1) )
-            self.assertEqual( AngularDistributionType.Isotropic, data.angular_distribution_type(2) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.angular_distribution_type(3) )
-            self.assertEqual( 8, data.relative_angular_distribution_locator(1) )
-            self.assertEqual( 0, data.relative_angular_distribution_locator(2) )
-            self.assertEqual( 19, data.relative_angular_distribution_locator(3) )
-            self.assertEqual( True, isinstance( data.angular_distribution_data(1), TabulatedAngularDistribution ) )
-            self.assertEqual( True, isinstance( data.angular_distribution_data(2), IsotropicAngularDistribution ) )
-            self.assertEqual( True, isinstance( data.angular_distribution_data(3), TabulatedAngularDistribution ) )
+            self.assertEqual( -32, data.distribution_locator(1) )
+            self.assertEqual( 0, data.distribution_locator(2) )
+            self.assertEqual( -43, data.distribution_locator(3) )
+            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(1) )
+            self.assertEqual( AngularDistributionType.Isotropic, data.distribution_type(2) )
+            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(3) )
+            self.assertEqual( 8, data.relative_distribution_locator(1) )
+            self.assertEqual( 0, data.relative_distribution_locator(2) )
+            self.assertEqual( 19, data.relative_distribution_locator(3) )
+            self.assertEqual( True, isinstance( data.distribution(1), TabulatedAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.distribution(2), IsotropicAngularDistribution ) )
+            self.assertEqual( True, isinstance( data.distribution(3), TabulatedAngularDistribution ) )
 
             # verify the xss array
             xss = chunk.xss_array

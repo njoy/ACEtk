@@ -18,7 +18,7 @@ AngularDistributionData( std::vector< Distribution >&& distributions,
 /**
  *  @brief Constructor
  *
- *  @param[in] locb    the offset with respect to the beginning of the AND block
+ *  @param[in] locb    the starting xss index with respect to the AND block
  *  @param[in] begin   the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array
  */

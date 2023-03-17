@@ -20,7 +20,7 @@ TabulatedAngularDistribution( double incident,
   TabulatedProbabilityDistribution(
         "AND::TabulatedAngularDistribution",
         interpolation, std::move( cosines ),
-        std::move( pdf ), std::move( cdf ) ),
+        std::move( pdf ), std::move( cdf ), {} ),
   incident_( incident ) {}
 
 /**

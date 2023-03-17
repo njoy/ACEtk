@@ -118,7 +118,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  int angularDistributionLocator( std::size_t index ) const {
+  int distributionLocator( std::size_t index ) const {
 
     return this->LOCC( index );
   }
@@ -135,7 +135,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t relativeAngularDistributionLocator( std::size_t index ) const {
+  std::size_t relativeDistributionLocator( std::size_t index ) const {
 
     const int locator = this->LOCC( index );
     return locator == 0 ? locator : std::abs( locator ) - this->locb_ + 1;
@@ -149,9 +149,9 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  AngularDistributionType angularDistributionType( std::size_t index ) const {
+  AngularDistributionType distributionType( std::size_t index ) const {
 
-    const auto locator = this->angularDistributionLocator( index );
+    const auto locator = this->distributionLocator( index );
     return locator == 0
            ? AngularDistributionType::Isotropic
            : locator < 0 ? AngularDistributionType::Tabulated
@@ -166,9 +166,9 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  Distribution angularDistributionData( std::size_t index ) const {
+  Distribution distribution( std::size_t index ) const {
 
-    const auto type = this->angularDistributionType( index );
+    const auto type = this->distributionType( index );
     const double incident = this->incidentEnergy( index );
     if ( type == AngularDistributionType::Isotropic ) {
 
@@ -176,12 +176,12 @@ public:
     }
     else {
 
-      const auto locator = this->relativeAngularDistributionLocator( index );
+      const auto locator = this->relativeDistributionLocator( index );
       const auto left = std::next( this->begin(), locator - 1 );
       auto right = this->end();
       for ( auto next = index + 1; next <= this->numberIncidentEnergies(); ++next ) {
 
-        auto nextlocator = this->relativeAngularDistributionLocator( next );
+        auto nextlocator = this->relativeDistributionLocator( next );
         if ( nextlocator > locator ) {
 
           right = std::next( this->begin(), nextlocator - 1 );
