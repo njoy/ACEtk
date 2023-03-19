@@ -496,6 +496,10 @@ void verifyChunk( const DosimetryTable& chunk ) {
   auto xs2 = chunk.SIGD().crossSectionData( 2 );
   CHECK( 306 == xs1.numberEnergyPoints() );
   CHECK( 272 == xs2.numberEnergyPoints() );
+  CHECK( 1.8961 == Approx( xs1.energies().front() ) );
+  CHECK( 20. == Approx( xs1.energies().back() ) );
+  CHECK( 3.248700000000E+00 == Approx( xs2.energies().front() ) );
+  CHECK( 20. == Approx( xs2.energies().back() ) );
   CHECK( 0. == Approx( xs1.crossSections().front() ) );
   CHECK( 0.0322 == Approx( xs1.crossSections().back() ) );
   CHECK( 0. == Approx( xs2.crossSections().front() ) );
