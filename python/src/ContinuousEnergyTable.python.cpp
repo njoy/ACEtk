@@ -252,6 +252,17 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "DLW",
+    &Table::DLW,
+    "The energy distribution block"
+  )
+  .def_property_readonly(
+
+    "energy_distribution_block",
+    &Table::energyDistributionBlock,
+    "The energy distribution block"
+  )
+  .def_property_readonly(
     "PTYPE",
     &Table::PTYPE,
     "The secondary particle type block"

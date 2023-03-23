@@ -25,21 +25,22 @@ class Base {
 
 public:
 
-  using Iterator = std::vector< double >::iterator;
+  using Iterator = std::vector< double >::const_iterator;
 
 private:
 
   /* fields */
   std::string name_;
   std::optional< std::vector< double > > xss_;
-  std::vector< double >::iterator begin_;
-  std::vector< double >::iterator end_;
+  Iterator begin_;
+  Iterator end_;
   std::size_t length_;
 
 protected:
 
   /* auxiliary functions */
   #include "ACEtk/block/details/Base/src/verifyIndex.hpp"
+  #include "ACEtk/block/details/Base/src/verifyReactionIndex.hpp"
 
   /* constructor */
   #include "ACEtk/block/details/Base/src/ctor.hpp"
@@ -84,7 +85,8 @@ public:
   Iterator iterator( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyIndex( index );
+    // an iterator may point to the position after the last one
+    this->verifyIndex( index, 1, this->length() + 1 );
     #endif
     return std::next( this->begin(), index - 1 );
   }
@@ -107,7 +109,10 @@ public:
    */
   auto XSS( std::size_t index ) const {
 
-    return *( this->iterator( index ) );
+    #ifndef NDEBUG
+    this->verifyIndex( index, 1, this->length() );
+    #endif
+    return *std::next( this->begin(), index - 1 );
   }
 
   /**

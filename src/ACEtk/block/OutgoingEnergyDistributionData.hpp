@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "utility/overload.hpp"
+#include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/BaseDistributionData.hpp"
 #include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
 
@@ -29,6 +29,63 @@ public:
 
   /* constructor */
   #include "ACEtk/block/OutgoingEnergyDistributionData/src/ctor.hpp"
+
+  /**
+   *  @brief Return the distribution type
+   */
+  static constexpr EnergyDistributionType LAW() {
+
+    return EnergyDistributionType::TabulatedEnergy;
+  }
+
+  /**
+   *  @brief Return the distribution type
+   */
+  static constexpr EnergyDistributionType type() {
+
+    return EnergyDistributionType::TabulatedEnergy;
+  }
+
+  /**
+   *  @brief Return the interpolation data
+   */
+  auto interpolationData() const {
+
+    return BaseDistributionData::interpolationData();
+  }
+
+  /**
+   *  @brief Return the number of interpolation regions
+   */
+  std::size_t NB() const { return BaseDistributionData::NB(); }
+
+  /**
+   *  @brief Return the number of interpolation regions
+   */
+  std::size_t numberInterpolationRegions() const {
+
+    return BaseDistributionData::numberInterpolationRegions();
+  }
+
+  /**
+   *  @brief Return the interpolation boundaries
+   */
+  auto NBT() const { return BaseDistributionData::NBT(); }
+
+  /**
+   *  @brief Return the interpolation boundaries
+   */
+  auto boundaries() const { return BaseDistributionData::boundaries(); }
+
+  /**
+   *  @brief Return the interpolants
+   */
+  auto INT() const { return BaseDistributionData::INT(); }
+
+  /**
+   *  @brief Return the interpolants
+   */
+  auto interpolants() const { return BaseDistributionData::interpolants(); }
 
   /**
    *  @brief Return the number of incident energy values
@@ -62,6 +119,22 @@ public:
   double incidentEnergy( std::size_t index ) const {
 
     return BaseDistributionData::incidentEnergy( index );
+  }
+
+  /**
+   *  @brief Return the minimum incident energy for the distribution
+   */
+  double minimumIncidentEnergy() const {
+
+    return BaseDistributionData::minimumIncidentEnergy();
+  }
+
+  /**
+   *  @brief Return the maximum incident energy for the distribution
+   */
+  double maximumIncidentEnergy() const {
+
+    return BaseDistributionData::maximumIncidentEnergy();
   }
 
   /**

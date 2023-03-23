@@ -94,6 +94,23 @@ void verifyChunk( const KalbachMannDistributionData& chunk ) {
   CHECK( 35 == chunk.length() );
   CHECK( "DLW::KalbachMannDistributionData" == chunk.name() );
 
+  CHECK( EnergyDistributionType::KalbachMann == chunk.LAW() );
+  CHECK( EnergyDistributionType::KalbachMann == chunk.type() );
+
+  CHECK( 0 == chunk.interpolationData().NB() );
+  CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == chunk.interpolationData().INT().size() );
+  CHECK( 0 == chunk.interpolationData().interpolants().size() );
+  CHECK( 0 == chunk.interpolationData().NBT().size() );
+  CHECK( 0 == chunk.interpolationData().boundaries().size() );
+
+  CHECK( 0 == chunk.NB() );
+  CHECK( 0 == chunk.numberInterpolationRegions() );
+  CHECK( 0 == chunk.INT().size() );
+  CHECK( 0 == chunk.interpolants().size() );
+  CHECK( 0 == chunk.NBT().size() );
+  CHECK( 0 == chunk.boundaries().size() );
+
   CHECK( 2 == chunk.NE() );
   CHECK( 2 == chunk.numberIncidentEnergies() );
 
@@ -103,6 +120,9 @@ void verifyChunk( const KalbachMannDistributionData& chunk ) {
 
   CHECK( 1.219437E+01 == Approx( chunk.incidentEnergy(1) ) );
   CHECK( 20. == Approx( chunk.incidentEnergy(2) ) );
+
+  CHECK( 1.219437E+01 == Approx( chunk.minimumIncidentEnergy() ) );
+  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
 
   CHECK( 27 == chunk.LOCC(1) );
   CHECK( 39 == chunk.LOCC(2) );

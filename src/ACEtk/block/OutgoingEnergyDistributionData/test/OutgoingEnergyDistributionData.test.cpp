@@ -88,6 +88,23 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 25 == chunk.length() );
   CHECK( "DLW::OutgoingEnergyDistributionData" == chunk.name() );
 
+  CHECK( EnergyDistributionType::TabulatedEnergy == chunk.LAW() );
+  CHECK( EnergyDistributionType::TabulatedEnergy == chunk.type() );
+
+  CHECK( 0 == chunk.interpolationData().NB() );
+  CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == chunk.interpolationData().INT().size() );
+  CHECK( 0 == chunk.interpolationData().interpolants().size() );
+  CHECK( 0 == chunk.interpolationData().NBT().size() );
+  CHECK( 0 == chunk.interpolationData().boundaries().size() );
+
+  CHECK( 0 == chunk.NB() );
+  CHECK( 0 == chunk.numberInterpolationRegions() );
+  CHECK( 0 == chunk.INT().size() );
+  CHECK( 0 == chunk.interpolants().size() );
+  CHECK( 0 == chunk.NBT().size() );
+  CHECK( 0 == chunk.boundaries().size() );
+
   CHECK( 2 == chunk.NE() );
   CHECK( 2 == chunk.numberIncidentEnergies() );
 
@@ -97,6 +114,9 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
 
   CHECK( 1e-11 == Approx( chunk.incidentEnergy(1) ) );
   CHECK( 20. == Approx( chunk.incidentEnergy(2) ) );
+
+  CHECK( 1e-11 == Approx( chunk.minimumIncidentEnergy() ) );
+  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
 
   CHECK( 27 == chunk.LOCC(1) );
   CHECK( 38 == chunk.LOCC(2) );

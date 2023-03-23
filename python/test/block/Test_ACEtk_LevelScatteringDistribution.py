@@ -4,6 +4,7 @@ import unittest
 # third party imports
 
 # local imports
+from ACEtk import EnergyDistributionType
 from ACEtk import LevelScatteringDistribution
 
 class Test_ACEtk_LevelScatteringDistribution( unittest.TestCase ) :
@@ -19,6 +20,9 @@ class Test_ACEtk_LevelScatteringDistribution( unittest.TestCase ) :
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 2, chunk.length )
             self.assertEqual( "DLW::LevelScatteringDistribution", chunk.name )
+
+            self.assertEqual( EnergyDistributionType.LevelScattering, chunk.LAW )
+            self.assertEqual( EnergyDistributionType.LevelScattering, chunk.type )
 
             self.assertAlmostEqual( 2.249999e-3, chunk.minimum_incident_energy )
             self.assertAlmostEqual( 20., chunk.maximum_incident_energy )

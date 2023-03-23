@@ -28,7 +28,6 @@ class CrossSectionBlock : protected details::Base {
 
   /* auxiliary functions */
   #include "ACEtk/block/CrossSectionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/CrossSectionBlock/src/verifyReactionIndex.hpp"
   #include "ACEtk/block/CrossSectionBlock/src/verifySize.hpp"
 
 public:
@@ -59,7 +58,7 @@ public:
   std::size_t LSIG( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index );
+    this->verifyReactionIndex( index, 1, this->NTR() );
     #endif
     return XSS( index );
   }
@@ -90,12 +89,10 @@ public:
     // sig : one-based index to the start of the SIG block
     // sig + locator - 1 : one-based index to the start of cross section data
     std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
-    const auto left = std::next( this->begin(),
-                                 ( sig + this->LSIG( index ) - 1 ) - 1 );
+    const auto left = this->iterator( sig + this->LSIG( index ) - 1 );
     const auto right = index == this->NTR()
                        ? this->end()
-                       : std::next( this->begin(),
-                                    ( sig + this->LSIG( index + 1 ) - 1 ) - 1 );
+                       : this->iterator( sig + this->LSIG( index + 1 ) - 1 );
     return CrossSectionData( left, right );
   }
 

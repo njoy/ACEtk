@@ -19,6 +19,7 @@ void wrapXsdir( python::module&, python::module& );
 // declarations - enumerators
 void wrapReferenceFrame( python::module&, python::module& );
 void wrapAngularDistributionType( python::module&, python::module& );
+void wrapEnergyDistributionType( python::module&, python::module& );
 
 namespace block {
 
@@ -47,6 +48,7 @@ namespace block {
   void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
   void wrapCrossSectionBlock( python::module&, python::module& );
   void wrapAngularDistributionBlock( python::module&, python::module& );
+  void wrapEnergyDistributionBlock( python::module&, python::module& );
   void wrapSecondaryParticleTypeBlock( python::module&, python::module& );
 }
 
@@ -76,10 +78,14 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapBasicRandomAccessAnyViewOf< unsigned int >(
       viewmodule,
       "any_view< unsigned int, random_access >" );
+  wrapBasicRandomAccessAnyViewOf< long >(
+      viewmodule,
+      "any_view< long, random_access >" );
 
   // wrap enumerators
   wrapReferenceFrame( module, viewmodule );
   wrapAngularDistributionType( module, viewmodule );
+  wrapEnergyDistributionType( module, viewmodule );
 
   // wrap generic ACE table components
   wrapData( module, viewmodule );
@@ -114,6 +120,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapFrameAndMultiplicityBlock( module, viewmodule );
   block::wrapCrossSectionBlock( module, viewmodule );
   block::wrapAngularDistributionBlock( module, viewmodule );
+  block::wrapEnergyDistributionBlock( module, viewmodule );
   block::wrapSecondaryParticleTypeBlock( module, viewmodule );
 
   // wrap ACE table types

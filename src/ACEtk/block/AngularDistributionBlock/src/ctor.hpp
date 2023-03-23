@@ -11,7 +11,7 @@ AngularDistributionBlock( std::vector< DistributionData >&& distributions,
   this->and_ = this->begin() + this->nr_ + 1;
 }
 
- public:
+public:
 
 AngularDistributionBlock() = default;
 

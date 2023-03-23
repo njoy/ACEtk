@@ -4,6 +4,7 @@ import unittest
 # third party imports
 
 # local imports
+from ACEtk import EnergyDistributionType
 from ACEtk import OutgoingEnergyDistributionData
 from ACEtk import TabulatedOutgoingEnergyDistribution
 
@@ -27,6 +28,23 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             self.assertEqual( 25, chunk.length )
             self.assertEqual( "DLW::OutgoingEnergyDistributionData", chunk.name )
 
+            self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.LAW )
+            self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.type )
+
+            self.assertEqual( 0, chunk.interpolation_data.NB )
+            self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
+            self.assertEqual( 0, len( chunk.interpolation_data.INT ) )
+            self.assertEqual( 0, len( chunk.interpolation_data.interpolants ) )
+            self.assertEqual( 0, len( chunk.interpolation_data.NBT ) )
+            self.assertEqual( 0, len( chunk.interpolation_data.boundaries ) )
+
+            self.assertEqual( 0, chunk.NB )
+            self.assertEqual( 0, chunk.number_interpolation_regions )
+            self.assertEqual( 0, len( chunk.INT ) )
+            self.assertEqual( 0, len( chunk.interpolants ) )
+            self.assertEqual( 0, len( chunk.NBT ) )
+            self.assertEqual( 0, len( chunk.boundaries ) )
+
             self.assertEqual( 2, chunk.NE )
             self.assertEqual( 2, chunk.number_incident_energies )
 
@@ -36,6 +54,9 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
 
             self.assertAlmostEqual( 1e-11, chunk.incident_energy(1) )
             self.assertAlmostEqual( 20., chunk.incident_energy(2) )
+
+            self.assertAlmostEqual( 1e-11, chunk.minimum_incident_energy )
+            self.assertAlmostEqual( 20., chunk.maximum_incident_energy )
 
             self.assertEqual( 27, chunk.LOCC(1) );
             self.assertEqual( 38, chunk.LOCC(2) );

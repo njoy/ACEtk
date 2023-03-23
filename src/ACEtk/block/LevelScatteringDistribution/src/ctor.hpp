@@ -18,7 +18,7 @@ LevelScatteringDistribution( double emin, double emax, double c1, double c2 ) :
 /**
  *  @brief Constructor
  *
- *  @param[in] begin   the begin iterator of the blcok
+ *  @param[in] begin   the begin iterator of the block
  *  @param[in] end     the end iterator of the block
  *  @param[in] emin    the minimum energy for the distribution
  *  @param[in] emax    the maximum energy for the distribution

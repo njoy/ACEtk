@@ -1,7 +1,16 @@
 BaseDistributionData() = default;
 
-BaseDistributionData( const BaseDistributionData& ) = default;
-BaseDistributionData( BaseDistributionData&& ) = default;
+BaseDistributionData( const BaseDistributionData& base ) :
+  Base( base ), locb_( base.locb_ ) {
+
+  this->generateBlocks();
+}
+
+BaseDistributionData( BaseDistributionData&& base ) :
+  Base( std::move( base ) ), locb_( base.locb_ ) {
+
+  this->generateBlocks();
+}
 
 /**
  *  @brief Constructor
@@ -44,5 +53,16 @@ BaseDistributionData( std::string&& name, std::size_t locb,
   this->generateBlocks();
 }
 
-BaseDistributionData& operator=( const BaseDistributionData& ) = default;
-BaseDistributionData& operator=( BaseDistributionData&& ) = default;
+BaseDistributionData& operator=( const BaseDistributionData& base ) {
+
+  new (this) BaseDistributionData( base );
+  this->generateBlocks();
+  return *this;
+}
+
+BaseDistributionData& operator=( BaseDistributionData&& base ) {
+
+  new (this) BaseDistributionData( std::move( base ) );
+  this->generateBlocks();
+  return *this;
+}

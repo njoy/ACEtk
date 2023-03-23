@@ -4,6 +4,7 @@
 // system includes
 
 // other includes
+#include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/Base.hpp"
 
 namespace njoy {
@@ -36,6 +37,22 @@ public:
 
   /* constructor */
   #include "ACEtk/block/LevelScatteringDistribution/src/ctor.hpp"
+
+  /**
+   *  @brief Return the distribution type
+   */
+  static constexpr EnergyDistributionType LAW() {
+
+    return EnergyDistributionType::LevelScattering;
+  }
+
+  /**
+   *  @brief Return the distribution type
+   */
+  static constexpr EnergyDistributionType type() {
+
+    return EnergyDistributionType::LevelScattering;
+  }
 
   /**
    *  @brief Return the minimum incident energy for the distribution

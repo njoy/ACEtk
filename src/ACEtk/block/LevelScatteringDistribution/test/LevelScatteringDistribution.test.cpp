@@ -77,6 +77,9 @@ void verifyChunk( const LevelScatteringDistribution& chunk ) {
   CHECK( 2 == chunk.length() );
   CHECK( "DLW::LevelScatteringDistribution" == chunk.name() );
 
+  CHECK( EnergyDistributionType::LevelScattering == chunk.LAW() );
+  CHECK( EnergyDistributionType::LevelScattering == chunk.type() );
+
   CHECK( 2.249999e-3 == Approx( chunk.minimumIncidentEnergy() ) );
   CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
 

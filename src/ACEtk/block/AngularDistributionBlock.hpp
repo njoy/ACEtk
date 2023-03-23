@@ -19,11 +19,12 @@ namespace block {
  *  @brief The continuous energy LAND and AND block with the angular
  *         distribution data
  *
- *  The AngularDistributionBlock class contains NXS(4) sets of angular
- *  distribution data (either ),
- *  one for each reaction number on the MTR block. The order of these cross
- *  section data sets is the same as the order of the reaction numbers in the
- *  MTR block.
+ *  The AngularDistributionBlock class contains angular distribution data,
+ *  one for each the first NXS(5) reaction numbers on the MTR block and
+ *  elastic as well (referenced using the reaction index 0). Elastic is always
+ *  the first reaction (hence the index 0 for this reaction) while the order
+ *  of the other distribution data sets is the same as the order of the reaction
+ *  numbers in the MTR block.
  */
 class AngularDistributionBlock : protected details::Base {
 
@@ -42,7 +43,6 @@ private:
 
   /* auxiliary functions */
   #include "ACEtk/block/AngularDistributionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/AngularDistributionBlock/src/verifyReactionIndex.hpp"
   #include "ACEtk/block/AngularDistributionBlock/src/verifySize.hpp"
 
 public:
@@ -76,7 +76,7 @@ public:
   int LAND( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyReactionIndex( index );
+    this->verifyReactionIndex( index, 0, this->NR() );
     #endif
     return XSS( index + 1 ); // elastic is index 0
   }
@@ -143,21 +143,21 @@ public:
 
         // xand : one-based index to the start of the AND block
         // xand + locator - 1 : one-based index to the start of distribution data
-        std::size_t xand = std::distance( this->begin(), this->and_ ) + 1;
-        const auto locator = xand + this->LAND( index ) - 1;
-        const auto left = std::next( this->begin(), locator - 1 );
+        const std::size_t xand = std::distance( this->begin(), this->and_ ) + 1;
+        const std::size_t land = this->LAND( index );
+        const auto locator = xand + land - 1;
+        const auto left = this->iterator( locator );
         auto right = this->end();
-        for ( auto next = index + 1;
-              next <= this->numberProjectileProductionReactions(); ++next ) {
+        for ( auto next = index + 1; next <= this->NR(); ++next ) {
 
-          auto nextlocator = xand + this->LAND( index ) - 1;
+          auto nextlocator = xand + this->LAND( next ) - 1;
           if ( nextlocator > locator ) {
 
-            right = std::next( this->begin(), nextlocator - 1 );
+            right = this->iterator( nextlocator );
             break;
-         }
+          }
         }
-        return AngularDistributionData( locator - ( xand - 1 ), left, right );
+        return AngularDistributionData( land, left, right );
       }
     }
     else {
