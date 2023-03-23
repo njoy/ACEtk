@@ -18,9 +18,10 @@ generateXSS( std::vector< Distribution >&& distributions, std::size_t locb ) {
     // set the energy value
     xss[index] = std::visit( incidentEnergy, distribution );
 
-    // set the locator
+    // set the LOCC locator
     if ( std::holds_alternative< IsotropicAngularDistribution >( distribution ) ) {
 
+      // LOCC = 0 for an isotropic distribution
       xss[index + ne] = 0;
     }
     else {
@@ -28,6 +29,7 @@ generateXSS( std::vector< Distribution >&& distributions, std::size_t locb ) {
       xss[index + ne] = xss.size() + locb;
       if ( std::holds_alternative< TabulatedAngularDistribution >( distribution ) ) {
 
+        // LOCC is negative for a tabulated distribution
         xss[index + ne] *= -1;
       }
     }
