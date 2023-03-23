@@ -79,6 +79,7 @@ if(ACEtk.python)
     python/src/ACEtk.python.cpp
     python/src/XsdirEntry.python.cpp
     python/src/Xsdir.python.cpp
+    python/src/Header.python.cpp
     python/src/Data.python.cpp
     python/src/Table.python.cpp
     python/src/ReferenceFrame.python.cpp
@@ -86,6 +87,7 @@ if(ACEtk.python)
     python/src/EnergyDistributionType.python.cpp
     python/src/block/InterpolationData.python.cpp
     python/src/block/CrossSectionData.python.cpp
+    python/src/block/DosimetryCrossSectionData.python.cpp
     python/src/block/PrincipalCrossSectionBlock.python.cpp
     python/src/block/PolynomialFissionMultiplicity.python.cpp
     python/src/block/TabulatedFissionMultiplicity.python.cpp
@@ -94,6 +96,7 @@ if(ACEtk.python)
     python/src/block/ReactionQValueBlock.python.cpp
     python/src/block/FrameAndMultiplicityBlock.python.cpp
     python/src/block/CrossSectionBlock.python.cpp
+    python/src/block/DosimetryCrossSectionBlock.python.cpp
     python/src/block/SecondaryParticleTypeBlock.python.cpp
     python/src/block/EquiprobableAngularBins.python.cpp
     python/src/block/TabulatedAngularDistribution.python.cpp
@@ -109,6 +112,7 @@ if(ACEtk.python)
     python/src/block/KalbachMannDistributionData.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
+    python/src/DosimetryTable.python.cpp
   )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )

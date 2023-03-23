@@ -1,13 +1,12 @@
-#ifndef NJOY_ACETK_CONTINUOUSENERGYTABLE
-#define NJOY_ACETK_CONTINUOUSENERGYTABLE
+#ifndef NJOY_ACETK_DOSIMETRYYTABLE
+#define NJOY_ACETK_DOSIMETRYYTABLE
 
 // system includes
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
-#include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/block/DosimetryCrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,23 +20,23 @@ namespace ACEtk {
 class DosimetryTable : protected Table {
 
   /* fields */
-  block::ESZ esz_;
   block::MTR mtr_;
-  block::SIG sig_;
+  block::SIGD sig_;
 
   /* auxiliary functions */
   void generateBlocks() {
 
     auto begin = this->data().XSS().begin();
-    auto esz = begin + this->data().JXS(1) - 1;
     auto mtr = begin + this->data().JXS(3) - 1;
     auto lsig = begin + this->data().JXS(6) - 1;
     auto sig = begin + this->data().JXS(7) - 1;
+    auto end = this->data().XSS().end();
 
-    this->esz_ = block::ESZ( esz, mtr, this->NES() );
     this->mtr_ = block::MTR( mtr, lsig, this->NTR() );
-    this->sig_ = block::SIG( lsig, sig, land, this->NTR() );
+    this->sig_ = block::SIGD( lsig, sig, end, this->NTR() );
   }
+
+  #include "ACEtk/DosimetryTable/src/generateData.hpp"
 
 public:
 
@@ -56,9 +55,39 @@ public:
   const std::string& ZAID() const { return this->header().ZAID(); }
 
   /**
+   *  @brief Return the atomic weight ratio (with respect to the neutron mass)
+   */
+  double AWR() const { return this->header().AWR(); }
+
+  /**
+   *  @brief Return the atomic weight ratio (with respect to the neutron mass)
+   */
+  double atomicWeightRatio() const { return this->header().atomicWeightRatio(); }
+
+  /**
    *  @brief Return the temperature of the table
    */
-  double temperature() const { return this->header().temperature();}
+  double TEMP() const { return this->header().TEMP(); }
+
+  /**
+   *  @brief Return the temperature of the table
+   */
+  double temperature() const { return this->header().temperature(); }
+
+  /**
+   *  @brief Return the date
+   */
+  const std::string& date() const { return this->header().date(); }
+
+  /**
+   *  @brief Return the title
+   */
+  const std::string& title() const { return this->header().title(); }
+
+  /**
+   *  @brief Return the material
+   */
+  const std::string& material() const { return this->header().material(); }
 
   // NXS information
 
@@ -73,16 +102,6 @@ public:
   unsigned int ZA() const { return this->data().NXS(2); }
 
   /**
-   *  @brief Return the number of energy points
-   */
-  unsigned int NES() const { return this->data().NXS(3); }
-
-  /**
-   *  @brief Return the number of energy points
-   */
-  unsigned int numberEnergyPoints() const { return this->NES(); }
-
-  /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
   unsigned int NTR() const { return this->data().NXS(4); }
@@ -92,24 +111,9 @@ public:
    */
   unsigned int numberReactions() const { return this->NTR(); }
 
-  /**
-   *  @brief Return the total number of available reactions (including elastic)
-   */
-  unsigned int totalNumberReactions() const { return this->NTR() + 1; }
-
   // JXS information
 
   // XSS blocks
-
-  /**
-   *  @brief Return the principal cross section block
-   */
-  const block::ESZ& ESZ() const { return this->esz_; }
-
-  /**
-   *  @brief Return the principal cross section block
-   */
-  const block::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
 
   /**
    *  @brief Return the reaction number block
@@ -124,12 +128,12 @@ public:
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& SIG() const { return this->sig_; }
+  const block::SIGD& SIGD() const { return this->sig_; }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& crossSectionBlock() const { return this->SIG(); }
+  const block::SIGD& crossSectionBlock() const { return this->SIGD(); }
 };
 
 } // ACEtk namespace

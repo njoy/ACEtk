@@ -87,9 +87,39 @@ public:
   const std::string& ZAID() const { return this->header().ZAID(); }
 
   /**
+   *  @brief Return the atomic weight ratio (with respect to the neutron mass)
+   */
+  double AWR() const { return this->header().AWR(); }
+
+  /**
+   *  @brief Return the atomic weight ratio (with respect to the neutron mass)
+   */
+  double atomicWeightRatio() const { return this->header().atomicWeightRatio(); }
+
+  /**
    *  @brief Return the temperature of the table
    */
-  double temperature() const { return this->header().temperature();}
+  double TEMP() const { return this->header().TEMP(); }
+
+  /**
+   *  @brief Return the temperature of the table
+   */
+  double temperature() const { return this->header().temperature(); }
+
+  /**
+   *  @brief Return the date
+   */
+  const std::string& date() const { return this->header().date(); }
+
+  /**
+   *  @brief Return the title
+   */
+  const std::string& title() const { return this->header().title(); }
+
+  /**
+   *  @brief Return the material
+   */
+  const std::string& material() const { return this->header().material(); }
 
   // NXS information
 

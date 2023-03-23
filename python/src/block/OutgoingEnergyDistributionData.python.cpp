@@ -58,19 +58,19 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
   .def_property_readonly(
 
     "interpolation_data",
-    [] ( const Block& self ) { return self.interpolationData(); },
+    &Block::interpolationData,
     "The interpolation data"
   )
   .def_property_readonly(
 
     "NB",
-    [] ( const Block& self ) { return self.NB(); },
-    "The number of interpolation ranges"
+    &Block::NB,
+    "The number of interpolation regions"
   )
   .def_property_readonly(
 
     "number_interpolation_regions",
-    [] ( const Block& self ) { return self.numberInterpolationRegions(); },
+    &Block::numberInterpolationRegions,
     "The number of interpolation regions"
   )
   .def_property_readonly(

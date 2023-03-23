@@ -9,6 +9,7 @@
 namespace python = pybind11;
 
 // declarations - generic ACE table
+void wrapHeader( python::module&, python::module& );
 void wrapData( python::module&, python::module& );
 void wrapTable( python::module&, python::module& );
 
@@ -28,6 +29,7 @@ namespace block {
   void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
   void wrapPolynomialFissionMultiplicity( python::module&, python::module& );
   void wrapCrossSectionData( python::module&, python::module& );
+  void wrapDosimetryCrossSectionData( python::module&, python::module& );
   void wrapEquiprobableAngularBins( python::module&, python::module& );
   void wrapTabulatedAngularDistribution( python::module&, python::module& );
   void wrapIsotropicAngularDistribution( python::module&, python::module& );
@@ -47,6 +49,7 @@ namespace block {
   void wrapReactionQValueBlock( python::module&, python::module& );
   void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
   void wrapCrossSectionBlock( python::module&, python::module& );
+  void wrapDosimetryCrossSectionBlock( python::module&, python::module& );
   void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapEnergyDistributionBlock( python::module&, python::module& );
   void wrapSecondaryParticleTypeBlock( python::module&, python::module& );
@@ -54,6 +57,7 @@ namespace block {
 
 // declarations - ACE table types
 void wrapContinuousEnergyTable( python::module&, python::module& );
+void wrapDosimetryTable( python::module&, python::module& );
 
 /**
  *  @brief ACEtk python bindings
@@ -88,6 +92,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapEnergyDistributionType( module, viewmodule );
 
   // wrap generic ACE table components
+  wrapHeader( module, viewmodule );
   wrapData( module, viewmodule );
   wrapTable( module, viewmodule );
 
@@ -100,6 +105,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapTabulatedFissionMultiplicity( module, viewmodule );
   block::wrapPolynomialFissionMultiplicity( module, viewmodule );
   block::wrapCrossSectionData( module, viewmodule );
+  block::wrapDosimetryCrossSectionData( module, viewmodule );
   block::wrapEquiprobableAngularBins( module, viewmodule );
   block::wrapTabulatedAngularDistribution( module, viewmodule );
   block::wrapIsotropicAngularDistribution( module, viewmodule );
@@ -119,10 +125,12 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapReactionQValueBlock( module, viewmodule );
   block::wrapFrameAndMultiplicityBlock( module, viewmodule );
   block::wrapCrossSectionBlock( module, viewmodule );
+  block::wrapDosimetryCrossSectionBlock( module, viewmodule );
   block::wrapAngularDistributionBlock( module, viewmodule );
   block::wrapEnergyDistributionBlock( module, viewmodule );
   block::wrapSecondaryParticleTypeBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
+  wrapDosimetryTable( module, viewmodule );
 }

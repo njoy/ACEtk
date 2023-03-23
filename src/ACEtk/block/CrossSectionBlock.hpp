@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/BaseCrossSectionBlock.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 
 namespace njoy {
@@ -20,15 +20,12 @@ namespace block {
  *  section data sets is the same as the order of the reaction numbers in the
  *  MTR block.
  */
-class CrossSectionBlock : protected details::Base {
+class CrossSectionBlock :
+    protected details::BaseCrossSectionBlock< CrossSectionData > {
 
   /* fields */
-  unsigned int ntr_; // the number of reactions (excluding elastic)
-  Iterator sig_;     // the begin iterator of the SIG block
 
   /* auxiliary functions */
-  #include "ACEtk/block/CrossSectionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/CrossSectionBlock/src/verifySize.hpp"
 
 public:
 
@@ -40,12 +37,15 @@ public:
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int NTR() const { return this->ntr_; }
+  unsigned int NTR() const { return BaseCrossSectionBlock::NTR(); }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int numberReactions() const { return this->NTR(); }
+  unsigned int numberReactions() const {
+
+    return BaseCrossSectionBlock::numberReactions();
+  }
 
   /**
    *  @brief Return the relative cross section locator for a reaction index
@@ -57,10 +57,7 @@ public:
    */
   std::size_t LSIG( std::size_t index ) const {
 
-    #ifndef NDEBUG
-    this->verifyReactionIndex( index, 1, this->NTR() );
-    #endif
-    return XSS( index );
+    return BaseCrossSectionBlock::LSIG( index );
   }
 
   /**
@@ -73,7 +70,7 @@ public:
    */
   std::size_t crossSectionLocator( std::size_t index ) const {
 
-    return this->LSIG( index );
+    return BaseCrossSectionBlock::crossSectionLocator( index );
   }
 
   /**
@@ -86,14 +83,7 @@ public:
    */
   auto crossSectionData( std::size_t index ) const {
 
-    // sig : one-based index to the start of the SIG block
-    // sig + locator - 1 : one-based index to the start of cross section data
-    std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
-    const auto left = this->iterator( sig + this->LSIG( index ) - 1 );
-    const auto right = index == this->NTR()
-                       ? this->end()
-                       : this->iterator( sig + this->LSIG( index + 1 ) - 1 );
-    return CrossSectionData( left, right );
+    return BaseCrossSectionBlock::crossSectionData( index );
   }
 
   /**
@@ -108,7 +98,7 @@ public:
 
     // sig : one-based index to the start of the SIG block
     // sig + locator - 1 : one-based index to the energy index
-    std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
+    std::size_t sig = std::distance( this->begin(), this->sig() ) + 1;
     return XSS( sig + this->LSIG( index ) - 1 );
   }
 
@@ -124,7 +114,7 @@ public:
 
     // sig : one-based index to the start of the SIG block
     // sig + locator - 1 + 1 : one-based index to the number of values
-    auto sig = std::distance( this->begin(), this->sig_ ) + 1;
+    auto sig = std::distance( this->begin(), this->sig() ) + 1;
     return XSS( sig + this->LSIG( index ) );
   }
 
@@ -141,17 +131,17 @@ public:
     // sig : one-based index to the start of the SIG block
     // sig + locator - 1 + 2 : one-based index to the first cross section value
     auto locator = this->LSIG( index );
-    auto sig = std::distance( this->begin(), this->sig_ ) + 1;
+    auto sig = std::distance( this->begin(), this->sig() ) + 1;
     return XSS( sig + locator + 1,
                 static_cast< std::size_t >( XSS( sig + locator ) ) );
   }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using BaseCrossSectionBlock::empty;
+  using BaseCrossSectionBlock::name;
+  using BaseCrossSectionBlock::length;
+  using BaseCrossSectionBlock::XSS;
+  using BaseCrossSectionBlock::begin;
+  using BaseCrossSectionBlock::end;
 };
 
 using SIG = CrossSectionBlock;

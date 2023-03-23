@@ -19,3 +19,15 @@ ContinuousEnergyTable( ContinuousEnergyTable&& cetable ) :
 
   this->generateBlocks();
 }
+
+ContinuousEnergyTable& operator=( const ContinuousEnergyTable& base ) {
+
+  new (this) ContinuousEnergyTable( base );
+  return *this;
+}
+
+ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
+
+  new (this) ContinuousEnergyTable( std::move( base ) );
+  return *this;
+}

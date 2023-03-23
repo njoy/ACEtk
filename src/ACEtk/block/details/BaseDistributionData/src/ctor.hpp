@@ -38,7 +38,7 @@ BaseDistributionData( std::string&& name,
 /**
  *  @brief Constructor
  *
- *  @param[in] name             the name of the block
+ *  @param[in] name    the name of the block
  *  @param[in] locb    the starting xss index with respect to the superblock
  *  @param[in] sig     the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array
@@ -56,13 +56,11 @@ BaseDistributionData( std::string&& name, std::size_t locb,
 BaseDistributionData& operator=( const BaseDistributionData& base ) {
 
   new (this) BaseDistributionData( base );
-  this->generateBlocks();
   return *this;
 }
 
 BaseDistributionData& operator=( BaseDistributionData&& base ) {
 
   new (this) BaseDistributionData( std::move( base ) );
-  this->generateBlocks();
   return *this;
 }
