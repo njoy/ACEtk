@@ -6,9 +6,12 @@
 
 // other includes
 #include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
+#include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
+#include "ACEtk/block/GeneralEvaporationSpectrum.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,15 +26,20 @@ namespace block {
  *  one for each the first NXS(5) reaction numbers on the MTR block. The order
  *  of the distribution data sets is the same as the order of the reaction
  *  numbers in the MTR block.
+ *
+ *  @todo verify if DiscretePhotonDistribution can appear here
  */
 class EnergyDistributionBlock : protected details::Base {
 
 public:
 
   /* type alias */
-  using DistributionData = std::variant< LevelScatteringDistribution,
+  using DistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
+                                         DiscretePhotonDistribution,
+                                         LevelScatteringDistribution,
                                          OutgoingEnergyDistributionData,
-                                         KalbachMannDistributionData >;
+                                         KalbachMannDistributionData,
+                                         GeneralEvaporationSpectrum >;
 
 private:
 
@@ -129,6 +137,14 @@ public:
       // switch on the law and return the appropriate data
       switch ( law ) {
 
+        case EnergyDistributionType::Equiprobable : {
+
+          return EquiprobableOutgoingEnergyBinData( left, right );
+        }
+        case EnergyDistributionType::DiscretePhoton : {
+
+          return DiscretePhotonDistribution( left, right, emin, emax );
+        }
         case EnergyDistributionType::LevelScattering : {
 
           return LevelScatteringDistribution( left, right, emin, emax );
@@ -140,6 +156,10 @@ public:
         case EnergyDistributionType::KalbachMann : {
 
           return KalbachMannDistributionData( idat, left, right );
+        }
+        case EnergyDistributionType::GeneralEvaporation : {
+
+          return GeneralEvaporationSpectrum( left, right );
         }
         default : {
 

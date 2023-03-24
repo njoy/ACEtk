@@ -28,12 +28,10 @@ class BaseTabulatedData : protected details::Base {
   #include "ACEtk/block/details/BaseTabulatedData/src/generateBlocks.hpp"
   #include "ACEtk/block/details/BaseTabulatedData/src/verifySize.hpp"
 
-protected:
+public:
 
   /* constructor */
   #include "ACEtk/block/details/BaseTabulatedData/src/ctor.hpp"
-
-public:
 
   /**
    *  @brief Return the interpolation data

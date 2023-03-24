@@ -17,7 +17,7 @@ generateXSS( const std::string& name,
                                    std::move( interpolants ) );
   xss.insert( xss.end(), interpolation.begin(), interpolation.end() );
 
-  // insert the tabulated data in the front
+  // insert the tabulated data
   ColumnData table( std::string( name ), std::move( x ), std::move( y ) );
   xss.insert( xss.end(), table.begin(), table.end() );
 

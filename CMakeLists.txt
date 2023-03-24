@@ -105,11 +105,15 @@ if(ACEtk.python)
     python/src/block/FullyIsotropicDistribution.python.cpp
     python/src/block/DistributionGivenElsewhere.python.cpp
     python/src/block/AngularDistributionBlock.python.cpp
+    python/src/block/EquiprobableOutgoingEnergyBins.python.cpp
+    python/src/block/EquiprobableOutgoingEnergyBinData.python.cpp
     python/src/block/LevelScatteringDistribution.python.cpp
+    python/src/block/DiscretePhotonDistribution.python.cpp
     python/src/block/TabulatedOutgoingEnergyDistribution.python.cpp
     python/src/block/OutgoingEnergyDistributionData.python.cpp
     python/src/block/TabulatedKalbachMannDistribution.python.cpp
     python/src/block/KalbachMannDistributionData.python.cpp
+    python/src/block/GeneralEvaporationSpectrum.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
