@@ -71,7 +71,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
         utility::overload{
 
           [] ( const MultiDistributionData& ) { /* nothing to do here */ },
-          [ &xss, &idat, locator ] ( auto&& value ) {
+          [ &xss, &idat, locator ] ( const auto& value ) {
 
             idat = locator + 3 + 1 + 5;
             xss.push_back( 0. );                                   // LNW

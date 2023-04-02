@@ -4,7 +4,6 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import EnergyDistributionType
 from ACEtk import TabulatedAngleEnergyDistribution
 from ACEtk import TabulatedEnergyDistribution
 
