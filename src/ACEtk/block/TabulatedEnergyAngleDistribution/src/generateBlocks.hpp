@@ -18,8 +18,7 @@ void generateBlocks() {
                        ? this->end()
                        : std::next( this->begin(),
                          this->relativeDistributionLocator( index + 1 ) - 1 );
-    this->distributions_.emplace_back(
-      TabulatedAngularDistributionWithProbability( energy, probability,
-                                                   cumulative, left, right ) );
+    this->distributions_.emplace_back( energy, probability,
+                                       cumulative, left, right );
   }
 }
