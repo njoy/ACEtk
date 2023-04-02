@@ -17,7 +17,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
 
         utility::overload{
 
-          [ &xss, offset ] ( const MultiDistributionData& value ) {
+          [ &xss, offset ] ( MultiDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             const MultiDistributionData temp(
@@ -60,7 +60,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
 
         utility::overload{
 
-          [ &xss, idat ] ( const OutgoingEnergyDistributionData& value ) {
+          [ &xss, idat ] ( OutgoingEnergyDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
@@ -72,7 +72,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
                       idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
-          [ &xss, idat ] ( const KalbachMannDistributionData& value ) {
+          [ &xss, idat ] ( KalbachMannDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
@@ -84,7 +84,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
                       idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
-          [ &xss, idat ] ( const EnergyAngleDistributionData& value ) {
+          [ &xss, idat ] ( EnergyAngleDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
@@ -96,7 +96,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
                       idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
-          [ &xss, idat ] ( const AngleEnergyDistributionData& value ) {
+          [ &xss, idat ] ( AngleEnergyDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();

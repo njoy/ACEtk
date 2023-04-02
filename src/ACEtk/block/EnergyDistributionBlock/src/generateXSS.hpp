@@ -48,7 +48,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
 
         utility::overload{
 
-          [ &xss, locator ] ( const MultiDistributionData& value ) {
+          [ &xss, locator ] ( MultiDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             const MultiDistributionData temp(
@@ -71,7 +71,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
         utility::overload{
 
           [] ( const MultiDistributionData& ) { /* nothing to do here */ },
-          [ &xss, &idat, locator ] ( const auto& value ) {
+          [ &xss, &idat, locator ] ( auto&& value ) {
 
             idat = locator + 3 + 1 + 5;
             xss.push_back( 0. );                                   // LNW
@@ -91,7 +91,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
 
         utility::overload{
 
-          [ &xss, idat ] ( const OutgoingEnergyDistributionData& value ) {
+          [ &xss, idat ] ( OutgoingEnergyDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
@@ -103,7 +103,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
                       idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
-          [ &xss, idat ] ( const KalbachMannDistributionData& value ) {
+          [ &xss, idat ] ( KalbachMannDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
@@ -115,7 +115,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
                       idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
-          [ &xss, idat ] ( const EnergyAngleDistributionData& value ) {
+          [ &xss, idat ] ( EnergyAngleDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
@@ -127,7 +127,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
                       idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
-          [ &xss, idat ] ( const AngleEnergyDistributionData& value ) {
+          [ &xss, idat ] ( AngleEnergyDistributionData&& value ) {
 
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
