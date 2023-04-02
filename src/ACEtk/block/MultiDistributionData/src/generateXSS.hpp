@@ -30,7 +30,7 @@ generateXSS( std::vector< DistributionProbability >&& probabilities,
 
       utility::overload{
 
-        [ &xss, offset ] ( OutgoingEnergyDistributionData&& value ) {
+        [ &xss, offset ] ( const OutgoingEnergyDistributionData& value ) {
 
           // remake the internal xss array with the proper locators
           decltype(auto) boundaries = value.boundaries();
@@ -42,7 +42,7 @@ generateXSS( std::vector< DistributionProbability >&& probabilities,
                     xss[ offset + 2 ] );
           xss.insert( xss.end(), temp.begin(), temp.end() );
         },
-        [ &xss, offset ] ( KalbachMannDistributionData&& value ) {
+        [ &xss, offset ] ( const KalbachMannDistributionData& value ) {
 
           // remake the internal xss array with the proper locators
           decltype(auto) boundaries = value.boundaries();
