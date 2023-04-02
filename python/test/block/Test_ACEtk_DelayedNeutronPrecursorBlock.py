@@ -29,7 +29,7 @@ class Test_ACEtk_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
             self.assertEqual( 2, chunk.number_delayed_precursors )
             self.assertEqual( 2, len( chunk.data ) )
 
-            group = chunk.precursor_group_data( 1 );
+            group = chunk.precursor_group_data( 1 )
             self.assertEqual( 1, group.number )
 
             self.assertAlmostEqual( 2.3e-4, group.DEC )
@@ -62,7 +62,7 @@ class Test_ACEtk_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
             self.assertAlmostEqual( 2.5e-2, group.probabilities[1] )
             self.assertAlmostEqual( 1., group.probabilities[2] )
 
-            group = chunk.precursor_group_data( 2 );
+            group = chunk.precursor_group_data( 2 )
             self.assertEqual( 2, group.number )
 
             self.assertAlmostEqual( 3.2e-4, group.DEC )

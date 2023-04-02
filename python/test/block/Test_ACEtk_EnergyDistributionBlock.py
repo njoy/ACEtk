@@ -161,7 +161,7 @@ class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
             self.assertEqual( 1., multiplicity1.multiplicities[1] )
 
             multiplicity2 = chunk.multiplicity_data(2)
-            self.assertEqual( 1, multiplicity2 );
+            self.assertEqual( 1, multiplicity2 )
 
             # verify the xss array
             xss = chunk.xss_array
