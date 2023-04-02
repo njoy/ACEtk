@@ -17,7 +17,7 @@ FetchContent_Declare( dimwits
 
 FetchContent_Declare( disco
     GIT_REPOSITORY  https://github.com/njoy/disco
-    GIT_TAG         a1a7ddb2c0f69465524d8640ee29988b714a881e
+    GIT_TAG         2606933a854bb0269c4ec37143e1236797e27838
     )
 
 FetchContent_Declare( hana-adapter
