@@ -332,5 +332,6 @@ Data generateData( unsigned int z, unsigned int a,
   nxs[9] = z;
   nxs[10] = a;
 
-  return { iz, aw, std::move( nxs ), std::move( jxs ), std::move( xss ) };
+  return { std::move( iz ), std::move( aw ),
+           std::move( nxs ), std::move( jxs ), std::move( xss ) };
 }
