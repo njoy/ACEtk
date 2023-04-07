@@ -22,7 +22,7 @@ class Test_ACEtk_TabulatedKalbachMannDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 17, chunk.length )
-            self.assertEqual( "DLW::TabulatedKalbachMannDistribution", chunk.name )
+            self.assertEqual( "TabulatedKalbachMannDistribution", chunk.name )
 
             self.assertEqual( 2.1, chunk.incident_energy )
             self.assertEqual( 2, chunk.interpolation )

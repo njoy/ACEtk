@@ -12,7 +12,7 @@ namespace block {
 
 /**
  *  @class
- *  @brief Parameter data from the DLW block for a Watt spectrum
+ *  @brief Parameter data for a Watt spectrum
  */
 class ParameterData : protected details::BaseTabulatedData {
 

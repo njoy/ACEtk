@@ -1,39 +1,39 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using TabulatedOutgoingEnergyDistribution = block::TabulatedOutgoingEnergyDistribution;
+using TabulatedEnergyDistribution = block::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedOutgoingEnergyDistribution& );
+void verifyChunk( const TabulatedEnergyDistribution& );
 
-SCENARIO( "TabulatedOutgoingEnergyDistribution" ) {
+SCENARIO( "TabulatedEnergyDistribution" ) {
 
-  GIVEN( "valid data for a TabulatedOutgoingEnergyDistribution instance" ) {
+  GIVEN( "valid data for a TabulatedEnergyDistribution instance" ) {
 
     std::vector< double > xss = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
-      double incident = 2.1;
+      double value = 2.1;
       int interpolation = 2;
       std::size_t discrete = 3;
       std::vector< double > cosines = { 1e-11, 1.0, 20.0 };
       std::vector< double > pdf = { 0.5, 0.5, 0.5 };
       std::vector< double > cdf = { 0.0, 0.5, 1.0 };
 
-      TabulatedOutgoingEnergyDistribution chunk( incident, interpolation,
-                                                 std::move( cosines ),
-                                                 std::move( pdf ),
-                                                 std::move( cdf ),
-                                                 discrete );
+      TabulatedEnergyDistribution chunk( value, interpolation,
+                                         std::move( cosines ),
+                                         std::move( pdf ),
+                                         std::move( cdf ),
+                                         discrete );
 
-      THEN( "a TabulatedOutgoingEnergyDistribution can be constructed and "
+      THEN( "a TabulatedEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -51,10 +51,10 @@ SCENARIO( "TabulatedOutgoingEnergyDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      double incident = 2.1;
-      TabulatedOutgoingEnergyDistribution chunk( incident, xss.begin(), xss.end() );
+      double value = 2.1;
+      TabulatedEnergyDistribution chunk( value, xss.begin(), xss.end() );
 
-      THEN( "a TabulatedOutgoingEnergyDistribution can be constructed and "
+      THEN( "a TabulatedEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -79,13 +79,13 @@ std::vector< double > chunk() {
            0.00000000000E+00,  0.50000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const TabulatedOutgoingEnergyDistribution& chunk ) {
+void verifyChunk( const TabulatedEnergyDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
-  CHECK( "DLW::TabulatedOutgoingEnergyDistribution" == chunk.name() );
+  CHECK( "TabulatedEnergyDistribution" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
+  CHECK( 2.1 == Approx( chunk.energyOrCosine() ) );
   CHECK( 2 == chunk.interpolation() );
   CHECK( 3 == chunk.numberDiscretePhotonLines() );
   CHECK( 3 == chunk.numberOutgoingEnergies() );

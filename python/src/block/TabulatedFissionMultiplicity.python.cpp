@@ -24,7 +24,10 @@ void wrapTabulatedFissionMultiplicity( python::module& module, python::module& )
 
     module,
     "TabulatedFissionMultiplicity",
-    "Tabulated fission multiplicity"
+    "Tabulated fission multiplicity\n\n"
+    "The TabulatedFissionMultiplicity class contains the tabulated\n"
+    "representation (LNU = 2) of the fission multiplicity. It is\n"
+    "used in the NU block."
   );
 
   // wrap the block
@@ -33,13 +36,13 @@ void wrapTabulatedFissionMultiplicity( python::module& module, python::module& )
 
     "LNU",
     &Block::LNU,
-    "The representation type (should always be 1)"
+    "The representation type (should always be 2)"
   )
   .def_property_readonly(
 
     "type",
     &Block::type,
-    "The representation type (should always be 1)"
+    "The representation type (should always be 2)"
   )
   .def_property_readonly(
 

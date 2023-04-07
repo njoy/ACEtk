@@ -18,7 +18,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief Angular distribution data from the AND block for a single reaction
+ *  @brief Angular distribution data
+ *
+ *  The AngularDistributionData class contains the angular distribution data
+ *  energy distributions for a set of incident energy values. It is used in
+ *  the AND block.
  */
 class AngularDistributionData : protected details::Base {
 

@@ -25,8 +25,10 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
 
     module,
     "AngularDistributionData",
-    "Convenience interface for angular distribution data for a single reaction "
-    "from the AND block"
+    "Angular distribution data\n\n"
+    "The AngularDistributionData class contains the angular distribution data\n"
+    "energy distributions for a set of incident energy values. It is used in\n"
+    "the AND block."
   );
 
   // wrap the block

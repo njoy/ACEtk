@@ -11,11 +11,10 @@ namespace block {
 
 /**
  *  @class
- *  @brief The angular distribution for a single reaction is not given in the
- *         AND blockbut in the DLW block
+ *  @brief The angular distribution is given in a different block
  *
  *  The DistributionGivenElsewhere class contains contains no data. It is a
- *  convenience interface object.
+ *  convenience interface object used in the AND block.
  */
 class DistributionGivenElsewhere {
 

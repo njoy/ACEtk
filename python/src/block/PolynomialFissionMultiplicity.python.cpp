@@ -24,7 +24,10 @@ void wrapPolynomialFissionMultiplicity( python::module& module, python::module& 
 
     module,
     "PolynomialFissionMultiplicity",
-    "Polynomial fission multiplicity"
+    "Polynomial fission multiplicity\n\n"
+    "The PolynomialFissionMultiplicity class contains the polynomial\n"
+    "representation (LNU = 1) of the fission multiplicity. It is\n"
+    "used in the NU block."
   );
 
   // wrap the block

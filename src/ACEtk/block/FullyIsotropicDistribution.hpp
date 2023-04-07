@@ -11,11 +11,10 @@ namespace block {
 
 /**
  *  @class
- *  @brief Fully isotropic angular distribution from the AND block for a single
- *         reaction
+ *  @brief Fully isotropic angular distribution
  *
  *  The FullyIsotropicDistribution class contains contains no data. It is a
- *  convenience interface object.
+ *  convenience interface object used in the AND block.
  */
 class FullyIsotropicDistribution {
 

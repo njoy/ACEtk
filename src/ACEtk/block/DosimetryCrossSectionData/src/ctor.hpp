@@ -15,7 +15,7 @@ DosimetryCrossSectionData( std::vector< long > boundaries,
                            std::vector< long > interpolants,
                            std::vector< double > energies,
                            std::vector< double > xs ) :
-  BaseTabulatedData( "SIGD::DosimetryCrossSectionData",
+  BaseTabulatedData( "DosimetryCrossSectionData",
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( xs ) ) {}
 
@@ -36,7 +36,7 @@ DosimetryCrossSectionData( std::vector< double > energies,
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 DosimetryCrossSectionData( Iterator begin, Iterator end ) :
-  BaseTabulatedData( "SIGD::DosimetryCrossSectionData", begin, end ) {}
+  BaseTabulatedData( "DosimetryCrossSectionData", begin, end ) {}
 
 DosimetryCrossSectionData& operator=( const DosimetryCrossSectionData& ) = default;
 DosimetryCrossSectionData& operator=( DosimetryCrossSectionData&& ) = default;

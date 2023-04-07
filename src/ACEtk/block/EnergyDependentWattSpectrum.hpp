@@ -13,8 +13,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief An energy dependent Watt spectrum from the DLW block for a single
- *         reaction
+ *  @brief An energy dependent Watt spectrum
+ *
+ *  The EnergyDependentWattSpectrum class contains the tabulated values for the
+ *  energy dependent a and b parameters as well as the restriction energy U used
+ *  to describe the Watt spectrum. It is used in the DLW block as ACE LAW 11.
  */
 class EnergyDependentWattSpectrum : protected details::Base {
 

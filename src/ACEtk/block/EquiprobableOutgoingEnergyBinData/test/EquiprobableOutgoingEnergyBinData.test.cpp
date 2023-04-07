@@ -84,7 +84,7 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 13 == chunk.length() );
-  CHECK( "DLW::EquiprobableOutgoingEnergyBinData" == chunk.name() );
+  CHECK( "EquiprobableOutgoingEnergyBinData" == chunk.name() );
 
   CHECK( EnergyDistributionType::Equiprobable == chunk.LAW() );
   CHECK( EnergyDistributionType::Equiprobable == chunk.type() );

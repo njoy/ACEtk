@@ -24,8 +24,9 @@ void wrapIsotropicAngularDistribution( python::module& module, python::module& )
 
     module,
     "IsotropicAngularDistribution",
-    "Convenience interface for an isotropic angular distribution from the "
-    "AND block"
+    "Isotropic angular distribution\n\n"
+    "The IsotropicAngularDistribution class contains contains no data other than\n"
+    "the incident energy. It is a convenience interface object used in the AND block"
   );
 
   // wrap the block
@@ -33,17 +34,17 @@ void wrapIsotropicAngularDistribution( python::module& module, python::module& )
   .def(
 
     python::init< double >(),
-    python::arg( "incident" ),
+    python::arg( "energy" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self        the block\n"
-    "    incident    the incident energy value\n"
+    "    self      the block\n"
+    "    energy    the associated energy value\n"
   )
   .def_property_readonly(
 
-    "incident_energy",
-    &Block::incidentEnergy,
-    "The incident energy"
+    "energy",
+    &Block::energy,
+    "The associated energy value"
   );
 }
 

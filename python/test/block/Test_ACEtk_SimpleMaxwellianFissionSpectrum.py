@@ -21,7 +21,7 @@ class Test_ACEtk_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 11, chunk.length )
-            self.assertEqual( "DLW::SimpleMaxwellianFissionSpectrum", chunk.name )
+            self.assertEqual( "SimpleMaxwellianFissionSpectrum", chunk.name )
 
             self.assertEqual( EnergyDistributionType.SimpleMaxwellianFission, chunk.LAW )
             self.assertEqual( EnergyDistributionType.SimpleMaxwellianFission, chunk.type )

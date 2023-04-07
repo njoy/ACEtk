@@ -20,7 +20,7 @@ SCENARIO( "EquiprobableAngularBins" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      double incident = 2.1;
+      double energy = 2.1;
       std::vector< double > cosines = {
 
         -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.3, -0.2, -0.1, 0.0,
@@ -29,7 +29,7 @@ SCENARIO( "EquiprobableAngularBins" ) {
         0.9625, 0.975, 1.0
       };
 
-      EquiprobableAngularBins chunk( incident, std::move( cosines ) );
+      EquiprobableAngularBins chunk( energy, std::move( cosines ) );
 
       THEN( "an EquiprobableAngularBins can be constructed and members can be "
             "tested" ) {
@@ -49,8 +49,8 @@ SCENARIO( "EquiprobableAngularBins" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      double incident = 2.1;
-      EquiprobableAngularBins chunk( incident, xss.begin(), xss.end() );
+      double energy = 2.1;
+      EquiprobableAngularBins chunk( energy, xss.begin(), xss.end() );
 
       THEN( "an EquiprobableAngularBins can be constructed and members can be tested" ) {
 
@@ -89,9 +89,9 @@ void verifyChunk( const EquiprobableAngularBins& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 33 == chunk.length() );
-  CHECK( "AND::EquiprobableAngularBins" == chunk.name() );
+  CHECK( "EquiprobableAngularBins" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
+  CHECK( 2.1 == Approx( chunk.energy() ) );
   CHECK( 32 == chunk.numberBins() );
 
   CHECK( 33 == chunk.cosines().size() );

@@ -27,7 +27,7 @@ GeneralEvaporationSpectrum(
     std::vector< double > energies,
     std::vector< double > temperatures,
     std::vector< double > bins ) :
-  Base( "DLW::GeneralEvaporationSpectrum",
+  Base( "GeneralEvaporationSpectrum",
         generateXSS( std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( temperatures ),
                      std::move( bins ) ) ) {
@@ -58,7 +58,7 @@ GeneralEvaporationSpectrum(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 GeneralEvaporationSpectrum( Iterator begin, Iterator end ) :
-  Base( "DLW::GeneralEvaporationSpectrum", begin, end ) {
+  Base( "GeneralEvaporationSpectrum", begin, end ) {
 
   std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );
   std::size_t ne = static_cast< std::size_t >( this->XSS( 1 + 2 * nr + 1 ) );

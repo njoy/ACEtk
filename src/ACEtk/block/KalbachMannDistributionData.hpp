@@ -15,11 +15,18 @@ namespace block {
 
 /**
  *  @class
- *  @brief Correlated outgoing energy-angle distribution data from the DLW block
- *         for a single reaction using Kalbach-Mann systematics
+ *  @brief Correlated outgoing energy-angle distribution data using Kalbach-Mann
+ *         systematics
+ *
+ *  The KalbachMannDistributionData class contains the Kalbach-Mann distributions
+ *  for a set of incident energy values. It is used in the DLW block as ACE LAW 44.
  */
 class KalbachMannDistributionData :
-  protected details::BaseDistributionData< TabulatedKalbachMannDistribution > {
+  protected details::BaseDistributionData< KalbachMannDistributionData,
+                                           TabulatedKalbachMannDistribution > {
+
+  friend class details::BaseDistributionData< KalbachMannDistributionData,
+                                              TabulatedKalbachMannDistribution >;
 
   /* fields */
 
@@ -90,14 +97,14 @@ public:
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t NE() const { return BaseDistributionData::NE(); }
+  std::size_t NE() const { return BaseDistributionData::N(); }
 
   /**
    *  @brief Return the number of incident energy values
    */
   std::size_t numberIncidentEnergies() const {
 
-    return BaseDistributionData::numberIncidentEnergies();
+    return BaseDistributionData::numberValues();
   }
 
   /**
@@ -105,7 +112,7 @@ public:
    */
   auto incidentEnergies() const {
 
-    return BaseDistributionData::incidentEnergies();
+    return BaseDistributionData::values( 1 );
   }
 
   /**
@@ -118,7 +125,7 @@ public:
    */
   double incidentEnergy( std::size_t index ) const {
 
-    return BaseDistributionData::incidentEnergy( index );
+    return BaseDistributionData::value( 1, index );
   }
 
   /**
@@ -126,7 +133,7 @@ public:
    */
   double minimumIncidentEnergy() const {
 
-    return BaseDistributionData::minimumIncidentEnergy();
+    return this->incidentEnergy( 1 );
   }
 
   /**
@@ -134,7 +141,7 @@ public:
    */
   double maximumIncidentEnergy() const {
 
-    return BaseDistributionData::maximumIncidentEnergy();
+    return this->incidentEnergy( this->NE() );
   }
 
   /**

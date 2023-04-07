@@ -18,7 +18,7 @@ class Test_ACEtk_DistributionProbability( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 8, chunk.length )
-            self.assertEqual( "DLW::DistributionProbability", chunk.name )
+            self.assertEqual( "DistributionProbability", chunk.name )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )

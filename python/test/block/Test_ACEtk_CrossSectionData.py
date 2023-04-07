@@ -43,7 +43,7 @@ class Test_ACEtk_CrossSectionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 101, chunk.length )
-            self.assertEqual( "SIG::XS", chunk.name )
+            self.assertEqual( "CrossSectionData", chunk.name )
 
             self.assertEqual( 1, chunk.energy_index )
             self.assertEqual( 99, chunk.number_values )

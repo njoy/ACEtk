@@ -17,7 +17,7 @@ namespace block {
  *
  *  The NBodyPhaseSpaceDistribution class contains two parameter values that
  *  determine the distribution: the number of particles in the system and the
- *  total mass ratio.
+ *  total mass ratio. It is used in the DLW block as ACE LAW 66.
  */
 class NBodyPhaseSpaceDistribution : protected details::Base {
 

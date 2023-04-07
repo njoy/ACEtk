@@ -14,9 +14,9 @@ OutgoingEnergyDistributionData( OutgoingEnergyDistributionData&& ) = default;
 OutgoingEnergyDistributionData(
     std::vector< long > boundaries,
     std::vector< long > interpolants,
-    std::vector< TabulatedOutgoingEnergyDistribution > distributions,
+    std::vector< TabulatedEnergyDistribution > distributions,
     std::size_t locb = 1 ) :
-  BaseDistributionData( "DLW::OutgoingEnergyDistributionData",
+  BaseDistributionData( "OutgoingEnergyDistributionData",
                         std::move( boundaries ), std::move( interpolants ),
                         std::move( distributions ), locb ) {}
 
@@ -27,7 +27,7 @@ OutgoingEnergyDistributionData(
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
 OutgoingEnergyDistributionData(
-    std::vector< TabulatedOutgoingEnergyDistribution > distributions,
+    std::vector< TabulatedEnergyDistribution > distributions,
     std::size_t locb = 1 ) :
   OutgoingEnergyDistributionData( {}, {}, std::move( distributions ), locb ) {}
 
@@ -39,7 +39,7 @@ OutgoingEnergyDistributionData(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 OutgoingEnergyDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
-  BaseDistributionData( "DLW::OutgoingEnergyDistributionData", locb,
+  BaseDistributionData( "OutgoingEnergyDistributionData", locb,
                         begin, end ) {}
 
 OutgoingEnergyDistributionData& operator=( const OutgoingEnergyDistributionData& ) = default;

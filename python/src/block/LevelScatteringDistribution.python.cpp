@@ -30,7 +30,8 @@ void wrapLevelScatteringDistribution( python::module& module, python::module& ) 
     "  Eprime = C2 * ( E - C1 )\n"
     "with:\n"
     "  C1 = ( A + 1 ) / A * abs( Q )\n"
-    "  C2 = ( A / ( A + 1 ) )^2"
+    "  C2 = ( A / ( A + 1 ) )^2\n"
+    "It is used in the DLW block as ACE LAW 3."
   );
 
   // wrap the block

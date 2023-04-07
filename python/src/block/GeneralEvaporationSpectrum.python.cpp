@@ -25,8 +25,10 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
 
     module,
     "GeneralEvaporationSpectrum",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using a general evaporation spectrum"
+    "A general evaporation spectrum\n\n"
+    "The GeneralEvaporationSpectrum class contains the tabulated energy and\n"
+    "temperature values as well as the bin date used to describe the\n"
+    "general evaporation spectrum. It is used in the DLW block as ACE LAW 5."
   );
 
   // wrap the block

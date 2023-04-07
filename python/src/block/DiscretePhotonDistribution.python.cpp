@@ -26,7 +26,7 @@ void wrapDiscretePhotonDistribution( python::module& module, python::module& ) {
     "DiscretePhotonDistribution",
     "The DiscretePhotonDistribution class contains the photon energy if the\n"
     "photon is a primary photon or the binding energy when the photon is not a\n"
-    "primary photon."
+    "primary photon. It is used in the DLW block as ACE LAW 2."
   );
 
   // wrap the block

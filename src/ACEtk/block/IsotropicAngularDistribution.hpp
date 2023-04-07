@@ -11,16 +11,15 @@ namespace block {
 
 /**
  *  @class
- *  @brief Isotropic angular distribution from the AND block for a single
- *         reaction and incident energy
+ *  @brief Isotropic angular distribution
  *
  *  The IsotropicAngularDistribution class contains contains no data other than
- *  the incident energy. It is a convenience interface object.
+ *  the incident energy. It is a convenience interface object used in the AND block.
  */
 class IsotropicAngularDistribution {
 
   /* fields */
-  double incident_;
+  double energy_;
 
   /* auxiliary functions */
 
@@ -30,9 +29,9 @@ public:
   #include "ACEtk/block/IsotropicAngularDistribution/src/ctor.hpp"
 
   /**
-   *  @brief Return the incident energy value
+   *  @brief Return the associated energy value
    */
-  double incidentEnergy() const { return this->incident_; }
+  double energy() const { return this->energy_; }
 };
 
 } // block namespace

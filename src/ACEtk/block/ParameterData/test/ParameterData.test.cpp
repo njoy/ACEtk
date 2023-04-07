@@ -75,7 +75,7 @@ void verifyChunk( const ParameterData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
-  CHECK( "DLW::ParameterData" == chunk.name() );
+  CHECK( "ParameterData" == chunk.name() );
 
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );

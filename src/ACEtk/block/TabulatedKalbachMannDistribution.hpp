@@ -12,13 +12,14 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated Kalbach-Mann distribution data from the DLW block for
- *         a single reaction and incident energy
+ *  @brief Tabulated Kalbach-Mann distribution data for a single incident energy
  *
  *  The TabulatedKalbachMannDistribution class contains the probability
  *  density function (PDF), the cumulative density function (CDF), the
  *  precompound fraction r and angular distribution slope a as a function
- *  of the outgoing energy for a single incident energy.
+ *  of the outgoing energy for a single incident energy. It is
+ *  used in the KalbachMannDistributionData (ACE LAW 44 for a given incident
+ *  energy) in the DLW block.
  */
 class TabulatedKalbachMannDistribution :
   protected details::TabulatedProbabilityDistribution {
@@ -32,6 +33,9 @@ public:
 
   /* constructor */
   #include "ACEtk/block/TabulatedKalbachMannDistribution/src/ctor.hpp"
+
+  // generic function used internally
+  double value() const { return this->incident_; }
 
   /**
    *  @brief Return the incident energy value

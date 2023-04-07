@@ -76,7 +76,7 @@ void verifyChunk( const SimpleMaxwellianFissionSpectrum& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
-  CHECK( "DLW::SimpleMaxwellianFissionSpectrum" == chunk.name() );
+  CHECK( "SimpleMaxwellianFissionSpectrum" == chunk.name() );
 
   CHECK( EnergyDistributionType::SimpleMaxwellianFission == chunk.LAW() );
   CHECK( EnergyDistributionType::SimpleMaxwellianFission == chunk.type() );

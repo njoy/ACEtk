@@ -23,7 +23,7 @@ EnergyDependentWattSpectrum(
     ParameterData a,
     ParameterData b,
     double energy ) :
-  Base( "DLW::EnergyDependentWattSpectrum",
+  Base( "EnergyDependentWattSpectrum",
         generateXSS( std::move( a ), std::move( b ), energy ) ) {
 
   this->generateBlocks();
@@ -38,7 +38,7 @@ EnergyDependentWattSpectrum(
  *  @param[in] end      the end iterator of the block in the XSS array
  */
 EnergyDependentWattSpectrum( Iterator begin, Iterator end ) :
-  Base( "DLW::EnergyDependentWattSpectrum", begin, end ) {
+  Base( "EnergyDependentWattSpectrum", begin, end ) {
 
   std::size_t nra = static_cast< std::size_t >( this->XSS( 1 ) );
   std::size_t nea = static_cast< std::size_t >( this->XSS( 1 + 2 * nra + 1 ) );

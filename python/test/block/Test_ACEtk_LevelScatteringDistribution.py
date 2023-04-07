@@ -19,7 +19,7 @@ class Test_ACEtk_LevelScatteringDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 2, chunk.length )
-            self.assertEqual( "DLW::LevelScatteringDistribution", chunk.name )
+            self.assertEqual( "LevelScatteringDistribution", chunk.name )
 
             self.assertEqual( EnergyDistributionType.LevelScattering, chunk.LAW )
             self.assertEqual( EnergyDistributionType.LevelScattering, chunk.type )

@@ -31,7 +31,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       ContinuousEnergyTable chunk( std::move( table ) );
 
-      THEN( "a DosimetryTable can be constructed and members can be tested" ) {
+      THEN( "a ContinuousEnergyTable can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       }

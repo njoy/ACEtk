@@ -17,24 +17,32 @@ namespace details {
 
 /**
  *  @class
- *  @brief Base class for energy distribution data as a function of incident energy
+ *  @brief Base class for distribution data as a function of values using
+ *         ENDF style interpolation data
  */
-template< typename Distribution >
+template< typename Derived, typename Distribution >
 class BaseDistributionData : protected details::Base {
 
   /* fields */
   std::size_t locb_;
+
+protected:
+
   InterpolationData interpolation_;
-  details::ColumnData incident_;
+  details::ColumnData values_;
   std::vector< Distribution > distributions_;
 
+private:
+
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseDistributionData/src/generateXSS.hpp"
-  #include "ACEtk/block/details/BaseDistributionData/src/verifyIncidentEnergyIndex.hpp"
+  #include "ACEtk/block/details/BaseDistributionData/src/verifyValueIndex.hpp"
   #include "ACEtk/block/details/BaseDistributionData/src/generateBlocks.hpp"
   #include "ACEtk/block/details/BaseDistributionData/src/verifySize.hpp"
 
 protected:
+
+  /* auxiliary functions */
+  #include "ACEtk/block/details/BaseDistributionData/src/generateXSS.hpp"
 
   /* constructor */
   #include "ACEtk/block/details/BaseDistributionData/src/ctor.hpp"
@@ -77,55 +85,47 @@ public:
   auto interpolants() const { return this->INT(); }
 
   /**
-   *  @brief Return the number of incident energy values
+   *  @brief Return the number of values in each column
    */
-  std::size_t NE() const { return this->incident_.N(); }
+  std::size_t N() const { return this->values_.N(); }
 
   /**
-   *  @brief Return the number of incident energy values
+   *  @brief Return the number of values in each column
    */
-  std::size_t numberIncidentEnergies() const { return this->NE(); }
+  std::size_t numberValues() const { return this->N(); }
 
   /**
-   *  @brief Return the incident energy values
-   */
-  auto incidentEnergies() const { return this->incident_.column( 1 ); }
-
-  /**
-   *  @brief Return the incident energy for a given index
+   *  @brief Return the values for a given column index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
+   *  @param[in] column    the column index (one-based)
+   */
+  auto values( std::size_t column ) const {
+
+    return this->values_.column( column );
+  }
+
+  /**
+   *  @brief Return the value for a given index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] column    the column index (one-based)
    *  @param[in] index     the index (one-based)
    */
-  double incidentEnergy( std::size_t index ) const {
+  double value( std::size_t column, std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyIncidentEnergyIndex( index );
+    this->verifyValueIndex( index );
     #endif
-    return this->incident_.value( 1, index );
+    return this->values_.value( column, index );
   }
 
   /**
-   *  @brief Return the minimum incident energy for the distribution
-   */
-  double minimumIncidentEnergy() const {
-
-    return this->incidentEnergy( 1 );
-  }
-
-  /**
-   *  @brief Return the maximum incident energy for the distribution
-   */
-  double maximumIncidentEnergy() const {
-
-    return this->incidentEnergy( this->NE() );
-  }
-
-  /**
-   *  @brief Return the angular distribution locator for an incident
-   *         energy index
+   *  @brief Return the distribution locator for a value index
    *
    *  This locator is the value as stored in the XSS array.
    *
@@ -136,15 +136,11 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    #ifndef NDEBUG
-    this->verifyIncidentEnergyIndex( index );
-    #endif
-    return this->incident_.value( 2, index );
+    return this->value( this->values_.NC(), index );
   }
 
   /**
-   *  @brief Return the angular distribution locator for an incident
-   *         energy index
+   *  @brief Return the distribution locator for a value index
    *
    *  This locator is the value as stored in the XSS array.
    *
@@ -159,8 +155,7 @@ public:
   }
 
   /**
-   *  @brief Return the relative angular distribution locator for an incident
-   *         energy index
+   *  @brief Return the relative distribution locator for a value index
    *
    *  This is the locator relative to the beginning of the current distribution
    *  block.
@@ -185,7 +180,7 @@ public:
   }
 
   /**
-   *  @brief Return the distribution for an incident energy index
+   *  @brief Return the distribution for a value index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
@@ -195,7 +190,7 @@ public:
   const Distribution& distribution( std::size_t index ) const {
 
     #ifndef NDEBUG
-    this->verifyIncidentEnergyIndex( index );
+    this->verifyValueIndex( index );
     #endif
     return this->distributions_[ index - 1 ];
   }

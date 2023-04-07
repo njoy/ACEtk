@@ -18,7 +18,7 @@ class Test_ACEtk_ParameterData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 8, chunk.length )
-            self.assertEqual( "DLW::ParameterData", chunk.name )
+            self.assertEqual( "ParameterData", chunk.name )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )

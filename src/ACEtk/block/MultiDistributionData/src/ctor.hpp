@@ -23,7 +23,7 @@ MultiDistributionData(
     std::vector< DistributionProbability > probabilities,
     std::vector< DistributionData > distributions,
     std::size_t locb = 1 ) :
-  Base( "DLW::MultiDistributionData",
+  Base( "MultiDistributionData",
         generateXSS( std::move( probabilities ), std::move( distributions ),
                      locb ) ),
   locb_( locb ) {
@@ -39,7 +39,7 @@ MultiDistributionData(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 MultiDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
-  Base( "DLW::MultiDistributionData", begin, end ),
+  Base( "MultiDistributionData", begin, end ),
   locb_( locb ) {
 
 //  std::size_t nr = static_cast< std::size_t >( this->XSS( 1 ) );

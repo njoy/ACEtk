@@ -8,7 +8,7 @@ generateXSS(
 
   // insert the tabulated data
   std::vector< double > xss;
-  details::BaseTabulatedData table( "DLW::GeneralEvaporationSpectrum",
+  details::BaseTabulatedData table( "GeneralEvaporationSpectrum",
                                     std::move( boundaries ),
                                     std::move( interpolants ),
                                     std::move( energies ),

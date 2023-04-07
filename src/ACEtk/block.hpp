@@ -8,6 +8,7 @@
 #include "ACEtk/block/CrossSectionData.hpp"
 #include "ACEtk/block/EquiprobableAngularBins.hpp"
 #include "ACEtk/block/TabulatedAngularDistribution.hpp"
+#include "ACEtk/block/TabulatedAngularDistributionWithProbability.hpp"
 #include "ACEtk/block/IsotropicAngularDistribution.hpp"
 #include "ACEtk/block/AngularDistributionData.hpp"
 #include "ACEtk/block/FullyIsotropicDistribution.hpp"
@@ -18,7 +19,7 @@
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/TabulatedKalbachMannDistribution.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
-#include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
 #include "ACEtk/block/DosimetryCrossSectionData.hpp"
 

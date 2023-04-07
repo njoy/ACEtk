@@ -16,7 +16,7 @@ KalbachMannDistributionData(
     std::vector< long > interpolants,
     std::vector< TabulatedKalbachMannDistribution > distributions,
     std::size_t locb = 1 ) :
-  BaseDistributionData( "DLW::KalbachMannDistributionData",
+  BaseDistributionData( "KalbachMannDistributionData",
                         std::move( boundaries ), std::move( interpolants ),
                         std::move( distributions ), locb ) {}
 
@@ -39,7 +39,7 @@ KalbachMannDistributionData(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 KalbachMannDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
-  BaseDistributionData( "DLW::KalbachMannDistributionData", locb,
+  BaseDistributionData( "KalbachMannDistributionData", locb,
                         begin, end ) {}
 
 KalbachMannDistributionData& operator=( const KalbachMannDistributionData& ) = default;

@@ -26,8 +26,9 @@ void wrapKalbachMannDistributionData( python::module& module,
 
     module,
     "KalbachMannDistributionData",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using Kalbach-Mann systematics"
+    "Correlated outgoing energy-angle distribution data using Kalbach-Mann systematics\n\n"
+    "The KalbachMannDistributionData class contains the Kalbach-Mann distributions\n"
+    "for a set of incident energy values. It is used in the DLW block as ACE LAW 44."
   );
 
   // wrap the block
@@ -39,6 +40,21 @@ void wrapKalbachMannDistributionData( python::module& module,
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
+    "    distributions    the distributions for each incident energy\n"
+    "    locb             the starting xss index with respect to the DLW block\n"
+    "                     (default = 1, the relative locators get recalculated)"
+  )
+  .def(
+
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< Distribution >, std::size_t >(),
+    python::arg( "boundaries" ), python::arg( "interpolants" ),
+    python::arg( "distributions" ), python::arg( "locb" ) = 1,
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self             the block\n"
+    "    boundaries       the interpolation range boundaries\n"
+    "    interpolants     the interpolation types for each range\n"
     "    distributions    the distributions for each incident energy\n"
     "    locb             the starting xss index with respect to the DLW block\n"
     "                     (default = 1, the relative locators get recalculated)"

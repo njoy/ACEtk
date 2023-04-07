@@ -16,6 +16,10 @@
 #include "ACEtk/block/EnergyDependentWattSpectrum.hpp"
 #include "ACEtk/block/KalbachMannDistributionData.hpp"
 #include "ACEtk/block/NBodyPhaseSpaceDistribution.hpp"
+#include "ACEtk/block/TwoBodyTransferDistribution.hpp"
+#include "ACEtk/block/EnergyAngleDistributionData.hpp"
+#include "ACEtk/block/AngleEnergyDistributionData.hpp"
+#include "ACEtk/block/TwoBodyTransferDistribution.hpp"
 #include "ACEtk/block/MultiDistributionData.hpp"
 
 namespace njoy {
@@ -49,6 +53,9 @@ public:
                                          EnergyDependentWattSpectrum,
                                          KalbachMannDistributionData,
                                          NBodyPhaseSpaceDistribution,
+                                         TwoBodyTransferDistribution,
+                                         EnergyAngleDistributionData,
+                                         AngleEnergyDistributionData,
                                          MultiDistributionData >;
 
 private:
@@ -166,6 +173,14 @@ public:
         case EnergyDistributionType::KalbachMann : {
 
           return KalbachMannDistributionData( idat, left, right );
+        }
+        case EnergyDistributionType::TabulatedEnergyAngle : {
+
+          return EnergyAngleDistributionData( idat, left, right );
+        }
+        case EnergyDistributionType::TabulatedAngleEnergy : {
+
+          return AngleEnergyDistributionData( idat, left, right );
         }
         case EnergyDistributionType::Equiprobable : {
 

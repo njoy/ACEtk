@@ -18,7 +18,7 @@ class Test_ACEtk_EquiprobableOutgoingEnergyBins( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 4, chunk.length )
-            self.assertEqual( "DLW::EquiprobableOutgoingEnergyBins", chunk.name )
+            self.assertEqual( "EquiprobableOutgoingEnergyBins", chunk.name )
 
             self.assertEqual( 2.1, chunk.incident_energy )
             self.assertEqual( 3, chunk.number_bins )

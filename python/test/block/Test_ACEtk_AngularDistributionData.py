@@ -34,7 +34,7 @@ class Test_ACEtk_AngularDistributionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 51, chunk.length )
-            self.assertEqual( "AND::AngularDistributionData", chunk.name )
+            self.assertEqual( "AngularDistributionData", chunk.name )
 
             self.assertEqual( 3, chunk.NE )
             self.assertEqual( 3, chunk.number_incident_energies )

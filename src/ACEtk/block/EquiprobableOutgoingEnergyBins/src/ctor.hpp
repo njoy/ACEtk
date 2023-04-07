@@ -11,7 +11,7 @@ EquiprobableOutgoingEnergyBins( EquiprobableOutgoingEnergyBins&& ) = default;
  */
 EquiprobableOutgoingEnergyBins( double incident,
                                 std::vector< double > energies ) :
-  Base( "DLW::EquiprobableOutgoingEnergyBins", std::move( energies ) ),
+  Base( "EquiprobableOutgoingEnergyBins", std::move( energies ) ),
   incident_( incident ) {}
 
 /**
@@ -22,7 +22,7 @@ EquiprobableOutgoingEnergyBins( double incident,
  *  @param[in] end        the end iterator of the equiprobable bin data
  */
 EquiprobableOutgoingEnergyBins( double incident, Iterator begin, Iterator end ) :
-  Base( "DLW::EquiprobableOutgoingEnergyBins", begin, end ),
+  Base( "EquiprobableOutgoingEnergyBins", begin, end ),
   incident_( incident ) {}
 
 EquiprobableOutgoingEnergyBins& operator=( const EquiprobableOutgoingEnergyBins& ) = default;

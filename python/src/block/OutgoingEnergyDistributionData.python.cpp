@@ -17,7 +17,7 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
 
   // type aliases
   using Block = njoy::ACEtk::block::OutgoingEnergyDistributionData;
-  using Distribution = njoy::ACEtk::block::TabulatedOutgoingEnergyDistribution;
+  using Distribution = njoy::ACEtk::block::TabulatedEnergyDistribution;
 
   // wrap views created by this block
 
@@ -26,8 +26,10 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
 
     module,
     "OutgoingEnergyDistributionData",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using tabulated outgoing energy distributions"
+    "Outgoing energy distribution data using tabulated outgoing energy distributions\n\n"
+    "The OutgoingEnergyDistributionData class contains the tabulated outgoing\n"
+    "energy distributions for a set of incident energy values. It is used in\n"
+    "the DLW block as ACE LAW 4."
   );
 
   // wrap the block
@@ -39,6 +41,21 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
+    "    distributions    the distributions for each incident energy\n"
+    "    locb             the starting xss index with respect to the DLW block\n"
+    "                     (default = 1, the relative locators get recalculated)"
+  )
+  .def(
+
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< Distribution >, std::size_t >(),
+    python::arg( "boundaries" ), python::arg( "interpolants" ),
+    python::arg( "distributions" ), python::arg( "locb" ) = 1,
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self             the block\n"
+    "    boundaries       the interpolation range boundaries\n"
+    "    interpolants     the interpolation types for each range\n"
     "    distributions    the distributions for each incident energy\n"
     "    locb             the starting xss index with respect to the DLW block\n"
     "                     (default = 1, the relative locators get recalculated)"

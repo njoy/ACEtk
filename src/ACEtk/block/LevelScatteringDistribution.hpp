@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/BaseTwoParameterDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -22,16 +22,14 @@ namespace block {
  *    C1 = ( A + 1 ) / A * abs( Q )
  *    C2 = ( A / ( A + 1 ) )^2
  *
- *  The content of the XSS array are only C1 and C2
+ *  It is used in the DLW block as ACE LAW 3.
  */
-class LevelScatteringDistribution : protected details::Base {
+class LevelScatteringDistribution :
+  protected details::BaseTwoParameterDistribution {
 
   /* fields */
-  double emin_;
-  double emax_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/LevelScatteringDistribution/src/verifySize.hpp"
 
 public:
 
@@ -57,29 +55,35 @@ public:
   /**
    *  @brief Return the minimum incident energy for the distribution
    */
-  double minimumIncidentEnergy() const { return this->emin_; }
+  double minimumIncidentEnergy() const {
+
+    return BaseTwoParameterDistribution::minimumIncidentEnergy();
+  }
 
   /**
    *  @brief Return the maximum incident energy for the distribution
    */
-  double maximumIncidentEnergy() const { return this->emax_; }
+  double maximumIncidentEnergy() const {
+
+    return BaseTwoParameterDistribution::maximumIncidentEnergy();
+  }
 
   /**
    *  @brief Return the value of C1 = ( A + 1 ) / A * abs( Q )
    */
-  double C1() const { return this->XSS( 1 ); }
+  double C1() const { return BaseTwoParameterDistribution::C1(); }
 
   /**
    *  @brief Return the value of C2 = ( A / ( A + 1 ) )^2
    */
-  double C2() const { return this->XSS( 2 ); }
+  double C2() const { return BaseTwoParameterDistribution::C2(); }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using BaseTwoParameterDistribution::empty;
+  using BaseTwoParameterDistribution::name;
+  using BaseTwoParameterDistribution::length;
+  using BaseTwoParameterDistribution::XSS;
+  using BaseTwoParameterDistribution::begin;
+  using BaseTwoParameterDistribution::end;
 };
 
 using ACELAW3 = LevelScatteringDistribution;

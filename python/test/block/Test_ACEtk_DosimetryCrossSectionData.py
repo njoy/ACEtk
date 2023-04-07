@@ -18,7 +18,7 @@ class Test_ACEtk_DosimetryCrossSectionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 8, chunk.length )
-            self.assertEqual( "SIGD::DosimetryCrossSectionData", chunk.name )
+            self.assertEqual( "DosimetryCrossSectionData", chunk.name )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )

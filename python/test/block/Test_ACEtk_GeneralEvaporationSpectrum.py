@@ -21,7 +21,7 @@ class Test_ACEtk_GeneralEvaporationSpectrum( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 14, chunk.length )
-            self.assertEqual( "DLW::GeneralEvaporationSpectrum", chunk.name )
+            self.assertEqual( "GeneralEvaporationSpectrum", chunk.name )
 
             self.assertEqual( EnergyDistributionType.GeneralEvaporation, chunk.LAW )
             self.assertEqual( EnergyDistributionType.GeneralEvaporation, chunk.type )

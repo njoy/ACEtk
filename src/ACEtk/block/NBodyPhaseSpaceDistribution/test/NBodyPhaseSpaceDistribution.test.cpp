@@ -75,7 +75,7 @@ void verifyChunk( const NBodyPhaseSpaceDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );
-  CHECK( "DLW::NBodyPhaseSpaceDistribution" == chunk.name() );
+  CHECK( "NBodyPhaseSpaceDistribution" == chunk.name() );
 
   CHECK( EnergyDistributionType::NBodyPhaseSpace == chunk.LAW() );
   CHECK( EnergyDistributionType::NBodyPhaseSpace == chunk.type() );

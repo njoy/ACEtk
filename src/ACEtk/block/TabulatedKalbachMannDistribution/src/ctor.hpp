@@ -24,7 +24,7 @@ TabulatedKalbachMannDistribution( double incident,
                                   std::vector< double > a,
                                   std::size_t discrete = 0 ) :
   TabulatedProbabilityDistribution(
-        "DLW::TabulatedKalbachMannDistribution",
+        "TabulatedKalbachMannDistribution",
         discrete * 10 + interpolation, std::move( cosines ),
         std::move( pdf ), std::move( cdf ), { std::move( r ), std::move( a ) } ),
   incident_( incident ) {}
@@ -37,9 +37,21 @@ TabulatedKalbachMannDistribution( double incident,
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
 TabulatedKalbachMannDistribution( double incident, Iterator begin, Iterator end ) :
-  TabulatedProbabilityDistribution( "DLW::TabulatedKalbachMannDistribution",
+  TabulatedProbabilityDistribution( "TabulatedKalbachMannDistribution",
                                     begin, end ),
   incident_( incident ) {}
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] incident   the incident energy value
+ *  @param[in] locb       the starting xss index with respect to the superblock
+ *  @param[in] begin      the begin iterator of the tabulated distribution data
+ *  @param[in] end        the end iterator of the tabulated distribution data
+ */
+TabulatedKalbachMannDistribution( double incident, std::size_t,
+                                  Iterator begin, Iterator end ) :
+  TabulatedKalbachMannDistribution( incident, begin, end ) {}
 
 TabulatedKalbachMannDistribution& operator=( const TabulatedKalbachMannDistribution& ) = default;
 TabulatedKalbachMannDistribution& operator=( TabulatedKalbachMannDistribution&& ) = default;

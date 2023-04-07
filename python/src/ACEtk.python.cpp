@@ -32,6 +32,7 @@ namespace block {
   void wrapDosimetryCrossSectionData( python::module&, python::module& );
   void wrapEquiprobableAngularBins( python::module&, python::module& );
   void wrapTabulatedAngularDistribution( python::module&, python::module& );
+  void wrapTabulatedAngularDistributionWithProbability( python::module&, python::module& );
   void wrapIsotropicAngularDistribution( python::module&, python::module& );
   void wrapAngularDistributionData( python::module&, python::module& );
   void wrapFullyIsotropicDistribution( python::module&, python::module& );
@@ -40,7 +41,7 @@ namespace block {
   void wrapEquiprobableOutgoingEnergyBinData( python::module&, python::module& );
   void wrapLevelScatteringDistribution( python::module&, python::module& );
   void wrapDiscretePhotonDistribution( python::module&, python::module& );
-  void wrapTabulatedOutgoingEnergyDistribution( python::module&, python::module& );
+  void wrapTabulatedEnergyDistribution( python::module&, python::module& );
   void wrapOutgoingEnergyDistributionData( python::module&, python::module& );
   void wrapKalbachMannDistributionData( python::module&, python::module& );
   void wrapGeneralEvaporationSpectrum( python::module&, python::module& );
@@ -50,6 +51,11 @@ namespace block {
   void wrapEnergyDependentWattSpectrum( python::module&, python::module& );
   void wrapTabulatedKalbachMannDistribution( python::module&, python::module& );
   void wrapNBodyPhaseSpaceDistribution( python::module&, python::module& );
+  void wrapTwoBodyTransferDistribution( python::module&, python::module& );
+  void wrapTabulatedEnergyAngleDistribution( python::module&, python::module& );
+  void wrapEnergyAngleDistributionData( python::module&, python::module& );
+  void wrapTabulatedAngleEnergyDistribution( python::module&, python::module& );
+  void wrapAngleEnergyDistributionData( python::module&, python::module& );
   void wrapDistributionProbability( python::module&, python::module& );
   void wrapMultiDistributionData( python::module&, python::module& );
 
@@ -119,6 +125,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapDosimetryCrossSectionData( module, viewmodule );
   block::wrapEquiprobableAngularBins( module, viewmodule );
   block::wrapTabulatedAngularDistribution( module, viewmodule );
+  block::wrapTabulatedAngularDistributionWithProbability( module, viewmodule );
   block::wrapIsotropicAngularDistribution( module, viewmodule );
   block::wrapAngularDistributionData( module, viewmodule );
   block::wrapFullyIsotropicDistribution( module, viewmodule );
@@ -127,7 +134,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapEquiprobableOutgoingEnergyBins( module, viewmodule );
   block::wrapEquiprobableOutgoingEnergyBinData( module, viewmodule );
   block::wrapDiscretePhotonDistribution( module, viewmodule );
-  block::wrapTabulatedOutgoingEnergyDistribution( module, viewmodule );
+  block::wrapTabulatedEnergyDistribution( module, viewmodule );
   block::wrapOutgoingEnergyDistributionData( module, viewmodule );
   block::wrapTabulatedKalbachMannDistribution( module, viewmodule );
   block::wrapGeneralEvaporationSpectrum( module, viewmodule );
@@ -137,6 +144,11 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapEnergyDependentWattSpectrum( module, viewmodule );
   block::wrapKalbachMannDistributionData( module, viewmodule );
   block::wrapNBodyPhaseSpaceDistribution( module, viewmodule );
+  block::wrapTwoBodyTransferDistribution( module, viewmodule );
+  block::wrapTabulatedEnergyAngleDistribution( module, viewmodule );
+  block::wrapEnergyAngleDistributionData( module, viewmodule );
+  block::wrapTabulatedAngleEnergyDistribution( module, viewmodule );
+  block::wrapAngleEnergyDistributionData( module, viewmodule );
   block::wrapDistributionProbability( module, viewmodule );
   block::wrapMultiDistributionData( module, viewmodule );
 

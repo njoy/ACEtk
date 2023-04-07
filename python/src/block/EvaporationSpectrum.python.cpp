@@ -24,8 +24,10 @@ void wrapEvaporationSpectrum( python::module& module, python::module& ) {
 
     module,
     "EvaporationSpectrum",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using an evaporation spectrum"
+    "An evaporation spectrum\n\n"
+    "The EvaporationSpectrum class contains the tabulated energy and\n"
+    "temperature values as well as the restriction energy U used to describe the\n"
+    "evaporation spectrum. It is used in the DLW block as ACE LAW 9."
   );
 
   // wrap the block

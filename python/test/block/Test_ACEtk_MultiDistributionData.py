@@ -40,7 +40,7 @@ class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 67, chunk.length )
-            self.assertEqual( "DLW::MultiDistributionData", chunk.name )
+            self.assertEqual( "MultiDistributionData", chunk.name )
 
             self.assertEqual( EnergyDistributionType.MultiDistribution, chunk.LAW )
             self.assertEqual( EnergyDistributionType.MultiDistribution, chunk.type )
@@ -258,7 +258,7 @@ class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
                               1.219437E+01, 1, [ 0.000000E+00, 1.866919E-02 ],
                               [ 5.356419E+01, 0.000000E+00 ], [ 0., 1. ], [ 0., 0. ],
                               [ 2.391154E-01, 2.398743E-01 ] ),
-                          TabulatedKalbachMannDistribution(
+                            TabulatedKalbachMannDistribution(
                               20., 2, [ 0.000000E+00, 1.120151E+00, 7.592137E+00 ],
                               [ 7.738696E-02, 4.209016E-01, 1.226090E-11 ],
                               [ 0.000000E+00, 5.382391E-01, 1.000000E+00 ],

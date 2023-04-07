@@ -78,7 +78,7 @@ void verifyChunk( const EnergyDependentWattSpectrum& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 19 == chunk.length() );
-  CHECK( "DLW::EnergyDependentWattSpectrum" == chunk.name() );
+  CHECK( "EnergyDependentWattSpectrum" == chunk.name() );
 
   CHECK( EnergyDistributionType::Watt == chunk.LAW() );
   CHECK( EnergyDistributionType::Watt == chunk.type() );

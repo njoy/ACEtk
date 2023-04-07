@@ -124,7 +124,7 @@ void verifyChunk( const MultiDistributionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 67 == chunk.length() );
-  CHECK( "DLW::MultiDistributionData" == chunk.name() );
+  CHECK( "MultiDistributionData" == chunk.name() );
 
   CHECK( EnergyDistributionType::MultiDistribution == chunk.LAW() );
   CHECK( EnergyDistributionType::MultiDistribution == chunk.type() );

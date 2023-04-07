@@ -7,7 +7,7 @@
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/BaseDistributionData.hpp"
-#include "ACEtk/block/TabulatedOutgoingEnergyDistribution.hpp"
+#include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -15,11 +15,19 @@ namespace block {
 
 /**
  *  @class
- *  @brief Outgoing energy distribution data from the DLW block for a single
- *         reaction using tabulated outgoing energy distributions
+ *  @brief Outgoing energy distribution data using tabulated outgoing energy
+ *         distributions
+ *
+ *  The OutgoingEnergyDistributionData class contains the tabulated outgoing
+ *  energy distributions for a set of incident energy values. It is used in
+ *  the DLW block as ACE LAW 4.
  */
 class OutgoingEnergyDistributionData :
-  protected details::BaseDistributionData< TabulatedOutgoingEnergyDistribution > {
+  protected details::BaseDistributionData< OutgoingEnergyDistributionData,
+                                           TabulatedEnergyDistribution > {
+
+  friend class details::BaseDistributionData< OutgoingEnergyDistributionData,
+                                              TabulatedEnergyDistribution >;
 
   /* fields */
 
@@ -90,14 +98,14 @@ public:
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t NE() const { return BaseDistributionData::NE(); }
+  std::size_t NE() const { return BaseDistributionData::N(); }
 
   /**
    *  @brief Return the number of incident energy values
    */
   std::size_t numberIncidentEnergies() const {
 
-    return BaseDistributionData::numberIncidentEnergies();
+    return BaseDistributionData::numberValues();
   }
 
   /**
@@ -105,7 +113,7 @@ public:
    */
   auto incidentEnergies() const {
 
-    return BaseDistributionData::incidentEnergies();
+    return BaseDistributionData::values( 1 );
   }
 
   /**
@@ -118,7 +126,7 @@ public:
    */
   double incidentEnergy( std::size_t index ) const {
 
-    return BaseDistributionData::incidentEnergy( index );
+    return BaseDistributionData::value( 1, index );
   }
 
   /**
@@ -126,7 +134,7 @@ public:
    */
   double minimumIncidentEnergy() const {
 
-    return BaseDistributionData::minimumIncidentEnergy();
+    return this->incidentEnergy( 1 );
   }
 
   /**
@@ -134,7 +142,7 @@ public:
    */
   double maximumIncidentEnergy() const {
 
-    return BaseDistributionData::maximumIncidentEnergy();
+    return this->incidentEnergy( this->NE() );
   }
 
   /**
@@ -189,7 +197,7 @@ public:
   /**
    *  @brief Return the distributions
    */
-  const std::vector< TabulatedOutgoingEnergyDistribution >& distributions() const {
+  const std::vector< TabulatedEnergyDistribution >& distributions() const {
 
     return BaseDistributionData::distributions();
   }
@@ -202,7 +210,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const TabulatedOutgoingEnergyDistribution& distribution( std::size_t index ) const {
+  const TabulatedEnergyDistribution& distribution( std::size_t index ) const {
 
     return BaseDistributionData::distribution( index );
   }

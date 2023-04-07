@@ -5,7 +5,7 @@ generateXSS( std::vector< Distribution >&& distributions, std::size_t locb ) {
   std::vector< double > xss( 1 + 2 * ne );
 
   auto incidentEnergy = [] ( const auto& value )
-                           { return value.incidentEnergy(); };
+                           { return value.energy(); };
 
   std::sort( distributions.begin(), distributions.end(),
              [=] ( const auto& left, const auto& right )

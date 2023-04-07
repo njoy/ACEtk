@@ -19,7 +19,7 @@ class Test_ACEtk_NBodyPhaseSpaceDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 2, chunk.length )
-            self.assertEqual( "DLW::NBodyPhaseSpaceDistribution", chunk.name )
+            self.assertEqual( "NBodyPhaseSpaceDistribution", chunk.name )
 
             self.assertEqual( EnergyDistributionType.NBodyPhaseSpace, chunk.LAW )
             self.assertEqual( EnergyDistributionType.NBodyPhaseSpace, chunk.type )

@@ -39,7 +39,7 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
 
         utility::overload{
 
-          [] ( const MultiDistributionData& ) { /* nothing to do here */ },         
+          [] ( const MultiDistributionData& ) { /* nothing to do here */ },
           [ &xss, &idat, offset ] ( const auto& value ) {
 
             idat = offset + 3 + 1 + 5;
@@ -78,6 +78,30 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
             decltype(auto) boundaries = value.boundaries();
             decltype(auto) interpolants = value.interpolants();
             KalbachMannDistributionData temp(
+                { boundaries.begin(), boundaries.end() },
+                { interpolants.begin(), interpolants.end() },
+                std::move( value.distributions() ),
+                idat );
+            xss.insert( xss.end(), temp.begin(), temp.end() );
+          },
+          [ &xss, idat ] ( const EnergyAngleDistributionData& value ) {
+
+            // remake the internal xss array with the proper locators
+            decltype(auto) boundaries = value.boundaries();
+            decltype(auto) interpolants = value.interpolants();
+            EnergyAngleDistributionData temp(
+                { boundaries.begin(), boundaries.end() },
+                { interpolants.begin(), interpolants.end() },
+                std::move( value.distributions() ),
+                idat );
+            xss.insert( xss.end(), temp.begin(), temp.end() );
+          },
+          [ &xss, idat ] ( const AngleEnergyDistributionData& value ) {
+
+            // remake the internal xss array with the proper locators
+            decltype(auto) boundaries = value.boundaries();
+            decltype(auto) interpolants = value.interpolants();
+            AngleEnergyDistributionData temp(
                 { boundaries.begin(), boundaries.end() },
                 { interpolants.begin(), interpolants.end() },
                 std::move( value.distributions() ),

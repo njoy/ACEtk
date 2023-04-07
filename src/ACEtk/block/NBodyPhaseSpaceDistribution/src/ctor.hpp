@@ -13,7 +13,7 @@ NBodyPhaseSpaceDistribution( NBodyPhaseSpaceDistribution&& ) = default;
  */
 NBodyPhaseSpaceDistribution( double emin, double emax,
                              unsigned int npsx, double ap ) :
-  Base( "DLW::NBodyPhaseSpaceDistribution",
+  Base( "NBodyPhaseSpaceDistribution",
         { static_cast< double >( npsx ), ap } ),
   emin_( emin ), emax_( emax ) {}
 
@@ -27,7 +27,7 @@ NBodyPhaseSpaceDistribution( double emin, double emax,
  */
 NBodyPhaseSpaceDistribution( Iterator begin, Iterator end,
                              double emin, double emax ) :
-  Base( "DLW::NBodyPhaseSpaceDistribution", begin, end ),
+  Base( "NBodyPhaseSpaceDistribution", begin, end ),
   emin_( emin ), emax_( emax ) {
 
   verifySize( this->begin(), this->end() );

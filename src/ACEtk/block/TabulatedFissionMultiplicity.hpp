@@ -17,7 +17,8 @@ namespace block {
  *  @brief Tabulated fission multiplicity
  *
  *  The TabulatedFissionMultiplicity class contains the tabulated
- *  representation of the fission multiplicity.
+ *  representation (LNU = 2) of the fission multiplicity. It is
+ *  used in the NU block.
  */
 class TabulatedFissionMultiplicity : protected details::Base {
 

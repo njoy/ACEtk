@@ -8,7 +8,7 @@
 // convenience typedefs
 using namespace njoy::ACEtk;
 using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
-using TabulatedOutgoingEnergyDistribution = block::TabulatedOutgoingEnergyDistribution;
+using TabulatedEnergyDistribution = block::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const OutgoingEnergyDistributionData& );
@@ -21,12 +21,12 @@ SCENARIO( "OutgoingEnergyDistributionData" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< TabulatedOutgoingEnergyDistribution > distributions  = {
+      std::vector< TabulatedEnergyDistribution > distributions  = {
 
-        TabulatedOutgoingEnergyDistribution(
+        TabulatedEnergyDistribution(
             1e-11, 2, { 0.0, .31, 1.84 },
             { 2.364290E-01, 1.050191E+00, 0. }, { 0., 4.932501E-01, 1. } ),
-        TabulatedOutgoingEnergyDistribution(
+        TabulatedEnergyDistribution(
             20., 2, { 0.0, 1.84 }, { .5, .5 }, { 0., 1. } )
       };
       std::size_t locb = 21;
@@ -86,7 +86,7 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 25 == chunk.length() );
-  CHECK( "DLW::OutgoingEnergyDistributionData" == chunk.name() );
+  CHECK( "OutgoingEnergyDistributionData" == chunk.name() );
 
   CHECK( EnergyDistributionType::TabulatedEnergy == chunk.LAW() );
   CHECK( EnergyDistributionType::TabulatedEnergy == chunk.type() );
@@ -127,7 +127,7 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 18 == chunk.relativeDistributionLocator(2) );
 
   auto data1 = chunk.distribution(1);
-  CHECK( 1e-11 == Approx( data1.incidentEnergy() ) );
+  CHECK( 1e-11 == Approx( data1.energyOrCosine() ) );
   CHECK( 2 == data1.interpolation() );
   CHECK( 0 == data1.numberDiscretePhotonLines() );
   CHECK( 3 == data1.numberOutgoingEnergies() );
@@ -145,7 +145,7 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 1. == Approx( data1.cdf().back() ) );
 
   auto data2 = chunk.distribution(2);
-  CHECK( 20. == Approx( data2.incidentEnergy() ) );
+  CHECK( 20. == Approx( data2.energyOrCosine() ) );
   CHECK( 2 == data2.interpolation() );
   CHECK( 0 == data2.numberDiscretePhotonLines() );
   CHECK( 2 == data2.numberOutgoingEnergies() );

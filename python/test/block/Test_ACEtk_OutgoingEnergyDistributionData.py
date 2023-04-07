@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk import EnergyDistributionType
 from ACEtk import OutgoingEnergyDistributionData
-from ACEtk import TabulatedOutgoingEnergyDistribution
+from ACEtk import TabulatedEnergyDistribution
 
 class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
     """Unit test for the OutgoingEnergyDistributionData class."""
@@ -26,7 +26,7 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 25, chunk.length )
-            self.assertEqual( "DLW::OutgoingEnergyDistributionData", chunk.name )
+            self.assertEqual( "OutgoingEnergyDistributionData", chunk.name )
 
             self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.LAW )
             self.assertEqual( EnergyDistributionType.TabulatedEnergy, chunk.type )
@@ -66,11 +66,11 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             self.assertEqual( 7, chunk.relative_distribution_locator(1) );
             self.assertEqual( 18, chunk.relative_distribution_locator(2) );
 
-            self.assertEqual( True, isinstance( chunk.distribution(1), TabulatedOutgoingEnergyDistribution )  )
-            self.assertEqual( True, isinstance( chunk.distribution(2), TabulatedOutgoingEnergyDistribution ) )
+            self.assertEqual( True, isinstance( chunk.distribution(1), TabulatedEnergyDistribution )  )
+            self.assertEqual( True, isinstance( chunk.distribution(2), TabulatedEnergyDistribution ) )
 
             data1 = chunk.distribution(1);
-            self.assertAlmostEqual( 1e-11, data1.incident_energy )
+            self.assertAlmostEqual( 1e-11, data1.energy_or_cosine )
             self.assertEqual( 2, data1.interpolation )
             self.assertEqual( 0, data1.number_discrete_photon_lines )
             self.assertEqual( 3, data1.number_outgoing_energies )
@@ -88,7 +88,7 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 1., data1.cdf[-1] )
 
             data2 = chunk.distribution(2);
-            self.assertAlmostEqual( 20., data2.incident_energy )
+            self.assertAlmostEqual( 20., data2.energy_or_cosine )
             self.assertEqual( 2, data2.interpolation )
             self.assertEqual( 0, data2.number_discrete_photon_lines )
             self.assertEqual( 2, data2.number_outgoing_energies )
@@ -115,10 +115,10 @@ class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
         chunk = OutgoingEnergyDistributionData(
                     distributions = [
 
-                      TabulatedOutgoingEnergyDistribution(
+                      TabulatedEnergyDistribution(
                           1e-11, 2, [ 0.0, .31, 1.84 ],
                           [ 2.364290E-01, 1.050191E+00, 0. ], [ 0., 4.932501E-01, 1. ] ),
-                      TabulatedOutgoingEnergyDistribution(
+                      TabulatedEnergyDistribution(
                           20., 2, [ 0.0, 1.84 ], [ .5, .5 ], [ 0., 1. ] ) ],
                    locb = 21 )
 

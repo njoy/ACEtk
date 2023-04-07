@@ -100,6 +100,7 @@ if(ACEtk.python)
     python/src/block/SecondaryParticleTypeBlock.python.cpp
     python/src/block/EquiprobableAngularBins.python.cpp
     python/src/block/TabulatedAngularDistribution.python.cpp
+    python/src/block/TabulatedAngularDistributionWithProbability.python.cpp
     python/src/block/IsotropicAngularDistribution.python.cpp
     python/src/block/AngularDistributionData.python.cpp
     python/src/block/FullyIsotropicDistribution.python.cpp
@@ -109,7 +110,7 @@ if(ACEtk.python)
     python/src/block/EquiprobableOutgoingEnergyBinData.python.cpp
     python/src/block/LevelScatteringDistribution.python.cpp
     python/src/block/DiscretePhotonDistribution.python.cpp
-    python/src/block/TabulatedOutgoingEnergyDistribution.python.cpp
+    python/src/block/TabulatedEnergyDistribution.python.cpp
     python/src/block/OutgoingEnergyDistributionData.python.cpp
     python/src/block/GeneralEvaporationSpectrum.python.cpp
     python/src/block/SimpleMaxwellianFissionSpectrum.python.cpp
@@ -119,6 +120,11 @@ if(ACEtk.python)
     python/src/block/TabulatedKalbachMannDistribution.python.cpp
     python/src/block/KalbachMannDistributionData.python.cpp
     python/src/block/NBodyPhaseSpaceDistribution.python.cpp
+    python/src/block/TwoBodyTransferDistribution.python.cpp
+    python/src/block/TabulatedEnergyAngleDistribution.python.cpp
+    python/src/block/EnergyAngleDistributionData.python.cpp
+    python/src/block/TabulatedAngleEnergyDistribution.python.cpp
+    python/src/block/AngleEnergyDistributionData.python.cpp
     python/src/block/DistributionProbability.python.cpp
     python/src/block/MultiDistributionData.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp

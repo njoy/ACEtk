@@ -26,8 +26,13 @@ void wrapMultiDistributionData( python::module& module, python::module& ) {
 
     module,
     "MultiDistributionData",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using multiple distributions"
+    "The distribution is a combination of multiple distributions\n\n"
+    "The MultiDistributionData class contains a set of distributions and\n"
+    "associated probabilities to represent the particle's distribution data.\n"
+    "This type of distribution is rarely used, and when it happens it is often\n"
+    "used for higher chance fission spectra. It is used in the DLW block (there\n"
+    "is no ACE LAW associated to this distribution type, but internally in ACEtk\n"
+    "we refer to it as ACE LAW 666 because it is evil)."
   );
 
   // wrap the block

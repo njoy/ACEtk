@@ -19,7 +19,7 @@ class Test_ACEtk_DiscretePhotonDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 2, chunk.length )
-            self.assertEqual( "DLW::DiscretePhotonDistribution", chunk.name )
+            self.assertEqual( "DiscretePhotonDistribution", chunk.name )
 
             self.assertEqual( EnergyDistributionType.DiscretePhoton, chunk.LAW )
             self.assertEqual( EnergyDistributionType.DiscretePhoton, chunk.type )

@@ -12,14 +12,17 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated secondary energy distribution data from the DLW block for
- *         a single reaction and incident energy
+ *  @brief Tabulated angular distribution data for a single incident energy or
+ *         cosine value
  *
- *  The TabulatedOutgoingEnergyDistribution class contains the probability
+ *  The TabulatedEnergyDistribution class contains the probability
  *  density function (PDF) and cumulative density function (CDF) as a function
- *  of the outgoing energy for a single incident energy.
+ *  of the outgoing energy for the given incident energy or cosine value. It is
+ *  used in the OutgoingEnergyDistributionData (ACE LAW 4 for a given incident
+ *  energy) and in the OutgoingAngleEnergyDistributionData (ACE LAW 67 for a
+ *  given cosine) in the DLW block.
  */
-class TabulatedOutgoingEnergyDistribution :
+class TabulatedEnergyDistribution :
   protected details::TabulatedProbabilityDistribution {
 
   /* fields */
@@ -30,12 +33,15 @@ class TabulatedOutgoingEnergyDistribution :
 public:
 
   /* constructor */
-  #include "ACEtk/block/TabulatedOutgoingEnergyDistribution/src/ctor.hpp"
+  #include "ACEtk/block/TabulatedEnergyDistribution/src/ctor.hpp"
+
+  // generic function used internally
+  double value() const { return this->incident_; }
 
   /**
    *  @brief Return the incident energy value
    */
-  double incidentEnergy() const { return this->incident_; }
+  double energyOrCosine() const { return this->value(); }
 
   /**
    *  @brief Return the interpolation flag

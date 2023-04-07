@@ -75,7 +75,7 @@ void verifyChunk( const EquiprobableOutgoingEnergyBins& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 4 == chunk.length() );
-  CHECK( "DLW::EquiprobableOutgoingEnergyBins" == chunk.name() );
+  CHECK( "EquiprobableOutgoingEnergyBins" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
   CHECK( 3 == chunk.numberBins() );

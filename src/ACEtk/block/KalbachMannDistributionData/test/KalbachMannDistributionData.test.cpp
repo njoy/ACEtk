@@ -92,7 +92,7 @@ void verifyChunk( const KalbachMannDistributionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 35 == chunk.length() );
-  CHECK( "DLW::KalbachMannDistributionData" == chunk.name() );
+  CHECK( "KalbachMannDistributionData" == chunk.name() );
 
   CHECK( EnergyDistributionType::KalbachMann == chunk.LAW() );
   CHECK( EnergyDistributionType::KalbachMann == chunk.type() );

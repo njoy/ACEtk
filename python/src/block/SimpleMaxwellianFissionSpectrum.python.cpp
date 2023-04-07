@@ -25,8 +25,10 @@ void wrapSimpleMaxwellianFissionSpectrum( python::module& module,
 
     module,
     "SimpleMaxwellianFissionSpectrum",
-    "Convenience interface for outgoing energy distribution data from the\n"
-    "DLW block for a single reaction using a simple Maxwellian fission spectrum"
+    "A simple Maxwellian fission spectrum\n\n"
+    "The SimpleMaxwellianFissionSpectrum class contains the tabulated energy and\n"
+    "temperature values as well as the restriction energy U used to describe the\n"
+    "Maxwellian fission spectrum. It is used in the DLW block as ACE LAW 7."
   );
 
   // wrap the block
