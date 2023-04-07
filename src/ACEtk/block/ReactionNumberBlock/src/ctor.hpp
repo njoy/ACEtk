@@ -19,7 +19,7 @@ ReactionNumberBlock( ReactionNumberBlock&& ) = default;
  *
  *  @param[in] mts    the MT numbers
  */
-ReactionNumberBlock( std::vector< unsigned int >&& reactions ) :
+ReactionNumberBlock( std::vector< unsigned int > reactions ) :
   ReactionNumberBlock( std::move( reactions ), reactions.size() ) {}
 
 /**

@@ -15,9 +15,9 @@ TabulatedOutgoingEnergyDistribution( TabulatedOutgoingEnergyDistribution&& ) = d
  */
 TabulatedOutgoingEnergyDistribution( double incident,
                                      int interpolation,
-                                     std::vector< double >&& cosines,
-                                     std::vector< double >&& pdf,
-                                     std::vector< double >&& cdf,
+                                     std::vector< double > cosines,
+                                     std::vector< double > pdf,
+                                     std::vector< double > cdf,
                                      std::size_t discrete = 0 ) :
   TabulatedProbabilityDistribution(
         "DLW::TabulatedOutgoingEnergyDistribution",

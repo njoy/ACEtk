@@ -8,7 +8,7 @@ DosimetryCrossSectionBlock( DosimetryCrossSectionBlock&& ) = default;
  *
  *  @param[in] xs    the cross section data
  */
-DosimetryCrossSectionBlock( std::vector< DosimetryCrossSectionData >&& xs ) :
+DosimetryCrossSectionBlock( std::vector< DosimetryCrossSectionData > xs ) :
   BaseCrossSectionBlock( "SIGD", std::move( xs ) ) {}
 
 /**

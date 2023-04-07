@@ -11,10 +11,10 @@ ParameterData( ParameterData&& ) = default;
  *  @param[in] energies        the energy values
  *  @param[in] values          the parameter values
  */
-ParameterData( std::vector< long >&& boundaries,
-               std::vector< long >&& interpolants,
-               std::vector< double >&& energies,
-               std::vector< double >&& values ) :
+ParameterData( std::vector< long > boundaries,
+               std::vector< long > interpolants,
+               std::vector< double > energies,
+               std::vector< double > values ) :
   BaseTabulatedData( "DLW::ParameterData",
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( values ) ) {}
@@ -25,8 +25,8 @@ ParameterData( std::vector< long >&& boundaries,
  *  @param[in] energies        the energy values
  *  @param[in] values          the parameter values
  */
-ParameterData( std::vector< double >&& energies,
-               std::vector< double >&& values ) :
+ParameterData( std::vector< double > energies,
+               std::vector< double > values ) :
   ParameterData( {}, {}, std::move( energies ), std::move( values ) ) {}
 
 /**

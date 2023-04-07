@@ -25,7 +25,8 @@ class BaseDistributionData : protected details::Base {
   /* fields */
   std::size_t locb_;
   InterpolationData interpolation_;
-  details::ColumnData data_;
+  details::ColumnData incident_;
+  std::vector< Distribution > distributions_;
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseDistributionData/src/generateXSS.hpp"
@@ -78,7 +79,7 @@ public:
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t NE() const { return this->data_.N(); }
+  std::size_t NE() const { return this->incident_.N(); }
 
   /**
    *  @brief Return the number of incident energy values
@@ -88,7 +89,7 @@ public:
   /**
    *  @brief Return the incident energy values
    */
-  auto incidentEnergies() const { return this->data_.column( 1 ); }
+  auto incidentEnergies() const { return this->incident_.column( 1 ); }
 
   /**
    *  @brief Return the incident energy for a given index
@@ -103,7 +104,7 @@ public:
     #ifndef NDEBUG
     this->verifyIncidentEnergyIndex( index );
     #endif
-    return this->data_.value( 1, index );
+    return this->incident_.value( 1, index );
   }
 
   /**
@@ -138,7 +139,7 @@ public:
     #ifndef NDEBUG
     this->verifyIncidentEnergyIndex( index );
     #endif
-    return this->data_.value( 2, index );
+    return this->incident_.value( 2, index );
   }
 
   /**
@@ -176,6 +177,14 @@ public:
   }
 
   /**
+   *  @brief Return the distributions
+   */
+  const std::vector< Distribution >& distributions() const {
+
+    return this->distributions_;
+  }
+
+  /**
    *  @brief Return the distribution for an incident energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
@@ -183,16 +192,12 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  Distribution distribution( std::size_t index ) const {
+  const Distribution& distribution( std::size_t index ) const {
 
-    const double incident = this->incidentEnergy( index );
-    const auto locator = this->relativeDistributionLocator( index );
-    const auto left = std::next( this->begin(), locator - 1 );
-    const auto right = index == this->numberIncidentEnergies()
-                       ? this->end()
-                       : std::next( this->begin(),
-                         this->relativeDistributionLocator( index + 1 ) - 1 );
-    return Distribution( incident, left, right );
+    #ifndef NDEBUG
+    this->verifyIncidentEnergyIndex( index );
+    #endif
+    return this->distributions_[ index - 1 ];
   }
 
   using Base::empty;

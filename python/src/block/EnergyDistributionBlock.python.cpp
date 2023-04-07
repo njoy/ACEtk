@@ -36,7 +36,7 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< DistributionData >&& >(),
+    python::init< std::vector< DistributionData > >(),
     python::arg( "distributions" ),
     "Initialise the block\n\n"
     "Arguments:\n"

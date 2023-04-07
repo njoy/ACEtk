@@ -13,10 +13,10 @@ EvaporationSpectrum( EvaporationSpectrum&& ) = default;
  *  @param[in] energy          the restriction energy
  */
 EvaporationSpectrum(
-    std::vector< long >&& boundaries,
-    std::vector< long >&& interpolants,
-    std::vector< double >&& energies,
-    std::vector< double >&& temperatures,
+    std::vector< long > boundaries,
+    std::vector< long > interpolants,
+    std::vector< double > energies,
+    std::vector< double > temperatures,
     double energy ) :
   BaseEvaporationSpectrum(
         "DLW::EvaporationSpectrum",

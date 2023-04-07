@@ -43,8 +43,8 @@ void wrapFrameAndMultiplicityBlock( python::module& module,
   block
   .def(
 
-    python::init< std::vector< ReferenceFrame >&&,
-                  std::vector< unsigned int >&& >(),
+    python::init< std::vector< ReferenceFrame >,
+                  std::vector< unsigned int > >(),
     python::arg( "frames" ), python::arg( "multiplicities" ),
     "Initialise the block\n\n"
     "Arguments:\n"

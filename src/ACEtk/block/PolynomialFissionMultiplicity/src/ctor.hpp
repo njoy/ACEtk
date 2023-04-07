@@ -8,7 +8,7 @@ PolynomialFissionMultiplicity( PolynomialFissionMultiplicity&& ) = default;
  *
  *  @param[in] coefficients    the polynomial coefficients
  */
-PolynomialFissionMultiplicity( std::vector< double >&& coefficients ) :
+PolynomialFissionMultiplicity( std::vector< double > coefficients ) :
   Base( "NU::POLY", generateXSS( std::move( coefficients ) ) ) {}
 
 /**

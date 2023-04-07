@@ -9,7 +9,7 @@ CrossSectionData( CrossSectionData&& ) = default;
  *  @param[in] index     the energy index
  *  @param[in] values    the cross section values
  */
-CrossSectionData( std::size_t index, std::vector< double >&& values ) :
+CrossSectionData( std::size_t index, std::vector< double > values ) :
   Base( "SIG::XS", generateXSS( index, std::move( values ) ) ) {}
 
 /**

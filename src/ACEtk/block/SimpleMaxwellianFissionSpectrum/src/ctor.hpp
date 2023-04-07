@@ -13,10 +13,10 @@ SimpleMaxwellianFissionSpectrum( SimpleMaxwellianFissionSpectrum&& ) = default;
  *  @param[in] energy          the restriction energy
  */
 SimpleMaxwellianFissionSpectrum(
-    std::vector< long >&& boundaries,
-    std::vector< long >&& interpolants,
-    std::vector< double >&& energies,
-    std::vector< double >&& temperatures,
+    std::vector< long > boundaries,
+    std::vector< long > interpolants,
+    std::vector< double > energies,
+    std::vector< double > temperatures,
     double energy ) :
   BaseEvaporationSpectrum(
         "DLW::SimpleMaxwellianFissionSpectrum",
@@ -33,8 +33,8 @@ SimpleMaxwellianFissionSpectrum(
  *  @param[in] energy          the restriction energy
  */
 SimpleMaxwellianFissionSpectrum(
-    std::vector< double >&& energies,
-    std::vector< double >&& temperatures,
+    std::vector< double > energies,
+    std::vector< double > temperatures,
     double energy ) :
   SimpleMaxwellianFissionSpectrum(
       {}, {}, std::move( energies ), std::move( temperatures ), energy ) {}

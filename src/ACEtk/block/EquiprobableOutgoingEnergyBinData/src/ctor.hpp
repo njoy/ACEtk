@@ -20,9 +20,9 @@ EquiprobableOutgoingEnergyBinData( EquiprobableOutgoingEnergyBinData&& base ) :
  *  @param[in] distributions    the distributions for each incident energy
  */
 EquiprobableOutgoingEnergyBinData(
-    std::vector< long >&& boundaries,
-    std::vector< long >&& interpolants,
-    std::vector< EquiprobableOutgoingEnergyBins >&& distributions ) :
+    std::vector< long > boundaries,
+    std::vector< long > interpolants,
+    std::vector< EquiprobableOutgoingEnergyBins > distributions ) :
   Base( "DLW::EquiprobableOutgoingEnergyBinData",
         generateXSS( std::move( boundaries ), std::move( interpolants ),
                      std::move( distributions ) ) ) {

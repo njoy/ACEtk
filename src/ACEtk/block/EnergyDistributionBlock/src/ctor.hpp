@@ -23,7 +23,7 @@ EnergyDistributionBlock( EnergyDistributionBlock&& ) = default;
  *
  *  @param[in] xs    the cross section data
  */
-EnergyDistributionBlock( std::vector< DistributionData >&& distributions ) :
+EnergyDistributionBlock( std::vector< DistributionData > distributions ) :
   EnergyDistributionBlock( std::move( distributions ),
                            distributions.size() ) {}
 

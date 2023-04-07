@@ -36,7 +36,7 @@ void wrapDosimetryCrossSectionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< DosimetryCrossSectionData >&& >(),
+    python::init< std::vector< DosimetryCrossSectionData > >(),
     python::arg( "xs" ),
     "Initialise the block\n\n"
     "Arguments:\n"

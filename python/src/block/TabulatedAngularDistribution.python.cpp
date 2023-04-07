@@ -32,8 +32,8 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
   block
   .def(
 
-    python::init< double, int, std::vector< double >&&, std::vector< double >&&,
-                  std::vector< double >&& >(),
+    python::init< double, int, std::vector< double >, std::vector< double >,
+                  std::vector< double > >(),
     python::arg( "incident" ), python::arg( "interpolation" ),
     python::arg( "cosines" ), python::arg( "pdf" ), python::arg( "cdf" ),
     "Initialise the block\n\n"

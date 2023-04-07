@@ -11,10 +11,11 @@ OutgoingEnergyDistributionData( OutgoingEnergyDistributionData&& ) = default;
  *  @param[in] distributions    the distributions for each incident energy
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
-OutgoingEnergyDistributionData( std::vector< long >&& boundaries,
-                                std::vector< long >&& interpolants,
-                                std::vector< TabulatedOutgoingEnergyDistribution >&& distributions,
-                                std::size_t locb = 1 ) :
+OutgoingEnergyDistributionData(
+    std::vector< long > boundaries,
+    std::vector< long > interpolants,
+    std::vector< TabulatedOutgoingEnergyDistribution > distributions,
+    std::size_t locb = 1 ) :
   BaseDistributionData( "DLW::OutgoingEnergyDistributionData",
                         std::move( boundaries ), std::move( interpolants ),
                         std::move( distributions ), locb ) {}
@@ -25,8 +26,9 @@ OutgoingEnergyDistributionData( std::vector< long >&& boundaries,
  *  @param[in] distributions    the distributions for each incident energy
  *  @param[in] locb             the starting xss index with respect to the superblock
  */
-OutgoingEnergyDistributionData( std::vector< TabulatedOutgoingEnergyDistribution >&& distributions,
-                                std::size_t locb = 1 ) :
+OutgoingEnergyDistributionData(
+    std::vector< TabulatedOutgoingEnergyDistribution > distributions,
+    std::size_t locb = 1 ) :
   OutgoingEnergyDistributionData( {}, {}, std::move( distributions ), locb ) {}
 
 /**

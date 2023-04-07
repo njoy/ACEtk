@@ -33,7 +33,7 @@ void wrapAngularDistributionData( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< Distribution >&&, std::size_t >(),
+    python::init< std::vector< Distribution >, std::size_t >(),
     python::arg( "distributions" ), python::arg( "locb" ) = 1,
     "Initialise the block\n\n"
     "Arguments:\n"
