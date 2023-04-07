@@ -41,7 +41,7 @@ void wrapGeneralEvaporationSpectrum( python::module& module,
     python::arg( "bins" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self             the block\n"
+    "    self            the block\n"
     "    boundaries      the interpolation range boundaries\n"
     "    interpolants    the interpolation types for each range\n"
     "    energies        the energy values\n"

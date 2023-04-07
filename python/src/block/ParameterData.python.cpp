@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/DosimetryCrossSectionData.hpp"
+#include "ACEtk/block/ParameterData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
+void wrapParameterData( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::DosimetryCrossSectionData;
+  using Block = njoy::ACEtk::block::ParameterData;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "DosimetryCrossSectionData",
-    "Convenience interface for dosimetry cross section data from the\n"
-    "SIGD block for a single reaction"
+    "ParameterData",
+    "Convenience interface for Watt spectrum parameter data from the\n"
+    "DLW block"
   );
 
   // wrap the block
@@ -33,19 +33,19 @@ void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
   .def(
 
     python::init< std::vector< double >&&, std::vector< double >&& >(),
-    python::arg( "energies" ), python::arg( "xs" ),
+    python::arg( "energies" ), python::arg( "values" ),
     "Initialise the block assuming linear interpolation\n\n"
     "Arguments:\n"
     "    self        the block\n"
     "    energies    the energy values\n"
-    "    xs          the xs values"
+    "    values      the parameter values"
   )
   .def(
 
     python::init< std::vector< long >&&, std::vector< long >&&,
                   std::vector< double >&&, std::vector< double >&& >(),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
-    python::arg( "energies" ), python::arg( "xs" ),
+    python::arg( "energies" ), python::arg( "values" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self            the block\n"
@@ -53,8 +53,6 @@ void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
     "    interpolants    the interpolation types for each range\n"
     "    energies        the energy values\n"
     "    values          the parameter values"
-    "    energies    the energy values\n"
-    "    xs          the xs values"
   )
   .def_property_readonly(
 
@@ -123,10 +121,10 @@ void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "cross_sections",
+    "values",
     [] ( const Block& self ) -> DoubleRange
-       { return self.crossSections(); },
-    "The cross section values"
+       { return self.values(); },
+    "The parameter values"
   );
 
   // add standard block definitions

@@ -42,9 +42,14 @@ namespace block {
   void wrapDiscretePhotonDistribution( python::module&, python::module& );
   void wrapTabulatedOutgoingEnergyDistribution( python::module&, python::module& );
   void wrapOutgoingEnergyDistributionData( python::module&, python::module& );
-  void wrapTabulatedKalbachMannDistribution( python::module&, python::module& );
   void wrapKalbachMannDistributionData( python::module&, python::module& );
   void wrapGeneralEvaporationSpectrum( python::module&, python::module& );
+  void wrapSimpleMaxwellianFissionSpectrum( python::module&, python::module& );
+  void wrapEvaporationSpectrum( python::module&, python::module& );
+  void wrapParameterData( python::module&, python::module& );
+  void wrapEnergyDependentWattSpectrum( python::module&, python::module& );
+  void wrapTabulatedKalbachMannDistribution( python::module&, python::module& );
+  void wrapNBodyPhaseSpaceDistribution( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -123,8 +128,13 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapTabulatedOutgoingEnergyDistribution( module, viewmodule );
   block::wrapOutgoingEnergyDistributionData( module, viewmodule );
   block::wrapTabulatedKalbachMannDistribution( module, viewmodule );
-  block::wrapKalbachMannDistributionData( module, viewmodule );
   block::wrapGeneralEvaporationSpectrum( module, viewmodule );
+  block::wrapSimpleMaxwellianFissionSpectrum( module, viewmodule );
+  block::wrapEvaporationSpectrum( module, viewmodule );
+  block::wrapParameterData( module, viewmodule );
+  block::wrapEnergyDependentWattSpectrum( module, viewmodule );
+  block::wrapKalbachMannDistributionData( module, viewmodule );
+  block::wrapNBodyPhaseSpaceDistribution( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );

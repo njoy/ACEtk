@@ -111,9 +111,14 @@ if(ACEtk.python)
     python/src/block/DiscretePhotonDistribution.python.cpp
     python/src/block/TabulatedOutgoingEnergyDistribution.python.cpp
     python/src/block/OutgoingEnergyDistributionData.python.cpp
+    python/src/block/GeneralEvaporationSpectrum.python.cpp
+    python/src/block/SimpleMaxwellianFissionSpectrum.python.cpp
+    python/src/block/EvaporationSpectrum.python.cpp
+    python/src/block/ParameterData.python.cpp
+    python/src/block/EnergyDependentWattSpectrum.python.cpp
     python/src/block/TabulatedKalbachMannDistribution.python.cpp
     python/src/block/KalbachMannDistributionData.python.cpp
-    python/src/block/GeneralEvaporationSpectrum.python.cpp
+    python/src/block/NBodyPhaseSpaceDistribution.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp

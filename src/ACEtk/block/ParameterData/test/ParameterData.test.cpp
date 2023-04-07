@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/DosimetryCrossSectionData.hpp"
+#include "ACEtk/block/ParameterData.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DosimetryCrossSectionData = block::DosimetryCrossSectionData;
+using ParameterData = block::ParameterData;
 
 std::vector< double > chunk();
-void verifyChunk( const DosimetryCrossSectionData& );
+void verifyChunk( const ParameterData& );
 
-SCENARIO( "DosimetryCrossSectionData" ) {
+SCENARIO( "ParameterData" ) {
 
-  GIVEN( "valid data for a DosimetryCrossSectionData instance" ) {
+  GIVEN( "valid data for a ParameterData instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -23,14 +23,14 @@ SCENARIO( "DosimetryCrossSectionData" ) {
       std::vector< long > interpolants = {};
       std::vector< long > boundaries = {};
       std::vector< double > energies = { 1., 3., 5. };
-      std::vector< double > xs = { 2., 4., 6. };
+      std::vector< double > values = { 2., 4., 6. };
 
-      DosimetryCrossSectionData chunk( std::move( boundaries ),
-                                       std::move( interpolants ),
-                                       std::move( energies ),
-                                       std::move( xs ) );
+      ParameterData chunk( std::move( boundaries ),
+                           std::move( interpolants ),
+                           std::move( energies ),
+                           std::move( values ) );
 
-      THEN( "a DosimetryCrossSectionData can be constructed and members can be tested" ) {
+      THEN( "a ParameterData can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -47,9 +47,9 @@ SCENARIO( "DosimetryCrossSectionData" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      DosimetryCrossSectionData chunk( xss.begin(), xss.end() );
+      ParameterData chunk( xss.begin(), xss.end() );
 
-      THEN( "a DosimetryCrossSectionData can be constructed and members can be tested" ) {
+      THEN( "a ParameterData can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -71,11 +71,11 @@ std::vector< double > chunk() {
   return { 0, 3, 1., 3., 5., 2., 4., 6. };
 }
 
-void verifyChunk( const DosimetryCrossSectionData& chunk ) {
+void verifyChunk( const ParameterData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
-  CHECK( "SIGD::DosimetryCrossSectionData" == chunk.name() );
+  CHECK( "DLW::ParameterData" == chunk.name() );
 
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
@@ -99,8 +99,8 @@ void verifyChunk( const DosimetryCrossSectionData& chunk ) {
   CHECK( 3. == Approx( chunk.energies()[1] ) );
   CHECK( 5. == Approx( chunk.energies()[2] ) );
 
-  CHECK( 3 == chunk.crossSections().size() );
-  CHECK( 2. == Approx( chunk.crossSections()[0] ) );
-  CHECK( 4. == Approx( chunk.crossSections()[1] ) );
-  CHECK( 6. == Approx( chunk.crossSections()[2] ) );
+  CHECK( 3 == chunk.values().size() );
+  CHECK( 2. == Approx( chunk.values()[0] ) );
+  CHECK( 4. == Approx( chunk.values()[1] ) );
+  CHECK( 6. == Approx( chunk.values()[2] ) );
 }

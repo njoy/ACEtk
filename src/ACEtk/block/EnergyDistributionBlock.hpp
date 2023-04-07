@@ -10,8 +10,12 @@
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
-#include "ACEtk/block/KalbachMannDistributionData.hpp"
 #include "ACEtk/block/GeneralEvaporationSpectrum.hpp"
+#include "ACEtk/block/SimpleMaxwellianFissionSpectrum.hpp"
+#include "ACEtk/block/EvaporationSpectrum.hpp"
+#include "ACEtk/block/EnergyDependentWattSpectrum.hpp"
+#include "ACEtk/block/KalbachMannDistributionData.hpp"
+#include "ACEtk/block/NBodyPhaseSpaceDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -38,8 +42,12 @@ public:
                                          DiscretePhotonDistribution,
                                          LevelScatteringDistribution,
                                          OutgoingEnergyDistributionData,
+                                         GeneralEvaporationSpectrum,
+                                         SimpleMaxwellianFissionSpectrum,
+                                         EvaporationSpectrum,
+                                         EnergyDependentWattSpectrum,
                                          KalbachMannDistributionData,
-                                         GeneralEvaporationSpectrum >;
+                                         NBodyPhaseSpaceDistribution >;
 
 private:
 
@@ -137,10 +145,6 @@ public:
       // switch on the law and return the appropriate data
       switch ( law ) {
 
-        case EnergyDistributionType::Equiprobable : {
-
-          return EquiprobableOutgoingEnergyBinData( left, right );
-        }
         case EnergyDistributionType::DiscretePhoton : {
 
           return DiscretePhotonDistribution( left, right, emin, emax );
@@ -148,6 +152,10 @@ public:
         case EnergyDistributionType::LevelScattering : {
 
           return LevelScatteringDistribution( left, right, emin, emax );
+        }
+        case EnergyDistributionType::NBodyPhaseSpace : {
+
+          return NBodyPhaseSpaceDistribution( left, right, emin, emax );
         }
         case EnergyDistributionType::TabulatedEnergy : {
 
@@ -157,9 +165,25 @@ public:
 
           return KalbachMannDistributionData( idat, left, right );
         }
+        case EnergyDistributionType::Equiprobable : {
+
+          return EquiprobableOutgoingEnergyBinData( left, right );
+        }
         case EnergyDistributionType::GeneralEvaporation : {
 
           return GeneralEvaporationSpectrum( left, right );
+        }
+        case EnergyDistributionType::SimpleMaxwellianFission : {
+
+          return SimpleMaxwellianFissionSpectrum( left, right );
+        }
+        case EnergyDistributionType::Evaporation : {
+
+          return EvaporationSpectrum( left, right );
+        }
+        case EnergyDistributionType::Watt : {
+
+          return EnergyDependentWattSpectrum( left, right );
         }
         default : {
 

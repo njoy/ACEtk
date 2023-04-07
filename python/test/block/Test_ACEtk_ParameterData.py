@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import DosimetryCrossSectionData
+from ACEtk import ParameterData
 
-class Test_ACEtk_DosimetryCrossSectionData( unittest.TestCase ) :
-    """Unit test for the DosimetryCrossSectionData class."""
+class Test_ACEtk_ParameterData( unittest.TestCase ) :
+    """Unit test for the ParameterData class."""
 
     chunk = [ 0, 3, 1., 3., 5., 2., 4., 6. ]
 
@@ -18,7 +18,7 @@ class Test_ACEtk_DosimetryCrossSectionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 8, chunk.length )
-            self.assertEqual( "SIGD::DosimetryCrossSectionData", chunk.name )
+            self.assertEqual( "DLW::ParameterData", chunk.name )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
@@ -42,10 +42,10 @@ class Test_ACEtk_DosimetryCrossSectionData( unittest.TestCase ) :
             self.assertEqual( 3., chunk.energies[1] )
             self.assertEqual( 5., chunk.energies[2] )
 
-            self.assertEqual( 3, len( chunk.cross_sections ) )
-            self.assertEqual( 2., chunk.cross_sections[0] )
-            self.assertEqual( 4., chunk.cross_sections[1] )
-            self.assertEqual( 6., chunk.cross_sections[2] )
+            self.assertEqual( 3, len( chunk.values ) )
+            self.assertEqual( 2., chunk.values[0] )
+            self.assertEqual( 4., chunk.values[1] )
+            self.assertEqual( 6., chunk.values[2] )
 
             # verify the xss array
             xss = chunk.xss_array
@@ -54,9 +54,9 @@ class Test_ACEtk_DosimetryCrossSectionData( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = DosimetryCrossSectionData( boundaries = [], interpolants = [],
-                                           energies = [ 1., 3., 5. ],
-                                           xs = [ 2., 4., 6. ] )
+        chunk = ParameterData( boundaries = [], interpolants = [],
+                               energies = [ 1., 3., 5. ],
+                               values = [ 2., 4., 6. ] )
 
         verify_chunk( self, chunk )
 

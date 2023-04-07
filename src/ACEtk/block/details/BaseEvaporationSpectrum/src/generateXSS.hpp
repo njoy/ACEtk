@@ -4,7 +4,7 @@ generateXSS(
   std::vector< long >&& interpolants,
   std::vector< double >&& energies,
   std::vector< double >&& temperatures,
-  std::vector< double >&& bins ) {
+  double energy ) {
 
   // insert the tabulated data
   std::vector< double > xss;
@@ -15,9 +15,8 @@ generateXSS(
                                     std::move( temperatures ) );
   xss.insert( xss.end(), table.begin(), table.end() );
 
-  // insert the bin data
-  xss.push_back( bins.size() );
-  xss.insert( xss.end(), bins.begin(), bins.end() );
+  // insert the restriction energy
+  xss.push_back( energy );
 
   return xss;
 }
