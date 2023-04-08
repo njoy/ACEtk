@@ -45,13 +45,13 @@ void wrapPhotonProductionCrossSectionData( python::module& module,
 
     "MFTYPE",
     &Block::MFTYPE,
-    "The representation type (should always be 12 or 16))"
+    "The representation type (should always be 13)"
   )
   .def_property_readonly(
 
     "type",
     &Block::type,
-    "The representation type (should always be 12 or 16))"
+    "The representation type (should always be 13)"
   )
   .def_property_readonly(
 
