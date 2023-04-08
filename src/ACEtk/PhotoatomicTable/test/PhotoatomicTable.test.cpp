@@ -309,6 +309,12 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.NSH() );
   CHECK( 0 == chunk.numberElectronShells() );
 
+  // this is an old format file so no EPR data blocks are presents
+  CHECK( 0 == chunk.NEPR() );
+  CHECK( 0 == chunk.electronPhotonRelaxationFormat() );
+  CHECK( 0 == chunk.NSSH() );
+  CHECK( 0 == chunk.numberElectronSubshells() );
+
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
 
@@ -396,6 +402,12 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberFluorescenceEdges() );
   CHECK( 2 == chunk.NSH() );
   CHECK( 2 == chunk.numberElectronShells() );
+
+  // this is an old format file so no EPR data blocks are presents
+  CHECK( 0 == chunk.NEPR() );
+  CHECK( 0 == chunk.electronPhotonRelaxationFormat() );
+  CHECK( 0 == chunk.NSSH() );
+  CHECK( 0 == chunk.numberElectronSubshells() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );

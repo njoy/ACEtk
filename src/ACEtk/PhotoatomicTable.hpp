@@ -134,14 +134,36 @@ public:
   unsigned int numberFluorescenceEdges() const { return this->NFLO(); }
 
   /**
-   *  @brief Return the number of electron shells
+   *  @brief Return the number of electron shells (for Compton Doppler broadening)
    */
   unsigned int NSH() const { return this->data().NXS(5); }
 
   /**
-   *  @brief Return the number of electron shells
+   *  @brief Return the number of electron shells (for Compton Doppler broadening)
    */
   unsigned int numberElectronShells() const { return this->NSH(); }
+
+  /**
+   *  @brief Return the EPR data format flag (0 for old format and 1 for EPR data)
+   */
+  unsigned int NEPR() const { return this->data().NXS(6); }
+
+  /**
+   *  @brief Return the EPR data format flag (0 for old format and 1 for EPR data)
+   */
+  unsigned int electronPhotonRelaxationFormat() const { return this->NEPR(); }
+
+  /**
+   *  @brief Return the number of electron shells (for photoelectric and electron
+   *         impact ionization)
+   */
+  unsigned int NSSH() const { return this->data().NXS(7); }
+
+  /**
+   *  @brief Return the number of electron shells (for photoelectric and electron
+   *         impact ionization)
+   */
+  unsigned int numberElectronSubshells() const { return this->NSSH(); }
 
   // JXS information
 

@@ -158,13 +158,37 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
 
     "NSH",
     &Table::NSH,
-    "The number of electron shells"
+    "The number of electron shells (for Compton Doppler broadening)"
   )
   .def_property_readonly(
 
     "number_electron_shells",
     &Table::numberElectronShells,
-    "The number of electron shells"
+    "The number of electron shells (for Compton Doppler broadening)"
+  )
+  .def_property_readonly(
+
+    "NEPR",
+    &Table::NEPR,
+    "The EPR data format flag (0 for old format and 1 for EPR data)"
+  )
+  .def_property_readonly(
+
+    "electron_photon_relaxation_format",
+    &Table::electronPhotonRelaxationFormat,
+    "The EPR data format flag (0 for old format and 1 for EPR data)"
+  )
+  .def_property_readonly(
+
+    "NSSH",
+    &Table::NSSH,
+    "The number of subshells for photoelectric and electron impact ionization"
+  )
+  .def_property_readonly(
+
+    "number_electron_subshells",
+    &Table::numberElectronSubshells,
+    "The number of subshells for photoelectric and electron impact ionization"
   )
   .def_property_readonly(
 
