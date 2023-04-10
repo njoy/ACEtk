@@ -31,7 +31,7 @@ namespace ACEtk {
     const auto file_size = in.tellg();
     in.seekg( 0, std::ios::beg );
     content.resize( file_size / sizeof( char ) );
-    in.read( &( content[ 0 ] ), file_size );
+    in.read( content.data(), file_size );
     return content;
   }
 
