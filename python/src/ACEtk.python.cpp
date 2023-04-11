@@ -58,6 +58,8 @@ namespace block {
   void wrapAngleEnergyDistributionData( python::module&, python::module& );
   void wrapDistributionProbability( python::module&, python::module& );
   void wrapMultiDistributionData( python::module&, python::module& );
+  void wrapTabulatedSecondaryParticleMultiplicity( python::module&, python::module& );
+  void wrapPhotonProductionCrossSectionData( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -69,6 +71,8 @@ namespace block {
   void wrapDosimetryCrossSectionBlock( python::module&, python::module& );
   void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapEnergyDistributionBlock( python::module&, python::module& );
+  void wrapPhotonProductionBlock( python::module&, python::module& );
+  void wrapMultiplicityReactionNumberBlock( python::module&, python::module& );
   void wrapSecondaryParticleTypeBlock( python::module&, python::module& );
 }
 
@@ -151,6 +155,8 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapAngleEnergyDistributionData( module, viewmodule );
   block::wrapDistributionProbability( module, viewmodule );
   block::wrapMultiDistributionData( module, viewmodule );
+  block::wrapTabulatedSecondaryParticleMultiplicity( module, viewmodule );
+  block::wrapPhotonProductionCrossSectionData( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
@@ -162,6 +168,8 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapDosimetryCrossSectionBlock( module, viewmodule );
   block::wrapAngularDistributionBlock( module, viewmodule );
   block::wrapEnergyDistributionBlock( module, viewmodule );
+  block::wrapPhotonProductionBlock( module, viewmodule );
+  block::wrapMultiplicityReactionNumberBlock( module, viewmodule );
   block::wrapSecondaryParticleTypeBlock( module, viewmodule );
 
   // wrap ACE table types

@@ -15,18 +15,24 @@ namespace details {
  *  @class
  *  @brief The base class for a LSIG and SIG block with cross section data
  */
-template < typename Data >
+template < typename Derived, typename Data >
 class BaseCrossSectionBlock : protected details::Base {
 
   /* fields */
   unsigned int ntr_; // the number of reactions (excluding elastic)
   Iterator sig_;     // the begin iterator of the SIG block
+  std::vector< Data > xs_;
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseCrossSectionBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/details/BaseCrossSectionBlock/src/generateData.hpp"
+  #include "ACEtk/block/details/BaseCrossSectionBlock/src/generateBlocks.hpp"
+  #include "ACEtk/block/details/BaseCrossSectionBlock/src/verifyCrossSectionIndex.hpp"
   #include "ACEtk/block/details/BaseCrossSectionBlock/src/verifySize.hpp"
 
 protected:
+
+  /* fields */
 
   /* constructor */
   #include "ACEtk/block/details/BaseCrossSectionBlock/src/ctor.hpp"
@@ -87,16 +93,12 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto crossSectionData( std::size_t index ) const {
+  const Data& crossSectionData( std::size_t index ) const {
 
-    // sig : one-based index to the start of the SIG block
-    // sig + locator - 1 : one-based index to the start of cross section data
-    std::size_t sig = std::distance( this->begin(), this->sig_ ) + 1;
-    const auto left = this->iterator( sig + this->LSIG( index ) - 1 );
-    const auto right = index == this->NTR()
-                       ? this->end()
-                       : this->iterator( sig + this->LSIG( index + 1 ) - 1 );
-    return Data( left, right );
+    #ifndef NDEBUG
+    this->verifyCrossSectionIndex( index );
+    #endif
+    return this->xs_[ index - 1 ];
   }
 
   using Base::empty;

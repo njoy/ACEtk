@@ -6,10 +6,8 @@ void generateBlocks() {
   auto data = begin + 2 * nr + 1;
   auto end = data + 2 * ne + 1;
 
-  this->interpolation_ = block::InterpolationData( std::string( this->name() ),
-                                                   begin, data );
-  this->values_ = block::details::ColumnData( std::string( this->name() ),
-                                              data, end, 2 );
+  this->interpolation_ = block::InterpolationData( this->name(), begin, data );
+  this->values_ = block::details::ColumnData( this->name(), data, end, 2 );
   for ( unsigned int index = 1; index <= this->values_.N(); ++index ) {
 
     const double value = this->value( 1, index );

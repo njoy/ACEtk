@@ -22,7 +22,11 @@ namespace block {
  *  the MTR block.
  */
 class DosimetryCrossSectionBlock :
-    protected details::BaseCrossSectionBlock< DosimetryCrossSectionData > {
+    protected details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+                                              DosimetryCrossSectionData > {
+
+  friend class details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+                                               DosimetryCrossSectionData >;
 
   /* fields */
 
@@ -82,7 +86,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto crossSectionData( std::size_t index ) const {
+  const DosimetryCrossSectionData& crossSectionData( std::size_t index ) const {
 
     return BaseCrossSectionBlock::crossSectionData( index );
   }

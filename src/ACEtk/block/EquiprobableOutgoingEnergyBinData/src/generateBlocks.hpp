@@ -7,10 +7,9 @@ void generateBlocks() {
   auto bins = incident + ne + 1;
   auto end = this->end();
 
-  this->interpolation_ = block::InterpolationData( std::string( this->name() ),
+  this->interpolation_ = block::InterpolationData( this->name(),
                                                    begin, incident );
-  this->energies_ = block::details::ColumnData( std::string( this->name() ),
+  this->energies_ = block::details::ColumnData( this->name(),
                                                 incident, bins, 1 );
-  this->bins_ = block::details::ColumnData( std::string( this->name() ),
-                                            bins, end, ne );
+  this->bins_ = block::details::ColumnData( this->name(), bins, end, ne );
 }

@@ -24,12 +24,12 @@ BaseEvaporationSpectrum( BaseEvaporationSpectrum&& base ) :
  *  @param[in] energy          the restriction energy
  */
 BaseEvaporationSpectrum(
-    std::string&& name,
+    std::string name,
     EnergyDistributionType type,
-    std::vector< long >&& boundaries,
-    std::vector< long >&& interpolants,
-    std::vector< double >&& energies,
-    std::vector< double >&& temperatures,
+    std::vector< long > boundaries,
+    std::vector< long > interpolants,
+    std::vector< double > energies,
+    std::vector< double > temperatures,
     double energy ) :
   Base( std::move( name ),
         generateXSS( std::move( boundaries ), std::move( interpolants ),
@@ -48,7 +48,7 @@ BaseEvaporationSpectrum(
  *  @param[in] begin    the begin iterator of the block in the XSS array
  *  @param[in] end      the end iterator of the block in the XSS array
  */
-BaseEvaporationSpectrum( std::string&& name, EnergyDistributionType type,
+BaseEvaporationSpectrum( std::string name, EnergyDistributionType type,
                          Iterator begin, Iterator end ) :
   Base( std::move( name ), begin, end ), type_( type ) {
 

@@ -32,6 +32,30 @@ void wrapTabulatedFissionMultiplicity( python::module& module, python::module& )
 
   // wrap the block
   block
+  .def(
+
+    python::init< std::vector< double >, std::vector< double > >(),
+    python::arg( "energies" ), python::arg( "multiplicities" ),
+    "Initialise the block assuming linear interpolation\n\n"
+    "Arguments:\n"
+    "    self             the block\n"
+    "    energies         the energy values\n"
+    "    multiplicities   the multiplicity values"
+  )
+  .def(
+
+    python::init< std::vector< long >, std::vector< long >,
+                  std::vector< double >, std::vector< double > >(),
+    python::arg( "boundaries" ), python::arg( "interpolants" ),
+    python::arg( "energies" ), python::arg( "xs" ),
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self            the block\n"
+    "    boundaries      the interpolation range boundaries\n"
+    "    interpolants    the interpolation types for each range\n"
+    "    energies        the energy values\n"
+    "    multiplicities   the multiplicity values"
+  )
   .def_property_readonly(
 
     "LNU",
@@ -43,6 +67,12 @@ void wrapTabulatedFissionMultiplicity( python::module& module, python::module& )
     "type",
     &Block::type,
     "The representation type (should always be 2)"
+  )
+  .def_property_readonly(
+
+    "interpolation_data",
+    &Block::interpolationData,
+    "The interpolation data"
   )
   .def_property_readonly(
 

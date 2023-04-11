@@ -13,6 +13,9 @@
 #include "ACEtk/block/CrossSectionBlock.hpp"
 #include "ACEtk/block/AngularDistributionBlock.hpp"
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
+#include "ACEtk/block/PhotonProductionBlock.hpp"
+#include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
+#include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
 
 namespace njoy {
@@ -36,6 +39,13 @@ class ContinuousEnergyTable : protected Table {
   block::SIG sig_;
   block::AND and_;
   block::DLW dlw_;
+
+  block::GPD gpd_;
+  block::MTR mtrp_;
+  block::SIGP sigp_;
+  block::AND andp_;
+  block::DLW dlwp_;
+  block::YP yp_;
 
   block::PTYPE ptype_;
 
@@ -288,6 +298,81 @@ public:
    *  @brief Return the energy distribution block
    */
   const block::DLW& energyDistributionBlock() const { return this->DLW(); }
+
+  /**
+   *  @brief Return the photon production block
+   */
+  const block::GPD& GPD() const { return this->gpd_; }
+
+  /**
+   *  @brief Return the photon production block
+   */
+  const block::GPD& photonProductionBlock() const { return this->GPD(); }
+
+  /**
+   *  @brief Return the photon production reaction number block
+   */
+  const block::MTR& MTRP() const { return this->mtrp_; }
+
+  /**
+   *  @brief Return the photon production reaction number block
+   */
+  const block::MTR& photonProductionReactionNumberBlock() const {
+
+    return this->MTRP();
+  }
+
+  /**
+   *  @brief Return the photon production cross section block
+   */
+  const block::SIGP& SIGP() const { return this->sigp_; }
+
+  /**
+   *  @brief Return the photon production cross section block
+   */
+  const block::SIGP& photonProductionCrossSectionBlock() const {
+
+    return this->SIGP();
+  }
+
+  /**
+   *  @brief Return the photon production angular distribution block
+   */
+  const block::AND& ANDP() const { return this->andp_; }
+
+  /**
+   *  @brief Return the photon production angular distribution block
+   */
+  const block::AND& photonProductionAngularDistributionBlock() const {
+
+    return this->ANDP();
+  }
+
+  /**
+   *  @brief Return the photon production energy distribution block
+   */
+  const block::DLW& DLWP() const { return this->dlwp_; }
+
+  /**
+   *  @brief Return the photon production energy distribution block
+   */
+  const block::DLW& photonProductionEnergyDistributionBlock() const {
+
+    return this->DLWP();
+  }
+
+  /**
+   *  @brief Return the photon multiplicity reaction number block
+   */
+  const block::YP& YP() const { return this->yp_; }
+
+  /**
+   *  @brief Return the photon multiplicity reaction number block
+   */
+  const block::YP& photonMultiplicityReactionNumberBlock() const {
+
+    return this->YP();
+  }
 
   /**
    *  @brief Return the secondary particle type block

@@ -97,7 +97,6 @@ if(ACEtk.python)
     python/src/block/FrameAndMultiplicityBlock.python.cpp
     python/src/block/CrossSectionBlock.python.cpp
     python/src/block/DosimetryCrossSectionBlock.python.cpp
-    python/src/block/SecondaryParticleTypeBlock.python.cpp
     python/src/block/EquiprobableAngularBins.python.cpp
     python/src/block/TabulatedAngularDistribution.python.cpp
     python/src/block/TabulatedAngularDistributionWithProbability.python.cpp
@@ -128,6 +127,11 @@ if(ACEtk.python)
     python/src/block/DistributionProbability.python.cpp
     python/src/block/MultiDistributionData.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
+    python/src/block/PhotonProductionBlock.python.cpp
+    python/src/block/MultiplicityReactionNumberBlock.python.cpp
+    python/src/block/TabulatedSecondaryParticleMultiplicity.python.cpp
+    python/src/block/PhotonProductionCrossSectionData.python.cpp
+    python/src/block/SecondaryParticleTypeBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
   )

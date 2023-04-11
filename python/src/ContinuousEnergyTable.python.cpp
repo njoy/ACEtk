@@ -323,6 +323,66 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "The energy distribution block"
   )
   .def_property_readonly(
+
+    "GPD",
+    &Table::GPD,
+    "The photon production block"
+  )
+  .def_property_readonly(
+
+    "photon_production_block",
+    &Table::photonProductionBlock,
+    "The photon production block"
+  )
+  .def_property_readonly(
+
+    "MTRP",
+    &Table::MTRP,
+    "The photon production reaction number block"
+  )
+  .def_property_readonly(
+
+    "photon_production_reaction_number_block",
+    &Table::photonProductionReactionNumberBlock,
+    "The photon production reaction number block"
+  )
+  .def_property_readonly(
+
+    "ANDP",
+    &Table::ANDP,
+    "The photon production angular distribution block"
+  )
+  .def_property_readonly(
+
+    "photon_production_angular_distribution_block",
+    &Table::photonProductionAngularDistributionBlock,
+    "The photon production angular distribution block"
+  )
+  .def_property_readonly(
+
+    "DLWP",
+    &Table::DLWP,
+    "The photon production energy distribution block"
+  )
+  .def_property_readonly(
+
+    "photon_production_energy_distribution_block",
+    &Table::photonProductionEnergyDistributionBlock,
+    "The photon production energy distribution block"
+  )
+  .def_property_readonly(
+
+    "YP",
+    &Table::YP,
+    "The photon multiplicity reaction number block"
+  )
+  .def_property_readonly(
+
+    "photon_multiplicity_reaction_number_block",
+    &Table::photonMultiplicityReactionNumberBlock,
+    "The photon multiplicity reaction number block"
+  )
+  .def_property_readonly(
     "PTYPE",
     &Table::PTYPE,
     "The secondary particle type block"

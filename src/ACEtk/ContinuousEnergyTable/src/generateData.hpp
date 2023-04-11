@@ -60,7 +60,7 @@ Data generateData( unsigned int z, unsigned int a,
   jxs[10] = xss.size() + nr + 1;
   xss.insert( xss.end(), dlw.begin(), dlw.end() );
 
-  // set the nxs values for the dosimetry table
+  // set the nxs values for the continuous energy table
   // NXS(1) = length
   // NXS(2) = za
   // NXS(4) = NTR

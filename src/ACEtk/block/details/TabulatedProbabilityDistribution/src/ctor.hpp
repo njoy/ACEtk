@@ -12,11 +12,11 @@ TabulatedProbabilityDistribution( TabulatedProbabilityDistribution&& ) = default
  *  @param[in] pdf             the pdf values (N values)
  *  @param[in] cdf             the cdf values (N values)
  */
-TabulatedProbabilityDistribution( std::string&& name,
+TabulatedProbabilityDistribution( std::string name,
                                   int interpolation,
-                                  std::vector< double >&& values,
-                                  std::vector< double >&& pdf,
-                                  std::vector< double >&& cdf,
+                                  std::vector< double > values,
+                                  std::vector< double > pdf,
+                                  std::vector< double > cdf,
                                   std::vector< std::vector< double > > data ) :
   Base( std::move( name ),
         generateXSS( interpolation,
@@ -29,7 +29,7 @@ TabulatedProbabilityDistribution( std::string&& name,
  *  @param[in] begin      the begin iterator of the tabulated distribution data
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
-TabulatedProbabilityDistribution( std::string&& name, Iterator begin, Iterator end ) :
+TabulatedProbabilityDistribution( std::string name, Iterator begin, Iterator end ) :
   Base( std::move( name ), begin, end ) {
 
   verifySize( this->begin(), this->end(), this->numberValues() );
