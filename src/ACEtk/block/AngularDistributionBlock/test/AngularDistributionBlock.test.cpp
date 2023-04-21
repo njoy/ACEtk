@@ -17,7 +17,6 @@ using IsotropicAngularDistribution = block::IsotropicAngularDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const AngularDistributionBlock& );
-//void verifyChunkWithoutElastic( const AngularDistributionBlock& );
 
 SCENARIO( "AngularDistributionBlock" ) {
 

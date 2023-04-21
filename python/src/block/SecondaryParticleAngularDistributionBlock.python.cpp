@@ -25,12 +25,12 @@ void wrapSecondaryParticleAngularDistributionBlock( python::module& module, pyth
 
     module,
     "SecondaryParticleAngularDistributionBlock",
-    "The continuous energy LANDP,ANDP and LANDH,ANDH blocks with the\n"
+    "The continuous energy LANDP, ANDP and LANDH, ANDH blocks with the\n"
     "angular distribution data for secondary particles that are not the\n"
     "incident particle type\n\n"
     "The SecondaryParticleAngularDistributionBlock class contains angular\n"
     "distribution data, one for each the NXS(6) reaction numbers on the MTRP\n"
-    "block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on\n"
+    "block (for the LANDP, ANDP blocks) and each of the NTRO(ITYPE) reactions on\n"
     "the MTRH(ITYPE) block. The order of the distribution data sets is the same\n"
     "as the order of the reaction numbers in the corresponding MTR block."
   );
@@ -97,8 +97,7 @@ void wrapSecondaryParticleAngularDistributionBlock( python::module& module, pyth
     "is_given",
     &Block::isGiven,
     python::arg( "index" ),
-    "Return whether or not the distribution data is fully isotropic for\n"
-    "is given in the AND block\n\n"
+    "Return whether or not the distribution data is given in the AND block\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"

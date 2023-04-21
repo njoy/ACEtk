@@ -13,13 +13,13 @@ namespace block {
 
 /**
  *  @class
- *  @brief The continuous energy LANDP,ANDP and LANDH,ANDH blocks with the
+ *  @brief The continuous energy LANDP, ANDP and LANDH, ANDH blocks with the
  *         angular distribution data for secondary particles that are not the
  *         incident particle type
  *
  *  The SecondaryParticleAngularDistributionBlock class contains angular
  *  distribution data, one for each the NXS(6) reaction numbers on the MTRP
- *  block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on
+ *  block (for the LANDP, ANDP blocks) and each of the NTRO(ITYPE) reactions on
  *  the MTRH(ITYPE) block. The order of the distribution data sets is the same
  *  as the order of the reaction numbers in the corresponding MTR block.
  */

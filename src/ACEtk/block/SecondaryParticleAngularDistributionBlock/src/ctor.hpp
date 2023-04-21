@@ -6,7 +6,7 @@ SecondaryParticleAngularDistributionBlock( SecondaryParticleAngularDistributionB
 /**
  *  @brief Constructor
  *
- *  @param[in] data    the ditribution data for all reactions
+ *  @param[in] data    the distribution data for all reactions
  */
 SecondaryParticleAngularDistributionBlock( std::vector< DistributionData > data ) :
   BaseAngularDistributionBlock( "ANDH", std::move( data ) ) {}
