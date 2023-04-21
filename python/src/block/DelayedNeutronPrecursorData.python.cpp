@@ -25,7 +25,7 @@ void wrapDelayedNeutronPrecursorData( python::module& module, python::module& ) 
     module,
     "DelayedNeutronPrecursorData",
     "Delayed neutron precursor group data\n\n"
-    "The DelayedNeutronPrecursorData class contains the prrcursor group's decay\n"
+    "The DelayedNeutronPrecursorData class contains the precursor group's decay\n"
     "constant and the associated probability as a function of incident energy."
   );
 
@@ -52,7 +52,7 @@ void wrapDelayedNeutronPrecursorData( python::module& module, python::module& ) 
                   std::vector< double >, std::vector< double > >(),
     python::arg( "number" ), python::arg( "constant" ),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
-    python::arg( "energies" ), python::arg( "xs" ),
+    python::arg( "energies" ), python::arg( "probabilities" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
