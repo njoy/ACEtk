@@ -143,6 +143,7 @@ public:
   using BaseAngularDistributionBlock::end;
 };
 
+using ANDP = SecondaryParticleAngularDistributionBlock;
 using ANDH = SecondaryParticleAngularDistributionBlock;
 
 } // block namespace

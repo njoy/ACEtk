@@ -108,6 +108,7 @@ public:
 };
 
 using TYR = FrameAndMultiplicityBlock;
+using TYRH = FrameAndMultiplicityBlock;
 
 } // block namespace
 } // ACEtk namespace

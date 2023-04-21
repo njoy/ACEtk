@@ -26,6 +26,10 @@ generateData( std::size_t locator, Iterator left, Iterator right ) {
 
         return LevelScatteringDistribution( start, right, emin, emax );
       }
+      case EnergyDistributionType::TwoBodyTransfer : {
+
+        return TwoBodyTransferDistribution( start, right, emin, emax );
+      }
       case EnergyDistributionType::NBodyPhaseSpace : {
 
         return NBodyPhaseSpaceDistribution( start, right, emin, emax );

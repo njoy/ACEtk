@@ -17,7 +17,7 @@ PhotonProductionCrossSectionBlock( std::vector< PhotonProductionData > xs ) :
  *  @param[in] lsigp    the begin iterator of the LSIGP block in the XSS array
  *  @param[in] sigp     the begin iterator of the SIGP block in the XSS array
  *  @param[in] end      the end iterator of the SIGP block in the XSS array
- *  @param[in] ntr      the number of reactions (excluding elastic)
+ *  @param[in] ntr      the number of reactions
  */
 PhotonProductionCrossSectionBlock( Iterator lsigp, Iterator sigp, Iterator end,
                                    unsigned int ntr ) :

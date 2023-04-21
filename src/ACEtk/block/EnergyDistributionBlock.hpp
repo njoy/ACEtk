@@ -146,6 +146,8 @@ public:
 };
 
 using DLW = EnergyDistributionBlock;
+using DLWP = EnergyDistributionBlock;
+using DLWH = EnergyDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

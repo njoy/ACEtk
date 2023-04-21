@@ -17,6 +17,7 @@ using DiscretePhotonDistribution = block::DiscretePhotonDistribution;
 using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
 using PhotonProductionCrossSectionData = block::PhotonProductionCrossSectionData;
 using TabulatedSecondaryParticleMultiplicity = block::TabulatedSecondaryParticleMultiplicity;
+using TwoBodyTransferDistribution = block::TwoBodyTransferDistribution;
 
 void verifyChunkU235( const ContinuousEnergyTable& );
 void verifyChunkHe3( const ContinuousEnergyTable& );
@@ -446,6 +447,12 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
+
+  // NTRO block
+  CHECK( true == chunk.NTRO().empty() );
+
+  // IXS block
+  CHECK( true == chunk.IXS().empty() );
 }
 
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
@@ -594,4 +601,115 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 34 == chunk.PTYPE().IP( 1 ) );
   CHECK( 34 == chunk.PTYPE().IPs().front() );
+
+  // NTRO block
+  CHECK( false == chunk.NTRO().empty() );
+  CHECK( 1 == chunk.NTRO().NTYPE() );
+  CHECK( 1 == chunk.NTRO().NPs().size() );
+
+  CHECK( 1 == chunk.NTRO().NP( 1 ) );
+  CHECK( 1 == chunk.NTRO().NPs().front() );
+
+  // IXS block
+  CHECK( false == chunk.IXS().empty() );
+  CHECK( 1 == chunk.IXS().NTYPE() );
+
+  CHECK(  8564 == chunk.IXS().HPD( 1 ) );
+  CHECK(  9952 == chunk.IXS().MTRH( 1 ) );
+  CHECK(  9953 == chunk.IXS().TYRH( 1 ) );
+  CHECK(  9954 == chunk.IXS().LSIGH( 1 ) );
+  CHECK(  9955 == chunk.IXS().SIGH( 1 ) );
+  CHECK(  9963 == chunk.IXS().LANDH( 1 ) );
+  CHECK(  9964 == chunk.IXS().ANDH( 1 ) );
+  CHECK(  9991 == chunk.IXS().LDLWH( 1 ) );
+  CHECK(  9992 == chunk.IXS().DLWH( 1 ) );
+  CHECK( 10003 == chunk.IXS().YP( 1 ) );
+
+  // HPD(1) block
+  CHECK( false == chunk.HPD(1).empty() );
+
+  CHECK( 1 == chunk.HPD(1).energyIndex() );
+  CHECK( 693 == chunk.HPD(1).numberValues() );
+  CHECK( 2.76519500000E-03 == Approx( chunk.HPD(1).totalProduction().front() ) );
+  CHECK( 2.86200000000E-05 == Approx( chunk.HPD(1).totalProduction().back() ) );
+  CHECK( 0. == Approx( chunk.HPD(1).heating().front() ) );
+  CHECK( 1.68611800000E-04 == Approx( chunk.HPD(1).heating().back() ) );
+
+  // MTRH(1) block
+  CHECK( false == chunk.MTRH(1).empty() );
+  CHECK( 1 == chunk.MTRH(1).MTs().size() );
+  CHECK( 102 == chunk.MTRH(1).MTs().front() );
+  CHECK( 1 == chunk.MTRH(1).reactionNumbers().size() );
+  CHECK( 102 == chunk.MTRH(1).reactionNumbers().front() );
+
+  CHECK( 102 == chunk.MTRH(1).MT( 1 ) );
+  CHECK( 102 == chunk.MTRH(1).reactionNumber( 1 ) );
+
+  CHECK( true == chunk.MTRH(1).hasReactionNumber( 102 ) );
+  CHECK( 1 == chunk.MTRH(1).index( 102 ) );
+
+  // TYRH(1) block
+  CHECK( false == chunk.TYRH(1).empty() );
+  CHECK( 1 == chunk.TYRH(1).referenceFrames().size() );
+  CHECK( ReferenceFrame::Laboratory == chunk.TYRH(1).referenceFrames().front() );
+  CHECK( ReferenceFrame::Laboratory == chunk.TYRH(1).referenceFrame( 1 ) );
+
+  // SIGH(1) block
+  CHECK( false == chunk.SIGH(1).empty() );
+
+  auto multiplicity = chunk.SIGH(1).crossSectionData( 1 );
+  CHECK( 12 == multiplicity.MFTYPE() );
+  CHECK( 12 == multiplicity.type() );
+  CHECK( 102 == multiplicity.MT() );
+  CHECK( 102 == multiplicity.reactionNumber() );
+
+  CHECK( 0 == multiplicity.interpolationData().NB() );
+  CHECK( 0 == multiplicity.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == multiplicity.interpolationData().INT().size() );
+  CHECK( 0 == multiplicity.interpolationData().interpolants().size() );
+  CHECK( 0 == multiplicity.interpolationData().NBT().size() );
+  CHECK( 0 == multiplicity.interpolationData().boundaries().size() );
+
+  CHECK( 0 == multiplicity.NB() );
+  CHECK( 0 == multiplicity.numberInterpolationRegions() );
+  CHECK( 0 == multiplicity.INT().size() );
+  CHECK( 0 == multiplicity.interpolants().size() );
+  CHECK( 0 == multiplicity.NBT().size() );
+  CHECK( 0 == multiplicity.boundaries().size() );
+
+  CHECK( 2 == multiplicity.NE() );
+  CHECK( 2 == multiplicity.numberValues() );
+
+  CHECK( 2 == multiplicity.energies().size() );
+  CHECK( 1e-5 == Approx( multiplicity.energies().front() ) );
+  CHECK( 20. == Approx( multiplicity.energies().back() ) );
+
+  CHECK( 2 == multiplicity.multiplicities().size() );
+  CHECK( 1. == Approx( multiplicity.multiplicities().front() ) );
+  CHECK( 1. == Approx( multiplicity.multiplicities().back() ) );
+
+  // ANDH(1) block
+  CHECK( false == chunk.ANDH(1).empty() );
+  CHECK( 1 == chunk.ANDH(1).NR() );
+
+  CHECK( 1 == chunk.ANDH(1).LAND( 1 ) );
+
+  CHECK( true == std::holds_alternative< AngularDistributionData >( chunk.ANDH(1).angularDistributionData( 1 ) ) );
+
+  // DLWH(1) block
+  CHECK( false == chunk.DLWH(1).empty() );
+  CHECK( 1 == chunk.DLWH(1).NR() );
+
+  CHECK( 1 == chunk.DLWH(1).LDLW( 1 ) );
+
+  CHECK( true == std::holds_alternative< TwoBodyTransferDistribution >( chunk.DLWH(1).energyDistributionData( 1 ) ) );
+
+  // YH(1) block
+  CHECK( false == chunk.YH(1).empty() );
+  CHECK( 1 == chunk.YH(1).MTs().size() );
+  CHECK( 102 == chunk.YH(1).MTs().front() );
+  CHECK( 1 == chunk.YH(1).reactionNumbers().size() );
+  CHECK( 102 == chunk.YH(1).reactionNumbers().front() );
+
+  CHECK( 102 == chunk.YH(1).MT( 1 ) );
 }
