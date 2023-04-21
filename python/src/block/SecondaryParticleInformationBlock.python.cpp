@@ -28,7 +28,7 @@ void wrapSecondaryParticleInformationBlock( python::module& module, python::modu
     "secondary particle type\n\n"
     "The SecondaryParticleInformationBlock class contains the number of reactions\n"
     "that produce each secondary particle type as given on the PTYPE.\n"
-    "The number of available available particle types is stored in NXS(7)."
+    "The number of available particle types is stored in NXS(7)."
   );
 
   // wrap the block

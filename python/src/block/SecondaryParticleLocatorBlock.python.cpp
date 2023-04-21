@@ -27,7 +27,7 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "The continuous energy IXS block with the secondary particle locators\n\n"
     "The SecondaryParticleLocatorBlock class contains 10 locators for each\n"
     "secondary particle type as given on the PTYPE block.\n"
-    "The number of available available particle types is stored in NXS(7)."
+    "The number of available particle types is stored in NXS(7)."
   );
 
   // wrap the block
@@ -39,7 +39,7 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self       the block\n"
-    "    numbers    the locators for each particle type"
+    "    locators   the locators for each particle type"
   )
   .def_property_readonly(
 

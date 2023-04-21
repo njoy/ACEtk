@@ -18,7 +18,7 @@ namespace block {
  *         particle production cross section data (multiplicity data only)
  *
  *  The SecondaryParticleProductionCrossSectionBlock class contains NTRO.NP sets
- *  of secodnary particle production data, one for each reaction number on the
+ *  of secondary particle production data, one for each reaction number on the
  *  MTRH block. The order of these cross section data sets is the same as the
  *  order of the reaction numbers in the MTRH block.
  */
