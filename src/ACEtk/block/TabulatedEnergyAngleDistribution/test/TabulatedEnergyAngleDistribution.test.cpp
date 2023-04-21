@@ -98,6 +98,7 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
 
   CHECK( 2 == chunk.NE() );
   CHECK( 2 == chunk.numberOutgoingEnergies() );
+  CHECK( 2 == chunk.distributions().size() );
 
   CHECK( 2 == chunk.outgoingEnergies().size() );
   CHECK( 2.1 == Approx( chunk.outgoingEnergies()[0] ) );

@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/BaseCrossSectionBlock.hpp"
+#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
 #include "ACEtk/block/DosimetryCrossSectionData.hpp"
 
 namespace njoy {
@@ -22,10 +22,10 @@ namespace block {
  *  the MTR block.
  */
 class DosimetryCrossSectionBlock :
-    protected details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+    protected details::BaseBlockWithLocators< DosimetryCrossSectionBlock,
                                               DosimetryCrossSectionData > {
 
-  friend class details::BaseCrossSectionBlock< DosimetryCrossSectionBlock,
+  friend class details::BaseBlockWithLocators< DosimetryCrossSectionBlock,
                                                DosimetryCrossSectionData >;
 
   /* fields */
@@ -40,16 +40,16 @@ public:
   /* methods */
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of available reactions
    */
-  unsigned int NTR() const { return BaseCrossSectionBlock::NTR(); }
+  unsigned int NTR() const { return BaseBlockWithLocators::NR(); }
 
   /**
-   *  @brief Return the number of available reactions (excluding elastic)
+   *  @brief Return the number of available reactions
    */
   unsigned int numberReactions() const {
 
-    return BaseCrossSectionBlock::numberReactions();
+    return BaseBlockWithLocators::numberReactions();
   }
 
   /**
@@ -62,7 +62,7 @@ public:
    */
   std::size_t LSIG( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::LSIG( index );
+    return BaseBlockWithLocators::LLOC( index );
   }
 
   /**
@@ -75,7 +75,15 @@ public:
    */
   std::size_t crossSectionLocator( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::crossSectionLocator( index );
+    return BaseBlockWithLocators::locator( index );
+  }
+
+  /**
+   *  @brief Return all cross section data
+   */
+  const std::vector< DosimetryCrossSectionData >& data() const {
+
+    return BaseBlockWithLocators::data();
   }
 
   /**
@@ -88,15 +96,15 @@ public:
    */
   const DosimetryCrossSectionData& crossSectionData( std::size_t index ) const {
 
-    return BaseCrossSectionBlock::crossSectionData( index );
+    return BaseBlockWithLocators::data( index );
   }
 
-  using BaseCrossSectionBlock::empty;
-  using BaseCrossSectionBlock::name;
-  using BaseCrossSectionBlock::length;
-  using BaseCrossSectionBlock::XSS;
-  using BaseCrossSectionBlock::begin;
-  using BaseCrossSectionBlock::end;
+  using BaseBlockWithLocators::empty;
+  using BaseBlockWithLocators::name;
+  using BaseBlockWithLocators::length;
+  using BaseBlockWithLocators::XSS;
+  using BaseBlockWithLocators::begin;
+  using BaseBlockWithLocators::end;
 };
 
 using SIGD = DosimetryCrossSectionBlock;

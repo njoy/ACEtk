@@ -12,6 +12,7 @@
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
 #include "ACEtk/block/AngularDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotonProductionBlock.hpp"
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
@@ -43,7 +44,7 @@ class ContinuousEnergyTable : protected Table {
   block::GPD gpd_;
   block::MTR mtrp_;
   block::SIGP sigp_;
-  block::AND andp_;
+  block::ANDH andp_;
   block::DLW dlwp_;
   block::YP yp_;
 
@@ -338,12 +339,12 @@ public:
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const block::AND& ANDP() const { return this->andp_; }
+  const block::ANDH& ANDP() const { return this->andp_; }
 
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const block::AND& photonProductionAngularDistributionBlock() const {
+  const block::ANDH& photonProductionAngularDistributionBlock() const {
 
     return this->ANDP();
   }

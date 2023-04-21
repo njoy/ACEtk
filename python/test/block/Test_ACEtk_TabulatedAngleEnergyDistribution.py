@@ -34,6 +34,7 @@ class Test_ACEtk_TabulatedAngleEnergyDistribution( unittest.TestCase ) :
 
             self.assertEqual( 2, chunk.NC )
             self.assertEqual( 2, chunk.number_cosines )
+            self.assertEqual( 2, len( chunk.distributions ) )
 
             self.assertEqual( 2, len( chunk.cosines ) )
             self.assertAlmostEqual( -1., chunk.cosines[0] )

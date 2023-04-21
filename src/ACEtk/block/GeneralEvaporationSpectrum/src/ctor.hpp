@@ -1,15 +1,23 @@
 GeneralEvaporationSpectrum() = default;
 
 GeneralEvaporationSpectrum( const GeneralEvaporationSpectrum& base ) :
-  Base( base ) {
+  Base( base ),
+  tabulated_( base.tabulated_ ), bins_( base.bins_ ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 GeneralEvaporationSpectrum( GeneralEvaporationSpectrum&& base ) :
-  Base( std::move( base ) ) {
+  Base( std::move( base ) ),
+  tabulated_( std::move( base.tabulated_ ) ), bins_( std::move( base.bins_ ) ) {
 
-  this->generateBlocks();
+  if ( Base::owner() ) {
+
+    this->generateBlocks();
+  }
 }
 
 /**

@@ -59,7 +59,7 @@ void generateBlocks() {
   locators = block( 8 );
   iterators = block( 9 );
   this->and_ = block::AND( locators.first, iterators.first, iterators.second,
-                           this->NR(), 1 );
+                           this->NR() );
 
   // angular distribution block
   locators = block( 10 );
@@ -91,10 +91,10 @@ void generateBlocks() {
   // secondary photon data: photon angular distributions
   locators = block( 16 );
   iterators = block( 17 );
-  this->andp_ = block::AND( present ? locators.first : begin,
-                            present ? iterators.first : begin,
-                            present ? iterators.second : begin,
-                            this->NTRP(), 0 );
+  this->andp_ = block::ANDH( present ? locators.first : begin,
+                             present ? iterators.first : begin,
+                             present ? iterators.second : begin,
+                             this->NTRP() );
 
   // secondary photon data: photon energy distributions
   locators = block( 18 );

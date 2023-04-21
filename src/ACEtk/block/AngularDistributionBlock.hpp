@@ -5,10 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/AngularDistributionData.hpp"
-#include "ACEtk/block/FullyIsotropicDistribution.hpp"
-#include "ACEtk/block/DistributionGivenElsewhere.hpp"
+#include "ACEtk/block/details/BaseAngularDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -26,28 +23,16 @@ namespace block {
  *  of the other distribution data sets is the same as the order of the reaction
  *  numbers in the MTR block.
  */
-class AngularDistributionBlock : protected details::Base {
+class AngularDistributionBlock : protected details::BaseAngularDistributionBlock {
+
+  /* fields */
+
+  /* auxiliary functions */
 
 public:
 
   /* type alias */
-  using DistributionData = std::variant< FullyIsotropicDistribution,
-                                         DistributionGivenElsewhere,
-                                         AngularDistributionData >;
-
-private:
-
-  /* fields */
-  unsigned int nr_; // number of reactions that produce the projectile (excluding elastic)
-  Iterator and_;    // the begin iterator of the AND block
-  std::size_t offset_;
-
-  /* auxiliary functions */
-  #include "ACEtk/block/AngularDistributionBlock/src/insertElastic.hpp"
-  #include "ACEtk/block/AngularDistributionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/AngularDistributionBlock/src/verifySize.hpp"
-
-public:
+  using DistributionData = details::BaseAngularDistributionBlock::DistributionData;
 
   /* constructor */
   #include "ACEtk/block/AngularDistributionBlock/src/ctor.hpp"
@@ -58,13 +43,28 @@ public:
    *  @brief Return the number of reactions that produce the projectile
    *         (excluding elastic )
    */
-  unsigned int NR() const { return this->nr_; }
+  unsigned int NR() const {
+
+    return BaseAngularDistributionBlock::NR();
+  }
 
   /**
    *  @brief Return the number of reactions that produce the projectile
-   *         (excluding elastic )
+   *         (excluding elastic)
    */
-  unsigned int numberProjectileProductionReactions() const { return this->NR(); }
+  unsigned int numberProjectileProductionReactions() const {
+
+    return BaseAngularDistributionBlock::numberReactions();
+  }
+
+  /**
+   *  @brief Return the total number of reactions that produce the projectile
+   *         (including elastic)
+   */
+  unsigned int totalNumberProjectileProductionReactions() const {
+
+    return this->NR() + 1;
+  }
 
   /**
    *  @brief Return the relative angular distribution locator for a reaction
@@ -77,10 +77,7 @@ public:
    */
   int LAND( std::size_t index ) const {
 
-    #ifndef NDEBUG
-    this->verifyReactionIndex( index, this->offset_ == 1 ? 0 : 1, this->NR() );
-    #endif
-    return XSS( index + this->offset_ ); // elastic is index 0
+    return BaseAngularDistributionBlock::LAND( index );
   }
 
   /**
@@ -94,7 +91,7 @@ public:
    */
   int angularDistributionLocator( std::size_t index ) const {
 
-    return this->LAND( index );
+    return BaseAngularDistributionBlock::angularDistributionLocator( index );
   }
 
   /**
@@ -108,7 +105,7 @@ public:
    */
   bool isFullyIsotropic( std::size_t index ) const {
 
-    return this->LAND( index ) == 0;
+    return BaseAngularDistributionBlock::isFullyIsotropic( index );
   }
 
   /**
@@ -122,7 +119,15 @@ public:
    */
   bool isGiven( std::size_t index ) const {
 
-    return this->LAND( index ) >= 0;
+    return BaseAngularDistributionBlock::isGiven( index );
+  }
+
+  /**
+   *  @brief Return all angular distribution data
+   */
+  const std::vector< DistributionData >& data() const {
+
+    return BaseAngularDistributionBlock::data();
   }
 
   /**
@@ -131,49 +136,19 @@ public:
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
-   *  @param[in] index     the index (one-based, zero for elastic)
+   *  @param[in] index     the index (one-based)
    */
-  DistributionData angularDistributionData( std::size_t index ) const {
+  const DistributionData& angularDistributionData( std::size_t index ) const {
 
-    if ( this->isGiven( index ) ) {
-
-      if ( this->isFullyIsotropic( index ) ) {
-
-        return FullyIsotropicDistribution();
-      }
-      else {
-
-        // xand : one-based index to the start of the AND block
-        // xand + locator - 1 : one-based index to the start of distribution data
-        const std::size_t xand = std::distance( this->begin(), this->and_ ) + 1;
-        const std::size_t land = this->LAND( index );
-        const auto locator = xand + land - 1;
-        const auto left = this->iterator( locator );
-        auto right = this->end();
-        for ( auto next = index + 1; next <= this->NR(); ++next ) {
-
-          auto nextlocator = xand + this->LAND( next ) - 1;
-          if ( nextlocator > locator ) {
-
-            right = this->iterator( nextlocator );
-            break;
-          }
-        }
-        return AngularDistributionData( land, left, right );
-      }
-    }
-    else {
-
-      return DistributionGivenElsewhere();
-    }
+    return BaseAngularDistributionBlock::angularDistributionData( index );
   }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using BaseAngularDistributionBlock::empty;
+  using BaseAngularDistributionBlock::name;
+  using BaseAngularDistributionBlock::length;
+  using BaseAngularDistributionBlock::XSS;
+  using BaseAngularDistributionBlock::begin;
+  using BaseAngularDistributionBlock::end;
 };
 
 using AND = AngularDistributionBlock;

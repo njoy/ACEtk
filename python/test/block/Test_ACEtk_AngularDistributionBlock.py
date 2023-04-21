@@ -42,6 +42,8 @@ class Test_ACEtk_AngularDistributionBlock( unittest.TestCase ) :
 
             self.assertEqual( 3, chunk.NR )
             self.assertEqual( 3, chunk.number_projectile_production_reactions )
+            self.assertEqual( 4, chunk.total_number_projectile_production_reactions )
+            self.assertEqual( 4, len( chunk.data ) )
 
             self.assertEqual( 1, chunk.LAND(0) )
             self.assertEqual( -1, chunk.LAND(1) )
@@ -118,92 +120,7 @@ class Test_ACEtk_AngularDistributionBlock( unittest.TestCase ) :
 
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
-        def verify_chunk_without_elastic( self, chunk ) :
-
-            # verify content
-            self.assertEqual( False, chunk.empty )
-            self.assertEqual( 54, chunk.length )
-            self.assertEqual( "AND", chunk.name )
-
-            self.assertEqual( 4, chunk.NR )
-            self.assertEqual( 4, chunk.number_projectile_production_reactions )
-
-            self.assertEqual( 1, chunk.LAND(1) )
-            self.assertEqual( -1, chunk.LAND(2) )
-            self.assertEqual( 0, chunk.LAND(3) )
-            self.assertEqual( 25, chunk.LAND(4) )
-            self.assertEqual( 1, chunk.angular_distribution_locator(1) )
-            self.assertEqual( -1, chunk.angular_distribution_locator(2) )
-            self.assertEqual( 0, chunk.angular_distribution_locator(3) )
-            self.assertEqual( 25, chunk.angular_distribution_locator(4) )
-
-            self.assertEqual( False, chunk.is_fully_isotropic(1) )
-            self.assertEqual( False, chunk.is_fully_isotropic(2) )
-            self.assertEqual( True, chunk.is_fully_isotropic(3) )
-            self.assertEqual( False, chunk.is_fully_isotropic(4) )
-
-            self.assertEqual( True, chunk.is_given(1) )
-            self.assertEqual( False, chunk.is_given(2) )
-            self.assertEqual( True, chunk.is_given(3) )
-            self.assertEqual( True, chunk.is_given(4) )
-
-            self.assertEqual( True, isinstance( chunk.angular_distribution_data(1), AngularDistributionData ) )
-            self.assertEqual( True, isinstance( chunk.angular_distribution_data(2), DistributionGivenElsewhere ) )
-            self.assertEqual( True, isinstance( chunk.angular_distribution_data(3), FullyIsotropicDistribution ) )
-            self.assertEqual( True, isinstance( chunk.angular_distribution_data(4), AngularDistributionData ) )
-
-            data = chunk.angular_distribution_data(1)
-            self.assertEqual( 2, data.NE )
-            self.assertEqual( 2, data.number_incident_energies )
-            self.assertEqual( 2, len( data.incident_energies ) )
-            self.assertAlmostEqual( 1e-11, data.incident_energies[0] )
-            self.assertAlmostEqual( 20., data.incident_energies[1] )
-            self.assertAlmostEqual( 1e-11, data.incident_energy(1) )
-            self.assertAlmostEqual( 20., data.incident_energy(2) )
-            self.assertEqual( -6, data.LOCC(1) )
-            self.assertEqual( -14, data.LOCC(2) )
-            self.assertEqual( -6, data.distribution_locator(1) )
-            self.assertEqual( -14, data.distribution_locator(2) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(1) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(2) )
-            self.assertEqual( 6, data.relative_distribution_locator(1) )
-            self.assertEqual( 14, data.relative_distribution_locator(2) )
-            self.assertEqual( True, isinstance( data.distribution(1), TabulatedAngularDistribution ) )
-            self.assertEqual( True, isinstance( data.distribution(2), TabulatedAngularDistribution ) )
-
-            data = chunk.angular_distribution_data(4)
-            self.assertEqual( 3, data.NE )
-            self.assertEqual( 3, data.number_incident_energies )
-            self.assertEqual( 3, len( data.incident_energies ) )
-            self.assertAlmostEqual( 1e-11, data.incident_energies[0] )
-            self.assertAlmostEqual( 1., data.incident_energies[1] )
-            self.assertAlmostEqual( 20., data.incident_energies[2] )
-            self.assertAlmostEqual( 1e-11, data.incident_energy(1) )
-            self.assertAlmostEqual( 1., data.incident_energy(2) )
-            self.assertAlmostEqual( 20., data.incident_energy(3) )
-            self.assertEqual( -32, data.LOCC(1) )
-            self.assertEqual( 0, data.LOCC(2) )
-            self.assertEqual( -43, data.LOCC(3) )
-            self.assertEqual( -32, data.distribution_locator(1) )
-            self.assertEqual( 0, data.distribution_locator(2) )
-            self.assertEqual( -43, data.distribution_locator(3) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(1) )
-            self.assertEqual( AngularDistributionType.Isotropic, data.distribution_type(2) )
-            self.assertEqual( AngularDistributionType.Tabulated, data.distribution_type(3) )
-            self.assertEqual( 8, data.relative_distribution_locator(1) )
-            self.assertEqual( 0, data.relative_distribution_locator(2) )
-            self.assertEqual( 19, data.relative_distribution_locator(3) )
-            self.assertEqual( True, isinstance( data.distribution(1), TabulatedAngularDistribution ) )
-            self.assertEqual( True, isinstance( data.distribution(2), IsotropicAngularDistribution ) )
-            self.assertEqual( True, isinstance( data.distribution(3), TabulatedAngularDistribution ) )
-
-            # verify the xss array
-            xss = chunk.xss_array
-            for index in range( chunk.length ) :
-
-                self.assertAlmostEqual( self.chunk[index], xss[index] )
-
-        # the data is given explicitly using elastic data
+        # the data is given explicitly
         chunk = AngularDistributionBlock(
                   elastic =
                       AngularDistributionData(
@@ -222,24 +139,6 @@ class Test_ACEtk_AngularDistributionBlock( unittest.TestCase ) :
                                                         [ 0.5, 0.5 ], [ 0.0, 1.0 ] ) ] ) ] )
 
         verify_chunk( self, chunk )
-
-        # the data is given explicitly without elastic data
-        chunk = AngularDistributionBlock(
-                  distributions = [
-                      AngularDistributionData(
-                        [ TabulatedAngularDistribution( 1e-11, 2, [ -1.0, 1.0 ],
-                                                        [ 0.5, 0.5 ], [ 0.0, 1.0 ] ),
-                          TabulatedAngularDistribution( 20., 2, [ -1.0, 0.0, 1.0 ],
-                                                        [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ) ] ),                      DistributionGivenElsewhere(),
-                      FullyIsotropicDistribution(),
-                      AngularDistributionData(
-                        [ TabulatedAngularDistribution( 1e-11, 2, [ -1.0, 0.0, 1.0 ],
-                                                        [ 0.5, 0.5, 0.5 ], [ 0.0, 0.5, 1.0 ] ),
-                          IsotropicAngularDistribution( 1. ),
-                          TabulatedAngularDistribution( 20., 2, [ -1.0, 1.0 ],
-                                                        [ 0.5, 0.5 ], [ 0.0, 1.0 ] ) ] ) ] )
-
-        verify_chunk_without_elastic( self, chunk )
 
 if __name__ == '__main__' :
 

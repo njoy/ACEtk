@@ -51,8 +51,7 @@ SCENARIO( "PhotonProductionCrossSectionData" ) {
         2.78785100000E-05, 2.76609500000E-05, 2.74425900000E-05, 2.72235400000E-05
       };
 
-      PhotonProductionCrossSectionData chunk( index,
-                                                         std::move( values ) );
+      PhotonProductionCrossSectionData chunk( index, std::move( values ) );
 
       THEN( "a PhotonProductionCrossSectionData can be constructed "
             "and members can be tested" ) {

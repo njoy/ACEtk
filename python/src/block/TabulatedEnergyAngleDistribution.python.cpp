@@ -166,6 +166,12 @@ void wrapTabulatedEnergyAngleDistribution( python::module& module,
     "    self     the block\n"
     "    index    the index (one-based)"
   )
+  .def_property_readonly(
+
+    "distributions",
+    &Block::distributions,
+    "The distributions"
+  )
   .def(
 
     "distribution",

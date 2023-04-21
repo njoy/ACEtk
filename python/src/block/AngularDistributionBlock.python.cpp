@@ -25,12 +25,11 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
 
     module,
     "AngularDistributionBlock",
-    "The continuous energy LAND and AND block with the angular distribution data\n\n"
     "The AngularDistributionBlock class contains angular distribution data,\n"
     "one for each the first NXS(5) reaction numbers on the MTR block and\n"
     "elastic as well (referenced using the reaction index 0). Elastic is always\n"
     "the first reaction (hence the index 0 for this reaction) while the order\n"
-    "of the other angular data sets is the same as the order of the reaction\n"
+    "of the other distribution data sets is the same as the order of the reaction\n"
     "numbers in the MTR block."
   );
 
@@ -46,15 +45,6 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
     "    elastic          the angular distribution data for elastic\n"
     "    distributions    the angular distribution data"
   )
-  .def(
-
-    python::init< std::vector< DistributionData > >(),
-    python::arg( "distributions" ),
-    "Initialise the block\n\n"
-    "Arguments:\n"
-    "    self             the block\n"
-    "    distributions    the angular distribution data"
-  )
   .def_property_readonly(
 
     "NR",
@@ -65,6 +55,12 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
 
     "number_projectile_production_reactions",
     &Block::numberProjectileProductionReactions,
+    "The number of reactions excluding elastic that produce the projectile"
+  )
+  .def_property_readonly(
+
+    "total_number_projectile_production_reactions",
+    &Block::totalNumberProjectileProductionReactions,
     "The number of reactions excluding elastic that produce the projectile"
   )
   .def(
@@ -112,6 +108,12 @@ void wrapAngularDistributionBlock( python::module& module, python::module& ) {
     "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based, zero for elastic)"
+  )
+  .def_property_readonly(
+
+    "data",
+    &Block::data,
+    "All angular distribution data"
   )
   .def(
 

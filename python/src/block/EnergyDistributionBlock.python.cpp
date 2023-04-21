@@ -16,7 +16,7 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::block::EnergyDistributionBlock;
-  using DistributionData = Block::DistributionData;
+  using EnergyDistributionData = njoy::ACEtk::block::EnergyDistributionData;
 
   // wrap views created by this block
 
@@ -36,7 +36,7 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< DistributionData > >(),
+    python::init< std::vector< EnergyDistributionData > >(),
     python::arg( "distributions" ),
     "Initialise the block\n\n"
     "Arguments:\n"
@@ -51,8 +51,8 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "number_projectile_production_reactions",
-    &Block::numberProjectileProductionReactions,
+    "number_reactions",
+    &Block::numberReactions,
     "The number of reactions excluding elastic that produce the projectile"
   )
   .def(
@@ -76,6 +76,12 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
     "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
+  )
+  .def_property_readonly(
+
+    "data",
+    &Block::data,
+    "The energy distribution data"
   )
   .def(
 

@@ -99,6 +99,7 @@ class Test_ACEtk_CrossSectionBlock( unittest.TestCase ) :
 
             self.assertEqual( 3, chunk.NTR )
             self.assertEqual( 3, chunk.number_reactions )
+            self.assertEqual( 3, len( chunk.data ) )
 
             self.assertEqual( 1, chunk.LSIG(1) )
             self.assertEqual( 102, chunk.LSIG(2) )
@@ -143,6 +144,27 @@ class Test_ACEtk_CrossSectionBlock( unittest.TestCase ) :
             self.assertEqual( 2.72235400000E-05, xs.cross_sections[-1] )
 
             xs = chunk.cross_section_data(3)
+            self.assertEqual( 1, xs.energy_index )
+            self.assertEqual( 99, xs.number_values )
+            self.assertEqual( 99, len( xs.cross_sections ) )
+            self.assertEqual( 9.02129200000E-03, xs.cross_sections[0] )
+            self.assertEqual( 3.06769500000E-04, xs.cross_sections[-1] )
+
+            xs = chunk.data[0]
+            self.assertEqual( 1, xs.energy_index )
+            self.assertEqual( 99, xs.number_values )
+            self.assertEqual( 99, len( xs.cross_sections ) )
+            self.assertEqual( 17.17401, xs.cross_sections[0] )
+            self.assertEqual( 2.72235400000E-05, xs.cross_sections[-1] )
+
+            xs = chunk.data[1]
+            self.assertEqual( 1, xs.energy_index )
+            self.assertEqual( 99, xs.number_values )
+            self.assertEqual( 99, len( xs.cross_sections ) )
+            self.assertEqual( 18.17401, xs.cross_sections[0] )
+            self.assertEqual( 2.72235400000E-05, xs.cross_sections[-1] )
+
+            xs = chunk.data[2]
             self.assertEqual( 1, xs.energy_index )
             self.assertEqual( 99, xs.number_values )
             self.assertEqual( 99, len( xs.cross_sections ) )

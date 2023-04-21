@@ -1,4 +1,5 @@
-static PhotonProductionData generateData( Iterator left, Iterator right ) {
+static PhotonProductionData
+generateData( std::size_t, Iterator left, Iterator right ) {
 
   if ( *left == 13 ) {
 

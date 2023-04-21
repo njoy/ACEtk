@@ -105,6 +105,7 @@ if(ACEtk.python)
     python/src/block/FullyIsotropicDistribution.python.cpp
     python/src/block/DistributionGivenElsewhere.python.cpp
     python/src/block/AngularDistributionBlock.python.cpp
+    python/src/block/SecondaryParticleAngularDistributionBlock.python.cpp
     python/src/block/EquiprobableOutgoingEnergyBins.python.cpp
     python/src/block/EquiprobableOutgoingEnergyBinData.python.cpp
     python/src/block/LevelScatteringDistribution.python.cpp
@@ -128,6 +129,7 @@ if(ACEtk.python)
     python/src/block/MultiDistributionData.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/block/PhotonProductionBlock.python.cpp
+    python/src/block/PhotonProductionCrossSectionBlock.python.cpp
     python/src/block/MultiplicityReactionNumberBlock.python.cpp
     python/src/block/TabulatedSecondaryParticleMultiplicity.python.cpp
     python/src/block/PhotonProductionCrossSectionData.python.cpp

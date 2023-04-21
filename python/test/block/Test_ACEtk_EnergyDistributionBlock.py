@@ -42,7 +42,8 @@ class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
             self.assertEqual( "DLW", chunk.name )
 
             self.assertEqual( 2, chunk.NR )
-            self.assertEqual( 2, chunk.number_projectile_production_reactions )
+            self.assertEqual( 2, chunk.number_reactions )
+            self.assertEqual( 2, len( chunk.data ) )
 
             self.assertEqual( 1, chunk.LDLW(1) )
             self.assertEqual( 12, chunk.LDLW(2) )
@@ -51,6 +52,9 @@ class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
 
             self.assertEqual( True, isinstance( chunk.energy_distribution_data(1), LevelScatteringDistribution ) )
             self.assertEqual( True, isinstance( chunk.energy_distribution_data(2), KalbachMannDistributionData ) )
+
+            self.assertEqual( True, isinstance( chunk.data[0], LevelScatteringDistribution ) )
+            self.assertEqual( True, isinstance( chunk.data[1], KalbachMannDistributionData ) )
 
             data1 = chunk.energy_distribution_data(1)
             self.assertEqual( EnergyDistributionType.LevelScattering, data1.LAW )

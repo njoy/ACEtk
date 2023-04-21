@@ -124,6 +124,7 @@ void verifyChunk( const AngleEnergyDistributionData& chunk ) {
 
   CHECK( 2 == chunk.NE() );
   CHECK( 2 == chunk.numberIncidentEnergies() );
+  CHECK( 2 == chunk.distributions().size() );
 
   CHECK( 2 == chunk.incidentEnergies().size() );
   CHECK( 1e-5 == Approx( chunk.incidentEnergies()[0] ) );

@@ -38,6 +38,7 @@ class Test_ACEtk_AngularDistributionData( unittest.TestCase ) :
 
             self.assertEqual( 3, chunk.NE )
             self.assertEqual( 3, chunk.number_incident_energies )
+            self.assertEqual( 3, len( chunk.distributions ) )
 
             self.assertEqual( 3, len( chunk.incident_energies ) )
             self.assertEqual( 1e-11, chunk.incident_energies[0] )
@@ -65,6 +66,10 @@ class Test_ACEtk_AngularDistributionData( unittest.TestCase ) :
             self.assertEqual( True, isinstance( chunk.distribution(1), IsotropicAngularDistribution )  )
             self.assertEqual( True, isinstance( chunk.distribution(2), EquiprobableAngularBins ) )
             self.assertEqual( True, isinstance( chunk.distribution(3), TabulatedAngularDistribution ) )
+
+            self.assertEqual( True, isinstance( chunk.distributions[0], IsotropicAngularDistribution )  )
+            self.assertEqual( True, isinstance( chunk.distributions[1], EquiprobableAngularBins ) )
+            self.assertEqual( True, isinstance( chunk.distributions[2], TabulatedAngularDistribution ) )
 
             # verify the xss array
             xss = chunk.xss_array

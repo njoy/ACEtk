@@ -27,7 +27,7 @@ Base& operator=( const Base& right ) {
 
   this->name_ = right.name_;
   this->xss_ = right.xss_;
-  if ( this->xss_ ) {
+  if ( this->owner() ) {
 
     this->begin_ = this->xss_->begin();
     this->end_ = this->xss_->end();
@@ -46,7 +46,7 @@ Base& operator=( Base&& right ) {
 
   this->name_ = std::move( right.name_ );
   this->xss_ = std::move( right.xss_ );
-  if ( this->xss_ ) {
+  if ( this->owner() ) {
 
     this->begin_ = this->xss_->begin();
     this->end_ = this->xss_->end();
