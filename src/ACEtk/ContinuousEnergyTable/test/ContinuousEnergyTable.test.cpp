@@ -412,6 +412,38 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 2 == chunk.YP().index( 18 ) );
   CHECK( 3 == chunk.YP().index( 102 ) );
 
+  // DNU block
+  CHECK( false == chunk.DNU().empty() );
+
+  CHECK( false == chunk.DNU().hasPromptAndTotalFissionMultiplicity() );
+
+  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU().promptFissionMultiplicity() );
+
+  CHECK( 0 == delayed.NB() );
+  CHECK( 6 == delayed.NE() );
+  CHECK( 1e-11 == Approx( delayed.energies().front() ) );
+  CHECK( 20. == Approx( delayed.energies().back() ) );
+  CHECK( 0.01585 == Approx( delayed.multiplicities().front() ) );
+  CHECK( 0.009 == Approx( delayed.multiplicities().back() ) );
+
+  // BDD block
+  CHECK( false == chunk.BDD().empty() );
+
+  CHECK( 6 == chunk.BDD().NPCR() );
+  CHECK( 6 == chunk.BDD().numberDelayedPrecursors() );
+
+  CHECK( 1.33360E-10 == Approx( chunk.BDD().precursorGroupData( 1 ).DEC() ) );
+  CHECK( 2.85300E-08 == Approx( chunk.BDD().precursorGroupData( 6 ).DEC() ) );
+
+  // DNED block
+  CHECK( false == chunk.DNED().empty() );
+
+  CHECK( 1 == chunk.DNED().LDLW( 1 ) );
+  CHECK( 7944 == chunk.DNED().LDLW( 6 ) );
+
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 1 ) ) );
+  CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED().energyDistributionData( 6 ) ) );
+
   // PTYPE block
   CHECK( true == chunk.PTYPE().empty() );
 }
@@ -545,6 +577,15 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   // YP block
   CHECK( true == chunk.YP().empty() );
+
+  // DNU block
+  CHECK( true == chunk.DNU().empty() );
+
+  // BDD block
+  CHECK( true == chunk.BDD().empty() );
+
+  // DNED block
+  CHECK( true == chunk.DNED().empty() );
 
   // PTYPE block
   CHECK( false == chunk.PTYPE().empty() );
