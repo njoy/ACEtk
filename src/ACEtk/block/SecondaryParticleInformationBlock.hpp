@@ -38,13 +38,13 @@ public:
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
   unsigned int NTYPE() const { return this->ntype_; }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
   unsigned int numberAdditionalSecondaryParticleTypes() const {
 
