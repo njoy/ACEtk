@@ -39,5 +39,6 @@ void wrapEnergyDistributionType( python::module& module, python::module& ) {
   .value( "TabulatedEnergyAngle",    Component::TabulatedEnergyAngle )
   .value( "NBodyPhaseSpace",         Component::NBodyPhaseSpace )
   .value( "TabulatedAngleEnergy",    Component::TabulatedAngleEnergy )
+  .value( "MultiEvaporation",        Component::MultiEvaporation )
   .value( "MultiDistribution",       Component::MultiDistribution );
 }
