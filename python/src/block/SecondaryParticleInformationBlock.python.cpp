@@ -46,13 +46,13 @@ void wrapSecondaryParticleInformationBlock( python::module& module, python::modu
 
     "NTYPE",
     &Block::NTYPE,
-    "The number of secondary particle types (excluding the projectile)"
+    "The number of secondary particle types (excluding the projectile and photons)"
   )
   .def_property_readonly(
 
     "number_additional_secondary_particle_types",
     &Block::numberAdditionalSecondaryParticleTypes,
-    "The number of secondary particle types (excluding the projectile)"
+    "The number of secondary particle types (excluding the projectile and photons)"
   )
   .def(
 
