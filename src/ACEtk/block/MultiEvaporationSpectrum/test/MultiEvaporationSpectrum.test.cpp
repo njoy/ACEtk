@@ -110,7 +110,7 @@ void verifyChunk( const MultiEvaporationSpectrum& chunk ) {
   CHECK( 2 == chunk.probabilities().size() );
   CHECK( 2 == chunk.distributions().size() );
 
-/*  auto probability1 = chunk.probability( 1 );
+  auto probability1 = chunk.probability( 1 );
   CHECK( 0 == probability1.interpolationData().NB() );
   CHECK( 0 == probability1.interpolationData().numberInterpolationRegions() );
   CHECK( 0 == probability1.interpolationData().INT().size() );
@@ -129,7 +129,7 @@ void verifyChunk( const MultiEvaporationSpectrum& chunk ) {
   CHECK( 2 == probability1.numberEnergyPoints() );
 
   CHECK( 2 == probability1.energies().size() );
-  CHECK( 1.219437E+01 == Approx( probability1.energies()[0] ) );
+  CHECK( 1e-5 == Approx( probability1.energies()[0] ) );
   CHECK( 20. == Approx( probability1.energies()[1] ) );
 
   CHECK( 2 == probability1.probabilities().size() );
@@ -162,12 +162,7 @@ void verifyChunk( const MultiEvaporationSpectrum& chunk ) {
   CHECK( 0.75 == Approx( probability2.probabilities()[0] ) );
   CHECK( 0.25 == Approx( probability2.probabilities()[1] ) );
 
-  CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.distribution( 1 ) ) );
-  CHECK( true == std::holds_alternative< GeneralEvaporationSpectrum >( chunk.distribution( 2 ) ) );
-  CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.distributions()[0] ) );
-  CHECK( true == std::holds_alternative< GeneralEvaporationSpectrum >( chunk.distributions()[1] ) );
-
-  auto distribution1 = std::get< KalbachMannDistributionData >( chunk.distribution( 1 ) );
+  auto distribution1 = chunk.distribution( 1 );
   CHECK( 0 == distribution1.interpolationData().NB() );
   CHECK( 0 == distribution1.interpolationData().numberInterpolationRegions() );
   CHECK( 0 == distribution1.interpolationData().INT().size() );
@@ -182,80 +177,28 @@ void verifyChunk( const MultiEvaporationSpectrum& chunk ) {
   CHECK( 0 == distribution1.NBT().size() );
   CHECK( 0 == distribution1.boundaries().size() );
 
-  CHECK( 2 == distribution1.NE() );
-  CHECK( 2 == distribution1.numberIncidentEnergies() );
+  CHECK( 4 == distribution1.NE() );
+  CHECK( 4 == distribution1.numberEnergyPoints() );
 
-  CHECK( 2 == distribution1.incidentEnergies().size() );
-  CHECK( 1.219437E+01 == Approx( distribution1.incidentEnergies()[0] ) );
-  CHECK( 20. == Approx( distribution1.incidentEnergies()[1] ) );
+  CHECK( 4 == distribution1.energies().size() );
+  CHECK( 1e-05 == Approx( distribution1.energies()[0] ) );
+  CHECK( 2. == Approx( distribution1.energies()[1] ) );
+  CHECK( 5. == Approx( distribution1.energies()[2] ) );
+  CHECK( 20. == Approx( distribution1.energies()[3] ) );
 
-  CHECK( 1.219437E+01 == Approx( distribution1.incidentEnergy(1) ) );
-  CHECK( 20. == Approx( distribution1.incidentEnergy(2) ) );
+  CHECK( 4 == distribution1.temperatures().size() );
+  CHECK( 5. == Approx( distribution1.temperatures()[0] ) );
+  CHECK( 6. == Approx( distribution1.temperatures()[1] ) );
+  CHECK( 7. == Approx( distribution1.temperatures()[2] ) );
+  CHECK( 8. == Approx( distribution1.temperatures()[3] ) );
 
-  CHECK( 1.219437E+01 == Approx( distribution1.minimumIncidentEnergy() ) );
+  CHECK( 1e-5 == Approx( distribution1.minimumIncidentEnergy() ) );
   CHECK( 20. == Approx( distribution1.maximumIncidentEnergy() ) );
 
-  CHECK( 27 == distribution1.LOCC(1) );
-  CHECK( 39 == distribution1.LOCC(2) );
-  CHECK( 27 == distribution1.distributionLocator(1) );
-  CHECK( 39 == distribution1.distributionLocator(2) );
+  CHECK( 1.5e+6 == distribution1.U() );
+  CHECK( 1.5e+6 == distribution1.restrictionEnergy() );
 
-  CHECK( 7 == distribution1.relativeDistributionLocator(1) );
-  CHECK( 19 == distribution1.relativeDistributionLocator(2) );
-
-  auto data1 = distribution1.distribution(1);
-  CHECK( 1.219437E+01 == Approx( data1.incidentEnergy() ) );
-  CHECK( 1 == data1.interpolation() );
-  CHECK( 0 == data1.numberDiscretePhotonLines() );
-  CHECK( 2 == data1.numberOutgoingEnergies() );
-
-  CHECK( 2 == data1.outgoingEnergies().size() );
-  CHECK( 0.0 == Approx( data1.outgoingEnergies().front() ) );
-  CHECK( 1.866919E-02 == Approx( data1.outgoingEnergies().back() ) );
-
-  CHECK( 2 == data1.pdf().size() );
-  CHECK( 5.356419E+01 == Approx( data1.pdf().front() ) );
-  CHECK( 0. == Approx( data1.pdf().back() ) );
-
-  CHECK( 2 == data1.cdf().size() );
-  CHECK( 0. == Approx( data1.cdf().front() ) );
-  CHECK( 1. == Approx( data1.cdf().back() ) );
-
-  CHECK( 2 == data1.precompoundFractionValues().size() );
-  CHECK( 0. == Approx( data1.precompoundFractionValues().front() ) );
-  CHECK( 0. == Approx( data1.precompoundFractionValues().back() ) );
-
-  CHECK( 2 == data1.angularDistributionSlopeValues().size() );
-  CHECK( 2.391154E-01 == Approx( data1.angularDistributionSlopeValues().front() ) );
-  CHECK( 2.398743E-01 == Approx( data1.angularDistributionSlopeValues().back() ) );
-
-  auto data2 = distribution1.distribution(2);
-  CHECK( 20. == Approx( data2.incidentEnergy() ) );
-  CHECK( 2 == data2.interpolation() );
-  CHECK( 0 == data2.numberDiscretePhotonLines() );
-  CHECK( 3 == data2.numberOutgoingEnergies() );
-
-  CHECK( 3 == data2.outgoingEnergies().size() );
-  CHECK( 0.0 == Approx( data2.outgoingEnergies().front() ) );
-  CHECK( 7.592137E+00 == Approx( data2.outgoingEnergies().back() ) );
-
-  CHECK( 3 == data2.pdf().size() );
-  CHECK( 7.738696E-02 == Approx( data2.pdf().front() ) );
-  CHECK( 1.226090E-11 == Approx( data2.pdf().back() ) );
-
-  CHECK( 3 == data2.cdf().size() );
-  CHECK( 0. == Approx( data2.cdf().front() ) );
-  CHECK( 1. == Approx( data2.cdf().back() ) );
-
-  CHECK( 3 == data2.precompoundFractionValues().size() );
-  CHECK( 2.491475E-03 == Approx( data2.precompoundFractionValues().front() ) );
-  CHECK( 9.775367E-01 == Approx( data2.precompoundFractionValues().back() ) );
-
-  CHECK( 3 == data2.angularDistributionSlopeValues().size() );
-  CHECK( 2.391154E-01 == Approx( data2.angularDistributionSlopeValues().front() ) );
-  CHECK( 5.592013E-01 == Approx( data2.angularDistributionSlopeValues().back() ) );
-
-  auto distribution2 = std::get< GeneralEvaporationSpectrum >( chunk.distribution( 2 ) );
+  auto distribution2 = chunk.distribution( 2 );
   CHECK( 0 == distribution2.interpolationData().NB() );
   CHECK( 0 == distribution2.interpolationData().numberInterpolationRegions() );
   CHECK( 0 == distribution2.interpolationData().INT().size() );
@@ -288,11 +231,6 @@ void verifyChunk( const MultiEvaporationSpectrum& chunk ) {
   CHECK( 1e-5 == Approx( distribution2.minimumIncidentEnergy() ) );
   CHECK( 20. == Approx( distribution2.maximumIncidentEnergy() ) );
 
-  CHECK( 3 == distribution2.NET() );
-  CHECK( 2 == distribution2.numberBins() );
-
-  CHECK( 3 == distribution2.bins().size() );
-  CHECK( 5. == Approx( distribution2.bins()[0] ) );
-  CHECK( 6. == Approx( distribution2.bins()[1] ) );
-  CHECK( 7. == Approx( distribution2.bins()[2] ) );*/
+  CHECK( 2e+6 == distribution2.U() );
+  CHECK( 2e+6 == distribution2.restrictionEnergy() );
 }
