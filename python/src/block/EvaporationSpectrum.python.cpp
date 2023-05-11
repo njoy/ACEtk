@@ -49,6 +49,19 @@ void wrapEvaporationSpectrum( python::module& module, python::module& ) {
     "    temperatures    the temperature values\n"
     "    energy          the restriction energy"
   )
+  .def(
+
+    python::init< std::vector< double >, std::vector< double >,
+                  double >(),
+    python::arg( "energies" ), python::arg( "temperatures" ),
+    python::arg( "energy" ),
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self            the block\n"
+    "    energies        the energy values\n"
+    "    temperatures    the temperature values\n"
+    "    energy          the restriction energy"
+  )
   .def_property_readonly(
 
     "LAW",
