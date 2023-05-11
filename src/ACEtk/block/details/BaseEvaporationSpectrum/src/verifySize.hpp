@@ -4,8 +4,8 @@ static void verifySize( Iterator begin, Iterator end,
   auto size = std::distance( begin, end );
   if ( size < 1 + 2 * nr + 1 + 2 * ne + 1 ) {
 
-    Log::error( "The size of the XSS subrange in the equiprobable outgoing "
-                "energy data block should be at least 3 + 2 * NR + 2 * NE" );
+    Log::error( "The size of the XSS subrange in the evaporation data block "
+                "should be at least 1 + 2 * NR + 1 + 2 * NE + 1" );
     Log::info( "NR value: {}", nr );
     Log::info( "NE value: {}", ne );
     Log::info( "XSS.size(): {}", size );
