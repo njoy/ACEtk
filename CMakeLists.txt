@@ -128,6 +128,7 @@ if(ACEtk.python)
     python/src/block/AngleEnergyDistributionData.python.cpp
     python/src/block/DistributionProbability.python.cpp
     python/src/block/MultiDistributionData.python.cpp
+    python/src/block/MultiEvaporationSpectrum.python.cpp
     python/src/block/EnergyDistributionBlock.python.cpp
     python/src/block/SecondaryParticleEnergyDistributionBlock.python.cpp
     python/src/block/DelayedNeutronPrecursorData.python.cpp

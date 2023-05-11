@@ -59,6 +59,7 @@ namespace block {
   void wrapAngleEnergyDistributionData( python::module&, python::module& );
   void wrapDistributionProbability( python::module&, python::module& );
   void wrapMultiDistributionData( python::module&, python::module& );
+  void wrapMultiEvaporationSpectrum( python::module&, python::module& );
   void wrapTabulatedMultiplicity( python::module&, python::module& );
   void wrapTabulatedSecondaryParticleMultiplicity( python::module&, python::module& );
   void wrapPhotonProductionCrossSectionData( python::module&, python::module& );
@@ -187,6 +188,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapAngleEnergyDistributionData( module, viewmodule );
   block::wrapDistributionProbability( module, viewmodule );
   block::wrapMultiDistributionData( module, viewmodule );
+  block::wrapMultiEvaporationSpectrum( module, viewmodule );
   block::wrapTabulatedSecondaryParticleMultiplicity( module, viewmodule );
   block::wrapTabulatedMultiplicity( module, viewmodule );
   block::wrapPhotonProductionCrossSectionData( module, viewmodule );
