@@ -25,7 +25,7 @@ void wrapProbabilityTableBlock( python::module& module, python::module& ) {
 
     module,
     "ProbabilityTableBlock",
-    "he continuous energy UNR block with the unresolved resonance probability tables"
+    "The continuous energy UNR block with the unresolved resonance probability tables"
   );
 
   // wrap the block
@@ -92,8 +92,8 @@ void wrapProbabilityTableBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "inelastic_competion",
-    &Block::inelasticCompetion,
+    "inelastic_competition",
+    &Block::inelasticCompetition,
     "The inelastic competition flag"
   )
   .def_property_readonly(
@@ -104,8 +104,8 @@ void wrapProbabilityTableBlock( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "absorption_competion",
-    &Block::absorptionCompetion,
+    "absorption_competition",
+    &Block::absorptionCompetition,
     "The absorption competition flag"
   )
   .def_property_readonly(
