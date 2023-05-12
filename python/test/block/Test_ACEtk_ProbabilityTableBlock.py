@@ -30,9 +30,9 @@ class Test_ACEtk_ProbabilityTableBlock( unittest.TestCase ) :
             self.assertEqual( 2, chunk.M )
             self.assertEqual( 2, chunk.number_bins )
             self.assertEqual( -1, chunk.ILF )
-            self.assertEqual( -1, chunk.inelastic_competion )
+            self.assertEqual( -1, chunk.inelastic_competition )
             self.assertEqual( 0, chunk.IOA )
-            self.assertEqual( 0, chunk.absorption_competion )
+            self.assertEqual( 0, chunk.absorption_competition )
             self.assertEqual( 1, chunk.IFF )
             self.assertEqual( 1, chunk.type )
 

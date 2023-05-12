@@ -202,7 +202,7 @@ void generateBlocks() {
     this->yp_ = block::YP( iterators.first, iterators.second );
   }
 
-  // delayed neutron data: unresolved resonance tables
+  // unresolved resonance tables
   present = ( this->data().JXS(23) > 0 );
   if ( present ) {
 
