@@ -38,7 +38,7 @@ public:
    */
   unsigned int MFTYPE() const {
 
-    return static_cast< unsigned int >( this->XSS( 1 ) );
+    return static_cast< unsigned int >( this->IXSS( 1 ) );
   }
 
   /**
@@ -51,7 +51,7 @@ public:
    */
   unsigned int MT() const {
 
-    return static_cast< unsigned int >( this->XSS( 2 ) );
+    return static_cast< unsigned int >( this->IXSS( 2 ) );
   }
 
   /**

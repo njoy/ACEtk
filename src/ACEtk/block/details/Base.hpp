@@ -112,13 +112,23 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto XSS( std::size_t index ) const {
+  double XSS( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyIndex( index, 1, this->length() );
     #endif
     return *std::next( this->begin(), index - 1 );
   }
+
+  /**
+   *  @brief Return a value from the XSS array as an integer
+   *
+   *  Range checking is only performed when NDEBUG is not defined. When the index
+   *  is out of range, an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index    the index (one-based)
+   */
+  int IXSS( std::size_t index ) const { return round( this->XSS( index ) ); }
 
   /**
    *  @brief Return a subrange of a given length from the xss array of the block

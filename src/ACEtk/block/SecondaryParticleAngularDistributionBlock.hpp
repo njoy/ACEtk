@@ -41,8 +41,7 @@ public:
   /* methods */
 
   /**
-   *  @brief Return the number of reactions that produce the projectile
-   *         (excluding elastic )
+   *  @brief Return the number of reactions with angular distribution data
    */
   unsigned int NR() const {
 
@@ -50,8 +49,7 @@ public:
   }
 
   /**
-   *  @brief Return the number of reactions that produce the projectile
-   *         (excluding elastic)
+  *  @brief Return the number of reactions with angular distribution data
    */
   unsigned int numberReactions() const {
 

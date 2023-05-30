@@ -42,7 +42,7 @@ public:
   /**
    *  @brief Return the number of elements in a column
    */
-  std::size_t N() const { return this->XSS( 1 ); }
+  std::size_t N() const { return this->IXSS( 1 ); }
 
   /**
    *  @brief Return the number of elements in a column
@@ -73,7 +73,7 @@ public:
    *  @param[in] column     the column index (one-based)
    *  @param[in] index      the index in the column (one-based)
    */
-  auto value( std::size_t column, std::size_t index ) const {
+  double value( std::size_t column, std::size_t index ) const {
 
     auto number = this->N();
     return this->XSS( 2 + ( column - 1 ) * number + index - 1 );
@@ -83,6 +83,7 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::IXSS;
   using Base::begin;
   using Base::end;
 };

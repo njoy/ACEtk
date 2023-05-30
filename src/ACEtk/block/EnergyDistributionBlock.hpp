@@ -5,7 +5,8 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
@@ -21,6 +22,8 @@
 #include "ACEtk/block/AngleEnergyDistributionData.hpp"
 #include "ACEtk/block/TwoBodyTransferDistribution.hpp"
 #include "ACEtk/block/MultiDistributionData.hpp"
+#include "ACEtk/block/TabulatedMultiplicity.hpp"
+#include "ACEtk/ReferenceFrame.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -41,6 +44,7 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
                                              EnergyAngleDistributionData,
                                              AngleEnergyDistributionData,
                                              MultiDistributionData >;
+using MultiplicityData = std::variant< unsigned int, TabulatedMultiplicity >;
 
 /**
  *  @class
@@ -51,21 +55,35 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
  *  one for each the first NXS(5) reaction numbers on the MTR block. The order
  *  of the distribution data sets is the same as the order of the reaction
  *  numbers in the MTR block.
- *
- *  @todo verify if DiscretePhotonDistribution can appear here
  */
-class EnergyDistributionBlock :
-    protected details::BaseBlockWithLocators< EnergyDistributionBlock,
-                                              EnergyDistributionData > {
-
-  friend class details::BaseBlockWithLocators< EnergyDistributionBlock,
-                                               EnergyDistributionData >;
+class EnergyDistributionBlock : protected details::Base {
 
   /* fields */
+  unsigned int nr_;   // the number of reactions
+  Iterator iterator_; // the begin iterator of the data block
+  block::TYR tyr_;    // the associated TYR block
+  std::vector< EnergyDistributionData > data_;
+  std::vector< MultiplicityData > multiplicities_;
+  std::vector< ReferenceFrame > frames_;
 
   /* auxiliary functions */
   #include "ACEtk/block/EnergyDistributionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/EnergyDistributionBlock/src/generateData.hpp"
+  #include "ACEtk/block/EnergyDistributionBlock/src/generateBlocks.hpp"
+  #include "ACEtk/block/EnergyDistributionBlock/src/verifyDataIndex.hpp"
+  #include "ACEtk/block/EnergyDistributionBlock/src/verifySize.hpp"
+
+  /**
+   *  @brief Return the iterator to the start of the sig block
+   */
+  Iterator iter() const { return this->iterator_; }
+
+  /**
+   *  @brief Return the associated TYR block
+   *
+   *  Note: this TYR block may not be completely compatible with the normal TYR
+   *        block since can be the wrong expected size.
+   */
+  const block::TYR& TYR() const { return this->tyr_; }
 
 public:
 
@@ -78,15 +96,13 @@ public:
    *  @brief Return the number of reactions that produce the projectile
    *         (excluding elastic )
    */
-  unsigned int NR() const { return BaseBlockWithLocators::NR(); }
+  unsigned int NR() const { return this->nr_; }
 
   /**
-   *  @brief Return the number of reactions
+   *  @brief Return the number of reactions that produce the projectile
+   *         (excluding elastic )
    */
-  unsigned int numberReactions() const {
-
-    return BaseBlockWithLocators::numberReactions();
-  }
+  unsigned int numberReactions() const { return this->NR(); }
 
   /**
    *  @brief Return the relative energy distribution locator for a reaction
@@ -99,7 +115,10 @@ public:
    */
   int LDLW( std::size_t index ) const {
 
-    return BaseBlockWithLocators::LLOC( index );
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->IXSS( index );
   }
 
   /**
@@ -113,7 +132,7 @@ public:
    */
   int energyDistributionLocator( std::size_t index ) const {
 
-    return BaseBlockWithLocators::locator( index );
+    return this->LDLW( index );
   }
 
   /**
@@ -121,7 +140,7 @@ public:
    */
   const std::vector< EnergyDistributionData >& data() const {
 
-    return BaseBlockWithLocators::data();
+    return this->data_;
   }
 
   /**
@@ -134,7 +153,66 @@ public:
    */
   const EnergyDistributionData& energyDistributionData( std::size_t index ) const {
 
-    return BaseBlockWithLocators::data( index );
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->data_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return all multiplicity data
+   */
+  const std::vector< MultiplicityData >& multiplicities() const {
+
+    return this->multiplicities_;
+  }
+
+  /**
+   *  @brief Return the multiplicity data for a reaction index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const MultiplicityData& multiplicityData( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->multiplicities_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return all reference frames
+   */
+  const std::vector< ReferenceFrame >& referenceFrames() const {
+
+    return this->frames_;
+  }
+
+  /**
+   *  @brief Return the reference frame for a reaction index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const ReferenceFrame& referenceFrame( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->frames_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the associated TYR multiplicity entries (internal only)
+   */
+  auto tyrMultiplicities() const {
+
+    return this->tyr_.multiplicities();
   }
 
   using Base::empty;
@@ -146,9 +224,6 @@ public:
 };
 
 using DLW = EnergyDistributionBlock;
-using DLWP = EnergyDistributionBlock;
-using DNED = EnergyDistributionBlock;
-using DLWH = EnergyDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

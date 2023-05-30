@@ -76,6 +76,7 @@ namespace block {
   void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapSecondaryParticleAngularDistributionBlock( python::module&, python::module& );
   void wrapEnergyDistributionBlock( python::module&, python::module& );
+  void wrapSecondaryParticleEnergyDistributionBlock( python::module&, python::module& );
   void wrapPhotonProductionBlock( python::module&, python::module& );
   void wrapMultiplicityReactionNumberBlock( python::module&, python::module& );
   void wrapDelayedNeutronPrecursorBlock( python::module&, python::module& );
@@ -187,6 +188,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotonProductionBlock( module, viewmodule );
   block::wrapMultiplicityReactionNumberBlock( module, viewmodule );
   block::wrapDelayedNeutronPrecursorBlock( module, viewmodule );
+  block::wrapSecondaryParticleEnergyDistributionBlock( module, viewmodule );
   block::wrapSecondaryParticleTypeBlock( module, viewmodule );
   block::wrapSecondaryParticleInformationBlock( module, viewmodule );
   block::wrapSecondaryParticleLocatorBlock( module, viewmodule );

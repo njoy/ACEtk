@@ -39,12 +39,12 @@ public:
   /**
    *  @brief Return the interpolation flag
    */
-  int interpolation() const { return this->XSS( 1 ); }
+  int interpolation() const { return this->IXSS( 1 ); }
 
   /**
-   *  @brief Return the number of cosine values
+   *  @brief Return the number of values
    */
-  std::size_t numberValues() const { return this->XSS( 2 ); }
+  std::size_t numberValues() const { return this->IXSS( 2 ); }
 
   /**
    *  @brief Return the values
@@ -83,6 +83,7 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::IXSS;
   using Base::begin;
   using Base::end;
 };

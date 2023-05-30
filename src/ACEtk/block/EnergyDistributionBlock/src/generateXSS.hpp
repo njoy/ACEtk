@@ -1,13 +1,44 @@
-static std::vector< double >
-generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
+static std::pair< std::vector< double >, std::vector< unsigned int > >
+generateXSS( std::vector< EnergyDistributionData >&& distributions,
+             std::vector< MultiplicityData >&& multiplicities ) {
+
+  if ( distributions.size() != multiplicities.size() ) {
+
+    Log::error( "The number of distributions and multiplicities should be the same" );
+    Log::info( "distributions.size(): {}", distributions.size() );
+    Log::info( "multiplicities.size(): {}", multiplicities.size() );
+    throw std::exception();
+  }
 
   std::size_t size = distributions.size();
   std::vector< double > xss( size );
+  std::vector< unsigned int > tyr;
   std::size_t index = 0;
   for ( auto&& distribution : distributions ) {
 
-    // set the locator
+    // current value of a locator into the xss array
     std::size_t offset = xss.size() - size + 1;
+
+    // handle multiplicity
+    std::visit(
+
+      utility::overload{
+
+        [ &xss, &tyr, &offset, size ] ( const TabulatedMultiplicity& value ) {
+
+          tyr.insert( tyr.end(), 100 + offset );
+          xss.insert( xss.end(), value.begin(), value.end() );
+          offset = xss.size() - size + 1;
+        },
+        [ &tyr ] ( const unsigned int& value ) {
+
+          tyr.insert( tyr.end(), value );
+        }
+      },
+      multiplicities[index]
+    );
+
+    // set the locator for the current distribution
     xss[index] = offset;
 
     // multi-law data needs no dummy probabilities
@@ -120,5 +151,5 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
     ++index;
   }
 
-  return xss;
+  return { std::move( xss ), std::move( tyr ) };
 }

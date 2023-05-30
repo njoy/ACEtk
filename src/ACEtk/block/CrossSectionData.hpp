@@ -34,20 +34,17 @@ public:
   /**
    *  @brief Return the energy index
    */
-  std::size_t energyIndex() const { return this->XSS( 1 ); }
+  std::size_t energyIndex() const { return this->IXSS( 1 ); }
 
   /**
    *  @brief Return the number of cross section values
    */
-  std::size_t numberValues() const { return this->XSS( 2 ); }
+  std::size_t numberValues() const { return this->IXSS( 2 ); }
 
   /**
    *  @brief Return the cross section values
    */
-  auto crossSections() const {
-
-    return this->XSS( 3, this->numberValues() );
-  }
+  auto crossSections() const { return this->XSS( 3, this->numberValues() ); }
 
   using Base::empty;
   using Base::name;

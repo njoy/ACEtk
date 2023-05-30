@@ -28,9 +28,12 @@ public:
 private:
 
   /* fields */
+  FissionMultiplicityData prompt_;
+  std::optional< FissionMultiplicityData > total_;
 
   /* auxiliary functions */
   #include "ACEtk/block/FissionMultiplicityBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/FissionMultiplicityBlock/src/generateBlocks.hpp"
 
 public:
 
@@ -45,40 +48,19 @@ public:
    */
   bool hasPromptAndTotalFissionMultiplicity() const {
 
-    return this->XSS( 1 ) < 0;
+    return bool( this->total_ );
   }
 
   /**
-   *  @brief Return the prompt fission multiplicity
+   *  @brief Return the multiplicity
    *
    *  This returns the prompt fission multiplicity when both prompt and total
    *  are given or just the available multiplicity data if only one of these is
    *  given (the ACE format does not indicate which is present).
    */
-  FissionMultiplicityData promptFissionMultiplicity() const {
+  const FissionMultiplicityData& multiplicity() const {
 
-    Iterator begin = this->begin();
-    Iterator end = this->end();
-
-    if ( this->hasPromptAndTotalFissionMultiplicity() ) {
-
-      auto knu = static_cast<unsigned int>( std::abs( *begin ) ) + 1;
-      end = std::next( begin, knu );
-      begin = std::next( begin );
-    }
-
-    unsigned int LNU = static_cast< unsigned int >( *begin );
-    switch (LNU) {
-
-      case 1: return PolynomialFissionMultiplicity( begin, end );
-      case 2: return TabulatedFissionMultiplicity( begin, end );
-      default: {
-
-        Log::error( "Illegal fission multiplicity representation LNU = {}", LNU );
-        Log::info( "Only LNU = 1 (polynomial) or LNU = 2 (tabulated) are allowed" );
-        throw std::exception();
-      }
-    }
+    return this->prompt_;
   }
 
   /**
@@ -88,29 +70,9 @@ public:
    *  are given or just the available multiplicity data if only one of these is
    *  given (the ACE format does not indicate which is present).
    */
-  FissionMultiplicityData totalFissionMultiplicity() const {
+  const std::optional< FissionMultiplicityData >& totalFissionMultiplicity() const {
 
-    Iterator begin = this->begin();
-    Iterator end = this->end();
-
-    if ( this->hasPromptAndTotalFissionMultiplicity() ) {
-
-      auto knu = static_cast<unsigned int>( std::abs( *begin ) ) + 1;
-      begin = std::next( begin, knu );
-    }
-
-    unsigned int LNU = static_cast< unsigned int >( *begin );
-    switch (LNU) {
-
-      case 1: return PolynomialFissionMultiplicity( begin, end );
-      case 2: return TabulatedFissionMultiplicity( begin, end );
-      default: {
-
-        Log::error( "Illegal fission multiplicity representation LNU = {}", LNU );
-        Log::info( "Only LNU = 1 (polynomial) or LNU = 2 (tabulated) are allowed" );
-        throw std::exception();
-      }
-    }
+    return this->total_;
   }
 
   using Base::empty;

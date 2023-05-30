@@ -27,7 +27,7 @@ class EquiprobableOutgoingEnergyBinData : protected details::Base {
   /* fields */
   InterpolationData interpolation_;
   details::ColumnData energies_;
-  details::ColumnData bins_;
+  std::vector< EquiprobableOutgoingEnergyBins > bins_;
 
   /* auxiliary functions */
   #include "ACEtk/block/EquiprobableOutgoingEnergyBinData/src/verifySize.hpp"
@@ -141,12 +141,25 @@ public:
   /**
    *  @brief Return the number of outgoing energy values for each incident energy
    */
-  int NET() const { return this->bins_.N(); }
+  std::size_t NET() const {
+
+    std::size_t nr = this->NB();
+    std::size_t ne = this->NE();
+    return static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 + ne + 1 ) );
+  }
 
   /**
    *  @brief Return the number of equiprobable outgoing energy bins
    */
-  int numberBins() const { return this->NET() - 1; }
+  std::size_t numberBins() const { return this->NET() - 1; }
+
+  /**
+   *  @brief Return the distributions
+   */
+  const std::vector< EquiprobableOutgoingEnergyBins >& distributions() const {
+
+    return this->bins_;
+  }
 
   /**
    *  @brief Return the distribution for an incident energy index
@@ -156,12 +169,12 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto distribution( std::size_t index ) const {
+  const EquiprobableOutgoingEnergyBins& distribution( std::size_t index ) const {
 
-    return EquiprobableOutgoingEnergyBins(
-               this->incidentEnergy( index ),
-               this->bins_.begin() + 1 + this->NET() * ( index - 1 ),
-               this->bins_.begin() + 1 + this->NET() * index );
+    #ifndef NDEBUG
+    this->verifyIncidentEnergyIndex( index );
+    #endif
+    return this->bins_[ index - 1 ];
   }
 
   using Base::empty;

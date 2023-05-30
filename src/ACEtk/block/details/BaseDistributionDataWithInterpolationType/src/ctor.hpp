@@ -57,7 +57,7 @@ BaseDistributionDataWithInterpolationType( std::string&& name,
                                            Iterator begin, Iterator end ) :
   Base( std::move( name ), begin, end ), locb_( locb ) {
 
-  std::size_t ne = static_cast< std::size_t >( this->XSS( 2 ) );
+  std::size_t ne = static_cast< std::size_t >( round( this->XSS( 2 ) ) );
   verifySize( this->begin(), this->end(), ne );
   static_cast< Derived* >( this )->generateBlocks();
 }

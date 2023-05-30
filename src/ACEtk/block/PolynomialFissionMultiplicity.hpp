@@ -37,7 +37,7 @@ public:
    */
   unsigned int LNU() const {
 
-    return static_cast< unsigned int >( this->XSS( 1 ) );
+    return static_cast< unsigned int >( this->IXSS( 1 ) );
   }
 
   /**
@@ -48,7 +48,7 @@ public:
   /**
    *  @brief Return the number of polynomial coefficients
    */
-  std::size_t NC() const { return this->XSS( 2 ); }
+  std::size_t NC() const { return this->IXSS( 2 ); }
 
   /**
    *  @brief Return the number of polynomial coefficients

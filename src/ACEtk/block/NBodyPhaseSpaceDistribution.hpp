@@ -6,6 +6,7 @@
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -26,6 +27,7 @@ class NBodyPhaseSpaceDistribution : protected details::Base {
   double emax_;
 
   /* auxiliary functions */
+  #include "ACEtk/block/NBodyPhaseSpaceDistribution/src/generateXSS.hpp"
   #include "ACEtk/block/NBodyPhaseSpaceDistribution/src/verifySize.hpp"
 
 public:
@@ -62,7 +64,7 @@ public:
   /**
    *  @brief Return the number of particles in the system
    */
-  unsigned int NPSX() const { return this->XSS( 1 ); }
+  unsigned int NPSX() const { return this->IXSS( 1 ); }
 
   /**
    *  @brief Return the number of particles in the system
@@ -78,6 +80,40 @@ public:
    *  @brief Return the total mass ratio of the particles
    */
   double totalMassRatio() const { return this->AP(); }
+
+  /**
+   *  @brief Return the interpolation flag
+   */
+  int interpolation() const { return this->IXSS( 3 ); }
+
+  /**
+   *  @brief Return the number of xi values
+   */
+  std::size_t numberValues() const { return this->IXSS( 4 ); }
+
+  /**
+   *  @brief Return the xi values
+   */
+  auto values() const {
+
+    return this->XSS( 5, this->numberValues() );
+  }
+
+  /**
+   *  @brief Return the pdf values
+   */
+  auto pdf() const {
+
+    return this->XSS( 5 + this->numberValues(), this->numberValues() );
+  }
+
+  /**
+   *  @brief Return the cdf values
+   */
+  auto cdf() const {
+
+    return this->XSS( 5 + 2 * this->numberValues(), this->numberValues() );
+  }
 
   using Base::empty;
   using Base::name;

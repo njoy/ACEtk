@@ -6,15 +6,24 @@ NBodyPhaseSpaceDistribution( NBodyPhaseSpaceDistribution&& ) = default;
 /**
  *  @brief Constructor
  *
- *  @param[in] emin    the minimum energy for the distribution
- *  @param[in] emax    the maximum energy for the distribution
- *  @param[in] npsx    the number of particles in the system
- *  @param[in] ap      the total mass ratio
+ *  @param[in] emin             the minimum energy for the distribution
+ *  @param[in] emax             the maximum energy for the distribution
+ *  @param[in] npsx             the number of particles in the system
+ *  @param[in] ap               the total mass ratio
+ *  @param[in] interpolation    the interpolation flag
+ *  @param[in] values           the xi values
+ *  @param[in] pdf              the pdf values
+ *  @param[in] cdf              the cdf values
  */
 NBodyPhaseSpaceDistribution( double emin, double emax,
-                             unsigned int npsx, double ap ) :
+                             unsigned int npsx, double ap,
+                             unsigned int interpolation,
+                             std::vector< double > values,
+                             std::vector< double > pdf,
+                             std::vector< double > cdf ) :
   Base( "NBodyPhaseSpaceDistribution",
-        { static_cast< double >( npsx ), ap } ),
+        generateXSS( npsx, ap, interpolation, std::move( values ),
+                     std::move( pdf ), std::move( cdf ) ) ),
   emin_( emin ), emax_( emax ) {}
 
 /**

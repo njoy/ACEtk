@@ -15,7 +15,7 @@ void generateBlocks() {
         // xand + locator - 1 : one-based index to the start of distribution data
         const std::size_t xand = std::distance( this->begin(), this->iterator_ ) + 1;
         const std::size_t land = this->LAND( index );
-        const auto locator = xand + land - 1;
+        const std::size_t locator = xand + land - 1;
         const auto left = this->iterator( locator );
         auto right = this->end();
         for ( auto next = index + 1; next <= this->NR(); ++next ) {

@@ -8,10 +8,13 @@
 // convenience typedefs
 using namespace njoy::ACEtk;
 using EnergyDistributionBlock = block::EnergyDistributionBlock;
+using FrameAndMultiplicityBlock = block::FrameAndMultiplicityBlock;
 using LevelScatteringDistribution = block::LevelScatteringDistribution;
 using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
 using KalbachMannDistributionData = block::KalbachMannDistributionData;
 using EnergyDistributionData = block::EnergyDistributionData;
+using MultiplicityData = block::MultiplicityData;
+using TabulatedMultiplicity = block::TabulatedMultiplicity;
 
 std::vector< double > chunk();
 void verifyChunk( const EnergyDistributionBlock& );
@@ -40,8 +43,19 @@ SCENARIO( "EnergyDistributionBlock" ) {
               { 2.491475E-03, 1.510768E-02, 9.775367E-01 },
               { 2.391154E-01, 2.847920E-01, 5.592013E-01 } ) } )
       };
+      std::vector< MultiplicityData > multiplicities = {
 
-      EnergyDistributionBlock chunk( std::move( distributions ) );
+        TabulatedMultiplicity( { 1e-11, 20. }, { 1., 1. } ),
+        unsigned{ 1 }
+      };
+      std::vector< ReferenceFrame > frames = {
+
+        ReferenceFrame::Laboratory, ReferenceFrame::CentreOfMass
+      };
+
+      EnergyDistributionBlock chunk( std::move( distributions ),
+                                     std::move( multiplicities ),
+                                     std::move( frames ) );
 
       THEN( "an EnergyDistributionBlock can be constructed and members can be tested" ) {
 
@@ -58,9 +72,14 @@ SCENARIO( "EnergyDistributionBlock" ) {
       } // THEN
     } // WHEN
 
-    WHEN( "the data is defined by iterators" ) {
+    WHEN( "the data is defined by iterators and the TYR block" ) {
 
-      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(),
+                                     tyr, 2 );
 
       THEN( "an EnergyDistributionBlock can be constructed and members can be tested" ) {
 
@@ -83,20 +102,23 @@ std::vector< double > chunk() {
 
   // 2 reactions
   // the given data:
-  //   - for reaction 1 : 1 law -> level scattering data
+  //   - for reaction 1 : 1 law -> level scattering data, with energy dependent yield
   //   - for reaction 2 : 1 law -> Kalbach-Mann systematics for two incident energies
   return {
            // LDLW
-                           1,                 12,
-           // DLW - reaction 1 - LNW = 0, LAW = 3, IDAT = 10
-                           0,                  3,                 10,                  0,
+                           7,                 18,
+           // DLW - reaction 1 - energy dependent multiplicity
+                           0,                  2,  1.00000000000E-11,  2.00000000000E+01,
+           1.00000000000E+00,  1.00000000000E+00,
+           // DLW - reaction 1 - LNW = 0, LAW = 3, IDAT = 16
+                           0,                  3,                 16,                  0,
                            2,        2.249999e-3,  2.00000000000E+01,  1.00000000000E+00,
            1.00000000000E+00,  7.71295800000E-05,           .9914722,
-           // DLW - reaction 1 - LNW = 0, LAW = 44, IDAT = 21
-                           0,                 44,                 21,                  0,
+           // DLW - reaction 2 - LNW = 0, LAW = 44, IDAT = 27
+                           0,                 44,                 27,                  0,
                            2,       1.219437E+01,  2.00000000000E+01,  1.00000000000E+00,
            1.00000000000E+00,                  0,                  2,       1.219437E+01,
-                2.000000E+01,                 27,                 39,                  1,
+                2.000000E+01,                 33,                 45,                  1,
                            2,       0.000000E+00,       1.866919E-02,       5.356419E+01,
                 0.000000E+00,       0.000000E+00,       1.000000E+00,       0.000000E+00,
                 0.000000E+00,       2.391154E-01,       2.398743E-01,                  2,
@@ -109,17 +131,17 @@ std::vector< double > chunk() {
 void verifyChunk( const EnergyDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
-  CHECK( 57 == chunk.length() );
+  CHECK( 63 == chunk.length() );
   CHECK( "DLW" == chunk.name() );
 
   CHECK( 2 == chunk.NR() );
   CHECK( 2 == chunk.numberReactions() );
   CHECK( 2 == chunk.data().size() );
 
-  CHECK( 1 == chunk.LDLW(1) );
-  CHECK( 12 == chunk.LDLW(2) );
-  CHECK( 1 == chunk.energyDistributionLocator(1) );
-  CHECK( 12 == chunk.energyDistributionLocator(2) );
+  CHECK( 7 == chunk.LDLW(1) );
+  CHECK( 18 == chunk.LDLW(2) );
+  CHECK( 7 == chunk.energyDistributionLocator(1) );
+  CHECK( 18 == chunk.energyDistributionLocator(2) );
 
   CHECK( true == std::holds_alternative< LevelScatteringDistribution >( chunk.energyDistributionData(1) ) );
   CHECK( true == std::holds_alternative< KalbachMannDistributionData >( chunk.energyDistributionData(2) ) );
@@ -147,10 +169,10 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
   CHECK( 20. == Approx( data2.incidentEnergy(2) ) );
   CHECK( 1.219437E+01 == Approx( data2.minimumIncidentEnergy() ) );
   CHECK( 20. == Approx( data2.maximumIncidentEnergy() ) );
-  CHECK( 27 == data2.LOCC(1) );
-  CHECK( 39 == data2.LOCC(2) );
-  CHECK( 27 == data2.distributionLocator(1) );
-  CHECK( 39 == data2.distributionLocator(2) );
+  CHECK( 33 == data2.LOCC(1) );
+  CHECK( 45 == data2.LOCC(2) );
+  CHECK( 33 == data2.distributionLocator(1) );
+  CHECK( 45 == data2.distributionLocator(2) );
   CHECK( 7 == data2.relativeDistributionLocator(1) );
   CHECK( 19 == data2.relativeDistributionLocator(2) );
   auto data21 = data2.distribution(1);
@@ -193,4 +215,44 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
   CHECK( 3 == data22.angularDistributionSlopeValues().size() );
   CHECK( 2.391154E-01 == Approx( data22.angularDistributionSlopeValues().front() ) );
   CHECK( 5.592013E-01 == Approx( data22.angularDistributionSlopeValues().back() ) );
+
+  CHECK( ReferenceFrame::Laboratory == chunk.referenceFrame(1) );
+  CHECK( ReferenceFrame::CentreOfMass == chunk.referenceFrame(2) );
+
+  CHECK( true == std::holds_alternative< TabulatedMultiplicity >( chunk.multiplicityData(1) ) );
+  CHECK( true == std::holds_alternative< unsigned int >( chunk.multiplicityData(2) ) );
+
+  auto multiplicity1 = std::get< TabulatedMultiplicity >( chunk.multiplicityData(1) );
+  CHECK( 0 == multiplicity1.interpolationData().NB() );
+  CHECK( 0 == multiplicity1.interpolationData().numberInterpolationRegions() );
+  CHECK( 0 == multiplicity1.interpolationData().INT().size() );
+  CHECK( 0 == multiplicity1.interpolationData().interpolants().size() );
+  CHECK( 0 == multiplicity1.interpolationData().NBT().size() );
+  CHECK( 0 == multiplicity1.interpolationData().boundaries().size() );
+
+  CHECK( 0 == multiplicity1.NB() );
+  CHECK( 0 == multiplicity1.numberInterpolationRegions() );
+  CHECK( 0 == multiplicity1.INT().size() );
+  CHECK( 0 == multiplicity1.interpolants().size() );
+  CHECK( 0 == multiplicity1.NBT().size() );
+  CHECK( 0 == multiplicity1.boundaries().size() );
+
+  CHECK( 2 == multiplicity1.NE() );
+  CHECK( 2 == multiplicity1.numberEnergyPoints() );
+
+  CHECK( 2 == multiplicity1.energies().size() );
+  CHECK( 1e-11 == Approx( multiplicity1.energies()[0] ) );
+  CHECK( 20. == Approx( multiplicity1.energies()[1] ) );
+
+  CHECK( 2 == multiplicity1.multiplicities().size() );
+  CHECK( 1. == Approx( multiplicity1.multiplicities()[0] ) );
+  CHECK( 1. == Approx( multiplicity1.multiplicities()[1] ) );
+
+  auto multiplicity2 = std::get< unsigned int >( chunk.multiplicityData(2) );
+  CHECK( 1 == multiplicity2 );
+
+  decltype(auto) tyr = chunk.tyrMultiplicities();
+  CHECK( 2 == tyr.size() );
+  CHECK( 101 == Approx( tyr[0] ) );
+  CHECK( 1 == Approx( tyr[1] ) );
 }

@@ -26,3 +26,17 @@ generateXSS( std::vector< ReferenceFrame >&& frames,
 
   return xss;
 }
+
+static std::vector< double >
+generateXSS( std::vector< ReferenceFrame >&& frames ) {
+
+  std::vector< double > xss( frames.size(), 1 );
+  for ( unsigned int i = 0; i < frames.size(); ++i ) {
+
+    if ( frames[i] == ReferenceFrame::CentreOfMass ) {
+
+      xss[i] = -1;
+    }
+  }
+  return xss;
+}

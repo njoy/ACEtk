@@ -24,7 +24,7 @@ SCENARIO( "Data" ) {
                                         8, 9, 10, 11, 12, 13, 14, 15 }};
       std::array< double, 16 > AW ={{ 15., 14., 13., 12., 11., 10., 9., 8.,
                                       7., 6., 5., 4., 3., 2., 1., 0. }};
-      std::array< int64_t, 16 > NXS = {{  6, 33074, 1595, 132, 46, 814, 2, 0,
+      std::array< int64_t, 16 > NXS = {{  7, 33074, 1595, 132, 46, 814, 2, 0,
                                           0,     0,    0,   0,  0,   0, 0, 9 }};
       std::array< int64_t, 32 > JXS = {{       1,  788721,  788768,  788815,
                                           788862,  788909,  788956, 1270743,
@@ -36,7 +36,8 @@ SCENARIO( "Data" ) {
                                                0,       0,       0,       8 }};
       std::vector< double > XSS = { 1.00000000000E+00, 1.03125000000E+00,
                                     1.06250000000E+00, 1.09375000000E+00,
-                                    1.12500000000E+00, 1.15625000000E+00 };
+                                    1.12500000000E+00, 1.15625000000E+00,
+                                    1.90000000000E+00 };
 
       Data chunk( std::move( IZ ), std::move( AW ), std::move( NXS ),
                   std::move( JXS ), std::move( XSS ) );
@@ -64,7 +65,7 @@ SCENARIO( "Data" ) {
                    {{ 15., 14., 13., 12., 11., 10., 9., 8.,
                        7., 6., 5., 4., 3., 2., 1., 0. }}
                  };
-      std::array< int64_t, 16 > NXS = {{  6, 33074, 1595, 132, 46, 814, 2, 0,
+      std::array< int64_t, 16 > NXS = {{  7, 33074, 1595, 132, 46, 814, 2, 0,
                                           0,     0,    0,   0,  0,   0, 0, 9 }};
       std::array< int64_t, 32 > JXS = {{       1,  788721,  788768,  788815,
                                           788862,  788909,  788956, 1270743,
@@ -76,7 +77,8 @@ SCENARIO( "Data" ) {
                                                0,       0,       0,       8 }};
       std::vector< double > XSS = { 1.00000000000E+00, 1.03125000000E+00,
                                     1.06250000000E+00, 1.09375000000E+00,
-                                    1.12500000000E+00, 1.15625000000E+00 };
+                                    1.12500000000E+00, 1.15625000000E+00,
+                                    1.90000000000E+00 };
 
       Data chunk( std::move( IZAW ), std::move( NXS ),
                   std::move( JXS ), std::move( XSS ) );
@@ -123,14 +125,14 @@ std::string chunk() {
     "      4 11.0000000      5 10.0000000      6  9.0000000      7  8.0000000\n"
     "      8  7.0000000      9  6.0000000     10  5.0000000     11  4.0000000\n"
     "     12  3.0000000     13  2.0000000     14  1.0000000     15  0.0000000\n"
-    "        6    33074     1595      132       46      814        2        0\n"
+    "        7    33074     1595      132       46      814        2        0\n"
     "        0        0        0        0        0        0        0        9\n"
     "        1   788721   788768   788815   788862   788909   788956  1270743\n"
     "  1270789  1363882  1363927  1475750  1633494  1633500  1633506  1634036\n"
     "  1634042  1634042  1634048  1637218   789147  1637220  1464171  1465923\n"
     "  1465934  1465976  1465982        0        0        0        0        8\n"
     "  1.000000000000E+00  1.031250000000E+00  1.062500000000E+00  1.093750000000E+00\n"
-    "  1.125000000000E+00  1.156250000000E+00\n";
+    "  1.125000000000E+00  1.156250000000E+00  1.900000000000E+00\n";
 }
 
 void verifyChunk( const Data& chunk ) {
@@ -172,7 +174,7 @@ void verifyChunk( const Data& chunk ) {
   CHECK( 0 == chunk.AW( 16 ) );
 
   CHECK( 16 == chunk.NXS().size() );
-  CHECK( 6 == chunk.NXS( 1 ) );
+  CHECK( 7 == chunk.NXS( 1 ) );
   CHECK( 33074 == chunk.NXS( 2 ) );
   CHECK( 1595 == chunk.NXS( 3 ) );
   CHECK( 132 == chunk.NXS( 4 ) );
@@ -223,13 +225,22 @@ void verifyChunk( const Data& chunk ) {
   CHECK( 0 == chunk.JXS( 31 ) );
   CHECK( 8 == chunk.JXS( 32 ) );
 
-  CHECK( 6 == chunk.XSS().size() );
+  CHECK( 7 == chunk.XSS().size() );
   CHECK( 1.00000000000E+00 == Approx( chunk.XSS( 1 ) ) );
   CHECK( 1.03125000000E+00 == Approx( chunk.XSS( 2 ) ) );
   CHECK( 1.06250000000E+00 == Approx( chunk.XSS( 3 ) ) );
   CHECK( 1.09375000000E+00 == Approx( chunk.XSS( 4 ) ) );
   CHECK( 1.12500000000E+00 == Approx( chunk.XSS( 5 ) ) );
   CHECK( 1.15625000000E+00 == Approx( chunk.XSS( 6 ) ) );
+  CHECK( 1.90000000000E+00 == Approx( chunk.XSS( 7 ) ) );
+
+  CHECK( 1 == chunk.IXSS( 1 ) );
+  CHECK( 1 == chunk.IXSS( 2 ) );
+  CHECK( 1 == chunk.IXSS( 3 ) );
+  CHECK( 1 == chunk.IXSS( 4 ) );
+  CHECK( 1 == chunk.IXSS( 5 ) );
+  CHECK( 1 == chunk.IXSS( 6 ) );
+  CHECK( 2 == chunk.IXSS( 7 ) );
 
   auto range = chunk.XSS( 1, 2 );
   CHECK( 2 == range.size() );
@@ -255,6 +266,6 @@ void verifyChunk( const Data& chunk ) {
   CHECK_THROWS( chunk.JXS( 33 ) );
 
   CHECK_THROWS( chunk.XSS( 0 ) );
-  CHECK_THROWS( chunk.XSS( 7 ) );
+  CHECK_THROWS( chunk.XSS( 8 ) );
 #endif
 }

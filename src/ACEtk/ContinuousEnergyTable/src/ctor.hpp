@@ -73,7 +73,6 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] dnu       the optional delayed fission neutron multiplicity block
  *  @param[in] mtr       the reaction number block
  *  @param[in] lqr       the reaction Q value block
- *  @param[in] tyr       the reference frame and multiplicity block
  *  @param[in] sig       the cross section data block
  *  @param[in] ang       the angular distribution data block
  *  @param[in] dlw       the energy distribution data block
@@ -89,7 +88,6 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] ptype     the secondary particle type block
  *  @param[in] hpd       the secondary particle production blocks
  *  @param[in] mtrh      the secondary particle production reaction number blocks
- *  @param[in] tyrh      the secondary particle productionreference frame blocks
  *  @param[in] sigh      the secondary particle production cross section data blocks
  *  @param[in] angh      the secondary particle angular distribution data blocks
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
@@ -98,7 +96,7 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
 ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        block::ESZ esz, std::optional< block::NU > nu,
                        std::optional< block::DNU > dnu,
-                       block::MTR mtr, block::LQR lqr, block::TYR tyr,
+                       block::MTR mtr, block::LQR lqr,
                        block::SIG sig, block::AND ang, block::DLW dlw,
                        std::optional< block::BDD > bdd,
                        std::optional< block::DNED > dned,
@@ -112,7 +110,6 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                        std::optional< block::PTYPE > ptype,
                        std::optional< std::vector< block::HPD > > hpd,
                        std::optional< std::vector< block::MTRH > > mtrh,
-                       std::optional< std::vector< block::TYRH > > tyrh,
                        std::optional< std::vector< block::SIGH > > sigh,
                        std::optional< std::vector< block::ANDH > > andh,
                        std::optional< std::vector< block::DLWH > > dlwh,
@@ -121,7 +118,7 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
       Table( std::move( header ),
              generateData( z, a, std::move( esz ), std::move( nu ),
                            std::move( mtr ), std::move( lqr ),
-                           std::move( tyr ), std::move( sig ),
+                           std::move( sig ),
                            std::move( ang ), std::move( dlw ),
                            std::move( gpd ), std::move( mtrp ),
                            std::move( sigp ), std::move( andp ),
@@ -129,6 +126,6 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, Header header,
                            std::move( unr ), std::move( dnu ),
                            std::move( bdd ), std::move( dned ),
                            std::move( ptype ), std::move( hpd ),
-                           std::move( mtrh ), std::move( tyrh ),
+                           std::move( mtrh ),
                            std::move( sigh ), std::move( andh ),
                            std::move( dlwh ), std::move( yh ) ) ) ) {}

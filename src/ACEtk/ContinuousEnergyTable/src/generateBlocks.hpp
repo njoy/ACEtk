@@ -137,7 +137,7 @@ void generateBlocks() {
   locators = block( 10 );
   iterators = block( 11 );
   this->dlw_ = block::DLW( locators.first, iterators.first, iterators.second,
-                           this->NR() );
+                           this->TYR(), this->NR() );
 
   // secondary photon data: total photon production cross section
   present = ( this->NTRP() > 0 );
@@ -181,7 +181,7 @@ void generateBlocks() {
   this->yp_ = block::YP( present ? iterators.first : begin,
                          present ? iterators.second : begin );
 
-  // delayed neutron data: delayed nubar for fissile isotopes
+  // delayed neutron data: unresolved resonance tables
   iterators = block( 23 );
   present = ( this->data().JXS(23) > 0 );
   this->unr_ = block::UNR( present ? iterators.first : begin,
@@ -200,10 +200,10 @@ void generateBlocks() {
                            present ? iterators.second : begin,
                            this->NPCR() );
 
-  // secondary photon data: photon energy distributions
+  // delayed neutron data: spectra
   locators = block( 26 );
   iterators = block( 27 );
-  this->dned_ = block::DLWP( present ? locators.first : begin,
+  this->dned_ = block::DNED( present ? locators.first : begin,
                              present ? iterators.first : begin,
                              present ? iterators.second : begin,
                              this->NPCR() );
@@ -262,7 +262,7 @@ void generateBlocks() {
     locators = block( index, 8 );
     iterators = block( index, 9 );
     this->dlwh_.emplace_back( locators.first, iterators.first, iterators.second,
-                              this->NTRO().NP( index ) );
+                              this->TYRH( index ), this->NTRO().NP( index ) );
 
     // secondary particle data: multiplicity reaction numbers
     iterators = block( index, 10 );

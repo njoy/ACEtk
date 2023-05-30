@@ -14,6 +14,7 @@
 #include "ACEtk/block/AngularDistributionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
 #include "ACEtk/block/EnergyDistributionBlock.hpp"
+#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotonProductionBlock.hpp"
 #include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
@@ -59,7 +60,7 @@ class ContinuousEnergyTable : protected Table {
 
   block::NU dnu_;
   block::BDD bdd_;
-  block::DLW dned_;
+  block::DNED dned_;
 
   block::PTYPE ptype_;
   block::NTRO ntro_;
@@ -433,12 +434,12 @@ public:
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const block::DLW& DNED() const { return this->dned_; }
+  const block::DNED& DNED() const { return this->dned_; }
 
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const block::DLW& delayedNeutronEnergyDistributionBlock() const {
+  const block::DNED& delayedNeutronEnergyDistributionBlock() const {
 
     return this->DNED();
   }

@@ -51,7 +51,7 @@ public:
   /**
    *  @brief Return the interpolation flag
    */
-  int interpolation() const { return this->XSS( 1 ); }
+  int interpolation() const { return this->IXSS( 1 ); }
 
   /**
    *  @brief Return the number of values in each column
@@ -105,7 +105,7 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    return this->value( this->values_.NC(), index );
+    return round( this->value( this->values_.NC(), index ) );
   }
 
   /**
@@ -168,6 +168,7 @@ public:
   using Base::name;
   using Base::length;
   using Base::XSS;
+  using Base::IXSS;
   using Base::begin;
   using Base::end;
 };

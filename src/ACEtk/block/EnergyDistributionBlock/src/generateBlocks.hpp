@@ -2,13 +2,13 @@ static EnergyDistributionData
 generateData( std::size_t locator, Iterator left, Iterator right ) {
 
   // left points to the LNW value - single law if zero
-  unsigned int lnw = static_cast< unsigned int >( *left );
+  unsigned int lnw = static_cast< unsigned int >( round( *left ) );
   if ( lnw == 0 ) {
 
-    EnergyDistributionType law = static_cast< EnergyDistributionType >( *( left + 1 ) );
-    std::size_t idat = static_cast< std::size_t >( *( left + 2 ) );
-    std::size_t nr = static_cast< std::size_t >( *( left + 3 ) );
-    std::size_t ne = static_cast< std::size_t >( *( left + 3 + 2 * nr + 1 ) );
+    EnergyDistributionType law = static_cast< EnergyDistributionType >( round( *( left + 1 ) ) );
+    std::size_t idat = static_cast< std::size_t >( round( *( left + 2 ) ) );
+    std::size_t nr = static_cast< std::size_t >( round( *( left + 3 ) ) );
+    std::size_t ne = static_cast< std::size_t >( round( *( left + 3 + 2 * nr + 1 ) ) );
     double emin = *( left + 3 + 2 * nr + 1 + 1 );
     double emax = *( left + 3 + 2 * nr + 1 + ne );
 
@@ -81,4 +81,38 @@ generateData( std::size_t locator, Iterator left, Iterator right ) {
 
     return MultiDistributionData( locator, left, right );
   }
+}
+
+void generateBlocks() {
+
+  for ( unsigned int index = 1; index <= this->NR(); ++index ) {
+
+    // data : one-based index to the start of the data block
+    // data + locator - 1 : one-based index to the start of cross section data
+    std::size_t data = std::distance( this->begin(), this->iter() ) + 1;
+    std::size_t locator = this->LDLW( index );
+    std::size_t multiplicity = index == this->NR()
+                               ? 0
+                               : this->TYR().multiplicity( index + 1 );
+    const auto left = this->iterator( data + locator - 1 );
+    const auto right = index == this->NR()
+                       ? this->end()
+                       : multiplicity < 100
+                           ? this->iterator( data + this->LDLW( index + 1 ) - 1 )
+                           : this->iterator( data + multiplicity - 100 - 1 );
+    this->data_.emplace_back( generateData( locator, left, right ) );
+    multiplicity = this->TYR().multiplicity( index );
+    if ( multiplicity > 100 ) {
+
+      auto mleft = this->iterator( data + multiplicity - 100 - 1 );
+      this->multiplicities_.emplace_back( TabulatedMultiplicity( mleft, left ) );
+    }
+    else {
+
+      this->multiplicities_.emplace_back( static_cast< unsigned int >( multiplicity ) );
+    }
+  }
+  this->frames_.insert( this->frames_.end(),
+                        this->TYR().referenceFrames().begin(),
+                        this->TYR().referenceFrames().begin() + this->NR() );
 }

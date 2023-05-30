@@ -27,10 +27,13 @@ namespace block {
 class FrameAndMultiplicityBlock : protected details::Base {
 
   /* fields */
-  unsigned int ntr_;
+  std::size_t ntr_;
+  std::vector< ReferenceFrame > frames_;
+  std::vector< unsigned int > multiplicities_;
 
   /* auxiliary functions */
   #include "ACEtk/block/FrameAndMultiplicityBlock/src/generateXSS.hpp"
+  #include "ACEtk/block/FrameAndMultiplicityBlock/src/generateBlocks.hpp"
   #include "ACEtk/block/FrameAndMultiplicityBlock/src/verifySize.hpp"
 
 public:
@@ -43,37 +46,32 @@ public:
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int NTR() const { return this->ntr_; }
+  std::size_t NTR() const { return this->ntr_; }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int numberReactions() const { return this->NTR(); }
+  std::size_t numberReactions() const { return this->NTR(); }
 
   /**
    *  @brief Return the reference frame for a reaction index
    *
    *  @param[in] index     the index (one-based)
    */
-  ReferenceFrame referenceFrame( std::size_t index ) const {
+  const ReferenceFrame& referenceFrame( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyReactionIndex( index, 1, this->NTR() );
     #endif
-    return this->XSS( index ) < 0 ? ReferenceFrame::CentreOfMass
-                                  : ReferenceFrame::Laboratory;
+    return this->frames_[ index - 1 ];
   }
 
   /**
    *  @brief Return the reference frames
    */
-  auto referenceFrames() const {
+  const std::vector< ReferenceFrame >& referenceFrames() const {
 
-    return this->XSS( 1, this->NTR() )
-             | ranges::cpp20::views::transform(
-                 [] ( const auto& value ) -> ReferenceFrame
-                    { return value < 0 ? ReferenceFrame::CentreOfMass
-                                       : ReferenceFrame::Laboratory; } );
+    return this->frames_;
   }
 
   /**
@@ -86,17 +84,15 @@ public:
     #ifndef NDEBUG
     this->verifyReactionIndex( index, 1, this->NTR() );
     #endif
-    return std::abs( this->XSS( index ) );
+    return this->multiplicities_[ index - 1 ];
   }
 
   /**
    *  @brief Return the multiplicities
    */
-  auto multiplicities() const {
+  const std::vector< unsigned int >& multiplicities() const {
 
-    return this->XSS( 1, this->NTR() )
-             | ranges::cpp20::views::transform(
-                 [] ( const auto& value ) { return std::abs( value ); } );
+    return this->multiplicities_;
   }
 
   using Base::empty;

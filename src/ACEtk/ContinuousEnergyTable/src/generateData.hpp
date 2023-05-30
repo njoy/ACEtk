@@ -1,6 +1,41 @@
+block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
+
+  auto entries = dlw.tyrMultiplicities();
+  std::vector< ReferenceFrame > frames = dlw.referenceFrames();
+  std::vector< unsigned int > multiplicities( entries.begin(),
+                                              entries.begin() + dlw.NR() );
+  for ( unsigned int i = dlw.NR(); i < ntr; ++i ) {
+
+    frames.push_back( ReferenceFrame::Laboratory );
+    multiplicities.push_back( 0 );
+  }
+  return { std::move( frames ), std::move( multiplicities ) };
+}
+
+std::optional< std::vector< block::TYRH > >
+generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
+
+  std::optional< std::vector< block::TYRH > > tyrh = std::nullopt;
+  if ( dlwh ) {
+
+    tyrh = std::vector< block::TYRH >{};
+    for ( const auto& element : dlwh.value() ) {
+
+      std::vector< ReferenceFrame > frames;
+      std::transform( element.referenceFrames().begin(),
+                      element.referenceFrames().end(),
+                      std::back_inserter( frames ),
+                      [] ( auto&& optional ) -> ReferenceFrame
+                         { return optional.value(); } );
+      tyrh->emplace_back( frames );
+    }
+  }
+  return tyrh;
+}
+
 Data generateData( unsigned int z, unsigned int a,
                    block::ESZ&& esz, std::optional< block::NU >&& nu,
-                   block::MTR&& mtr, block::LQR&& lqr, block::TYR&& tyr,
+                   block::MTR&& mtr, block::LQR&& lqr,
                    block::SIG&& sig, block::AND&& ang, block::DLW&& dlw,
                    std::optional< block::GPD >&& gpd,
                    std::optional< block::MTRP >&& mtrp,
@@ -15,7 +50,6 @@ Data generateData( unsigned int z, unsigned int a,
                    std::optional< block::PTYPE >&& ptype,
                    std::optional< std::vector< block::HPD > >&& hpd,
                    std::optional< std::vector< block::MTRH > >&& mtrh,
-                   std::optional< std::vector< block::TYRH > >&& tyrh,
                    std::optional< std::vector< block::SIGH > >&& sigh,
                    std::optional< std::vector< block::ANDH > >&& andh,
                    std::optional< std::vector< block::DLWH > >&& dlwh,
@@ -31,6 +65,17 @@ Data generateData( unsigned int z, unsigned int a,
   jxs.fill( 0 );
   std::vector< double > xss;
 
+  // some size values
+  unsigned int ntr = mtr.NTR();
+  unsigned int nr = ang.NR();
+  unsigned int ntrp = mtrp ? mtrp->NTR() : 0;
+  unsigned int ntype = ptype ? ptype->NTYPE() : 0;
+  unsigned int npcr = bdd ? bdd->NPCR() : 0;
+
+  // generate blocks we don't have yet
+  block::TYR tyr = generateTYR( dlw, ntr );
+  std::optional< std::vector< block::TYRH > > tyrh = generateTYRH( dlwh );
+
   // verify some stuff:
   //  - MTR, LQR, TYR and SIG have the same NTR
   //  - AND and DLW have the same NR
@@ -42,11 +87,6 @@ Data generateData( unsigned int z, unsigned int a,
   //  - BDD and DNED have the same NPCR
   //  - when one of the secondary particle blocks is defined, all of them should be
   //  - the number of secondary particle production blocks is correct
-  unsigned int ntr = mtr.NTR();
-  unsigned int nr = ang.NR();
-  unsigned int ntrp = mtrp ? mtrp->NTR() : 0;
-  unsigned int ntype = ptype ? ptype->NTYPE() : 0;
-  unsigned int npcr = bdd ? bdd->NPCR() : 0;
   if ( ( ntr != lqr.NTR() ) || ( ntr != tyr.NTR() ) ||
        ( ntr != sig.NTR() ) ) {
 
@@ -101,7 +141,7 @@ Data generateData( unsigned int z, unsigned int a,
       throw std::exception();
     }
     unsigned int lnu = std::visit( [] ( const auto& nu ) { return nu.LNU(); },
-                                   dnu->promptFissionMultiplicity() );
+                                   dnu->multiplicity() );
     if ( lnu != 2 ) {
 
       Log::error( "The delayed fission neutron multiplicity data is not given "
