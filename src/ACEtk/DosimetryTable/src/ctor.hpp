@@ -1,31 +1,61 @@
+/**
+ *  @brief Copy constructor using a generic table
+ *
+ *  @param[in] table    the generic table to be copied
+ */
 DosimetryTable( const Table& table ): Table( table ) {
 
   this->generateBlocks();
 }
 
+/**
+ *  @brief Move constructor using a generic table
+ *
+ *  @param[in] table    the generic table to be moved
+ */
 DosimetryTable( Table&& table ): Table( std::move( table ) ) {
 
   this->generateBlocks();
 }
 
+/**
+ *  @brief Copy constructor using a dosimetry table
+ *
+ *  @param[in] table    the dosimetry table to be copied
+ */
 DosimetryTable( const DosimetryTable& dostable ) :
   Table( dostable ) {
 
   this->generateBlocks();
 }
 
+/**
+ *  @brief Move constructor using a dosimetry table
+ *
+ *  @param[in] table    the dosimetry table to be moved
+ */
 DosimetryTable( DosimetryTable&& dostable ) :
   Table( std::move( dostable ) ) {
 
   this->generateBlocks();
 }
 
+/**
+ *  @brief Copy assignment using a dosimetry table
+ *
+ *  @param[in] table    the dosimetry table to be copied
+ */
 DosimetryTable& operator=( const DosimetryTable& base ) {
 
   new (this) DosimetryTable( base );
   return *this;
 }
 
+/**
+ *  @brief Move assignment using a dosimetry table
+ *
+ *  @param[in] table    the dosimetry table to be moved
+ */
 DosimetryTable& operator=( DosimetryTable&& base ) {
 
   new (this) DosimetryTable( std::move( base ) );

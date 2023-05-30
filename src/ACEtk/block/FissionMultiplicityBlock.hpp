@@ -122,6 +122,7 @@ public:
 };
 
 using NU = FissionMultiplicityBlock;
+using DNU = FissionMultiplicityBlock;
 
 } // block namespace
 } // ACEtk namespace

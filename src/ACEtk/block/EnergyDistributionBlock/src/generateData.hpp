@@ -79,7 +79,6 @@ generateData( std::size_t locator, Iterator left, Iterator right ) {
   }
   else {
 
-    // this is a multi-law - currently unimplemented
-    throw std::runtime_error( "DLW multi-law - currently not implemented" );
+    return MultiDistributionData( locator, left, right );
   }
 }

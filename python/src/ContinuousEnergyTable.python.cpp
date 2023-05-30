@@ -18,12 +18,30 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   using Table = njoy::ACEtk::ContinuousEnergyTable;
   using ESZ = njoy::ACEtk::block::ESZ;
   using NU = njoy::ACEtk::block::NU;
+  using DNU = njoy::ACEtk::block::DNU;
   using MTR = njoy::ACEtk::block::MTR;
   using LQR = njoy::ACEtk::block::LQR;
   using TYR = njoy::ACEtk::block::TYR;
   using SIG = njoy::ACEtk::block::SIG;
   using AND = njoy::ACEtk::block::AND;
   using DLW = njoy::ACEtk::block::DLW;
+  using BDD = njoy::ACEtk::block::BDD;
+  using DNED = njoy::ACEtk::block::DNED;
+  using GPD = njoy::ACEtk::block::GPD;
+  using MTRP = njoy::ACEtk::block::MTRP;
+  using SIGP = njoy::ACEtk::block::SIGP;
+  using ANDP = njoy::ACEtk::block::ANDP;
+  using DLWP = njoy::ACEtk::block::DLWP;
+  using YP = njoy::ACEtk::block::YP;
+  using UNR = njoy::ACEtk::block::UNR;
+  using PTYPE = njoy::ACEtk::block::PTYPE;
+  using HPD = njoy::ACEtk::block::HPD;
+  using MTRH = njoy::ACEtk::block::MTRH;
+  using TYRH = njoy::ACEtk::block::TYRH;
+  using SIGH = njoy::ACEtk::block::SIGH;
+  using ANDH = njoy::ACEtk::block::ANDH;
+  using DLWH = njoy::ACEtk::block::DLWH;
+  using YH = njoy::ACEtk::block::YH;
 
   // wrap views created by this table
 
@@ -42,13 +60,34 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   .def(
 
     python::init< unsigned int, unsigned int, Header,
-                  ESZ, std::optional< NU >, MTR, LQR, TYR,
-                  SIG, AND, DLW >(),
+                  ESZ, std::optional< NU >, std::optional< DNU >,
+                  MTR, LQR, TYR, SIG, AND, DLW,
+                  std::optional< BDD >, std::optional< DNED >,
+                  std::optional< GPD >, std::optional< MTRP >,
+                  std::optional< SIGP >, std::optional< ANDP >,
+                  std::optional< DLWP >, std::optional< YP >,
+                  std::optional< UNR >, std::optional< PTYPE >,
+                  std::optional< std::vector< HPD > >,
+                  std::optional< std::vector< MTRH > >,
+                  std::optional< std::vector< TYRH > >,
+                  std::optional< std::vector< SIGH > >,
+                  std::optional< std::vector< ANDH > >,
+                  std::optional< std::vector< DLWH > >,
+                  std::optional< std::vector< YH > > >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "esz" ),
-    python::arg( "nu" ) = std::nullopt,
+    python::arg( "nu" ) = std::nullopt, python::arg( "dnu" ) = std::nullopt,
     python::arg( "mtr" ), python::arg( "lqr" ), python::arg( "tyr" ),
     python::arg( "sig" ), python::arg( "ang" ), python::arg( "dlw" ),
+    python::arg( "bdd" ) = std::nullopt, python::arg( "dned" ) = std::nullopt,
+    python::arg( "gpd" ) = std::nullopt, python::arg( "mtrp" ) = std::nullopt,
+    python::arg( "sigp" ) = std::nullopt, python::arg( "andp" ) = std::nullopt,
+    python::arg( "dlwp" ) = std::nullopt, python::arg( "yp" ) = std::nullopt,
+    python::arg( "unr" ) = std::nullopt, python::arg( "ptype" ) = std::nullopt,
+    python::arg( "hpd" ) = std::nullopt, python::arg( "mtrh" ) = std::nullopt,
+    python::arg( "tyrh" ) = std::nullopt, python::arg( "sigh" ) = std::nullopt,
+    python::arg( "andh" ) = std::nullopt, python::arg( "dlwh" ) = std::nullopt,
+    python::arg( "yh" ) = std::nullopt,
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -56,13 +95,31 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    a         the A number of the nuclide\n"
     "    header    the header for the table\n"
     "    esz       the principal cross section block\n"
-    "    nu        the optional fission multiplicity block\n"
+    "    nu        the optional fission neutron multiplicity block\n"
+    "    dnu       the optional delayed fission neutron multiplicity block\n"
     "    mtr       the reaction number block\n"
     "    lqr       the reaction Q value block\n"
     "    tyr       the reference frame and multiplicity block\n"
     "    sig       the cross section data block\n"
     "    ang       the angular distribution data block\n"
-    "    dlw       the energy distribution data block"
+    "    dlw       the energy distribution data block\n"
+    "    bdd       the delayed fission neutron precursor data block\n"
+    "    dned      the delayed fission neutron energy distribution data block\n"
+    "    gpd       the photon production block\n"
+    "    mtrp      the photon production reaction number block\n"
+    "    sigp      the photon production cross section data block\n"
+    "    angp      the photon production angular distribution data block\n"
+    "    dlwp      the photon production energy distribution data block\n"
+    "    yp        the photon multiplicity reaction number block\n"
+    "    unr       the unresolved resonance probability table block\n"
+    "    ptype     the secondary particle type block\n"
+    "    hpd       the secondary particle production blocks\n"
+    "    mtrh      the secondary particle production reaction number blocks\n"
+    "    tyrh      the secondary particle productionreference frame blocks\n"
+    "    sigh      the secondary particle production cross section data blocks\n"
+    "    angh      the secondary particle angular distribution data blocks\n"
+    "    dlwh      the secondary particle energy distribution data blocks\n"
+    "    yh        the secondary particle multiplicity reaction number blocks"
   )
   .def_property_readonly(
 

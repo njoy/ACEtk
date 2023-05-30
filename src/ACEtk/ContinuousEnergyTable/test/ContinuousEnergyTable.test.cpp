@@ -93,6 +93,79 @@ SCENARIO( "ContinuousEnergyTable" ){
         }
       } // THEN
     } // WHEN
+
+    WHEN( "constructing a ContinuousEnergyTable from its components" ) {
+
+      ContinuousEnergyTable base( std::move( table ) );
+
+      ContinuousEnergyTable chunk( 92, 235, base.header(),
+                                   base.ESZ(), base.NU(), base.DNU(),
+                                   base.MTR(), base.LQR(), base.TYR(),
+                                   base.SIG(), base.AND(), base.DLW(),
+                                   base.BDD(), base.DNED(),
+                                   base.GPD(), base.MTRP(), base.SIGP(),
+                                   base.ANDP(), base.DLWP(), base.YP(),
+                                   base.UNR(),
+                                   std::nullopt, std::nullopt, std::nullopt,
+                                   std::nullopt, std::nullopt, std::nullopt,
+                                   std::nullopt, std::nullopt );
+
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkU235( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a ContinuousEnergyTable - He3" ) {
@@ -109,6 +182,98 @@ SCENARIO( "ContinuousEnergyTable" ){
       ContinuousEnergyTable chunk( std::move( table ) );
 
       THEN( "a ContinuousEnergyTable can be constructed and members can be tested" ) {
+
+        verifyChunkHe3( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ContinuousEnergyTable from its components" ) {
+
+      ContinuousEnergyTable base( std::move( table ) );
+
+      std::optional< std::vector< block::HPD > > hpd = std::vector< block::HPD >{};
+      std::optional< std::vector< block::MTRH > > mtrh = std::vector< block::MTRH >{};
+      std::optional< std::vector< block::TYRH > > tyrh = std::vector< block::TYRH >{};
+      std::optional< std::vector< block::SIGH > > sigh = std::vector< block::SIGH >{};
+      std::optional< std::vector< block::ANDH > > andh = std::vector< block::ANDH >{};
+      std::optional< std::vector< block::DLWH > > dlwh = std::vector< block::DLWH >{};
+      std::optional< std::vector< block::YH > > yh = std::vector< block::YH >{};
+      for ( unsigned int index = 1; index <= base.NTYPE(); ++index ) {
+
+        hpd->push_back( base.HPD( index ) );
+        mtrh->push_back( base.MTRH( index ) );
+        tyrh->push_back( base.TYRH( index ) );
+        sigh->push_back( base.SIGH( index ) );
+        andh->push_back( base.ANDH( index ) );
+        dlwh->push_back( base.DLWH( index ) );
+        yh->push_back( base.YH( index ) );
+      }
+
+      ContinuousEnergyTable chunk( 2, 3, base.header(),
+                                   base.ESZ(), std::nullopt, std::nullopt,
+                                   base.MTR(), base.LQR(), base.TYR(),
+                                   base.SIG(), base.AND(), base.DLW(),
+                                   std::nullopt, std::nullopt,
+                                   std::nullopt, std::nullopt, std::nullopt,
+                                   std::nullopt, std::nullopt, std::nullopt,
+                                   std::nullopt,
+                                   base.PTYPE(), std::move( hpd ),
+                                   std::move( mtrh ), std::move( tyrh ),
+                                   std::move( sigh ), std::move( andh ),
+                                   std::move( dlwh ), std::move( yh ) );
+
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
 
         verifyChunkHe3( chunk );
       }

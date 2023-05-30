@@ -41,6 +41,12 @@ void generateBlocks() {
             NBodyPhaseSpaceDistribution( dbegin, end, emin, emax ) );
         break;
       }
+      case EnergyDistributionType::TwoBodyTransfer : {
+
+        this->distributions_.emplace_back(
+            TwoBodyTransferDistribution( dbegin, end, emin, emax ) );
+        break;
+      }
       case EnergyDistributionType::TabulatedEnergy : {
 
         this->distributions_.emplace_back(
@@ -52,6 +58,17 @@ void generateBlocks() {
         this->distributions_.emplace_back(
             KalbachMannDistributionData( idat, dbegin, end ) );
         break;
+      }
+      case EnergyDistributionType::TabulatedEnergyAngle : {
+
+        this->distributions_.emplace_back(
+          EnergyAngleDistributionData( idat, dbegin, end ) );
+        break;
+      }
+      case EnergyDistributionType::TabulatedAngleEnergy : {
+
+        this->distributions_.emplace_back(
+          AngleEnergyDistributionData( idat, dbegin, end ) );
       }
       case EnergyDistributionType::Equiprobable : {
 

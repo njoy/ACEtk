@@ -8,15 +8,55 @@ auto block( std::size_t index ) const {
   std::size_t end = 0;
   if ( index != 32 ) {
 
-    // look for the first value that is larger then or equal to the start locator
-    auto iter = std::find_if( this->data().JXS().begin() + index,
-                              this->data().JXS().end(),
-                              [start] ( auto&& value ) { return value >= start; } );
-    if ( iter != this->data().JXS().end() ) {
+    if ( start != 0 ) {
 
-      // JXS(22) is not a locator, it points to the last value of the conventional
-      // XSS array (i.e. before the secondary particle data)
-      end = *iter != this->data().JXS(22) ? *iter : *iter + 1;
+      // look for the first value that is larger then or equal to the start locator
+      auto iter = std::find_if( this->data().JXS().begin() + index,
+                                this->data().JXS().end(),
+                                [start] ( auto&& value ) { return value >= start; } );
+      if ( iter != this->data().JXS().end() ) {
+
+        // JXS(22) is not a locator, it points to the last value of the conventional
+        // XSS array (i.e. before the secondary particle data)
+        end = *iter != this->data().JXS(22) ? *iter : *iter + 1;
+      }
+
+      // verify if out of order blocks exist (delayed neutron data before photons)
+      switch ( index ) {
+
+        // DLW ends either at GPD or UNR
+        case 11 : {
+
+          auto unr = this->data().JXS( 23 );
+          if ( unr != 0 ) {
+
+            if ( end > unr ) {
+
+              end = unr;
+            }
+          }
+          break;
+        }
+        // DEND ends either at GPD or END
+        case 27 : {
+
+          if ( end == 0 ) {
+
+            end = this->data().JXS(22) + 1;
+          }
+
+          auto gpd = this->data().JXS( 12 );
+          if ( gpd != 0 ) {
+
+            if ( end > gpd ) {
+
+              end = gpd;
+            }
+          }
+          break;
+        }
+        default: break;
+      }
     }
   }
   else {
@@ -93,7 +133,7 @@ void generateBlocks() {
   this->and_ = block::AND( locators.first, iterators.first, iterators.second,
                            this->NR() );
 
-  // angular distribution block
+  // energy distribution block
   locators = block( 10 );
   iterators = block( 11 );
   this->dlw_ = block::DLW( locators.first, iterators.first, iterators.second,
