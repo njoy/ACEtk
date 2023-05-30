@@ -1,6 +1,6 @@
 void generateFrames() {
 
-  if ( this->TYRH() ) {
+  if ( this->TYRH().has_value() ) {
 
     this->frames_.insert( this->frames_.end(),
                           this->TYRH()->referenceFrames().begin(),

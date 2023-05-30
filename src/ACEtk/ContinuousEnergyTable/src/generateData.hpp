@@ -1,4 +1,4 @@
-block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
+static block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
 
   auto entries = dlw.tyrMultiplicities();
   std::vector< ReferenceFrame > frames = dlw.referenceFrames();
@@ -12,7 +12,7 @@ block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
   return { std::move( frames ), std::move( multiplicities ) };
 }
 
-std::optional< std::vector< block::TYRH > >
+static std::optional< std::vector< block::TYRH > >
 generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
 
   std::optional< std::vector< block::TYRH > > tyrh = std::nullopt;

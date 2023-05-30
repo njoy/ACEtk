@@ -20,7 +20,6 @@
 #include "ACEtk/block/TwoBodyTransferDistribution.hpp"
 #include "ACEtk/block/EnergyAngleDistributionData.hpp"
 #include "ACEtk/block/AngleEnergyDistributionData.hpp"
-#include "ACEtk/block/TwoBodyTransferDistribution.hpp"
 #include "ACEtk/block/MultiDistributionData.hpp"
 
 namespace njoy {
@@ -45,13 +44,13 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
 
 /**
  *  @class
- *  @brief The continuous energy LDLWP,DLWP and LDLWH,DLWH blocks with the
+ *  @brief The continuous energy LDLWP, DLWP and LDLWH, DLWH blocks with the
  *         energy distribution data for secondary particles that are not the
  *         incident particle type
  *
  *  The SecondaryParticleAngularDistributionBlock class contains energy
  *  distribution data, one for each the NXS(6) reaction numbers on the MTRP
- *  block (for the LANDP,ANDP blocks) and each of the NTRO(ITYPE) reactions on
+ *  block (for the LANDP, ANDP blocks) and each of the NTRO(ITYPE) reactions on
  *  the MTRH(ITYPE) block. The order of the distribution data sets is the same
  *  as the order of the reaction numbers in the corresponding MTR block.
  */

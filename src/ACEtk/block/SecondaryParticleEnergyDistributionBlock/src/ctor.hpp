@@ -27,7 +27,7 @@ SecondaryParticleEnergyDistributionBlock(
 }
 
 /**
- *  @brief Constructor (without reference frames for DNED)
+ *  @brief Constructor (without reference frames for DLWH)
  *
  *  @param[in] distributions    the energy distribution data
  */
@@ -55,7 +55,7 @@ SecondaryParticleEnergyDistributionBlock(
 }
 
 /**
- *  @brief Constructor (without reference frames for DNED)
+ *  @brief Constructor (without reference frames for DLWH)
  *
  *  @param[in] ldlw    the begin iterator of the LDLW block in the XSS array
  *  @param[in] dlw     the begin iterator of the DLW block in the XSS array
