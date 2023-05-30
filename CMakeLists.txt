@@ -140,6 +140,8 @@ if(ACEtk.python)
     python/src/block/SecondaryParticleLocatorBlock.python.cpp
     python/src/block/SecondaryParticleProductionBlock.python.cpp
     python/src/block/SecondaryParticleProductionCrossSectionBlock.python.cpp
+    python/src/block/ProbabilityTable.python.cpp
+    python/src/block/ProbabilityTableBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
   )
