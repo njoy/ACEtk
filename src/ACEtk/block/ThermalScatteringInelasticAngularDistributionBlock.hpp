@@ -157,7 +157,7 @@ public:
    */
   std::size_t NIEB( std::size_t index ) const {
 
-    if ( this->nieb_ ) {
+    if ( this->nieb_.has_value() ) {
 
       return this->nieb_.value();
     }
