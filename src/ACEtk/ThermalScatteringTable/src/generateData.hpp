@@ -28,20 +28,20 @@ Data generateData( std::vector< unsigned int > za,
 
   // some options
   unsigned int idpnc = 0;
-  if ( itce || itcei ) {
+  if ( itce.has_value() || itcei.has_value() ) {
 
-    if ( itce && itcei ) {
+    if ( itce.has_value() && itcei.has_value() ) {
 
       idpnc = 5;
-      ncl = itca ? itca->NCL() : -1;
+      ncl = itca.has_value() ? itca->NCL() : -1;
       ncli = itcai->NCL();
     }
     else {
 
-      if ( itce ) {
+      if ( itce.has_value() ) {
 
         idpnc = 4;
-        ncl = itca ? itca->NCL() : -1;
+        ncl = itca.has_value() ? itca->NCL() : -1;
       }
       else {
 
