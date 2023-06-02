@@ -67,35 +67,32 @@ Data generateData( std::vector< unsigned int > za,
   xss.insert( xss.end(), itie.begin(), itie.end() );
   jxs[2] = xss.size() + 1;
   xss.insert( xss.end(), itxe.begin(), itxe.end() );
-  if ( idpnc ) {
+  if ( idpnc == 3 ) {
 
-    if ( idpnc == 3 ) {
+    jxs[3] = xss.size() + 1;
+    jxs[4] = jxs[3] + itcei->NE() + 1;
+    xss.insert( xss.end(), itcei->begin(), itcei->end() );
+    jxs[5] = xss.size() + 1;
+    xss.insert( xss.end(), itcai->begin(), itcai->end() );
+  }
+  if ( ( idpnc == 4 ) || ( idpnc == 5 ) ) {
 
-      jxs[3] = xss.size() + 1;
-      jxs[4] = jxs[3] + itcei->NE() + 1;
-      xss.insert( xss.end(), itcei->begin(), itcei->end() );
-      jxs[5] = xss.size() + 1;
-      xss.insert( xss.end(), itcai->begin(), itcai->end() );
+    jxs[3] = xss.size() + 1;
+    jxs[4] = jxs[3] + itce->NE() + 1;
+    xss.insert( xss.end(), itce->begin(), itce->end() );
+    if ( itca ) {
+
+      jxs[5] = itca->empty() ? 0 : xss.size() + 1;
+      xss.insert( xss.end(), itca->begin(), itca->end() );
     }
-    if ( ( idpnc == 4 ) || ( idpnc == 5 ) ) {
+  }
+  if ( idpnc == 5 ) {
 
-      jxs[3] = xss.size() + 1;
-      jxs[4] = jxs[3] + itce->NE() + 1;
-      xss.insert( xss.end(), itce->begin(), itce->end() );
-      if ( itca ) {
-
-        jxs[5] = itca->empty() ? 0 : xss.size() + 1;
-        xss.insert( xss.end(), itca->begin(), itca->end() );
-      }
-    }
-    if ( idpnc == 5 ) {
-
-      jxs[6] = xss.size() + 1;
-      jxs[7] = jxs[6] + itcei->NE() + 1;
-      xss.insert( xss.end(), itcei->begin(), itcei->end() );
-      jxs[8] = xss.size() + 1;
-      xss.insert( xss.end(), itcai->begin(), itcai->end() );
-    }
+    jxs[6] = xss.size() + 1;
+    jxs[7] = jxs[6] + itcei->NE() + 1;
+    xss.insert( xss.end(), itcei->begin(), itcei->end() );
+    jxs[8] = xss.size() + 1;
+    xss.insert( xss.end(), itcai->begin(), itcai->end() );
   }
 
   // set the nxs values for the continuous energy table
