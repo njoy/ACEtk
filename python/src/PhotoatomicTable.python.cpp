@@ -60,7 +60,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "    jinc      the incoherent scattering function block\n"
     "    jcoh      the coherent form factor block\n"
     "    lhnm      the heating numbers block\n"
-    "    lhnm      the fluorescence data block\n"
+    "    jflo      the fluorescence data block\n"
     "    eps       the electron shell block\n"
     "    swd       the compton profile block"
   )
