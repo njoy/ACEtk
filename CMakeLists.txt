@@ -144,8 +144,14 @@ if(ACEtk.python)
     python/src/block/SecondaryParticleProductionCrossSectionBlock.python.cpp
     python/src/block/ProbabilityTable.python.cpp
     python/src/block/ProbabilityTableBlock.python.cpp
+    python/src/block/ThermalScatteringCrossSectionBlock.python.cpp
+    python/src/block/ThermalScatteringDiscreteCosines.python.cpp
+    python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
+    python/src/block/ThermalScatteringElasticAngularDistributionBlock.python.cpp
+    python/src/block/ThermalScatteringInelasticAngularDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
+    python/src/ThermalScatteringTable.python.cpp
   )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )

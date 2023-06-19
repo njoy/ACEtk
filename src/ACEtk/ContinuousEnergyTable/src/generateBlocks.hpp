@@ -19,20 +19,30 @@ auto block( std::size_t index ) const {
         // JXS(22) is not a locator, it points to the last value of the conventional
         // XSS array (i.e. before the secondary particle data)
         end = *iter != this->data().JXS(22) ? *iter : *iter + 1;
+
+        // JXS(21) does not point to an actual block so set it to END + 1 instead
+        if ( end == this->data().JXS(21) ) {
+
+          end = this->data().JXS(22) + 1;
+        }
       }
 
       // verify if out of order blocks exist (delayed neutron data before photons)
       switch ( index ) {
 
-        // DLW ends either at GPD or UNR
+        // DLW ends either at GPD or one of the blocks past JXS(22)
         case 11 : {
 
-          auto unr = this->data().JXS( 23 );
-          if ( unr != 0 ) {
+          iter = std::find_if( this->data().JXS().begin() + 22,
+                               this->data().JXS().end(),
+                               [start] ( auto&& value ) { return value >= start; } );
 
-            if ( end > unr ) {
+          if ( iter != this->data().JXS().end() ) {
 
-              end = unr;
+            auto next = *iter;
+            if ( end > next ) {
+
+              end = next;
             }
           }
           break;
