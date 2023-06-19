@@ -24,6 +24,8 @@ class CoherentFormFactorBlock : protected details::ArrayData {
   /* fields */
 
   /* auxiliary functions */
+  #include "ACEtk/block/CrossSectionData/src/generateXSS.hpp"
+  #include "ACEtk/block/CrossSectionData/src/verifySize.hpp"
 
 public:
 
@@ -35,17 +37,17 @@ public:
   /**
    *  @brief Return the number of values
    */
-  constexpr unsigned int NM() const { return 55; }
+  static constexpr unsigned int NM() { return 55; }
 
   /**
    *  @brief Return the number of values
    */
-  constexpr unsigned int numberValues() const { return this->NM(); }
+  static constexpr unsigned int numberValues() { return NM(); }
 
   /**
    *  @brief Return the electron recoil momentum values
    */
-  constexpr std::array< double, 55 > momentum() const {
+  static constexpr std::array< double, 55 > momentum() {
 
     return {{ 0., .01, .02, .03, .04, .05, .06, .08, .10, .12, .15,
               .18, .20, .25, .30, .35, .40, .45, .50, .55, .60, .70,

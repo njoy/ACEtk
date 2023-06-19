@@ -149,14 +149,18 @@ if(ACEtk.python)
     python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
     python/src/block/ThermalScatteringElasticAngularDistributionBlock.python.cpp
     python/src/block/ThermalScatteringInelasticAngularDistributionBlock.python.cpp
-    python/src/block/PhotoAtomicPrincipalCrossSectionBlock.python.cpp
+    python/src/block/PhotoatomicPrincipalCrossSectionBlock.python.cpp
     python/src/block/IncoherentScatteringFunctionBlock.python.cpp
     python/src/block/CoherentFormFactorBlock.python.cpp
-    python/src/block/PhotoAtomicHeatingNumbersBlock.python.cpp
+    python/src/block/PhotoatomicFluorescenceDataBlock.python.cpp
+    python/src/block/PhotoatomicHeatingNumbersBlock.python.cpp
+    python/src/block/PhotoatomicElectronShellBlock.python.cpp
+    python/src/block/PhotoatomicComptonProfile.python.cpp
+    python/src/block/PhotoatomicComptonProfileBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp
-    python/src/PhotoAtomicTable.python.cpp
+    python/src/PhotoatomicTable.python.cpp
   )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
