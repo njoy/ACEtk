@@ -12,7 +12,7 @@ BaseBlockWithLocators( std::string&& name, std::vector< Data >&& xs,
   static_cast< Derived* >( this )->generateBlocks();
 }
 
-public:
+protected:
 
 BaseBlockWithLocators() = default;
 

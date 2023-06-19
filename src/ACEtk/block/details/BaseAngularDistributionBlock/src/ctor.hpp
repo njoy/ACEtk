@@ -25,7 +25,7 @@ BaseAngularDistributionBlock( std::string&& name,
                                             std::move( data ) ),
                                 nr, true ) {}
 
-public:
+protected:
 
 BaseAngularDistributionBlock() = default;
 

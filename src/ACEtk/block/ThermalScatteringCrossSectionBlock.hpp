@@ -45,7 +45,7 @@ public:
    */
   auto crossSections() const { return this->column( 2 ); }
 
-  using Base::empty;
+  using ColumnData::empty;
   using ColumnData::name;
   using ColumnData::length;
   using ColumnData::XSS;

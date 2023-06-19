@@ -65,6 +65,7 @@ namespace block {
   void wrapProbabilityTable( python::module&, python::module& );
   void wrapThermalScatteringDiscreteCosines( python::module&, python::module& );
   void wrapThermalScatteringDiscreteCosinesWithProbability( python::module&, python::module& );
+  void wrapPhotoatomicComptonProfile( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -91,12 +92,20 @@ namespace block {
   void wrapThermalScatteringCrossSectionBlock( python::module&, python::module& );
   void wrapThermalScatteringElasticAngularDistributionBlock( python::module&, python::module& );
   void wrapThermalScatteringInelasticAngularDistributionBlock( python::module&, python::module& );
+  void wrapPhotoatomicPrincipalCrossSectionBlock( python::module&, python::module& );
+  void wrapIncoherentScatteringFunctionBlock( python::module&, python::module& );
+  void wrapCoherentFormFactorBlock( python::module&, python::module& );
+  void wrapPhotoatomicFluorescenceDataBlock( python::module&, python::module& );
+  void wrapPhotoatomicHeatingNumbersBlock( python::module&, python::module& );
+  void wrapPhotoatomicElectronShellBlock( python::module&, python::module& );
+  void wrapPhotoatomicComptonProfileBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
 void wrapContinuousEnergyTable( python::module&, python::module& );
 void wrapDosimetryTable( python::module&, python::module& );
 void wrapThermalScatteringTable( python::module&, python::module& );
+void wrapPhotoatomicTable( python::module&, python::module& );
 
 /**
  *  @brief ACEtk python bindings
@@ -180,6 +189,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapProbabilityTable( module, viewmodule );
   block::wrapThermalScatteringDiscreteCosines( module, viewmodule );
   block::wrapThermalScatteringDiscreteCosinesWithProbability( module, viewmodule );
+  block::wrapPhotoatomicComptonProfile( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
@@ -206,9 +216,17 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapThermalScatteringCrossSectionBlock( module, viewmodule );
   block::wrapThermalScatteringElasticAngularDistributionBlock( module, viewmodule );
   block::wrapThermalScatteringInelasticAngularDistributionBlock( module, viewmodule );
+  block::wrapPhotoatomicPrincipalCrossSectionBlock( module, viewmodule );
+  block::wrapIncoherentScatteringFunctionBlock( module, viewmodule );
+  block::wrapCoherentFormFactorBlock( module, viewmodule );
+  block::wrapPhotoatomicFluorescenceDataBlock( module, viewmodule );
+  block::wrapPhotoatomicHeatingNumbersBlock( module, viewmodule );
+  block::wrapPhotoatomicElectronShellBlock( module, viewmodule );
+  block::wrapPhotoatomicComptonProfileBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
   wrapDosimetryTable( module, viewmodule );
   wrapThermalScatteringTable( module, viewmodule );
+  wrapPhotoatomicTable( module, viewmodule );
 }

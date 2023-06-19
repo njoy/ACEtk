@@ -11,6 +11,7 @@ TabulatedProbabilityDistribution( TabulatedProbabilityDistribution&& ) = default
  *  @param[in] values          the values (N values)
  *  @param[in] pdf             the pdf values (N values)
  *  @param[in] cdf             the cdf values (N values)
+ *  @param[in] data            the additional data (arrays of N values)
  */
 TabulatedProbabilityDistribution( std::string name,
                                   int interpolation,
@@ -22,6 +23,24 @@ TabulatedProbabilityDistribution( std::string name,
         generateXSS( interpolation,
                      std::move( values ), std::move( pdf ), std::move( cdf ),
                      std::move( data ) ) ) {}
+
+/**
+ *  @brief Constructor
+ *
+ *  @param[in] name            the name of the block
+ *  @param[in] interpolation   the interpolation type
+ *  @param[in] values          the values (N values)
+ *  @param[in] pdf             the pdf values (N values)
+ *  @param[in] cdf             the cdf values (N values)
+ */
+TabulatedProbabilityDistribution( std::string name,
+                                  int interpolation,
+                                  std::vector< double > values,
+                                  std::vector< double > pdf,
+                                  std::vector< double > cdf ) :
+  TabulatedProbabilityDistribution(
+      std::move( name ), interpolation,
+      std::move( values ), std::move( pdf ), std::move( cdf ), {} ) {}
 
 /**
  *  @brief Constructor

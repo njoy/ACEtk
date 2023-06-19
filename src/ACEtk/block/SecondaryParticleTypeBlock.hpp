@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,14 +20,11 @@ namespace block {
  *
  *  The number of available particle types is stored in NXS(7).
  */
-class SecondaryParticleTypeBlock : protected details::Base {
+class SecondaryParticleTypeBlock : protected details::ArrayData {
 
   /* fields */
-  unsigned int ntype_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/SecondaryParticleTypeBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/SecondaryParticleTypeBlock/src/verifySize.hpp"
 
 public:
 
@@ -40,7 +37,7 @@ public:
    *  @brief Return the number of secondary particle types (excluding the
    *         projectile)
    */
-  unsigned int NTYPE() const { return this->ntype_; }
+  unsigned int NTYPE() const { return this->N(); }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
@@ -56,7 +53,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  unsigned int IP( std::size_t index ) const { return this->IXSS( index ); }
+  unsigned int IP( std::size_t index ) const { return this->ivalue( 1, index ); }
 
   /**
    *  @brief Return the particle type for a secondary particle index
@@ -71,7 +68,7 @@ public:
   /**
    *  @brief Return the particle types
    */
-  auto IPs() const { return this->XSS( 1, this->NTYPE() ); }
+  auto IPs() const { return this->array( 1 ); }
 
   /**
    *  @brief Return the particle types
@@ -85,7 +82,9 @@ public:
    */
   bool hasIP( unsigned int type ) const {
 
-    return std::find( this->begin(), this->end(), type ) != this->end();
+    return std::find( this->begin(),
+                      this->begin() + this->NTYPE(),
+                      type ) != this->end();
   }
 
   /**
@@ -105,7 +104,7 @@ public:
    */
   std::size_t index( unsigned int type ) const {
 
-    auto iter = std::find( this->begin(), this->end(), type );
+    auto iter = std::find( this->begin(), this->begin() + this->NTYPE(), type );
     if ( iter != this->end() ) {
 
       return std::distance( this->begin(), iter ) + 1;
@@ -117,12 +116,12 @@ public:
     }
   }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using PTYPE = SecondaryParticleTypeBlock;

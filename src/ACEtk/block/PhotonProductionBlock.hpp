@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,13 +20,11 @@ namespace block {
  *  section block. For older data files, this also contains the equiprobable
  *  energy bins.
  */
-class PhotonProductionBlock : protected details::Base {
+class PhotonProductionBlock : protected details::ArrayData {
 
   /* fields */
-  unsigned int nes_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/PhotonProductionBlock/src/verifySize.hpp"
 
 public:
 
@@ -38,7 +36,7 @@ public:
   /**
    *  @brief Return the number of energy points
    */
-  unsigned int NES() const { return this->nes_; }
+  unsigned int NES() const { return this->N(); }
 
   /**
    *  @brief Return the number of energy points
@@ -48,14 +46,14 @@ public:
   /**
    *  @brief Return the total photon production cross section values
    */
-  auto totalProduction() const { return this->XSS( 1, this->nes_ ); }
+  auto totalProduction() const { return this->array( 1 ); }
 
-  using Base::empty;
-  using Base::name;
-  using Base::length;
-  using Base::XSS;
-  using Base::begin;
-  using Base::end;
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using GPD = PhotonProductionBlock;

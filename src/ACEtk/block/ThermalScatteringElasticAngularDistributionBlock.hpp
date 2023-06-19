@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/block/details/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,16 +19,12 @@ namespace block {
  *  value (the associated incident energy values are stored in the
  *  associated elastic thermal scattering cross section block).
  */
-class ThermalScatteringElasticAngularDistributionBlock : protected details::Base {
+class ThermalScatteringElasticAngularDistributionBlock :
+  protected details::ArrayData {
 
   /* fields */
-  std::size_t ne_;
-  std::size_t nc_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/ThermalScatteringElasticAngularDistributionBlock/src/verifyIndex.hpp"
-  #include "ACEtk/block/ThermalScatteringElasticAngularDistributionBlock/src/verifySize.hpp"
-  #include "ACEtk/block/ThermalScatteringElasticAngularDistributionBlock/src/generateXSS.hpp"
 
 public:
 
@@ -38,7 +34,7 @@ public:
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t NE() const { return this->ne_; }
+  std::size_t NE() const { return this->M(); }
 
   /**
    *  @brief Return the number of incident energy values
@@ -49,7 +45,7 @@ public:
    *  @brief Return the number of equiprobable discrete cosine values for each
    *         incident energy value
    */
-  std::size_t NC() const { return this->nc_; }
+  std::size_t NC() const { return this->N(); }
 
   /**
    *  @brief Return the number of equiprobable discrete cosine values for each
@@ -79,13 +75,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto cosines( std::size_t index ) const {
-
-    #ifndef NDEBUG
-    this->verifyIndex( index );
-    #endif
-    return this->XSS( this->NC() * ( index - 1 ) + 1, this->NC() );
-  }
+  auto cosines( std::size_t index ) const { return this->array( index ); }
 
   using Base::empty;
   using Base::name;

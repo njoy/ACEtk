@@ -1,14 +1,3 @@
-private:
-
-/**
- *  @brief Private constructor
- */
-ReactionNumberBlock( std::vector< unsigned int >&& reactions, std::size_t ntr ) :
-  Base( "MTR", generateXSS( std::move( reactions ) ) ),
-  ntr_( ntr ) {}
-
-public:
-
 ReactionNumberBlock() = default;
 
 ReactionNumberBlock( const ReactionNumberBlock& ) = default;
@@ -20,20 +9,18 @@ ReactionNumberBlock( ReactionNumberBlock&& ) = default;
  *  @param[in] mts    the MT numbers
  */
 ReactionNumberBlock( std::vector< unsigned int > reactions ) :
-  ReactionNumberBlock( std::move( reactions ), reactions.size() ) {}
+  ArrayData( "MTR",
+             std::vector< std::vector< unsigned int > >{ std::move( reactions ) } ) {}
 
 /**
  *  @brief Constructor
  *
- *  @param[in] mtr   the begin iterator of the MTR block in the XSS array
- *  @param[in] end   the end iterator of the MTR block in the XSS array
- *  @param[in] ntr   the number of reactions (excluding elastic)
+ *  @param[in] begin   the begin iterator of the MTR block in the XSS array
+ *  @param[in] end     the end iterator of the MTR block in the XSS array
+ *  @param[in] ntr     the number of reactions (excluding elastic)
  */
-ReactionNumberBlock( Iterator mtr, Iterator end, unsigned int ntr ) :
-  Base( "MTR", mtr, end ), ntr_( ntr ) {
-
-  verifySize( this->begin(), this->end(), this->ntr_ );
-}
+ReactionNumberBlock( Iterator begin, Iterator end, unsigned int ntr ) :
+  ArrayData( "MTR", begin, end, ntr, 1 ) {}
 
 ReactionNumberBlock& operator=( const ReactionNumberBlock& ) = default;
 ReactionNumberBlock& operator=( ReactionNumberBlock&& ) = default;

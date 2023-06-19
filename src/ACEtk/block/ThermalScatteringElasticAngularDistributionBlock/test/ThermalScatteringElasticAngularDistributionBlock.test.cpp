@@ -46,8 +46,8 @@ SCENARIO( "ThermalScatteringElasticAngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringElasticAngularDistributionBlock chunk( 4, 3,
-                                                              xss.begin(), xss.end() );
+      ThermalScatteringElasticAngularDistributionBlock chunk( xss.begin(), xss.end(),
+                                                              4, 3 );
 
       THEN( "a ThermalScatteringElasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
