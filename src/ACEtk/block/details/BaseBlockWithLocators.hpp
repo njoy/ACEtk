@@ -14,15 +14,15 @@ namespace details {
 /**
  *  @class
  *  @brief The base class for a combined locator and data block like the
- *         LSI&SIG, LDLW&DLW, etc. blocks
+ *         LSIG&SIG, LDLW&DLW, etc. blocks
  */
 template < typename Derived, typename Data >
 class BaseBlockWithLocators : protected details::Base {
 
   /* fields */
-  unsigned int nr_;  // the number of reactions
-  Iterator iterator_; // the begin iterator of the data block
-  std::vector< Data > data_;
+  unsigned int n_;           // the number of data blocks
+  Iterator iterator_;        // the begin iterator of the data block
+  std::vector< Data > data_; // the data blocks
 
   /* auxiliary functions */
   #include "ACEtk/block/details/BaseBlockWithLocators/src/generateXSS.hpp"
@@ -39,7 +39,7 @@ protected:
   #include "ACEtk/block/details/BaseBlockWithLocators/src/ctor.hpp"
 
   /**
-   *  @brief Return the iterator to the start of the sig block
+   *  @brief Return the iterator to the start of the data block
    */
   Iterator iter() const { return this->iterator_; }
 
@@ -48,17 +48,17 @@ public:
   /* methods */
 
   /**
-   *  @brief Return the number of available reactions
+   *  @brief Return the number of available data blocks
    */
-  unsigned int NR() const { return this->nr_; }
+  unsigned int N() const { return this->n_; }
 
   /**
-   *  @brief Return the number of available reactions
+   *  @brief Return the number of available data blocks
    */
-  unsigned int numberReactions() const { return this->NR(); }
+  unsigned int numberDataBlocks() const { return this->N(); }
 
   /**
-   *  @brief Return the relative cross section locator for a reaction index
+   *  @brief Return the relative data locator for a data block index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
@@ -74,7 +74,7 @@ public:
   }
 
   /**
-   *  @brief Return the relative cross section locator for a reaction index
+   *  @brief Return the relative data locator for a data block index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
@@ -95,7 +95,7 @@ public:
   }
 
   /**
-   *  @brief Return the cross section data for a reaction index
+   *  @brief Return the data for a data block index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
