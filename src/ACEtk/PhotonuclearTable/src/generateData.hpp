@@ -74,7 +74,6 @@ Data generateData( unsigned int z, unsigned int a,
   xss.insert( xss.end(), sig.begin(), sig.end() );
   if ( ptype.has_value() ) {
 
-
     std::vector< unsigned int > numbers;
     for ( const auto& element : mtrh.value() ) {
 

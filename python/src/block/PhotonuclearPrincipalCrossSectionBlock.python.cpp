@@ -26,7 +26,7 @@ void wrapPhotonuclearPrincipalCrossSectionBlock( python::module& module, python:
     "PhotonuclearPrincipalCrossSectionBlock",
     "The photoatomic ESZG block with the principal cross sections\n\n"
     "The PhotonuclearPrincipalCrossSectionBlock class contains 3 or 4 arrays of the\n"
-    "same length (all values are stored as the natural logarithm):\n"
+    "same length:\n"
     "  - the energy points\n"
     "  - the total cross section\n"
     "  - the elastic scattering cross section (optional)\n"

@@ -23,7 +23,7 @@ namespace ACEtk {
  *  @class
  *  @brief The photonuclear ACE table
  *
- *  The PhotoAtomicTable class represents the ACE table for the photonuclear data.
+ *  The PhotonuclearTable class represents the ACE table for the photonuclear data.
  */
 class PhotonuclearTable : protected Table {
 
