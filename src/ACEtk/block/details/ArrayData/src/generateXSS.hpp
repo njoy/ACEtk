@@ -18,7 +18,7 @@ generateXSS( std::vector< std::vector< Number > >&& arrays ) {
     }
 
     xss.insert( xss.end(), array.begin(), array.end() );
-    index++;
+    ++index;
   }
 
   return xss;

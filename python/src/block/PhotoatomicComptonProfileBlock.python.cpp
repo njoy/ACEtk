@@ -45,13 +45,13 @@ void wrapPhotoatomicComptonProfileBlock( python::module& module, python::module&
 
     "NSH",
     &Block::NSH,
-    "The number of electron shelld"
+    "The number of electron shells"
   )
   .def_property_readonly(
 
     "number_electron_shells",
     &Block::numberElectronShells,
-    "The number of electron shelld"
+    "The number of electron shells"
   )
   .def(
 

@@ -76,7 +76,10 @@ Data generateData( unsigned int z,
 
   // set the nxs values for the continuous energy table
   // NXS(1) = length
+  // NXS(2) = Z
   // NXS(3) = NE
+  // NXS(4) = NFLO
+  // NXS(5) = NSH
   nxs[0] = xss.size();
   nxs[1] = z;
   nxs[2] = ne;
