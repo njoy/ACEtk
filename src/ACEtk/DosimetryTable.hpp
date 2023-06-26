@@ -37,6 +37,7 @@ class DosimetryTable : protected Table {
   }
 
   #include "ACEtk/DosimetryTable/src/generateData.hpp"
+  #include "ACEtk/DosimetryTable/src/verifyType.hpp"
 
 public:
 

@@ -8,6 +8,7 @@
 // other includes
 #include "Log.hpp"
 #include "range/v3/view/subrange.hpp"
+#include "range/v3/view/transform.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -145,6 +146,27 @@ public:
     const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
                                   : left;
     return ranges::make_subrange( left, right );
+  }
+
+  /**
+   *  @brief Return a subrange of integers of a given length from the xss array
+   *         of the block
+   *
+   *  When the index is out of range or if the array goes over its length,
+   *  an std::out_of_range exception is thrown.
+   *
+   *  @param[in] index     the index (one-based)
+   *  @param[in] length    the length of the subrange
+   */
+  auto IXSS( std::size_t index, std::size_t length ) const {
+
+    const auto left = this->iterator( index );
+    const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
+                                  : left;
+    return this->XSS( index, length )
+           | ranges::views::transform(
+                 [] ( auto value ) -> int
+                    { return round( value ); } );
   }
 };
 

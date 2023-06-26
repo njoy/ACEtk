@@ -68,7 +68,7 @@ public:
   /**
    *  @brief Return the particle types
    */
-  auto IPs() const { return this->array( 1 ); }
+  auto IPs() const { return this->iarray( 1 ); }
 
   /**
    *  @brief Return the particle types
@@ -82,9 +82,14 @@ public:
    */
   bool hasIP( unsigned int type ) const {
 
-    return std::find( this->begin(),
-                      this->begin() + this->NTYPE(),
-                      type ) != this->end();
+    return std::find_if(
+               this->begin(),
+               this->begin() + this->NTYPE(),
+               [type] ( auto&& value ) {
+
+                 return static_cast< unsigned int >( std::round( value ) )
+                        == type;
+               } ) != this->end();
   }
 
   /**
@@ -104,7 +109,13 @@ public:
    */
   std::size_t index( unsigned int type ) const {
 
-    auto iter = std::find( this->begin(), this->begin() + this->NTYPE(), type );
+    auto iter = std::find_if(
+                    this->begin(), this->begin() + this->NTYPE(),
+                    [type] ( auto&& value ) {
+
+                      return static_cast< unsigned int >( std::round( value ) )
+                             == type;
+                    } );
     if ( iter != this->end() ) {
 
       return std::distance( this->begin(), iter ) + 1;

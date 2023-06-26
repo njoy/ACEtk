@@ -5,6 +5,7 @@
  */
 PhotonuclearTable( const Table& table ): Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -15,6 +16,7 @@ PhotonuclearTable( const Table& table ): Table( table ) {
  */
 PhotonuclearTable( Table&& table ): Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -26,6 +28,7 @@ PhotonuclearTable( Table&& table ): Table( std::move( table ) ) {
 PhotonuclearTable( const PhotonuclearTable& table ) :
   Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -37,6 +40,7 @@ PhotonuclearTable( const PhotonuclearTable& table ) :
 PhotonuclearTable( PhotonuclearTable&& table ) :
   Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 

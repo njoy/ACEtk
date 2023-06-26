@@ -5,6 +5,7 @@
  */
 PhotoatomicTable( const Table& table ): Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -15,6 +16,7 @@ PhotoatomicTable( const Table& table ): Table( table ) {
  */
 PhotoatomicTable( Table&& table ): Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -26,6 +28,7 @@ PhotoatomicTable( Table&& table ): Table( std::move( table ) ) {
 PhotoatomicTable( const PhotoatomicTable& table ) :
   Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -37,6 +40,7 @@ PhotoatomicTable( const PhotoatomicTable& table ) :
 PhotoatomicTable( PhotoatomicTable&& table ) :
   Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 

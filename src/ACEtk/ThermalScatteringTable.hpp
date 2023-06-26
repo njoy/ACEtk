@@ -32,6 +32,7 @@ class ThermalScatteringTable : protected Table {
   /* auxiliary functions */
   #include "ACEtk/ThermalScatteringTable/src/generateBlocks.hpp"
   #include "ACEtk/ThermalScatteringTable/src/generateData.hpp"
+  #include "ACEtk/ThermalScatteringTable/src/verifyType.hpp"
 
 public:
 

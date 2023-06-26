@@ -44,7 +44,7 @@ public:
   /**
    *  @brief Return the heating numbers
    */
-  auto heating() const { return this->array( 1 ); }
+  auto heating() const { return this->darray( 1 ); }
 
   using ArrayData::empty;
   using ArrayData::name;

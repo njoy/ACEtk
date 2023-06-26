@@ -66,7 +66,7 @@ public:
   /**
    *  @brief Return the reaction numbers
    */
-  auto MTs() const { return this->array( 1 ); }
+  auto MTs() const { return this->iarray( 1 ); }
 
   /**
    *  @brief Return the reaction numbers
@@ -80,9 +80,15 @@ public:
    */
   bool hasMT( unsigned int reaction ) const {
 
-    return std::find( this->begin(),
-                      this->begin() + this->NTR(),
-                      reaction ) != this->end();
+    // need to round the value before comparing due to roundoff errors
+    return std::find_if(
+               this->begin(),
+               this->begin() + this->NTR(),
+               [reaction] ( auto&& value ) {
+
+                 return static_cast< unsigned int >( std::round( value ) )
+                        == reaction;
+               } ) != this->end();
   }
 
   /**
@@ -102,7 +108,13 @@ public:
    */
   std::size_t index( unsigned int reaction ) const {
 
-    auto iter = std::find( this->begin(), this->begin() + this->NTR(), reaction );
+    auto iter = std::find_if(
+                    this->begin(), this->begin() + this->NTR(),
+                    [reaction] ( auto&& value ) {
+
+                      return static_cast< unsigned int >( std::round( value ) )
+                             == reaction;
+                    } );
     if ( iter != this->end() ) {
 
       return std::distance( this->begin(), iter ) + 1;

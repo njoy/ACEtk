@@ -49,23 +49,23 @@ public:
   /**
    *  @brief Return the energy values
    */
-  auto energies() const { return this->array( 1 ); }
+  auto energies() const { return this->darray( 1 ); }
 
   /**
    *  @brief Return the incoherent cross section values
    */
-  auto total() const { return this->array( 2 ); }
+  auto total() const { return this->darray( 2 ); }
 
   /**
    *  @brief Return the coherent cross section values
    */
   auto elastic() const { return this->M() == 3 ? this->emptyArray()
-                                               : this->array( 3 ); }
+                                               : this->darray( 3 ); }
 
   /**
    *  @brief Return the average heating cross section values
    */
-  auto heating() const { return this->array( this->M() ); }
+  auto heating() const { return this->darray( this->M() ); }
 
   using ArrayData::empty;
   using ArrayData::name;

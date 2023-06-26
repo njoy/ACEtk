@@ -75,7 +75,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  auto cosines( std::size_t index ) const { return this->array( index ); }
+  auto cosines( std::size_t index ) const { return this->darray( index ); }
 
   using Base::empty;
   using Base::name;

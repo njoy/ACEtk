@@ -84,16 +84,29 @@ public:
   }
 
   /**
-   *  @brief Return an array
+   *  @brief Return an array of doubles
    *
    *  @param[in] index      the array index (one-based)
    */
-  auto array( std::size_t index ) const {
+  auto darray( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyIndex( index );
     #endif
     return this->XSS( 1 + ( index - 1 ) * this->N(), this->N() );
+  }
+
+  /**
+   *  @brief Return an array of integers
+   *
+   *  @param[in] index      the array index (one-based)
+   */
+  auto iarray( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyIndex( index );
+    #endif
+    return this->IXSS( 1 + ( index - 1 ) * this->N(), this->N() );
   }
 
   /**

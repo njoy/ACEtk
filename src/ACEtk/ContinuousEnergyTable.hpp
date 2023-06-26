@@ -75,6 +75,7 @@ class ContinuousEnergyTable : protected Table {
   /* auxiliary functions */
   #include "ACEtk/ContinuousEnergyTable/src/generateBlocks.hpp"
   #include "ACEtk/ContinuousEnergyTable/src/generateData.hpp"
+  #include "ACEtk/ContinuousEnergyTable/src/verifyType.hpp"
 
 public:
 

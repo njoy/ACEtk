@@ -60,13 +60,13 @@ public:
    *  @brief Return the integrated form factor values (tabulated on a grid of
    *         squared momentum values)
    */
-  auto integratedFormFactors() const { return this->array( 1 ); }
+  auto integratedFormFactors() const { return this->darray( 1 ); }
 
   /**
    *  @brief Return the form factor values (tabulated on a grid of momentum
    *         values)
    */
-  auto formFactors() const { return this->array( 2 ); }
+  auto formFactors() const { return this->darray( 2 ); }
 
   using ArrayData::empty;
   using ArrayData::name;

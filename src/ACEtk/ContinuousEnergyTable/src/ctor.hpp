@@ -5,6 +5,7 @@
  */
 ContinuousEnergyTable( const Table& table ): Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -15,6 +16,7 @@ ContinuousEnergyTable( const Table& table ): Table( table ) {
  */
 ContinuousEnergyTable( Table&& table ): Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -26,6 +28,7 @@ ContinuousEnergyTable( Table&& table ): Table( std::move( table ) ) {
 ContinuousEnergyTable( const ContinuousEnergyTable& table ) :
   Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -37,6 +40,7 @@ ContinuousEnergyTable( const ContinuousEnergyTable& table ) :
 ContinuousEnergyTable( ContinuousEnergyTable&& table ) :
   Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 

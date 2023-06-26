@@ -5,6 +5,7 @@
  */
 DosimetryTable( const Table& table ): Table( table ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -15,6 +16,7 @@ DosimetryTable( const Table& table ): Table( table ) {
  */
 DosimetryTable( Table&& table ): Table( std::move( table ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -26,6 +28,7 @@ DosimetryTable( Table&& table ): Table( std::move( table ) ) {
 DosimetryTable( const DosimetryTable& dostable ) :
   Table( dostable ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
@@ -37,6 +40,7 @@ DosimetryTable( const DosimetryTable& dostable ) :
 DosimetryTable( DosimetryTable&& dostable ) :
   Table( std::move( dostable ) ) {
 
+  this->verifyType();
   this->generateBlocks();
 }
 
