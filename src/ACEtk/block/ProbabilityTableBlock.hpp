@@ -92,7 +92,7 @@ public:
   /**
    *  @brief Return the inelastic competition flag
    */
-  int inelasticCompetion() const {
+  int inelasticCompetition() const {
 
     return this->ILF();
   }
@@ -106,9 +106,9 @@ public:
   }
 
   /**
-   *  @brief Return the inelastic competition flag
+   *  @brief Return the absorption competition flag
    */
-  int absorptionCompetion() const {
+  int absorptionCompetition() const {
 
     return this->IOA();
   }
