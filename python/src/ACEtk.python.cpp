@@ -99,6 +99,8 @@ namespace block {
   void wrapPhotoatomicHeatingNumbersBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronShellBlock( python::module&, python::module& );
   void wrapPhotoatomicComptonProfileBlock( python::module&, python::module& );
+  void wrapPhotonuclearPrincipalCrossSectionBlock( python::module&, python::module& );
+  void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -106,6 +108,7 @@ void wrapContinuousEnergyTable( python::module&, python::module& );
 void wrapDosimetryTable( python::module&, python::module& );
 void wrapThermalScatteringTable( python::module&, python::module& );
 void wrapPhotoatomicTable( python::module&, python::module& );
+void wrapPhotonuclearTable( python::module&, python::module& );
 
 /**
  *  @brief ACEtk python bindings
@@ -223,10 +226,13 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotoatomicHeatingNumbersBlock( module, viewmodule );
   block::wrapPhotoatomicElectronShellBlock( module, viewmodule );
   block::wrapPhotoatomicComptonProfileBlock( module, viewmodule );
+  block::wrapPhotonuclearPrincipalCrossSectionBlock( module, viewmodule );
+  block::wrapPhotonuclearSecondaryParticleLocatorBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
   wrapDosimetryTable( module, viewmodule );
   wrapThermalScatteringTable( module, viewmodule );
   wrapPhotoatomicTable( module, viewmodule );
+  wrapPhotonuclearTable( module, viewmodule );
 }

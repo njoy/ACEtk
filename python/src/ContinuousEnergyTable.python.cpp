@@ -112,7 +112,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    hpd       the secondary particle production blocks\n"
     "    mtrh      the secondary particle production reaction number blocks\n"
     "    sigh      the secondary particle production cross section data blocks\n"
-    "    angh      the secondary particle angular distribution data blocks\n"
+    "    andh      the secondary particle angular distribution data blocks\n"
     "    dlwh      the secondary particle energy distribution data blocks\n"
     "    yh        the secondary particle multiplicity reaction number blocks"
   )
@@ -527,6 +527,17 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "secondary_particle_information_block",
     &Table::secondaryParticleInformationBlock,
     "The secondary particle information block"
+  )
+  .def_property_readonly(
+    "IXS",
+    &Table::IXS,
+    "The secondary particle locator block"
+  )
+  .def_property_readonly(
+
+    "secondary_particle_locator_block",
+    &Table::secondaryParticleLocatorBlock,
+    "The secondary particle locator block"
   )
   .def(
 

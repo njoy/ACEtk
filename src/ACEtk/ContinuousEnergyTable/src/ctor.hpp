@@ -89,7 +89,7 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] hpd       the secondary particle production blocks
  *  @param[in] mtrh      the secondary particle production reaction number blocks
  *  @param[in] sigh      the secondary particle production cross section data blocks
- *  @param[in] angh      the secondary particle angular distribution data blocks
+ *  @param[in] andh      the secondary particle angular distribution data blocks
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
  *  @param[in] yh        the secondary particle multiplicity reaction number blocks
  */

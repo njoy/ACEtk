@@ -10,7 +10,7 @@ auto block( std::size_t index ) const {
 
     if ( start != 0 ) {
 
-      // look for the first value that is larger then or equal to the start locator
+      // look for the first value that is larger than or equal to the start locator
       auto iter = std::find_if( this->data().JXS().begin() + index,
                                 this->data().JXS().end(),
                                 [start] ( auto&& value ) { return value >= start; } );

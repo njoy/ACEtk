@@ -142,7 +142,8 @@ public:
   auto XSS( std::size_t index, std::size_t length ) const {
 
     const auto left = this->iterator( index );
-    const auto right = this->iterator( index + length - 1 ) + 1;
+    const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
+                                  : left;
     return ranges::make_subrange( left, right );
   }
 };

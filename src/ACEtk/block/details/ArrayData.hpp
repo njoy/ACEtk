@@ -96,6 +96,14 @@ public:
     return this->XSS( 1 + ( index - 1 ) * this->N(), this->N() );
   }
 
+  /**
+   *  @brief Return an empty array
+   */
+  auto emptyArray() const {
+
+    return this->XSS( 1, 0 );
+  }
+
   using Base::empty;
   using Base::name;
   using Base::length;

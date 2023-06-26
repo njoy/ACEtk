@@ -31,6 +31,48 @@ ArrayData( std::string&& name, std::vector< std::vector< Number > >&& values ) :
  *  @param[in] array1   the values for array 1
  *  @param[in] array2   the values for array 2
  *  @param[in] array3   the values for array 3
+ */
+template < typename Number >
+ArrayData( std::string&& name,
+           std::vector< Number >&& array1,
+           std::vector< Number >&& array2,
+           std::vector< Number >&& array3 ) :
+  ArrayData( std::move( name ),
+             std::vector< std::vector< Number > >{
+
+               std::move( array1 ), std::move( array2 ),
+               std::move( array3 )
+             } ) {}
+
+/**
+ *  @brief Convenience constructor
+ *
+ *  @param[in] name     the name of the block
+ *  @param[in] array1   the values for array 1
+ *  @param[in] array2   the values for array 2
+ *  @param[in] array3   the values for array 3
+ *  @param[in] array4   the values for array 4
+ */
+template < typename Number >
+ArrayData( std::string&& name,
+           std::vector< Number >&& array1,
+           std::vector< Number >&& array2,
+           std::vector< Number >&& array3,
+           std::vector< Number >&& array4 ) :
+  ArrayData( std::move( name ),
+             std::vector< std::vector< Number > >{
+
+               std::move( array1 ), std::move( array2 ),
+               std::move( array3 ), std::move( array4 )
+             } ) {}
+
+/**
+ *  @brief Convenience constructor
+ *
+ *  @param[in] name     the name of the block
+ *  @param[in] array1   the values for array 1
+ *  @param[in] array2   the values for array 2
+ *  @param[in] array3   the values for array 3
  *  @param[in] array4   the values for array 4
  *  @param[in] array5   the values for array 5
  */
@@ -58,7 +100,7 @@ ArrayData( std::string&& name,
  *  @param[in] array3   the values for array 3
  *  @param[in] array4   the values for array 4
  *  @param[in] array5   the values for array 5
- *  @param[in] array5   the values for array 6
+ *  @param[in] array6   the values for array 6
  */
 template < typename Number >
 ArrayData( std::string&& name,
