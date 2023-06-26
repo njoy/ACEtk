@@ -20,11 +20,12 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
 
     WHEN( "the data is given explicitly" ) {
 
+      unsigned int number = 1;
       double lambda = 2.3e-4;
       std::vector< double > energies = { 1e-5, 1., 20. };
       std::vector< double > probabilities = { 1.2e-3, 2.5e-2, 1. };
 
-      DelayedNeutronPrecursorData chunk( lambda,
+      DelayedNeutronPrecursorData chunk( number, lambda,
                                          std::move( energies ),
                                          std::move( probabilities ) );
 
@@ -46,7 +47,7 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end() );
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
 
       THEN( "a DelayedNeutronPrecursorData can be constructed and "
             "members can be tested" ) {
@@ -78,6 +79,8 @@ void verifyChunk( const DelayedNeutronPrecursorData& chunk ) {
   CHECK( false == chunk.empty() );
   CHECK( 9 == chunk.length() );
   CHECK( "DelayedNeutronPrecursorData" == chunk.name() );
+
+  CHECK( 1 == chunk.number() );
 
   CHECK( 2.3e-4 == Approx( chunk.DEC() ) );
   CHECK( 2.3e-4 == Approx( chunk.decayConstant() ) );

@@ -1,7 +1,7 @@
 static std::string strip( const std::string& string ) {
 
   std::string result = string;
-  auto notspace = [] ( char c )  { return !std::isspace( c ); };
+  auto notspace = [] ( char c ) { return !std::isspace( c ); };
 
   auto front = std::find_if( result.begin(), result.end(), notspace );
   result.erase( result.begin(), front );

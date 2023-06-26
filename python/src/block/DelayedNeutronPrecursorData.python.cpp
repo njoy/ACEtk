@@ -33,32 +33,41 @@ void wrapDelayedNeutronPrecursorData( python::module& module, python::module& ) 
   block
   .def(
 
-    python::init< double, std::vector< double >, std::vector< double > >(),
-    python::arg( "constant" ), python::arg( "energies" ),
-    python::arg( "probabilities" ),
+    python::init< unsigned int, double,
+                  std::vector< double >, std::vector< double > >(),
+    python::arg( "number" ), python::arg( "constant" ),
+    python::arg( "energies" ), python::arg( "probabilities" ),
     "Initialise the block assuming linear interpolation\n\n"
     "Arguments:\n"
     "    self             the block\n"
+    "    number           the precursor group number\n"
     "    constant         the precursor group's decay constant\n"
     "    energies         the energy values\n"
     "    probabilities    the probability values"
   )
   .def(
 
-    python::init< double,
+    python::init< unsigned int, double,
                   std::vector< long >, std::vector< long >,
                   std::vector< double >, std::vector< double > >(),
-    python::arg( "constant" ),
+    python::arg( "number" ), python::arg( "constant" ),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
     python::arg( "energies" ), python::arg( "xs" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
+    "    number           the precursor group number\n"
     "    constant         the precursor group's decay constant\n"
     "    boundaries       the interpolation range boundaries\n"
     "    interpolants     the interpolation types for each range\n"
     "    energies         the energy values\n"
     "    probabilities    the probability values"
+  )
+  .def_property_readonly(
+
+    "number",
+    &Block::number,
+    "The precursor group number"
   )
   .def_property_readonly(
 

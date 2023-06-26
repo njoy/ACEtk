@@ -22,6 +22,8 @@ class Test_ACEtk_DelayedNeutronPrecursorData( unittest.TestCase ) :
             self.assertEqual( 9, chunk.length )
             self.assertEqual( "DelayedNeutronPrecursorData", chunk.name )
 
+            self.assertEqual( 1, chunk.number )
+
             self.assertAlmostEqual( 2.3e-4, chunk.DEC )
             self.assertAlmostEqual( 2.3e-4, chunk.decay_constant )
 
@@ -60,6 +62,7 @@ class Test_ACEtk_DelayedNeutronPrecursorData( unittest.TestCase ) :
 
         # the data is given explicitly
         chunk = DelayedNeutronPrecursorData(
+                  number = 1,
                   constant = 2.3e-4,
                   energies = [ 1e-11, 1., 20. ],
                   probabilities = [ 1.2e-3, 2.5e-2, 1. ] )
