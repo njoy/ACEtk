@@ -4,10 +4,12 @@ import unittest
 # third party imports
 
 # local imports
+from ACEtk import Header
+from ACEtk import Data
 from ACEtk import Table
 
-class Test_ACEtk_Data( unittest.TestCase ) :
-    """Unit test for the Data class."""
+class Test_ACEtk_Table( unittest.TestCase ) :
+    """Unit test for the Table class."""
 
     chunk = ( ' 92238.80c  236.005800  2.5301E-08   12/13/12\n'
               'U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9237\n'
@@ -29,6 +31,18 @@ class Test_ACEtk_Data( unittest.TestCase ) :
         def verify_chunk( self, chunk ) :
 
             # verify content
+            self.assertEqual( '1.0.0', chunk.header.VERS )
+            self.assertEqual( '1.0.0', chunk.header.version )
+            self.assertEqual( '92238.80c', chunk.header.zaid )
+            self.assertEqual( 236.005800, chunk.header.AWR )
+            self.assertEqual( 236.005800, chunk.header.atomic_weight_ratio )
+            self.assertEqual( 2.5301E-08, chunk.header.TEMP )
+            self.assertEqual( 2.5301E-08, chunk.header.temperature )
+            self.assertEqual( '12/13/12', chunk.header.date )
+            self.assertEqual( 'U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)',
+                              chunk.header.title )
+            self.assertEqual( 'mat9237', chunk.header.material )
+
             self.assertEqual( 16, len( chunk.data.iz_array ) )
             self.assertEqual( 0, chunk.data.iz( 1 ) )
             self.assertEqual( 1, chunk.data.iz( 2 ) )
@@ -130,6 +144,33 @@ class Test_ACEtk_Data( unittest.TestCase ) :
 
         # the data is read from a string
         chunk = Table.from_string( self.chunk )
+
+        verify_chunk( self, chunk )
+
+        # the data is made from scratch
+        header = Header( zaid = '92238.80c', awr = 236.0058,
+                         temperature = 2.5301E-08, date = '12/13/12',
+                         title = 'U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)',
+                         material = 'mat9237' )
+
+        data = Data( iz = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ],
+                     aw = [ 15., 14., 13., 12., 11., 10., 9., 8.,
+                             7., 6., 5., 4., 3., 2., 1., 0. ],
+                     nxs = [  6, 33074, 1595, 132, 46, 814, 2, 0,
+                              0,     0,    0,   0,  0,   0, 0, 9 ],
+                     jxs = [       1,  788721,  788768,  788815,
+                               788862,  788909,  788956, 1270743,
+                              1270789, 1363882, 1363927, 1475750,
+                              1633494, 1633500, 1633506, 1634036,
+                              1634042, 1634042, 1634048, 1637218,
+                               789147, 1637220, 1464171, 1465923,
+                              1465934, 1465976, 1465982,       0,
+                                    0,       0,       0,       8 ],
+                     xss = [ 1.00000000000E+00, 1.03125000000E+00,
+                             1.06250000000E+00, 1.09375000000E+00,
+                             1.12500000000E+00, 1.15625000000E+00 ] )
+
+        chunk = Table( header = header, data = data )
 
         verify_chunk( self, chunk )
 

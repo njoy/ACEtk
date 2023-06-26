@@ -13,8 +13,8 @@ void wrapTable( python::module& module, python::module& ) {
 
   // type aliases
   using Component = njoy::ACEtk::Table;
-  //using Header = njoy::ACEtk::Table::Header;
-  //using Data = njoy::ACEtk::Table::Data;
+  using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
+  using Data = njoy::ACEtk::Table::Data;
 
   // wrap views created by this component
 
@@ -32,16 +32,17 @@ void wrapTable( python::module& module, python::module& ) {
 
   // wrap the component
   component
-//  .def(
-//
-//    python::init< Header&&, Data&& >(),
-//    python::arg( "header" ), python::arg( "data" ),
-//    "Initialise the component\n\n"
-//    "Arguments:\n"
-//    "    self     the table\n"
-//    "    header   the header information\n"
-//    "    data     the ACE data"
-//  )
+  .def(
+
+    python::init( [] ( HeaderVariant&& header, Data data )
+                     { return Component( std::move( header ), std::move( data ) ); } ),
+    python::arg( "header" ), python::arg( "data" ),
+    "Initialise the component\n\n"
+    "Arguments:\n"
+    "    self     the table\n"
+    "    header   the header information\n"
+    "    data     the ACE data"
+  )
   .def_property_readonly(
 
     "header",
