@@ -29,7 +29,7 @@ void wrapAngleEnergyDistributionData( python::module& module,
     "Correlated outgoing energy-angle distribution data using tabulated distributions\n"
     "ordered as E, mu, Eprime\n\n"
     "The AngleEnergyDistributionData class contains the energy-angle distributions\n"
-    "for a set of incident energy values. It is used in the DLW block as ACE LAW 61."
+    "for a set of incident energy values. It is used in the DLW block as ACE LAW 67."
   );
 
   // wrap the block

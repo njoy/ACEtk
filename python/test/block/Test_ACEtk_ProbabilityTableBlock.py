@@ -64,7 +64,7 @@ class Test_ACEtk_ProbabilityTableBlock( unittest.TestCase ) :
             self.assertAlmostEqual( 9., table1.heating[0] )
             self.assertAlmostEqual( 10., table1.heating[-1] )
 
-            table2 = chunk.probability_table(2);
+            table2 = chunk.probability_table(2)
             self.assertAlmostEqual( 1e+3, table2.incident_energy )
 
             self.assertEqual( 2, table2.number_bins )

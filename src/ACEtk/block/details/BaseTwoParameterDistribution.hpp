@@ -57,12 +57,12 @@ public:
   double maximumIncidentEnergy() const { return this->emax_; }
 
   /**
-   *  @brief Return the value of C1 = ( A + 1 ) / A * abs( Q )
+   *  @brief Return the value of C1
    */
   double C1() const { return this->XSS( 1 ); }
 
   /**
-   *  @brief Return the value of C2 = ( A / ( A + 1 ) )^2
+   *  @brief Return the value of C2
    */
   double C2() const { return this->XSS( 2 ); }
 

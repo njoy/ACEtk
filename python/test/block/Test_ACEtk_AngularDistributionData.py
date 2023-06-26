@@ -49,19 +49,19 @@ class Test_ACEtk_AngularDistributionData( unittest.TestCase ) :
             self.assertEqual( 1., chunk.incident_energy(2) )
             self.assertEqual( 20., chunk.incident_energy(3) )
 
-            self.assertEqual( 0, chunk.LOCC(1) );
-            self.assertEqual( 13, chunk.LOCC(2) );
-            self.assertEqual( -46, chunk.LOCC(3) );
-            self.assertEqual( 0, chunk.distribution_locator(1) );
-            self.assertEqual( 13, chunk.distribution_locator(2) );
-            self.assertEqual( -46, chunk.distribution_locator(3) );
+            self.assertEqual( 0, chunk.LOCC(1) )
+            self.assertEqual( 13, chunk.LOCC(2) )
+            self.assertEqual( -46, chunk.LOCC(3) )
+            self.assertEqual( 0, chunk.distribution_locator(1) )
+            self.assertEqual( 13, chunk.distribution_locator(2) )
+            self.assertEqual( -46, chunk.distribution_locator(3) )
 
-            self.assertEqual( AngularDistributionType.Isotropic, chunk.distribution_type(1) );
-            self.assertEqual( AngularDistributionType.Equiprobable, chunk.distribution_type(2) );
-            self.assertEqual( AngularDistributionType.Tabulated, chunk.distribution_type(3) );
-            self.assertEqual( 0, chunk.relative_distribution_locator(1) );
-            self.assertEqual( 8, chunk.relative_distribution_locator(2) );
-            self.assertEqual( 41, chunk.relative_distribution_locator(3) );
+            self.assertEqual( AngularDistributionType.Isotropic, chunk.distribution_type(1) )
+            self.assertEqual( AngularDistributionType.Equiprobable, chunk.distribution_type(2) )
+            self.assertEqual( AngularDistributionType.Tabulated, chunk.distribution_type(3) )
+            self.assertEqual( 0, chunk.relative_distribution_locator(1) )
+            self.assertEqual( 8, chunk.relative_distribution_locator(2) )
+            self.assertEqual( 41, chunk.relative_distribution_locator(3) )
 
             self.assertEqual( True, isinstance( chunk.distribution(1), IsotropicAngularDistribution )  )
             self.assertEqual( True, isinstance( chunk.distribution(2), EquiprobableAngularBins ) )
