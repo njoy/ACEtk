@@ -43,14 +43,14 @@ public:
   /**
    *  @brief Return the number of secondary particle production reactions
    */
-  unsigned int NP() const { return BaseBlockWithLocators::NR(); }
+  unsigned int NP() const { return BaseBlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of secondary particle production reactions
    */
   unsigned int numberSecondaryParticleProductionReactions() const {
 
-    return BaseBlockWithLocators::numberReactions();
+    return BaseBlockWithLocators::numberDataBlocks();
   }
 
   /**

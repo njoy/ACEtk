@@ -85,14 +85,14 @@ public:
   /**
    *  @brief Return the number of reactions with energy distribution data
    */
-  unsigned int NR() const { return BaseBlockWithLocators::NR(); }
+  unsigned int NR() const { return BaseBlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of reactions with energy distribution data
    */
   unsigned int numberReactions() const {
 
-    return BaseBlockWithLocators::numberReactions();
+    return BaseBlockWithLocators::numberDataBlocks();
   }
 
   /**
