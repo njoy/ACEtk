@@ -32,7 +32,7 @@ FetchContent_Declare( header-utilities
 
 FetchContent_Declare( interpolation
     GIT_REPOSITORY  https://github.com/njoy/interpolation
-    GIT_TAG         32375a9ae0ff346cecf69d5acd32dbc0092e7d7a
+    GIT_TAG         cb975c3cc58ccbc948b6750231056f7a98ad2ac9
     )
 
 FetchContent_Declare( Log
@@ -42,7 +42,7 @@ FetchContent_Declare( Log
 
 FetchContent_Declare( pybind11
     GIT_REPOSITORY  https://github.com/pybind/pybind11
-    GIT_TAG         80dc998efced8ceb2be59756668a7e90e8bef917 # tag: v2.10.1
+    GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
     )
 
 FetchContent_Declare( range-v3
