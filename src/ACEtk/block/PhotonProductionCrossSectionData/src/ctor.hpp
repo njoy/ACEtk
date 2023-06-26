@@ -10,7 +10,7 @@ PhotonProductionCrossSectionData( PhotonProductionCrossSectionData&& ) = default
  *  @param[in] values    the cross section values
  */
 PhotonProductionCrossSectionData( std::size_t index,
-                                             std::vector< double > values ) :
+                                  std::vector< double > values ) :
   Base( "PhotonProductionCrossSectionData",
         generateXSS( index, std::move( values ) ) ) {}
 
