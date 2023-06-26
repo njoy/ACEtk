@@ -412,7 +412,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 
 void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
-  CHECK( "92235.80c" == chunk.ZAID() );
+  CHECK( "92235.710nc" == chunk.ZAID() );
   CHECK( 2.5301e-8 == Approx( chunk.temperature() ) );
 
   CHECK( 837481 == chunk.length() );
@@ -720,7 +720,7 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
-  CHECK( "2003.80c" == chunk.ZAID() );
+  CHECK( "2003.710nc" == chunk.ZAID() );
   CHECK( 2.5301e-8 == Approx( chunk.temperature() ) );
 
   CHECK( 10004 == chunk.length() );

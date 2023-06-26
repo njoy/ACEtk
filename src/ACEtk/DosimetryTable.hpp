@@ -53,42 +53,52 @@ public:
   /**
    *  @brief Return the full ZAID or SZAID of the table
    */
-  const std::string& ZAID() const { return this->header().ZAID(); }
+  const std::string& ZAID() const {
+
+    return std::visit( [] ( const auto& header ) -> decltype(auto)
+                          { return header.ZAID(); },
+                       this->header() );
+  }
 
   /**
    *  @brief Return the atomic weight ratio (with respect to the neutron mass)
    */
-  double AWR() const { return this->header().AWR(); }
+  double AWR() const {
+
+    return std::visit( [] ( const auto& header ) -> decltype(auto)
+                          { return header.AWR(); },
+                       this->header() );
+  }
 
   /**
    *  @brief Return the atomic weight ratio (with respect to the neutron mass)
    */
-  double atomicWeightRatio() const { return this->header().atomicWeightRatio(); }
+  double atomicWeightRatio() const { return this->AWR(); }
 
   /**
    *  @brief Return the temperature of the table
    */
-  double TEMP() const { return this->header().TEMP(); }
+  double TEMP() const {
+
+    return std::visit( [] ( const auto& header ) -> decltype(auto)
+                          { return header.TEMP(); },
+                       this->header() );
+  }
 
   /**
    *  @brief Return the temperature of the table
    */
-  double temperature() const { return this->header().temperature(); }
+  double temperature() const { return this->TEMP(); }
 
   /**
    *  @brief Return the date
    */
-  const std::string& date() const { return this->header().date(); }
+  const std::string& date() const {
 
-  /**
-   *  @brief Return the title
-   */
-  const std::string& title() const { return this->header().title(); }
-
-  /**
-   *  @brief Return the material
-   */
-  const std::string& material() const { return this->header().material(); }
+    return std::visit( [] ( const auto& header ) -> decltype(auto)
+                          { return header.date(); },
+                       this->header() );
+  }
 
   // NXS information
 

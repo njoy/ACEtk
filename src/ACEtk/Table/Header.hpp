@@ -2,35 +2,19 @@
  *  @class
  *  @brief The header information in an ACE file
  *
- *  There are multiple version of the header.
+ *  There are multiple version of the header. This is the original header
+ *  used by NJOY.
  *
- *  The normal header contains the following information, fixed column format:
+ *  The header contains the following information, fixed column format:
  *    - line 1: ZAID (10 characters), AW (atomic mass ratio, 12 characters),
  *              TZ (temperature in MeV, 12 characters), blank space,
  *              date (10 characters)
  *    - line 2: description (70 characters), material identifier (10 characters)
- *
- *  The 2.0.0 header contains the following information, in free format:
- *    - line 1: VERS (header version), SZAID, SRC (evaluation source)
- *    - line 2: AW (atomic mass ratio), TZ (temperature in MeV), date,
- *              N (comments)
- *    - line 3 to N+2: comment lines (the last two lines are always the normal
- *                     header)
- *
- *  The 2.0.1 header contains the following information, fixed column format:
- *    - line 1: VERS (header version, 10 characters), blank space,
- *              SZAID (24 characters), blank space,
- *              SRC (evaluation source, 24 characters)
- *    - line 2: AW (atomic mass ratio, 12 characters), blank space,
- *              TZ (temperature in MeV, 12 characters), blank space,
- *              date (10 characters), blank space, N (number of comment lines,
- *              4 characters)
- *    - line 3 to N+2: comment lines (the last two lines are always the normal
- *                     header)
  */
 class Header {
 
   /* fields */
+  std::string vers_;
   std::string zaid_;
   double temp_;
   double awr_;
@@ -45,6 +29,16 @@ class Header {
 public:
 
   #include "ACEtk/Table/Header/src/ctor.hpp"
+
+  /**
+   *  @brief Return the header version
+   */
+  const std::string& VERS() const { return this->vers_; }
+
+  /**
+   *  @brief Return the header version
+   */
+  const std::string& version() const { return this->vers_; }
 
   /**
    *  @brief Return the full ZAID or SZAID of the table
@@ -77,7 +71,7 @@ public:
   const std::string& date() const { return this->date_; }
 
   /**
-   *  @brief Return the titla string
+   *  @brief Return the title string
    */
   const std::string& title() const { return this->title_; }
 

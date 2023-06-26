@@ -15,7 +15,7 @@ namespace python = pybind11;
 void wrapDosimetryTable( python::module& module, python::module& ) {
 
   // type aliases
-  using Header = njoy::ACEtk::Table::Header;
+  using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::DosimetryTable;
   using MTR = njoy::ACEtk::block::MTR;
   using SIGD = njoy::ACEtk::block::SIGD;
@@ -35,7 +35,7 @@ void wrapDosimetryTable( python::module& module, python::module& ) {
   table
   .def(
 
-    python::init< unsigned int, unsigned int, Header, MTR, SIGD >(),
+    python::init< unsigned int, unsigned int, HeaderVariant, MTR, SIGD >(),
     python::arg( "z" ), python::arg( "a" ),
     python::arg( "header" ), python::arg( "mtr" ), python::arg( "sigd" ),
     "Initialise the table\n\n"
@@ -82,18 +82,6 @@ void wrapDosimetryTable( python::module& module, python::module& ) {
     "date",
     &Table::date,
     "The date"
-  )
-  .def_property_readonly(
-
-    "title",
-    &Table::title,
-    "The title"
-  )
-  .def_property_readonly(
-
-    "material",
-    &Table::material,
-    "The material"
   )
   .def_property_readonly(
 

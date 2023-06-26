@@ -97,18 +97,6 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "title",
-    &Table::title,
-    "The title"
-  )
-  .def_property_readonly(
-
-    "material",
-    &Table::material,
-    "The material"
-  )
-  .def_property_readonly(
-
     "length",
     &Table::length,
     "The total length of the XSS array"

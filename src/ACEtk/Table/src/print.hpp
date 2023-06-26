@@ -6,6 +6,7 @@
 template< typename Ostream >
 void print( Ostream& ostream ) const {
 
-  this->header_.print( ostream );
+  std::visit( [&ostream] ( const auto& header ) { header.print( ostream ); },
+              this->header_ );
   this->data_.print( ostream );
 }

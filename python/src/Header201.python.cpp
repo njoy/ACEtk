@@ -9,10 +9,10 @@
 // namespace aliases
 namespace python = pybind11;
 
-void wrapHeader( python::module& module, python::module& ) {
+void wrapHeader201( python::module& module, python::module& ) {
 
   // type aliases
-  using Component = njoy::ACEtk::Table::Header;
+  using Component = njoy::ACEtk::Table::Header201;
 
   // wrap views created by this component
 
@@ -20,7 +20,7 @@ void wrapHeader( python::module& module, python::module& ) {
   python::class_< Component > component(
 
     module,
-    "Header",
+    "Header201",
     "The header in an ACE table"
   );
 
@@ -28,20 +28,21 @@ void wrapHeader( python::module& module, python::module& ) {
   component
   .def(
 
-    python::init< const std::string&, double, double,
-                  const std::string&, const std::string&,
-                  const std::string& >(),
-    python::arg( "zaid" ), python::arg( "awr" ), python::arg( "temperature" ),
-    python::arg( "date" ), python::arg( "title" ), python::arg( "material" ),
+    python::init< const std::string&, const std::string&,
+                  double, double, const std::string&,
+                  const std::vector< std::string >& >(),
+    python::arg( "szaid" ), python::arg( "source" ), python::arg( "awr" ),
+    python::arg( "temperature" ), python::arg( "date" ),
+    python::arg( "comments" ),
     "Initialise the component\n\n"
     "Arguments:\n"
-    "    self           the header\n"
-    "    zaid           the zaid (max 10 characters)\n"
-    "    awr            the atomic weight ratio (to the neutron mass)\n"
-    "    temperature    the temperature in MeV\n"
-    "    date           the date (max 10 characters)\n"
-    "    title          the title (max 70 characters)\n"
-    "    material       the material (max 10 characters)"
+    "    self          the header\n"
+    "    szaid         the szaid (max 10 characters)\n"
+    "    source        the source of the file\n"
+    "    awr           the atomic weight ratio (to the neutron mass)\n"
+    "    temperature   the temperature in MeV\n"
+    "    date          the date (max 10 characters)\n"
+    "    comments      the comments"
   )
   .def_property_readonly(
 
@@ -93,14 +94,8 @@ void wrapHeader( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "title",
-    &Component::title,
-    "The title"
-  )
-  .def_property_readonly(
-
-    "material",
-    &Component::material,
-    "The material"
+    "comments",
+    &Component::comments,
+    "The comments"
   );
 }

@@ -1,5 +1,8 @@
+Header() = default;
 Header( const Header& ) = default;
 Header( Header&& ) = default;
+Header& operator=( const Header& ) = default;
+Header& operator=( Header&& ) = default;
 
 /**
  *  @brief Constructor (legacy header)
@@ -14,7 +17,7 @@ Header( Header&& ) = default;
 Header( const std::string& zaid, double awr, double temperature,
         const std::string& date, const std::string& title,
         const std::string& material ) :
-  zaid_( strip( zaid ) ),  awr_( awr ), temp_( temperature ),
+  vers_( "1.0.0" ), zaid_( strip( zaid ) ),  awr_( awr ), temp_( temperature ),
   date_( strip( date ) ), title_( strip( title ) ),
   material_( strip( material ) ) {}
 

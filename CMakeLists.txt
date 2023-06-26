@@ -80,6 +80,7 @@ if(ACEtk.python)
     python/src/XsdirEntry.python.cpp
     python/src/Xsdir.python.cpp
     python/src/Header.python.cpp
+    python/src/Header201.python.cpp
     python/src/Data.python.cpp
     python/src/Table.python.cpp
     python/src/ReferenceFrame.python.cpp

@@ -8,16 +8,19 @@
 // convenience typedefs
 using namespace njoy::ACEtk;
 using Header = Table::Header;
+using Header201 = Table::Header201;
 using Data = Table::Data;
 
 std::string chunk();
 std::string chunkWith200Header();
 std::string chunkWith201Header();
 void verifyChunk( const Table& );
+void verifyHeader( const Table& );
+void verifyHeader201( const Table& );
 
 SCENARIO( "Table" ) {
 
-  GIVEN( "valid data for a Table instance" ) {
+  GIVEN( "valid data for a Table instance with an original header" ) {
 
     std::string string = chunk();
 
@@ -48,6 +51,7 @@ SCENARIO( "Table" ) {
 
       THEN( "a Table can be constructed and members can be tested" ) {
 
+        verifyHeader( chunk );
         verifyChunk( chunk );
       } // THEN
 
@@ -60,13 +64,14 @@ SCENARIO( "Table" ) {
       } // THEN
     } // WHEN
 
-    WHEN( "the data is read from a string/stream with the normal header" ) {
+    WHEN( "the data is read from a string/stream with the original header" ) {
 
       State< std::string::iterator > state{ 1, string.begin(), string.end() };
       Table chunk( state );
 
       THEN( "a Data can be constructed and members can be tested" ) {
 
+        verifyHeader( chunk );
         verifyChunk( chunk );
       } // THEN
 
@@ -78,19 +83,47 @@ SCENARIO( "Table" ) {
         CHECK( oss.str() == string );
       } // THEN
     } // WHEN
+  } // GIVEN
 
-    WHEN( "the data is read from a string/stream with the 2.0.0 header" ) {
+  GIVEN( "valid data for a Table instance with a 201 header" ) {
 
-      std::string header = chunkWith200Header();
-      State< std::string::iterator > state{ 1, header.begin(), header.end() };
-      Table chunk( state );
+    std::string string = chunkWith201Header();
 
-      THEN( "a Data can be constructed and members can be tested" ) {
+    WHEN( "the data is given explicitly" ) {
 
+      Header201 header201(
+
+        "92238.800nc", "ENDF/B-VIII.0", 236.0058, 2.5301E-08, "2018-05-01",
+        { " 92238.80c  236.005800  2.5301E-08   12/13/12",
+          "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9237" }
+      );
+
+      Data data( {{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }},
+                 {{ 15., 14., 13., 12., 11., 10., 9., 8.,
+                    7., 6., 5., 4., 3., 2., 1., 0. }},
+                 {{  6, 33074, 1595, 132, 46, 814, 2, 0,
+                     0,     0,    0,   0,  0,   0, 0, 9 }},
+                 {{       1,  788721,  788768,  788815,
+                     788862,  788909,  788956, 1270743,
+                    1270789, 1363882, 1363927, 1475750,
+                    1633494, 1633500, 1633506, 1634036,
+                    1634042, 1634042, 1634048, 1637218,
+                     789147, 1637220, 1464171, 1465923,
+                    1465934, 1465976, 1465982,       0,
+                          0,       0,       0,       8 }},
+                 { 1.00000000000E+00, 1.03125000000E+00,
+                   1.06250000000E+00, 1.09375000000E+00,
+                   1.12500000000E+00, 1.15625000000E+00 } );
+
+      Table chunk( std::move( header201 ), std::move( data ) );
+
+      THEN( "a Table can be constructed and members can be tested" ) {
+
+        verifyHeader201( chunk );
         verifyChunk( chunk );
       } // THEN
 
-      THEN( "it can be printed with the normal header" ) {
+      THEN( "it can be printed" ) {
 
         std::ostringstream oss;
         chunk.print( oss );
@@ -101,12 +134,12 @@ SCENARIO( "Table" ) {
 
     WHEN( "the data is read from a string/stream with the 2.0.1 header" ) {
 
-      std::string header = chunkWith201Header();
-      State< std::string::iterator > state{ 1, header.begin(), header.end() };
+      State< std::string::iterator > state{ 1, string.begin(), string.end() };
       Table chunk( state );
 
       THEN( "a Data can be constructed and members can be tested" ) {
 
+        verifyHeader201( chunk );
         verifyChunk( chunk );
       } // THEN
 
@@ -141,16 +174,6 @@ std::string chunk() {
 }
 
 void verifyChunk( const Table& chunk ) {
-
-  CHECK( "92238.80c" == chunk.header().ZAID() );
-  CHECK( 236.0058 == Approx( chunk.header().AWR() ) );
-  CHECK( 236.0058 == Approx( chunk.header().atomicWeightRatio() ) );
-  CHECK( 2.5301E-08 == Approx( chunk.header().TEMP() ) );
-  CHECK( 2.5301E-08 == Approx( chunk.header().temperature() ) );
-  CHECK( "12/13/12" == chunk.header().date() );
-  CHECK( "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)"
-         == chunk.header().title() );
-  CHECK( "mat9237" == chunk.header().material() );
 
   CHECK( 16 == chunk.data().IZ().size() );
   CHECK( 0 == chunk.data().IZ( 1 ) );
@@ -276,6 +299,36 @@ void verifyChunk( const Table& chunk ) {
 #endif
 }
 
+void verifyHeader( const Table& chunk ) {
+
+  auto header = std::get< Header >( chunk.header() );
+  CHECK( "92238.80c" == header.ZAID() );
+  CHECK( 236.0058 == Approx( header.AWR() ) );
+  CHECK( 236.0058 == Approx( header.atomicWeightRatio() ) );
+  CHECK( 2.5301E-08 == Approx( header.TEMP() ) );
+  CHECK( 2.5301E-08 == Approx( header.temperature() ) );
+  CHECK( "12/13/12" == header.date() );
+  CHECK( "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)"
+         == header.title() );
+  CHECK( "mat9237" == header.material() );
+}
+
+void verifyHeader201( const Table& chunk ) {
+
+  auto header = std::get< Header201 >( chunk.header() );
+  CHECK( "2.0.1" == header.VERS() );
+  CHECK( "2.0.1" == header.version() );
+  CHECK( "92238.800nc" == header.ZAID() );
+  CHECK( 236.0058 == Approx( header.AWR() ) );
+  CHECK( 236.0058 == Approx( header.atomicWeightRatio() ) );
+  CHECK( 2.5301E-08 == Approx( header.TEMP() ) );
+  CHECK( 2.5301E-08 == Approx( header.temperature() ) );
+  CHECK( "2018-05-01" == header.date() );
+  CHECK( " 92238.80c  236.005800  2.5301E-08   12/13/12" == header.comments()[0] );
+  CHECK( "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9237"
+         == header.comments()[1] );
+}
+
 std::string chunkWith200Header() {
 
   return
@@ -301,8 +354,8 @@ std::string chunkWith200Header() {
 std::string chunkWith201Header() {
 
   return
-    "2.0.1                   92238.800nc         ENDF/B-VIII.0\n"
-    "  236.005800   2.5301e-08 2018-05-01    2\n"
+    "2.0.1                   92238.800nc            ENDF/B-VIII.0\n"
+    "  236.005800   2.5301E-08 2018-05-01          2\n"
     " 92238.80c  236.005800  2.5301E-08   12/13/12\n"
     "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9237\n"
     "      0 15.0000000      1 14.0000000      2 13.0000000      3 12.0000000\n"

@@ -458,8 +458,6 @@ void verifyChunk( const DosimetryTable& chunk ) {
   CHECK( 0. == Approx( chunk.temperature() ) );
 
   CHECK( "" == chunk.date() );
-  CHECK( "" == chunk.title() );
-  CHECK( "" == chunk.material() );
 
   CHECK( 1164 == chunk.length() );
   CHECK( 13027 == chunk.ZA() );
