@@ -33,7 +33,7 @@ Data generateData( std::vector< unsigned int > za,
     if ( itce && itcei ) {
 
       idpnc = 5;
-      ncl = itca->NCL();
+      ncl = itca ? itca->NCL() : -1;
       ncli = itcai->NCL();
     }
     else {
@@ -41,7 +41,7 @@ Data generateData( std::vector< unsigned int > za,
       if ( itce ) {
 
         idpnc = 4;
-        ncl = itca->NCL();
+        ncl = itca ? itca->NCL() : -1;
       }
       else {
 
@@ -77,21 +77,19 @@ Data generateData( std::vector< unsigned int > za,
       jxs[5] = xss.size() + 1;
       xss.insert( xss.end(), itcai->begin(), itcai->end() );
     }
-    if ( idpnc == 4 ) {
+    if ( ( idpnc == 4 ) || ( idpnc == 5 ) ) {
 
       jxs[3] = xss.size() + 1;
       jxs[4] = jxs[3] + itce->NE() + 1;
       xss.insert( xss.end(), itce->begin(), itce->end() );
-      jxs[5] = itca->empty() ? 0 : xss.size() + 1;
-      xss.insert( xss.end(), itca->begin(), itca->end() );
+      if ( itca ) {
+
+        jxs[5] = itca->empty() ? 0 : xss.size() + 1;
+        xss.insert( xss.end(), itca->begin(), itca->end() );
+      }
     }
     if ( idpnc == 5 ) {
 
-      jxs[3] = xss.size() + 1;
-      jxs[4] = jxs[3] + itce->NE() + 1;
-      xss.insert( xss.end(), itce->begin(), itce->end() );
-      jxs[5] = itca->empty() ? 0 : xss.size() + 1;
-      xss.insert( xss.end(), itca->begin(), itca->end() );
       jxs[6] = xss.size() + 1;
       jxs[7] = jxs[6] + itcei->NE() + 1;
       xss.insert( xss.end(), itcei->begin(), itcei->end() );

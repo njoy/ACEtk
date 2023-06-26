@@ -24,10 +24,10 @@ class ThermalScatteringTable : protected Table {
   /* fields */
   block::ITIE itie_;
   block::ITXE itxe_;
-  block::ITCE itce_;
-  block::ITCA itca_;
-  block::ITCEI itcei_;
-  block::ITCAI itcai_;
+  std::optional< block::ITCE > itce_;
+  std::optional< block::ITCA > itca_;
+  std::optional< block::ITCEI> itcei_;
+  std::optional< block::ITCAI> itcai_;
 
   /* auxiliary functions */
   #include "ACEtk/ThermalScatteringTable/src/generateBlocks.hpp"
@@ -140,28 +140,28 @@ public:
    *
    *  The elastic dimensioning parameter is equal to NC - 1
    */
-  unsigned int NCL() const { return this->data().NXS(6); }
+  int NCL() const { return this->data().NXS(6); }
 
   /**
    *  @brief Return the first elastic dimensioning parameter
    *
    *  The elastic dimensioning parameter is equal to NC - 1
    */
-  unsigned int firstElasticDimensioningParameter() const { return this->NCL(); }
+  int firstElasticDimensioningParameter() const { return this->NCL(); }
 
   /**
    *  @brief Return the second elastic dimensioning parameter
    *
    *  The elastic dimensioning parameter is equal to NC - 1
    */
-  unsigned int NCLI() const { return this->data().NXS(8); }
+  int NCLI() const { return this->data().NXS(8); }
 
   /**
    *  @brief Return the second elastic dimensioning parameter
    *
    *  The elastic dimensioning parameter is equal to NC - 1
    */
-  unsigned int secondElasticDimensioningParameter() const { return this->NCLI(); }
+  int secondElasticDimensioningParameter() const { return this->NCLI(); }
 
   /**
    *  @brief Return the secondary energy mode
@@ -206,12 +206,12 @@ public:
   /**
    *  @brief Return the coherent elastic thermal scattering cross section block
    */
-  const block::ITCE& ITCE() const { return this->itce_; }
+  const std::optional< block::ITCE >& ITCE() const { return this->itce_; }
 
   /**
    *  @brief Return the coherent elastic thermal scattering cross section block
    */
-  const block::ITCE& coherentElasticCrossSectionBlock() const {
+  const std::optional< block::ITCE >& coherentElasticCrossSectionBlock() const {
 
     return this->ITCE();
   }
@@ -220,13 +220,13 @@ public:
    *  @brief Return the coherent elastic thermal scattering angular distribution
    *         block
    */
-  const block::ITCA& ITCA() const { return this->itca_; }
+  const std::optional< block::ITCA >& ITCA() const { return this->itca_; }
 
   /**
    *  @brief Return the coherent elastic thermal scattering angular distribution
    *         block
    */
-  const block::ITCA& coherentElasticAngularDistributionBlock() const {
+  const std::optional< block::ITCA >& coherentElasticAngularDistributionBlock() const {
 
     return this->ITCA();
   }
@@ -234,12 +234,12 @@ public:
   /**
    *  @brief Return the incoherent elastic thermal scattering cross section block
    */
-  const block::ITCEI& ITCEI() const { return this->itcei_; }
+  const std::optional< block::ITCEI >& ITCEI() const { return this->itcei_; }
 
   /**
    *  @brief Return the incoherent elastic thermal scattering cross section block
    */
-  const block::ITCEI& incoherentElasticCrossSectionBlock() const {
+  const std::optional< block::ITCEI >& incoherentElasticCrossSectionBlock() const {
 
     return this->ITCEI();
   }
@@ -248,13 +248,13 @@ public:
    *  @brief Return the incoherent elastic thermal scattering angular distribution
    *         block
    */
-  const block::ITCAI& ITCAI() const { return this->itcai_; }
+  const std::optional< block::ITCAI >& ITCAI() const { return this->itcai_; }
 
   /**
    *  @brief Return the incoherent elastic thermal scattering angular distribution
    *         block
    */
-  const block::ITCAI& incoherentElasticAngularDistributionBlock() const {
+  const std::optional< block::ITCAI >& incoherentElasticAngularDistributionBlock() const {
 
     return this->ITCAI();
   }

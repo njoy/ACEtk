@@ -51,27 +51,31 @@ void generateBlocks() {
 
   // coherent elastic thermal scattering data
   present = this->IDPNC() > 3 ? true : false;
-  iterators = block( 4 );
-  this->itce_ = block::ITCE( present ? iterators.first : begin,
-                             present ? iterators.second : begin );
+  if ( present ) {
 
-  iterators = block( 6 );
-  this->itca_ = block::ITCA( present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             present ? this->ITCE().NE() : 0,
-                             present ? this->NCL() + 1 : 0 );
+    iterators = block( 4 );
+    this->itce_ = block::ITCE( iterators.first, iterators.second );
+
+    present = this->NCL() + 1 != 0 ? true : false;
+    if ( present ) {
+
+      iterators = block( 6 );
+      this->itca_ = block::ITCA( iterators.first, iterators.second,
+                                 this->ITCE()->NE(), this->NCL() + 1 );
+    }
+  }
 
   // incoherent elastic thermal scattering data
   present = this->IDPNC() == 3 || this->IDPNC() == 5 ? true : false;
-  iterators = this->IDPNC() == 3 ? block( 4 ) : block( 7 );
-  this->itcei_ = block::ITCEI( present ? iterators.first : begin,
-                               present ? iterators.second : begin );
+  if ( present ) {
 
-  iterators = this->IDPNC() == 3 ? block( 6 ) : block( 9 );
-  this->itcai_ = block::ITCA( present ? iterators.first : begin,
-                              present ? iterators.second : begin,
-                              present ? this->ITCEI().NE() : 0,
-                              present ? this->IDPNC() == 3 ? this->NCL() + 1
-                                                           : this->NCLI() + 1
-                                      : 0 );
+    iterators = this->IDPNC() == 3 ? block( 4 ) : block( 7 );
+    this->itcei_ = block::ITCEI( iterators.first, iterators.second );
+
+    iterators = this->IDPNC() == 3 ? block( 6 ) : block( 9 );
+    this->itcai_ = block::ITCA( iterators.first, iterators.second,
+                                this->ITCEI()->NE(),
+                                this->IDPNC() == 3 ? this->NCL() + 1
+                                                   : this->NCLI() + 1 );
+  }
 }

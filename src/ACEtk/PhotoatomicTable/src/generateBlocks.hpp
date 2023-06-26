@@ -27,6 +27,11 @@ std::cout << index << ' ' << start << ' ' << end << std::endl;
 
 void generateBlocks() {
 
+  // optional blocks
+  this->jflo_ = std::nullopt;
+  this->eps_ = std::nullopt;
+  this->swd_ = std::nullopt;
+
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
 
@@ -43,30 +48,29 @@ void generateBlocks() {
   this->jcoh_ = block::JCOH( iterators.first, iterators.second );
 
   // fluorescence data block
-  iterators = block( 4 );
   bool present = ( this->NFLO() > 0 );
-  this->jflo_ = block::JFLO( present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             this->NFLO() );
+  if ( present ) {
+
+    iterators = block( 4 );
+    this->jflo_ = block::JFLO( iterators.first, iterators.second, this->NFLO() );
+  }
 
   // heating numbers
   iterators = block( 5 );
   this->lhnm_ = block::LHNM( iterators.first, iterators.second, this->NES() );
 
-  // electron shell block
-  auto locators = block( 6 );
-  iterators = block( 8 );
   present = ( this->NSH() > 0 );
-  this->eps_ = block::EPS( present ? locators.first : begin,
-                           present ? iterators.second : begin,
-                           this->NSH() );
+  if ( present ) {
 
-  // compton profile block
-  locators = block( 9 );
-  iterators = block( 10 );
-  present = ( this->NSH() > 0 );
-  this->swd_ = block::SWD( present ? locators.first : begin,
-                           present ? iterators.first : begin,
-                           present ? iterators.second : begin,
-                           this->NSH() );
+    // electron shell block
+    auto locators = block( 6 );
+    iterators = block( 8 );
+    this->eps_ = block::EPS( locators.first, iterators.second, this->NSH() );
+
+    // compton profile block
+    locators = block( 9 );
+    iterators = block( 10 );
+    this->swd_ = block::SWD( locators.first, iterators.first, iterators.second,
+                             this->NSH() );
+  }
 }

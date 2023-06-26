@@ -58,14 +58,14 @@ public:
    *
    *  The elastic dimensioning parameter is equal to NC - 1
    */
-  std::size_t NCL() const { return this->NC() - 1; }
+  int NCL() const { return static_cast< int >( this->NC() ) - 1; }
 
   /**
    *  @brief Return the elastic dimensioning parameter
    *
    *  The elastic dimensioning parameter is equal to NC - 1
    */
-  std::size_t elasticDimensioningParameter() const { return this->NCL(); }
+  int elasticDimensioningParameter() const { return this->NCL(); }
 
   /**
    *  @brief Return the cosine values for an incident energy index

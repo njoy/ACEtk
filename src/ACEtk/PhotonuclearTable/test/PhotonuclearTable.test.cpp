@@ -98,7 +98,7 @@ SCENARIO( "PhotonuclearTable" ){
       std::optional< std::vector< block::DLWH > > dlwh = std::vector< block::DLWH >{};
       for ( unsigned int index = 1; index <= base.NTYPE(); ++index ) {
 
-        ptype->push_back( base.IXS().IP( index ) );
+        ptype->push_back( base.IXS()->IP( index ) );
         pxs->push_back( base.PXS( index ) );
         phn->push_back( base.PHN( index ) );
         mtrh->push_back( base.MTRH( index ) );
@@ -262,48 +262,48 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 6.65666700000E-03 == Approx( data2.back() ) );
 
   // IXSU block
-  CHECK( false == chunk.IXS().empty() );
+  CHECK( false == chunk.IXS()->empty() );
 
-  CHECK( 7 == chunk.IXS().NTYPE() );
-  CHECK( 7 == chunk.IXS().numberAdditionalSecondaryParticleTypes() );
+  CHECK( 7 == chunk.IXS()->NTYPE() );
+  CHECK( 7 == chunk.IXS()->numberAdditionalSecondaryParticleTypes() );
 
-  CHECK( 1 == chunk.IXS().IP( 1 ) );
-  CHECK( 2 == chunk.IXS().IP( 2 ) );
-  CHECK( 9 == chunk.IXS().IP( 3 ) );
-  CHECK( 31 == chunk.IXS().IP( 4 ) );
-  CHECK( 32 == chunk.IXS().IP( 5 ) );
-  CHECK( 33 == chunk.IXS().IP( 6 ) );
-  CHECK( 34 == chunk.IXS().IP( 7 ) );
+  CHECK( 1 == chunk.IXS()->IP( 1 ) );
+  CHECK( 2 == chunk.IXS()->IP( 2 ) );
+  CHECK( 9 == chunk.IXS()->IP( 3 ) );
+  CHECK( 31 == chunk.IXS()->IP( 4 ) );
+  CHECK( 32 == chunk.IXS()->IP( 5 ) );
+  CHECK( 33 == chunk.IXS()->IP( 6 ) );
+  CHECK( 34 == chunk.IXS()->IP( 7 ) );
 
-  CHECK( 2 == chunk.IXS().NP( 1 ) );
-  CHECK( 1 == chunk.IXS().NP( 2 ) );
-  CHECK( 1 == chunk.IXS().NP( 3 ) );
-  CHECK( 1 == chunk.IXS().NP( 4 ) );
-  CHECK( 1 == chunk.IXS().NP( 5 ) );
-  CHECK( 1 == chunk.IXS().NP( 6 ) );
-  CHECK( 1 == chunk.IXS().NP( 7 ) );
+  CHECK( 2 == chunk.IXS()->NP( 1 ) );
+  CHECK( 1 == chunk.IXS()->NP( 2 ) );
+  CHECK( 1 == chunk.IXS()->NP( 3 ) );
+  CHECK( 1 == chunk.IXS()->NP( 4 ) );
+  CHECK( 1 == chunk.IXS()->NP( 5 ) );
+  CHECK( 1 == chunk.IXS()->NP( 6 ) );
+  CHECK( 1 == chunk.IXS()->NP( 7 ) );
 
-  CHECK( 543 == chunk.IXS().PXS( 1 ) );
-  CHECK( 635 == chunk.IXS().PHN( 1 ) );
-  CHECK( 727 == chunk.IXS().MTRH( 1 ) );
-  CHECK( 729 == chunk.IXS().TYRH( 1 ) );
-  CHECK( 731 == chunk.IXS().LSIGH( 1 ) );
-  CHECK( 733 == chunk.IXS().SIGH( 1 ) );
-  CHECK( 1085 == chunk.IXS().LANDH( 1 ) );
-  CHECK( 1087 == chunk.IXS().ANDH( 1 ) );
-  CHECK( 1087 == chunk.IXS().LDLWH( 1 ) );
-  CHECK( 1089 == chunk.IXS().DLWH( 1 ) );
+  CHECK( 543 == chunk.IXS()->PXS( 1 ) );
+  CHECK( 635 == chunk.IXS()->PHN( 1 ) );
+  CHECK( 727 == chunk.IXS()->MTRH( 1 ) );
+  CHECK( 729 == chunk.IXS()->TYRH( 1 ) );
+  CHECK( 731 == chunk.IXS()->LSIGH( 1 ) );
+  CHECK( 733 == chunk.IXS()->SIGH( 1 ) );
+  CHECK( 1085 == chunk.IXS()->LANDH( 1 ) );
+  CHECK( 1087 == chunk.IXS()->ANDH( 1 ) );
+  CHECK( 1087 == chunk.IXS()->LDLWH( 1 ) );
+  CHECK( 1089 == chunk.IXS()->DLWH( 1 ) );
 
-  CHECK( 863286 == chunk.IXS().PXS( 7 ) );
-  CHECK( 863378 == chunk.IXS().PHN( 7 ) );
-  CHECK( 863470 == chunk.IXS().MTRH( 7 ) );
-  CHECK( 863471 == chunk.IXS().TYRH( 7 ) );
-  CHECK( 863472 == chunk.IXS().LSIGH( 7 ) );
-  CHECK( 863473 == chunk.IXS().SIGH( 7 ) );
-  CHECK( 863657 == chunk.IXS().LANDH( 7 ) );
-  CHECK( 863658 == chunk.IXS().ANDH( 7 ) );
-  CHECK( 863658 == chunk.IXS().LDLWH( 7 ) );
-  CHECK( 863659 == chunk.IXS().DLWH( 7 ) );
+  CHECK( 863286 == chunk.IXS()->PXS( 7 ) );
+  CHECK( 863378 == chunk.IXS()->PHN( 7 ) );
+  CHECK( 863470 == chunk.IXS()->MTRH( 7 ) );
+  CHECK( 863471 == chunk.IXS()->TYRH( 7 ) );
+  CHECK( 863472 == chunk.IXS()->LSIGH( 7 ) );
+  CHECK( 863473 == chunk.IXS()->SIGH( 7 ) );
+  CHECK( 863657 == chunk.IXS()->LANDH( 7 ) );
+  CHECK( 863658 == chunk.IXS()->ANDH( 7 ) );
+  CHECK( 863658 == chunk.IXS()->LDLWH( 7 ) );
+  CHECK( 863659 == chunk.IXS()->DLWH( 7 ) );
 
   // PXS(1) block
   CHECK( false == chunk.PXS(1).empty() );

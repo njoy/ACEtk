@@ -87,14 +87,14 @@ auto block( std::size_t particle, std::size_t index ) const {
   // assumption: blocks are stored in sequence!
 
   auto begin = this->data().XSS().begin();
-  std::size_t start = this->IXS().LLOC( particle, index );
+  std::size_t start = this->IXS()->LLOC( particle, index );
 
   // look for the first value that is larger then or equal to the start locator
   std::size_t end = 0;
-  auto iter = std::find_if( this->IXS().begin() + ( particle - 1 ) * 10 + index,
-                            this->IXS().end(),
+  auto iter = std::find_if( this->IXS()->begin() + ( particle - 1 ) * 10 + index,
+                            this->IXS()->end(),
                             [start] ( auto&& value ) { return value >= start; } );
-  if ( iter != this->IXS().end() ) {
+  if ( iter != this->IXS()->end() ) {
 
     end = *iter;
   }
@@ -106,6 +106,22 @@ auto block( std::size_t particle, std::size_t index ) const {
 
 void generateBlocks() {
 
+  // optional blocks
+  this->nu_ = std::nullopt;
+  this->gpd_ = std::nullopt;
+  this->mtrp_ = std::nullopt;
+  this->sigp_ = std::nullopt;
+  this->andp_ = std::nullopt;
+  this->dlwp_ = std::nullopt;
+  this->yp_ = std::nullopt;
+  this->unr_ = std::nullopt;
+  this->dnu_ = std::nullopt;
+  this->bdd_ = std::nullopt;
+  this->dned_ = std::nullopt;
+  this->ptype_ = std::nullopt;
+  this->ntro_ = std::nullopt;
+  this->ixs_ = std::nullopt;
+
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
 
@@ -114,10 +130,12 @@ void generateBlocks() {
   this->esz_ = block::ESZ( iterators.first, iterators.second, this->NES() );
 
   // nubar for fissile isotopes
-  iterators = block( 2 );
   bool present = ( this->data().JXS(2) > 0 );
-  this->nu_ = block::NU( present ? iterators.first : begin,
-                         present ? iterators.second : begin );
+  if ( present ) {
+
+    iterators = block( 2 );
+    this->nu_ = block::NU( iterators.first, iterators.second );
+  }
 
   // reaction number block
   iterators = block( 3 );
@@ -149,133 +167,126 @@ void generateBlocks() {
   this->dlw_ = block::DLW( locators.first, iterators.first, iterators.second,
                            this->TYR(), this->NR() );
 
-  // secondary photon data: total photon production cross section
+  // secondary photon data
   present = ( this->NTRP() > 0 );
-  iterators = block( 12 );
-  this->gpd_ = block::GPD( present ? iterators.first : begin,
-                           present ? iterators.second : begin,
-                           present ? this->NES() : 0 );
+  if ( present ) {
 
-  // secondary photon data: photon production reaction numbers
-  iterators = block( 13 );
-  this->mtrp_ = block::MTRP( present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             this->NTRP() );
+    // secondary photon data: total photon production cross section
+    iterators = block( 12 );
+    this->gpd_ = block::GPD( iterators.first, iterators.second, this->NES() );
 
-  // secondary photon data: photon production cross sections
-  locators = block( 14 );
-  iterators = block( 15 );
-  this->sigp_ = block::SIGP( present ? locators.first : begin,
-                             present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             this->NTRP() );
+    // secondary photon data: photon production reaction numbers
+    iterators = block( 13 );
+    this->mtrp_ = block::MTRP( iterators.first, iterators.second, this->NTRP() );
 
-  // secondary photon data: photon angular distributions
-  locators = block( 16 );
-  iterators = block( 17 );
-  this->andp_ = block::ANDP( present ? locators.first : begin,
-                             present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             this->NTRP() );
+    // secondary photon data: photon production cross sections
+    locators = block( 14 );
+    iterators = block( 15 );
+    this->sigp_ = block::SIGP( locators.first, iterators.first, iterators.second,
+                               this->NTRP() );
 
-  // secondary photon data: photon energy distributions
-  locators = block( 18 );
-  iterators = block( 19 );
-  this->dlwp_ = block::DLWP( present ? locators.first : begin,
-                             present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             this->NTRP() );
+    // secondary photon data: photon angular distributions
+    locators = block( 16 );
+    iterators = block( 17 );
+    this->andp_ = block::ANDP( locators.first, iterators.first, iterators.second,
+                               this->NTRP() );
 
-  // secondary photon data: photon yield data
-  iterators = block( 20 );
-  this->yp_ = block::YP( present ? iterators.first : begin,
-                         present ? iterators.second : begin );
+    // secondary photon data: photon energy distributions
+    locators = block( 18 );
+    iterators = block( 19 );
+    this->dlwp_ = block::DLWP( locators.first, iterators.first, iterators.second,
+                               this->NTRP() );
+
+    // secondary photon data: photon yield data
+    iterators = block( 20 );
+    this->yp_ = block::YP( iterators.first, iterators.second );
+  }
 
   // delayed neutron data: unresolved resonance tables
-  iterators = block( 23 );
   present = ( this->data().JXS(23) > 0 );
-  this->unr_ = block::UNR( present ? iterators.first : begin,
-                           present ? iterators.second : begin );
+  if ( present ) {
+
+    iterators = block( 23 );
+    this->unr_ = block::UNR( iterators.first, iterators.second );
+  }
 
   // delayed neutron data: delayed nubar for fissile isotopes
-  iterators = block( 24 );
   present = ( this->data().JXS(24) > 0 );
-  this->dnu_ = block::NU( present ? iterators.first : begin,
-                          present ? iterators.second : begin );
+  if ( present ) {
 
-  // delayed neutron data: precursor data
-  iterators = block( 25 );
+    iterators = block( 24 );
+    this->dnu_ = block::NU( iterators.first, iterators.second );
+  }
+
+  // delayed neutron data
   present = ( this->NPCR() > 0 );
-  this->bdd_ = block::BDD( present ? iterators.first : begin,
-                           present ? iterators.second : begin,
-                           this->NPCR() );
+  if ( present ) {
 
-  // delayed neutron data: spectra
-  locators = block( 26 );
-  iterators = block( 27 );
-  this->dned_ = block::DNED( present ? locators.first : begin,
-                             present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             this->NPCR() );
+    // delayed neutron data: precursor data
+    iterators = block( 25 );
+    this->bdd_ = block::BDD( iterators.first, iterators.second, this->NPCR() );
 
-  // secondary particle data: available particle types
-  iterators = block( 30 );
+    // delayed neutron data: spectra
+    locators = block( 26 );
+    iterators = block( 27 );
+    this->dned_ = block::DNED( locators.first, iterators.first, iterators.second,
+                               this->NPCR() );
+  }
+
+  // secondary particle data
   present = ( this->NTYPE() > 0 );
-  this->ptype_ = block::PTYPE( present ? iterators.first : begin,
-                               present ? iterators.second : begin,
-                               this->NTYPE() );
+  if ( present ) {
 
-  // secondary particle data: number of reactions per type
-  iterators = block( 31 );
-  present = ( this->NTYPE() > 0 );
-  this->ntro_ = block::NTRO( present ? iterators.first : begin,
-                             present ? iterators.second : begin,
-                             this->NTYPE() );
+    // secondary particle data: available particle types
+    iterators = block( 30 );
+    this->ptype_ = block::PTYPE( iterators.first, iterators.second, this->NTYPE() );
 
-  // secondary particle data: number of reactions per type
-  iterators = block( 32 );
-  present = ( this->NTYPE() > 0 );
-  this->ixs_ = block::IXS( present ? iterators.first : begin,
-                           present ? iterators.second : begin,
-                           this->NTYPE() );
+    // secondary particle data: number of reactions per type
+    iterators = block( 31 );
+    this->ntro_ = block::NTRO( iterators.first, iterators.second, this->NTYPE() );
 
-  // secondary particle data: data blocks
-  for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
+    // secondary particle data: number of reactions per type
+    iterators = block( 32 );
+    this->ixs_ = block::IXS( iterators.first, iterators.second, this->NTYPE() );
 
-    // secondary particle data: total production cross section
-    iterators = block( index, 1 );
-    this->hpd_.emplace_back( iterators.first, iterators.second );
+    // secondary particle data: data blocks
+    for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
 
-    // secondary particle data: reaction numbers
-    iterators = block( index, 2 );
-    this->mtrh_.emplace_back( iterators.first, iterators.second,
-                              this->NTRO().NP( index ) );
+      // secondary particle data: total production cross section
+      iterators = block( index, 1 );
+      this->hpd_.emplace_back( iterators.first, iterators.second );
 
-    // secondary particle data: reference frame and multiplicity
-    iterators = block( index, 3 );
-    this->tyrh_.emplace_back( iterators.first, iterators.second,
-                              this->NTRO().NP( index ) );
+      // secondary particle data: reaction numbers
+      iterators = block( index, 2 );
+      this->mtrh_.emplace_back( iterators.first, iterators.second,
+                                this->NTRO()->NP( index ) );
 
-    // secondary particle data: production cross section data
-    locators = block( index, 4 );
-    iterators = block( index, 5 );
-    this->sigh_.emplace_back( locators.first, iterators.first, iterators.second,
-                              this->NTRO().NP( index ) );
+      // secondary particle data: reference frame and multiplicity
+      iterators = block( index, 3 );
+      this->tyrh_.emplace_back( iterators.first, iterators.second,
+                                this->NTRO()->NP( index ) );
 
-    // secondary particle data: angular distributions
-    locators = block( index, 6 );
-    iterators = block( index, 7 );
-    this->andh_.emplace_back( locators.first, iterators.first, iterators.second,
-                              this->NTRO().NP( index ) );
+      // secondary particle data: production cross section data
+      locators = block( index, 4 );
+      iterators = block( index, 5 );
+      this->sigh_.emplace_back( locators.first, iterators.first, iterators.second,
+                                this->NTRO()->NP( index ) );
 
-    // secondary particle data: energy distributions
-    locators = block( index, 8 );
-    iterators = block( index, 9 );
-    this->dlwh_.emplace_back( locators.first, iterators.first, iterators.second,
-                              this->TYRH( index ), this->NTRO().NP( index ) );
+      // secondary particle data: angular distributions
+      locators = block( index, 6 );
+      iterators = block( index, 7 );
+      this->andh_.emplace_back( locators.first, iterators.first, iterators.second,
+                                this->NTRO()->NP( index ) );
 
-    // secondary particle data: multiplicity reaction numbers
-    iterators = block( index, 10 );
-    this->yh_.emplace_back( iterators.first, iterators.second );
+      // secondary particle data: energy distributions
+      locators = block( index, 8 );
+      iterators = block( index, 9 );
+      this->dlwh_.emplace_back( locators.first, iterators.first, iterators.second,
+                                this->TYRH( index ), this->NTRO()->NP( index ) );
+
+      // secondary particle data: multiplicity reaction numbers
+      iterators = block( index, 10 );
+      this->yh_.emplace_back( iterators.first, iterators.second );
+    }
   }
 }
