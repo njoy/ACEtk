@@ -705,17 +705,17 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 1 ) ) );
   CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 6 ) ) );
 
-  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 1 ) );
-  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 6 ) );
+  CHECK( false == chunk.DNED()->referenceFrame( 1 ).has_value() );
+  CHECK( false == chunk.DNED()->referenceFrame( 6 ).has_value() );
 
   // PTYPE block
-  CHECK( std::nullopt == chunk.PTYPE() );
+  CHECK( false == chunk.PTYPE().has_value() );
 
   // NTRO block
-  CHECK( std::nullopt == chunk.NTRO() );
+  CHECK( false == chunk.NTRO().has_value() );
 
   // IXS block
-  CHECK( std::nullopt == chunk.IXS() );
+  CHECK( false == chunk.IXS().has_value() );
 }
 
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
@@ -760,7 +760,7 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 693 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
 
   // NU block
-  CHECK( std::nullopt == chunk.NU() );
+  CHECK( false == chunk.NU().has_value() );
 
   // LQR block
   CHECK( false == chunk.LQR().empty() );
@@ -831,34 +831,34 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 0 == chunk.DLW().NR() );
 
   // GPD block
-  CHECK( std::nullopt == chunk.GPD() );
+  CHECK( false == chunk.GPD().has_value() );
 
   // MTRP block
-  CHECK( std::nullopt == chunk.MTRP() );
+  CHECK( false == chunk.MTRP().has_value() );
 
   // SIGP block
-  CHECK( std::nullopt == chunk.SIGP() );
+  CHECK( false == chunk.SIGP().has_value() );
 
   // ANDP block
-  CHECK( std::nullopt == chunk.ANDP() );
+  CHECK( false == chunk.ANDP().has_value() );
 
   // DLWP block
-  CHECK( std::nullopt == chunk.DLWP() );
+  CHECK( false == chunk.DLWP().has_value() );
 
   // YP block
-  CHECK( std::nullopt == chunk.YP() );
+  CHECK( false == chunk.YP().has_value() );
 
   // UNR block
-  CHECK( std::nullopt == chunk.UNR() );
+  CHECK( false == chunk.UNR().has_value() );
 
   // DNU block
-  CHECK( std::nullopt == chunk.DNU() );
+  CHECK( false == chunk.DNU().has_value() );
 
   // BDD block
-  CHECK( std::nullopt == chunk.BDD() );
+  CHECK( false == chunk.BDD().has_value() );
 
   // DNED block
-  CHECK( std::nullopt == chunk.DNED() );
+  CHECK( false == chunk.DNED().has_value() );
 
   // PTYPE block
   CHECK( false == chunk.PTYPE()->empty() );
@@ -1277,15 +1277,15 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 1 ) ) );
   CHECK( true == std::holds_alternative< OutgoingEnergyDistributionData >( chunk.DNED()->energyDistributionData( 6 ) ) );
 
-  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 1 ) );
-  CHECK( std::nullopt == chunk.DNED()->referenceFrame( 6 ) );
+  CHECK( false == chunk.DNED()->referenceFrame( 1 ).has_value() );
+  CHECK( false == chunk.DNED()->referenceFrame( 6 ).has_value() );
 
   // PTYPE block
-  CHECK( std::nullopt == chunk.PTYPE() );
+  CHECK( false == chunk.PTYPE().has_value() );
 
   // NTRO block
-  CHECK( std::nullopt == chunk.NTRO() );
+  CHECK( false == chunk.NTRO().has_value() );
 
   // IXS block
-  CHECK( std::nullopt == chunk.IXS() );
+  CHECK( false == chunk.IXS().has_value() );
 }

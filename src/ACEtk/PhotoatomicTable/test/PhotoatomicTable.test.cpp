@@ -365,7 +365,7 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 6.282390000000E-06 == Approx( chunk.JCOH().formFactors().back() ) );
 
   // JFLO block
-  CHECK( std::nullopt == chunk.JFLO() );
+  CHECK( false == chunk.JFLO().has_value() );
 
   // LHNM block
   CHECK( false == chunk.LHNM().empty() );
@@ -378,10 +378,10 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 9.086036433693E+01 == Approx( chunk.LHNM().heating().back() ) );
 
   // EPS block
-  CHECK( std::nullopt == chunk.EPS() );
+  CHECK( false == chunk.EPS().has_value() );
 
   // SWD block
-  CHECK( std::nullopt == chunk.SWD() );
+  CHECK( false == chunk.SWD().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -453,7 +453,7 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 7.806310000000E-04 == Approx( chunk.JCOH().formFactors().back() ) );
 
   // JFLO block
-  CHECK( std::nullopt == chunk.JFLO() );
+  CHECK( false == chunk.JFLO().has_value() );
 
   // LHNM block
   CHECK( false == chunk.LHNM().empty() );
