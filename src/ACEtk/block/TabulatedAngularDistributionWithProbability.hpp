@@ -24,8 +24,8 @@ class TabulatedAngularDistributionWithProbability :
   protected TabulatedAngularDistribution {
 
   /* fields */
-  double pdf_;
-  double cdf_;
+  double pdf_ = 0.0;
+  double cdf_ = 0.0;
 
   /* auxiliary functions */
 

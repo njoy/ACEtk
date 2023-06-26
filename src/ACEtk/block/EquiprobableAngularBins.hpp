@@ -22,7 +22,7 @@ namespace block {
 class EquiprobableAngularBins : protected details::Base {
 
   /* fields */
-  double energy_;
+  double energy_ = 0.0;
 
   /* auxiliary functions */
   #include "ACEtk/block/EquiprobableAngularBins/src/verifySize.hpp"

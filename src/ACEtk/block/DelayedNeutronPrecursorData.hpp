@@ -21,7 +21,7 @@ namespace block {
 class DelayedNeutronPrecursorData : protected details::Base {
 
   /* fields */
-  unsigned int number_;
+  unsigned int number_ = 0;
   details::BaseTabulatedData data_;
 
   /* auxiliary functions */

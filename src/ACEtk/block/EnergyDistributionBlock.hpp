@@ -59,9 +59,9 @@ using MultiplicityData = std::variant< unsigned int, TabulatedMultiplicity >;
 class EnergyDistributionBlock : protected details::Base {
 
   /* fields */
-  unsigned int nr_;   // the number of reactions
-  Iterator iterator_; // the begin iterator of the data block
-  block::TYR tyr_;    // the associated TYR block
+  unsigned int nr_ = 0; // the number of reactions
+  Iterator iterator_;   // the begin iterator of the data block
+  block::TYR tyr_;      // the associated TYR block
   std::vector< EnergyDistributionData > data_;
   std::vector< MultiplicityData > multiplicities_;
   std::vector< ReferenceFrame > frames_;

@@ -194,7 +194,7 @@ public:
    */
   auto IXSS( std::size_t index ) const {
 
-    return round( fetch( this->xss_, index ) );
+    return static_cast< int >( std::round( fetch( this->xss_, index ) ) );
   }
 
   #include "ACEtk/Table/Data/src/XSS.hpp"

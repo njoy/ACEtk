@@ -1,7 +1,7 @@
 template < typename Iterator >
 static FissionMultiplicityData generateData( Iterator begin, Iterator end ) {
 
-  unsigned int LNU = static_cast< unsigned int >( round( *begin ) );
+  unsigned int LNU = static_cast< unsigned int >( std::round( *begin ) );
   switch (LNU) {
 
     case 1: return PolynomialFissionMultiplicity( begin, end );
@@ -25,7 +25,7 @@ void generateBlocks() {
     bool both = this->XSS( 1 ) < 0;
     if ( both ) {
 
-      auto knu = static_cast<unsigned int>( std::abs( round( *begin ) ) ) + 1;
+      auto knu = static_cast<unsigned int>( std::abs( std::round( *begin ) ) ) + 1;
       end = std::next( begin, knu );
       begin = std::next( begin );
     }

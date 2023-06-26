@@ -129,7 +129,10 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  int IXSS( std::size_t index ) const { return round( this->XSS( index ) ); }
+  int IXSS( std::size_t index ) const {
+
+    return static_cast< int >( std::round( this->XSS( index ) ) );
+  }
 
   /**
    *  @brief Return a subrange of a given length from the xss array of the block
@@ -166,7 +169,7 @@ public:
     return this->XSS( index, length )
            | ranges::views::transform(
                  [] ( auto value ) -> int
-                    { return round( value ); } );
+                    { return static_cast< int >( std::round( value ) ); } );
   }
 };
 

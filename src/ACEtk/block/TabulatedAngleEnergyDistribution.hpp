@@ -32,7 +32,7 @@ class TabulatedAngleEnergyDistribution :
                   TabulatedEnergyDistribution >;
 
   /* fields */
-  double incident_;
+  double incident_ = 0.0;
 
   /* auxiliary functions */
 

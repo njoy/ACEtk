@@ -22,7 +22,7 @@ namespace block {
 class ThermalScatteringDiscreteCosines : protected details::Base {
 
   /* fields */
-  std::size_t ncosines_;
+  std::size_t ncosines_ = 0;
 
   /* auxiliary functions */
   #include "ACEtk/block/ThermalScatteringDiscreteCosines/src/verifySize.hpp"
