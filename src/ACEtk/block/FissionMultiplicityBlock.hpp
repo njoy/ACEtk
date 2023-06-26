@@ -48,7 +48,7 @@ public:
    */
   bool hasPromptAndTotalFissionMultiplicity() const {
 
-    return bool( this->total_ );
+    return this->total_.has_value();
   }
 
   /**

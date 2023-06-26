@@ -117,7 +117,7 @@ void wrapNBodyPhaseSpaceDistribution( python::module& module, python::module& ) 
     "values",
     [] ( const Block& self ) -> DoubleRange
        { return self.values(); },
-    "The values"
+    "The normalised energy values"
   )
   .def_property_readonly(
 

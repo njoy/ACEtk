@@ -1,4 +1,4 @@
-block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
+static block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
 
   auto entries = dlw.tyrMultiplicities();
   std::vector< ReferenceFrame > frames = dlw.referenceFrames();
@@ -12,11 +12,11 @@ block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
   return { std::move( frames ), std::move( multiplicities ) };
 }
 
-std::optional< std::vector< block::TYRH > >
+static std::optional< std::vector< block::TYRH > >
 generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
 
   std::optional< std::vector< block::TYRH > > tyrh = std::nullopt;
-  if ( dlwh ) {
+  if ( dlwh.has_value() ) {
 
     tyrh = std::vector< block::TYRH >{};
     for ( const auto& element : dlwh.value() ) {
@@ -122,7 +122,7 @@ Data generateData( unsigned int z, unsigned int a,
     Log::info( yp ? "YP is defined" : "YP is not defined" );
     throw std::exception();
   }
-  if ( gpd ) {
+  if ( gpd.has_value() ) {
 
     if ( ( ntrp != andp->NR() ) || ( ntrp != dlwp->NR() ) ) {
 
@@ -132,7 +132,7 @@ Data generateData( unsigned int z, unsigned int a,
       throw std::exception();
     }
   }
-  if ( dnu ) {
+  if ( dnu.has_value() ) {
 
     if ( dnu->hasPromptAndTotalFissionMultiplicity() ) {
 
@@ -159,7 +159,7 @@ Data generateData( unsigned int z, unsigned int a,
     Log::info( dned ? "DNED is defined" : "DNED is not defined" );
     throw std::exception();
   }
-  if ( bdd ) {
+  if ( bdd.has_value() ) {
 
     if ( ( npcr != bdd->NPCR() ) || ( npcr != dned->NR() ) ) {
 
@@ -183,7 +183,7 @@ Data generateData( unsigned int z, unsigned int a,
     Log::info( dlwh ? "YH is defined" : "YH is not defined" );
     throw std::exception();
   }
-  if ( ptype ) {
+  if ( ptype.has_value() ) {
 
     if ( ( ntype != hpd->size() ) || ( ntype != mtrh->size() ) ||
          ( ntype != tyrh->size() ) || ( ntype != sigh->size() ) ||
@@ -207,7 +207,7 @@ Data generateData( unsigned int z, unsigned int a,
   // generate the xss array and set the locators in the jxs array as we go
   jxs[0] = 1;
   xss.insert( xss.end(), esz.begin(), esz.end() );
-  if ( nu ) {
+  if ( nu.has_value() ) {
 
     jxs[1] = xss.size() + 1;
     xss.insert( xss.end(), nu->begin(), nu->end() );
@@ -232,7 +232,7 @@ Data generateData( unsigned int z, unsigned int a,
     jxs[22] = xss.size() + 1;
     xss.insert( xss.end(), unr->begin(), unr->end() );
   }
-  if ( dnu ) {
+  if ( dnu.has_value() ) {
 
     jxs[23] = xss.size() + 1;
     xss.insert( xss.end(), dnu->begin(), dnu->end() );
@@ -242,7 +242,7 @@ Data generateData( unsigned int z, unsigned int a,
     jxs[26] = xss.size() + npcr + 1;
     xss.insert( xss.end(), dned->begin(), dned->end() );
   }
-  if ( gpd ) {
+  if ( gpd.has_value() ) {
 
     jxs[11] = xss.size() + 1;
     xss.insert( xss.end(), gpd->begin(), gpd->end() );
@@ -265,7 +265,7 @@ Data generateData( unsigned int z, unsigned int a,
     jxs[20] = jxs[6] + sig.crossSectionLocator( mtr.index( 18 ) ) - 1;
   }
   jxs[21] = xss.size();
-  if ( ptype ) {
+  if ( ptype.has_value() ) {
 
     std::vector< unsigned int > numbers;
     for ( const auto& element : mtrh.value() ) {
