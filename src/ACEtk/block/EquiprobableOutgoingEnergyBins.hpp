@@ -42,7 +42,7 @@ public:
   int numberBins() const { return this->length() - 1; }
 
   /**
-   *  @brief Return the cosine values
+   *  @brief Return the energy values
    */
   auto energies() const {
 
