@@ -119,26 +119,26 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk ) {
   CHECK( 4 == chunk.NET() );
   CHECK( 3 == chunk.numberBins() );
 
-  decltype(auto) bins = chunk.distributions();
-  CHECK( 2 == bins.size() );
+  decltype(auto) distributions = chunk.distributions();
+  CHECK( 2 == distributions.size() );
 
-  CHECK( 1e-5 == Approx( bins[0].incidentEnergy() ) );
-  CHECK( 3 == bins[0].numberBins() );
-  CHECK( 4 == bins[0].energies().size() );
-  CHECK( 1e-4 == Approx( bins[0].energies()[0] ) );
-  CHECK( 1. == Approx( bins[0].energies()[1] ) );
-  CHECK( 10. == Approx( bins[0].energies()[2] ) );
-  CHECK( 20. == Approx( bins[0].energies()[3] ) );
+  CHECK( 1e-5 == Approx( distributions[0].incidentEnergy() ) );
+  CHECK( 3 == distributions[0].numberBins() );
+  CHECK( 4 == distributions[0].energies().size() );
+  CHECK( 1e-4 == Approx( distributions[0].energies()[0] ) );
+  CHECK( 1. == Approx( distributions[0].energies()[1] ) );
+  CHECK( 10. == Approx( distributions[0].energies()[2] ) );
+  CHECK( 20. == Approx( distributions[0].energies()[3] ) );
 
-  CHECK( 20. == Approx( bins[1].incidentEnergy() ) );
-  CHECK( 3 == bins[1].numberBins() );
-  CHECK( 4 == bins[1].energies().size() );
-  CHECK( 1e-5 == Approx( bins[1].energies()[0] ) );
-  CHECK( 3. == Approx( bins[1].energies()[1] ) );
-  CHECK( 12. == Approx( bins[1].energies()[2] ) );
-  CHECK( 20. == Approx( bins[1].energies()[3] ) );
+  CHECK( 20. == Approx( distributions[1].incidentEnergy() ) );
+  CHECK( 3 == distributions[1].numberBins() );
+  CHECK( 4 == distributions[1].energies().size() );
+  CHECK( 1e-5 == Approx( distributions[1].energies()[0] ) );
+  CHECK( 3. == Approx( distributions[1].energies()[1] ) );
+  CHECK( 12. == Approx( distributions[1].energies()[2] ) );
+  CHECK( 20. == Approx( distributions[1].energies()[3] ) );
 
-  decltype(auto) bins1 = chunk.distribution(1);
+  auto bins1 = chunk.distribution(1);
   CHECK( 1e-5 == Approx( bins1.incidentEnergy() ) );
   CHECK( 3 == bins1.numberBins() );
   CHECK( 4 == bins1.energies().size() );
@@ -147,7 +147,7 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk ) {
   CHECK( 10. == Approx( bins1.energies()[2] ) );
   CHECK( 20. == Approx( bins1.energies()[3] ) );
 
-  decltype(auto) bins2 = chunk.distribution(2);
+  auto bins2 = chunk.distribution(2);
   CHECK( 20. == Approx( bins2.incidentEnergy() ) );
   CHECK( 3 == bins2.numberBins() );
   CHECK( 4 == bins2.energies().size() );

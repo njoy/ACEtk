@@ -22,7 +22,7 @@ public:
 /**
  *  @brief Constructor
  *
- *  @param[in] szaid         the szaid (max 10 characters)
+ *  @param[in] szaid         the szaid (max 24 characters)
  *  @param[in] source        the source of the file
  *  @param[in] awr           the atomic weight ratio (to the neutron mass)
  *  @param[in] temperature   the temperature in MeV

@@ -15,7 +15,8 @@ namespace block {
  *  @brief The photoatomic ESZG block with the principal cross sections
  *
  *  The PhotoatomicPrincipalCrossSectionBlock class contains 5 arrays of the
- *  same length (all values are stored as the natural logarithm):
+ *  same length (all values are stored as the natural logarithm with the
+ *  exception of 0 values which are interpreted as 0 and NOT as exp(0) = 1):
  *    - the energy points
  *    - the incoherent cross section
  *    - the coherent cross section

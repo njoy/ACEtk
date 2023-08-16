@@ -24,8 +24,6 @@ PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,
  *
  *  @param[in] energies         the energy values
  *  @param[in] total            the total cross section values
- *  @param[in] disappearance    the projectile disappearance cross section values
- *  @param[in] elastic          the elastic cross section values
  *  @param[in] heating          the average heating cross section values
  */
 PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,

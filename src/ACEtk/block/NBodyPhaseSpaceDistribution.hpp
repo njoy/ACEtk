@@ -87,12 +87,12 @@ public:
   int interpolation() const { return this->IXSS( 3 ); }
 
   /**
-   *  @brief Return the number of xi values
+   *  @brief Return the number of normalised energy values
    */
   std::size_t numberValues() const { return this->IXSS( 4 ); }
 
   /**
-   *  @brief Return the xi values
+   *  @brief Return the normalised energy values
    */
   auto values() const {
 

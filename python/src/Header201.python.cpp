@@ -37,7 +37,7 @@ void wrapHeader201( python::module& module, python::module& ) {
     "Initialise the component\n\n"
     "Arguments:\n"
     "    self          the header\n"
-    "    szaid         the szaid (max 10 characters)\n"
+    "    szaid         the szaid (max 24 characters)\n"
     "    source        the source of the file\n"
     "    awr           the atomic weight ratio (to the neutron mass)\n"
     "    temperature   the temperature in MeV\n"

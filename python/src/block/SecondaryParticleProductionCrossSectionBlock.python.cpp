@@ -28,7 +28,7 @@ void wrapSecondaryParticleProductionCrossSectionBlock( python::module& module, p
     "The continuous energy LSIGH and SIGH block with the secondary particle\n"
     "production cross section data (multiplicity data only)\n\n"
     "The SecondaryParticleProductionCrossSectionBlock class contains NTRO.NP sets\n"
-    "of secodnary particle production data, one for each reaction number on the\n"
+    "of secondary particle production data, one for each reaction number on the\n"
     "MTRH block. The order of these cross section data sets is the same as the\n"
     "order of the reaction numbers in the MTRH block."
   );

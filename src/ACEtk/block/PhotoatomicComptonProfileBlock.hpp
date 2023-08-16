@@ -39,14 +39,14 @@ public:
   /**
    *  @brief Return the number of electron shells
    */
-  unsigned int NSH() const { return BaseBlockWithLocators::NR(); }
+  unsigned int NSH() const { return BaseBlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of electron shells
    */
   unsigned int numberElectronShells() const {
 
-    return BaseBlockWithLocators::numberReactions();
+    return BaseBlockWithLocators::numberDataBlocks();
   }
 
   /**

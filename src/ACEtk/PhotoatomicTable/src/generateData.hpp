@@ -53,21 +53,21 @@ Data generateData( unsigned int z,
   xss.insert( xss.end(), jinc.begin(), jinc.end() );
   jxs[2] = xss.size() + 1;
   xss.insert( xss.end(), jcoh.begin(), jcoh.end() );
-  if ( jflo ) {
+  if ( jflo.has_value() ) {
 
     jxs[3] = xss.size() + 1;
     xss.insert( xss.end(), jflo->begin(), jflo->end() );
   }
   jxs[4] = xss.size() + 1;
   xss.insert( xss.end(), lhnm.begin(), lhnm.end() );
-  if ( eps ) {
+  if ( eps.has_value() ) {
 
     jxs[5] = xss.size() + 1;
     jxs[6] = xss.size() + nsh + 1;
     jxs[7] = xss.size() + 2 * nsh + 1;
     xss.insert( xss.end(), eps->begin(), eps->end() );
   }
-  if ( swd ) {
+  if ( swd.has_value() ) {
 
     jxs[8] = xss.size() + 1;
     jxs[9] = xss.size() + nsh + 1;
@@ -76,7 +76,10 @@ Data generateData( unsigned int z,
 
   // set the nxs values for the continuous energy table
   // NXS(1) = length
+  // NXS(2) = Z
   // NXS(3) = NE
+  // NXS(4) = NFLO
+  // NXS(5) = NSH
   nxs[0] = xss.size();
   nxs[1] = z;
   nxs[2] = ne;
