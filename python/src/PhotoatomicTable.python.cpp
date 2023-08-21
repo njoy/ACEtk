@@ -176,7 +176,8 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
 
     "electron_photon_relaxation_format",
     &Table::electronPhotonRelaxationFormat,
-    "The EPR data format flag (0 for old format and 1 for EPR data)"
+    "Return the EPR data format flag (0 for old format, 1 for EPR data\n"
+    "from 2012 and 3 for EPR data from 2014)"
   )
   .def_property_readonly(
 
