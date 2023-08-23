@@ -156,13 +156,13 @@ public:
   unsigned int electronPhotonRelaxationFormat() const { return this->NEPR(); }
 
   /**
-   *  @brief Return the number of electron shells (for photoelectric and electron
+   *  @brief Return the number of electron subshells (for photoelectric and electron
    *         impact ionization)
    */
   unsigned int NSSH() const { return this->data().NXS(7); }
 
   /**
-   *  @brief Return the number of electron shells (for photoelectric and electron
+   *  @brief Return the number of electron subshells (for photoelectric and electron
    *         impact ionization)
    */
   unsigned int numberElectronSubshells() const { return this->NSSH(); }
