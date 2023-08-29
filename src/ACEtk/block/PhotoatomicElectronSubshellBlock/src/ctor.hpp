@@ -10,7 +10,7 @@ PhotoatomicElectronSubshellBlock( PhotoatomicElectronSubshellBlock&& ) = default
  *  @param[in] energies         the binding energy for each shell
  *  @param[in] probabilities    the interaction probability for each shell
  */
-PhotoatomicElectronSubshellBlock( std::vector< double > designators,
+PhotoatomicElectronSubshellBlock( std::vector< unsigned int > designators,
                                   std::vector< unsigned int > electrons,
                                   std::vector< double > energies,
                                   std::vector< double > probabilities,
@@ -18,7 +18,8 @@ PhotoatomicElectronSubshellBlock( std::vector< double > designators,
   ArrayData( "SUBSH",
              std::vector< std::vector< double > > {
 
-               std::move( designators ),
+               [] ( auto&& vector ) -> std::vector< double >
+                  { return { vector.begin(), vector.end() }; }( designators ),
                [] ( auto&& vector ) -> std::vector< double >
                   { return { vector.begin(), vector.end() }; }( electrons ),
                std::move( energies ),
@@ -30,8 +31,8 @@ PhotoatomicElectronSubshellBlock( std::vector< double > designators,
 /**
  *  @brief Constructor
  *
- *  @param[in] begin   the begin iterator of the EPS block in the XSS array
- *  @param[in] end     the end iterator of the EPS block in the XSS array
+ *  @param[in] begin   the begin iterator of the SUBSH block in the XSS array
+ *  @param[in] end     the end iterator of the SUBSH block in the XSS array
  *  @param[in] nsh     the number of electron shells
  */
 PhotoatomicElectronSubshellBlock( Iterator begin, Iterator end, unsigned int nssh ) :

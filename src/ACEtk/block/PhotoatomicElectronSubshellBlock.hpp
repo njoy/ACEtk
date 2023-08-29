@@ -48,7 +48,7 @@ public:
   /**
    *  @brief Return the ENDF designator for each subshell
    */
-  auto ENDF() const { return this->darray( 1 ); }
+  auto ENDF() const { return this->iarray( 1 ); }
 
   /**
    *  @brief Return the ENDF designator for each subshell
@@ -58,7 +58,7 @@ public:
   /**
    *  @brief Return the electron population for each subshell
    */
-  auto EP() const { return this->darray( 2 ); }
+  auto EP() const { return this->iarray( 2 ); }
 
   /**
    *  @brief Return the electron population for each subshell
@@ -83,17 +83,17 @@ public:
   /**
    *  @brief Return the vacancy probabilities for each subshell
    */
-  auto vacancyProbabilyties() const { return this->CV(); }
+  auto vacancyProbabilities() const { return this->CV(); }
 
   /**
    *  @brief Return the number of transitions to fill a vacancy for each subshell
    */
-  auto NT() const { return this->darray( 4 ); }
+  auto NT() const { return this->iarray( 5 ); }
 
   /**
    *  @brief Return the number of transitions to fill a vacancy for each subshell
    */
-  auto numberTransitions() const { return this->CV(); }
+  auto numberTransitions() const { return this->NT(); }
 
   /**
    *  @brief Return the ENDF designator for a specific shell
@@ -120,9 +120,9 @@ public:
    *
    *  @param[in] index    the electron subshell index (one-based)
    */
-  unsigned int bindingEnergy( std::size_t index ) const {
+  double bindingEnergy( std::size_t index ) const {
 
-    return this->ivalue( 3, index );
+    return this->dvalue( 3, index );
   }
 
   /**
@@ -130,9 +130,9 @@ public:
    *
    *  @param[in] index    the electron subshell index (one-based)
    */
-  unsigned int vacancyProbality( std::size_t index ) const {
+  double vacancyProbability( std::size_t index ) const {
 
-    return this->ivalue( 4, index );
+    return this->dvalue( 4, index );
   }
 
   /**
