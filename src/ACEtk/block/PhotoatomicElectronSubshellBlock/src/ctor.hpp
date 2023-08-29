@@ -6,9 +6,11 @@ PhotoatomicElectronSubshellBlock( PhotoatomicElectronSubshellBlock&& ) = default
 /**
  *  @brief Constructor
  *
- *  @param[in] electrons        the number of electrons for each shell
- *  @param[in] energies         the binding energy for each shell
- *  @param[in] probabilities    the interaction probability for each shell
+ *  @param[in] designators      the ENDF designator of each subshell
+ *  @param[in] electrons        the electron population for each subshell
+ *  @param[in] energies         the vacancy cumulative probability for each subshell
+ *  @param[in] probabilities    the number of possible transitions to fill a vacancy
+ *                              for each subshell
  */
 PhotoatomicElectronSubshellBlock( std::vector< unsigned int > designators,
                                   std::vector< unsigned int > electrons,
