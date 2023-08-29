@@ -130,7 +130,7 @@ void wrapPhotoatomicElectronSubshellBlock( python::module& module, python::modul
   )
   .def_property_readonly(
 
-    "numberTransitions",
+    "number_transitions",
     [] ( const Block& self ) -> UnsignedIntRange
        { return self.numberTransitions(); },
        "The number of transitions to fill a vacancy for each subshell"
@@ -177,7 +177,7 @@ void wrapPhotoatomicElectronSubshellBlock( python::module& module, python::modul
   )
   .def(
 
-    "number_transitions",
+    "transitions",
     python::overload_cast< std::size_t >( &Block::numberTransitions, python::const_ ),
     python::arg( "index" ),
     "The number of transitions to fill a vacancy for a specific shell\n\n"
