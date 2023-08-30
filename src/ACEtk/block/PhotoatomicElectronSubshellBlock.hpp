@@ -14,6 +14,8 @@ namespace block {
  *  @class
  *  @brief The photoatomic SUBSH block with the electron subshell data
  *
+ *  This block is part of the eprdata formats.
+ *
  *  The PhotoatomicElectronSubshellBlock class contains 5 arrays of the
  *  same length:
  *    - the ENDF designator of each subshell

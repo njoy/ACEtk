@@ -25,6 +25,7 @@ void wrapPhotoatomicElectronSubshellBlock( python::module& module, python::modul
     module,
     "PhotoatomicElectronSubshellBlock",
     "The photoatomic SUBSH block with the electron subshell data\n\n"
+    "This block is part of the eprdata formats.\n\n"
     "The PhotoatomicElectronSubshellBlock class contains 5 arrays of the same length:\n"
     "  - the ENDF designator of each subshell\n"
     "  - the electron population for each subshell\n"
