@@ -162,6 +162,7 @@ if(ACEtk.python)
     python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
     python/src/block/PhotoatomicElectronSubshellBlock.python.cpp
     python/src/block/PhotoatomicElectronCrossSectionBlock.python.cpp
+    python/src/block/PhotoatomicElectronExcitationBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp

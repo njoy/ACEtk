@@ -79,6 +79,9 @@ void verifyChunk( const PhotoatomicElectronExcitationBlock& chunk ) {
   CHECK( 3 == chunk.NXL() );
   CHECK( 3 == chunk.numberEnergyPoints() );
 
+  CHECK( 3 == chunk.energies().size() );
+  CHECK( 3 == chunk.excitationEnergyLoss().size() );
+
   CHECK(  10. == Approx( chunk.energies()[0] ) );
   CHECK(  20. == Approx( chunk.energies()[1] ) );
   CHECK( 200. == Approx( chunk.energies()[2] ) );
