@@ -17,12 +17,12 @@ namespace block {
  *
  *  This block is part of the eprdata formats.
  *
- *  The PhotoatomicElectronExcitationBlock class contains 2 arrays of the same 
+ *  The PhotoatomicElectronExcitationBlock class contains 2 arrays of the same
  *  length:
  *    - the energy points
  *    - the average excitation energy loss values
  *
- *  The size NXL of each (the total number of excitation energy points) is 
+ *  The size NXL of each (the total number of excitation energy points) is
  *  stored in NXS(9).
  */
 class PhotoatomicElectronExcitationBlock : protected details::ArrayData {

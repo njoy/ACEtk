@@ -9,7 +9,7 @@ PhotoatomicElectronExcitationBlock( PhotoatomicElectronExcitationBlock&& ) = def
  *  @param[in] energies    the energy values
  *  @param[in] loss        the average excitation energy loss values
  */
-PhotoatomicElectronExcitationBlock( 
+PhotoatomicElectronExcitationBlock(
     std::vector< double > energies,
     std::vector< double > loss ) :
   ArrayData( "EXCIT",
@@ -26,7 +26,7 @@ PhotoatomicElectronExcitationBlock(
  *  @param[in] end     the end iterator of the EXCIT block in the XSS array
  *  @param[in] nxl     the number of energy values
  */
-PhotoatomicElectronExcitationBlock( Iterator begin, Iterator end, 
+PhotoatomicElectronExcitationBlock( Iterator begin, Iterator end,
                                     unsigned int nxl ) :
   ArrayData( "EXCIT", begin, end, nxl, 2 ) {}
 
