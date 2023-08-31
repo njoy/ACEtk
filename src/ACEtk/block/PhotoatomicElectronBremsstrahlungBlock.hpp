@@ -12,15 +12,15 @@ namespace block {
 
 /**
  *  @class
- *  @brief The photoatomic BREML block with the electron Bremsstrahlung energy
- *         loss data
+ *  @brief The photoatomic BREML block with the average electron energy
+ *         after Bremsstrahlung
  *
  *  This block is part of the eprdata formats.
  *
  *  The PhotoatomicElectronBremsstrahlungBlock class contains 2 arrays of the
  *  same length:
  *    - the energy points
- *    - the average energy remaining after loss to Bremsstrahlung
+ *    - the average energy remaining after Bremsstrahlung
  *
  *  The size NBL of each (the total number of energy points) is stored in NXS(12).
  */
