@@ -20,7 +20,6 @@
 #include "ACEtk/block/TwoBodyTransferDistribution.hpp"
 #include "ACEtk/block/EnergyAngleDistributionData.hpp"
 #include "ACEtk/block/AngleEnergyDistributionData.hpp"
-#include "ACEtk/block/TwoBodyTransferDistribution.hpp"
 #include "ACEtk/block/MultiDistributionData.hpp"
 #include "ACEtk/block/TabulatedMultiplicity.hpp"
 #include "ACEtk/ReferenceFrame.hpp"
@@ -59,9 +58,9 @@ using MultiplicityData = std::variant< unsigned int, TabulatedMultiplicity >;
 class EnergyDistributionBlock : protected details::Base {
 
   /* fields */
-  unsigned int nr_;   // the number of reactions
-  Iterator iterator_; // the begin iterator of the data block
-  block::TYR tyr_;    // the associated TYR block
+  unsigned int nr_ = 0; // the number of reactions
+  Iterator iterator_;   // the begin iterator of the data block
+  block::TYR tyr_;      // the associated TYR block
   std::vector< EnergyDistributionData > data_;
   std::vector< MultiplicityData > multiplicities_;
   std::vector< ReferenceFrame > frames_;
@@ -81,7 +80,8 @@ class EnergyDistributionBlock : protected details::Base {
    *  @brief Return the associated TYR block
    *
    *  Note: this TYR block may not be completely compatible with the normal TYR
-   *        block since can be the wrong expected size.
+   *        block since it only contains data for the first NR reactions (instead
+   *        of NTR).
    */
   const block::TYR& TYR() const { return this->tyr_; }
 

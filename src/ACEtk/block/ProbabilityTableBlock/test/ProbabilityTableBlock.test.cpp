@@ -96,9 +96,9 @@ void verifyChunk( const ProbabilityTableBlock& chunk ) {
   CHECK( 2 == chunk.INT() );
   CHECK( 2 == chunk.interpolation() );
   CHECK( -1 == chunk.ILF() );
-  CHECK( -1 == chunk.inelasticCompetion() );
+  CHECK( -1 == chunk.inelasticCompetition() );
   CHECK( 0 == chunk.IOA() );
-  CHECK( 0 == chunk.absorptionCompetion() );
+  CHECK( 0 == chunk.absorptionCompetition() );
   CHECK( 1 == chunk.IFF() );
   CHECK( 1 == chunk.type() );
 

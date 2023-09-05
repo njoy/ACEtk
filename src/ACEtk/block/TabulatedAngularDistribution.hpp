@@ -23,7 +23,7 @@ class TabulatedAngularDistribution :
   protected details::TabulatedProbabilityDistribution {
 
   /* fields */
-  double energy_;
+  double energy_ = 0.0;
 
   /* auxiliary functions */
 

@@ -7,7 +7,9 @@ ThermalScatteringDiscreteCosinesWithProbability( ThermalScatteringDiscreteCosine
  *  @brief Constructor
  *
  *  @param[in] energy     the outgoing energy value
- *  @param[in] cosines    the discrete cosine values
+ *  @param[in] pdf        the pdf value
+ *  @param[in] cdf        the cdf value
+ *  @param[in] cosines    the cosine values
  */
 ThermalScatteringDiscreteCosinesWithProbability(
     double energy, double pdf, double cdf,

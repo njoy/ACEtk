@@ -21,9 +21,9 @@ PhotoatomicTable( Table&& table ): Table( std::move( table ) ) {
 }
 
 /**
- *  @brief Copy constructor using a thermal scattering table
+ *  @brief Copy constructor using a photoatomic table
  *
- *  @param[in] table    the thermal scattering table to be copied
+ *  @param[in] table    the photoatomic table to be copied
  */
 PhotoatomicTable( const PhotoatomicTable& table ) :
   Table( table ) {
@@ -33,9 +33,9 @@ PhotoatomicTable( const PhotoatomicTable& table ) :
 }
 
 /**
- *  @brief Move constructor using a thermal scattering table
+ *  @brief Move constructor using a photoatomic table
  *
- *  @param[in] table    the thermal scattering table to be moved
+ *  @param[in] table    the photoatomic table to be moved
  */
 PhotoatomicTable( PhotoatomicTable&& table ) :
   Table( std::move( table ) ) {
@@ -45,9 +45,9 @@ PhotoatomicTable( PhotoatomicTable&& table ) :
 }
 
 /**
- *  @brief Copy assignment using a thermal scattering table
+ *  @brief Copy assignment using a photoatomic table
  *
- *  @param[in] table    the thermal scattering table to be copied
+ *  @param[in] table    the photoatomic table to be copied
  */
 PhotoatomicTable& operator=( const PhotoatomicTable& base ) {
 
@@ -56,9 +56,9 @@ PhotoatomicTable& operator=( const PhotoatomicTable& base ) {
 }
 
 /**
- *  @brief Move assignment using a thermal scattering table
+ *  @brief Move assignment using a photoatomic table
  *
- *  @param[in] table    the thermal scattering table to be moved
+ *  @param[in] table    the photoatomic table to be moved
  */
 PhotoatomicTable& operator=( PhotoatomicTable&& base ) {
 

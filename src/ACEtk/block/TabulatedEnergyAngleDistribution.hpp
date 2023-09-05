@@ -32,7 +32,7 @@ class TabulatedEnergyAngleDistribution :
                    TabulatedAngularDistributionWithProbability >;
 
   /* fields */
-  double incident_;
+  double incident_ = 0.0;
 
   /* auxiliary functions */
   #include "ACEtk/block/TabulatedEnergyAngleDistribution/src/generateXSS.hpp"

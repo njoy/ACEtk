@@ -24,7 +24,7 @@ namespace block {
 class ThermalScatteringDiscreteCosinesWithProbability : protected details::Base {
 
   /* fields */
-  std::size_t ncosines_;
+  std::size_t ncosines_ = 0;
 
   /* auxiliary functions */
   #include "ACEtk/block/ThermalScatteringDiscreteCosinesWithProbability/src/generateXSS.hpp"

@@ -3,7 +3,7 @@ generateXSS( std::vector< ReferenceFrame >&& frames,
              std::vector< unsigned int >&& multiplicities ) {
 
   std::vector< double > xss;
-  auto ntr = multiplicities.size();
+  const auto ntr = multiplicities.size();
   xss.reserve( ntr );
 
   if ( frames.size() != ntr ) {

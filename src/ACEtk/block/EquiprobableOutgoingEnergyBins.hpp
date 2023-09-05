@@ -22,7 +22,7 @@ namespace block {
 class EquiprobableOutgoingEnergyBins : protected details::Base {
 
   /* fields */
-  double incident_;
+  double incident_ = 0.0;
 
   /* auxiliary functions */
 
@@ -42,7 +42,7 @@ public:
   int numberBins() const { return this->length() - 1; }
 
   /**
-   *  @brief Return the cosine values
+   *  @brief Return the energy values
    */
   auto energies() const {
 

@@ -59,7 +59,7 @@ public:
 private:
 
   /* fields */
-  std::size_t locb_;
+  std::size_t locb_ = 1;
   std::vector< DistributionProbability > probabilities_;
   std::vector< DistributionData > distributions_;
 

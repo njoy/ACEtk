@@ -2,7 +2,7 @@ std::optional< std::vector< block::TYRH > >
 generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
 
   std::optional< std::vector< block::TYRH > > tyrh = std::nullopt;
-  if ( dlwh ) {
+  if ( dlwh.has_value() ) {
 
     tyrh = std::vector< block::TYRH >{};
     for ( const auto& element : dlwh.value() ) {
@@ -72,8 +72,7 @@ Data generateData( unsigned int z, unsigned int a,
   jxs[7] = xss.size() + 1;
   jxs[8] = xss.size() + ntr + 1;
   xss.insert( xss.end(), sig.begin(), sig.end() );
-  if ( ptype ) {
-
+  if ( ptype.has_value() ) {
 
     std::vector< unsigned int > numbers;
     for ( const auto& element : mtrh.value() ) {

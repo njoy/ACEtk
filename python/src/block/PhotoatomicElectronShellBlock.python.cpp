@@ -25,8 +25,7 @@ void wrapPhotoatomicElectronShellBlock( python::module& module, python::module& 
     module,
     "PhotoatomicElectronShellBlock",
     "The photoatomic LNEPS, LBEPS and LPIPS block with the electron shell data\n\n"
-    "The PhotoatomicPrincipalCrossSectionBlock class contains 3 arrays of the\n"
-    "same length:\n"
+    "The PhotoatomicElectronShellBlock class contains 3 arrays of the same length:\n"
     "  - the number of electrons for each shell\n"
     "  - the binding energy for each shell\n"
     "  - the interaction probability for each shell\n"

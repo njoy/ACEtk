@@ -8,10 +8,10 @@ static std::vector< double > generateXSS( unsigned int npsx, double ap,
                                 ap,
                                 static_cast< double >( interpolation ) };
   xss.reserve( 5 + 3 * values.size() );
-  details::ColumnData columns( "NBodyPhaseSpaceDistribution",
-                               std::move( values ),
-                               std::move( pdf ),
-                               std::move( cdf ) );
+  const details::ColumnData columns( "NBodyPhaseSpaceDistribution",
+                                     std::move( values ),
+                                     std::move( pdf ),
+                                     std::move( cdf ) );
   xss.insert( xss.end(), columns.begin(), columns.end() );
 
   return xss;

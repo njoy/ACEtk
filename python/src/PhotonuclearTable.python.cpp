@@ -322,7 +322,7 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
   .def(
 
     "secondary_particle_production_cross_section_block",
-    &Table::secondaryParticleFrameAndMultiplicityBlock,
+    &Table::secondaryParticleProductionCrossSectionBlock,
     python::arg( "index" ),
     "Return the production cross section block for a secondary particle index\n\n"
     "When the index is out of range an out of range exception is thrown\n"

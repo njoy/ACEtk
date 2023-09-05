@@ -23,7 +23,7 @@ namespace block {
 class SecondaryParticleInformationBlock : protected details::Base {
 
   /* fields */
-  unsigned int ntype_;
+  unsigned int ntype_ = 0;
 
   /* auxiliary functions */
   #include "ACEtk/block/SecondaryParticleInformationBlock/src/generateXSS.hpp"
@@ -38,13 +38,13 @@ public:
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
   unsigned int NTYPE() const { return this->ntype_; }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
   unsigned int numberAdditionalSecondaryParticleTypes() const {
 

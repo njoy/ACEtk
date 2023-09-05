@@ -27,7 +27,7 @@ namespace block {
 class FrameAndMultiplicityBlock : protected details::Base {
 
   /* fields */
-  std::size_t ntr_;
+  std::size_t ntr_ = 0;
   std::vector< ReferenceFrame > frames_;
   std::vector< unsigned int > multiplicities_;
 

@@ -42,14 +42,14 @@ public:
   /**
    *  @brief Return the number of available reactions
    */
-  unsigned int NTR() const { return BaseBlockWithLocators::NR(); }
+  unsigned int NTR() const { return BaseBlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of available reactions
    */
   unsigned int numberReactions() const {
 
-    return BaseBlockWithLocators::numberReactions();
+    return BaseBlockWithLocators::numberDataBlocks();
   }
 
   /**

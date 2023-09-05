@@ -1,7 +1,7 @@
 static std::vector< double >
 generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
 
-  std::size_t size = distributions.size();
+  const auto size = distributions.size();
   std::vector< double > xss( size );
   std::size_t index = 0;
   for ( auto&& distribution : distributions ) {
@@ -20,10 +20,10 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
           [ &xss, offset ] ( const MultiDistributionData& value ) {
 
             // remake the internal xss array with the proper locators
-            MultiDistributionData temp(
-                std::move( value.probabilities() ),
-                std::move( value.distributions() ),
-                offset );
+            const MultiDistributionData temp(
+                      std::move( value.probabilities() ),
+                      std::move( value.distributions() ),
+                      offset );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
           [] ( const auto& ) { /* nothing to do here */ }
@@ -43,11 +43,11 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
           [ &xss, &idat, offset ] ( const auto& value ) {
 
             idat = offset + 3 + 1 + 5;
-            xss.push_back( 0 );                                    // LNW
-            xss.push_back( static_cast< short >( value.LAW() ) );  // LAW
-            xss.push_back( idat );                                 // IDAT
-            xss.push_back( 0 );                                    // NR
-            xss.push_back( 2 );                                    // NE
+            xss.push_back( 0. );                                   // LNW
+            xss.push_back( static_cast< double >( value.LAW() ) ); // LAW
+            xss.push_back( static_cast< double >( idat ) );        // IDAT
+            xss.push_back( 0. );                                   // NR
+            xss.push_back( 2. );                                   // NE
             xss.push_back( value.minimumIncidentEnergy() );        // E[0]
             xss.push_back( value.maximumIncidentEnergy() );        // E[1]
             xss.push_back( 1. );                                   // P[0]
@@ -65,11 +65,11 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
             decltype(auto) interpolants = value.interpolants();
-            OutgoingEnergyDistributionData temp(
-                { boundaries.begin(), boundaries.end() },
-                { interpolants.begin(), interpolants.end() },
-                std::move( value.distributions() ),
-                idat );
+            const OutgoingEnergyDistributionData temp(
+                      { boundaries.begin(), boundaries.end() },
+                      { interpolants.begin(), interpolants.end() },
+                      std::move( value.distributions() ),
+                      idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
           [ &xss, idat ] ( const KalbachMannDistributionData& value ) {
@@ -77,11 +77,11 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
             decltype(auto) interpolants = value.interpolants();
-            KalbachMannDistributionData temp(
-                { boundaries.begin(), boundaries.end() },
-                { interpolants.begin(), interpolants.end() },
-                std::move( value.distributions() ),
-                idat );
+            const KalbachMannDistributionData temp(
+                      { boundaries.begin(), boundaries.end() },
+                      { interpolants.begin(), interpolants.end() },
+                      std::move( value.distributions() ),
+                      idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
           [ &xss, idat ] ( const EnergyAngleDistributionData& value ) {
@@ -89,11 +89,11 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
             decltype(auto) interpolants = value.interpolants();
-            EnergyAngleDistributionData temp(
-                { boundaries.begin(), boundaries.end() },
-                { interpolants.begin(), interpolants.end() },
-                std::move( value.distributions() ),
-                idat );
+            const EnergyAngleDistributionData temp(
+                      { boundaries.begin(), boundaries.end() },
+                      { interpolants.begin(), interpolants.end() },
+                      std::move( value.distributions() ),
+                      idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
           [ &xss, idat ] ( const AngleEnergyDistributionData& value ) {
@@ -101,11 +101,11 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
             // remake the internal xss array with the proper locators
             decltype(auto) boundaries = value.boundaries();
             decltype(auto) interpolants = value.interpolants();
-            AngleEnergyDistributionData temp(
-                { boundaries.begin(), boundaries.end() },
-                { interpolants.begin(), interpolants.end() },
-                std::move( value.distributions() ),
-                idat );
+            const AngleEnergyDistributionData temp(
+                      { boundaries.begin(), boundaries.end() },
+                      { interpolants.begin(), interpolants.end() },
+                      std::move( value.distributions() ),
+                      idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
           [ &xss ] ( const auto& value ) {

@@ -19,7 +19,7 @@ namespace block {
 class IsotropicAngularDistribution {
 
   /* fields */
-  double energy_;
+  double energy_ = 0.0;
 
   /* auxiliary functions */
 

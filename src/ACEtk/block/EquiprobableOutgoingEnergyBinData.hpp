@@ -20,7 +20,7 @@ namespace block {
  *
  *  The EquiprobableOutgoingEnergyBinData class contains the equiprobable bins
  *  for a set of incident energy values. It is used in the AND block. This
- *  format is only used in old ACE data.
+ *  format is only used in old ACE data. It is used in the DLW block as ACE LAW 1.
  */
 class EquiprobableOutgoingEnergyBinData : protected details::Base {
 

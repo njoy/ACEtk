@@ -5,8 +5,8 @@ generateXSS(
   std::vector< EquiprobableOutgoingEnergyBins >&& distributions ) {
 
   // reserve size in the vector
-  std::size_t nr = boundaries.size();
-  std::size_t ne = distributions.size();
+  const auto nr = boundaries.size();
+  const auto ne = distributions.size();
   std::vector< double > xss( 2 + ne ); // NE, list of energies, NET
 
   // sort distributions
@@ -15,14 +15,14 @@ generateXSS(
                  { return left.incidentEnergy() < right.incidentEnergy(); } );
 
   // insert the interpolation data
-  InterpolationData interpolation( "EquiprobableOutgoingEnergyBinData",
-                                   std::move( boundaries ),
-                                   std::move( interpolants ) );
+  const InterpolationData interpolation( "EquiprobableOutgoingEnergyBinData",
+                                         std::move( boundaries ),
+                                         std::move( interpolants ) );
   xss.insert( xss.begin(), interpolation.begin(), interpolation.end() );
 
   // insert the bin data
-  xss[ 1 + 2 * nr ] = ne;
-  xss[ 2 + 2 * nr + ne ] = distributions.front().numberBins() + 1;
+  xss[ 1 + 2 * nr ] = static_cast< double >( ne );
+  xss[ 2 + 2 * nr + ne ] = static_cast< double >( distributions.front().numberBins() + 1 );
   std::size_t index = 2 + 2 * nr;
   for ( const auto& distribution : distributions ) {
 

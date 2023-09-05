@@ -17,7 +17,7 @@ FetchContent_Declare( dimwits
 
 FetchContent_Declare( disco
     GIT_REPOSITORY  https://github.com/njoy/disco
-    GIT_TAG         a1a7ddb2c0f69465524d8640ee29988b714a881e
+    GIT_TAG         2606933a854bb0269c4ec37143e1236797e27838
     )
 
 FetchContent_Declare( hana-adapter
@@ -32,7 +32,7 @@ FetchContent_Declare( header-utilities
 
 FetchContent_Declare( interpolation
     GIT_REPOSITORY  https://github.com/njoy/interpolation
-    GIT_TAG         32375a9ae0ff346cecf69d5acd32dbc0092e7d7a
+    GIT_TAG         cb975c3cc58ccbc948b6750231056f7a98ad2ac9
     )
 
 FetchContent_Declare( Log
@@ -42,7 +42,7 @@ FetchContent_Declare( Log
 
 FetchContent_Declare( pybind11
     GIT_REPOSITORY  https://github.com/pybind/pybind11
-    GIT_TAG         f1abf5d9159b805674197f6bc443592e631c9130 # tag: v2.6.1
+    GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
     )
 
 FetchContent_Declare( range-v3

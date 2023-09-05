@@ -47,13 +47,13 @@ void wrapTabulatedFissionMultiplicity( python::module& module, python::module& )
     python::init< std::vector< long >, std::vector< long >,
                   std::vector< double >, std::vector< double > >(),
     python::arg( "boundaries" ), python::arg( "interpolants" ),
-    python::arg( "energies" ), python::arg( "xs" ),
+    python::arg( "energies" ), python::arg( "multiplicities" ),
     "Initialise the block\n\n"
     "Arguments:\n"
-    "    self            the block\n"
-    "    boundaries      the interpolation range boundaries\n"
-    "    interpolants    the interpolation types for each range\n"
-    "    energies        the energy values\n"
+    "    self             the block\n"
+    "    boundaries       the interpolation range boundaries\n"
+    "    interpolants     the interpolation types for each range\n"
+    "    energies         the energy values\n"
     "    multiplicities   the multiplicity values"
   )
   .def_property_readonly(

@@ -6,12 +6,12 @@ generateXSS( const std::string& name,
              std::size_t locb ) {
 
   // add the distribution data to the xss array
-  std::size_t nr = boundaries.size();
-  std::size_t ne = distributions.size();
+  const auto nr = boundaries.size();
+  const auto ne = distributions.size();
   std::vector< double > xss( 1 + 2 * ne );
   xss[0] = ne;
   std::size_t index = 1;
-  std::size_t offset = 1 + 2 * nr + locb;
+  const auto offset = 1 + 2 * nr + locb;
   for ( const auto& distribution : distributions ) {
 
     // set the associated value
@@ -21,11 +21,11 @@ generateXSS( const std::string& name,
     xss[index + ne] = xss.size() + offset;
 
     // remake the internal xss array with the proper locators
-    TabulatedAngleEnergyDistribution temp(
-        distribution.value(),
-        distribution.interpolation(),
-        std::move( distribution.distributions() ),
-        xss[index + ne] );
+    const TabulatedAngleEnergyDistribution temp(
+              distribution.value(),
+              distribution.interpolation(),
+              std::move( distribution.distributions() ),
+              xss[index + ne] );
     xss.insert( xss.end(), temp.begin(), temp.end() );
 
     // on to the next distribution

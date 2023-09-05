@@ -25,7 +25,7 @@ class TabulatedKalbachMannDistribution :
   protected details::TabulatedProbabilityDistribution {
 
   /* fields */
-  double incident_;
+  double incident_ = 0.0;
 
   /* auxiliary functions */
 

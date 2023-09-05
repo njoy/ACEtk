@@ -52,7 +52,10 @@ public:
   /**
    *  @brief Return the interpolation data
    */
-  auto interpolationData() const { return this->interpolation_; }
+  const InterpolationData& interpolationData() const {
+
+    return this->interpolation_;
+  }
 
   /**
    *  @brief Return the number of interpolation regions
@@ -136,7 +139,8 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    return round( this->value( this->values_.NC(), index ) );
+    return static_cast< int >( std::round( this->value( this->values_.NC(),
+                                                        index ) ) );
   }
 
   /**
@@ -165,7 +169,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t relativeDistributionLocator( std::size_t index ) const {
+  int relativeDistributionLocator( std::size_t index ) const {
 
     const int locator = this->LOCC( index );
     return locator - this->locb_ + 1;

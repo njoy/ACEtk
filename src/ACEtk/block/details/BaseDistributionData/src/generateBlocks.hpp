@@ -1,7 +1,7 @@
 void generateBlocks() {
 
-  std::size_t nr = static_cast< std::size_t >( this->IXSS( 1 ) );
-  std::size_t ne = static_cast< std::size_t >( this->IXSS( 2 + 2 * nr ) );
+  const auto nr = static_cast< std::size_t >( this->IXSS( 1 ) );
+  const auto ne = static_cast< std::size_t >( this->IXSS( 2 + 2 * nr ) );
   auto begin = this->begin();
   auto data = this->iterator( 2 + 2 * nr );
   auto end = this->iterator( 2 + 2 * nr + 2 * ne + 1 );

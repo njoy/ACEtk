@@ -22,7 +22,7 @@ namespace block {
 class ProbabilityTable : protected details::ArrayData {
 
   /* fields */
-  double incident_;
+  double incident_ = 0.0;
 
   /* auxiliary functions */
 

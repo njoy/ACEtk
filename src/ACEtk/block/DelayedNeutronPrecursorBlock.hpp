@@ -21,7 +21,7 @@ namespace block {
 class DelayedNeutronPrecursorBlock : protected details::Base {
 
   /* fields */
-  unsigned int npcr_;
+  unsigned int npcr_ = 0;
   std::vector< DelayedNeutronPrecursorData > data_;
 
   /* auxiliary functions */

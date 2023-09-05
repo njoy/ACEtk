@@ -49,7 +49,7 @@ class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
             self.assertEqual( 2, len( chunk.probabilities ) )
             self.assertEqual( 2, len( chunk.distributions ) )
 
-            probability1 = chunk.probability( 1 );
+            probability1 = chunk.probability( 1 )
             self.assertEqual( 0, probability1.interpolation_data.NB )
             self.assertEqual( 0, probability1.interpolation_data.number_interpolation_regions )
             self.assertEqual( 0, len( probability1.interpolation_data.INT ) )
@@ -75,7 +75,7 @@ class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
             self.assertEqual( 0.25, probability1.probabilities[0] )
             self.assertEqual( 0.75, probability1.probabilities[1] )
 
-            probability2 = chunk.probability( 2 );
+            probability2 = chunk.probability( 2 )
             self.assertEqual( 0, probability2.interpolation_data.NB )
             self.assertEqual( 0, probability2.interpolation_data.number_interpolation_regions )
             self.assertEqual( 0, len( probability2.interpolation_data.INT ) )
@@ -134,18 +134,18 @@ class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 1.219437E+01, distribution1.minimum_incident_energy )
             self.assertAlmostEqual( 20., distribution1.maximum_incident_energy )
 
-            self.assertEqual( 27, distribution1.LOCC(1) );
-            self.assertEqual( 39, distribution1.LOCC(2) );
-            self.assertEqual( 27, distribution1.distribution_locator(1) );
-            self.assertEqual( 39, distribution1.distribution_locator(2) );
+            self.assertEqual( 27, distribution1.LOCC(1) )
+            self.assertEqual( 39, distribution1.LOCC(2) )
+            self.assertEqual( 27, distribution1.distribution_locator(1) )
+            self.assertEqual( 39, distribution1.distribution_locator(2) )
 
-            self.assertEqual( 7, distribution1.relative_distribution_locator(1) );
-            self.assertEqual( 19, distribution1.relative_distribution_locator(2) );
+            self.assertEqual( 7, distribution1.relative_distribution_locator(1) )
+            self.assertEqual( 19, distribution1.relative_distribution_locator(2) )
 
             self.assertEqual( True, isinstance( distribution1.distribution(1), TabulatedKalbachMannDistribution )  )
             self.assertEqual( True, isinstance( distribution1.distribution(2), TabulatedKalbachMannDistribution ) )
 
-            data1 = distribution1.distribution(1);
+            data1 = distribution1.distribution(1)
             self.assertAlmostEqual( 1.219437E+01, data1.incident_energy )
             self.assertEqual( 1, data1.interpolation )
             self.assertEqual( 0, data1.number_discrete_photon_lines )
@@ -171,7 +171,7 @@ class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
             self.assertAlmostEqual( 2.391154E-01, data1.angular_distribution_slope_values[0] )
             self.assertAlmostEqual( 2.398743E-01, data1.angular_distribution_slope_values[-1] )
 
-            data2 = distribution1.distribution(2);
+            data2 = distribution1.distribution(2)
             self.assertAlmostEqual( 20., data2.incident_energy )
             self.assertEqual( 2, data2.interpolation )
             self.assertEqual( 0, data2.number_discrete_photon_lines )

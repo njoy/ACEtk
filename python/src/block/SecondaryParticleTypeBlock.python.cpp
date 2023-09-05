@@ -27,7 +27,7 @@ void wrapSecondaryParticleTypeBlock( python::module& module, python::module& ) {
     "The continuous energy PTYPE block with the secondary particle types\n\n"
     "The SecondaryParticleTypeBlock class contains the secondary particle types\n"
     "for which data is available (excluding the incident particle type).\n"
-    "The number of available available particle types is stored in NXS(7)."
+    "The number of available particle types is stored in NXS(7)."
   );
 
   // wrap the block

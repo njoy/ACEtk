@@ -1,14 +1,3 @@
-private:
-
-/**
- *  @brief Private constructor
- */
-MultiplicityReactionNumberBlock( std::vector< unsigned int >&& reactions,
-                                 std::size_t nyp ) :
-  Base( "YP", generateXSS( std::move( reactions ) ) ) {}
-
-public:
-
 MultiplicityReactionNumberBlock() = default;
 
 MultiplicityReactionNumberBlock( const MultiplicityReactionNumberBlock& ) = default;
@@ -20,7 +9,7 @@ MultiplicityReactionNumberBlock( MultiplicityReactionNumberBlock&& ) = default;
  *  @param[in] mts    the MT numbers
  */
 MultiplicityReactionNumberBlock( std::vector< unsigned int > reactions ) :
-  MultiplicityReactionNumberBlock( std::move( reactions ), reactions.size() ) {}
+  Base( "YP", generateXSS( std::move( reactions ) ) ) {}
 
 /**
  *  @brief Constructor

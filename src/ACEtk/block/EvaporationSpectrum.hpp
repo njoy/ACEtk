@@ -106,7 +106,7 @@ public:
   auto energies() const { return BaseEvaporationSpectrum::energies(); }
 
   /**
-   *  @brief Return the cross section values
+   *  @brief Return the temperature values
    */
   auto temperatures() const { return BaseEvaporationSpectrum::temperatures(); }
 
