@@ -32,18 +32,18 @@
 
 #include "range/v3/all.hpp"
 
-#include "dimwits.hpp"
-#include "interpolation.hpp"
+//#include "dimwits.hpp"
+//#include "interpolation.hpp"
 #include "header-utilities.hpp"
 #include "Log.hpp"
 
 namespace njoy {
 namespace ACEtk {
 
-using namespace dimwits;
+//using namespace dimwits;
 
-#include "ACEtk/details.hpp"
-#include "ACEtk/interpretation.hpp"
+//#include "ACEtk/details.hpp"
+//#include "ACEtk/interpretation.hpp"
 
 }
 }
