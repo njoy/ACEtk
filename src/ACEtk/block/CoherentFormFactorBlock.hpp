@@ -16,7 +16,7 @@ namespace block {
  *  @brief The photoatomic JCOH block with the coherent form factors
  *
  *  The CoherentFormFactorBlock class contains coherent form factors that are
- *  used to modify the differential Thomson cross sectiontabulated on a fixed
+ *  used to modify the differential Thomson cross section tabulated on a fixed
  *  grid of the recoil electron momentum transfer (in inverse angstroms).
  */
 class CoherentFormFactorBlock : protected details::ArrayData {

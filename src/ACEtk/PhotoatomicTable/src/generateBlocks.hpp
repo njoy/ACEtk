@@ -31,6 +31,7 @@ void generateBlocks() {
   this->jflo_ = std::nullopt;
   this->eps_ = std::nullopt;
   this->swd_ = std::nullopt;
+  this->subsh_ = std::nullopt;
 
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
@@ -73,4 +74,14 @@ void generateBlocks() {
     this->swd_ = block::SWD( locators.first, iterators.first, iterators.second,
                              this->NSH() );
   }
+
+  present = ( this->NEPR() > 0 );
+  if ( present ) {
+
+    // electron subshell block and photolectric subshell cross section block
+    auto subsh = block( 11 );
+    auto sphel = block( 16 );
+    this->subsh_ = block::SUBSH( subsh.first, sphel.first, this->NSSH() );
+  }
 }
+

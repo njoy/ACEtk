@@ -388,6 +388,9 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // SWD block
   CHECK( false == chunk.SWD().has_value() );
+
+  // SUBSH block - not an EPR data file
+  CHECK( false == chunk.SUBSH().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -530,4 +533,7 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 31 == profile.cdf().size() );
   CHECK( 0. == Approx( profile.cdf().front() ) );
   CHECK( 1. == Approx( profile.cdf().back() ) );
+
+  // SUBSH block - not an EPR data file
+  CHECK( false == chunk.SUBSH().has_value() );
 }
