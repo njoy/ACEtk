@@ -256,12 +256,12 @@ public:
   }
 
   /**
-   *  @brief Return the electron subshell data block (NEPR > 0)
+   *  @brief Return the electron subshell data block for eprdata (NEPR > 0)
    */
   const std::optional< block::SUBSH >& SUBSH() const { return this->subsh_; }
 
   /**
-   *  @brief Return the compton profile block
+   *  @brief Return the electron subshell data block for eprdata (NEPR > 0)
    */
   const std::optional< block::SUBSH >& electronSubshellBlock() const {
 
