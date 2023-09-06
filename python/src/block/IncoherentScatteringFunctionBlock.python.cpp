@@ -24,10 +24,13 @@ void wrapIncoherentScatteringFunctionBlock( python::module& module, python::modu
 
     module,
     "IncoherentScatteringFunctionBlock",
-    "The photoatomic JINC block with the incoherent scattering function values\n\n"
-    "The IncoherentScatteringFunctionBlock class contains the scattering functions\n"
-    "tabulated on a fixed grid of the recoil electron momentum (in inverse\n"
-    "angstroms)."
+    "The photoatomic JINC block with the incoherent scattering function\n\n"
+    "The IncoherentScatteringFunctionBlock class contains one of the following\n"
+    "representations of the scattering function:\n"
+    "  - 21 scattering function values using a fixed momentum grid (mcplib version)\n"
+    "  - tabulated momentum and scattering function values (eprdata version)\n\n"
+    "The interface abstracts away the distinction between the two representations.\n\n"
+    "The recoil electron momentum transfer values are given in inverse angstroms."
   );
 
   // wrap the block
@@ -36,27 +39,38 @@ void wrapIncoherentScatteringFunctionBlock( python::module& module, python::modu
 
     python::init< std::vector< double > >(),
     python::arg( "values" ),
-    "Initialise the block\n\n"
+    "Initialise the block using the mcplib representation\n\n"
     "Arguments:\n"
     "    self       the block\n"
-    "    values     the incoherent scattering function values"
+    "    values     the incoherent scattering function values (21 in total)"
+  )
+  .def(
+
+    python::init< std::vector< double > >(),
+    python::arg( "values" ),
+    "Initialise the block using the eprdata representation\n\n"
+    "Arguments:\n"
+    "    self        the block\n"
+    "    momentum    the momentum values"
+    "    values      the incoherent scattering function values"
   )
   .def_property_readonly(
 
     "NM",
-    [] ( const Block& self ) { return self.NM(); },
+    &Block::NM,
     "The number of values"
   )
   .def_property_readonly(
 
     "number_values",
-    [] ( const Block& self ) { return self.numberValues(); },
+    &Block::numberValues,
     "The number of values"
   )
   .def_property_readonly(
 
     "momentum",
-    [] ( const Block& self ) { return self.momentum(); },
+    [] ( const Block& self ) -> DoubleRange
+       { return self.momentum(); },
     "The electron recoil momentum values"
   )
   .def_property_readonly(
