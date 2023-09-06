@@ -734,5 +734,101 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 94 == chunk.JINC().values().size() );
   CHECK( 0 == Approx( chunk.JINC().values().front() ) );
   CHECK( 1 == Approx( chunk.JINC().values().back() ) );
+
+  // JCOH block
+  CHECK( false == chunk.JCOH().empty() );
+
+  CHECK( 90 == chunk.JCOH().NM() );
+  CHECK( 90 == chunk.JCOH().numberValues() );
+
+  CHECK( 90 == chunk.JCOH().momentum().size() );
+  CHECK( 0.                 == Approx( chunk.JCOH().momentum().front() ) );
+  CHECK( 1.000000000000E+09 == Approx( chunk.JCOH().momentum().back() ) );
+
+  CHECK( 90 == chunk.JCOH().integratedFormFactors().size() );
+  CHECK( 0.                 == Approx( chunk.JCOH().integratedFormFactors().front() ) );
+  CHECK( 3.012861887900E-02 == Approx( chunk.JCOH().integratedFormFactors().back() ) );
+
+  CHECK( 90 == chunk.JCOH().formFactors().size() );
+  CHECK( 1.                 == Approx( chunk.JCOH().formFactors().front() ) );
+  CHECK( 8.182900000000E-39 == Approx( chunk.JCOH().formFactors().back() ) );
+
+  // JFLO block
+  CHECK( false == chunk.JFLO().has_value() );
+
+  // LHNM block
+  CHECK( false == chunk.LHNM().empty() );
+
+  CHECK( 647 == chunk.LHNM().NES() );
+  CHECK( 647 == chunk.LHNM().numberEnergyPoints() );
+  CHECK( 647 == chunk.LHNM().heating().size() );
+
+  CHECK( 8.714616354250E-07 == Approx( chunk.LHNM().heating().front() ) );
+  CHECK( 9.999084183050E+04 == Approx( chunk.LHNM().heating().back() ) );
+
+  // EPS block
+  CHECK( false == chunk.EPS()->empty() );
+
+  CHECK( 1 == chunk.EPS()->NSH() );
+  CHECK( 1 == chunk.EPS()->numberElectronShells() );
+
+  CHECK( 1 == Approx( chunk.EPS()->numberElectrons()[0] ) );
+  CHECK( 1.400000000000e-05 == Approx( chunk.EPS()->bindingEnergies()[0] ) );
+  CHECK( 1.000000000000e+00 == Approx( chunk.EPS()->interactionProbabilities()[0] ) );
+
+  CHECK( 1 == chunk.EPS()->numberElectronsPerShell( 1 ) );
+  CHECK( 1.400000000000e-05 == Approx( chunk.EPS()->bindingEnergy( 1 ) ) );
+  CHECK( 1.000000000000e+00 == Approx( chunk.EPS()->interactionProbability( 1 ) ) );
+
+  // SWD block
+  CHECK( false == chunk.SWD()->empty() );
+
+  CHECK( 1 == chunk.SWD()->NSH() );
+
+  CHECK( 1 == chunk.SWD()->LSWD( 1 ) );
+
+  auto profile = chunk.SWD()->comptonProfile(1);
+  CHECK( 2 == profile.interpolation() );
+  CHECK( 31 == profile.numberValues() );
+  CHECK( 31 == profile.momentum().size() );
+  CHECK( 0. == Approx( profile.momentum().front() ) );
+  CHECK( 100. == Approx( profile.momentum().back() ) );
+  CHECK( 31 == profile.pdf().size() );
+  CHECK( 1.690581458877E+00 == Approx( profile.pdf().front() ) );
+  CHECK( 5.177281263934E-11 == Approx( profile.pdf().back() ) );
+  CHECK( 31 == profile.cdf().size() );
+  CHECK( 0. == Approx( profile.cdf().front() ) );
+  CHECK( 1. == Approx( profile.cdf().back() ) );
+
+  // SUBSH block - EPR data file
+  CHECK( true == chunk.SUBSH().has_value() );
+
+  CHECK( 1 == chunk.SUBSH()->NSSH() );
+  CHECK( 1 == chunk.SUBSH()->numberElectronSubshells() );
+
+  CHECK( 1 == chunk.SUBSH()->ENDF()[0] );
+  CHECK( 1 == chunk.SUBSH()->designators()[0] );
+
+  CHECK( 1 == chunk.SUBSH()->EP()[0] );
+  CHECK( 1 == chunk.SUBSH()->populations()[0] );
+
+  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->BE()[0] ) );
+  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->bindingEnergies()[0] ) );
+
+  CHECK( 1. == Approx( chunk.SUBSH()->CV()[0] ) );
+  CHECK( 1. == Approx( chunk.SUBSH()->vacancyProbabilities()[0] ) );
+
+  CHECK( 0 == chunk.SUBSH()->NT()[0] );
+  CHECK( 0 == chunk.SUBSH()->numberTransitions()[0] );
+
+  CHECK( 1 == chunk.SUBSH()->designator( 1 ) );
+
+  CHECK( 1 == chunk.SUBSH()->population( 1 ) );
+
+  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->bindingEnergy( 1 ) ) );
+
+  CHECK( 1. == Approx( chunk.SUBSH()->vacancyProbability( 1 ) ) );
+
+  CHECK( 0 == chunk.SUBSH()->numberTransitions( 1 ) );
 }
 
