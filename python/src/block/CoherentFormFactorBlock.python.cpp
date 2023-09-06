@@ -45,19 +45,20 @@ void wrapCoherentFormFactorBlock( python::module& module, python::module& ) {
   .def_property_readonly(
 
     "NM",
-    [] ( const Block& self ) { return self.NM(); },
+    &Block::NM,
     "The number of values"
   )
   .def_property_readonly(
 
     "number_values",
-    [] ( const Block& self ) { return self.numberValues(); },
+    &Block::numberValues,
     "The number of values"
   )
   .def_property_readonly(
 
     "momentum",
-    [] ( const Block& self ) { return self.momentum(); },
+    [] ( const Block& self ) -> DoubleRange
+       { return self.momentum(); },
     "The electron recoil momentum values"
   )
   .def_property_readonly(

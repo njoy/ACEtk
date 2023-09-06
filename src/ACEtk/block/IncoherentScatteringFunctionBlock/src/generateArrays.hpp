@@ -1,7 +1,7 @@
 static std::vector< std::vector< double > > 
 generateArrays( std::vector< double > values ) {
 
-  if ( 21 == values.size() ) {
+  if ( 21 != values.size() ) {
 
     Log::error( "The size of the XSS subrange in the JINC block for an "
                 "mcplib style scattering function should be 21" );
