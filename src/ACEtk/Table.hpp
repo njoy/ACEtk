@@ -13,7 +13,7 @@
 #include "ACEtk/State.hpp"
 #include "header-utilities.hpp"
 #include "disco.hpp"
-#include "dimwits.hpp"
+//#include "dimwits.hpp"
 #include "Log.hpp"
 #include "range/v3/view/subrange.hpp"
 
@@ -21,7 +21,7 @@ namespace njoy {
 namespace ACEtk {
 
 using namespace disco;
-using namespace dimwits;
+//using namespace dimwits;
 
 /**
  *  @class
