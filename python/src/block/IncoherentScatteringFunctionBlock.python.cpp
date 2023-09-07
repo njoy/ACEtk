@@ -46,8 +46,8 @@ void wrapIncoherentScatteringFunctionBlock( python::module& module, python::modu
   )
   .def(
 
-    python::init< std::vector< double > >(),
-    python::arg( "values" ),
+    python::init< std::vector< double >, std::vector< double > >(),
+    python::arg( "momentum" ), python::arg( "values" ),
     "Initialise the block using the eprdata representation\n\n"
     "Arguments:\n"
     "    self        the block\n"

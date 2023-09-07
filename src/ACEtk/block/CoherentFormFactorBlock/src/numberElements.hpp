@@ -7,7 +7,7 @@ static unsigned int numberElements( Iterator begin, Iterator end ) {
   }
   else {
 
-    if ( 0 != size%3 ) {
+    if ( 0 != size % 3 ) {
 
       Log::error( "The size of the XSS subrange in the JCOH block for"
                   "arbitrarily tabulated form factors should be odd" );

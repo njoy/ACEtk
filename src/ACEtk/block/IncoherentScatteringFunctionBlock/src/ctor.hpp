@@ -19,7 +19,7 @@ IncoherentScatteringFunctionBlock( std::vector< double > values ) :
 /**
  *  @brief Constructor
  *
- *  @param[in] momentum    the momemtum values
+ *  @param[in] momentum    the momentum values
  *  @param[in] values      the scattering function values
  */
 IncoherentScatteringFunctionBlock( std::vector< double > momentum,
@@ -31,8 +31,8 @@ private :
 /**
  *  @brief Private intermediate constructor
  */
-IncoherentScatteringFunctionBlock( Iterator begin, Iterator end, 
-                                   unsigned int size, 
+IncoherentScatteringFunctionBlock( Iterator begin, Iterator end,
+                                   unsigned int size,
                                    unsigned int n, unsigned int m ) :
   ArrayData( "JINC", begin, end, n, m ), momentum_( std::nullopt ) {
 
@@ -52,11 +52,10 @@ public:
  *  @param[in] end     the end iterator of the JINC block in the XSS array
  */
 IncoherentScatteringFunctionBlock( Iterator begin, Iterator end ) :
-  IncoherentScatteringFunctionBlock( begin, end, 
-                                     std::distance( begin, end ), 
-                                     numberElements( begin, end ), 
+  IncoherentScatteringFunctionBlock( begin, end,
+                                     std::distance( begin, end ),
+                                     numberElements( begin, end ),
                                      numberArrays( begin, end ) ) {}
 
 IncoherentScatteringFunctionBlock& operator=( const IncoherentScatteringFunctionBlock& ) = default;
 IncoherentScatteringFunctionBlock& operator=( IncoherentScatteringFunctionBlock&& ) = default;
-

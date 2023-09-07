@@ -10,11 +10,13 @@ using namespace njoy::ACEtk;
 using IncoherentScatteringFunctionBlock = block::IncoherentScatteringFunctionBlock;
 
 std::vector< double > chunk();
+std::vector< double > chunkEprdata();
 void verifyChunk( const IncoherentScatteringFunctionBlock& );
+void verifyChunkEprdata( const IncoherentScatteringFunctionBlock& );
 
 SCENARIO( "IncoherentScatteringFunctionBlock" ) {
 
-  GIVEN( "valid data for a IncoherentScatteringFunctionBlock instance" ) {
+  GIVEN( "valid data for a IncoherentScatteringFunctionBlock instance - mcplib style" ) {
 
     std::vector< double > xss = chunk();
 
@@ -68,6 +70,55 @@ SCENARIO( "IncoherentScatteringFunctionBlock" ) {
       } // THEN
     } // WHEN
   } // GIVEN
+
+  GIVEN( "valid data for a IncoherentScatteringFunctionBlock instance - eprdata style" ) {
+
+    std::vector< double > xss = chunkEprdata();
+
+    WHEN( "the data is given explicitly" ) {
+
+      std::vector< double > momentum = { 0., 1., 1000., 1e+6, 1e+9 };
+      std::vector< double > values = { 1., 2., 3., 4., 5. };
+
+      IncoherentScatteringFunctionBlock chunk( std::move( momentum ),
+                                               std::move( values ) );
+
+      THEN( "a IncoherentScatteringFunctionBlock can be constructed and members can "
+            "be tested" ) {
+
+        verifyChunkEprdata( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+    WHEN( "the data is defined by iterators" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+
+      THEN( "a IncoherentScatteringFunctionBlock can be constructed and members can "
+            "be tested" ) {
+
+        verifyChunkEprdata( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+  } // GIVEN
 } // SCENARIO
 
 std::vector< double > chunk() {
@@ -79,6 +130,15 @@ std::vector< double > chunk() {
            9.950160000000E-01,  9.983740000000E-01,  9.994100000000E-01,  9.997650000000E-01,
            9.998980000000E-01,  9.999530000000E-01,  9.999980000000E-01,                   1,
                             1,                   1,                   1,                   1
+  };
+}
+
+std::vector< double > chunkEprdata() {
+
+  return {
+
+    0., 1., 1000., 1e+6, 1e+9,
+    1., 2., 3., 4., 5.
   };
 }
 
@@ -136,4 +196,28 @@ void verifyChunk( const IncoherentScatteringFunctionBlock& chunk ) {
   CHECK( 1 == Approx( chunk.values()[18] ) );
   CHECK( 1 == Approx( chunk.values()[19] ) );
   CHECK( 1 == Approx( chunk.values()[20] ) );
+}
+
+void verifyChunkEprdata( const IncoherentScatteringFunctionBlock& chunk ) {
+
+  CHECK( false == chunk.empty() );
+  CHECK( 10 == chunk.length() );
+  CHECK( "JINC" == chunk.name() );
+
+  CHECK( 5 == chunk.NM() );
+  CHECK( 5 == chunk.numberValues() );
+
+  CHECK( 5 == chunk.momentum().size() );
+  CHECK( 0.   == Approx( chunk.momentum()[0] ) );
+  CHECK( 1.   == Approx( chunk.momentum()[1] ) );
+  CHECK( 1e+3 == Approx( chunk.momentum()[2] ) );
+  CHECK( 1e+6 == Approx( chunk.momentum()[3] ) );
+  CHECK( 1e+9 == Approx( chunk.momentum()[4] ) );
+
+  CHECK( 5 == chunk.values().size() );
+  CHECK( 1 == Approx( chunk.values()[0] ) );
+  CHECK( 2. == Approx( chunk.values()[1] ) );
+  CHECK( 3. == Approx( chunk.values()[2] ) );
+  CHECK( 4. == Approx( chunk.values()[3] ) );
+  CHECK( 5. == Approx( chunk.values()[4] ) );
 }

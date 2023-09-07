@@ -7,7 +7,7 @@ static unsigned int numberElements( Iterator begin, Iterator end ) {
   }
   else {
 
-    if ( 0 != size%2 ) {
+    if ( 0 != size % 2 ) {
 
       Log::error( "The size of the XSS subrange in the JINC block for an "
                   "arbitrarily tabulated scattering function should be even" );
