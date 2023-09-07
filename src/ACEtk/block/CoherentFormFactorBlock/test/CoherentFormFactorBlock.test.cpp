@@ -10,11 +10,13 @@ using namespace njoy::ACEtk;
 using CoherentFormFactorBlock = block::CoherentFormFactorBlock;
 
 std::vector< double > chunk();
+std::vector< double > chunkEprdata();
 void verifyChunk( const CoherentFormFactorBlock& );
+void verifyChunkEprdata( const CoherentFormFactorBlock& );
 
 SCENARIO( "CoherentFormFactorBlock" ) {
 
-  GIVEN( "valid data for a CoherentFormFactorBlock instance" ) {
+  GIVEN( "valid data for a CoherentFormFactorBlock instance - mcplib style" ) {
 
     std::vector< double > xss = chunk();
 
@@ -94,6 +96,57 @@ SCENARIO( "CoherentFormFactorBlock" ) {
       } // THEN
     } // WHEN
   } // GIVEN
+
+  GIVEN( "valid data for a CoherentFormFactorBlock instance - eprdata style" ) {
+
+    std::vector< double > xss = chunkEprdata();
+
+    WHEN( "the data is given explicitly" ) {
+
+      std::vector< double > momentum = { 0., 1., 1000., 1e+6, 1e+9 };
+      std::vector< double > integrated = { 1., 2., 3., 4., 5. };
+      std::vector< double > factors = { 6., 7., 8., 9., 10. };
+
+      CoherentFormFactorBlock chunk( std::move( momentum ),
+                                     std::move( integrated ),
+                                     std::move( factors ) );
+
+      THEN( "a CoherentFormFactorBlock can be constructed and members can "
+            "be tested" ) {
+
+        verifyChunkEprdata( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+    WHEN( "the data is defined by iterators" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+
+      THEN( "a CoherentFormFactorBlock can be constructed and members can "
+            "be tested" ) {
+
+        verifyChunkEprdata( chunk );
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        auto xss_chunk = chunk.XSS();
+        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+  } // GIVEN
 } // SCENARIO
 
 std::vector< double > chunk() {
@@ -131,6 +184,16 @@ std::vector< double > chunk() {
   };
 }
 
+std::vector< double > chunkEprdata() {
+
+  return {
+
+    0., 1., 1000., 1e+6, 1e+9,
+    1., 2., 3., 4., 5.,
+    6., 7., 8., 9., 10.
+  };
+}
+
 void verifyChunk( const CoherentFormFactorBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
@@ -141,14 +204,36 @@ void verifyChunk( const CoherentFormFactorBlock& chunk ) {
   CHECK( 55 == chunk.numberValues() );
 
   CHECK( 55 == chunk.momentum().size() );
-  CHECK( 0.   == Approx( chunk.momentum()[0] ) );
-  CHECK( 6.   == Approx( chunk.momentum()[54] ) );
+  CHECK( 0.   == Approx( chunk.momentum().front() ) );
+  CHECK( 6.   == Approx( chunk.momentum().back() ) );
 
   CHECK( 55 == chunk.integratedFormFactors().size() );
   CHECK( 0. == Approx( chunk.integratedFormFactors()[0] ) );
-  CHECK( 3.058316405266E-02 == Approx( chunk.integratedFormFactors()[54] ) );
+  CHECK( 3.058316405266E-02 == Approx( chunk.integratedFormFactors().back() ) );
 
   CHECK( 55 == chunk.formFactors().size() );
   CHECK( 1. == Approx( chunk.formFactors()[0] ) );
-  CHECK( 6.282390000000E-06 == Approx( chunk.formFactors()[54] ) );
+  CHECK( 6.282390000000E-06 == Approx( chunk.formFactors().back() ) );
+}
+
+void verifyChunkEprdata( const CoherentFormFactorBlock& chunk ) {
+
+  CHECK( false == chunk.empty() );
+  CHECK( 15 == chunk.length() );
+  CHECK( "JCOH" == chunk.name() );
+
+  CHECK( 5 == chunk.NM() );
+  CHECK( 5 == chunk.numberValues() );
+
+  CHECK( 5 == chunk.momentum().size() );
+  CHECK( 0.   == Approx( chunk.momentum().front() ) );
+  CHECK( 1e+9 == Approx( chunk.momentum().back() ) );
+
+  CHECK( 5 == chunk.integratedFormFactors().size() );
+  CHECK( 1. == Approx( chunk.integratedFormFactors().front() ) );
+  CHECK( 5. == Approx( chunk.integratedFormFactors().back() ) );
+
+  CHECK( 5 == chunk.formFactors().size() );
+  CHECK(  6. == Approx( chunk.formFactors().front() ) );
+  CHECK( 10. == Approx( chunk.formFactors().back() ) );
 }

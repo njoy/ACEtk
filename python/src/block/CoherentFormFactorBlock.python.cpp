@@ -42,6 +42,19 @@ void wrapCoherentFormFactorBlock( python::module& module, python::module& ) {
     "    integrated    the integrated form factor values\n"
     "    factors       the form factor values"
   )
+  .def(
+
+    python::init< std::vector< double >, std::vector< double >,
+                  std::vector< double > >(),
+    python::arg( "momentum" ), python::arg( "integrated" ),
+    python::arg( "factors" ),
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self          the block\n"
+    "    momentum      the momentum values\n"
+    "    integrated    the integrated form factor values\n"
+    "    factors       the form factor values"
+  )
   .def_property_readonly(
 
     "NM",

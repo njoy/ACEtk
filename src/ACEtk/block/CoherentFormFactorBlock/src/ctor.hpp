@@ -24,14 +24,14 @@ CoherentFormFactorBlock( std::vector< double > integrated,
 /**
  *  @brief Constructor
  *
- *  @param[in] momentum      the momemtum values
+ *  @param[in] momentum      the momentum values
  *  @param[in] integrated    the integrated form factor values
  *  @param[in] factors       the form factor values
  */
 CoherentFormFactorBlock( std::vector< double > momentum,
                          std::vector< double > integrated,
                          std::vector< double > factors ) :
-  ArrayData( "JCOH", std::move( momentum ), std::move( integrated ), 
+  ArrayData( "JCOH", std::move( momentum ), std::move( integrated ),
                      std::move( factors ) ) {}
 
 private :
@@ -39,8 +39,8 @@ private :
 /**
  *  @brief Private intermediate constructor
  */
-CoherentFormFactorBlock( Iterator begin, Iterator end, 
-                         unsigned int size, 
+CoherentFormFactorBlock( Iterator begin, Iterator end,
+                         unsigned int size,
                          unsigned int n, unsigned int m ) :
   ArrayData( "JCOH", begin, end, n, m ), momentum_( std::nullopt ) {
 
@@ -63,11 +63,10 @@ public:
  *  @param[in] end     the end iterator of the JINC block in the XSS array
  */
 CoherentFormFactorBlock( Iterator begin, Iterator end ) :
-  CoherentFormFactorBlock( begin, end, 
-                           std::distance( begin, end ), 
-                           numberElements( begin, end ), 
+  CoherentFormFactorBlock( begin, end,
+                           std::distance( begin, end ),
+                           numberElements( begin, end ),
                            numberArrays( begin, end ) ) {}
 
 CoherentFormFactorBlock& operator=( const CoherentFormFactorBlock& ) = default;
 CoherentFormFactorBlock& operator=( CoherentFormFactorBlock&& ) = default;
-
