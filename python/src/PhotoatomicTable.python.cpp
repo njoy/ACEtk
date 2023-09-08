@@ -274,6 +274,18 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "electron_subshell_block",
     &Table::electronSubshellBlock,
     "The electron subshell data block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "SPHEL",
+    &Table::SPHEL,
+    "The photolectric cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "photoelectric_cross_section_block",
+    &Table::photoelectricCrossSectionBlock,
+    "The photolectric cross section block for eprdata (NEPR > 0)"
   );
 
   // add standard block definitions

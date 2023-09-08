@@ -13,6 +13,7 @@
 #include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
 #include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
+#include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -34,6 +35,7 @@ class PhotoatomicTable : protected Table {
   std::optional< block::EPS > eps_;
   std::optional< block::SWD > swd_;
   std::optional< block::SUBSH > subsh_;
+  std::optional< block::SPHEL > sphel_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -266,6 +268,19 @@ public:
   const std::optional< block::SUBSH >& electronSubshellBlock() const {
 
     return this->SUBSH();
+  }
+
+  /**
+   *  @brief Return the photoelectric cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::SPHEL >& SPHEL() const { return this->sphel_; }
+
+  /**
+   *  @brief Return the photoelectric cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::SPHEL >& photoelectricCrossSectionBlock() const {
+
+    return this->SPHEL();
   }
 };
 

@@ -532,6 +532,9 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // SUBSH block - not an EPR data file
   CHECK( false == chunk.SUBSH().has_value() );
+
+  // SPHEL block - not an EPR data file
+  CHECK( false == chunk.SPHEL().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -677,6 +680,9 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   // SUBSH block - not an EPR data file
   CHECK( false == chunk.SUBSH().has_value() );
+
+  // SPHEL block - not an EPR data file
+  CHECK( false == chunk.SPHEL().has_value() );
 }
 
 void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
@@ -830,4 +836,17 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 1. == Approx( chunk.SUBSH()->vacancyProbability( 1 ) ) );
 
   CHECK( 0 == chunk.SUBSH()->numberTransitions( 1 ) );
+
+  // SPHEL block - EPR data file
+  CHECK( true == chunk.SPHEL().has_value() );
+
+  CHECK( 647 == chunk.SPHEL()->NES() );
+  CHECK( 647 == chunk.SPHEL()->numberEnergyPoints() );
+  CHECK( 1 == chunk.SPHEL()->NSSH() );
+  CHECK( 1 == chunk.SPHEL()->numberElectronSubshells() );
+
+  CHECK( 647 == chunk.SPHEL()->photoelectric(1).size() );
+
+  CHECK(  0.000000000000E+00 == Approx( chunk.SPHEL()->photoelectric(1).front() ) );
+  CHECK( -3.249289163676E+01 == Approx( chunk.SPHEL()->photoelectric(1).back() ) );
 }
