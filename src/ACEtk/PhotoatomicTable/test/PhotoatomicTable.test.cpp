@@ -831,4 +831,3 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 
   CHECK( 0 == chunk.SUBSH()->numberTransitions( 1 ) );
 }
-
