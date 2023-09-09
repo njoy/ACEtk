@@ -193,6 +193,18 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "NE",
+    &Table::NE,
+    "The number of electron energy points"
+  )
+  .def_property_readonly(
+
+    "number_electron_energy_points",
+    &Table::numberElectronEnergyPoints,
+    "The number of electron energy points"
+  )
+  .def_property_readonly(
+
     "ESZ",
     &Table::ESZG,
     "The principal cross section block"
@@ -286,6 +298,18 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "photoelectric_cross_section_block",
     &Table::photoelectricCrossSectionBlock,
     "The photolectric cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "ESZE",
+    &Table::ESZE,
+    "The electron cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_cross_section_block",
+    &Table::electronCrossSectionBlock,
+    "The electron cross section block for eprdata (NEPR > 0)"
   );
 
   // add standard block definitions

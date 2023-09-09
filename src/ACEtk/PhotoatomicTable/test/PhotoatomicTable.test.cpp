@@ -535,6 +535,11 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // SPHEL block - not an EPR data file
   CHECK( false == chunk.SPHEL().has_value() );
+
+  // XPROB block - EPR data file
+
+  // ESZE block - EPR data file
+  CHECK( false == chunk.ESZE().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -683,6 +688,11 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   // SPHEL block - not an EPR data file
   CHECK( false == chunk.SPHEL().has_value() );
+
+  // XPROB block - EPR data file
+
+  // ESZE block - EPR data file
+  CHECK( false == chunk.ESZE().has_value() );
 }
 
 void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
@@ -849,4 +859,37 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 
   CHECK(  0.000000000000E+00 == Approx( chunk.SPHEL()->photoelectric(1).front() ) );
   CHECK( -3.249289163676E+01 == Approx( chunk.SPHEL()->photoelectric(1).back() ) );
+
+  // XPROB block - EPR data file
+
+  // ESZE block - EPR data file
+  CHECK( true == chunk.ESZE().has_value() );
+
+  CHECK( 342 == chunk.ESZE()->NE() );
+  CHECK( 342 == chunk.ESZE()->numberEnergyPoints() );
+  CHECK( 1 == chunk.ESZE()->NSSH() );
+  CHECK( 1 == chunk.ESZE()->numberElectronSubshells() );
+
+  CHECK( 342 == chunk.ESZE()->energies().size() );
+  CHECK( 342 == chunk.ESZE()->total().size() );
+  CHECK( 342 == chunk.ESZE()->elastic().size() );
+  CHECK( 342 == chunk.ESZE()->bremsstrahlung().size() );
+  CHECK( 342 == chunk.ESZE()->excitation().size() );
+  CHECK( 342 == chunk.ESZE()->totalElectroionisation().size() );
+  CHECK( 342 == chunk.ESZE()->electroionisation(1).size() );
+
+  CHECK( 1.000000000000E-05 == Approx( chunk.ESZE()->energies().front() ) );
+  CHECK( 1.000000000000E+05 == Approx( chunk.ESZE()->energies().back() ) );
+  CHECK( 2.748960297832E+08 == Approx( chunk.ESZE()->total().front() ) );
+  CHECK( 1.643349906341E+05 == Approx( chunk.ESZE()->total().back() ) );
+  CHECK( 2.748960000000E+08 == Approx( chunk.ESZE()->elastic().front() ) );
+  CHECK( 1.311760000000E-05 == Approx( chunk.ESZE()->elastic().back() ) );
+  CHECK( 2.978320000000E+01 == Approx( chunk.ESZE()->bremsstrahlung().front() ) );
+  CHECK( 9.906210000000E-01 == Approx( chunk.ESZE()->bremsstrahlung().back() ) );
+  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->excitation().front() ) );
+  CHECK( 8.144160000000E+04 == Approx( chunk.ESZE()->excitation().back() ) );
+  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->totalElectroionisation().front() ) );
+  CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->totalElectroionisation().back() ) );
+  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->electroionisation(1).front() ) );
+  CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->electroionisation(1).back() ) );
 }

@@ -14,6 +14,7 @@
 #include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
 #include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -36,6 +37,8 @@ class PhotoatomicTable : protected Table {
   std::optional< block::SWD > swd_;
   std::optional< block::SUBSH > subsh_;
   std::optional< block::SPHEL > sphel_;
+
+  std::optional< block::ESZE > esze_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -171,6 +174,16 @@ public:
    */
   unsigned int numberElectronSubshells() const { return this->NSSH(); }
 
+  /**
+   *  @brief Return the number of electron energy points
+   */
+  unsigned int NE() const { return this->data().NXS(8); }
+
+  /**
+   *  @brief Return the number of electron energy points
+   */
+  unsigned int numberElectronEnergies() const { return this->NE(); }
+
   // JXS information
 
   // XSS blocks
@@ -281,6 +294,19 @@ public:
   const std::optional< block::SPHEL >& photoelectricCrossSectionBlock() const {
 
     return this->SPHEL();
+  }
+
+  /**
+   *  @brief Return the electron cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::ESZE >& ESZE() const { return this->esze_; }
+
+  /**
+   *  @brief Return the electron cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::ESZE >& electronCrossSectionBlock() const {
+
+    return this->ESZE();
   }
 };
 
