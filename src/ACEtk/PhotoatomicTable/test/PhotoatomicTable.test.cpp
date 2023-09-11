@@ -443,6 +443,8 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0. == Approx( chunk.temperature() ) );
 
   CHECK( 389 == chunk.length() );
+  CHECK( 1 == chunk.Z() );
+  CHECK( 1 == chunk.atomNumber() );
   CHECK( 43 == chunk.NES() );
   CHECK( 43 == chunk.numberEnergyPoints() );
   CHECK( 0 == chunk.NFLO() );
@@ -455,6 +457,10 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.electronPhotonRelaxationFormat() );
   CHECK( 0 == chunk.NSSH() );
   CHECK( 0 == chunk.numberElectronSubshells() );
+  CHECK( 0 == chunk.NE() );
+  CHECK( 0 == chunk.numberElectronEnergyPoints() );
+  CHECK( 0 == chunk.NXL() );
+  CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -540,6 +546,9 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // ESZE block - EPR data file
   CHECK( false == chunk.ESZE().has_value() );
+
+  // EXCIT block - EPR data file
+  CHECK( false == chunk.EXCIT().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -548,6 +557,8 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0. == Approx( chunk.temperature() ) );
 
   CHECK( 821 == chunk.length() );
+  CHECK( 3 == chunk.Z() );
+  CHECK( 3 == chunk.atomNumber() );
   CHECK( 82 == chunk.NES() );
   CHECK( 82 == chunk.numberEnergyPoints() );
   CHECK( 0 == chunk.NFLO() );
@@ -560,6 +571,10 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.electronPhotonRelaxationFormat() );
   CHECK( 0 == chunk.NSSH() );
   CHECK( 0 == chunk.numberElectronSubshells() );
+  CHECK( 0 == chunk.NE() );
+  CHECK( 0 == chunk.numberElectronEnergyPoints() );
+  CHECK( 0 == chunk.NXL() );
+  CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -693,6 +708,9 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   // ESZE block - EPR data file
   CHECK( false == chunk.ESZE().has_value() );
+
+  // EXCIT block - EPR data file
+  CHECK( false == chunk.EXCIT().has_value() );
 }
 
 void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
@@ -701,6 +719,8 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 0. == Approx( chunk.temperature() ) );
 
   CHECK( 12025 == chunk.length() );
+  CHECK( 1 == chunk.Z() );
+  CHECK( 1 == chunk.atomNumber() );
   CHECK( 647 == chunk.NES() );
   CHECK( 647 == chunk.numberEnergyPoints() );
   CHECK( 0 == chunk.NFLO() );
@@ -713,6 +733,10 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 1 == chunk.electronPhotonRelaxationFormat() );
   CHECK( 1 == chunk.NSSH() );
   CHECK( 1 == chunk.numberElectronSubshells() );
+  CHECK( 342 == chunk.NE() );
+  CHECK( 342 == chunk.numberElectronEnergyPoints() );
+  CHECK( 170 == chunk.NXL() );
+  CHECK( 170 == chunk.numberElectronExcitationEnergyPoints() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -892,4 +916,19 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->totalElectroionisation().back() ) );
   CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->electroionisation(1).front() ) );
   CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->electroionisation(1).back() ) );
+
+  // EXCIT block - EPR data file
+  CHECK( true == chunk.EXCIT().has_value() );
+
+  CHECK( 170 == chunk.EXCIT()->NXL() );
+  CHECK( 170 == chunk.EXCIT()->numberEnergyPoints() );
+
+  CHECK( 170 == chunk.EXCIT()->energies().size() );
+  CHECK( 170 == chunk.EXCIT()->excitationEnergyLoss().size() );
+
+  CHECK( 1.361000000000E-05 == Approx( chunk.EXCIT()->energies().front() ) );
+  CHECK( 1.000000000000E+05 == Approx( chunk.EXCIT()->energies().back() ) );
+
+  CHECK( 1.351000000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().front() ) );
+  CHECK( 2.107770000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().back() ) );
 }
