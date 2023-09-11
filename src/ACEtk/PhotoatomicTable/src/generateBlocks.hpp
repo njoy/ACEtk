@@ -34,6 +34,7 @@ void generateBlocks() {
   this->subsh_ = std::nullopt;
   this->sphel_ = std::nullopt;
   this->esze_ = std::nullopt;
+  this->excit_ = std::nullopt;
 
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
@@ -88,5 +89,7 @@ void generateBlocks() {
 
     auto esze = block( 19 );
     this->esze_ = block::ESZE( esze.first, esze.second, this->NSSH(), this->NE() );
+    auto excit = block( 20 );
+    this->excit_ = block::EXCIT( excit.first, excit.second, this->NXL() );
   }
 }

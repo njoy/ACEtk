@@ -15,6 +15,7 @@
 #include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
 #include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -37,6 +38,7 @@ class PhotoatomicTable : protected Table {
   std::optional< block::SWD > swd_;
   std::optional< block::SUBSH > subsh_;
   std::optional< block::SPHEL > sphel_;
+  std::optional< block::EXCIT > excit_;
 
   std::optional< block::ESZE > esze_;
 
@@ -184,6 +186,16 @@ public:
    */
   unsigned int numberElectronEnergyPoints() const { return this->NE(); }
 
+  /**
+   *  @brief Return the number of electron excitation energy points
+   */
+  unsigned int NXL() const { return this->data().NXS(9); }
+
+  /**
+   *  @brief Return the number of electron excitation energy points
+   */
+  unsigned int numberElectronExcitationEnergyPoints() const { return this->NXL(); }
+
   // JXS information
 
   // XSS blocks
@@ -307,6 +319,19 @@ public:
   const std::optional< block::ESZE >& electronCrossSectionBlock() const {
 
     return this->ESZE();
+  }
+
+  /**
+   *  @brief Return the electron excitation energy loss block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::EXCIT >& EXCIT() const { return this->excit_; }
+
+  /**
+   *  @brief Return the electron excitation energy loss block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::EXCIT >& electronExcitationEnergyLossBlock() const {
+
+    return this->EXCIT();
   }
 };
 
