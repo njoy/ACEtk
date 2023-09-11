@@ -182,7 +182,7 @@ public:
   /**
    *  @brief Return the number of electron energy points
    */
-  unsigned int numberElectronEnergies() const { return this->NE(); }
+  unsigned int numberElectronEnergyPoints() const { return this->NE(); }
 
   // JXS information
 
