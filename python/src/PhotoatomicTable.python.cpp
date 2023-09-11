@@ -193,6 +193,30 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "NXL",
+    &Table::NXL,
+    "The number of electron excitation energy points"
+  )
+  .def_property_readonly(
+
+    "number_electron_excitation_energy_points",
+    &Table::numberElectronExcitationEnergyPoints,
+    "The number of electron excitation energy points"
+  )
+  .def_property_readonly(
+
+    "NBL",
+    &Table::NBL,
+    "The number of electron Bremsstrahlung energy points"
+  )
+  .def_property_readonly(
+
+    "number_electron_bremsstrahlung_energy_points",
+    &Table::numberElectronBremsstrahlungEnergyPoints,
+    "The number of electron Bremsstrahlung energy points"
+  )
+  .def_property_readonly(
+
     "ESZ",
     &Table::ESZG,
     "The principal cross section block"
@@ -298,6 +322,30 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "electron_cross_section_block",
     &Table::electronCrossSectionBlock,
     "The electron cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "EXCIT",
+    &Table::EXCIT,
+    "The electron excitation energy loss block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_excitation_energy_loss_block",
+    &Table::electronExcitationEnergyLossBlock,
+    "The electron excitation energy loss block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "BREML",
+    &Table::BREML,
+    "The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_energy_after_bremsstrahlung_block",
+    &Table::electronEnergyAfterBremsstrahlungBlock,
+    "The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)"
   );
 
   // add standard block definitions
