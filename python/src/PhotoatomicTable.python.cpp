@@ -132,18 +132,6 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "Z",
-    &Table::Z,
-    "The atom number of the element"
-  )
-  .def_property_readonly(
-
-    "atom_number",
-    &Table::atomNumber,
-    "The atom number of the element"
-  )
-  .def_property_readonly(
-
     "NFLO",
     &Table::NFLO,
     "The number of fluorescence edges"
