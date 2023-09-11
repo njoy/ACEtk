@@ -461,6 +461,8 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberElectronEnergyPoints() );
   CHECK( 0 == chunk.NXL() );
   CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
+  CHECK( 0 == chunk.NBL() );
+  CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -549,6 +551,11 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // EXCIT block - EPR data file
   CHECK( false == chunk.EXCIT().has_value() );
+
+  // JXS(21) -> JXS(25)
+
+  // BREML block - EPR data file
+  CHECK( false == chunk.BREML().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -575,6 +582,8 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberElectronEnergyPoints() );
   CHECK( 0 == chunk.NXL() );
   CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
+  CHECK( 0 == chunk.NBL() );
+  CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -711,6 +720,11 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   // EXCIT block - EPR data file
   CHECK( false == chunk.EXCIT().has_value() );
+
+  // JXS(21) -> JXS(25)
+
+  // BREML block - EPR data file
+  CHECK( false == chunk.BREML().has_value() );
 }
 
 void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
@@ -737,6 +751,8 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 342 == chunk.numberElectronEnergyPoints() );
   CHECK( 170 == chunk.NXL() );
   CHECK( 170 == chunk.numberElectronExcitationEnergyPoints() );
+  CHECK( 82 == chunk.NBL() );
+  CHECK( 82 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -931,4 +947,21 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 
   CHECK( 1.351000000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().front() ) );
   CHECK( 2.107770000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().back() ) );
+
+  // JXS(21) -> JXS(25)
+
+  // BREML block - EPR data file
+  CHECK( true == chunk.BREML().has_value() );
+
+  CHECK( 82 == chunk.BREML()->NBL() );
+  CHECK( 82 == chunk.BREML()->numberEnergyPoints() );
+
+  CHECK( 82 == chunk.BREML()->energies().size() );
+  CHECK( 82 == chunk.BREML()->energyAfterBremsstrahlung().size() );
+
+  CHECK( 1.000000000000E-05 == Approx( chunk.BREML()->energies().front() ) );
+  CHECK( 1.000000000000E+05 == Approx( chunk.BREML()->energies().back() ) );
+
+  CHECK( 7.855740000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
+  CHECK( 9.733190000000E+04 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
 }

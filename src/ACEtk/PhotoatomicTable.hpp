@@ -349,14 +349,14 @@ public:
   }
 
   /**
-   *  @brief Return the electron Brehmsstrahlung energy loss block for eprdata (NEPR > 0)
+   *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
    */
   const std::optional< block::BREML >& BREML() const { return this->breml_; }
 
   /**
-   *  @brief Return the electron Brehmsstrahlung energy loss block for eprdata (NEPR > 0)
+   *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
    */
-  const std::optional< block::BREML >& electronBremsstrahlungEnergyLossBlock() const {
+  const std::optional< block::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
 
     return this->BREML();
   }
