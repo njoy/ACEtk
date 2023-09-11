@@ -91,5 +91,8 @@ void generateBlocks() {
     this->esze_ = block::ESZE( esze.first, esze.second, this->NSSH(), this->NE() );
     auto excit = block( 20 );
     this->excit_ = block::EXCIT( excit.first, excit.second, this->NXL() );
+
+    auto breml = block( 26 );
+    this->breml_ = block::BREML( breml.first, breml.second, this->NBL() );
   }
 }

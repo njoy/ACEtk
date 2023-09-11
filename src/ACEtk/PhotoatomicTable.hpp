@@ -16,6 +16,7 @@
 #include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronBremsstrahlungBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -38,9 +39,12 @@ class PhotoatomicTable : protected Table {
   std::optional< block::SWD > swd_;
   std::optional< block::SUBSH > subsh_;
   std::optional< block::SPHEL > sphel_;
-  std::optional< block::EXCIT > excit_;
 
   std::optional< block::ESZE > esze_;
+
+  std::optional< block::EXCIT > excit_;
+
+  std::optional< block::BREML > breml_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -196,6 +200,16 @@ public:
    */
   unsigned int numberElectronExcitationEnergyPoints() const { return this->NXL(); }
 
+  /**
+   *  @brief Return the number of electron Bremsstrahlung energy points
+   */
+  unsigned int NBL() const { return this->data().NXS(12); }
+
+  /**
+   *  @brief Return the number of electron Bremsstrahlung energy points
+   */
+  unsigned int numberElectronBremsstrahlungEnergyPoints() const { return this->NBL(); }
+
   // JXS information
 
   // XSS blocks
@@ -332,6 +346,19 @@ public:
   const std::optional< block::EXCIT >& electronExcitationEnergyLossBlock() const {
 
     return this->EXCIT();
+  }
+
+  /**
+   *  @brief Return the electron Brehmsstrahlung energy loss block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::BREML >& BREML() const { return this->breml_; }
+
+  /**
+   *  @brief Return the electron Brehmsstrahlung energy loss block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::BREML >& electronBremsstrahlungEnergyLossBlock() const {
+
+    return this->BREML();
   }
 };
 
