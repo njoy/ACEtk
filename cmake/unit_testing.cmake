@@ -94,6 +94,7 @@ add_subdirectory( src/ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/test
 add_subdirectory( src/ACEtk/block/PhotoatomicElectronCrossSectionBlock/test )
 add_subdirectory( src/ACEtk/block/PhotoatomicElectronExcitationBlock/test )
 add_subdirectory( src/ACEtk/block/PhotoatomicElectronBremsstrahlungBlock/test )
+add_subdirectory( src/ACEtk/block/PhotoatomicSubshellTransitionData/test )
 add_subdirectory( src/ACEtk/block/PhotoelectricCrossSectionBlock/test )
 add_subdirectory( src/ACEtk/details/verify/CDF/test )
 add_subdirectory( src/ACEtk/details/verify/Positive/test )
