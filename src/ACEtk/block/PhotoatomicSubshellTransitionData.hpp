@@ -12,7 +12,7 @@ namespace block {
 
 /**
  *  @class
- *  @brief The photoatomic transition data for a given subshell
+ *  @brief The electron transition data for a given subshell
  *
  *  This block is part of the eprdata formats.
  *
@@ -45,12 +45,12 @@ public:
   /* methods */
 
   /**
-   *  @brief Return the number of energy points
+   *  @brief Return the number of transitions
    */
   unsigned int NT() const { return this->M(); }
 
   /**
-   *  @brief Return the number of energy points
+   *  @brief Return the number of transitions
    */
   unsigned int numberTransitions() const { return this->NT(); }
 
@@ -65,7 +65,7 @@ public:
   }
 
   /**
-   *  @brief Return the primary designator
+   *  @brief Return the primary designator for a given transition
    *
    *  @param[in] index      the transition index (one-based)
    */
@@ -75,7 +75,7 @@ public:
   }
 
   /**
-   *  @brief Return the secondary designator
+   *  @brief Return the secondary designator for a given transition
    *
    *  @param[in] index      the transition index (one-based)
    */
@@ -106,7 +106,7 @@ public:
   }
 
   /**
-   *  @brief Return whether or not the transition is a radiative transition
+   *  @brief Return whether or not the transition is a radiative transitions
    *
    *  @param[in] index      the transition index (one-based)
    */
