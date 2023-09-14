@@ -4,9 +4,9 @@ private:
  *  @brief Private constructor
  */
 BaseBlockWithLocators( std::string&& name, std::vector< Data >&& xs,
-                       std::size_t n ) :
-  Base( std::move( name ), Derived::generateXSS( std::move( xs ) ) ),
-  n_( n ) {
+                       std::size_t n, bool locator ) :
+  Base( std::move( name ), Derived::generateXSS( std::move( xs ), locator ) ),
+  n_( n ), locator_( locator ) {
 
   this->iterator_ = this->begin() + this->N();
   static_cast< Derived* >( this )->generateBlocks();
@@ -17,8 +17,8 @@ protected:
 BaseBlockWithLocators() = default;
 
 BaseBlockWithLocators( const BaseBlockWithLocators& base ) :
-  Base( base ), n_( base.n_ ), iterator_( base.iterator_ ),
-  data_( base.data_ ) {
+  Base( base ), n_( base.n_ ), locator_( base.locator_ ),
+  iterator_( base.iterator_ ), data_( base.data_ ) {
 
   if ( Base::owner() ) {
 
@@ -29,8 +29,8 @@ BaseBlockWithLocators( const BaseBlockWithLocators& base ) :
 }
 
 BaseBlockWithLocators( BaseBlockWithLocators&& base ) :
-  Base( std::move( base ) ), n_( base.n_ ), iterator_( base.iterator_ ),
-  data_( std::move( base.data_ ) ) {
+  Base( std::move( base ) ), n_( base.n_ ), locator_( base.locator_ ),
+  iterator_( base.iterator_ ), data_( std::move( base.data_ ) ) {
 
   if ( Base::owner() ) {
 
@@ -46,8 +46,10 @@ BaseBlockWithLocators( BaseBlockWithLocators&& base ) :
  *  @param[in] name    the block name
  *  @param[in] data    the data
  */
-BaseBlockWithLocators( std::string name, std::vector< Data > data ) :
-  BaseBlockWithLocators( std::move( name ), std::move( data ), data.size() ) {}
+BaseBlockWithLocators( std::string name, std::vector< Data > data,
+                       bool locator = true ) :
+  BaseBlockWithLocators( std::move( name ), std::move( data ), data.size(),
+                         locator ) {}
 
 /**
  *  @brief Constructor
@@ -60,9 +62,9 @@ BaseBlockWithLocators( std::string name, std::vector< Data > data ) :
  */
 BaseBlockWithLocators( std::string name,
                        Iterator loc, Iterator data, Iterator end,
-                       unsigned int n ) :
+                       unsigned int n, bool locator = true ) :
   Base( std::move( name ), loc, end ),
-  n_( n ), iterator_( data ) {
+  n_( n ), locator_( locator ), iterator_( data ) {
 
   verifySize( this->begin(), this->iterator_, this->end(), this->N() );
   static_cast< Derived* >( this )->generateBlocks();
