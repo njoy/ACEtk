@@ -35,6 +35,7 @@ class PhotoatomicSubshellTransitionData : protected details::ArrayData {
   /* fields */
 
   /* auxiliary functions */
+  #include "ACEtk/block/PhotoatomicSubshellTransitionData/src/calculateNumberTransitions.hpp"
   #include "ACEtk/block/PhotoatomicSubshellTransitionData/src/generateArrays.hpp"
 
 public:

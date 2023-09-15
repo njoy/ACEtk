@@ -47,7 +47,7 @@ SCENARIO( "PhotoatomicSubshellTransitionData" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicSubshellTransitionData chunk( xss.begin(), xss.end(), 3 );
+      PhotoatomicSubshellTransitionData chunk( xss.begin(), xss.end() );
 
       THEN( "a PhotoatomicSubshellTransitionData can be constructed and "
             "members can be tested" ) {

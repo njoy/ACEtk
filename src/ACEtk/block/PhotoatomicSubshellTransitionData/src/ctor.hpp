@@ -25,9 +25,8 @@ PhotoatomicSubshellTransitionData(
  *  @param[in] end     the end iterator of the transition data in the XSS array
  *  @param[in] nt      the number of transitions
  */
-PhotoatomicSubshellTransitionData( Iterator begin, Iterator end,
-                                   unsigned int nt ) :
-  ArrayData( "TRAN", begin, end, 4, nt ) {}
+PhotoatomicSubshellTransitionData( Iterator begin, Iterator end ) :
+  ArrayData( "TRAN", begin, end, 4, calculateNumberTransitions( begin, end ) ) {}
 
 PhotoatomicSubshellTransitionData& operator=( const PhotoatomicSubshellTransitionData& ) = default;
 PhotoatomicSubshellTransitionData& operator=( PhotoatomicSubshellTransitionData&& ) = default;
