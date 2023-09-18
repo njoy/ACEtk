@@ -544,17 +544,18 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   // SPHEL block - not an EPR data file
   CHECK( false == chunk.SPHEL().has_value() );
 
-  // XPROB block - EPR data file
+  // XPROB block - not EPR data file
+  CHECK( false == chunk.XPROB().has_value() );
 
-  // ESZE block - EPR data file
+  // ESZE block - not EPR data file
   CHECK( false == chunk.ESZE().has_value() );
 
-  // EXCIT block - EPR data file
+  // EXCIT block - not EPR data file
   CHECK( false == chunk.EXCIT().has_value() );
 
   // JXS(21) -> JXS(25)
 
-  // BREML block - EPR data file
+  // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
 }
 
@@ -713,17 +714,18 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   // SPHEL block - not an EPR data file
   CHECK( false == chunk.SPHEL().has_value() );
 
-  // XPROB block - EPR data file
+  // XPROB block - not EPR data file
+  CHECK( false == chunk.XPROB().has_value() );
 
-  // ESZE block - EPR data file
+  // ESZE block - not EPR data file
   CHECK( false == chunk.ESZE().has_value() );
 
-  // EXCIT block - EPR data file
+  // EXCIT block - not EPR data file
   CHECK( false == chunk.EXCIT().has_value() );
 
   // JXS(21) -> JXS(25)
 
-  // BREML block - EPR data file
+  // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
 }
 
@@ -901,6 +903,16 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( -3.249289163676E+01 == Approx( chunk.SPHEL()->photoelectric(1).back() ) );
 
   // XPROB block - EPR data file
+  CHECK( true == chunk.XPROB().has_value() );
+
+  CHECK( 1 == chunk.XPROB()->NSSH() );
+  CHECK( 1 == chunk.XPROB()->numberElectronSubshells() );
+  CHECK( 1 == chunk.XPROB()->data().size() );
+
+  CHECK(  1 == chunk.XPROB()->LTRAN(1) );
+  CHECK(  1 == chunk.XPROB()->transitionDataLocator(1) );
+
+  CHECK( true == chunk.XPROB()->transitionData(1).empty() );
 
   // ESZE block - EPR data file
   CHECK( true == chunk.ESZE().has_value() );

@@ -14,6 +14,7 @@
 #include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
 #include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronBremsstrahlungBlock.hpp"
@@ -39,7 +40,7 @@ class PhotoatomicTable : protected Table {
   std::optional< block::SWD > swd_;
   std::optional< block::SUBSH > subsh_;
   std::optional< block::SPHEL > sphel_;
-
+  std::optional< block::XPROB > xprob_;
   std::optional< block::ESZE > esze_;
 
   std::optional< block::EXCIT > excit_;
@@ -320,6 +321,19 @@ public:
   const std::optional< block::SPHEL >& photoelectricCrossSectionBlock() const {
 
     return this->SPHEL();
+  }
+
+  /**
+   *  @brief Return the subshell transition data block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::XPROB >& XPROB() const { return this->xprob_; }
+
+  /**
+   *  @brief Return the subshell transition data block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::XPROB >& subshellTransitionDataBlock() const {
+
+    return this->XPROB();
   }
 
   /**
