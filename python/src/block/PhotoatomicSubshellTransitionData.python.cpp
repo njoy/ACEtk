@@ -44,6 +44,11 @@ void wrapPhotoatomicSubshellTransitionData( python::module& module, python::modu
   block
   .def(
 
+    python::init<>(),
+    "Initialise an empty block"
+  )
+  .def(
+
     python::init< std::vector< unsigned int >, std::vector< unsigned int >,
                   std::vector< double >, std::vector< double > >(),
     python::arg( "primary" ), python::arg( "secondary" ),

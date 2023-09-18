@@ -78,4 +78,4 @@ add_test( NAME ACEtk.python.block.PhotoelectricCrossSectionBlock COMMAND ${PYTHO
 add_test( NAME ACEtk.python.block.PhotonuclearPrincipalCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonuclearPrincipalCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotonuclearSecondaryParticleLocatorBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonuclearSecondaryParticleLocatorBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotoatomicSubshellTransitionData COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotoatomicSubshellTransitionData.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
-
+add_test( NAME ACEtk.python.block.PhotoatomicSubshellTransitionDataBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotoatomicSubshellTransitionDataBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )

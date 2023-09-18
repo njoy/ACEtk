@@ -6,10 +6,11 @@ PhotoatomicSubshellTransitionDataBlock( PhotoatomicSubshellTransitionDataBlock&&
 /**
  *  @brief Constructor
  *
- *  @param[in] xs    the cross section data
+ *  @param[in] transitions    the transition data
  */
-PhotoatomicSubshellTransitionDataBlock( std::vector< PhotoatomicSubshellTransitionData > xs ) :
-  BaseBlockWithLocators( "XPROB", std::move( xs ), false ) {}
+PhotoatomicSubshellTransitionDataBlock(
+    std::vector< PhotoatomicSubshellTransitionData > transitions ) :
+  BaseBlockWithLocators( "XPROB", std::move( transitions ), false ) {}
 
 /**
  *  @brief Constructor

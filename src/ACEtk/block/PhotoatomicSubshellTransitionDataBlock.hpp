@@ -13,12 +13,10 @@ namespace block {
 
 /**
  *  @class
- *  @brief The continuous energy LSIG and SIG block with the cross section data
+ *  @brief The photoatomic and electron RELO and XPROB block with the transition data
  *
- *  The CrossSectionBlock class contains NXS(4) sets of cross section values,
- *  one for each reaction number on the MTR block. The order of these cross
- *  section data sets is the same as the order of the reaction numbers in the
- *  MTR block.
+ *  The PhotoatomicSubshellTransitionDataBlock class contains the transition
+ *  data for each subshell (the number of subshells NSSH is stored in NXS(7)).
  */
 class PhotoatomicSubshellTransitionDataBlock :
     protected details::BaseBlockWithLocators< PhotoatomicSubshellTransitionDataBlock,
