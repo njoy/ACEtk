@@ -12,12 +12,12 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated angular distribution data for a single incident or outgoing
+ *  @brief Tabulated electron angular distribution data for a single incident
  *         energy
  *
- *  The TabulatedAngularDistribution class contains the probability density
- *  function (PDF) and cumulative density function (CDF) as a function of
- *  cosine for the given energy. It is used in the AND block.
+ *  The ElectronTabulatedAngularDistribution class contains the cumulative
+ *  density function (CDF) as a function of cosine for the given incident
+ *  energy. It is used in the ELAS block.
  */
 class ElectronTabulatedAngularDistribution : protected details::ArrayData {
 
@@ -32,7 +32,7 @@ public:
   #include "ACEtk/block/ElectronTabulatedAngularDistribution/src/ctor.hpp"
 
   /**
-   *  @brief Return the associated energy value
+   *  @brief Return the associated incident energy value
    */
   double energy() const { return this->energy_; }
 

@@ -68,6 +68,7 @@ namespace block {
   void wrapThermalScatteringDiscreteCosinesWithProbability( python::module&, python::module& );
   void wrapPhotoatomicComptonProfile( python::module&, python::module& );
   void wrapPhotoatomicSubshellTransitionData( python::module&, python::module& );
+  void wrapElectronTabulatedAngularDistribution( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -203,6 +204,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapThermalScatteringDiscreteCosinesWithProbability( module, viewmodule );
   block::wrapPhotoatomicComptonProfile( module, viewmodule );
   block::wrapPhotoatomicSubshellTransitionData( module, viewmodule );
+  block::wrapElectronTabulatedAngularDistribution( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
