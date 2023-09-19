@@ -39,7 +39,12 @@ public:
   /**
    *  @brief Return the number of cosine values
    */
-  std::size_t LA() const { return this->N(); }
+  std::size_t L() const { return this->N(); }
+
+  /**
+   *  @brief Return the number of cosine values
+   */
+  std::size_t LA() const { return this->L(); }
 
   /**
    *  @brief Return the number of cosine values
