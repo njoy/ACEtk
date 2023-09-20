@@ -463,6 +463,8 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
   CHECK( 0 == chunk.NA() );
   CHECK( 0 == chunk.numberElectronElasticEnergyPoints() );
+  CHECK( 0 == chunk.NB() );
+  CHECK( 0 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
@@ -560,6 +562,9 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // other blocks go here
 
+  // BREME block - not EPR data file
+  CHECK( false == chunk.BREME().has_value() );
+
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
 }
@@ -590,6 +595,8 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
   CHECK( 0 == chunk.NA() );
   CHECK( 0 == chunk.numberElectronElasticEnergyPoints() );
+  CHECK( 0 == chunk.NB() );
+  CHECK( 0 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
@@ -735,6 +742,9 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   // other blocks go here
 
+  // BREME block - not EPR data file
+  CHECK( false == chunk.BREME().has_value() );
+
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
 }
@@ -765,6 +775,8 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 170 == chunk.numberElectronExcitationEnergyPoints() );
   CHECK( 16 == chunk.NA() );
   CHECK( 16 == chunk.numberElectronElasticEnergyPoints() );
+  CHECK( 10 == chunk.NB() );
+  CHECK( 10 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 82 == chunk.NBL() );
   CHECK( 82 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
@@ -989,6 +1001,22 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 91 == distribution.numberCosines() );
 
   // other blocks go here
+
+  // BREME block - not EPR data file
+  CHECK( true == chunk.BREME().has_value() );
+
+  CHECK( 10 == chunk.BREME()->NB() );
+  CHECK( 10 == chunk.BREME()->numberEnergyPoints() );
+  CHECK( 10 == chunk.BREME()->energies().size() );
+  CHECK( 10 == chunk.BREME()->distributions().size() );
+
+  auto bremdistribution = chunk.BREME()->distribution(1);
+  CHECK( 1.000000000000E-05 == bremdistribution.energy() );
+  CHECK( 17 == bremdistribution.numberOutgoingEnergies() );
+
+  bremdistribution = chunk.BREME()->distribution(10);
+  CHECK( 1e+5 == bremdistribution.energy() );
+  CHECK( 111 == bremdistribution.numberOutgoingEnergies() );
 
   // BREML block - EPR data file
   CHECK( true == chunk.BREML().has_value() );

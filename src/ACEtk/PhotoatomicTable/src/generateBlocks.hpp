@@ -37,6 +37,7 @@ void generateBlocks() {
   this->esze_ = std::nullopt;
   this->excit_ = std::nullopt;
   this->elas_ = std::nullopt;
+  this->breme_ = std::nullopt;
   this->breml_ = std::nullopt;
 
   // starting iterator into the XSS array
@@ -99,7 +100,10 @@ void generateBlocks() {
     auto elasi = block( 21 );
     auto elas = block( 22 );
     this->elas_ = block::ELAS( elasi.first, elas.second, this->NA() );
-
+    // electroinionisation tables will go here
+    auto bremi = block( 24 );
+    auto breme = block( 25 );
+    this->breme_ = block::BREME( bremi.first, breme.second, this->NB() );
     auto breml = block( 26 );
     this->breml_ = block::BREML( breml.first, breml.second, this->NBL() );
   }
