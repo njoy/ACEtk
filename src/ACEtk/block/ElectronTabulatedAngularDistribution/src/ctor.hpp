@@ -23,7 +23,7 @@ ElectronTabulatedAngularDistribution( double energy,
  *  @param[in] energy    the associated energy value
  *  @param[in] begin     the begin iterator of the tabulated distribution data
  *  @param[in] end       the end iterator of the tabulated distribution data
- *  @param[in] ls        the number of electron shells
+ *  @param[in] la        the number of cosine values
  */
 ElectronTabulatedAngularDistribution( double energy,
                                       Iterator begin, Iterator end,
