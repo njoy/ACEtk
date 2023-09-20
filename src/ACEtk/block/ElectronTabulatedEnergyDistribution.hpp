@@ -12,7 +12,7 @@ namespace block {
 
 /**
  *  @class
- *  @brief Tabulated photon energy distribution from Bresstrahlung for a single
+ *  @brief Tabulated photon energy distribution from Bremsstrahlung for a single
  *         incident energy
  *
  *  The ElectronTabulatedEnergyDistribution class contains the cumulative
