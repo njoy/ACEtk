@@ -6,7 +6,7 @@ ElectronElasticAngularDistributionBlock( ElectronElasticAngularDistributionBlock
 /**
  *  @brief Constructor
  *
- *  @param[in] xs    the cross section data
+ *  @param[in] distributions    the angular distribution data
  */
 ElectronElasticAngularDistributionBlock( std::vector< ElectronTabulatedAngularDistribution > distributions ) :
   BaseElectronBlockWithLocators( "ELAS", std::move( distributions ) ) {}

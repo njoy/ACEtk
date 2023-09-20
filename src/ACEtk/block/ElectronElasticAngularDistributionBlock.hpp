@@ -13,12 +13,11 @@ namespace block {
 
 /**
  *  @class
- *  @brief The continuous energy LSIG and SIG block with the cross section data
+ *  @brief The photoatomic and electron ELASI and ELAS block with the
+ *         elastic scattering angular distribution data
  *
- *  The CrossSectionBlock class contains NXS(4) sets of cross section values,
- *  one for each reaction number on the MTR block. The order of these cross
- *  section data sets is the same as the order of the reaction numbers in the
- *  MTR block.
+ *  The ElectronElasticAngularDistributionBlock class a list of electron energies
+ *  for which angular distribution data is given.
  */
 class ElectronElasticAngularDistributionBlock :
     protected details::BaseElectronBlockWithLocators<

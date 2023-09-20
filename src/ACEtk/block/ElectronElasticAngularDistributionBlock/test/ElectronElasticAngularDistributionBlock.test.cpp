@@ -102,14 +102,18 @@ void verifyChunk( const ElectronElasticAngularDistributionBlock& chunk ) {
   CHECK( 19 == chunk.angularDistributionLocator(4) );
 
   auto distribution = chunk.angularDistribution(1);
+  CHECK( 1e-11 == distribution.energy() );
   CHECK( 2 == distribution.numberCosines() );
 
   distribution = chunk.angularDistribution(2);
+  CHECK( 1e-6 == distribution.energy() );
   CHECK( 3 == distribution.numberCosines() );
 
   distribution = chunk.angularDistribution(3);
+  CHECK( 1e-3 == distribution.energy() );
   CHECK( 4 == distribution.numberCosines() );
 
   distribution = chunk.angularDistribution(4);
+  CHECK( 1. == distribution.energy() );
   CHECK( 2 == distribution.numberCosines() );
 }
