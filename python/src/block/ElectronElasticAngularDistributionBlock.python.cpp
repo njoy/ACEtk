@@ -56,10 +56,10 @@ void wrapElectronElasticAngularDistributionBlock( python::module& module, python
   )
   .def(
 
-    "LAND",
-    &Block::LAND,
+    "LLOC",
+    &Block::LLOC,
     python::arg( "index" ),
-    "Return the relative angular distribution locator for an energy index\n\n"
+    "Return the relative distribution locator for an energy index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"
@@ -67,10 +67,10 @@ void wrapElectronElasticAngularDistributionBlock( python::module& module, python
   )
   .def(
 
-    "angular_distribution_locator",
-    &Block::angularDistributionLocator,
+    "distribution_locator",
+    &Block::distributionLocator,
     python::arg( "index" ),
-    "Return the relative angular distribution locator for an energy index\n\n"
+    "Return the relative distribution locator for an energy index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
     "(debug mode only).\n\n"
     "    self     the block\n"
@@ -85,14 +85,14 @@ void wrapElectronElasticAngularDistributionBlock( python::module& module, python
   )
   .def_property_readonly(
 
-    "data",
-    &Block::data,
+    "distributions",
+    &Block::distributions,
     "The angular distribution data"
   )
   .def(
 
-    "angular_distribution",
-    &Block::angularDistribution,
+    "distribution",
+    &Block::distribution,
     python::arg( "index" ),
     "Return the angular distribution for an energy index\n\n"
     "When the index is out of range an out of range exception is thrown\n"
