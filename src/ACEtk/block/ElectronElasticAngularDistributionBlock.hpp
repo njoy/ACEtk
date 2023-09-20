@@ -53,27 +53,27 @@ public:
   }
 
   /**
-   *  @brief Return the relative angular distribution locator for an energy index
+   *  @brief Return the relative distribution locator for an energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t LAND( std::size_t index ) const {
+  std::size_t LLOC( std::size_t index ) const {
 
     return BaseElectronBlockWithLocators::LLOC( index );
   }
 
   /**
-   *  @brief Return the relative angular distribution locator for an energy index
+   *  @brief Return the relative distribution locator for an energy index
    *
    *  When the index is out of range an std::out_of_range exception is thrown
    *  (debug mode only).
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t angularDistributionLocator( std::size_t index ) const {
+  std::size_t distributionLocator( std::size_t index ) const {
 
     return BaseElectronBlockWithLocators::locator( index );
   }
@@ -89,7 +89,7 @@ public:
   /**
    *  @brief Return all angular distribution data
    */
-  const std::vector< ElectronTabulatedAngularDistribution >& data() const {
+  const std::vector< ElectronTabulatedAngularDistribution >& distributions() const {
 
     return BaseElectronBlockWithLocators::data();
   }
@@ -103,7 +103,7 @@ public:
    *  @param[in] index     the index (one-based)
    */
   const ElectronTabulatedAngularDistribution&
-  angularDistribution( std::size_t index ) const {
+  distribution( std::size_t index ) const {
 
     return BaseElectronBlockWithLocators::data( index );
   }

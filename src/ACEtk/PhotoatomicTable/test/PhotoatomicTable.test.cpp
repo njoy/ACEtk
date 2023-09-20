@@ -978,13 +978,13 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 16 == chunk.ELAS()->NA() );
   CHECK( 16 == chunk.ELAS()->numberEnergyPoints() );
   CHECK( 16 == chunk.ELAS()->energies().size() );
-  CHECK( 16 == chunk.ELAS()->data().size() );
+  CHECK( 16 == chunk.ELAS()->distributions().size() );
 
-  auto distribution = chunk.ELAS()->angularDistribution(1);
+  auto distribution = chunk.ELAS()->distribution(1);
   CHECK( 1.000000000000E-05 == distribution.energy() );
   CHECK( 3 == distribution.numberCosines() );
 
-  distribution = chunk.ELAS()->angularDistribution(16);
+  distribution = chunk.ELAS()->distribution(16);
   CHECK( 1e+5 == distribution.energy() );
   CHECK( 91 == distribution.numberCosines() );
 

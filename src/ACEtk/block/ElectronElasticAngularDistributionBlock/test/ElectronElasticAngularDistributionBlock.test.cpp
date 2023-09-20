@@ -90,30 +90,30 @@ void verifyChunk( const ElectronElasticAngularDistributionBlock& chunk ) {
   CHECK( 4 == chunk.NA() );
   CHECK( 4 == chunk.numberEnergyPoints() );
   CHECK( 4 == chunk.energies().size() );
-  CHECK( 4 == chunk.data().size() );
+  CHECK( 4 == chunk.distributions().size() );
 
-  CHECK(  1 == chunk.LAND(1) );
-  CHECK(  5 == chunk.LAND(2) );
-  CHECK( 11 == chunk.LAND(3) );
-  CHECK( 19 == chunk.LAND(4) );
-  CHECK(  1 == chunk.angularDistributionLocator(1) );
-  CHECK(  5 == chunk.angularDistributionLocator(2) );
-  CHECK( 11 == chunk.angularDistributionLocator(3) );
-  CHECK( 19 == chunk.angularDistributionLocator(4) );
+  CHECK(  1 == chunk.LLOC(1) );
+  CHECK(  5 == chunk.LLOC(2) );
+  CHECK( 11 == chunk.LLOC(3) );
+  CHECK( 19 == chunk.LLOC(4) );
+  CHECK(  1 == chunk.distributionLocator(1) );
+  CHECK(  5 == chunk.distributionLocator(2) );
+  CHECK( 11 == chunk.distributionLocator(3) );
+  CHECK( 19 == chunk.distributionLocator(4) );
 
-  auto distribution = chunk.angularDistribution(1);
+  auto distribution = chunk.distribution(1);
   CHECK( 1e-11 == distribution.energy() );
   CHECK( 2 == distribution.numberCosines() );
 
-  distribution = chunk.angularDistribution(2);
+  distribution = chunk.distribution(2);
   CHECK( 1e-6 == distribution.energy() );
   CHECK( 3 == distribution.numberCosines() );
 
-  distribution = chunk.angularDistribution(3);
+  distribution = chunk.distribution(3);
   CHECK( 1e-3 == distribution.energy() );
   CHECK( 4 == distribution.numberCosines() );
 
-  distribution = chunk.angularDistribution(4);
+  distribution = chunk.distribution(4);
   CHECK( 1. == distribution.energy() );
   CHECK( 2 == distribution.numberCosines() );
 }
