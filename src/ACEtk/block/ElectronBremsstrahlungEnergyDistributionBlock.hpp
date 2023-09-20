@@ -16,8 +16,8 @@ namespace block {
  *  @brief The photoatomic and electron BREMI and BREME block with the
  *         photon energy distribution data from Bremsstrahlung
  *
- *  The ElectronElasticAngularDistributionBlock class a list of electron energies
- *  for which angular distribution data is given.
+ *  The ElectronElasticAngularDistributionBlock class contains a list of
+ *  electron energies for which energy distribution data is given.
  */
 class ElectronBremsstrahlungEnergyDistributionBlock :
     protected details::BaseElectronBlockWithLocators<
