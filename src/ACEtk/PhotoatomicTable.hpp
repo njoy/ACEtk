@@ -16,6 +16,7 @@
 #include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
+#include "ACEtk/block/ElectronElasticAngularDistributionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronBremsstrahlungBlock.hpp"
 
@@ -42,8 +43,8 @@ class PhotoatomicTable : protected Table {
   std::optional< block::SPHEL > sphel_;
   std::optional< block::XPROB > xprob_;
   std::optional< block::ESZE > esze_;
-
   std::optional< block::EXCIT > excit_;
+  std::optional< block::ELAS > elas_;
 
   std::optional< block::BREML > breml_;
 
@@ -200,6 +201,16 @@ public:
    *  @brief Return the number of electron excitation energy points
    */
   unsigned int numberElectronExcitationEnergyPoints() const { return this->NXL(); }
+
+  /**
+   *  @brief Return the number of energy points with electron elastic angular distributions
+   */
+  unsigned int NA() const { return this->data().NXS(10); }
+
+  /**
+   *  @brief Return the number of electron excitation energy points
+   */
+  unsigned int numberElectronElasticEnergyPoints() const { return this->NA(); }
 
   /**
    *  @brief Return the number of electron Bremsstrahlung energy points
@@ -360,6 +371,19 @@ public:
   const std::optional< block::EXCIT >& electronExcitationEnergyLossBlock() const {
 
     return this->EXCIT();
+  }
+
+  /**
+   *  @brief Return the electron elastic angular distribution block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::ELAS >& ELAS() const { return this->elas_; }
+
+  /**
+   *  @brief Return the electron elastic angular distribution block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::ELAS >& electronElasticAngularDistributionBlock() const {
+
+    return this->ELAS();
   }
 
   /**
