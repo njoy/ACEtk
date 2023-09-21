@@ -46,6 +46,7 @@ class PhotoatomicTable : protected Table {
   std::optional< block::ESZE > esze_;
   std::optional< block::EXCIT > excit_;
   std::optional< block::ELAS > elas_;
+  std::vector< block::EION > eion_;
   std::optional< block::BREME > breme_;
   std::optional< block::BREML > breml_;
 
@@ -53,6 +54,7 @@ class PhotoatomicTable : protected Table {
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
   #include "ACEtk/PhotoatomicTable/src/generateData.hpp"
   #include "ACEtk/PhotoatomicTable/src/verifyType.hpp"
+  #include "ACEtk/PhotoatomicTable/src/verifySubshellIndex.hpp"
 
 public:
 
@@ -399,6 +401,37 @@ public:
   const std::optional< block::ELAS >& electronElasticAngularDistributionBlock() const {
 
     return this->ELAS();
+  }
+
+  /**
+   *  @brief Return the knock-on electron energy distribution block for a subshell
+   *         index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::EION& EION( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifySubshellIndex( index );
+    #endif
+    return this->eion_[ index - 1 ];
+  }
+
+  /**
+   *  @brief Return the knock-on electron energy distribution block for a subshell
+   *         index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  const block::EION& electroionisationEnergyDistributionBlock( std::size_t index ) const {
+
+    return this->EION( index );
   }
 
   /**

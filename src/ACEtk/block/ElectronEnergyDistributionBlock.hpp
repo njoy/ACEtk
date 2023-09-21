@@ -118,6 +118,7 @@ public:
 };
 
 using BREME = ElectronEnergyDistributionBlock;
+using EION = ElectronEnergyDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

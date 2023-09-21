@@ -18,8 +18,7 @@ ElectronEnergyDistributionBlock( std::vector< ElectronTabulatedEnergyDistributio
  *  @param[in] end      the end iterator in the XSS array
  *  @param[in] nb       the number of energies with outgoing energy distributions
  */
-ElectronEnergyDistributionBlock( Iterator begin, Iterator end,
-                                         unsigned int nb ) :
+ElectronEnergyDistributionBlock( Iterator begin, Iterator end, unsigned int nb ) :
   BaseElectronBlockWithLocators( "BREME", begin, end, nb ) {}
 
 ElectronEnergyDistributionBlock& operator=( const ElectronEnergyDistributionBlock& ) = default;

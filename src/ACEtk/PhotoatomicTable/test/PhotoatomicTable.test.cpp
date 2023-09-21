@@ -984,7 +984,7 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 1.351000000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().front() ) );
   CHECK( 2.107770000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().back() ) );
 
-  // ELAS block - not EPR data file
+  // ELAS block - EPR data file
   CHECK( true == chunk.ELAS().has_value() );
 
   CHECK( 16 == chunk.ELAS()->NA() );
@@ -1000,9 +1000,23 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 1e+5 == distribution.energy() );
   CHECK( 91 == distribution.numberCosines() );
 
-  // other blocks go here
+  // EION block - EPR data file
+  CHECK( false == chunk.EION( 1 ).empty() );
 
-  // BREME block - not EPR data file
+  CHECK( 8 == chunk.EION( 1 ).NB() );
+  CHECK( 8 == chunk.EION( 1 ).numberEnergyPoints() );
+  CHECK( 8 == chunk.EION( 1 ).energies().size() );
+  CHECK( 8 == chunk.EION( 1 ).distributions().size() );
+
+  auto eiondistribution = chunk.EION( 1 ).distribution(1);
+  CHECK( 1.361000000000E-05 == eiondistribution.energy() );
+  CHECK( 2 == eiondistribution.numberOutgoingEnergies() );
+
+  eiondistribution = chunk.EION( 1 ).distribution(8);
+  CHECK( 1e+5 == eiondistribution.energy() );
+  CHECK( 147 == eiondistribution.numberOutgoingEnergies() );
+
+  // BREME block - EPR data file
   CHECK( true == chunk.BREME().has_value() );
 
   CHECK( 10 == chunk.BREME()->NB() );
