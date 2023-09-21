@@ -15,7 +15,7 @@ void verifyChunk( const ElectronEnergyDistributionBlock& );
 
 SCENARIO( "ElectronEnergyDistributionBlock" ) {
 
-  GIVEN( "valid data for a ElectronEnergyDistributionBlock instance" ) {
+  GIVEN( "valid data for a ElectronEnergyDistributionBlock instance" ) { 
 
     std::vector< double > xss = chunk();
 

@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_ELECTRONBREMSTRAHLUNGENERGYDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_ELECTRONBREMSTRAHLUNGENERGYDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_BLOCK_ELECTRONENERGYDISTRIBUTIONBLOCK
+#define NJOY_ACETK_BLOCK_ELECTRONENERGYDISTRIBUTIONBLOCK
 
 // system includes
 
@@ -117,7 +117,7 @@ public:
   using BaseElectronBlockWithLocators::end;
 };
 
-using BREME = ElectronBremsstrahlungEnergyDistributionBlock;
+using BREME = ElectronEnergyDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

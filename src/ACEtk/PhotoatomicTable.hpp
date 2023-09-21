@@ -17,7 +17,7 @@
 #include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
 #include "ACEtk/block/ElectronElasticAngularDistributionBlock.hpp"
-#include "ACEtk/block/ElectronBremsstrahlungEnergyDistributionBlock.hpp"
+#include "ACEtk/block/ElectronEnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronBremsstrahlungBlock.hpp"
 

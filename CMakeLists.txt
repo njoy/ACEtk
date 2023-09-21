@@ -170,7 +170,7 @@ if(ACEtk.python)
     python/src/block/ElectronTabulatedAngularDistribution.python.cpp
     python/src/block/ElectronElasticAngularDistributionBlock.python.cpp
     python/src/block/ElectronTabulatedEnergyDistribution.python.cpp
-    python/src/block/ElectronBremsstrahlungEnergyDistributionBlock.python.cpp
+    python/src/block/ElectronEnergyDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp
