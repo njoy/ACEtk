@@ -1,21 +1,21 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/ElectronBremsstrahlungEnergyDistributionBlock.hpp"
+#include "ACEtk/block/ElectronEnergyDistributionBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ElectronBremsstrahlungEnergyDistributionBlock = block::ElectronBremsstrahlungEnergyDistributionBlock;
+using ElectronEnergyDistributionBlock = block::ElectronEnergyDistributionBlock;
 using ElectronTabulatedEnergyDistribution = block::ElectronTabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const ElectronBremsstrahlungEnergyDistributionBlock& );
+void verifyChunk( const ElectronEnergyDistributionBlock& );
 
-SCENARIO( "ElectronBremsstrahlungEnergyDistributionBlock" ) {
+SCENARIO( "ElectronEnergyDistributionBlock" ) {
 
-  GIVEN( "valid data for a ElectronBremsstrahlungEnergyDistributionBlock instance" ) {
+  GIVEN( "valid data for a ElectronEnergyDistributionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -29,9 +29,9 @@ SCENARIO( "ElectronBremsstrahlungEnergyDistributionBlock" ) {
         ElectronTabulatedEnergyDistribution(    1., { 1e-11, 0.999 }, { 0., 1. } )
       };
 
-      ElectronBremsstrahlungEnergyDistributionBlock chunk( std::move( distributions ) );
+      ElectronEnergyDistributionBlock chunk( std::move( distributions ) );
 
-      THEN( "a ElectronBremsstrahlungEnergyDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "a ElectronEnergyDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -48,9 +48,9 @@ SCENARIO( "ElectronBremsstrahlungEnergyDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ElectronBremsstrahlungEnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElectronEnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
 
-      THEN( "a ElectronBremsstrahlungEnergyDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "a ElectronEnergyDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -81,7 +81,7 @@ std::vector< double > chunk() {
     1e-11, 0.999, 0., 1. };
 }
 
-void verifyChunk( const ElectronBremsstrahlungEnergyDistributionBlock& chunk ) {
+void verifyChunk( const ElectronEnergyDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );
