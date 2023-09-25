@@ -299,7 +299,7 @@ SCENARIO( "PhotoatomicTable" ){
 
   GIVEN( "valid data for a PhotoatomicTable - eprdata12" ) {
 
-    auto table = fromFile( "1000-eprdata12.12p" );
+    auto table = fromFile( "1000.12p" );
     std::array< int32_t, 16 > iz = table.data().IZ();
     std::array< double, 16 > aw = table.data().AW();
     std::array< int64_t, 16 > nxs = table.data().NXS();
@@ -1523,33 +1523,33 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
   // EXCIT block - EPR data file
   CHECK( true == chunk.EXCIT().has_value() );
 
-//  CHECK( 170 == chunk.EXCIT()->NXL() );
-//  CHECK( 170 == chunk.EXCIT()->numberEnergyPoints() );
-//
-//  CHECK( 170 == chunk.EXCIT()->energies().size() );
-//  CHECK( 170 == chunk.EXCIT()->excitationEnergyLoss().size() );
-//
-//  CHECK( 1.361000000000E-05 == Approx( chunk.EXCIT()->energies().front() ) );
-//  CHECK( 1.000000000000E+05 == Approx( chunk.EXCIT()->energies().back() ) );
-//
-//  CHECK( 1.351000000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().front() ) );
-//  CHECK( 2.107770000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().back() ) );
+  CHECK( 181 == chunk.EXCIT()->NXL() );
+  CHECK( 181 == chunk.EXCIT()->numberEnergyPoints() );
+
+  CHECK( 181 == chunk.EXCIT()->energies().size() );
+  CHECK( 181 == chunk.EXCIT()->excitationEnergyLoss().size() );
+
+  CHECK( 1.000000000000E-05 == Approx( chunk.EXCIT()->energies().front() ) );
+  CHECK( 1.000000000000E+05 == Approx( chunk.EXCIT()->energies().back() ) );
+
+  CHECK( 9.232690000000E-06 == Approx( chunk.EXCIT()->excitationEnergyLoss().front() ) );
+  CHECK( 1.981540000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().back() ) );
 
   // ELAS block - EPR data file
   CHECK( true == chunk.ELAS().has_value() );
 
-//  CHECK( 16 == chunk.ELAS()->NA() );
-//  CHECK( 16 == chunk.ELAS()->numberEnergyPoints() );
-//  CHECK( 16 == chunk.ELAS()->energies().size() );
-//  CHECK( 16 == chunk.ELAS()->distributions().size() );
-//
-//  auto distribution = chunk.ELAS()->distribution(1);
-//  CHECK( 1.000000000000E-05 == distribution.energy() );
-//  CHECK( 3 == distribution.numberCosines() );
-//
-//  distribution = chunk.ELAS()->distribution(16);
-//  CHECK( 1e+5 == distribution.energy() );
-//  CHECK( 91 == distribution.numberCosines() );
+  CHECK( 16 == chunk.ELAS()->NA() );
+  CHECK( 16 == chunk.ELAS()->numberEnergyPoints() );
+  CHECK( 16 == chunk.ELAS()->energies().size() );
+  CHECK( 16 == chunk.ELAS()->distributions().size() );
+
+  auto distribution = chunk.ELAS()->distribution(1);
+  CHECK( 1.000000000000E-05 == distribution.energy() );
+  CHECK( 2 == distribution.numberCosines() );
+
+  distribution = chunk.ELAS()->distribution(16);
+  CHECK( 1e+5 == distribution.energy() );
+  CHECK( 96 == distribution.numberCosines() );
 
   // EION block - EPR data file
   CHECK( false == chunk.EION( 1 ).empty() );
