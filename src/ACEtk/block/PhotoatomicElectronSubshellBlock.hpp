@@ -60,7 +60,7 @@ public:
   /**
    *  @brief Return the electron population for each subshell
    */
-  auto EP() const { return this->iarray( 2 ); }
+  auto EP() const { return this->darray( 2 ); }
 
   /**
    *  @brief Return the electron population for each subshell
@@ -112,9 +112,9 @@ public:
    *
    *  @param[in] index    the electron subshell index (one-based)
    */
-  unsigned int population( std::size_t index ) const {
+  double population( std::size_t index ) const {
 
-    return this->ivalue( 2, index );
+    return this->dvalue( 2, index );
   }
 
   /**
