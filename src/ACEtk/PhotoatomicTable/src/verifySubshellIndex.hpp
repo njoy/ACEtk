@@ -1,4 +1,4 @@
-void verifyDataIndex( const std::size_t index ) const {
+void verifySubshellIndex( const std::size_t index ) const {
 
   if ( ( index < 1 ) || ( index > this->NSSH() ) ) {
 
