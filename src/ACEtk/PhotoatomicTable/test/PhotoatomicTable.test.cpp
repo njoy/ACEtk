@@ -1483,33 +1483,42 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
   // ESZE block - EPR data file
   CHECK( true == chunk.ESZE().has_value() );
 
-//  CHECK( 342 == chunk.ESZE()->NE() );
-//  CHECK( 342 == chunk.ESZE()->numberEnergyPoints() );
-//  CHECK( 1 == chunk.ESZE()->NSSH() );
-//  CHECK( 1 == chunk.ESZE()->numberElectronSubshells() );
-//
-//  CHECK( 342 == chunk.ESZE()->energies().size() );
-//  CHECK( 342 == chunk.ESZE()->total().size() );
-//  CHECK( 342 == chunk.ESZE()->elastic().size() );
-//  CHECK( 342 == chunk.ESZE()->bremsstrahlung().size() );
-//  CHECK( 342 == chunk.ESZE()->excitation().size() );
-//  CHECK( 342 == chunk.ESZE()->totalElectroionisation().size() );
-//  CHECK( 342 == chunk.ESZE()->electroionisation(1).size() );
-//
-//  CHECK( 1.000000000000E-05 == Approx( chunk.ESZE()->energies().front() ) );
-//  CHECK( 1.000000000000E+05 == Approx( chunk.ESZE()->energies().back() ) );
-//  CHECK( 2.748960297832E+08 == Approx( chunk.ESZE()->total().front() ) );
-//  CHECK( 1.643349906341E+05 == Approx( chunk.ESZE()->total().back() ) );
-//  CHECK( 2.748960000000E+08 == Approx( chunk.ESZE()->elastic().front() ) );
-//  CHECK( 1.311760000000E-05 == Approx( chunk.ESZE()->elastic().back() ) );
-//  CHECK( 2.978320000000E+01 == Approx( chunk.ESZE()->bremsstrahlung().front() ) );
-//  CHECK( 9.906210000000E-01 == Approx( chunk.ESZE()->bremsstrahlung().back() ) );
-//  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->excitation().front() ) );
-//  CHECK( 8.144160000000E+04 == Approx( chunk.ESZE()->excitation().back() ) );
-//  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->totalElectroionisation().front() ) );
-//  CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->totalElectroionisation().back() ) );
-//  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->electroionisation(1).front() ) );
-//  CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->electroionisation(1).back() ) );
+  CHECK( 352 == chunk.ESZE()->NE() );
+  CHECK( 352 == chunk.ESZE()->numberEnergyPoints() );
+  CHECK( 4 == chunk.ESZE()->NSSH() );
+  CHECK( 4 == chunk.ESZE()->numberElectronSubshells() );
+
+  CHECK( 352 == chunk.ESZE()->energies().size() );
+  CHECK( 352 == chunk.ESZE()->total().size() );
+  CHECK( 352 == chunk.ESZE()->elastic().size() );
+  CHECK( 352 == chunk.ESZE()->bremsstrahlung().size() );
+  CHECK( 352 == chunk.ESZE()->excitation().size() );
+  CHECK( 352 == chunk.ESZE()->totalElectroionisation().size() );
+  CHECK( 352 == chunk.ESZE()->electroionisation(1).size() );
+  CHECK( 352 == chunk.ESZE()->electroionisation(2).size() );
+  CHECK( 352 == chunk.ESZE()->electroionisation(3).size() );
+  CHECK( 352 == chunk.ESZE()->electroionisation(4).size() );
+
+  CHECK( 1.000000000000E-05 == Approx( chunk.ESZE()->energies().front() ) );
+  CHECK( 1.000000000000E+05 == Approx( chunk.ESZE()->energies().back() ) );
+  CHECK( 3.098128233128E+09 == Approx( chunk.ESZE()->total().front() ) );
+  CHECK( 5.118768719723E+05 == Approx( chunk.ESZE()->total().back() ) );
+  CHECK( 3.063510000000E+09 == Approx( chunk.ESZE()->elastic().front() ) );
+  CHECK( 4.723090000000E-04 == Approx( chunk.ESZE()->elastic().back() ) );
+  CHECK( 6.031280000000E+02 == Approx( chunk.ESZE()->bremsstrahlung().front() ) );
+  CHECK( 1.697150000000E+01 == Approx( chunk.ESZE()->bremsstrahlung().back() ) );
+  CHECK( 3.168630000000E+06 == Approx( chunk.ESZE()->excitation().front() ) );
+  CHECK( 1.198920000000E+05 == Approx( chunk.ESZE()->excitation().back() ) );
+  CHECK( 3.144900000000E+07 == Approx( chunk.ESZE()->totalElectroionisation().front() ) );
+  CHECK( 3.919679000000E+05 == Approx( chunk.ESZE()->totalElectroionisation().back() ) );
+  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->electroionisation(1).front() ) );
+  CHECK( 1.338050000000E+04 == Approx( chunk.ESZE()->electroionisation(1).back() ) );
+  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->electroionisation(2).front() ) );
+  CHECK( 7.595140000000E+04 == Approx( chunk.ESZE()->electroionisation(2).back() ) );
+  CHECK( 1.041970000000E+07 == Approx( chunk.ESZE()->electroionisation(3).front() ) );
+  CHECK( 1.009350000000E+05 == Approx( chunk.ESZE()->electroionisation(3).back() ) );
+  CHECK( 2.102930000000E+07 == Approx( chunk.ESZE()->electroionisation(4).front() ) );
+  CHECK( 2.017010000000E+05 == Approx( chunk.ESZE()->electroionisation(4).back() ) );
 
   // EXCIT block - EPR data file
   CHECK( true == chunk.EXCIT().has_value() );
