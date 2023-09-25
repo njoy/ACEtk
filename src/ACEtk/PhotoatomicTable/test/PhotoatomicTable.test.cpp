@@ -12,6 +12,7 @@ using namespace njoy::ACEtk;
 void verifyChunkMcplib( const PhotoatomicTable& );
 void verifyChunkMcplib03( const PhotoatomicTable& );
 void verifyChunkEprdata12( const PhotoatomicTable& );
+void verifyChunkEprdata14( const PhotoatomicTable& );
 
 SCENARIO( "PhotoatomicTable" ){
 
@@ -296,7 +297,7 @@ SCENARIO( "PhotoatomicTable" ){
     } // WHEN
   } // GIVEN
 
-  GIVEN( "valid data for a PhotoatomicTable - eprdata" ) {
+  GIVEN( "valid data for a PhotoatomicTable - eprdata12" ) {
 
     auto table = fromFile( "1000-eprdata12.12p" );
     std::array< int32_t, 16 > iz = table.data().IZ();
@@ -435,6 +436,146 @@ SCENARIO( "PhotoatomicTable" ){
       } // THEN
     } // WHEN*/
   } // GIVEN
+
+  GIVEN( "valid data for a PhotoatomicTable - eprdata14" ) {
+
+    auto table = fromFile( "6000.14p" );
+    std::array< int32_t, 16 > iz = table.data().IZ();
+    std::array< double, 16 > aw = table.data().AW();
+    std::array< int64_t, 16 > nxs = table.data().NXS();
+    std::array< int64_t, 32 > jxs = table.data().JXS();
+    std::vector< double > xss = table.data().XSS();
+
+    WHEN( "constructing a PhotoatomicTable from a table" ) {
+
+      PhotoatomicTable chunk( std::move( table ) );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata14( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+/*    WHEN( "constructing a PhotoatomicTable from its components" ) {
+
+      PhotoatomicTable base( std::move( table ) );
+
+      PhotoatomicTable chunk( 1, base.header(),
+                              {  },
+                              {  },
+                              base.ESZG(), base.JINC(),
+                              base.JCOH(), base.LHNM(),
+                              std::nullopt,
+                              base.EPS(), base.SWD() );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata12( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN*/
+  }
 } // SCENARIO
 
 void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
@@ -1046,4 +1187,303 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 
   CHECK( 7.855740000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
   CHECK( 9.733190000000E+04 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
+}
+
+void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
+
+  CHECK( "6000.14p" == chunk.ZAID() );
+  CHECK( 0. == Approx( chunk.temperature() ) );
+
+  CHECK( 24009 == chunk.length() );
+  CHECK( 6 == chunk.Z() );
+  CHECK( 6 == chunk.atomNumber() );
+  CHECK( 1210 == chunk.NES() );
+  CHECK( 1210 == chunk.numberEnergyPoints() );
+  CHECK( 0 == chunk.NFLO() );
+  CHECK( 0 == chunk.numberFluorescenceEdges() );
+  CHECK( 3 == chunk.NSH() );
+  CHECK( 3 == chunk.numberElectronShells() );
+
+  // this is an EPR data file
+  CHECK( 3 == chunk.NEPR() );
+  CHECK( 3 == chunk.electronPhotonRelaxationFormat() );
+  CHECK( 4 == chunk.NSSH() );
+  CHECK( 4 == chunk.numberElectronSubshells() );
+  CHECK( 352 == chunk.NE() );
+  CHECK( 352 == chunk.numberElectronEnergyPoints() );
+  CHECK( 181 == chunk.NXL() );
+  CHECK( 181 == chunk.numberElectronExcitationEnergyPoints() );
+  CHECK( 16 == chunk.NA() );
+  CHECK( 16 == chunk.numberElectronElasticEnergyPoints() );
+  CHECK( 9 == chunk.NB() );
+  CHECK( 9 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
+  CHECK( 75 == chunk.NBL() );
+  CHECK( 75 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+
+  // ESZG block
+  CHECK( false == chunk.ESZG().empty() );
+
+  CHECK( 1210 == chunk.ESZG().NES() );
+  CHECK( 1210 == chunk.ESZG().numberEnergyPoints() );
+
+  CHECK( 1210 == chunk.ESZG().energies().size() );
+  CHECK( 1210 == chunk.ESZG().incoherent().size() );
+  CHECK( 1210 == chunk.ESZG().coherent().size() );
+  CHECK( 1210 == chunk.ESZG().photoelectric().size() );
+  CHECK( 1210 == chunk.ESZG().pairproduction().size() );
+
+//  CHECK( -1.381551055796E+01 == Approx( chunk.ESZG().energies().front() ) );
+//  CHECK(  1.151292546497E+01 == Approx( chunk.ESZG().energies().back() ) );
+//  CHECK( -1.616285246005E+01 == Approx( chunk.ESZG().incoherent().front() ) );
+//  CHECK( -1.097982967256E+01 == Approx( chunk.ESZG().incoherent().back() ) );
+//  CHECK( -1.152423386458E+01 == Approx( chunk.ESZG().coherent().front() ) );
+//  CHECK( -3.530963433758E+01 == Approx( chunk.ESZG().coherent().back() ) );
+//  CHECK(                   0 == Approx( chunk.ESZG().photoelectric().front() ) );
+//  CHECK( -3.249289163676E+01 == Approx( chunk.ESZG().photoelectric().back() ) );
+//  CHECK(                   0 == Approx( chunk.ESZG().pairproduction().front() ) );
+//  CHECK( -3.877573270699E+00 == Approx( chunk.ESZG().pairproduction().back() ) );
+
+  // JINC block
+  CHECK( false == chunk.JINC().empty() );
+
+//  CHECK( 94 == chunk.JINC().NM() );
+//  CHECK( 94 == chunk.JINC().numberValues() );
+//
+//  CHECK( 94 == chunk.JINC().momentum().size() );
+//  CHECK( 1.000000000000E-07 == Approx( chunk.JINC().momentum().front() ) );
+//  CHECK( 1.000000000000E+09   == Approx( chunk.JINC().momentum().back() ) );
+//
+//  CHECK( 94 == chunk.JINC().values().size() );
+//  CHECK( 0 == Approx( chunk.JINC().values().front() ) );
+//  CHECK( 1 == Approx( chunk.JINC().values().back() ) );
+
+  // JCOH block
+  CHECK( false == chunk.JCOH().empty() );
+
+//  CHECK( 90 == chunk.JCOH().NM() );
+//  CHECK( 90 == chunk.JCOH().numberValues() );
+//
+//  CHECK( 90 == chunk.JCOH().momentum().size() );
+//  CHECK( 0.                 == Approx( chunk.JCOH().momentum().front() ) );
+//  CHECK( 1.000000000000E+09 == Approx( chunk.JCOH().momentum().back() ) );
+//
+//  CHECK( 90 == chunk.JCOH().integratedFormFactors().size() );
+//  CHECK( 0.                 == Approx( chunk.JCOH().integratedFormFactors().front() ) );
+//  CHECK( 3.012861887900E-02 == Approx( chunk.JCOH().integratedFormFactors().back() ) );
+//
+//  CHECK( 90 == chunk.JCOH().formFactors().size() );
+//  CHECK( 1.                 == Approx( chunk.JCOH().formFactors().front() ) );
+//  CHECK( 8.182900000000E-39 == Approx( chunk.JCOH().formFactors().back() ) );
+
+  // JFLO block
+  CHECK( false == chunk.JFLO().has_value() );
+
+  // LHNM block
+  CHECK( false == chunk.LHNM().empty() );
+
+//  CHECK( 647 == chunk.LHNM().NES() );
+//  CHECK( 647 == chunk.LHNM().numberEnergyPoints() );
+//  CHECK( 647 == chunk.LHNM().heating().size() );
+//
+//  CHECK( 8.714616354250E-07 == Approx( chunk.LHNM().heating().front() ) );
+//  CHECK( 9.999084183050E+04 == Approx( chunk.LHNM().heating().back() ) );
+
+  // EPS block
+  CHECK( false == chunk.EPS()->empty() );
+
+//  CHECK( 1 == chunk.EPS()->NSH() );
+//  CHECK( 1 == chunk.EPS()->numberElectronShells() );
+//
+//  CHECK( 1 == Approx( chunk.EPS()->numberElectrons()[0] ) );
+//  CHECK( 1.400000000000e-05 == Approx( chunk.EPS()->bindingEnergies()[0] ) );
+//  CHECK( 1.000000000000e+00 == Approx( chunk.EPS()->interactionProbabilities()[0] ) );
+//
+//  CHECK( 1 == chunk.EPS()->numberElectronsPerShell( 1 ) );
+//  CHECK( 1.400000000000e-05 == Approx( chunk.EPS()->bindingEnergy( 1 ) ) );
+//  CHECK( 1.000000000000e+00 == Approx( chunk.EPS()->interactionProbability( 1 ) ) );
+
+  // SWD block
+  CHECK( false == chunk.SWD()->empty() );
+
+//  CHECK( 1 == chunk.SWD()->NSH() );
+//
+//  CHECK( 1 == chunk.SWD()->LSWD( 1 ) );
+//
+//  auto profile = chunk.SWD()->comptonProfile(1);
+//  CHECK( 2 == profile.interpolation() );
+//  CHECK( 31 == profile.numberValues() );
+//  CHECK( 31 == profile.momentum().size() );
+//  CHECK( 0. == Approx( profile.momentum().front() ) );
+//  CHECK( 100. == Approx( profile.momentum().back() ) );
+//  CHECK( 31 == profile.pdf().size() );
+//  CHECK( 1.690581458877E+00 == Approx( profile.pdf().front() ) );
+//  CHECK( 5.177281263934E-11 == Approx( profile.pdf().back() ) );
+//  CHECK( 31 == profile.cdf().size() );
+//  CHECK( 0. == Approx( profile.cdf().front() ) );
+//  CHECK( 1. == Approx( profile.cdf().back() ) );
+
+  // SUBSH block - EPR data file
+  CHECK( true == chunk.SUBSH().has_value() );
+
+//  CHECK( 1 == chunk.SUBSH()->NSSH() );
+//  CHECK( 1 == chunk.SUBSH()->numberElectronSubshells() );
+//
+//  CHECK( 1 == chunk.SUBSH()->ENDF()[0] );
+//  CHECK( 1 == chunk.SUBSH()->designators()[0] );
+//
+//  CHECK( 1 == chunk.SUBSH()->EP()[0] );
+//  CHECK( 1 == chunk.SUBSH()->populations()[0] );
+//
+//  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->BE()[0] ) );
+//  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->bindingEnergies()[0] ) );
+//
+//  CHECK( 1. == Approx( chunk.SUBSH()->CV()[0] ) );
+//  CHECK( 1. == Approx( chunk.SUBSH()->vacancyProbabilities()[0] ) );
+//
+//  CHECK( 0 == chunk.SUBSH()->NT()[0] );
+//  CHECK( 0 == chunk.SUBSH()->numberTransitions()[0] );
+//
+//  CHECK( 1 == chunk.SUBSH()->designator( 1 ) );
+//
+//  CHECK( 1 == chunk.SUBSH()->population( 1 ) );
+//
+//  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->bindingEnergy( 1 ) ) );
+//
+//  CHECK( 1. == Approx( chunk.SUBSH()->vacancyProbability( 1 ) ) );
+//
+//  CHECK( 0 == chunk.SUBSH()->numberTransitions( 1 ) );
+
+  // SPHEL block - EPR data file
+  CHECK( true == chunk.SPHEL().has_value() );
+
+//  CHECK( 647 == chunk.SPHEL()->NES() );
+//  CHECK( 647 == chunk.SPHEL()->numberEnergyPoints() );
+//  CHECK( 1 == chunk.SPHEL()->NSSH() );
+//  CHECK( 1 == chunk.SPHEL()->numberElectronSubshells() );
+//
+//  CHECK( 647 == chunk.SPHEL()->photoelectric(1).size() );
+//
+//  CHECK(  0.000000000000E+00 == Approx( chunk.SPHEL()->photoelectric(1).front() ) );
+//  CHECK( -3.249289163676E+01 == Approx( chunk.SPHEL()->photoelectric(1).back() ) );
+
+  // XPROB block - EPR data file
+  CHECK( true == chunk.XPROB().has_value() );
+
+//  CHECK( 1 == chunk.XPROB()->NSSH() );
+//  CHECK( 1 == chunk.XPROB()->numberElectronSubshells() );
+//  CHECK( 1 == chunk.XPROB()->data().size() );
+//
+//  CHECK(  1 == chunk.XPROB()->LTRAN(1) );
+//  CHECK(  1 == chunk.XPROB()->transitionDataLocator(1) );
+//
+//  CHECK( true == chunk.XPROB()->transitionData(1).empty() );
+
+  // ESZE block - EPR data file
+  CHECK( true == chunk.ESZE().has_value() );
+
+//  CHECK( 342 == chunk.ESZE()->NE() );
+//  CHECK( 342 == chunk.ESZE()->numberEnergyPoints() );
+//  CHECK( 1 == chunk.ESZE()->NSSH() );
+//  CHECK( 1 == chunk.ESZE()->numberElectronSubshells() );
+//
+//  CHECK( 342 == chunk.ESZE()->energies().size() );
+//  CHECK( 342 == chunk.ESZE()->total().size() );
+//  CHECK( 342 == chunk.ESZE()->elastic().size() );
+//  CHECK( 342 == chunk.ESZE()->bremsstrahlung().size() );
+//  CHECK( 342 == chunk.ESZE()->excitation().size() );
+//  CHECK( 342 == chunk.ESZE()->totalElectroionisation().size() );
+//  CHECK( 342 == chunk.ESZE()->electroionisation(1).size() );
+//
+//  CHECK( 1.000000000000E-05 == Approx( chunk.ESZE()->energies().front() ) );
+//  CHECK( 1.000000000000E+05 == Approx( chunk.ESZE()->energies().back() ) );
+//  CHECK( 2.748960297832E+08 == Approx( chunk.ESZE()->total().front() ) );
+//  CHECK( 1.643349906341E+05 == Approx( chunk.ESZE()->total().back() ) );
+//  CHECK( 2.748960000000E+08 == Approx( chunk.ESZE()->elastic().front() ) );
+//  CHECK( 1.311760000000E-05 == Approx( chunk.ESZE()->elastic().back() ) );
+//  CHECK( 2.978320000000E+01 == Approx( chunk.ESZE()->bremsstrahlung().front() ) );
+//  CHECK( 9.906210000000E-01 == Approx( chunk.ESZE()->bremsstrahlung().back() ) );
+//  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->excitation().front() ) );
+//  CHECK( 8.144160000000E+04 == Approx( chunk.ESZE()->excitation().back() ) );
+//  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->totalElectroionisation().front() ) );
+//  CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->totalElectroionisation().back() ) );
+//  CHECK( 0.000000000000E+00 == Approx( chunk.ESZE()->electroionisation(1).front() ) );
+//  CHECK( 8.289240000000E+04 == Approx( chunk.ESZE()->electroionisation(1).back() ) );
+
+  // EXCIT block - EPR data file
+  CHECK( true == chunk.EXCIT().has_value() );
+
+//  CHECK( 170 == chunk.EXCIT()->NXL() );
+//  CHECK( 170 == chunk.EXCIT()->numberEnergyPoints() );
+//
+//  CHECK( 170 == chunk.EXCIT()->energies().size() );
+//  CHECK( 170 == chunk.EXCIT()->excitationEnergyLoss().size() );
+//
+//  CHECK( 1.361000000000E-05 == Approx( chunk.EXCIT()->energies().front() ) );
+//  CHECK( 1.000000000000E+05 == Approx( chunk.EXCIT()->energies().back() ) );
+//
+//  CHECK( 1.351000000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().front() ) );
+//  CHECK( 2.107770000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().back() ) );
+
+  // ELAS block - EPR data file
+  CHECK( true == chunk.ELAS().has_value() );
+
+//  CHECK( 16 == chunk.ELAS()->NA() );
+//  CHECK( 16 == chunk.ELAS()->numberEnergyPoints() );
+//  CHECK( 16 == chunk.ELAS()->energies().size() );
+//  CHECK( 16 == chunk.ELAS()->distributions().size() );
+//
+//  auto distribution = chunk.ELAS()->distribution(1);
+//  CHECK( 1.000000000000E-05 == distribution.energy() );
+//  CHECK( 3 == distribution.numberCosines() );
+//
+//  distribution = chunk.ELAS()->distribution(16);
+//  CHECK( 1e+5 == distribution.energy() );
+//  CHECK( 91 == distribution.numberCosines() );
+
+  // EION block - EPR data file
+  CHECK( false == chunk.EION( 1 ).empty() );
+
+//  CHECK( 8 == chunk.EION( 1 ).NB() );
+//  CHECK( 8 == chunk.EION( 1 ).numberEnergyPoints() );
+//  CHECK( 8 == chunk.EION( 1 ).energies().size() );
+//  CHECK( 8 == chunk.EION( 1 ).distributions().size() );
+//
+//  auto eiondistribution = chunk.EION( 1 ).distribution(1);
+//  CHECK( 1.361000000000E-05 == eiondistribution.energy() );
+//  CHECK( 2 == eiondistribution.numberOutgoingEnergies() );
+//
+//  eiondistribution = chunk.EION( 1 ).distribution(8);
+//  CHECK( 1e+5 == eiondistribution.energy() );
+//  CHECK( 147 == eiondistribution.numberOutgoingEnergies() );
+//
+//  // BREME block - EPR data file
+//  CHECK( true == chunk.BREME().has_value() );
+//
+//  CHECK( 10 == chunk.BREME()->NB() );
+//  CHECK( 10 == chunk.BREME()->numberEnergyPoints() );
+//  CHECK( 10 == chunk.BREME()->energies().size() );
+//  CHECK( 10 == chunk.BREME()->distributions().size() );
+//
+//  auto bremdistribution = chunk.BREME()->distribution(1);
+//  CHECK( 1.000000000000E-05 == bremdistribution.energy() );
+//  CHECK( 17 == bremdistribution.numberOutgoingEnergies() );
+//
+//  bremdistribution = chunk.BREME()->distribution(10);
+//  CHECK( 1e+5 == bremdistribution.energy() );
+//  CHECK( 111 == bremdistribution.numberOutgoingEnergies() );
+
+  // BREML block - EPR data file
+  CHECK( true == chunk.BREML().has_value() );
+
+//  CHECK( 82 == chunk.BREML()->NBL() );
+//  CHECK( 82 == chunk.BREML()->numberEnergyPoints() );
+//
+//  CHECK( 82 == chunk.BREML()->energies().size() );
+//  CHECK( 82 == chunk.BREML()->energyAfterBremsstrahlung().size() );
+//
+//  CHECK( 1.000000000000E-05 == Approx( chunk.BREML()->energies().front() ) );
+//  CHECK( 1.000000000000E+05 == Approx( chunk.BREML()->energies().back() ) );
+//
+//  CHECK( 7.855740000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
+//  CHECK( 9.733190000000E+04 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
 }
