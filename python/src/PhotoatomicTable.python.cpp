@@ -205,6 +205,30 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "NA",
+    &Table::NA,
+    "The number of energy points with electron elastic angular distributions"
+  )
+  .def_property_readonly(
+
+    "number_electron_elastic_energy_points",
+    &Table::numberElectronElasticEnergyPoints,
+    "The number of energy points with electron elastic angular distributions"
+  )
+  .def_property_readonly(
+
+    "NB",
+    &Table::NB,
+    "The number of energy points with Bremsstrahlung photon energy distributions"
+  )
+  .def_property_readonly(
+
+    "number_electron_bremsstrahlung_energy_points",
+    &Table::numberElectronBremsstrahlungEnergyPoints,
+    "The number of energy points with Bremsstrahlung photon energy distributions"
+  )
+  .def_property_readonly(
+
     "NBL",
     &Table::NBL,
     "The number of electron Bremsstrahlung energy points"
@@ -217,7 +241,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "ESZ",
+    "ESZG",
     &Table::ESZG,
     "The principal cross section block"
   )
@@ -289,6 +313,30 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "EPS",
+    &Table::EPS,
+    "The electron shell block"
+  )
+  .def_property_readonly(
+
+    "electron_shell_block",
+    &Table::electronShellBlock,
+    "The electron shell block"
+  )
+  .def_property_readonly(
+
+    "SWD",
+    &Table::SWD,
+    "The compton profile block"
+  )
+  .def_property_readonly(
+
+    "compton_profile_block",
+    &Table::comptonProfileBlock,
+    "The electron shell block"
+  )
+  .def_property_readonly(
+
     "SUBSH",
     &Table::SUBSH,
     "The electron subshell data block for eprdata (NEPR > 0)"
@@ -334,6 +382,52 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "electron_excitation_energy_loss_block",
     &Table::electronExcitationEnergyLossBlock,
     "The electron excitation energy loss block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "ELAS",
+    &Table::ELAS,
+    "The electron elastic angular distribution block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_elastic_angular_distribution_block",
+    &Table::electronElasticAngularDistributionBlock,
+    "The electron elastic angular distribution block for eprdata (NEPR > 0)"
+  )
+  .def(
+
+    "EION",
+    &Table::EION,
+    python::arg( "index" ),
+    "Return the knock-on electron energy distribution block for a subshell index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "electroionisation_energy_distribution_block",
+    &Table::electroionisationEnergyDistributionBlock,
+    python::arg( "index" ),
+    "Return the knock-on electron energy distribution block for a subshell index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def_property_readonly(
+
+    "BREME",
+    &Table::BREME,
+    "The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "bremsstrahlung_energy_distribution_block",
+    &Table::bremsstrahlungEnergyDistributionBlock,
+    "The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)"
   )
   .def_property_readonly(
 

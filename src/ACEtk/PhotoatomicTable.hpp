@@ -442,7 +442,7 @@ public:
   /**
    *  @brief Return the Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
    */
-  const std::optional< block::BREME >& electronBremsstrahlungEnergyDistributionBlock() const {
+  const std::optional< block::BREME >& bremsstrahlungEnergyDistributionBlock() const {
 
     return this->BREME();
   }
