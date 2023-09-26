@@ -24,13 +24,13 @@ SCENARIO( "PhotoatomicElectronCrossSectionBlock" ) {
       std::vector< double > elastic = { 1., 2., 3. };
       std::vector< double > bremsstrahlung = { 4., 5., 6. };
       std::vector< double > excitation = { 7., 8., 9. };
-      std::vector< std::vector< double > > 
+      std::vector< std::vector< double > >
       electroionisation = { { 10., 11., 12. },
                             { 13., 14., 15. } };
 
-      PhotoatomicElectronCrossSectionBlock 
-      chunk( std::move( energies ), std::move( elastic ), 
-             std::move( bremsstrahlung ), std::move( excitation ), 
+      PhotoatomicElectronCrossSectionBlock
+      chunk( std::move( energies ), std::move( elastic ),
+             std::move( bremsstrahlung ), std::move( excitation ),
              std::move( electroionisation ) );
 
       THEN( "a PhotoatomicElectronCrossSectionBlock can be constructed and "
@@ -129,4 +129,3 @@ void verifyChunk( const PhotoatomicElectronCrossSectionBlock& chunk ) {
   CHECK(  14. == Approx( chunk.electroionisation(2)[1] ) );
   CHECK(  15. == Approx( chunk.electroionisation(2)[2] ) );
 }
-
