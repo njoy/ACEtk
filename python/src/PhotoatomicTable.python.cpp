@@ -32,6 +32,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   using EION = njoy::ACEtk::block::EION;
   using BREME = njoy::ACEtk::block::BREME;
   using BREML = njoy::ACEtk::block::BREML;
+  using SELAS = njoy::ACEtk::block::SELAS;
 
   // wrap views created by this table
 
@@ -56,7 +57,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
                   std::optional< XPROB >, std::optional< ESZE >,
                   std::optional< EXCIT >, std::optional< ELAS >,
                   std::vector< EION >, std::optional< BREME >,
-                  std::optional< BREML > >(),
+                  std::optional< BREML >, std::optional< SELAS > >(),
     python::arg( "z" ), python::arg( "header" ),
     python::arg( "za" ), python::arg( "awr" ),
     python::arg( "eszg" ), python::arg( "jinc" ),
@@ -73,6 +74,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     python::arg( "eion" ) = std::vector< EION >{},
     python::arg( "breme" ) = std::nullopt,
     python::arg( "breml" ) = std::nullopt,
+    python::arg( "selas" ) = std::nullopt,
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -94,7 +96,8 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "    elas      the electron elastic angular distribution block\n"
     "    eion      the electronionisation data block\n"
     "    breme     the photon energy distributions from Bremsstrahlung\n"
-    "    breml     the electron average energy after Bremsstrahlung"
+    "    breml     the electron average energy after Bremsstrahlung\n"
+    "    selas     the additional electron elastic cross section block"
   )
   .def_property_readonly(
 
@@ -472,6 +475,18 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "electron_energy_after_bremsstrahlung_block",
     &Table::electronEnergyAfterBremsstrahlungBlock,
     "The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "SELAS",
+    &Table::SELAS,
+    "The additional elastic cross section block for eprdata (NEPR = 3)"
+  )
+  .def_property_readonly(
+
+    "electron_elastic_cross_section_block",
+    &Table::electronElasticCrossSectionBlock,
+    "The additional elastic cross section block for eprdata (NEPR = 3)"
   );
 
   // add standard block definitions

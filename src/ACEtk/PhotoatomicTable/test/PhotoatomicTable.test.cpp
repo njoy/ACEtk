@@ -100,7 +100,8 @@ SCENARIO( "PhotoatomicTable" ){
                               std::nullopt, std::nullopt,
                               std::nullopt, std::nullopt,
                               std::nullopt, {  },
-                              std::nullopt, std::nullopt );
+                              std::nullopt, std::nullopt,
+                              std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -245,7 +246,7 @@ SCENARIO( "PhotoatomicTable" ){
                               std::nullopt, std::nullopt,
                               std::nullopt, std::nullopt,
                               {  }, std::nullopt,
-                              std::nullopt );
+                              std::nullopt, std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -396,7 +397,8 @@ SCENARIO( "PhotoatomicTable" ){
                               base.XPROB(), base.ESZE(),
                               base.EXCIT(), base.ELAS(),
                               std::move( eion ),
-                              base.BREME(), base.BREML() );
+                              base.BREME(), base.BREML(),
+                              std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -526,22 +528,34 @@ SCENARIO( "PhotoatomicTable" ){
       } // THEN
     } // WHEN
 
-/*    WHEN( "constructing a PhotoatomicTable from its components" ) {
+    WHEN( "constructing a PhotoatomicTable from its components" ) {
 
       PhotoatomicTable base( std::move( table ) );
 
-      PhotoatomicTable chunk( 1, base.header(),
+      std::vector< block::EION > eion = std::vector< block::EION >{};
+      for ( unsigned int index = 1; index <= base.NSSH(); ++index ) {
+
+        eion.push_back( base.EION( index ) );
+      }
+
+      PhotoatomicTable chunk( 6, base.header(),
                               {  },
                               {  },
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
                               std::nullopt,
-                              base.EPS(), base.SWD() );
+                              base.EPS(), base.SWD(),
+                              base.SUBSH(), base.SPHEL(),
+                              base.XPROB(), base.ESZE(),
+                              base.EXCIT(), base.ELAS(),
+                              std::move( eion ),
+                              base.BREME(), base.BREML(),
+                              base.SELAS() );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
-        verifyChunkEprdata12( chunk );
+        verifyChunkEprdata14( chunk );
       }
 
       THEN( "the IZ array is correct" ) {
@@ -593,7 +607,7 @@ SCENARIO( "PhotoatomicTable" ){
           CHECK( xss[i] == Approx( xss_chunk[i] ) );
         }
       } // THEN
-    } // WHEN*/
+    } // WHEN
   }
 } // SCENARIO
 

@@ -88,6 +88,7 @@ PhotoatomicTable& operator=( PhotoatomicTable&& base ) {
  *  @param[in] eion      the electronionisation data block
  *  @param[in] breme     the photon energy distributions from Bremsstrahlung
  *  @param[in] breml     the electron average energy after Bremsstrahlung
+ *  @param[in] selas     the additional electron elastic cross section block
  */
 PhotoatomicTable( unsigned int z, HeaderVariant header,
                   std::vector< unsigned int > za, std::vector< double > awr,
@@ -104,7 +105,8 @@ PhotoatomicTable( unsigned int z, HeaderVariant header,
                   std::optional< block::ELAS > elas,
                   std::vector< block::EION > eion,
                   std::optional< block::BREME > breme,
-                  std::optional< block::BREML > breml ) :
+                  std::optional< block::BREML > breml,
+                  std::optional< block::SELAS > selas ) :
   PhotoatomicTable(
       Table( std::move( header ),
              generateData( z, std::move( za ), std::move( awr ),
@@ -115,4 +117,5 @@ PhotoatomicTable( unsigned int z, HeaderVariant header,
                            std::move( sphel ), std::move( xprob ),
                            std::move( esze ), std::move( excit ),
                            std::move( elas ), std::move( eion ),
-                           std::move( breme ), std::move( breml ) ) ) ) {}
+                           std::move( breme ), std::move( breml ),
+                           std::move( selas ) ) ) ) {}

@@ -13,7 +13,8 @@ Data generateData( unsigned int z,
                    std::optional< block::ELAS >&& elas,
                    std::vector< block::EION >&& eion,
                    std::optional< block::BREME >&& breme,
-                   std::optional< block::BREML >&& breml ) {
+                   std::optional< block::BREML >&& breml,
+                   std::optional< block::SELAS >&& selas ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -33,7 +34,7 @@ Data generateData( unsigned int z,
   }
 
   // determine data type
-  unsigned int nepr = subsh.has_value() ? 1 : 0; // TODO: add nepr=3 option
+  unsigned int nepr = subsh.has_value() ? selas.has_value() ? 3 : 1 : 0;
 
   // some size values
   unsigned int nes = eszg.NES();
@@ -45,6 +46,8 @@ Data generateData( unsigned int z,
   unsigned int na = nepr > 0 ? elas->NA() : 0;
   unsigned int nb = nepr > 0 ? breme->NB() : 0;
   unsigned int nbl = nepr > 0 ? breml->NBL() : 0;
+  unsigned int ninc = nepr > 1 ? jinc.NM() : 0;
+  unsigned int ncoh = nepr > 1 ? jcoh.NM() : 0;
 
   // verify some stuff:
   //  - same number of ZA and atomic mass values
@@ -75,6 +78,16 @@ Data generateData( unsigned int z,
       Log::info( "XPROB NSSH value = {}", xprob->NSSH() );
       Log::info( "ESZE NSSH value = {}", esze->NSSH() );
       Log::info( "EION NSSH value = {}", eion.size() );
+      throw std::exception();
+    }
+  }
+  if ( nepr == 3 ) {
+
+    if ( ne != selas->NE() ) {
+
+      Log::error( "Inconsistent NE between the different blocks" );
+      Log::info( "ESZE NE value = {}", esze->NE() );
+      Log::info( "SELAS NE value = {}", selas->NE() );
       throw std::exception();
     }
   }
@@ -135,12 +148,18 @@ Data generateData( unsigned int z,
       xss[l + nssh] = xss.size() + 1;
       xss[l + 2 * nssh] = xss.size() + 3 * block.NB() + 1;
       xss.insert( xss.end(), block.begin(), block.end() );
+      ++l;
     }
     jxs[23] = xss.size() + 1;
     jxs[24] = jxs[23] + 3 * nb;
     xss.insert( xss.end(), breme->begin(), breme->end() );
     jxs[25] = xss.size() + 1;
     xss.insert( xss.end(), breml->begin(), breml->end() );
+    if ( nepr == 3 ) {
+
+      jxs[26] = xss.size() + 1;
+      xss.insert( xss.end(), selas->begin(), selas->end() );
+    }
   }
 
   // set the nxs values for the continuous energy table
@@ -156,6 +175,8 @@ Data generateData( unsigned int z,
   // NXS(10) = NA
   // NXS(11) = NB
   // NXS(12) = NBL
+  // NXS(13) = NINC
+  // NXS(14) = NCOH
   nxs[0] = xss.size();
   nxs[1] = z;
   nxs[2] = nes;
@@ -168,6 +189,8 @@ Data generateData( unsigned int z,
   nxs[9] = na;
   nxs[10] = nb;
   nxs[11] = nbl;
+  nxs[12] = ninc;
+  nxs[13] = ncoh;
 
   return { std::move( iz ), std::move( aw ),
            std::move( nxs ), std::move( jxs ), std::move( xss ) };
