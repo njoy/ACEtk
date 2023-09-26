@@ -4,7 +4,16 @@ Data generateData( unsigned int z,
                    block::JCOH&& jcoh, block::LHNM&& lhnm,
                    std::optional< block::JFLO >&& jflo,
                    std::optional< block::EPS >&& eps,
-                   std::optional< block::SWD >&& swd ) {
+                   std::optional< block::SWD >&& swd,
+                   std::optional< block::SUBSH >&& subsh,
+                   std::optional< block::SPHEL >&& sphel,
+                   std::optional< block::XPROB >&& xprob,
+                   std::optional< block::ESZE >&& esze,
+                   std::optional< block::EXCIT >&& excit,
+                   std::optional< block::ELAS >&& elas,
+                   std::vector< block::EION >&& eion,
+                   std::optional< block::BREME >&& breme,
+                   std::optional< block::BREML >&& breml ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;

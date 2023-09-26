@@ -23,6 +23,15 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   using LHNM = njoy::ACEtk::block::LHNM;
   using EPS = njoy::ACEtk::block::EPS;
   using SWD = njoy::ACEtk::block::SWD;
+  using SUBSH = njoy::ACEtk::block::SUBSH;
+  using SPHEL = njoy::ACEtk::block::SPHEL;
+  using XPROB = njoy::ACEtk::block::XPROB;
+  using ESZE = njoy::ACEtk::block::ESZE;
+  using EXCIT = njoy::ACEtk::block::EXCIT;
+  using ELAS = njoy::ACEtk::block::ELAS;
+  using EION = njoy::ACEtk::block::EION;
+  using BREME = njoy::ACEtk::block::BREME;
+  using BREML = njoy::ACEtk::block::BREML;
 
   // wrap views created by this table
 
@@ -42,7 +51,12 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     python::init< unsigned int, HeaderVariant,
                   std::vector< unsigned int >, std::vector< double >,
                   ESZG, JINC, JCOH, LHNM, std::optional< JFLO >,
-                  std::optional< EPS >, std::optional< SWD > >(),
+                  std::optional< EPS >, std::optional< SWD >,
+                  std::optional< SUBSH >, std::optional< SPHEL >,
+                  std::optional< XPROB >, std::optional< ESZE >,
+                  std::optional< EXCIT >, std::optional< ELAS >,
+                  std::vector< EION >, std::optional< BREME >,
+                  std::optional< BREML > >(),
     python::arg( "z" ), python::arg( "header" ),
     python::arg( "za" ), python::arg( "awr" ),
     python::arg( "eszg" ), python::arg( "jinc" ),
@@ -50,6 +64,15 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     python::arg( "jflo" ) = std::nullopt,
     python::arg( "eps" ) = std::nullopt,
     python::arg( "swd" ) = std::nullopt,
+    python::arg( "subsh" ) = std::nullopt,
+    python::arg( "sphel" ) = std::nullopt,
+    python::arg( "xprob" ) = std::nullopt,
+    python::arg( "esze" ) = std::nullopt,
+    python::arg( "excit" ) = std::nullopt,
+    python::arg( "elas" ) = std::nullopt,
+    python::arg( "eion" ) = std::vector< EION >{},
+    python::arg( "breme" ) = std::nullopt,
+    python::arg( "breml" ) = std::nullopt,
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -62,7 +85,16 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "    lhnm      the heating numbers block\n"
     "    jflo      the fluorescence data block\n"
     "    eps       the electron shell block\n"
-    "    swd       the compton profile block"
+    "    swd       the compton profile block\n"
+    "    subsh     the electron subshell data block\n"
+    "    sphel     the photoelectric cross section block\n"
+    "    xprob     the atomic relaxation data block\n"
+    "    esze      the electron cross section block\n"
+    "    excit     the excitation energy loss data block\n"
+    "    elas      the electron elastic angular distribution block\n"
+    "    eion      the electronionisation data block\n"
+    "    breme     the photon energy distributions from Bremsstrahlung\n"
+    "    breml     the electron average energy after Bremsstrahlung"
   )
   .def_property_readonly(
 

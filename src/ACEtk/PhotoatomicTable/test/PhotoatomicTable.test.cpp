@@ -95,9 +95,12 @@ SCENARIO( "PhotoatomicTable" ){
                               { 0.999167, 1.996800, 2.990140 },
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
-                              std::nullopt,
-                              std::nullopt,
-                              std::nullopt );
+                              std::nullopt, std::nullopt,
+                              std::nullopt, std::nullopt,
+                              std::nullopt, std::nullopt,
+                              std::nullopt, std::nullopt,
+                              std::nullopt, {  },
+                              std::nullopt, std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -237,7 +240,12 @@ SCENARIO( "PhotoatomicTable" ){
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
                               std::nullopt,
-                              base.EPS(), base.SWD() );
+                              base.EPS(), base.SWD(),
+                              std::nullopt, std::nullopt,
+                              std::nullopt, std::nullopt,
+                              std::nullopt, std::nullopt,
+                              {  }, std::nullopt,
+                              std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
