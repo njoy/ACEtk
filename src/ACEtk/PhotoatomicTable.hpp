@@ -165,13 +165,13 @@ public:
 
   /**
    *  @brief Return the EPR data format flag (0 for old format, 1 for EPR data
-   *         from 2012 and 3 for EPR data from 2014)
+   *         from 2012 and 3 for EPR data from 2014 and above)
    */
   unsigned int NEPR() const { return this->data().NXS(6); }
 
   /**
    *  @brief Return the EPR data format flag (0 for old format, 1 for EPR data
-   *         from 2012 and 3 for EPR data from 2014)
+   *         from 2012 and 3 for EPR data from 2014 and above)
    */
   unsigned int electronPhotonRelaxationFormat() const { return this->NEPR(); }
 
@@ -240,6 +240,26 @@ public:
    *  @brief Return the number of electron Bremsstrahlung energy points
    */
   unsigned int numberElectronBremsstrahlungEnergyPoints() const { return this->NBL(); }
+
+  /**
+   *  @brief Return the number of momentum values in the JINC block (NEPR > 1)
+   */
+  unsigned int NINC() const { return this->data().NXS(13); }
+
+  /**
+   *  @brief Return the number of momentum values in the JINC block (NEPR > 1)
+   */
+  unsigned int numberIncoherentMomentumValues() const { return this->NINC(); }
+
+  /**
+   *  @brief Return the number of momentum values in the JCOH block (NEPR > 1)
+   */
+  unsigned int NCOH() const { return this->data().NXS(14); }
+
+  /**
+   *  @brief Return the number of momentum values in the JCOH block (NEPR > 1)
+   */
+  unsigned int numberCoherentMomentumValues() const { return this->NCOH(); }
 
   // JXS information
 

@@ -641,6 +641,10 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 0 == chunk.NINC() );
+  CHECK( 0 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 0 == chunk.NCOH() );
+  CHECK( 0 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -776,6 +780,10 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 0 == chunk.NINC() );
+  CHECK( 0 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 0 == chunk.NCOH() );
+  CHECK( 0 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -959,6 +967,10 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 10 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 82 == chunk.NBL() );
   CHECK( 82 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 0 == chunk.NINC() );
+  CHECK( 0 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 0 == chunk.NCOH() );
+  CHECK( 0 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -1261,6 +1273,10 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
   CHECK( 9 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 75 == chunk.NBL() );
   CHECK( 75 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 142 == chunk.NINC() );
+  CHECK( 142 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 138 == chunk.NCOH() );
+  CHECK( 138 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
