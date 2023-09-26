@@ -124,7 +124,7 @@ Data generateData( unsigned int z,
     jxs[19] = xss.size() + 1;
     xss.insert( xss.end(), excit->begin(), excit->end() );
     jxs[20] = xss.size() + 1;
-    jxs[21] = jxs[20] + na;
+    jxs[21] = jxs[20] + 3 * na;
     xss.insert( xss.end(), elas->begin(), elas->end() );
     jxs[22] = xss.size() + 1;
     unsigned int l = xss.size();
@@ -133,11 +133,11 @@ Data generateData( unsigned int z,
 
       xss[l] = block.NB();
       xss[l + nssh] = xss.size() + 1;
-      xss[l + 2 * nssh] = xss.size() + nssh + 1;
+      xss[l + 2 * nssh] = xss.size() + 3 * block.NB() + 1;
       xss.insert( xss.end(), block.begin(), block.end() );
     }
     jxs[23] = xss.size() + 1;
-    jxs[24] = jxs[23] + nb;
+    jxs[24] = jxs[23] + 3 * nb;
     xss.insert( xss.end(), breme->begin(), breme->end() );
     jxs[25] = xss.size() + 1;
     xss.insert( xss.end(), breml->begin(), breml->end() );

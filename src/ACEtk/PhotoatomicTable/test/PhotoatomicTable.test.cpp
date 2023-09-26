@@ -375,9 +375,15 @@ SCENARIO( "PhotoatomicTable" ){
       } // THEN
     } // WHEN
 
-/*    WHEN( "constructing a PhotoatomicTable from its components" ) {
+    WHEN( "constructing a PhotoatomicTable from its components" ) {
 
       PhotoatomicTable base( std::move( table ) );
+
+      std::vector< block::EION > eion = std::vector< block::EION >{};
+      for ( unsigned int index = 1; index <= base.NSSH(); ++index ) {
+
+        eion.push_back( base.EION( index ) );
+      }
 
       PhotoatomicTable chunk( 1, base.header(),
                               {  },
@@ -385,7 +391,12 @@ SCENARIO( "PhotoatomicTable" ){
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
                               std::nullopt,
-                              base.EPS(), base.SWD() );
+                              base.EPS(), base.SWD(),
+                              base.SUBSH(), base.SPHEL(),
+                              base.XPROB(), base.ESZE(),
+                              base.EXCIT(), base.ELAS(),
+                              std::move( eion ),
+                              base.BREME(), base.BREML() );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -442,7 +453,7 @@ SCENARIO( "PhotoatomicTable" ){
           CHECK( xss[i] == Approx( xss_chunk[i] ) );
         }
       } // THEN
-    } // WHEN*/
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a PhotoatomicTable - eprdata14" ) {
