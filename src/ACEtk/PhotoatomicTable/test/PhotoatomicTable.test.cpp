@@ -1553,48 +1553,59 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
 
   // EION block - EPR data file
   CHECK( false == chunk.EION( 1 ).empty() );
+  CHECK( false == chunk.EION( 2 ).empty() );
+  CHECK( false == chunk.EION( 3 ).empty() );
+  CHECK( false == chunk.EION( 4 ).empty() );
 
-//  CHECK( 8 == chunk.EION( 1 ).NB() );
-//  CHECK( 8 == chunk.EION( 1 ).numberEnergyPoints() );
-//  CHECK( 8 == chunk.EION( 1 ).energies().size() );
-//  CHECK( 8 == chunk.EION( 1 ).distributions().size() );
-//
-//  auto eiondistribution = chunk.EION( 1 ).distribution(1);
-//  CHECK( 1.361000000000E-05 == eiondistribution.energy() );
-//  CHECK( 2 == eiondistribution.numberOutgoingEnergies() );
-//
-//  eiondistribution = chunk.EION( 1 ).distribution(8);
-//  CHECK( 1e+5 == eiondistribution.energy() );
-//  CHECK( 147 == eiondistribution.numberOutgoingEnergies() );
-//
-//  // BREME block - EPR data file
-//  CHECK( true == chunk.BREME().has_value() );
-//
-//  CHECK( 10 == chunk.BREME()->NB() );
-//  CHECK( 10 == chunk.BREME()->numberEnergyPoints() );
-//  CHECK( 10 == chunk.BREME()->energies().size() );
-//  CHECK( 10 == chunk.BREME()->distributions().size() );
-//
-//  auto bremdistribution = chunk.BREME()->distribution(1);
-//  CHECK( 1.000000000000E-05 == bremdistribution.energy() );
-//  CHECK( 17 == bremdistribution.numberOutgoingEnergies() );
-//
-//  bremdistribution = chunk.BREME()->distribution(10);
-//  CHECK( 1e+5 == bremdistribution.energy() );
-//  CHECK( 111 == bremdistribution.numberOutgoingEnergies() );
+  CHECK( 7 == chunk.EION( 1 ).NB() );
+  CHECK( 7 == chunk.EION( 1 ).numberEnergyPoints() );
+  CHECK( 7 == chunk.EION( 1 ).energies().size() );
+  CHECK( 7 == chunk.EION( 1 ).distributions().size() );
+
+  auto eiondistribution = chunk.EION( 1 ).distribution(1);
+  CHECK( 2.910100000000E-04 == eiondistribution.energy() );
+  CHECK( 2 == eiondistribution.numberOutgoingEnergies() );
+
+  eiondistribution = chunk.EION( 1 ).distribution(7);
+  CHECK( 1e+5 == eiondistribution.energy() );
+  CHECK( 128 == eiondistribution.numberOutgoingEnergies() );
+
+  eiondistribution = chunk.EION( 4 ).distribution(1);
+  CHECK( 8.980000000000E-06 == eiondistribution.energy() );
+  CHECK( 2 == eiondistribution.numberOutgoingEnergies() );
+
+  eiondistribution = chunk.EION( 4 ).distribution(8);
+  CHECK( 1e+5 == eiondistribution.energy() );
+  CHECK( 143 == eiondistribution.numberOutgoingEnergies() );
+
+  // BREME block - EPR data file
+  CHECK( true == chunk.BREME().has_value() );
+
+  CHECK( 9 == chunk.BREME()->NB() );
+  CHECK( 9 == chunk.BREME()->numberEnergyPoints() );
+  CHECK( 9 == chunk.BREME()->energies().size() );
+  CHECK( 9 == chunk.BREME()->distributions().size() );
+
+  auto bremdistribution = chunk.BREME()->distribution(1);
+  CHECK( 1.000000000000E-05 == bremdistribution.energy() );
+  CHECK( 17 == bremdistribution.numberOutgoingEnergies() );
+
+  bremdistribution = chunk.BREME()->distribution(9);
+  CHECK( 1e+5 == bremdistribution.energy() );
+  CHECK( 105 == bremdistribution.numberOutgoingEnergies() );
 
   // BREML block - EPR data file
   CHECK( true == chunk.BREML().has_value() );
 
-//  CHECK( 82 == chunk.BREML()->NBL() );
-//  CHECK( 82 == chunk.BREML()->numberEnergyPoints() );
-//
-//  CHECK( 82 == chunk.BREML()->energies().size() );
-//  CHECK( 82 == chunk.BREML()->energyAfterBremsstrahlung().size() );
-//
-//  CHECK( 1.000000000000E-05 == Approx( chunk.BREML()->energies().front() ) );
-//  CHECK( 1.000000000000E+05 == Approx( chunk.BREML()->energies().back() ) );
-//
-//  CHECK( 7.855740000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
-//  CHECK( 9.733190000000E+04 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
+  CHECK( 75 == chunk.BREML()->NBL() );
+  CHECK( 75 == chunk.BREML()->numberEnergyPoints() );
+
+  CHECK( 75 == chunk.BREML()->energies().size() );
+  CHECK( 75 == chunk.BREML()->energyAfterBremsstrahlung().size() );
+
+  CHECK( 1.000000000000E-05 == Approx( chunk.BREML()->energies().front() ) );
+  CHECK( 1.000000000000E+05 == Approx( chunk.BREML()->energies().back() ) );
+
+  CHECK( 2.150380000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
+  CHECK( 2.712000000000E+03 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
 }
