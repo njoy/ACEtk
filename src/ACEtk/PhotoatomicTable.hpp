@@ -16,6 +16,7 @@
 #include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronElasticCrossSectionBlock.hpp"
 #include "ACEtk/block/ElectronElasticAngularDistributionBlock.hpp"
 #include "ACEtk/block/ElectronEnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
@@ -49,6 +50,7 @@ class PhotoatomicTable : protected Table {
   std::vector< block::EION > eion_;
   std::optional< block::BREME > breme_;
   std::optional< block::BREML > breml_;
+  std::optional< block::SELAS > selas_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -458,6 +460,19 @@ public:
   const std::optional< block::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
 
     return this->BREML();
+  }
+
+  /**
+   *  @brief Return the additional elastic cross section block for eprdata (NEPR = 3)
+   */
+  const std::optional< block::SELAS >& SELAS() const { return this->selas_; }
+
+  /**
+   *  @brief Return the additional elastic cross section block for eprdata (NEPR = 3)
+   */
+  const std::optional< block::SELAS >& electronElasticCrossSectionBlock() const {
+
+    return this->SELAS();
   }
 };
 

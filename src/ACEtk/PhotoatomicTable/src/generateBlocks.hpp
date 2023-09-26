@@ -128,5 +128,12 @@ void generateBlocks() {
     this->breme_ = block::BREME( bremi.first, breme.second, this->NB() );
     auto breml = block( 26 );
     this->breml_ = block::BREML( breml.first, breml.second, this->NBL() );
+
+    present = ( this->NEPR() == 3 );
+    if ( present ) {
+
+      auto selas = block( 27 );
+      this->selas_ = block::SELAS( selas.first, selas.second, this->NE() );
+    }
   }
 }

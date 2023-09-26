@@ -727,6 +727,9 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
+
+  // SELAS block - not EPR data file
+  CHECK( false == chunk.SELAS().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -907,6 +910,9 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
+
+  // SELAS block - not EPR data file
+  CHECK( false == chunk.SELAS().has_value() );
 }
 
 void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
@@ -1206,6 +1212,9 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 
   CHECK( 7.855740000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
   CHECK( 9.733190000000E+04 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
+
+  // SELAS block - not eprdata14 file
+  CHECK( false == chunk.SELAS().has_value() );
 }
 
 void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
@@ -1627,4 +1636,19 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
 
   CHECK( 2.150380000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
   CHECK( 2.712000000000E+03 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
+
+  // SELAS block - EPR data file
+  CHECK( true == chunk.SELAS().has_value() );
+
+  CHECK( 352 == chunk.SELAS()->NE() );
+  CHECK( 352 == chunk.SELAS()->numberEnergyPoints() );
+
+  CHECK( 352 == chunk.SELAS()->transport().size() );
+  CHECK( 352 == chunk.SELAS()->total().size() );
+
+  CHECK( 3.063510000000E+09 == Approx( chunk.SELAS()->transport().front() ) );
+  CHECK( 1.510140000000E-08 == Approx( chunk.SELAS()->transport().back() ) );
+
+  CHECK( 3.063510000000E+09 == Approx( chunk.SELAS()->total().front() ) );
+  CHECK( 1.407220000000E+05 == Approx( chunk.SELAS()->total().back() ) );
 }
