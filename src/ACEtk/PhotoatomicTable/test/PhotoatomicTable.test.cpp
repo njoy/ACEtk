@@ -1002,7 +1002,7 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 94 == chunk.JINC().numberValues() );
 
   CHECK( 94 == chunk.JINC().momentum().size() );
-  CHECK( 1.000000000000E-07 == Approx( chunk.JINC().momentum().front() ) );
+  CHECK( 0.000000000000E+00 == Approx( chunk.JINC().momentum().front() ) );
   CHECK( 1.000000000000E+09   == Approx( chunk.JINC().momentum().back() ) );
 
   CHECK( 94 == chunk.JINC().values().size() );
