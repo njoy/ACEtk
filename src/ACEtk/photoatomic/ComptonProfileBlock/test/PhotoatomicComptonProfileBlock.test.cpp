@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
+#include "ACEtk/photoatomic/ComptonProfileBlock.hpp"
 
 // other includes
 

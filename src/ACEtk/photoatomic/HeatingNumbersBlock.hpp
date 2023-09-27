@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICHEATINGNUMBERSBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICHEATINGNUMBERSBLOCK
+#ifndef NJOY_ACETK_PHOTOATOMIC_HEATINGNUMBERSBLOCK
+#define NJOY_ACETK_PHOTOATOMIC_HEATINGNUMBERSBLOCK
 
 // system includes
 
@@ -27,7 +27,7 @@ class PhotoatomicHeatingNumbersBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicHeatingNumbersBlock/src/ctor.hpp"
+  #include "ACEtk/photoatomic/HeatingNumbersBlock/src/ctor.hpp"
 
   /* methods */
 

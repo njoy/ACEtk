@@ -28,12 +28,12 @@ class PhotoelectricCrossSectionBlock : protected details::ArrayData {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/block/PhotoelectricCrossSectionBlock/src/verifyIndex.hpp"
+  #include "ACEtk/photoatomic/PhotoelectricCrossSectionBlock/src/verifyIndex.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoelectricCrossSectionBlock/src/ctor.hpp"
+  #include "ACEtk/photoatomic/PhotoelectricCrossSectionBlock/src/ctor.hpp"
 
   /* methods */
 

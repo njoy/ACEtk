@@ -1,11 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_PhotoatomicComptonProfileBlock
-#define NJOY_ACETK_BLOCK_PhotoatomicComptonProfileBlock
+#ifndef NJOY_ACETK_PHOTOATOMIC_COMPTONPROFILEBLOCK
+#define NJOY_ACETK_PHOTOATOMIC_COMPTONPROFILEBLOCK
 
 // system includes
 
 // other includes
 #include "ACEtk/block/details/BaseBlockWithLocators.hpp"
-#include "ACEtk/block/PhotoatomicComptonProfile.hpp"
+#include "ACEtk/photoatomic/ComptonProfile.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -32,7 +32,7 @@ class PhotoatomicComptonProfileBlock :
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicComptonProfileBlock/src/ctor.hpp"
+  #include "ACEtk/photoatomic/ComptonProfileBlock/src/ctor.hpp"
 
   /* methods */
 

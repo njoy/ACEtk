@@ -154,10 +154,11 @@ if(ACEtk.python)
     python/src/photoatomic/IncoherentScatteringFunctionBlock.python.cpp
     python/src/photoatomic/CoherentFormFactorBlock.python.cpp
     python/src/photoatomic/FluorescenceDataBlock.python.cpp
-    python/src/block/PhotoatomicHeatingNumbersBlock.python.cpp
+    python/src/photoatomic/HeatingNumbersBlock.python.cpp
+    python/src/photoatomic/ComptonProfile.python.cpp
+    python/src/photoatomic/ComptonProfileBlock.python.cpp
+    python/src/photoatomic/PhotoelectricCrossSectionBlock.python.cpp
     python/src/block/PhotoatomicElectronShellBlock.python.cpp
-    python/src/block/PhotoatomicComptonProfile.python.cpp
-    python/src/block/PhotoatomicComptonProfileBlock.python.cpp
     python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
     python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
     python/src/block/PhotoatomicElectronSubshellBlock.python.cpp
@@ -165,7 +166,6 @@ if(ACEtk.python)
     python/src/block/PhotoatomicElectronElasticCrossSectionBlock.python.cpp
     python/src/block/PhotoatomicElectronExcitationBlock.python.cpp
     python/src/block/PhotoatomicElectronBremsstrahlungBlock.python.cpp
-    python/src/block/PhotoelectricCrossSectionBlock.python.cpp
     python/src/block/PhotoatomicSubshellTransitionData.python.cpp
     python/src/block/PhotoatomicSubshellTransitionDataBlock.python.cpp
     python/src/block/ElectronTabulatedAngularDistribution.python.cpp

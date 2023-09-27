@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicHeatingNumbersBlock.hpp"
+#include "ACEtk/photoatomic/HeatingNumbersBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

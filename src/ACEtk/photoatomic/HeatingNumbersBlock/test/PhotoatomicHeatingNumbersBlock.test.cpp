@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicHeatingNumbersBlock.hpp"
+#include "ACEtk/photoatomic/HeatingNumbersBlock.hpp"
 
 // other includes
 

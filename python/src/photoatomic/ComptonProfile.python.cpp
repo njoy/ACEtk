@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicComptonProfile.hpp"
+#include "ACEtk/photoatomic/ComptonProfile.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

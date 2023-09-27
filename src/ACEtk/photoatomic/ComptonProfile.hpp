@@ -28,7 +28,7 @@ class PhotoatomicComptonProfile :
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicComptonProfile/src/ctor.hpp"
+  #include "ACEtk/photoatomic/ComptonProfile/src/ctor.hpp"
 
   /**
    *  @brief Return the interpolation flag

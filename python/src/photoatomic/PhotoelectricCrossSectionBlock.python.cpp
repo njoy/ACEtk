@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
+#include "ACEtk/photoatomic/PhotoelectricCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
