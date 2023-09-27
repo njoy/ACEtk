@@ -50,12 +50,12 @@ public:
   /**
    *  @brief Return the ENDF designator for each subshell
    */
-  auto ENDF() const { return this->iarray( 1 ); }
+  auto ID() const { return this->iarray( 1 ); }
 
   /**
    *  @brief Return the ENDF designator for each subshell
    */
-  auto designators() const { return this->ENDF(); }
+  auto designators() const { return this->ID(); }
 
   /**
    *  @brief Return the electron population for each subshell
@@ -78,12 +78,12 @@ public:
   auto bindingEnergies() const { return this->BE(); }
 
   /**
-   *  @brief Return the vacancy probabilities for each subshell
+   *  @brief Return the vacancy cumulative probabilities for each subshell
    */
   auto CV() const { return this->darray( 4 ); }
 
   /**
-   *  @brief Return the vacancy probabilities for each subshell
+   *  @brief Return the vacancy cumulative probabilities for each subshell
    */
   auto vacancyProbabilities() const { return this->CV(); }
 

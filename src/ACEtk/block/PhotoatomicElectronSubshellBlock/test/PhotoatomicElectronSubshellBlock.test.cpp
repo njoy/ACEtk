@@ -93,11 +93,11 @@ void verifyChunk( const PhotoatomicElectronSubshellBlock& chunk ) {
   CHECK( 5 == chunk.NSSH() );
   CHECK( 5 == chunk.numberElectronSubshells() );
 
-  CHECK( 1 == chunk.ENDF()[0] );
-  CHECK( 2 == chunk.ENDF()[1] );
-  CHECK( 3 == chunk.ENDF()[2] );
-  CHECK( 4 == chunk.ENDF()[3] );
-  CHECK( 5 == chunk.ENDF()[4] );
+  CHECK( 1 == chunk.ID()[0] );
+  CHECK( 2 == chunk.ID()[1] );
+  CHECK( 3 == chunk.ID()[2] );
+  CHECK( 4 == chunk.ID()[3] );
+  CHECK( 5 == chunk.ID()[4] );
   CHECK( 1 == chunk.designators()[0] );
   CHECK( 2 == chunk.designators()[1] );
   CHECK( 3 == chunk.designators()[2] );
