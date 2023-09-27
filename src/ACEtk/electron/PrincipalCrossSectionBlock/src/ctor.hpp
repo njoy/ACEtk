@@ -1,7 +1,7 @@
-PhotoatomicElectronCrossSectionBlock() = default;
+PrincipalCrossSectionBlock() = default;
 
-PhotoatomicElectronCrossSectionBlock( const PhotoatomicElectronCrossSectionBlock& ) = default;
-PhotoatomicElectronCrossSectionBlock( PhotoatomicElectronCrossSectionBlock&& ) = default;
+PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
+PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -13,14 +13,14 @@ PhotoatomicElectronCrossSectionBlock( PhotoatomicElectronCrossSectionBlock&& ) =
  *  @param[in] electroionisation    the electroionisation cross section values
  *                                  for each shell
  */
-PhotoatomicElectronCrossSectionBlock( 
+PrincipalCrossSectionBlock(
     std::vector< double > energies,
     std::vector< double > elastic,
     std::vector< double > bremsstrahlung,
     std::vector< double > excitation,
     std::vector< std::vector< double > > electroionisation ) :
   ArrayData( "ESZE",
-             generateArrays( std::move( energies ), std::move( elastic ), 
+             generateArrays( std::move( energies ), std::move( elastic ),
                              std::move( bremsstrahlung ), std::move( excitation ),
                              std::move( electroionisation ) ) ) {}
 
@@ -32,9 +32,9 @@ PhotoatomicElectronCrossSectionBlock(
  *  @param[in] nssh    the number of electron shells
  *  @param[in] ne      the number of energy values
  */
-PhotoatomicElectronCrossSectionBlock( Iterator begin, Iterator end, 
+PrincipalCrossSectionBlock( Iterator begin, Iterator end,
                                       unsigned int nssh, unsigned int ne ) :
   ArrayData( "ESZE", begin, end, ne, 6 + nssh ) {}
 
-PhotoatomicElectronCrossSectionBlock& operator=( const PhotoatomicElectronCrossSectionBlock& ) = default;
-PhotoatomicElectronCrossSectionBlock& operator=( PhotoatomicElectronCrossSectionBlock&& ) = default;
+PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
+PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;

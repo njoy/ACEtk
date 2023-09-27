@@ -1,7 +1,7 @@
-PhotoatomicElectronSubshellBlock() = default;
+ElectronSubshellBlock() = default;
 
-PhotoatomicElectronSubshellBlock( const PhotoatomicElectronSubshellBlock& ) = default;
-PhotoatomicElectronSubshellBlock( PhotoatomicElectronSubshellBlock&& ) = default;
+ElectronSubshellBlock( const ElectronSubshellBlock& ) = default;
+ElectronSubshellBlock( ElectronSubshellBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -12,11 +12,11 @@ PhotoatomicElectronSubshellBlock( PhotoatomicElectronSubshellBlock&& ) = default
  *  @param[in] probabilities    the number of possible transitions to fill a vacancy
  *                              for each subshell
  */
-PhotoatomicElectronSubshellBlock( std::vector< unsigned int > designators,
-                                  std::vector< unsigned int > electrons,
-                                  std::vector< double > energies,
-                                  std::vector< double > probabilities,
-                                  std::vector< unsigned int > transitions ) :
+ElectronSubshellBlock( std::vector< unsigned int > designators,
+                       std::vector< unsigned int > electrons,
+                       std::vector< double > energies,
+                       std::vector< double > probabilities,
+                       std::vector< unsigned int > transitions ) :
   ArrayData( "SUBSH",
              std::vector< std::vector< double > > {
 
@@ -37,8 +37,8 @@ PhotoatomicElectronSubshellBlock( std::vector< unsigned int > designators,
  *  @param[in] end     the end iterator of the SUBSH block in the XSS array
  *  @param[in] nsh     the number of electron shells
  */
-PhotoatomicElectronSubshellBlock( Iterator begin, Iterator end, unsigned int nssh ) :
+ElectronSubshellBlock( Iterator begin, Iterator end, unsigned int nssh ) :
   ArrayData( "SUBSH", begin, end, nssh, 5 ) {}
 
-PhotoatomicElectronSubshellBlock& operator=( const PhotoatomicElectronSubshellBlock& ) = default;
-PhotoatomicElectronSubshellBlock& operator=( PhotoatomicElectronSubshellBlock&& ) = default;
+ElectronSubshellBlock& operator=( const ElectronSubshellBlock& ) = default;
+ElectronSubshellBlock& operator=( ElectronSubshellBlock&& ) = default;

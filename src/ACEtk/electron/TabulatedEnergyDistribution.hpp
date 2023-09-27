@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_ELECTRONTABULATEDENERGYDISTRIBUTION
-#define NJOY_ACETK_BLOCK_ELECTRONTABULATEDENERGYDISTRIBUTION
+#ifndef NJOY_ACETK_ELECTRON_TABULATEDENERGYDISTRIBUTION
+#define NJOY_ACETK_ELECTRON_TABULATEDENERGYDISTRIBUTION
 
 // system includes
 
@@ -8,18 +8,18 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
  *  @brief Tabulated photon energy distribution from Bremsstrahlung for a single
  *         incident energy
  *
- *  The ElectronTabulatedEnergyDistribution class contains the cumulative
- *  density function (CDF) as a function of photon energy for the given incident
+ *  The TabulatedEnergyDistribution class contains the cumulative density
+ *  function (CDF) as a function of photon energy for the given incident
  *  energy. It is used in the BREME block.
  */
-class ElectronTabulatedEnergyDistribution : protected details::ArrayData {
+class TabulatedEnergyDistribution : protected block::details::ArrayData {
 
   /* fields */
   double energy_ = 0.0;
@@ -29,7 +29,7 @@ class ElectronTabulatedEnergyDistribution : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/ElectronTabulatedEnergyDistribution/src/ctor.hpp"
+  #include "ACEtk/electron/TabulatedEnergyDistribution/src/ctor.hpp"
 
   /**
    *  @brief Return the associated incident energy value
@@ -69,7 +69,7 @@ public:
   using ArrayData::end;
 };
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

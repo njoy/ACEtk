@@ -1,7 +1,7 @@
-PhotoatomicSubshellTransitionData() = default;
+SubshellTransitionData() = default;
 
-PhotoatomicSubshellTransitionData( const PhotoatomicSubshellTransitionData& ) = default;
-PhotoatomicSubshellTransitionData( PhotoatomicSubshellTransitionData&& ) = default;
+SubshellTransitionData( const SubshellTransitionData& ) = default;
+SubshellTransitionData( SubshellTransitionData&& ) = default;
 
 /**
  *  @brief Constructor
@@ -9,7 +9,7 @@ PhotoatomicSubshellTransitionData( PhotoatomicSubshellTransitionData&& ) = defau
  *  @param[in] energies    the energy values
  *  @param[in] loss        the average excitation energy loss values
  */
-PhotoatomicSubshellTransitionData(
+SubshellTransitionData(
     std::vector< unsigned int > primary,
     std::vector< unsigned int > secondary,
     std::vector< double > energies,
@@ -25,8 +25,8 @@ PhotoatomicSubshellTransitionData(
  *  @param[in] end     the end iterator of the transition data in the XSS array
  *  @param[in] nt      the number of transitions
  */
-PhotoatomicSubshellTransitionData( Iterator begin, Iterator end ) :
+SubshellTransitionData( Iterator begin, Iterator end ) :
   ArrayData( "TRAN", begin, end, 4, calculateNumberTransitions( begin, end ) ) {}
 
-PhotoatomicSubshellTransitionData& operator=( const PhotoatomicSubshellTransitionData& ) = default;
-PhotoatomicSubshellTransitionData& operator=( PhotoatomicSubshellTransitionData&& ) = default;
+SubshellTransitionData& operator=( const SubshellTransitionData& ) = default;
+SubshellTransitionData& operator=( SubshellTransitionData&& ) = default;

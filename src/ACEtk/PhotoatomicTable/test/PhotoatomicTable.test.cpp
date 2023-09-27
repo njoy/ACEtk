@@ -380,7 +380,7 @@ SCENARIO( "PhotoatomicTable" ){
 
       PhotoatomicTable base( std::move( table ) );
 
-      std::vector< block::EION > eion = std::vector< block::EION >{};
+      std::vector< electron::EION > eion = std::vector< electron::EION >{};
       for ( unsigned int index = 1; index <= base.NSSH(); ++index ) {
 
         eion.push_back( base.EION( index ) );
@@ -532,7 +532,7 @@ SCENARIO( "PhotoatomicTable" ){
 
       PhotoatomicTable base( std::move( table ) );
 
-      std::vector< block::EION > eion = std::vector< block::EION >{};
+      std::vector< electron::EION > eion = std::vector< electron::EION >{};
       for ( unsigned int index = 1; index <= base.NSSH(); ++index ) {
 
         eion.push_back( base.EION( index ) );

@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICSUBSHELLTRANSITIONDATA
-#define NJOY_ACETK_BLOCK_PHOTOATOMICSUBSHELLTRANSITIONDATA
+#ifndef NJOY_ACETK_ELECTRON_SUBSHELLTRANSITIONDATA
+#define NJOY_ACETK_ELECTRON_SUBSHELLTRANSITIONDATA
 
 // system includes
 
@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
@@ -16,7 +16,7 @@ namespace block {
  *
  *  This block is part of the eprdata formats.
  *
- *  The PhotoatomicSubshellTransitionData class contains the transition data
+ *  The SubshellTransitionData class contains the transition data
  *  to fill vacancies in the given subshell. Each transition has the following
  *  information associated to it:
  *    - the primary subshell designator (the designator of the subshell from
@@ -30,18 +30,18 @@ namespace block {
  *  The size NT of each (the total number of transitions) is stored in the SUBSH
  *  block. This data block may be empty (NT = 0).
  */
-class PhotoatomicSubshellTransitionData : protected details::ArrayData {
+class SubshellTransitionData : protected block::details::ArrayData {
 
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/block/PhotoatomicSubshellTransitionData/src/calculateNumberTransitions.hpp"
-  #include "ACEtk/block/PhotoatomicSubshellTransitionData/src/generateArrays.hpp"
+  #include "ACEtk/electron/SubshellTransitionData/src/calculateNumberTransitions.hpp"
+  #include "ACEtk/electron/SubshellTransitionData/src/generateArrays.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicSubshellTransitionData/src/ctor.hpp"
+  #include "ACEtk/electron/SubshellTransitionData/src/ctor.hpp"
 
   /* methods */
 
@@ -124,9 +124,9 @@ public:
   using ArrayData::end;
 };
 
-using TRAN = PhotoatomicSubshellTransitionData;
+using TRAN = SubshellTransitionData;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

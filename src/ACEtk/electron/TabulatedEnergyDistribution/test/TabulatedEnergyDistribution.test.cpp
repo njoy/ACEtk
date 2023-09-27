@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/ElectronTabulatedEnergyDistribution.hpp"
+#include "ACEtk/electron/TabulatedEnergyDistribution.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ElectronTabulatedEnergyDistribution = block::ElectronTabulatedEnergyDistribution;
+using TabulatedEnergyDistribution = electron::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const ElectronTabulatedEnergyDistribution& );
+void verifyChunk( const TabulatedEnergyDistribution& );
 
-SCENARIO( "ElectronTabulatedEnergyDistribution" ) {
+SCENARIO( "TabulatedEnergyDistribution" ) {
 
-  GIVEN( "valid data for a ElectronTabulatedEnergyDistribution instance" ) {
+  GIVEN( "valid data for a TabulatedEnergyDistribution instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -24,10 +24,10 @@ SCENARIO( "ElectronTabulatedEnergyDistribution" ) {
       std::vector< double > outgoing = { 10., 100., 999. };
       std::vector< double > cdf = { 0., 0.75, 1. };
 
-      ElectronTabulatedEnergyDistribution chunk( energy, std::move( outgoing ),
+      TabulatedEnergyDistribution chunk( energy, std::move( outgoing ),
                                                  std::move( cdf ) );
 
-      THEN( "a ElectronTabulatedEnergyDistribution can be constructed and "
+      THEN( "a TabulatedEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -45,9 +45,9 @@ SCENARIO( "ElectronTabulatedEnergyDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ElectronTabulatedEnergyDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedEnergyDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
 
-      THEN( "a ElectronTabulatedEnergyDistribution can be constructed and "
+      THEN( "a TabulatedEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -71,11 +71,11 @@ std::vector< double > chunk() {
             0., 0.75, 1. };
 }
 
-void verifyChunk( const ElectronTabulatedEnergyDistribution& chunk ) {
+void verifyChunk( const TabulatedEnergyDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );
-  CHECK( "ElectronTabulatedEnergyDistribution" == chunk.name() );
+  CHECK( "TabulatedEnergyDistribution" == chunk.name() );
 
   CHECK( 1000. == Approx( chunk.energy() ) );
 

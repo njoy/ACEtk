@@ -1,33 +1,33 @@
-#ifndef NJOY_ACETK_BLOCK_ELECTRONENERGYDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_ELECTRONENERGYDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_ELECTRON_ENERGYDISTRIBUTIONBLOCK
+#define NJOY_ACETK_ELECTRON_ENERGYDISTRIBUTIONBLOCK
 
 // system includes
 
 // other includes
 #include "ACEtk/block/details/BaseElectronBlockWithLocators.hpp"
-#include "ACEtk/block/ElectronTabulatedEnergyDistribution.hpp"
+#include "ACEtk/electron/TabulatedEnergyDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
  *  @brief The energy distribution block for photons from Bremsstrahlung or
  *         knock-on electrons for a specific subshell
  *
- *  The ElectronEnergyDistributionBlock class contains a list of electron
- *  energies for which energy distribution data is given (for either photons in
- *  the BREMI/BREME block or electrons in the EION blocks).
+ *  The EnergyDistributionBlock class contains a list of electron energies for
+ *  which energy distribution data is given (for either photons in the
+ *  BREMI/BREME block or electrons in the EION blocks).
  */
-class ElectronEnergyDistributionBlock :
-    protected details::BaseElectronBlockWithLocators<
-                  ElectronEnergyDistributionBlock,
-                  ElectronTabulatedEnergyDistribution > {
+class EnergyDistributionBlock :
+    protected block::details::BaseElectronBlockWithLocators<
+                  EnergyDistributionBlock,
+                  TabulatedEnergyDistribution > {
 
-  friend class details::BaseElectronBlockWithLocators<
-                   ElectronEnergyDistributionBlock,
-                   ElectronTabulatedEnergyDistribution >;
+  friend class block::details::BaseElectronBlockWithLocators<
+                   EnergyDistributionBlock,
+                   TabulatedEnergyDistribution >;
 
   /* fields */
 
@@ -36,7 +36,7 @@ class ElectronEnergyDistributionBlock :
 public:
 
   /* constructor */
-  #include "ACEtk/block/ElectronEnergyDistributionBlock/src/ctor.hpp"
+  #include "ACEtk/electron/EnergyDistributionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -90,7 +90,7 @@ public:
   /**
    *  @brief Return all energy distribution data
    */
-  const std::vector< ElectronTabulatedEnergyDistribution >& distributions() const {
+  const std::vector< TabulatedEnergyDistribution >& distributions() const {
 
     return BaseElectronBlockWithLocators::data();
   }
@@ -103,7 +103,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const ElectronTabulatedEnergyDistribution&
+  const TabulatedEnergyDistribution&
   distribution( std::size_t index ) const {
 
     return BaseElectronBlockWithLocators::data( index );
@@ -117,10 +117,10 @@ public:
   using BaseElectronBlockWithLocators::end;
 };
 
-using BREME = ElectronEnergyDistributionBlock;
-using EION = ElectronEnergyDistributionBlock;
+using BREME = EnergyDistributionBlock;
+using EION = EnergyDistributionBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/ElectronTabulatedAngularDistribution.hpp"
+#include "ACEtk/electron/TabulatedAngularDistribution.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ElectronTabulatedAngularDistribution = block::ElectronTabulatedAngularDistribution;
+using TabulatedAngularDistribution = electron::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const ElectronTabulatedAngularDistribution& );
+void verifyChunk( const TabulatedAngularDistribution& );
 
-SCENARIO( "ElectronTabulatedAngularDistribution" ) {
+SCENARIO( "TabulatedAngularDistribution" ) {
 
-  GIVEN( "valid data for a ElectronTabulatedAngularDistribution instance" ) {
+  GIVEN( "valid data for a TabulatedAngularDistribution instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -24,7 +24,7 @@ SCENARIO( "ElectronTabulatedAngularDistribution" ) {
       std::vector< double > cosines = { -1., 0., 1. };
       std::vector< double > cdf = { 0., 0.75, 1. };
 
-      ElectronTabulatedAngularDistribution chunk( energy, std::move( cosines ),
+      TabulatedAngularDistribution chunk( energy, std::move( cosines ),
                                                   std::move( cdf ) );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
@@ -45,7 +45,7 @@ SCENARIO( "ElectronTabulatedAngularDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ElectronTabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
             "be tested" ) {
@@ -71,11 +71,11 @@ std::vector< double > chunk() {
             0., 0.75, 1. };
 }
 
-void verifyChunk( const ElectronTabulatedAngularDistribution& chunk ) {
+void verifyChunk( const TabulatedAngularDistribution& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );
-  CHECK( "ElectronTabulatedAngularDistribution" == chunk.name() );
+  CHECK( "TabulatedAngularDistribution" == chunk.name() );
 
   CHECK( 1000. == Approx( chunk.energy() ) );
 

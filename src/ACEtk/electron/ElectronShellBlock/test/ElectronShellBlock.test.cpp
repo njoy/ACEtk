@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
+#include "ACEtk/electron/ElectronShellBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicElectronShellBlock = block::PhotoatomicElectronShellBlock;
+using ElectronShellBlock = electron::ElectronShellBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicElectronShellBlock& );
+void verifyChunk( const ElectronShellBlock& );
 
-SCENARIO( "PhotoatomicElectronShellBlock" ) {
+SCENARIO( "ElectronShellBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicElectronShellBlock instance" ) {
+  GIVEN( "valid data for a ElectronShellBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -24,11 +24,11 @@ SCENARIO( "PhotoatomicElectronShellBlock" ) {
       std::vector< double > energies = { 5.480000000000e-05, 1.000000000000e-06 };
       std::vector< double > probabilities = { 6.666666666667e-01, 3.333333333333e-01 };
 
-      PhotoatomicElectronShellBlock chunk( std::move( electrons ),
+      ElectronShellBlock chunk( std::move( electrons ),
                                          std::move( energies ),
                                          std::move( probabilities ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ElectronShellBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -46,9 +46,9 @@ SCENARIO( "PhotoatomicElectronShellBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicElectronShellBlock chunk( xss.begin(), xss.end(), 2 );
+      ElectronShellBlock chunk( xss.begin(), xss.end(), 2 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ElectronShellBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -73,7 +73,7 @@ std::vector< double > chunk() {
            3.333333333333e-01 };
 }
 
-void verifyChunk( const PhotoatomicElectronShellBlock& chunk ) {
+void verifyChunk( const ElectronShellBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );

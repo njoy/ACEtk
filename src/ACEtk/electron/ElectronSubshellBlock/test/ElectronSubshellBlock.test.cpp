@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
+#include "ACEtk/electron/ElectronSubshellBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicElectronSubshellBlock = block::PhotoatomicElectronSubshellBlock;
+using ElectronSubshellBlock = electron::ElectronSubshellBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicElectronSubshellBlock& );
+void verifyChunk( const ElectronSubshellBlock& );
 
-SCENARIO( "PhotoatomicElectronSubshellBlock" ) {
+SCENARIO( "ElectronSubshellBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicElectronSubshellBlock instance" ) {
+  GIVEN( "valid data for a ElectronSubshellBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -29,7 +29,7 @@ SCENARIO( "PhotoatomicElectronSubshellBlock" ) {
                                               1.000000000000E+0 };
       std::vector< unsigned int > transitions = { 12, 5, 3, 2, 0 };
 
-      PhotoatomicElectronSubshellBlock chunk( std::move( designators ),
+      ElectronSubshellBlock chunk( std::move( designators ),
                                               std::move( electrons ),
                                               std::move( energies ),
                                               std::move( probabilities ),
@@ -53,7 +53,7 @@ SCENARIO( "PhotoatomicElectronSubshellBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
             "be tested" ) {
@@ -84,7 +84,7 @@ std::vector< double > chunk() {
            5.000000000000E+00, 3.000000000000E+00, 2.000000000000E+00, 0.000000000000E+00 };
 }
 
-void verifyChunk( const PhotoatomicElectronSubshellBlock& chunk ) {
+void verifyChunk( const ElectronSubshellBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 25 == chunk.length() );

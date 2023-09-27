@@ -1,15 +1,15 @@
-PhotoatomicSubshellTransitionDataBlock() = default;
+SubshellTransitionDataBlock() = default;
 
-PhotoatomicSubshellTransitionDataBlock( const PhotoatomicSubshellTransitionDataBlock& ) = default;
-PhotoatomicSubshellTransitionDataBlock( PhotoatomicSubshellTransitionDataBlock&& ) = default;
+SubshellTransitionDataBlock( const SubshellTransitionDataBlock& ) = default;
+SubshellTransitionDataBlock( SubshellTransitionDataBlock&& ) = default;
 
 /**
  *  @brief Constructor
  *
  *  @param[in] transitions    the transition data
  */
-PhotoatomicSubshellTransitionDataBlock(
-    std::vector< PhotoatomicSubshellTransitionData > transitions ) :
+SubshellTransitionDataBlock(
+    std::vector< SubshellTransitionData > transitions ) :
   BaseBlockWithLocators( "XPROB", std::move( transitions ), false ) {}
 
 /**
@@ -20,9 +20,9 @@ PhotoatomicSubshellTransitionDataBlock(
  *  @param[in] end     the end iterator of the XPROB block in the XSS array
  *  @param[in] nssh    the number of electron subshells
  */
-PhotoatomicSubshellTransitionDataBlock( Iterator relo, Iterator xprob,
-                                        Iterator end, unsigned int nssh ) :
+SubshellTransitionDataBlock( Iterator relo, Iterator xprob,
+                             Iterator end, unsigned int nssh ) :
   BaseBlockWithLocators( "XPROB", relo, xprob, end, nssh, false ) {}
 
-PhotoatomicSubshellTransitionDataBlock& operator=( const PhotoatomicSubshellTransitionDataBlock& ) = default;
-PhotoatomicSubshellTransitionDataBlock& operator=( PhotoatomicSubshellTransitionDataBlock&& ) = default;
+SubshellTransitionDataBlock& operator=( const SubshellTransitionDataBlock& ) = default;
+SubshellTransitionDataBlock& operator=( SubshellTransitionDataBlock&& ) = default;

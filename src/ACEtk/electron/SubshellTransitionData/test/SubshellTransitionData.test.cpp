@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicSubshellTransitionData.hpp"
+#include "ACEtk/electron/SubshellTransitionData.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicSubshellTransitionData = block::PhotoatomicSubshellTransitionData;
+using SubshellTransitionData = electron::SubshellTransitionData;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicSubshellTransitionData& );
+void verifyChunk( const SubshellTransitionData& );
 
-SCENARIO( "PhotoatomicSubshellTransitionData" ) {
+SCENARIO( "SubshellTransitionData" ) {
 
-  GIVEN( "valid data for a PhotoatomicSubshellTransitionData instance" ) {
+  GIVEN( "valid data for a SubshellTransitionData instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -25,11 +25,11 @@ SCENARIO( "PhotoatomicSubshellTransitionData" ) {
       std::vector< double > energies = { 3.5, 2.5, 5.5 };
       std::vector< double > probabilities = { 0.25, 0.75, 1. };
 
-      PhotoatomicSubshellTransitionData
+      SubshellTransitionData
       chunk( std::move( primary ), std::move( secondary ),
              std::move( energies ), std::move( probabilities ) );
 
-      THEN( "a PhotoatomicSubshellTransitionData can be constructed and "
+      THEN( "a SubshellTransitionData can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -47,9 +47,9 @@ SCENARIO( "PhotoatomicSubshellTransitionData" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicSubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
 
-      THEN( "a PhotoatomicSubshellTransitionData can be constructed and "
+      THEN( "a SubshellTransitionData can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -75,7 +75,7 @@ std::vector< double > chunk() {
              3,   1,   5.5, 1.00 };
 }
 
-void verifyChunk( const PhotoatomicSubshellTransitionData& chunk ) {
+void verifyChunk( const SubshellTransitionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 12 == chunk.length() );

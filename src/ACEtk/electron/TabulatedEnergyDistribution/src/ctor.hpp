@@ -1,7 +1,7 @@
-ElectronTabulatedEnergyDistribution() = default;
+TabulatedEnergyDistribution() = default;
 
-ElectronTabulatedEnergyDistribution( const ElectronTabulatedEnergyDistribution& ) = default;
-ElectronTabulatedEnergyDistribution( ElectronTabulatedEnergyDistribution&& ) = default;
+TabulatedEnergyDistribution( const TabulatedEnergyDistribution& ) = default;
+TabulatedEnergyDistribution( TabulatedEnergyDistribution&& ) = default;
 
 /**
  *  @brief Constructor
@@ -10,10 +10,10 @@ ElectronTabulatedEnergyDistribution( ElectronTabulatedEnergyDistribution&& ) = d
  *  @param[in] outgoing    the outgoing energy values (LB values)
  *  @param[in] cdf         the cdf values (LB values)
  */
-ElectronTabulatedEnergyDistribution( double energy,
-                                     std::vector< double > outgoing,
-                                     std::vector< double > cdf ) :
-  ArrayData( "ElectronTabulatedEnergyDistribution",
+TabulatedEnergyDistribution( double energy,
+                             std::vector< double > outgoing,
+                             std::vector< double > cdf ) :
+  ArrayData( "TabulatedEnergyDistribution",
              std::move( outgoing ), std::move( cdf ) ),
   energy_( energy ) {}
 
@@ -25,11 +25,11 @@ ElectronTabulatedEnergyDistribution( double energy,
  *  @param[in] end       the end iterator of the tabulated distribution data
  *  @param[in] lb        the number of outgoing energy values
  */
-ElectronTabulatedEnergyDistribution( double energy,
-                                      Iterator begin, Iterator end,
-                                      unsigned int la ) :
-  ArrayData( "ElectronTabulatedEnergyDistribution", begin, end, la, 2 ),
+TabulatedEnergyDistribution( double energy,
+                             Iterator begin, Iterator end,
+                             unsigned int la ) :
+  ArrayData( "TabulatedEnergyDistribution", begin, end, la, 2 ),
   energy_( energy ) {}
 
-ElectronTabulatedEnergyDistribution& operator=( const ElectronTabulatedEnergyDistribution& ) = default;
-ElectronTabulatedEnergyDistribution& operator=( ElectronTabulatedEnergyDistribution&& ) = default;
+TabulatedEnergyDistribution& operator=( const TabulatedEnergyDistribution& ) = default;
+TabulatedEnergyDistribution& operator=( TabulatedEnergyDistribution&& ) = default;

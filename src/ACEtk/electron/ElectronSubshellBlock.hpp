@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONSUBSHELLBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONSUBSHELLBLOCK
+#ifndef NJOY_ACETK_ELECTRON_ELECTRONSUBSHELLBLOCK
+#define NJOY_ACETK_ELECTRON_ELECTRONSUBSHELLBLOCK
 
 // system includes
 
@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
@@ -16,8 +16,7 @@ namespace block {
  *
  *  This block is part of the eprdata formats.
  *
- *  The PhotoatomicElectronSubshellBlock class contains 5 arrays of the
- *  same length:
+ *  The ElectronSubshellBlock class contains 5 arrays of the same length:
  *    - the ENDF designator of each subshell
  *    - the electron population for each subshell
  *    - the binding energy for each subshell
@@ -26,7 +25,7 @@ namespace block {
  *
  *  The size of each (the total number of electron shells) is stored in NXS(7).
  */
-class PhotoatomicElectronSubshellBlock : protected details::ArrayData {
+class ElectronSubshellBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -35,7 +34,7 @@ class PhotoatomicElectronSubshellBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicElectronSubshellBlock/src/ctor.hpp"
+  #include "ACEtk/electron/ElectronSubshellBlock/src/ctor.hpp"
 
   /**
    *  @brief Return the number of electron subshells
@@ -155,9 +154,9 @@ public:
   using ArrayData::end;
 };
 
-using SUBSH = PhotoatomicElectronSubshellBlock;
+using SUBSH = ElectronSubshellBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

@@ -1,38 +1,38 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
+#include "ACEtk/electron/SubshellTransitionDataBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicSubshellTransitionDataBlock = block::PhotoatomicSubshellTransitionDataBlock;
-using PhotoatomicSubshellTransitionData = block::PhotoatomicSubshellTransitionData;
+using SubshellTransitionDataBlock = electron::SubshellTransitionDataBlock;
+using SubshellTransitionData = electron::SubshellTransitionData;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicSubshellTransitionDataBlock& );
+void verifyChunk( const SubshellTransitionDataBlock& );
 
-SCENARIO( "PhotoatomicSubshellTransitionDataBlock" ) {
+SCENARIO( "SubshellTransitionDataBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicSubshellTransitionDataBlock instance" ) {
+  GIVEN( "valid data for a SubshellTransitionDataBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< PhotoatomicSubshellTransitionData > transitions = {
+      std::vector< SubshellTransitionData > transitions = {
 
-        PhotoatomicSubshellTransitionData( { 1, 2, 3 }, { 0, 3, 1 },
-                                           { 3.5, 2.5, 5.5 }, { 0.25, 0.75, 1. } ),
-        PhotoatomicSubshellTransitionData(),
-        PhotoatomicSubshellTransitionData(),
-        PhotoatomicSubshellTransitionData()
+        SubshellTransitionData( { 1, 2, 3 }, { 0, 3, 1 },
+                                { 3.5, 2.5, 5.5 }, { 0.25, 0.75, 1. } ),
+        SubshellTransitionData(),
+        SubshellTransitionData(),
+        SubshellTransitionData()
       };
 
-      PhotoatomicSubshellTransitionDataBlock chunk( std::move( transitions ) );
+      SubshellTransitionDataBlock chunk( std::move( transitions ) );
 
-      THEN( "a PhotoatomicSubshellTransitionDataBlock can be constructed and "
+      THEN( "a SubshellTransitionDataBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -50,9 +50,9 @@ SCENARIO( "PhotoatomicSubshellTransitionDataBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicSubshellTransitionDataBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 4 );
+      SubshellTransitionDataBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 4 );
 
-      THEN( "a PhotoatomicSubshellTransitionDataBlock can be constructed and "
+      THEN( "a SubshellTransitionDataBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -76,7 +76,7 @@ std::vector< double > chunk() {
            1, 0, 3.5, 0.25, 2, 3, 2.5, 0.75, 3, 1, 5.5, 1.00 };
 }
 
-void verifyChunk( const PhotoatomicSubshellTransitionDataBlock& chunk ) {
+void verifyChunk( const SubshellTransitionDataBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 16 == chunk.length() );

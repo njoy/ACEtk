@@ -1,29 +1,29 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICSUBSHELLTRANSITIONDATABLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICSUBSHELLTRANSITIONDATABLOCK
+#ifndef NJOY_ACETK_ELECTRON_SUBSHELLTRANSITIONDATABLOCK
+#define NJOY_ACETK_ELECTRON_SUBSHELLTRANSITIONDATABLOCK
 
 // system includes
 
 // other includes
 #include "ACEtk/block/details/BaseBlockWithLocators.hpp"
-#include "ACEtk/block/PhotoatomicSubshellTransitionData.hpp"
+#include "ACEtk/electron/SubshellTransitionData.hpp"
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
  *  @brief The photoatomic and electron RELO and XPROB block with the transition data
  *
- *  The PhotoatomicSubshellTransitionDataBlock class contains the transition
- *  data for each subshell (the number of subshells NSSH is stored in NXS(7)).
+ *  The SubshellTransitionDataBlock class contains the transition data for each
+ *  subshell (the number of subshells NSSH is stored in NXS(7)).
  */
-class PhotoatomicSubshellTransitionDataBlock :
-    protected details::BaseBlockWithLocators< PhotoatomicSubshellTransitionDataBlock,
-                                              PhotoatomicSubshellTransitionData > {
+class SubshellTransitionDataBlock :
+    protected block::details::BaseBlockWithLocators< SubshellTransitionDataBlock,
+                                                     SubshellTransitionData > {
 
-  friend class details::BaseBlockWithLocators< PhotoatomicSubshellTransitionDataBlock,
-                                               PhotoatomicSubshellTransitionData >;
+  friend class block::details::BaseBlockWithLocators< SubshellTransitionDataBlock,
+                                                      SubshellTransitionData >;
 
   /* fields */
 
@@ -32,7 +32,7 @@ class PhotoatomicSubshellTransitionDataBlock :
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock/src/ctor.hpp"
+  #include "ACEtk/electron/SubshellTransitionDataBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -75,7 +75,7 @@ public:
   /**
    *  @brief Return all transition data
    */
-  const std::vector< PhotoatomicSubshellTransitionData >& data() const {
+  const std::vector< SubshellTransitionData >& data() const {
 
     return BaseBlockWithLocators::data();
   }
@@ -88,7 +88,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const PhotoatomicSubshellTransitionData& transitionData( std::size_t index ) const {
+  const SubshellTransitionData& transitionData( std::size_t index ) const {
 
     return BaseBlockWithLocators::data( index );
   }
@@ -101,9 +101,9 @@ public:
   using BaseBlockWithLocators::end;
 };
 
-using XPROB = PhotoatomicSubshellTransitionDataBlock;
+using XPROB = SubshellTransitionDataBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

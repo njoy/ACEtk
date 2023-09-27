@@ -1,37 +1,37 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/ElectronEnergyDistributionBlock.hpp"
+#include "ACEtk/electron/EnergyDistributionBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ElectronEnergyDistributionBlock = block::ElectronEnergyDistributionBlock;
-using ElectronTabulatedEnergyDistribution = block::ElectronTabulatedEnergyDistribution;
+using EnergyDistributionBlock = electron::EnergyDistributionBlock;
+using TabulatedEnergyDistribution = electron::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const ElectronEnergyDistributionBlock& );
+void verifyChunk( const EnergyDistributionBlock& );
 
-SCENARIO( "ElectronEnergyDistributionBlock" ) {
+SCENARIO( "EnergyDistributionBlock" ) {
 
-  GIVEN( "valid data for a ElectronEnergyDistributionBlock instance" ) { 
+  GIVEN( "valid data for a EnergyDistributionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< ElectronTabulatedEnergyDistribution > distributions = {
+      std::vector< TabulatedEnergyDistribution > distributions = {
 
-        ElectronTabulatedEnergyDistribution( 1e-11, { 1e-12, 9e-12 }, { 0., 1. } ),
-        ElectronTabulatedEnergyDistribution(  1e-6, { 1e-11, 1e-9, 9e-7 }, { 0., 0.75, 1. } ),
-        ElectronTabulatedEnergyDistribution(  1e-3, { 1e-11, 1e-6, 1e-4, 9e-4 }, { 0., 0.25, 0.5, 1. } ),
-        ElectronTabulatedEnergyDistribution(    1., { 1e-11, 0.999 }, { 0., 1. } )
+        TabulatedEnergyDistribution( 1e-11, { 1e-12, 9e-12 }, { 0., 1. } ),
+        TabulatedEnergyDistribution(  1e-6, { 1e-11, 1e-9, 9e-7 }, { 0., 0.75, 1. } ),
+        TabulatedEnergyDistribution(  1e-3, { 1e-11, 1e-6, 1e-4, 9e-4 }, { 0., 0.25, 0.5, 1. } ),
+        TabulatedEnergyDistribution(    1., { 1e-11, 0.999 }, { 0., 1. } )
       };
 
-      ElectronEnergyDistributionBlock chunk( std::move( distributions ) );
+      EnergyDistributionBlock chunk( std::move( distributions ) );
 
-      THEN( "a ElectronEnergyDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "a EnergyDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -48,9 +48,9 @@ SCENARIO( "ElectronEnergyDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ElectronEnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
 
-      THEN( "a ElectronEnergyDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "a EnergyDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -81,7 +81,7 @@ std::vector< double > chunk() {
     1e-11, 0.999, 0., 1. };
 }
 
-void verifyChunk( const ElectronEnergyDistributionBlock& chunk ) {
+void verifyChunk( const EnergyDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );

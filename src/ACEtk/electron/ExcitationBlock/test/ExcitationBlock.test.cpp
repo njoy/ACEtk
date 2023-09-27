@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
+#include "ACEtk/electron/ExcitationBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicElectronExcitationBlock = block::PhotoatomicElectronExcitationBlock;
+using ExcitationBlock = electron::ExcitationBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicElectronExcitationBlock& );
+void verifyChunk( const ExcitationBlock& );
 
-SCENARIO( "PhotoatomicElectronExcitationBlock" ) {
+SCENARIO( "ExcitationBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicElectronExcitationBlock instance" ) {
+  GIVEN( "valid data for a ExcitationBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -23,7 +23,7 @@ SCENARIO( "PhotoatomicElectronExcitationBlock" ) {
       std::vector< double > energies = { 10., 20., 200. };
       std::vector< double > loss = { 1., 2., 3. };
 
-      PhotoatomicElectronExcitationBlock chunk( std::move( energies ),
+      ExcitationBlock chunk( std::move( energies ),
                                                 std::move( loss ) );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
@@ -44,7 +44,7 @@ SCENARIO( "PhotoatomicElectronExcitationBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicElectronExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
             "be tested" ) {
@@ -70,7 +70,7 @@ std::vector< double > chunk() {
              1.,   2.,   3. };
 }
 
-void verifyChunk( const PhotoatomicElectronExcitationBlock& chunk ) {
+void verifyChunk( const ExcitationBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );

@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicElectronBremsstrahlungBlock = block::PhotoatomicElectronBremsstrahlungBlock;
+using BremsstrahlungBlock = electron::BremsstrahlungBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicElectronBremsstrahlungBlock& );
+void verifyChunk( const BremsstrahlungBlock& );
 
-SCENARIO( "PhotoatomicElectronBremsstrahlungBlock" ) {
+SCENARIO( "BremsstrahlungBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicElectronBremsstrahlungBlock instance" ) {
+  GIVEN( "valid data for a BremsstrahlungBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -23,7 +23,7 @@ SCENARIO( "PhotoatomicElectronBremsstrahlungBlock" ) {
       std::vector< double > energies = { 10., 20., 200. };
       std::vector< double > remaining = { 1., 2., 3. };
 
-      PhotoatomicElectronBremsstrahlungBlock chunk( std::move( energies ),
+      BremsstrahlungBlock chunk( std::move( energies ),
                                                     std::move( remaining ) );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
@@ -44,7 +44,7 @@ SCENARIO( "PhotoatomicElectronBremsstrahlungBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicElectronBremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
+      BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
             "be tested" ) {
@@ -70,7 +70,7 @@ std::vector< double > chunk() {
              1.,   2.,   3. };
 }
 
-void verifyChunk( const PhotoatomicElectronBremsstrahlungBlock& chunk ) {
+void verifyChunk( const BremsstrahlungBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );

@@ -1,14 +1,14 @@
-ElectronEnergyDistributionBlock() = default;
+EnergyDistributionBlock() = default;
 
-ElectronEnergyDistributionBlock( const ElectronEnergyDistributionBlock& ) = default;
-ElectronEnergyDistributionBlock( ElectronEnergyDistributionBlock&& ) = default;
+EnergyDistributionBlock( const EnergyDistributionBlock& ) = default;
+EnergyDistributionBlock( EnergyDistributionBlock&& ) = default;
 
 /**
  *  @brief Constructor
  *
  *  @param[in] distributions    the energy distribution data
  */
-ElectronEnergyDistributionBlock( std::vector< ElectronTabulatedEnergyDistribution > distributions ) :
+EnergyDistributionBlock( std::vector< TabulatedEnergyDistribution > distributions ) :
   BaseElectronBlockWithLocators( "BREME", std::move( distributions ) ) {}
 
 /**
@@ -18,8 +18,8 @@ ElectronEnergyDistributionBlock( std::vector< ElectronTabulatedEnergyDistributio
  *  @param[in] end      the end iterator in the XSS array
  *  @param[in] nb       the number of energies with outgoing energy distributions
  */
-ElectronEnergyDistributionBlock( Iterator begin, Iterator end, unsigned int nb ) :
+EnergyDistributionBlock( Iterator begin, Iterator end, unsigned int nb ) :
   BaseElectronBlockWithLocators( "BREME", begin, end, nb ) {}
 
-ElectronEnergyDistributionBlock& operator=( const ElectronEnergyDistributionBlock& ) = default;
-ElectronEnergyDistributionBlock& operator=( ElectronEnergyDistributionBlock&& ) = default;
+EnergyDistributionBlock& operator=( const EnergyDistributionBlock& ) = default;
+EnergyDistributionBlock& operator=( EnergyDistributionBlock&& ) = default;

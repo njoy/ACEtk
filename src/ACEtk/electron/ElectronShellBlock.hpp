@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONSHELLBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONSHELLBLOCK
+#ifndef NJOY_ACETK_ELECTRON_ELECTRONSHELLBLOCK
+#define NJOY_ACETK_ELECTRON_ELECTRONSHELLBLOCK
 
 // system includes
 
@@ -8,22 +8,21 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
  *  @brief The photoatomic LNEPS, LBEPS and LPIPS block with the electron shell
  *         data
  *
- *  The PhotoatomicElectronShellBlock class contains 3 arrays of the
- *  same length:
+ *  The ElectronShellBlock class contains 3 arrays of the same length:
  *    - the number of electrons for each shell
  *    - the binding energy for each shell
  *    - the interaction probability for each shell
  *
  *  The size of each (the total number of electron shells) is stored in NXS(5).
  */
-class PhotoatomicElectronShellBlock : protected details::ArrayData {
+class ElectronShellBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -32,7 +31,7 @@ class PhotoatomicElectronShellBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicElectronShellBlock/src/ctor.hpp"
+  #include "ACEtk/electron/ElectronShellBlock/src/ctor.hpp"
 
   /**
    *  @brief Return the number of electron shells
@@ -112,9 +111,9 @@ public:
   using ArrayData::end;
 };
 
-using EPS = PhotoatomicElectronShellBlock;
+using EPS = ElectronShellBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

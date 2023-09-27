@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONEXCITATIONBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONEXCITATIONBLOCK
+#ifndef NJOY_ACETK_ELECTRON_EXCITATIONBLOCK
+#define NJOY_ACETK_ELECTRON_EXCITATIONBLOCK
 
 // system includes
 
@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
@@ -17,15 +17,14 @@ namespace block {
  *
  *  This block is part of the eprdata formats.
  *
- *  The PhotoatomicElectronExcitationBlock class contains 2 arrays of the same
- *  length:
+ *  The ExcitationBlock class contains 2 arrays of the same length:
  *    - the energy points
  *    - the average excitation energy loss values
  *
  *  The size NXL of each (the total number of excitation energy points) is
  *  stored in NXS(9).
  */
-class PhotoatomicElectronExcitationBlock : protected details::ArrayData {
+class ExcitationBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -34,7 +33,7 @@ class PhotoatomicElectronExcitationBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicElectronExcitationBlock/src/ctor.hpp"
+  #include "ACEtk/electron/ExcitationBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -66,9 +65,9 @@ public:
   using ArrayData::end;
 };
 
-using EXCIT = PhotoatomicElectronExcitationBlock;
+using EXCIT = ExcitationBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

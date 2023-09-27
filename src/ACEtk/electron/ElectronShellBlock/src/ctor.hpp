@@ -1,7 +1,7 @@
-PhotoatomicElectronShellBlock() = default;
+ElectronShellBlock() = default;
 
-PhotoatomicElectronShellBlock( const PhotoatomicElectronShellBlock& ) = default;
-PhotoatomicElectronShellBlock( PhotoatomicElectronShellBlock&& ) = default;
+ElectronShellBlock( const ElectronShellBlock& ) = default;
+ElectronShellBlock( ElectronShellBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -10,7 +10,7 @@ PhotoatomicElectronShellBlock( PhotoatomicElectronShellBlock&& ) = default;
  *  @param[in] energies         the binding energy for each shell
  *  @param[in] probabilities    the interaction probability for each shell
  */
-PhotoatomicElectronShellBlock( std::vector< unsigned int > electrons,
+ElectronShellBlock( std::vector< unsigned int > electrons,
                                std::vector< double > energies,
                                std::vector< double > probabilities ) :
   ArrayData( "EPS",
@@ -29,8 +29,8 @@ PhotoatomicElectronShellBlock( std::vector< unsigned int > electrons,
  *  @param[in] end     the end iterator of the EPS block in the XSS array
  *  @param[in] nsh     the number of electron shells
  */
-PhotoatomicElectronShellBlock( Iterator begin, Iterator end, unsigned int nsh ) :
+ElectronShellBlock( Iterator begin, Iterator end, unsigned int nsh ) :
   ArrayData( "EPS", begin, end, nsh, 3 ) {}
 
-PhotoatomicElectronShellBlock& operator=( const PhotoatomicElectronShellBlock& ) = default;
-PhotoatomicElectronShellBlock& operator=( PhotoatomicElectronShellBlock&& ) = default;
+ElectronShellBlock& operator=( const ElectronShellBlock& ) = default;
+ElectronShellBlock& operator=( ElectronShellBlock&& ) = default;

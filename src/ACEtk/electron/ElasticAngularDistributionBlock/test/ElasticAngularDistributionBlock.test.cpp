@@ -1,37 +1,37 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/ElectronElasticAngularDistributionBlock.hpp"
+#include "ACEtk/electron/ElasticAngularDistributionBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ElectronElasticAngularDistributionBlock = block::ElectronElasticAngularDistributionBlock;
-using ElectronTabulatedAngularDistribution = block::ElectronTabulatedAngularDistribution;
+using ElasticAngularDistributionBlock = electron::ElasticAngularDistributionBlock;
+using TabulatedAngularDistribution = electron::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const ElectronElasticAngularDistributionBlock& );
+void verifyChunk( const ElasticAngularDistributionBlock& );
 
-SCENARIO( "ElectronElasticAngularDistributionBlock" ) {
+SCENARIO( "ElasticAngularDistributionBlock" ) {
 
-  GIVEN( "valid data for a ElectronElasticAngularDistributionBlock instance" ) {
+  GIVEN( "valid data for a ElasticAngularDistributionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< ElectronTabulatedAngularDistribution > distributions = {
+      std::vector< TabulatedAngularDistribution > distributions = {
 
-        ElectronTabulatedAngularDistribution( 1e-11, { -1.0, 1.0 }, { 0., 1. } ),
-        ElectronTabulatedAngularDistribution(  1e-6, { -1.0, 0.0, 1.0 }, { 0., 0.75, 1. } ),
-        ElectronTabulatedAngularDistribution(  1e-3, { -1.0, 0.5, 0.7, 1.0 }, { 0., 0.25, 0.5, 1. } ),
-        ElectronTabulatedAngularDistribution(    1., { -1.0, 1.0 }, { 0., 1. } )
+        TabulatedAngularDistribution( 1e-11, { -1.0, 1.0 }, { 0., 1. } ),
+        TabulatedAngularDistribution(  1e-6, { -1.0, 0.0, 1.0 }, { 0., 0.75, 1. } ),
+        TabulatedAngularDistribution(  1e-3, { -1.0, 0.5, 0.7, 1.0 }, { 0., 0.25, 0.5, 1. } ),
+        TabulatedAngularDistribution(    1., { -1.0, 1.0 }, { 0., 1. } )
       };
 
-      ElectronElasticAngularDistributionBlock chunk( std::move( distributions ) );
+      ElasticAngularDistributionBlock chunk( std::move( distributions ) );
 
-      THEN( "a ElectronElasticAngularDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "a ElasticAngularDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -48,9 +48,9 @@ SCENARIO( "ElectronElasticAngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ElectronElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
 
-      THEN( "a ElectronElasticAngularDistributionBlock can be constructed and members can be tested" ) {
+      THEN( "a ElasticAngularDistributionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -81,7 +81,7 @@ std::vector< double > chunk() {
      -1.0, 1.0, 0., 1. };
 }
 
-void verifyChunk( const ElectronElasticAngularDistributionBlock& chunk ) {
+void verifyChunk( const ElasticAngularDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );

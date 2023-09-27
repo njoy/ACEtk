@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicElectronElasticCrossSectionBlock.hpp"
+#include "ACEtk/electron/ElasticCrossSectionBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicElectronElasticCrossSectionBlock = block::PhotoatomicElectronElasticCrossSectionBlock;
+using ElasticCrossSectionBlock = electron::ElasticCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicElectronElasticCrossSectionBlock& );
+void verifyChunk( const ElasticCrossSectionBlock& );
 
-SCENARIO( "PhotoatomicElectronElasticCrossSectionBlock" ) {
+SCENARIO( "ElasticCrossSectionBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicElectronElasticCrossSectionBlock instance" ) {
+  GIVEN( "valid data for a ElasticCrossSectionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -23,10 +23,10 @@ SCENARIO( "PhotoatomicElectronElasticCrossSectionBlock" ) {
       std::vector< double > transport = { 1., 2., 3. };
       std::vector< double > total = { 4., 5., 6. };
 
-      PhotoatomicElectronElasticCrossSectionBlock
+      ElasticCrossSectionBlock
       chunk( std::move( transport ), std::move( total ) );
 
-      THEN( "a PhotoatomicElectronElasticCrossSectionBlock can be constructed and "
+      THEN( "a ElasticCrossSectionBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -44,9 +44,9 @@ SCENARIO( "PhotoatomicElectronElasticCrossSectionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicElectronElasticCrossSectionBlock chunk( xss.begin(), xss.end(), 3 );
+      ElasticCrossSectionBlock chunk( xss.begin(), xss.end(), 3 );
 
-      THEN( "a PhotoatomicElectronElasticCrossSectionBlock can be constructed and "
+      THEN( "a ElasticCrossSectionBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -71,7 +71,7 @@ std::vector< double > chunk() {
              4.,   5.,   6. };
 }
 
-void verifyChunk( const PhotoatomicElectronElasticCrossSectionBlock& chunk ) {
+void verifyChunk( const ElasticCrossSectionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );

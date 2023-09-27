@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_ELECTRONTABULATEDANGULARDISTRIBUTION
-#define NJOY_ACETK_BLOCK_ELECTRONTABULATEDANGULARDISTRIBUTION
+#ifndef NJOY_ACETK_ELECTRON_TABULATEDANGULARDISTRIBUTION
+#define NJOY_ACETK_ELECTRON_TABULATEDANGULARDISTRIBUTION
 
 // system includes
 
@@ -8,18 +8,18 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
  *  @brief Tabulated electron angular distribution data for a single incident
  *         energy
  *
- *  The ElectronTabulatedAngularDistribution class contains the cumulative
+ *  The TabulatedAngularDistribution class contains the cumulative
  *  density function (CDF) as a function of cosine for the given incident
  *  energy. It is used in the ELAS block.
  */
-class ElectronTabulatedAngularDistribution : protected details::ArrayData {
+class TabulatedAngularDistribution : protected block::details::ArrayData {
 
   /* fields */
   double energy_ = 0.0;
@@ -29,7 +29,7 @@ class ElectronTabulatedAngularDistribution : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/ElectronTabulatedAngularDistribution/src/ctor.hpp"
+  #include "ACEtk/electron/TabulatedAngularDistribution/src/ctor.hpp"
 
   /**
    *  @brief Return the associated incident energy value
@@ -69,7 +69,7 @@ public:
   using ArrayData::end;
 };
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

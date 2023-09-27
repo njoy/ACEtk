@@ -1,14 +1,14 @@
-ElectronElasticAngularDistributionBlock() = default;
+ElasticAngularDistributionBlock() = default;
 
-ElectronElasticAngularDistributionBlock( const ElectronElasticAngularDistributionBlock& ) = default;
-ElectronElasticAngularDistributionBlock( ElectronElasticAngularDistributionBlock&& ) = default;
+ElasticAngularDistributionBlock( const ElasticAngularDistributionBlock& ) = default;
+ElasticAngularDistributionBlock( ElasticAngularDistributionBlock&& ) = default;
 
 /**
  *  @brief Constructor
  *
  *  @param[in] distributions    the angular distribution data
  */
-ElectronElasticAngularDistributionBlock( std::vector< ElectronTabulatedAngularDistribution > distributions ) :
+ElasticAngularDistributionBlock( std::vector< TabulatedAngularDistribution > distributions ) :
   BaseElectronBlockWithLocators( "ELAS", std::move( distributions ) ) {}
 
 /**
@@ -18,9 +18,8 @@ ElectronElasticAngularDistributionBlock( std::vector< ElectronTabulatedAngularDi
  *  @param[in] end      the end iterator in the XSS array
  *  @param[in] na       the number of energies with angular distributions
  */
-ElectronElasticAngularDistributionBlock( Iterator begin, Iterator end,
-                                         unsigned int na ) :
+ElasticAngularDistributionBlock( Iterator begin, Iterator end, unsigned int na ) :
   BaseElectronBlockWithLocators( "ELAS", begin, end, na ) {}
 
-ElectronElasticAngularDistributionBlock& operator=( const ElectronElasticAngularDistributionBlock& ) = default;
-ElectronElasticAngularDistributionBlock& operator=( ElectronElasticAngularDistributionBlock&& ) = default;
+ElasticAngularDistributionBlock& operator=( const ElasticAngularDistributionBlock& ) = default;
+ElasticAngularDistributionBlock& operator=( ElasticAngularDistributionBlock&& ) = default;

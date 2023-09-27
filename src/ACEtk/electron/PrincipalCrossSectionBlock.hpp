@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONCROSSSECTIONBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONCROSSSECTIONBLOCK
+#ifndef NJOY_ACETK_ELECTRON_PRINCIPALCROSSSECTIONBLOCK
+#define NJOY_ACETK_ELECTRON_PRINCIPALCROSSSECTIONBLOCK
 
 // system includes
 
@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
@@ -16,8 +16,8 @@ namespace block {
  *
  *  This block is part of the eprdata formats.
  *
- *  The PhotoatomicElectronCrossSectionBlock class contains 5 + NSSH arrays
- *  of the same length:
+ *  The PrincipalCrossSectionBlock class contains 5 + NSSH arrays of the same
+ *  length:
  *    - the energy points
  *    - the total cross section (sum of the following three arrays)
  *    - the elastic scattering cross section
@@ -29,18 +29,18 @@ namespace block {
  *  The size NE of each (the total number of electron energy points) is stored in
  *  NXS(8). The number of subshells NSSH is stored in NXS(7).
  */
-class PhotoatomicElectronCrossSectionBlock : protected details::ArrayData {
+class PrincipalCrossSectionBlock : protected block::details::ArrayData {
 
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock/src/verifyIndex.hpp"
-  #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock/src/generateArrays.hpp"
+  #include "ACEtk/electron/PrincipalCrossSectionBlock/src/verifyIndex.hpp"
+  #include "ACEtk/electron/PrincipalCrossSectionBlock/src/generateArrays.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock/src/ctor.hpp"
+  #include "ACEtk/electron/PrincipalCrossSectionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -116,9 +116,9 @@ public:
   using ArrayData::end;
 };
 
-using ESZE = PhotoatomicElectronCrossSectionBlock;
+using ESZE = PrincipalCrossSectionBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

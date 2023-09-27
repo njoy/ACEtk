@@ -1,7 +1,7 @@
-PhotoatomicElectronElasticCrossSectionBlock() = default;
+ElasticCrossSectionBlock() = default;
 
-PhotoatomicElectronElasticCrossSectionBlock( const PhotoatomicElectronElasticCrossSectionBlock& ) = default;
-PhotoatomicElectronElasticCrossSectionBlock( PhotoatomicElectronElasticCrossSectionBlock&& ) = default;
+ElasticCrossSectionBlock( const ElasticCrossSectionBlock& ) = default;
+ElasticCrossSectionBlock( ElasticCrossSectionBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -9,7 +9,7 @@ PhotoatomicElectronElasticCrossSectionBlock( PhotoatomicElectronElasticCrossSect
  *  @param[in] transport    the transport elastic cross section values
  *  @param[in] total        the total elastic cross section values
  */
-PhotoatomicElectronElasticCrossSectionBlock(
+ElasticCrossSectionBlock(
     std::vector< double > transport,
     std::vector< double > total ) :
   ArrayData( "SELAS", std::move( transport ), std::move( total ) ) {}
@@ -22,9 +22,9 @@ PhotoatomicElectronElasticCrossSectionBlock(
  *  @param[in] nssh    the number of electron shells
  *  @param[in] ne      the number of energy values
  */
-PhotoatomicElectronElasticCrossSectionBlock( Iterator begin, Iterator end,
+ElasticCrossSectionBlock( Iterator begin, Iterator end,
                                       unsigned int ne ) :
   ArrayData( "SELAS", begin, end, ne, 2 ) {}
 
-PhotoatomicElectronElasticCrossSectionBlock& operator=( const PhotoatomicElectronElasticCrossSectionBlock& ) = default;
-PhotoatomicElectronElasticCrossSectionBlock& operator=( PhotoatomicElectronElasticCrossSectionBlock&& ) = default;
+ElasticCrossSectionBlock& operator=( const ElasticCrossSectionBlock& ) = default;
+ElasticCrossSectionBlock& operator=( ElasticCrossSectionBlock&& ) = default;

@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONELASTICCROSSSECTIONBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONELASTICCROSSSECTIONBLOCK
+#ifndef NJOY_ACETK_ELECTRON_ELASTICCROSSSECTIONBLOCK
+#define NJOY_ACETK_ELECTRON_ELASTICCROSSSECTIONBLOCK
 
 // system includes
 
@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
@@ -17,15 +17,14 @@ namespace block {
  *
  *  This block is part of the eprdata14 format.
  *
- *  The PhotoatomicElectronElasticCrossSectionBlock class contains 2 arrays
- *  of the same length:
+ *  The ElasticCrossSectionBlock class contains 2 arrays of the same length:
  *    - the transport elastic scattering cross section
  *    - the total elastic scattering cross section
  *
  *  The size NE of each (the total number of electron energy points) is stored in
  *  NXS(8).
  */
-class PhotoatomicElectronElasticCrossSectionBlock : protected details::ArrayData {
+class ElasticCrossSectionBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -34,7 +33,7 @@ class PhotoatomicElectronElasticCrossSectionBlock : protected details::ArrayData
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicElectronElasticCrossSectionBlock/src/ctor.hpp"
+  #include "ACEtk/electron/ElasticCrossSectionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -66,9 +65,9 @@ public:
   using ArrayData::end;
 };
 
-using SELAS = PhotoatomicElectronElasticCrossSectionBlock;
+using SELAS = ElasticCrossSectionBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

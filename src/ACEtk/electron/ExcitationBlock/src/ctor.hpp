@@ -1,7 +1,7 @@
-PhotoatomicElectronExcitationBlock() = default;
+ExcitationBlock() = default;
 
-PhotoatomicElectronExcitationBlock( const PhotoatomicElectronExcitationBlock& ) = default;
-PhotoatomicElectronExcitationBlock( PhotoatomicElectronExcitationBlock&& ) = default;
+ExcitationBlock( const ExcitationBlock& ) = default;
+ExcitationBlock( ExcitationBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -9,7 +9,7 @@ PhotoatomicElectronExcitationBlock( PhotoatomicElectronExcitationBlock&& ) = def
  *  @param[in] energies    the energy values
  *  @param[in] loss        the average excitation energy loss values
  */
-PhotoatomicElectronExcitationBlock(
+ExcitationBlock(
     std::vector< double > energies,
     std::vector< double > loss ) :
   ArrayData( "EXCIT",
@@ -26,9 +26,9 @@ PhotoatomicElectronExcitationBlock(
  *  @param[in] end     the end iterator of the EXCIT block in the XSS array
  *  @param[in] nxl     the number of energy values
  */
-PhotoatomicElectronExcitationBlock( Iterator begin, Iterator end,
+ExcitationBlock( Iterator begin, Iterator end,
                                     unsigned int nxl ) :
   ArrayData( "EXCIT", begin, end, nxl, 2 ) {}
 
-PhotoatomicElectronExcitationBlock& operator=( const PhotoatomicElectronExcitationBlock& ) = default;
-PhotoatomicElectronExcitationBlock& operator=( PhotoatomicElectronExcitationBlock&& ) = default;
+ExcitationBlock& operator=( const ExcitationBlock& ) = default;
+ExcitationBlock& operator=( ExcitationBlock&& ) = default;

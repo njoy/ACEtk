@@ -1,32 +1,32 @@
-#ifndef NJOY_ACETK_BLOCK_ELECTRONANGULARDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_ELECTRONANGULARDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_ELECTRON_ELASTICANGULARDISTRIBUTIONBLOCK
+#define NJOY_ACETK_ELECTRON_ELASTICANGULARDISTRIBUTIONBLOCK
 
 // system includes
 
 // other includes
 #include "ACEtk/block/details/BaseElectronBlockWithLocators.hpp"
-#include "ACEtk/block/ElectronTabulatedAngularDistribution.hpp"
+#include "ACEtk/electron/TabulatedAngularDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
  *  @brief The photoatomic and electron ELASI and ELAS block with the
  *         elastic scattering angular distribution data
  *
- *  The ElectronElasticAngularDistributionBlock class a list of electron energies
+ *  The ElasticAngularDistributionBlock class a list of electron energies
  *  for which angular distribution data is given.
  */
-class ElectronElasticAngularDistributionBlock :
-    protected details::BaseElectronBlockWithLocators<
-                  ElectronElasticAngularDistributionBlock,
-                  ElectronTabulatedAngularDistribution > {
+class ElasticAngularDistributionBlock :
+    protected block::details::BaseElectronBlockWithLocators<
+                  ElasticAngularDistributionBlock,
+                  TabulatedAngularDistribution > {
 
-  friend class details::BaseElectronBlockWithLocators<
-                   ElectronElasticAngularDistributionBlock,
-                   ElectronTabulatedAngularDistribution >;
+  friend class block::details::BaseElectronBlockWithLocators<
+                   ElasticAngularDistributionBlock,
+                   TabulatedAngularDistribution >;
 
   /* fields */
 
@@ -35,7 +35,7 @@ class ElectronElasticAngularDistributionBlock :
 public:
 
   /* constructor */
-  #include "ACEtk/block/ElectronElasticAngularDistributionBlock/src/ctor.hpp"
+  #include "ACEtk/electron/ElasticAngularDistributionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -89,7 +89,7 @@ public:
   /**
    *  @brief Return all angular distribution data
    */
-  const std::vector< ElectronTabulatedAngularDistribution >& distributions() const {
+  const std::vector< TabulatedAngularDistribution >& distributions() const {
 
     return BaseElectronBlockWithLocators::data();
   }
@@ -102,7 +102,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const ElectronTabulatedAngularDistribution&
+  const TabulatedAngularDistribution&
   distribution( std::size_t index ) const {
 
     return BaseElectronBlockWithLocators::data( index );
@@ -116,9 +116,9 @@ public:
   using BaseElectronBlockWithLocators::end;
 };
 
-using ELAS = ElectronElasticAngularDistributionBlock;
+using ELAS = ElasticAngularDistributionBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 

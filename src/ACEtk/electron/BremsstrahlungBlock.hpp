@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONBREMSSTRAHLUNGBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICELECTRONBREMSSTRAHLUNGBLOCK
+#ifndef NJOY_ACETK_BLOCK_BREMSSTRAHLUNGBLOCK
+#define NJOY_ACETK_BLOCK_BREMSSTRAHLUNGBLOCK
 
 // system includes
 
@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace electron {
 
 /**
  *  @class
@@ -17,14 +17,13 @@ namespace block {
  *
  *  This block is part of the eprdata formats.
  *
- *  The PhotoatomicElectronBremsstrahlungBlock class contains 2 arrays of the
- *  same length:
+ *  The BremsstrahlungBlock class contains 2 arrays of the same length:
  *    - the energy points
  *    - the average energy remaining after Bremsstrahlung
  *
  *  The size NBL of each (the total number of energy points) is stored in NXS(12).
  */
-class PhotoatomicElectronBremsstrahlungBlock : protected details::ArrayData {
+class BremsstrahlungBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -33,7 +32,7 @@ class PhotoatomicElectronBremsstrahlungBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicElectronBremsstrahlungBlock/src/ctor.hpp"
+  #include "ACEtk/electron/BremsstrahlungBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -65,9 +64,9 @@ public:
   using ArrayData::end;
 };
 
-using BREML = PhotoatomicElectronBremsstrahlungBlock;
+using BREML = BremsstrahlungBlock;
 
-} // block namespace
+} // electron namespace
 } // ACEtk namespace
 } // njoy namespace
 
