@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
+#include "ACEtk/electron/SubshellTransitionDataBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoatomicSubshellTransitionDataBlock( python::module& module, python::module& ) {
+void wrapSubshellTransitionDataBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicSubshellTransitionDataBlock;
-  using PhotoatomicSubshellTransitionData = njoy::ACEtk::block::PhotoatomicSubshellTransitionData;
+  using Block = njoy::ACEtk::electron::SubshellTransitionDataBlock;
+  using SubshellTransitionData = njoy::ACEtk::electron::SubshellTransitionData;
 
   // wrap views created by this block
 
@@ -24,9 +24,9 @@ void wrapPhotoatomicSubshellTransitionDataBlock( python::module& module, python:
   python::class_< Block > block(
 
     module,
-    "PhotoatomicSubshellTransitionDataBlock",
+    "SubshellTransitionDataBlock",
     "The photoatomic and electron RELO and XPROB block with the transition data\n\n"
-    "The PhotoatomicSubshellTransitionDataBlock class contains the transition\n"
+    "The SubshellTransitionDataBlock class contains the transition\n"
     "data for each subshell (the number of subshells NSSH is stored in NXS(7))."
   );
 
@@ -34,7 +34,7 @@ void wrapPhotoatomicSubshellTransitionDataBlock( python::module& module, python:
   block
   .def(
 
-    python::init< std::vector< PhotoatomicSubshellTransitionData > >(),
+    python::init< std::vector< SubshellTransitionData > >(),
     python::arg( "transitions" ),
     "Initialise the block\n\n"
     "Arguments:\n"

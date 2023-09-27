@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicElectronElasticCrossSectionBlock.hpp"
+#include "ACEtk/electron/ElasticCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoatomicElectronElasticCrossSectionBlock( python::module& module, python::module& ) {
+void wrapElasticCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicElectronElasticCrossSectionBlock;
+  using Block = njoy::ACEtk::electron::ElasticCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotoatomicElectronElasticCrossSectionBlock( python::module& module, py
   python::class_< Block > block(
 
     module,
-    "PhotoatomicElectronElasticCrossSectionBlock",
+    "ElasticCrossSectionBlock",
     "The photoatomic SELAS block with the additional electron elastic cross section data\n\n"
     "This block is part of the eprdata14 format.\n\n"
-    "The PhotoatomicElectronElasticCrossSectionBlock class contains 2 arrays\n"
+    "The ElasticCrossSectionBlock class contains 2 arrays\n"
     "of the same length:\n"
     "  - the transport elastic scattering cross section\n"
     "  - the total elastic scattering cross section\n\n"

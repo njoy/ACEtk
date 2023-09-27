@@ -4,11 +4,11 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import ElectronElasticAngularDistributionBlock
-from ACEtk import ElectronTabulatedAngularDistribution
+from ACEtk.electron import ElasticAngularDistributionBlock
+from ACEtk.electron import TabulatedAngularDistribution
 
-class Test_ACEtk_ElectronElasticAngularDistributionBlock( unittest.TestCase ) :
-    """Unit test for the ElectronElasticAngularDistributionBlock class."""
+class Test_ACEtk_ElasticAngularDistributionBlock( unittest.TestCase ) :
+    """Unit test for the ElasticAngularDistributionBlock class."""
 
     chunk = [ 1e-11, 1e-6, 1e-3, 1.,
                  2,    3,    4,  2,
@@ -64,12 +64,12 @@ class Test_ACEtk_ElectronElasticAngularDistributionBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = ElectronElasticAngularDistributionBlock(
+        chunk = ElasticAngularDistributionBlock(
                   distributions = [
-                      ElectronTabulatedAngularDistribution( 1e-11, [ -1.0, 1.0 ], [ 0., 1. ] ),
-                      ElectronTabulatedAngularDistribution(  1e-6, [ -1.0, 0.0, 1.0 ], [ 0., 0.75, 1. ] ),
-                      ElectronTabulatedAngularDistribution(  1e-3, [ -1.0, 0.5, 0.7, 1.0 ], [ 0., 0.25, 0.5, 1. ] ),
-                      ElectronTabulatedAngularDistribution(    1., [ -1.0, 1.0 ], [ 0., 1. ] ) ] )
+                      TabulatedAngularDistribution( 1e-11, [ -1.0, 1.0 ], [ 0., 1. ] ),
+                      TabulatedAngularDistribution(  1e-6, [ -1.0, 0.0, 1.0 ], [ 0., 0.75, 1. ] ),
+                      TabulatedAngularDistribution(  1e-3, [ -1.0, 0.5, 0.7, 1.0 ], [ 0., 0.25, 0.5, 1. ] ),
+                      TabulatedAngularDistribution(    1., [ -1.0, 1.0 ], [ 0., 1. ] ) ] )
 
         verify_chunk( self, chunk )
 

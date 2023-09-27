@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicElectronBremsstrahlungBlock.hpp"
+#include "ACEtk/electron/BremsstrahlungBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoatomicElectronBremsstrahlungBlock( python::module& module, python::module& ) {
+void wrapBremsstrahlungBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicElectronBremsstrahlungBlock;
+  using Block = njoy::ACEtk::electron::BremsstrahlungBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotoatomicElectronBremsstrahlungBlock( python::module& module, python:
   python::class_< Block > block(
 
     module,
-    "PhotoatomicElectronBremsstrahlungBlock",
+    "BremsstrahlungBlock",
     "The photoatomic BREML block with the average electron energy after Bremsstrahlung\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The PhotoatomicElectronBremsstrahlungBlock class contains 2 arrays of the same\n"
+    "The BremsstrahlungBlock class contains 2 arrays of the same\n"
     "length:\n"
     "  - the energy points\n"
     "  - the average energy remaining after Bremsstrahlung\n\n"

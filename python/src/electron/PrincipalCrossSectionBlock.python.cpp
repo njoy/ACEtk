@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
+#include "ACEtk/electron/PrincipalCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoatomicElectronCrossSectionBlock( python::module& module, python::module& ) {
+void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicElectronCrossSectionBlock;
+  using Block = njoy::ACEtk::electron::PrincipalCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotoatomicElectronCrossSectionBlock( python::module& module, python::m
   python::class_< Block > block(
 
     module,
-    "PhotoatomicElectronCrossSectionBlock",
+    "PrincipalCrossSectionBlock",
     "The photoatomic ESZE block with the electron cross section data\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The PhotoatomicElectronCrossSectionBlock class contains 5 + NSSH arrays\n"
+    "The PrincipalCrossSectionBlock class contains 5 + NSSH arrays\n"
     "of the same length:\n"
     "  - the energy points\n"
     "  - the total cross section (sum of the following three arrays)\n"

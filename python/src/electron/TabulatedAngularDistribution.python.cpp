@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ElectronTabulatedAngularDistribution.hpp"
+#include "ACEtk/electron/TabulatedAngularDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapElectronTabulatedAngularDistribution( python::module& module, python::module& ) {
+void wrapTabulatedAngularDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ElectronTabulatedAngularDistribution;
+  using Block = njoy::ACEtk::electron::TabulatedAngularDistribution;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapElectronTabulatedAngularDistribution( python::module& module, python::m
   python::class_< Block > block(
 
     module,
-    "ElectronTabulatedAngularDistribution",
+    "TabulatedAngularDistribution",
     "Tabulated electron angular distribution data for a single incident energy\n\n"
-    "The ElectronTabulatedAngularDistribution class contains the cumulative\n"
+    "The TabulatedAngularDistribution class contains the cumulative\n"
     "density function (CDF) as a function of cosine for the given incident\n"
     "energy. It is used in the ELAS block."
   );

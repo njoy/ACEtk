@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ElectronElasticAngularDistributionBlock.hpp"
+#include "ACEtk/electron/ElasticAngularDistributionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapElectronElasticAngularDistributionBlock( python::module& module, python::module& ) {
+void wrapElasticAngularDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ElectronElasticAngularDistributionBlock;
-  using ElectronTabulatedAngularDistribution = njoy::ACEtk::block::ElectronTabulatedAngularDistribution;
+  using Block = njoy::ACEtk::electron::ElasticAngularDistributionBlock;
+  using TabulatedAngularDistribution = njoy::ACEtk::electron::TabulatedAngularDistribution;
 
   // wrap views created by this block
 
@@ -24,10 +24,10 @@ void wrapElectronElasticAngularDistributionBlock( python::module& module, python
   python::class_< Block > block(
 
     module,
-    "ElectronElasticAngularDistributionBlock",
+    "ElasticAngularDistributionBlock",
     "The photoatomic and electron ELASI and ELAS block with the elastic scattering\n"
     "angular distribution data\n\n"
-    "The ElectronElasticAngularDistributionBlock class contains a list of\n"
+    "The ElasticAngularDistributionBlock class contains a list of\n"
     "electron energies for which angular distribution data is given."
   );
 
@@ -35,7 +35,7 @@ void wrapElectronElasticAngularDistributionBlock( python::module& module, python
   block
   .def(
 
-    python::init< std::vector< ElectronTabulatedAngularDistribution > >(),
+    python::init< std::vector< TabulatedAngularDistribution > >(),
     python::arg( "distributions" ),
     "Initialise the block\n\n"
     "Arguments:\n"

@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ElectronEnergyDistributionBlock.hpp"
+#include "ACEtk/electron/EnergyDistributionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapElectronEnergyDistributionBlock( python::module& module, python::module& ) {
+void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ElectronEnergyDistributionBlock;
-  using ElectronTabulatedEnergyDistribution = njoy::ACEtk::block::ElectronTabulatedEnergyDistribution;
+  using Block = njoy::ACEtk::electron::EnergyDistributionBlock;
+  using ElectronTabulatedEnergyDistribution = njoy::ACEtk::electron::ElectronTabulatedEnergyDistribution;
 
   // wrap views created by this block
 
@@ -24,10 +24,10 @@ void wrapElectronEnergyDistributionBlock( python::module& module, python::module
   python::class_< Block > block(
 
     module,
-    "ElectronEnergyDistributionBlock",
+    "EnergyDistributionBlock",
     "The energy distribution block for photons from Bremsstrahlung or knock-on\n"
     "electrons for a specific subshell\n\n"
-    "The ElectronEnergyDistributionBlock class contains a list of electron energies\n"
+    "The EnergyDistributionBlock class contains a list of electron energies\n"
     "for which energy distribution data is given (for either photons in the\n"
     "BREMI/BREME block or electrons in the EION blocks)."
   );

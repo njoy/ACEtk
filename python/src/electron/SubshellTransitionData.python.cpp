@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicSubshellTransitionData.hpp"
+#include "ACEtk/electron/SubshellTransitionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoatomicSubshellTransitionData( python::module& module, python::module& ) {
+void wrapSubshellTransitionData( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicSubshellTransitionData;
+  using Block = njoy::ACEtk::electron::SubshellTransitionData;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotoatomicSubshellTransitionData( python::module& module, python::modu
   python::class_< Block > block(
 
     module,
-    "PhotoatomicSubshellTransitionData",
+    "SubshellTransitionData",
     "The electron transition data for a given subshell\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The PhotoatomicSubshellTransitionData class contains the transition data\n"
+    "The SubshellTransitionData class contains the transition data\n"
     "to fill vacancies in the given subshell. Each transition has the following\n"
     "information associated to it:\n"
     "  - the primary subshell designator (the designator of the subshell from\n"

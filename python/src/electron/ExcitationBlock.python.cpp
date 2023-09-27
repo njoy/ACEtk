@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
+#include "ACEtk/electron/ElectronExcitationBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoatomicElectronExcitationBlock( python::module& module, python::module& ) {
+void wrapElectronExcitationBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicElectronExcitationBlock;
+  using Block = njoy::ACEtk::electron::ElectronExcitationBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotoatomicElectronExcitationBlock( python::module& module, python::mod
   python::class_< Block > block(
 
     module,
-    "PhotoatomicElectronExcitationBlock",
+    "ElectronExcitationBlock",
     "The photoatomic EXCIT block with the electron excitation energy loss data\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The PhotoatomicElectronExcitationBlock class contains 2 arrays of the same\n"
+    "The ElectronExcitationBlock class contains 2 arrays of the same\n"
     "length:\n"
     "  - the energy points\n"
     "  - the average excitation energy loss values\n\n"

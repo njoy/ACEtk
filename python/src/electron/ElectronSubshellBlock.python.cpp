@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
+#include "ACEtk/electron/ElectronSubshellBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapPhotoatomicElectronSubshellBlock( python::module& module, python::module& ) {
+void wrapElectronSubshellBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicElectronSubshellBlock;
+  using Block = njoy::ACEtk::electron::ElectronSubshellBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotoatomicElectronSubshellBlock( python::module& module, python::modul
   python::class_< Block > block(
 
     module,
-    "PhotoatomicElectronSubshellBlock",
+    "ElectronSubshellBlock",
     "The photoatomic SUBSH block with the electron subshell data\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The PhotoatomicElectronSubshellBlock class contains 5 arrays of the same length:\n"
+    "The ElectronSubshellBlock class contains 5 arrays of the same length:\n"
     "  - the ENDF designator of each subshell\n"
     "  - the electron population for each subshell\n"
     "  - the binding energy for each subshell\n"

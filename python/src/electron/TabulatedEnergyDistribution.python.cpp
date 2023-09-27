@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ElectronTabulatedEnergyDistribution.hpp"
+#include "ACEtk/electron/TabulatedEnergyDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapElectronTabulatedEnergyDistribution( python::module& module, python::module& ) {
+void wrapTabulatedEnergyDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ElectronTabulatedEnergyDistribution;
+  using Block = njoy::ACEtk::electron::TabulatedEnergyDistribution;
 
   // wrap views created by this block
 
@@ -23,9 +23,9 @@ void wrapElectronTabulatedEnergyDistribution( python::module& module, python::mo
   python::class_< Block > block(
 
     module,
-    "ElectronTabulatedEnergyDistribution",
+    "TabulatedEnergyDistribution",
     "Tabulated photon energy distribution from Bremsstrahlung for a single incident energy\n\n"
-    "The ElectronTabulatedEnergyDistribution class contains the cumulative\n"
+    "The TabulatedEnergyDistribution class contains the cumulative\n"
     "density function (CDF) as a function of photon energy for the given incident\n"
     "energy. It is used in the BREME block."
   );
