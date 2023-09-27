@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/IncoherentScatteringFunctionBlock.hpp"
+#include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

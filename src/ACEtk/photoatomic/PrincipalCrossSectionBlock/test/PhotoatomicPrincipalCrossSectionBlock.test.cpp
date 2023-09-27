@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/photoatomic/PrincipalCrossSectionBlock.hpp"
 
 // other includes
 

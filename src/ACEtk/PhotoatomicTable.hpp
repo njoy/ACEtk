@@ -5,10 +5,10 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PhotoatomicPrincipalCrossSectionBlock.hpp"
-#include "ACEtk/block/IncoherentScatteringFunctionBlock.hpp"
-#include "ACEtk/block/CoherentFormFactorBlock.hpp"
-#include "ACEtk/block/PhotoatomicFluorescenceDataBlock.hpp"
+#include "ACEtk/photoatomic/PrincipalCrossSectionBlock.hpp"
+#include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock.hpp"
+#include "ACEtk/photoatomic/CoherentFormFactorBlock.hpp"
+#include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
 #include "ACEtk/block/PhotoatomicHeatingNumbersBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
 #include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"

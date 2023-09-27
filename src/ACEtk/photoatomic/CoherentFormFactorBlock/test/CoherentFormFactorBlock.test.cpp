@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/CoherentFormFactorBlock.hpp"
+#include "ACEtk/photoatomic/CoherentFormFactorBlock.hpp"
 
 // other includes
 

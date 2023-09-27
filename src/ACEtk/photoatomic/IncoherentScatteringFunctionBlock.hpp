@@ -30,14 +30,14 @@ class IncoherentScatteringFunctionBlock : protected details::ArrayData {
   std::optional< std::vector< double > > momentum_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/IncoherentScatteringFunctionBlock/src/numberElements.hpp"
-  #include "ACEtk/block/IncoherentScatteringFunctionBlock/src/numberArrays.hpp"
-  #include "ACEtk/block/IncoherentScatteringFunctionBlock/src/generateArrays.hpp"
+  #include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock/src/numberElements.hpp"
+  #include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock/src/numberArrays.hpp"
+  #include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock/src/generateArrays.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/IncoherentScatteringFunctionBlock/src/ctor.hpp"
+  #include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -58,7 +58,7 @@ public:
 
     if ( this->momentum_.has_value() ) {
 
-      return ranges::make_subrange( this->momentum_.value().begin(), 
+      return ranges::make_subrange( this->momentum_.value().begin(),
                                     this->momentum_.value().end() );
     }
     else {
@@ -70,7 +70,7 @@ public:
   /**
    *  @brief Return the scattering function values
    */
-  auto values() const { 
+  auto values() const {
 
     return this->darray( this->momentum_.has_value() ? 1 : 2 );
   }

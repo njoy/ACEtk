@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICFLUORESCENCEDATABLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICFLUORESCENCEDATABLOCK
+#ifndef NJOY_ACETK_PHOTOATOMIC_FLUORESCENCEDATABLOCK
+#define NJOY_ACETK_PHOTOATOMIC_FLUORESCENCEDATABLOCK
 
 // system includes
 
@@ -32,7 +32,7 @@ class PhotoatomicFluorescenceDataBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicFluorescenceDataBlock/src/ctor.hpp"
+  #include "ACEtk/photoatomic/FluorescenceDataBlock/src/ctor.hpp"
 
   /**
    *  @brief Return the number of fluorescence edges

@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotoatomicFluorescenceDataBlock.hpp"
+#include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
 
 // other includes
 

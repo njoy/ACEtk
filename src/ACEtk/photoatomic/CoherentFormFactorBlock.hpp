@@ -17,7 +17,7 @@ namespace block {
  *
  *  The CoherentFormFactorBlock class contains one of the following
  *  representations of the form factor:
- *    - 55 values for the form factor and its integral form using a fixed 
+ *    - 55 values for the form factor and its integral form using a fixed
  *      momentum grid (mcplib version)
  *    - tabulated form factor and its integral form (eprdata version)
  */
@@ -27,14 +27,14 @@ class CoherentFormFactorBlock : protected details::ArrayData {
   std::optional< std::vector< double > > momentum_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/CoherentFormFactorBlock/src/numberElements.hpp"
-  #include "ACEtk/block/CoherentFormFactorBlock/src/numberArrays.hpp"
-  #include "ACEtk/block/CoherentFormFactorBlock/src/generateArrays.hpp"
+  #include "ACEtk/photoatomic/CoherentFormFactorBlock/src/numberElements.hpp"
+  #include "ACEtk/photoatomic/CoherentFormFactorBlock/src/numberArrays.hpp"
+  #include "ACEtk/photoatomic/CoherentFormFactorBlock/src/generateArrays.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/CoherentFormFactorBlock/src/ctor.hpp"
+  #include "ACEtk/photoatomic/CoherentFormFactorBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -55,7 +55,7 @@ public:
 
     if ( this->momentum_.has_value() ) {
 
-      return ranges::make_subrange( this->momentum_.value().begin(), 
+      return ranges::make_subrange( this->momentum_.value().begin(),
                                     this->momentum_.value().end() );
     }
     else {
@@ -68,7 +68,7 @@ public:
    *  @brief Return the integrated form factor values (tabulated on a grid of
    *         squared momentum values)
    */
-  auto integratedFormFactors() const { 
+  auto integratedFormFactors() const {
 
     return this->darray( this->momentum_.has_value() ? 1 : 2 );
   }
@@ -77,7 +77,7 @@ public:
    *  @brief Return the form factor values (tabulated on a grid of momentum
    *         values)
    */
-  auto formFactors() const { 
+  auto formFactors() const {
 
     return this->darray( this->momentum_.has_value() ? 2 : 3 );
   }

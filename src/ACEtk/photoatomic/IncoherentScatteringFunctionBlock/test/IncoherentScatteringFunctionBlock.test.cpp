@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/IncoherentScatteringFunctionBlock.hpp"
+#include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock.hpp"
 
 // other includes
 

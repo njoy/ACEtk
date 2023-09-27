@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotoatomicFluorescenceDataBlock.hpp"
+#include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

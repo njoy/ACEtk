@@ -150,10 +150,10 @@ if(ACEtk.python)
     python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
     python/src/block/ThermalScatteringElasticAngularDistributionBlock.python.cpp
     python/src/block/ThermalScatteringInelasticAngularDistributionBlock.python.cpp
-    python/src/block/PhotoatomicPrincipalCrossSectionBlock.python.cpp
-    python/src/block/IncoherentScatteringFunctionBlock.python.cpp
-    python/src/block/CoherentFormFactorBlock.python.cpp
-    python/src/block/PhotoatomicFluorescenceDataBlock.python.cpp
+    python/src/photoatomic/PrincipalCrossSectionBlock.python.cpp
+    python/src/photoatomic/IncoherentScatteringFunctionBlock.python.cpp
+    python/src/photoatomic/CoherentFormFactorBlock.python.cpp
+    python/src/photoatomic/FluorescenceDataBlock.python.cpp
     python/src/block/PhotoatomicHeatingNumbersBlock.python.cpp
     python/src/block/PhotoatomicElectronShellBlock.python.cpp
     python/src/block/PhotoatomicComptonProfile.python.cpp

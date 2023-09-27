@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICPRINCIPALCROSSSECTIONBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOATOMICPRINCIPALCROSSSECTIONBLOCK
+#ifndef NJOY_ACETK_PHOTOATOMIC_PRINCIPALCROSSSECTIONBLOCK
+#define NJOY_ACETK_PHOTOATOMIC_PRINCIPALCROSSSECTIONBLOCK
 
 // system includes
 
@@ -34,7 +34,7 @@ class PhotoatomicPrincipalCrossSectionBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotoatomicPrincipalCrossSectionBlock/src/ctor.hpp"
+  #include "ACEtk/photoatomic/PrincipalCrossSectionBlock/src/ctor.hpp"
 
   /* methods */
 
