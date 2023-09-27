@@ -10,13 +10,13 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace electron {
 
 void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::electron::EnergyDistributionBlock;
-  using ElectronTabulatedEnergyDistribution = njoy::ACEtk::electron::ElectronTabulatedEnergyDistribution;
+  using TabulatedEnergyDistribution = njoy::ACEtk::electron::TabulatedEnergyDistribution;
 
   // wrap views created by this block
 
@@ -36,7 +36,7 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< ElectronTabulatedEnergyDistribution > >(),
+    python::init< std::vector< TabulatedEnergyDistribution > >(),
     python::arg( "distributions" ),
     "Initialise the block\n\n"
     "Arguments:\n"
@@ -106,4 +106,4 @@ void wrapEnergyDistributionBlock( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // electron namespace

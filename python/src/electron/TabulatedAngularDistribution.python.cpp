@@ -10,7 +10,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace electron {
 
 void wrapTabulatedAngularDistribution( python::module& module, python::module& ) {
 
@@ -74,4 +74,4 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // electron namespace

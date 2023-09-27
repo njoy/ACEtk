@@ -10,7 +10,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace electron {
 
 void wrapSubshellTransitionData( python::module& module, python::module& ) {
 
@@ -138,4 +138,4 @@ void wrapSubshellTransitionData( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // electron namespace

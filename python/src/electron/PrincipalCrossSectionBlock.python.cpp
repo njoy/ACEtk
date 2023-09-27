@@ -10,7 +10,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace electron {
 
 void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
 
@@ -140,4 +140,4 @@ void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // electron namespace

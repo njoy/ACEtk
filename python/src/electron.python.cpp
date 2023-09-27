@@ -8,7 +8,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace photoatomic {
+namespace electron {
 
   // declarations - ACE data components
   void wrapSubshellTransitionData( python::module&, python::module& );
