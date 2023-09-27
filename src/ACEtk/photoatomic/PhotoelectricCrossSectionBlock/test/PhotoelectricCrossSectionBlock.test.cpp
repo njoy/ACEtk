@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoelectricCrossSectionBlock = block::PhotoelectricCrossSectionBlock;
+using PhotoelectricCrossSectionBlock = photoatomic::PhotoelectricCrossSectionBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const PhotoelectricCrossSectionBlock& );

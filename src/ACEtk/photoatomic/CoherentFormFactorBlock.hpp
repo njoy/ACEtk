@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_COHERENTFORMFACTORBLOCK
-#define NJOY_ACETK_BLOCK_COHERENTFORMFACTORBLOCK
+#ifndef NJOY_ACETK_PHOTOATOMIC_COHERENTFORMFACTORBLOCK
+#define NJOY_ACETK_PHOTOATOMIC_COHERENTFORMFACTORBLOCK
 
 // system includes
 #include <algorithm>
@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
@@ -21,7 +21,7 @@ namespace block {
  *      momentum grid (mcplib version)
  *    - tabulated form factor and its integral form (eprdata version)
  */
-class CoherentFormFactorBlock : protected details::ArrayData {
+class CoherentFormFactorBlock : protected block::details::ArrayData {
 
   /* fields */
   std::optional< std::vector< double > > momentum_;
@@ -92,7 +92,7 @@ public:
 
 using JCOH = CoherentFormFactorBlock;
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 

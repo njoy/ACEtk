@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicComptonProfile = block::PhotoatomicComptonProfile;
+using ComptonProfile = photoatomic::ComptonProfile;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicComptonProfile& );
+void verifyChunk( const ComptonProfile& );
 
-SCENARIO( "PhotoatomicComptonProfile" ) {
+SCENARIO( "ComptonProfile" ) {
 
-  GIVEN( "valid data for a PhotoatomicComptonProfile instance" ) {
+  GIVEN( "valid data for a ComptonProfile instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -25,12 +25,12 @@ SCENARIO( "PhotoatomicComptonProfile" ) {
       std::vector< double > pdf = { 0.5, 0.5, 0.5 };
       std::vector< double > cdf = { 0.0, 0.5, 1.0 };
 
-      PhotoatomicComptonProfile chunk( interpolation,
+      ComptonProfile chunk( interpolation,
                                        std::move( momentum ),
                                        std::move( pdf ),
                                        std::move( cdf ) );
 
-      THEN( "a PhotoatomicComptonProfile can be constructed and "
+      THEN( "a ComptonProfile can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -48,9 +48,9 @@ SCENARIO( "PhotoatomicComptonProfile" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicComptonProfile chunk( xss.begin(), xss.end() );
+      ComptonProfile chunk( xss.begin(), xss.end() );
 
-      THEN( "a PhotoatomicComptonProfile can be constructed and "
+      THEN( "a ComptonProfile can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -75,11 +75,11 @@ std::vector< double > chunk() {
            0.00000000000E+00,  0.50000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const PhotoatomicComptonProfile& chunk ) {
+void verifyChunk( const ComptonProfile& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
-  CHECK( "PhotoatomicComptonProfile" == chunk.name() );
+  CHECK( "ComptonProfile" == chunk.name() );
 
   CHECK( 2 == chunk.interpolation() );
   CHECK( 3 == chunk.numberValues() );

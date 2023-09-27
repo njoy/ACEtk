@@ -1,7 +1,7 @@
-PhotoatomicFluorescenceDataBlock() = default;
+FluorescenceDataBlock() = default;
 
-PhotoatomicFluorescenceDataBlock( const PhotoatomicFluorescenceDataBlock& ) = default;
-PhotoatomicFluorescenceDataBlock( PhotoatomicFluorescenceDataBlock&& ) = default;
+FluorescenceDataBlock( const FluorescenceDataBlock& ) = default;
+FluorescenceDataBlock( FluorescenceDataBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -11,7 +11,7 @@ PhotoatomicFluorescenceDataBlock( PhotoatomicFluorescenceDataBlock&& ) = default
  *  @param[in] yields           the yields
  *  @param[in] energies         the fluorescent energies
  */
-PhotoatomicFluorescenceDataBlock( std::vector< double > edges,
+FluorescenceDataBlock( std::vector< double > edges,
                                   std::vector< double > probabilities,
                                   std::vector< double > yields,
                                   std::vector< double > energies ) :
@@ -27,8 +27,8 @@ PhotoatomicFluorescenceDataBlock( std::vector< double > edges,
  *  @param[in] end     the end iterator of the JFLO block in the XSS array
  *  @param[in] nflo    the number of edges
  */
-PhotoatomicFluorescenceDataBlock( Iterator begin, Iterator end, unsigned int nflo ) :
+FluorescenceDataBlock( Iterator begin, Iterator end, unsigned int nflo ) :
   ArrayData( "JFLO", begin, end, nflo, 4 ) {}
 
-PhotoatomicFluorescenceDataBlock& operator=( const PhotoatomicFluorescenceDataBlock& ) = default;
-PhotoatomicFluorescenceDataBlock& operator=( PhotoatomicFluorescenceDataBlock&& ) = default;
+FluorescenceDataBlock& operator=( const FluorescenceDataBlock& ) = default;
+FluorescenceDataBlock& operator=( FluorescenceDataBlock&& ) = default;

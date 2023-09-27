@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using CoherentFormFactorBlock = block::CoherentFormFactorBlock;
+using CoherentFormFactorBlock = photoatomic::CoherentFormFactorBlock;
 
 std::vector< double > chunk();
 std::vector< double > chunkEprdata();

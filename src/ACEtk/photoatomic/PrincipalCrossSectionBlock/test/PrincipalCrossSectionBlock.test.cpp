@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicPrincipalCrossSectionBlock = block::PhotoatomicPrincipalCrossSectionBlock;
+using PrincipalCrossSectionBlock = photoatomic::PrincipalCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicPrincipalCrossSectionBlock& );
+void verifyChunk( const PrincipalCrossSectionBlock& );
 
-SCENARIO( "PhotoatomicPrincipalCrossSectionBlock" ) {
+SCENARIO( "PrincipalCrossSectionBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicPrincipalCrossSectionBlock instance" ) {
+  GIVEN( "valid data for a PrincipalCrossSectionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -93,13 +93,13 @@ SCENARIO( "PhotoatomicPrincipalCrossSectionBlock" ) {
         -4.643194015692E+00, -4.537511537514E+00, -4.455371820900E+00
       };
 
-      PhotoatomicPrincipalCrossSectionBlock chunk( std::move( energies ),
+      PrincipalCrossSectionBlock chunk( std::move( energies ),
                                                    std::move( incoherent ),
                                                    std::move( coherent ),
                                                    std::move( photoelectric ),
                                                    std::move( pairproduction ) );
 
-      THEN( "a PhotoatomicPrincipalCrossSectionBlock can be constructed and members can "
+      THEN( "a PrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -117,9 +117,9 @@ SCENARIO( "PhotoatomicPrincipalCrossSectionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicPrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
 
-      THEN( "a PhotoatomicPrincipalCrossSectionBlock can be constructed and members can "
+      THEN( "a PrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -198,7 +198,7 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotoatomicPrincipalCrossSectionBlock& chunk ) {
+void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 215 == chunk.length() );

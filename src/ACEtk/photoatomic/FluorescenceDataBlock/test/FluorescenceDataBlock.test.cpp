@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicFluorescenceDataBlock = block::PhotoatomicFluorescenceDataBlock;
+using FluorescenceDataBlock = photoatomic::FluorescenceDataBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicFluorescenceDataBlock& );
+void verifyChunk( const FluorescenceDataBlock& );
 
-SCENARIO( "PhotoatomicFluorescenceDataBlock" ) {
+SCENARIO( "FluorescenceDataBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicFluorescenceDataBlock instance" ) {
+  GIVEN( "valid data for a FluorescenceDataBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -25,12 +25,12 @@ SCENARIO( "PhotoatomicFluorescenceDataBlock" ) {
       std::vector< double > yields = { 0.000000000000E+00,  2.542671170140E-02 };
       std::vector< double > energies = { 0.000000000000E+00,  1.238156190380E-03 };
 
-      PhotoatomicFluorescenceDataBlock chunk( std::move( edges ),
+      FluorescenceDataBlock chunk( std::move( edges ),
                                               std::move( probabilities ),
                                               std::move( yields ),
                                               std::move( energies ) );
 
-      THEN( "a PhotoatomicFluorescenceDataBlock can be constructed and members can "
+      THEN( "a FluorescenceDataBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -48,9 +48,9 @@ SCENARIO( "PhotoatomicFluorescenceDataBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicFluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
 
-      THEN( "a PhotoatomicFluorescenceDataBlock can be constructed and members can "
+      THEN( "a FluorescenceDataBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -76,7 +76,7 @@ std::vector< double > chunk() {
     0.000000000000E+00,  2.542671170140E-02,  0.000000000000E+00,  1.238156190380E-03  };
 }
 
-void verifyChunk( const PhotoatomicFluorescenceDataBlock& chunk ) {
+void verifyChunk( const FluorescenceDataBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );

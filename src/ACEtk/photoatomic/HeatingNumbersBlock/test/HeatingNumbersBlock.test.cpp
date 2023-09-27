@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicHeatingNumbersBlock = block::PhotoatomicHeatingNumbersBlock;
+using HeatingNumbersBlock = photoatomic::HeatingNumbersBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicHeatingNumbersBlock& );
+void verifyChunk( const HeatingNumbersBlock& );
 
-SCENARIO( "PhotoatomicHeatingNumbersBlock" ) {
+SCENARIO( "HeatingNumbersBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicHeatingNumbersBlock instance" ) {
+  GIVEN( "valid data for a HeatingNumbersBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -36,9 +36,9 @@ SCENARIO( "PhotoatomicHeatingNumbersBlock" ) {
         9.086036433693E+01
       };
 
-      PhotoatomicHeatingNumbersBlock chunk( std::move( heating ) );
+      HeatingNumbersBlock chunk( std::move( heating ) );
 
-      THEN( "a PhotoatomicHeatingNumbersBlock can be constructed and members can "
+      THEN( "a HeatingNumbersBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -56,9 +56,9 @@ SCENARIO( "PhotoatomicHeatingNumbersBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicHeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
 
-      THEN( "a PhotoatomicHeatingNumbersBlock can be constructed and members can "
+      THEN( "a HeatingNumbersBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -95,7 +95,7 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotoatomicHeatingNumbersBlock& chunk ) {
+void verifyChunk( const HeatingNumbersBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 43 == chunk.length() );

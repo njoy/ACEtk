@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOELECTRICCROSSSECTIONBLOCK
-#define NJOY_ACETK_BLOCK_PHOTOELECTRICCROSSSECTIONBLOCK
+#ifndef NJOY_ACETK_PHOTOATOMIC_PHOTOELECTRICCROSSSECTIONBLOCK
+#define NJOY_ACETK_PHOTOATOMIC_PHOTOELECTRICCROSSSECTIONBLOCK
 
 // system includes
 
@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
@@ -23,7 +23,7 @@ namespace block {
  *
  *  The size of each (the total number of energy points NES) is stored in NXS(3).
  */
-class PhotoelectricCrossSectionBlock : protected details::ArrayData {
+class PhotoelectricCrossSectionBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -80,7 +80,7 @@ public:
 
 using SPHEL = PhotoelectricCrossSectionBlock;
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 

@@ -60,27 +60,27 @@ void generateBlocks() {
 
   // principal cross section data
   auto iterators = block( 1 );
-  this->eszg_ = block::ESZG( iterators.first, iterators.second, this->NES() );
+  this->eszg_ = photoatomic::ESZG( iterators.first, iterators.second, this->NES() );
 
   // incoherent scattering functions
   iterators = block( 2 );
-  this->jinc_ = block::JINC( iterators.first, iterators.second );
+  this->jinc_ = photoatomic::JINC( iterators.first, iterators.second );
 
   // coherent form factor
   iterators = block( 3 );
-  this->jcoh_ = block::JCOH( iterators.first, iterators.second );
+  this->jcoh_ = photoatomic::JCOH( iterators.first, iterators.second );
 
   // fluorescence data block
   bool present = ( this->NFLO() > 0 );
   if ( present ) {
 
     iterators = block( 4 );
-    this->jflo_ = block::JFLO( iterators.first, iterators.second, this->NFLO() );
+    this->jflo_ = photoatomic::JFLO( iterators.first, iterators.second, this->NFLO() );
   }
 
   // heating numbers
   iterators = block( 5 );
-  this->lhnm_ = block::LHNM( iterators.first, iterators.second, this->NES() );
+  this->lhnm_ = photoatomic::LHNM( iterators.first, iterators.second, this->NES() );
 
   present = ( this->NSH() > 0 );
   if ( present ) {
@@ -93,8 +93,8 @@ void generateBlocks() {
     // compton profile block
     locators = block( 9 );
     iterators = block( 10 );
-    this->swd_ = block::SWD( locators.first, iterators.first, iterators.second,
-                             this->NSH() );
+    this->swd_ = photoatomic::SWD( locators.first, iterators.first, iterators.second,
+                                   this->NSH() );
   }
 
   present = ( this->NEPR() > 0 );
@@ -103,7 +103,7 @@ void generateBlocks() {
     auto subsh = block( 11 );
     auto sphel = block( 16 );
     this->subsh_ = block::SUBSH( subsh.first, sphel.first, this->NSSH() );
-    this->sphel_ = block::SPHEL( sphel.first, sphel.second, this->NSSH(), this->NES() );
+    this->sphel_ = photoatomic::SPHEL( sphel.first, sphel.second, this->NSSH(), this->NES() );
     auto relo = block( 17 );
     auto xprob = block( 18 );
     this->xprob_ = block::XPROB( relo.first, xprob.first, xprob.second, this->NSSH() );

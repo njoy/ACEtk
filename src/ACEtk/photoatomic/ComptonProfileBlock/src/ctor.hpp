@@ -1,14 +1,14 @@
-PhotoatomicComptonProfileBlock() = default;
+ComptonProfileBlock() = default;
 
-PhotoatomicComptonProfileBlock( const PhotoatomicComptonProfileBlock& ) = default;
-PhotoatomicComptonProfileBlock( PhotoatomicComptonProfileBlock&& ) = default;
+ComptonProfileBlock( const ComptonProfileBlock& ) = default;
+ComptonProfileBlock( ComptonProfileBlock&& ) = default;
 
 /**
  *  @brief Constructor
  *
  *  @param[in] profiles    the compton profile data
  */
-PhotoatomicComptonProfileBlock( std::vector< PhotoatomicComptonProfile > profiles ) :
+ComptonProfileBlock( std::vector< ComptonProfile > profiles ) :
   BaseBlockWithLocators( "SWD", std::move( profiles ) ) {}
 
 /**
@@ -19,9 +19,9 @@ PhotoatomicComptonProfileBlock( std::vector< PhotoatomicComptonProfile > profile
  *  @param[in] end     the end iterator of the SWD block in the XSS array
  *  @param[in] nsh     the number of shells
  */
-PhotoatomicComptonProfileBlock( Iterator lsig, Iterator sig, Iterator end,
+ComptonProfileBlock( Iterator lsig, Iterator sig, Iterator end,
                                 unsigned int nsh ) :
   BaseBlockWithLocators( "SWD", lsig, sig, end, nsh ) {}
 
-PhotoatomicComptonProfileBlock& operator=( const PhotoatomicComptonProfileBlock& ) = default;
-PhotoatomicComptonProfileBlock& operator=( PhotoatomicComptonProfileBlock&& ) = default;
+ComptonProfileBlock& operator=( const ComptonProfileBlock& ) = default;
+ComptonProfileBlock& operator=( ComptonProfileBlock&& ) = default;

@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_INCOHERENTSCATTERINGFUNCTIONBLOCK
-#define NJOY_ACETK_BLOCK_INCOHERENTSCATTERINGFUNCTIONBLOCK
+#ifndef NJOY_ACETK_PHOTOATOMIC_INCOHERENTSCATTERINGFUNCTIONBLOCK
+#define NJOY_ACETK_PHOTOATOMIC_INCOHERENTSCATTERINGFUNCTIONBLOCK
 
 // system includes
 #include <algorithm>
@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
@@ -24,7 +24,7 @@ namespace block {
  *
  *  The recoil electron momentum transfer values are given in inverse angstroms.
  */
-class IncoherentScatteringFunctionBlock : protected details::ArrayData {
+class IncoherentScatteringFunctionBlock : protected block::details::ArrayData {
 
   /* fields */
   std::optional< std::vector< double > > momentum_;
@@ -85,7 +85,7 @@ public:
 
 using JINC = IncoherentScatteringFunctionBlock;
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 

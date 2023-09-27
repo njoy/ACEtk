@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTOATOMICCOMPTONPROFILE
-#define NJOY_ACETK_BLOCK_PHOTOATOMICCOMPTONPROFILE
+#ifndef NJOY_ACETK_PHOTOATOMIC_COMPTONPROFILE
+#define NJOY_ACETK_PHOTOATOMIC_COMPTONPROFILE
 
 // system includes
 
@@ -8,18 +8,17 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
  *  @brief Tabulated Compton profile data for a given electron shell
  *
- *  The PhotoatomicComptonProfile class contains the probability density
+ *  The ComptonProfile class contains the probability density
  *  function (PDF) and cumulative density function (CDF) as a function of
  *  momentum. It is used in the LSWD block.
  */
-class PhotoatomicComptonProfile :
-  protected details::TabulatedProbabilityDistribution {
+class ComptonProfile : protected block::details::TabulatedProbabilityDistribution {
 
   /* fields */
 
@@ -78,7 +77,7 @@ public:
   using TabulatedProbabilityDistribution::end;
 };
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 

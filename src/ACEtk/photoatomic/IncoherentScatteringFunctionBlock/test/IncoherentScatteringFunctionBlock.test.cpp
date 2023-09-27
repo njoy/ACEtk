@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using IncoherentScatteringFunctionBlock = block::IncoherentScatteringFunctionBlock;
+using IncoherentScatteringFunctionBlock = photoatomic::IncoherentScatteringFunctionBlock;
 
 std::vector< double > chunk();
 std::vector< double > chunkEprdata();

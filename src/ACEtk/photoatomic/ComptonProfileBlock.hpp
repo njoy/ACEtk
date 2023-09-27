@@ -9,21 +9,21 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
  *  @brief The photoatomic LSWD and SWD block with the compton profile data
  *
- *  The PhotoatomicComptonProfileBlock class contains NXS(5) sets of compton
+ *  The ComptonProfileBlock class contains NXS(5) sets of compton
  *  profiles, one for each electron shell.
  */
-class PhotoatomicComptonProfileBlock :
-    protected details::BaseBlockWithLocators< PhotoatomicComptonProfileBlock,
-                                              PhotoatomicComptonProfile > {
+class ComptonProfileBlock :
+    protected block::details::BaseBlockWithLocators< ComptonProfileBlock,
+                                                     ComptonProfile > {
 
-  friend class details::BaseBlockWithLocators< PhotoatomicComptonProfileBlock,
-                                               PhotoatomicComptonProfile >;
+  friend class block::details::BaseBlockWithLocators< ComptonProfileBlock,
+                                                      ComptonProfile >;
 
   /* fields */
 
@@ -78,7 +78,7 @@ public:
   /**
    *  @brief Return all compton profiles
    */
-  const std::vector< PhotoatomicComptonProfile >& data() const {
+  const std::vector< ComptonProfile >& data() const {
 
     return BaseBlockWithLocators::data();
   }
@@ -91,7 +91,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const PhotoatomicComptonProfile& comptonProfile( std::size_t index ) const {
+  const ComptonProfile& comptonProfile( std::size_t index ) const {
 
     return BaseBlockWithLocators::data( index );
   }
@@ -104,9 +104,9 @@ public:
   using BaseBlockWithLocators::end;
 };
 
-using SWD = PhotoatomicComptonProfileBlock;
+using SWD = ComptonProfileBlock;
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 

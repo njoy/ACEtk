@@ -8,17 +8,17 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
  *  @brief The photoatomic LHNM block with the heating numbers
  *
- *  The PhotoatomicHeatingNumbersBlock class contains the heating numbers.
- *  The size of the array is stored in NXS(3) and the corresponding energy
- *  points can be found in the ESZG block.
+ *  The HeatingNumbersBlock class contains the heating numbers. The size of the
+ *  array is stored in NXS(3) and the corresponding energy points can be found
+ *  in the ESZG block.
  */
-class PhotoatomicHeatingNumbersBlock : protected details::ArrayData {
+class HeatingNumbersBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -54,9 +54,9 @@ public:
   using ArrayData::end;
 };
 
-using LHNM = PhotoatomicHeatingNumbersBlock;
+using LHNM = HeatingNumbersBlock;
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 

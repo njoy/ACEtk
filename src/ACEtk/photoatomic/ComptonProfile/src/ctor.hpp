@@ -1,7 +1,7 @@
-PhotoatomicComptonProfile() = default;
+ComptonProfile() = default;
 
-PhotoatomicComptonProfile( const PhotoatomicComptonProfile& ) = default;
-PhotoatomicComptonProfile( PhotoatomicComptonProfile&& ) = default;
+ComptonProfile( const ComptonProfile& ) = default;
+ComptonProfile( ComptonProfile&& ) = default;
 
 /**
  *  @brief Constructor
@@ -11,12 +11,12 @@ PhotoatomicComptonProfile( PhotoatomicComptonProfile&& ) = default;
  *  @param[in] pdf             the pdf values (N values)
  *  @param[in] cdf             the cdf values (N values)
  */
-PhotoatomicComptonProfile( int interpolation,
+ComptonProfile( int interpolation,
                            std::vector< double > momentum,
                            std::vector< double > pdf,
                            std::vector< double > cdf ) :
   TabulatedProbabilityDistribution(
-        "PhotoatomicComptonProfile", interpolation, std::move( momentum ),
+        "ComptonProfile", interpolation, std::move( momentum ),
         std::move( pdf ), std::move( cdf ) ) {}
 
 /**
@@ -25,8 +25,8 @@ PhotoatomicComptonProfile( int interpolation,
  *  @param[in] begin      the begin iterator of the tabulated distribution data
  *  @param[in] end        the end iterator of the tabulated distribution data
  */
-PhotoatomicComptonProfile( Iterator begin, Iterator end ) :
-  TabulatedProbabilityDistribution( "PhotoatomicComptonProfile", begin, end ) {}
+ComptonProfile( Iterator begin, Iterator end ) :
+  TabulatedProbabilityDistribution( "ComptonProfile", begin, end ) {}
 
-PhotoatomicComptonProfile& operator=( const PhotoatomicComptonProfile& ) = default;
-PhotoatomicComptonProfile& operator=( PhotoatomicComptonProfile&& ) = default;
+ComptonProfile& operator=( const ComptonProfile& ) = default;
+ComptonProfile& operator=( ComptonProfile&& ) = default;

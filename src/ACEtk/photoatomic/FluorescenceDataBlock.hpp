@@ -8,13 +8,13 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
  *  @brief The photoatomic JFLO block with the fluorescence data
  *
- *  The PhotoatomicFluorescenceDataBlock class contains 4 arrays of the
+ *  The FluorescenceDataBlock class contains 4 arrays of the
  *  same length:
  *    - the fluoresence edge energies
  *    - the relative ejection probabilities
@@ -23,7 +23,7 @@ namespace block {
  *
  *  The size of each (the total number of fluorescence edges) is stored in NXS(4).
  */
-class PhotoatomicFluorescenceDataBlock : protected details::ArrayData {
+class FluorescenceDataBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -92,9 +92,9 @@ public:
   using ArrayData::end;
 };
 
-using JFLO = PhotoatomicFluorescenceDataBlock;
+using JFLO = FluorescenceDataBlock;
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 

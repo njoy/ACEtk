@@ -7,23 +7,23 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotoatomicComptonProfileBlock = block::PhotoatomicComptonProfileBlock;
-using PhotoatomicComptonProfile = block::PhotoatomicComptonProfile;
+using ComptonProfileBlock = photoatomic::ComptonProfileBlock;
+using ComptonProfile = photoatomic::ComptonProfile;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoatomicComptonProfileBlock& );
+void verifyChunk( const ComptonProfileBlock& );
 
-SCENARIO( "PhotoatomicComptonProfileBlock" ) {
+SCENARIO( "ComptonProfileBlock" ) {
 
-  GIVEN( "valid data for a PhotoatomicComptonProfileBlock instance" ) {
+  GIVEN( "valid data for a ComptonProfileBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< PhotoatomicComptonProfile > profiles = {
+      std::vector< ComptonProfile > profiles = {
 
-        PhotoatomicComptonProfile(
+        ComptonProfile(
           2,
           {                      0.000000000000e+00,  5.000000000000e-02,  1.000000000000e-01,
             1.500000000000e-01,  2.000000000000e-01,  3.000000000000e-01,  4.000000000000e-01,
@@ -50,7 +50,7 @@ SCENARIO( "PhotoatomicComptonProfileBlock" ) {
             9.947352611489e-01,  9.970904507507e-01,  9.982343149508e-01,  9.992442488238e-01,
             9.998990193113e-01,  9.999704488190e-01,  9.999964412232e-01,  9.999990107013e-01,
             9.999998539663e-01,  1.000000000000e+00 } ),
-        PhotoatomicComptonProfile(
+        ComptonProfile(
           2,
           { 0.000000000000e+00,  5.000000000000e-02,  1.000000000000e-01,  1.500000000000e-01,
             2.000000000000e-01,  3.000000000000e-01,  4.000000000000e-01,  5.000000000000e-01,
@@ -79,9 +79,9 @@ SCENARIO( "PhotoatomicComptonProfileBlock" ) {
             9.999992738509e-01,  9.999999125847e-01,  9.999999756646e-01,  9.999999964136e-01,
             1.000000000000e+00 } ) };
 
-      PhotoatomicComptonProfileBlock chunk( std::move( profiles ) );
+      ComptonProfileBlock chunk( std::move( profiles ) );
 
-      THEN( "a PhotoatomicComptonProfileBlock can be constructed and members can be tested" ) {
+      THEN( "a ComptonProfileBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -98,9 +98,9 @@ SCENARIO( "PhotoatomicComptonProfileBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotoatomicComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
 
-      THEN( "a PhotoatomicComptonProfileBlock can be constructed and members can be tested" ) {
+      THEN( "a ComptonProfileBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -173,7 +173,7 @@ std::vector< double > chunk() {
     1.000000000000e+00 };
 }
 
-void verifyChunk( const PhotoatomicComptonProfileBlock& chunk ) {
+void verifyChunk( const ComptonProfileBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 192 == chunk.length() );

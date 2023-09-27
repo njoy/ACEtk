@@ -8,13 +8,13 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photoatomic {
 
 /**
  *  @class
  *  @brief The photoatomic ESZG block with the principal cross sections
  *
- *  The PhotoatomicPrincipalCrossSectionBlock class contains 5 arrays of the
+ *  The PrincipalCrossSectionBlock class contains 5 arrays of the
  *  same length (all values are stored as the natural logarithm with the
  *  exception of 0 values which are interpreted as 0 and NOT as exp(0) = 1):
  *    - the energy points
@@ -25,7 +25,7 @@ namespace block {
  *
  *  The size of each (the total number of energy points NES) is stored in NXS(3).
  */
-class PhotoatomicPrincipalCrossSectionBlock : protected details::ArrayData {
+class PrincipalCrossSectionBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -81,9 +81,9 @@ public:
   using ArrayData::end;
 };
 
-using ESZG = PhotoatomicPrincipalCrossSectionBlock;
+using ESZG = PrincipalCrossSectionBlock;
 
-} // block namespace
+} // photoatomic namespace
 } // ACEtk namespace
 } // njoy namespace
 
