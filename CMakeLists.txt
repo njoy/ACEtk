@@ -151,6 +151,8 @@ if(ACEtk.python)
       python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
       python/src/block/ThermalScatteringElasticAngularDistributionBlock.python.cpp
       python/src/block/ThermalScatteringInelasticAngularDistributionBlock.python.cpp
+      python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
+      python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
       python/src/photoatomic.python.cpp
       python/src/photoatomic/PrincipalCrossSectionBlock.python.cpp
       python/src/photoatomic/IncoherentScatteringFunctionBlock.python.cpp
@@ -160,20 +162,19 @@ if(ACEtk.python)
       python/src/photoatomic/ComptonProfile.python.cpp
       python/src/photoatomic/ComptonProfileBlock.python.cpp
       python/src/photoatomic/PhotoelectricCrossSectionBlock.python.cpp
-      python/src/block/PhotoatomicElectronShellBlock.python.cpp
-      python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
-      python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
-      python/src/block/PhotoatomicElectronSubshellBlock.python.cpp
-      python/src/block/PhotoatomicElectronCrossSectionBlock.python.cpp
-      python/src/block/PhotoatomicElectronElasticCrossSectionBlock.python.cpp
-      python/src/block/PhotoatomicElectronExcitationBlock.python.cpp
-      python/src/block/PhotoatomicElectronBremsstrahlungBlock.python.cpp
-      python/src/block/PhotoatomicSubshellTransitionData.python.cpp
-      python/src/block/PhotoatomicSubshellTransitionDataBlock.python.cpp
-      python/src/block/ElectronTabulatedAngularDistribution.python.cpp
-      python/src/block/ElectronElasticAngularDistributionBlock.python.cpp
-      python/src/block/ElectronTabulatedEnergyDistribution.python.cpp
-      python/src/block/ElectronEnergyDistributionBlock.python.cpp
+      python/src/electron.python.cpp
+      python/src/electron/ElectronShellBlock.python.cpp
+      python/src/electron/ElectronSubshellBlock.python.cpp
+      python/src/electron/PrincipalCrossSectionBlock.python.cpp
+      python/src/electron/ElasticCrossSectionBlock.python.cpp
+      python/src/electron/ExcitationBlock.python.cpp
+      python/src/electron/BremsstrahlungBlock.python.cpp
+      python/src/electron/SubshellTransitionData.python.cpp
+      python/src/electron/SubshellTransitionDataBlock.python.cpp
+      python/src/electron/TabulatedAngularDistribution.python.cpp
+      python/src/electron/ElasticAngularDistributionBlock.python.cpp
+      python/src/electron/TabulatedEnergyDistribution.python.cpp
+      python/src/electron/EnergyDistributionBlock.python.cpp
       python/src/ContinuousEnergyTable.python.cpp
       python/src/DosimetryTable.python.cpp
       python/src/ThermalScatteringTable.python.cpp
