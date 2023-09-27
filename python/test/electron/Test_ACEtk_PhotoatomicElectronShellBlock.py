@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicElectronShellBlock
+from ACEtk.electron import ElectronShellBlock
 
-class Test_ACEtk_PhotoatomicElectronShellBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicElectronShellBlock class."""
+class Test_ACEtk_electron_ElectronShellBlock( unittest.TestCase ) :
+    """Unit test for the ElectronShellBlock class."""
 
     chunk = [                                                                                  2,
                                 1,  5.480000000000e-05,  1.000000000000e-06,  6.666666666667e-01,
@@ -48,7 +48,7 @@ class Test_ACEtk_PhotoatomicElectronShellBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicElectronShellBlock(
+        chunk = ElectronShellBlock(
           electrons = [ 2, 1 ],
           energies =  [ 5.480000000000e-05,  1.000000000000e-06 ],
           probabilities = [ 6.666666666667e-01, 3.333333333333e-01 ] )

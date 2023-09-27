@@ -7,7 +7,7 @@ import unittest
 from ACEtk.electron import ElasticAngularDistributionBlock
 from ACEtk.electron import TabulatedAngularDistribution
 
-class Test_ACEtk_ElasticAngularDistributionBlock( unittest.TestCase ) :
+class Test_ACEtk_electron_ElasticAngularDistributionBlock( unittest.TestCase ) :
     """Unit test for the ElasticAngularDistributionBlock class."""
 
     chunk = [ 1e-11, 1e-6, 1e-3, 1.,

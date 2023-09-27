@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicElectronBremsstrahlungBlock
+from ACEtk.electron import BremsstrahlungBlock
 
-class Test_ACEtk_PhotoatomicElectronBremsstrahlungBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicElectronBremsstrahlungBlock class."""
+class Test_ACEtk_electron_BremsstrahlungBlock( unittest.TestCase ) :
+    """Unit test for the BremsstrahlungBlock class."""
 
     chunk = [  10.,  20., 200.,
                 1.,   2.,   3. ]
@@ -43,7 +43,7 @@ class Test_ACEtk_PhotoatomicElectronBremsstrahlungBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicElectronBremsstrahlungBlock(
+        chunk = BremsstrahlungBlock(
                   energies  = [ 10., 20., 200. ],
                   remaining = [ 1., 2., 3. ] )
 

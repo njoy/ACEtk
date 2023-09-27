@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicElectronElasticCrossSectionBlock
+from ACEtk.electron import ElasticCrossSectionBlock
 
-class Test_ACEtk_PhotoatomicElectronElasticCrossSectionBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicElectronElasticCrossSectionBlock class."""
+class Test_ACEtk_electron_ElasticCrossSectionBlock( unittest.TestCase ) :
+    """Unit test for the ElasticCrossSectionBlock class."""
 
     chunk = [   1.,   2.,   3.,
                 4.,   5.,   6. ]
@@ -43,7 +43,7 @@ class Test_ACEtk_PhotoatomicElectronElasticCrossSectionBlock( unittest.TestCase 
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicElectronElasticCrossSectionBlock(
+        chunk = ElasticCrossSectionBlock(
                   transport = [ 1., 2., 3. ],
                   total = [ 4., 5., 6. ] )
 

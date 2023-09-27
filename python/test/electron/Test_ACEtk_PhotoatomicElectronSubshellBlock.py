@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicElectronSubshellBlock
+from ACEtk.electron import ElectronSubshellBlock
 
-class Test_ACEtk_PhotoatomicElectronSubshellBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicElectronSubshellBlock class."""
+class Test_ACEtk_electron_ElectronSubshellBlock( unittest.TestCase ) :
+    """Unit test for the ElectronSubshellBlock class."""
 
     chunk = [                                                             1.000000000000E+00,
               2.000000000000E+00, 3.000000000000E+00, 4.000000000000E+00, 5.000000000000E+00,
@@ -123,7 +123,7 @@ class Test_ACEtk_PhotoatomicElectronSubshellBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicElectronSubshellBlock(
+        chunk = ElectronSubshellBlock(
                   designators = [ 1, 2, 3, 4, 5 ],
                   electrons = [ 2, 2, 2, 4, 2 ],
                   energies = [ 1.2945e-3, 8.946e-5, 5.655e-5,

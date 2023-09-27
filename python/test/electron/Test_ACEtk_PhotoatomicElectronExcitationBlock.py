@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicElectronExcitationBlock
+from ACEtk.electron import ExcitationBlock
 
-class Test_ACEtk_PhotoatomicElectronExcitationBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicElectronExcitationBlock class."""
+class Test_ACEtk_electron_ExcitationBlock( unittest.TestCase ) :
+    """Unit test for the ExcitationBlock class."""
 
     chunk = [  10.,  20., 200.,
                 1.,   2.,   3. ]
@@ -43,7 +43,7 @@ class Test_ACEtk_PhotoatomicElectronExcitationBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicElectronExcitationBlock(
+        chunk = ExcitationBlock(
                   energies = [ 10., 20., 200. ],
                   loss     = [ 1., 2., 3. ] )
 

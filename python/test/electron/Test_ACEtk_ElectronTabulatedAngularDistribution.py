@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import ElectronTabulatedAngularDistribution
+from ACEtk.electron import TabulatedAngularDistribution
 
-class Test_ACEtk_ElectronTabulatedAngularDistribution( unittest.TestCase ) :
-    """Unit test for the ElectronTabulatedAngularDistribution class."""
+class Test_ACEtk_electron_TabulatedAngularDistribution( unittest.TestCase ) :
+    """Unit test for the TabulatedAngularDistribution class."""
 
     chunk = [ -1.00000000000E+00,  0.00000000000E+00,  1.00000000000E+00,
                0.00000000000E+00,  0.75000000000E+00,  1.00000000000E+00 ]
@@ -19,7 +19,7 @@ class Test_ACEtk_ElectronTabulatedAngularDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 6, chunk.length )
-            self.assertEqual( "ElectronTabulatedAngularDistribution", chunk.name )
+            self.assertEqual( "TabulatedAngularDistribution", chunk.name )
 
             self.assertEqual( 1000., chunk.energy )
             self.assertEqual( 3, chunk.number_cosines )
@@ -39,7 +39,7 @@ class Test_ACEtk_ElectronTabulatedAngularDistribution( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = ElectronTabulatedAngularDistribution(
+        chunk = TabulatedAngularDistribution(
                     energy = 1000.,
                     cosines = [ -1.0, 0.0, 1.0 ],
                     cdf = [ 0.0, 0.75, 1.0 ] )

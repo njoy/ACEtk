@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import ElectronTabulatedEnergyDistribution
+from ACEtk.electron import TabulatedEnergyDistribution
 
-class Test_ACEtk_ElectronTabulatedEnergyDistribution( unittest.TestCase ) :
-    """Unit test for the ElectronTabulatedEnergyDistribution class."""
+class Test_ACEtk_electron_TabulatedEnergyDistribution( unittest.TestCase ) :
+    """Unit test for the TabulatedEnergyDistribution class."""
 
     chunk = [  1.00000000000E+01,  1.00000000000E+02,  9.99000000000E+02,
                0.00000000000E+00,  0.75000000000E+00,  1.00000000000E+00 ]
@@ -19,7 +19,7 @@ class Test_ACEtk_ElectronTabulatedEnergyDistribution( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 6, chunk.length )
-            self.assertEqual( "ElectronTabulatedEnergyDistribution", chunk.name )
+            self.assertEqual( "TabulatedEnergyDistribution", chunk.name )
 
             self.assertEqual( 1000., chunk.energy )
             self.assertEqual( 3, chunk.number_outgoing_energies )
@@ -39,7 +39,7 @@ class Test_ACEtk_ElectronTabulatedEnergyDistribution( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = ElectronTabulatedEnergyDistribution(
+        chunk = TabulatedEnergyDistribution(
                     energy = 1000.,
                     outgoing = [ 10., 100., 999. ],
                     cdf = [ 0.0, 0.75, 1.0 ] )

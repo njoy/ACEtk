@@ -4,11 +4,11 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicSubshellTransitionDataBlock
-from ACEtk import PhotoatomicSubshellTransitionData
+from ACEtk.electron import SubshellTransitionDataBlock
+from ACEtk.electron import SubshellTransitionData
 
-class Test_ACEtk_PhotoatomicSubshellTransitionDataBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicSubshellTransitionDataBlock class."""
+class Test_ACEtk_electron_SubshellTransitionDataBlock( unittest.TestCase ) :
+    """Unit test for the SubshellTransitionDataBlock class."""
 
     chunk = [ 0, 12, 12, 12,
               1, 0, 3.5, 0.25, 2, 3, 2.5, 0.75, 3, 1, 5.5, 1.00 ]
@@ -140,14 +140,14 @@ class Test_ACEtk_PhotoatomicSubshellTransitionDataBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicSubshellTransitionDataBlock(
+        chunk = SubshellTransitionDataBlock(
                     transitions = [
 
-                          PhotoatomicSubshellTransitionData( [ 1, 2, 3 ], [ 0, 3, 1 ],
+                          SubshellTransitionData( [ 1, 2, 3 ], [ 0, 3, 1 ],
                                                              [ 3.5, 2.5, 5.5 ], [ 0.25, 0.75, 1. ] ),
-                          PhotoatomicSubshellTransitionData(),
-                          PhotoatomicSubshellTransitionData(),
-                          PhotoatomicSubshellTransitionData() ] )
+                          SubshellTransitionData(),
+                          SubshellTransitionData(),
+                          SubshellTransitionData() ] )
 
         verify_chunk( self, chunk )
 

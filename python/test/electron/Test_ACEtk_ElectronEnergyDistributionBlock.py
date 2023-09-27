@@ -4,11 +4,11 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import ElectronEnergyDistributionBlock
-from ACEtk import ElectronTabulatedEnergyDistribution
+from ACEtk.electron import EnergyDistributionBlock
+from ACEtk.electron import TabulatedEnergyDistribution
 
-class Test_ACEtk_ElectronEnergyDistributionBlock( unittest.TestCase ) :
-    """Unit test for the ElectronEnergyDistributionBlock class."""
+class Test_ACEtk_electron_EnergyDistributionBlock( unittest.TestCase ) :
+    """Unit test for the EnergyDistributionBlock class."""
 
     chunk = [ 1e-11, 1e-6, 1e-3, 1.,
                   2,    3,    4,  2,
@@ -64,12 +64,12 @@ class Test_ACEtk_ElectronEnergyDistributionBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = ElectronEnergyDistributionBlock(
+        chunk = EnergyDistributionBlock(
                   distributions = [
-                      ElectronTabulatedEnergyDistribution( 1e-11, [ 1e-12, 9e-12 ], [ 0., 1. ] ),
-                      ElectronTabulatedEnergyDistribution(  1e-6, [ 1e-11, 1e-9, 9e-7 ], [ 0., 0.75, 1. ] ),
-                      ElectronTabulatedEnergyDistribution(  1e-3, [ 1e-11, 1e-6, 1e-4, 9e-4 ], [ 0., 0.25, 0.5, 1. ] ),
-                      ElectronTabulatedEnergyDistribution(    1., [ 1e-11, 0.999 ], [ 0., 1. ] ) ] )
+                      TabulatedEnergyDistribution( 1e-11, [ 1e-12, 9e-12 ], [ 0., 1. ] ),
+                      TabulatedEnergyDistribution(  1e-6, [ 1e-11, 1e-9, 9e-7 ], [ 0., 0.75, 1. ] ),
+                      TabulatedEnergyDistribution(  1e-3, [ 1e-11, 1e-6, 1e-4, 9e-4 ], [ 0., 0.25, 0.5, 1. ] ),
+                      TabulatedEnergyDistribution(    1., [ 1e-11, 0.999 ], [ 0., 1. ] ) ] )
 
         verify_chunk( self, chunk )
 
