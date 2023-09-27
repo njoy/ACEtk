@@ -10,12 +10,12 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
 void wrapIncoherentScatteringFunctionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::IncoherentScatteringFunctionBlock;
+  using Block = njoy::ACEtk::photoatomic::IncoherentScatteringFunctionBlock;
 
   // wrap views created by this block
 
@@ -85,4 +85,4 @@ void wrapIncoherentScatteringFunctionBlock( python::module& module, python::modu
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace

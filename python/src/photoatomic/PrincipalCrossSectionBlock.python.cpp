@@ -10,12 +10,12 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
-void wrapPhotoatomicPrincipalCrossSectionBlock( python::module& module, python::module& ) {
+void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicPrincipalCrossSectionBlock;
+  using Block = njoy::ACEtk::photoatomic::PrincipalCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotoatomicPrincipalCrossSectionBlock( python::module& module, python::
   python::class_< Block > block(
 
     module,
-    "PhotoatomicPrincipalCrossSectionBlock",
+    "PrincipalCrossSectionBlock",
     "The photoatomic ESZG block with the principal cross sections\n\n"
-    "The PhotoatomicPrincipalCrossSectionBlock class contains 5 arrays of the\n"
-    "same length (all values are stored as the natural logarithm):\n"
+    "The PrincipalCrossSectionBlock class contains 5 arrays of the same length\n"
+    "(all values are stored as the natural logarithm):\n"
     "  - the energy points\n"
     "  - the incoherent cross section\n"
     "  - the coherent cross section\n"
@@ -106,4 +106,4 @@ void wrapPhotoatomicPrincipalCrossSectionBlock( python::module& module, python::
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace

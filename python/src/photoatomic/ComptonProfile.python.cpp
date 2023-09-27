@@ -10,12 +10,12 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
-void wrapPhotoatomicComptonProfile( python::module& module, python::module& ) {
+void wrapComptonProfile( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicComptonProfile;
+  using Block = njoy::ACEtk::photoatomic::ComptonProfile;
 
   // wrap views created by this block
 
@@ -23,11 +23,11 @@ void wrapPhotoatomicComptonProfile( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "PhotoatomicComptonProfile",
+    "ComptonProfile",
     "Tabulated Compton profile data for a given electron shell\n\n"
-    "The PhotoatomicComptonProfile class contains the probability density\n"
-    "function (PDF) and cumulative density function (CDF) as a function of\n"
-    "momentum. It is used in the LSWD block."
+    "The ComptonProfile class contains the probability density function (PDF) and\n"
+    "cumulative density function (CDF) as a function of momentum. It is used in\n"
+    "the LSWD block."
   );
 
   // wrap the block
@@ -84,4 +84,4 @@ void wrapPhotoatomicComptonProfile( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace

@@ -10,12 +10,12 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
-void wrapPhotoatomicHeatingNumbersBlock( python::module& module, python::module& ) {
+void wrapHeatingNumbersBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicHeatingNumbersBlock;
+  using Block = njoy::ACEtk::photoatomic::HeatingNumbersBlock;
 
   // wrap views created by this block
 
@@ -23,11 +23,11 @@ void wrapPhotoatomicHeatingNumbersBlock( python::module& module, python::module&
   python::class_< Block > block(
 
     module,
-    "PhotoatomicHeatingNumbersBlock",
+    "HeatingNumbersBlock",
     "The photoatomic LHNM block with the heating numbers\n\n"
-    "The PhotoatomicHeatingNumbersBlock class contains the heating numbers.\n"
-    "The size of the array is stored in NXS(3) and the corresponding energy\n"
-    "points can be found in the ESZG block."
+    "The HeatingNumbersBlock class contains the heating numbers. The size of the\n"
+    "array is stored in NXS(3) and the corresponding energy points can be found\n"
+    "in the ESZG block."
   );
 
   // wrap the block
@@ -65,4 +65,4 @@ void wrapPhotoatomicHeatingNumbersBlock( python::module& module, python::module&
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace

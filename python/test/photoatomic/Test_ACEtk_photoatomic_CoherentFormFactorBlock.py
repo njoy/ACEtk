@@ -4,9 +4,9 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import CoherentFormFactorBlock
+from ACEtk.photoatomic import CoherentFormFactorBlock
 
-class Test_ACEtk_CoherentFormFactorBlock( unittest.TestCase ) :
+class Test_ACEtk_photoatomic_CoherentFormFactorBlock( unittest.TestCase ) :
     """Unit test for the CoherentFormFactorBlock class."""
 
     chunk = [                  0,  9.977954354245E-05,  3.964942506035E-04,  8.824146336660E-04,

@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicComptonProfile
+from ACEtk.photoatomic import ComptonProfile
 
-class Test_ACEtk_PhotoatomicComptonProfile( unittest.TestCase ) :
-    """Unit test for the PhotoatomicComptonProfile class."""
+class Test_ACEtk_photoatomic_ComptonProfile( unittest.TestCase ) :
+    """Unit test for the ComptonProfile class."""
 
     chunk = [                 2,                  3,  1.00000000000E-11,  1.00000000000E+00,
               2.00000000000E+01,  0.50000000000E+00,  0.50000000000E+00,  0.50000000000E+00,
@@ -20,7 +20,7 @@ class Test_ACEtk_PhotoatomicComptonProfile( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 11, chunk.length )
-            self.assertEqual( "PhotoatomicComptonProfile", chunk.name )
+            self.assertEqual( "ComptonProfile", chunk.name )
 
             self.assertEqual( 2, chunk.interpolation )
             self.assertEqual( 3, chunk.number_values )
@@ -44,7 +44,7 @@ class Test_ACEtk_PhotoatomicComptonProfile( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicComptonProfile(
+        chunk = ComptonProfile(
                     interpolation = 2,
                     momentum = [ 1e-11, 1., 20. ],
                     pdf = [ 0.5, 0.5, 0.5 ],

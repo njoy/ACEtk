@@ -4,11 +4,11 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicComptonProfileBlock
-from ACEtk import PhotoatomicComptonProfile
+from ACEtk.photoatomic import ComptonProfileBlock
+from ACEtk.photoatomic import ComptonProfile
 
-class Test_ACEtk_PhotoatomicComptonProfileBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicComptonProfileBlock class."""
+class Test_ACEtk_photoatomic_ComptonProfileBlock( unittest.TestCase ) :
+    """Unit test for the ComptonProfileBlock class."""
 
     chunk = [                                       1,                  96,                   2,
                               31,  0.000000000000e+00,  5.000000000000e-02,  1.000000000000e-01,
@@ -137,10 +137,10 @@ class Test_ACEtk_PhotoatomicComptonProfileBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicComptonProfileBlock(
+        chunk = ComptonProfileBlock(
                   profiles = [
 
-                      PhotoatomicComptonProfile(
+                      ComptonProfile(
                         2,
                         [                      0.000000000000e+00,  5.000000000000e-02,  1.000000000000e-01,
                           1.500000000000e-01,  2.000000000000e-01,  3.000000000000e-01,  4.000000000000e-01,
@@ -167,7 +167,7 @@ class Test_ACEtk_PhotoatomicComptonProfileBlock( unittest.TestCase ) :
                           9.947352611489e-01,  9.970904507507e-01,  9.982343149508e-01,  9.992442488238e-01,
                           9.998990193113e-01,  9.999704488190e-01,  9.999964412232e-01,  9.999990107013e-01,
                           9.999998539663e-01,  1.000000000000e+00 ] ),
-                      PhotoatomicComptonProfile(
+                      ComptonProfile(
                         2,
                         [ 0.000000000000e+00,  5.000000000000e-02,  1.000000000000e-01,  1.500000000000e-01,
                           2.000000000000e-01,  3.000000000000e-01,  4.000000000000e-01,  5.000000000000e-01,

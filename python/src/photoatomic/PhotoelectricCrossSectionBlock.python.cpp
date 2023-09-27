@@ -10,12 +10,12 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
 void wrapPhotoelectricCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoelectricCrossSectionBlock;
+  using Block = njoy::ACEtk::photoatomic::PhotoelectricCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -82,4 +82,4 @@ void wrapPhotoelectricCrossSectionBlock( python::module& module, python::module&
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace

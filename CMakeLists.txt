@@ -11,15 +11,15 @@ project( ACEtk LANGUAGES CXX )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-option(ACEtk.tests "Build the ACEtk unit tests" OFF)
+option( ACEtk.tests "Build the ACEtk unit tests" OFF )
 option( ACEtk.python "Build ACEtk python bindings" ON )
 option( strict_compile
     "Treat all warnings as errors." ON
     )
 
 # Compile flags
-set( common_flags "-Wall" "-Wextra" "-Wpedantic" ) # i'm not sure why we manage flags this way...
-set( strict_flags "-Werror" )                      # improving this will need to happen in the future for spack
+set( common_flags "-Wall" "-Wextra" "-Wpedantic" )
+set( strict_flags "-Werror" )
 set( release_flags "-O3" )
 set( debug_flags "-O0" "-g" )
 
@@ -75,109 +75,111 @@ target_link_libraries( ACEtk
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if(ACEtk.python)
+
   pybind11_add_module( ACEtk.python
-    python/src/ACEtk.python.cpp
-    python/src/XsdirEntry.python.cpp
-    python/src/Xsdir.python.cpp
-    python/src/Header.python.cpp
-    python/src/Header201.python.cpp
-    python/src/Data.python.cpp
-    python/src/Table.python.cpp
-    python/src/ReferenceFrame.python.cpp
-    python/src/AngularDistributionType.python.cpp
-    python/src/EnergyDistributionType.python.cpp
-    python/src/block/InterpolationData.python.cpp
-    python/src/block/CrossSectionData.python.cpp
-    python/src/block/DosimetryCrossSectionData.python.cpp
-    python/src/block/PrincipalCrossSectionBlock.python.cpp
-    python/src/block/PolynomialFissionMultiplicity.python.cpp
-    python/src/block/TabulatedFissionMultiplicity.python.cpp
-    python/src/block/FissionMultiplicityBlock.python.cpp
-    python/src/block/ReactionNumberBlock.python.cpp
-    python/src/block/ReactionQValueBlock.python.cpp
-    python/src/block/FrameAndMultiplicityBlock.python.cpp
-    python/src/block/CrossSectionBlock.python.cpp
-    python/src/block/DosimetryCrossSectionBlock.python.cpp
-    python/src/block/EquiprobableAngularBins.python.cpp
-    python/src/block/TabulatedAngularDistribution.python.cpp
-    python/src/block/TabulatedAngularDistributionWithProbability.python.cpp
-    python/src/block/IsotropicAngularDistribution.python.cpp
-    python/src/block/AngularDistributionData.python.cpp
-    python/src/block/FullyIsotropicDistribution.python.cpp
-    python/src/block/DistributionGivenElsewhere.python.cpp
-    python/src/block/AngularDistributionBlock.python.cpp
-    python/src/block/SecondaryParticleAngularDistributionBlock.python.cpp
-    python/src/block/EquiprobableOutgoingEnergyBins.python.cpp
-    python/src/block/EquiprobableOutgoingEnergyBinData.python.cpp
-    python/src/block/LevelScatteringDistribution.python.cpp
-    python/src/block/DiscretePhotonDistribution.python.cpp
-    python/src/block/TabulatedEnergyDistribution.python.cpp
-    python/src/block/OutgoingEnergyDistributionData.python.cpp
-    python/src/block/GeneralEvaporationSpectrum.python.cpp
-    python/src/block/SimpleMaxwellianFissionSpectrum.python.cpp
-    python/src/block/EvaporationSpectrum.python.cpp
-    python/src/block/ParameterData.python.cpp
-    python/src/block/EnergyDependentWattSpectrum.python.cpp
-    python/src/block/TabulatedKalbachMannDistribution.python.cpp
-    python/src/block/KalbachMannDistributionData.python.cpp
-    python/src/block/NBodyPhaseSpaceDistribution.python.cpp
-    python/src/block/TwoBodyTransferDistribution.python.cpp
-    python/src/block/TabulatedEnergyAngleDistribution.python.cpp
-    python/src/block/EnergyAngleDistributionData.python.cpp
-    python/src/block/TabulatedAngleEnergyDistribution.python.cpp
-    python/src/block/AngleEnergyDistributionData.python.cpp
-    python/src/block/DistributionProbability.python.cpp
-    python/src/block/MultiDistributionData.python.cpp
-    python/src/block/EnergyDistributionBlock.python.cpp
-    python/src/block/SecondaryParticleEnergyDistributionBlock.python.cpp
-    python/src/block/DelayedNeutronPrecursorData.python.cpp
-    python/src/block/PhotonProductionBlock.python.cpp
-    python/src/block/PhotonProductionCrossSectionBlock.python.cpp
-    python/src/block/MultiplicityReactionNumberBlock.python.cpp
-    python/src/block/TabulatedMultiplicity.python.cpp
-    python/src/block/TabulatedSecondaryParticleMultiplicity.python.cpp
-    python/src/block/PhotonProductionCrossSectionData.python.cpp
-    python/src/block/DelayedNeutronPrecursorBlock.python.cpp
-    python/src/block/SecondaryParticleTypeBlock.python.cpp
-    python/src/block/SecondaryParticleInformationBlock.python.cpp
-    python/src/block/SecondaryParticleLocatorBlock.python.cpp
-    python/src/block/SecondaryParticleProductionBlock.python.cpp
-    python/src/block/SecondaryParticleProductionCrossSectionBlock.python.cpp
-    python/src/block/ProbabilityTable.python.cpp
-    python/src/block/ProbabilityTableBlock.python.cpp
-    python/src/block/ThermalScatteringCrossSectionBlock.python.cpp
-    python/src/block/ThermalScatteringDiscreteCosines.python.cpp
-    python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
-    python/src/block/ThermalScatteringElasticAngularDistributionBlock.python.cpp
-    python/src/block/ThermalScatteringInelasticAngularDistributionBlock.python.cpp
-    python/src/photoatomic/PrincipalCrossSectionBlock.python.cpp
-    python/src/photoatomic/IncoherentScatteringFunctionBlock.python.cpp
-    python/src/photoatomic/CoherentFormFactorBlock.python.cpp
-    python/src/photoatomic/FluorescenceDataBlock.python.cpp
-    python/src/photoatomic/HeatingNumbersBlock.python.cpp
-    python/src/photoatomic/ComptonProfile.python.cpp
-    python/src/photoatomic/ComptonProfileBlock.python.cpp
-    python/src/photoatomic/PhotoelectricCrossSectionBlock.python.cpp
-    python/src/block/PhotoatomicElectronShellBlock.python.cpp
-    python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
-    python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
-    python/src/block/PhotoatomicElectronSubshellBlock.python.cpp
-    python/src/block/PhotoatomicElectronCrossSectionBlock.python.cpp
-    python/src/block/PhotoatomicElectronElasticCrossSectionBlock.python.cpp
-    python/src/block/PhotoatomicElectronExcitationBlock.python.cpp
-    python/src/block/PhotoatomicElectronBremsstrahlungBlock.python.cpp
-    python/src/block/PhotoatomicSubshellTransitionData.python.cpp
-    python/src/block/PhotoatomicSubshellTransitionDataBlock.python.cpp
-    python/src/block/ElectronTabulatedAngularDistribution.python.cpp
-    python/src/block/ElectronElasticAngularDistributionBlock.python.cpp
-    python/src/block/ElectronTabulatedEnergyDistribution.python.cpp
-    python/src/block/ElectronEnergyDistributionBlock.python.cpp
-    python/src/ContinuousEnergyTable.python.cpp
-    python/src/DosimetryTable.python.cpp
-    python/src/ThermalScatteringTable.python.cpp
-    python/src/PhotoatomicTable.python.cpp
-    python/src/PhotonuclearTable.python.cpp
-  )
+      python/src/ACEtk.python.cpp
+      python/src/XsdirEntry.python.cpp
+      python/src/Xsdir.python.cpp
+      python/src/Header.python.cpp
+      python/src/Header201.python.cpp
+      python/src/Data.python.cpp
+      python/src/Table.python.cpp
+      python/src/ReferenceFrame.python.cpp
+      python/src/AngularDistributionType.python.cpp
+      python/src/EnergyDistributionType.python.cpp
+      python/src/block/InterpolationData.python.cpp
+      python/src/block/CrossSectionData.python.cpp
+      python/src/block/DosimetryCrossSectionData.python.cpp
+      python/src/block/PrincipalCrossSectionBlock.python.cpp
+      python/src/block/PolynomialFissionMultiplicity.python.cpp
+      python/src/block/TabulatedFissionMultiplicity.python.cpp
+      python/src/block/FissionMultiplicityBlock.python.cpp
+      python/src/block/ReactionNumberBlock.python.cpp
+      python/src/block/ReactionQValueBlock.python.cpp
+      python/src/block/FrameAndMultiplicityBlock.python.cpp
+      python/src/block/CrossSectionBlock.python.cpp
+      python/src/block/DosimetryCrossSectionBlock.python.cpp
+      python/src/block/EquiprobableAngularBins.python.cpp
+      python/src/block/TabulatedAngularDistribution.python.cpp
+      python/src/block/TabulatedAngularDistributionWithProbability.python.cpp
+      python/src/block/IsotropicAngularDistribution.python.cpp
+      python/src/block/AngularDistributionData.python.cpp
+      python/src/block/FullyIsotropicDistribution.python.cpp
+      python/src/block/DistributionGivenElsewhere.python.cpp
+      python/src/block/AngularDistributionBlock.python.cpp
+      python/src/block/SecondaryParticleAngularDistributionBlock.python.cpp
+      python/src/block/EquiprobableOutgoingEnergyBins.python.cpp
+      python/src/block/EquiprobableOutgoingEnergyBinData.python.cpp
+      python/src/block/LevelScatteringDistribution.python.cpp
+      python/src/block/DiscretePhotonDistribution.python.cpp
+      python/src/block/TabulatedEnergyDistribution.python.cpp
+      python/src/block/OutgoingEnergyDistributionData.python.cpp
+      python/src/block/GeneralEvaporationSpectrum.python.cpp
+      python/src/block/SimpleMaxwellianFissionSpectrum.python.cpp
+      python/src/block/EvaporationSpectrum.python.cpp
+      python/src/block/ParameterData.python.cpp
+      python/src/block/EnergyDependentWattSpectrum.python.cpp
+      python/src/block/TabulatedKalbachMannDistribution.python.cpp
+      python/src/block/KalbachMannDistributionData.python.cpp
+      python/src/block/NBodyPhaseSpaceDistribution.python.cpp
+      python/src/block/TwoBodyTransferDistribution.python.cpp
+      python/src/block/TabulatedEnergyAngleDistribution.python.cpp
+      python/src/block/EnergyAngleDistributionData.python.cpp
+      python/src/block/TabulatedAngleEnergyDistribution.python.cpp
+      python/src/block/AngleEnergyDistributionData.python.cpp
+      python/src/block/DistributionProbability.python.cpp
+      python/src/block/MultiDistributionData.python.cpp
+      python/src/block/EnergyDistributionBlock.python.cpp
+      python/src/block/SecondaryParticleEnergyDistributionBlock.python.cpp
+      python/src/block/DelayedNeutronPrecursorData.python.cpp
+      python/src/block/PhotonProductionBlock.python.cpp
+      python/src/block/PhotonProductionCrossSectionBlock.python.cpp
+      python/src/block/MultiplicityReactionNumberBlock.python.cpp
+      python/src/block/TabulatedMultiplicity.python.cpp
+      python/src/block/TabulatedSecondaryParticleMultiplicity.python.cpp
+      python/src/block/PhotonProductionCrossSectionData.python.cpp
+      python/src/block/DelayedNeutronPrecursorBlock.python.cpp
+      python/src/block/SecondaryParticleTypeBlock.python.cpp
+      python/src/block/SecondaryParticleInformationBlock.python.cpp
+      python/src/block/SecondaryParticleLocatorBlock.python.cpp
+      python/src/block/SecondaryParticleProductionBlock.python.cpp
+      python/src/block/SecondaryParticleProductionCrossSectionBlock.python.cpp
+      python/src/block/ProbabilityTable.python.cpp
+      python/src/block/ProbabilityTableBlock.python.cpp
+      python/src/block/ThermalScatteringCrossSectionBlock.python.cpp
+      python/src/block/ThermalScatteringDiscreteCosines.python.cpp
+      python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
+      python/src/block/ThermalScatteringElasticAngularDistributionBlock.python.cpp
+      python/src/block/ThermalScatteringInelasticAngularDistributionBlock.python.cpp
+      python/src/photoatomic.python.cpp
+      python/src/photoatomic/PrincipalCrossSectionBlock.python.cpp
+      python/src/photoatomic/IncoherentScatteringFunctionBlock.python.cpp
+      python/src/photoatomic/CoherentFormFactorBlock.python.cpp
+      python/src/photoatomic/FluorescenceDataBlock.python.cpp
+      python/src/photoatomic/HeatingNumbersBlock.python.cpp
+      python/src/photoatomic/ComptonProfile.python.cpp
+      python/src/photoatomic/ComptonProfileBlock.python.cpp
+      python/src/photoatomic/PhotoelectricCrossSectionBlock.python.cpp
+      python/src/block/PhotoatomicElectronShellBlock.python.cpp
+      python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
+      python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
+      python/src/block/PhotoatomicElectronSubshellBlock.python.cpp
+      python/src/block/PhotoatomicElectronCrossSectionBlock.python.cpp
+      python/src/block/PhotoatomicElectronElasticCrossSectionBlock.python.cpp
+      python/src/block/PhotoatomicElectronExcitationBlock.python.cpp
+      python/src/block/PhotoatomicElectronBremsstrahlungBlock.python.cpp
+      python/src/block/PhotoatomicSubshellTransitionData.python.cpp
+      python/src/block/PhotoatomicSubshellTransitionDataBlock.python.cpp
+      python/src/block/ElectronTabulatedAngularDistribution.python.cpp
+      python/src/block/ElectronElasticAngularDistributionBlock.python.cpp
+      python/src/block/ElectronTabulatedEnergyDistribution.python.cpp
+      python/src/block/ElectronEnergyDistributionBlock.python.cpp
+      python/src/ContinuousEnergyTable.python.cpp
+      python/src/DosimetryTable.python.cpp
+      python/src/ThermalScatteringTable.python.cpp
+      python/src/PhotoatomicTable.python.cpp
+      python/src/PhotonuclearTable.python.cpp
+      )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
   target_include_directories( ACEtk.python PRIVATE python/src )
@@ -185,6 +187,13 @@ if(ACEtk.python)
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
   set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
   set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+  message( STATUS "Building ACEtk's python API" )
+
+  list( APPEND ACEtk_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
+
+  include( cmake/unit_testing_python.cmake )
+
 endif()
 
 if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )

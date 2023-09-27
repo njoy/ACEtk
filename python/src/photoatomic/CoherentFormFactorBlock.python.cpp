@@ -10,12 +10,12 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
 void wrapCoherentFormFactorBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::CoherentFormFactorBlock;
+  using Block = njoy::ACEtk::photoatomic::CoherentFormFactorBlock;
 
   // wrap views created by this block
 
@@ -93,4 +93,4 @@ void wrapCoherentFormFactorBlock( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace

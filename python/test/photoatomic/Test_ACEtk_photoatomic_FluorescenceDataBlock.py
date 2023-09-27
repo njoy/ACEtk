@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoatomicFluorescenceDataBlock
+from ACEtk.photoatomic import FluorescenceDataBlock
 
-class Test_ACEtk_PhotoatomicFluorescenceDataBlock( unittest.TestCase ) :
-    """Unit test for the PhotoatomicFluorescenceDataBlock class."""
+class Test_ACEtk_photoatomic_FluorescenceDataBlock( unittest.TestCase ) :
+    """Unit test for the FluorescenceDataBlock class."""
 
     chunk = [ 1.294500000000E-03,  1.294500000000E-03,  8.180862310960E-02,  1.000000000000E+00,
               0.000000000000E+00,  2.542671170140E-02,  0.000000000000E+00,  1.238156190380E-03 ]
@@ -58,7 +58,7 @@ class Test_ACEtk_PhotoatomicFluorescenceDataBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotoatomicFluorescenceDataBlock(
+        chunk = FluorescenceDataBlock(
                   edges = [ 1.294500000000E-03,  1.294500000000E-03 ],
                   probabilities = [ 8.180862310960E-02,  1.000000000000E+00 ],
                   yields = [ 0.000000000000E+00,  2.542671170140E-02 ],

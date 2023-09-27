@@ -10,13 +10,13 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
-void wrapPhotoatomicComptonProfileBlock( python::module& module, python::module& ) {
+void wrapComptonProfileBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicComptonProfileBlock;
-  using PhotoatomicComptonProfile = njoy::ACEtk::block::PhotoatomicComptonProfile;
+  using Block = njoy::ACEtk::photoatomic::ComptonProfileBlock;
+  using ComptonProfile = njoy::ACEtk::photoatomic::ComptonProfile;
 
   // wrap views created by this block
 
@@ -24,17 +24,17 @@ void wrapPhotoatomicComptonProfileBlock( python::module& module, python::module&
   python::class_< Block > block(
 
     module,
-    "PhotoatomicComptonProfileBlock",
+    "ComptonProfileBlock",
     "The photoatomic LSWD and SWD block with the compton profile data\n\n"
-    "The PhotoatomicComptonProfileBlock class contains NXS(5) sets of compton\n"
-    "profiles, one for each electron shell."
+    "The ComptonProfileBlock class contains NXS(5) sets of compton profiles, one\n"
+    "for each electron shell."
   );
 
   // wrap the block
   block
   .def(
 
-    python::init< std::vector< PhotoatomicComptonProfile > >(),
+    python::init< std::vector< ComptonProfile > >(),
     python::arg( "profiles" ),
     "Initialise the block\n\n"
     "Arguments:\n"
@@ -97,4 +97,4 @@ void wrapPhotoatomicComptonProfileBlock( python::module& module, python::module&
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace

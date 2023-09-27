@@ -4,9 +4,9 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotoelectricCrossSectionBlock
+from ACEtk.photoatomic import PhotoelectricCrossSectionBlock
 
-class Test_ACEtk_PhotoelectricCrossSectionBlock( unittest.TestCase ) :
+class Test_ACEtk_photoatomic_PhotoelectricCrossSectionBlock( unittest.TestCase ) :
     """Unit test for the PhotoelectricCrossSectionBlock class."""
 
     chunk = [  1.,  2.,  3.,  4.,  5.,

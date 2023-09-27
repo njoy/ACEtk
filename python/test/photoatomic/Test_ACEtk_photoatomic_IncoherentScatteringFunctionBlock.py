@@ -4,9 +4,9 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import IncoherentScatteringFunctionBlock
+from ACEtk.photoatomic import IncoherentScatteringFunctionBlock
 
-class Test_ACEtk_IncoherentScatteringFunctionBlock( unittest.TestCase ) :
+class Test_ACEtk_photoatomic_IncoherentScatteringFunctionBlock( unittest.TestCase ) :
     """Unit test for the IncoherentScatteringFunctionBlock class."""
 
     chunk = [                                                                                  0,

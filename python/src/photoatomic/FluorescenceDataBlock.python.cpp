@@ -10,12 +10,12 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photoatomic {
 
-void wrapPhotoatomicFluorescenceDataBlock( python::module& module, python::module& ) {
+void wrapFluorescenceDataBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotoatomicFluorescenceDataBlock;
+  using Block = njoy::ACEtk::photoatomic::FluorescenceDataBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,9 @@ void wrapPhotoatomicFluorescenceDataBlock( python::module& module, python::modul
   python::class_< Block > block(
 
     module,
-    "PhotoatomicFluorescenceDataBlock",
+    "FluorescenceDataBlock",
     "The photoatomic JFLO block with the fluorescence data\n\n"
-    "The PhotoatomicFluorescenceDataBlock class contains 4 arrays of the\n"
-    "same length:\n"
+    "The FluorescenceDataBlock class contains 4 arrays of the same length:\n"
     "  - the fluoresence edge energies\n"
     "  - the relative ejection probabilities\n"
     "  - the yields\n"
@@ -123,4 +122,4 @@ void wrapPhotoatomicFluorescenceDataBlock( python::module& module, python::modul
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photoatomic namespace
