@@ -16,7 +16,7 @@ namespace block {
  *
  *  This block is part of the eprdata formats.
  *
- *  The PhotoatomicElectronCrossSectionBlock class contains 5 + NSSH arrays 
+ *  The PhotoatomicElectronCrossSectionBlock class contains 5 + NSSH arrays
  *  of the same length:
  *    - the energy points
  *    - the total cross section (sum of the following three arrays)
@@ -26,7 +26,7 @@ namespace block {
  *    - the total electroionisation cross section (sum of the following NSSH arrays)
  *    - the electroionisation cross section for each subshell (NSSH arrays)
  *
- *  The size NE of each (the total number of electron energy points) is stored in 
+ *  The size NE of each (the total number of electron energy points) is stored in
  *  NXS(8). The number of subshells NSSH is stored in NXS(7).
  */
 class PhotoatomicElectronCrossSectionBlock : protected details::ArrayData {
@@ -95,17 +95,17 @@ public:
   auto totalElectroionisation() const { return this->darray( 6 ); }
 
   /**
-   *  @brief Return the electroionisation cross section values for a specific 
+   *  @brief Return the electroionisation cross section values for a specific
    *         shell
    *
    *  @param[in] index    the electron subshell index (one-based)
    */
-  auto electroionisation( std::size_t index ) const { 
+  auto electroionisation( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifyIndex( index );
     #endif
-    return this->darray( 6 + index ); 
+    return this->darray( 6 + index );
   }
 
   using ArrayData::empty;

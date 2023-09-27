@@ -1002,7 +1002,7 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 94 == chunk.JINC().numberValues() );
 
   CHECK( 94 == chunk.JINC().momentum().size() );
-  CHECK( 1.000000000000E-07 == Approx( chunk.JINC().momentum().front() ) );
+  CHECK( 0.000000000000E+00 == Approx( chunk.JINC().momentum().front() ) );
   CHECK( 1.000000000000E+09   == Approx( chunk.JINC().momentum().back() ) );
 
   CHECK( 94 == chunk.JINC().values().size() );
@@ -1080,7 +1080,7 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 1 == chunk.SUBSH()->NSSH() );
   CHECK( 1 == chunk.SUBSH()->numberElectronSubshells() );
 
-  CHECK( 1 == chunk.SUBSH()->ENDF()[0] );
+  CHECK( 1 == chunk.SUBSH()->ID()[0] );
   CHECK( 1 == chunk.SUBSH()->designators()[0] );
 
   CHECK( 1 == chunk.SUBSH()->EP()[0] );
@@ -1409,10 +1409,10 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
   CHECK( 4 == chunk.SUBSH()->NSSH() );
   CHECK( 4 == chunk.SUBSH()->numberElectronSubshells() );
 
-  CHECK( 1 == chunk.SUBSH()->ENDF()[0] );
-  CHECK( 2 == chunk.SUBSH()->ENDF()[1] );
-  CHECK( 3 == chunk.SUBSH()->ENDF()[2] );
-  CHECK( 4 == chunk.SUBSH()->ENDF()[3] );
+  CHECK( 1 == chunk.SUBSH()->ID()[0] );
+  CHECK( 2 == chunk.SUBSH()->ID()[1] );
+  CHECK( 3 == chunk.SUBSH()->ID()[2] );
+  CHECK( 4 == chunk.SUBSH()->ID()[3] );
   CHECK( 1 == chunk.SUBSH()->designators()[0] );
   CHECK( 2 == chunk.SUBSH()->designators()[1] );
   CHECK( 3 == chunk.SUBSH()->designators()[2] );

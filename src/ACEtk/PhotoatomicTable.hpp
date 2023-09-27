@@ -165,14 +165,14 @@ public:
   unsigned int numberElectronShells() const { return this->NSH(); }
 
   /**
-   *  @brief Return the EPR data format flag (0 for old format, 1 for EPR data
-   *         from 2012 and 3 for EPR data from 2014 and above)
+   *  @brief Return the EPR data format flag (0 for the old mcplib format, 1 for
+   *         EPR data from 2012 and 3 for EPR data from 2014 and above)
    */
   unsigned int NEPR() const { return this->data().NXS(6); }
 
   /**
-   *  @brief Return the EPR data format flag (0 for old format, 1 for EPR data
-   *         from 2012 and 3 for EPR data from 2014 and above)
+   *  @brief Return the EPR data format flag (0 for the old mcplib format, 1 for 
+   *         EPR data from 2012 and 3 for EPR data from 2014 and above)
    */
   unsigned int electronPhotonRelaxationFormat() const { return this->NEPR(); }
 
