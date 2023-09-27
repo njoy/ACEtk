@@ -24,13 +24,12 @@ void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
 
     module,
     "PrincipalCrossSectionBlock",
-    "The photoatomic ESZE block with the electron cross section data\n\n"
+    "The electron ESZE block with the electron cross section data\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The PrincipalCrossSectionBlock class contains 5 + NSSH arrays\n"
-    "of the same length:\n"
+    "The PrincipalCrossSectionBlock class contains 5 + NSSH arrays of the same length:\n"
     "  - the energy points\n"
     "  - the total cross section (sum of the following three arrays)\n"
-    "  - the elastic scattering cross section\n"
+    "  - the large angle elastic scattering cross section\n"
     "  - the Bremsstrahlung cross section\n"
     "  - the excitation cross section\n"
     "  - the total electroionisation cross section (sum of the following NSSH arrays)\n"
@@ -101,7 +100,7 @@ void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
     "elastic",
     [] ( const Block& self ) -> DoubleRange
        { return self.elastic(); },
-    "The elastic cross section values"
+    "The large angle elastic cross section values"
   )
   .def_property_readonly(
 

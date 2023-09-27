@@ -24,10 +24,9 @@ void wrapElasticCrossSectionBlock( python::module& module, python::module& ) {
 
     module,
     "ElasticCrossSectionBlock",
-    "The photoatomic SELAS block with the additional electron elastic cross section data\n\n"
+    "The electron SELAS block with the additional electron elastic cross section data\n\n"
     "This block is part of the eprdata14 format.\n\n"
-    "The ElasticCrossSectionBlock class contains 2 arrays\n"
-    "of the same length:\n"
+    "The ElasticCrossSectionBlock class contains 2 arrays of the same length:\n"
     "  - the transport elastic scattering cross section\n"
     "  - the total elastic scattering cross section\n\n"
     "The size NE of each (the total number of electron energy points) is stored in\n"

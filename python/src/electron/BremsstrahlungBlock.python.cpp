@@ -24,10 +24,9 @@ void wrapBremsstrahlungBlock( python::module& module, python::module& ) {
 
     module,
     "BremsstrahlungBlock",
-    "The photoatomic BREML block with the average electron energy after Bremsstrahlung\n\n"
+    "The electron BREML block with the average electron energy after Bremsstrahlung\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The BremsstrahlungBlock class contains 2 arrays of the same\n"
-    "length:\n"
+    "The BremsstrahlungBlock class contains 2 arrays of the same length:\n"
     "  - the energy points\n"
     "  - the average energy remaining after Bremsstrahlung\n\n"
     "The size NBL of each (the total number of energy points) is stored in NXS(12)."

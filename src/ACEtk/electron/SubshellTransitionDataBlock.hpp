@@ -13,7 +13,7 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic and electron RELO and XPROB block with the transition data
+ *  @brief The electron RELO and XPROB block with the transition data
  *
  *  The SubshellTransitionDataBlock class contains the transition data for each
  *  subshell (the number of subshells NSSH is stored in NXS(7)).

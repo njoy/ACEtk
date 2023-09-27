@@ -12,8 +12,7 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic LNEPS, LBEPS and LPIPS block with the electron shell
- *         data
+ *  @brief The electron LNEPS, LBEPS and LPIPS block with the electron shell data
  *
  *  The ElectronShellBlock class contains 3 arrays of the same length:
  *    - the number of electrons for each shell

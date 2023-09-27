@@ -25,9 +25,9 @@ void wrapTabulatedEnergyDistribution( python::module& module, python::module& ) 
     module,
     "TabulatedEnergyDistribution",
     "Tabulated photon energy distribution from Bremsstrahlung for a single incident energy\n\n"
-    "The TabulatedEnergyDistribution class contains the cumulative\n"
-    "density function (CDF) as a function of photon energy for the given incident\n"
-    "energy. It is used in the BREME block."
+    "The TabulatedEnergyDistribution class contains the cumulative density function\n"
+    "(CDF) as a function of photon energy for the given incident energy. It is used\n"
+    "in the BREME block."
   );
 
   // wrap the block

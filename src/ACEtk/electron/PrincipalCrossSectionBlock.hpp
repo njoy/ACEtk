@@ -12,7 +12,7 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic ESZE block with the electron cross section data
+ *  @brief The electron ESZE block with the electron cross section data
  *
  *  This block is part of the eprdata formats.
  *

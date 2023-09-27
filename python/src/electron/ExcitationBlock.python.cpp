@@ -24,10 +24,9 @@ void wrapExcitationBlock( python::module& module, python::module& ) {
 
     module,
     "ExcitationBlock",
-    "The photoatomic EXCIT block with the electron excitation energy loss data\n\n"
+    "The electron EXCIT block with the electron excitation energy loss data\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The ExcitationBlock class contains 2 arrays of the same\n"
-    "length:\n"
+    "The ExcitationBlock class contains 2 arrays of the same length:\n"
     "  - the energy points\n"
     "  - the average excitation energy loss values\n\n"
     "The size NXL of each (the total number of excitation energy points) is\n"

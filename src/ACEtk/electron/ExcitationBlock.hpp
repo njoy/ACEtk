@@ -12,8 +12,7 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic EXCIT block with the electron excitation energy loss
- *         data
+ *  @brief The electron EXCIT block with the electron excitation energy loss data
  *
  *  This block is part of the eprdata formats.
  *

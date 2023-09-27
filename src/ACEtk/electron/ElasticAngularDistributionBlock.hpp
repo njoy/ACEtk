@@ -13,8 +13,8 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic and electron ELASI and ELAS block with the
- *         elastic scattering angular distribution data
+ *  @brief The electron ELASI and ELAS block with the large angle elastic
+ *         scattering angular distribution data
  *
  *  The ElasticAngularDistributionBlock class a list of electron energies
  *  for which angular distribution data is given.

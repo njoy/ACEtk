@@ -12,7 +12,7 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic SUBSH block with the electron subshell data
+ *  @brief The electron SUBSH block with the electron subshell data
  *
  *  This block is part of the eprdata formats.
  *

@@ -26,9 +26,8 @@ void wrapSubshellTransitionData( python::module& module, python::module& ) {
     "SubshellTransitionData",
     "The electron transition data for a given subshell\n\n"
     "This block is part of the eprdata formats.\n\n"
-    "The SubshellTransitionData class contains the transition data\n"
-    "to fill vacancies in the given subshell. Each transition has the following\n"
-    "information associated to it:\n"
+    "The SubshellTransitionData class contains the transition data to fill vacancies\n"
+    "in the given subshell. Each transition has the following information associated to it:\n"
     "  - the primary subshell designator (the designator of the subshell from\n"
     "    where the electron is \"moving\" from)\n"
     "  - the secondary subshell designator (the designator of the subshell from\n"

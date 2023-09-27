@@ -12,7 +12,7 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic SELAS block with the additional electron elastic
+ *  @brief The electron SELAS block with the additional electron elastic
  *         cross section data
  *
  *  This block is part of the eprdata14 format.

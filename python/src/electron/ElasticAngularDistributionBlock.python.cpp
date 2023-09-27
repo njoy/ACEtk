@@ -25,10 +25,10 @@ void wrapElasticAngularDistributionBlock( python::module& module, python::module
 
     module,
     "ElasticAngularDistributionBlock",
-    "The photoatomic and electron ELASI and ELAS block with the elastic scattering\n"
+    "The electron ELASI and ELAS block with the large angle elastic scattering\n"
     "angular distribution data\n\n"
-    "The ElasticAngularDistributionBlock class contains a list of\n"
-    "electron energies for which angular distribution data is given."
+    "The ElasticAngularDistributionBlock class contains a list of electron energies\n"
+    "for which angular distribution data is given."
   );
 
   // wrap the block

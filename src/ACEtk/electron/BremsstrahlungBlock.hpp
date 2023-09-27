@@ -12,8 +12,8 @@ namespace electron {
 
 /**
  *  @class
- *  @brief The photoatomic BREML block with the average electron energy
- *         after Bremsstrahlung
+ *  @brief The electron BREML block with the average electron energy after
+ *         Bremsstrahlung
  *
  *  This block is part of the eprdata formats.
  *

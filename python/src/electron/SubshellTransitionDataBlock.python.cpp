@@ -25,9 +25,9 @@ void wrapSubshellTransitionDataBlock( python::module& module, python::module& ) 
 
     module,
     "SubshellTransitionDataBlock",
-    "The photoatomic and electron RELO and XPROB block with the transition data\n\n"
-    "The SubshellTransitionDataBlock class contains the transition\n"
-    "data for each subshell (the number of subshells NSSH is stored in NXS(7))."
+    "The electron RELO and XPROB block with the transition data\n\n"
+    "The SubshellTransitionDataBlock class contains the transition data for each\n"
+    "subshell (the number of subshells NSSH is stored in NXS(7))."
   );
 
   // wrap the block

@@ -24,7 +24,7 @@ void wrapElectronShellBlock( python::module& module, python::module& ) {
 
     module,
     "ElectronShellBlock",
-    "The photoatomic LNEPS, LBEPS and LPIPS block with the electron shell data\n\n"
+    "The electron LNEPS, LBEPS and LPIPS block with the electron shell data\n\n"
     "The ElectronShellBlock class contains 3 arrays of the same length:\n"
     "  - the number of electrons for each shell\n"
     "  - the binding energy for each shell\n"

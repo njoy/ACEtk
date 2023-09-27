@@ -25,9 +25,9 @@ void wrapTabulatedAngularDistribution( python::module& module, python::module& )
     module,
     "TabulatedAngularDistribution",
     "Tabulated electron angular distribution data for a single incident energy\n\n"
-    "The TabulatedAngularDistribution class contains the cumulative\n"
-    "density function (CDF) as a function of cosine for the given incident\n"
-    "energy. It is used in the ELAS block."
+    "The TabulatedAngularDistribution class contains the cumulative density function\n"
+    "(CDF) as a function of cosine for the given incident energy. It is used in\n"
+    "the ELAS block."
   );
 
   // wrap the block
