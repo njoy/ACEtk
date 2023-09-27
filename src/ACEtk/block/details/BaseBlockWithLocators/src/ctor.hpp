@@ -43,8 +43,10 @@ BaseBlockWithLocators( BaseBlockWithLocators&& base ) :
 /**
  *  @brief Constructor for a block
  *
- *  @param[in] name    the block name
- *  @param[in] data    the data
+ *  @param[in] name       the block name
+ *  @param[in] data       the data
+ *  @param[in] locator    flag to indicate if the L values are to be interpreted
+ *                        as locators or offsets
  */
 BaseBlockWithLocators( std::string name, std::vector< Data > data,
                        bool locator = true ) :
@@ -54,11 +56,13 @@ BaseBlockWithLocators( std::string name, std::vector< Data > data,
 /**
  *  @brief Constructor
  *
- *  @param[in] name    the block name
- *  @param[in] loc     the begin iterator of the LSIG block in the XSS array
- *  @param[in] data    the begin iterator of the SIG block in the XSS array
- *  @param[in] end     the end iterator of the SIG block in the XSS array
- *  @param[in] n       the number of reactions (excluding elastic)
+ *  @param[in] name       the block name
+ *  @param[in] loc        the begin iterator of the LSIG block in the XSS array
+ *  @param[in] data       the begin iterator of the SIG block in the XSS array
+ *  @param[in] end        the end iterator of the SIG block in the XSS array
+ *  @param[in] n          the number of reactions (excluding elastic)
+ *  @param[in] locator    flag to indicate if the L values are to be interpreted
+ *                        as locators or offsets
  */
 BaseBlockWithLocators( std::string name,
                        Iterator loc, Iterator data, Iterator end,

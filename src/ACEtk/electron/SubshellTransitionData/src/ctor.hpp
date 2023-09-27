@@ -6,8 +6,10 @@ SubshellTransitionData( SubshellTransitionData&& ) = default;
 /**
  *  @brief Constructor
  *
- *  @param[in] energies    the energy values
- *  @param[in] loss        the average excitation energy loss values
+ *  @param[in] primary          the primary subshell designators
+ *  @param[in] secondary        the secondary subshell designators
+ *  @param[in] energies         the energy values of the secondary photon or electron
+ *  @param[in] probabilities    the cumulative probabilities of the transitions
  */
 SubshellTransitionData(
     std::vector< unsigned int > primary,
