@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_ELECTRONBREMSTRAHLUNGENERGYDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_ELECTRONBREMSTRAHLUNGENERGYDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_BLOCK_ELECTRONENERGYDISTRIBUTIONBLOCK
+#define NJOY_ACETK_BLOCK_ELECTRONENERGYDISTRIBUTIONBLOCK
 
 // system includes
 
@@ -13,19 +13,20 @@ namespace block {
 
 /**
  *  @class
- *  @brief The photoatomic and electron BREMI and BREME block with the
- *         photon energy distribution data from Bremsstrahlung
+ *  @brief The energy distribution block for photons from Bremsstrahlung or
+ *         knock-on electrons for a specific subshell
  *
- *  The ElectronElasticAngularDistributionBlock class contains a list of
- *  electron energies for which energy distribution data is given.
+ *  The ElectronEnergyDistributionBlock class contains a list of electron
+ *  energies for which energy distribution data is given (for either photons in
+ *  the BREMI/BREME block or electrons in the EION blocks).
  */
-class ElectronBremsstrahlungEnergyDistributionBlock :
+class ElectronEnergyDistributionBlock :
     protected details::BaseElectronBlockWithLocators<
-                  ElectronBremsstrahlungEnergyDistributionBlock,
+                  ElectronEnergyDistributionBlock,
                   ElectronTabulatedEnergyDistribution > {
 
   friend class details::BaseElectronBlockWithLocators<
-                   ElectronBremsstrahlungEnergyDistributionBlock,
+                   ElectronEnergyDistributionBlock,
                    ElectronTabulatedEnergyDistribution >;
 
   /* fields */
@@ -35,7 +36,7 @@ class ElectronBremsstrahlungEnergyDistributionBlock :
 public:
 
   /* constructor */
-  #include "ACEtk/block/ElectronBremsstrahlungEnergyDistributionBlock/src/ctor.hpp"
+  #include "ACEtk/block/ElectronEnergyDistributionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -116,7 +117,8 @@ public:
   using BaseElectronBlockWithLocators::end;
 };
 
-using BREME = ElectronBremsstrahlungEnergyDistributionBlock;
+using BREME = ElectronEnergyDistributionBlock;
+using EION = ElectronEnergyDistributionBlock;
 
 } // block namespace
 } // ACEtk namespace

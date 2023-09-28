@@ -4,11 +4,11 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import ElectronBremsstrahlungEnergyDistributionBlock
+from ACEtk import ElectronEnergyDistributionBlock
 from ACEtk import ElectronTabulatedEnergyDistribution
 
-class Test_ACEtk_ElectronBremsstrahlungEnergyDistributionBlock( unittest.TestCase ) :
-    """Unit test for the ElectronBremsstrahlungEnergyDistributionBlock class."""
+class Test_ACEtk_ElectronEnergyDistributionBlock( unittest.TestCase ) :
+    """Unit test for the ElectronEnergyDistributionBlock class."""
 
     chunk = [ 1e-11, 1e-6, 1e-3, 1.,
                   2,    3,    4,  2,
@@ -64,7 +64,7 @@ class Test_ACEtk_ElectronBremsstrahlungEnergyDistributionBlock( unittest.TestCas
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = ElectronBremsstrahlungEnergyDistributionBlock(
+        chunk = ElectronEnergyDistributionBlock(
                   distributions = [
                       ElectronTabulatedEnergyDistribution( 1e-11, [ 1e-12, 9e-12 ], [ 0., 1. ] ),
                       ElectronTabulatedEnergyDistribution(  1e-6, [ 1e-11, 1e-9, 9e-7 ], [ 0., 0.75, 1. ] ),

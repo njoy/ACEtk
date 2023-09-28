@@ -25,6 +25,21 @@ auto block( std::size_t index ) const {
                                    : begin + end - 1 );
 }
 
+auto electroionisation_block( std::size_t index ) const {
+
+  auto begin = this->data().XSS().begin();
+  auto jxs23 = this->data().JXS( 23 );
+
+  auto nssh = this->NSSH();
+  auto n = *std::next( begin, jxs23 + index - 2 );
+  auto start = std::next( begin, *std::next( begin, jxs23 + nssh + index - 2 ) - 1 );
+  auto end = index != nssh
+             ? std::next( begin, *std::next( begin, jxs23 + nssh + index - 1 ) - 1 )
+             : std::next( begin, this->data().JXS( 24 ) - 1 );
+
+  return std::make_tuple( start, end, n );
+}
+
 void generateBlocks() {
 
   // optional blocks
@@ -85,7 +100,6 @@ void generateBlocks() {
   present = ( this->NEPR() > 0 );
   if ( present ) {
 
-    // electron subshell block and photolectric subshell cross section block
     auto subsh = block( 11 );
     auto sphel = block( 16 );
     this->subsh_ = block::SUBSH( subsh.first, sphel.first, this->NSSH() );
@@ -100,7 +114,15 @@ void generateBlocks() {
     auto elasi = block( 21 );
     auto elas = block( 22 );
     this->elas_ = block::ELAS( elasi.first, elas.second, this->NA() );
-    // electroinionisation tables will go here
+
+    // electronionisation
+    for ( std::size_t index = 1; index <= this->NSSH(); ++index ) {
+
+      auto eion = electroionisation_block( index );
+      this->eion_.emplace_back( std::get< 0 >( eion ), std::get< 1 >( eion ),
+                                std::get< 2 >( eion ) );
+    }
+
     auto bremi = block( 24 );
     auto breme = block( 25 );
     this->breme_ = block::BREME( bremi.first, breme.second, this->NB() );

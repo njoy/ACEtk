@@ -23,6 +23,15 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   using LHNM = njoy::ACEtk::block::LHNM;
   using EPS = njoy::ACEtk::block::EPS;
   using SWD = njoy::ACEtk::block::SWD;
+  using SUBSH = njoy::ACEtk::block::SUBSH;
+  using SPHEL = njoy::ACEtk::block::SPHEL;
+  using XPROB = njoy::ACEtk::block::XPROB;
+  using ESZE = njoy::ACEtk::block::ESZE;
+  using EXCIT = njoy::ACEtk::block::EXCIT;
+  using ELAS = njoy::ACEtk::block::ELAS;
+  using EION = njoy::ACEtk::block::EION;
+  using BREME = njoy::ACEtk::block::BREME;
+  using BREML = njoy::ACEtk::block::BREML;
 
   // wrap views created by this table
 
@@ -42,7 +51,12 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     python::init< unsigned int, HeaderVariant,
                   std::vector< unsigned int >, std::vector< double >,
                   ESZG, JINC, JCOH, LHNM, std::optional< JFLO >,
-                  std::optional< EPS >, std::optional< SWD > >(),
+                  std::optional< EPS >, std::optional< SWD >,
+                  std::optional< SUBSH >, std::optional< SPHEL >,
+                  std::optional< XPROB >, std::optional< ESZE >,
+                  std::optional< EXCIT >, std::optional< ELAS >,
+                  std::vector< EION >, std::optional< BREME >,
+                  std::optional< BREML > >(),
     python::arg( "z" ), python::arg( "header" ),
     python::arg( "za" ), python::arg( "awr" ),
     python::arg( "eszg" ), python::arg( "jinc" ),
@@ -50,6 +64,15 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     python::arg( "jflo" ) = std::nullopt,
     python::arg( "eps" ) = std::nullopt,
     python::arg( "swd" ) = std::nullopt,
+    python::arg( "subsh" ) = std::nullopt,
+    python::arg( "sphel" ) = std::nullopt,
+    python::arg( "xprob" ) = std::nullopt,
+    python::arg( "esze" ) = std::nullopt,
+    python::arg( "excit" ) = std::nullopt,
+    python::arg( "elas" ) = std::nullopt,
+    python::arg( "eion" ) = std::vector< EION >{},
+    python::arg( "breme" ) = std::nullopt,
+    python::arg( "breml" ) = std::nullopt,
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
@@ -62,7 +85,16 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "    lhnm      the heating numbers block\n"
     "    jflo      the fluorescence data block\n"
     "    eps       the electron shell block\n"
-    "    swd       the compton profile block"
+    "    swd       the compton profile block\n"
+    "    subsh     the electron subshell data block\n"
+    "    sphel     the photoelectric cross section block\n"
+    "    xprob     the atomic relaxation data block\n"
+    "    esze      the electron cross section block\n"
+    "    excit     the excitation energy loss data block\n"
+    "    elas      the electron elastic angular distribution block\n"
+    "    eion      the electronionisation data block\n"
+    "    breme     the photon energy distributions from Bremsstrahlung\n"
+    "    breml     the electron average energy after Bremsstrahlung"
   )
   .def_property_readonly(
 
@@ -205,6 +237,30 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "NA",
+    &Table::NA,
+    "The number of energy points with electron elastic angular distributions"
+  )
+  .def_property_readonly(
+
+    "number_electron_elastic_energy_points",
+    &Table::numberElectronElasticEnergyPoints,
+    "The number of energy points with electron elastic angular distributions"
+  )
+  .def_property_readonly(
+
+    "NB",
+    &Table::NB,
+    "The number of energy points with Bremsstrahlung photon energy distributions"
+  )
+  .def_property_readonly(
+
+    "number_electron_bremsstrahlung_energy_points",
+    &Table::numberElectronBremsstrahlungEnergyPoints,
+    "The number of energy points with Bremsstrahlung photon energy distributions"
+  )
+  .def_property_readonly(
+
     "NBL",
     &Table::NBL,
     "The number of electron Bremsstrahlung energy points"
@@ -217,7 +273,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "ESZ",
+    "ESZG",
     &Table::ESZG,
     "The principal cross section block"
   )
@@ -289,6 +345,30 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "EPS",
+    &Table::EPS,
+    "The electron shell block"
+  )
+  .def_property_readonly(
+
+    "electron_shell_block",
+    &Table::electronShellBlock,
+    "The electron shell block"
+  )
+  .def_property_readonly(
+
+    "SWD",
+    &Table::SWD,
+    "The compton profile block"
+  )
+  .def_property_readonly(
+
+    "compton_profile_block",
+    &Table::comptonProfileBlock,
+    "The electron shell block"
+  )
+  .def_property_readonly(
+
     "SUBSH",
     &Table::SUBSH,
     "The electron subshell data block for eprdata (NEPR > 0)"
@@ -334,6 +414,52 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "electron_excitation_energy_loss_block",
     &Table::electronExcitationEnergyLossBlock,
     "The electron excitation energy loss block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "ELAS",
+    &Table::ELAS,
+    "The electron elastic angular distribution block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_elastic_angular_distribution_block",
+    &Table::electronElasticAngularDistributionBlock,
+    "The electron elastic angular distribution block for eprdata (NEPR > 0)"
+  )
+  .def(
+
+    "EION",
+    &Table::EION,
+    python::arg( "index" ),
+    "Return the knock-on electron energy distribution block for a subshell index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "electroionisation_energy_distribution_block",
+    &Table::electroionisationEnergyDistributionBlock,
+    python::arg( "index" ),
+    "Return the knock-on electron energy distribution block for a subshell index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def_property_readonly(
+
+    "BREME",
+    &Table::BREME,
+    "The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "bremsstrahlung_energy_distribution_block",
+    &Table::bremsstrahlungEnergyDistributionBlock,
+    "The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)"
   )
   .def_property_readonly(
 

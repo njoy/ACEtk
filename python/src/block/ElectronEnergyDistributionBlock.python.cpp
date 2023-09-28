@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ElectronBremsstrahlungEnergyDistributionBlock.hpp"
+#include "ACEtk/block/ElectronEnergyDistributionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapElectronBremsstrahlungEnergyDistributionBlock( python::module& module, python::module& ) {
+void wrapElectronEnergyDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ElectronBremsstrahlungEnergyDistributionBlock;
+  using Block = njoy::ACEtk::block::ElectronEnergyDistributionBlock;
   using ElectronTabulatedEnergyDistribution = njoy::ACEtk::block::ElectronTabulatedEnergyDistribution;
 
   // wrap views created by this block
@@ -24,11 +24,12 @@ void wrapElectronBremsstrahlungEnergyDistributionBlock( python::module& module, 
   python::class_< Block > block(
 
     module,
-    "ElectronBremsstrahlungEnergyDistributionBlock",
-    "The photoatomic and electron BREMI and BREME block with the photon energy\n"
-    "distribution data from Bremsstrahlung\n\n"
-    "The ElectronElasticAngularDistributionBlock class contains a list of\n"
-    "electron energies for which energy distribution data is given."
+    "ElectronEnergyDistributionBlock",
+    "The energy distribution block for photons from Bremsstrahlung or knock-on\n"
+    "electrons for a specific subshell\n\n"
+    "The ElectronEnergyDistributionBlock class contains a list of electron energies\n"
+    "for which energy distribution data is given (for either photons in the\n"
+    "BREMI/BREME block or electrons in the EION blocks)."
   );
 
   // wrap the block
