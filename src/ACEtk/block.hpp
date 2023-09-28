@@ -39,7 +39,6 @@
 #include "ACEtk/block/OutgoingEnergyDistributionData.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionData.hpp"
 #include "ACEtk/block/ProbabilityTable.hpp"
-#include "ACEtk/block/DosimetryCrossSectionData.hpp"
 
 #include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
@@ -61,4 +60,3 @@
 #include "ACEtk/block/SecondaryParticleLocatorBlock.hpp"
 #include "ACEtk/block/SecondaryParticleProductionBlock.hpp"
 #include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
-#include "ACEtk/block/DosimetryCrossSectionBlock.hpp"
