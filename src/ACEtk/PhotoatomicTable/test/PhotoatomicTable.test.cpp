@@ -1188,6 +1188,14 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 1.000000000000E-05 == distribution.energy() );
   CHECK( 3 == distribution.numberCosines() );
 
+  CHECK( -1. == Approx( distribution.cosines()[0] ) );
+  CHECK( 9.9999900000E-01 == Approx( distribution.cosines()[1] ) );
+  CHECK(  1. == Approx( distribution.cosines()[2] ) );
+
+  CHECK( 0. == Approx( distribution.cdf()[0] ) );
+  CHECK( 9.9999950000E-01 == Approx( distribution.cdf()[1] ) );
+  CHECK( 1. == Approx( distribution.cdf()[2] ) );
+
   distribution = chunk.ELAS()->distribution(16);
   CHECK( 1e+5 == distribution.energy() );
   CHECK( 91 == distribution.numberCosines() );
@@ -1201,11 +1209,45 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 8 == chunk.EION( 1 ).distributions().size() );
 
   auto eiondistribution = chunk.EION( 1 ).distribution(1);
-  CHECK( 1.361000000000E-05 == eiondistribution.energy() );
+  CHECK( 1.361000000000E-05 == Approx( eiondistribution.energy() ) );
   CHECK( 2 == eiondistribution.numberOutgoingEnergies() );
 
+  eiondistribution = chunk.EION( 1 ).distribution(3);
+  CHECK( 1.000000E-04 == Approx( eiondistribution.energy() ) );
+  CHECK( 14 == eiondistribution.numberOutgoingEnergies() );
+
+  CHECK( 1.000000000000E-07 == Approx( eiondistribution.outgoingEnergies()[0] ) );
+  CHECK( 6.309570000000E-07 == Approx( eiondistribution.outgoingEnergies()[1] ) );
+  CHECK( 1.122020000000E-06 == Approx( eiondistribution.outgoingEnergies()[2] ) );
+  CHECK( 1.995260000000E-06 == Approx( eiondistribution.outgoingEnergies()[3] ) );
+  CHECK( 3.162280000000E-06 == Approx( eiondistribution.outgoingEnergies()[4] ) );
+  CHECK( 5.011870000000E-06 == Approx( eiondistribution.outgoingEnergies()[5] ) );
+  CHECK( 6.309580000000E-06 == Approx( eiondistribution.outgoingEnergies()[6] ) );
+  CHECK( 8.912530000000E-06 == Approx( eiondistribution.outgoingEnergies()[7] ) );
+  CHECK( 1.258930000000E-05 == Approx( eiondistribution.outgoingEnergies()[8] ) );
+  CHECK( 1.584900000000E-05 == Approx( eiondistribution.outgoingEnergies()[9] ) );
+  CHECK( 1.883650000000E-05 == Approx( eiondistribution.outgoingEnergies()[10] ) );
+  CHECK( 2.440620000000E-05 == Approx( eiondistribution.outgoingEnergies()[11] ) );
+  CHECK( 3.162280000000E-05 == Approx( eiondistribution.outgoingEnergies()[12] ) );
+  CHECK( 4.319500000000E-05 == Approx( eiondistribution.outgoingEnergies()[13] ) );
+
+  CHECK( 0.000000000000E+00 == Approx( eiondistribution.cdf()[0] ) );
+  CHECK( 7.331561116464E-02 == Approx( eiondistribution.cdf()[1] ) );
+  CHECK( 1.326897983815E-01 == Approx( eiondistribution.cdf()[2] ) );
+  CHECK( 2.239504599538E-01 == Approx( eiondistribution.cdf()[3] ) );
+  CHECK( 3.239408010297E-01 == Approx( eiondistribution.cdf()[4] ) );
+  CHECK( 4.457028360624E-01 == Approx( eiondistribution.cdf()[5] ) );
+  CHECK( 5.121432582477E-01 == Approx( eiondistribution.cdf()[6] ) );
+  CHECK( 6.122427030250E-01 == Approx( eiondistribution.cdf()[7] ) );
+  CHECK( 7.115063101586E-01 == Approx( eiondistribution.cdf()[8] ) );
+  CHECK( 7.742971020638E-01 == Approx( eiondistribution.cdf()[9] ) );
+  CHECK( 8.177487997791E-01 == Approx( eiondistribution.cdf()[10] ) );
+  CHECK( 8.785708761786E-01 == Approx( eiondistribution.cdf()[11] ) );
+  CHECK( 9.338664910728E-01 == Approx( eiondistribution.cdf()[12] ) );
+  CHECK( 1.000000000000E+00 == Approx( eiondistribution.cdf()[13] ) );
+
   eiondistribution = chunk.EION( 1 ).distribution(8);
-  CHECK( 1e+5 == eiondistribution.energy() );
+  CHECK( 1e+5 == Approx( eiondistribution.energy() ) );
   CHECK( 147 == eiondistribution.numberOutgoingEnergies() );
 
   // BREME block - EPR data file
@@ -1217,11 +1259,55 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 10 == chunk.BREME()->distributions().size() );
 
   auto bremdistribution = chunk.BREME()->distribution(1);
-  CHECK( 1.000000000000E-05 == bremdistribution.energy() );
+  CHECK( 1.000000000000E-05 == Approx( bremdistribution.energy() ) );
   CHECK( 17 == bremdistribution.numberOutgoingEnergies() );
 
+  bremdistribution = chunk.BREME()->distribution(2);
+  CHECK( 2.073600E-05 == Approx( bremdistribution.energy() ) );
+  CHECK( 19 == bremdistribution.numberOutgoingEnergies() );
+
+  CHECK( 1.000000000000E-07 == Approx( bremdistribution.outgoingEnergies()[0] ) );
+  CHECK( 1.460800000000E-07 == Approx( bremdistribution.outgoingEnergies()[1] ) );
+  CHECK( 1.941040000000E-07 == Approx( bremdistribution.outgoingEnergies()[2] ) );
+  CHECK( 2.402240000000E-07 == Approx( bremdistribution.outgoingEnergies()[3] ) );
+  CHECK( 3.307420000000E-07 == Approx( bremdistribution.outgoingEnergies()[4] ) );
+  CHECK( 4.553680000000E-07 == Approx( bremdistribution.outgoingEnergies()[5] ) );
+  CHECK( 6.652010000000E-07 == Approx( bremdistribution.outgoingEnergies()[6] ) );
+  CHECK( 8.838860000000E-07 == Approx( bremdistribution.outgoingEnergies()[7] ) );
+  CHECK( 1.093900000000E-06 == Approx( bremdistribution.outgoingEnergies()[8] ) );
+  CHECK( 1.506090000000E-06 == Approx( bremdistribution.outgoingEnergies()[9] ) );
+  CHECK( 2.073600000000E-06 == Approx( bremdistribution.outgoingEnergies()[10] ) );
+  CHECK( 2.932510000000E-06 == Approx( bremdistribution.outgoingEnergies()[11] ) );
+  CHECK( 4.147200000000E-06 == Approx( bremdistribution.outgoingEnergies()[12] ) );
+  CHECK( 5.865030000000E-06 == Approx( bremdistribution.outgoingEnergies()[13] ) );
+  CHECK( 8.294400000000E-06 == Approx( bremdistribution.outgoingEnergies()[14] ) );
+  CHECK( 1.173010000000E-05 == Approx( bremdistribution.outgoingEnergies()[15] ) );
+  CHECK( 1.658880000000E-05 == Approx( bremdistribution.outgoingEnergies()[16] ) );
+  CHECK( 2.052860000000E-05 == Approx( bremdistribution.outgoingEnergies()[17] ) );
+  CHECK( 2.073600000000E-05 == Approx( bremdistribution.outgoingEnergies()[18] ) );
+
+  CHECK( 0.000000000000E+00 == Approx( bremdistribution.cdf()[0] ) );
+  CHECK( 7.173043318075E-02 == Approx( bremdistribution.cdf()[1] ) );
+  CHECK( 1.249665748251E-01 == Approx( bremdistribution.cdf()[2] ) );
+  CHECK( 1.646566864984E-01 == Approx( bremdistribution.cdf()[3] ) );
+  CHECK( 2.247508182846E-01 == Approx( bremdistribution.cdf()[4] ) );
+  CHECK( 2.848391828607E-01 == Approx( bremdistribution.cdf()[5] ) );
+  CHECK( 3.565273694928E-01 == Approx( bremdistribution.cdf()[6] ) );
+  CHECK( 4.097170294934E-01 == Approx( bremdistribution.cdf()[7] ) );
+  CHECK( 4.493639981010E-01 == Approx( bremdistribution.cdf()[8] ) );
+  CHECK( 5.093809240389E-01 == Approx( bremdistribution.cdf()[9] ) );
+  CHECK( 5.693767769535E-01 == Approx( bremdistribution.cdf()[10] ) );
+  CHECK( 6.345683905906E-01 == Approx( bremdistribution.cdf()[11] ) );
+  CHECK( 6.997311655273E-01 == Approx( bremdistribution.cdf()[12] ) );
+  CHECK( 7.648297087129E-01 == Approx( bremdistribution.cdf()[13] ) );
+  CHECK( 8.298143855346E-01 == Approx( bremdistribution.cdf()[14] ) );
+  CHECK( 8.946128910962E-01 == Approx( bremdistribution.cdf()[15] ) );
+  CHECK( 9.591194227081E-01 == Approx( bremdistribution.cdf()[16] ) );
+  CHECK( 9.981726317539E-01 == Approx( bremdistribution.cdf()[17] ) );
+  CHECK( 1.000000000000E+00 == Approx( bremdistribution.cdf()[18] ) );
+
   bremdistribution = chunk.BREME()->distribution(10);
-  CHECK( 1e+5 == bremdistribution.energy() );
+  CHECK( 1e+5 == Approx( bremdistribution.energy() ) );
   CHECK( 111 == bremdistribution.numberOutgoingEnergies() );
 
   // BREML block - EPR data file
