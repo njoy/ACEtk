@@ -46,3 +46,9 @@ add_python_test( electron.TabulatedAngularDistribution    electron/Test_ACEtk_el
 add_python_test( electron.TabulatedEnergyDistribution     electron/Test_ACEtk_electron_TabulatedEnergyDistribution.py )
 add_python_test( electron.ElasticAngularDistributionBlock electron/Test_ACEtk_electron_ElasticAngularDistributionBlock.py )
 add_python_test( electron.EnergyDistributionBlock         electron/Test_ACEtk_electron_EnergyDistributionBlock.py )
+
+add_python_test( thermal.CrossSectionBlock                 thermal/Test_ACEtk_thermal_CrossSectionBlock.py )
+add_python_test( thermal.DiscreteCosines                   thermal/Test_ACEtk_thermal_DiscreteCosines.py )
+add_python_test( thermal.DiscreteCosinesWithProbability    thermal/Test_ACEtk_thermal_DiscreteCosinesWithProbability.py )
+add_python_test( thermal.ElasticAngularDistributionBlock   thermal/Test_ACEtk_thermal_ElasticAngularDistributionBlock.py )
+add_python_test( thermal.InelasticAngularDistributionBlock thermal/Test_ACEtk_thermal_InelasticAngularDistributionBlock.py )

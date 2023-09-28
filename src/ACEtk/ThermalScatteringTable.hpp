@@ -5,9 +5,9 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/ThermalScatteringCrossSectionBlock.hpp"
-#include "ACEtk/block/ThermalScatteringInelasticAngularDistributionBlock.hpp"
-#include "ACEtk/block/ThermalScatteringElasticAngularDistributionBlock.hpp"
+#include "ACEtk/thermal/CrossSectionBlock.hpp"
+#include "ACEtk/thermal/InelasticAngularDistributionBlock.hpp"
+#include "ACEtk/thermal/ElasticAngularDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {

@@ -140,11 +140,6 @@ if(ACEtk.python)
       python/src/block/SecondaryParticleProductionCrossSectionBlock.python.cpp
       python/src/block/ProbabilityTable.python.cpp
       python/src/block/ProbabilityTableBlock.python.cpp
-      python/src/block/ThermalScatteringCrossSectionBlock.python.cpp
-      python/src/block/ThermalScatteringDiscreteCosines.python.cpp
-      python/src/block/ThermalScatteringDiscreteCosinesWithProbability.python.cpp
-      python/src/block/ThermalScatteringElasticAngularDistributionBlock.python.cpp
-      python/src/block/ThermalScatteringInelasticAngularDistributionBlock.python.cpp
       python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
       python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
       python/src/photoatomic.python.cpp
@@ -172,6 +167,12 @@ if(ACEtk.python)
       python/src/electron/ElasticAngularDistributionBlock.python.cpp
       python/src/electron/TabulatedEnergyDistribution.python.cpp
       python/src/electron/EnergyDistributionBlock.python.cpp
+      python/src/thermal.python.cpp
+      python/src/thermal/CrossSectionBlock.python.cpp
+      python/src/thermal/DiscreteCosines.python.cpp
+      python/src/thermal/DiscreteCosinesWithProbability.python.cpp
+      python/src/thermal/ElasticAngularDistributionBlock.python.cpp
+      python/src/thermal/InelasticAngularDistributionBlock.python.cpp
       python/src/ContinuousEnergyTable.python.cpp
       python/src/DosimetryTable.python.cpp
       python/src/ThermalScatteringTable.python.cpp
