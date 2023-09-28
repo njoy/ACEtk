@@ -6,7 +6,7 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
-#include "ACEtk/block/DosimetryCrossSectionBlock.hpp"
+#include "ACEtk/dosimetry/CrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {

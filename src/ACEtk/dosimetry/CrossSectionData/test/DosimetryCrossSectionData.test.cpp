@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/DosimetryCrossSectionData.hpp"
+#include "ACEtk/dosimetry/CrossSectionData.hpp"
 
 // other includes
 

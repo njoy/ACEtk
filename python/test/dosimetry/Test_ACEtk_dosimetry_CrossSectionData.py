@@ -4,9 +4,9 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import DosimetryCrossSectionData
+from ACEtk.dosimetry import DosimetryCrossSectionData
 
-class Test_ACEtk_DosimetryCrossSectionData( unittest.TestCase ) :
+class Test_ACEtk_dosimetry_DosimetryCrossSectionData( unittest.TestCase ) :
     """Unit test for the DosimetryCrossSectionData class."""
 
     chunk = [ 0, 3, 1., 3., 5., 2., 4., 6. ]

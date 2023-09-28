@@ -85,7 +85,6 @@ if(ACEtk.python)
       python/src/EnergyDistributionType.python.cpp
       python/src/block/InterpolationData.python.cpp
       python/src/block/CrossSectionData.python.cpp
-      python/src/block/DosimetryCrossSectionData.python.cpp
       python/src/block/PrincipalCrossSectionBlock.python.cpp
       python/src/block/PolynomialFissionMultiplicity.python.cpp
       python/src/block/TabulatedFissionMultiplicity.python.cpp
@@ -94,7 +93,6 @@ if(ACEtk.python)
       python/src/block/ReactionQValueBlock.python.cpp
       python/src/block/FrameAndMultiplicityBlock.python.cpp
       python/src/block/CrossSectionBlock.python.cpp
-      python/src/block/DosimetryCrossSectionBlock.python.cpp
       python/src/block/EquiprobableAngularBins.python.cpp
       python/src/block/TabulatedAngularDistribution.python.cpp
       python/src/block/TabulatedAngularDistributionWithProbability.python.cpp
@@ -158,6 +156,9 @@ if(ACEtk.python)
       python/src/photoatomic/ComptonProfile.python.cpp
       python/src/photoatomic/ComptonProfileBlock.python.cpp
       python/src/photoatomic/PhotoelectricCrossSectionBlock.python.cpp
+      python/src/dosimetry.python.cpp
+      python/src/dosimetry/CrossSectionData.python.cpp
+      python/src/dosimetry/CrossSectionBlock.python.cpp
       python/src/electron.python.cpp
       python/src/electron/ElectronShellBlock.python.cpp
       python/src/electron/ElectronSubshellBlock.python.cpp

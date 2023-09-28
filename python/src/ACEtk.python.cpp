@@ -25,6 +25,7 @@ void wrapEnergyDistributionType( python::module&, python::module& );
 
 // declarations - block and component subpackages
 void wrapPhotoatomic( python::module&, python::module& );
+void wrapDosimetry( python::module&, python::module& );
 void wrapElectron( python::module&, python::module& );
 
 namespace block {
@@ -34,7 +35,6 @@ namespace block {
   void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
   void wrapPolynomialFissionMultiplicity( python::module&, python::module& );
   void wrapCrossSectionData( python::module&, python::module& );
-  void wrapDosimetryCrossSectionData( python::module&, python::module& );
   void wrapEquiprobableAngularBins( python::module&, python::module& );
   void wrapTabulatedAngularDistribution( python::module&, python::module& );
   void wrapTabulatedAngularDistributionWithProbability( python::module&, python::module& );
@@ -78,7 +78,6 @@ namespace block {
   void wrapReactionQValueBlock( python::module&, python::module& );
   void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
   void wrapCrossSectionBlock( python::module&, python::module& );
-  void wrapDosimetryCrossSectionBlock( python::module&, python::module& );
   void wrapPhotonProductionCrossSectionBlock( python::module&, python::module& );
   void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapSecondaryParticleAngularDistributionBlock( python::module&, python::module& );
@@ -154,7 +153,6 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapTabulatedFissionMultiplicity( module, viewmodule );
   block::wrapPolynomialFissionMultiplicity( module, viewmodule );
   block::wrapCrossSectionData( module, viewmodule );
-  block::wrapDosimetryCrossSectionData( module, viewmodule );
   block::wrapEquiprobableAngularBins( module, viewmodule );
   block::wrapTabulatedAngularDistribution( module, viewmodule );
   block::wrapTabulatedAngularDistributionWithProbability( module, viewmodule );
@@ -198,7 +196,6 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapReactionQValueBlock( module, viewmodule );
   block::wrapFrameAndMultiplicityBlock( module, viewmodule );
   block::wrapCrossSectionBlock( module, viewmodule );
-  block::wrapDosimetryCrossSectionBlock( module, viewmodule );
   block::wrapPhotonProductionCrossSectionBlock( module, viewmodule );
   block::wrapAngularDistributionBlock( module, viewmodule );
   block::wrapSecondaryParticleAngularDistributionBlock( module, viewmodule );
@@ -221,6 +218,7 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // component and block subpackages
   wrapPhotoatomic( module, viewmodule );
+  wrapDosimetry( module, viewmodule );
   wrapElectron( module, viewmodule );
 
   // wrap ACE table types

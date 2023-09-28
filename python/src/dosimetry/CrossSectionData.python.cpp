@@ -3,14 +3,14 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/DosimetryCrossSectionData.hpp"
+#include "ACEtk/dosimetry/CrossSectionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace dosimetry {
 
 void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
 
@@ -134,4 +134,4 @@ void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // dosimetry namespace

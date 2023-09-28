@@ -28,7 +28,7 @@ class DosimetryCrossSectionData : protected details::BaseTabulatedData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/DosimetryCrossSectionData/src/ctor.hpp"
+  #include "ACEtk/dosimetry/CrossSectionData/src/ctor.hpp"
 
   /**
    *  @brief Return the interpolation data

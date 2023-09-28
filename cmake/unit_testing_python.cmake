@@ -31,6 +31,9 @@ add_python_test( photoatomic.ComptonProfile                    photoatomic/Test_
 add_python_test( photoatomic.ComptonProfileBlock               photoatomic/Test_ACEtk_photoatomic_ComptonProfileBlock.py )
 add_python_test( photoatomic.PhotoelectricCrossSectionBlock    photoatomic/Test_ACEtk_photoatomic_PhotoelectricCrossSectionBlock.py )
 
+add_python_test( dosimetry.CrossSectionBlock dosimetry/Test_ACEtk_dosimetry_CrossSectionBlock.py )
+add_python_test( dosimetry.CrossSectionData  dosimetry/Test_ACEtk_dosimetry_CrossSectionData.py )
+
 add_python_test( electron.ElectronShellBlock              electron/Test_ACEtk_electron_ElectronShellBlock.py )
 add_python_test( electron.ElectronSubshellBlock           electron/Test_ACEtk_electron_ElectronSubshellBlock.py )
 add_python_test( electron.PrincipalCrossSectionBlock      electron/Test_ACEtk_electron_PrincipalCrossSectionBlock.py )

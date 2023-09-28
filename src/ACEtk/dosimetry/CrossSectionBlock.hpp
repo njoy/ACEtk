@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/block/details/BaseBlockWithLocators.hpp"
-#include "ACEtk/block/DosimetryCrossSectionData.hpp"
+#include "ACEtk/dosimetry/CrossSectionData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -35,7 +35,7 @@ class DosimetryCrossSectionBlock :
 public:
 
   /* constructor */
-  #include "ACEtk/block/DosimetryCrossSectionBlock/src/ctor.hpp"
+  #include "ACEtk/dosimetry/CrossSectionBlock/src/ctor.hpp"
 
   /* methods */
 

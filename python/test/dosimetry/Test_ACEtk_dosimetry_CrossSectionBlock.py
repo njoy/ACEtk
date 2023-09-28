@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import DosimetryCrossSectionBlock
-from ACEtk import DosimetryCrossSectionData
+from ACEtk.dosimetry import DosimetryCrossSectionBlock
+from ACEtk.dosimetry import DosimetryCrossSectionData
 
-class Test_ACEtk_DosimetryCrossSectionBlock( unittest.TestCase ) :
+class Test_ACEtk_dosimetry_CrossSectionBlock( unittest.TestCase ) :
     """Unit test for the DosimetryCrossSectionBlock class."""
 
     chunk = [                   1,                  11,
