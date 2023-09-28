@@ -104,6 +104,13 @@ Data generateData( unsigned int z,
     jxs[3] = xss.size() + 1;
     xss.insert( xss.end(), jflo->begin(), jflo->end() );
   }
+  else {
+
+    if ( nepr > 0 ) {
+
+      jxs[3] = xss.size() + 1; // can't have zero in this case
+    }
+  }
   jxs[4] = xss.size() + 1;
   xss.insert( xss.end(), lhnm.begin(), lhnm.end() );
   if ( eps.has_value() ) {
