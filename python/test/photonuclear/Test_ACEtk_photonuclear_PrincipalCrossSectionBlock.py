@@ -4,7 +4,7 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotonuclearPrincipalCrossSectionBlock
+from ACEtk.photonuclear import PhotonuclearPrincipalCrossSectionBlock
 
 class Test_ACEtk_PhotonuclearPrincipalCrossSectionBlock( unittest.TestCase ) :
     """Unit test for the PhotonuclearPrincipalCrossSectionBlock class."""

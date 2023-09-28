@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
 
 // other includes
 

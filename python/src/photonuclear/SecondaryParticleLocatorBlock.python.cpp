@@ -3,16 +3,16 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photonuclear {
 
-void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module& module, python::module& ) {
+void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::block::PhotonuclearSecondaryParticleLocatorBlock;

@@ -5,11 +5,11 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/photonuclear/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
 #include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
-#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"

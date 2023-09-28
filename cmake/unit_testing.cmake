@@ -105,8 +105,8 @@ add_subdirectory( src/ACEtk/thermal/DiscreteCosinesWithProbability/test )
 add_subdirectory( src/ACEtk/thermal/ElasticAngularDistributionBlock/test )
 add_subdirectory( src/ACEtk/thermal/InelasticAngularDistributionBlock/test )
 
-add_subdirectory( src/ACEtk/block/PhotonuclearPrincipalCrossSectionBlock/test )
-add_subdirectory( src/ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/test )
+add_subdirectory( src/ACEtk/photonuclear/PrincipalCrossSectionBlock/test )
+add_subdirectory( src/ACEtk/photonuclear/SecondaryParticleLocatorBlock/test )
 
 add_subdirectory( src/ACEtk/XsdirEntry/test )
 add_subdirectory( src/ACEtk/Xsdir/test )

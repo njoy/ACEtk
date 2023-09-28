@@ -25,6 +25,7 @@ void wrapEnergyDistributionType( python::module&, python::module& );
 
 // declarations - block and component subpackages
 void wrapPhotoatomic( python::module&, python::module& );
+void wrapPhotonuclear( python::module&, python::module& );
 void wrapDosimetry( python::module&, python::module& );
 void wrapElectron( python::module&, python::module& );
 void wrapThermal( python::module&, python::module& );
@@ -91,8 +92,6 @@ namespace block {
   void wrapSecondaryParticleProductionBlock( python::module&, python::module& );
   void wrapSecondaryParticleProductionCrossSectionBlock( python::module&, python::module& );
   void wrapProbabilityTableBlock( python::module&, python::module& );
-  void wrapPhotonuclearPrincipalCrossSectionBlock( python::module&, python::module& );
-  void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -204,11 +203,10 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapSecondaryParticleProductionBlock( module, viewmodule );
   block::wrapSecondaryParticleProductionCrossSectionBlock( module, viewmodule );
   block::wrapProbabilityTableBlock( module, viewmodule );
-  block::wrapPhotonuclearPrincipalCrossSectionBlock( module, viewmodule );
-  block::wrapPhotonuclearSecondaryParticleLocatorBlock( module, viewmodule );
 
   // component and block subpackages
   wrapPhotoatomic( module, viewmodule );
+  wrapPhotonuclear( module, viewmodule );
   wrapDosimetry( module, viewmodule );
   wrapElectron( module, viewmodule );
   wrapThermal( module, viewmodule );

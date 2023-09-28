@@ -4,7 +4,7 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk import PhotonuclearSecondaryParticleLocatorBlock
+from ACEtk.photonuclear import PhotonuclearSecondaryParticleLocatorBlock
 
 class Test_ACEtk_PhotonuclearSecondaryParticleLocatorBlock( unittest.TestCase ) :
     """Unit test for the PhotonuclearSecondaryParticleLocatorBlock class."""

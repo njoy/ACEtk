@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTONUCLEARSECONDARYPARTICLELOCATORBLOCK
-#define NJOY_ACETK_BLOCK_PHOTONUCLEARSECONDARYPARTICLELOCATORBLOCK
+#ifndef NJOY_ACETK_PHOTONUCLEAR_SECONDARYPARTICLELOCATORBLOCK
+#define NJOY_ACETK_PHOTONUCLEAR_SECONDARYPARTICLELOCATORBLOCK
 
 // system includes
 
@@ -26,13 +26,13 @@ class PhotonuclearSecondaryParticleLocatorBlock : protected details::Base {
   unsigned int ntype_ = 0;
 
   /* auxiliary functions */
-  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/verifySize.hpp"
+  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/generateXSS.hpp"
+  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/ctor.hpp"
+  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/ctor.hpp"
 
   /* methods */
 

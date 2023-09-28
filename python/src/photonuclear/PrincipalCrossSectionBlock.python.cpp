@@ -3,16 +3,16 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/photonuclear/PrincipalCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photonuclear {
 
-void wrapPhotonuclearPrincipalCrossSectionBlock( python::module& module, python::module& ) {
+void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::block::PhotonuclearPrincipalCrossSectionBlock;
