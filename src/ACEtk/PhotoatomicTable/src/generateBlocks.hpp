@@ -88,7 +88,7 @@ void generateBlocks() {
     // electron shell block
     auto locators = block( 6 );
     iterators = block( 8 );
-    this->eps_ = block::EPS( locators.first, iterators.second, this->NSH() );
+    this->eps_ = electron::EPS( locators.first, iterators.second, this->NSH() );
 
     // compton profile block
     locators = block( 9 );
@@ -102,18 +102,18 @@ void generateBlocks() {
 
     auto subsh = block( 11 );
     auto sphel = block( 16 );
-    this->subsh_ = block::SUBSH( subsh.first, sphel.first, this->NSSH() );
+    this->subsh_ = electron::SUBSH( subsh.first, sphel.first, this->NSSH() );
     this->sphel_ = photoatomic::SPHEL( sphel.first, sphel.second, this->NSSH(), this->NES() );
     auto relo = block( 17 );
     auto xprob = block( 18 );
-    this->xprob_ = block::XPROB( relo.first, xprob.first, xprob.second, this->NSSH() );
+    this->xprob_ = electron::XPROB( relo.first, xprob.first, xprob.second, this->NSSH() );
     auto esze = block( 19 );
-    this->esze_ = block::ESZE( esze.first, esze.second, this->NSSH(), this->NE() );
+    this->esze_ = electron::ESZE( esze.first, esze.second, this->NSSH(), this->NE() );
     auto excit = block( 20 );
-    this->excit_ = block::EXCIT( excit.first, excit.second, this->NXL() );
+    this->excit_ = electron::EXCIT( excit.first, excit.second, this->NXL() );
     auto elasi = block( 21 );
     auto elas = block( 22 );
-    this->elas_ = block::ELAS( elasi.first, elas.second, this->NA() );
+    this->elas_ = electron::ELAS( elasi.first, elas.second, this->NA() );
 
     // electronionisation
     for ( std::size_t index = 1; index <= this->NSSH(); ++index ) {
@@ -125,15 +125,15 @@ void generateBlocks() {
 
     auto bremi = block( 24 );
     auto breme = block( 25 );
-    this->breme_ = block::BREME( bremi.first, breme.second, this->NB() );
+    this->breme_ = electron::BREME( bremi.first, breme.second, this->NB() );
     auto breml = block( 26 );
-    this->breml_ = block::BREML( breml.first, breml.second, this->NBL() );
+    this->breml_ = electron::BREML( breml.first, breml.second, this->NBL() );
 
     present = ( this->NEPR() == 3 );
     if ( present ) {
 
       auto selas = block( 27 );
-      this->selas_ = block::SELAS( selas.first, selas.second, this->NE() );
+      this->selas_ = electron::SELAS( selas.first, selas.second, this->NE() );
     }
   }
 }
