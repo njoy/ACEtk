@@ -1,6 +1,6 @@
 static std::vector< double >
 generateXSS(
-  std::vector< std::vector< ThermalScatteringDiscreteCosines > >&& cosines,
+  std::vector< std::vector< DiscreteCosines > >&& cosines,
   std::size_t ) {
 
   std::vector< double > xss;
@@ -29,7 +29,7 @@ generateXSS(
 
 static std::vector< double >
 generateXSS(
-  std::vector< std::vector< ThermalScatteringDiscreteCosinesWithProbability > >&& cosines,
+  std::vector< std::vector< DiscreteCosinesWithProbability > >&& cosines,
   std::size_t locb ) {
 
   const auto size = cosines.size();

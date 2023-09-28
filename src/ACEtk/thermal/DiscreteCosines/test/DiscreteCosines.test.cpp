@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ThermalScatteringDiscreteCosines = block::ThermalScatteringDiscreteCosines;
+using DiscreteCosines = thermal::DiscreteCosines;
 
 std::vector< double > chunk();
-void verifyChunk( const ThermalScatteringDiscreteCosines& );
+void verifyChunk( const DiscreteCosines& );
 
-SCENARIO( "ThermalScatteringDiscreteCosines" ) {
+SCENARIO( "DiscreteCosines" ) {
 
-  GIVEN( "valid data for a ThermalScatteringDiscreteCosines instance" ) {
+  GIVEN( "valid data for a DiscreteCosines instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -29,10 +29,9 @@ SCENARIO( "ThermalScatteringDiscreteCosines" ) {
         0.9625, 0.975, 1.0
       };
 
-      ThermalScatteringDiscreteCosines chunk( energy,
-                                                      std::move( cosines ) );
+      DiscreteCosines chunk( energy, std::move( cosines ) );
 
-      THEN( "a ThermalScatteringDiscreteCosines can be constructed "
+      THEN( "a DiscreteCosines can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -50,9 +49,9 @@ SCENARIO( "ThermalScatteringDiscreteCosines" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringDiscreteCosines chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosines chunk( 33, xss.begin(), xss.end() );
 
-      THEN( "a ThermalScatteringDiscreteCosines can be constructed "
+      THEN( "a DiscreteCosines can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -87,11 +86,11 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const ThermalScatteringDiscreteCosines& chunk ) {
+void verifyChunk( const DiscreteCosines& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );
-  CHECK( "ThermalScatteringDiscreteCosines" == chunk.name() );
+  CHECK( "DiscreteCosines" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.energy() ) );
   CHECK( 33 == chunk.numberDiscreteCosines() );

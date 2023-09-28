@@ -15,7 +15,7 @@ namespace thermal {
 void wrapCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ThermalScatteringCrossSectionBlock;
+  using Block = njoy::ACEtk::thermal::CrossSectionBlock;
 
   // wrap views created by this block
 
@@ -23,8 +23,8 @@ void wrapCrossSectionBlock( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "ThermalScatteringCrossSectionBlock",
-    "The inelastic thermal scattering cross section block"
+    "CrossSectionBlock",
+    "The thermal scattering cross section block"
   );
 
   // wrap the block

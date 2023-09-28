@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ThermalScatteringDiscreteCosinesWithProbability = block::ThermalScatteringDiscreteCosinesWithProbability;
+using DiscreteCosinesWithProbability = thermal::DiscreteCosinesWithProbability;
 
 std::vector< double > chunk();
-void verifyChunk( const ThermalScatteringDiscreteCosinesWithProbability& );
+void verifyChunk( const DiscreteCosinesWithProbability& );
 
-SCENARIO( "ThermalScatteringDiscreteCosinesWithProbability" ) {
+SCENARIO( "DiscreteCosinesWithProbability" ) {
 
-  GIVEN( "valid data for a ThermalScatteringDiscreteCosinesWithProbability instance" ) {
+  GIVEN( "valid data for a DiscreteCosinesWithProbability instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -31,10 +31,10 @@ SCENARIO( "ThermalScatteringDiscreteCosinesWithProbability" ) {
         0.9625, 0.975, 1.0
       };
 
-      ThermalScatteringDiscreteCosinesWithProbability
+      DiscreteCosinesWithProbability
       chunk( energy, pdf, cdf, std::move( cosines ) );
 
-      THEN( "a ThermalScatteringDiscreteCosinesWithProbability can be constructed "
+      THEN( "a DiscreteCosinesWithProbability can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -52,9 +52,9 @@ SCENARIO( "ThermalScatteringDiscreteCosinesWithProbability" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringDiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
 
-      THEN( "a ThermalScatteringDiscreteCosinesWithProbability can be constructed "
+      THEN( "a DiscreteCosinesWithProbability can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -89,11 +89,11 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const ThermalScatteringDiscreteCosinesWithProbability& chunk ) {
+void verifyChunk( const DiscreteCosinesWithProbability& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 36 == chunk.length() );
-  CHECK( "ThermalScatteringDiscreteCosinesWithProbability" == chunk.name() );
+  CHECK( "DiscreteCosinesWithProbability" == chunk.name() );
 
   CHECK( 2.1 == Approx( chunk.energy() ) );
   CHECK( 0.5 == Approx( chunk.pdf() ) );

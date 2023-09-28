@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.thermal import ThermalScatteringElasticAngularDistributionBlock
+from ACEtk.thermal import ElasticAngularDistributionBlock
 
 class Test_ACEtk_thermal_ElasticAngularDistributionBlock( unittest.TestCase ) :
-    """Unit test for the ThermalScatteringElasticAngularDistributionBlock class."""
+    """Unit test for the ElasticAngularDistributionBlock class."""
 
     chunk = [  -1.00000000000E+00, -0.90000000000E+00,  1.00000000000E+00,
                -1.00000000000E+00,  0.00000000000E+00,  1.00000000000E+00,
@@ -21,7 +21,7 @@ class Test_ACEtk_thermal_ElasticAngularDistributionBlock( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 12, chunk.length )
-            self.assertEqual( "ThermalScatteringElasticAngularDistributionBlock", chunk.name )
+            self.assertEqual( "ElasticAngularDistributionBlock", chunk.name )
 
             self.assertEqual( 4, chunk.NE )
             self.assertEqual( 4, chunk.number_incident_energies )
@@ -61,7 +61,7 @@ class Test_ACEtk_thermal_ElasticAngularDistributionBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = ThermalScatteringElasticAngularDistributionBlock(
+        chunk = ElasticAngularDistributionBlock(
                     cosines = [ [ -1.0, -0.9, 1.0 ], [ -1.0, 0.0, 1.0 ],
                                 [ -1.0, 0.5, 1.0 ], [ -1.0, 0.9, 1.0 ] ] )
 

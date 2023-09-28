@@ -15,7 +15,7 @@ namespace thermal {
 void wrapDiscreteCosines( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ThermalScatteringDiscreteCosines;
+  using Block = njoy::ACEtk::thermal::DiscreteCosines;
 
   // wrap views created by this block
 
@@ -23,12 +23,12 @@ void wrapDiscreteCosines( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "ThermalScatteringDiscreteCosines",
+    "DiscreteCosines",
     "Discrete cosines for a single outgoing energy value used in thermal "
     "scattering secondary particle distributions\n\n"
-    "The ThermalScatteringDiscreteCosines class contains an outgoing\n"
-    "energy value and the associated discrete cosine values. It is used in the\n"
-    "ITXE block (for inelastic thermal scattering data) when IFENG = 0 or 1."
+    "The DiscreteCosines class contains an outgoing energy value and the\n"
+    "associated discrete cosine values. It is used in the ITXE block (for\n"
+    "inelastic thermal scattering data) when IFENG = 0 or 1."
   );
 
   // wrap the block

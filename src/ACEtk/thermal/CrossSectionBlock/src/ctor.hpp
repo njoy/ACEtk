@@ -1,7 +1,7 @@
-ThermalScatteringCrossSectionBlock() = default;
+CrossSectionBlock() = default;
 
-ThermalScatteringCrossSectionBlock( const ThermalScatteringCrossSectionBlock& ) = default;
-ThermalScatteringCrossSectionBlock( ThermalScatteringCrossSectionBlock&& ) = default;
+CrossSectionBlock( const CrossSectionBlock& ) = default;
+CrossSectionBlock( CrossSectionBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -9,9 +9,8 @@ ThermalScatteringCrossSectionBlock( ThermalScatteringCrossSectionBlock&& ) = def
  *  @param[in] energies    the energies
  *  @param[in] xs          the cross section values
  */
-ThermalScatteringCrossSectionBlock( std::vector< double > energies,
-                                      std::vector< double > xs ) :
-  ColumnData( "ThermalScatteringCrossSectionBlock",
+CrossSectionBlock( std::vector< double > energies, std::vector< double > xs ) :
+  ColumnData( "CrossSectionBlock",
               std::move( energies ), std::move( xs ) ) {}
 
 /**
@@ -20,8 +19,8 @@ ThermalScatteringCrossSectionBlock( std::vector< double > energies,
  *  @param[in] begin    the begin iterator of the thermal scattering cross section block
  *  @param[in] end      the end iterator of the thermal scattering cross section block
  */
-ThermalScatteringCrossSectionBlock( Iterator begin, Iterator end ) :
-  ColumnData( "ThermalScatteringCrossSectionBlock", begin, end, 2 ) {}
+CrossSectionBlock( Iterator begin, Iterator end ) :
+  ColumnData( "CrossSectionBlock", begin, end, 2 ) {}
 
-ThermalScatteringCrossSectionBlock& operator=( const ThermalScatteringCrossSectionBlock& ) = default;
-ThermalScatteringCrossSectionBlock& operator=( ThermalScatteringCrossSectionBlock&& ) = default;
+CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
+CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;

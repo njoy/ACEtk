@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_THERMALSCATTERINGINELASTCANGULARDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_THERMALSCATTERINGINELASTCANGULARDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_THERMAL_INELASTICANGULARDISTRIBUTIONBLOCK
+#define NJOY_ACETK_THERMAL_INELASTICANGULARDISTRIBUTIONBLOCK
 
 // system includes
 #include <variant>
@@ -11,24 +11,23 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace thermal {
 
 /**
  *  @class
  *  @brief The angular distribution block for inelastic thermal scattering
  *
- *  The ThermalScatteringInelasticAngularDistributionBlock class contains
- *  the equiprobable set or a skewed distribution of discrete cosines, or a
- *  tabulated probability distribution.
+ *  The InelasticAngularDistributionBlock class contains the equiprobable set or
+ *  a skewed distribution of discrete cosines, or a tabulated probability
+ *  distribution.
  */
-class ThermalScatteringInelasticAngularDistributionBlock : protected details::Base {
+class InelasticAngularDistributionBlock : protected block::details::Base {
 
 public:
 
   /* type alias */
-  using AngularDistributionData =
-  std::variant< ThermalScatteringDiscreteCosines,
-                ThermalScatteringDiscreteCosinesWithProbability >;
+  using AngularDistributionData = std::variant< DiscreteCosines,
+                                                DiscreteCosinesWithProbability >;
 
 private:
 
@@ -217,9 +216,9 @@ public:
   using Base::end;
 };
 
-using ITXE = ThermalScatteringInelasticAngularDistributionBlock;
+using ITXE = InelasticAngularDistributionBlock;
 
-} // block namespace
+} // thermal namespace
 } // ACEtk namespace
 } // njoy namespace
 

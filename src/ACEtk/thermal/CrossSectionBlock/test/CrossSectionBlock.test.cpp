@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ThermalScatteringCrossSectionBlock = block::ThermalScatteringCrossSectionBlock;
+using CrossSectionBlock = thermal::CrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ThermalScatteringCrossSectionBlock& );
+void verifyChunk( const CrossSectionBlock& );
 
-SCENARIO( "ThermalScatteringCrossSectionBlock" ) {
+SCENARIO( "CrossSectionBlock" ) {
 
-  GIVEN( "valid data for a ThermalScatteringCrossSectionBlock instance" ) {
+  GIVEN( "valid data for a CrossSectionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -23,10 +23,10 @@ SCENARIO( "ThermalScatteringCrossSectionBlock" ) {
       std::vector< double > energies = { 10., 20., 30., 40. };
       std::vector< double > xs = { 1., 2., 3., 4. };
 
-      ThermalScatteringCrossSectionBlock chunk( std::move( energies ),
+      CrossSectionBlock chunk( std::move( energies ),
                                                   std::move( xs ) );
 
-      THEN( "a ThermalScatteringCrossSectionBlock can be constructed and "
+      THEN( "a CrossSectionBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -44,9 +44,9 @@ SCENARIO( "ThermalScatteringCrossSectionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringCrossSectionBlock chunk( xss.begin(), xss.end() );
+      CrossSectionBlock chunk( xss.begin(), xss.end() );
 
-      THEN( "a ThermalScatteringCrossSectionBlock can be constructed and "
+      THEN( "a CrossSectionBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( chunk );
@@ -74,11 +74,11 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const ThermalScatteringCrossSectionBlock& chunk ) {
+void verifyChunk( const CrossSectionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 9 == chunk.length() );
-  CHECK( "ThermalScatteringCrossSectionBlock" == chunk.name() );
+  CHECK( "CrossSectionBlock" == chunk.name() );
 
   CHECK( 4 == chunk.NE() );
   CHECK( 4 == chunk.numberIncidentEnergies() );

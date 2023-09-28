@@ -15,7 +15,7 @@ namespace thermal {
 void wrapDiscreteCosinesWithProbability( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ThermalScatteringDiscreteCosinesWithProbability;
+  using Block = njoy::ACEtk::thermal::DiscreteCosinesWithProbability;
 
   // wrap views created by this block
 
@@ -23,14 +23,14 @@ void wrapDiscreteCosinesWithProbability( python::module& module, python::module&
   python::class_< Block > block(
 
     module,
-    "ThermalScatteringDiscreteCosinesWithProbability",
+    "DiscreteCosinesWithProbability",
     "Discrete cosines for a single outgoing energy value used in thermal "
     "scattering secondary particle distributions\n\n"
-    "The ThermalScatteringDiscreteCosinesWithProbability class contains an outgoing\n"
-    "energy value, the corresponding pdf and cdf value and the associated\n"
-    "discrete cosine values. It is used in the ITXE block (for inelastic thermal\n"
-    "scattering data) when IFENG = 2. This is the current standard ACE format\n"
-    "used in inelastic thermal scattering."
+    "The DiscreteCosinesWithProbability class contains an outgoing energy value,\n"
+    "the corresponding pdf and cdf value and the associated discrete cosine values.\n"
+    "It is used in the ITXE block (for inelastic thermal scattering data) when\n"
+    "IFENG = 2. This is the current standard ACE format used in inelastic thermal\n"
+    "scattering."
   );
 
   // wrap the block

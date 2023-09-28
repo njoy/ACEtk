@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_THERMALSCATTERINGDISCRETECOSINESWITHPROBABILITY
-#define NJOY_ACETK_BLOCK_THERMALSCATTERINGDISCRETECOSINESWITHPROBABILITY
+#ifndef NJOY_ACETK_THERMAL_DISCRETECOSINESWITHPROBABILITY
+#define NJOY_ACETK_THERMAL_DISCRETECOSINESWITHPROBABILITY
 
 // system includes
 
@@ -8,20 +8,20 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace thermal {
 
 /**
  *  @class
  *  @brief Discrete cosines for a single outgoing energy value used
  *         in thermal scattering secondary particle distributions
  *
- *  The ThermalScatteringDiscreteCosinesWithProbability class contains an outgoing
- *  energy value, the corresponding pdf and cdf value and the associated
- *  discrete cosine values. It is used in the ITXE block (for inelastic thermal
- *  scattering data) when IFENG = 2. This is the current standard ACE format
- *  used in inelastic thermal scattering.
+ *  The DiscreteCosinesWithProbability class contains an outgoing energy value,
+ *  the corresponding pdf and cdf value and the associated discrete cosine
+ *  values. It is used in the ITXE block (for inelastic thermal scattering data)
+ *  when IFENG = 2. This is the current standard ACE format used in inelastic
+ *  thermal scattering.
  */
-class ThermalScatteringDiscreteCosinesWithProbability : protected details::Base {
+class DiscreteCosinesWithProbability : protected block::details::Base {
 
   /* fields */
   std::size_t ncosines_ = 0;
@@ -76,7 +76,7 @@ public:
   using Base::end;
 };
 
-} // block namespace
+} // thermal namespace
 } // ACEtk namespace
 } // njoy namespace
 

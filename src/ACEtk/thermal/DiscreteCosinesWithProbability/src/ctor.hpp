@@ -1,7 +1,7 @@
-ThermalScatteringDiscreteCosinesWithProbability() = default;
+DiscreteCosinesWithProbability() = default;
 
-ThermalScatteringDiscreteCosinesWithProbability( const ThermalScatteringDiscreteCosinesWithProbability& ) = default;
-ThermalScatteringDiscreteCosinesWithProbability( ThermalScatteringDiscreteCosinesWithProbability&& ) = default;
+DiscreteCosinesWithProbability( const DiscreteCosinesWithProbability& ) = default;
+DiscreteCosinesWithProbability( DiscreteCosinesWithProbability&& ) = default;
 
 /**
  *  @brief Constructor
@@ -11,10 +11,10 @@ ThermalScatteringDiscreteCosinesWithProbability( ThermalScatteringDiscreteCosine
  *  @param[in] cdf        the cdf value
  *  @param[in] cosines    the cosine values
  */
-ThermalScatteringDiscreteCosinesWithProbability(
+DiscreteCosinesWithProbability(
     double energy, double pdf, double cdf,
     std::vector< double > cosines ) :
-  Base( "ThermalScatteringDiscreteCosinesWithProbability",
+  Base( "DiscreteCosinesWithProbability",
         generateXSS( energy, pdf, cdf, std::move( cosines ) ) ),
   ncosines_( cosines.size() ) {
 
@@ -28,14 +28,14 @@ ThermalScatteringDiscreteCosinesWithProbability(
  *  @param[in] begin       the begin iterator of the equiprobable bin data
  *  @param[in] end         the end iterator of the equiprobable bin data
  */
-ThermalScatteringDiscreteCosinesWithProbability(
+DiscreteCosinesWithProbability(
     std::size_t ncosines,
     Iterator begin, Iterator end ) :
-  Base( "ThermalScatteringDiscreteCosinesWithProbability", begin, end ),
+  Base( "DiscreteCosinesWithProbability", begin, end ),
   ncosines_( ncosines ) {
 
   verifySize( this->begin(), this->end(), this->numberDiscreteCosines() );
 }
 
-ThermalScatteringDiscreteCosinesWithProbability& operator=( const ThermalScatteringDiscreteCosinesWithProbability& ) = default;
-ThermalScatteringDiscreteCosinesWithProbability& operator=( ThermalScatteringDiscreteCosinesWithProbability&& ) = default;
+DiscreteCosinesWithProbability& operator=( const DiscreteCosinesWithProbability& ) = default;
+DiscreteCosinesWithProbability& operator=( DiscreteCosinesWithProbability&& ) = default;

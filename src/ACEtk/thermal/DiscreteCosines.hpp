@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_THERMALSCATTERINGDISCRETECOSINES
-#define NJOY_ACETK_BLOCK_THERMALSCATTERINGDISCRETECOSINES
+#ifndef NJOY_ACETK_THERMAL_DISCRETECOSINES
+#define NJOY_ACETK_THERMAL_DISCRETECOSINES
 
 // system includes
 
@@ -8,18 +8,18 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace thermal {
 
 /**
  *  @class
  *  @brief Discrete cosines for a single outgoing energy value used
  *         in thermal scattering secondary particle distributions
  *
- *  The ThermalScatteringDiscreteCosines class contains an outgoing
- *  energy value and the associated discrete cosine values. It is used in the
- *  ITXE block (for inelastic thermal scattering data) when IFENG = 0 or 1.
+ *  The DiscreteCosines class contains an outgoing energy value and the
+ *  associated discrete cosine values. It is used in the ITXE block (for
+ *  inelastic thermal scattering data) when IFENG = 0 or 1.
  */
-class ThermalScatteringDiscreteCosines : protected details::Base {
+class DiscreteCosines : protected block::details::Base {
 
   /* fields */
   std::size_t ncosines_ = 0;
@@ -64,7 +64,7 @@ public:
   using Base::end;
 };
 
-} // block namespace
+} // thermal namespace
 } // ACEtk namespace
 } // njoy namespace
 

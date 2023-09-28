@@ -1,16 +1,15 @@
-ThermalScatteringElasticAngularDistributionBlock() = default;
+ElasticAngularDistributionBlock() = default;
 
-ThermalScatteringElasticAngularDistributionBlock( const ThermalScatteringElasticAngularDistributionBlock& ) = default;
-ThermalScatteringElasticAngularDistributionBlock( ThermalScatteringElasticAngularDistributionBlock&& ) = default;
+ElasticAngularDistributionBlock( const ElasticAngularDistributionBlock& ) = default;
+ElasticAngularDistributionBlock( ElasticAngularDistributionBlock&& ) = default;
 
 /**
  *  @brief Constructor
  *
  *  @param[in] cosines    the discrete cosine values for each incident energy
  */
-ThermalScatteringElasticAngularDistributionBlock(
-    std::vector< std::vector< double > > cosines ) :
-  ArrayData( "ThermalScatteringElasticAngularDistributionBlock",
+ElasticAngularDistributionBlock( std::vector< std::vector< double > > cosines ) :
+  ArrayData( "ElasticAngularDistributionBlock",
              std::move( cosines ) ) {}
 
 /**
@@ -21,11 +20,11 @@ ThermalScatteringElasticAngularDistributionBlock(
  *  @param[in] ne         the number of incident energies
  *  @param[in] nc         the number of discrete cosines per incident energy
  */
-ThermalScatteringElasticAngularDistributionBlock(
+ElasticAngularDistributionBlock(
     Iterator begin, Iterator end,
     std::size_t ne, std::size_t nc ) :
-  ArrayData( "ThermalScatteringElasticAngularDistributionBlock",
+  ArrayData( "ElasticAngularDistributionBlock",
              begin, end, nc, ne ) {}
 
-ThermalScatteringElasticAngularDistributionBlock& operator=( const ThermalScatteringElasticAngularDistributionBlock& ) = default;
-ThermalScatteringElasticAngularDistributionBlock& operator=( ThermalScatteringElasticAngularDistributionBlock&& ) = default;
+ElasticAngularDistributionBlock& operator=( const ElasticAngularDistributionBlock& ) = default;
+ElasticAngularDistributionBlock& operator=( ElasticAngularDistributionBlock&& ) = default;

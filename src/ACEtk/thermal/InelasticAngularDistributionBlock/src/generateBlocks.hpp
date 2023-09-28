@@ -13,7 +13,7 @@ void generateBlocks() {
       for ( unsigned int outgoing = 1; outgoing <= nieb; ++outgoing ) {
 
         end = current + nc + 1;
-        data.emplace_back( ThermalScatteringDiscreteCosines( nc, current, end ) );
+        data.emplace_back( DiscreteCosines( nc, current, end ) );
         current = end;
       }
       this->data_.emplace_back( std::move( data ) );
@@ -34,7 +34,7 @@ void generateBlocks() {
       for ( unsigned int outgoing = 1; outgoing <= nieb; ++outgoing ) {
 
         end = outgoing == nieb ? next : current + nc + 3;
-        data.emplace_back( ThermalScatteringDiscreteCosinesWithProbability( nc, current, end ) );
+        data.emplace_back( DiscreteCosinesWithProbability( nc, current, end ) );
         current = end;
       }
       this->data_.emplace_back( std::move( data ) );

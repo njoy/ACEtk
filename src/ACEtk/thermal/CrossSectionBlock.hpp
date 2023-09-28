@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_THERMALSCATTERINGCROSSSECTIONBLOCK
-#define NJOY_ACETK_BLOCK_THERMALSCATTERINGCROSSSECTIONBLOCK
+#ifndef NJOY_ACETK_THERMAL_CROSSSECTIONBLOCK
+#define NJOY_ACETK_THERMAL_CROSSSECTIONBLOCK
 
 // system includes
 
@@ -8,13 +8,13 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace thermal {
 
 /**
  *  @class
  *  @brief The thermal scattering cross section block
  */
-class ThermalScatteringCrossSectionBlock : protected details::ColumnData {
+class CrossSectionBlock : protected block::details::ColumnData {
 
   /* fields */
 
@@ -53,11 +53,11 @@ public:
   using ColumnData::end;
 };
 
-using ITIE = ThermalScatteringCrossSectionBlock;
-using ITCE = ThermalScatteringCrossSectionBlock;
-using ITCEI = ThermalScatteringCrossSectionBlock;
+using ITIE = CrossSectionBlock;
+using ITCE = CrossSectionBlock;
+using ITCEI = CrossSectionBlock;
 
-} // block namespace
+} // thermal namespace
 } // ACEtk namespace
 } // njoy namespace
 

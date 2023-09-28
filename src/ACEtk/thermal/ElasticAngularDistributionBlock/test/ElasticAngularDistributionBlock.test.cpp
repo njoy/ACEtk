@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ThermalScatteringElasticAngularDistributionBlock = block::ThermalScatteringElasticAngularDistributionBlock;
+using ElasticAngularDistributionBlock = thermal::ElasticAngularDistributionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ThermalScatteringElasticAngularDistributionBlock& );
+void verifyChunk( const ElasticAngularDistributionBlock& );
 
-SCENARIO( "ThermalScatteringElasticAngularDistributionBlock" ) {
+SCENARIO( "ElasticAngularDistributionBlock" ) {
 
-  GIVEN( "valid data for a ThermalScatteringElasticAngularDistributionBlock instance" ) {
+  GIVEN( "valid data for a ElasticAngularDistributionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -26,9 +26,9 @@ SCENARIO( "ThermalScatteringElasticAngularDistributionBlock" ) {
         { -1.0, 0.9, 1.0 }
       };
 
-      ThermalScatteringElasticAngularDistributionBlock chunk( std::move( cosines ) );
+      ElasticAngularDistributionBlock chunk( std::move( cosines ) );
 
-      THEN( "a ThermalScatteringElasticAngularDistributionBlock can be constructed "
+      THEN( "a ElasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -46,10 +46,10 @@ SCENARIO( "ThermalScatteringElasticAngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringElasticAngularDistributionBlock chunk( xss.begin(), xss.end(),
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(),
                                                               4, 3 );
 
-      THEN( "a ThermalScatteringElasticAngularDistributionBlock can be constructed "
+      THEN( "a ElasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -78,11 +78,11 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const ThermalScatteringElasticAngularDistributionBlock& chunk ) {
+void verifyChunk( const ElasticAngularDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 12 == chunk.length() );
-  CHECK( "ThermalScatteringElasticAngularDistributionBlock" == chunk.name() );
+  CHECK( "ElasticAngularDistributionBlock" == chunk.name() );
 
   CHECK( 4 == chunk.NE() );
   CHECK( 4 == chunk.numberIncidentEnergies() );

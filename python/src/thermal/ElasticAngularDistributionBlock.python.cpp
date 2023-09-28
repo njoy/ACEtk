@@ -15,7 +15,7 @@ namespace thermal {
 void wrapElasticAngularDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ThermalScatteringElasticAngularDistributionBlock;
+  using Block = njoy::ACEtk::thermal::ElasticAngularDistributionBlock;
 
   // wrap views created by this block
 
@@ -23,11 +23,10 @@ void wrapElasticAngularDistributionBlock( python::module& module, python::module
   python::class_< Block > block(
 
     module,
-    "ThermalScatteringElasticAngularDistributionBlock",
+    "ElasticAngularDistributionBlock",
     "The angular distribution block for inelastic thermal scattering\n\n"
-    "The ThermalScatteringElasticAngularDistributionBlock class contains\n"
-    "the equiprobable set or a skewed distribution of discrete cosines, or a\n"
-    "tabulated probability distribution."
+    "The ElasticAngularDistributionBlock class contains the equiprobable set or\n"
+    "a skewed distribution of discrete cosines, or a tabulated probability distribution."
   );
 
   // wrap the block

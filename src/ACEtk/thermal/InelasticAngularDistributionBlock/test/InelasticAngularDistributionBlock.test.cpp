@@ -7,26 +7,26 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ThermalScatteringInelasticAngularDistributionBlock = block::ThermalScatteringInelasticAngularDistributionBlock;
-using ThermalScatteringDiscreteCosines = block::ThermalScatteringDiscreteCosines;
-using ThermalScatteringDiscreteCosinesWithProbability = block::ThermalScatteringDiscreteCosinesWithProbability;
+using InelasticAngularDistributionBlock = thermal::InelasticAngularDistributionBlock;
+using DiscreteCosines = thermal::DiscreteCosines;
+using DiscreteCosinesWithProbability = thermal::DiscreteCosinesWithProbability;
 
 std::vector< double > chunk();
 std::vector< double > chunkWithIFENG2();
-void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& );
-void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionBlock& );
+void verifyChunk( const InelasticAngularDistributionBlock& );
+void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& );
 
-SCENARIO( "ThermalScatteringInelasticAngularDistributionBlock" ) {
+SCENARIO( "InelasticAngularDistributionBlock" ) {
 
-  GIVEN( "valid data for a ThermalScatteringInelasticAngularDistributionBlock "
-         "instance using IFENG = 1" ) {
+  GIVEN( "valid data for a InelasticAngularDistributionBlock instance using "
+         "IFENG = 1" ) {
 
     std::vector< double > xss = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
       bool skewed = true;
-      std::vector< std::vector< ThermalScatteringDiscreteCosines > > cosines = {
+      std::vector< std::vector< DiscreteCosines > > cosines = {
 
         { { 1., { -1.0, -0.9, 1.0 } },
           { 2., { -1.0, 0.0, 1.0 } } },
@@ -38,10 +38,9 @@ SCENARIO( "ThermalScatteringInelasticAngularDistributionBlock" ) {
           { 8., { -1.0, 0.7, 1.0 } } }
       };
 
-      ThermalScatteringInelasticAngularDistributionBlock
-      chunk( std::move( cosines ), skewed );
+      InelasticAngularDistributionBlock chunk( std::move( cosines ), skewed );
 
-      THEN( "a ThermalScatteringInelasticAngularDistributionBlock can be constructed "
+      THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -59,10 +58,10 @@ SCENARIO( "ThermalScatteringInelasticAngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringInelasticAngularDistributionBlock
+      InelasticAngularDistributionBlock
       chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
 
-      THEN( "a ThermalScatteringInelasticAngularDistributionBlock can be constructed "
+      THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk );
@@ -79,14 +78,14 @@ SCENARIO( "ThermalScatteringInelasticAngularDistributionBlock" ) {
     } // WHEN
   } // GIVEN
 
-  GIVEN( "valid data for a ThermalScatteringInelasticAngularDistributionBlock "
+  GIVEN( "valid data for a InelasticAngularDistributionBlock "
          "instance using IFENG = 2" ) {
 
     std::vector< double > xss = chunkWithIFENG2();
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< std::vector< ThermalScatteringDiscreteCosinesWithProbability > > cosines = {
+      std::vector< std::vector< DiscreteCosinesWithProbability > > cosines = {
 
         { {  1., 0.5, 0., { -1.0, -0.9, 1.0 } },
           {  2., 0.5, 1., { -1.0, 0.0, 1.0 } } },
@@ -102,10 +101,9 @@ SCENARIO( "ThermalScatteringInelasticAngularDistributionBlock" ) {
           { 12., 0.33, 1.0, { -1.0, 0.4, 1.0 } } }
       };
 
-      ThermalScatteringInelasticAngularDistributionBlock
-      chunk( std::move( cosines ), 9 );
+      InelasticAngularDistributionBlock chunk( std::move( cosines ), 9 );
 
-      THEN( "a ThermalScatteringInelasticAngularDistributionBlock can be constructed "
+      THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
         verifyChunkWithIFENG2( chunk );
@@ -123,10 +121,10 @@ SCENARIO( "ThermalScatteringInelasticAngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ThermalScatteringInelasticAngularDistributionBlock
+      InelasticAngularDistributionBlock
       chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
 
-      THEN( "a ThermalScatteringInelasticAngularDistributionBlock can be constructed "
+      THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
         verifyChunkWithIFENG2( chunk );
@@ -180,11 +178,11 @@ std::vector< double > chunkWithIFENG2() {
   };
 }
 
-void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chunk ) {
+void verifyChunk( const InelasticAngularDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 32 == chunk.length() );
-  CHECK( "ThermalScatteringInelasticAngularDistributionBlock" == chunk.name() );
+  CHECK( "InelasticAngularDistributionBlock" == chunk.name() );
 
   CHECK( 1 == chunk.IFENG() );
   CHECK( 1 == chunk.secondaryEnergyMode() );
@@ -204,7 +202,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK( 2 == chunk.numberOutgoingEnergies( 3 ) );
   CHECK( 2 == chunk.numberOutgoingEnergies( 4 ) );
 
-  auto data11 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 1, 1 ) );
+  auto data11 = std::get< DiscreteCosines >( chunk.discreteCosineData( 1, 1 ) );
   CHECK( 3 == data11.NC() );
   CHECK( 3 == data11.numberDiscreteCosines() );
   CHECK( 1. == Approx( data11.energy() ) );
@@ -212,7 +210,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK( -.9 == Approx( data11.cosines()[1] ) );
   CHECK( +1. == Approx( data11.cosines()[2] ) );
 
-  auto data12 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 1, 2 ) );
+  auto data12 = std::get< DiscreteCosines >( chunk.discreteCosineData( 1, 2 ) );
   CHECK( 3 == data12.NC() );
   CHECK( 3 == data12.numberDiscreteCosines() );
   CHECK( 2. == Approx( data12.energy() ) );
@@ -220,7 +218,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK(  0. == Approx( data12.cosines()[1] ) );
   CHECK( +1. == Approx( data12.cosines()[2] ) );
 
-  auto data21 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 2, 1 ) );
+  auto data21 = std::get< DiscreteCosines >( chunk.discreteCosineData( 2, 1 ) );
   CHECK( 3 == data21.NC() );
   CHECK( 3 == data21.numberDiscreteCosines() );
   CHECK( 3. == Approx( data21.energy() ) );
@@ -228,7 +226,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK(  .5 == Approx( data21.cosines()[1] ) );
   CHECK( +1. == Approx( data21.cosines()[2] ) );
 
-  auto data22 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 2, 2 ) );
+  auto data22 = std::get< DiscreteCosines >( chunk.discreteCosineData( 2, 2 ) );
   CHECK( 3 == data22.NC() );
   CHECK( 3 == data22.numberDiscreteCosines() );
   CHECK( 4. == Approx( data22.energy() ) );
@@ -236,7 +234,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK(  .9 == Approx( data22.cosines()[1] ) );
   CHECK( +1. == Approx( data22.cosines()[2] ) );
 
-  auto data31 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 3, 1 ) );
+  auto data31 = std::get< DiscreteCosines >( chunk.discreteCosineData( 3, 1 ) );
   CHECK( 3 == data31.NC() );
   CHECK( 3 == data31.numberDiscreteCosines() );
   CHECK( 5. == Approx( data31.energy() ) );
@@ -244,7 +242,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK(  .4 == Approx( data31.cosines()[1] ) );
   CHECK( +1. == Approx( data31.cosines()[2] ) );
 
-  auto data32 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 3, 2 ) );
+  auto data32 = std::get< DiscreteCosines >( chunk.discreteCosineData( 3, 2 ) );
   CHECK( 3 == data32.NC() );
   CHECK( 3 == data32.numberDiscreteCosines() );
   CHECK( 6. == Approx( data32.energy() ) );
@@ -252,7 +250,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK(  .8 == Approx( data32.cosines()[1] ) );
   CHECK( +1. == Approx( data32.cosines()[2] ) );
 
-  auto data41 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 4, 1 ) );
+  auto data41 = std::get< DiscreteCosines >( chunk.discreteCosineData( 4, 1 ) );
   CHECK( 3 == data41.NC() );
   CHECK( 3 == data41.numberDiscreteCosines() );
   CHECK( 7. == Approx( data41.energy() ) );
@@ -260,7 +258,7 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK(  .3 == Approx( data41.cosines()[1] ) );
   CHECK( +1. == Approx( data41.cosines()[2] ) );
 
-  auto data42 = std::get< ThermalScatteringDiscreteCosines >( chunk.discreteCosineData( 4, 2 ) );
+  auto data42 = std::get< DiscreteCosines >( chunk.discreteCosineData( 4, 2 ) );
   CHECK( 3 == data42.NC() );
   CHECK( 3 == data42.numberDiscreteCosines() );
   CHECK( 8. == Approx( data42.energy() ) );
@@ -269,11 +267,11 @@ void verifyChunk( const ThermalScatteringInelasticAngularDistributionBlock& chun
   CHECK( +1. == Approx( data42.cosines()[2] ) );
 }
 
-void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionBlock& chunk ) {
+void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 80 == chunk.length() );
-  CHECK( "ThermalScatteringInelasticAngularDistributionBlock" == chunk.name() );
+  CHECK( "InelasticAngularDistributionBlock" == chunk.name() );
 
   CHECK( 2 == chunk.IFENG() );
   CHECK( 2 == chunk.secondaryEnergyMode() );
@@ -293,7 +291,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK( 3 == chunk.numberOutgoingEnergies( 3 ) );
   CHECK( 3 == chunk.numberOutgoingEnergies( 4 ) );
 
-  auto data11 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 1, 1 ) );
+  auto data11 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 1, 1 ) );
   CHECK( 3 == data11.NC() );
   CHECK( 3 == data11.numberDiscreteCosines() );
   CHECK(  1. == Approx( data11.energy() ) );
@@ -303,7 +301,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK( -.9 == Approx( data11.cosines()[1] ) );
   CHECK( +1. == Approx( data11.cosines()[2] ) );
 
-  auto data12 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 1, 2 ) );
+  auto data12 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 1, 2 ) );
   CHECK( 3 == data12.NC() );
   CHECK( 3 == data12.numberDiscreteCosines() );
   CHECK(  2. == Approx( data12.energy() ) );
@@ -313,7 +311,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  0. == Approx( data12.cosines()[1] ) );
   CHECK( +1. == Approx( data12.cosines()[2] ) );
 
-  auto data21 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 1 ) );
+  auto data21 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 1 ) );
   CHECK( 3 == data21.NC() );
   CHECK( 3 == data21.numberDiscreteCosines() );
   CHECK(  3. == Approx( data21.energy() ) );
@@ -323,7 +321,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .5 == Approx( data21.cosines()[1] ) );
   CHECK( +1. == Approx( data21.cosines()[2] ) );
 
-  auto data22 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 2 ) );
+  auto data22 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 2 ) );
   CHECK( 3 == data22.NC() );
   CHECK( 3 == data22.numberDiscreteCosines() );
   CHECK(  4. == Approx( data22.energy() ) );
@@ -333,7 +331,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .9 == Approx( data22.cosines()[1] ) );
   CHECK( +1. == Approx( data22.cosines()[2] ) );
 
-  auto data23 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 3 ) );
+  auto data23 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 3 ) );
   CHECK( 3 == data23.NC() );
   CHECK( 3 == data23.numberDiscreteCosines() );
   CHECK(  5. == Approx( data23.energy() ) );
@@ -343,7 +341,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .4 == Approx( data23.cosines()[1] ) );
   CHECK( +1. == Approx( data23.cosines()[2] ) );
 
-  auto data24 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 4 ) );
+  auto data24 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 4 ) );
   CHECK( 3 == data24.NC() );
   CHECK( 3 == data24.numberDiscreteCosines() );
   CHECK(  6. == Approx( data24.energy() ) );
@@ -353,7 +351,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .8 == Approx( data24.cosines()[1] ) );
   CHECK( +1. == Approx( data24.cosines()[2] ) );
 
-  auto data31 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 1 ) );
+  auto data31 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 1 ) );
   CHECK( 3 == data31.NC() );
   CHECK( 3 == data31.numberDiscreteCosines() );
   CHECK(  7. == Approx( data31.energy() ) );
@@ -363,7 +361,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .3 == Approx( data31.cosines()[1] ) );
   CHECK( +1. == Approx( data31.cosines()[2] ) );
 
-  auto data32 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 2 ) );
+  auto data32 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 2 ) );
   CHECK( 3 == data32.NC() );
   CHECK( 3 == data32.numberDiscreteCosines() );
   CHECK(  8. == Approx( data32.energy() ) );
@@ -373,7 +371,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .7 == Approx( data32.cosines()[1] ) );
   CHECK( +1. == Approx( data32.cosines()[2] ) );
 
-  auto data33 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 3 ) );
+  auto data33 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 3 ) );
   CHECK( 3 == data33.NC() );
   CHECK( 3 == data33.numberDiscreteCosines() );
   CHECK(  9. == Approx( data33.energy() ) );
@@ -383,7 +381,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .6 == Approx( data33.cosines()[1] ) );
   CHECK( +1. == Approx( data33.cosines()[2] ) );
 
-  auto data41 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 1 ) );
+  auto data41 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 1 ) );
   CHECK( 3 == data41.NC() );
   CHECK( 3 == data41.numberDiscreteCosines() );
   CHECK( 10. == Approx( data41.energy() ) );
@@ -393,7 +391,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .2 == Approx( data41.cosines()[1] ) );
   CHECK( +1. == Approx( data41.cosines()[2] ) );
 
-  auto data42 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 2 ) );
+  auto data42 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 2 ) );
   CHECK( 3 == data42.NC() );
   CHECK( 3 == data42.numberDiscreteCosines() );
   CHECK( 11. == Approx( data42.energy() ) );
@@ -403,7 +401,7 @@ void verifyChunkWithIFENG2( const ThermalScatteringInelasticAngularDistributionB
   CHECK(  .5 == Approx( data42.cosines()[1] ) );
   CHECK( +1. == Approx( data42.cosines()[2] ) );
 
-  auto data43 = std::get< ThermalScatteringDiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 3 ) );
+  auto data43 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 3 ) );
   CHECK( 3 == data43.NC() );
   CHECK( 3 == data43.numberDiscreteCosines() );
   CHECK( 12. == Approx( data43.energy() ) );

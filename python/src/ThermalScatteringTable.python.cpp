@@ -16,12 +16,12 @@ void wrapThermalScatteringTable( python::module& module, python::module& ) {
   // type aliases
   using Header = njoy::ACEtk::Table::Header;
   using Table = njoy::ACEtk::ThermalScatteringTable;
-  using ITIE = njoy::ACEtk::block::ITIE;
-  using ITXE = njoy::ACEtk::block::ITXE;
-  using ITCE = njoy::ACEtk::block::ITCE;
-  using ITCA = njoy::ACEtk::block::ITCA;
-  using ITCEI = njoy::ACEtk::block::ITCEI;
-  using ITCAI = njoy::ACEtk::block::ITCAI;
+  using ITIE = njoy::ACEtk::thermal::ITIE;
+  using ITXE = njoy::ACEtk::thermal::ITXE;
+  using ITCE = njoy::ACEtk::thermal::ITCE;
+  using ITCA = njoy::ACEtk::thermal::ITCA;
+  using ITCEI = njoy::ACEtk::thermal::ITCEI;
+  using ITCAI = njoy::ACEtk::thermal::ITCAI;
 
   // wrap views created by this table
 

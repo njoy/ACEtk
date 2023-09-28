@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_THERMALSCATTERINGELASTCANGULARDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_THERMALSCATTERINGELASTCANGULARDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_THERMAL_ELASTICANGULARDISTRIBUTIONBLOCK
+#define NJOY_ACETK_THERMAL_ELASTICANGULARDISTRIBUTIONBLOCK
 
 // system includes
 
@@ -8,19 +8,18 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace thermal {
 
 /**
  *  @class
  *  @brief The angular distribution block for elastic thermal scattering
  *
- *  The ThermalScatteringElasticAngularDistributionBlock class contains the
- *  a set of equally probable discrete cosine values for each incident energy
- *  value (the associated incident energy values are stored in the
- *  associated elastic thermal scattering cross section block).
+ *  The ElasticAngularDistributionBlock class contains the a set of equally
+ *  probable discrete cosine values for each incident energy value (the
+ *  associated incident energy values are stored in the associated elastic
+ *  thermal scattering cross section block).
  */
-class ThermalScatteringElasticAngularDistributionBlock :
-  protected details::ArrayData {
+class ElasticAngularDistributionBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -85,10 +84,10 @@ public:
   using Base::end;
 };
 
-using ITCA = ThermalScatteringElasticAngularDistributionBlock;
-using ITCAI = ThermalScatteringElasticAngularDistributionBlock;
+using ITCA = ElasticAngularDistributionBlock;
+using ITCAI = ElasticAngularDistributionBlock;
 
-} // block namespace
+} // thermal namespace
 } // ACEtk namespace
 } // njoy namespace
 
