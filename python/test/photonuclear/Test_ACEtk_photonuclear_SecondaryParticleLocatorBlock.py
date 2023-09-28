@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.photonuclear import PhotonuclearSecondaryParticleLocatorBlock
+from ACEtk.photonuclear import SecondaryParticleLocatorBlock
 
-class Test_ACEtk_PhotonuclearSecondaryParticleLocatorBlock( unittest.TestCase ) :
-    """Unit test for the PhotonuclearSecondaryParticleLocatorBlock class."""
+class Test_ACEtk_photonuclear_SecondaryParticleLocatorBlock( unittest.TestCase ) :
+    """Unit test for the SecondaryParticleLocatorBlock class."""
 
     chunk = [                                                    1,                   2,
                      543,                 635,                 727,                 729,
@@ -93,7 +93,7 @@ class Test_ACEtk_PhotonuclearSecondaryParticleLocatorBlock( unittest.TestCase ) 
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = PhotonuclearSecondaryParticleLocatorBlock(
+        chunk = SecondaryParticleLocatorBlock(
                   types = [ 1, 2, 9, 31, 32, 33, 34 ],
                   numbers = [ 2, 1, 1, 1, 1, 1, 1 ],
                   locators = [ [ 543,                 635,                 727,                 729,

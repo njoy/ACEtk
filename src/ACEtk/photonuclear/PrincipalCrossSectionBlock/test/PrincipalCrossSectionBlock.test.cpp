@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotonuclearPrincipalCrossSectionBlock = block::PhotonuclearPrincipalCrossSectionBlock;
+using PrincipalCrossSectionBlock = photonuclear::PrincipalCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotonuclearPrincipalCrossSectionBlock& );
+void verifyChunk( const PrincipalCrossSectionBlock& );
 
-SCENARIO( "PhotonuclearPrincipalCrossSectionBlock" ) {
+SCENARIO( "PrincipalCrossSectionBlock" ) {
 
-  GIVEN( "valid data for a PhotonuclearPrincipalCrossSectionBlock instance" ) {
+  GIVEN( "valid data for a PrincipalCrossSectionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -99,11 +99,11 @@ SCENARIO( "PhotonuclearPrincipalCrossSectionBlock" ) {
         3.05302600000E+02,   3.09883800000E+02
       };
 
-      PhotonuclearPrincipalCrossSectionBlock chunk( std::move( energies ),
+      PrincipalCrossSectionBlock chunk( std::move( energies ),
                                                     std::move( total ),
                                                     std::move( heating ) );
 
-      THEN( "a PhotonuclearPrincipalCrossSectionBlock can be constructed and members can "
+      THEN( "a PrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -121,9 +121,9 @@ SCENARIO( "PhotonuclearPrincipalCrossSectionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotonuclearPrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 90, 3 );
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 90, 3 );
 
-      THEN( "a PhotonuclearPrincipalCrossSectionBlock can be constructed and members can "
+      THEN( "a PrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk );
@@ -216,7 +216,7 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotonuclearPrincipalCrossSectionBlock& chunk ) {
+void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 270 == chunk.length() );

@@ -8,14 +8,14 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photonuclear {
 
 /**
  *  @class
  *  @brief The photonuclear ESZU block with the principal cross sections
  *
- *  The PhotonuclearPrincipalCrossSectionBlock class contains 3 or 4 arrays of the
- *  same length:
+ *  The PrincipalCrossSectionBlock class contains 3 or 4 arrays of the same
+ *  length:
  *    - the energy points
  *    - the total cross section
  *    - the elastic scattering cross section (optional)
@@ -23,7 +23,7 @@ namespace block {
  *
  *  The size of each (the total number of energy points) is stored in NXS(3).
  */
-class PhotonuclearPrincipalCrossSectionBlock : protected details::ArrayData {
+class PrincipalCrossSectionBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -75,9 +75,9 @@ public:
   using ArrayData::end;
 };
 
-using ESZU = PhotonuclearPrincipalCrossSectionBlock;
+using ESZU = PrincipalCrossSectionBlock;
 
-} // block namespace
+} // photonuclear namespace
 } // ACEtk namespace
 } // njoy namespace
 

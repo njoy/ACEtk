@@ -60,7 +60,7 @@ void generateBlocks() {
   }
   auto locators = block( 1 );
   auto iterators = block( 6 );
-  this->eszu_ = block::ESZU( locators.first, iterators.first, this->NES(), size );
+  this->eszu_ = photonuclear::ESZU( locators.first, iterators.first, this->NES(), size );
 
   // reaction number block
   iterators = block( 6 );
@@ -82,7 +82,7 @@ void generateBlocks() {
 
     // secondary particle information and locator block
     iterators = block( 10 );
-    this->ixsu_ = block::IXSU( iterators.first, iterators.second, this->NTYPE() );
+    this->ixsu_ = photonuclear::IXSU( iterators.first, iterators.second, this->NTYPE() );
 
     // secondary particle data: data blocks
     for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {

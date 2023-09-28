@@ -90,4 +90,4 @@ void wrapDiscreteCosinesWithProbability( python::module& module, python::module&
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // thermal namespace

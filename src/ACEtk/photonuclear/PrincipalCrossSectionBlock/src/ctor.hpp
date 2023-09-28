@@ -1,7 +1,7 @@
-PhotonuclearPrincipalCrossSectionBlock() = default;
+PrincipalCrossSectionBlock() = default;
 
-PhotonuclearPrincipalCrossSectionBlock( const PhotonuclearPrincipalCrossSectionBlock& ) = default;
-PhotonuclearPrincipalCrossSectionBlock( PhotonuclearPrincipalCrossSectionBlock&& ) = default;
+PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
+PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -11,10 +11,10 @@ PhotonuclearPrincipalCrossSectionBlock( PhotonuclearPrincipalCrossSectionBlock&&
  *  @param[in] elastic          the elastic cross section values
  *  @param[in] heating          the average heating cross section values
  */
-PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,
-                                        std::vector< double > total,
-                                        std::vector< double > elastic,
-                                        std::vector< double > heating ) :
+PrincipalCrossSectionBlock( std::vector< double > energies,
+                            std::vector< double > total,
+                            std::vector< double > elastic,
+                            std::vector< double > heating ) :
   ArrayData( "ESZU",
              std::move( energies ), std::move( total ),
              std::move( elastic ), std::move( heating ) ) {}
@@ -26,9 +26,9 @@ PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,
  *  @param[in] total            the total cross section values
  *  @param[in] heating          the average heating cross section values
  */
-PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,
-                                        std::vector< double > total,
-                                        std::vector< double > heating ) :
+PrincipalCrossSectionBlock( std::vector< double > energies,
+                            std::vector< double > total,
+                            std::vector< double > heating ) :
   ArrayData( "ESZU",
              std::move( energies ), std::move( total ),
              std::move( heating ) ) {}
@@ -40,9 +40,9 @@ PhotonuclearPrincipalCrossSectionBlock( std::vector< double > energies,
  *  @param[in] end     the end iterator of the ESZ block in the XSS array
  *  @param[in] nes     the number of energy points
  */
-PhotonuclearPrincipalCrossSectionBlock( Iterator begin, Iterator end,
-                                        unsigned int nes, unsigned int size ) :
+PrincipalCrossSectionBlock( Iterator begin, Iterator end,
+                            unsigned int nes, unsigned int size ) :
   ArrayData( "ESZU", begin, end, nes, size ) {}
 
-PhotonuclearPrincipalCrossSectionBlock& operator=( const PhotonuclearPrincipalCrossSectionBlock& ) = default;
-PhotonuclearPrincipalCrossSectionBlock& operator=( PhotonuclearPrincipalCrossSectionBlock&& ) = default;
+PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
+PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;
