@@ -34,7 +34,7 @@ Data generateData( unsigned int z,
   }
 
   // determine data type
-  unsigned int nepr = subsh.has_value() ? selas.has_value() ? 3 : 1 : 0;
+  unsigned int nepr = ( subsh.has_value() ? ( selas.has_value() ? 3 : 1 ) : 0 );
 
   // some size values
   unsigned int nes = eszg.NES();
