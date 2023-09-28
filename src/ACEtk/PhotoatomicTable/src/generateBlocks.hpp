@@ -33,6 +33,7 @@ void generateBlocks() {
   this->swd_ = std::nullopt;
   this->subsh_ = std::nullopt;
   this->sphel_ = std::nullopt;
+  this->xprob_ = std::nullopt;
   this->esze_ = std::nullopt;
   this->excit_ = std::nullopt;
 
@@ -86,7 +87,9 @@ void generateBlocks() {
     auto sphel = block( 16 );
     this->subsh_ = block::SUBSH( subsh.first, sphel.first, this->NSSH() );
     this->sphel_ = block::SPHEL( sphel.first, sphel.second, this->NSSH(), this->NES() );
-
+    auto relo = block( 17 );
+    auto xprob = block( 18 );
+    this->xprob_ = block::XPROB( relo.first, xprob.first, xprob.second, this->NSSH() );
     auto esze = block( 19 );
     this->esze_ = block::ESZE( esze.first, esze.second, this->NSSH(), this->NE() );
     auto excit = block( 20 );

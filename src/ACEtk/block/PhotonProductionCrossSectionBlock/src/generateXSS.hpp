@@ -1,4 +1,4 @@
-static std::vector< double > generateXSS( std::vector< PhotonProductionData >&& xs ) {
+static std::vector< double > generateXSS( std::vector< PhotonProductionData >&& xs, bool ) {
 
   const auto ntr = xs.size();
   std::vector< double > xss( ntr );

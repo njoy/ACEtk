@@ -1,4 +1,4 @@
-static std::vector< std::vector< double > > generateArrays( 
+static std::vector< std::vector< double > > generateArrays(
     std::vector< double > energies,
     std::vector< double > elastic,
     std::vector< double > bremsstrahlung,
@@ -21,7 +21,7 @@ static std::vector< std::vector< double > > generateArrays(
       size = true;
     }
   }
-  if ( ( elastic.size() != ne ) || ( bremsstrahlung.size() != ne ) || 
+  if ( ( elastic.size() != ne ) || ( bremsstrahlung.size() != ne ) ||
        ( excitation.size() != ne ) || size ) {
 
     Log::error( "The sizes of the principal cross sections are not consistent" );
@@ -46,21 +46,22 @@ static std::vector< std::vector< double > > generateArrays(
   arrays.push_back( std::move( energies ) );
   arrays.push_back( std::move( elastic ) );
   arrays.push_back( std::move( bremsstrahlung ) );
-  std::transform( arrays.back().cbegin(), arrays.back().cend(), 
+  std::transform( arrays.back().cbegin(), arrays.back().cend(),
                   total.cbegin(), total.begin(), std::plus<>{} );
   arrays.push_back( std::move( excitation ) );
-  std::transform( arrays.back().cbegin(), arrays.back().cend(), 
+  std::transform( arrays.back().cbegin(), arrays.back().cend(),
                   total.cbegin(), total.begin(), std::plus<>{} );
   for ( unsigned int i = 0; i < nssh; ++i ) {
 
     arrays.push_back( std::move( electroionisation[i] ) );
     if ( i != 0 ) {
 
-      std::transform( arrays.back().cbegin(), arrays.back().cend(), 
-                      totalionisation.cbegin(), totalionisation.begin(), std::plus<>{} );
+      std::transform( arrays.back().cbegin(), arrays.back().cend(),
+                      totalionisation.cbegin(), totalionisation.begin(),
+                      std::plus<>{} );
     }
   }
-  std::transform( totalionisation.cbegin(), totalionisation.cend(), 
+  std::transform( totalionisation.cbegin(), totalionisation.cend(),
                   total.cbegin(), total.begin(), std::plus<>{} );
 
   arrays.insert( std::next( arrays.begin(), 4 ), totalionisation );

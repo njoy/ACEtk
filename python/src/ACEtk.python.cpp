@@ -67,6 +67,7 @@ namespace block {
   void wrapThermalScatteringDiscreteCosines( python::module&, python::module& );
   void wrapThermalScatteringDiscreteCosinesWithProbability( python::module&, python::module& );
   void wrapPhotoatomicComptonProfile( python::module&, python::module& );
+  void wrapPhotoatomicSubshellTransitionData( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -107,6 +108,7 @@ namespace block {
   void wrapPhotoatomicElectronExcitationBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronBremsstrahlungBlock( python::module&, python::module& );
   void wrapPhotoelectricCrossSectionBlock( python::module&, python::module& );
+  void wrapPhotoatomicSubshellTransitionDataBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -200,6 +202,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapThermalScatteringDiscreteCosines( module, viewmodule );
   block::wrapThermalScatteringDiscreteCosinesWithProbability( module, viewmodule );
   block::wrapPhotoatomicComptonProfile( module, viewmodule );
+  block::wrapPhotoatomicSubshellTransitionData( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
@@ -240,6 +243,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotoatomicElectronExcitationBlock( module, viewmodule );
   block::wrapPhotoatomicElectronBremsstrahlungBlock( module, viewmodule );
   block::wrapPhotoelectricCrossSectionBlock( module, viewmodule );
+  block::wrapPhotoatomicSubshellTransitionDataBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );

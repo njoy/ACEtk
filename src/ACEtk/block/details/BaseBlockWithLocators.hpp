@@ -21,6 +21,7 @@ class BaseBlockWithLocators : protected details::Base {
 
   /* fields */
   unsigned int n_;           // the number of data blocks
+  bool locator_;             // flag to indicate if locators or offsets are used
   Iterator iterator_;        // the begin iterator of the data block
   std::vector< Data > data_; // the data blocks
 
@@ -70,7 +71,7 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    return this->IXSS( index );
+    return this->locator_ ? this->IXSS( index ) : this->IXSS( index ) + 1;
   }
 
   /**

@@ -1,5 +1,5 @@
 static std::vector< double >
-generateXSS( std::vector< EnergyDistributionData >&& distributions ) {
+generateXSS( std::vector< EnergyDistributionData >&& distributions, bool ) {
 
   const auto size = distributions.size();
   std::vector< double > xss( size );
