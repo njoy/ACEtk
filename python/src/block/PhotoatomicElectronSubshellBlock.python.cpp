@@ -68,9 +68,9 @@ void wrapPhotoatomicElectronSubshellBlock( python::module& module, python::modul
   )
   .def_property_readonly(
 
-    "ENDF",
+    "ID",
     [] ( const Block& self ) -> UnsignedIntRange
-       { return self.ENDF(); },
+       { return self.ID(); },
     "The number of electron shells"
   )
   .def_property_readonly(
