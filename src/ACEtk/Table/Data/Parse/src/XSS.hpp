@@ -1,5 +1,4 @@
-template< typename Iterator, typename Range,
-          utility::Require<true, utility::is_range, Range> = true >
+template< typename Iterator, typename Range >
 static void
 XSS( State<Iterator>& state, Range& result ) {
 
@@ -35,9 +34,9 @@ XSS( State<Iterator>& state, Range& result ) {
   }
   catch ( std::exception& e ) {
 
-    Log::info("Error encountered while parsing XSS block");
-    utility::echoErroneousLine( begin, state.position,
-                                state.end, state.lineNumber );
+    Log::error( "Error encountered while parsing XSS block on line {}", state.lineNumber );
+    Log::info( "Data: {}", std::string( begin, std::find( state.position, state.end, '\n') ) );
+
     throw e;
   }
 }
@@ -45,7 +44,7 @@ XSS( State<Iterator>& state, Range& result ) {
 template< typename Iterator >
 static auto
 XSS( State<Iterator>& state, const std::int64_t size ) {
-  
+
   std::vector<double> result;
   result.resize( size );
   XSS( state, result );

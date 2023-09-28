@@ -21,3 +21,30 @@
 #include "ACEtk/PhotoatomicTable.hpp"
 #include "ACEtk/PhotonuclearTable.hpp"
 #include "ACEtk/ThermalScatteringTable.hpp"
+
+#ifndef ACETK_HPP
+#define ACETK_HPP
+
+#include <istream>
+#include <iterator>
+#include <functional>
+#include <algorithm>
+
+#include "range/v3/all.hpp"
+
+#include "dimwits.hpp"
+#include "interpolation.hpp"
+#include "header-utilities.hpp"
+#include "Log.hpp"
+
+namespace njoy {
+namespace ACEtk {
+
+using namespace dimwits;
+
+#include "ACEtk/interpretation.hpp"
+
+}
+}
+
+#endif
