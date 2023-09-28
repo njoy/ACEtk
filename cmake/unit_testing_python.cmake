@@ -31,6 +31,9 @@ add_python_test( photoatomic.ComptonProfile                    photoatomic/Test_
 add_python_test( photoatomic.ComptonProfileBlock               photoatomic/Test_ACEtk_photoatomic_ComptonProfileBlock.py )
 add_python_test( photoatomic.PhotoelectricCrossSectionBlock    photoatomic/Test_ACEtk_photoatomic_PhotoelectricCrossSectionBlock.py )
 
+add_python_test( dosimetry.CrossSectionBlock dosimetry/Test_ACEtk_dosimetry_CrossSectionBlock.py )
+add_python_test( dosimetry.CrossSectionData  dosimetry/Test_ACEtk_dosimetry_CrossSectionData.py )
+
 add_python_test( electron.ElectronShellBlock              electron/Test_ACEtk_electron_ElectronShellBlock.py )
 add_python_test( electron.ElectronSubshellBlock           electron/Test_ACEtk_electron_ElectronSubshellBlock.py )
 add_python_test( electron.PrincipalCrossSectionBlock      electron/Test_ACEtk_electron_PrincipalCrossSectionBlock.py )
@@ -43,3 +46,9 @@ add_python_test( electron.TabulatedAngularDistribution    electron/Test_ACEtk_el
 add_python_test( electron.TabulatedEnergyDistribution     electron/Test_ACEtk_electron_TabulatedEnergyDistribution.py )
 add_python_test( electron.ElasticAngularDistributionBlock electron/Test_ACEtk_electron_ElasticAngularDistributionBlock.py )
 add_python_test( electron.EnergyDistributionBlock         electron/Test_ACEtk_electron_EnergyDistributionBlock.py )
+
+add_python_test( thermal.CrossSectionBlock                 thermal/Test_ACEtk_thermal_CrossSectionBlock.py )
+add_python_test( thermal.DiscreteCosines                   thermal/Test_ACEtk_thermal_DiscreteCosines.py )
+add_python_test( thermal.DiscreteCosinesWithProbability    thermal/Test_ACEtk_thermal_DiscreteCosinesWithProbability.py )
+add_python_test( thermal.ElasticAngularDistributionBlock   thermal/Test_ACEtk_thermal_ElasticAngularDistributionBlock.py )
+add_python_test( thermal.InelasticAngularDistributionBlock thermal/Test_ACEtk_thermal_InelasticAngularDistributionBlock.py )

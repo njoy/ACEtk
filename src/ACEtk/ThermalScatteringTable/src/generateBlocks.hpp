@@ -35,33 +35,33 @@ void generateBlocks() {
   // inelastic thermal scattering data
   bool present = this->data().JXS(1) > 0 ? true : false;
   auto iterators = block( 1 );
-  this->itie_ = block::ITIE( present ? iterators.first : begin,
-                             present ? iterators.second : begin );
+  this->itie_ = thermal::ITIE( present ? iterators.first : begin,
+                               present ? iterators.second : begin );
 
   iterators = block( 3 );
-  this->itxe_ = block::ITXE( present ? this->IFENG() : 0,
-                             present ? this->IFENG() < 2 ? this->NIEB() : 0 : 0,
-                             present ? this->IFENG() < 2 ? this->NIL() + 1
-                                                         : this->NIL() - 1
-                                     : 0,
-                             present ? this->ITIE().NE() : 0,
-                             present ? this->data().JXS(3) : 1,
-                             present ? iterators.first : begin,
-                             present ? iterators.second : begin );
+  this->itxe_ = thermal::ITXE( present ? this->IFENG() : 0,
+                               present ? this->IFENG() < 2 ? this->NIEB() : 0 : 0,
+                               present ? this->IFENG() < 2 ? this->NIL() + 1
+                                                           : this->NIL() - 1
+                                       : 0,
+                               present ? this->ITIE().NE() : 0,
+                               present ? this->data().JXS(3) : 1,
+                               present ? iterators.first : begin,
+                               present ? iterators.second : begin );
 
   // coherent elastic thermal scattering data
   present = this->IDPNC() > 3 ? true : false;
   if ( present ) {
 
     iterators = block( 4 );
-    this->itce_ = block::ITCE( iterators.first, iterators.second );
+    this->itce_ = thermal::ITCE( iterators.first, iterators.second );
 
     present = this->NCL() + 1 != 0 ? true : false;
     if ( present ) {
 
       iterators = block( 6 );
-      this->itca_ = block::ITCA( iterators.first, iterators.second,
-                                 this->ITCE()->NE(), this->NCL() + 1 );
+      this->itca_ = thermal::ITCA( iterators.first, iterators.second,
+                                   this->ITCE()->NE(), this->NCL() + 1 );
     }
   }
 
@@ -70,12 +70,12 @@ void generateBlocks() {
   if ( present ) {
 
     iterators = this->IDPNC() == 3 ? block( 4 ) : block( 7 );
-    this->itcei_ = block::ITCEI( iterators.first, iterators.second );
+    this->itcei_ = thermal::ITCEI( iterators.first, iterators.second );
 
     iterators = this->IDPNC() == 3 ? block( 6 ) : block( 9 );
-    this->itcai_ = block::ITCA( iterators.first, iterators.second,
-                                this->ITCEI()->NE(),
-                                this->IDPNC() == 3 ? this->NCL() + 1
-                                                   : this->NCLI() + 1 );
+    this->itcai_ = thermal::ITCA( iterators.first, iterators.second,
+                                  this->ITCEI()->NE(),
+                                  this->IDPNC() == 3 ? this->NCL() + 1
+                                                     : this->NCLI() + 1 );
   }
 }

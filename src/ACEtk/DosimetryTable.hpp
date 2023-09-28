@@ -6,7 +6,7 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
-#include "ACEtk/block/DosimetryCrossSectionBlock.hpp"
+#include "ACEtk/dosimetry/CrossSectionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,7 +21,7 @@ class DosimetryTable : protected Table {
 
   /* fields */
   block::MTR mtr_;
-  block::SIGD sig_;
+  dosimetry::SIGD sig_;
 
   /* auxiliary functions */
   void generateBlocks() {
@@ -33,7 +33,7 @@ class DosimetryTable : protected Table {
     auto end = this->data().XSS().end();
 
     this->mtr_ = block::MTR( mtr, lsig, this->NTR() );
-    this->sig_ = block::SIGD( lsig, sig, end, this->NTR() );
+    this->sig_ = dosimetry::SIGD( lsig, sig, end, this->NTR() );
   }
 
   #include "ACEtk/DosimetryTable/src/generateData.hpp"
@@ -139,12 +139,12 @@ public:
   /**
    *  @brief Return the cross section block
    */
-  const block::SIGD& SIGD() const { return this->sig_; }
+  const dosimetry::SIGD& SIGD() const { return this->sig_; }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIGD& crossSectionBlock() const { return this->SIGD(); }
+  const dosimetry::SIGD& crossSectionBlock() const { return this->SIGD(); }
 };
 
 } // ACEtk namespace

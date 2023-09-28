@@ -1,0 +1,5 @@
+#include "ACEtk/thermal/CrossSectionBlock.hpp"
+#include "ACEtk/thermal/DiscreteCosines.hpp"
+#include "ACEtk/thermal/DiscreteCosinesWithProbability.hpp"
+#include "ACEtk/thermal/ElasticAngularDistributionBlock.hpp"
+#include "ACEtk/thermal/InelasticAngularDistributionBlock.hpp"

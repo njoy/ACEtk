@@ -25,7 +25,9 @@ void wrapEnergyDistributionType( python::module&, python::module& );
 
 // declarations - block and component subpackages
 void wrapPhotoatomic( python::module&, python::module& );
+void wrapDosimetry( python::module&, python::module& );
 void wrapElectron( python::module&, python::module& );
+void wrapThermal( python::module&, python::module& );
 
 namespace block {
 
@@ -34,7 +36,6 @@ namespace block {
   void wrapTabulatedFissionMultiplicity( python::module&, python::module& );
   void wrapPolynomialFissionMultiplicity( python::module&, python::module& );
   void wrapCrossSectionData( python::module&, python::module& );
-  void wrapDosimetryCrossSectionData( python::module&, python::module& );
   void wrapEquiprobableAngularBins( python::module&, python::module& );
   void wrapTabulatedAngularDistribution( python::module&, python::module& );
   void wrapTabulatedAngularDistributionWithProbability( python::module&, python::module& );
@@ -68,8 +69,6 @@ namespace block {
   void wrapPhotonProductionCrossSectionData( python::module&, python::module& );
   void wrapDelayedNeutronPrecursorData( python::module&, python::module& );
   void wrapProbabilityTable( python::module&, python::module& );
-  void wrapThermalScatteringDiscreteCosines( python::module&, python::module& );
-  void wrapThermalScatteringDiscreteCosinesWithProbability( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -78,7 +77,6 @@ namespace block {
   void wrapReactionQValueBlock( python::module&, python::module& );
   void wrapFrameAndMultiplicityBlock( python::module&, python::module& );
   void wrapCrossSectionBlock( python::module&, python::module& );
-  void wrapDosimetryCrossSectionBlock( python::module&, python::module& );
   void wrapPhotonProductionCrossSectionBlock( python::module&, python::module& );
   void wrapAngularDistributionBlock( python::module&, python::module& );
   void wrapSecondaryParticleAngularDistributionBlock( python::module&, python::module& );
@@ -93,9 +91,6 @@ namespace block {
   void wrapSecondaryParticleProductionBlock( python::module&, python::module& );
   void wrapSecondaryParticleProductionCrossSectionBlock( python::module&, python::module& );
   void wrapProbabilityTableBlock( python::module&, python::module& );
-  void wrapThermalScatteringCrossSectionBlock( python::module&, python::module& );
-  void wrapThermalScatteringElasticAngularDistributionBlock( python::module&, python::module& );
-  void wrapThermalScatteringInelasticAngularDistributionBlock( python::module&, python::module& );
   void wrapPhotonuclearPrincipalCrossSectionBlock( python::module&, python::module& );
   void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module&, python::module& );
 }
@@ -154,7 +149,6 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapTabulatedFissionMultiplicity( module, viewmodule );
   block::wrapPolynomialFissionMultiplicity( module, viewmodule );
   block::wrapCrossSectionData( module, viewmodule );
-  block::wrapDosimetryCrossSectionData( module, viewmodule );
   block::wrapEquiprobableAngularBins( module, viewmodule );
   block::wrapTabulatedAngularDistribution( module, viewmodule );
   block::wrapTabulatedAngularDistributionWithProbability( module, viewmodule );
@@ -188,8 +182,6 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotonProductionCrossSectionData( module, viewmodule );
   block::wrapDelayedNeutronPrecursorData( module, viewmodule );
   block::wrapProbabilityTable( module, viewmodule );
-  block::wrapThermalScatteringDiscreteCosines( module, viewmodule );
-  block::wrapThermalScatteringDiscreteCosinesWithProbability( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
@@ -198,7 +190,6 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapReactionQValueBlock( module, viewmodule );
   block::wrapFrameAndMultiplicityBlock( module, viewmodule );
   block::wrapCrossSectionBlock( module, viewmodule );
-  block::wrapDosimetryCrossSectionBlock( module, viewmodule );
   block::wrapPhotonProductionCrossSectionBlock( module, viewmodule );
   block::wrapAngularDistributionBlock( module, viewmodule );
   block::wrapSecondaryParticleAngularDistributionBlock( module, viewmodule );
@@ -213,15 +204,14 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapSecondaryParticleProductionBlock( module, viewmodule );
   block::wrapSecondaryParticleProductionCrossSectionBlock( module, viewmodule );
   block::wrapProbabilityTableBlock( module, viewmodule );
-  block::wrapThermalScatteringCrossSectionBlock( module, viewmodule );
-  block::wrapThermalScatteringElasticAngularDistributionBlock( module, viewmodule );
-  block::wrapThermalScatteringInelasticAngularDistributionBlock( module, viewmodule );
   block::wrapPhotonuclearPrincipalCrossSectionBlock( module, viewmodule );
   block::wrapPhotonuclearSecondaryParticleLocatorBlock( module, viewmodule );
 
   // component and block subpackages
   wrapPhotoatomic( module, viewmodule );
+  wrapDosimetry( module, viewmodule );
   wrapElectron( module, viewmodule );
+  wrapThermal( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
