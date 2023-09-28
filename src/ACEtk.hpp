@@ -13,6 +13,8 @@
 #include "ACEtk/ReferenceFrame.hpp"
 
 // ACE data blocks
+#include "ACEtk/photoatomic.hpp"
+#include "ACEtk/electron.hpp"
 #include "ACEtk/block.hpp"
 
 // interpretation ACE tables

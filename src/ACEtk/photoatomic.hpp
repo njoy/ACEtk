@@ -1,0 +1,8 @@
+#include "ACEtk/photoatomic/CoherentFormFactorBlock.hpp"
+#include "ACEtk/photoatomic/ComptonProfile.hpp"
+#include "ACEtk/photoatomic/ComptonProfileBlock.hpp"
+#include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
+#include "ACEtk/photoatomic/HeatingNumbersBlock.hpp"
+#include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock.hpp"
+#include "ACEtk/photoatomic/PhotoelectricCrossSectionBlock.hpp"
+#include "ACEtk/photoatomic/PrincipalCrossSectionBlock.hpp"
