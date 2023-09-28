@@ -16,6 +16,7 @@
 #include "ACEtk/photoatomic.hpp"
 #include "ACEtk/dosimetry.hpp"
 #include "ACEtk/electron.hpp"
+#include "ACEtk/thermal.hpp"
 #include "ACEtk/block.hpp"
 
 // interpretation ACE tables
