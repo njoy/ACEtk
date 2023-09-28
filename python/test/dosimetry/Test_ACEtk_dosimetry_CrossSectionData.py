@@ -4,10 +4,10 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.dosimetry import DosimetryCrossSectionData
+from ACEtk.dosimetry import CrossSectionData
 
-class Test_ACEtk_dosimetry_DosimetryCrossSectionData( unittest.TestCase ) :
-    """Unit test for the DosimetryCrossSectionData class."""
+class Test_ACEtk_dosimetry_CrossSectionData( unittest.TestCase ) :
+    """Unit test for the CrossSectionData class."""
 
     chunk = [ 0, 3, 1., 3., 5., 2., 4., 6. ]
 
@@ -18,7 +18,7 @@ class Test_ACEtk_dosimetry_DosimetryCrossSectionData( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 8, chunk.length )
-            self.assertEqual( "DosimetryCrossSectionData", chunk.name )
+            self.assertEqual( "CrossSectionData", chunk.name )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
@@ -54,7 +54,7 @@ class Test_ACEtk_dosimetry_DosimetryCrossSectionData( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = DosimetryCrossSectionData( boundaries = [], interpolants = [],
+        chunk = CrossSectionData( boundaries = [], interpolants = [],
                                            energies = [ 1., 3., 5. ],
                                            xs = [ 2., 4., 6. ] )
 

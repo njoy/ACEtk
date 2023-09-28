@@ -4,11 +4,11 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.dosimetry import DosimetryCrossSectionBlock
-from ACEtk.dosimetry import DosimetryCrossSectionData
+from ACEtk.dosimetry import CrossSectionBlock
+from ACEtk.dosimetry import CrossSectionData
 
 class Test_ACEtk_dosimetry_CrossSectionBlock( unittest.TestCase ) :
-    """Unit test for the DosimetryCrossSectionBlock class."""
+    """Unit test for the CrossSectionBlock class."""
 
     chunk = [                   1,                  11,
                                 0,                   4,  1.896100000000E+00,  2.000000000000E+00,
@@ -82,13 +82,13 @@ class Test_ACEtk_dosimetry_CrossSectionBlock( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = DosimetryCrossSectionBlock(
-                  xs = [ DosimetryCrossSectionData(
+        chunk = CrossSectionBlock(
+                  xs = [ CrossSectionData(
                            [ 1.896100000000E+00,  2.000000000000E+00,
                              2.050000000000E+00,  2.000000000000E+01 ],
                            [ 0.000000000000E+00,  9.090000000000E-15,
                              3.638500000000E-02,  3.220000000000E-02 ] ),
-                         DosimetryCrossSectionData(
+                         CrossSectionData(
                            [ 3.248700000000E+00,  3.600000000000E+00,
                              2.000000000000E+01 ],
                            [ 0.000000000000E+00,  5.653700000000E-02,

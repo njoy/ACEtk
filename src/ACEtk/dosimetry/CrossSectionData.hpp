@@ -8,18 +8,18 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace dosimetry {
 
 /**
  *  @class
  *  @brief Cross section data from the SIGD block for a single reaction
  *
- *  The DosimetryCrossSectionData class contains the interpolation regions (if
+ *  The CrossSectionData class contains the interpolation regions (if
  *  any are defined) along with the energy and cross section values. The
  *  dosimetry cross sections are different from the other cross section data
  *  blocks in that the data is not given on a common energy grid.
  */
-class DosimetryCrossSectionData : protected details::BaseTabulatedData {
+class CrossSectionData : protected block::details::BaseTabulatedData {
 
   /* fields */
 
@@ -99,7 +99,7 @@ public:
   using BaseTabulatedData::end;
 };
 
-} // block namespace
+} // dosimetry namespace
 } // ACEtk namespace
 } // njoy namespace
 

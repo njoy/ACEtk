@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DosimetryCrossSectionData = block::DosimetryCrossSectionData;
+using CrossSectionData = dosimetry::CrossSectionData;
 
 std::vector< double > chunk();
-void verifyChunk( const DosimetryCrossSectionData& );
+void verifyChunk( const CrossSectionData& );
 
-SCENARIO( "DosimetryCrossSectionData" ) {
+SCENARIO( "CrossSectionData" ) {
 
-  GIVEN( "valid data for a DosimetryCrossSectionData instance" ) {
+  GIVEN( "valid data for a CrossSectionData instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -25,12 +25,12 @@ SCENARIO( "DosimetryCrossSectionData" ) {
       std::vector< double > energies = { 1., 3., 5. };
       std::vector< double > xs = { 2., 4., 6. };
 
-      DosimetryCrossSectionData chunk( std::move( boundaries ),
-                                       std::move( interpolants ),
-                                       std::move( energies ),
-                                       std::move( xs ) );
+      CrossSectionData chunk( std::move( boundaries ),
+                              std::move( interpolants ),
+                              std::move( energies ),
+                              std::move( xs ) );
 
-      THEN( "a DosimetryCrossSectionData can be constructed and members can be tested" ) {
+      THEN( "a CrossSectionData can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -47,9 +47,9 @@ SCENARIO( "DosimetryCrossSectionData" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      DosimetryCrossSectionData chunk( xss.begin(), xss.end() );
+      CrossSectionData chunk( xss.begin(), xss.end() );
 
-      THEN( "a DosimetryCrossSectionData can be constructed and members can be tested" ) {
+      THEN( "a CrossSectionData can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -71,11 +71,11 @@ std::vector< double > chunk() {
   return { 0, 3, 1., 3., 5., 2., 4., 6. };
 }
 
-void verifyChunk( const DosimetryCrossSectionData& chunk ) {
+void verifyChunk( const CrossSectionData& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
-  CHECK( "DosimetryCrossSectionData" == chunk.name() );
+  CHECK( "CrossSectionData" == chunk.name() );
 
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );

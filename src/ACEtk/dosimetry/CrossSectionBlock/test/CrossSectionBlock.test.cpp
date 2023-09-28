@@ -7,34 +7,34 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DosimetryCrossSectionBlock = block::DosimetryCrossSectionBlock;
-using DosimetryCrossSectionData = block::DosimetryCrossSectionData;
+using CrossSectionBlock = dosimetry::CrossSectionBlock;
+using CrossSectionData = dosimetry::CrossSectionData;
 
 std::vector< double > chunk();
-void verifyChunk( const DosimetryCrossSectionBlock& );
+void verifyChunk( const CrossSectionBlock& );
 
-SCENARIO( "DosimetryCrossSectionBlock" ) {
+SCENARIO( "CrossSectionBlock" ) {
 
-  GIVEN( "valid data for a DosimetryCrossSectionBlock instance" ) {
+  GIVEN( "valid data for a CrossSectionBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< DosimetryCrossSectionData > xs = {
+      std::vector< CrossSectionData > xs = {
 
-        DosimetryCrossSectionData(
+        CrossSectionData(
           { 1.896100000000E+00,  2.000000000000E+00,
             2.050000000000E+00,  2.000000000000E+01 },
           { 0.000000000000E+00,  9.090000000000E-15,
             3.638500000000E-02,  3.220000000000E-02 } ),
-        DosimetryCrossSectionData(
+        CrossSectionData(
           { 3.248700000000E+00,  3.600000000000E+00,  2.000000000000E+01 },
           { 0.000000000000E+00,  5.653700000000E-02,  4.980000000000E-02 } ) };
 
-      DosimetryCrossSectionBlock chunk( std::move( xs ) );
+      CrossSectionBlock chunk( std::move( xs ) );
 
-      THEN( "a DosimetryCrossSectionBlock can be constructed and members can be tested" ) {
+      THEN( "a CrossSectionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -51,9 +51,9 @@ SCENARIO( "DosimetryCrossSectionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      DosimetryCrossSectionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      CrossSectionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
 
-      THEN( "a DosimetryCrossSectionBlock can be constructed and members can be tested" ) {
+      THEN( "a CrossSectionBlock can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       } // THEN
@@ -82,7 +82,7 @@ std::vector< double > chunk() {
    5.653700000000E-02,  4.980000000000E-02 };
 }
 
-void verifyChunk( const DosimetryCrossSectionBlock& chunk ) {
+void verifyChunk( const CrossSectionBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 20 == chunk.length() );

@@ -18,7 +18,7 @@ void wrapDosimetryTable( python::module& module, python::module& ) {
   using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::DosimetryTable;
   using MTR = njoy::ACEtk::block::MTR;
-  using SIGD = njoy::ACEtk::block::SIGD;
+  using SIGD = njoy::ACEtk::dosimetry::SIGD;
 
   // wrap views created by this table
 

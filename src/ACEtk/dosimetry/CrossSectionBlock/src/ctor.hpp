@@ -1,14 +1,14 @@
-DosimetryCrossSectionBlock() = default;
+CrossSectionBlock() = default;
 
-DosimetryCrossSectionBlock( const DosimetryCrossSectionBlock& ) = default;
-DosimetryCrossSectionBlock( DosimetryCrossSectionBlock&& ) = default;
+CrossSectionBlock( const CrossSectionBlock& ) = default;
+CrossSectionBlock( CrossSectionBlock&& ) = default;
 
 /**
  *  @brief Constructor
  *
  *  @param[in] xs    the cross section data
  */
-DosimetryCrossSectionBlock( std::vector< DosimetryCrossSectionData > xs ) :
+CrossSectionBlock( std::vector< CrossSectionData > xs ) :
   BaseBlockWithLocators( "SIGD", std::move( xs ) ) {}
 
 /**
@@ -19,9 +19,9 @@ DosimetryCrossSectionBlock( std::vector< DosimetryCrossSectionData > xs ) :
  *  @param[in] end     the end iterator of the SIGD block in the XSS array
  *  @param[in] ntr     the number of reactions (excluding elastic)
  */
-DosimetryCrossSectionBlock( Iterator lsig, Iterator sig, Iterator end,
+CrossSectionBlock( Iterator lsig, Iterator sig, Iterator end,
                    unsigned int ntr ) :
   BaseBlockWithLocators( "SIGD", lsig, sig, end, ntr ) {}
 
-DosimetryCrossSectionBlock& operator=( const DosimetryCrossSectionBlock& ) = default;
-DosimetryCrossSectionBlock& operator=( DosimetryCrossSectionBlock&& ) = default;
+CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
+CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;

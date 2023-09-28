@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace dosimetry {
 
-void wrapDosimetryCrossSectionBlock( python::module& module, python::module& ) {
+void wrapCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::DosimetryCrossSectionBlock;
-  using DosimetryCrossSectionData = njoy::ACEtk::block::DosimetryCrossSectionData;
+  using Block = njoy::ACEtk::dosimetry::CrossSectionBlock;
+  using CrossSectionData = njoy::ACEtk::dosimetry::CrossSectionData;
 
   // wrap views created by this block
 
@@ -24,9 +24,9 @@ void wrapDosimetryCrossSectionBlock( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "DosimetryCrossSectionBlock",
+    "CrossSectionBlock",
     "The continuous energy LSIG and SIGD block with the dosimetry cross section data\n\n"
-    "The DosimetryCrossSectionBlock class contains NXS(4) sets of cross section data,\n"
+    "The CrossSectionBlock class contains NXS(4) sets of cross section data,\n"
     "one for each reaction number on the MTR block. The order of these cross\n"
     "section data sets is the same as the order of the reaction numbers in the\n"
     "MTR block."
@@ -36,7 +36,7 @@ void wrapDosimetryCrossSectionBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< DosimetryCrossSectionData > >(),
+    python::init< std::vector< CrossSectionData > >(),
     python::arg( "xs" ),
     "Initialise the block\n\n"
     "Arguments:\n"

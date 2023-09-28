@@ -12,10 +12,10 @@ namespace python = pybind11;
 
 namespace dosimetry {
 
-void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
+void wrapCrossSectionData( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::DosimetryCrossSectionData;
+  using Block = njoy::ACEtk::dosimetry::CrossSectionData;
 
   // wrap views created by this block
 
@@ -23,12 +23,12 @@ void wrapDosimetryCrossSectionData( python::module& module, python::module& ) {
   python::class_< Block > block(
 
     module,
-    "DosimetryCrossSectionData",
+    "CrossSectionData",
     "Cross section data from the SIGD block for a single reaction\n\n"
-    "The DosimetryCrossSectionData class contains the interpolation regions (if\n"
-    "any are defined) along with the energy and cross section values. The\n"
-    "dosimetry cross sections are different from the other cross section data\n"
-    "blocks in that the data is not given on a common energy grid."
+    "The CrossSectionData class contains the interpolation regions (if any are\n"
+    "defined) along with the energy and cross section values. The dosimetry cross\n"
+    "sections are different from the other cross section data blocks in that the\n"
+    "data is not given on a common energy grid."
   );
 
   // wrap the block

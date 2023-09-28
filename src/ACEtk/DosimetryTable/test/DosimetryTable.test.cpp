@@ -8,9 +8,9 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DosimetryCrossSectionData = block::DosimetryCrossSectionData;
+using CrossSectionData = dosimetry::CrossSectionData;
 using MTR = block::MTR;
-using SIGD = block::SIGD;
+using SIGD = dosimetry::SIGD;
 using Header = Table::Header;
 
 void verifyChunk( const DosimetryTable& );
@@ -92,7 +92,7 @@ SCENARIO( "DosimetryTable" ){
       unsigned int a = 27;
       Header header( "13027.24y", 26.75, 0., "", "", "" );
       MTR mtr( { 103, 107 } );
-      SIGD sigd( { DosimetryCrossSectionData(
+      SIGD sigd( { CrossSectionData(
 
                      { 1.896100000000E+00, 2.000000000000E+00,
                        2.050000000000E+00, 2.062500000000E+00, 2.075000000000E+00, 2.078125000000E+00,
@@ -249,7 +249,7 @@ SCENARIO( "DosimetryTable" ){
                         6.270000000000E-02, 5.880700000000E-02, 5.168100000000E-02, 4.400000000000E-02,
                         3.638500000000E-02, 3.220000000000E-02 }
                    ),
-                   DosimetryCrossSectionData(
+                   CrossSectionData(
                      { 3.248700000000E+00, 3.600000000000E+00, 3.650000000000E+00, 3.675000000000E+00,
                        3.700000000000E+00, 3.750000000000E+00, 3.800000000000E+00, 3.825000000000E+00,
                        3.850000000000E+00, 3.875000000000E+00, 3.900000000000E+00, 3.925000000000E+00,

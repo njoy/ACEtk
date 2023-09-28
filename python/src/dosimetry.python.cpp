@@ -11,10 +11,10 @@ namespace python = pybind11;
 namespace dosimetry {
 
   // declarations - ACE data components
-  void wrapDosimetryCrossSectionData( python::module&, python::module& );
+  void wrapCrossSectionData( python::module&, python::module& );
 
   // declarations - ACE table blocks
-  void wrapDosimetryCrossSectionBlock( python::module&, python::module& );
+  void wrapCrossSectionBlock( python::module&, python::module& );
 }
 
 void wrapDosimetry( python::module& module, python::module& viewmodule ) {
@@ -26,6 +26,6 @@ void wrapDosimetry( python::module& module, python::module& viewmodule ) {
     "Dosimetry ACE blocks and components"
   );
 
-  dosimetry::wrapDosimetryCrossSectionData( submodule, viewmodule );
-  dosimetry::wrapDosimetryCrossSectionBlock( submodule, viewmodule );
+  dosimetry::wrapCrossSectionData( submodule, viewmodule );
+  dosimetry::wrapCrossSectionBlock( submodule, viewmodule );
 }

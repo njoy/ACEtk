@@ -1,7 +1,7 @@
-DosimetryCrossSectionData() = default;
+CrossSectionData() = default;
 
-DosimetryCrossSectionData( const DosimetryCrossSectionData& ) = default;
-DosimetryCrossSectionData( DosimetryCrossSectionData&& ) = default;
+CrossSectionData( const CrossSectionData& ) = default;
+CrossSectionData( CrossSectionData&& ) = default;
 
 /**
  *  @brief Constructor
@@ -11,11 +11,11 @@ DosimetryCrossSectionData( DosimetryCrossSectionData&& ) = default;
  *  @param[in] energies        the energy values
  *  @param[in] xs              the xs values
  */
-DosimetryCrossSectionData( std::vector< long > boundaries,
-                           std::vector< long > interpolants,
-                           std::vector< double > energies,
-                           std::vector< double > xs ) :
-  BaseTabulatedData( "DosimetryCrossSectionData",
+CrossSectionData( std::vector< long > boundaries,
+                  std::vector< long > interpolants,
+                  std::vector< double > energies,
+                  std::vector< double > xs ) :
+  BaseTabulatedData( "CrossSectionData",
                      std::move( boundaries ), std::move( interpolants ),
                      std::move( energies ), std::move( xs ) ) {}
 
@@ -25,9 +25,9 @@ DosimetryCrossSectionData( std::vector< long > boundaries,
  *  @param[in] energies        the energy values
  *  @param[in] xs              the xs values
  */
-DosimetryCrossSectionData( std::vector< double > energies,
-                           std::vector< double > xs ) :
-  DosimetryCrossSectionData( {}, {}, std::move( energies ), std::move( xs ) ) {}
+CrossSectionData( std::vector< double > energies,
+                  std::vector< double > xs ) :
+  CrossSectionData( {}, {}, std::move( energies ), std::move( xs ) ) {}
 
 /**
  *  @brief Constructor
@@ -35,8 +35,8 @@ DosimetryCrossSectionData( std::vector< double > energies,
  *  @param[in] sig     the begin iterator of the block in the XSS array
  *  @param[in] end     the end iterator of the block in the XSS array
  */
-DosimetryCrossSectionData( Iterator begin, Iterator end ) :
-  BaseTabulatedData( "DosimetryCrossSectionData", begin, end ) {}
+CrossSectionData( Iterator begin, Iterator end ) :
+  BaseTabulatedData( "CrossSectionData", begin, end ) {}
 
-DosimetryCrossSectionData& operator=( const DosimetryCrossSectionData& ) = default;
-DosimetryCrossSectionData& operator=( DosimetryCrossSectionData&& ) = default;
+CrossSectionData& operator=( const CrossSectionData& ) = default;
+CrossSectionData& operator=( CrossSectionData&& ) = default;

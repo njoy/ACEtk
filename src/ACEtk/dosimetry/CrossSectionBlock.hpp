@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace dosimetry {
 
 /**
  *  @class
@@ -21,12 +21,12 @@ namespace block {
  *  cross section data sets is the same as the order of the reaction numbers in
  *  the MTR block.
  */
-class DosimetryCrossSectionBlock :
-    protected details::BaseBlockWithLocators< DosimetryCrossSectionBlock,
-                                              DosimetryCrossSectionData > {
+class CrossSectionBlock :
+    protected block::details::BaseBlockWithLocators< CrossSectionBlock,
+                                                     CrossSectionData > {
 
-  friend class details::BaseBlockWithLocators< DosimetryCrossSectionBlock,
-                                               DosimetryCrossSectionData >;
+  friend class block::details::BaseBlockWithLocators< CrossSectionBlock,
+                                                      CrossSectionData >;
 
   /* fields */
 
@@ -81,7 +81,7 @@ public:
   /**
    *  @brief Return all cross section data
    */
-  const std::vector< DosimetryCrossSectionData >& data() const {
+  const std::vector< CrossSectionData >& data() const {
 
     return BaseBlockWithLocators::data();
   }
@@ -94,7 +94,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const DosimetryCrossSectionData& crossSectionData( std::size_t index ) const {
+  const CrossSectionData& crossSectionData( std::size_t index ) const {
 
     return BaseBlockWithLocators::data( index );
   }
@@ -107,9 +107,9 @@ public:
   using BaseBlockWithLocators::end;
 };
 
-using SIGD = DosimetryCrossSectionBlock;
+using SIGD = CrossSectionBlock;
 
-} // block namespace
+} // dosimetry namespace
 } // ACEtk namespace
 } // njoy namespace
 
