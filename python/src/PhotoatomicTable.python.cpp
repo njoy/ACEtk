@@ -262,6 +262,18 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "heating_numbers_block",
     &Table::heatingNumbersBlock,
     "The heating numbers block"
+  )
+  .def_property_readonly(
+
+    "SUBSH",
+    &Table::SUBSH,
+    "The electron subshell data block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_subshell_block",
+    &Table::electronSubshellBlock,
+    "The electron subshell data block for eprdata (NEPR > 0)"
   );
 
   // add standard block definitions

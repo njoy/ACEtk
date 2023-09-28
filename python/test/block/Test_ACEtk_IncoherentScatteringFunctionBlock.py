@@ -16,6 +16,9 @@ class Test_ACEtk_IncoherentScatteringFunctionBlock( unittest.TestCase ) :
                9.998980000000E-01,  9.999530000000E-01,  9.999980000000E-01,                   1,
                                 1,                   1,                   1,                   1 ]
 
+    chunk_eprdata = [ 0., 1., 1000., 1e+6, 1e+9,
+                      1., 2., 3., 4., 5. ]
+
     def test_component( self ) :
 
         def verify_chunk( self, chunk ) :
@@ -80,7 +83,37 @@ class Test_ACEtk_IncoherentScatteringFunctionBlock( unittest.TestCase ) :
 
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
-        # the data is given explicitly
+        def verify_chunk_eprdata( self, chunk ) :
+
+            # verify content
+            self.assertEqual( False, chunk.empty )
+            self.assertEqual( 10, chunk.length )
+            self.assertEqual( "JINC", chunk.name )
+
+            self.assertEqual( 5, chunk.NM )
+            self.assertEqual( 5, chunk.number_values )
+
+            self.assertEqual( 5, len( chunk.momentum ) )
+            self.assertAlmostEqual( 0.  , chunk.momentum[0] )
+            self.assertAlmostEqual( 1.  , chunk.momentum[1] )
+            self.assertAlmostEqual( 1e+3, chunk.momentum[2] )
+            self.assertAlmostEqual( 1e+6, chunk.momentum[3] )
+            self.assertAlmostEqual( 1e+9, chunk.momentum[4] )
+
+            self.assertEqual( 5, len( chunk.values ) )
+            self.assertAlmostEqual( 1, chunk.values[0] )
+            self.assertAlmostEqual( 2, chunk.values[1] )
+            self.assertAlmostEqual( 3, chunk.values[2] )
+            self.assertAlmostEqual( 4, chunk.values[3] )
+            self.assertAlmostEqual( 5, chunk.values[4] )
+
+            # verify the xss array
+            xss = chunk.xss_array
+            for index in range( chunk.length ) :
+
+                self.assertAlmostEqual( self.chunk_eprdata[index], xss[index] )
+
+        # the data is given explicitly - mcnplib style
         chunk = IncoherentScatteringFunctionBlock(
                   values = [                                                                                 0,
                              1.104680000000E-03,  4.409660000000E-03,  1.033110000000E-01,  3.425650000000E-01,
@@ -90,6 +123,13 @@ class Test_ACEtk_IncoherentScatteringFunctionBlock( unittest.TestCase ) :
                                               1,                   1,                   1,                   1 ] )
 
         verify_chunk( self, chunk )
+
+        # the data is given explicitly - eprdata style
+        chunk = IncoherentScatteringFunctionBlock(
+                  momentum = [0., 1., 1000., 1e+6, 1e+9 ],
+                  values = [ 1., 2., 3., 4., 5. ] )
+
+        verify_chunk_eprdata( self, chunk )
 
 if __name__ == '__main__' :
 

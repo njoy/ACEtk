@@ -38,6 +38,10 @@ class Test_ACEtk_CoherentFormFactorBlock( unittest.TestCase ) :
               1.299850000000E-05,  1.111643855704E-05,  9.563173392213E-06,  8.272100115712E-06,
               7.191840373343E-06,  6.282390000000E-06 ]
 
+    chunk_eprdata = [ 0., 1., 1000., 1e+6, 1e+9,
+                      1., 2., 3., 4., 5.,
+                      6., 7., 8., 9., 10. ]
+
     def test_component( self ) :
 
         def verify_chunk( self, chunk ) :
@@ -68,7 +72,35 @@ class Test_ACEtk_CoherentFormFactorBlock( unittest.TestCase ) :
 
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
-        # the data is given explicitly
+        def verify_chunk_eprdata( self, chunk ) :
+
+            # verify content
+            self.assertEqual( False, chunk.empty )
+            self.assertEqual( 15, chunk.length )
+            self.assertEqual( "JCOH", chunk.name )
+
+            self.assertEqual( 5, chunk.NM )
+            self.assertEqual( 5, chunk.number_values )
+
+            self.assertEqual( 5, len( chunk.momentum ) )
+            self.assertAlmostEqual( 0.  , chunk.momentum[0] )
+            self.assertAlmostEqual( 1e+9, chunk.momentum[-1] )
+
+            self.assertEqual( 5, len( chunk.integrated_form_factors ) )
+            self.assertAlmostEqual( 1, chunk.integrated_form_factors[0] )
+            self.assertAlmostEqual( 5, chunk.integrated_form_factors[-1] )
+
+            self.assertEqual( 5, len( chunk.form_factors ) )
+            self.assertAlmostEqual(  6., chunk.form_factors[0] )
+            self.assertAlmostEqual( 10., chunk.form_factors[-1] )
+
+            # verify the xss array
+            xss = chunk.xss_array
+            for index in range( chunk.length ) :
+
+                self.assertAlmostEqual( self.chunk_eprdata[index], xss[index] )
+
+        # the data is given explicitly - mcplib style
         chunk = CoherentFormFactorBlock(
                   integrated = [                  0,  9.977954354245E-05,  3.964942506035E-04,  8.824146336660E-04,
                                  1.545120632092E-03,  2.368152245929E-03,  3.328001096461E-03,  5.572765511802E-03,
@@ -101,6 +133,14 @@ class Test_ACEtk_CoherentFormFactorBlock( unittest.TestCase ) :
                               7.191840373343E-06,  6.282390000000E-06 ] )
 
         verify_chunk( self, chunk )
+
+        # the data is given explicitly - eprdata style
+        chunk = CoherentFormFactorBlock(
+                  momentum = [0., 1., 1000., 1e+6, 1e+9 ],
+                  integrated = [ 1., 2., 3., 4., 5. ],
+                  factors = [ 6., 7., 8., 9., 10.] )
+
+        verify_chunk_eprdata( self, chunk )
 
 if __name__ == '__main__' :
 

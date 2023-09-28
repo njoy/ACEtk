@@ -11,6 +11,7 @@ using namespace njoy::ACEtk;
 
 void verifyChunkMcplib( const PhotoatomicTable& );
 void verifyChunkMcplib03( const PhotoatomicTable& );
+void verifyChunkEprdata12( const PhotoatomicTable& );
 
 SCENARIO( "PhotoatomicTable" ){
 
@@ -294,6 +295,146 @@ SCENARIO( "PhotoatomicTable" ){
       } // THEN
     } // WHEN
   } // GIVEN
+
+  GIVEN( "valid data for a PhotoatomicTable - eprdata" ) {
+
+    auto table = fromFile( "1000-eprdata12.12p" );
+    std::array< int32_t, 16 > iz = table.data().IZ();
+    std::array< double, 16 > aw = table.data().AW();
+    std::array< int64_t, 16 > nxs = table.data().NXS();
+    std::array< int64_t, 32 > jxs = table.data().JXS();
+    std::vector< double > xss = table.data().XSS();
+
+    WHEN( "constructing a PhotoatomicTable from a table" ) {
+
+      PhotoatomicTable chunk( std::move( table ) );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata12( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN
+
+/*    WHEN( "constructing a PhotoatomicTable from its components" ) {
+
+      PhotoatomicTable base( std::move( table ) );
+
+      PhotoatomicTable chunk( 1, base.header(),
+                              {  },
+                              {  },
+                              base.ESZG(), base.JINC(),
+                              base.JCOH(), base.LHNM(),
+                              std::nullopt,
+                              base.EPS(), base.SWD() );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata12( chunk );
+      }
+
+      THEN( "the IZ array is correct" ) {
+
+        decltype(auto) iz_chunk = chunk.data().IZ();
+        CHECK( iz.size() == iz_chunk.size() );
+        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the AW array is correct" ) {
+
+        decltype(auto) aw_chunk = chunk.data().AW();
+        CHECK( aw.size() == aw_chunk.size() );
+        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the NXS array is correct" ) {
+
+        decltype(auto) nxs_chunk = chunk.data().NXS();
+        CHECK( nxs.size() == nxs_chunk.size() );
+        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the JXS array is correct" ) {
+
+        decltype(auto) jxs_chunk = chunk.data().JXS();
+        CHECK( jxs.size() == jxs_chunk.size() );
+        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+        }
+      } // THEN
+
+      THEN( "the XSS array is correct" ) {
+
+        decltype(auto) xss_chunk = chunk.data().XSS();
+        CHECK( xss.size() == xss_chunk.size() );
+        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+        }
+      } // THEN
+    } // WHEN*/
+  } // GIVEN
 } // SCENARIO
 
 void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
@@ -388,6 +529,9 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // SWD block
   CHECK( false == chunk.SWD().has_value() );
+
+  // SUBSH block - not an EPR data file
+  CHECK( false == chunk.SUBSH().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -530,4 +674,161 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 31 == profile.cdf().size() );
   CHECK( 0. == Approx( profile.cdf().front() ) );
   CHECK( 1. == Approx( profile.cdf().back() ) );
+
+  // SUBSH block - not an EPR data file
+  CHECK( false == chunk.SUBSH().has_value() );
 }
+
+void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
+
+  CHECK( "1000.12p" == chunk.ZAID() );
+  CHECK( 0. == Approx( chunk.temperature() ) );
+
+  CHECK( 12025 == chunk.length() );
+  CHECK( 647 == chunk.NES() );
+  CHECK( 647 == chunk.numberEnergyPoints() );
+  CHECK( 0 == chunk.NFLO() );
+  CHECK( 0 == chunk.numberFluorescenceEdges() );
+  CHECK( 1 == chunk.NSH() );
+  CHECK( 1 == chunk.numberElectronShells() );
+
+  // this is an EPR data file
+  CHECK( 1 == chunk.NEPR() );
+  CHECK( 1 == chunk.electronPhotonRelaxationFormat() );
+  CHECK( 1 == chunk.NSSH() );
+  CHECK( 1 == chunk.numberElectronSubshells() );
+
+  // ESZG block
+  CHECK( false == chunk.ESZG().empty() );
+
+  CHECK( 647 == chunk.ESZG().NES() );
+  CHECK( 647 == chunk.ESZG().numberEnergyPoints() );
+
+  CHECK( 647 == chunk.ESZG().energies().size() );
+  CHECK( 647 == chunk.ESZG().incoherent().size() );
+  CHECK( 647 == chunk.ESZG().coherent().size() );
+  CHECK( 647 == chunk.ESZG().photoelectric().size() );
+  CHECK( 647 == chunk.ESZG().pairproduction().size() );
+
+  CHECK( -1.381551055796E+01 == Approx( chunk.ESZG().energies().front() ) );
+  CHECK(  1.151292546497E+01 == Approx( chunk.ESZG().energies().back() ) );
+  CHECK( -1.616285246005E+01 == Approx( chunk.ESZG().incoherent().front() ) );
+  CHECK( -1.097982967256E+01 == Approx( chunk.ESZG().incoherent().back() ) );
+  CHECK( -1.152423386458E+01 == Approx( chunk.ESZG().coherent().front() ) );
+  CHECK( -3.530963433758E+01 == Approx( chunk.ESZG().coherent().back() ) );
+  CHECK(                   0 == Approx( chunk.ESZG().photoelectric().front() ) );
+  CHECK( -3.249289163676E+01 == Approx( chunk.ESZG().photoelectric().back() ) );
+  CHECK(                   0 == Approx( chunk.ESZG().pairproduction().front() ) );
+  CHECK( -3.877573270699E+00 == Approx( chunk.ESZG().pairproduction().back() ) );
+
+  // JINC block
+  CHECK( false == chunk.JINC().empty() );
+
+  CHECK( 94 == chunk.JINC().NM() );
+  CHECK( 94 == chunk.JINC().numberValues() );
+
+  CHECK( 94 == chunk.JINC().momentum().size() );
+  CHECK( 1.000000000000E-07 == Approx( chunk.JINC().momentum().front() ) );
+  CHECK( 1.000000000000E+09   == Approx( chunk.JINC().momentum().back() ) );
+
+  CHECK( 94 == chunk.JINC().values().size() );
+  CHECK( 0 == Approx( chunk.JINC().values().front() ) );
+  CHECK( 1 == Approx( chunk.JINC().values().back() ) );
+
+  // JCOH block
+  CHECK( false == chunk.JCOH().empty() );
+
+  CHECK( 90 == chunk.JCOH().NM() );
+  CHECK( 90 == chunk.JCOH().numberValues() );
+
+  CHECK( 90 == chunk.JCOH().momentum().size() );
+  CHECK( 0.                 == Approx( chunk.JCOH().momentum().front() ) );
+  CHECK( 1.000000000000E+09 == Approx( chunk.JCOH().momentum().back() ) );
+
+  CHECK( 90 == chunk.JCOH().integratedFormFactors().size() );
+  CHECK( 0.                 == Approx( chunk.JCOH().integratedFormFactors().front() ) );
+  CHECK( 3.012861887900E-02 == Approx( chunk.JCOH().integratedFormFactors().back() ) );
+
+  CHECK( 90 == chunk.JCOH().formFactors().size() );
+  CHECK( 1.                 == Approx( chunk.JCOH().formFactors().front() ) );
+  CHECK( 8.182900000000E-39 == Approx( chunk.JCOH().formFactors().back() ) );
+
+  // JFLO block
+  CHECK( false == chunk.JFLO().has_value() );
+
+  // LHNM block
+  CHECK( false == chunk.LHNM().empty() );
+
+  CHECK( 647 == chunk.LHNM().NES() );
+  CHECK( 647 == chunk.LHNM().numberEnergyPoints() );
+  CHECK( 647 == chunk.LHNM().heating().size() );
+
+  CHECK( 8.714616354250E-07 == Approx( chunk.LHNM().heating().front() ) );
+  CHECK( 9.999084183050E+04 == Approx( chunk.LHNM().heating().back() ) );
+
+  // EPS block
+  CHECK( false == chunk.EPS()->empty() );
+
+  CHECK( 1 == chunk.EPS()->NSH() );
+  CHECK( 1 == chunk.EPS()->numberElectronShells() );
+
+  CHECK( 1 == Approx( chunk.EPS()->numberElectrons()[0] ) );
+  CHECK( 1.400000000000e-05 == Approx( chunk.EPS()->bindingEnergies()[0] ) );
+  CHECK( 1.000000000000e+00 == Approx( chunk.EPS()->interactionProbabilities()[0] ) );
+
+  CHECK( 1 == chunk.EPS()->numberElectronsPerShell( 1 ) );
+  CHECK( 1.400000000000e-05 == Approx( chunk.EPS()->bindingEnergy( 1 ) ) );
+  CHECK( 1.000000000000e+00 == Approx( chunk.EPS()->interactionProbability( 1 ) ) );
+
+  // SWD block
+  CHECK( false == chunk.SWD()->empty() );
+
+  CHECK( 1 == chunk.SWD()->NSH() );
+
+  CHECK( 1 == chunk.SWD()->LSWD( 1 ) );
+
+  auto profile = chunk.SWD()->comptonProfile(1);
+  CHECK( 2 == profile.interpolation() );
+  CHECK( 31 == profile.numberValues() );
+  CHECK( 31 == profile.momentum().size() );
+  CHECK( 0. == Approx( profile.momentum().front() ) );
+  CHECK( 100. == Approx( profile.momentum().back() ) );
+  CHECK( 31 == profile.pdf().size() );
+  CHECK( 1.690581458877E+00 == Approx( profile.pdf().front() ) );
+  CHECK( 5.177281263934E-11 == Approx( profile.pdf().back() ) );
+  CHECK( 31 == profile.cdf().size() );
+  CHECK( 0. == Approx( profile.cdf().front() ) );
+  CHECK( 1. == Approx( profile.cdf().back() ) );
+
+  // SUBSH block - EPR data file
+  CHECK( true == chunk.SUBSH().has_value() );
+
+  CHECK( 1 == chunk.SUBSH()->NSSH() );
+  CHECK( 1 == chunk.SUBSH()->numberElectronSubshells() );
+
+  CHECK( 1 == chunk.SUBSH()->ENDF()[0] );
+  CHECK( 1 == chunk.SUBSH()->designators()[0] );
+
+  CHECK( 1 == chunk.SUBSH()->EP()[0] );
+  CHECK( 1 == chunk.SUBSH()->populations()[0] );
+
+  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->BE()[0] ) );
+  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->bindingEnergies()[0] ) );
+
+  CHECK( 1. == Approx( chunk.SUBSH()->CV()[0] ) );
+  CHECK( 1. == Approx( chunk.SUBSH()->vacancyProbabilities()[0] ) );
+
+  CHECK( 0 == chunk.SUBSH()->NT()[0] );
+  CHECK( 0 == chunk.SUBSH()->numberTransitions()[0] );
+
+  CHECK( 1 == chunk.SUBSH()->designator( 1 ) );
+
+  CHECK( 1 == chunk.SUBSH()->population( 1 ) );
+
+  CHECK( 1.361E-05 == Approx( chunk.SUBSH()->bindingEnergy( 1 ) ) );
+
+  CHECK( 1. == Approx( chunk.SUBSH()->vacancyProbability( 1 ) ) );
+
+  CHECK( 0 == chunk.SUBSH()->numberTransitions( 1 ) );
+}
+

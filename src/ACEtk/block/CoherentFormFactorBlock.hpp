@@ -15,17 +15,21 @@ namespace block {
  *  @class
  *  @brief The photoatomic JCOH block with the coherent form factors
  *
- *  The CoherentFormFactorBlock class contains coherent form factors that are
- *  used to modify the differential Thomson cross sectiontabulated on a fixed
- *  grid of the recoil electron momentum transfer (in inverse angstroms).
+ *  The CoherentFormFactorBlock class contains one of the following
+ *  representations of the form factor:
+ *    - 55 values for the form factor and its integral form using a fixed 
+ *      momentum grid (mcplib version)
+ *    - tabulated form factor and its integral form (eprdata version)
  */
 class CoherentFormFactorBlock : protected details::ArrayData {
 
   /* fields */
+  std::optional< std::vector< double > > momentum_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/CrossSectionData/src/generateXSS.hpp"
-  #include "ACEtk/block/CrossSectionData/src/verifySize.hpp"
+  #include "ACEtk/block/CoherentFormFactorBlock/src/numberElements.hpp"
+  #include "ACEtk/block/CoherentFormFactorBlock/src/numberArrays.hpp"
+  #include "ACEtk/block/CoherentFormFactorBlock/src/generateArrays.hpp"
 
 public:
 
@@ -37,36 +41,46 @@ public:
   /**
    *  @brief Return the number of values
    */
-  static constexpr unsigned int NM() { return 55; }
+  unsigned int NM() const { return this->N(); }
 
   /**
    *  @brief Return the number of values
    */
-  static constexpr unsigned int numberValues() { return NM(); }
+  unsigned int numberValues() const { return NM(); }
 
   /**
    *  @brief Return the electron recoil momentum values
    */
-  static constexpr std::array< double, 55 > momentum() {
+  auto momentum() const {
 
-    return {{ 0., .01, .02, .03, .04, .05, .06, .08, .10, .12, .15,
-              .18, .20, .25, .30, .35, .40, .45, .50, .55, .60, .70,
-              .80, .90, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8,
-              1.9, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8,
-              4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0 }};
+    if ( this->momentum_.has_value() ) {
+
+      return ranges::make_subrange( this->momentum_.value().begin(), 
+                                    this->momentum_.value().end() );
+    }
+    else {
+
+      return this->darray( 1 );
+    }
   }
 
   /**
    *  @brief Return the integrated form factor values (tabulated on a grid of
    *         squared momentum values)
    */
-  auto integratedFormFactors() const { return this->darray( 1 ); }
+  auto integratedFormFactors() const { 
+
+    return this->darray( this->momentum_.has_value() ? 1 : 2 );
+  }
 
   /**
    *  @brief Return the form factor values (tabulated on a grid of momentum
    *         values)
    */
-  auto formFactors() const { return this->darray( 2 ); }
+  auto formFactors() const { 
+
+    return this->darray( this->momentum_.has_value() ? 2 : 3 );
+  }
 
   using ArrayData::empty;
   using ArrayData::name;

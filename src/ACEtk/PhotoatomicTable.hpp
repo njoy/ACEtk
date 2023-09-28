@@ -12,6 +12,7 @@
 #include "ACEtk/block/PhotoatomicHeatingNumbersBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
 #include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -32,6 +33,7 @@ class PhotoatomicTable : protected Table {
   block::LHNM lhnm_;
   std::optional< block::EPS > eps_;
   std::optional< block::SWD > swd_;
+  std::optional< block::SUBSH > subsh_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -251,6 +253,19 @@ public:
   const std::optional< block::SWD >& comptonProfileBlock() const {
 
     return this->SWD();
+  }
+
+  /**
+   *  @brief Return the electron subshell data block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::SUBSH >& SUBSH() const { return this->subsh_; }
+
+  /**
+   *  @brief Return the electron subshell data block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::SUBSH >& electronSubshellBlock() const {
+
+    return this->SUBSH();
   }
 };
 
