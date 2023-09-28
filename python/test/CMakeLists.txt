@@ -72,6 +72,7 @@ add_test( NAME ACEtk.python.block.PhotoatomicComptonProfileBlock COMMAND ${PYTHO
 add_test( NAME ACEtk.python.block.PhotoatomicElectronShellBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotoatomicElectronShellBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotoatomicElectronSubshellBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotoatomicElectronSubshellBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotoatomicElectronCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotoatomicElectronCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.PhotoatomicElectronExcitationBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotoatomicElectronExcitationBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
+add_test( NAME ACEtk.python.block.PhotoatomicElectronBremsstrahlungBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotoatomicElectronExcitationBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotonuclearPrincipalCrossSectionBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonuclearPrincipalCrossSectionBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
 add_test( NAME ACEtk.python.block.PhotonuclearSecondaryParticleLocatorBlock COMMAND ${PYTHON_EXECUTABLE} -m unittest -v test/block/Test_ACEtk_PhotonuclearSecondaryParticleLocatorBlock.py WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/python )
-
