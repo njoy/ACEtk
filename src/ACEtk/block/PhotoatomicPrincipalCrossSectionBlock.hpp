@@ -23,7 +23,7 @@ namespace block {
  *    - the photoelectric cross section
  *    - the pair production cross section
  *
- *  The size of each (the total number of energy points) is stored in NXS(3).
+ *  The size of each (the total number of energy points NES) is stored in NXS(3).
  */
 class PhotoatomicPrincipalCrossSectionBlock : protected details::ArrayData {
 

@@ -13,6 +13,10 @@
 #include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
 #include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
+#include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronBremsstrahlungBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -34,6 +38,13 @@ class PhotoatomicTable : protected Table {
   std::optional< block::EPS > eps_;
   std::optional< block::SWD > swd_;
   std::optional< block::SUBSH > subsh_;
+  std::optional< block::SPHEL > sphel_;
+
+  std::optional< block::ESZE > esze_;
+
+  std::optional< block::EXCIT > excit_;
+
+  std::optional< block::BREML > breml_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -169,6 +180,36 @@ public:
    */
   unsigned int numberElectronSubshells() const { return this->NSSH(); }
 
+  /**
+   *  @brief Return the number of electron energy points
+   */
+  unsigned int NE() const { return this->data().NXS(8); }
+
+  /**
+   *  @brief Return the number of electron energy points
+   */
+  unsigned int numberElectronEnergyPoints() const { return this->NE(); }
+
+  /**
+   *  @brief Return the number of electron excitation energy points
+   */
+  unsigned int NXL() const { return this->data().NXS(9); }
+
+  /**
+   *  @brief Return the number of electron excitation energy points
+   */
+  unsigned int numberElectronExcitationEnergyPoints() const { return this->NXL(); }
+
+  /**
+   *  @brief Return the number of electron Bremsstrahlung energy points
+   */
+  unsigned int NBL() const { return this->data().NXS(12); }
+
+  /**
+   *  @brief Return the number of electron Bremsstrahlung energy points
+   */
+  unsigned int numberElectronBremsstrahlungEnergyPoints() const { return this->NBL(); }
+
   // JXS information
 
   // XSS blocks
@@ -266,6 +307,58 @@ public:
   const std::optional< block::SUBSH >& electronSubshellBlock() const {
 
     return this->SUBSH();
+  }
+
+  /**
+   *  @brief Return the photoelectric cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::SPHEL >& SPHEL() const { return this->sphel_; }
+
+  /**
+   *  @brief Return the photoelectric cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::SPHEL >& photoelectricCrossSectionBlock() const {
+
+    return this->SPHEL();
+  }
+
+  /**
+   *  @brief Return the electron cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::ESZE >& ESZE() const { return this->esze_; }
+
+  /**
+   *  @brief Return the electron cross section block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::ESZE >& electronCrossSectionBlock() const {
+
+    return this->ESZE();
+  }
+
+  /**
+   *  @brief Return the electron excitation energy loss block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::EXCIT >& EXCIT() const { return this->excit_; }
+
+  /**
+   *  @brief Return the electron excitation energy loss block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::EXCIT >& electronExcitationEnergyLossBlock() const {
+
+    return this->EXCIT();
+  }
+
+  /**
+   *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::BREML >& BREML() const { return this->breml_; }
+
+  /**
+   *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
+   */
+  const std::optional< block::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
+
+    return this->BREML();
   }
 };
 

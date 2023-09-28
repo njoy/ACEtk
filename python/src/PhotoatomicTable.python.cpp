@@ -132,18 +132,6 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "Z",
-    &Table::Z,
-    "The atom number of the element"
-  )
-  .def_property_readonly(
-
-    "atom_number",
-    &Table::atomNumber,
-    "The atom number of the element"
-  )
-  .def_property_readonly(
-
     "NFLO",
     &Table::NFLO,
     "The number of fluorescence edges"
@@ -190,6 +178,42 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "number_electron_subshells",
     &Table::numberElectronSubshells,
     "The number of subshells for photoelectric and electron impact ionization"
+  )
+  .def_property_readonly(
+
+    "NE",
+    &Table::NE,
+    "The number of electron energy points"
+  )
+  .def_property_readonly(
+
+    "number_electron_energy_points",
+    &Table::numberElectronEnergyPoints,
+    "The number of electron energy points"
+  )
+  .def_property_readonly(
+
+    "NXL",
+    &Table::NXL,
+    "The number of electron excitation energy points"
+  )
+  .def_property_readonly(
+
+    "number_electron_excitation_energy_points",
+    &Table::numberElectronExcitationEnergyPoints,
+    "The number of electron excitation energy points"
+  )
+  .def_property_readonly(
+
+    "NBL",
+    &Table::NBL,
+    "The number of electron Bremsstrahlung energy points"
+  )
+  .def_property_readonly(
+
+    "number_electron_bremsstrahlung_energy_points",
+    &Table::numberElectronBremsstrahlungEnergyPoints,
+    "The number of electron Bremsstrahlung energy points"
   )
   .def_property_readonly(
 
@@ -274,6 +298,54 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "electron_subshell_block",
     &Table::electronSubshellBlock,
     "The electron subshell data block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "SPHEL",
+    &Table::SPHEL,
+    "The photolectric cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "photoelectric_cross_section_block",
+    &Table::photoelectricCrossSectionBlock,
+    "The photolectric cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "ESZE",
+    &Table::ESZE,
+    "The electron cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_cross_section_block",
+    &Table::electronCrossSectionBlock,
+    "The electron cross section block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "EXCIT",
+    &Table::EXCIT,
+    "The electron excitation energy loss block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_excitation_energy_loss_block",
+    &Table::electronExcitationEnergyLossBlock,
+    "The electron excitation energy loss block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "BREML",
+    &Table::BREML,
+    "The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "electron_energy_after_bremsstrahlung_block",
+    &Table::electronEnergyAfterBremsstrahlungBlock,
+    "The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)"
   );
 
   // add standard block definitions
