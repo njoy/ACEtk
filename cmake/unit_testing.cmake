@@ -105,11 +105,7 @@ add_subdirectory( src/ACEtk/electron/EnergyDistributionBlock/test )
 
 add_subdirectory( src/ACEtk/block/PhotonuclearPrincipalCrossSectionBlock/test )
 add_subdirectory( src/ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/test )
-add_subdirectory( src/ACEtk/details/verify/CDF/test )
-add_subdirectory( src/ACEtk/details/verify/Positive/test )
-add_subdirectory( src/ACEtk/details/verify/Sorted/test )
-add_subdirectory( src/ACEtk/details/verify/StrictlyPositive/test )
-add_subdirectory( src/ACEtk/details/verify/test )
+
 add_subdirectory( src/ACEtk/interpretation/DEDX1/test )
 add_subdirectory( src/ACEtk/interpretation/EL03/test )
 add_subdirectory( src/ACEtk/interpretation/EPR/test )

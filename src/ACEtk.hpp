@@ -42,7 +42,6 @@ namespace ACEtk {
 
 using namespace dimwits;
 
-#include "ACEtk/details.hpp"
 #include "ACEtk/interpretation.hpp"
 
 }
