@@ -69,6 +69,7 @@ namespace block {
   void wrapPhotoatomicComptonProfile( python::module&, python::module& );
   void wrapPhotoatomicSubshellTransitionData( python::module&, python::module& );
   void wrapElectronTabulatedAngularDistribution( python::module&, python::module& );
+  void wrapElectronTabulatedEnergyDistribution( python::module&, python::module& );
 
   // declarations - ACE table blocks
   void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
@@ -111,6 +112,7 @@ namespace block {
   void wrapPhotoelectricCrossSectionBlock( python::module&, python::module& );
   void wrapPhotoatomicSubshellTransitionDataBlock( python::module&, python::module& );
   void wrapElectronElasticAngularDistributionBlock( python::module&, python::module& );
+  void wrapElectronBremsstrahlungEnergyDistributionBlock( python::module&, python::module& );
 }
 
 // declarations - ACE table types
@@ -206,6 +208,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotoatomicComptonProfile( module, viewmodule );
   block::wrapPhotoatomicSubshellTransitionData( module, viewmodule );
   block::wrapElectronTabulatedAngularDistribution( module, viewmodule );
+  block::wrapElectronTabulatedEnergyDistribution( module, viewmodule );
 
   // wrap ACE table blocks
   block::wrapPrincipalCrossSectionBlock( module, viewmodule );
@@ -248,6 +251,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotoelectricCrossSectionBlock( module, viewmodule );
   block::wrapPhotoatomicSubshellTransitionDataBlock( module, viewmodule );
   block::wrapElectronElasticAngularDistributionBlock( module, viewmodule );
+  block::wrapElectronBremsstrahlungEnergyDistributionBlock( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );

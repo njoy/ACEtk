@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ElectronElasticAngularDistributionBlock.hpp"
+#include "ACEtk/block/ElectronBremsstrahlungEnergyDistributionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapElectronElasticAngularDistributionBlock( python::module& module, python::module& ) {
+void wrapElectronBremsstrahlungEnergyDistributionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ElectronElasticAngularDistributionBlock;
-  using ElectronTabulatedAngularDistribution = njoy::ACEtk::block::ElectronTabulatedAngularDistribution;
+  using Block = njoy::ACEtk::block::ElectronBremsstrahlungEnergyDistributionBlock;
+  using ElectronTabulatedEnergyDistribution = njoy::ACEtk::block::ElectronTabulatedEnergyDistribution;
 
   // wrap views created by this block
 
@@ -24,28 +24,28 @@ void wrapElectronElasticAngularDistributionBlock( python::module& module, python
   python::class_< Block > block(
 
     module,
-    "ElectronElasticAngularDistributionBlock",
-    "The photoatomic and electron ELASI and ELAS block with the elastic scattering\n"
-    "angular distribution data\n\n"
+    "ElectronBremsstrahlungEnergyDistributionBlock",
+    "The photoatomic and electron BREMI and BREME block with the photon energy\n"
+    "distribution data from Bremsstrahlung\n\n"
     "The ElectronElasticAngularDistributionBlock class contains a list of\n"
-    "electron energies for which angular distribution data is given."
+    "electron energies for which energy distribution data is given."
   );
 
   // wrap the block
   block
   .def(
 
-    python::init< std::vector< ElectronTabulatedAngularDistribution > >(),
+    python::init< std::vector< ElectronTabulatedEnergyDistribution > >(),
     python::arg( "distributions" ),
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self             the block\n"
-    "    distributions    the angular distribution data"
+    "    distributions    the energy distribution data"
   )
   .def_property_readonly(
 
-    "NA",
-    &Block::NA,
+    "NB",
+    &Block::NB,
     "The number of available energies"
   )
   .def_property_readonly(
