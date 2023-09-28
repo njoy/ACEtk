@@ -167,6 +167,8 @@ if(ACEtk.python)
     python/src/block/PhotoelectricCrossSectionBlock.python.cpp
     python/src/block/PhotoatomicSubshellTransitionData.python.cpp
     python/src/block/PhotoatomicSubshellTransitionDataBlock.python.cpp
+    python/src/block/ElectronTabulatedAngularDistribution.python.cpp
+    python/src/block/ElectronElasticAngularDistributionBlock.python.cpp
     python/src/ContinuousEnergyTable.python.cpp
     python/src/DosimetryTable.python.cpp
     python/src/ThermalScatteringTable.python.cpp

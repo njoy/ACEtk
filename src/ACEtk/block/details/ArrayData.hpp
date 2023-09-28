@@ -26,12 +26,10 @@ class ArrayData : protected details::Base {
   #include "ACEtk/block/details/ArrayData/src/generateXSS.hpp"
   #include "ACEtk/block/details/ArrayData/src/verifySize.hpp"
 
-protected:
+public:
 
   /* constructor */
   #include "ACEtk/block/details/ArrayData/src/ctor.hpp"
-
-public:
 
   /* methods */
 

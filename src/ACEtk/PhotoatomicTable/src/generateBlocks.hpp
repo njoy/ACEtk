@@ -36,6 +36,8 @@ void generateBlocks() {
   this->xprob_ = std::nullopt;
   this->esze_ = std::nullopt;
   this->excit_ = std::nullopt;
+  this->elas_ = std::nullopt;
+  this->breml_ = std::nullopt;
 
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
@@ -94,6 +96,9 @@ void generateBlocks() {
     this->esze_ = block::ESZE( esze.first, esze.second, this->NSSH(), this->NE() );
     auto excit = block( 20 );
     this->excit_ = block::EXCIT( excit.first, excit.second, this->NXL() );
+    auto elasi = block( 21 );
+    auto elas = block( 22 );
+    this->elas_ = block::ELAS( elasi.first, elas.second, this->NA() );
 
     auto breml = block( 26 );
     this->breml_ = block::BREML( breml.first, breml.second, this->NBL() );

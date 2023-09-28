@@ -6,7 +6,7 @@ ArrayData( std::string&& name, std::vector< std::vector< Number > >&& values,
   Base( std::move( name ), generateXSS( std::move( values ) ) ),
   nelements_( n ), narrays_( m ) {}
 
-protected:
+public:
 
 ArrayData() = default;
 

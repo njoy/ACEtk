@@ -461,6 +461,8 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberElectronEnergyPoints() );
   CHECK( 0 == chunk.NXL() );
   CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
+  CHECK( 0 == chunk.NA() );
+  CHECK( 0 == chunk.numberElectronElasticEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
@@ -553,7 +555,10 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   // EXCIT block - not EPR data file
   CHECK( false == chunk.EXCIT().has_value() );
 
-  // JXS(21) -> JXS(25)
+  // ELAS block - not EPR data file
+  CHECK( false == chunk.ELAS().has_value() );
+
+  // other blocks go here
 
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
@@ -583,6 +588,8 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberElectronEnergyPoints() );
   CHECK( 0 == chunk.NXL() );
   CHECK( 0 == chunk.numberElectronExcitationEnergyPoints() );
+  CHECK( 0 == chunk.NA() );
+  CHECK( 0 == chunk.numberElectronElasticEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
@@ -723,7 +730,10 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   // EXCIT block - not EPR data file
   CHECK( false == chunk.EXCIT().has_value() );
 
-  // JXS(21) -> JXS(25)
+  // ELAS block - not EPR data file
+  CHECK( false == chunk.ELAS().has_value() );
+
+  // other blocks go here
 
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
@@ -753,6 +763,8 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 342 == chunk.numberElectronEnergyPoints() );
   CHECK( 170 == chunk.NXL() );
   CHECK( 170 == chunk.numberElectronExcitationEnergyPoints() );
+  CHECK( 16 == chunk.NA() );
+  CHECK( 16 == chunk.numberElectronElasticEnergyPoints() );
   CHECK( 82 == chunk.NBL() );
   CHECK( 82 == chunk.numberElectronBremsstrahlungEnergyPoints() );
 
@@ -960,7 +972,23 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 1.351000000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().front() ) );
   CHECK( 2.107770000000E-05 == Approx( chunk.EXCIT()->excitationEnergyLoss().back() ) );
 
-  // JXS(21) -> JXS(25)
+  // ELAS block - not EPR data file
+  CHECK( true == chunk.ELAS().has_value() );
+
+  CHECK( 16 == chunk.ELAS()->NA() );
+  CHECK( 16 == chunk.ELAS()->numberEnergyPoints() );
+  CHECK( 16 == chunk.ELAS()->energies().size() );
+  CHECK( 16 == chunk.ELAS()->distributions().size() );
+
+  auto distribution = chunk.ELAS()->distribution(1);
+  CHECK( 1.000000000000E-05 == distribution.energy() );
+  CHECK( 3 == distribution.numberCosines() );
+
+  distribution = chunk.ELAS()->distribution(16);
+  CHECK( 1e+5 == distribution.energy() );
+  CHECK( 91 == distribution.numberCosines() );
+
+  // other blocks go here
 
   // BREML block - EPR data file
   CHECK( true == chunk.BREML().has_value() );
