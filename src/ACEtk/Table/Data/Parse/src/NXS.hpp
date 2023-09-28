@@ -24,9 +24,8 @@ NXS( State<Iterator>& state, Range& result ) {
   }
   catch ( std::exception& e ) {
 
-    Log::info("Error encountered while parsing NXS block");
-    utility::echoErroneousLine( begin, state.position,
-                                state.end, state.lineNumber );
+    Log::error( "Error encountered while parsing NXS block on line {}", state.lineNumber );
+    Log::info( "Data: {}", std::string( begin, std::find( state.position, state.end, '\n') ) );
     throw e;
   }
 }
@@ -34,7 +33,7 @@ NXS( State<Iterator>& state, Range& result ) {
 template< typename Iterator >
 static auto
 NXS( State<Iterator>& state ) {
-  
+
   std::array< int64_t, 16 > result;
   NXS( state, result );
   return result;

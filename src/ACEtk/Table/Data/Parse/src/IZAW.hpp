@@ -28,18 +28,16 @@ IZAW( State<Iterator>& state, IZrange& izrange, AWrange& awrange ) {
   }
   catch( std::exception& e ) {
 
-    Log::info("Error encountered while parsing IZAW block");
-    utility::echoErroneousLine( begin, state.position,
-                                state.end, state.lineNumber );
+    Log::error( "Error encountered while parsing IZAW block on line {}", state.lineNumber );
+    Log::info( "Data: {}", std::string( begin, std::find( state.position, state.end, '\n') ) );
     throw e;
   }
 }
 
-
 template< typename Iterator >
 static auto
 IZAW( State<Iterator>& state ) {
-  
+
   std::pair< std::array< int32_t, 16 >,
              std::array< double, 16 > > result;
   IZAW( state, result.first, result.second );

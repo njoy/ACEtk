@@ -46,7 +46,11 @@ namespace ACEtk {
   inline auto fromFile( const std::string& filename ) {
 
     std::string content = readContentFromFile( filename );
-    return njoy::ACEtk::Table( content );
+
+    using Iterator = decltype( content.begin() );
+    State< Iterator > state{ 1, content.begin(), content.end() };
+
+    return njoy::ACEtk::Table( state );
   }
 
   /**

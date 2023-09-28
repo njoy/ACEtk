@@ -18,6 +18,9 @@ Table( HeaderVariant&& header, State< Iterator >& state ) :
 
 public:
 
+Table( const Table& ) = default;
+Table( Table&& ) = default;
+
 /**
  *  @brief Constructor (from a buffer)
  *
@@ -43,16 +46,3 @@ Table( State< Iterator >& state )
  */
 template< typename Iterator >
 Table( State< Iterator >&& state ) : Table( state ) {}
-
-/**
- *  @brief Constructor (from a range)
- *
- *  @param[in] range   the buffer given as a range (e.g. a string)
- */
-template< typename Range,
-          typename... Args,
-          typename = utility::void_t
-          < decltype( std::declval< Range >().begin() ),
-            decltype( std::declval< Range >().end() ) > >
-Table( Range&& range, Args&&... ) :
-  Table( State< decltype( range.begin() ) >{ 1, range.begin(), range.end() } ) {}

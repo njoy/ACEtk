@@ -10,29 +10,9 @@ FetchContent_Declare( catch-adapter
     GIT_TAG         fb84b82ebf7a4789aa43cea560680cf745c6ee4f
     )
 
-FetchContent_Declare( dimwits
-    GIT_REPOSITORY  https://github.com/njoy/DimensionalAnalysis
-    GIT_TAG         acd794d373c8740a788f5c9d58a6eb8ba4d9861a
-    )
-
 FetchContent_Declare( disco
     GIT_REPOSITORY  https://github.com/njoy/disco
     GIT_TAG         2606933a854bb0269c4ec37143e1236797e27838
-    )
-
-FetchContent_Declare( hana-adapter
-    GIT_REPOSITORY  https://github.com/njoy/hana-adapter
-    GIT_TAG         f58e8973c9a614dc4f3720b5581a762c61bdbb40
-    )
-
-FetchContent_Declare( header-utilities
-    GIT_REPOSITORY  https://github.com/njoy/header-utilities
-    GIT_TAG         cc2610fee15e255c151e8e22aca1e8b3d1a96b39
-    )
-
-FetchContent_Declare( interpolation
-    GIT_REPOSITORY  https://github.com/njoy/interpolation
-    GIT_TAG         cb975c3cc58ccbc948b6750231056f7a98ad2ac9
     )
 
 FetchContent_Declare( Log
@@ -61,11 +41,7 @@ FetchContent_Declare( spdlog
 
 FetchContent_MakeAvailable(
     catch-adapter
-    dimwits
     disco
-    hana-adapter
-    header-utilities
-    interpolation
     Log
     pybind11
     range-v3
