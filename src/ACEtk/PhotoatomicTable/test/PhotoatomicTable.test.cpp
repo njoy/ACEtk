@@ -100,7 +100,8 @@ SCENARIO( "PhotoatomicTable" ){
                               std::nullopt, std::nullopt,
                               std::nullopt, std::nullopt,
                               std::nullopt, {  },
-                              std::nullopt, std::nullopt );
+                              std::nullopt, std::nullopt,
+                              std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -245,7 +246,7 @@ SCENARIO( "PhotoatomicTable" ){
                               std::nullopt, std::nullopt,
                               std::nullopt, std::nullopt,
                               {  }, std::nullopt,
-                              std::nullopt );
+                              std::nullopt, std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -396,7 +397,8 @@ SCENARIO( "PhotoatomicTable" ){
                               base.XPROB(), base.ESZE(),
                               base.EXCIT(), base.ELAS(),
                               std::move( eion ),
-                              base.BREME(), base.BREML() );
+                              base.BREME(), base.BREML(),
+                              std::nullopt );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
@@ -526,22 +528,34 @@ SCENARIO( "PhotoatomicTable" ){
       } // THEN
     } // WHEN
 
-/*    WHEN( "constructing a PhotoatomicTable from its components" ) {
+    WHEN( "constructing a PhotoatomicTable from its components" ) {
 
       PhotoatomicTable base( std::move( table ) );
 
-      PhotoatomicTable chunk( 1, base.header(),
+      std::vector< block::EION > eion = std::vector< block::EION >{};
+      for ( unsigned int index = 1; index <= base.NSSH(); ++index ) {
+
+        eion.push_back( base.EION( index ) );
+      }
+
+      PhotoatomicTable chunk( 6, base.header(),
                               {  },
                               {  },
                               base.ESZG(), base.JINC(),
                               base.JCOH(), base.LHNM(),
                               std::nullopt,
-                              base.EPS(), base.SWD() );
+                              base.EPS(), base.SWD(),
+                              base.SUBSH(), base.SPHEL(),
+                              base.XPROB(), base.ESZE(),
+                              base.EXCIT(), base.ELAS(),
+                              std::move( eion ),
+                              base.BREME(), base.BREML(),
+                              base.SELAS() );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
-        verifyChunkEprdata12( chunk );
+        verifyChunkEprdata14( chunk );
       }
 
       THEN( "the IZ array is correct" ) {
@@ -593,7 +607,7 @@ SCENARIO( "PhotoatomicTable" ){
           CHECK( xss[i] == Approx( xss_chunk[i] ) );
         }
       } // THEN
-    } // WHEN*/
+    } // WHEN
   }
 } // SCENARIO
 
@@ -627,6 +641,10 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 0 == chunk.NINC() );
+  CHECK( 0 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 0 == chunk.NCOH() );
+  CHECK( 0 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -727,6 +745,9 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
+
+  // SELAS block - not EPR data file
+  CHECK( false == chunk.SELAS().has_value() );
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
@@ -759,6 +780,10 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK( 0 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 0 == chunk.NBL() );
   CHECK( 0 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 0 == chunk.NINC() );
+  CHECK( 0 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 0 == chunk.NCOH() );
+  CHECK( 0 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -907,6 +932,9 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   // BREML block - not EPR data file
   CHECK( false == chunk.BREML().has_value() );
+
+  // SELAS block - not EPR data file
+  CHECK( false == chunk.SELAS().has_value() );
 }
 
 void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
@@ -939,6 +967,10 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK( 10 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 82 == chunk.NBL() );
   CHECK( 82 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 0 == chunk.NINC() );
+  CHECK( 0 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 0 == chunk.NCOH() );
+  CHECK( 0 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -1206,6 +1238,9 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 
   CHECK( 7.855740000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
   CHECK( 9.733190000000E+04 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
+
+  // SELAS block - not eprdata14 file
+  CHECK( false == chunk.SELAS().has_value() );
 }
 
 void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
@@ -1238,6 +1273,10 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
   CHECK( 9 == chunk.numberPhotonBremsstrahlungEnergyPoints() );
   CHECK( 75 == chunk.NBL() );
   CHECK( 75 == chunk.numberElectronBremsstrahlungEnergyPoints() );
+  CHECK( 142 == chunk.NINC() );
+  CHECK( 142 == chunk.numberIncoherentMomentumValues() );
+  CHECK( 138 == chunk.NCOH() );
+  CHECK( 138 == chunk.numberCoherentMomentumValues() );
 
   // ESZG block
   CHECK( false == chunk.ESZG().empty() );
@@ -1627,4 +1666,19 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
 
   CHECK( 2.150380000000E-06 == Approx( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
   CHECK( 2.712000000000E+03 == Approx( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
+
+  // SELAS block - EPR data file
+  CHECK( true == chunk.SELAS().has_value() );
+
+  CHECK( 352 == chunk.SELAS()->NE() );
+  CHECK( 352 == chunk.SELAS()->numberEnergyPoints() );
+
+  CHECK( 352 == chunk.SELAS()->transport().size() );
+  CHECK( 352 == chunk.SELAS()->total().size() );
+
+  CHECK( 3.063510000000E+09 == Approx( chunk.SELAS()->transport().front() ) );
+  CHECK( 1.510140000000E-08 == Approx( chunk.SELAS()->transport().back() ) );
+
+  CHECK( 3.063510000000E+09 == Approx( chunk.SELAS()->total().front() ) );
+  CHECK( 1.407220000000E+05 == Approx( chunk.SELAS()->total().back() ) );
 }

@@ -107,6 +107,7 @@ namespace block {
   void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronSubshellBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronCrossSectionBlock( python::module&, python::module& );
+  void wrapPhotoatomicElectronElasticCrossSectionBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronExcitationBlock( python::module&, python::module& );
   void wrapPhotoatomicElectronBremsstrahlungBlock( python::module&, python::module& );
   void wrapPhotoelectricCrossSectionBlock( python::module&, python::module& );
@@ -246,6 +247,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   block::wrapPhotonuclearSecondaryParticleLocatorBlock( module, viewmodule );
   block::wrapPhotoatomicElectronSubshellBlock( module, viewmodule );
   block::wrapPhotoatomicElectronCrossSectionBlock( module, viewmodule );
+  block::wrapPhotoatomicElectronElasticCrossSectionBlock( module, viewmodule );
   block::wrapPhotoatomicElectronExcitationBlock( module, viewmodule );
   block::wrapPhotoatomicElectronBremsstrahlungBlock( module, viewmodule );
   block::wrapPhotoelectricCrossSectionBlock( module, viewmodule );

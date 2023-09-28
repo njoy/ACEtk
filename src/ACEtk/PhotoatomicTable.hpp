@@ -16,6 +16,7 @@
 #include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
+#include "ACEtk/block/PhotoatomicElectronElasticCrossSectionBlock.hpp"
 #include "ACEtk/block/ElectronElasticAngularDistributionBlock.hpp"
 #include "ACEtk/block/ElectronEnergyDistributionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronExcitationBlock.hpp"
@@ -49,6 +50,7 @@ class PhotoatomicTable : protected Table {
   std::vector< block::EION > eion_;
   std::optional< block::BREME > breme_;
   std::optional< block::BREML > breml_;
+  std::optional< block::SELAS > selas_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -163,13 +165,13 @@ public:
 
   /**
    *  @brief Return the EPR data format flag (0 for old format, 1 for EPR data
-   *         from 2012 and 3 for EPR data from 2014)
+   *         from 2012 and 3 for EPR data from 2014 and above)
    */
   unsigned int NEPR() const { return this->data().NXS(6); }
 
   /**
    *  @brief Return the EPR data format flag (0 for old format, 1 for EPR data
-   *         from 2012 and 3 for EPR data from 2014)
+   *         from 2012 and 3 for EPR data from 2014 and above)
    */
   unsigned int electronPhotonRelaxationFormat() const { return this->NEPR(); }
 
@@ -238,6 +240,26 @@ public:
    *  @brief Return the number of electron Bremsstrahlung energy points
    */
   unsigned int numberElectronBremsstrahlungEnergyPoints() const { return this->NBL(); }
+
+  /**
+   *  @brief Return the number of momentum values in the JINC block (NEPR > 1)
+   */
+  unsigned int NINC() const { return this->data().NXS(13); }
+
+  /**
+   *  @brief Return the number of momentum values in the JINC block (NEPR > 1)
+   */
+  unsigned int numberIncoherentMomentumValues() const { return this->NINC(); }
+
+  /**
+   *  @brief Return the number of momentum values in the JCOH block (NEPR > 1)
+   */
+  unsigned int NCOH() const { return this->data().NXS(14); }
+
+  /**
+   *  @brief Return the number of momentum values in the JCOH block (NEPR > 1)
+   */
+  unsigned int numberCoherentMomentumValues() const { return this->NCOH(); }
 
   // JXS information
 
@@ -458,6 +480,19 @@ public:
   const std::optional< block::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
 
     return this->BREML();
+  }
+
+  /**
+   *  @brief Return the additional elastic cross section block for eprdata (NEPR = 3)
+   */
+  const std::optional< block::SELAS >& SELAS() const { return this->selas_; }
+
+  /**
+   *  @brief Return the additional elastic cross section block for eprdata (NEPR = 3)
+   */
+  const std::optional< block::SELAS >& electronElasticCrossSectionBlock() const {
+
+    return this->SELAS();
   }
 };
 
