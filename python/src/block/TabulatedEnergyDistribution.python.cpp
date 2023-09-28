@@ -47,7 +47,7 @@ void wrapTabulatedEnergyDistribution( python::module& module, python::module& ) 
     "Arguments:\n"
     "    self        the block\n"
     "    incident    the incident energy or cosine value\n"
-    "    cosines     the cosine values\n"
+    "    outgoing    the outgoing energy values\n"
     "    pdf         the pdf values\n"
     "    cdf         the cdf values\n"
     "    discrete    the number of discrete photon lines (defaults to 0)"
