@@ -5,15 +5,16 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PhotoatomicPrincipalCrossSectionBlock.hpp"
-#include "ACEtk/block/IncoherentScatteringFunctionBlock.hpp"
-#include "ACEtk/block/CoherentFormFactorBlock.hpp"
-#include "ACEtk/block/PhotoatomicFluorescenceDataBlock.hpp"
-#include "ACEtk/block/PhotoatomicHeatingNumbersBlock.hpp"
+#include "ACEtk/photoatomic/PrincipalCrossSectionBlock.hpp"
+#include "ACEtk/photoatomic/IncoherentScatteringFunctionBlock.hpp"
+#include "ACEtk/photoatomic/CoherentFormFactorBlock.hpp"
+#include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
+#include "ACEtk/photoatomic/HeatingNumbersBlock.hpp"
+#include "ACEtk/photoatomic/ComptonProfileBlock.hpp"
+#include "ACEtk/photoatomic/PhotoelectricCrossSectionBlock.hpp"
+
 #include "ACEtk/block/PhotoatomicElectronShellBlock.hpp"
-#include "ACEtk/block/PhotoatomicComptonProfileBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronSubshellBlock.hpp"
-#include "ACEtk/block/PhotoelectricCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicSubshellTransitionDataBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronCrossSectionBlock.hpp"
 #include "ACEtk/block/PhotoatomicElectronElasticCrossSectionBlock.hpp"
@@ -34,15 +35,15 @@ namespace ACEtk {
 class PhotoatomicTable : protected Table {
 
   /* fields */
-  block::ESZG eszg_;
-  block::JINC jinc_;
-  block::JCOH jcoh_;
-  std::optional< block::JFLO > jflo_;
-  block::LHNM lhnm_;
+  photoatomic::ESZG eszg_;
+  photoatomic::JINC jinc_;
+  photoatomic::JCOH jcoh_;
+  std::optional< photoatomic::JFLO > jflo_;
+  photoatomic::LHNM lhnm_;
   std::optional< block::EPS > eps_;
-  std::optional< block::SWD > swd_;
+  std::optional< photoatomic::SWD > swd_;
   std::optional< block::SUBSH > subsh_;
-  std::optional< block::SPHEL > sphel_;
+  std::optional< photoatomic::SPHEL > sphel_;
   std::optional< block::XPROB > xprob_;
   std::optional< block::ESZE > esze_;
   std::optional< block::EXCIT > excit_;
@@ -268,22 +269,25 @@ public:
   /**
    *  @brief Return the principal cross section block
    */
-  const block::ESZG& ESZG() const { return this->eszg_; }
+  const photoatomic::ESZG& ESZG() const { return this->eszg_; }
 
   /**
    *  @brief Return the principal cross section block
    */
-  const block::ESZG& principalCrossSectionBlock() const { return this->ESZG(); }
+  const photoatomic::ESZG& principalCrossSectionBlock() const {
+
+    return this->ESZG();
+  }
 
   /**
    *  @brief Return the incoherent scattering function block
    */
-  const block::JINC& JINC() const { return this->jinc_; }
+  const photoatomic::JINC& JINC() const { return this->jinc_; }
 
   /**
    *  @brief Return the incoherent scattering function block
    */
-  const block::JINC& incoherentScatteringFunctionBlock() const {
+  const photoatomic::JINC& incoherentScatteringFunctionBlock() const {
 
     return this->JINC();
   }
@@ -291,22 +295,25 @@ public:
   /**
    *  @brief Return the coherent form factor block
    */
-  const block::JCOH& JCOH() const { return this->jcoh_; }
+  const photoatomic::JCOH& JCOH() const { return this->jcoh_; }
 
   /**
    *  @brief Return the coherent form factor block
    */
-  const block::JCOH& coherentFormFactorBlock() const { return this->JCOH(); }
+  const photoatomic::JCOH& coherentFormFactorBlock() const {
+
+    return this->JCOH();
+  }
 
   /**
    *  @brief Return the fluoresence data block
    */
-  const std::optional< block::JFLO >& JFLO() const { return this->jflo_; }
+  const std::optional< photoatomic::JFLO >& JFLO() const { return this->jflo_; }
 
   /**
    *  @brief Return the fluoresence data block
    */
-  const std::optional< block::JFLO >& fluorescenceDataBlock() const {
+  const std::optional< photoatomic::JFLO >& fluorescenceDataBlock() const {
 
     return this->JFLO();
   }
@@ -314,12 +321,12 @@ public:
   /**
    *  @brief Return the heating numbers block
    */
-  const block::LHNM& LHNM() const { return this->lhnm_; }
+  const photoatomic::LHNM& LHNM() const { return this->lhnm_; }
 
   /**
    *  @brief Return the heating numbers block
    */
-  const block::LHNM& heatingNumbersBlock() const { return this->LHNM(); }
+  const photoatomic::LHNM& heatingNumbersBlock() const { return this->LHNM(); }
 
   /**
    *  @brief Return the electron shell block
@@ -337,12 +344,12 @@ public:
   /**
    *  @brief Return the compton profile block
    */
-  const std::optional< block::SWD >& SWD() const { return this->swd_; }
+  const std::optional< photoatomic::SWD >& SWD() const { return this->swd_; }
 
   /**
    *  @brief Return the compton profile block
    */
-  const std::optional< block::SWD >& comptonProfileBlock() const {
+  const std::optional< photoatomic::SWD >& comptonProfileBlock() const {
 
     return this->SWD();
   }
@@ -363,12 +370,15 @@ public:
   /**
    *  @brief Return the photoelectric cross section block for eprdata (NEPR > 0)
    */
-  const std::optional< block::SPHEL >& SPHEL() const { return this->sphel_; }
+  const std::optional< photoatomic::SPHEL >& SPHEL() const {
+
+    return this->sphel_;
+  }
 
   /**
    *  @brief Return the photoelectric cross section block for eprdata (NEPR > 0)
    */
-  const std::optional< block::SPHEL >& photoelectricCrossSectionBlock() const {
+  const std::optional< photoatomic::SPHEL >& photoelectricCrossSectionBlock() const {
 
     return this->SPHEL();
   }

@@ -16,15 +16,15 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   // type aliases
   using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::PhotoatomicTable;
-  using ESZG = njoy::ACEtk::block::ESZG;
-  using JINC = njoy::ACEtk::block::JINC;
-  using JCOH = njoy::ACEtk::block::JCOH;
-  using JFLO = njoy::ACEtk::block::JFLO;
-  using LHNM = njoy::ACEtk::block::LHNM;
+  using ESZG = njoy::ACEtk::photoatomic::ESZG;
+  using JINC = njoy::ACEtk::photoatomic::JINC;
+  using JCOH = njoy::ACEtk::photoatomic::JCOH;
+  using JFLO = njoy::ACEtk::photoatomic::JFLO;
+  using LHNM = njoy::ACEtk::photoatomic::LHNM;
   using EPS = njoy::ACEtk::block::EPS;
-  using SWD = njoy::ACEtk::block::SWD;
+  using SWD = njoy::ACEtk::photoatomic::SWD;
   using SUBSH = njoy::ACEtk::block::SUBSH;
-  using SPHEL = njoy::ACEtk::block::SPHEL;
+  using SPHEL = njoy::ACEtk::photoatomic::SPHEL;
   using XPROB = njoy::ACEtk::block::XPROB;
   using ESZE = njoy::ACEtk::block::ESZE;
   using EXCIT = njoy::ACEtk::block::EXCIT;
