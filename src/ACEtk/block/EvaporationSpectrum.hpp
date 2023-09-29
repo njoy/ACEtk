@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/base/BaseEvaporationSpectrum.hpp"
+#include "ACEtk/base/EvaporationSpectrum.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,7 +19,7 @@ namespace block {
  *  temperature values as well as the restriction energy U used to describe the
  *  evaporation spectrum. It is used in the DLW block as ACE LAW 9.
  */
-class EvaporationSpectrum : protected base::BaseEvaporationSpectrum {
+class EvaporationSpectrum : protected base::EvaporationSpectrum {
 
   /* fields */
 
@@ -35,7 +35,7 @@ public:
    */
   EnergyDistributionType LAW() const {
 
-    return BaseEvaporationSpectrum::LAW();
+    return base::EvaporationSpectrum::LAW();
   }
 
   /**
@@ -43,7 +43,7 @@ public:
    */
   EnergyDistributionType type() const {
 
-    return BaseEvaporationSpectrum::type();
+    return base::EvaporationSpectrum::type();
   }
 
   /**
@@ -51,71 +51,71 @@ public:
    */
   auto interpolationData() const {
 
-    return BaseEvaporationSpectrum::interpolationData();
+    return base::EvaporationSpectrum::interpolationData();
   }
 
   /**
    *  @brief Return the number of interpolation regions
    */
-  std::size_t NB() const { return BaseEvaporationSpectrum::NB(); }
+  std::size_t NB() const { return base::EvaporationSpectrum::NB(); }
 
   /**
    *  @brief Return the number of interpolation regions
    */
   std::size_t numberInterpolationRegions() const {
 
-    return BaseEvaporationSpectrum::numberInterpolationRegions();
+    return base::EvaporationSpectrum::numberInterpolationRegions();
   }
 
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto NBT() const { return BaseEvaporationSpectrum::NBT(); }
+  auto NBT() const { return base::EvaporationSpectrum::NBT(); }
 
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto boundaries() const { return BaseEvaporationSpectrum::boundaries(); }
+  auto boundaries() const { return base::EvaporationSpectrum::boundaries(); }
 
   /**
    *  @brief Return the interpolants
    */
-  auto INT() const { return BaseEvaporationSpectrum::INT(); }
+  auto INT() const { return base::EvaporationSpectrum::INT(); }
 
   /**
    *  @brief Return the interpolants
    */
-  auto interpolants() const { return BaseEvaporationSpectrum::interpolants(); }
+  auto interpolants() const { return base::EvaporationSpectrum::interpolants(); }
 
   /**
    *  @brief Return the number of energy values
    */
-  std::size_t NE() const { return BaseEvaporationSpectrum::NE(); }
+  std::size_t NE() const { return base::EvaporationSpectrum::NE(); }
 
   /**
    *  @brief Return the number of energy values
    */
   std::size_t numberEnergyPoints() const {
 
-    return BaseEvaporationSpectrum::numberEnergyPoints();
+    return base::EvaporationSpectrum::numberEnergyPoints();
   }
 
   /**
    *  @brief Return the energy values
    */
-  auto energies() const { return BaseEvaporationSpectrum::energies(); }
+  auto energies() const { return base::EvaporationSpectrum::energies(); }
 
   /**
    *  @brief Return the temperature values
    */
-  auto temperatures() const { return BaseEvaporationSpectrum::temperatures(); }
+  auto temperatures() const { return base::EvaporationSpectrum::temperatures(); }
 
   /**
    *  @brief Return the minimum incident energy for the distribution
    */
   double minimumIncidentEnergy() const {
 
-    return BaseEvaporationSpectrum::minimumIncidentEnergy();
+    return base::EvaporationSpectrum::minimumIncidentEnergy();
   }
 
   /**
@@ -123,28 +123,28 @@ public:
    */
   double maximumIncidentEnergy() const {
 
-    return BaseEvaporationSpectrum::maximumIncidentEnergy();
+    return base::EvaporationSpectrum::maximumIncidentEnergy();
   }
 
   /**
    *  @brief Return the restriction energy
    */
-  double U() const { return BaseEvaporationSpectrum::U(); }
+  double U() const { return base::EvaporationSpectrum::U(); }
 
   /**
    *  @brief Return the restriction energy
    */
   double restrictionEnergy() const {
 
-    return BaseEvaporationSpectrum::restrictionEnergy();
+    return base::EvaporationSpectrum::restrictionEnergy();
   }
 
-  using BaseEvaporationSpectrum::empty;
-  using BaseEvaporationSpectrum::name;
-  using BaseEvaporationSpectrum::length;
-  using BaseEvaporationSpectrum::XSS;
-  using BaseEvaporationSpectrum::begin;
-  using BaseEvaporationSpectrum::end;
+  using base::EvaporationSpectrum::empty;
+  using base::EvaporationSpectrum::name;
+  using base::EvaporationSpectrum::length;
+  using base::EvaporationSpectrum::XSS;
+  using base::EvaporationSpectrum::begin;
+  using base::EvaporationSpectrum::end;
 };
 
 using ACELAW9 = EvaporationSpectrum;

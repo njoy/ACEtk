@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/base/BaseTwoParameterDistribution.hpp"
+#include "ACEtk/base/TwoParameterDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,7 +19,7 @@ namespace block {
  *  photon is a primary photon or the binding energy when the photon is not a
  *  primary photon. It is used in the DLW block as ACE LAW 2.
  */
-class DiscretePhotonDistribution : protected base::BaseTwoParameterDistribution {
+class DiscretePhotonDistribution : protected base::TwoParameterDistribution {
 
   /* fields */
 
@@ -51,7 +51,7 @@ public:
    */
   double minimumIncidentEnergy() const {
 
-    return BaseTwoParameterDistribution::minimumIncidentEnergy();
+    return TwoParameterDistribution::minimumIncidentEnergy();
   }
 
   /**
@@ -59,13 +59,13 @@ public:
    */
   double maximumIncidentEnergy() const {
 
-    return BaseTwoParameterDistribution::maximumIncidentEnergy();
+    return TwoParameterDistribution::maximumIncidentEnergy();
   }
 
   /**
    *  @brief Return the primary flag value (0, 1 or 2)
    */
-  unsigned int LP() const { return BaseTwoParameterDistribution::C1(); }
+  unsigned int LP() const { return TwoParameterDistribution::C1(); }
 
   /**
    *  @brief Return the primary flag value (0, 1 or 2)
@@ -80,19 +80,19 @@ public:
   /**
    *  @brief Return the photon or binding energy
    */
-  double EG() const { return BaseTwoParameterDistribution::C2(); }
+  double EG() const { return TwoParameterDistribution::C2(); }
 
   /**
    *  @brief Return the photon or binding energy
    */
   double photonOrBindingEnergy() const { return this->EG(); }
 
-  using BaseTwoParameterDistribution::empty;
-  using BaseTwoParameterDistribution::name;
-  using BaseTwoParameterDistribution::length;
-  using BaseTwoParameterDistribution::XSS;
-  using BaseTwoParameterDistribution::begin;
-  using BaseTwoParameterDistribution::end;
+  using TwoParameterDistribution::empty;
+  using TwoParameterDistribution::name;
+  using TwoParameterDistribution::length;
+  using TwoParameterDistribution::XSS;
+  using TwoParameterDistribution::begin;
+  using TwoParameterDistribution::end;
 };
 
 using ACELAW2 = DiscretePhotonDistribution;

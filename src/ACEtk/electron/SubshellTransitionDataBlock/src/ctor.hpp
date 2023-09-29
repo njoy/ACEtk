@@ -10,7 +10,7 @@ SubshellTransitionDataBlock( SubshellTransitionDataBlock&& ) = default;
  */
 SubshellTransitionDataBlock(
     std::vector< SubshellTransitionData > transitions ) :
-  BaseBlockWithLocators( "XPROB", std::move( transitions ), false ) {}
+  BlockWithLocators( "XPROB", std::move( transitions ), false ) {}
 
 /**
  *  @brief Constructor
@@ -22,7 +22,7 @@ SubshellTransitionDataBlock(
  */
 SubshellTransitionDataBlock( Iterator relo, Iterator xprob,
                              Iterator end, unsigned int nssh ) :
-  BaseBlockWithLocators( "XPROB", relo, xprob, end, nssh, false ) {}
+  BlockWithLocators( "XPROB", relo, xprob, end, nssh, false ) {}
 
 SubshellTransitionDataBlock& operator=( const SubshellTransitionDataBlock& ) = default;
 SubshellTransitionDataBlock& operator=( SubshellTransitionDataBlock&& ) = default;

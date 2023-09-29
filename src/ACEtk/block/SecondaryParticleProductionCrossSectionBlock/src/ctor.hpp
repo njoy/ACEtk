@@ -9,7 +9,7 @@ SecondaryParticleProductionCrossSectionBlock( SecondaryParticleProductionCrossSe
  *  @param[in] xs    the cross section data
  */
 SecondaryParticleProductionCrossSectionBlock( std::vector< TabulatedSecondaryParticleMultiplicity > xs ) :
-  BaseBlockWithLocators( "SIGH", std::move( xs ) ) {}
+  BlockWithLocators( "SIGH", std::move( xs ) ) {}
 
 /**
  *  @brief Constructor
@@ -21,7 +21,7 @@ SecondaryParticleProductionCrossSectionBlock( std::vector< TabulatedSecondaryPar
  */
 SecondaryParticleProductionCrossSectionBlock( Iterator lsigh, Iterator sigh,
                                               Iterator end, unsigned int np ) :
-  BaseBlockWithLocators( "SIGH", lsigh, sigh, end, np ) {}
+  BlockWithLocators( "SIGH", lsigh, sigh, end, np ) {}
 
 SecondaryParticleProductionCrossSectionBlock& operator=( const SecondaryParticleProductionCrossSectionBlock& ) = default;
 SecondaryParticleProductionCrossSectionBlock& operator=( SecondaryParticleProductionCrossSectionBlock&& ) = default;

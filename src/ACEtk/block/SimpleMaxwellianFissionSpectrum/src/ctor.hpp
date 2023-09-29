@@ -18,7 +18,7 @@ SimpleMaxwellianFissionSpectrum(
     std::vector< double > energies,
     std::vector< double > temperatures,
     double energy ) :
-  BaseEvaporationSpectrum(
+  EvaporationSpectrum(
         "SimpleMaxwellianFissionSpectrum",
         EnergyDistributionType::SimpleMaxwellianFission,
         std::move( boundaries ), std::move( interpolants ),
@@ -47,9 +47,9 @@ SimpleMaxwellianFissionSpectrum(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 SimpleMaxwellianFissionSpectrum( Iterator begin, Iterator end ) :
-  BaseEvaporationSpectrum( "SimpleMaxwellianFissionSpectrum",
-                           EnergyDistributionType::SimpleMaxwellianFission,
-                           begin, end ) {}
+  EvaporationSpectrum( "SimpleMaxwellianFissionSpectrum",
+                       EnergyDistributionType::SimpleMaxwellianFission,
+                       begin, end ) {}
 
 SimpleMaxwellianFissionSpectrum& operator=( const SimpleMaxwellianFissionSpectrum& ) = default;
 SimpleMaxwellianFissionSpectrum& operator=( SimpleMaxwellianFissionSpectrum&& base ) = default;

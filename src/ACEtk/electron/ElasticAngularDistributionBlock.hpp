@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/base/BaseElectronBlockWithLocators.hpp"
+#include "ACEtk/base/ElectronBlockWithLocators.hpp"
 #include "ACEtk/electron/TabulatedAngularDistribution.hpp"
 
 namespace njoy {
@@ -20,13 +20,11 @@ namespace electron {
  *  for which angular distribution data is given.
  */
 class ElasticAngularDistributionBlock :
-    protected base::BaseElectronBlockWithLocators<
-                  ElasticAngularDistributionBlock,
-                  TabulatedAngularDistribution > {
+    protected base::ElectronBlockWithLocators< ElasticAngularDistributionBlock,
+                                               TabulatedAngularDistribution > {
 
-  friend class base::BaseElectronBlockWithLocators<
-                   ElasticAngularDistributionBlock,
-                   TabulatedAngularDistribution >;
+  friend class base::ElectronBlockWithLocators< ElasticAngularDistributionBlock,
+                                                TabulatedAngularDistribution >;
 
   /* fields */
 
@@ -42,14 +40,14 @@ public:
   /**
    *  @brief Return the number of available energies
    */
-  unsigned int NA() const { return BaseElectronBlockWithLocators::N(); }
+  unsigned int NA() const { return ElectronBlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of available energies
    */
   unsigned int numberEnergyPoints() const {
 
-    return BaseElectronBlockWithLocators::numberDataBlocks();
+    return ElectronBlockWithLocators::numberDataBlocks();
   }
 
   /**
@@ -62,7 +60,7 @@ public:
    */
   std::size_t LLOC( std::size_t index ) const {
 
-    return BaseElectronBlockWithLocators::LLOC( index );
+    return ElectronBlockWithLocators::LLOC( index );
   }
 
   /**
@@ -75,7 +73,7 @@ public:
    */
   std::size_t distributionLocator( std::size_t index ) const {
 
-    return BaseElectronBlockWithLocators::locator( index );
+    return ElectronBlockWithLocators::locator( index );
   }
 
   /**
@@ -83,7 +81,7 @@ public:
    */
   auto energies() const {
 
-    return BaseElectronBlockWithLocators::energies();
+    return ElectronBlockWithLocators::energies();
   }
 
   /**
@@ -91,7 +89,7 @@ public:
    */
   const std::vector< TabulatedAngularDistribution >& distributions() const {
 
-    return BaseElectronBlockWithLocators::data();
+    return ElectronBlockWithLocators::data();
   }
 
   /**
@@ -105,15 +103,15 @@ public:
   const TabulatedAngularDistribution&
   distribution( std::size_t index ) const {
 
-    return BaseElectronBlockWithLocators::data( index );
+    return ElectronBlockWithLocators::data( index );
   }
 
-  using BaseElectronBlockWithLocators::empty;
-  using BaseElectronBlockWithLocators::name;
-  using BaseElectronBlockWithLocators::length;
-  using BaseElectronBlockWithLocators::XSS;
-  using BaseElectronBlockWithLocators::begin;
-  using BaseElectronBlockWithLocators::end;
+  using ElectronBlockWithLocators::empty;
+  using ElectronBlockWithLocators::name;
+  using ElectronBlockWithLocators::length;
+  using ElectronBlockWithLocators::XSS;
+  using ElectronBlockWithLocators::begin;
+  using ElectronBlockWithLocators::end;
 };
 
 using ELAS = ElasticAngularDistributionBlock;

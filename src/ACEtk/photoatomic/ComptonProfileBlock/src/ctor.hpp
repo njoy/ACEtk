@@ -9,7 +9,7 @@ ComptonProfileBlock( ComptonProfileBlock&& ) = default;
  *  @param[in] profiles    the compton profile data
  */
 ComptonProfileBlock( std::vector< ComptonProfile > profiles ) :
-  BaseBlockWithLocators( "SWD", std::move( profiles ) ) {}
+  BlockWithLocators( "SWD", std::move( profiles ) ) {}
 
 /**
  *  @brief Constructor
@@ -19,9 +19,8 @@ ComptonProfileBlock( std::vector< ComptonProfile > profiles ) :
  *  @param[in] end     the end iterator of the SWD block in the XSS array
  *  @param[in] nsh     the number of shells
  */
-ComptonProfileBlock( Iterator lsig, Iterator sig, Iterator end,
-                                unsigned int nsh ) :
-  BaseBlockWithLocators( "SWD", lsig, sig, end, nsh ) {}
+ComptonProfileBlock( Iterator lsig, Iterator sig, Iterator end, unsigned int nsh ) :
+  BlockWithLocators( "SWD", lsig, sig, end, nsh ) {}
 
 ComptonProfileBlock& operator=( const ComptonProfileBlock& ) = default;
 ComptonProfileBlock& operator=( ComptonProfileBlock&& ) = default;

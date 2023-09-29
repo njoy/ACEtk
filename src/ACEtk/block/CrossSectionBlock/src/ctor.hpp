@@ -9,7 +9,7 @@ CrossSectionBlock( CrossSectionBlock&& ) = default;
  *  @param[in] xs    the cross section data
  */
 CrossSectionBlock( std::vector< CrossSectionData > xs ) :
-  BaseBlockWithLocators( "SIG", std::move( xs ) ) {}
+  BlockWithLocators( "SIG", std::move( xs ) ) {}
 
 /**
  *  @brief Constructor
@@ -19,9 +19,8 @@ CrossSectionBlock( std::vector< CrossSectionData > xs ) :
  *  @param[in] end     the end iterator of the SIG block in the XSS array
  *  @param[in] ntr     the number of reactions (excluding elastic)
  */
-CrossSectionBlock( Iterator lsig, Iterator sig, Iterator end,
-                   unsigned int ntr ) :
-  BaseBlockWithLocators( "SIG", lsig, sig, end, ntr ) {}
+CrossSectionBlock( Iterator lsig, Iterator sig, Iterator end, unsigned int ntr ) :
+  BlockWithLocators( "SIG", lsig, sig, end, ntr ) {}
 
 CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
 CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;

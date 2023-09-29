@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/base/Base.hpp"
-#include "ACEtk/base/BaseTabulatedData.hpp"
+#include "ACEtk/base/TabulatedData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -22,7 +22,7 @@ class DelayedNeutronPrecursorData : protected base::Base {
 
   /* fields */
   unsigned int number_ = 0;
-  base::BaseTabulatedData data_;
+  base::TabulatedData data_;
 
   /* auxiliary functions */
   #include "ACEtk/block/DelayedNeutronPrecursorData/src/generateXSS.hpp"

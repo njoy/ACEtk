@@ -16,9 +16,9 @@ TabulatedEnergyAngleDistribution(
     int interpolation,
     std::vector< TabulatedAngularDistributionWithProbability > distributions,
     std::size_t locb = 1 ) :
-  BaseDistributionDataWithInterpolationType( "TabulatedEnergyAngleDistribution",
-                                             interpolation,
-                                             std::move( distributions ), locb ),
+  DistributionDataWithInterpolationType( "TabulatedEnergyAngleDistribution",
+                                         interpolation,
+                                         std::move( distributions ), locb ),
   incident_( incident ) {}
 
 /**
@@ -31,8 +31,8 @@ TabulatedEnergyAngleDistribution(
  */
 TabulatedEnergyAngleDistribution( double incident, std::size_t locb,
                                   Iterator begin, Iterator end ) :
-  BaseDistributionDataWithInterpolationType( "TabulatedEnergyAngleDistribution",
-                                             locb, begin, end ),
+  DistributionDataWithInterpolationType( "TabulatedEnergyAngleDistribution",
+                                         locb, begin, end ),
   incident_( incident ) {}
 
 TabulatedEnergyAngleDistribution& operator=( const TabulatedEnergyAngleDistribution& ) = default;

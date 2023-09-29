@@ -7,7 +7,7 @@
 #include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/base/Base.hpp"
 #include "ACEtk/base/ColumnData.hpp"
-#include "ACEtk/base/BaseTabulatedData.hpp"
+#include "ACEtk/base/TabulatedData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -24,7 +24,7 @@ namespace block {
 class GeneralEvaporationSpectrum : protected base::Base {
 
   /* fields */
-  base::BaseTabulatedData tabulated_;
+  base::TabulatedData tabulated_;
   base::ColumnData bins_;
 
   /* auxiliary functions */

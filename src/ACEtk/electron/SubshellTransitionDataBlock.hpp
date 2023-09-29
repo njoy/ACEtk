@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/base/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BlockWithLocators.hpp"
 #include "ACEtk/electron/SubshellTransitionData.hpp"
 
 namespace njoy {
@@ -19,11 +19,11 @@ namespace electron {
  *  subshell (the number of subshells NSSH is stored in NXS(7)).
  */
 class SubshellTransitionDataBlock :
-    protected base::BaseBlockWithLocators< SubshellTransitionDataBlock,
-                                           SubshellTransitionData > {
+    protected base::BlockWithLocators< SubshellTransitionDataBlock,
+                                       SubshellTransitionData > {
 
-  friend class base::BaseBlockWithLocators< SubshellTransitionDataBlock,
-                                            SubshellTransitionData >;
+  friend class base::BlockWithLocators< SubshellTransitionDataBlock,
+                                        SubshellTransitionData >;
 
   /* fields */
 
@@ -56,7 +56,7 @@ public:
    */
   std::size_t LTRAN( std::size_t index ) const {
 
-    return BaseBlockWithLocators::LLOC( index );
+    return BlockWithLocators::LLOC( index );
   }
 
   /**
@@ -69,7 +69,7 @@ public:
    */
   std::size_t transitionDataLocator( std::size_t index ) const {
 
-    return BaseBlockWithLocators::locator( index );
+    return BlockWithLocators::locator( index );
   }
 
   /**
@@ -77,7 +77,7 @@ public:
    */
   const std::vector< SubshellTransitionData >& data() const {
 
-    return BaseBlockWithLocators::data();
+    return BlockWithLocators::data();
   }
 
   /**
@@ -90,15 +90,15 @@ public:
    */
   const SubshellTransitionData& transitionData( std::size_t index ) const {
 
-    return BaseBlockWithLocators::data( index );
+    return BlockWithLocators::data( index );
   }
 
-  using BaseBlockWithLocators::empty;
-  using BaseBlockWithLocators::name;
-  using BaseBlockWithLocators::length;
-  using BaseBlockWithLocators::XSS;
-  using BaseBlockWithLocators::begin;
-  using BaseBlockWithLocators::end;
+  using BlockWithLocators::empty;
+  using BlockWithLocators::name;
+  using BlockWithLocators::length;
+  using BlockWithLocators::XSS;
+  using BlockWithLocators::begin;
+  using BlockWithLocators::end;
 };
 
 using XPROB = SubshellTransitionDataBlock;

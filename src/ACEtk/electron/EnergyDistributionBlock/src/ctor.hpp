@@ -9,7 +9,7 @@ EnergyDistributionBlock( EnergyDistributionBlock&& ) = default;
  *  @param[in] distributions    the energy distribution data
  */
 EnergyDistributionBlock( std::vector< TabulatedEnergyDistribution > distributions ) :
-  BaseElectronBlockWithLocators( "BREME", std::move( distributions ) ) {}
+  ElectronBlockWithLocators( "BREME", std::move( distributions ) ) {}
 
 /**
  *  @brief Constructor
@@ -19,7 +19,7 @@ EnergyDistributionBlock( std::vector< TabulatedEnergyDistribution > distribution
  *  @param[in] nb       the number of energies with outgoing energy distributions
  */
 EnergyDistributionBlock( Iterator begin, Iterator end, unsigned int nb ) :
-  BaseElectronBlockWithLocators( "BREME", begin, end, nb ) {}
+  ElectronBlockWithLocators( "BREME", begin, end, nb ) {}
 
 EnergyDistributionBlock& operator=( const EnergyDistributionBlock& ) = default;
 EnergyDistributionBlock& operator=( EnergyDistributionBlock&& ) = default;

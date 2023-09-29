@@ -18,12 +18,12 @@ EvaporationSpectrum(
     std::vector< double > energies,
     std::vector< double > temperatures,
     double energy ) :
-  BaseEvaporationSpectrum(
-        "EvaporationSpectrum",
-        EnergyDistributionType::Evaporation,
-        std::move( boundaries ), std::move( interpolants ),
-        std::move( energies ), std::move( temperatures ),
-        energy ) {}
+  base::EvaporationSpectrum(
+            "EvaporationSpectrum",
+            EnergyDistributionType::Evaporation,
+            std::move( boundaries ), std::move( interpolants ),
+            std::move( energies ), std::move( temperatures ),
+            energy ) {}
 
 /**
  *  @brief Constructor without interpolation data
@@ -47,9 +47,9 @@ EvaporationSpectrum(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 EvaporationSpectrum( Iterator begin, Iterator end ) :
-  BaseEvaporationSpectrum( "EvaporationSpectrum",
-                           EnergyDistributionType::Evaporation,
-                           begin, end ) {}
+  base::EvaporationSpectrum( "EvaporationSpectrum",
+                             EnergyDistributionType::Evaporation,
+                             begin, end ) {}
 
 EvaporationSpectrum& operator=( const EvaporationSpectrum& ) = default;
 EvaporationSpectrum& operator=( EvaporationSpectrum&& base ) = default;

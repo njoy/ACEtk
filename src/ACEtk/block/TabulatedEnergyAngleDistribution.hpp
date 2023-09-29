@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/base/BaseDistributionDataWithInterpolationType.hpp"
+#include "ACEtk/base/DistributionDataWithInterpolationType.hpp"
 #include "ACEtk/block/TabulatedAngularDistributionWithProbability.hpp"
 
 namespace njoy {
@@ -23,11 +23,11 @@ namespace block {
  *  OutgoingEnergyAngleDistributionData (ACE LAW 61) in the DLW block.
  */
 class TabulatedEnergyAngleDistribution :
-  protected base::BaseDistributionDataWithInterpolationType<
+  protected base::DistributionDataWithInterpolationType<
                 TabulatedEnergyAngleDistribution,
                 TabulatedAngularDistributionWithProbability > {
 
-  friend class base::BaseDistributionDataWithInterpolationType<
+  friend class base::DistributionDataWithInterpolationType<
                    TabulatedEnergyAngleDistribution,
                    TabulatedAngularDistributionWithProbability >;
 
@@ -56,7 +56,7 @@ public:
    */
   int interpolation() const {
 
-    return BaseDistributionDataWithInterpolationType::interpolation();
+    return DistributionDataWithInterpolationType::interpolation();
   }
 
   /**
@@ -64,7 +64,7 @@ public:
    */
   std::size_t NE() const {
 
-    return BaseDistributionDataWithInterpolationType::N();
+    return DistributionDataWithInterpolationType::N();
   }
 
   /**
@@ -72,7 +72,7 @@ public:
    */
   std::size_t numberOutgoingEnergies() const {
 
-    return BaseDistributionDataWithInterpolationType::numberValues();
+    return DistributionDataWithInterpolationType::numberValues();
   }
 
   /**
@@ -80,7 +80,7 @@ public:
    */
   auto outgoingEnergies() const {
 
-    return BaseDistributionDataWithInterpolationType::values( 1 );
+    return DistributionDataWithInterpolationType::values( 1 );
   }
 
   /**
@@ -88,7 +88,7 @@ public:
    */
   auto pdf() const {
 
-    return BaseDistributionDataWithInterpolationType::values( 2 );
+    return DistributionDataWithInterpolationType::values( 2 );
   }
 
   /**
@@ -96,7 +96,7 @@ public:
    */
   auto cdf() const {
 
-    return BaseDistributionDataWithInterpolationType::values( 3 );
+    return DistributionDataWithInterpolationType::values( 3 );
   }
 
   /**
@@ -109,7 +109,7 @@ public:
    */
   double outgoingEnergy( std::size_t index ) const {
 
-    return BaseDistributionDataWithInterpolationType::value( 1, index );
+    return DistributionDataWithInterpolationType::value( 1, index );
   }
 
   /**
@@ -122,7 +122,7 @@ public:
    */
   double probability( std::size_t index ) const {
 
-    return BaseDistributionDataWithInterpolationType::value( 2, index );
+    return DistributionDataWithInterpolationType::value( 2, index );
   }
 
   /**
@@ -135,7 +135,7 @@ public:
    */
   double cumulativeProbability( std::size_t index ) const {
 
-    return BaseDistributionDataWithInterpolationType::value( 3, index );
+    return DistributionDataWithInterpolationType::value( 3, index );
   }
 
   /**
@@ -151,7 +151,7 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    return BaseDistributionDataWithInterpolationType::LOCC( index );
+    return DistributionDataWithInterpolationType::LOCC( index );
   }
 
   /**
@@ -167,7 +167,7 @@ public:
    */
   int distributionLocator( std::size_t index ) const {
 
-    return BaseDistributionDataWithInterpolationType::distributionLocator( index );
+    return DistributionDataWithInterpolationType::distributionLocator( index );
   }
 
   /**
@@ -184,7 +184,7 @@ public:
    */
   std::size_t relativeDistributionLocator( std::size_t index ) const {
 
-    return BaseDistributionDataWithInterpolationType::relativeDistributionLocator( index );
+    return DistributionDataWithInterpolationType::relativeDistributionLocator( index );
   }
 
   /**
@@ -193,7 +193,7 @@ public:
   const std::vector< TabulatedAngularDistributionWithProbability >&
   distributions() const {
 
-    return BaseDistributionDataWithInterpolationType::distributions();
+    return DistributionDataWithInterpolationType::distributions();
   }
 
   /**
@@ -207,15 +207,15 @@ public:
   const TabulatedAngularDistributionWithProbability&
   distribution( std::size_t index ) const {
 
-    return BaseDistributionDataWithInterpolationType::distribution( index );
+    return DistributionDataWithInterpolationType::distribution( index );
   }
 
-  using BaseDistributionDataWithInterpolationType::empty;
-  using BaseDistributionDataWithInterpolationType::name;
-  using BaseDistributionDataWithInterpolationType::length;
-  using BaseDistributionDataWithInterpolationType::XSS;
-  using BaseDistributionDataWithInterpolationType::begin;
-  using BaseDistributionDataWithInterpolationType::end;
+  using DistributionDataWithInterpolationType::empty;
+  using DistributionDataWithInterpolationType::name;
+  using DistributionDataWithInterpolationType::length;
+  using DistributionDataWithInterpolationType::XSS;
+  using DistributionDataWithInterpolationType::begin;
+  using DistributionDataWithInterpolationType::end;
 };
 
 } // block namespace

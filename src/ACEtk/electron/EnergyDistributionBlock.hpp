@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/base/BaseElectronBlockWithLocators.hpp"
+#include "ACEtk/base/ElectronBlockWithLocators.hpp"
 #include "ACEtk/electron/TabulatedEnergyDistribution.hpp"
 
 namespace njoy {
@@ -21,13 +21,11 @@ namespace electron {
  *  BREMI/BREME block or electrons in the EION blocks).
  */
 class EnergyDistributionBlock :
-    protected base::BaseElectronBlockWithLocators<
-                  EnergyDistributionBlock,
-                  TabulatedEnergyDistribution > {
+    protected base::ElectronBlockWithLocators< EnergyDistributionBlock,
+                                               TabulatedEnergyDistribution > {
 
-  friend class base::BaseElectronBlockWithLocators<
-                   EnergyDistributionBlock,
-                   TabulatedEnergyDistribution >;
+  friend class base::ElectronBlockWithLocators< EnergyDistributionBlock,
+                                                TabulatedEnergyDistribution >;
 
   /* fields */
 
@@ -43,14 +41,14 @@ public:
   /**
    *  @brief Return the number of available energies
    */
-  unsigned int NB() const { return BaseElectronBlockWithLocators::N(); }
+  unsigned int NB() const { return ElectronBlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of available energies
    */
   unsigned int numberEnergyPoints() const {
 
-    return BaseElectronBlockWithLocators::numberDataBlocks();
+    return ElectronBlockWithLocators::numberDataBlocks();
   }
 
   /**
@@ -63,7 +61,7 @@ public:
    */
   std::size_t LLOC( std::size_t index ) const {
 
-    return BaseElectronBlockWithLocators::LLOC( index );
+    return ElectronBlockWithLocators::LLOC( index );
   }
 
   /**
@@ -76,7 +74,7 @@ public:
    */
   std::size_t distributionLocator( std::size_t index ) const {
 
-    return BaseElectronBlockWithLocators::locator( index );
+    return ElectronBlockWithLocators::locator( index );
   }
 
   /**
@@ -84,7 +82,7 @@ public:
    */
   auto energies() const {
 
-    return BaseElectronBlockWithLocators::energies();
+    return ElectronBlockWithLocators::energies();
   }
 
   /**
@@ -92,7 +90,7 @@ public:
    */
   const std::vector< TabulatedEnergyDistribution >& distributions() const {
 
-    return BaseElectronBlockWithLocators::data();
+    return ElectronBlockWithLocators::data();
   }
 
   /**
@@ -106,15 +104,15 @@ public:
   const TabulatedEnergyDistribution&
   distribution( std::size_t index ) const {
 
-    return BaseElectronBlockWithLocators::data( index );
+    return ElectronBlockWithLocators::data( index );
   }
 
-  using BaseElectronBlockWithLocators::empty;
-  using BaseElectronBlockWithLocators::name;
-  using BaseElectronBlockWithLocators::length;
-  using BaseElectronBlockWithLocators::XSS;
-  using BaseElectronBlockWithLocators::begin;
-  using BaseElectronBlockWithLocators::end;
+  using ElectronBlockWithLocators::empty;
+  using ElectronBlockWithLocators::name;
+  using ElectronBlockWithLocators::length;
+  using ElectronBlockWithLocators::XSS;
+  using ElectronBlockWithLocators::begin;
+  using ElectronBlockWithLocators::end;
 };
 
 using BREME = EnergyDistributionBlock;

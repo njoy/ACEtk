@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/base/BaseTwoParameterDistribution.hpp"
+#include "ACEtk/base/TwoParameterDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -24,7 +24,7 @@ namespace block {
  *
  *  It is used in the DLW block as ACE LAW 3.
  */
-class LevelScatteringDistribution : protected base::BaseTwoParameterDistribution {
+class LevelScatteringDistribution : protected base::TwoParameterDistribution {
 
   /* fields */
 
@@ -56,7 +56,7 @@ public:
    */
   double minimumIncidentEnergy() const {
 
-    return BaseTwoParameterDistribution::minimumIncidentEnergy();
+    return TwoParameterDistribution::minimumIncidentEnergy();
   }
 
   /**
@@ -64,25 +64,25 @@ public:
    */
   double maximumIncidentEnergy() const {
 
-    return BaseTwoParameterDistribution::maximumIncidentEnergy();
+    return TwoParameterDistribution::maximumIncidentEnergy();
   }
 
   /**
    *  @brief Return the value of C1 = ( A + 1 ) / A * abs( Q )
    */
-  double C1() const { return BaseTwoParameterDistribution::C1(); }
+  double C1() const { return TwoParameterDistribution::C1(); }
 
   /**
    *  @brief Return the value of C2 = ( A / ( A + 1 ) )^2
    */
-  double C2() const { return BaseTwoParameterDistribution::C2(); }
+  double C2() const { return TwoParameterDistribution::C2(); }
 
-  using BaseTwoParameterDistribution::empty;
-  using BaseTwoParameterDistribution::name;
-  using BaseTwoParameterDistribution::length;
-  using BaseTwoParameterDistribution::XSS;
-  using BaseTwoParameterDistribution::begin;
-  using BaseTwoParameterDistribution::end;
+  using TwoParameterDistribution::empty;
+  using TwoParameterDistribution::name;
+  using TwoParameterDistribution::length;
+  using TwoParameterDistribution::XSS;
+  using TwoParameterDistribution::begin;
+  using TwoParameterDistribution::end;
 };
 
 using ACELAW3 = LevelScatteringDistribution;

@@ -15,9 +15,9 @@ CrossSectionData( std::vector< long > boundaries,
                   std::vector< long > interpolants,
                   std::vector< double > energies,
                   std::vector< double > xs ) :
-  BaseTabulatedData( "CrossSectionData",
-                     std::move( boundaries ), std::move( interpolants ),
-                     std::move( energies ), std::move( xs ) ) {}
+  TabulatedData( "CrossSectionData",
+                 std::move( boundaries ), std::move( interpolants ),
+                 std::move( energies ), std::move( xs ) ) {}
 
 /**
  *  @brief Constructor (linear interpolation is assumed)
@@ -36,7 +36,7 @@ CrossSectionData( std::vector< double > energies,
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 CrossSectionData( Iterator begin, Iterator end ) :
-  BaseTabulatedData( "CrossSectionData", begin, end ) {}
+  TabulatedData( "CrossSectionData", begin, end ) {}
 
 CrossSectionData& operator=( const CrossSectionData& ) = default;
 CrossSectionData& operator=( CrossSectionData&& ) = default;

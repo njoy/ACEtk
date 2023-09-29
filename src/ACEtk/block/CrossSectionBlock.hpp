@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/base/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BlockWithLocators.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 
 namespace njoy {
@@ -21,11 +21,9 @@ namespace block {
  *  MTR block.
  */
 class CrossSectionBlock :
-    protected base::BaseBlockWithLocators< CrossSectionBlock,
-                                           CrossSectionData > {
+    protected base::BlockWithLocators< CrossSectionBlock, CrossSectionData > {
 
-  friend class base::BaseBlockWithLocators< CrossSectionBlock,
-                                            CrossSectionData >;
+  friend class base::BlockWithLocators< CrossSectionBlock, CrossSectionData >;
 
   /* fields */
 
@@ -41,14 +39,14 @@ public:
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
-  unsigned int NTR() const { return BaseBlockWithLocators::N(); }
+  unsigned int NTR() const { return BlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of available reactions (excluding elastic)
    */
   unsigned int numberReactions() const {
 
-    return BaseBlockWithLocators::numberDataBlocks();
+    return BlockWithLocators::numberDataBlocks();
   }
 
   /**
@@ -61,7 +59,7 @@ public:
    */
   std::size_t LSIG( std::size_t index ) const {
 
-    return BaseBlockWithLocators::LLOC( index );
+    return BlockWithLocators::LLOC( index );
   }
 
   /**
@@ -74,7 +72,7 @@ public:
    */
   std::size_t crossSectionLocator( std::size_t index ) const {
 
-    return BaseBlockWithLocators::locator( index );
+    return BlockWithLocators::locator( index );
   }
 
   /**
@@ -82,7 +80,7 @@ public:
    */
   const std::vector< CrossSectionData >& data() const {
 
-    return BaseBlockWithLocators::data();
+    return BlockWithLocators::data();
   }
 
   /**
@@ -95,7 +93,7 @@ public:
    */
   const CrossSectionData& crossSectionData( std::size_t index ) const {
 
-    return BaseBlockWithLocators::data( index );
+    return BlockWithLocators::data( index );
   }
 
   /**
@@ -137,12 +135,12 @@ public:
     return this->crossSectionData( index ).crossSections();
   }
 
-  using BaseBlockWithLocators::empty;
-  using BaseBlockWithLocators::name;
-  using BaseBlockWithLocators::length;
-  using BaseBlockWithLocators::XSS;
-  using BaseBlockWithLocators::begin;
-  using BaseBlockWithLocators::end;
+  using BlockWithLocators::empty;
+  using BlockWithLocators::name;
+  using BlockWithLocators::length;
+  using BlockWithLocators::XSS;
+  using BlockWithLocators::begin;
+  using BlockWithLocators::end;
 };
 
 using SIG = CrossSectionBlock;

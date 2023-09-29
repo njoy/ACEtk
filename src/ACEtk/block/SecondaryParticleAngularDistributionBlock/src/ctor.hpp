@@ -9,7 +9,7 @@ SecondaryParticleAngularDistributionBlock( SecondaryParticleAngularDistributionB
  *  @param[in] data    the distribution data for all reactions
  */
 SecondaryParticleAngularDistributionBlock( std::vector< DistributionData > data ) :
-  BaseAngularDistributionBlock( "ANDH", std::move( data ) ) {}
+  AngularDistributionBlock( "ANDH", std::move( data ) ) {}
 
 /**
  *  @brief Constructor
@@ -21,7 +21,7 @@ SecondaryParticleAngularDistributionBlock( std::vector< DistributionData > data 
  */
 SecondaryParticleAngularDistributionBlock( Iterator loc, Iterator data,
                                            Iterator end, unsigned int nr ) :
-  BaseAngularDistributionBlock( "ANDH", loc, data, end, nr, false ) {}
+  AngularDistributionBlock( "ANDH", loc, data, end, nr, false ) {}
 
 SecondaryParticleAngularDistributionBlock& operator=( const SecondaryParticleAngularDistributionBlock& ) = default;
 

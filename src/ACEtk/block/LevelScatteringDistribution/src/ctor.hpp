@@ -12,8 +12,7 @@ LevelScatteringDistribution( LevelScatteringDistribution&& ) = default;
  *  @param[in] c2      the value of C2 = ( A / ( A + 1 ) )^2
  */
 LevelScatteringDistribution( double emin, double emax, double c1, double c2 ) :
-  BaseTwoParameterDistribution( "LevelScatteringDistribution",
-                                emin, emax, c1, c2 ) {}
+  TwoParameterDistribution( "LevelScatteringDistribution", emin, emax, c1, c2 ) {}
 
 /**
  *  @brief Constructor
@@ -25,8 +24,7 @@ LevelScatteringDistribution( double emin, double emax, double c1, double c2 ) :
  */
 LevelScatteringDistribution( Iterator begin, Iterator end,
                              double emin, double emax ) :
-  BaseTwoParameterDistribution( "LevelScatteringDistribution",
-                                begin, end, emin, emax ) {}
+  TwoParameterDistribution( "LevelScatteringDistribution", begin, end, emin, emax ) {}
 
 LevelScatteringDistribution& operator=( const LevelScatteringDistribution& ) = default;
 LevelScatteringDistribution& operator=( LevelScatteringDistribution&& ) = default;

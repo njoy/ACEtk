@@ -12,8 +12,7 @@ AngularDistributionBlock( AngularDistributionBlock&& ) = default;
  */
 AngularDistributionBlock( DistributionData elastic,
                           std::vector< DistributionData > data ) :
-  BaseAngularDistributionBlock( "AND", std::move( elastic ),
-                                std::move( data ) ) {}
+  base::AngularDistributionBlock( "AND", std::move( elastic ), std::move( data ) ) {}
 
 /**
  *  @brief Constructor
@@ -25,7 +24,7 @@ AngularDistributionBlock( DistributionData elastic,
  */
 AngularDistributionBlock( Iterator loc, Iterator data, Iterator end,
                           unsigned int nr ) :
-  BaseAngularDistributionBlock( "AND", loc, data, end, nr, true ) {}
+  base::AngularDistributionBlock( "AND", loc, data, end, nr, true ) {}
 
 AngularDistributionBlock& operator=( const AngularDistributionBlock& ) = default;
 

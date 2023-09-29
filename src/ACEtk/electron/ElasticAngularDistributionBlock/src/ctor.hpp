@@ -9,7 +9,7 @@ ElasticAngularDistributionBlock( ElasticAngularDistributionBlock&& ) = default;
  *  @param[in] distributions    the angular distribution data
  */
 ElasticAngularDistributionBlock( std::vector< TabulatedAngularDistribution > distributions ) :
-  BaseElectronBlockWithLocators( "ELAS", std::move( distributions ) ) {}
+  ElectronBlockWithLocators( "ELAS", std::move( distributions ) ) {}
 
 /**
  *  @brief Constructor
@@ -19,7 +19,7 @@ ElasticAngularDistributionBlock( std::vector< TabulatedAngularDistribution > dis
  *  @param[in] na       the number of energies with angular distributions
  */
 ElasticAngularDistributionBlock( Iterator begin, Iterator end, unsigned int na ) :
-  BaseElectronBlockWithLocators( "ELAS", begin, end, na ) {}
+  ElectronBlockWithLocators( "ELAS", begin, end, na ) {}
 
 ElasticAngularDistributionBlock& operator=( const ElasticAngularDistributionBlock& ) = default;
 ElasticAngularDistributionBlock& operator=( ElasticAngularDistributionBlock&& ) = default;
