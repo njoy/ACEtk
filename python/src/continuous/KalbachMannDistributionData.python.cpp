@@ -12,8 +12,7 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapKalbachMannDistributionData( python::module& module,
-                                      python::module& ) {
+void wrapKalbachMannDistributionData( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::block::KalbachMannDistributionData;

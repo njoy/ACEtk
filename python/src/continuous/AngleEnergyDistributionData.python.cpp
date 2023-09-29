@@ -12,8 +12,7 @@ namespace python = pybind11;
 
 namespace block {
 
-void wrapAngleEnergyDistributionData( python::module& module,
-                                         python::module& ) {
+void wrapAngleEnergyDistributionData( python::module& module, python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::block::AngleEnergyDistributionData;
