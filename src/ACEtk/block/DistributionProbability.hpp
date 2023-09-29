@@ -14,7 +14,7 @@ namespace block {
  *  @class
  *  @brief The probability for a distribution to occur
  */
-class DistributionProbability : protected details::BaseTabulatedData {
+class DistributionProbability : protected base::BaseTabulatedData {
 
   /* fields */
 

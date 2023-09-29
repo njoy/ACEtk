@@ -9,8 +9,7 @@ void generateBlocks() {
 
   this->interpolation_ = block::InterpolationData( this->name(),
                                                    begin, incident );
-  this->energies_ = block::details::ColumnData( this->name(),
-                                                incident, bins, 1 );
+  this->energies_ = base::ColumnData( this->name(), incident, bins, 1 );
 
   for ( unsigned int index = 1; index <= ne; ++index ) {
 

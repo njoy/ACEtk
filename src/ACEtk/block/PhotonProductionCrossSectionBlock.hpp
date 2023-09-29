@@ -29,11 +29,11 @@ using PhotonProductionData = std::variant<
  *  numbers in the MTRP block.
  */
 class PhotonProductionCrossSectionBlock :
-    protected details::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
-                                              PhotonProductionData > {
+    protected base::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
+                                           PhotonProductionData > {
 
-  friend class details::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
-                                               PhotonProductionData >;
+  friend class base::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
+                                            PhotonProductionData >;
 
   /* fields */
 

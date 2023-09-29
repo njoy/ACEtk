@@ -12,22 +12,21 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
  *  @brief Base class for angular distribution data, capable of accepting both a
  *         zero or one based reaction index
  */
-class BaseAngularDistributionBlock : protected details::Base {
+class BaseAngularDistributionBlock : protected Base {
 
 public:
 
   /* type alias */
-  using DistributionData = std::variant< FullyIsotropicDistribution,
-                                         DistributionGivenElsewhere,
-                                         AngularDistributionData >;
+  using DistributionData = std::variant< block::FullyIsotropicDistribution,
+                                         block::DistributionGivenElsewhere,
+                                         block::AngularDistributionData >;
 
 private:
 
@@ -155,8 +154,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

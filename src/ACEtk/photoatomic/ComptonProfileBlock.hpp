@@ -19,11 +19,11 @@ namespace photoatomic {
  *  profiles, one for each electron shell.
  */
 class ComptonProfileBlock :
-    protected block::details::BaseBlockWithLocators< ComptonProfileBlock,
-                                                     ComptonProfile > {
+    protected base::BaseBlockWithLocators< ComptonProfileBlock,
+                                           ComptonProfile > {
 
-  friend class block::details::BaseBlockWithLocators< ComptonProfileBlock,
-                                                      ComptonProfile >;
+  friend class base::BaseBlockWithLocators< ComptonProfileBlock,
+                                            ComptonProfile >;
 
   /* fields */
 

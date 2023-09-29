@@ -55,7 +55,7 @@ using MultiplicityData = std::variant< unsigned int, TabulatedMultiplicity >;
  *  of the distribution data sets is the same as the order of the reaction
  *  numbers in the MTR block.
  */
-class EnergyDistributionBlock : protected details::Base {
+class EnergyDistributionBlock : protected base::Base {
 
   /* fields */
   unsigned int nr_ = 0; // the number of reactions

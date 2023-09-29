@@ -23,7 +23,7 @@ namespace photoatomic {
  *
  *  The size of each (the total number of energy points NES) is stored in NXS(3).
  */
-class PhotoelectricCrossSectionBlock : protected block::details::ArrayData {
+class PhotoelectricCrossSectionBlock : protected base::ArrayData {
 
   /* fields */
 

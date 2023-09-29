@@ -20,7 +20,7 @@ namespace block {
  *  that are needed in production cross section calculations using multiplicity
  *  values.
  */
-class MultiplicityReactionNumberBlock : protected details::Base {
+class MultiplicityReactionNumberBlock : protected base::Base {
 
   /* fields */
 

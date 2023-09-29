@@ -23,13 +23,13 @@ namespace block {
  *  AngleEnergyDistributionData (ACE LAW 67) in the DLW block.
  */
 class TabulatedAngleEnergyDistribution :
-  protected details::BaseDistributionDataWithInterpolationType<
+  protected base::BaseDistributionDataWithInterpolationType<
                 TabulatedAngleEnergyDistribution,
                 TabulatedEnergyDistribution > {
 
-  friend class details::BaseDistributionDataWithInterpolationType<
+  friend class base::BaseDistributionDataWithInterpolationType<
                    TabulatedAngleEnergyDistribution,
-                  TabulatedEnergyDistribution >;
+                   TabulatedEnergyDistribution >;
 
   /* fields */
   double incident_ = 0.0;

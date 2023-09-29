@@ -22,11 +22,11 @@ namespace block {
  *  for a set of incident energy values. It is used in the AND block. This
  *  format is only used in old ACE data. It is used in the DLW block as ACE LAW 1.
  */
-class EquiprobableOutgoingEnergyBinData : protected details::Base {
+class EquiprobableOutgoingEnergyBinData : protected base::Base {
 
   /* fields */
   InterpolationData interpolation_;
-  details::ColumnData energies_;
+  base::ColumnData energies_;
   std::vector< EquiprobableOutgoingEnergyBins > bins_;
 
   /* auxiliary functions */

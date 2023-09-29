@@ -20,7 +20,7 @@ namespace block {
  *  cross section values and the actual production cross section values and
  *  heating numbers.
  */
-class SecondaryParticleProductionBlock : protected details::Base {
+class SecondaryParticleProductionBlock : protected base::Base {
 
   /* fields */
 

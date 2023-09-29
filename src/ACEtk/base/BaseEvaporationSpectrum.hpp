@@ -9,18 +9,17 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
  *  @brief A general evaporation spectrum from the DLW block for a single
  *         reaction
  */
-class BaseEvaporationSpectrum : protected details::Base {
+class BaseEvaporationSpectrum : protected Base {
 
   /* fields */
-  details::BaseTabulatedData tabulated_;
+  BaseTabulatedData tabulated_;
   EnergyDistributionType type_;
 
   /* auxiliary functions */
@@ -145,8 +144,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

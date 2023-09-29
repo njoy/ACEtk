@@ -23,7 +23,7 @@ namespace electron {
  *
  *  The size NBL of each (the total number of energy points) is stored in NXS(12).
  */
-class BremsstrahlungBlock : protected block::details::ArrayData {
+class BremsstrahlungBlock : protected base::ArrayData {
 
   /* fields */
 

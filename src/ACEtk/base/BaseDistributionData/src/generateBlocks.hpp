@@ -7,7 +7,7 @@ void generateBlocks() {
   auto end = this->iterator( 2 + 2 * nr + 2 * ne + 1 );
 
   this->interpolation_ = block::InterpolationData( this->name(), begin, data );
-  this->values_ = block::details::ColumnData( this->name(), data, end, 2 );
+  this->values_ = ColumnData( this->name(), data, end, 2 );
   for ( unsigned int index = 1; index <= this->numberValues(); ++index ) {
 
     const double value = this->value( 1, index );

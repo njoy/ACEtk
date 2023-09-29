@@ -24,7 +24,7 @@ namespace block {
  *  as the order of the reaction numbers in the corresponding MTR block.
  */
 class SecondaryParticleAngularDistributionBlock :
-    protected details::BaseAngularDistributionBlock {
+    protected base::BaseAngularDistributionBlock {
 
   /* fields */
 
@@ -33,7 +33,7 @@ class SecondaryParticleAngularDistributionBlock :
 public:
 
   /* type alias */
-  using DistributionData = details::BaseAngularDistributionBlock::DistributionData;
+  using DistributionData = base::BaseAngularDistributionBlock::DistributionData;
 
   /* constructor */
   #include "ACEtk/block/SecondaryParticleAngularDistributionBlock/src/ctor.hpp"

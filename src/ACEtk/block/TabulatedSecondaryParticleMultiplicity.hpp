@@ -19,10 +19,10 @@ namespace block {
  *  multiplicities for a secondary particle (MFMULT = 12 or 16). It also
  *  contains the MT number of the associated reaction.
  */
-class TabulatedSecondaryParticleMultiplicity : protected details::Base {
+class TabulatedSecondaryParticleMultiplicity : protected base::Base {
 
   /* fields */
-  details::BaseTabulatedData data_;
+  base::BaseTabulatedData data_;
 
   /* auxiliary functions */
   #include "ACEtk/block/TabulatedSecondaryParticleMultiplicity/src/generateXSS.hpp"

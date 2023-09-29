@@ -8,14 +8,13 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
  *  @brief A block of data given as a number of arrays of equal length
  */
-class ArrayData : protected details::Base {
+class ArrayData : protected Base {
 
   /* fields */
   unsigned int nelements_;
@@ -124,8 +123,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

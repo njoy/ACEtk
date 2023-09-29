@@ -23,11 +23,11 @@ namespace block {
  *  order of the reaction numbers in the MTRH block.
  */
 class SecondaryParticleProductionCrossSectionBlock :
-    protected details::BaseBlockWithLocators< SecondaryParticleProductionCrossSectionBlock,
-                                              TabulatedSecondaryParticleMultiplicity > {
+    protected base::BaseBlockWithLocators< SecondaryParticleProductionCrossSectionBlock,
+                                           TabulatedSecondaryParticleMultiplicity > {
 
-  friend class details::BaseBlockWithLocators< SecondaryParticleProductionCrossSectionBlock,
-                                               TabulatedSecondaryParticleMultiplicity >;
+  friend class base::BaseBlockWithLocators< SecondaryParticleProductionCrossSectionBlock,
+                                            TabulatedSecondaryParticleMultiplicity >;
 
   /* fields */
 

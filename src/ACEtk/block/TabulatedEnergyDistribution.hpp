@@ -22,8 +22,7 @@ namespace block {
  *  energy) and in the OutgoingAngleEnergyDistributionData (ACE LAW 67 for a
  *  given cosine) in the DLW block.
  */
-class TabulatedEnergyDistribution :
-  protected details::TabulatedProbabilityDistribution {
+class TabulatedEnergyDistribution : protected base::TabulatedProbabilityDistribution {
 
   /* fields */
   double incident_ = 0.0;

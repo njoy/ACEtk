@@ -4,8 +4,7 @@ void generateBlocks() {
   auto data = this->iterator( 2 );
   auto end = this->iterator( 2 + 2 * ne + 1 );
 
-  this->values_ = block::details::ColumnData( std::string( this->name() ),
-                                              data, end, 2 );
+  this->values_ = base::ColumnData( std::string( this->name() ), data, end, 2 );
   for ( unsigned int index = 1; index <= this->numberValues(); ++index ) {
 
     const double value = this->value( 1, index );

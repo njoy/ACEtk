@@ -9,15 +9,14 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
  *  @brief The base class for a combined locator and data block prepended
  */
 template < typename Derived, typename Data >
-class BaseElectronBlockWithLocators : protected details::Base {
+class BaseElectronBlockWithLocators : protected Base {
 
   /* fields */
   std::size_t n_;
@@ -169,8 +168,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

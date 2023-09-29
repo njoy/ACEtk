@@ -19,7 +19,7 @@ namespace block {
  *
  *  The number of available particle types is stored in NXS(7).
  */
-class SecondaryParticleLocatorBlock : protected details::Base {
+class SecondaryParticleLocatorBlock : protected base::Base {
 
   /* fields */
   unsigned int ntype_ = 0;

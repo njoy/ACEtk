@@ -19,8 +19,7 @@ namespace block {
  *  function (PDF) and cumulative density function (CDF) as a function of
  *  cosine for the given energy. It is used in the AND block.
  */
-class TabulatedAngularDistribution :
-  protected details::TabulatedProbabilityDistribution {
+class TabulatedAngularDistribution : protected base::TabulatedProbabilityDistribution {
 
   /* fields */
   double energy_ = 0.0;

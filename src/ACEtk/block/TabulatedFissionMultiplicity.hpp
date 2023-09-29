@@ -19,10 +19,10 @@ namespace block {
  *  representation (LNU = 2) of the fission multiplicity. It is
  *  used in the NU block.
  */
-class TabulatedFissionMultiplicity : protected details::Base {
+class TabulatedFissionMultiplicity : protected base::Base {
 
   /* fields */
-  details::BaseTabulatedData data_;
+  base::BaseTabulatedData data_;
 
   /* auxiliary functions */
   #include "ACEtk/block/TabulatedFissionMultiplicity/src/generateXSS.hpp"

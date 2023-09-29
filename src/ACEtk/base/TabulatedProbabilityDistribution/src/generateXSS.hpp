@@ -10,8 +10,7 @@ static std::vector< double > generateXSS(
   data.insert( data.begin(), std::move( cdf ) );
   data.insert( data.begin(), std::move( pdf ) );
   data.insert( data.begin(), std::move( values ) );
-  details::ColumnData columns( "TabulatedProbabilityDistribution",
-                               std::move( data ) );
+  ColumnData columns( "TabulatedProbabilityDistribution", std::move( data ) );
   xss.insert( xss.end(), columns.begin(), columns.end() );
 
   return xss;

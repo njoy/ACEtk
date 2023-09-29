@@ -4,7 +4,7 @@ void generateBlocks() {
   auto begin = this->begin();
   auto end = this->iterator( 2 * ne + 2 );
 
-  this->values_ = block::details::ColumnData( this->name(), begin, end, 2 );
+  this->values_ = base::ColumnData( this->name(), begin, end, 2 );
   for ( unsigned int index = 1; index <= this->numberIncidentEnergies(); ++index ) {
 
     const auto type = this->distributionType( index );

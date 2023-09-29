@@ -21,11 +21,11 @@ namespace electron {
  *  BREMI/BREME block or electrons in the EION blocks).
  */
 class EnergyDistributionBlock :
-    protected block::details::BaseElectronBlockWithLocators<
+    protected base::BaseElectronBlockWithLocators<
                   EnergyDistributionBlock,
                   TabulatedEnergyDistribution > {
 
-  friend class block::details::BaseElectronBlockWithLocators<
+  friend class base::BaseElectronBlockWithLocators<
                    EnergyDistributionBlock,
                    TabulatedEnergyDistribution >;
 

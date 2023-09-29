@@ -14,7 +14,7 @@ namespace thermal {
  *  @class
  *  @brief The thermal scattering cross section block
  */
-class CrossSectionBlock : protected block::details::ColumnData {
+class CrossSectionBlock : protected base::ColumnData {
 
   /* fields */
 

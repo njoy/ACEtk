@@ -17,8 +17,7 @@ namespace block {
  *
  *  It is used in the DLW block as ACE LAW 33.
  */
-class TwoBodyTransferDistribution :
-  protected details::BaseTwoParameterDistribution {
+class TwoBodyTransferDistribution : protected base::BaseTwoParameterDistribution {
 
   /* fields */
 

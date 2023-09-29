@@ -19,7 +19,7 @@ namespace block {
  *  temperature values as well as the restriction energy U used to describe the
  *  Maxwellian fission spectrum. It is used in the DLW block as ACE LAW 7.
  */
-class SimpleMaxwellianFissionSpectrum : protected details::BaseEvaporationSpectrum {
+class SimpleMaxwellianFissionSpectrum : protected base::BaseEvaporationSpectrum {
 
   /* fields */
 

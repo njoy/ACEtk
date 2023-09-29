@@ -19,7 +19,7 @@ namespace block {
  *  temperature values as well as the restriction energy U used to describe the
  *  evaporation spectrum. It is used in the DLW block as ACE LAW 9.
  */
-class EvaporationSpectrum : protected details::BaseEvaporationSpectrum {
+class EvaporationSpectrum : protected base::BaseEvaporationSpectrum {
 
   /* fields */
 

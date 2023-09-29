@@ -5,5 +5,5 @@ void generateBlocks() {
   auto begin = this->begin();
   auto end = begin + 2 * nr + 2 * ne + 2;
 
-  this->tabulated_ = block::details::BaseTabulatedData( this->name(), begin, end );
+  this->tabulated_ = base::BaseTabulatedData( this->name(), begin, end );
 }

@@ -21,7 +21,7 @@ namespace electron {
  *
  *  The size of each (the total number of electron shells) is stored in NXS(5).
  */
-class ElectronShellBlock : protected block::details::ArrayData {
+class ElectronShellBlock : protected base::ArrayData {
 
   /* fields */
 

@@ -19,7 +19,7 @@ namespace thermal {
  *  associated incident energy values are stored in the associated elastic
  *  thermal scattering cross section block).
  */
-class ElasticAngularDistributionBlock : protected block::details::ArrayData {
+class ElasticAngularDistributionBlock : protected base::ArrayData {
 
   /* fields */
 

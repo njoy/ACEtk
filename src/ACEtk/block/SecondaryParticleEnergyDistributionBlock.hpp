@@ -55,11 +55,11 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
  *  as the order of the reaction numbers in the corresponding MTR block.
  */
 class SecondaryParticleEnergyDistributionBlock :
-    protected details::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
-                                              EnergyDistributionData > {
+    protected base::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
+                                           EnergyDistributionData > {
 
-  friend class details::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
-                                               EnergyDistributionData >;
+  friend class base::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
+                                            EnergyDistributionData >;
 
   /* fields */
   std::optional< block::TYRH > tyrh_;

@@ -8,8 +8,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
@@ -17,7 +16,7 @@ namespace details {
  *         LSIG&SIG, LDLW&DLW, etc. blocks
  */
 template < typename Derived, typename Data >
-class BaseBlockWithLocators : protected details::Base {
+class BaseBlockWithLocators : protected Base {
 
   /* fields */
   unsigned int n_;           // the number of data blocks
@@ -120,8 +119,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

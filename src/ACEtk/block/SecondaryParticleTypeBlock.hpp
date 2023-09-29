@@ -20,7 +20,7 @@ namespace block {
  *
  *  The number of available particle types is stored in NXS(7).
  */
-class SecondaryParticleTypeBlock : protected details::ArrayData {
+class SecondaryParticleTypeBlock : protected base::ArrayData {
 
   /* fields */
 

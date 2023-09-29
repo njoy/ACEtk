@@ -17,7 +17,7 @@ namespace block {
  *  @class
  *  @brief The continuous energy NU block with the fission multiplicity data
  */
-class FissionMultiplicityBlock : protected details::Base {
+class FissionMultiplicityBlock : protected base::Base {
 
 public:
 

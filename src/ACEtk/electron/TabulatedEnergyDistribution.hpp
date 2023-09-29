@@ -19,7 +19,7 @@ namespace electron {
  *  function (CDF) as a function of photon energy for the given incident
  *  energy. It is used in the BREME block.
  */
-class TabulatedEnergyDistribution : protected block::details::ArrayData {
+class TabulatedEnergyDistribution : protected base::ArrayData {
 
   /* fields */
   double energy_ = 0.0;

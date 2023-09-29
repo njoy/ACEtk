@@ -23,7 +23,7 @@ namespace photoatomic {
  *
  *  The size of each (the total number of fluorescence edges) is stored in NXS(4).
  */
-class FluorescenceDataBlock : protected block::details::ArrayData {
+class FluorescenceDataBlock : protected base::ArrayData {
 
   /* fields */
 

@@ -24,7 +24,7 @@ namespace block {
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
-class FrameAndMultiplicityBlock : protected details::Base {
+class FrameAndMultiplicityBlock : protected base::Base {
 
   /* fields */
   std::size_t ntr_ = 0;

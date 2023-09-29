@@ -23,11 +23,11 @@ namespace block {
  *  the DLW block as ACE LAW 4.
  */
 class OutgoingEnergyDistributionData :
-  protected details::BaseDistributionData< OutgoingEnergyDistributionData,
-                                           TabulatedEnergyDistribution > {
+  protected base::BaseDistributionData< OutgoingEnergyDistributionData,
+                                        TabulatedEnergyDistribution > {
 
-  friend class details::BaseDistributionData< OutgoingEnergyDistributionData,
-                                              TabulatedEnergyDistribution >;
+  friend class base::BaseDistributionData< OutgoingEnergyDistributionData,
+                                           TabulatedEnergyDistribution >;
 
   /* fields */
 

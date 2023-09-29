@@ -9,8 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
@@ -21,7 +20,7 @@ namespace details {
  *  additional data columns as a function of cosine for the given incident
  *  energy.
  */
-class TabulatedProbabilityDistribution : protected details::Base {
+class TabulatedProbabilityDistribution : protected Base {
 
   /* fields */
 
@@ -88,8 +87,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

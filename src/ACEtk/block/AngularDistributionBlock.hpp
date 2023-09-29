@@ -23,7 +23,7 @@ namespace block {
  *  of the other distribution data sets is the same as the order of the reaction
  *  numbers in the MTR block.
  */
-class AngularDistributionBlock : protected details::BaseAngularDistributionBlock {
+class AngularDistributionBlock : protected base::BaseAngularDistributionBlock {
 
   /* fields */
 
@@ -32,7 +32,7 @@ class AngularDistributionBlock : protected details::BaseAngularDistributionBlock
 public:
 
   /* type alias */
-  using DistributionData = details::BaseAngularDistributionBlock::DistributionData;
+  using DistributionData = base::BaseAngularDistributionBlock::DistributionData;
 
   /* constructor */
   #include "ACEtk/block/AngularDistributionBlock/src/ctor.hpp"

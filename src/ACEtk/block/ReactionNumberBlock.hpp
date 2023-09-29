@@ -20,7 +20,7 @@ namespace block {
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
-class ReactionNumberBlock : protected details::ArrayData {
+class ReactionNumberBlock : protected base::ArrayData {
 
   /* fields */
 

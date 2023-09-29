@@ -19,11 +19,11 @@ namespace electron {
  *  subshell (the number of subshells NSSH is stored in NXS(7)).
  */
 class SubshellTransitionDataBlock :
-    protected block::details::BaseBlockWithLocators< SubshellTransitionDataBlock,
-                                                     SubshellTransitionData > {
+    protected base::BaseBlockWithLocators< SubshellTransitionDataBlock,
+                                           SubshellTransitionData > {
 
-  friend class block::details::BaseBlockWithLocators< SubshellTransitionDataBlock,
-                                                      SubshellTransitionData >;
+  friend class base::BaseBlockWithLocators< SubshellTransitionDataBlock,
+                                            SubshellTransitionData >;
 
   /* fields */
 

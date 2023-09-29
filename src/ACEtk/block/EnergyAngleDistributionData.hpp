@@ -21,11 +21,11 @@ namespace block {
  *  for a set of incident energy values. It is used in the DLW block as ACE LAW 61.
  */
 class EnergyAngleDistributionData :
-  protected details::BaseDistributionData< EnergyAngleDistributionData,
-                                           TabulatedEnergyAngleDistribution > {
+  protected base::BaseDistributionData< EnergyAngleDistributionData,
+                                        TabulatedEnergyAngleDistribution > {
 
-  friend class details::BaseDistributionData< EnergyAngleDistributionData,
-                                              TabulatedEnergyAngleDistribution >;
+  friend class base::BaseDistributionData< EnergyAngleDistributionData,
+                                           TabulatedEnergyAngleDistribution >;
 
   /* fields */
 

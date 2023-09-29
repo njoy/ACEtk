@@ -10,18 +10,17 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
  *  @brief Base class for energy distribution data as a function of incident energy
  */
-class BaseTabulatedData : protected details::Base {
+class BaseTabulatedData : protected Base {
 
   /* fields */
-  InterpolationData interpolation_;
-  details::ColumnData data_;
+  block::InterpolationData interpolation_;
+  ColumnData data_;
 
   /* auxiliary functions */
   #include "ACEtk/base/BaseTabulatedData/src/generateXSS.hpp"
@@ -97,8 +96,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

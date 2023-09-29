@@ -19,7 +19,7 @@ namespace block {
  *  photon is a primary photon or the binding energy when the photon is not a
  *  primary photon. It is used in the DLW block as ACE LAW 2.
  */
-class DiscretePhotonDistribution : protected details::BaseTwoParameterDistribution {
+class DiscretePhotonDistribution : protected base::BaseTwoParameterDistribution {
 
   /* fields */
 

@@ -20,11 +20,11 @@ namespace electron {
  *  for which angular distribution data is given.
  */
 class ElasticAngularDistributionBlock :
-    protected block::details::BaseElectronBlockWithLocators<
+    protected base::BaseElectronBlockWithLocators<
                   ElasticAngularDistributionBlock,
                   TabulatedAngularDistribution > {
 
-  friend class block::details::BaseElectronBlockWithLocators<
+  friend class base::BaseElectronBlockWithLocators<
                    ElasticAngularDistributionBlock,
                    TabulatedAngularDistribution >;
 

@@ -20,7 +20,7 @@ namespace block {
  *  section block. For older data files, this also contains the equiprobable
  *  energy bins.
  */
-class PhotonProductionBlock : protected details::ArrayData {
+class PhotonProductionBlock : protected base::ArrayData {
 
   /* fields */
 

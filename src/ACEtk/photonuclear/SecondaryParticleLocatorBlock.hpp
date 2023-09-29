@@ -20,7 +20,7 @@ namespace photonuclear {
  *
  *  The number of available particle types is stored in NXS(5).
  */
-class SecondaryParticleLocatorBlock : protected block::details::Base {
+class SecondaryParticleLocatorBlock : protected base::Base {
 
   /* fields */
   unsigned int ntype_ = 0;

@@ -4,8 +4,7 @@ void generateBlocks() {
   auto data = this->begin() + 1;
   auto end = data + 4 * ne + 1;
 
-  this->values_ = block::details::ColumnData( std::string( this->name() ),
-                                              data, end, 4 );
+  this->values_ = base::ColumnData( std::string( this->name() ), data, end, 4 );
   for ( unsigned int index = 1; index <= this->values_.N(); ++index ) {
 
     const double energy = this->values_.value( 1, index );

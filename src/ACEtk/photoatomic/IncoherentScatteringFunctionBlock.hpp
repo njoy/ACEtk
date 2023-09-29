@@ -24,7 +24,7 @@ namespace photoatomic {
  *
  *  The recoil electron momentum transfer values are given in inverse angstroms.
  */
-class IncoherentScatteringFunctionBlock : protected block::details::ArrayData {
+class IncoherentScatteringFunctionBlock : protected base::ArrayData {
 
   /* fields */
   std::optional< std::vector< double > > momentum_;

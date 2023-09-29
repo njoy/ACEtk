@@ -19,7 +19,7 @@ namespace dosimetry {
  *  dosimetry cross sections are different from the other cross section data
  *  blocks in that the data is not given on a common energy grid.
  */
-class CrossSectionData : protected block::details::BaseTabulatedData {
+class CrossSectionData : protected base::BaseTabulatedData {
 
   /* fields */
 

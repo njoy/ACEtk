@@ -24,8 +24,7 @@ namespace block {
  *
  *  It is used in the DLW block as ACE LAW 3.
  */
-class LevelScatteringDistribution :
-  protected details::BaseTwoParameterDistribution {
+class LevelScatteringDistribution : protected base::BaseTwoParameterDistribution {
 
   /* fields */
 

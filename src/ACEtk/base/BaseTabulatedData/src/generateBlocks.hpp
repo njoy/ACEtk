@@ -7,5 +7,5 @@ void generateBlocks() {
   const auto end = data + 2 * ne + 1;
 
   this->interpolation_ = block::InterpolationData( this->name(), begin, data );
-  this->data_ = block::details::ColumnData( this->name(), data, end, 2 );
+  this->data_ = ColumnData( this->name(), data, end, 2 );
 }

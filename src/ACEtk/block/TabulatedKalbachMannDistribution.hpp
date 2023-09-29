@@ -21,8 +21,7 @@ namespace block {
  *  used in the KalbachMannDistributionData (ACE LAW 44 for a given incident
  *  energy) in the DLW block.
  */
-class TabulatedKalbachMannDistribution :
-  protected details::TabulatedProbabilityDistribution {
+class TabulatedKalbachMannDistribution : protected base::TabulatedProbabilityDistribution {
 
   /* fields */
   double incident_ = 0.0;

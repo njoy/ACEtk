@@ -28,9 +28,9 @@ generateXSS( const std::string& name,
   }
 
   // insert the interpolation data in the front
-  const InterpolationData interpolation( std::string( name ),
-                                         std::move( boundaries ),
-                                         std::move( interpolants ) );
+  const block::InterpolationData interpolation( std::string( name ),
+                                                std::move( boundaries ),
+                                                std::move( interpolants ) );
   xss.insert( xss.begin(), interpolation.begin(), interpolation.end() );
 
   return xss;

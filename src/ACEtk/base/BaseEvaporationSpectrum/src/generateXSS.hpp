@@ -8,11 +8,11 @@ generateXSS(
 
   // insert the tabulated data
   std::vector< double > xss;
-  const details::BaseTabulatedData table( "DLW::GeneralEvaporationSpectrum",
-                                          std::move( boundaries ),
-                                          std::move( interpolants ),
-                                          std::move( energies ),
-                                          std::move( temperatures ) );
+  const BaseTabulatedData table( "DLW::GeneralEvaporationSpectrum",
+                                 std::move( boundaries ),
+                                 std::move( interpolants ),
+                                 std::move( energies ),
+                                 std::move( temperatures ) );
   xss.insert( xss.end(), table.begin(), table.end() );
 
   // insert the restriction energy

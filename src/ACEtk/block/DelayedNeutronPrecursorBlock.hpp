@@ -18,7 +18,7 @@ namespace block {
  *
  *  The number of precursor groups is stored in NXS(8).
  */
-class DelayedNeutronPrecursorBlock : protected details::Base {
+class DelayedNeutronPrecursorBlock : protected base::Base {
 
   /* fields */
   unsigned int npcr_ = 0;

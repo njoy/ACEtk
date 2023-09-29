@@ -14,7 +14,7 @@ namespace block {
  *  @class
  *  @brief Interpolation data
  */
-class InterpolationData : protected details::ColumnData {
+class InterpolationData : protected base::ColumnData {
 
   /* fields */
 

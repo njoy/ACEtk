@@ -4,14 +4,13 @@ static std::vector< double > generateXSS( unsigned int npsx, double ap,
                                           std::vector< double >&& pdf,
                                           std::vector< double >&& cdf ) {
 
-  std::vector< double > xss = { static_cast< double >( npsx ),
-                                ap,
+  std::vector< double > xss = { static_cast< double >( npsx ), ap,
                                 static_cast< double >( interpolation ) };
   xss.reserve( 5 + 3 * values.size() );
-  const details::ColumnData columns( "NBodyPhaseSpaceDistribution",
-                                     std::move( values ),
-                                     std::move( pdf ),
-                                     std::move( cdf ) );
+  const base::ColumnData columns( "NBodyPhaseSpaceDistribution",
+                                  std::move( values ),
+                                  std::move( pdf ),
+                                  std::move( cdf ) );
   xss.insert( xss.end(), columns.begin(), columns.end() );
 
   return xss;

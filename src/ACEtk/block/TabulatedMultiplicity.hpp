@@ -14,7 +14,7 @@ namespace block {
  *  @class
  *  @brief Tabulated multiplicity data (used in the DLW block)
  */
-class TabulatedMultiplicity : protected details::BaseTabulatedData {
+class TabulatedMultiplicity : protected base::BaseTabulatedData {
 
   /* fields */
 

@@ -21,11 +21,11 @@ namespace block {
  *  MTR block.
  */
 class CrossSectionBlock :
-    protected details::BaseBlockWithLocators< CrossSectionBlock,
-                                              CrossSectionData > {
+    protected base::BaseBlockWithLocators< CrossSectionBlock,
+                                           CrossSectionData > {
 
-  friend class details::BaseBlockWithLocators< CrossSectionBlock,
-                                               CrossSectionData >;
+  friend class base::BaseBlockWithLocators< CrossSectionBlock,
+                                            CrossSectionData >;
 
   /* fields */
 

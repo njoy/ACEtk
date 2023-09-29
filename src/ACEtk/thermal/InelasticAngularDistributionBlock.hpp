@@ -21,7 +21,7 @@ namespace thermal {
  *  a skewed distribution of discrete cosines, or a tabulated probability
  *  distribution.
  */
-class InelasticAngularDistributionBlock : protected block::details::Base {
+class InelasticAngularDistributionBlock : protected base::Base {
 
 public:
 

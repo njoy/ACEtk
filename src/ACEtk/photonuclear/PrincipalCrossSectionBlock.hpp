@@ -23,7 +23,7 @@ namespace photonuclear {
  *
  *  The size of each (the total number of energy points) is stored in NXS(3).
  */
-class PrincipalCrossSectionBlock : protected block::details::ArrayData {
+class PrincipalCrossSectionBlock : protected base::ArrayData {
 
   /* fields */
 

@@ -12,8 +12,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
@@ -21,15 +20,15 @@ namespace details {
  *         ENDF style interpolation data
  */
 template< typename Derived, typename Distribution >
-class BaseDistributionData : protected details::Base {
+class BaseDistributionData : protected Base {
 
   /* fields */
   std::size_t locb_;
 
 protected:
 
-  InterpolationData interpolation_;
-  details::ColumnData values_;
+  block::InterpolationData interpolation_;
+  ColumnData values_;
   std::vector< Distribution > distributions_;
 
 private:
@@ -52,7 +51,7 @@ public:
   /**
    *  @brief Return the interpolation data
    */
-  const InterpolationData& interpolationData() const {
+  const block::InterpolationData& interpolationData() const {
 
     return this->interpolation_;
   }
@@ -208,8 +207,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 

@@ -20,7 +20,7 @@ namespace block {
  *  determine the distribution: the number of particles in the system and the
  *  total mass ratio. It is used in the DLW block as ACE LAW 66.
  */
-class NBodyPhaseSpaceDistribution : protected details::Base {
+class NBodyPhaseSpaceDistribution : protected base::Base {
 
   /* fields */
   double emin_ = 0.0;

@@ -20,8 +20,7 @@ namespace block {
  *  a function of cosine for the given energy. It is used in the
  *  OutgoingEnergyAngleDistributionData (ACE LAW 61) in the DLW block.
  */
-class TabulatedAngularDistributionWithProbability :
-  protected TabulatedAngularDistribution {
+class TabulatedAngularDistributionWithProbability : protected TabulatedAngularDistribution {
 
   /* fields */
   double pdf_ = 0.0;

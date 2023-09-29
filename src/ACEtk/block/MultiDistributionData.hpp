@@ -37,7 +37,7 @@ namespace block {
  *  is no ACE LAW associated to this distribution type, but internally in ACEtk
  *  we refer to it as ACE LAW 666 because it is evil).
  */
-class MultiDistributionData : protected details::Base {
+class MultiDistributionData : protected base::Base {
 
 public:
 

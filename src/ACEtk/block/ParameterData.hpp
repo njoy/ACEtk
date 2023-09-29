@@ -14,7 +14,7 @@ namespace block {
  *  @class
  *  @brief Parameter data for a Watt spectrum
  */
-class ParameterData : protected details::BaseTabulatedData {
+class ParameterData : protected base::BaseTabulatedData {
 
   /* fields */
 

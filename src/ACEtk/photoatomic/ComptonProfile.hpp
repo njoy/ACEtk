@@ -18,7 +18,7 @@ namespace photoatomic {
  *  function (PDF) and cumulative density function (CDF) as a function of
  *  momentum. It is used in the LSWD block.
  */
-class ComptonProfile : protected block::details::TabulatedProbabilityDistribution {
+class ComptonProfile : protected base::TabulatedProbabilityDistribution {
 
   /* fields */
 

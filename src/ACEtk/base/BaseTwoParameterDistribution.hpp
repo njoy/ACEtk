@@ -9,14 +9,13 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
-namespace details {
+namespace base {
 
 /**
  *  @class
  *  @brief Base class for a distribution using two parameters
  */
-class BaseTwoParameterDistribution : protected details::Base {
+class BaseTwoParameterDistribution : protected Base {
 
   /* fields */
   double emin_;
@@ -75,8 +74,7 @@ public:
   using Base::end;
 };
 
-} // details namespace
-} // block namespace
+} // base namespace
 } // ACEtk namespace
 } // njoy namespace
 
