@@ -5,8 +5,8 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {

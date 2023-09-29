@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/block/DelayedNeutronPrecursorData.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {

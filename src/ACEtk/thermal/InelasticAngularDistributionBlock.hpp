@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/thermal/DiscreteCosines.hpp"
 #include "ACEtk/thermal/DiscreteCosinesWithProbability.hpp"
 

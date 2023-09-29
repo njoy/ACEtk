@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BaseBlockWithLocators.hpp"
 #include "ACEtk/block/TabulatedSecondaryParticleMultiplicity.hpp"
 
 namespace njoy {

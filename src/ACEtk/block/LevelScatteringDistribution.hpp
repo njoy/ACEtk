@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/BaseTwoParameterDistribution.hpp"
+#include "ACEtk/base/BaseTwoParameterDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {

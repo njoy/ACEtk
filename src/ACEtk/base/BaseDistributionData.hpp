@@ -1,13 +1,13 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_BASEDISTRIBUTIONDATAWITHINTERPOLATIONTYPE
-#define NJOY_ACETK_BLOCK_DETAILS_BASEDISTRIBUTIONDATAWITHINTERPOLATIONTYPE
+#ifndef NJOY_ACETK_BASE_DISTRIBUTIONDATABASE
+#define NJOY_ACETK_BASE_DISTRIBUTIONDATABASE
 
 // system includes
 #include <variant>
 
 // other includes
 #include "utility/overload.hpp"
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/ColumnData.hpp"
 #include "ACEtk/block/InterpolationData.hpp"
 
 namespace njoy {
@@ -17,41 +17,75 @@ namespace details {
 
 /**
  *  @class
- *  @brief Base class for distribution data as a function of values using an
- *         interpolation type flag
+ *  @brief Base class for distribution data as a function of values using
+ *         ENDF style interpolation data
  */
 template< typename Derived, typename Distribution >
-class BaseDistributionDataWithInterpolationType : protected details::Base {
+class BaseDistributionData : protected details::Base {
 
   /* fields */
   std::size_t locb_;
 
 protected:
 
+  InterpolationData interpolation_;
   details::ColumnData values_;
   std::vector< Distribution > distributions_;
 
 private:
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/verifyValueIndex.hpp"
-  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/verifySize.hpp"
+  #include "ACEtk/base/BaseDistributionData/src/verifyValueIndex.hpp"
+  #include "ACEtk/base/BaseDistributionData/src/generateBlocks.hpp"
+  #include "ACEtk/base/BaseDistributionData/src/verifySize.hpp"
 
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/generateXSS.hpp"
+  #include "ACEtk/base/BaseDistributionData/src/generateXSS.hpp"
 
   /* constructor */
-  #include "ACEtk/block/details/BaseDistributionDataWithInterpolationType/src/ctor.hpp"
+  #include "ACEtk/base/BaseDistributionData/src/ctor.hpp"
 
 public:
 
   /**
-   *  @brief Return the interpolation flag
+   *  @brief Return the interpolation data
    */
-  int interpolation() const { return this->IXSS( 1 ); }
+  const InterpolationData& interpolationData() const {
+
+    return this->interpolation_;
+  }
+
+  /**
+   *  @brief Return the number of interpolation regions
+   */
+  std::size_t NB() const { return this->interpolationData().NB(); }
+
+  /**
+   *  @brief Return the number of interpolation regions
+   */
+  std::size_t numberInterpolationRegions() const { return this->NB(); }
+
+  /**
+   *  @brief Return the interpolation boundaries
+   */
+  auto NBT() const { return this->interpolationData().NBT(); }
+
+  /**
+   *  @brief Return the interpolation boundaries
+   */
+  auto boundaries() const { return this->NBT(); }
+
+  /**
+   *  @brief Return the interpolants
+   */
+  auto INT() const { return this->interpolationData().INT(); }
+
+  /**
+   *  @brief Return the interpolants
+   */
+  auto interpolants() const { return this->INT(); }
 
   /**
    *  @brief Return the number of values in each column
@@ -135,7 +169,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  std::size_t relativeDistributionLocator( std::size_t index ) const {
+  int relativeDistributionLocator( std::size_t index ) const {
 
     const int locator = this->LOCC( index );
     return locator - this->locb_ + 1;

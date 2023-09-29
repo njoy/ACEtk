@@ -1,10 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_BASEBLOCKWITHLOCATORS
-#define NJOY_ACETK_BLOCK_DETAILS_BASEBLOCKWITHLOCATORS
+#ifndef NJOY_ACETK_BASE_ELECTRONBASEBLOCKWITHLOCATORS
+#define NJOY_ACETK_BASE_ELECTRONBASEBLOCKWITHLOCATORS
 
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -13,31 +14,27 @@ namespace details {
 
 /**
  *  @class
- *  @brief The base class for a combined locator and data block like the
- *         LSIG&SIG, LDLW&DLW, etc. blocks
+ *  @brief The base class for a combined locator and data block prepended
  */
 template < typename Derived, typename Data >
-class BaseBlockWithLocators : protected details::Base {
+class BaseElectronBlockWithLocators : protected details::Base {
 
   /* fields */
-  unsigned int n_;           // the number of data blocks
-  bool locator_;             // flag to indicate if locators or offsets are used
-  Iterator iterator_;        // the begin iterator of the data block
+  std::size_t n_;
+  ArrayData information_;
   std::vector< Data > data_; // the data blocks
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/generateXSS.hpp"
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/generateData.hpp"
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/verifySize.hpp"
+  #include "ACEtk/base/BaseElectronBlockWithLocators/src/generateXSS.hpp"
+  #include "ACEtk/base/BaseElectronBlockWithLocators/src/generateBlocks.hpp"
 
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/verifyDataIndex.hpp"
+  #include "ACEtk/base/BaseElectronBlockWithLocators/src/verifyDataIndex.hpp"
 
   /* constructor */
-  #include "ACEtk/block/details/BaseBlockWithLocators/src/ctor.hpp"
+  #include "ACEtk/base/BaseElectronBlockWithLocators/src/ctor.hpp"
 
   /**
    *  @brief Return the iterator to the start of the data block
@@ -71,7 +68,7 @@ public:
     #ifndef NDEBUG
     this->verifyDataIndex( index );
     #endif
-    return this->locator_ ? this->IXSS( index ) : this->IXSS( index ) + 1;
+    return this->information_.ivalue( 3, index ) + 1;
   }
 
   /**
@@ -88,11 +85,63 @@ public:
   }
 
   /**
+   *  @brief Return the energy values
+   */
+  auto E() const { return this->information_.darray( 1 ); }
+
+  /**
+   *  @brief Return the energy values
+   */
+  auto energies() const { return this->E(); }
+
+  /**
+   *  @brief Return the table lengths
+   */
+  auto L() const { return this->information_.iarray( 1 ); }
+
+  /**
+   *  @brief Return the table lengths
+   */
+  auto lengths() const { return this->L(); }
+
+  /**
    *  @brief Return the data vector
    */
   const std::vector< Data >& data() const {
 
     return this->data_;
+  }
+
+  /**
+   *  @brief Return the energy for a data block index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  double energy( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->information_.dvalue( 1, index );
+  }
+
+  /**
+   *  @brief Return the table length for a data block index
+   *
+   *  When the index is out of range an std::out_of_range exception is thrown
+   *  (debug mode only).
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  unsigned int length( std::size_t index ) const {
+
+    #ifndef NDEBUG
+    this->verifyDataIndex( index );
+    #endif
+    return this->information_.ivalue( 2, index );
   }
 
   /**

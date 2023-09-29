@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/BaseEvaporationSpectrum.hpp"
+#include "ACEtk/base/BaseEvaporationSpectrum.hpp"
 
 namespace njoy {
 namespace ACEtk {

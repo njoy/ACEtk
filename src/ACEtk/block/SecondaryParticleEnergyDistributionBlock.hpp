@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BaseBlockWithLocators.hpp"
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"

@@ -6,7 +6,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"

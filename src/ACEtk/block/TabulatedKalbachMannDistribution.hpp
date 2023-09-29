@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/TabulatedProbabilityDistribution.hpp"
+#include "ACEtk/base/TabulatedProbabilityDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {

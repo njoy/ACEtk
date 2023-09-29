@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseDistributionDataWithInterpolationType.hpp"
+#include "ACEtk/base/BaseDistributionDataWithInterpolationType.hpp"
 #include "ACEtk/block/TabulatedAngularDistributionWithProbability.hpp"
 
 namespace njoy {

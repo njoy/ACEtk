@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {

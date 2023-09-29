@@ -1,10 +1,10 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_ARRAYDATA
-#define NJOY_ACETK_BLOCK_DETAILS_ARRAYDATA
+#ifndef NJOY_ACETK_BASE_ARRAYDATA
+#define NJOY_ACETK_BASE_ARRAYDATA
 
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -22,14 +22,14 @@ class ArrayData : protected details::Base {
   unsigned int narrays_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/ArrayData/src/verifyIndex.hpp"
-  #include "ACEtk/block/details/ArrayData/src/generateXSS.hpp"
-  #include "ACEtk/block/details/ArrayData/src/verifySize.hpp"
+  #include "ACEtk/base/ArrayData/src/verifyIndex.hpp"
+  #include "ACEtk/base/ArrayData/src/generateXSS.hpp"
+  #include "ACEtk/base/ArrayData/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/details/ArrayData/src/ctor.hpp"
+  #include "ACEtk/base/ArrayData/src/ctor.hpp"
 
   /* methods */
 

@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BaseBlockWithLocators.hpp"
 #include "ACEtk/photoatomic/ComptonProfile.hpp"
 
 namespace njoy {

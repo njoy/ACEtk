@@ -1,11 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_BASEEVAPORATIONSPECTRUM
-#define NJOY_ACETK_BLOCK_DETAILS_BASEEVAPORATIONSPECTRUM
+#ifndef NJOY_ACETK_BASE_BASEEVAPORATIONSPECTRUM
+#define NJOY_ACETK_BASE_BASEEVAPORATIONSPECTRUM
 
 // system includes
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/BaseTabulatedData.hpp"
+#include "ACEtk/base/BaseTabulatedData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -24,14 +24,14 @@ class BaseEvaporationSpectrum : protected details::Base {
   EnergyDistributionType type_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseEvaporationSpectrum/src/verifySize.hpp"
-  #include "ACEtk/block/details/BaseEvaporationSpectrum/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseEvaporationSpectrum/src/generateXSS.hpp"
+  #include "ACEtk/base/BaseEvaporationSpectrum/src/verifySize.hpp"
+  #include "ACEtk/base/BaseEvaporationSpectrum/src/generateBlocks.hpp"
+  #include "ACEtk/base/BaseEvaporationSpectrum/src/generateXSS.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/details/BaseEvaporationSpectrum/src/ctor.hpp"
+  #include "ACEtk/base/BaseEvaporationSpectrum/src/ctor.hpp"
 
   /**
    *  @brief Return the distribution type

@@ -6,7 +6,7 @@
 
 // other includes
 #include "utility/overload.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/block/EquiprobableAngularBins.hpp"
 #include "ACEtk/block/TabulatedAngularDistribution.hpp"
 #include "ACEtk/block/IsotropicAngularDistribution.hpp"

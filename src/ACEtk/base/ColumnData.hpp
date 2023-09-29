@@ -1,10 +1,10 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_COLUMNDATA
-#define NJOY_ACETK_BLOCK_DETAILS_COLUMNDATA
+#ifndef NJOY_ACETK_BASE_COLUMNDATA
+#define NJOY_ACETK_BASE_COLUMNDATA
 
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,13 +21,13 @@ class ColumnData : protected Base {
   std::size_t nc_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/ColumnData/src/generateXSS.hpp"
-  #include "ACEtk/block/details/ColumnData/src/verifySize.hpp"
+  #include "ACEtk/base/ColumnData/src/generateXSS.hpp"
+  #include "ACEtk/base/ColumnData/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/details/ColumnData/src/ctor.hpp"
+  #include "ACEtk/base/ColumnData/src/ctor.hpp"
 
   /**
    *  @brief Return the number of columns

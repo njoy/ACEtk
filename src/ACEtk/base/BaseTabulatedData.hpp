@@ -1,11 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_BASETABULATEDDATA
-#define NJOY_ACETK_BLOCK_DETAILS_BASETABULATEDDATA
+#ifndef NJOY_ACETK_BASE_BASETABULATEDDATA
+#define NJOY_ACETK_BASE_BASETABULATEDDATA
 
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/ColumnData.hpp"
 #include "ACEtk/block/InterpolationData.hpp"
 
 namespace njoy {
@@ -24,14 +24,14 @@ class BaseTabulatedData : protected details::Base {
   details::ColumnData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseTabulatedData/src/generateXSS.hpp"
-  #include "ACEtk/block/details/BaseTabulatedData/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseTabulatedData/src/verifySize.hpp"
+  #include "ACEtk/base/BaseTabulatedData/src/generateXSS.hpp"
+  #include "ACEtk/base/BaseTabulatedData/src/generateBlocks.hpp"
+  #include "ACEtk/base/BaseTabulatedData/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/details/BaseTabulatedData/src/ctor.hpp"
+  #include "ACEtk/base/BaseTabulatedData/src/ctor.hpp"
 
   /**
    *  @brief Return the interpolation data

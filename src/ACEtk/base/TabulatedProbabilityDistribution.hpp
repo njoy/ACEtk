@@ -1,11 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_TABULATEDPROBABILITYDISTRIBUTION
-#define NJOY_ACETK_BLOCK_DETAILS_TABULATEDPROBABILITYDISTRIBUTION
+#ifndef NJOY_ACETK_BASE_TABULATEDPROBABILITYDISTRIBUTION
+#define NJOY_ACETK_BASE_TABULATEDPROBABILITYDISTRIBUTION
 
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -26,13 +26,13 @@ class TabulatedProbabilityDistribution : protected details::Base {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/TabulatedProbabilityDistribution/src/generateXSS.hpp"
-  #include "ACEtk/block/details/TabulatedProbabilityDistribution/src/verifySize.hpp"
+  #include "ACEtk/base/TabulatedProbabilityDistribution/src/generateXSS.hpp"
+  #include "ACEtk/base/TabulatedProbabilityDistribution/src/verifySize.hpp"
 
 protected:
 
   /* constructor */
-  #include "ACEtk/block/details/TabulatedProbabilityDistribution/src/ctor.hpp"
+  #include "ACEtk/base/TabulatedProbabilityDistribution/src/ctor.hpp"
 
 public:
 

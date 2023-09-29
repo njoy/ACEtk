@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/ReferenceFrame.hpp"
 #include "range/v3/view/transform.hpp"
 

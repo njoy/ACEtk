@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/BaseElectronBlockWithLocators.hpp"
+#include "ACEtk/base/BaseElectronBlockWithLocators.hpp"
 #include "ACEtk/electron/TabulatedEnergyDistribution.hpp"
 
 namespace njoy {

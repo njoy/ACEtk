@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_BASE
-#define NJOY_ACETK_BLOCK_DETAILS_BASE
+#ifndef NJOY_ACETK_BASE_BASE
+#define NJOY_ACETK_BASE_BASE
 
 // system includes
 #include <vector>
@@ -40,11 +40,11 @@ private:
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/Base/src/verifyIndex.hpp"
-  #include "ACEtk/block/details/Base/src/verifyReactionIndex.hpp"
+  #include "ACEtk/base/Base/src/verifyIndex.hpp"
+  #include "ACEtk/base/Base/src/verifyReactionIndex.hpp"
 
   /* constructor */
-  #include "ACEtk/block/details/Base/src/ctor.hpp"
+  #include "ACEtk/base/Base/src/ctor.hpp"
 
 public:
 

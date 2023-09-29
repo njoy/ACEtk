@@ -1,11 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_BASETWOPARAMETERDISTRIBUTION
-#define NJOY_ACETK_BLOCK_BASETWOPARAMETERDISTRIBUTION
+#ifndef NJOY_ACETK_BASE_BASETWOPARAMETERDISTRIBUTION
+#define NJOY_ACETK_BASE_BASETWOPARAMETERDISTRIBUTION
 
 // system includes
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,12 +23,12 @@ class BaseTwoParameterDistribution : protected details::Base {
   double emax_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseTwoParameterDistribution/src/verifySize.hpp"
+  #include "ACEtk/base/BaseTwoParameterDistribution/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/details/BaseTwoParameterDistribution/src/ctor.hpp"
+  #include "ACEtk/base/BaseTwoParameterDistribution/src/ctor.hpp"
 
   /**
    *  @brief Return the distribution type

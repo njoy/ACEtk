@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseAngularDistributionBlock.hpp"
+#include "ACEtk/base/BaseAngularDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {

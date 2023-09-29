@@ -1,11 +1,11 @@
-#ifndef NJOY_ACETK_BLOCK_DETAILS_BASEANGULARDISTRIBUTIONBLOCK
-#define NJOY_ACETK_BLOCK_DETAILS_BASEANGULARDISTRIBUTIONBLOCK
+#ifndef NJOY_ACETK_BASE_BASEANGULARDISTRIBUTIONBLOCK
+#define NJOY_ACETK_BASE_BASEANGULARDISTRIBUTIONBLOCK
 
 // system includes
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/block/AngularDistributionData.hpp"
 #include "ACEtk/block/FullyIsotropicDistribution.hpp"
 #include "ACEtk/block/DistributionGivenElsewhere.hpp"
@@ -38,16 +38,16 @@ private:
   bool zero_index_;
 
   /* auxiliary functions */
-  #include "ACEtk/block/details/BaseAngularDistributionBlock/src/insertZero.hpp"
-  #include "ACEtk/block/details/BaseAngularDistributionBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/details/BaseAngularDistributionBlock/src/generateBlocks.hpp"
-  #include "ACEtk/block/details/BaseAngularDistributionBlock/src/verifySize.hpp"
-  #include "ACEtk/block/details/BaseAngularDistributionBlock/src/verifyDataIndex.hpp"
+  #include "ACEtk/base/BaseAngularDistributionBlock/src/insertZero.hpp"
+  #include "ACEtk/base/BaseAngularDistributionBlock/src/generateXSS.hpp"
+  #include "ACEtk/base/BaseAngularDistributionBlock/src/generateBlocks.hpp"
+  #include "ACEtk/base/BaseAngularDistributionBlock/src/verifySize.hpp"
+  #include "ACEtk/base/BaseAngularDistributionBlock/src/verifyDataIndex.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/details/BaseAngularDistributionBlock/src/ctor.hpp"
+  #include "ACEtk/base/BaseAngularDistributionBlock/src/ctor.hpp"
 
   /* methods */
 
