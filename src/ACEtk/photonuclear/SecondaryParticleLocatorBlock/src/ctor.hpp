@@ -3,7 +3,7 @@ private:
 /**
  *  @brief Private constructor
  */
-PhotonuclearSecondaryParticleLocatorBlock(
+SecondaryParticleLocatorBlock(
     std::vector< unsigned int >&& types,
     std::vector< unsigned int >&& numbers,
     std::vector< std::array< unsigned int, 10 > >&& locators,
@@ -14,10 +14,10 @@ PhotonuclearSecondaryParticleLocatorBlock(
 
 public:
 
-PhotonuclearSecondaryParticleLocatorBlock() = default;
+SecondaryParticleLocatorBlock() = default;
 
-PhotonuclearSecondaryParticleLocatorBlock( const PhotonuclearSecondaryParticleLocatorBlock& ) = default;
-PhotonuclearSecondaryParticleLocatorBlock( PhotonuclearSecondaryParticleLocatorBlock&& ) = default;
+SecondaryParticleLocatorBlock( const SecondaryParticleLocatorBlock& ) = default;
+SecondaryParticleLocatorBlock( SecondaryParticleLocatorBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -26,11 +26,11 @@ PhotonuclearSecondaryParticleLocatorBlock( PhotonuclearSecondaryParticleLocatorB
  *  @param[in] numbers     the number of reactions for each particle type
  *  @param[in] locators    the locators for each secondary particle type
  */
-PhotonuclearSecondaryParticleLocatorBlock(
+SecondaryParticleLocatorBlock(
     std::vector< unsigned int > types,
     std::vector< unsigned int > numbers,
     std::vector< std::array< unsigned int, 10 > > locators ) :
-  PhotonuclearSecondaryParticleLocatorBlock(
+  SecondaryParticleLocatorBlock(
     std::move( types ), std::move( numbers ),
     std::move( locators ), locators.size() ) {}
 
@@ -41,12 +41,11 @@ PhotonuclearSecondaryParticleLocatorBlock(
  *  @param[in] end     the end iterator of the IXS block in the XSS array
  *  @param[in] ntype   the number of secondary particle types
  */
-PhotonuclearSecondaryParticleLocatorBlock( Iterator ixs, Iterator end,
-                                           unsigned int ntype ) :
+SecondaryParticleLocatorBlock( Iterator ixs, Iterator end, unsigned int ntype ) :
   Base( "IXSU", ixs, end ), ntype_( ntype ) {
 
   verifySize( this->begin(), this->end(), this->NTYPE() );
 }
 
-PhotonuclearSecondaryParticleLocatorBlock& operator=( const PhotonuclearSecondaryParticleLocatorBlock& ) = default;
-PhotonuclearSecondaryParticleLocatorBlock& operator=( PhotonuclearSecondaryParticleLocatorBlock&& ) = default;
+SecondaryParticleLocatorBlock& operator=( const SecondaryParticleLocatorBlock& ) = default;
+SecondaryParticleLocatorBlock& operator=( SecondaryParticleLocatorBlock&& ) = default;

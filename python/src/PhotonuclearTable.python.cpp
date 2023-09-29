@@ -16,7 +16,7 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
   // type aliases
   using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::PhotonuclearTable;
-  using ESZU = njoy::ACEtk::block::ESZU;
+  using ESZU = njoy::ACEtk::photonuclear::ESZU;
   using MTR = njoy::ACEtk::block::MTR;
   using LQR = njoy::ACEtk::block::LQR;
   using SIG = njoy::ACEtk::block::SIG;

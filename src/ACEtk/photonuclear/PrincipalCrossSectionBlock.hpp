@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTONUCLEARPRINCIPALCROSSSECTIONBLOCK
-#define NJOY_ACETK_BLOCK_PHOTONUCLEARPRINCIPALCROSSSECTIONBLOCK
+#ifndef NJOY_ACETK_PHOTONUCLEAR_PRINCIPALCROSSSECTIONBLOCK
+#define NJOY_ACETK_PHOTONUCLEAR_PRINCIPALCROSSSECTIONBLOCK
 
 // system includes
 
@@ -8,14 +8,14 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photonuclear {
 
 /**
  *  @class
  *  @brief The photonuclear ESZU block with the principal cross sections
  *
- *  The PhotonuclearPrincipalCrossSectionBlock class contains 3 or 4 arrays of the
- *  same length:
+ *  The PrincipalCrossSectionBlock class contains 3 or 4 arrays of the same
+ *  length:
  *    - the energy points
  *    - the total cross section
  *    - the elastic scattering cross section (optional)
@@ -23,7 +23,7 @@ namespace block {
  *
  *  The size of each (the total number of energy points) is stored in NXS(3).
  */
-class PhotonuclearPrincipalCrossSectionBlock : protected details::ArrayData {
+class PrincipalCrossSectionBlock : protected block::details::ArrayData {
 
   /* fields */
 
@@ -32,7 +32,7 @@ class PhotonuclearPrincipalCrossSectionBlock : protected details::ArrayData {
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock/src/ctor.hpp"
+  #include "ACEtk/photonuclear/PrincipalCrossSectionBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -75,9 +75,9 @@ public:
   using ArrayData::end;
 };
 
-using ESZU = PhotonuclearPrincipalCrossSectionBlock;
+using ESZU = PrincipalCrossSectionBlock;
 
-} // block namespace
+} // photonuclear namespace
 } // ACEtk namespace
 } // njoy namespace
 

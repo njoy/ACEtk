@@ -140,8 +140,9 @@ if(ACEtk.python)
       python/src/block/SecondaryParticleProductionCrossSectionBlock.python.cpp
       python/src/block/ProbabilityTable.python.cpp
       python/src/block/ProbabilityTableBlock.python.cpp
-      python/src/block/PhotonuclearPrincipalCrossSectionBlock.python.cpp
-      python/src/block/PhotonuclearSecondaryParticleLocatorBlock.python.cpp
+      python/src/photonuclear.python.cpp
+      python/src/photonuclear/PrincipalCrossSectionBlock.python.cpp
+      python/src/photonuclear/SecondaryParticleLocatorBlock.python.cpp
       python/src/photoatomic.python.cpp
       python/src/photoatomic/PrincipalCrossSectionBlock.python.cpp
       python/src/photoatomic/IncoherentScatteringFunctionBlock.python.cpp

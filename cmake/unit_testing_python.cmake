@@ -22,6 +22,9 @@ endfunction()
 
 message( STATUS "Adding ACEtk Python unit testing" )
 
+add_python_test( photonuclear.PrincipalCrossSectionBlock    photonuclear/Test_ACEtk_photonuclear_PrincipalCrossSectionBlock.py )
+add_python_test( photonuclear.SecondaryParticleLocatorBlock photonuclear/Test_ACEtk_photonuclear_SecondaryParticleLocatorBlock.py )
+
 add_python_test( photoatomic.PrincipalCrossSectionBlock        photoatomic/Test_ACEtk_photoatomic_PrincipalCrossSectionBlock.py )
 add_python_test( photoatomic.IncoherentScatteringFunctionBlock photoatomic/Test_ACEtk_photoatomic_IncoherentScatteringFunctionBlock.py )
 add_python_test( photoatomic.CoherentFormFactorBlock           photoatomic/Test_ACEtk_photoatomic_CoherentFormFactorBlock.py )

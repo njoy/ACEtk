@@ -1,20 +1,20 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotonuclearSecondaryParticleLocatorBlock = block::PhotonuclearSecondaryParticleLocatorBlock;
+using SecondaryParticleLocatorBlock = photonuclear::SecondaryParticleLocatorBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotonuclearSecondaryParticleLocatorBlock& );
+void verifyChunk( const SecondaryParticleLocatorBlock& );
 
-SCENARIO( "PhotonuclearSecondaryParticleLocatorBlock" ) {
+SCENARIO( "SecondaryParticleLocatorBlock" ) {
 
-  GIVEN( "valid data for a PhotonuclearSecondaryParticleLocatorBlock instance" ) {
+  GIVEN( "valid data for a SecondaryParticleLocatorBlock instance" ) {
 
     std::vector< double > xss = chunk();
 
@@ -53,11 +53,11 @@ SCENARIO( "PhotonuclearSecondaryParticleLocatorBlock" ) {
           863658,              863659 }
       };
 
-      PhotonuclearSecondaryParticleLocatorBlock chunk( std::move( types ),
+      SecondaryParticleLocatorBlock chunk( std::move( types ),
                                                        std::move( numbers ),
                                                        std::move( locators ) );
 
-      THEN( "a PhotonuclearSecondaryParticleLocatorBlock can be constructed and members "
+      THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
         verifyChunk( chunk );
@@ -75,9 +75,9 @@ SCENARIO( "PhotonuclearSecondaryParticleLocatorBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      PhotonuclearSecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
 
-      THEN( "a PhotonuclearSecondaryParticleLocatorBlock can be constructed and members "
+      THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
         verifyChunk( chunk );
@@ -124,7 +124,7 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotonuclearSecondaryParticleLocatorBlock& chunk ) {
+void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
 
   CHECK( false == chunk.empty() );
   CHECK( 84 == chunk.length() );

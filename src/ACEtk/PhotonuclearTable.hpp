@@ -5,11 +5,11 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/photonuclear/PrincipalCrossSectionBlock.hpp"
 #include "ACEtk/block/ReactionNumberBlock.hpp"
 #include "ACEtk/block/ReactionQValueBlock.hpp"
 #include "ACEtk/block/CrossSectionBlock.hpp"
-#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
 #include "ACEtk/block/CrossSectionData.hpp"
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
@@ -28,12 +28,12 @@ namespace ACEtk {
 class PhotonuclearTable : protected Table {
 
   /* fields */
-  block::ESZU eszu_;
+  photonuclear::ESZU eszu_;
   block::MTR mtr_;
   block::LQR lqr_;
   block::SIG sig_;
 
-  std::optional< block::IXSU > ixsu_;
+  std::optional< photonuclear::IXSU > ixsu_;
   std::vector< block::CrossSectionData > pxs_;
   std::vector< block::CrossSectionData > phn_;
   std::vector< block::MTRH > mtrh_;
@@ -157,12 +157,12 @@ public:
   /**
    *  @brief Return the principal cross section block
    */
-  const block::ESZU& ESZ() const { return this->eszu_; }
+  const photonuclear::ESZU& ESZ() const { return this->eszu_; }
 
   /**
    *  @brief Return the principal cross section block
    */
-  const block::ESZU& principalCrossSectionBlock() const { return this->ESZ(); }
+  const photonuclear::ESZU& principalCrossSectionBlock() const { return this->ESZ(); }
 
   /**
    *  @brief Return the reaction number block
@@ -197,12 +197,12 @@ public:
   /**
    *  @brief Return the secondary particle information and locator block
    */
-  const std::optional< block::IXSU >& IXS() const { return this->ixsu_; }
+  const std::optional< photonuclear::IXSU >& IXS() const { return this->ixsu_; }
 
   /**
    *  @brief Return the secondary particle information and locator block
    */
-  const std::optional< block::IXSU >& secondaryParticleLocatorBlock() const {
+  const std::optional< photonuclear::IXSU >& secondaryParticleLocatorBlock() const {
 
     return this->IXS();
   }

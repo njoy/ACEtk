@@ -85,7 +85,7 @@ PhotonuclearTable& operator=( PhotonuclearTable&& base ) {
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
  */
 PhotonuclearTable( unsigned int z, unsigned int a, HeaderVariant header,
-                   block::ESZU eszu, block::MTR mtr, block::LQR lqr,
+                   photonuclear::ESZU eszu, block::MTR mtr, block::LQR lqr,
                    block::SIG sig,
                    std::optional< std::vector< unsigned int > > ptype,
                    std::optional< std::vector< block::CrossSectionData > > pxs,

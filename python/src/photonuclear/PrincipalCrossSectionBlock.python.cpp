@@ -3,19 +3,19 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotonuclearPrincipalCrossSectionBlock.hpp"
+#include "ACEtk/photonuclear/PrincipalCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photonuclear {
 
-void wrapPhotonuclearPrincipalCrossSectionBlock( python::module& module, python::module& ) {
+void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotonuclearPrincipalCrossSectionBlock;
+  using Block = njoy::ACEtk::photonuclear::PrincipalCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotonuclearPrincipalCrossSectionBlock( python::module& module, python:
   python::class_< Block > block(
 
     module,
-    "PhotonuclearPrincipalCrossSectionBlock",
+    "PrincipalCrossSectionBlock",
     "The photoatomic ESZG block with the principal cross sections\n\n"
-    "The PhotonuclearPrincipalCrossSectionBlock class contains 3 or 4 arrays of the\n"
-    "same length:\n"
+    "The PrincipalCrossSectionBlock class contains 3 or 4 arrays of the same\n"
+    "length:\n"
     "  - the energy points\n"
     "  - the total cross section\n"
     "  - the elastic scattering cross section (optional)\n"
@@ -108,4 +108,4 @@ void wrapPhotonuclearPrincipalCrossSectionBlock( python::module& module, python:
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photonuclear namespace

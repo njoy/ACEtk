@@ -20,7 +20,7 @@ generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
 }
 
 Data generateData( unsigned int z, unsigned int a,
-                   block::ESZU&& eszu,  block::MTR&& mtr,
+                   photonuclear::ESZU&& eszu,  block::MTR&& mtr,
                    block::LQR&& lqr, block::SIG&& sig,
                    std::optional< std::vector< unsigned int > > ptype,
                    std::optional< std::vector< block::CrossSectionData > > pxs,
@@ -110,8 +110,8 @@ Data generateData( unsigned int z, unsigned int a,
       xss.insert( xss.end(), dlwh.value()[index].begin(), dlwh.value()[index].end() );
     }
 
-    block::IXSU locators( std::move( ptype.value() ), std::move( numbers ),
-                          std::move( ixs ) );
+    photonuclear::IXSU locators( std::move( ptype.value() ), std::move( numbers ),
+                                 std::move( ixs ) );
     xss.insert( xss.begin() + ixs_position, locators.begin(), locators.end() );
   }
 

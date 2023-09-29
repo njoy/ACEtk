@@ -99,9 +99,9 @@ Data generateData( unsigned int z,
   xss.insert( xss.end(), jinc.begin(), jinc.end() );
   jxs[2] = xss.size() + 1;
   xss.insert( xss.end(), jcoh.begin(), jcoh.end() );
+  jxs[3] = xss.size() + 1;
   if ( jflo.has_value() ) {
 
-    jxs[3] = xss.size() + 1;
     xss.insert( xss.end(), jflo->begin(), jflo->end() );
   }
   jxs[4] = xss.size() + 1;

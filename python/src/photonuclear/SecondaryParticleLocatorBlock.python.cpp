@@ -3,19 +3,19 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace photonuclear {
 
-void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module& module, python::module& ) {
+void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotonuclearSecondaryParticleLocatorBlock;
+  using Block = njoy::ACEtk::photonuclear::SecondaryParticleLocatorBlock;
 
   // wrap views created by this block
 
@@ -23,10 +23,10 @@ void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module& module, pyth
   python::class_< Block > block(
 
     module,
-    "PhotonuclearSecondaryParticleLocatorBlock",
+    "SecondaryParticleLocatorBlock",
     "The photonuclear IXSU block with the secondary particle information and locators\n\n"
-    "The PhotonuclearSecondaryParticleLocatorBlock class contains a particle type,\n"
-    "a number of reactions and 10 locators for each secondary particle type.\n\n"
+    "The SecondaryParticleLocatorBlock class contains a particle type, a number\n"
+    "of reactions and 10 locators for each secondary particle type.\n\n"
     "The number of available available particle types is stored in NXS(5)."
   );
 
@@ -202,4 +202,4 @@ void wrapPhotonuclearSecondaryParticleLocatorBlock( python::module& module, pyth
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // photonuclear namespace

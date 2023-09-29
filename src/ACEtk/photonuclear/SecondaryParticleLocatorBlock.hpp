@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BLOCK_PHOTONUCLEARSECONDARYPARTICLELOCATORBLOCK
-#define NJOY_ACETK_BLOCK_PHOTONUCLEARSECONDARYPARTICLELOCATORBLOCK
+#ifndef NJOY_ACETK_PHOTONUCLEAR_SECONDARYPARTICLELOCATORBLOCK
+#define NJOY_ACETK_PHOTONUCLEAR_SECONDARYPARTICLELOCATORBLOCK
 
 // system includes
 
@@ -8,31 +8,31 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace photonuclear {
 
 /**
  *  @class
  *  @brief The photonuclear IXSU block with the secondary particle information
  *         and locators
  *
- *  The PhotonuclearSecondaryParticleLocatorBlock class contains a particle type,
- *  a number of reactions and 10 locators for each secondary particle type.
+ *  The SecondaryParticleLocatorBlock class contains a particle type, a number
+ *  of reactions and 10 locators for each secondary particle type.
  *
  *  The number of available particle types is stored in NXS(5).
  */
-class PhotonuclearSecondaryParticleLocatorBlock : protected details::Base {
+class SecondaryParticleLocatorBlock : protected block::details::Base {
 
   /* fields */
   unsigned int ntype_ = 0;
 
   /* auxiliary functions */
-  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/generateXSS.hpp"
-  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/verifySize.hpp"
+  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/generateXSS.hpp"
+  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/verifySize.hpp"
 
 public:
 
   /* constructor */
-  #include "ACEtk/block/PhotonuclearSecondaryParticleLocatorBlock/src/ctor.hpp"
+  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/ctor.hpp"
 
   /* methods */
 
@@ -219,9 +219,9 @@ public:
   using Base::end;
 };
 
-using IXSU = PhotonuclearSecondaryParticleLocatorBlock;
+using IXSU = SecondaryParticleLocatorBlock;
 
-} // block namespace
+} // photonuclear namespace
 } // ACEtk namespace
 } // njoy namespace
 
