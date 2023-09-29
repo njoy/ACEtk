@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/EnergyDependentWattSpectrum.hpp"
+#include "ACEtk/continuous/EnergyDependentWattSpectrum.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

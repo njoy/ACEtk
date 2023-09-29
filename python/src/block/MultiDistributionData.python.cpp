@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/MultiDistributionData.hpp"
+#include "ACEtk/continuous/MultiDistributionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/DelayedNeutronPrecursorData.hpp"
+#include "ACEtk/continuous/DelayedNeutronPrecursorData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

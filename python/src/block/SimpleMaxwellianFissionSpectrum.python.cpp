@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/SimpleMaxwellianFissionSpectrum.hpp"
+#include "ACEtk/continuous/SimpleMaxwellianFissionSpectrum.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

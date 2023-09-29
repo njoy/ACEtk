@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/TwoBodyTransferDistribution.hpp"
+#include "ACEtk/continuous/TwoBodyTransferDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/TabulatedAngleEnergyDistribution.hpp"
+#include "ACEtk/continuous/TabulatedAngleEnergyDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

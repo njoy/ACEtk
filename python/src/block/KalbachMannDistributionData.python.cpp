@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/KalbachMannDistributionData.hpp"
+#include "ACEtk/continuous/KalbachMannDistributionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

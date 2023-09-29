@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/TabulatedMultiplicity.hpp"
+#include "ACEtk/continuous/TabulatedMultiplicity.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

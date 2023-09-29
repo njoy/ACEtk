@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ParameterData.hpp"
+#include "ACEtk/continuous/ParameterData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

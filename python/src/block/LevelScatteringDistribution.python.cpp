@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/LevelScatteringDistribution.hpp"
+#include "ACEtk/continuous/LevelScatteringDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

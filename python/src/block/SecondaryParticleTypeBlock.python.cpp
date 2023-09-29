@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleTypeBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

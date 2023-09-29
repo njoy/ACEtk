@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/continuous/CrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

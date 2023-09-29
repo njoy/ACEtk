@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/EvaporationSpectrum.hpp"
+#include "ACEtk/continuous/EvaporationSpectrum.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

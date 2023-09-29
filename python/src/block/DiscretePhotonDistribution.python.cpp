@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/DiscretePhotonDistribution.hpp"
+#include "ACEtk/continuous/DiscretePhotonDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

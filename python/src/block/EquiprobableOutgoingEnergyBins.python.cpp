@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/EquiprobableOutgoingEnergyBins.hpp"
+#include "ACEtk/continuous/EquiprobableOutgoingEnergyBins.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

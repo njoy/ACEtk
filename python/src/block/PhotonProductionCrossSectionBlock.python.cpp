@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
+#include "ACEtk/continuous/PhotonProductionCrossSectionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

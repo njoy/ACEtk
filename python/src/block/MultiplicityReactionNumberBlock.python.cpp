@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
+#include "ACEtk/continuous/MultiplicityReactionNumberBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

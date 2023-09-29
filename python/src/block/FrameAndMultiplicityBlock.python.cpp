@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
+#include "ACEtk/continuous/FrameAndMultiplicityBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

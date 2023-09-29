@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/AngularDistributionData.hpp"
+#include "ACEtk/continuous/AngularDistributionData.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

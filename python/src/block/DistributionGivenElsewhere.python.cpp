@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/DistributionGivenElsewhere.hpp"
+#include "ACEtk/continuous/DistributionGivenElsewhere.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

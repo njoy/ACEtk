@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/ReactionQValueBlock.hpp"
+#include "ACEtk/continuous/ReactionQValueBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

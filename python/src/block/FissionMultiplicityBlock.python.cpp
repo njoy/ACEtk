@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/FissionMultiplicityBlock.hpp"
+#include "ACEtk/continuous/FissionMultiplicityBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

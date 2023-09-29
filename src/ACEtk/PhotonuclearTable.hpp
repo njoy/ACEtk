@@ -6,15 +6,15 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/photonuclear/PrincipalCrossSectionBlock.hpp"
-#include "ACEtk/block/ReactionNumberBlock.hpp"
-#include "ACEtk/block/ReactionQValueBlock.hpp"
-#include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/continuous/ReactionNumberBlock.hpp"
+#include "ACEtk/continuous/ReactionQValueBlock.hpp"
+#include "ACEtk/continuous/CrossSectionBlock.hpp"
 #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
-#include "ACEtk/block/CrossSectionData.hpp"
-#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
-#include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
+#include "ACEtk/continuous/CrossSectionData.hpp"
+#include "ACEtk/continuous/FrameAndMultiplicityBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleProductionCrossSectionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleAngularDistributionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleEnergyDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {

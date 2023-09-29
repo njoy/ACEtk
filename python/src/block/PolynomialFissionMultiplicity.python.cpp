@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/PolynomialFissionMultiplicity.hpp"
+#include "ACEtk/continuous/PolynomialFissionMultiplicity.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

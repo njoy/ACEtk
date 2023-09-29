@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/NBodyPhaseSpaceDistribution.hpp"
+#include "ACEtk/continuous/NBodyPhaseSpaceDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

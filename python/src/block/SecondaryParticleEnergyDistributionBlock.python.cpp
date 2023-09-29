@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleEnergyDistributionBlock.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/TabulatedSecondaryParticleMultiplicity.hpp"
+#include "ACEtk/continuous/TabulatedSecondaryParticleMultiplicity.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

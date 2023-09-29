@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/DistributionProbability.hpp"
+#include "ACEtk/continuous/DistributionProbability.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 

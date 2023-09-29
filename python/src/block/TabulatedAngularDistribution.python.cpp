@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/block/TabulatedAngularDistribution.hpp"
+#include "ACEtk/continuous/TabulatedAngularDistribution.hpp"
 #include "views.hpp"
 #include "definitions.hpp"
 
