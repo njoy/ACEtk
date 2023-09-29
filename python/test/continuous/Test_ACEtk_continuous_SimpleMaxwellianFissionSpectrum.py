@@ -4,11 +4,11 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.continuous import EnergyDistributionType
-from ACEtk.continuous import EvaporationSpectrum
+from ACEtk import EnergyDistributionType
+from ACEtk.continuous import SimpleMaxwellianFissionSpectrum
 
-class Test_ACEtk_EvaporationSpectrum( unittest.TestCase ) :
-    """Unit test for the EvaporationSpectrum class."""
+class Test_ACEtk_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
+    """Unit test for the SimpleMaxwellianFissionSpectrum class."""
 
     chunk = [ 0,
               4, 1e-5, 1., 10., 20., 1., 2., 3., 4.,
@@ -21,10 +21,10 @@ class Test_ACEtk_EvaporationSpectrum( unittest.TestCase ) :
             # verify content
             self.assertEqual( False, chunk.empty )
             self.assertEqual( 11, chunk.length )
-            self.assertEqual( "EvaporationSpectrum", chunk.name )
+            self.assertEqual( "SimpleMaxwellianFissionSpectrum", chunk.name )
 
-            self.assertEqual( EnergyDistributionType.Evaporation, chunk.LAW )
-            self.assertEqual( EnergyDistributionType.Evaporation, chunk.type )
+            self.assertEqual( EnergyDistributionType.SimpleMaxwellianFission, chunk.LAW )
+            self.assertEqual( EnergyDistributionType.SimpleMaxwellianFission, chunk.type )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
@@ -68,7 +68,7 @@ class Test_ACEtk_EvaporationSpectrum( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = EvaporationSpectrum(
+        chunk = SimpleMaxwellianFissionSpectrum(
                     boundaries = [], interpolants = [],
                     energies = [ 1e-5, 1., 10., 20. ],
                     temperatures = [ 1., 2., 3., 4. ],

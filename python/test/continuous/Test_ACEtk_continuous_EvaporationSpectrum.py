@@ -4,15 +4,15 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.continuous import EnergyDistributionType
-from ACEtk.continuous import GeneralEvaporationSpectrum
+from ACEtk import EnergyDistributionType
+from ACEtk.continuous import EvaporationSpectrum
 
-class Test_ACEtk_GeneralEvaporationSpectrum( unittest.TestCase ) :
-    """Unit test for the GeneralEvaporationSpectrum class."""
+class Test_ACEtk_EvaporationSpectrum( unittest.TestCase ) :
+    """Unit test for the EvaporationSpectrum class."""
 
     chunk = [ 0,
               4, 1e-5, 1., 10., 20., 1., 2., 3., 4.,
-              3, 5., 6., 7. ]
+              1.5e+6 ]
 
     def test_component( self ) :
 
@@ -20,11 +20,11 @@ class Test_ACEtk_GeneralEvaporationSpectrum( unittest.TestCase ) :
 
             # verify content
             self.assertEqual( False, chunk.empty )
-            self.assertEqual( 14, chunk.length )
-            self.assertEqual( "GeneralEvaporationSpectrum", chunk.name )
+            self.assertEqual( 11, chunk.length )
+            self.assertEqual( "EvaporationSpectrum", chunk.name )
 
-            self.assertEqual( EnergyDistributionType.GeneralEvaporation, chunk.LAW )
-            self.assertEqual( EnergyDistributionType.GeneralEvaporation, chunk.type )
+            self.assertEqual( EnergyDistributionType.Evaporation, chunk.LAW )
+            self.assertEqual( EnergyDistributionType.Evaporation, chunk.type )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
@@ -58,13 +58,8 @@ class Test_ACEtk_GeneralEvaporationSpectrum( unittest.TestCase ) :
             self.assertAlmostEqual( 1e-5, chunk.minimum_incident_energy )
             self.assertAlmostEqual( 20., chunk.maximum_incident_energy )
 
-            self.assertEqual( 3, chunk.NET )
-            self.assertEqual( 2, chunk.number_bins )
-
-            self.assertEqual( 3, len( chunk.bins ) )
-            self.assertAlmostEqual( 5., chunk.bins[0] )
-            self.assertAlmostEqual( 6., chunk.bins[1] )
-            self.assertAlmostEqual( 7., chunk.bins[2] )
+            self.assertEqual( 1.5e+6, chunk.U )
+            self.assertEqual( 1.5e+6, chunk.restriction_energy )
 
             # verify the xss array
             xss = chunk.xss_array
@@ -73,11 +68,11 @@ class Test_ACEtk_GeneralEvaporationSpectrum( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = GeneralEvaporationSpectrum(
+        chunk = EvaporationSpectrum(
                     boundaries = [], interpolants = [],
                     energies = [ 1e-5, 1., 10., 20. ],
                     temperatures = [ 1., 2., 3., 4. ],
-                    bins = [ 5., 6., 7. ] )
+                    energy = 1.5e+6 )
 
         verify_chunk( self, chunk )
 

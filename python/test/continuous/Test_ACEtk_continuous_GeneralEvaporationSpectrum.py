@@ -4,15 +4,15 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.continuous import EnergyDistributionType
-from ACEtk.continuous import SimpleMaxwellianFissionSpectrum
+from ACEtk import EnergyDistributionType
+from ACEtk.continuous import GeneralEvaporationSpectrum
 
-class Test_ACEtk_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
-    """Unit test for the SimpleMaxwellianFissionSpectrum class."""
+class Test_ACEtk_GeneralEvaporationSpectrum( unittest.TestCase ) :
+    """Unit test for the GeneralEvaporationSpectrum class."""
 
     chunk = [ 0,
               4, 1e-5, 1., 10., 20., 1., 2., 3., 4.,
-              1.5e+6 ]
+              3, 5., 6., 7. ]
 
     def test_component( self ) :
 
@@ -20,11 +20,11 @@ class Test_ACEtk_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
 
             # verify content
             self.assertEqual( False, chunk.empty )
-            self.assertEqual( 11, chunk.length )
-            self.assertEqual( "SimpleMaxwellianFissionSpectrum", chunk.name )
+            self.assertEqual( 14, chunk.length )
+            self.assertEqual( "GeneralEvaporationSpectrum", chunk.name )
 
-            self.assertEqual( EnergyDistributionType.SimpleMaxwellianFission, chunk.LAW )
-            self.assertEqual( EnergyDistributionType.SimpleMaxwellianFission, chunk.type )
+            self.assertEqual( EnergyDistributionType.GeneralEvaporation, chunk.LAW )
+            self.assertEqual( EnergyDistributionType.GeneralEvaporation, chunk.type )
 
             self.assertEqual( 0, chunk.interpolation_data.NB )
             self.assertEqual( 0, chunk.interpolation_data.number_interpolation_regions )
@@ -58,8 +58,13 @@ class Test_ACEtk_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
             self.assertAlmostEqual( 1e-5, chunk.minimum_incident_energy )
             self.assertAlmostEqual( 20., chunk.maximum_incident_energy )
 
-            self.assertEqual( 1.5e+6, chunk.U )
-            self.assertEqual( 1.5e+6, chunk.restriction_energy )
+            self.assertEqual( 3, chunk.NET )
+            self.assertEqual( 2, chunk.number_bins )
+
+            self.assertEqual( 3, len( chunk.bins ) )
+            self.assertAlmostEqual( 5., chunk.bins[0] )
+            self.assertAlmostEqual( 6., chunk.bins[1] )
+            self.assertAlmostEqual( 7., chunk.bins[2] )
 
             # verify the xss array
             xss = chunk.xss_array
@@ -68,11 +73,11 @@ class Test_ACEtk_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
                 self.assertAlmostEqual( self.chunk[index], xss[index] )
 
         # the data is given explicitly
-        chunk = SimpleMaxwellianFissionSpectrum(
+        chunk = GeneralEvaporationSpectrum(
                     boundaries = [], interpolants = [],
                     energies = [ 1e-5, 1., 10., 20. ],
                     temperatures = [ 1., 2., 3., 4. ],
-                    energy = 1.5e+6 )
+                    bins = [ 5., 6., 7. ] )
 
         verify_chunk( self, chunk )
 

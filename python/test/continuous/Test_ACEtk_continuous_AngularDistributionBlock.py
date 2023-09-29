@@ -10,7 +10,7 @@ from ACEtk.continuous import FullyIsotropicDistribution
 from ACEtk.continuous import AngularDistributionData
 from ACEtk.continuous import IsotropicAngularDistribution
 from ACEtk.continuous import TabulatedAngularDistribution
-from ACEtk.continuous import AngularDistributionType
+from ACEtk import AngularDistributionType
 
 class Test_ACEtk_AngularDistributionBlock( unittest.TestCase ) :
     """Unit test for the AngularDistributionBlock class."""

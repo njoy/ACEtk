@@ -11,7 +11,7 @@ from ACEtk.continuous import AngularDistributionData
 from ACEtk.continuous import IsotropicAngularDistribution
 from ACEtk.continuous import EquiprobableAngularBins
 from ACEtk.continuous import TabulatedAngularDistribution
-from ACEtk.continuous import AngularDistributionType
+from ACEtk import AngularDistributionType
 
 class Test_ACEtk_SecondaryParticleAngularDistributionBlock( unittest.TestCase ) :
     """Unit test for the SecondaryParticleAngularDistributionBlock class."""

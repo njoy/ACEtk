@@ -5,7 +5,7 @@ import unittest
 
 # local imports
 from ACEtk.continuous import FrameAndMultiplicityBlock
-from ACEtk.continuous import ReferenceFrame
+from ACEtk import ReferenceFrame
 
 class Test_ACEtk_FrameAndMultiplicityBlock( unittest.TestCase ) :
     """Unit test for the FrameAndMultiplicityBlock class."""

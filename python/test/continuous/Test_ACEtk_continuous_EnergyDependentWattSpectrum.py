@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import EnergyDependentWattSpectrum
 from ACEtk.continuous import ParameterData
-from ACEtk.continuous import EnergyDistributionType
+from ACEtk import EnergyDistributionType
 
 class Test_ACEtk_EnergyDependentWattSpectrum( unittest.TestCase ) :
     """Unit test for the EnergyDependentWattSpectrum class."""

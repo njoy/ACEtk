@@ -4,7 +4,7 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.continuous import EnergyDistributionType
+from ACEtk import EnergyDistributionType
 from ACEtk.continuous import LevelScatteringDistribution
 
 class Test_ACEtk_LevelScatteringDistribution( unittest.TestCase ) :

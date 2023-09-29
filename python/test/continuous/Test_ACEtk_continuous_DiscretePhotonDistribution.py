@@ -4,7 +4,7 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.continuous import EnergyDistributionType
+from ACEtk import EnergyDistributionType
 from ACEtk.continuous import DiscretePhotonDistribution
 
 class Test_ACEtk_DiscretePhotonDistribution( unittest.TestCase ) :

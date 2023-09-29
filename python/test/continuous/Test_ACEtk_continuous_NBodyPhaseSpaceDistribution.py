@@ -4,7 +4,7 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.continuous import EnergyDistributionType
+from ACEtk import EnergyDistributionType
 from ACEtk.continuous import NBodyPhaseSpaceDistribution
 
 class Test_ACEtk_NBodyPhaseSpaceDistribution( unittest.TestCase ) :

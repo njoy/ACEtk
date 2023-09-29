@@ -4,7 +4,7 @@ import unittest
 # third party imports
 
 # local imports
-from ACEtk.continuous import EnergyDistributionType
+from ACEtk import EnergyDistributionType
 from ACEtk.continuous import MultiDistributionData
 from ACEtk.continuous import DistributionProbability
 from ACEtk.continuous import KalbachMannDistributionData

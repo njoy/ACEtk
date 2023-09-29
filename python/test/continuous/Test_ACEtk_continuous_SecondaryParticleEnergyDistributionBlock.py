@@ -8,8 +8,8 @@ from ACEtk.continuous import SecondaryParticleEnergyDistributionBlock
 from ACEtk.continuous import TabulatedKalbachMannDistribution
 from ACEtk.continuous import LevelScatteringDistribution
 from ACEtk.continuous import KalbachMannDistributionData
-from ACEtk.continuous import EnergyDistributionType
-from ACEtk.continuous import ReferenceFrame
+from ACEtk import EnergyDistributionType
+from ACEtk import ReferenceFrame
 
 class Test_ACEtk_SecondaryParticleEnergyDistributionBlock( unittest.TestCase ) :
     """Unit test for the SecondaryParticleEnergyDistributionBlock class."""
