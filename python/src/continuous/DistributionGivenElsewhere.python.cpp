@@ -10,7 +10,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace continuous {
 
 void wrapDistributionGivenElsewhere( python::module& module, python::module& ) {
 
@@ -40,4 +40,4 @@ void wrapDistributionGivenElsewhere( python::module& module, python::module& ) {
   );
 }
 
-} // block namespace
+} // continuous namespace

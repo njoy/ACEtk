@@ -83,6 +83,7 @@ if(ACEtk.python)
       python/src/ReferenceFrame.python.cpp
       python/src/AngularDistributionType.python.cpp
       python/src/EnergyDistributionType.python.cpp
+      python/src/continuous.python.cpp
       python/src/continuous/InterpolationData.python.cpp
       python/src/continuous/CrossSectionData.python.cpp
       python/src/continuous/PrincipalCrossSectionBlock.python.cpp

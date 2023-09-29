@@ -10,7 +10,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace continuous {
 
 void wrapKalbachMannDistributionData( python::module& module, python::module& ) {
 
@@ -213,4 +213,4 @@ void wrapKalbachMannDistributionData( python::module& module, python::module& ) 
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // continuous namespace

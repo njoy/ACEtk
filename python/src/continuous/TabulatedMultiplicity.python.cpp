@@ -10,7 +10,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace continuous {
 
 void wrapTabulatedMultiplicity( python::module& module, python::module& ) {
 
@@ -130,4 +130,4 @@ void wrapTabulatedMultiplicity( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // continuous namespace

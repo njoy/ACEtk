@@ -10,7 +10,7 @@
 // namespace aliases
 namespace python = pybind11;
 
-namespace block {
+namespace continuous {
 
 void wrapEvaporationSpectrum( python::module& module, python::module& ) {
 
@@ -162,4 +162,4 @@ void wrapEvaporationSpectrum( python::module& module, python::module& ) {
   addStandardBlockDefinitions< Block >( block );
 }
 
-} // block namespace
+} // continuous namespace
