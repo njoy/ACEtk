@@ -1,10 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
-#include "ACEtk/fromFile.hpp"
+// what we are testing
 #include "ACEtk/PhotonuclearTable.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -40,7 +43,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -50,7 +53,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -60,7 +63,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -70,7 +73,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -80,7 +83,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -126,7 +129,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -136,7 +139,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -146,7 +149,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -156,7 +159,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -166,7 +169,7 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -176,7 +179,7 @@ SCENARIO( "PhotonuclearTable" ){
 void verifyChunk( const PhotonuclearTable& chunk ) {
 
   CHECK( "94239.31u" == chunk.ZAID() );
-  CHECK( 0.0 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 0.0, WithinRel( chunk.temperature() ) );
 
   CHECK( 1038009 == chunk.length() );
   CHECK( 94239 == chunk.ZA() );
@@ -194,11 +197,11 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 0 == chunk.ESZ().elastic().size() );
   CHECK( 90 == chunk.ESZ().heating().size() );
 
-  CHECK( 1. == Approx( chunk.ESZ().energies().front() ) );
-  CHECK( 200. == Approx( chunk.ESZ().energies().back() ) );
+  CHECK_THAT( 1., WithinRel( chunk.ESZ().energies().front() ) );
+  CHECK_THAT( 200., WithinRel( chunk.ESZ().energies().back() ) );
 
-  CHECK( 1. == Approx( chunk.ESZ().XSS( 1 ) ) );
-  CHECK( 90 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
+  CHECK_THAT( 1., WithinRel( chunk.ESZ().XSS( 1 ) ) );
+  CHECK_THAT( 200., WithinRel( chunk.ESZ().XSS( 90 ) ) );
 
   // MTR block
   CHECK( false == chunk.MTR().empty() );
@@ -222,11 +225,11 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   // LQR block
   CHECK( false == chunk.LQR().empty() );
   CHECK( 2 == chunk.LQR().QValues().size() );
-  CHECK( 0. == chunk.LQR().QValues().front() );
-  CHECK( 199.188 == Approx( chunk.LQR().QValues().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.LQR().QValues().front() ) );
+  CHECK_THAT( 199.188, WithinRel( chunk.LQR().QValues().back() ) );
 
-  CHECK( 0. == chunk.LQR().QValue( 1 ) );
-  CHECK( 199.188 == Approx( chunk.LQR().QValue( 2 ) ) );
+  CHECK_THAT( 0., WithinRel( chunk.LQR().QValue( 1 ) ) );
+  CHECK_THAT( 199.188, WithinRel( chunk.LQR().QValue( 2 ) ) );
 
   // SIG block
   CHECK( false == chunk.SIG().empty() );
@@ -247,19 +250,19 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 3 == xs2.energyIndex() );
   CHECK( 90 == xs1.numberValues() );
   CHECK( 88 == xs2.numberValues() );
-  CHECK( 0. == Approx( xs1.crossSections().front() ) );
-  CHECK( 3.35584000000E-04 == Approx( xs1.crossSections().back() ) );
-  CHECK( 0. == Approx( xs2.crossSections().front() ) );
-  CHECK( 6.65666700000E-03 == Approx( xs2.crossSections().back() ) );
+  CHECK_THAT( 0., WithinRel( xs1.crossSections().front() ) );
+  CHECK_THAT( 3.35584000000E-04, WithinRel( xs1.crossSections().back() ) );
+  CHECK_THAT( 0., WithinRel( xs2.crossSections().front() ) );
+  CHECK_THAT( 6.65666700000E-03, WithinRel( xs2.crossSections().back() ) );
 
   auto data1 = chunk.SIG().crossSections( 1 );
   auto data2 = chunk.SIG().crossSections( 2 );
   CHECK( 90 == data1.size() );
   CHECK( 88 == data2.size() );
-  CHECK( 0. == Approx( data1.front() ) );
-  CHECK( 3.35584000000E-04 == Approx( data1.back() ) );
-  CHECK( 0. == Approx( data2.front() ) );
-  CHECK( 6.65666700000E-03 == Approx( data2.back() ) );
+  CHECK_THAT( 0., WithinRel( data1.front() ) );
+  CHECK_THAT( 3.35584000000E-04, WithinRel( data1.back() ) );
+  CHECK_THAT( 0., WithinRel( data2.front() ) );
+  CHECK_THAT( 6.65666700000E-03, WithinRel( data2.back() ) );
 
   // IXSU block
   CHECK( false == chunk.IXS()->empty() );
@@ -310,16 +313,16 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
 
   CHECK( 1 == chunk.PXS(1).energyIndex() );
   CHECK( 90 == chunk.PXS(1).numberValues() );
-  CHECK( 0.00000000000E+00 == Approx( chunk.PXS(1).crossSections().front() ) );
-  CHECK( 1.21479700000E-01 == Approx( chunk.PXS(1).crossSections().back() ) );
+  CHECK_THAT( 0.00000000000E+00, WithinRel( chunk.PXS(1).crossSections().front() ) );
+  CHECK_THAT( 1.21479700000E-01, WithinRel( chunk.PXS(1).crossSections().back() ) );
 
   // PHN(1) block
   CHECK( false == chunk.PHN(1).empty() );
 
   CHECK( 1 == chunk.PHN(1).energyIndex() );
   CHECK( 90 == chunk.PHN(1).numberValues() );
-  CHECK( 0.00000000000E+00 == Approx( chunk.PHN(1).crossSections().front() ) );
-  CHECK( 7.91132000000E+01 == Approx( chunk.PHN(1).crossSections().back() ) );
+  CHECK_THAT( 0.00000000000E+00, WithinRel( chunk.PHN(1).crossSections().front() ) );
+  CHECK_THAT( 7.91132000000E+01, WithinRel( chunk.PHN(1).crossSections().back() ) );
 
   // MTRH(1) block
   CHECK( false == chunk.MTRH(1).empty() );
@@ -353,12 +356,12 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 84 == multiplicity.numberValues() );
 
   CHECK( 84 == multiplicity.energies().size() );
-  CHECK( 1.00000000000E+00 == Approx( multiplicity.energies().front() ) );
-  CHECK( 2.00000000000E+02 == Approx( multiplicity.energies().back() ) );
+  CHECK_THAT( 1.00000000000E+00, WithinRel( multiplicity.energies().front() ) );
+  CHECK_THAT( 2.00000000000E+02, WithinRel( multiplicity.energies().back() ) );
 
   CHECK( 84 == multiplicity.multiplicities().size() );
-  CHECK( 0.00000000000E+00 == Approx( multiplicity.multiplicities().front() ) );
-  CHECK( 1.26229500000E+02 == Approx( multiplicity.multiplicities().back() ) );
+  CHECK_THAT( 0.00000000000E+00, WithinRel( multiplicity.multiplicities().front() ) );
+  CHECK_THAT( 1.26229500000E+02, WithinRel( multiplicity.multiplicities().back() ) );
 
   multiplicity = chunk.SIGH(1).crossSectionData( 2 );
   CHECK( 6 == multiplicity.MFTYPE() );
@@ -372,12 +375,12 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 88 == multiplicity.numberValues() );
 
   CHECK( 88 == multiplicity.energies().size() );
-  CHECK( 1.00000000000E+00 == Approx( multiplicity.energies().front() ) );
-  CHECK( 2.00000000000E+02 == Approx( multiplicity.energies().back() ) );
+  CHECK_THAT( 1.00000000000E+00, WithinRel( multiplicity.energies().front() ) );
+  CHECK_THAT( 2.00000000000E+02, WithinRel( multiplicity.energies().back() ) );
 
   CHECK( 88 == multiplicity.multiplicities().size() );
-  CHECK( 1.94030000000E+00 == Approx( multiplicity.multiplicities().front() ) );
-  CHECK( 1.18857000000E+01 == Approx( multiplicity.multiplicities().back() ) );
+  CHECK_THAT( 1.94030000000E+00, WithinRel( multiplicity.multiplicities().front() ) );
+  CHECK_THAT( 1.18857000000E+01, WithinRel( multiplicity.multiplicities().back() ) );
 
   // ANDH(1) block
   CHECK( false == chunk.ANDH(1).empty() );
@@ -398,16 +401,16 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
 
   CHECK( 1 == chunk.PXS(7).energyIndex() );
   CHECK( 90 == chunk.PXS(7).numberValues() );
-  CHECK( 0.00000000000E+00 == Approx( chunk.PXS(7).crossSections().front() ) );
-  CHECK( 1.63503800000E-03 == Approx( chunk.PXS(7).crossSections().back() ) );
+  CHECK_THAT( 0.00000000000E+00, WithinRel( chunk.PXS(7).crossSections().front() ) );
+  CHECK_THAT( 1.63503800000E-03, WithinRel( chunk.PXS(7).crossSections().back() ) );
 
   // PHN(7) block
   CHECK( false == chunk.PHN(7).empty() );
 
   CHECK( 1 == chunk.PHN(7).energyIndex() );
   CHECK( 90 == chunk.PHN(7).numberValues() );
-  CHECK( 0.00000000000E+00 == Approx( chunk.PHN(7).crossSections().front() ) );
-  CHECK( 5.97042200000E+00 == Approx( chunk.PHN(7).crossSections().back() ) );
+  CHECK_THAT( 0.00000000000E+00, WithinRel( chunk.PHN(7).crossSections().front() ) );
+  CHECK_THAT( 5.97042200000E+00, WithinRel( chunk.PHN(7).crossSections().back() ) );
 
   // MTRH(7) block
   CHECK( false == chunk.MTRH(7).empty() );
@@ -438,12 +441,12 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 90 == multiplicity.numberValues() );
 
   CHECK( 90 == multiplicity.energies().size() );
-  CHECK( 1.00000000000E+00 == Approx( multiplicity.energies().front() ) );
-  CHECK( 2.00000000000E+02 == Approx( multiplicity.energies().back() ) );
+  CHECK_THAT( 1.00000000000E+00, WithinRel( multiplicity.energies().front() ) );
+  CHECK_THAT( 2.00000000000E+02, WithinRel( multiplicity.energies().back() ) );
 
   CHECK( 90 == multiplicity.multiplicities().size() );
-  CHECK( 0.00000000000E+00 == Approx( multiplicity.multiplicities().front() ) );
-  CHECK( 4.87221700000E+00 == Approx( multiplicity.multiplicities().back() ) );
+  CHECK_THAT( 5.08021000000E-19, WithinRel( multiplicity.multiplicities().front() ) );
+  CHECK_THAT( 4.87221700000E+00, WithinRel( multiplicity.multiplicities().back() ) );
 
   // ANDH(7) block
   CHECK( false == chunk.ANDH(7).empty() );

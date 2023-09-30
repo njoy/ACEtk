@@ -1,10 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
-#include "ACEtk/fromFile.hpp"
+// what we are testing
 #include "ACEtk/ThermalScatteringTable.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -41,7 +44,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -51,7 +54,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -61,7 +64,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -71,7 +74,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -81,7 +84,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -107,7 +110,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -117,7 +120,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -127,7 +130,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -137,7 +140,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -147,7 +150,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -178,7 +181,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -188,7 +191,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -198,7 +201,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -208,7 +211,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -218,7 +221,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -245,7 +248,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -255,7 +258,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -265,7 +268,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -275,7 +278,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -285,7 +288,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -316,7 +319,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -326,7 +329,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -336,7 +339,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -346,7 +349,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -356,7 +359,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -382,7 +385,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -392,7 +395,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -402,7 +405,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -412,7 +415,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -422,7 +425,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -453,7 +456,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -463,7 +466,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -473,7 +476,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -483,7 +486,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -493,7 +496,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -519,7 +522,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -529,7 +532,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -539,7 +542,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -549,7 +552,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -559,7 +562,7 @@ SCENARIO( "ThermalScatteringTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -569,7 +572,7 @@ SCENARIO( "ThermalScatteringTable" ){
 void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
 
   CHECK( "h-h2o.40t" == chunk.ZAID() );
-  CHECK( 2.53e-8 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 2.53e-8, WithinRel( chunk.temperature() ) );
 
   CHECK( 1643616 == chunk.length() );
   CHECK( 3 == chunk.IDPNI() );
@@ -594,12 +597,12 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
   CHECK( 118 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 118 == chunk.ITIE().energies().size() );
-  CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
-  CHECK( 1e-5 == Approx( chunk.ITIE().energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ITIE().energies().front() ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.ITIE().energies().back() ) );
 
   CHECK( 118 == chunk.ITIE().crossSections().size() );
-  CHECK( 500.5451 == Approx( chunk.ITIE().crossSections().front() ) );
-  CHECK( 20.53782 == Approx( chunk.ITIE().crossSections().back() ) );
+  CHECK_THAT( 500.5451, WithinRel( chunk.ITIE().crossSections().front() ) );
+  CHECK_THAT( 20.53782, WithinRel( chunk.ITIE().crossSections().back() ) );
 
   // ITXE block
   CHECK( false == chunk.ITXE().empty() );
@@ -629,7 +632,7 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
 void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
 
   CHECK( "zr-zrh.40t" == chunk.ZAID() );
-  CHECK( 2.53e-8 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 2.5507e-8, WithinRel( chunk.temperature() ) );
 
   CHECK( 1091556 == chunk.length() );
   CHECK( 3 == chunk.IDPNI() );
@@ -654,12 +657,12 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 91 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 91 == chunk.ITIE().energies().size() );
-  CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
-  CHECK( 9.5e-7 == Approx( chunk.ITIE().energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ITIE().energies().front() ) );
+  CHECK_THAT( 9.5e-7, WithinRel( chunk.ITIE().energies().back() ) );
 
   CHECK( 91 == chunk.ITIE().crossSections().size() );
-  CHECK( 2.619597 == Approx( chunk.ITIE().crossSections().front() ) );
-  CHECK( 5.3698962 == Approx( chunk.ITIE().crossSections().back() ) );
+  CHECK_THAT( 2.619597, WithinRel( chunk.ITIE().crossSections().front() ) );
+  CHECK_THAT( 5.3698962, WithinRel( chunk.ITIE().crossSections().back() ) );
 
   // ITXE block
   CHECK( false == chunk.ITXE().empty() );
@@ -686,12 +689,12 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 91 == chunk.ITCEI()->numberIncidentEnergies() );
 
   CHECK( 91 == chunk.ITCEI()->energies().size() );
-  CHECK( 1e-11 == Approx( chunk.ITCEI()->energies().front() ) );
-  CHECK( 9.5e-7 == Approx( chunk.ITCEI()->energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ITCEI()->energies().front() ) );
+  CHECK_THAT( 9.5e-7, WithinRel( chunk.ITCEI()->energies().back() ) );
 
   CHECK( 91 == chunk.ITCEI()->crossSections().size() );
-  CHECK( 6.337617 == Approx( chunk.ITCEI()->crossSections().front() ) );
-  CHECK( 0.82849246 == Approx( chunk.ITCEI()->crossSections().back() ) );
+  CHECK_THAT( 6.337617, WithinRel( chunk.ITCEI()->crossSections().front() ) );
+  CHECK_THAT( 0.82849246, WithinRel( chunk.ITCEI()->crossSections().back() ) );
 
   // ITCAI block
   CHECK( false == chunk.ITCAI()->empty() );
@@ -702,14 +705,14 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
   CHECK( 20 == chunk.ITCAI()->NC() );
   CHECK( 20 == chunk.ITCAI()->numberDiscreteCosines() );
 
-  CHECK( -.9499973 == Approx( chunk.ITCAI()->cosines( 1 )[0] ) );
-  CHECK( .99335678 == Approx( chunk.ITCAI()->cosines( 91 )[19] ) );
+  CHECK_THAT( -.9499973, WithinRel( chunk.ITCAI()->cosines( 1 )[0] ) );
+  CHECK_THAT( .99335678, WithinRel( chunk.ITCAI()->cosines( 91 )[19] ) );
 }
 
 void verifyChunkAl( const ThermalScatteringTable& chunk ) {
 
   CHECK( "al-27.40t" == chunk.ZAID() );
-  CHECK( 2.53e-8 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 2.53e-8, WithinRel( chunk.temperature() ) );
 
   CHECK( 1066414 == chunk.length() );
   CHECK( 3 == chunk.IDPNI() );
@@ -734,12 +737,12 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( 100 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 100 == chunk.ITIE().energies().size() );
-  CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
-  CHECK( 2.18e-6 == Approx( chunk.ITIE().energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ITIE().energies().front() ) );
+  CHECK_THAT( 2.18e-6, WithinRel( chunk.ITIE().energies().back() ) );
 
   CHECK( 100 == chunk.ITIE().crossSections().size() );
-  CHECK( 1.677347 == Approx( chunk.ITIE().crossSections().front() ) );
-  CHECK( 1.31533352198 == Approx( chunk.ITIE().crossSections().back() ) );
+  CHECK_THAT( 1.677347, WithinRel( chunk.ITIE().crossSections().front() ) );
+  CHECK_THAT( 1.31533352198, WithinRel( chunk.ITIE().crossSections().back() ) );
 
   // ITXE block
   CHECK( false == chunk.ITXE().empty() );
@@ -760,12 +763,12 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
   CHECK( 119 == chunk.ITCE()->numberIncidentEnergies() );
 
   CHECK( 119 == chunk.ITCE()->energies().size() );
-  CHECK( 3.759019e-9 == Approx( chunk.ITCE()->energies().front() ) );
-  CHECK( 5.813947e-7 == Approx( chunk.ITCE()->energies().back() ) );
+  CHECK_THAT( 3.759019e-9, WithinRel( chunk.ITCE()->energies().front() ) );
+  CHECK_THAT( 5.813947e-7, WithinRel( chunk.ITCE()->energies().back() ) );
 
   CHECK( 119 == chunk.ITCE()->crossSections().size() );
-  CHECK( 5.10384187842E-09 == Approx( chunk.ITCE()->crossSections().front() ) );
-  CHECK( 7.15617224626E-08 == Approx( chunk.ITCE()->crossSections().back() ) );
+  CHECK_THAT( 5.10384187842E-09, WithinRel( chunk.ITCE()->crossSections().front() ) );
+  CHECK_THAT( 7.15617224626E-08, WithinRel( chunk.ITCE()->crossSections().back() ) );
 
   // ITCA block
   CHECK( false == chunk.ITCA().has_value() );
@@ -780,7 +783,7 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
 void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
 
   CHECK( "d-lid.10t" == chunk.ZAID() );
-  CHECK( 2.53e-8 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 3.4469e-8, WithinRel( chunk.temperature() ) );
 
   CHECK( 52095 == chunk.length() );
   CHECK( 3 == chunk.IDPNI() );
@@ -805,12 +808,12 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 117 == chunk.ITIE().numberIncidentEnergies() );
 
   CHECK( 117 == chunk.ITIE().energies().size() );
-  CHECK( 1e-11 == Approx( chunk.ITIE().energies().front() ) );
-  CHECK( 9.85e-6 == Approx( chunk.ITIE().energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ITIE().energies().front() ) );
+  CHECK_THAT( 9.85e-6, WithinRel( chunk.ITIE().energies().back() ) );
 
   CHECK( 117 == chunk.ITIE().crossSections().size() );
-  CHECK( 14.55274 == Approx( chunk.ITIE().crossSections().front() ) );
-  CHECK( 1.68978156625 == Approx( chunk.ITIE().crossSections().back() ) );
+  CHECK_THAT( 14.55274, WithinRel( chunk.ITIE().crossSections().front() ) );
+  CHECK_THAT( 1.68978156625, WithinRel( chunk.ITIE().crossSections().back() ) );
 
   // ITXE block
   CHECK( false == chunk.ITXE().empty() );
@@ -831,12 +834,12 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 72 == chunk.ITCE()->numberIncidentEnergies() );
 
   CHECK( 72 == chunk.ITCE()->energies().size() );
-  CHECK( 3.70672e-9 == Approx( chunk.ITCE()->energies().front() ) );
-  CHECK( 3.66965e-7 == Approx( chunk.ITCE()->energies().back() ) );
+  CHECK_THAT( 3.70672e-9, WithinRel( chunk.ITCE()->energies().front() ) );
+  CHECK_THAT( 3.66965e-7, WithinRel( chunk.ITCE()->energies().back() ) );
 
   CHECK( 72 == chunk.ITCE()->crossSections().size() );
-  CHECK( 3.75735379520E-09 == Approx( chunk.ITCE()->crossSections().front() ) );
-  CHECK( 8.39439776800E-08 == Approx( chunk.ITCE()->crossSections().back() ) );
+  CHECK_THAT( 3.75735379520E-09, WithinRel( chunk.ITCE()->crossSections().front() ) );
+  CHECK_THAT( 8.39439776800E-08, WithinRel( chunk.ITCE()->crossSections().back() ) );
 
   // ITCA block
   CHECK( false == chunk.ITCA().has_value() );
@@ -848,12 +851,12 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 117 == chunk.ITCEI()->numberIncidentEnergies() );
 
   CHECK( 117 == chunk.ITCEI()->energies().size() );
-  CHECK( 1e-11 == Approx( chunk.ITCEI()->energies().front() ) );
-  CHECK( 9.85e-6 == Approx( chunk.ITCEI()->energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ITCEI()->energies().front() ) );
+  CHECK_THAT( 9.85e-6, WithinRel( chunk.ITCEI()->energies().back() ) );
 
   CHECK( 117 == chunk.ITCEI()->crossSections().size() );
-  CHECK( 1.026886 == Approx( chunk.ITCEI()->crossSections().front() ) );
-  CHECK( 2.48815555289E-03 == Approx( chunk.ITCEI()->crossSections().back() ) );
+  CHECK_THAT( 1.026886, WithinRel( chunk.ITCEI()->crossSections().front() ) );
+  CHECK_THAT( 2.48815555289E-03, WithinRel( chunk.ITCEI()->crossSections().back() ) );
 
   // ITCAI block
   CHECK( false == chunk.ITCAI()->empty() );
@@ -863,6 +866,6 @@ void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
   CHECK( 20 == chunk.ITCAI()->NC() );
   CHECK( 20 == chunk.ITCAI()->numberDiscreteCosines() );
 
-  CHECK( -9.49989880639E-01 == Approx( chunk.ITCAI()->cosines( 1 )[0] ) );
-  CHECK( 9.99876836853E-01 == Approx( chunk.ITCAI()->cosines( 117 )[19] ) );
+  CHECK_THAT( -9.49989880639E-01, WithinRel( chunk.ITCAI()->cosines( 1 )[0] ) );
+  CHECK_THAT( 9.99876836853E-01, WithinRel( chunk.ITCAI()->cosines( 117 )[19] ) );
 }
