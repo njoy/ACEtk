@@ -22,6 +22,13 @@ endfunction()
 
 message( STATUS "Adding ACEtk Python unit testing" )
 
+add_python_test( XsdirEntry Test_ACEtk_XsdirEntry.py )
+add_python_test( Xsdir      Test_ACEtk_Xsdir.py )
+add_python_test( Header     Test_ACEtk_Header.py )
+add_python_test( Header201  Test_ACEtk_Header201.py )
+add_python_test( Data       Test_ACEtk_Data.py )
+add_python_test( Table      Test_ACEtk_Table.py )
+
 # currently missing:
 # add_python_test( continuous.DistributionGivenElsewhere                   continuous/Test_ACEtk_continuous_DistributionGivenElsewhere.py )
 # add_python_test( continuous.EnergyDistributionBlock                      continuous/Test_ACEtk_continuous_EnergyDistributionBlock.py )

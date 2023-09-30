@@ -111,11 +111,3 @@ add_subdirectory( src/ACEtk/photonuclear/SecondaryParticleLocatorBlock/test )
 
 add_subdirectory( src/ACEtk/XsdirEntry/test )
 add_subdirectory( src/ACEtk/Xsdir/test )
-
-#######################################################################
-# python tests
-#######################################################################
-
-if( ACEtk.python )
-  add_subdirectory( python/test )
-endif()
