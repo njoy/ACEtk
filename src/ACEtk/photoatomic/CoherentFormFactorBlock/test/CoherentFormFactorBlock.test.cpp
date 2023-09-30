@@ -1,9 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/photoatomic/CoherentFormFactorBlock.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -71,7 +75,7 @@ SCENARIO( "CoherentFormFactorBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -91,7 +95,7 @@ SCENARIO( "CoherentFormFactorBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -122,7 +126,7 @@ SCENARIO( "CoherentFormFactorBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -142,7 +146,7 @@ SCENARIO( "CoherentFormFactorBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -204,16 +208,16 @@ void verifyChunk( const CoherentFormFactorBlock& chunk ) {
   CHECK( 55 == chunk.numberValues() );
 
   CHECK( 55 == chunk.momentum().size() );
-  CHECK( 0.   == Approx( chunk.momentum().front() ) );
-  CHECK( 6.   == Approx( chunk.momentum().back() ) );
+  CHECK_THAT( 0.  , WithinRel( chunk.momentum().front() ) );
+  CHECK_THAT( 6.  , WithinRel( chunk.momentum().back() ) );
 
   CHECK( 55 == chunk.integratedFormFactors().size() );
-  CHECK( 0. == Approx( chunk.integratedFormFactors()[0] ) );
-  CHECK( 3.058316405266E-02 == Approx( chunk.integratedFormFactors().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.integratedFormFactors()[0] ) );
+  CHECK_THAT( 3.058316405266E-02, WithinRel( chunk.integratedFormFactors().back() ) );
 
   CHECK( 55 == chunk.formFactors().size() );
-  CHECK( 1. == Approx( chunk.formFactors()[0] ) );
-  CHECK( 6.282390000000E-06 == Approx( chunk.formFactors().back() ) );
+  CHECK_THAT( 1., WithinRel( chunk.formFactors()[0] ) );
+  CHECK_THAT( 6.282390000000E-06, WithinRel( chunk.formFactors().back() ) );
 }
 
 void verifyChunkEprdata( const CoherentFormFactorBlock& chunk ) {
@@ -226,14 +230,14 @@ void verifyChunkEprdata( const CoherentFormFactorBlock& chunk ) {
   CHECK( 5 == chunk.numberValues() );
 
   CHECK( 5 == chunk.momentum().size() );
-  CHECK( 0.   == Approx( chunk.momentum().front() ) );
-  CHECK( 1e+9 == Approx( chunk.momentum().back() ) );
+  CHECK_THAT( 0.  , WithinRel( chunk.momentum().front() ) );
+  CHECK_THAT( 1e+9, WithinRel( chunk.momentum().back() ) );
 
   CHECK( 5 == chunk.integratedFormFactors().size() );
-  CHECK( 1. == Approx( chunk.integratedFormFactors().front() ) );
-  CHECK( 5. == Approx( chunk.integratedFormFactors().back() ) );
+  CHECK_THAT( 1., WithinRel( chunk.integratedFormFactors().front() ) );
+  CHECK_THAT( 5., WithinRel( chunk.integratedFormFactors().back() ) );
 
   CHECK( 5 == chunk.formFactors().size() );
-  CHECK(  6. == Approx( chunk.formFactors().front() ) );
-  CHECK( 10. == Approx( chunk.formFactors().back() ) );
+  CHECK_THAT(  6., WithinRel( chunk.formFactors().front() ) );
+  CHECK_THAT( 10., WithinRel( chunk.formFactors().back() ) );
 }
