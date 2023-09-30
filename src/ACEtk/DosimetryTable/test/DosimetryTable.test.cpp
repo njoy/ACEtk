@@ -1,10 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
-#include "ACEtk/fromFile.hpp"
+// what we are testing
 #include "ACEtk/DosimetryTable.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -41,7 +44,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -51,7 +54,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -61,7 +64,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -71,7 +74,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -81,7 +84,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -402,7 +405,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -412,7 +415,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -422,7 +425,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -432,7 +435,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -442,7 +445,7 @@ SCENARIO( "DosimetryTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -452,10 +455,10 @@ SCENARIO( "DosimetryTable" ){
 void verifyChunk( const DosimetryTable& chunk ) {
 
   CHECK( "13027.24y" == chunk.ZAID() );
-  CHECK( 26.75 == Approx( chunk.AWR() ) );
-  CHECK( 26.75 == Approx( chunk.atomicWeightRatio() ) );
-  CHECK( 0. == Approx( chunk.TEMP() ) );
-  CHECK( 0. == Approx( chunk.temperature() ) );
+  CHECK_THAT( 26.75, WithinRel( chunk.AWR() ) );
+  CHECK_THAT( 26.75, WithinRel( chunk.atomicWeightRatio() ) );
+  CHECK_THAT( 0., WithinRel( chunk.TEMP() ) );
+  CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
 
   CHECK( "" == chunk.date() );
 
@@ -496,12 +499,12 @@ void verifyChunk( const DosimetryTable& chunk ) {
   auto xs2 = chunk.SIGD().crossSectionData( 2 );
   CHECK( 306 == xs1.numberEnergyPoints() );
   CHECK( 272 == xs2.numberEnergyPoints() );
-  CHECK( 1.8961 == Approx( xs1.energies().front() ) );
-  CHECK( 20. == Approx( xs1.energies().back() ) );
-  CHECK( 3.248700000000E+00 == Approx( xs2.energies().front() ) );
-  CHECK( 20. == Approx( xs2.energies().back() ) );
-  CHECK( 0. == Approx( xs1.crossSections().front() ) );
-  CHECK( 0.0322 == Approx( xs1.crossSections().back() ) );
-  CHECK( 0. == Approx( xs2.crossSections().front() ) );
-  CHECK( 0.038 == Approx( xs2.crossSections().back() ) );
+  CHECK_THAT( 1.8961, WithinRel( xs1.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( xs1.energies().back() ) );
+  CHECK_THAT( 3.248700000000E+00, WithinRel( xs2.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( xs2.energies().back() ) );
+  CHECK_THAT( 0., WithinRel( xs1.crossSections().front() ) );
+  CHECK_THAT( 0.0322, WithinRel( xs1.crossSections().back() ) );
+  CHECK_THAT( 0., WithinRel( xs2.crossSections().front() ) );
+  CHECK_THAT( 0.038, WithinRel( xs2.crossSections().back() ) );
 }

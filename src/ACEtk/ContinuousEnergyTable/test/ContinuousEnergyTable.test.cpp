@@ -1,10 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
-#include "ACEtk/fromFile.hpp"
+// what we are testing
 #include "ACEtk/ContinuousEnergyTable.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -50,7 +53,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -60,7 +63,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -70,7 +73,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -80,7 +83,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -90,7 +93,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -123,7 +126,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -133,7 +136,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -143,7 +146,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -153,7 +156,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -163,7 +166,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -193,7 +196,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -203,7 +206,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -213,7 +216,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -223,7 +226,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -233,7 +236,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -283,7 +286,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -293,7 +296,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -303,7 +306,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -313,7 +316,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -323,7 +326,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -356,7 +359,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( iz.size() == iz_chunk.size() );
         for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
 
-          CHECK( iz[i] == Approx( iz_chunk[i] ) );
+          CHECK( iz[i] == iz_chunk[i] );
         }
       } // THEN
 
@@ -366,7 +369,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( aw.size() == aw_chunk.size() );
         for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
 
-          CHECK( aw[i] == Approx( aw_chunk[i] ) );
+          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
         }
       } // THEN
 
@@ -376,7 +379,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == Approx( nxs_chunk[i] ) );
+          CHECK( nxs[i] == nxs_chunk[i] );
         }
       } // THEN
 
@@ -386,7 +389,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( jxs.size() == jxs_chunk.size() );
         for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
 
-          CHECK( jxs[i] == Approx( jxs_chunk[i] ) );
+          CHECK( jxs[i] == jxs_chunk[i] );
         }
       } // THEN
 
@@ -396,7 +399,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( xss.size() == xss_chunk.size() );
         for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -413,7 +416,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   CHECK( "92235.710nc" == chunk.ZAID() );
-  CHECK( 2.5301e-8 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 2.5301e-8, WithinRel( chunk.temperature() ) );
 
   CHECK( 837481 == chunk.length() );
   CHECK( 92235 == chunk.ZA() );
@@ -445,11 +448,11 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 76518 == chunk.ESZ().elastic().size() );
   CHECK( 76518 == chunk.ESZ().heating().size() );
 
-  CHECK( 1e-11 == Approx( chunk.ESZ().energies().front() ) );
-  CHECK( 20. == Approx( chunk.ESZ().energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ESZ().energies().front() ) );
+  CHECK_THAT( 20., WithinRel( chunk.ESZ().energies().back() ) );
 
-  CHECK( 1e-11 == Approx( chunk.ESZ().XSS( 1 ) ) );
-  CHECK( 76518 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ESZ().XSS( 1 ) ) );
+  CHECK_THAT( 20., WithinRel( chunk.ESZ().XSS( 76518 ) ) );
 
   // NU block
   CHECK( false == chunk.NU()->empty() );
@@ -461,17 +464,17 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 0 == prompt.NB() );
   CHECK( 79 == prompt.NE() );
-  CHECK( 1e-11 == Approx( prompt.energies().front() ) );
-  CHECK( 20. == Approx( prompt.energies().back() ) );
-  CHECK( 2.42085 == Approx( prompt.multiplicities().front() ) );
-  CHECK( 5.200845 == Approx( prompt.multiplicities().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( prompt.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( prompt.energies().back() ) );
+  CHECK_THAT( 2.42085, WithinRel( prompt.multiplicities().front() ) );
+  CHECK_THAT( 5.200845, WithinRel( prompt.multiplicities().back() ) );
 
   CHECK( 0 == total.NB() );
   CHECK( 79 == total.NE() );
-  CHECK( 1e-11 == Approx( total.energies().front() ) );
-  CHECK( 20. == Approx( total.energies().back() ) );
-  CHECK( 2.4367 == Approx( total.multiplicities().front() ) );
-  CHECK( 5.209845 == Approx( total.multiplicities().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( total.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( total.energies().back() ) );
+  CHECK_THAT( 2.4367, WithinRel( total.multiplicities().front() ) );
+  CHECK_THAT( 5.209845, WithinRel( total.multiplicities().back() ) );
 
   // MTR block
   CHECK( false == chunk.MTR().empty() );
@@ -534,19 +537,19 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 76095 == xs48.energyIndex() );
   CHECK( 59 == xs1.numberValues() );
   CHECK( 424 == xs48.numberValues() );
-  CHECK( 0. == Approx( xs1.crossSections().front() ) );
-  CHECK( 1.55512000000E-01 == Approx( xs1.crossSections().back() ) );
-  CHECK( 0. == Approx( xs48.crossSections().front() ) );
-  CHECK( 3.65016600000E-01 == Approx( xs48.crossSections().back() ) );
+  CHECK_THAT( 0., WithinRel( xs1.crossSections().front() ) );
+  CHECK_THAT( 1.55512000000E-01, WithinRel( xs1.crossSections().back() ) );
+  CHECK_THAT( 0., WithinRel( xs48.crossSections().front() ) );
+  CHECK_THAT( 3.65016600000E-01, WithinRel( xs48.crossSections().back() ) );
 
   auto data1 = chunk.SIG().crossSections( 1 );
   auto data48 = chunk.SIG().crossSections( 48 );
   CHECK( 59 == data1.size() );
   CHECK( 424 == data48.size() );
-  CHECK( 0. == Approx( data1.front() ) );
-  CHECK( 1.55512000000E-01 == Approx( data1.back() ) );
-  CHECK( 0. == Approx( data48.front() ) );
-  CHECK( 3.65016600000E-01 == Approx( data48.back() ) );
+  CHECK_THAT( 0., WithinRel( data1.front() ) );
+  CHECK_THAT( 1.55512000000E-01, WithinRel( data1.back() ) );
+  CHECK_THAT( 0., WithinRel( data48.front() ) );
+  CHECK_THAT( 3.65016600000E-01, WithinRel( data48.back() ) );
 
   // AND block
   CHECK( false == chunk.AND().empty() );
@@ -578,8 +581,8 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( false == chunk.GPD()->empty() );
   CHECK( 76518 == chunk.GPD()->totalProduction().size() );
 
-  CHECK( 2.433297E+05 == Approx( chunk.GPD()->totalProduction().front() ) );
-  CHECK( 31.07 == Approx( chunk.GPD()->totalProduction().back() ) );
+  CHECK_THAT( 2.433297E+05, WithinRel( chunk.GPD()->totalProduction().front() ) );
+  CHECK_THAT( 31.07, WithinRel( chunk.GPD()->totalProduction().back() ) );
 
   // MTRP block
   CHECK( false == chunk.MTRP()->empty() );
@@ -664,14 +667,14 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   auto unr1 = chunk.UNR()->probabilityTable( 1 );
   auto unr19 = chunk.UNR()->probabilityTable( 19 );
-  CHECK( 2.25000100000E-03 == Approx( unr1.incidentEnergy() ) );
-  CHECK( 2.49999900000E-02 == Approx( unr19.incidentEnergy() ) );
+  CHECK_THAT( 2.25000100000E-03, WithinRel( unr1.incidentEnergy() ) );
+  CHECK_THAT( 2.49999900000E-02, WithinRel( unr19.incidentEnergy() ) );
   CHECK( 16 == unr1.numberBins() );
   CHECK( 16 == unr19.numberBins() );
-  CHECK( 1. == Approx( unr1.heating().front() ) );
-  CHECK( 1. == Approx( unr1.heating().back() ) );
-  CHECK( 1. == Approx( unr19.heating().front() ) );
-  CHECK( 1. == Approx( unr19.heating().back() ) );
+  CHECK_THAT( 1., WithinRel( unr1.heating().front() ) );
+  CHECK_THAT( 1., WithinRel( unr1.heating().back() ) );
+  CHECK_THAT( 1., WithinRel( unr19.heating().front() ) );
+  CHECK_THAT( 1., WithinRel( unr19.heating().back() ) );
 
   // DNU block
   CHECK( false == chunk.DNU()->empty() );
@@ -682,10 +685,10 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 0 == delayed.NB() );
   CHECK( 6 == delayed.NE() );
-  CHECK( 1e-11 == Approx( delayed.energies().front() ) );
-  CHECK( 20. == Approx( delayed.energies().back() ) );
-  CHECK( 0.01585 == Approx( delayed.multiplicities().front() ) );
-  CHECK( 0.009 == Approx( delayed.multiplicities().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( delayed.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( delayed.energies().back() ) );
+  CHECK_THAT( 0.01585, WithinRel( delayed.multiplicities().front() ) );
+  CHECK_THAT( 0.009, WithinRel( delayed.multiplicities().back() ) );
 
   // BDD block
   CHECK( false == chunk.BDD()->empty() );
@@ -693,8 +696,8 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 6 == chunk.BDD()->NPCR() );
   CHECK( 6 == chunk.BDD()->numberDelayedPrecursors() );
 
-  CHECK( 1.33360E-10 == Approx( chunk.BDD()->precursorGroupData( 1 ).DEC() ) );
-  CHECK( 2.85300E-08 == Approx( chunk.BDD()->precursorGroupData( 6 ).DEC() ) );
+  CHECK_THAT( 1.33360E-10, WithinRel( chunk.BDD()->precursorGroupData( 1 ).DEC() ) );
+  CHECK_THAT( 2.85300E-08, WithinRel( chunk.BDD()->precursorGroupData( 6 ).DEC() ) );
 
   // DNED block
   CHECK( false == chunk.DNED()->empty() );
@@ -721,7 +724,7 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   CHECK( "2003.710nc" == chunk.ZAID() );
-  CHECK( 2.5301e-8 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 2.5301e-8, WithinRel( chunk.temperature() ) );
 
   CHECK( 10004 == chunk.length() );
   CHECK( 2003 == chunk.ZA() );
@@ -753,11 +756,11 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 693 == chunk.ESZ().elastic().size() );
   CHECK( 693 == chunk.ESZ().heating().size() );
 
-  CHECK( 1e-11 == Approx( chunk.ESZ().energies().front() ) );
-  CHECK( 20. == Approx( chunk.ESZ().energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ESZ().energies().front() ) );
+  CHECK_THAT( 20., WithinRel( chunk.ESZ().energies().back() ) );
 
-  CHECK( 1e-11 == Approx( chunk.ESZ().XSS( 1 ) ) );
-  CHECK( 693 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ESZ().XSS( 1 ) ) );
+  CHECK_THAT( 20., WithinRel( chunk.ESZ().XSS( 693 ) ) );
 
   // NU block
   CHECK( false == chunk.NU().has_value() );
@@ -804,19 +807,19 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 1 == xs8.energyIndex() );
   CHECK( 693 == xs1.numberValues() );
   CHECK( 693 == xs8.numberValues() );
-  CHECK( 2.76519500000E-03 == Approx( xs1.crossSections().front() ) );
-  CHECK( 2.86200000000E-05 == Approx( xs1.crossSections().back() ) );
-  CHECK( 5.36998100000E+02 == Approx( xs8.crossSections().front() ) );
-  CHECK( 2.63996800000E-03 == Approx( xs8.crossSections().back() ) );
+  CHECK_THAT( 2.76519500000E-03, WithinRel( xs1.crossSections().front() ) );
+  CHECK_THAT( 2.86200000000E-05, WithinRel( xs1.crossSections().back() ) );
+  CHECK_THAT( 5.36998100000E+02, WithinRel( xs8.crossSections().front() ) );
+  CHECK_THAT( 2.63996800000E-03, WithinRel( xs8.crossSections().back() ) );
 
   auto data1 = chunk.SIG().crossSections( 1 );
   auto data8 = chunk.SIG().crossSections( 8 );
   CHECK( 693 == data1.size() );
   CHECK( 693 == data8.size() );
-  CHECK( 2.76519500000E-03 == Approx( data1.front() ) );
-  CHECK( 2.86200000000E-05 == Approx( data1.back() ) );
-  CHECK( 5.36998100000E+02 == Approx( data8.front() ) );
-  CHECK( 2.63996800000E-03 == Approx( data8.back() ) );
+  CHECK_THAT( 2.76519500000E-03, WithinRel( data1.front() ) );
+  CHECK_THAT( 2.86200000000E-05, WithinRel( data1.back() ) );
+  CHECK_THAT( 5.36998100000E+02, WithinRel( data8.front() ) );
+  CHECK_THAT( 2.63996800000E-03, WithinRel( data8.back() ) );
 
   // AND block
   CHECK( false == chunk.AND().empty() );
@@ -896,10 +899,10 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 1 == chunk.HPD(1).energyIndex() );
   CHECK( 693 == chunk.HPD(1).numberValues() );
-  CHECK( 2.76519500000E-03 == Approx( chunk.HPD(1).totalProduction().front() ) );
-  CHECK( 2.86200000000E-05 == Approx( chunk.HPD(1).totalProduction().back() ) );
-  CHECK( 0. == Approx( chunk.HPD(1).heating().front() ) );
-  CHECK( 1.68611800000E-04 == Approx( chunk.HPD(1).heating().back() ) );
+  CHECK_THAT( 2.76519500000E-03, WithinRel( chunk.HPD(1).totalProduction().front() ) );
+  CHECK_THAT( 2.86200000000E-05, WithinRel( chunk.HPD(1).totalProduction().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.HPD(1).heating().front() ) );
+  CHECK_THAT( 1.68611800000E-04, WithinRel( chunk.HPD(1).heating().back() ) );
 
   // MTRH(1) block
   CHECK( false == chunk.MTRH(1).empty() );
@@ -947,12 +950,12 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 2 == multiplicity.numberValues() );
 
   CHECK( 2 == multiplicity.energies().size() );
-  CHECK( 1e-5 == Approx( multiplicity.energies().front() ) );
-  CHECK( 20. == Approx( multiplicity.energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( multiplicity.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( multiplicity.energies().back() ) );
 
   CHECK( 2 == multiplicity.multiplicities().size() );
-  CHECK( 1. == Approx( multiplicity.multiplicities().front() ) );
-  CHECK( 1. == Approx( multiplicity.multiplicities().back() ) );
+  CHECK_THAT( 1., WithinRel( multiplicity.multiplicities().front() ) );
+  CHECK_THAT( 1., WithinRel( multiplicity.multiplicities().back() ) );
 
   // ANDH(1) block
   CHECK( false == chunk.ANDH(1).empty() );
@@ -985,7 +988,7 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   CHECK( "92238.69c" == chunk.ZAID() );
-  CHECK( 2.5301e-8 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 2.5301e-8, WithinRel( chunk.temperature() ) );
 
   CHECK( 874492 == chunk.length() );
   CHECK( 92238 == chunk.ZA() );
@@ -1017,11 +1020,11 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 78709 == chunk.ESZ().elastic().size() );
   CHECK( 78709 == chunk.ESZ().heating().size() );
 
-  CHECK( 1e-11 == Approx( chunk.ESZ().energies().front() ) );
-  CHECK( 30. == Approx( chunk.ESZ().energies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ESZ().energies().front() ) );
+  CHECK_THAT( 30., WithinRel( chunk.ESZ().energies().back() ) );
 
-  CHECK( 1e-11 == Approx( chunk.ESZ().XSS( 1 ) ) );
-  CHECK( 78709 == chunk.ESZ().XSS( 1, chunk.NES() ).size() );
+  CHECK_THAT( 1e-11, WithinRel( chunk.ESZ().XSS( 1 ) ) );
+  CHECK_THAT( 30., WithinRel( chunk.ESZ().XSS( 78709 ) ) );
 
   // NU block
   CHECK( false == chunk.NU()->empty() );
@@ -1033,17 +1036,17 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 0 == prompt.NB() );
   CHECK( 6 == prompt.NE() );
-  CHECK( 1e-11 == Approx( prompt.energies().front() ) );
-  CHECK( 30. == Approx( prompt.energies().back() ) );
-  CHECK( 2.448088 == Approx( prompt.multiplicities().front() ) );
-  CHECK( 6.4 == Approx( prompt.multiplicities().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( prompt.energies().front() ) );
+  CHECK_THAT( 30., WithinRel( prompt.energies().back() ) );
+  CHECK_THAT( 2.448088, WithinRel( prompt.multiplicities().front() ) );
+  CHECK_THAT( 6.4, WithinRel( prompt.multiplicities().back() ) );
 
   CHECK( 0 == total.NB() );
   CHECK( 8 == total.NE() );
-  CHECK( 1e-11 == Approx( total.energies().front() ) );
-  CHECK( 30. == Approx( total.energies().back() ) );
-  CHECK( 2.492088 == Approx( total.multiplicities().front() ) );
-  CHECK( 6.426 == Approx( total.multiplicities().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( total.energies().front() ) );
+  CHECK_THAT( 30., WithinRel( total.energies().back() ) );
+  CHECK_THAT( 2.492088, WithinRel( total.multiplicities().front() ) );
+  CHECK_THAT( 6.426, WithinRel( total.multiplicities().back() ) );
 
   // MTR block
   CHECK( false == chunk.MTR().empty() );
@@ -1106,19 +1109,19 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 1 == xs47.energyIndex() );
   CHECK( 106 == xs1.numberValues() );
   CHECK( 78709 == xs47.numberValues() );
-  CHECK( 0. == Approx( xs1.crossSections().front() ) );
-  CHECK( 1.387829e-1 == Approx( xs1.crossSections().back() ) );
-  CHECK( 6.560634e-4 == Approx( xs47.crossSections().front() ) );
-  CHECK( 3.159912e-1 == Approx( xs47.crossSections().back() ) );
+  CHECK_THAT( 0., WithinRel( xs1.crossSections().front() ) );
+  CHECK_THAT( 1.387829e-1, WithinRel( xs1.crossSections().back() ) );
+  CHECK_THAT( 6.560634e-4, WithinRel( xs47.crossSections().front() ) );
+  CHECK_THAT( 3.159912e-1, WithinRel( xs47.crossSections().back() ) );
 
   auto data1 = chunk.SIG().crossSections( 1 );
   auto data47 = chunk.SIG().crossSections( 47 );
   CHECK( 106 == data1.size() );
   CHECK( 78709 == data47.size() );
-  CHECK( 0. == Approx( data1.front() ) );
-  CHECK( 1.387829e-1 == Approx( data1.back() ) );
-  CHECK( 6.560634e-4 == Approx( data47.front() ) );
-  CHECK( 3.159912e-1 == Approx( data47.back() ) );
+  CHECK_THAT( 0., WithinRel( data1.front() ) );
+  CHECK_THAT( 1.387829e-1, WithinRel( data1.back() ) );
+  CHECK_THAT( 6.560634e-4, WithinRel( data47.front() ) );
+  CHECK_THAT( 3.159912e-1, WithinRel( data47.back() ) );
 
   // AND block
   CHECK( false == chunk.AND().empty() );
@@ -1152,8 +1155,8 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( false == chunk.GPD()->empty() );
   CHECK( 78709 == chunk.GPD()->totalProduction().size() );
 
-  CHECK( 589.4728 == Approx( chunk.GPD()->totalProduction().front() ) );
-  CHECK( 17.12507 == Approx( chunk.GPD()->totalProduction().back() ) );
+  CHECK_THAT( 589.4728, WithinRel( chunk.GPD()->totalProduction().front() ) );
+  CHECK_THAT( 17.12507, WithinRel( chunk.GPD()->totalProduction().back() ) );
 
   // MTRP block
   CHECK( false == chunk.MTRP()->empty() );
@@ -1236,14 +1239,14 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   auto unr1 = chunk.UNR()->probabilityTable( 1 );
   auto unr23 = chunk.UNR()->probabilityTable( 23 );
-  CHECK( 1.000001E-02 == Approx( unr1.incidentEnergy() ) );
-  CHECK( 1.490287E-01 == Approx( unr23.incidentEnergy() ) );
+  CHECK_THAT( 1.000001E-02, WithinRel( unr1.incidentEnergy() ) );
+  CHECK_THAT( 1.490287E-01, WithinRel( unr23.incidentEnergy() ) );
   CHECK( 20 == unr1.numberBins() );
   CHECK( 20 == unr23.numberBins() );
-  CHECK( 1.12201615476 == Approx( unr1.heating().front() ) );
-  CHECK( .981419270377 == Approx( unr1.heating().back() ) );
-  CHECK( .958067726215 == Approx( unr23.heating().front() ) );
-  CHECK( 1.02349211485 == Approx( unr23.heating().back() ) );
+  CHECK_THAT( 1.12201615476, WithinRel( unr1.heating().front() ) );
+  CHECK_THAT( .981419270377, WithinRel( unr1.heating().back() ) );
+  CHECK_THAT( .958067726215, WithinRel( unr23.heating().front() ) );
+  CHECK_THAT( 1.02349211485, WithinRel( unr23.heating().back() ) );
 
   // DNU block
   CHECK( false == chunk.DNU()->empty() );
@@ -1254,10 +1257,10 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   CHECK( 0 == delayed.NB() );
   CHECK( 4 == delayed.NE() );
-  CHECK( 1e-11 == Approx( delayed.energies().front() ) );
-  CHECK( 30. == Approx( delayed.energies().back() ) );
-  CHECK( 0.044 == Approx( delayed.multiplicities().front() ) );
-  CHECK( 0.026 == Approx( delayed.multiplicities().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( delayed.energies().front() ) );
+  CHECK_THAT( 30., WithinRel( delayed.energies().back() ) );
+  CHECK_THAT( 0.044, WithinRel( delayed.multiplicities().front() ) );
+  CHECK_THAT( 0.026, WithinRel( delayed.multiplicities().back() ) );
 
   // BDD block
   CHECK( false == chunk.BDD()->empty() );
@@ -1265,8 +1268,8 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 6 == chunk.BDD()->NPCR() );
   CHECK( 6 == chunk.BDD()->numberDelayedPrecursors() );
 
-  CHECK( 1.249817E-10 == Approx( chunk.BDD()->precursorGroupData( 1 ).DEC() ) );
-  CHECK( 4.984604E-08 == Approx( chunk.BDD()->precursorGroupData( 6 ).DEC() ) );
+  CHECK_THAT( 1.249817E-10, WithinRel( chunk.BDD()->precursorGroupData( 1 ).DEC() ) );
+  CHECK_THAT( 4.984604E-08, WithinRel( chunk.BDD()->precursorGroupData( 6 ).DEC() ) );
 
   // DNED block
   CHECK( false == chunk.DNED()->empty() );

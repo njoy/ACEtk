@@ -13,6 +13,11 @@ function( add_cpp_test name source )
   target_link_libraries( ${test_name} PRIVATE ACEtk )
   target_link_libraries( ${test_name} PRIVATE Catch2::Catch2WithMain )
 
+  file( GLOB resources "resources/*" )
+  foreach( resource ${resources})
+      file( COPY "${resource}" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}" )
+  endforeach()
+
 endfunction()
 
 #######################################################################
