@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/thermal/ElasticAngularDistributionBlock.hpp"
 
 // other includes
@@ -39,7 +42,7 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -60,7 +63,7 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -93,25 +96,25 @@ void verifyChunk( const ElasticAngularDistributionBlock& chunk ) {
 
   auto cosines = chunk.cosines( 1 );
   CHECK( 3 == cosines.size() );
-  CHECK( -1. == Approx( cosines[0] ) );
-  CHECK( -.9 == Approx( cosines[1] ) );
-  CHECK( +1. == Approx( cosines[2] ) );
+  CHECK_THAT( -1., WithinRel( cosines[0] ) );
+  CHECK_THAT( -.9, WithinRel( cosines[1] ) );
+  CHECK_THAT( +1., WithinRel( cosines[2] ) );
 
   cosines = chunk.cosines( 2 );
   CHECK( 3 == cosines.size() );
-  CHECK( -1. == Approx( cosines[0] ) );
-  CHECK(  0. == Approx( cosines[1] ) );
-  CHECK( +1. == Approx( cosines[2] ) );
+  CHECK_THAT( -1., WithinRel( cosines[0] ) );
+  CHECK_THAT(  0., WithinRel( cosines[1] ) );
+  CHECK_THAT( +1., WithinRel( cosines[2] ) );
 
   cosines = chunk.cosines( 3 );
   CHECK( 3 == cosines.size() );
-  CHECK( -1. == Approx( cosines[0] ) );
-  CHECK(  .5 == Approx( cosines[1] ) );
-  CHECK( +1. == Approx( cosines[2] ) );
+  CHECK_THAT( -1., WithinRel( cosines[0] ) );
+  CHECK_THAT(  .5, WithinRel( cosines[1] ) );
+  CHECK_THAT( +1., WithinRel( cosines[2] ) );
 
   cosines = chunk.cosines( 4 );
   CHECK( 3 == cosines.size() );
-  CHECK( -1. == Approx( cosines[0] ) );
-  CHECK(  .9 == Approx( cosines[1] ) );
-  CHECK( +1. == Approx( cosines[2] ) );
+  CHECK_THAT( -1., WithinRel( cosines[0] ) );
+  CHECK_THAT(  .9, WithinRel( cosines[1] ) );
+  CHECK_THAT( +1., WithinRel( cosines[2] ) );
 }

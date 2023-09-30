@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/thermal/DiscreteCosinesWithProbability.hpp"
 
 // other includes
@@ -45,7 +48,7 @@ SCENARIO( "DiscreteCosinesWithProbability" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -65,7 +68,7 @@ SCENARIO( "DiscreteCosinesWithProbability" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -95,12 +98,12 @@ void verifyChunk( const DiscreteCosinesWithProbability& chunk ) {
   CHECK( 36 == chunk.length() );
   CHECK( "DiscreteCosinesWithProbability" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.energy() ) );
-  CHECK( 0.5 == Approx( chunk.pdf() ) );
-  CHECK( 1.0 == Approx( chunk.cdf() ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.energy() ) );
+  CHECK_THAT( 0.5, WithinRel( chunk.pdf() ) );
+  CHECK_THAT( 1.0, WithinRel( chunk.cdf() ) );
   CHECK( 33 == chunk.numberDiscreteCosines() );
 
   CHECK( 33 == chunk.cosines().size() );
-  CHECK( -1. == Approx( chunk.cosines().front() ) );
-  CHECK( +1. == Approx( chunk.cosines().back() ) );
+  CHECK_THAT( -1., WithinRel( chunk.cosines().front() ) );
+  CHECK_THAT( +1., WithinRel( chunk.cosines().back() ) );
 }
