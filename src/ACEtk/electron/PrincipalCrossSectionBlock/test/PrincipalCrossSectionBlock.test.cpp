@@ -1,9 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/electron/PrincipalCrossSectionBlock.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -44,7 +48,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -64,7 +68,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -104,28 +108,28 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
   CHECK( 3 == chunk.electroionisation(1).size() );
   CHECK( 3 == chunk.electroionisation(2).size() );
 
-  CHECK(  10. == Approx( chunk.energies()[0] ) );
-  CHECK(  20. == Approx( chunk.energies()[1] ) );
-  CHECK( 200. == Approx( chunk.energies()[2] ) );
-  CHECK(  35. == Approx( chunk.total()[0] ) );
-  CHECK(  40. == Approx( chunk.total()[1] ) );
-  CHECK(  45. == Approx( chunk.total()[2] ) );
-  CHECK(   1. == Approx( chunk.elastic()[0] ) );
-  CHECK(   2. == Approx( chunk.elastic()[1] ) );
-  CHECK(   3. == Approx( chunk.elastic()[2] ) );
-  CHECK(   4. == Approx( chunk.bremsstrahlung()[0] ) );
-  CHECK(   5. == Approx( chunk.bremsstrahlung()[1] ) );
-  CHECK(   6. == Approx( chunk.bremsstrahlung()[2] ) );
-  CHECK(   7. == Approx( chunk.excitation()[0] ) );
-  CHECK(   8. == Approx( chunk.excitation()[1] ) );
-  CHECK(   9. == Approx( chunk.excitation()[2] ) );
-  CHECK(  23. == Approx( chunk.totalElectroionisation()[0] ) );
-  CHECK(  25. == Approx( chunk.totalElectroionisation()[1] ) );
-  CHECK(  27. == Approx( chunk.totalElectroionisation()[2] ) );
-  CHECK(  10. == Approx( chunk.electroionisation(1)[0] ) );
-  CHECK(  11. == Approx( chunk.electroionisation(1)[1] ) );
-  CHECK(  12. == Approx( chunk.electroionisation(1)[2] ) );
-  CHECK(  13. == Approx( chunk.electroionisation(2)[0] ) );
-  CHECK(  14. == Approx( chunk.electroionisation(2)[1] ) );
-  CHECK(  15. == Approx( chunk.electroionisation(2)[2] ) );
+  CHECK_THAT(  10., WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT(  20., WithinRel( chunk.energies()[1] ) );
+  CHECK_THAT( 200., WithinRel( chunk.energies()[2] ) );
+  CHECK_THAT(  35., WithinRel( chunk.total()[0] ) );
+  CHECK_THAT(  40., WithinRel( chunk.total()[1] ) );
+  CHECK_THAT(  45., WithinRel( chunk.total()[2] ) );
+  CHECK_THAT(   1., WithinRel( chunk.elastic()[0] ) );
+  CHECK_THAT(   2., WithinRel( chunk.elastic()[1] ) );
+  CHECK_THAT(   3., WithinRel( chunk.elastic()[2] ) );
+  CHECK_THAT(   4., WithinRel( chunk.bremsstrahlung()[0] ) );
+  CHECK_THAT(   5., WithinRel( chunk.bremsstrahlung()[1] ) );
+  CHECK_THAT(   6., WithinRel( chunk.bremsstrahlung()[2] ) );
+  CHECK_THAT(   7., WithinRel( chunk.excitation()[0] ) );
+  CHECK_THAT(   8., WithinRel( chunk.excitation()[1] ) );
+  CHECK_THAT(   9., WithinRel( chunk.excitation()[2] ) );
+  CHECK_THAT(  23., WithinRel( chunk.totalElectroionisation()[0] ) );
+  CHECK_THAT(  25., WithinRel( chunk.totalElectroionisation()[1] ) );
+  CHECK_THAT(  27., WithinRel( chunk.totalElectroionisation()[2] ) );
+  CHECK_THAT(  10., WithinRel( chunk.electroionisation(1)[0] ) );
+  CHECK_THAT(  11., WithinRel( chunk.electroionisation(1)[1] ) );
+  CHECK_THAT(  12., WithinRel( chunk.electroionisation(1)[2] ) );
+  CHECK_THAT(  13., WithinRel( chunk.electroionisation(2)[0] ) );
+  CHECK_THAT(  14., WithinRel( chunk.electroionisation(2)[1] ) );
+  CHECK_THAT(  15., WithinRel( chunk.electroionisation(2)[2] ) );
 }

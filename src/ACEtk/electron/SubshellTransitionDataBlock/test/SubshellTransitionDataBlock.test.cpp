@@ -1,9 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/electron/SubshellTransitionDataBlock.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -43,7 +47,7 @@ SCENARIO( "SubshellTransitionDataBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -63,7 +67,7 @@ SCENARIO( "SubshellTransitionDataBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -104,31 +108,31 @@ void verifyChunk( const SubshellTransitionDataBlock& chunk ) {
   CHECK( 4 == xs.transition(2).size() );
   CHECK( 4 == xs.transition(3).size() );
 
-  CHECK(    1 == Approx( xs.transition(1)[0] ) );
-  CHECK(    0 == Approx( xs.transition(1)[1] ) );
-  CHECK(  3.5 == Approx( xs.transition(1)[2] ) );
-  CHECK( 0.25 == Approx( xs.transition(1)[3] ) );
-  CHECK(    2 == Approx( xs.transition(2)[0] ) );
-  CHECK(    3 == Approx( xs.transition(2)[1] ) );
-  CHECK(  2.5 == Approx( xs.transition(2)[2] ) );
-  CHECK( 0.75 == Approx( xs.transition(2)[3] ) );
-  CHECK(    3 == Approx( xs.transition(3)[0] ) );
-  CHECK(    1 == Approx( xs.transition(3)[1] ) );
-  CHECK(  5.5 == Approx( xs.transition(3)[2] ) );
-  CHECK( 1.00 == Approx( xs.transition(3)[3] ) );
+  CHECK_THAT(    1, WithinRel( xs.transition(1)[0] ) );
+  CHECK_THAT(    0, WithinRel( xs.transition(1)[1] ) );
+  CHECK_THAT(  3.5, WithinRel( xs.transition(1)[2] ) );
+  CHECK_THAT( 0.25, WithinRel( xs.transition(1)[3] ) );
+  CHECK_THAT(    2, WithinRel( xs.transition(2)[0] ) );
+  CHECK_THAT(    3, WithinRel( xs.transition(2)[1] ) );
+  CHECK_THAT(  2.5, WithinRel( xs.transition(2)[2] ) );
+  CHECK_THAT( 0.75, WithinRel( xs.transition(2)[3] ) );
+  CHECK_THAT(    3, WithinRel( xs.transition(3)[0] ) );
+  CHECK_THAT(    1, WithinRel( xs.transition(3)[1] ) );
+  CHECK_THAT(  5.5, WithinRel( xs.transition(3)[2] ) );
+  CHECK_THAT( 1.00, WithinRel( xs.transition(3)[3] ) );
 
   CHECK(    1 == xs.primaryDesignator(1) );
   CHECK(    0 == xs.secondaryDesignator(1) );
-  CHECK(  3.5 == Approx( xs.energy(1) ) );
-  CHECK( 0.25 == Approx( xs.probability(1) ) );
+  CHECK_THAT(  3.5, WithinRel( xs.energy(1) ) );
+  CHECK_THAT( 0.25, WithinRel( xs.probability(1) ) );
   CHECK(    2 == xs.primaryDesignator(2) );
   CHECK(    3 == xs.secondaryDesignator(2) );
-  CHECK(  2.5 == Approx( xs.energy(2) ) );
-  CHECK( 0.75 == Approx( xs.probability(2) ) );
+  CHECK_THAT(  2.5, WithinRel( xs.energy(2) ) );
+  CHECK_THAT( 0.75, WithinRel( xs.probability(2) ) );
   CHECK(    3 == xs.primaryDesignator(3) );
   CHECK(    1 == xs.secondaryDesignator(3) );
-  CHECK(  5.5 == Approx( xs.energy(3) ) );
-  CHECK( 1.00 == Approx( xs.probability(3) ) );
+  CHECK_THAT(  5.5, WithinRel( xs.energy(3) ) );
+  CHECK_THAT( 1.00, WithinRel( xs.probability(3) ) );
 
   CHECK( true == xs.isRadiativeTransition(1) );
   CHECK( false == xs.isRadiativeTransition(2) );
@@ -153,31 +157,31 @@ void verifyChunk( const SubshellTransitionDataBlock& chunk ) {
   CHECK( 4 == xs.transition(2).size() );
   CHECK( 4 == xs.transition(3).size() );
 
-  CHECK(    1 == Approx( xs.transition(1)[0] ) );
-  CHECK(    0 == Approx( xs.transition(1)[1] ) );
-  CHECK(  3.5 == Approx( xs.transition(1)[2] ) );
-  CHECK( 0.25 == Approx( xs.transition(1)[3] ) );
-  CHECK(    2 == Approx( xs.transition(2)[0] ) );
-  CHECK(    3 == Approx( xs.transition(2)[1] ) );
-  CHECK(  2.5 == Approx( xs.transition(2)[2] ) );
-  CHECK( 0.75 == Approx( xs.transition(2)[3] ) );
-  CHECK(    3 == Approx( xs.transition(3)[0] ) );
-  CHECK(    1 == Approx( xs.transition(3)[1] ) );
-  CHECK(  5.5 == Approx( xs.transition(3)[2] ) );
-  CHECK( 1.00 == Approx( xs.transition(3)[3] ) );
+  CHECK_THAT(    1, WithinRel( xs.transition(1)[0] ) );
+  CHECK_THAT(    0, WithinRel( xs.transition(1)[1] ) );
+  CHECK_THAT(  3.5, WithinRel( xs.transition(1)[2] ) );
+  CHECK_THAT( 0.25, WithinRel( xs.transition(1)[3] ) );
+  CHECK_THAT(    2, WithinRel( xs.transition(2)[0] ) );
+  CHECK_THAT(    3, WithinRel( xs.transition(2)[1] ) );
+  CHECK_THAT(  2.5, WithinRel( xs.transition(2)[2] ) );
+  CHECK_THAT( 0.75, WithinRel( xs.transition(2)[3] ) );
+  CHECK_THAT(    3, WithinRel( xs.transition(3)[0] ) );
+  CHECK_THAT(    1, WithinRel( xs.transition(3)[1] ) );
+  CHECK_THAT(  5.5, WithinRel( xs.transition(3)[2] ) );
+  CHECK_THAT( 1.00, WithinRel( xs.transition(3)[3] ) );
 
   CHECK(    1 == xs.primaryDesignator(1) );
   CHECK(    0 == xs.secondaryDesignator(1) );
-  CHECK(  3.5 == Approx( xs.energy(1) ) );
-  CHECK( 0.25 == Approx( xs.probability(1) ) );
+  CHECK_THAT(  3.5, WithinRel( xs.energy(1) ) );
+  CHECK_THAT( 0.25, WithinRel( xs.probability(1) ) );
   CHECK(    2 == xs.primaryDesignator(2) );
   CHECK(    3 == xs.secondaryDesignator(2) );
-  CHECK(  2.5 == Approx( xs.energy(2) ) );
-  CHECK( 0.75 == Approx( xs.probability(2) ) );
+  CHECK_THAT(  2.5, WithinRel( xs.energy(2) ) );
+  CHECK_THAT( 0.75, WithinRel( xs.probability(2) ) );
   CHECK(    3 == xs.primaryDesignator(3) );
   CHECK(    1 == xs.secondaryDesignator(3) );
-  CHECK(  5.5 == Approx( xs.energy(3) ) );
-  CHECK( 1.00 == Approx( xs.probability(3) ) );
+  CHECK_THAT(  5.5, WithinRel( xs.energy(3) ) );
+  CHECK_THAT( 1.00, WithinRel( xs.probability(3) ) );
 
   CHECK( true == xs.isRadiativeTransition(1) );
   CHECK( false == xs.isRadiativeTransition(2) );

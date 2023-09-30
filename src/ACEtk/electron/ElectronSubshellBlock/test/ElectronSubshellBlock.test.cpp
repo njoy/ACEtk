@@ -1,9 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/electron/ElectronSubshellBlock.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -46,7 +50,7 @@ SCENARIO( "ElectronSubshellBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -66,7 +70,7 @@ SCENARIO( "ElectronSubshellBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -115,27 +119,27 @@ void verifyChunk( const ElectronSubshellBlock& chunk ) {
   CHECK( 4 == chunk.populations()[3] );
   CHECK( 2 == chunk.populations()[4] );
 
-  CHECK( 1.2945e-3 == Approx( chunk.BE()[0] ) );
-  CHECK( 8.9460e-5 == Approx( chunk.BE()[1] ) );
-  CHECK( 5.6550e-5 == Approx( chunk.BE()[2] ) );
-  CHECK( 5.6240e-5 == Approx( chunk.BE()[3] ) );
-  CHECK( 6.8900e-6 == Approx( chunk.BE()[4] ) );
-  CHECK( 1.2945e-3 == Approx( chunk.bindingEnergies()[0] ) );
-  CHECK( 8.9460e-5 == Approx( chunk.bindingEnergies()[1] ) );
-  CHECK( 5.6550e-5 == Approx( chunk.bindingEnergies()[2] ) );
-  CHECK( 5.6240e-5 == Approx( chunk.bindingEnergies()[3] ) );
-  CHECK( 6.8900e-6 == Approx( chunk.bindingEnergies()[4] ) );
+  CHECK_THAT( 1.2945e-3, WithinRel( chunk.BE()[0] ) );
+  CHECK_THAT( 8.9460e-5, WithinRel( chunk.BE()[1] ) );
+  CHECK_THAT( 5.6550e-5, WithinRel( chunk.BE()[2] ) );
+  CHECK_THAT( 5.6240e-5, WithinRel( chunk.BE()[3] ) );
+  CHECK_THAT( 6.8900e-6, WithinRel( chunk.BE()[4] ) );
+  CHECK_THAT( 1.2945e-3, WithinRel( chunk.bindingEnergies()[0] ) );
+  CHECK_THAT( 8.9460e-5, WithinRel( chunk.bindingEnergies()[1] ) );
+  CHECK_THAT( 5.6550e-5, WithinRel( chunk.bindingEnergies()[2] ) );
+  CHECK_THAT( 5.6240e-5, WithinRel( chunk.bindingEnergies()[3] ) );
+  CHECK_THAT( 6.8900e-6, WithinRel( chunk.bindingEnergies()[4] ) );
 
-  CHECK( 1.666666666667e-1 == Approx( chunk.CV()[0] ) );
-  CHECK( 3.333333333333e-1 == Approx( chunk.CV()[1] ) );
-  CHECK( 5.000000000000e-1 == Approx( chunk.CV()[2] ) );
-  CHECK( 8.333333333333e-1 == Approx( chunk.CV()[3] ) );
-  CHECK( 1.000000000000e+0 == Approx( chunk.CV()[4] ) );
-  CHECK( 1.666666666667e-1 == Approx( chunk.vacancyProbabilities()[0] ) );
-  CHECK( 3.333333333333e-1 == Approx( chunk.vacancyProbabilities()[1] ) );
-  CHECK( 5.000000000000e-1 == Approx( chunk.vacancyProbabilities()[2] ) );
-  CHECK( 8.333333333333e-1 == Approx( chunk.vacancyProbabilities()[3] ) );
-  CHECK( 1.000000000000e+0 == Approx( chunk.vacancyProbabilities()[4] ) );
+  CHECK_THAT( 1.666666666667e-1, WithinRel( chunk.CV()[0] ) );
+  CHECK_THAT( 3.333333333333e-1, WithinRel( chunk.CV()[1] ) );
+  CHECK_THAT( 5.000000000000e-1, WithinRel( chunk.CV()[2] ) );
+  CHECK_THAT( 8.333333333333e-1, WithinRel( chunk.CV()[3] ) );
+  CHECK_THAT( 1.000000000000e+0, WithinRel( chunk.CV()[4] ) );
+  CHECK_THAT( 1.666666666667e-1, WithinRel( chunk.vacancyProbabilities()[0] ) );
+  CHECK_THAT( 3.333333333333e-1, WithinRel( chunk.vacancyProbabilities()[1] ) );
+  CHECK_THAT( 5.000000000000e-1, WithinRel( chunk.vacancyProbabilities()[2] ) );
+  CHECK_THAT( 8.333333333333e-1, WithinRel( chunk.vacancyProbabilities()[3] ) );
+  CHECK_THAT( 1.000000000000e+0, WithinRel( chunk.vacancyProbabilities()[4] ) );
 
   CHECK( 12 == chunk.NT()[0] );
   CHECK(  5 == chunk.NT()[1] );
@@ -160,17 +164,17 @@ void verifyChunk( const ElectronSubshellBlock& chunk ) {
   CHECK( 4 == chunk.population( 4 ) );
   CHECK( 2 == chunk.population( 5 ) );
 
-  CHECK( 1.2945e-3 == Approx( chunk.bindingEnergy( 1 ) ) );
-  CHECK( 8.9460e-5 == Approx( chunk.bindingEnergy( 2 ) ) );
-  CHECK( 5.6550e-5 == Approx( chunk.bindingEnergy( 3 ) ) );
-  CHECK( 5.6240e-5 == Approx( chunk.bindingEnergy( 4 ) ) );
-  CHECK( 6.8900e-6 == Approx( chunk.bindingEnergy( 5 ) ) );
+  CHECK_THAT( 1.2945e-3, WithinRel( chunk.bindingEnergy( 1 ) ) );
+  CHECK_THAT( 8.9460e-5, WithinRel( chunk.bindingEnergy( 2 ) ) );
+  CHECK_THAT( 5.6550e-5, WithinRel( chunk.bindingEnergy( 3 ) ) );
+  CHECK_THAT( 5.6240e-5, WithinRel( chunk.bindingEnergy( 4 ) ) );
+  CHECK_THAT( 6.8900e-6, WithinRel( chunk.bindingEnergy( 5 ) ) );
 
-  CHECK( 1.666666666667e-1 == Approx( chunk.vacancyProbability( 1 ) ) );
-  CHECK( 3.333333333333e-1 == Approx( chunk.vacancyProbability( 2 ) ) );
-  CHECK( 5.000000000000e-1 == Approx( chunk.vacancyProbability( 3 ) ) );
-  CHECK( 8.333333333333e-1 == Approx( chunk.vacancyProbability( 4 ) ) );
-  CHECK( 1.000000000000e+0 == Approx( chunk.vacancyProbability( 5 ) ) );
+  CHECK_THAT( 1.666666666667e-1, WithinRel( chunk.vacancyProbability( 1 ) ) );
+  CHECK_THAT( 3.333333333333e-1, WithinRel( chunk.vacancyProbability( 2 ) ) );
+  CHECK_THAT( 5.000000000000e-1, WithinRel( chunk.vacancyProbability( 3 ) ) );
+  CHECK_THAT( 8.333333333333e-1, WithinRel( chunk.vacancyProbability( 4 ) ) );
+  CHECK_THAT( 1.000000000000e+0, WithinRel( chunk.vacancyProbability( 5 ) ) );
 
   CHECK( 12 == chunk.numberTransitions( 1 ) );
   CHECK(  5 == chunk.numberTransitions( 2 ) );

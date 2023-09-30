@@ -1,9 +1,13 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/electron/BremsstrahlungBlock.hpp"
 
 // other includes
+#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
@@ -37,7 +41,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -57,7 +61,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -82,11 +86,11 @@ void verifyChunk( const BremsstrahlungBlock& chunk ) {
   CHECK( 3 == chunk.energies().size() );
   CHECK( 3 == chunk.energyAfterBremsstrahlung().size() );
 
-  CHECK(  10. == Approx( chunk.energies()[0] ) );
-  CHECK(  20. == Approx( chunk.energies()[1] ) );
-  CHECK( 200. == Approx( chunk.energies()[2] ) );
+  CHECK_THAT(  10., WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT(  20., WithinRel( chunk.energies()[1] ) );
+  CHECK_THAT( 200., WithinRel( chunk.energies()[2] ) );
 
-  CHECK(   1. == Approx( chunk.energyAfterBremsstrahlung()[0] ) );
-  CHECK(   2. == Approx( chunk.energyAfterBremsstrahlung()[1] ) );
-  CHECK(   3. == Approx( chunk.energyAfterBremsstrahlung()[2] ) );
+  CHECK_THAT(   1., WithinRel( chunk.energyAfterBremsstrahlung()[0] ) );
+  CHECK_THAT(   2., WithinRel( chunk.energyAfterBremsstrahlung()[1] ) );
+  CHECK_THAT(   3., WithinRel( chunk.energyAfterBremsstrahlung()[2] ) );
 }
