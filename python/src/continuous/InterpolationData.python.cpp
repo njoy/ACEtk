@@ -15,7 +15,7 @@ namespace continuous {
 void wrapInterpolationData( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::InterpolationData;
+  using Block = njoy::ACEtk::continuous::InterpolationData;
 
   // wrap views created by this block
 

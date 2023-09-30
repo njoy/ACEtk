@@ -26,7 +26,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /* type alias */
 using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
@@ -60,7 +60,7 @@ class EnergyDistributionBlock : protected base::Base {
   /* fields */
   unsigned int nr_ = 0; // the number of reactions
   Iterator iterator_;   // the begin iterator of the data block
-  block::TYR tyr_;      // the associated TYR block
+  continuous::TYR tyr_;      // the associated TYR block
   std::vector< EnergyDistributionData > data_;
   std::vector< MultiplicityData > multiplicities_;
   std::vector< ReferenceFrame > frames_;
@@ -83,7 +83,7 @@ class EnergyDistributionBlock : protected base::Base {
    *        block since it only contains data for the first NR reactions (instead
    *        of NTR).
    */
-  const block::TYR& TYR() const { return this->tyr_; }
+  const continuous::TYR& TYR() const { return this->tyr_; }
 
 public:
 
@@ -225,7 +225,7 @@ public:
 
 using DLW = EnergyDistributionBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

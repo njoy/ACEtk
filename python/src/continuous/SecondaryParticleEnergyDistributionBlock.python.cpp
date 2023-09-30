@@ -16,8 +16,8 @@ void wrapSecondaryParticleEnergyDistributionBlock( python::module& module,
                                                    python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::SecondaryParticleEnergyDistributionBlock;
-  using EnergyDistributionData = njoy::ACEtk::block::EnergyDistributionData;
+  using Block = njoy::ACEtk::continuous::SecondaryParticleEnergyDistributionBlock;
+  using EnergyDistributionData = njoy::ACEtk::continuous::EnergyDistributionData;
   using ReferenceFrame = njoy::ACEtk::ReferenceFrame;
 
   // wrap views created by this block

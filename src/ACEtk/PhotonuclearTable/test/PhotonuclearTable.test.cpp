@@ -8,8 +8,8 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
-using EnergyAngleDistributionData = block::EnergyAngleDistributionData;
+using DistributionGivenElsewhere = continuous::DistributionGivenElsewhere;
+using EnergyAngleDistributionData = continuous::EnergyAngleDistributionData;
 
 void verifyChunk( const PhotonuclearTable& );
 
@@ -90,12 +90,12 @@ SCENARIO( "PhotonuclearTable" ){
       PhotonuclearTable base( std::move( table ) );
 
       std::optional< std::vector< unsigned int > > ptype = std::vector< unsigned int >{};
-      std::optional< std::vector< block::CrossSectionData > > pxs = std::vector< block::CrossSectionData >{};
-      std::optional< std::vector< block::CrossSectionData > > phn = std::vector< block::CrossSectionData >{};
-      std::optional< std::vector< block::MTRH > > mtrh = std::vector< block::MTRH >{};
-      std::optional< std::vector< block::SIGH > > sigh = std::vector< block::SIGH >{};
-      std::optional< std::vector< block::ANDH > > andh = std::vector< block::ANDH >{};
-      std::optional< std::vector< block::DLWH > > dlwh = std::vector< block::DLWH >{};
+      std::optional< std::vector< continuous::CrossSectionData > > pxs = std::vector< continuous::CrossSectionData >{};
+      std::optional< std::vector< continuous::CrossSectionData > > phn = std::vector< continuous::CrossSectionData >{};
+      std::optional< std::vector< continuous::MTRH > > mtrh = std::vector< continuous::MTRH >{};
+      std::optional< std::vector< continuous::SIGH > > sigh = std::vector< continuous::SIGH >{};
+      std::optional< std::vector< continuous::ANDH > > andh = std::vector< continuous::ANDH >{};
+      std::optional< std::vector< continuous::DLWH > > dlwh = std::vector< continuous::DLWH >{};
       for ( unsigned int index = 1; index <= base.NTYPE(); ++index ) {
 
         ptype->push_back( base.IXS()->IP( index ) );

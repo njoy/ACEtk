@@ -7,14 +7,14 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using EnergyDistributionBlock = block::EnergyDistributionBlock;
-using FrameAndMultiplicityBlock = block::FrameAndMultiplicityBlock;
-using LevelScatteringDistribution = block::LevelScatteringDistribution;
-using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
-using KalbachMannDistributionData = block::KalbachMannDistributionData;
-using EnergyDistributionData = block::EnergyDistributionData;
-using MultiplicityData = block::MultiplicityData;
-using TabulatedMultiplicity = block::TabulatedMultiplicity;
+using EnergyDistributionBlock = continuous::EnergyDistributionBlock;
+using FrameAndMultiplicityBlock = continuous::FrameAndMultiplicityBlock;
+using LevelScatteringDistribution = continuous::LevelScatteringDistribution;
+using TabulatedKalbachMannDistribution = continuous::TabulatedKalbachMannDistribution;
+using KalbachMannDistributionData = continuous::KalbachMannDistributionData;
+using EnergyDistributionData = continuous::EnergyDistributionData;
+using MultiplicityData = continuous::MultiplicityData;
+using TabulatedMultiplicity = continuous::TabulatedMultiplicity;
 
 std::vector< double > chunk();
 void verifyChunk( const EnergyDistributionBlock& );

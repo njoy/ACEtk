@@ -1,5 +1,5 @@
 Data generateData( unsigned int z, unsigned int a,
-                   block::MTR&& mtr, dosimetry::SIGD&& sigd ) {
+                   continuous::MTR&& mtr, dosimetry::SIGD&& sigd ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;

@@ -15,7 +15,7 @@ namespace continuous {
 void wrapDiscretePhotonDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::DiscretePhotonDistribution;
+  using Block = njoy::ACEtk::continuous::DiscretePhotonDistribution;
 
   // wrap views created by this block
 

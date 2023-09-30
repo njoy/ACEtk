@@ -7,12 +7,12 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using MultiDistributionData = block::MultiDistributionData;
-using DistributionProbability = block::DistributionProbability;
+using MultiDistributionData = continuous::MultiDistributionData;
+using DistributionProbability = continuous::DistributionProbability;
 using DistributionData = MultiDistributionData::DistributionData;
-using KalbachMannDistributionData = block::KalbachMannDistributionData;
-using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
-using GeneralEvaporationSpectrum = block::GeneralEvaporationSpectrum;
+using KalbachMannDistributionData = continuous::KalbachMannDistributionData;
+using TabulatedKalbachMannDistribution = continuous::TabulatedKalbachMannDistribution;
+using GeneralEvaporationSpectrum = continuous::GeneralEvaporationSpectrum;
 
 std::vector< double > chunk();
 void verifyChunk( const MultiDistributionData& );

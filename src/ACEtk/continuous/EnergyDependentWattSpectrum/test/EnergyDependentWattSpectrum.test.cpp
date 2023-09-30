@@ -8,8 +8,8 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using EnergyDependentWattSpectrum = block::EnergyDependentWattSpectrum;
-using ParameterData = block::ParameterData;
+using EnergyDependentWattSpectrum = continuous::EnergyDependentWattSpectrum;
+using ParameterData = continuous::ParameterData;
 
 std::vector< double > chunk();
 void verifyChunk( const EnergyDependentWattSpectrum& );

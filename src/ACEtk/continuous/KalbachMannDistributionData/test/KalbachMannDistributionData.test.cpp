@@ -7,8 +7,8 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using KalbachMannDistributionData = block::KalbachMannDistributionData;
-using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
+using KalbachMannDistributionData = continuous::KalbachMannDistributionData;
+using TabulatedKalbachMannDistribution = continuous::TabulatedKalbachMannDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const KalbachMannDistributionData& );

@@ -20,7 +20,7 @@ namespace ACEtk {
 class DosimetryTable : protected Table {
 
   /* fields */
-  block::MTR mtr_;
+  continuous::MTR mtr_;
   dosimetry::SIGD sig_;
 
   /* auxiliary functions */
@@ -32,7 +32,7 @@ class DosimetryTable : protected Table {
     auto sig = begin + this->data().JXS(7) - 1;
     auto end = this->data().XSS().end();
 
-    this->mtr_ = block::MTR( mtr, lsig, this->NTR() );
+    this->mtr_ = continuous::MTR( mtr, lsig, this->NTR() );
     this->sig_ = dosimetry::SIGD( lsig, sig, end, this->NTR() );
   }
 
@@ -129,12 +129,12 @@ public:
   /**
    *  @brief Return the reaction number block
    */
-  const block::MTR& MTR() const { return this->mtr_; }
+  const continuous::MTR& MTR() const { return this->mtr_; }
 
   /**
    *  @brief Return the reaction number block
    */
-  const block::MTR& reactionNumberBlock() const { return this->MTR(); }
+  const continuous::MTR& reactionNumberBlock() const { return this->MTR(); }
 
   /**
    *  @brief Return the cross section block

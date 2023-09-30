@@ -15,7 +15,7 @@ namespace continuous {
 void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::SecondaryParticleLocatorBlock;
+  using Block = njoy::ACEtk::continuous::SecondaryParticleLocatorBlock;
 
   // wrap views created by this block
 

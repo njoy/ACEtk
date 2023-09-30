@@ -10,7 +10,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -171,7 +171,7 @@ public:
   using DistributionDataWithInterpolationType::end;
 };
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

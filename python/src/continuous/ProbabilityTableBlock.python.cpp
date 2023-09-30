@@ -15,8 +15,8 @@ namespace continuous {
 void wrapProbabilityTableBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ProbabilityTableBlock;
-  using ProbabilityTable = njoy::ACEtk::block::ProbabilityTable;
+  using Block = njoy::ACEtk::continuous::ProbabilityTableBlock;
+  using ProbabilityTable = njoy::ACEtk::continuous::ProbabilityTable;
 
   // wrap views created by this block
 

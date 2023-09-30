@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -143,7 +143,7 @@ public:
 using YP = MultiplicityReactionNumberBlock;
 using YH = MultiplicityReactionNumberBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

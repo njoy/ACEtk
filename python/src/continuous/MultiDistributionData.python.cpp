@@ -15,8 +15,8 @@ namespace continuous {
 void wrapMultiDistributionData( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::MultiDistributionData;
-  using DistributionProbability = njoy::ACEtk::block::DistributionProbability;
+  using Block = njoy::ACEtk::continuous::MultiDistributionData;
+  using DistributionProbability = njoy::ACEtk::continuous::DistributionProbability;
   using DistributionData = Block::DistributionData;
 
   // wrap views created by this block

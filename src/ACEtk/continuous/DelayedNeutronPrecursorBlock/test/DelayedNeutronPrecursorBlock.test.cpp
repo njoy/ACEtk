@@ -7,8 +7,8 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DelayedNeutronPrecursorBlock = block::DelayedNeutronPrecursorBlock;
-using DelayedNeutronPrecursorData = block::DelayedNeutronPrecursorData;
+using DelayedNeutronPrecursorBlock = continuous::DelayedNeutronPrecursorBlock;
+using DelayedNeutronPrecursorData = continuous::DelayedNeutronPrecursorData;
 
 std::vector< double > chunk();
 void verifyChunk( const DelayedNeutronPrecursorBlock& );

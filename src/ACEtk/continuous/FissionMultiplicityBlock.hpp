@@ -11,7 +11,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -86,7 +86,7 @@ public:
 using NU = FissionMultiplicityBlock;
 using DNU = FissionMultiplicityBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

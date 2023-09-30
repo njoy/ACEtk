@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using MultiplicityReactionNumberBlock = block::MultiplicityReactionNumberBlock;
+using MultiplicityReactionNumberBlock = continuous::MultiplicityReactionNumberBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const MultiplicityReactionNumberBlock& );

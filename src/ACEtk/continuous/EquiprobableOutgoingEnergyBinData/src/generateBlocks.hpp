@@ -7,8 +7,8 @@ void generateBlocks() {
   auto bins = incident + ne + 1;
   auto end = this->end();
 
-  this->interpolation_ = block::InterpolationData( this->name(),
-                                                   begin, incident );
+  this->interpolation_ = continuous::InterpolationData( this->name(),
+                                                        begin, incident );
   this->energies_ = base::ColumnData( this->name(), incident, bins, 1 );
 
   for ( unsigned int index = 1; index <= ne; ++index ) {

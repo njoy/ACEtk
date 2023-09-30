@@ -24,7 +24,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /* type alias */
 using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
@@ -62,7 +62,7 @@ class SecondaryParticleEnergyDistributionBlock :
                                         EnergyDistributionData >;
 
   /* fields */
-  std::optional< block::TYRH > tyrh_;
+  std::optional< continuous::TYRH > tyrh_;
   std::vector< std::optional< ReferenceFrame > > frames_;
 
   /* auxiliary functions */
@@ -73,7 +73,7 @@ class SecondaryParticleEnergyDistributionBlock :
   /**
    *  @brief Return the associated TYRH block
    */
-  const std::optional< block::TYRH >& TYRH() const { return this->tyrh_; }
+  const std::optional< continuous::TYRH >& TYRH() const { return this->tyrh_; }
 
 public:
 
@@ -180,7 +180,7 @@ using DLWP = SecondaryParticleEnergyDistributionBlock;
 using DNED = SecondaryParticleEnergyDistributionBlock;
 using DLWH = SecondaryParticleEnergyDistributionBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

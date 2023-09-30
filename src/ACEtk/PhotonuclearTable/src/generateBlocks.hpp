@@ -64,17 +64,17 @@ void generateBlocks() {
 
   // reaction number block
   iterators = block( 6 );
-  this->mtr_ = block::MTR( iterators.first, iterators.second, this->NTR() );
+  this->mtr_ = continuous::MTR( iterators.first, iterators.second, this->NTR() );
 
   // Q value block
   iterators = block( 7 );
-  this->lqr_ = block::LQR( iterators.first, iterators.second, this->NTR() );
+  this->lqr_ = continuous::LQR( iterators.first, iterators.second, this->NTR() );
 
   // cross section block
   locators = block( 8 );
   iterators = block( 9 );
-  this->sig_ = block::SIG( locators.first, iterators.first, iterators.second,
-                           this->NTR() );
+  this->sig_ = continuous::SIG( locators.first, iterators.first, iterators.second,
+                                this->NTR() );
 
   // secondary particles
   bool present = ( this->NTYPE() > 0 );

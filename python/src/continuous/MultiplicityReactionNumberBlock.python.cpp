@@ -15,7 +15,7 @@ namespace continuous {
 void wrapMultiplicityReactionNumberBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::MultiplicityReactionNumberBlock;
+  using Block = njoy::ACEtk::continuous::MultiplicityReactionNumberBlock;
 
   // wrap views created by this block
 

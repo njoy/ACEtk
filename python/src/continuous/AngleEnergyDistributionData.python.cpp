@@ -15,8 +15,8 @@ namespace continuous {
 void wrapAngleEnergyDistributionData( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::AngleEnergyDistributionData;
-  using Distribution = njoy::ACEtk::block::TabulatedAngleEnergyDistribution;
+  using Block = njoy::ACEtk::continuous::AngleEnergyDistributionData;
+  using Distribution = njoy::ACEtk::continuous::TabulatedAngleEnergyDistribution;
 
   // wrap views created by this block
 

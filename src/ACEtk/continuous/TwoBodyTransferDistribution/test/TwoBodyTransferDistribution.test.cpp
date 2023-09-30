@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using TwoBodyTransferDistribution = block::TwoBodyTransferDistribution;
+using TwoBodyTransferDistribution = continuous::TwoBodyTransferDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const TwoBodyTransferDistribution& );

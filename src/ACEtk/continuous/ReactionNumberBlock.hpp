@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -138,7 +138,7 @@ using MTR = ReactionNumberBlock;
 using MTRP = ReactionNumberBlock;
 using MTRH = ReactionNumberBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

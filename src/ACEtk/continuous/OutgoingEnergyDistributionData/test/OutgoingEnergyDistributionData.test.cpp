@@ -7,8 +7,8 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
-using TabulatedEnergyDistribution = block::TabulatedEnergyDistribution;
+using OutgoingEnergyDistributionData = continuous::OutgoingEnergyDistributionData;
+using TabulatedEnergyDistribution = continuous::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const OutgoingEnergyDistributionData& );

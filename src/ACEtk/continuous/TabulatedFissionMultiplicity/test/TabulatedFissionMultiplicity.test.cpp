@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using TabulatedFissionMultiplicity = block::TabulatedFissionMultiplicity;
+using TabulatedFissionMultiplicity = continuous::TabulatedFissionMultiplicity;
 
 std::vector< double > chunk();
 void verifyChunk( const TabulatedFissionMultiplicity& );

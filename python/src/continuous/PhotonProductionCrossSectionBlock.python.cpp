@@ -15,8 +15,8 @@ namespace continuous {
 void wrapPhotonProductionCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PhotonProductionCrossSectionBlock;
-  using PhotonProductionData = njoy::ACEtk::block::PhotonProductionData;
+  using Block = njoy::ACEtk::continuous::PhotonProductionCrossSectionBlock;
+  using PhotonProductionData = njoy::ACEtk::continuous::PhotonProductionData;
 
   // wrap views created by this block
 

@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -87,7 +87,7 @@ public:
 
 using ACELAW3 = LevelScatteringDistribution;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

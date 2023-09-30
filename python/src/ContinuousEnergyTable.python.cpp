@@ -16,30 +16,30 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   // type aliases
   using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::ContinuousEnergyTable;
-  using ESZ = njoy::ACEtk::block::ESZ;
-  using NU = njoy::ACEtk::block::NU;
-  using DNU = njoy::ACEtk::block::DNU;
-  using MTR = njoy::ACEtk::block::MTR;
-  using LQR = njoy::ACEtk::block::LQR;
-  using SIG = njoy::ACEtk::block::SIG;
-  using AND = njoy::ACEtk::block::AND;
-  using DLW = njoy::ACEtk::block::DLW;
-  using BDD = njoy::ACEtk::block::BDD;
-  using DNED = njoy::ACEtk::block::DNED;
-  using GPD = njoy::ACEtk::block::GPD;
-  using MTRP = njoy::ACEtk::block::MTRP;
-  using SIGP = njoy::ACEtk::block::SIGP;
-  using ANDP = njoy::ACEtk::block::ANDP;
-  using DLWP = njoy::ACEtk::block::DLWP;
-  using YP = njoy::ACEtk::block::YP;
-  using UNR = njoy::ACEtk::block::UNR;
-  using PTYPE = njoy::ACEtk::block::PTYPE;
-  using HPD = njoy::ACEtk::block::HPD;
-  using MTRH = njoy::ACEtk::block::MTRH;
-  using SIGH = njoy::ACEtk::block::SIGH;
-  using ANDH = njoy::ACEtk::block::ANDH;
-  using DLWH = njoy::ACEtk::block::DLWH;
-  using YH = njoy::ACEtk::block::YH;
+  using ESZ = njoy::ACEtk::continuous::ESZ;
+  using NU = njoy::ACEtk::continuous::NU;
+  using DNU = njoy::ACEtk::continuous::DNU;
+  using MTR = njoy::ACEtk::continuous::MTR;
+  using LQR = njoy::ACEtk::continuous::LQR;
+  using SIG = njoy::ACEtk::continuous::SIG;
+  using AND = njoy::ACEtk::continuous::AND;
+  using DLW = njoy::ACEtk::continuous::DLW;
+  using BDD = njoy::ACEtk::continuous::BDD;
+  using DNED = njoy::ACEtk::continuous::DNED;
+  using GPD = njoy::ACEtk::continuous::GPD;
+  using MTRP = njoy::ACEtk::continuous::MTRP;
+  using SIGP = njoy::ACEtk::continuous::SIGP;
+  using ANDP = njoy::ACEtk::continuous::ANDP;
+  using DLWP = njoy::ACEtk::continuous::DLWP;
+  using YP = njoy::ACEtk::continuous::YP;
+  using UNR = njoy::ACEtk::continuous::UNR;
+  using PTYPE = njoy::ACEtk::continuous::PTYPE;
+  using HPD = njoy::ACEtk::continuous::HPD;
+  using MTRH = njoy::ACEtk::continuous::MTRH;
+  using SIGH = njoy::ACEtk::continuous::SIGH;
+  using ANDH = njoy::ACEtk::continuous::ANDH;
+  using DLWH = njoy::ACEtk::continuous::DLWH;
+  using YH = njoy::ACEtk::continuous::YH;
 
   // wrap views created by this table
 

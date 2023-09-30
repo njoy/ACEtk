@@ -15,7 +15,7 @@ namespace continuous {
 void wrapTabulatedAngularDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedAngularDistribution;
+  using Block = njoy::ACEtk::continuous::TabulatedAngularDistribution;
 
   // wrap views created by this block
 

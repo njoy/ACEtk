@@ -15,7 +15,7 @@ namespace continuous {
 void wrapTabulatedFissionMultiplicity( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedFissionMultiplicity;
+  using Block = njoy::ACEtk::continuous::TabulatedFissionMultiplicity;
 
   // wrap views created by this block
 

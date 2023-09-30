@@ -15,7 +15,7 @@ namespace continuous {
 void wrapTabulatedKalbachMannDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedKalbachMannDistribution;
+  using Block = njoy::ACEtk::continuous::TabulatedKalbachMannDistribution;
 
   // wrap views created by this block
 

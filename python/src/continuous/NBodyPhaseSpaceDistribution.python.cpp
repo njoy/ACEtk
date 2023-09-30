@@ -15,7 +15,7 @@ namespace continuous {
 void wrapNBodyPhaseSpaceDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::NBodyPhaseSpaceDistribution;
+  using Block = njoy::ACEtk::continuous::NBodyPhaseSpaceDistribution;
 
   // wrap views created by this block
 

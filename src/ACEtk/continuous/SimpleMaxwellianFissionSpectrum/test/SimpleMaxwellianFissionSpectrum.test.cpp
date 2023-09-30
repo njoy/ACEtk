@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using SimpleMaxwellianFissionSpectrum = block::SimpleMaxwellianFissionSpectrum;
+using SimpleMaxwellianFissionSpectrum = continuous::SimpleMaxwellianFissionSpectrum;
 
 std::vector< double > chunk();
 void verifyChunk( const SimpleMaxwellianFissionSpectrum& );

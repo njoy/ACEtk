@@ -15,7 +15,7 @@ namespace continuous {
 void wrapReactionQValueBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::ReactionQValueBlock;
+  using Block = njoy::ACEtk::continuous::ReactionQValueBlock;
 
   // wrap views created by this block
 

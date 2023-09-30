@@ -19,7 +19,7 @@ namespace base {
 class TabulatedData : protected Base {
 
   /* fields */
-  block::InterpolationData interpolation_;
+  continuous::InterpolationData interpolation_;
   ColumnData data_;
 
   /* auxiliary functions */

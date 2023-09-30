@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using TabulatedMultiplicity = block::TabulatedMultiplicity;
+using TabulatedMultiplicity = continuous::TabulatedMultiplicity;
 
 std::vector< double > chunk();
 void verifyChunk( const TabulatedMultiplicity& );

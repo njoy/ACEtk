@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using TabulatedEnergyDistribution = block::TabulatedEnergyDistribution;
+using TabulatedEnergyDistribution = continuous::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const TabulatedEnergyDistribution& );

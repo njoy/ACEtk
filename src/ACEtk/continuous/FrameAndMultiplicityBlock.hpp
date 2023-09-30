@@ -11,7 +11,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -106,7 +106,7 @@ public:
 using TYR = FrameAndMultiplicityBlock;
 using TYRH = FrameAndMultiplicityBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

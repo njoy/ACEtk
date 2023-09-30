@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ParameterData = block::ParameterData;
+using ParameterData = continuous::ParameterData;
 
 std::vector< double > chunk();
 void verifyChunk( const ParameterData& );

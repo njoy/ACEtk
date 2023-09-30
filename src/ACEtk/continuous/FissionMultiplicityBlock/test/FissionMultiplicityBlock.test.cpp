@@ -7,9 +7,9 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using FissionMultiplicityBlock = block::FissionMultiplicityBlock;
-using PolynomialFissionMultiplicity = block::PolynomialFissionMultiplicity;
-using TabulatedFissionMultiplicity = block::TabulatedFissionMultiplicity;
+using FissionMultiplicityBlock = continuous::FissionMultiplicityBlock;
+using PolynomialFissionMultiplicity = continuous::PolynomialFissionMultiplicity;
+using TabulatedFissionMultiplicity = continuous::TabulatedFissionMultiplicity;
 
 std::vector< double > chunk();
 std::vector< double > chunkWithPromptAndTotal();

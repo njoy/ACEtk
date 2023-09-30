@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using NBodyPhaseSpaceDistribution = block::NBodyPhaseSpaceDistribution;
+using NBodyPhaseSpaceDistribution = continuous::NBodyPhaseSpaceDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const NBodyPhaseSpaceDistribution& );

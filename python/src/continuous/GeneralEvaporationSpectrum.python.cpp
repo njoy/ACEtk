@@ -15,7 +15,7 @@ namespace continuous {
 void wrapGeneralEvaporationSpectrum( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::GeneralEvaporationSpectrum;
+  using Block = njoy::ACEtk::continuous::GeneralEvaporationSpectrum;
 
   // wrap views created by this block
 

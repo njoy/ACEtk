@@ -16,8 +16,8 @@ void wrapEquiprobableOutgoingEnergyBinData( python::module& module,
                                             python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::EquiprobableOutgoingEnergyBinData;
-  using Distribution = njoy::ACEtk::block::EquiprobableOutgoingEnergyBins;
+  using Block = njoy::ACEtk::continuous::EquiprobableOutgoingEnergyBinData;
+  using Distribution = njoy::ACEtk::continuous::EquiprobableOutgoingEnergyBins;
 
   // wrap views created by this block
 

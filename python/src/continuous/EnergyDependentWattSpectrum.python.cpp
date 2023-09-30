@@ -15,8 +15,8 @@ namespace continuous {
 void wrapEnergyDependentWattSpectrum( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::EnergyDependentWattSpectrum;
-  using ParameterData = njoy::ACEtk::block::ParameterData;
+  using Block = njoy::ACEtk::continuous::EnergyDependentWattSpectrum;
+  using ParameterData = njoy::ACEtk::continuous::ParameterData;
 
   // wrap views created by this block
 

@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DistributionProbability = block::DistributionProbability;
+using DistributionProbability = continuous::DistributionProbability;
 
 std::vector< double > chunk();
 void verifyChunk( const DistributionProbability& );

@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotonProductionBlock = block::PhotonProductionBlock;
+using PhotonProductionBlock = continuous::PhotonProductionBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const PhotonProductionBlock& );

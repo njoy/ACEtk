@@ -8,7 +8,7 @@
 // convenience typedefs
 using namespace njoy::ACEtk;
 using PhotonProductionCrossSectionData =
-              block::PhotonProductionCrossSectionData;
+              continuous::PhotonProductionCrossSectionData;
 
 std::vector< double > chunk();
 void verifyChunk( const PhotonProductionCrossSectionData& );

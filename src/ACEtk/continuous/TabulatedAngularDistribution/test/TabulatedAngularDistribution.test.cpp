@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using TabulatedAngularDistribution = block::TabulatedAngularDistribution;
+using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const TabulatedAngularDistribution& );

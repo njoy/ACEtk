@@ -10,20 +10,20 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
 
       utility::overload{
 
-        [ &xss, index ] ( const block::FullyIsotropicDistribution& value ) {
+        [ &xss, index ] ( const continuous::FullyIsotropicDistribution& value ) {
 
           xss[index] = 0;
         },
-        [ &xss, index ] ( const block::DistributionGivenElsewhere& value ) {
+        [ &xss, index ] ( const continuous::DistributionGivenElsewhere& value ) {
 
           xss[index] = -1;
         },
-        [ &xss, index, nr ] ( const block::AngularDistributionData& value ) {
+        [ &xss, index, nr ] ( const continuous::AngularDistributionData& value ) {
 
           xss[index] = xss.size() - nr + 1;
 
           // remake the internal xss array with the proper locators
-          const block::AngularDistributionData temp(
+          const continuous::AngularDistributionData temp(
                     std::move( value.distributions() ),
                     xss[index] );
           xss.insert( xss.end(), temp.begin(), temp.end() );

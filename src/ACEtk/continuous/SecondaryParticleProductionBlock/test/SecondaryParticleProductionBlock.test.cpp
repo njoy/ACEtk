@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using SecondaryParticleProductionBlock = block::SecondaryParticleProductionBlock;
+using SecondaryParticleProductionBlock = continuous::SecondaryParticleProductionBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const SecondaryParticleProductionBlock& );

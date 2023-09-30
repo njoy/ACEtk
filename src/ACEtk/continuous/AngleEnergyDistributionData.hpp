@@ -10,7 +10,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -226,7 +226,7 @@ public:
 
 using ACELAW67 = AngleEnergyDistributionData;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

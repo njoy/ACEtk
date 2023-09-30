@@ -7,8 +7,8 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using CrossSectionBlock = block::CrossSectionBlock;
-using CrossSectionData = block::CrossSectionData;
+using CrossSectionBlock = continuous::CrossSectionBlock;
+using CrossSectionData = continuous::CrossSectionData;
 
 std::vector< double > chunk();
 void verifyChunk( const CrossSectionBlock& );

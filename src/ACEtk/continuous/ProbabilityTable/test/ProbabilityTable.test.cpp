@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ProbabilityTable = block::ProbabilityTable;
+using ProbabilityTable = continuous::ProbabilityTable;
 
 std::vector< double > chunk();
 void verifyChunk( const ProbabilityTable& );

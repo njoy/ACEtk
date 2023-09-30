@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using FrameAndMultiplicityBlock = block::FrameAndMultiplicityBlock;
+using FrameAndMultiplicityBlock = continuous::FrameAndMultiplicityBlock;
 
 std::vector< double > chunk();
 std::vector< double > chunkTYRH();

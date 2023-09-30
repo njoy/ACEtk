@@ -7,10 +7,10 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PhotonProductionCrossSectionBlock = block::PhotonProductionCrossSectionBlock;
-using PhotonProductionCrossSectionData = block::PhotonProductionCrossSectionData;
-using TabulatedSecondaryParticleMultiplicity = block::TabulatedSecondaryParticleMultiplicity;
-using PhotonProductionData = block::PhotonProductionData;
+using PhotonProductionCrossSectionBlock = continuous::PhotonProductionCrossSectionBlock;
+using PhotonProductionCrossSectionData = continuous::PhotonProductionCrossSectionData;
+using TabulatedSecondaryParticleMultiplicity = continuous::TabulatedSecondaryParticleMultiplicity;
+using PhotonProductionData = continuous::PhotonProductionData;
 
 std::vector< double > chunk();
 void verifyChunk( const PhotonProductionCrossSectionBlock& );

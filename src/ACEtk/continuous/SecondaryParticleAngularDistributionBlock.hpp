@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -144,7 +144,7 @@ public:
 using ANDP = SecondaryParticleAngularDistributionBlock;
 using ANDH = SecondaryParticleAngularDistributionBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

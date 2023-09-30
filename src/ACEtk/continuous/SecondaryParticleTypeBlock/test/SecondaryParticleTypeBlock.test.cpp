@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using SecondaryParticleTypeBlock = block::SecondaryParticleTypeBlock;
+using SecondaryParticleTypeBlock = continuous::SecondaryParticleTypeBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const SecondaryParticleTypeBlock& );

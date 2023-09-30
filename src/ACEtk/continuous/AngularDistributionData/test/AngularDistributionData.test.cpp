@@ -7,10 +7,10 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using AngularDistributionData = block::AngularDistributionData;
-using IsotropicAngularDistribution = block::IsotropicAngularDistribution;
-using EquiprobableAngularBins = block::EquiprobableAngularBins;
-using TabulatedAngularDistribution = block::TabulatedAngularDistribution;
+using AngularDistributionData = continuous::AngularDistributionData;
+using IsotropicAngularDistribution = continuous::IsotropicAngularDistribution;
+using EquiprobableAngularBins = continuous::EquiprobableAngularBins;
+using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
 using Distribution = AngularDistributionData::Distribution;
 
 std::vector< double > chunk();

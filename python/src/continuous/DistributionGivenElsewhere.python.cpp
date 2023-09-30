@@ -15,7 +15,7 @@ namespace continuous {
 void wrapDistributionGivenElsewhere( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::DistributionGivenElsewhere;
+  using Block = njoy::ACEtk::continuous::DistributionGivenElsewhere;
 
   // wrap views created by this block
 

@@ -17,15 +17,15 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
   using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::PhotonuclearTable;
   using ESZU = njoy::ACEtk::photonuclear::ESZU;
-  using MTR = njoy::ACEtk::block::MTR;
-  using LQR = njoy::ACEtk::block::LQR;
-  using SIG = njoy::ACEtk::block::SIG;
-  using CrossSectionData = njoy::ACEtk::block::CrossSectionData;
-  using MTRH = njoy::ACEtk::block::MTRH;
-  using LQR = njoy::ACEtk::block::LQR;
-  using SIGH = njoy::ACEtk::block::SIGH;
-  using ANDH = njoy::ACEtk::block::ANDH;
-  using DLWH = njoy::ACEtk::block::DLWH;
+  using MTR = njoy::ACEtk::continuous::MTR;
+  using LQR = njoy::ACEtk::continuous::LQR;
+  using SIG = njoy::ACEtk::continuous::SIG;
+  using CrossSectionData = njoy::ACEtk::continuous::CrossSectionData;
+  using MTRH = njoy::ACEtk::continuous::MTRH;
+  using LQR = njoy::ACEtk::continuous::LQR;
+  using SIGH = njoy::ACEtk::continuous::SIGH;
+  using ANDH = njoy::ACEtk::continuous::ANDH;
+  using DLWH = njoy::ACEtk::continuous::DLWH;
 
   // wrap views created by this table
 

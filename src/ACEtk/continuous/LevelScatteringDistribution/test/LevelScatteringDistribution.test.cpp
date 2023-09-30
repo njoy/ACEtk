@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using LevelScatteringDistribution = block::LevelScatteringDistribution;
+using LevelScatteringDistribution = continuous::LevelScatteringDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const LevelScatteringDistribution& );

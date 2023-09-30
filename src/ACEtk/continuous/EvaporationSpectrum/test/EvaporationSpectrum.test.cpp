@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using EvaporationSpectrum = block::EvaporationSpectrum;
+using EvaporationSpectrum = continuous::EvaporationSpectrum;
 
 std::vector< double > chunk();
 void verifyChunk( const EvaporationSpectrum& );

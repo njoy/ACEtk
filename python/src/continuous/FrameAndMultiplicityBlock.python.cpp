@@ -16,7 +16,7 @@ void wrapFrameAndMultiplicityBlock( python::module& module,
                                     python::module& viewmodule ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::FrameAndMultiplicityBlock;
+  using Block = njoy::ACEtk::continuous::FrameAndMultiplicityBlock;
   using ReferenceFrame = njoy::ACEtk::ReferenceFrame;
   using ReferenceFrameRange = BasicRandomAccessAnyView< ReferenceFrame >;
 

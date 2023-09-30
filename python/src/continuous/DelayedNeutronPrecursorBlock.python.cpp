@@ -15,8 +15,8 @@ namespace continuous {
 void wrapDelayedNeutronPrecursorBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::DelayedNeutronPrecursorBlock;
-  using DelayedNeutronPrecursorData = njoy::ACEtk::block::DelayedNeutronPrecursorData;
+  using Block = njoy::ACEtk::continuous::DelayedNeutronPrecursorBlock;
+  using DelayedNeutronPrecursorData = njoy::ACEtk::continuous::DelayedNeutronPrecursorData;
 
   // wrap views created by this block
 

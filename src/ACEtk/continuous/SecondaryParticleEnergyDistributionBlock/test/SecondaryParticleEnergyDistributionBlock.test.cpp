@@ -7,12 +7,12 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using SecondaryParticleEnergyDistributionBlock = block::SecondaryParticleEnergyDistributionBlock;
-using LevelScatteringDistribution = block::LevelScatteringDistribution;
-using TabulatedKalbachMannDistribution = block::TabulatedKalbachMannDistribution;
-using KalbachMannDistributionData = block::KalbachMannDistributionData;
-using EnergyDistributionData = block::EnergyDistributionData;
-using FrameAndMultiplicityBlock = block::FrameAndMultiplicityBlock;
+using SecondaryParticleEnergyDistributionBlock = continuous::SecondaryParticleEnergyDistributionBlock;
+using LevelScatteringDistribution = continuous::LevelScatteringDistribution;
+using TabulatedKalbachMannDistribution = continuous::TabulatedKalbachMannDistribution;
+using KalbachMannDistributionData = continuous::KalbachMannDistributionData;
+using EnergyDistributionData = continuous::EnergyDistributionData;
+using FrameAndMultiplicityBlock = continuous::FrameAndMultiplicityBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const SecondaryParticleEnergyDistributionBlock& );

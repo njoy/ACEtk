@@ -11,7 +11,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /* type alias */
 using PhotonProductionData = std::variant<
@@ -118,7 +118,7 @@ public:
 
 using SIGP = PhotonProductionCrossSectionBlock;
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

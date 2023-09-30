@@ -16,7 +16,7 @@ void wrapTabulatedSecondaryParticleMultiplicity( python::module& module,
                                                  python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedSecondaryParticleMultiplicity;
+  using Block = njoy::ACEtk::continuous::TabulatedSecondaryParticleMultiplicity;
 
   // wrap views created by this block
 

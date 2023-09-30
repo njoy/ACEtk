@@ -16,7 +16,7 @@ void wrapTabulatedAngularDistributionWithProbability( python::module& module,
                                                       python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedAngularDistributionWithProbability;
+  using Block = njoy::ACEtk::continuous::TabulatedAngularDistributionWithProbability;
 
   // wrap views created by this block
 

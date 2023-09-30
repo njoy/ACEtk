@@ -8,16 +8,16 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using AngularDistributionData = block::AngularDistributionData;
-using FullyIsotropicDistribution = block::FullyIsotropicDistribution;
-using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
-using LevelScatteringDistribution = block::LevelScatteringDistribution;
-using KalbachMannDistributionData = block::KalbachMannDistributionData;
-using DiscretePhotonDistribution = block::DiscretePhotonDistribution;
-using OutgoingEnergyDistributionData = block::OutgoingEnergyDistributionData;
-using PhotonProductionCrossSectionData = block::PhotonProductionCrossSectionData;
-using TabulatedSecondaryParticleMultiplicity = block::TabulatedSecondaryParticleMultiplicity;
-using TwoBodyTransferDistribution = block::TwoBodyTransferDistribution;
+using AngularDistributionData = continuous::AngularDistributionData;
+using FullyIsotropicDistribution = continuous::FullyIsotropicDistribution;
+using DistributionGivenElsewhere = continuous::DistributionGivenElsewhere;
+using LevelScatteringDistribution = continuous::LevelScatteringDistribution;
+using KalbachMannDistributionData = continuous::KalbachMannDistributionData;
+using DiscretePhotonDistribution = continuous::DiscretePhotonDistribution;
+using OutgoingEnergyDistributionData = continuous::OutgoingEnergyDistributionData;
+using PhotonProductionCrossSectionData = continuous::PhotonProductionCrossSectionData;
+using TabulatedSecondaryParticleMultiplicity = continuous::TabulatedSecondaryParticleMultiplicity;
+using TwoBodyTransferDistribution = continuous::TwoBodyTransferDistribution;
 
 void verifyChunkU235( const ContinuousEnergyTable& );
 void verifyChunkHe3( const ContinuousEnergyTable& );
@@ -242,12 +242,12 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       ContinuousEnergyTable base( std::move( table ) );
 
-      std::optional< std::vector< block::HPD > > hpd = std::vector< block::HPD >{};
-      std::optional< std::vector< block::MTRH > > mtrh = std::vector< block::MTRH >{};
-      std::optional< std::vector< block::SIGH > > sigh = std::vector< block::SIGH >{};
-      std::optional< std::vector< block::ANDH > > andh = std::vector< block::ANDH >{};
-      std::optional< std::vector< block::DLWH > > dlwh = std::vector< block::DLWH >{};
-      std::optional< std::vector< block::YH > > yh = std::vector< block::YH >{};
+      std::optional< std::vector< continuous::HPD > > hpd = std::vector< continuous::HPD >{};
+      std::optional< std::vector< continuous::MTRH > > mtrh = std::vector< continuous::MTRH >{};
+      std::optional< std::vector< continuous::SIGH > > sigh = std::vector< continuous::SIGH >{};
+      std::optional< std::vector< continuous::ANDH > > andh = std::vector< continuous::ANDH >{};
+      std::optional< std::vector< continuous::DLWH > > dlwh = std::vector< continuous::DLWH >{};
+      std::optional< std::vector< continuous::YH > > yh = std::vector< continuous::YH >{};
       for ( unsigned int index = 1; index <= base.NTYPE(); ++index ) {
 
         hpd->push_back( base.HPD( index ) );
@@ -456,8 +456,8 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   CHECK( true == chunk.NU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->multiplicity() );
-  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->totalFissionMultiplicity().value() );
+  auto prompt = std::get< njoy::ACEtk::continuous::TabulatedFissionMultiplicity >( chunk.NU()->multiplicity() );
+  auto total = std::get< njoy::ACEtk::continuous::TabulatedFissionMultiplicity >( chunk.NU()->totalFissionMultiplicity().value() );
 
   CHECK( 0 == prompt.NB() );
   CHECK( 79 == prompt.NE() );
@@ -678,7 +678,7 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
   CHECK( false == chunk.DNU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU()->multiplicity() );
+  auto delayed = std::get< njoy::ACEtk::continuous::TabulatedFissionMultiplicity >( chunk.DNU()->multiplicity() );
 
   CHECK( 0 == delayed.NB() );
   CHECK( 6 == delayed.NE() );
@@ -1028,8 +1028,8 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   CHECK( true == chunk.NU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto prompt = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->multiplicity() );
-  auto total = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.NU()->totalFissionMultiplicity().value() );
+  auto prompt = std::get< njoy::ACEtk::continuous::TabulatedFissionMultiplicity >( chunk.NU()->multiplicity() );
+  auto total = std::get< njoy::ACEtk::continuous::TabulatedFissionMultiplicity >( chunk.NU()->totalFissionMultiplicity().value() );
 
   CHECK( 0 == prompt.NB() );
   CHECK( 6 == prompt.NE() );
@@ -1250,7 +1250,7 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
 
   CHECK( false == chunk.DNU()->hasPromptAndTotalFissionMultiplicity() );
 
-  auto delayed = std::get< njoy::ACEtk::block::TabulatedFissionMultiplicity >( chunk.DNU()->multiplicity() );
+  auto delayed = std::get< njoy::ACEtk::continuous::TabulatedFissionMultiplicity >( chunk.DNU()->multiplicity() );
 
   CHECK( 0 == delayed.NB() );
   CHECK( 4 == delayed.NE() );

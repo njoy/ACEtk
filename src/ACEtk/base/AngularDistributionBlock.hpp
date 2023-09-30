@@ -24,9 +24,9 @@ class AngularDistributionBlock : protected Base {
 public:
 
   /* type alias */
-  using DistributionData = std::variant< block::FullyIsotropicDistribution,
-                                         block::DistributionGivenElsewhere,
-                                         block::AngularDistributionData >;
+  using DistributionData = std::variant< continuous::FullyIsotropicDistribution,
+                                         continuous::DistributionGivenElsewhere,
+                                         continuous::AngularDistributionData >;
 
 private:
 

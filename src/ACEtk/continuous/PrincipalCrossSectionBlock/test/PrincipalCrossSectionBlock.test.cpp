@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using PrincipalCrossSectionBlock = block::PrincipalCrossSectionBlock;
+using PrincipalCrossSectionBlock = continuous::PrincipalCrossSectionBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const PrincipalCrossSectionBlock& );

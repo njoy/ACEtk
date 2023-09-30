@@ -15,8 +15,8 @@ namespace continuous {
 void wrapCrossSectionBlock( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::CrossSectionBlock;
-  using CrossSectionData = njoy::ACEtk::block::CrossSectionData;
+  using Block = njoy::ACEtk::continuous::CrossSectionBlock;
+  using CrossSectionData = njoy::ACEtk::continuous::CrossSectionData;
 
   // wrap views created by this block
 

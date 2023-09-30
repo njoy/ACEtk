@@ -9,6 +9,6 @@ void generateBlocks() {
   ne = static_cast< std::size_t >( this->IXSS( distance + 1 + 2 * nr + 1 ) );
   auto end = beginb + 2 * nr + 2 * ne + 2;
 
-  this->a_ = block::ParameterData( begina, beginb );
-  this->b_ = block::ParameterData( beginb, end );
+  this->a_ = continuous::ParameterData( begina, beginb );
+  this->b_ = continuous::ParameterData( beginb, end );
 }

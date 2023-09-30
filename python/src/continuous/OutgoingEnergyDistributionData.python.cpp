@@ -16,8 +16,8 @@ void wrapOutgoingEnergyDistributionData( python::module& module,
                                          python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::OutgoingEnergyDistributionData;
-  using Distribution = njoy::ACEtk::block::TabulatedEnergyDistribution;
+  using Block = njoy::ACEtk::continuous::OutgoingEnergyDistributionData;
+  using Distribution = njoy::ACEtk::continuous::TabulatedEnergyDistribution;
 
   // wrap views created by this block
 

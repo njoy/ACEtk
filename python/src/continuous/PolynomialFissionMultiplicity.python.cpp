@@ -15,7 +15,7 @@ namespace continuous {
 void wrapPolynomialFissionMultiplicity( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::PolynomialFissionMultiplicity;
+  using Block = njoy::ACEtk::continuous::PolynomialFissionMultiplicity;
 
   // wrap views created by this block
 

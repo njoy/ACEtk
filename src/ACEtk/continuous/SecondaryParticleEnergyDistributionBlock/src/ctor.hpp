@@ -78,7 +78,7 @@ SecondaryParticleEnergyDistributionBlock(
  */
 SecondaryParticleEnergyDistributionBlock(
     Iterator lsig, Iterator sig, Iterator end,
-    block::TYRH tyrh, unsigned int nr ) :
+    continuous::TYRH tyrh, unsigned int nr ) :
   BlockWithLocators( "DLWH", lsig, sig, end, nr ), tyrh_( std::move( tyrh ) ) {
 
   this->generateFrames();

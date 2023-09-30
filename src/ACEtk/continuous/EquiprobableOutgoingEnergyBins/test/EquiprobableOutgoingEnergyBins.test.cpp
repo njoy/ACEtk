@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using EquiprobableOutgoingEnergyBins = block::EquiprobableOutgoingEnergyBins;
+using EquiprobableOutgoingEnergyBins = continuous::EquiprobableOutgoingEnergyBins;
 
 std::vector< double > chunk();
 void verifyChunk( const EquiprobableOutgoingEnergyBins& );

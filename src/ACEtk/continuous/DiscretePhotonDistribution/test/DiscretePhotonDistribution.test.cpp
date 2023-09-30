@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using DiscretePhotonDistribution = block::DiscretePhotonDistribution;
+using DiscretePhotonDistribution = continuous::DiscretePhotonDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const DiscretePhotonDistribution& );

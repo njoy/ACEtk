@@ -7,13 +7,13 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using AngularDistributionBlock = block::AngularDistributionBlock;
-using AngularDistributionData = block::AngularDistributionData;
-using FullyIsotropicDistribution = block::FullyIsotropicDistribution;
-using DistributionGivenElsewhere = block::DistributionGivenElsewhere;
-using DistributionData = block::AngularDistributionBlock::DistributionData;
-using TabulatedAngularDistribution = block::TabulatedAngularDistribution;
-using IsotropicAngularDistribution = block::IsotropicAngularDistribution;
+using AngularDistributionBlock = continuous::AngularDistributionBlock;
+using AngularDistributionData = continuous::AngularDistributionData;
+using FullyIsotropicDistribution = continuous::FullyIsotropicDistribution;
+using DistributionGivenElsewhere = continuous::DistributionGivenElsewhere;
+using DistributionData = continuous::AngularDistributionBlock::DistributionData;
+using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
+using IsotropicAngularDistribution = continuous::IsotropicAngularDistribution;
 
 std::vector< double > chunk();
 void verifyChunk( const AngularDistributionBlock& );

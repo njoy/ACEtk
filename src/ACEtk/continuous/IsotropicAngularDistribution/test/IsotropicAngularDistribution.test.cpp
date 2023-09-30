@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using IsotropicAngularDistribution = block::IsotropicAngularDistribution;
+using IsotropicAngularDistribution = continuous::IsotropicAngularDistribution;
 
 void verifyChunk( const IsotropicAngularDistribution& );
 

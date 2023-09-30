@@ -15,7 +15,7 @@ namespace continuous {
 void wrapEquiprobableOutgoingEnergyBins( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::EquiprobableOutgoingEnergyBins;
+  using Block = njoy::ACEtk::continuous::EquiprobableOutgoingEnergyBins;
 
   // wrap views created by this block
 

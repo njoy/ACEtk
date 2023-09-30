@@ -17,7 +17,7 @@ void wrapDosimetryTable( python::module& module, python::module& ) {
   // type aliases
   using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
   using Table = njoy::ACEtk::DosimetryTable;
-  using MTR = njoy::ACEtk::block::MTR;
+  using MTR = njoy::ACEtk::continuous::MTR;
   using SIGD = njoy::ACEtk::dosimetry::SIGD;
 
   // wrap views created by this table

@@ -7,7 +7,7 @@
 
 namespace njoy {
 namespace ACEtk {
-namespace block {
+namespace continuous {
 
 /**
  *  @class
@@ -28,7 +28,7 @@ public:
   DistributionGivenElsewhere() = default;
 };
 
-} // block namespace
+} // continuous namespace
 } // ACEtk namespace
 } // njoy namespace
 

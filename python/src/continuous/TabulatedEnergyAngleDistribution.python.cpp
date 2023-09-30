@@ -16,8 +16,8 @@ void wrapTabulatedEnergyAngleDistribution( python::module& module,
                                            python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::TabulatedEnergyAngleDistribution;
-  using Distribution = njoy::ACEtk::block::TabulatedAngularDistributionWithProbability;
+  using Block = njoy::ACEtk::continuous::TabulatedEnergyAngleDistribution;
+  using Distribution = njoy::ACEtk::continuous::TabulatedAngularDistributionWithProbability;
 
   // wrap views created by this block
 

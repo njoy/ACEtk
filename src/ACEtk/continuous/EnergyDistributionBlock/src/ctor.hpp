@@ -88,7 +88,7 @@ EnergyDistributionBlock( std::vector< EnergyDistributionData > distributions,
  *  @param[in] nr      the number of reactions
  */
 EnergyDistributionBlock( Iterator loc, Iterator data, Iterator end,
-                         block::TYR tyr, unsigned int nr ) :
+                         continuous::TYR tyr, unsigned int nr ) :
   Base( "DLW", loc, end ), nr_( nr ), iterator_( data ),
   tyr_( std::move( tyr ) ) {
 

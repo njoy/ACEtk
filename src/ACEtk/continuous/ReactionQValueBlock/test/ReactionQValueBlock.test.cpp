@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using ReactionQValueBlock = block::ReactionQValueBlock;
+using ReactionQValueBlock = continuous::ReactionQValueBlock;
 
 std::vector< double > chunk();
 void verifyChunk( const ReactionQValueBlock& );

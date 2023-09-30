@@ -15,7 +15,7 @@ namespace continuous {
 void wrapFullyIsotropicDistribution( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::FullyIsotropicDistribution;
+  using Block = njoy::ACEtk::continuous::FullyIsotropicDistribution;
 
   // wrap views created by this block
 

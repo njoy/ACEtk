@@ -15,7 +15,7 @@ namespace continuous {
 void wrapEquiprobableAngularBins( python::module& module, python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::EquiprobableAngularBins;
+  using Block = njoy::ACEtk::continuous::EquiprobableAngularBins;
 
   // wrap views created by this block
 

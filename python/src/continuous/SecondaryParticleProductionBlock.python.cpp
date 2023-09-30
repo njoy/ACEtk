@@ -16,7 +16,7 @@ void wrapSecondaryParticleProductionBlock( python::module& module,
                                            python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::block::SecondaryParticleProductionBlock;
+  using Block = njoy::ACEtk::continuous::SecondaryParticleProductionBlock;
 
   // wrap views created by this block
 

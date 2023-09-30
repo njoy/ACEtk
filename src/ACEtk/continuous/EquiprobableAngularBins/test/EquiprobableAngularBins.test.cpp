@@ -7,7 +7,7 @@
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using EquiprobableAngularBins = block::EquiprobableAngularBins;
+using EquiprobableAngularBins = continuous::EquiprobableAngularBins;
 
 std::vector< double > chunk();
 void verifyChunk( const EquiprobableAngularBins& );

@@ -1,10 +1,10 @@
-std::optional< std::vector< block::TYRH > >
-generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
+std::optional< std::vector< continuous::TYRH > >
+generateTYRH( const std::optional< std::vector< continuous::DLWH > >& dlwh ) {
 
-  std::optional< std::vector< block::TYRH > > tyrh = std::nullopt;
+  std::optional< std::vector< continuous::TYRH > > tyrh = std::nullopt;
   if ( dlwh.has_value() ) {
 
-    tyrh = std::vector< block::TYRH >{};
+    tyrh = std::vector< continuous::TYRH >{};
     for ( const auto& element : dlwh.value() ) {
 
       std::vector< ReferenceFrame > frames;
@@ -20,15 +20,15 @@ generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
 }
 
 Data generateData( unsigned int z, unsigned int a,
-                   photonuclear::ESZU&& eszu,  block::MTR&& mtr,
-                   block::LQR&& lqr, block::SIG&& sig,
+                   photonuclear::ESZU&& eszu,  continuous::MTR&& mtr,
+                   continuous::LQR&& lqr, continuous::SIG&& sig,
                    std::optional< std::vector< unsigned int > > ptype,
-                   std::optional< std::vector< block::CrossSectionData > > pxs,
-                   std::optional< std::vector< block::CrossSectionData > > phn,
-                   std::optional< std::vector< block::MTRH > > mtrh,
-                   std::optional< std::vector< block::SIGH > > sigh,
-                   std::optional< std::vector< block::ANDH > > andh,
-                   std::optional< std::vector< block::DLWH > > dlwh ) {
+                   std::optional< std::vector< continuous::CrossSectionData > > pxs,
+                   std::optional< std::vector< continuous::CrossSectionData > > phn,
+                   std::optional< std::vector< continuous::MTRH > > mtrh,
+                   std::optional< std::vector< continuous::SIGH > > sigh,
+                   std::optional< std::vector< continuous::ANDH > > andh,
+                   std::optional< std::vector< continuous::DLWH > > dlwh ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -45,7 +45,7 @@ Data generateData( unsigned int z, unsigned int a,
   unsigned int ntype = ptype ? ptype->size() : 0;
 
   // generate blocks we don't have yet
-  std::optional< std::vector< block::TYRH > > tyrh = generateTYRH( dlwh );
+  std::optional< std::vector< continuous::TYRH > > tyrh = generateTYRH( dlwh );
 
   // verify some stuff:
   //  - MTR, LQR and SIG have the same NTR
