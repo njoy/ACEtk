@@ -7,7 +7,6 @@ using Catch::Matchers::WithinRel;
 #include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
 
 // other includes
-#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;

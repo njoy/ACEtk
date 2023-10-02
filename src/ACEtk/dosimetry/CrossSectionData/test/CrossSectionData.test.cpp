@@ -7,7 +7,6 @@ using Catch::Matchers::WithinRel;
 #include "ACEtk/dosimetry/CrossSectionData.hpp"
 
 // other includes
-#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;

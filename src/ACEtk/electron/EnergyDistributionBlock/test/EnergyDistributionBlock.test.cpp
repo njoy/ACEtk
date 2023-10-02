@@ -7,7 +7,6 @@ using Catch::Matchers::WithinRel;
 #include "ACEtk/electron/EnergyDistributionBlock.hpp"
 
 // other includes
-#include "ACEtk/fromFile.hpp"
 
 // convenience typedefs
 using namespace njoy::ACEtk;
