@@ -186,7 +186,7 @@ if(ACEtk.python)
   target_compile_options( ACEtk.python PRIVATE "-fvisibility=hidden" )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
   set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
-  set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON)
+  set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
 
   message( STATUS "Building ACEtk's python API" )
 
