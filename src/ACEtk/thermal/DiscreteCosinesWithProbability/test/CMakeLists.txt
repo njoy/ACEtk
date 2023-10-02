@@ -1,1 +1,1 @@
-add_cpp_test( DiscreteCosinesWithProbability DiscreteCosinesWithProbability.test.cpp )
+add_cpp_test( thermal.DiscreteCosinesWithProbability DiscreteCosinesWithProbability.test.cpp )

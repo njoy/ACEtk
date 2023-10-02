@@ -1,1 +1,1 @@
-add_cpp_test( ElasticAngularDistributionBlock ElasticAngularDistributionBlock.test.cpp )
+add_cpp_test( thermal.ElasticAngularDistributionBlock ElasticAngularDistributionBlock.test.cpp )

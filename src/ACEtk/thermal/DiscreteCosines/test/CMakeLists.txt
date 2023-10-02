@@ -1,1 +1,1 @@
-add_cpp_test( DiscreteCosines DiscreteCosines.test.cpp )
+add_cpp_test( thermal.DiscreteCosines DiscreteCosines.test.cpp )

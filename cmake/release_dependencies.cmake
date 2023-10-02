@@ -5,11 +5,6 @@ include( FetchContent )
 # Declare project dependencies
 #######################################################################
 
-FetchContent_Declare( catch-adapter
-    GIT_REPOSITORY  https://github.com/njoy/catch-adapter
-    GIT_TAG         fb84b82ebf7a4789aa43cea560680cf745c6ee4f
-    )
-
 FetchContent_Declare( Catch2
     GIT_REPOSITORY  https://github.com/catchorg/Catch2
     GIT_TAG         3f0283de7a9c43200033da996ff9093be3ac84dc # tag: v3.3.2
@@ -45,7 +40,6 @@ FetchContent_Declare( spdlog
 #######################################################################
 
 FetchContent_MakeAvailable(
-    catch-adapter
     Catch2
     disco
     Log

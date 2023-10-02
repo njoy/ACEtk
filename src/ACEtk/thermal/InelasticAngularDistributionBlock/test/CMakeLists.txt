@@ -1,1 +1,1 @@
-add_cpp_test( InelasticAngularDistributionBlock InelasticAngularDistributionBlock.test.cpp )
+add_cpp_test( thermal.InelasticAngularDistributionBlock InelasticAngularDistributionBlock.test.cpp )
