@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/ProbabilityTableBlock.hpp"
 
 // other includes
@@ -47,7 +50,7 @@ SCENARIO( "ProbabilityTableBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -67,7 +70,7 @@ SCENARIO( "ProbabilityTableBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -103,11 +106,11 @@ void verifyChunk( const ProbabilityTableBlock& chunk ) {
   CHECK( 1 == chunk.type() );
 
   CHECK( 2 == chunk.energies().size() );
-  CHECK( 1e-3 == Approx( chunk.energies()[0] ) );
-  CHECK( 1e+3 == Approx( chunk.energies()[1] ) );
+  CHECK_THAT( 1e-3, WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT( 1e+3, WithinRel( chunk.energies()[1] ) );
 
   auto table1 = chunk.probabilityTable(1);
-  CHECK( 1e-3 == Approx( table1.incidentEnergy() ) );
+  CHECK_THAT( 1e-3, WithinRel( table1.incidentEnergy() ) );
 
   CHECK( 2 == table1.numberBins() );
   CHECK( 2 == table1.cumulativeProbabilities().size() );
@@ -117,21 +120,21 @@ void verifyChunk( const ProbabilityTableBlock& chunk ) {
   CHECK( 2 == table1.capture().size() );
   CHECK( 2 == table1.heating().size() );
 
-  CHECK( 0.5 == Approx( table1.cumulativeProbabilities().front() ) );
-  CHECK( 1.0 == Approx( table1.cumulativeProbabilities().back() ) );
-  CHECK( 1. == Approx( table1.total().front() ) );
-  CHECK( 2. == Approx( table1.total().back() ) );
-  CHECK( 3. == Approx( table1.elastic().front() ) );
-  CHECK( 4. == Approx( table1.elastic().back() ) );
-  CHECK( 5. == Approx( table1.fission().front() ) );
-  CHECK( 6. == Approx( table1.fission().back() ) );
-  CHECK( 7. == Approx( table1.capture().front() ) );
-  CHECK( 8. == Approx( table1.capture().back() ) );
-  CHECK( 9. == Approx( table1.heating().front() ) );
-  CHECK( 10. == Approx( table1.heating().back() ) );
+  CHECK_THAT( 0.5, WithinRel( table1.cumulativeProbabilities().front() ) );
+  CHECK_THAT( 1.0, WithinRel( table1.cumulativeProbabilities().back() ) );
+  CHECK_THAT( 1., WithinRel( table1.total().front() ) );
+  CHECK_THAT( 2., WithinRel( table1.total().back() ) );
+  CHECK_THAT( 3., WithinRel( table1.elastic().front() ) );
+  CHECK_THAT( 4., WithinRel( table1.elastic().back() ) );
+  CHECK_THAT( 5., WithinRel( table1.fission().front() ) );
+  CHECK_THAT( 6., WithinRel( table1.fission().back() ) );
+  CHECK_THAT( 7., WithinRel( table1.capture().front() ) );
+  CHECK_THAT( 8., WithinRel( table1.capture().back() ) );
+  CHECK_THAT( 9., WithinRel( table1.heating().front() ) );
+  CHECK_THAT( 10., WithinRel( table1.heating().back() ) );
 
   auto table2 = chunk.probabilityTable(2);
-  CHECK( 1e+3 == Approx( table2.incidentEnergy() ) );
+  CHECK_THAT( 1e+3, WithinRel( table2.incidentEnergy() ) );
 
   CHECK( 2 == table2.numberBins() );
   CHECK( 2 == table2.cumulativeProbabilities().size() );
@@ -141,16 +144,16 @@ void verifyChunk( const ProbabilityTableBlock& chunk ) {
   CHECK( 2 == table2.capture().size() );
   CHECK( 2 == table2.heating().size() );
 
-  CHECK( 0.25 == Approx( table2.cumulativeProbabilities().front() ) );
-  CHECK( 1.0 == Approx( table2.cumulativeProbabilities().back() ) );
-  CHECK( 11. == Approx( table2.total().front() ) );
-  CHECK( 12. == Approx( table2.total().back() ) );
-  CHECK( 13. == Approx( table2.elastic().front() ) );
-  CHECK( 14. == Approx( table2.elastic().back() ) );
-  CHECK( 15. == Approx( table2.fission().front() ) );
-  CHECK( 16. == Approx( table2.fission().back() ) );
-  CHECK( 17. == Approx( table2.capture().front() ) );
-  CHECK( 18. == Approx( table2.capture().back() ) );
-  CHECK( 19. == Approx( table2.heating().front() ) );
-  CHECK( 20. == Approx( table2.heating().back() ) );
+  CHECK_THAT( 0.25, WithinRel( table2.cumulativeProbabilities().front() ) );
+  CHECK_THAT( 1.0, WithinRel( table2.cumulativeProbabilities().back() ) );
+  CHECK_THAT( 11., WithinRel( table2.total().front() ) );
+  CHECK_THAT( 12., WithinRel( table2.total().back() ) );
+  CHECK_THAT( 13., WithinRel( table2.elastic().front() ) );
+  CHECK_THAT( 14., WithinRel( table2.elastic().back() ) );
+  CHECK_THAT( 15., WithinRel( table2.fission().front() ) );
+  CHECK_THAT( 16., WithinRel( table2.fission().back() ) );
+  CHECK_THAT( 17., WithinRel( table2.capture().front() ) );
+  CHECK_THAT( 18., WithinRel( table2.capture().back() ) );
+  CHECK_THAT( 19., WithinRel( table2.heating().front() ) );
+  CHECK_THAT( 20., WithinRel( table2.heating().back() ) );
 }

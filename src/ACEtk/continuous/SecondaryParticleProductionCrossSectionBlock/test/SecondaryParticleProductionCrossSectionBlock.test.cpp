@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/SecondaryParticleProductionCrossSectionBlock.hpp"
 
 // other includes
@@ -49,7 +52,7 @@ SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -70,7 +73,7 @@ SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -126,13 +129,13 @@ void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk ) {
   CHECK( 7 == xs1.NE() );
   CHECK( 7 == xs1.numberValues() );
   CHECK( 7 == xs1.energies().size() );
-  CHECK( 0.7742381 == Approx( xs1.energies().front() ) );
-  CHECK( 1. == Approx( xs1.energies()[3] ) );
-  CHECK( 20. == Approx( xs1.energies().back() ) );
+  CHECK_THAT( 0.7742381, WithinRel( xs1.energies().front() ) );
+  CHECK_THAT( 1., WithinRel( xs1.energies()[3] ) );
+  CHECK_THAT( 20., WithinRel( xs1.energies().back() ) );
   CHECK( 7 == xs1.multiplicities().size() );
-  CHECK( 0. == Approx( xs1.multiplicities().front() ) );
-  CHECK( 0.119 == Approx( xs1.multiplicities()[3] ) );
-  CHECK( 0. == Approx( xs1.multiplicities().back() ) );
+  CHECK_THAT( 0., WithinRel( xs1.multiplicities().front() ) );
+  CHECK_THAT( 0.119, WithinRel( xs1.multiplicities()[3] ) );
+  CHECK_THAT( 0., WithinRel( xs1.multiplicities().back() ) );
 
   auto xs2 = chunk.crossSectionData(2);
   CHECK( 12 == xs2.MFTYPE() );
@@ -154,9 +157,9 @@ void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk ) {
   CHECK( 2 == xs2.NE() );
   CHECK( 2 == xs2.numberValues() );
   CHECK( 2 == xs2.energies().size() );
-  CHECK( 1e-5 == Approx( xs2.energies().front() ) );
-  CHECK( 20. == Approx( xs2.energies().back() ) );
+  CHECK_THAT( 1e-5, WithinRel( xs2.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( xs2.energies().back() ) );
   CHECK( 2 == xs2.multiplicities().size() );
-  CHECK( 1. == Approx( xs2.multiplicities().front() ) );
-  CHECK( 1. == Approx( xs2.multiplicities().back() ) );
+  CHECK_THAT( 1., WithinRel( xs2.multiplicities().front() ) );
+  CHECK_THAT( 1., WithinRel( xs2.multiplicities().back() ) );
 }

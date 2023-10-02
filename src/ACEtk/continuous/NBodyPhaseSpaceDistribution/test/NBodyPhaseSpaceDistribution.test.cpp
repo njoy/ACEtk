@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/NBodyPhaseSpaceDistribution.hpp"
 
 // other includes
@@ -46,7 +49,7 @@ SCENARIO( "NBodyPhaseSpaceDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -67,7 +70,7 @@ SCENARIO( "NBodyPhaseSpaceDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -92,26 +95,26 @@ void verifyChunk( const NBodyPhaseSpaceDistribution& chunk ) {
   CHECK( EnergyDistributionType::NBodyPhaseSpace == chunk.LAW() );
   CHECK( EnergyDistributionType::NBodyPhaseSpace == chunk.type() );
 
-  CHECK( 2.249999e-3 == Approx( chunk.minimumIncidentEnergy() ) );
-  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+  CHECK_THAT( 2.249999e-3, WithinRel( chunk.minimumIncidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( chunk.maximumIncidentEnergy() ) );
 
   CHECK( 4 == chunk.NPSX() );
   CHECK( 4 == chunk.numberParticles() );
-  CHECK( .9914722 == Approx( chunk.AP() ) );
-  CHECK( .9914722 == Approx( chunk.totalMassRatio() ) );
+  CHECK_THAT( .9914722, WithinRel( chunk.AP() ) );
+  CHECK_THAT( .9914722, WithinRel( chunk.totalMassRatio() ) );
   CHECK( 2 == chunk.interpolation() );
   CHECK( 4 == chunk.numberValues() );
 
-  CHECK( 0. == Approx( chunk.values()[0] ) );
-  CHECK( .25 == Approx( chunk.values()[1] ) );
-  CHECK( .75 == Approx( chunk.values()[2] ) );
-  CHECK( 1. == Approx( chunk.values()[3] ) );
-  CHECK( 1. == Approx( chunk.pdf()[0] ) );
-  CHECK( 1. == Approx( chunk.pdf()[1] ) );
-  CHECK( 1. == Approx( chunk.pdf()[2] ) );
-  CHECK( 1. == Approx( chunk.pdf()[3] ) );
-  CHECK( 0. == Approx( chunk.cdf()[0] ) );
-  CHECK( .33 == Approx( chunk.cdf()[1] ) );
-  CHECK( .66 == Approx( chunk.cdf()[2] ) );
-  CHECK( 1. == Approx( chunk.cdf()[3] ) );
+  CHECK_THAT( 0., WithinRel( chunk.values()[0] ) );
+  CHECK_THAT( .25, WithinRel( chunk.values()[1] ) );
+  CHECK_THAT( .75, WithinRel( chunk.values()[2] ) );
+  CHECK_THAT( 1., WithinRel( chunk.values()[3] ) );
+  CHECK_THAT( 1., WithinRel( chunk.pdf()[0] ) );
+  CHECK_THAT( 1., WithinRel( chunk.pdf()[1] ) );
+  CHECK_THAT( 1., WithinRel( chunk.pdf()[2] ) );
+  CHECK_THAT( 1., WithinRel( chunk.pdf()[3] ) );
+  CHECK_THAT( 0., WithinRel( chunk.cdf()[0] ) );
+  CHECK_THAT( .33, WithinRel( chunk.cdf()[1] ) );
+  CHECK_THAT( .66, WithinRel( chunk.cdf()[2] ) );
+  CHECK_THAT( 1., WithinRel( chunk.cdf()[3] ) );
 }

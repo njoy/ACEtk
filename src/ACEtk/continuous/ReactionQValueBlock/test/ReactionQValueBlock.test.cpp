@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/ReactionQValueBlock.hpp"
 
 // other includes
@@ -35,7 +38,7 @@ SCENARIO( "ReactionQValueBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -55,7 +58,7 @@ SCENARIO( "ReactionQValueBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -76,12 +79,12 @@ void verifyChunk( const ReactionQValueBlock& chunk ) {
   CHECK( 3 == chunk.NTR() );
   CHECK( 3 == chunk.numberReactions() );
 
-  CHECK( 2.224631 == Approx( chunk.QValue(1) ) );
-  CHECK( 0 == Approx( chunk.QValue(2) ) );
-  CHECK( 0 == Approx( chunk.QValue(3) ) );
+  CHECK_THAT( 2.224631, WithinRel( chunk.QValue(1) ) );
+  CHECK_THAT( 0, WithinRel( chunk.QValue(2) ) );
+  CHECK_THAT( 0, WithinRel( chunk.QValue(3) ) );
 
   CHECK( 3 == chunk.QValues().size() );
-  CHECK( 2.224631 == Approx( chunk.QValues()[0] ) );
-  CHECK( 0 == Approx( chunk.QValues()[1] ) );
-  CHECK( 0 == Approx( chunk.QValues()[2] ) );
+  CHECK_THAT( 2.224631, WithinRel( chunk.QValues()[0] ) );
+  CHECK_THAT( 0, WithinRel( chunk.QValues()[1] ) );
+  CHECK_THAT( 0, WithinRel( chunk.QValues()[2] ) );
 }

@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/LevelScatteringDistribution.hpp"
 
 // other includes
@@ -38,7 +41,7 @@ SCENARIO( "LevelScatteringDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -59,7 +62,7 @@ SCENARIO( "LevelScatteringDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -80,9 +83,9 @@ void verifyChunk( const LevelScatteringDistribution& chunk ) {
   CHECK( EnergyDistributionType::LevelScattering == chunk.LAW() );
   CHECK( EnergyDistributionType::LevelScattering == chunk.type() );
 
-  CHECK( 2.249999e-3 == Approx( chunk.minimumIncidentEnergy() ) );
-  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+  CHECK_THAT( 2.249999e-3, WithinRel( chunk.minimumIncidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( chunk.maximumIncidentEnergy() ) );
 
-  CHECK( 7.71295800000E-05 == Approx( chunk.C1() ) );
-  CHECK( .9914722 == Approx( chunk.C2() ) );
+  CHECK_THAT( 7.71295800000E-05, WithinRel( chunk.C1() ) );
+  CHECK_THAT( .9914722, WithinRel( chunk.C2() ) );
 }

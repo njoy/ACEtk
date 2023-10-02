@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/EquiprobableOutgoingEnergyBins.hpp"
 
 // other includes
@@ -36,7 +39,7 @@ SCENARIO( "EquiprobableOutgoingEnergyBins" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -56,7 +59,7 @@ SCENARIO( "EquiprobableOutgoingEnergyBins" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -77,12 +80,12 @@ void verifyChunk( const EquiprobableOutgoingEnergyBins& chunk ) {
   CHECK( 4 == chunk.length() );
   CHECK( "EquiprobableOutgoingEnergyBins" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.incidentEnergy() ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.incidentEnergy() ) );
   CHECK( 3 == chunk.numberBins() );
 
   CHECK( 4 == chunk.energies().size() );
-  CHECK( 1e-5 == Approx( chunk.energies()[0] ) );
-  CHECK( .02 == Approx( chunk.energies()[1] ) );
-  CHECK( 1. == Approx( chunk.energies()[2] ) );
-  CHECK( 20. == Approx( chunk.energies()[3] ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT( .02, WithinRel( chunk.energies()[1] ) );
+  CHECK_THAT( 1., WithinRel( chunk.energies()[2] ) );
+  CHECK_THAT( 20., WithinRel( chunk.energies()[3] ) );
 }

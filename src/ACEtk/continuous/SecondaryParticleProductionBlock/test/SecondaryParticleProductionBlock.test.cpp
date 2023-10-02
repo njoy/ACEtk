@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/SecondaryParticleProductionBlock.hpp"
 
 // other includes
@@ -45,7 +48,7 @@ SCENARIO( "SecondaryParticleProductionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -65,7 +68,7 @@ SCENARIO( "SecondaryParticleProductionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -91,10 +94,10 @@ void verifyChunk( const SecondaryParticleProductionBlock& chunk ) {
   CHECK( 3 == chunk.numberValues() );
 
   CHECK( 3 == chunk.totalProduction().size() );
-  CHECK( 17.17401 == Approx( chunk.totalProduction().front() ) );
-  CHECK( 272.2354 == Approx( chunk.totalProduction().back() ) );
+  CHECK_THAT( 17.17401, WithinRel( chunk.totalProduction().front() ) );
+  CHECK_THAT( 272.2354, WithinRel( chunk.totalProduction().back() ) );
 
   CHECK( 3 == chunk.heating().size() );
-  CHECK( 3.63894900000E-05 == Approx( chunk.heating().front() ) );
-  CHECK( 3.70168600000E-05 == Approx( chunk.heating().back() ) );
+  CHECK_THAT( 3.63894900000E-05, WithinRel( chunk.heating().front() ) );
+  CHECK_THAT( 3.70168600000E-05, WithinRel( chunk.heating().back() ) );
 }

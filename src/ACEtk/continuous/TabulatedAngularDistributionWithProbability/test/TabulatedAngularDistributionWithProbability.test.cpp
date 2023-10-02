@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/TabulatedAngularDistributionWithProbability.hpp"
 
 // other includes
@@ -45,7 +48,7 @@ SCENARIO( "TabulatedAngularDistributionWithProbability" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -68,7 +71,7 @@ SCENARIO( "TabulatedAngularDistributionWithProbability" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -88,21 +91,21 @@ void verifyChunk( const TabulatedAngularDistributionWithProbability& chunk ) {
   CHECK( 11 == chunk.length() );
   CHECK( "TabulatedAngularDistribution" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.energy() ) );
-  CHECK( .5 == Approx( chunk.probability() ) );
-  CHECK( .75 == Approx( chunk.cumulativeProbability() ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.energy() ) );
+  CHECK_THAT( .5, WithinRel( chunk.probability() ) );
+  CHECK_THAT( .75, WithinRel( chunk.cumulativeProbability() ) );
   CHECK( 2 == chunk.interpolation() );
   CHECK( 3 == chunk.numberCosines() );
 
   CHECK( 3 == chunk.cosines().size() );
-  CHECK( -1. == Approx( chunk.cosines().front() ) );
-  CHECK( +1. == Approx( chunk.cosines().back() ) );
+  CHECK_THAT( -1., WithinRel( chunk.cosines().front() ) );
+  CHECK_THAT( +1., WithinRel( chunk.cosines().back() ) );
 
   CHECK( 3 == chunk.pdf().size() );
-  CHECK( .5 == Approx( chunk.pdf().front() ) );
-  CHECK( .5 == Approx( chunk.pdf().back() ) );
+  CHECK_THAT( .5, WithinRel( chunk.pdf().front() ) );
+  CHECK_THAT( .5, WithinRel( chunk.pdf().back() ) );
 
   CHECK( 3 == chunk.cdf().size() );
-  CHECK( 0. == Approx( chunk.cdf().front() ) );
-  CHECK( 1. == Approx( chunk.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
 }

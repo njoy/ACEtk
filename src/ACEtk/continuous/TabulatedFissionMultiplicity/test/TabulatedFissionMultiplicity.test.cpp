@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/TabulatedFissionMultiplicity.hpp"
 
 // other includes
@@ -37,7 +40,7 @@ SCENARIO( "TabulatedFissionMultiplicity" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -57,7 +60,7 @@ SCENARIO( "TabulatedFissionMultiplicity" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -67,7 +70,7 @@ SCENARIO( "TabulatedFissionMultiplicity" ) {
 std::vector< double > chunk() {
 
   return {                  2,                   0,                   3,
-            1.00000000000E-11,   1.00000000000E+00,   2.00000000000E+01,   2.35000000000E+00,
+            1.00000000000E-05,   1.00000000000E+00,   2.00000000000E+01,   2.35000000000E+00,
             2.55000000000E+00,   7.00000000000E+00 };
 }
 
@@ -98,12 +101,12 @@ void verifyChunk( const TabulatedFissionMultiplicity& chunk ) {
   CHECK( 3 == chunk.numberValues() );
 
   CHECK( 3 == chunk.energies().size() );
-  CHECK( 1e-11 == Approx( chunk.energies()[0] ) );
-  CHECK( 1. == Approx( chunk.energies()[1] ) );
-  CHECK( 20. == Approx( chunk.energies()[2] ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( chunk.energies()[1] ) );
+  CHECK_THAT( 20., WithinRel( chunk.energies()[2] ) );
 
   CHECK( 3 == chunk.multiplicities().size() );
-  CHECK( 2.35 == Approx( chunk.multiplicities()[0] ) );
-  CHECK( 2.55 == Approx( chunk.multiplicities()[1] ) );
-  CHECK( 7. == Approx( chunk.multiplicities()[2] ) );
+  CHECK_THAT( 2.35, WithinRel( chunk.multiplicities()[0] ) );
+  CHECK_THAT( 2.55, WithinRel( chunk.multiplicities()[1] ) );
+  CHECK_THAT( 7., WithinRel( chunk.multiplicities()[2] ) );
 }

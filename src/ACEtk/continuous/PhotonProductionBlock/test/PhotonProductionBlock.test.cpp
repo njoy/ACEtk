@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/PhotonProductionBlock.hpp"
 
 // other includes
@@ -63,7 +66,7 @@ SCENARIO( "PhotonProductionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -83,7 +86,7 @@ SCENARIO( "PhotonProductionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -135,6 +138,6 @@ void verifyChunk( const PhotonProductionBlock& chunk ) {
   CHECK( 99 == chunk.numberEnergyPoints() );
   CHECK( 99 == chunk.totalProduction().size() );
 
-  CHECK( 1.17771501000E+03 == Approx( chunk.totalProduction().front() ) );
-  CHECK( 4.82773424000E-01 == Approx( chunk.totalProduction().back() ) );
+  CHECK_THAT( 1.17771501000E+03, WithinRel( chunk.totalProduction().front() ) );
+  CHECK_THAT( 4.82773424000E-01, WithinRel( chunk.totalProduction().back() ) );
 }

@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/ProbabilityTable.hpp"
 
 // other includes
@@ -89,7 +92,7 @@ SCENARIO( "ProbabilityTable" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -109,7 +112,7 @@ SCENARIO( "ProbabilityTable" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -156,7 +159,7 @@ void verifyChunk( const ProbabilityTable& chunk ) {
 
   CHECK( 96 == chunk.XSS().size() );
 
-  CHECK( 2.250001e-3 == Approx( chunk.incidentEnergy() ) );
+  CHECK_THAT( 2.250001e-3, WithinRel( chunk.incidentEnergy() ) );
 
   CHECK( 16 == chunk.numberBins() );
   CHECK( 16 == chunk.cumulativeProbabilities().size() );
@@ -166,16 +169,16 @@ void verifyChunk( const ProbabilityTable& chunk ) {
   CHECK( 16 == chunk.capture().size() );
   CHECK( 16 == chunk.heating().size() );
 
-  CHECK( 2.97187500000E-03 == Approx( chunk.cumulativeProbabilities().front() ) );
-  CHECK( 1. == Approx( chunk.cumulativeProbabilities().back() ) );
-  CHECK( 6.20303500000E-01 == Approx( chunk.total().front() ) );
-  CHECK( 2.08166900000E+00 == Approx( chunk.total().back() ) );
-  CHECK( 8.88269000000E-01 == Approx( chunk.elastic().front() ) );
-  CHECK( 1.25902700000E+00 == Approx( chunk.elastic().back() ) );
-  CHECK( 2.06017200000E-01 == Approx( chunk.fission().front() ) );
-  CHECK( 3.24694300000E+00 == Approx( chunk.fission().back() ) );
-  CHECK( 1.79948200000E-01 == Approx( chunk.capture().front() ) );
-  CHECK( 3.73081700000E+00 == Approx( chunk.capture().back() ) );
-  CHECK( 1. == Approx( chunk.heating().front() ) );
-  CHECK( 1. == Approx( chunk.heating().back() ) );
+  CHECK_THAT( 2.97187500000E-03, WithinRel( chunk.cumulativeProbabilities().front() ) );
+  CHECK_THAT( 1., WithinRel( chunk.cumulativeProbabilities().back() ) );
+  CHECK_THAT( 6.20303500000E-01, WithinRel( chunk.total().front() ) );
+  CHECK_THAT( 2.08166900000E+00, WithinRel( chunk.total().back() ) );
+  CHECK_THAT( 8.88269000000E-01, WithinRel( chunk.elastic().front() ) );
+  CHECK_THAT( 1.25902700000E+00, WithinRel( chunk.elastic().back() ) );
+  CHECK_THAT( 2.06017200000E-01, WithinRel( chunk.fission().front() ) );
+  CHECK_THAT( 3.24694300000E+00, WithinRel( chunk.fission().back() ) );
+  CHECK_THAT( 1.79948200000E-01, WithinRel( chunk.capture().front() ) );
+  CHECK_THAT( 3.73081700000E+00, WithinRel( chunk.capture().back() ) );
+  CHECK_THAT( 1., WithinRel( chunk.heating().front() ) );
+  CHECK_THAT( 1., WithinRel( chunk.heating().back() ) );
 }

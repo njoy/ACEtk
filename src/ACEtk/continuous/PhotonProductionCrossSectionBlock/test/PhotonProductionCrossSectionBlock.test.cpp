@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/PhotonProductionCrossSectionBlock.hpp"
 
 // other includes
@@ -74,7 +77,7 @@ SCENARIO( "PhotonProductionCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -95,7 +98,7 @@ SCENARIO( "PhotonProductionCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -165,8 +168,8 @@ void verifyChunk( const PhotonProductionCrossSectionBlock& chunk ) {
   CHECK( 1 == xs1.energyIndex() );
   CHECK( 99 == xs1.numberValues() );
   CHECK( 99 == xs1.crossSections().size() );
-  CHECK( 17.17401 == Approx( xs1.crossSections().front() ) );
-  CHECK( 2.72235400000E-05 == Approx( xs1.crossSections().back() ) );
+  CHECK_THAT( 17.17401, WithinRel( xs1.crossSections().front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( xs1.crossSections().back() ) );
 
   auto xs2 = std::get< TabulatedSecondaryParticleMultiplicity >( chunk.crossSectionData(2) );
   CHECK( 12 == xs2.MFTYPE() );
@@ -188,11 +191,11 @@ void verifyChunk( const PhotonProductionCrossSectionBlock& chunk ) {
   CHECK( 7 == xs2.NE() );
   CHECK( 7 == xs2.numberValues() );
   CHECK( 7 == xs2.energies().size() );
-  CHECK( 0.7742381 == Approx( xs2.energies().front() ) );
-  CHECK( 1. == Approx( xs2.energies()[3] ) );
-  CHECK( 20. == Approx( xs2.energies().back() ) );
+  CHECK_THAT( 0.7742381, WithinRel( xs2.energies().front() ) );
+  CHECK_THAT( 1., WithinRel( xs2.energies()[3] ) );
+  CHECK_THAT( 20., WithinRel( xs2.energies().back() ) );
   CHECK( 7 == xs2.multiplicities().size() );
-  CHECK( 0. == Approx( xs2.multiplicities().front() ) );
-  CHECK( 0.119 == Approx( xs2.multiplicities()[3] ) );
-  CHECK( 0. == Approx( xs2.multiplicities().back() ) );
+  CHECK_THAT( 0., WithinRel( xs2.multiplicities().front() ) );
+  CHECK_THAT( 0.119, WithinRel( xs2.multiplicities()[3] ) );
+  CHECK_THAT( 0., WithinRel( xs2.multiplicities().back() ) );
 }

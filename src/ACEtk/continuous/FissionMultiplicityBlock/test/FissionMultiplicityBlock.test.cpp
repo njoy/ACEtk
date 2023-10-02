@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/FissionMultiplicityBlock.hpp"
 
 // other includes
@@ -38,7 +41,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -57,7 +60,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -85,7 +88,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -104,7 +107,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -152,14 +155,14 @@ void verifyChunk( const FissionMultiplicityBlock& chunk ) {
   CHECK( 3 == multiplicity.numberValues() );
 
   CHECK( 3 == multiplicity.energies().size() );
-  CHECK( 1e-11 == Approx( multiplicity.energies()[0] ) );
-  CHECK( 1. == Approx( multiplicity.energies()[1] ) );
-  CHECK( 20. == Approx( multiplicity.energies()[2] ) );
+  CHECK_THAT( 1e-11, WithinRel( multiplicity.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( multiplicity.energies()[1] ) );
+  CHECK_THAT( 20., WithinRel( multiplicity.energies()[2] ) );
 
   CHECK( 3 == multiplicity.multiplicities().size() );
-  CHECK( 2.5 == Approx( multiplicity.multiplicities()[0] ) );
-  CHECK( 2.65 == Approx( multiplicity.multiplicities()[1] ) );
-  CHECK( 3.5 == Approx( multiplicity.multiplicities()[2] ) );
+  CHECK_THAT( 2.5, WithinRel( multiplicity.multiplicities()[0] ) );
+  CHECK_THAT( 2.65, WithinRel( multiplicity.multiplicities()[1] ) );
+  CHECK_THAT( 3.5, WithinRel( multiplicity.multiplicities()[2] ) );
 
   CHECK( std::nullopt == chunk.totalFissionMultiplicity() );
 }
@@ -194,14 +197,14 @@ void verifyChunkWithPromptAndTotal( const FissionMultiplicityBlock& chunk ) {
   CHECK( 3 == multiplicity.numberValues() );
 
   CHECK( 3 == multiplicity.energies().size() );
-  CHECK( 1e-11 == Approx( multiplicity.energies()[0] ) );
-  CHECK( 1. == Approx( multiplicity.energies()[1] ) );
-  CHECK( 20. == Approx( multiplicity.energies()[2] ) );
+  CHECK_THAT( 1e-11, WithinRel( multiplicity.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( multiplicity.energies()[1] ) );
+  CHECK_THAT( 20., WithinRel( multiplicity.energies()[2] ) );
 
   CHECK( 3 == multiplicity.multiplicities().size() );
-  CHECK( 2.5 == Approx( multiplicity.multiplicities()[0] ) );
-  CHECK( 2.65 == Approx( multiplicity.multiplicities()[1] ) );
-  CHECK( 3.5 == Approx( multiplicity.multiplicities()[2] ) );
+  CHECK_THAT( 2.5, WithinRel( multiplicity.multiplicities()[0] ) );
+  CHECK_THAT( 2.65, WithinRel( multiplicity.multiplicities()[1] ) );
+  CHECK_THAT( 3.5, WithinRel( multiplicity.multiplicities()[2] ) );
 
   auto total = std::get< PolynomialFissionMultiplicity >( chunk.totalFissionMultiplicity().value() );
   CHECK( 1 == total.LNU() );
@@ -211,6 +214,6 @@ void verifyChunkWithPromptAndTotal( const FissionMultiplicityBlock& chunk ) {
   CHECK( 2 == total.numberCoefficients() );
 
   CHECK( 2 == total.coefficients().size() );
-  CHECK( 2.35 == Approx( total.coefficients()[0] ) );
-  CHECK( 1e-3 == Approx( total.coefficients()[1] ) );
+  CHECK_THAT( 2.35, WithinRel( total.coefficients()[0] ) );
+  CHECK_THAT( 1e-3, WithinRel( total.coefficients()[1] ) );
 }

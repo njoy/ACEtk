@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/TabulatedEnergyDistribution.hpp"
 
 // other includes
@@ -44,7 +47,7 @@ SCENARIO( "TabulatedEnergyDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -65,7 +68,7 @@ SCENARIO( "TabulatedEnergyDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -85,20 +88,20 @@ void verifyChunk( const TabulatedEnergyDistribution& chunk ) {
   CHECK( 11 == chunk.length() );
   CHECK( "TabulatedEnergyDistribution" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.energyOrCosine() ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.energyOrCosine() ) );
   CHECK( 2 == chunk.interpolation() );
   CHECK( 3 == chunk.numberDiscretePhotonLines() );
   CHECK( 3 == chunk.numberOutgoingEnergies() );
 
   CHECK( 3 == chunk.outgoingEnergies().size() );
-  CHECK( 1e-11 == Approx( chunk.outgoingEnergies().front() ) );
-  CHECK( 20. == Approx( chunk.outgoingEnergies().back() ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.outgoingEnergies().front() ) );
+  CHECK_THAT( 20., WithinRel( chunk.outgoingEnergies().back() ) );
 
   CHECK( 3 == chunk.pdf().size() );
-  CHECK( .5 == Approx( chunk.pdf().front() ) );
-  CHECK( .5 == Approx( chunk.pdf().back() ) );
+  CHECK_THAT( .5, WithinRel( chunk.pdf().front() ) );
+  CHECK_THAT( .5, WithinRel( chunk.pdf().back() ) );
 
   CHECK( 3 == chunk.cdf().size() );
-  CHECK( 0. == Approx( chunk.cdf().front() ) );
-  CHECK( 1. == Approx( chunk.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
 }

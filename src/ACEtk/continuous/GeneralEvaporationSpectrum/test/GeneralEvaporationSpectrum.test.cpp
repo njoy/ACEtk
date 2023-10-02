@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/GeneralEvaporationSpectrum.hpp"
 
 // other includes
@@ -39,7 +42,7 @@ SCENARIO( "GeneralEvaporationSpectrum" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -58,7 +61,7 @@ SCENARIO( "GeneralEvaporationSpectrum" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -99,25 +102,25 @@ void verifyChunk( const GeneralEvaporationSpectrum& chunk ) {
   CHECK( 4 == chunk.numberEnergyPoints() );
 
   CHECK( 4 == chunk.energies().size() );
-  CHECK( 1e-05 == Approx( chunk.energies()[0] ) );
-  CHECK( 1. == Approx( chunk.energies()[1] ) );
-  CHECK( 10. == Approx( chunk.energies()[2] ) );
-  CHECK( 20. == Approx( chunk.energies()[3] ) );
+  CHECK_THAT( 1e-05, WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( chunk.energies()[1] ) );
+  CHECK_THAT( 10., WithinRel( chunk.energies()[2] ) );
+  CHECK_THAT( 20., WithinRel( chunk.energies()[3] ) );
 
   CHECK( 4 == chunk.temperatures().size() );
-  CHECK( 1. == Approx( chunk.temperatures()[0] ) );
-  CHECK( 2. == Approx( chunk.temperatures()[1] ) );
-  CHECK( 3. == Approx( chunk.temperatures()[2] ) );
-  CHECK( 4. == Approx( chunk.temperatures()[3] ) );
+  CHECK_THAT( 1., WithinRel( chunk.temperatures()[0] ) );
+  CHECK_THAT( 2., WithinRel( chunk.temperatures()[1] ) );
+  CHECK_THAT( 3., WithinRel( chunk.temperatures()[2] ) );
+  CHECK_THAT( 4., WithinRel( chunk.temperatures()[3] ) );
 
-  CHECK( 1e-5 == Approx( chunk.minimumIncidentEnergy() ) );
-  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.minimumIncidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( chunk.maximumIncidentEnergy() ) );
 
   CHECK( 3 == chunk.NET() );
   CHECK( 2 == chunk.numberBins() );
 
   CHECK( 3 == chunk.bins().size() );
-  CHECK( 5. == Approx( chunk.bins()[0] ) );
-  CHECK( 6. == Approx( chunk.bins()[1] ) );
-  CHECK( 7. == Approx( chunk.bins()[2] ) );
+  CHECK_THAT( 5., WithinRel( chunk.bins()[0] ) );
+  CHECK_THAT( 6., WithinRel( chunk.bins()[1] ) );
+  CHECK_THAT( 7., WithinRel( chunk.bins()[2] ) );
 }
