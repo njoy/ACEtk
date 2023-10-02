@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/AngularDistributionData.hpp"
 
 // other includes
@@ -51,7 +54,7 @@ SCENARIO( "AngularDistributionData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -71,7 +74,7 @@ SCENARIO( "AngularDistributionData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -112,13 +115,13 @@ void verifyChunk( const AngularDistributionData& chunk ) {
   CHECK( 3 == chunk.distributions().size() );
 
   CHECK( 3 == chunk.incidentEnergies().size() );
-  CHECK( 1e-11 == Approx( chunk.incidentEnergies()[0] ) );
-  CHECK( 1. == Approx( chunk.incidentEnergies()[1] ) );
-  CHECK( 20. == Approx( chunk.incidentEnergies()[2] ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.incidentEnergies()[0] ) );
+  CHECK_THAT( 1., WithinRel( chunk.incidentEnergies()[1] ) );
+  CHECK_THAT( 20., WithinRel( chunk.incidentEnergies()[2] ) );
 
-  CHECK( 1e-11 == Approx( chunk.incidentEnergy(1) ) );
-  CHECK( 1. == Approx( chunk.incidentEnergy(2) ) );
-  CHECK( 20. == Approx( chunk.incidentEnergy(3) ) );
+  CHECK_THAT( 1e-11, WithinRel( chunk.incidentEnergy(1) ) );
+  CHECK_THAT( 1., WithinRel( chunk.incidentEnergy(2) ) );
+  CHECK_THAT( 20., WithinRel( chunk.incidentEnergy(3) ) );
 
   CHECK( 0 == chunk.LOCC(1) );
   CHECK( 13 == chunk.LOCC(2) );

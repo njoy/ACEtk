@@ -1,7 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
-#include "ACEtk/continuous/ParameterData.hpp"
+// what we are testing
 #include "ACEtk/continuous/EnergyDependentWattSpectrum.hpp"
 
 // other includes
@@ -40,7 +42,7 @@ SCENARIO( "EnergyDependentWattSpectrum" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -60,7 +62,7 @@ SCENARIO( "EnergyDependentWattSpectrum" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -102,16 +104,16 @@ void verifyChunk( const EnergyDependentWattSpectrum& chunk ) {
   CHECK( 4 == a.numberEnergyPoints() );
 
   CHECK( 4 == a.energies().size() );
-  CHECK( 1e-05 == Approx( a.energies()[0] ) );
-  CHECK( 1. == Approx( a.energies()[1] ) );
-  CHECK( 10. == Approx( a.energies()[2] ) );
-  CHECK( 20. == Approx( a.energies()[3] ) );
+  CHECK_THAT( 1e-05, WithinRel( a.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( a.energies()[1] ) );
+  CHECK_THAT( 10., WithinRel( a.energies()[2] ) );
+  CHECK_THAT( 20., WithinRel( a.energies()[3] ) );
 
   CHECK( 4 == a.values().size() );
-  CHECK( 1. == Approx( a.values()[0] ) );
-  CHECK( 2. == Approx( a.values()[1] ) );
-  CHECK( 3. == Approx( a.values()[2] ) );
-  CHECK( 4. == Approx( a.values()[3] ) );
+  CHECK_THAT( 1., WithinRel( a.values()[0] ) );
+  CHECK_THAT( 2., WithinRel( a.values()[1] ) );
+  CHECK_THAT( 3., WithinRel( a.values()[2] ) );
+  CHECK_THAT( 4., WithinRel( a.values()[3] ) );
 
   auto b = chunk.b();
   CHECK( 0 == b.interpolationData().NB() );
@@ -132,17 +134,17 @@ void verifyChunk( const EnergyDependentWattSpectrum& chunk ) {
   CHECK( 3 == b.numberEnergyPoints() );
 
   CHECK( 3 == b.energies().size() );
-  CHECK( 1e-05 == Approx( b.energies()[0] ) );
-  CHECK( 2. == Approx( b.energies()[1] ) );
-  CHECK( 20. == Approx( b.energies()[2] ) );
+  CHECK_THAT( 1e-05, WithinRel( b.energies()[0] ) );
+  CHECK_THAT( 2., WithinRel( b.energies()[1] ) );
+  CHECK_THAT( 20., WithinRel( b.energies()[2] ) );
 
   CHECK( 3 == b.values().size() );
-  CHECK( 5. == Approx( b.values()[0] ) );
-  CHECK( 6. == Approx( b.values()[1] ) );
-  CHECK( 7. == Approx( b.values()[2] ) );
+  CHECK_THAT( 5., WithinRel( b.values()[0] ) );
+  CHECK_THAT( 6., WithinRel( b.values()[1] ) );
+  CHECK_THAT( 7., WithinRel( b.values()[2] ) );
 
-  CHECK( 1e-5 == Approx( chunk.minimumIncidentEnergy() ) );
-  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.minimumIncidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( chunk.maximumIncidentEnergy() ) );
 
   CHECK( 1.5e+6 == chunk.U() );
   CHECK( 1.5e+6 == chunk.restrictionEnergy() );
