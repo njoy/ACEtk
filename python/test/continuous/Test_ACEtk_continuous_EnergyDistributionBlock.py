@@ -8,9 +8,9 @@ from ACEtk.continuous import EnergyDistributionBlock
 from ACEtk.continuous import TabulatedKalbachMannDistribution
 from ACEtk.continuous import LevelScatteringDistribution
 from ACEtk.continuous import KalbachMannDistributionData
-from ACEtk.continuous import EnergyDistributionType
-from ACEtk.continuous import ReferenceFrame
 from ACEtk.continuous import TabulatedMultiplicity
+from ACEtk import EnergyDistributionType
+from ACEtk import ReferenceFrame
 
 class Test_ACEtk_continuous_EnergyDistributionBlock( unittest.TestCase ) :
     """Unit test for the EnergyDistributionBlock class."""
