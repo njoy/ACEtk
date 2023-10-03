@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import ProbabilityTable
 
-class Test_ACEtk_ProbabilityTable( unittest.TestCase ) :
+class Test_ACEtk_continuous_ProbabilityTable( unittest.TestCase ) :
     """Unit test for the ProbabilityTable class."""
 
     chunk = [                       2.97187500000E-03,   5.33593800000E-03,   1.41937500000E-02,

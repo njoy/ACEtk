@@ -7,7 +7,7 @@ import unittest
 from ACEtk import EnergyDistributionType
 from ACEtk.continuous import NBodyPhaseSpaceDistribution
 
-class Test_ACEtk_NBodyPhaseSpaceDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_NBodyPhaseSpaceDistribution( unittest.TestCase ) :
     """Unit test for the NBodyPhaseSpaceDistribution class."""
 
     chunk = [ 4.00000000000E+00, 9.91472200000E-01,

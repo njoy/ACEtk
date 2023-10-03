@@ -7,7 +7,7 @@ import unittest
 from ACEtk import EnergyDistributionType
 from ACEtk.continuous import DiscretePhotonDistribution
 
-class Test_ACEtk_DiscretePhotonDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_DiscretePhotonDistribution( unittest.TestCase ) :
     """Unit test for the DiscretePhotonDistribution class."""
 
     chunk = [ 2.00000000000E+00, 1.00000000000E+05 ]

@@ -8,7 +8,7 @@ from ACEtk import EnergyDistributionType
 from ACEtk.continuous import EquiprobableOutgoingEnergyBinData
 from ACEtk.continuous import EquiprobableOutgoingEnergyBins
 
-class Test_ACEtk_EquiprobableOutgoingEnergyBinData( unittest.TestCase ) :
+class Test_ACEtk_continuous_EquiprobableOutgoingEnergyBinData( unittest.TestCase ) :
     """Unit test for the EquiprobableOutgoingEnergyBinData class."""
 
     chunk = [                 0,

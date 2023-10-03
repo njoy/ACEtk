@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import PrincipalCrossSectionBlock
 
-class Test_ACEtk_PrincipalCrossSectionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_PrincipalCrossSectionBlock( unittest.TestCase ) :
     """Unit test for the PrincipalCrossSectionBlock class."""
 
     chunk = [ 1.00000000000E-11, 2.00000000000E-11, 5.00000000000E-11, 1.00000000000E-10,

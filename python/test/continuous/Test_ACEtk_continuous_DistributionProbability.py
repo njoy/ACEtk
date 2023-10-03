@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import DistributionProbability
 
-class Test_ACEtk_DistributionProbability( unittest.TestCase ) :
+class Test_ACEtk_continuous_DistributionProbability( unittest.TestCase ) :
     """Unit test for the DistributionProbability class."""
 
     chunk = [ 0, 3, 1., 3., 5., 2., 4., 6. ]

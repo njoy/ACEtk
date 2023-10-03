@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import EquiprobableOutgoingEnergyBins
 
-class Test_ACEtk_EquiprobableOutgoingEnergyBins( unittest.TestCase ) :
+class Test_ACEtk_continuous_EquiprobableOutgoingEnergyBins( unittest.TestCase ) :
     """Unit test for the EquiprobableOutgoingEnergyBins class."""
 
     chunk = [  1.00000000000E-05,  2.00000000000E-02,  1.00000000000E+00,  2.00000000000E+01 ]

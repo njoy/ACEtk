@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import TabulatedMultiplicity
 
-class Test_ACEtk_TabulatedMultiplicity( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedMultiplicity( unittest.TestCase ) :
     """Unit test for the TabulatedMultiplicity class."""
 
     chunk = [ 0, 3, 1., 3., 5., 2., 4., 6. ]

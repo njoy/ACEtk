@@ -12,7 +12,7 @@ from ACEtk.continuous import EnergyDistributionType
 from ACEtk.continuous import ReferenceFrame
 from ACEtk.continuous import TabulatedMultiplicity
 
-class Test_ACEtk_EnergyDistributionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_EnergyDistributionBlock( unittest.TestCase ) :
     """Unit test for the EnergyDistributionBlock class."""
 
     chunk = [ # LDLW

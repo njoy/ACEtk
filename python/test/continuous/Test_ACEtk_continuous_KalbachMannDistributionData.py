@@ -8,7 +8,7 @@ from ACEtk import EnergyDistributionType
 from ACEtk.continuous import KalbachMannDistributionData
 from ACEtk.continuous import TabulatedKalbachMannDistribution
 
-class Test_ACEtk_KalbachMannDistributionData( unittest.TestCase ) :
+class Test_ACEtk_continuous_KalbachMannDistributionData( unittest.TestCase ) :
     """Unit test for the KalbachMannDistributionData class."""
 
     chunk = [            0,             2,  1.219437E+01,  2.000000E+01,

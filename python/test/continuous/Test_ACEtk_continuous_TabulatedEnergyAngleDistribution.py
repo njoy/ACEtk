@@ -8,7 +8,7 @@ from ACEtk import EnergyDistributionType
 from ACEtk.continuous import TabulatedEnergyAngleDistribution
 from ACEtk.continuous import TabulatedAngularDistributionWithProbability
 
-class Test_ACEtk_TabulatedEnergyAngleDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedEnergyAngleDistribution( unittest.TestCase ) :
     """Unit test for the TabulatedEnergyAngleDistribution class."""
 
     chunk = [             2,             2,  2.100000E+00,  2.000000E+01,

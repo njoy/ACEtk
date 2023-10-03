@@ -11,7 +11,7 @@ from ACEtk.continuous import KalbachMannDistributionData
 from ACEtk.continuous import TabulatedKalbachMannDistribution
 from ACEtk.continuous import GeneralEvaporationSpectrum
 
-class Test_ACEtk_MultiDistributionData( unittest.TestCase ) :
+class Test_ACEtk_continuous_MultiDistributionData( unittest.TestCase ) :
     """Unit test for the MultiDistributionData class."""
 
     chunk = [           56,                 44,            21,             0,

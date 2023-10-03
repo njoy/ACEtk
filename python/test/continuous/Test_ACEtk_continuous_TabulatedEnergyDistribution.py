@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import TabulatedEnergyDistribution
 
-class Test_ACEtk_TabulatedEnergyDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedEnergyDistribution( unittest.TestCase ) :
     """Unit test for the TabulatedEnergyDistribution class."""
 
     chunk = [                32,                  3,  1.00000000000E-11,  1.00000000000E+00,

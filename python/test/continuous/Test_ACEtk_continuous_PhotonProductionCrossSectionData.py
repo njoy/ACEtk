@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import PhotonProductionCrossSectionData
 
-class Test_ACEtk_PhotonProductionCrossSectionData( unittest.TestCase ) :
+class Test_ACEtk_continuous_PhotonProductionCrossSectionData( unittest.TestCase ) :
     """Unit test for the PhotonProductionCrossSectionData class."""
 
     chunk = [                13,                 1,

@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import ReactionQValueBlock
 
-class Test_ACEtk_ReactionQValueBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_ReactionQValueBlock( unittest.TestCase ) :
     """Unit test for the ReactionQValueBlock class."""
 
     chunk = [ 2.22463100000E+00, 0., 0. ]
