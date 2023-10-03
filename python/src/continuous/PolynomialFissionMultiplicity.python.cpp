@@ -32,6 +32,15 @@ void wrapPolynomialFissionMultiplicity( python::module& module, python::module& 
 
   // wrap the block
   block
+  .def(
+
+    python::init< std::vector< double > >(),
+    python::arg( "coefficients" ),
+    "Initialise the block\n\n"
+    "Arguments:\n"
+    "    self            the block\n"
+    "    coefficients    the polynomial coefficients"
+  )
   .def_property_readonly(
 
     "LNU",
