@@ -35,6 +35,7 @@ add_subdirectory( src/ACEtk/Table/Header/test )
 add_subdirectory( src/ACEtk/Table/Header201/test )
 add_subdirectory( src/ACEtk/Table/test )
 
+add_subdirectory( src/ACEtk/continuous/PolynomialFissionMultiplicity/test )
 add_subdirectory( src/ACEtk/continuous/PrincipalCrossSectionBlock/test )
 add_subdirectory( src/ACEtk/continuous/ReactionNumberBlock/test )
 add_subdirectory( src/ACEtk/continuous/ReactionQValueBlock/test )
