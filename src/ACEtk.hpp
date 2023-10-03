@@ -17,7 +17,7 @@
 #include "ACEtk/dosimetry.hpp"
 #include "ACEtk/electron.hpp"
 #include "ACEtk/thermal.hpp"
-#include "ACEtk/block.hpp"
+#include "ACEtk/continuous.hpp"
 
 // interpretation ACE tables
 #include "ACEtk/ContinuousEnergyTable.hpp"
