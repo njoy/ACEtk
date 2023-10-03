@@ -32,9 +32,9 @@ add_python_test( Table      Test_ACEtk_Table.py )
 # currently missing:
 # add_python_test( continuous.DistributionGivenElsewhere                   continuous/Test_ACEtk_continuous_DistributionGivenElsewhere.py )
 # add_python_test( continuous.EnergyDistributionBlock                      continuous/Test_ACEtk_continuous_EnergyDistributionBlock.py )
-# add_python_test( continuous.FissionMultiplicityBlock                     continuous/Test_ACEtk_continuous_FissionMultiplicityBlock.py )
 # add_python_test( continuous.FullyIsotropicDistribution                   continuous/Test_ACEtk_continuous_FullyIsotropicDistribution.py )
 
+add_python_test( continuous.FissionMultiplicityBlock                     continuous/Test_ACEtk_continuous_FissionMultiplicityBlock.py )
 add_python_test( continuous.PolynomialFissionMultiplicity                continuous/Test_ACEtk_continuous_PolynomialFissionMultiplicity.py )
 add_python_test( continuous.TwoBodyTransferDistribution                  continuous/Test_ACEtk_continuous_TwoBodyTransferDistribution.py )
 add_python_test( continuous.TabulatedSecondaryParticleMultiplicity       continuous/Test_ACEtk_continuous_TabulatedSecondaryParticleMultiplicity.py )
