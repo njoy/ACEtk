@@ -1,8 +1,21 @@
 ########################################################################
 # Preamble
 ########################################################################
+
 cmake_minimum_required( VERSION 3.14 )
-project( ACEtk LANGUAGES CXX )
+
+set( subproject OFF )
+if( DEFINED PROJECT_NAME )
+  set( subproject ON )
+endif()
+
+project( ACEtk
+  VERSION 0.1.0
+  LANGUAGES CXX
+)
+
+include( CMakeDependentOption )
+include( GNUInstallDirs )
 
 ########################################################################
 # Project-wide setup
@@ -11,18 +24,8 @@ project( ACEtk LANGUAGES CXX )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-option( ACEtk.tests "Build the ACEtk unit tests" OFF )
+option( ACEtk.tests  "Build the ACEtk unit tests"  OFF )
 option( ACEtk.python "Build ACEtk python bindings" ON )
-option( strict_compile
-    "Treat all warnings as errors." ON
-    )
-
-# Compile flags
-set( common_flags "-Wall" "-Wextra" "-Wpedantic" )
-set( strict_flags "-Werror" )
-set( release_flags "-O3" )
-set( debug_flags "-O0" "-g" )
-
 
 ########################################################################
 # Dependencies
@@ -55,15 +58,19 @@ endif()
 # ACEtk : library
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-include_directories( src/ )
-
 add_library( ACEtk INTERFACE )
-target_include_directories( ACEtk INTERFACE src/ )
+add_library( njoy::ACEtk ALIAS ACEtk )
+target_include_directories( ACEtk
+  INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 target_link_libraries( ACEtk
-    INTERFACE Log
-    INTERFACE disco
-    INTERFACE range-v3
-    )
+  INTERFACE
+    Log
+    disco
+    range-v3
+)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # ACEtk : python bindings
@@ -183,7 +190,7 @@ if(ACEtk.python)
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
   target_include_directories( ACEtk.python PRIVATE python/src )
-  target_compile_options( ACEtk.python PRIVATE "-fvisibility=hidden" )
+  target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
   set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
   set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
@@ -200,4 +207,57 @@ if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
   if( ACEtk.tests )
     include( cmake/unit_testing.cmake )
   endif()
+endif()
+
+#######################################################################
+# Installation
+#######################################################################
+
+if(ACEtk.installation)
+
+  include( CMakePackageConfigHelpers )
+
+  install( TARGETS ACEtk EXPORT ACEtk-targets
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+  )
+
+  install( EXPORT ACEtk-targets
+    FILE "ACEtk-targets.cmake"
+    NAMESPACE njoy::
+    DESTINATION share/cmake/ACEtk
+  )
+
+  install( DIRECTORY src/
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+    FILES_MATCHING PATTERN "*.hpp"
+    PATTERN "*test*" EXCLUDE
+  )
+
+  string( TOLOWER ACEtk lowercasePackageName )
+
+  write_basic_package_version_file( "${lowercasePackageName}-config-version.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY AnyNewerVersion
+  )
+
+  configure_package_config_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/${lowercasePackageName}-config.cmake.in
+    ${PROJECT_BINARY_DIR}/${lowercasePackageName}-config.cmake
+    INSTALL_DESTINATION share/cmake/ACEtk
+  )
+
+  install( FILES
+    "${PROJECT_BINARY_DIR}/${lowercasePackageName}-config.cmake"
+    "${PROJECT_BINARY_DIR}/${lowercasePackageName}-config-version.cmake"
+    DESTINATION share/cmake/ACEtk
+  )
+
+  if( NOT subproject )
+    set(CPACK_PACKAGE_VENDOR "Los Alamos National Laboratory")
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+    include(CPack)
+  endif()
+
 endif()

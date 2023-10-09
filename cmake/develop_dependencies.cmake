@@ -39,7 +39,6 @@ FetchContent_Declare( pybind11
 
 FetchContent_MakeAvailable(
     Log
-    Catch2
     disco
     range-v3
     pybind11
