@@ -14,6 +14,7 @@ project( ACEtk
   LANGUAGES CXX
 )
 
+include( CTest )
 include( CMakeDependentOption )
 include( GNUInstallDirs )
 
@@ -24,8 +25,16 @@ include( GNUInstallDirs )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-option( ACEtk.tests  "Build the ACEtk unit tests"  OFF )
-option( ACEtk.python "Build ACEtk python bindings" ON )
+cmake_dependent_option( 
+  ACEtk.tests
+  "Build the ACEtk unit tests and integrate with ctest" ON
+  "BUILD_TESTING AND NOT ${subproject}" OFF
+)
+cmake_dependent_option( 
+  ACEtk.python
+  "Build ACEtk python bindings" ON
+  "NOT ${subproject}" OFF
+)
 
 ########################################################################
 # Dependencies
@@ -189,7 +198,7 @@ if(ACEtk.python)
       )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
-  target_include_directories( ACEtk.python PRIVATE python/src )
+  target_include_directories( ACEtk.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
   target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
   set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
@@ -209,55 +218,3 @@ if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
   endif()
 endif()
 
-#######################################################################
-# Installation
-#######################################################################
-
-if(ACEtk.installation)
-
-  include( CMakePackageConfigHelpers )
-
-  install( TARGETS ACEtk EXPORT ACEtk-targets
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  )
-
-  install( EXPORT ACEtk-targets
-    FILE "ACEtk-targets.cmake"
-    NAMESPACE njoy::
-    DESTINATION share/cmake/ACEtk
-  )
-
-  install( DIRECTORY src/
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-    FILES_MATCHING PATTERN "*.hpp"
-    PATTERN "*test*" EXCLUDE
-  )
-
-  string( TOLOWER ACEtk lowercasePackageName )
-
-  write_basic_package_version_file( "${lowercasePackageName}-config-version.cmake"
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY AnyNewerVersion
-  )
-
-  configure_package_config_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/${lowercasePackageName}-config.cmake.in
-    ${PROJECT_BINARY_DIR}/${lowercasePackageName}-config.cmake
-    INSTALL_DESTINATION share/cmake/ACEtk
-  )
-
-  install( FILES
-    "${PROJECT_BINARY_DIR}/${lowercasePackageName}-config.cmake"
-    "${PROJECT_BINARY_DIR}/${lowercasePackageName}-config-version.cmake"
-    DESTINATION share/cmake/ACEtk
-  )
-
-  if( NOT subproject )
-    set(CPACK_PACKAGE_VENDOR "Los Alamos National Laboratory")
-    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
-    include(CPack)
-  endif()
-
-endif()
