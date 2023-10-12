@@ -25,12 +25,12 @@ include( GNUInstallDirs )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-cmake_dependent_option( 
+cmake_dependent_option(
   ACEtk.tests
   "Build the ACEtk unit tests and integrate with ctest" ON
   "BUILD_TESTING AND NOT ${subproject}" OFF
 )
-cmake_dependent_option( 
+cmake_dependent_option(
   ACEtk.python
   "Build ACEtk python bindings" ON
   "NOT ${subproject}" OFF
@@ -217,4 +217,3 @@ if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
     include( cmake/unit_testing.cmake )
   endif()
 endif()
-
