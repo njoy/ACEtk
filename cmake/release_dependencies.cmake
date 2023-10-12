@@ -42,7 +42,6 @@ FetchContent_Declare( spdlog
 FetchContent_MakeAvailable(
     disco
     Log
-    pybind11
     range-v3
     spdlog
     )

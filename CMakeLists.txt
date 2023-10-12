@@ -85,7 +85,9 @@ target_link_libraries( ACEtk
 # ACEtk : python bindings
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if(ACEtk.python)
+if( ACEtk.python )
+
+  FetchContent_MakeAvailable( pybind11 )
 
   pybind11_add_module( ACEtk.python
       python/src/ACEtk.python.cpp

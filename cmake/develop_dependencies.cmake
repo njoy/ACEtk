@@ -41,5 +41,4 @@ FetchContent_MakeAvailable(
     Log
     disco
     range-v3
-    pybind11
     )
