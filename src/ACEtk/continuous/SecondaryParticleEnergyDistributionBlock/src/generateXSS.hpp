@@ -15,7 +15,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions, bool ) {
 
       std::visit(
 
-        utility::overload{
+        tools::overload{
 
           [ &xss, offset ] ( const MultiDistributionData& value ) {
 
@@ -37,7 +37,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions, bool ) {
       std::size_t idat = 0;
       std::visit(
 
-        utility::overload{
+        tools::overload{
 
           [] ( const MultiDistributionData& ) { /* nothing to do here */ },
           [ &xss, &idat, offset ] ( const auto& value ) {
@@ -58,7 +58,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions, bool ) {
       );
       std::visit(
 
-        utility::overload{
+        tools::overload{
 
           [ &xss, idat ] ( const OutgoingEnergyDistributionData& value ) {
 

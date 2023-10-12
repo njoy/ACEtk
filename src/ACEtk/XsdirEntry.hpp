@@ -9,7 +9,7 @@
 #include <sstream>
 
 // other includes
-#include "Log.hpp"
+#include "tools/Log.hpp"
 
 namespace njoy {
 namespace ACEtk {

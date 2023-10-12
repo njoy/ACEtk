@@ -28,7 +28,7 @@ generateXSS( std::vector< DistributionProbability >&& probabilities,
     xss[ offset + 2 ] = static_cast< double >( xss.size() + locb ); // idat
     std::visit(
 
-      utility::overload{
+      tools::overload{
 
         [ &xss, offset ] ( const OutgoingEnergyDistributionData& value ) {
 

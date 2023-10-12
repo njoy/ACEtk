@@ -8,7 +8,7 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
 
     std::visit(
 
-      utility::overload{
+      tools::overload{
 
         [ &xss, index ] ( const continuous::FullyIsotropicDistribution& value ) {
 
