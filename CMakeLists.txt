@@ -1,8 +1,22 @@
 ########################################################################
 # Preamble
 ########################################################################
+
 cmake_minimum_required( VERSION 3.14 )
-project( ACEtk LANGUAGES CXX )
+
+set( subproject OFF )
+if( DEFINED PROJECT_NAME )
+  set( subproject ON )
+endif()
+
+project( ACEtk
+  VERSION 0.1.0
+  LANGUAGES CXX
+)
+
+include( CTest )
+include( CMakeDependentOption )
+include( GNUInstallDirs )
 
 ########################################################################
 # Project-wide setup
@@ -11,18 +25,16 @@ project( ACEtk LANGUAGES CXX )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-option( ACEtk.tests "Build the ACEtk unit tests" OFF )
-option( ACEtk.python "Build ACEtk python bindings" ON )
-option( strict_compile
-    "Treat all warnings as errors." ON
-    )
-
-# Compile flags
-set( common_flags "-Wall" "-Wextra" "-Wpedantic" )
-set( strict_flags "-Werror" )
-set( release_flags "-O3" )
-set( debug_flags "-O0" "-g" )
-
+cmake_dependent_option(
+  ACEtk.tests
+  "Build the ACEtk unit tests and integrate with ctest" ON
+  "BUILD_TESTING AND NOT ${subproject}" OFF
+)
+cmake_dependent_option(
+  ACEtk.python
+  "Build ACEtk python bindings" ON
+  "NOT ${subproject}" OFF
+)
 
 ########################################################################
 # Dependencies
@@ -55,21 +67,27 @@ endif()
 # ACEtk : library
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-include_directories( src/ )
-
 add_library( ACEtk INTERFACE )
-target_include_directories( ACEtk INTERFACE src/ )
+add_library( njoy::ACEtk ALIAS ACEtk )
+target_include_directories( ACEtk
+  INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 target_link_libraries( ACEtk
-    INTERFACE Log
-    INTERFACE disco
-    INTERFACE range-v3
-    )
+  INTERFACE
+    Log
+    disco
+    range-v3
+)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # ACEtk : python bindings
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if(ACEtk.python)
+if( ACEtk.python )
+
+  FetchContent_MakeAvailable( pybind11 )
 
   pybind11_add_module( ACEtk.python
       python/src/ACEtk.python.cpp
@@ -182,8 +200,8 @@ if(ACEtk.python)
       )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
-  target_include_directories( ACEtk.python PRIVATE python/src )
-  target_compile_options( ACEtk.python PRIVATE "-fvisibility=hidden" )
+  target_include_directories( ACEtk.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
+  target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
   set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
   set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
