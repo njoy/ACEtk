@@ -7,7 +7,7 @@ void generateBlocks() {
 
       if ( this->isFullyIsotropic( index ) ) {
 
-        this->data_.emplace_back( block::FullyIsotropicDistribution() );
+        this->data_.emplace_back( continuous::FullyIsotropicDistribution() );
       }
       else {
 
@@ -27,12 +27,12 @@ void generateBlocks() {
             break;
           }
         }
-        this->data_.emplace_back( block::AngularDistributionData( land, left, right ) );
+        this->data_.emplace_back( continuous::AngularDistributionData( land, left, right ) );
       }
     }
     else {
 
-      this->data_.emplace_back( block::DistributionGivenElsewhere() );
+      this->data_.emplace_back( continuous::DistributionGivenElsewhere() );
     }
   }
 }

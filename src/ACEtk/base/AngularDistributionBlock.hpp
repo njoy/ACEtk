@@ -6,9 +6,9 @@
 
 // other includes
 #include "ACEtk/base/Base.hpp"
-#include "ACEtk/block/AngularDistributionData.hpp"
-#include "ACEtk/block/FullyIsotropicDistribution.hpp"
-#include "ACEtk/block/DistributionGivenElsewhere.hpp"
+#include "ACEtk/continuous/AngularDistributionData.hpp"
+#include "ACEtk/continuous/FullyIsotropicDistribution.hpp"
+#include "ACEtk/continuous/DistributionGivenElsewhere.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -24,9 +24,9 @@ class AngularDistributionBlock : protected Base {
 public:
 
   /* type alias */
-  using DistributionData = std::variant< block::FullyIsotropicDistribution,
-                                         block::DistributionGivenElsewhere,
-                                         block::AngularDistributionData >;
+  using DistributionData = std::variant< continuous::FullyIsotropicDistribution,
+                                         continuous::DistributionGivenElsewhere,
+                                         continuous::AngularDistributionData >;
 
 private:
 

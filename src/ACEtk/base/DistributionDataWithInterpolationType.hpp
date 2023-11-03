@@ -8,7 +8,7 @@
 #include "utility/overload.hpp"
 #include "ACEtk/base/Base.hpp"
 #include "ACEtk/base/ColumnData.hpp"
-#include "ACEtk/block/InterpolationData.hpp"
+#include "ACEtk/continuous/InterpolationData.hpp"
 
 namespace njoy {
 namespace ACEtk {

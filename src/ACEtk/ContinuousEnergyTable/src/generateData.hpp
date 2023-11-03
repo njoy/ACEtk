@@ -1,4 +1,4 @@
-static block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
+static continuous::TYR generateTYR( const continuous::DLW& dlw, std::size_t ntr ) {
 
   auto entries = dlw.tyrMultiplicities();
   std::vector< ReferenceFrame > frames = dlw.referenceFrames();
@@ -12,13 +12,13 @@ static block::TYR generateTYR( const block::DLW& dlw, std::size_t ntr ) {
   return { std::move( frames ), std::move( multiplicities ) };
 }
 
-static std::optional< std::vector< block::TYRH > >
-generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
+static std::optional< std::vector< continuous::TYRH > >
+generateTYRH( const std::optional< std::vector< continuous::DLWH > >& dlwh ) {
 
-  std::optional< std::vector< block::TYRH > > tyrh = std::nullopt;
+  std::optional< std::vector< continuous::TYRH > > tyrh = std::nullopt;
   if ( dlwh.has_value() ) {
 
-    tyrh = std::vector< block::TYRH >{};
+    tyrh = std::vector< continuous::TYRH >{};
     for ( const auto& element : dlwh.value() ) {
 
       std::vector< ReferenceFrame > frames;
@@ -34,26 +34,27 @@ generateTYRH( const std::optional< std::vector< block::DLWH > >& dlwh ) {
 }
 
 Data generateData( unsigned int z, unsigned int a,
-                   block::ESZ&& esz, std::optional< block::NU >&& nu,
-                   block::MTR&& mtr, block::LQR&& lqr,
-                   block::SIG&& sig, block::AND&& ang, block::DLW&& dlw,
-                   std::optional< block::GPD >&& gpd,
-                   std::optional< block::MTRP >&& mtrp,
-                   std::optional< block::SIGP >&& sigp,
-                   std::optional< block::ANDP >&& andp,
-                   std::optional< block::DLWP >&& dlwp,
-                   std::optional< block::YP >&& yp,
-                   std::optional< block::UNR >&& unr,
-                   std::optional< block::DNU >&& dnu,
-                   std::optional< block::BDD >&& bdd,
-                   std::optional< block::DNED >&& dned,
-                   std::optional< block::PTYPE >&& ptype,
-                   std::optional< std::vector< block::HPD > >&& hpd,
-                   std::optional< std::vector< block::MTRH > >&& mtrh,
-                   std::optional< std::vector< block::SIGH > >&& sigh,
-                   std::optional< std::vector< block::ANDH > >&& andh,
-                   std::optional< std::vector< block::DLWH > >&& dlwh,
-                   std::optional< std::vector< block::YH > >&& yh ) {
+                   continuous::ESZ&& esz, std::optional< continuous::NU >&& nu,
+                   continuous::MTR&& mtr, continuous::LQR&& lqr,
+                   continuous::SIG&& sig, continuous::AND&& ang,
+                   continuous::DLW&& dlw,
+                   std::optional< continuous::GPD >&& gpd,
+                   std::optional< continuous::MTRP >&& mtrp,
+                   std::optional< continuous::SIGP >&& sigp,
+                   std::optional< continuous::ANDP >&& andp,
+                   std::optional< continuous::DLWP >&& dlwp,
+                   std::optional< continuous::YP >&& yp,
+                   std::optional< continuous::UNR >&& unr,
+                   std::optional< continuous::DNU >&& dnu,
+                   std::optional< continuous::BDD >&& bdd,
+                   std::optional< continuous::DNED >&& dned,
+                   std::optional< continuous::PTYPE >&& ptype,
+                   std::optional< std::vector< continuous::HPD > >&& hpd,
+                   std::optional< std::vector< continuous::MTRH > >&& mtrh,
+                   std::optional< std::vector< continuous::SIGH > >&& sigh,
+                   std::optional< std::vector< continuous::ANDH > >&& andh,
+                   std::optional< std::vector< continuous::DLWH > >&& dlwh,
+                   std::optional< std::vector< continuous::YH > >&& yh ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;
@@ -73,8 +74,8 @@ Data generateData( unsigned int z, unsigned int a,
   unsigned int npcr = bdd ? bdd->NPCR() : 0;
 
   // generate blocks we don't have yet
-  block::TYR tyr = generateTYR( dlw, ntr );
-  std::optional< std::vector< block::TYRH > > tyrh = generateTYRH( dlwh );
+  continuous::TYR tyr = generateTYR( dlw, ntr );
+  std::optional< std::vector< continuous::TYRH > > tyrh = generateTYRH( dlwh );
 
   // verify some stuff:
   //  - MTR, LQR, TYR and SIG have the same NTR
@@ -272,7 +273,7 @@ Data generateData( unsigned int z, unsigned int a,
 
       numbers.push_back( element.NTR() );
     }
-    block::NTRO ntro( std::move( numbers ) );
+    continuous::NTRO ntro( std::move( numbers ) );
 
     jxs[29] = xss.size() + 1;
     xss.insert( xss.end(), ptype->begin(), ptype->end() );
@@ -307,7 +308,7 @@ Data generateData( unsigned int z, unsigned int a,
       xss.insert( xss.end(), yh.value()[index].begin(), yh.value()[index].end() );
     }
 
-    block::IXS locators( std::move( ixs ) );
+    continuous::IXS locators( std::move( ixs ) );
     xss.insert( xss.begin() + ixs_position, locators.begin(), locators.end() );
   }
 

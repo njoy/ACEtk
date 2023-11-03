@@ -5,26 +5,26 @@
 
 // other includes
 #include "ACEtk/Table.hpp"
-#include "ACEtk/block/PrincipalCrossSectionBlock.hpp"
-#include "ACEtk/block/FissionMultiplicityBlock.hpp"
-#include "ACEtk/block/ReactionNumberBlock.hpp"
-#include "ACEtk/block/ReactionQValueBlock.hpp"
-#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
-#include "ACEtk/block/CrossSectionBlock.hpp"
-#include "ACEtk/block/AngularDistributionBlock.hpp"
-#include "ACEtk/block/EnergyDistributionBlock.hpp"
-#include "ACEtk/block/PhotonProductionBlock.hpp"
-#include "ACEtk/block/MultiplicityReactionNumberBlock.hpp"
-#include "ACEtk/block/PhotonProductionCrossSectionBlock.hpp"
-#include "ACEtk/block/DelayedNeutronPrecursorBlock.hpp"
-#include "ACEtk/block/ProbabilityTableBlock.hpp"
-#include "ACEtk/block/SecondaryParticleTypeBlock.hpp"
-#include "ACEtk/block/SecondaryParticleInformationBlock.hpp"
-#include "ACEtk/block/SecondaryParticleLocatorBlock.hpp"
-#include "ACEtk/block/SecondaryParticleProductionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
+#include "ACEtk/continuous/PrincipalCrossSectionBlock.hpp"
+#include "ACEtk/continuous/FissionMultiplicityBlock.hpp"
+#include "ACEtk/continuous/ReactionNumberBlock.hpp"
+#include "ACEtk/continuous/ReactionQValueBlock.hpp"
+#include "ACEtk/continuous/FrameAndMultiplicityBlock.hpp"
+#include "ACEtk/continuous/CrossSectionBlock.hpp"
+#include "ACEtk/continuous/AngularDistributionBlock.hpp"
+#include "ACEtk/continuous/EnergyDistributionBlock.hpp"
+#include "ACEtk/continuous/PhotonProductionBlock.hpp"
+#include "ACEtk/continuous/MultiplicityReactionNumberBlock.hpp"
+#include "ACEtk/continuous/PhotonProductionCrossSectionBlock.hpp"
+#include "ACEtk/continuous/DelayedNeutronPrecursorBlock.hpp"
+#include "ACEtk/continuous/ProbabilityTableBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleTypeBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleInformationBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleLocatorBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleProductionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleProductionCrossSectionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleAngularDistributionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleEnergyDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -39,38 +39,38 @@ namespace ACEtk {
 class ContinuousEnergyTable : protected Table {
 
   /* fields */
-  block::ESZ esz_;
-  std::optional< block::NU > nu_;
-  block::MTR mtr_;
-  block::LQR lqr_;
-  block::TYR tyr_;
-  block::SIG sig_;
-  block::AND and_;
-  block::DLW dlw_;
+  continuous::ESZ esz_;
+  std::optional< continuous::NU > nu_;
+  continuous::MTR mtr_;
+  continuous::LQR lqr_;
+  continuous::TYR tyr_;
+  continuous::SIG sig_;
+  continuous::AND and_;
+  continuous::DLW dlw_;
 
-  std::optional< block::GPD > gpd_;
-  std::optional< block::MTRP > mtrp_;
-  std::optional< block::SIGP > sigp_;
-  std::optional< block::ANDP > andp_;
-  std::optional< block::DLWP > dlwp_;
-  std::optional< block::YP > yp_;
+  std::optional< continuous::GPD > gpd_;
+  std::optional< continuous::MTRP > mtrp_;
+  std::optional< continuous::SIGP > sigp_;
+  std::optional< continuous::ANDP > andp_;
+  std::optional< continuous::DLWP > dlwp_;
+  std::optional< continuous::YP > yp_;
 
-  std::optional< block::UNR > unr_;
+  std::optional< continuous::UNR > unr_;
 
-  std::optional< block::NU > dnu_;
-  std::optional< block::BDD > bdd_;
-  std::optional< block::DNED > dned_;
+  std::optional< continuous::NU > dnu_;
+  std::optional< continuous::BDD > bdd_;
+  std::optional< continuous::DNED > dned_;
 
-  std::optional< block::PTYPE > ptype_;
-  std::optional< block::NTRO > ntro_;
-  std::optional< block::IXS > ixs_;
-  std::vector< block::HPD > hpd_;
-  std::vector< block::MTRH > mtrh_;
-  std::vector< block::TYRH > tyrh_;
-  std::vector< block::SIGH > sigh_;
-  std::vector< block::ANDH > andh_;
-  std::vector< block::DLWH > dlwh_;
-  std::vector< block::YH > yh_;
+  std::optional< continuous::PTYPE > ptype_;
+  std::optional< continuous::NTRO > ntro_;
+  std::optional< continuous::IXS > ixs_;
+  std::vector< continuous::HPD > hpd_;
+  std::vector< continuous::MTRH > mtrh_;
+  std::vector< continuous::TYRH > tyrh_;
+  std::vector< continuous::SIGH > sigh_;
+  std::vector< continuous::ANDH > andh_;
+  std::vector< continuous::DLWH > dlwh_;
+  std::vector< continuous::YH > yh_;
 
   /* auxiliary functions */
   #include "ACEtk/ContinuousEnergyTable/src/generateBlocks.hpp"
@@ -256,22 +256,22 @@ public:
   /**
    *  @brief Return the principal cross section block
    */
-  const block::ESZ& ESZ() const { return this->esz_; }
+  const continuous::ESZ& ESZ() const { return this->esz_; }
 
   /**
    *  @brief Return the principal cross section block
    */
-  const block::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
+  const continuous::ESZ& principalCrossSectionBlock() const { return this->ESZ(); }
 
   /**
    *  @brief Return the fission multiplicity block
    */
-  const std::optional< block::NU >& NU() const { return this->nu_; }
+  const std::optional< continuous::NU >& NU() const { return this->nu_; }
 
   /**
    *  @brief Return the fission multiplicity block
    */
-  const std::optional< block::NU >& fissionMultiplicityBlock() const {
+  const std::optional< continuous::NU >& fissionMultiplicityBlock() const {
 
     return this->NU();
   }
@@ -279,72 +279,72 @@ public:
   /**
    *  @brief Return the reaction number block
    */
-  const block::MTR& MTR() const { return this->mtr_; }
+  const continuous::MTR& MTR() const { return this->mtr_; }
 
   /**
    *  @brief Return the reaction number block
    */
-  const block::MTR& reactionNumberBlock() const { return this->MTR(); }
+  const continuous::MTR& reactionNumberBlock() const { return this->MTR(); }
 
   /**
    *  @brief Return the reaction Q value block
    */
-  const block::LQR& LQR() const { return this->lqr_; }
+  const continuous::LQR& LQR() const { return this->lqr_; }
 
   /**
    *  @brief Return the reaction Q value block
    */
-  const block::LQR& reactionQValueBlock() const { return this->LQR(); }
+  const continuous::LQR& reactionQValueBlock() const { return this->LQR(); }
 
   /**
    *  @brief Return the reference frame and multiplicity block
    */
-  const block::TYR& TYR() const { return this->tyr_; }
+  const continuous::TYR& TYR() const { return this->tyr_; }
 
   /**
    *  @brief Return the reference frame and multiplicity block
    */
-  const block::TYR& frameAndMultiplicityBlock() const { return this->TYR(); }
+  const continuous::TYR& frameAndMultiplicityBlock() const { return this->TYR(); }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& SIG() const { return this->sig_; }
+  const continuous::SIG& SIG() const { return this->sig_; }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& crossSectionBlock() const { return this->SIG(); }
+  const continuous::SIG& crossSectionBlock() const { return this->SIG(); }
 
   /**
    *  @brief Return the angular distribution block
    */
-  const block::AND& AND() const { return this->and_; }
+  const continuous::AND& AND() const { return this->and_; }
 
   /**
    *  @brief Return the angular distribution block
    */
-  const block::AND& angularDistributionBlock() const { return this->AND(); }
+  const continuous::AND& angularDistributionBlock() const { return this->AND(); }
 
   /**
    *  @brief Return the energy distribution block
    */
-  const block::DLW& DLW() const { return this->dlw_; }
+  const continuous::DLW& DLW() const { return this->dlw_; }
 
   /**
    *  @brief Return the energy distribution block
    */
-  const block::DLW& energyDistributionBlock() const { return this->DLW(); }
+  const continuous::DLW& energyDistributionBlock() const { return this->DLW(); }
 
   /**
    *  @brief Return the photon production block
    */
-  const std::optional< block::GPD >& GPD() const { return this->gpd_; }
+  const std::optional< continuous::GPD >& GPD() const { return this->gpd_; }
 
   /**
    *  @brief Return the photon production block
    */
-  const std::optional< block::GPD >& photonProductionBlock() const {
+  const std::optional< continuous::GPD >& photonProductionBlock() const {
 
     return this->GPD();
   }
@@ -352,12 +352,12 @@ public:
   /**
    *  @brief Return the photon production reaction number block
    */
-  const std::optional< block::MTR >& MTRP() const { return this->mtrp_; }
+  const std::optional< continuous::MTR >& MTRP() const { return this->mtrp_; }
 
   /**
    *  @brief Return the photon production reaction number block
    */
-  const std::optional< block::MTR >& photonProductionReactionNumberBlock() const {
+  const std::optional< continuous::MTR >& photonProductionReactionNumberBlock() const {
 
     return this->MTRP();
   }
@@ -365,12 +365,12 @@ public:
   /**
    *  @brief Return the photon production cross section block
    */
-  const std::optional< block::SIGP >& SIGP() const { return this->sigp_; }
+  const std::optional< continuous::SIGP >& SIGP() const { return this->sigp_; }
 
   /**
    *  @brief Return the photon production cross section block
    */
-  const std::optional< block::SIGP >& photonProductionCrossSectionBlock() const {
+  const std::optional< continuous::SIGP >& photonProductionCrossSectionBlock() const {
 
     return this->SIGP();
   }
@@ -378,12 +378,12 @@ public:
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const std::optional< block::ANDP >& ANDP() const { return this->andp_; }
+  const std::optional< continuous::ANDP >& ANDP() const { return this->andp_; }
 
   /**
    *  @brief Return the photon production angular distribution block
    */
-  const std::optional< block::ANDP >& photonProductionAngularDistributionBlock() const {
+  const std::optional< continuous::ANDP >& photonProductionAngularDistributionBlock() const {
 
     return this->ANDP();
   }
@@ -391,12 +391,12 @@ public:
   /**
    *  @brief Return the photon production energy distribution block
    */
-  const std::optional< block::DLWP >& DLWP() const { return this->dlwp_; }
+  const std::optional< continuous::DLWP >& DLWP() const { return this->dlwp_; }
 
   /**
    *  @brief Return the photon production energy distribution block
    */
-  const std::optional< block::DLWP >& photonProductionEnergyDistributionBlock() const {
+  const std::optional< continuous::DLWP >& photonProductionEnergyDistributionBlock() const {
 
     return this->DLWP();
   }
@@ -404,12 +404,12 @@ public:
   /**
    *  @brief Return the photon multiplicity reaction number block
    */
-  const std::optional< block::YP >& YP() const { return this->yp_; }
+  const std::optional< continuous::YP >& YP() const { return this->yp_; }
 
   /**
    *  @brief Return the photon multiplicity reaction number block
    */
-  const std::optional< block::YP >& photonMultiplicityReactionNumberBlock() const {
+  const std::optional< continuous::YP >& photonMultiplicityReactionNumberBlock() const {
 
     return this->YP();
   }
@@ -417,12 +417,12 @@ public:
   /**
    *  @brief Return the unresoved probability table block
    */
-  const std::optional< block::UNR >& UNR() const { return this->unr_; }
+  const std::optional< continuous::UNR >& UNR() const { return this->unr_; }
 
   /**
    *  @brief Return the unresoved probability table block
    */
-  const std::optional< block::UNR >& probabilityTableBlock() const {
+  const std::optional< continuous::UNR >& probabilityTableBlock() const {
 
     return this->UNR();
   }
@@ -430,12 +430,12 @@ public:
   /**
    *  @brief Return the delayed fission multiplicity block
    */
-  const std::optional< block::NU >& DNU() const { return this->dnu_; }
+  const std::optional< continuous::NU >& DNU() const { return this->dnu_; }
 
   /**
    *  @brief Return the delayed fission multiplicity block
    */
-  const std::optional< block::NU >& delayedFissionMultiplicityBlock() const {
+  const std::optional< continuous::NU >& delayedFissionMultiplicityBlock() const {
 
     return this->DNU();
   }
@@ -443,12 +443,12 @@ public:
   /**
    *  @brief Return the delayed neutron precursor block
    */
-  const std::optional< block::BDD >& BDD() const { return this->bdd_; }
+  const std::optional< continuous::BDD >& BDD() const { return this->bdd_; }
 
   /**
    *  @brief Return the delayed neutron precursor block
    */
-  const std::optional< block::BDD >& delayedNeutronPrecursorBlock() const {
+  const std::optional< continuous::BDD >& delayedNeutronPrecursorBlock() const {
 
     return this->BDD();
   }
@@ -456,12 +456,12 @@ public:
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const std::optional< block::DNED >& DNED() const { return this->dned_; }
+  const std::optional< continuous::DNED >& DNED() const { return this->dned_; }
 
   /**
    *  @brief Return the delayed neutron energy distribution block
    */
-  const std::optional< block::DNED >& delayedNeutronEnergyDistributionBlock() const {
+  const std::optional< continuous::DNED >& delayedNeutronEnergyDistributionBlock() const {
 
     return this->DNED();
   }
@@ -469,12 +469,12 @@ public:
   /**
    *  @brief Return the secondary particle type block
    */
-  const std::optional< block::PTYPE >& PTYPE() const { return this->ptype_; }
+  const std::optional< continuous::PTYPE >& PTYPE() const { return this->ptype_; }
 
   /**
    *  @brief Return the secondary particle type block
    */
-  const std::optional< block::PTYPE >& secondaryParticleTypeBlock() const {
+  const std::optional< continuous::PTYPE >& secondaryParticleTypeBlock() const {
 
     return this->PTYPE();
   }
@@ -482,12 +482,12 @@ public:
   /**
    *  @brief Return the secondary particle information block
    */
-  const std::optional< block::NTRO >& NTRO() const { return this->ntro_; }
+  const std::optional< continuous::NTRO >& NTRO() const { return this->ntro_; }
 
   /**
    *  @brief Return the secondary particle information block
    */
-  const std::optional< block::NTRO >& secondaryParticleInformationBlock() const {
+  const std::optional< continuous::NTRO >& secondaryParticleInformationBlock() const {
 
     return this->NTRO();
   }
@@ -495,12 +495,12 @@ public:
   /**
    *  @brief Return the secondary particle locator block
    */
-  const std::optional< block::IXS >& IXS() const { return this->ixs_; }
+  const std::optional< continuous::IXS >& IXS() const { return this->ixs_; }
 
   /**
    *  @brief Return the secondary particle locator block
    */
-  const std::optional< block::IXS >& secondaryParticleLocatorBlock() const {
+  const std::optional< continuous::IXS >& secondaryParticleLocatorBlock() const {
 
     return this->IXS();
   }
@@ -514,7 +514,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::HPD& HPD( std::size_t index ) const {
+  const continuous::HPD& HPD( std::size_t index ) const {
 
     return this->hpd_[ index - 1 ];
   }
@@ -528,7 +528,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::HPD& secondaryParticleProductionBlock( std::size_t index ) const {
+  const continuous::HPD& secondaryParticleProductionBlock( std::size_t index ) const {
 
     return this->HPD( index );
   }
@@ -541,7 +541,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::MTRH& MTRH( std::size_t index ) const {
+  const continuous::MTRH& MTRH( std::size_t index ) const {
 
     return this->mtrh_[ index - 1 ];
   }
@@ -554,7 +554,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::MTRH& secondaryParticleReactionNumberBlock( std::size_t index ) const {
+  const continuous::MTRH& secondaryParticleReactionNumberBlock( std::size_t index ) const {
 
     return this->MTRH( index );
   }
@@ -568,7 +568,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::TYRH& TYRH( std::size_t index ) const {
+  const continuous::TYRH& TYRH( std::size_t index ) const {
 
     return this->tyrh_[ index - 1 ];
   }
@@ -582,7 +582,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::TYRH& secondaryParticleFrameAndMultiplicityBlock( std::size_t index ) const {
+  const continuous::TYRH& secondaryParticleFrameAndMultiplicityBlock( std::size_t index ) const {
 
     return this->TYRH( index );
   }
@@ -596,7 +596,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::SIGH& SIGH( std::size_t index ) const {
+  const continuous::SIGH& SIGH( std::size_t index ) const {
 
     return this->sigh_[ index - 1 ];
   }
@@ -610,7 +610,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::SIGH& secondaryParticleProductionCrossSectionBlock( std::size_t index ) const {
+  const continuous::SIGH& secondaryParticleProductionCrossSectionBlock( std::size_t index ) const {
 
     return this->SIGH( index );
   }
@@ -624,7 +624,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::ANDH& ANDH( std::size_t index ) const {
+  const continuous::ANDH& ANDH( std::size_t index ) const {
 
     return this->andh_[ index - 1 ];
   }
@@ -638,7 +638,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::ANDH& secondaryParticleAngularDistributionBlock( std::size_t index ) const {
+  const continuous::ANDH& secondaryParticleAngularDistributionBlock( std::size_t index ) const {
 
     return this->ANDH( index );
   }
@@ -652,7 +652,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::DLWH& DLWH( std::size_t index ) const {
+  const continuous::DLWH& DLWH( std::size_t index ) const {
 
     return this->dlwh_[ index - 1 ];
   }
@@ -666,7 +666,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::DLWH& secondaryParticleEnergyDistributionBlock( std::size_t index ) const {
+  const continuous::DLWH& secondaryParticleEnergyDistributionBlock( std::size_t index ) const {
 
     return this->DLWH( index );
   }
@@ -680,7 +680,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::YH& YH( std::size_t index ) const {
+  const continuous::YH& YH( std::size_t index ) const {
 
     return this->yh_[ index - 1 ];
   }
@@ -694,7 +694,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::YH& secondaryParticleMultiplicityReactionNumberBlock( std::size_t index ) const {
+  const continuous::YH& secondaryParticleMultiplicityReactionNumberBlock( std::size_t index ) const {
 
     return this->YH( index );
   }

@@ -12,9 +12,9 @@ generateXSS( const std::string& name,
   xss.reserve( 2 + 2 * nr + 2 * ne );
 
   // insert the interpolation data
-  const block::InterpolationData interpolation( std::string( name ),
-                                                std::move( boundaries ),
-                                                std::move( interpolants ) );
+  const continuous::InterpolationData interpolation( std::string( name ),
+                                                     std::move( boundaries ),
+                                                     std::move( interpolants ) );
   xss.insert( xss.end(), interpolation.begin(), interpolation.end() );
 
   // insert the tabulated data

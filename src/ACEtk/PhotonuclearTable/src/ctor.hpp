@@ -85,15 +85,15 @@ PhotonuclearTable& operator=( PhotonuclearTable&& base ) {
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
  */
 PhotonuclearTable( unsigned int z, unsigned int a, HeaderVariant header,
-                   photonuclear::ESZU eszu, block::MTR mtr, block::LQR lqr,
-                   block::SIG sig,
+                   photonuclear::ESZU eszu, continuous::MTR mtr,
+                   continuous::LQR lqr, continuous::SIG sig,
                    std::optional< std::vector< unsigned int > > ptype,
-                   std::optional< std::vector< block::CrossSectionData > > pxs,
-                   std::optional< std::vector< block::CrossSectionData > > phn,
-                   std::optional< std::vector< block::MTRH > > mtrh,
-                   std::optional< std::vector< block::SIGH > > sigh,
-                   std::optional< std::vector< block::ANDH > > andh,
-                   std::optional< std::vector< block::DLWH > > dlwh ) :
+                   std::optional< std::vector< continuous::CrossSectionData > > pxs,
+                   std::optional< std::vector< continuous::CrossSectionData > > phn,
+                   std::optional< std::vector< continuous::MTRH > > mtrh,
+                   std::optional< std::vector< continuous::SIGH > > sigh,
+                   std::optional< std::vector< continuous::ANDH > > andh,
+                   std::optional< std::vector< continuous::DLWH > > dlwh ) :
   PhotonuclearTable(
       Table( std::move( header ),
              generateData( z, a, std::move( eszu ),

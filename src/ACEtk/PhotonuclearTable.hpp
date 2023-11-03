@@ -6,15 +6,15 @@
 // other includes
 #include "ACEtk/Table.hpp"
 #include "ACEtk/photonuclear/PrincipalCrossSectionBlock.hpp"
-#include "ACEtk/block/ReactionNumberBlock.hpp"
-#include "ACEtk/block/ReactionQValueBlock.hpp"
-#include "ACEtk/block/CrossSectionBlock.hpp"
+#include "ACEtk/continuous/ReactionNumberBlock.hpp"
+#include "ACEtk/continuous/ReactionQValueBlock.hpp"
+#include "ACEtk/continuous/CrossSectionBlock.hpp"
 #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
-#include "ACEtk/block/CrossSectionData.hpp"
-#include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
-#include "ACEtk/block/SecondaryParticleProductionCrossSectionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleAngularDistributionBlock.hpp"
-#include "ACEtk/block/SecondaryParticleEnergyDistributionBlock.hpp"
+#include "ACEtk/continuous/CrossSectionData.hpp"
+#include "ACEtk/continuous/FrameAndMultiplicityBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleProductionCrossSectionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleAngularDistributionBlock.hpp"
+#include "ACEtk/continuous/SecondaryParticleEnergyDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -29,18 +29,18 @@ class PhotonuclearTable : protected Table {
 
   /* fields */
   photonuclear::ESZU eszu_;
-  block::MTR mtr_;
-  block::LQR lqr_;
-  block::SIG sig_;
+  continuous::MTR mtr_;
+  continuous::LQR lqr_;
+  continuous::SIG sig_;
 
   std::optional< photonuclear::IXSU > ixsu_;
-  std::vector< block::CrossSectionData > pxs_;
-  std::vector< block::CrossSectionData > phn_;
-  std::vector< block::MTRH > mtrh_;
-  std::vector< block::TYRH > tyrh_;
-  std::vector< block::SIGH > sigh_;
-  std::vector< block::ANDH > andh_;
-  std::vector< block::DLWH > dlwh_;
+  std::vector< continuous::CrossSectionData > pxs_;
+  std::vector< continuous::CrossSectionData > phn_;
+  std::vector< continuous::MTRH > mtrh_;
+  std::vector< continuous::TYRH > tyrh_;
+  std::vector< continuous::SIGH > sigh_;
+  std::vector< continuous::ANDH > andh_;
+  std::vector< continuous::DLWH > dlwh_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotonuclearTable/src/generateBlocks.hpp"
@@ -167,32 +167,32 @@ public:
   /**
    *  @brief Return the reaction number block
    */
-  const block::MTR& MTR() const { return this->mtr_; }
+  const continuous::MTR& MTR() const { return this->mtr_; }
 
   /**
    *  @brief Return the reaction number block
    */
-  const block::MTR& reactionNumberBlock() const { return this->MTR(); }
+  const continuous::MTR& reactionNumberBlock() const { return this->MTR(); }
 
   /**
    *  @brief Return the reaction Q value block
    */
-  const block::LQR& LQR() const { return this->lqr_; }
+  const continuous::LQR& LQR() const { return this->lqr_; }
 
   /**
    *  @brief Return the reaction Q value block
    */
-  const block::LQR& reactionQValueBlock() const { return this->LQR(); }
+  const continuous::LQR& reactionQValueBlock() const { return this->LQR(); }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& SIG() const { return this->sig_; }
+  const continuous::SIG& SIG() const { return this->sig_; }
 
   /**
    *  @brief Return the cross section block
    */
-  const block::SIG& crossSectionBlock() const { return this->SIG(); }
+  const continuous::SIG& crossSectionBlock() const { return this->SIG(); }
 
   /**
    *  @brief Return the secondary particle information and locator block
@@ -216,7 +216,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::CrossSectionData& PXS( std::size_t index ) const {
+  const continuous::CrossSectionData& PXS( std::size_t index ) const {
 
     return this->pxs_[ index - 1 ];
   }
@@ -230,7 +230,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::CrossSectionData&
+  const continuous::CrossSectionData&
   secondaryParticleProductionCrossSection( std::size_t index ) const {
 
     return this->PXS( index );
@@ -245,7 +245,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::CrossSectionData& PHN( std::size_t index ) const {
+  const continuous::CrossSectionData& PHN( std::size_t index ) const {
 
     return this->phn_[ index - 1 ];
   }
@@ -259,7 +259,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::CrossSectionData&
+  const continuous::CrossSectionData&
   secondaryParticleHeatingCrossSection( std::size_t index ) const {
 
     return this->PHN( index );
@@ -273,7 +273,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::MTRH& MTRH( std::size_t index ) const {
+  const continuous::MTRH& MTRH( std::size_t index ) const {
 
     return this->mtrh_[ index - 1 ];
   }
@@ -286,7 +286,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::MTRH& secondaryParticleReactionNumberBlock( std::size_t index ) const {
+  const continuous::MTRH& secondaryParticleReactionNumberBlock( std::size_t index ) const {
 
     return this->MTRH( index );
   }
@@ -300,7 +300,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::TYRH& TYRH( std::size_t index ) const {
+  const continuous::TYRH& TYRH( std::size_t index ) const {
 
     return this->tyrh_[ index - 1 ];
   }
@@ -314,7 +314,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::TYRH& secondaryParticleFrameAndMultiplicityBlock( std::size_t index ) const {
+  const continuous::TYRH& secondaryParticleFrameAndMultiplicityBlock( std::size_t index ) const {
 
     return this->TYRH( index );
   }
@@ -328,7 +328,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::SIGH& SIGH( std::size_t index ) const {
+  const continuous::SIGH& SIGH( std::size_t index ) const {
 
     return this->sigh_[ index - 1 ];
   }
@@ -342,7 +342,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::SIGH& secondaryParticleProductionCrossSectionBlock( std::size_t index ) const {
+  const continuous::SIGH& secondaryParticleProductionCrossSectionBlock( std::size_t index ) const {
 
     return this->SIGH( index );
   }
@@ -356,7 +356,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::ANDH& ANDH( std::size_t index ) const {
+  const continuous::ANDH& ANDH( std::size_t index ) const {
 
     return this->andh_[ index - 1 ];
   }
@@ -370,7 +370,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::ANDH& secondaryParticleAngularDistributionBlock( std::size_t index ) const {
+  const continuous::ANDH& secondaryParticleAngularDistributionBlock( std::size_t index ) const {
 
     return this->ANDH( index );
   }
@@ -384,7 +384,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::DLWH& DLWH( std::size_t index ) const {
+  const continuous::DLWH& DLWH( std::size_t index ) const {
 
     return this->dlwh_[ index - 1 ];
   }
@@ -398,7 +398,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const block::DLWH& secondaryParticleEnergyDistributionBlock( std::size_t index ) const {
+  const continuous::DLWH& secondaryParticleEnergyDistributionBlock( std::size_t index ) const {
 
     return this->DLWH( index );
   }

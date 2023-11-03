@@ -9,7 +9,7 @@
 // convenience typedefs
 using namespace njoy::ACEtk;
 using CrossSectionData = dosimetry::CrossSectionData;
-using MTR = block::MTR;
+using MTR = continuous::MTR;
 using SIGD = dosimetry::SIGD;
 using Header = Table::Header;
 

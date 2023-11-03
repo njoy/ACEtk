@@ -76,7 +76,7 @@ DosimetryTable& operator=( DosimetryTable&& base ) {
  *  @param[in] sigd      the cross section data block
  */
 DosimetryTable( unsigned int z, unsigned int a,
-                HeaderVariant header, block::MTR mtr, dosimetry::SIGD sigd ) :
+                HeaderVariant header, continuous::MTR mtr, dosimetry::SIGD sigd ) :
   DosimetryTable( Table( std::move( header ),
                          generateData( z, a, std::move( mtr ),
                                        std::move( sigd ) ) ) ) {}

@@ -8,7 +8,7 @@
 #include "utility/overload.hpp"
 #include "ACEtk/base/Base.hpp"
 #include "ACEtk/base/ColumnData.hpp"
-#include "ACEtk/block/InterpolationData.hpp"
+#include "ACEtk/continuous/InterpolationData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -27,7 +27,7 @@ class DistributionData : protected Base {
 
 protected:
 
-  block::InterpolationData interpolation_;
+  continuous::InterpolationData interpolation_;
   ColumnData values_;
   std::vector< Distribution > distributions_;
 
@@ -51,7 +51,7 @@ public:
   /**
    *  @brief Return the interpolation data
    */
-  const block::InterpolationData& interpolationData() const {
+  const continuous::InterpolationData& interpolationData() const {
 
     return this->interpolation_;
   }

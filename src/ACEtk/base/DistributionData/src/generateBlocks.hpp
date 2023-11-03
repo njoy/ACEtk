@@ -6,7 +6,7 @@ void generateBlocks() {
   auto data = this->iterator( 2 + 2 * nr );
   auto end = this->iterator( 2 + 2 * nr + 2 * ne + 1 );
 
-  this->interpolation_ = block::InterpolationData( this->name(), begin, data );
+  this->interpolation_ = continuous::InterpolationData( this->name(), begin, data );
   this->values_ = ColumnData( this->name(), data, end, 2 );
   for ( unsigned int index = 1; index <= this->numberValues(); ++index ) {
 
