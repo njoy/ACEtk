@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,7 +21,7 @@ namespace thermal {
  *  when IFENG = 2. This is the current standard ACE format used in inelastic
  *  thermal scattering.
  */
-class DiscreteCosinesWithProbability : protected block::details::Base {
+class DiscreteCosinesWithProbability : protected base::Base {
 
   /* fields */
   std::size_t ncosines_ = 0;

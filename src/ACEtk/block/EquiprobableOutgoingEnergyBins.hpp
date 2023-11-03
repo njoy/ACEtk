@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,7 +19,7 @@ namespace block {
  *  used in the EquiprobableOutgoingEnergyBinData (ACE LAW 1 for a given incident
  *  energy) in the DLW block. This format is only used in old ACE data.
  */
-class EquiprobableOutgoingEnergyBins : protected details::Base {
+class EquiprobableOutgoingEnergyBins : protected base::Base {
 
   /* fields */
   double incident_ = 0.0;

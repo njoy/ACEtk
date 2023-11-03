@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BlockWithLocators.hpp"
 #include "ACEtk/block/PhotonProductionCrossSectionData.hpp"
 #include "ACEtk/block/TabulatedSecondaryParticleMultiplicity.hpp"
 
@@ -29,11 +29,11 @@ using PhotonProductionData = std::variant<
  *  numbers in the MTRP block.
  */
 class PhotonProductionCrossSectionBlock :
-    protected details::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
-                                              PhotonProductionData > {
+    protected base::BlockWithLocators< PhotonProductionCrossSectionBlock,
+                                       PhotonProductionData > {
 
-  friend class details::BaseBlockWithLocators< PhotonProductionCrossSectionBlock,
-                                               PhotonProductionData >;
+  friend class base::BlockWithLocators< PhotonProductionCrossSectionBlock,
+                                        PhotonProductionData >;
 
   /* fields */
 
@@ -51,14 +51,14 @@ public:
   /**
    *  @brief Return the number of photon production reactions
    */
-  unsigned int NTRP() const { return BaseBlockWithLocators::N(); }
+  unsigned int NTRP() const { return BlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of photon production reactions
    */
   unsigned int numberPhotonProductionReactions() const {
 
-    return BaseBlockWithLocators::numberDataBlocks();
+    return BlockWithLocators::numberDataBlocks();
   }
 
   /**
@@ -71,7 +71,7 @@ public:
    */
   std::size_t LSIG( std::size_t index ) const {
 
-    return BaseBlockWithLocators::LLOC( index );
+    return BlockWithLocators::LLOC( index );
   }
 
   /**
@@ -84,7 +84,7 @@ public:
    */
   std::size_t crossSectionLocator( std::size_t index ) const {
 
-    return BaseBlockWithLocators::locator( index );
+    return BlockWithLocators::locator( index );
   }
 
   /**
@@ -92,7 +92,7 @@ public:
    */
   const std::vector< PhotonProductionData >& data() const {
 
-    return BaseBlockWithLocators::data();
+    return BlockWithLocators::data();
   }
 
   /**
@@ -105,15 +105,15 @@ public:
    */
   const PhotonProductionData& crossSectionData( std::size_t index ) const {
 
-    return BaseBlockWithLocators::data( index );
+    return BlockWithLocators::data( index );
   }
 
-  using BaseBlockWithLocators::empty;
-  using BaseBlockWithLocators::name;
-  using BaseBlockWithLocators::length;
-  using BaseBlockWithLocators::XSS;
-  using BaseBlockWithLocators::begin;
-  using BaseBlockWithLocators::end;
+  using BlockWithLocators::empty;
+  using BlockWithLocators::name;
+  using BlockWithLocators::length;
+  using BlockWithLocators::XSS;
+  using BlockWithLocators::begin;
+  using BlockWithLocators::end;
 };
 
 using SIGP = PhotonProductionCrossSectionBlock;

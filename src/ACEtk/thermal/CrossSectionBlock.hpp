@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/base/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -14,7 +14,7 @@ namespace thermal {
  *  @class
  *  @brief The thermal scattering cross section block
  */
-class CrossSectionBlock : protected block::details::ColumnData {
+class CrossSectionBlock : protected base::ColumnData {
 
   /* fields */
 

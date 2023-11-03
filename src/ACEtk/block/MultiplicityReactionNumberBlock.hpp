@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,7 +20,7 @@ namespace block {
  *  that are needed in production cross section calculations using multiplicity
  *  values.
  */
-class MultiplicityReactionNumberBlock : protected details::Base {
+class MultiplicityReactionNumberBlock : protected base::Base {
 
   /* fields */
 

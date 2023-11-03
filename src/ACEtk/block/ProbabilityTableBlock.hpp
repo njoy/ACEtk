@@ -5,7 +5,7 @@
 
 // other includes
 #include "ACEtk/block/ProbabilityTable.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -16,7 +16,7 @@ namespace block {
  *  @brief The continuous energy UNR block with the unresolved resonance
  *         probability tables
  */
-class ProbabilityTableBlock : protected details::Base {
+class ProbabilityTableBlock : protected base::Base {
 
   /* fields */
   std::vector< ProbabilityTable > data_;

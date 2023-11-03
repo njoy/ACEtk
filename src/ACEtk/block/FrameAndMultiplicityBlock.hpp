@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/ReferenceFrame.hpp"
 #include "range/v3/view/transform.hpp"
 
@@ -24,7 +24,7 @@ namespace block {
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
-class FrameAndMultiplicityBlock : protected details::Base {
+class FrameAndMultiplicityBlock : protected base::Base {
 
   /* fields */
   std::size_t ntr_ = 0;

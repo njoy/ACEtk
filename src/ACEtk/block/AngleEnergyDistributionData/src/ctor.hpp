@@ -16,9 +16,9 @@ AngleEnergyDistributionData(
     std::vector< long > interpolants,
     std::vector< TabulatedAngleEnergyDistribution > distributions,
     std::size_t locb = 1 ) :
-  BaseDistributionData( "AngleEnergyDistributionData",
-                        std::move( boundaries ), std::move( interpolants ),
-                        std::move( distributions ), locb ) {}
+  DistributionData( "AngleEnergyDistributionData",
+                    std::move( boundaries ), std::move( interpolants ),
+                    std::move( distributions ), locb ) {}
 
 /**
  *  @brief Constructor without interpolation data
@@ -39,8 +39,7 @@ AngleEnergyDistributionData(
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 AngleEnergyDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
-  BaseDistributionData( "AngleEnergyDistributionData", locb,
-                        begin, end ) {}
+  DistributionData( "AngleEnergyDistributionData", locb, begin, end ) {}
 
 AngleEnergyDistributionData& operator=( const AngleEnergyDistributionData& ) = default;
 AngleEnergyDistributionData& operator=( AngleEnergyDistributionData&& ) = default;

@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -24,7 +24,7 @@ namespace photoatomic {
  *
  *  The recoil electron momentum transfer values are given in inverse angstroms.
  */
-class IncoherentScatteringFunctionBlock : protected block::details::ArrayData {
+class IncoherentScatteringFunctionBlock : protected base::ArrayData {
 
   /* fields */
   std::optional< std::vector< double > > momentum_;

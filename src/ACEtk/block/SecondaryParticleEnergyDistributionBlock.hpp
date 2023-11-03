@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BlockWithLocators.hpp"
 #include "ACEtk/block/FrameAndMultiplicityBlock.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
@@ -55,11 +55,11 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
  *  as the order of the reaction numbers in the corresponding MTR block.
  */
 class SecondaryParticleEnergyDistributionBlock :
-    protected details::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
-                                              EnergyDistributionData > {
+    protected base::BlockWithLocators< SecondaryParticleEnergyDistributionBlock,
+                                       EnergyDistributionData > {
 
-  friend class details::BaseBlockWithLocators< SecondaryParticleEnergyDistributionBlock,
-                                               EnergyDistributionData >;
+  friend class base::BlockWithLocators< SecondaryParticleEnergyDistributionBlock,
+                                        EnergyDistributionData >;
 
   /* fields */
   std::optional< block::TYRH > tyrh_;
@@ -85,14 +85,14 @@ public:
   /**
    *  @brief Return the number of reactions with energy distribution data
    */
-  unsigned int NR() const { return BaseBlockWithLocators::N(); }
+  unsigned int NR() const { return BlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of reactions with energy distribution data
    */
   unsigned int numberReactions() const {
 
-    return BaseBlockWithLocators::numberDataBlocks();
+    return BlockWithLocators::numberDataBlocks();
   }
 
   /**
@@ -106,7 +106,7 @@ public:
    */
   int LDLW( std::size_t index ) const {
 
-    return BaseBlockWithLocators::LLOC( index );
+    return BlockWithLocators::LLOC( index );
   }
 
   /**
@@ -120,7 +120,7 @@ public:
    */
   int energyDistributionLocator( std::size_t index ) const {
 
-    return BaseBlockWithLocators::locator( index );
+    return BlockWithLocators::locator( index );
   }
 
   /**
@@ -128,7 +128,7 @@ public:
    */
   const std::vector< EnergyDistributionData >& data() const {
 
-    return BaseBlockWithLocators::data();
+    return BlockWithLocators::data();
   }
 
   /**
@@ -141,7 +141,7 @@ public:
    */
   const EnergyDistributionData& energyDistributionData( std::size_t index ) const {
 
-    return BaseBlockWithLocators::data( index );
+    return BlockWithLocators::data( index );
   }
 
   /**

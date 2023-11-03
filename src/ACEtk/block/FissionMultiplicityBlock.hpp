@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/block/PolynomialFissionMultiplicity.hpp"
 #include "ACEtk/block/TabulatedFissionMultiplicity.hpp"
 
@@ -17,7 +17,7 @@ namespace block {
  *  @class
  *  @brief The continuous energy NU block with the fission multiplicity data
  */
-class FissionMultiplicityBlock : protected details::Base {
+class FissionMultiplicityBlock : protected base::Base {
 
 public:
 

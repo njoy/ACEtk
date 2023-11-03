@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -18,7 +18,7 @@ namespace photoatomic {
  *  array is stored in NXS(3) and the corresponding energy points can be found
  *  in the ESZG block.
  */
-class HeatingNumbersBlock : protected block::details::ArrayData {
+class HeatingNumbersBlock : protected base::ArrayData {
 
   /* fields */
 

@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,7 +19,7 @@ namespace electron {
  *  density function (CDF) as a function of cosine for the given incident
  *  energy. It is used in the ELAS block.
  */
-class TabulatedAngularDistribution : protected block::details::ArrayData {
+class TabulatedAngularDistribution : protected base::ArrayData {
 
   /* fields */
   double energy_ = 0.0;

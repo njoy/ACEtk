@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,7 +19,7 @@ namespace thermal {
  *  associated discrete cosine values. It is used in the ITXE block (for
  *  inelastic thermal scattering data) when IFENG = 0 or 1.
  */
-class DiscreteCosines : protected block::details::Base {
+class DiscreteCosines : protected base::Base {
 
   /* fields */
   std::size_t ncosines_ = 0;

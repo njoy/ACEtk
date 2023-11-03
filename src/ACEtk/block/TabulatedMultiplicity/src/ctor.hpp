@@ -15,9 +15,9 @@ TabulatedMultiplicity( std::vector< long > boundaries,
                        std::vector< long > interpolants,
                        std::vector< double > energies,
                        std::vector< double > values ) :
-  BaseTabulatedData( "TabulatedMultiplicity",
-                     std::move( boundaries ), std::move( interpolants ),
-                     std::move( energies ), std::move( values ) ) {}
+  TabulatedData( "TabulatedMultiplicity",
+                 std::move( boundaries ), std::move( interpolants ),
+                 std::move( energies ), std::move( values ) ) {}
 
 /**
  *  @brief Constructor (linear interpolation is assumed)
@@ -36,7 +36,7 @@ TabulatedMultiplicity( std::vector< double > energies,
  *  @param[in] end      the end iterator of the block in the XSS array
  */
 TabulatedMultiplicity( Iterator begin, Iterator end ) :
-  BaseTabulatedData( "TabulatedMultiplicity", begin, end ) {}
+  TabulatedData( "TabulatedMultiplicity", begin, end ) {}
 
 TabulatedMultiplicity& operator=( const TabulatedMultiplicity& ) = default;
 TabulatedMultiplicity& operator=( TabulatedMultiplicity&& ) = default;

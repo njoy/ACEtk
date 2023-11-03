@@ -15,9 +15,9 @@ DistributionProbability( std::vector< long > boundaries,
                          std::vector< long > interpolants,
                          std::vector< double > energies,
                          std::vector< double > probabilities ) :
-  BaseTabulatedData( "DistributionProbability",
-                     std::move( boundaries ), std::move( interpolants ),
-                     std::move( energies ), std::move( probabilities ) ) {}
+  TabulatedData( "DistributionProbability",
+                 std::move( boundaries ), std::move( interpolants ),
+                 std::move( energies ), std::move( probabilities ) ) {}
 
 /**
  *  @brief Constructor (linear interpolation is assumed)
@@ -37,7 +37,7 @@ DistributionProbability( std::vector< double >&& energies,
  *  @param[in] end     the end iterator of the block in the XSS array
  */
 DistributionProbability( Iterator begin, Iterator end ) :
-  BaseTabulatedData( "DistributionProbability", begin, end ) {}
+  TabulatedData( "DistributionProbability", begin, end ) {}
 
 DistributionProbability& operator=( const DistributionProbability& ) = default;
 DistributionProbability& operator=( DistributionProbability&& ) = default;

@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/TabulatedProbabilityDistribution.hpp"
+#include "ACEtk/base/TabulatedProbabilityDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -18,7 +18,7 @@ namespace photoatomic {
  *  function (PDF) and cumulative density function (CDF) as a function of
  *  momentum. It is used in the LSWD block.
  */
-class ComptonProfile : protected block::details::TabulatedProbabilityDistribution {
+class ComptonProfile : protected base::TabulatedProbabilityDistribution {
 
   /* fields */
 

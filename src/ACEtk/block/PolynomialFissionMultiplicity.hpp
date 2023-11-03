@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -18,7 +18,7 @@ namespace block {
  *  representation (LNU = 1) of the fission multiplicity. It is
  *  used in the NU block.
  */
-class PolynomialFissionMultiplicity : protected details::Base {
+class PolynomialFissionMultiplicity : protected base::Base {
 
   /* fields */
 

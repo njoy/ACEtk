@@ -5,9 +5,9 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/ColumnData.hpp"
-#include "ACEtk/block/details/BaseTabulatedData.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/ColumnData.hpp"
+#include "ACEtk/base/TabulatedData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,11 +21,11 @@ namespace block {
  *  temperature values as well as the bin data used to describe the
  *  general evaporation spectrum. It is used in the DLW block as ACE LAW 5.
  */
-class GeneralEvaporationSpectrum : protected details::Base {
+class GeneralEvaporationSpectrum : protected base::Base {
 
   /* fields */
-  details::BaseTabulatedData tabulated_;
-  details::ColumnData bins_;
+  base::TabulatedData tabulated_;
+  base::ColumnData bins_;
 
   /* auxiliary functions */
   #include "ACEtk/block/GeneralEvaporationSpectrum/src/verifySize.hpp"

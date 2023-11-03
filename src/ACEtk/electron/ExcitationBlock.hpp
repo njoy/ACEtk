@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -23,7 +23,7 @@ namespace electron {
  *  The size NXL of each (the total number of excitation energy points) is
  *  stored in NXS(9).
  */
-class ExcitationBlock : protected block::details::ArrayData {
+class ExcitationBlock : protected base::ArrayData {
 
   /* fields */
 

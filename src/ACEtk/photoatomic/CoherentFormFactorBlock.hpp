@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,7 +21,7 @@ namespace photoatomic {
  *      momentum grid (mcplib version)
  *    - tabulated form factor and its integral form (eprdata version)
  */
-class CoherentFormFactorBlock : protected block::details::ArrayData {
+class CoherentFormFactorBlock : protected base::ArrayData {
 
   /* fields */
   std::optional< std::vector< double > > momentum_;

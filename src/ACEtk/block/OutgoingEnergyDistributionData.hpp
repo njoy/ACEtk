@@ -6,7 +6,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/BaseDistributionData.hpp"
+#include "ACEtk/base/DistributionData.hpp"
 #include "ACEtk/block/TabulatedEnergyDistribution.hpp"
 
 namespace njoy {
@@ -23,11 +23,11 @@ namespace block {
  *  the DLW block as ACE LAW 4.
  */
 class OutgoingEnergyDistributionData :
-  protected details::BaseDistributionData< OutgoingEnergyDistributionData,
-                                           TabulatedEnergyDistribution > {
+  protected base::DistributionData< OutgoingEnergyDistributionData,
+                                    TabulatedEnergyDistribution > {
 
-  friend class details::BaseDistributionData< OutgoingEnergyDistributionData,
-                                              TabulatedEnergyDistribution >;
+  friend class base::DistributionData< OutgoingEnergyDistributionData,
+                                       TabulatedEnergyDistribution >;
 
   /* fields */
 
@@ -59,53 +59,53 @@ public:
    */
   auto interpolationData() const {
 
-    return BaseDistributionData::interpolationData();
+    return DistributionData::interpolationData();
   }
 
   /**
    *  @brief Return the number of interpolation regions
    */
-  std::size_t NB() const { return BaseDistributionData::NB(); }
+  std::size_t NB() const { return DistributionData::NB(); }
 
   /**
    *  @brief Return the number of interpolation regions
    */
   std::size_t numberInterpolationRegions() const {
 
-    return BaseDistributionData::numberInterpolationRegions();
+    return DistributionData::numberInterpolationRegions();
   }
 
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto NBT() const { return BaseDistributionData::NBT(); }
+  auto NBT() const { return DistributionData::NBT(); }
 
   /**
    *  @brief Return the interpolation boundaries
    */
-  auto boundaries() const { return BaseDistributionData::boundaries(); }
+  auto boundaries() const { return DistributionData::boundaries(); }
 
   /**
    *  @brief Return the interpolants
    */
-  auto INT() const { return BaseDistributionData::INT(); }
+  auto INT() const { return DistributionData::INT(); }
 
   /**
    *  @brief Return the interpolants
    */
-  auto interpolants() const { return BaseDistributionData::interpolants(); }
+  auto interpolants() const { return DistributionData::interpolants(); }
 
   /**
    *  @brief Return the number of incident energy values
    */
-  std::size_t NE() const { return BaseDistributionData::N(); }
+  std::size_t NE() const { return DistributionData::N(); }
 
   /**
    *  @brief Return the number of incident energy values
    */
   std::size_t numberIncidentEnergies() const {
 
-    return BaseDistributionData::numberValues();
+    return DistributionData::numberValues();
   }
 
   /**
@@ -113,7 +113,7 @@ public:
    */
   auto incidentEnergies() const {
 
-    return BaseDistributionData::values( 1 );
+    return DistributionData::values( 1 );
   }
 
   /**
@@ -126,7 +126,7 @@ public:
    */
   double incidentEnergy( std::size_t index ) const {
 
-    return BaseDistributionData::value( 1, index );
+    return DistributionData::value( 1, index );
   }
 
   /**
@@ -158,7 +158,7 @@ public:
    */
   int LOCC( std::size_t index ) const {
 
-    return BaseDistributionData::LOCC( index );
+    return DistributionData::LOCC( index );
   }
 
   /**
@@ -174,7 +174,7 @@ public:
    */
   int distributionLocator( std::size_t index ) const {
 
-    return BaseDistributionData::distributionLocator( index );
+    return DistributionData::distributionLocator( index );
   }
 
   /**
@@ -191,7 +191,7 @@ public:
    */
   std::size_t relativeDistributionLocator( std::size_t index ) const {
 
-    return BaseDistributionData::relativeDistributionLocator( index );
+    return DistributionData::relativeDistributionLocator( index );
   }
 
   /**
@@ -199,7 +199,7 @@ public:
    */
   const std::vector< TabulatedEnergyDistribution >& distributions() const {
 
-    return BaseDistributionData::distributions();
+    return DistributionData::distributions();
   }
 
   /**
@@ -212,15 +212,15 @@ public:
    */
   const TabulatedEnergyDistribution& distribution( std::size_t index ) const {
 
-    return BaseDistributionData::distribution( index );
+    return DistributionData::distribution( index );
   }
 
-  using BaseDistributionData::empty;
-  using BaseDistributionData::name;
-  using BaseDistributionData::length;
-  using BaseDistributionData::XSS;
-  using BaseDistributionData::begin;
-  using BaseDistributionData::end;
+  using DistributionData::empty;
+  using DistributionData::name;
+  using DistributionData::length;
+  using DistributionData::XSS;
+  using DistributionData::begin;
+  using DistributionData::end;
 };
 
 using ACELAW4 = OutgoingEnergyDistributionData;

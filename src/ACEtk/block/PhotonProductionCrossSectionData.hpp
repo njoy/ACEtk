@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -15,7 +15,7 @@ namespace block {
  *  @brief Secondary particle production cross section data from the SIGP block
  *         for a single reaction
  */
-class PhotonProductionCrossSectionData : protected details::Base {
+class PhotonProductionCrossSectionData : protected base::Base {
 
   /* fields */
 

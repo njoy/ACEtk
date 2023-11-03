@@ -4,8 +4,8 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/BaseTabulatedData.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/TabulatedData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -18,11 +18,11 @@ namespace block {
  *  The DelayedNeutronPrecursorData class contains the prrcursor group's decay
  *  constant and the associated probability as a function of incident energy.
  */
-class DelayedNeutronPrecursorData : protected details::Base {
+class DelayedNeutronPrecursorData : protected base::Base {
 
   /* fields */
   unsigned int number_ = 0;
-  details::BaseTabulatedData data_;
+  base::TabulatedData data_;
 
   /* auxiliary functions */
   #include "ACEtk/block/DelayedNeutronPrecursorData/src/generateXSS.hpp"

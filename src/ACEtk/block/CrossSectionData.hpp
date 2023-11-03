@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -18,7 +18,7 @@ namespace block {
  *  corresponding to the first cross section value, the number of cross
  *  section values and the actual cross section values.
  */
-class CrossSectionData : protected details::Base {
+class CrossSectionData : protected base::Base {
 
   /* fields */
 

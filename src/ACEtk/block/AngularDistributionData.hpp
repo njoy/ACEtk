@@ -6,7 +6,7 @@
 
 // other includes
 #include "utility/overload.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/block/EquiprobableAngularBins.hpp"
 #include "ACEtk/block/TabulatedAngularDistribution.hpp"
 #include "ACEtk/block/IsotropicAngularDistribution.hpp"
@@ -24,7 +24,7 @@ namespace block {
  *  energy distributions for a set of incident energy values. It is used in
  *  the AND block.
  */
-class AngularDistributionData : protected details::Base {
+class AngularDistributionData : protected base::Base {
 
 public:
 
@@ -37,7 +37,7 @@ private:
 
   /* fields */
   std::size_t locb_ = 1;
-  details::ColumnData values_;
+  base::ColumnData values_;
   std::vector< Distribution > distributions_;
 
   /* auxiliary functions */

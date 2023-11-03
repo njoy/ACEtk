@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/BaseAngularDistributionBlock.hpp"
+#include "ACEtk/base/AngularDistributionBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -24,7 +24,7 @@ namespace block {
  *  as the order of the reaction numbers in the corresponding MTR block.
  */
 class SecondaryParticleAngularDistributionBlock :
-    protected details::BaseAngularDistributionBlock {
+    protected base::AngularDistributionBlock {
 
   /* fields */
 
@@ -33,7 +33,7 @@ class SecondaryParticleAngularDistributionBlock :
 public:
 
   /* type alias */
-  using DistributionData = details::BaseAngularDistributionBlock::DistributionData;
+  using DistributionData = base::AngularDistributionBlock::DistributionData;
 
   /* constructor */
   #include "ACEtk/block/SecondaryParticleAngularDistributionBlock/src/ctor.hpp"
@@ -45,7 +45,7 @@ public:
    */
   unsigned int NR() const {
 
-    return BaseAngularDistributionBlock::NR();
+    return AngularDistributionBlock::NR();
   }
 
   /**
@@ -53,7 +53,7 @@ public:
    */
   unsigned int numberReactions() const {
 
-    return BaseAngularDistributionBlock::numberReactions();
+    return AngularDistributionBlock::numberReactions();
   }
 
   /**
@@ -67,7 +67,7 @@ public:
    */
   int LAND( std::size_t index ) const {
 
-    return BaseAngularDistributionBlock::LAND( index );
+    return AngularDistributionBlock::LAND( index );
   }
 
   /**
@@ -81,7 +81,7 @@ public:
    */
   int angularDistributionLocator( std::size_t index ) const {
 
-    return BaseAngularDistributionBlock::angularDistributionLocator( index );
+    return AngularDistributionBlock::angularDistributionLocator( index );
   }
 
   /**
@@ -95,7 +95,7 @@ public:
    */
   bool isFullyIsotropic( std::size_t index ) const {
 
-    return BaseAngularDistributionBlock::isFullyIsotropic( index );
+    return AngularDistributionBlock::isFullyIsotropic( index );
   }
 
   /**
@@ -109,7 +109,7 @@ public:
    */
   bool isGiven( std::size_t index ) const {
 
-    return BaseAngularDistributionBlock::isGiven( index );
+    return AngularDistributionBlock::isGiven( index );
   }
 
   /**
@@ -117,7 +117,7 @@ public:
    */
   const std::vector< DistributionData >& data() const {
 
-    return BaseAngularDistributionBlock::data();
+    return AngularDistributionBlock::data();
   }
 
   /**
@@ -130,15 +130,15 @@ public:
    */
   const DistributionData& angularDistributionData( std::size_t index ) const {
 
-    return BaseAngularDistributionBlock::angularDistributionData( index );
+    return AngularDistributionBlock::angularDistributionData( index );
   }
 
-  using BaseAngularDistributionBlock::empty;
-  using BaseAngularDistributionBlock::name;
-  using BaseAngularDistributionBlock::length;
-  using BaseAngularDistributionBlock::XSS;
-  using BaseAngularDistributionBlock::begin;
-  using BaseAngularDistributionBlock::end;
+  using AngularDistributionBlock::empty;
+  using AngularDistributionBlock::name;
+  using AngularDistributionBlock::length;
+  using AngularDistributionBlock::XSS;
+  using AngularDistributionBlock::begin;
+  using AngularDistributionBlock::end;
 };
 
 using ANDP = SecondaryParticleAngularDistributionBlock;

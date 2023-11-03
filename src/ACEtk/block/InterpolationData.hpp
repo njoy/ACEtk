@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/base/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -14,7 +14,7 @@ namespace block {
  *  @class
  *  @brief Interpolation data
  */
-class InterpolationData : protected details::ColumnData {
+class InterpolationData : protected base::ColumnData {
 
   /* fields */
 

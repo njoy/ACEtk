@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,7 +19,7 @@ namespace block {
  *  assocoiated incident energy. It is used in the AND block. This
  *  format is only used in old ACE data.
  */
-class EquiprobableAngularBins : protected details::Base {
+class EquiprobableAngularBins : protected base::Base {
 
   /* fields */
   double energy_ = 0.0;

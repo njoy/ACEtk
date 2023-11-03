@@ -2,7 +2,7 @@ SecondaryParticleEnergyDistributionBlock() = default;
 
 SecondaryParticleEnergyDistributionBlock(
     const SecondaryParticleEnergyDistributionBlock& base ) :
-  BaseBlockWithLocators( base ),
+  BlockWithLocators( base ),
   tyrh_( base.tyrh_ ),
   frames_( base.frames_ ) {
 
@@ -15,7 +15,7 @@ SecondaryParticleEnergyDistributionBlock(
 
 SecondaryParticleEnergyDistributionBlock(
     SecondaryParticleEnergyDistributionBlock&& base ) :
-  BaseBlockWithLocators( std::move( base ) ),
+  BlockWithLocators( std::move( base ) ),
   tyrh_( std::move( base.tyrh_ ) ),
   frames_( std::move( base.frames_ ) ) {
 
@@ -33,8 +33,7 @@ SecondaryParticleEnergyDistributionBlock(
  */
 SecondaryParticleEnergyDistributionBlock(
     std::vector< EnergyDistributionData > distributions ) :
-  BaseBlockWithLocators( "DLWH", std::move( distributions ) ),
-  tyrh_( std::nullopt ) {
+  BlockWithLocators( "DLWH", std::move( distributions ) ), tyrh_( std::nullopt ) {
 
   this->generateFrames();
 }
@@ -48,8 +47,7 @@ SecondaryParticleEnergyDistributionBlock(
 SecondaryParticleEnergyDistributionBlock(
     std::vector< EnergyDistributionData > distributions,
     std::vector< ReferenceFrame > frames ) :
-  BaseBlockWithLocators( "DLWH", std::move( distributions ) ),
-  tyrh_( std::move( frames ) ) {
+  BlockWithLocators( "DLWH", std::move( distributions ) ), tyrh_( std::move( frames ) ) {
 
   this->generateFrames();
 }
@@ -64,8 +62,7 @@ SecondaryParticleEnergyDistributionBlock(
  */
 SecondaryParticleEnergyDistributionBlock(
     Iterator lsig, Iterator sig, Iterator end, unsigned int nr ) :
-  BaseBlockWithLocators( "DLWH", lsig, sig, end, nr ),
-  tyrh_( std::nullopt ) {
+  BlockWithLocators( "DLWH", lsig, sig, end, nr ), tyrh_( std::nullopt ) {
 
   this->generateFrames();
 }
@@ -82,8 +79,7 @@ SecondaryParticleEnergyDistributionBlock(
 SecondaryParticleEnergyDistributionBlock(
     Iterator lsig, Iterator sig, Iterator end,
     block::TYRH tyrh, unsigned int nr ) :
-  BaseBlockWithLocators( "DLWH", lsig, sig, end, nr ),
-  tyrh_( std::move( tyrh ) ) {
+  BlockWithLocators( "DLWH", lsig, sig, end, nr ), tyrh_( std::move( tyrh ) ) {
 
   this->generateFrames();
 }

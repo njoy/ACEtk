@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -19,7 +19,7 @@ namespace block {
  *  values for the total, elastic, fission and capture cross sections and the
  *  heating numbers.
  */
-class ProbabilityTable : protected details::ArrayData {
+class ProbabilityTable : protected base::ArrayData {
 
   /* fields */
   double incident_ = 0.0;

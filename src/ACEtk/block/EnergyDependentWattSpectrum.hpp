@@ -19,7 +19,7 @@ namespace block {
  *  energy dependent a and b parameters as well as the restriction energy U used
  *  to describe the Watt spectrum. It is used in the DLW block as ACE LAW 11.
  */
-class EnergyDependentWattSpectrum : protected details::Base {
+class EnergyDependentWattSpectrum : protected base::Base {
 
   /* fields */
   ParameterData a_;

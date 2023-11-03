@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,7 +20,7 @@ namespace block {
  *  cross section values and the actual production cross section values and
  *  heating numbers.
  */
-class SecondaryParticleProductionBlock : protected details::Base {
+class SecondaryParticleProductionBlock : protected base::Base {
 
   /* fields */
 

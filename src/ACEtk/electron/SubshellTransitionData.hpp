@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -30,7 +30,7 @@ namespace electron {
  *  The size NT of each (the total number of transitions) is stored in the SUBSH
  *  block. This data block may be empty (NT = 0).
  */
-class SubshellTransitionData : protected block::details::ArrayData {
+class SubshellTransitionData : protected base::ArrayData {
 
   /* fields */
 

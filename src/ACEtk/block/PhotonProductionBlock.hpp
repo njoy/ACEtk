@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,7 +20,7 @@ namespace block {
  *  section block. For older data files, this also contains the equiprobable
  *  energy bins.
  */
-class PhotonProductionBlock : protected details::ArrayData {
+class PhotonProductionBlock : protected base::ArrayData {
 
   /* fields */
 

@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/BaseBlockWithLocators.hpp"
+#include "ACEtk/base/BlockWithLocators.hpp"
 #include "ACEtk/photoatomic/ComptonProfile.hpp"
 
 namespace njoy {
@@ -19,11 +19,11 @@ namespace photoatomic {
  *  profiles, one for each electron shell.
  */
 class ComptonProfileBlock :
-    protected block::details::BaseBlockWithLocators< ComptonProfileBlock,
-                                                     ComptonProfile > {
+    protected base::BlockWithLocators< ComptonProfileBlock,
+                                           ComptonProfile > {
 
-  friend class block::details::BaseBlockWithLocators< ComptonProfileBlock,
-                                                      ComptonProfile >;
+  friend class base::BlockWithLocators< ComptonProfileBlock,
+                                            ComptonProfile >;
 
   /* fields */
 
@@ -39,14 +39,14 @@ public:
   /**
    *  @brief Return the number of electron shells
    */
-  unsigned int NSH() const { return BaseBlockWithLocators::N(); }
+  unsigned int NSH() const { return BlockWithLocators::N(); }
 
   /**
    *  @brief Return the number of electron shells
    */
   unsigned int numberElectronShells() const {
 
-    return BaseBlockWithLocators::numberDataBlocks();
+    return BlockWithLocators::numberDataBlocks();
   }
 
   /**
@@ -59,7 +59,7 @@ public:
    */
   std::size_t LSWD( std::size_t index ) const {
 
-    return BaseBlockWithLocators::LLOC( index );
+    return BlockWithLocators::LLOC( index );
   }
 
   /**
@@ -72,7 +72,7 @@ public:
    */
   std::size_t comptonProfileLocator( std::size_t index ) const {
 
-    return BaseBlockWithLocators::locator( index );
+    return BlockWithLocators::locator( index );
   }
 
   /**
@@ -80,7 +80,7 @@ public:
    */
   const std::vector< ComptonProfile >& data() const {
 
-    return BaseBlockWithLocators::data();
+    return BlockWithLocators::data();
   }
 
   /**
@@ -93,15 +93,15 @@ public:
    */
   const ComptonProfile& comptonProfile( std::size_t index ) const {
 
-    return BaseBlockWithLocators::data( index );
+    return BlockWithLocators::data( index );
   }
 
-  using BaseBlockWithLocators::empty;
-  using BaseBlockWithLocators::name;
-  using BaseBlockWithLocators::length;
-  using BaseBlockWithLocators::XSS;
-  using BaseBlockWithLocators::begin;
-  using BaseBlockWithLocators::end;
+  using BlockWithLocators::empty;
+  using BlockWithLocators::name;
+  using BlockWithLocators::length;
+  using BlockWithLocators::XSS;
+  using BlockWithLocators::begin;
+  using BlockWithLocators::end;
 };
 
 using SWD = ComptonProfileBlock;

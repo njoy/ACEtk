@@ -5,8 +5,8 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/Base.hpp"
-#include "ACEtk/block/details/ColumnData.hpp"
+#include "ACEtk/base/Base.hpp"
+#include "ACEtk/base/ColumnData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -20,7 +20,7 @@ namespace block {
  *  determine the distribution: the number of particles in the system and the
  *  total mass ratio. It is used in the DLW block as ACE LAW 66.
  */
-class NBodyPhaseSpaceDistribution : protected details::Base {
+class NBodyPhaseSpaceDistribution : protected base::Base {
 
   /* fields */
   double emin_ = 0.0;

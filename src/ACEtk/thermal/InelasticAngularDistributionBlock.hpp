@@ -5,7 +5,7 @@
 #include <variant>
 
 // other includes
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/thermal/DiscreteCosines.hpp"
 #include "ACEtk/thermal/DiscreteCosinesWithProbability.hpp"
 
@@ -21,7 +21,7 @@ namespace thermal {
  *  a skewed distribution of discrete cosines, or a tabulated probability
  *  distribution.
  */
-class InelasticAngularDistributionBlock : protected block::details::Base {
+class InelasticAngularDistributionBlock : protected base::Base {
 
 public:
 

@@ -6,7 +6,7 @@
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"
-#include "ACEtk/block/details/Base.hpp"
+#include "ACEtk/base/Base.hpp"
 #include "ACEtk/block/EquiprobableOutgoingEnergyBinData.hpp"
 #include "ACEtk/block/DiscretePhotonDistribution.hpp"
 #include "ACEtk/block/LevelScatteringDistribution.hpp"
@@ -37,7 +37,7 @@ namespace block {
  *  is no ACE LAW associated to this distribution type, but internally in ACEtk
  *  we refer to it as ACE LAW 666 because it is evil).
  */
-class MultiDistributionData : protected details::Base {
+class MultiDistributionData : protected base::Base {
 
 public:
 

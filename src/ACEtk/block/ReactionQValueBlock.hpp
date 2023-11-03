@@ -5,7 +5,7 @@
 #include <algorithm>
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -21,7 +21,7 @@ namespace block {
  *
  *  The number of available reactions (excluding elastic) is stored in NXS(4).
  */
-class ReactionQValueBlock : protected details::ArrayData {
+class ReactionQValueBlock : protected base::ArrayData {
 
   /* fields */
 

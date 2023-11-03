@@ -4,7 +4,7 @@
 // system includes
 
 // other includes
-#include "ACEtk/block/details/ArrayData.hpp"
+#include "ACEtk/base/ArrayData.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -25,7 +25,7 @@ namespace electron {
  *
  *  The size of each (the total number of electron shells) is stored in NXS(7).
  */
-class ElectronSubshellBlock : protected block::details::ArrayData {
+class ElectronSubshellBlock : protected base::ArrayData {
 
   /* fields */
 

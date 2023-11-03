@@ -6,6 +6,6 @@ void generateBlocks() {
   auto bins = begin + 2 * nr + 2 * ne + 2;
   auto end = this->end();
 
-  this->tabulated_ = block::details::BaseTabulatedData( this->name(), begin, bins );
-  this->bins_ = block::details::ColumnData( this->name(), bins, end, 1 );
+  this->tabulated_ = base::TabulatedData( this->name(), begin, bins );
+  this->bins_ = base::ColumnData( this->name(), bins, end, 1 );
 }
