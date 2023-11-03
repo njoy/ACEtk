@@ -35,7 +35,7 @@ generateXSS( std::vector< Distribution >&& distributions, std::size_t locb ) {
     }
 
     // insert the xss array
-    std::visit( utility::overload{
+    std::visit( tools::overload{
 
                   [] ( const IsotropicAngularDistribution& ) {},
                   [&xss] ( const EquiprobableAngularBins& value )

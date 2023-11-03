@@ -5,6 +5,7 @@
 #include <variant>
 
 // other includes
+#include "tools/overload.hpp"
 #include "ACEtk/base/Base.hpp"
 #include "ACEtk/continuous/AngularDistributionData.hpp"
 #include "ACEtk/continuous/FullyIsotropicDistribution.hpp"

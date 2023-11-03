@@ -10,9 +10,9 @@
 #include <vector>
 
 // other includes
+#include "tools/Log.hpp"
 #include "ACEtk/State.hpp"
 #include "disco.hpp"
-#include "Log.hpp"
 #include "range/v3/view/subrange.hpp"
 
 namespace njoy {

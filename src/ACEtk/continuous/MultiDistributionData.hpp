@@ -5,6 +5,7 @@
 #include <variant>
 
 // other includes
+#include "tools/overload.hpp"
 #include "ACEtk/EnergyDistributionType.hpp"
 #include "ACEtk/base/Base.hpp"
 #include "ACEtk/continuous/EquiprobableOutgoingEnergyBinData.hpp"

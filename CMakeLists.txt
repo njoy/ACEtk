@@ -76,7 +76,7 @@ target_include_directories( ACEtk
 )
 target_link_libraries( ACEtk
   INTERFACE
-    Log
+    njoy::tools
     disco
     range-v3
 )

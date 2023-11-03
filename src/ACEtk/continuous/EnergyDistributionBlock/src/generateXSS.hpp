@@ -22,7 +22,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
     // handle multiplicity
     std::visit(
 
-      utility::overload{
+      tools::overload{
 
         [ &xss, &tyr, &locator, size ] ( const TabulatedMultiplicity& value ) {
 
@@ -46,7 +46,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
 
       std::visit(
 
-        utility::overload{
+        tools::overload{
 
           [ &xss, locator ] ( const MultiDistributionData& value ) {
 
@@ -68,7 +68,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
       std::size_t idat = 0;
       std::visit(
 
-        utility::overload{
+        tools::overload{
 
           [] ( const MultiDistributionData& ) { /* nothing to do here */ },
           [ &xss, &idat, locator ] ( const auto& value ) {
@@ -89,7 +89,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
       );
       std::visit(
 
-        utility::overload{
+        tools::overload{
 
           [ &xss, idat ] ( const OutgoingEnergyDistributionData& value ) {
 

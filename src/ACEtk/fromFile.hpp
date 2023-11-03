@@ -6,7 +6,7 @@
 #include <fstream>
 
 // other includes
-#include "Log.hpp"
+#include "tools/Log.hpp"
 #include "ACEtk/Table.hpp"
 
 namespace njoy {
