@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/SecondaryParticleAngularDistributionBlock.hpp"
 
 // other includes
@@ -56,7 +59,7 @@ SCENARIO( "SecondaryParticleAngularDistributionBlock" ) {
          auto xss_chunk = chunk.XSS();
          for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-           CHECK( xss[i] == Approx( xss_chunk[i] ) );
+           CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
          }
        } // THEN
      } // WHEN
@@ -76,7 +79,7 @@ SCENARIO( "SecondaryParticleAngularDistributionBlock" ) {
          auto xss_chunk = chunk.XSS();
          for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-           CHECK( xss[i] == Approx( xss_chunk[i] ) );
+           CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
          }
        } // THEN
      } // WHEN
@@ -146,10 +149,10 @@ void verifyChunk( const SecondaryParticleAngularDistributionBlock& chunk ) {
   CHECK( 2 == data1.NE() );
   CHECK( 2 == data1.numberIncidentEnergies() );
   CHECK( 2 == data1.incidentEnergies().size() );
-  CHECK( 1e-11 == Approx( data1.incidentEnergies()[0] ) );
-  CHECK( 20. == Approx( data1.incidentEnergies()[1] ) );
-  CHECK( 1e-11 == Approx( data1.incidentEnergy(1) ) );
-  CHECK( 20. == Approx( data1.incidentEnergy(2) ) );
+  CHECK_THAT( 1e-11, WithinRel( data1.incidentEnergies()[0] ) );
+  CHECK_THAT( 20., WithinRel( data1.incidentEnergies()[1] ) );
+  CHECK_THAT( 1e-11, WithinRel( data1.incidentEnergy(1) ) );
+  CHECK_THAT( 20., WithinRel( data1.incidentEnergy(2) ) );
   CHECK( -6 == data1.LOCC(1) );
   CHECK( -14 == data1.LOCC(2) );
   CHECK( -6 == data1.distributionLocator(1) );
@@ -165,12 +168,12 @@ void verifyChunk( const SecondaryParticleAngularDistributionBlock& chunk ) {
   CHECK( 3 == data4.NE() );
   CHECK( 3 == data4.numberIncidentEnergies() );
   CHECK( 3 == data4.incidentEnergies().size() );
-  CHECK( 1e-11 == Approx( data4.incidentEnergies()[0] ) );
-  CHECK( 1. == Approx( data4.incidentEnergies()[1] ) );
-  CHECK( 20. == Approx( data4.incidentEnergies()[2] ) );
-  CHECK( 1e-11 == Approx( data4.incidentEnergy(1) ) );
-  CHECK( 1. == Approx( data4.incidentEnergy(2) ) );
-  CHECK( 20. == Approx( data4.incidentEnergy(3) ) );
+  CHECK_THAT( 1e-11, WithinRel( data4.incidentEnergies()[0] ) );
+  CHECK_THAT( 1., WithinRel( data4.incidentEnergies()[1] ) );
+  CHECK_THAT( 20., WithinRel( data4.incidentEnergies()[2] ) );
+  CHECK_THAT( 1e-11, WithinRel( data4.incidentEnergy(1) ) );
+  CHECK_THAT( 1., WithinRel( data4.incidentEnergy(2) ) );
+  CHECK_THAT( 20., WithinRel( data4.incidentEnergy(3) ) );
   CHECK( -32 == data4.LOCC(1) );
   CHECK( 0 == data4.LOCC(2) );
   CHECK( -43 == data4.LOCC(3) );

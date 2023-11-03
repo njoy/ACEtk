@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/Table.hpp"
 
 // other includes
@@ -226,13 +229,13 @@ void verifyChunk( const Data& chunk ) {
   CHECK( 8 == chunk.JXS( 32 ) );
 
   CHECK( 7 == chunk.XSS().size() );
-  CHECK( 1.00000000000E+00 == Approx( chunk.XSS( 1 ) ) );
-  CHECK( 1.03125000000E+00 == Approx( chunk.XSS( 2 ) ) );
-  CHECK( 1.06250000000E+00 == Approx( chunk.XSS( 3 ) ) );
-  CHECK( 1.09375000000E+00 == Approx( chunk.XSS( 4 ) ) );
-  CHECK( 1.12500000000E+00 == Approx( chunk.XSS( 5 ) ) );
-  CHECK( 1.15625000000E+00 == Approx( chunk.XSS( 6 ) ) );
-  CHECK( 1.90000000000E+00 == Approx( chunk.XSS( 7 ) ) );
+  CHECK_THAT( 1.00000000000E+00, WithinRel( chunk.XSS( 1 ) ) );
+  CHECK_THAT( 1.03125000000E+00, WithinRel( chunk.XSS( 2 ) ) );
+  CHECK_THAT( 1.06250000000E+00, WithinRel( chunk.XSS( 3 ) ) );
+  CHECK_THAT( 1.09375000000E+00, WithinRel( chunk.XSS( 4 ) ) );
+  CHECK_THAT( 1.12500000000E+00, WithinRel( chunk.XSS( 5 ) ) );
+  CHECK_THAT( 1.15625000000E+00, WithinRel( chunk.XSS( 6 ) ) );
+  CHECK_THAT( 1.90000000000E+00, WithinRel( chunk.XSS( 7 ) ) );
 
   CHECK( 1 == chunk.IXSS( 1 ) );
   CHECK( 1 == chunk.IXSS( 2 ) );
@@ -244,13 +247,13 @@ void verifyChunk( const Data& chunk ) {
 
   auto range = chunk.XSS( 1, 2 );
   CHECK( 2 == range.size() );
-  CHECK( 1.00000000000E+00 == Approx( range[0] ) );
-  CHECK( 1.03125000000E+00 == Approx( range[1] ) );
+  CHECK_THAT( 1.00000000000E+00, WithinRel( range[0] ) );
+  CHECK_THAT( 1.03125000000E+00, WithinRel( range[1] ) );
 
   range = chunk.XSS( 2, 2 );
   CHECK( 2 == range.size() );
-  CHECK( 1.03125000000E+00 == Approx( range[0] ) );
-  CHECK( 1.06250000000E+00 == Approx( range[1] ) );
+  CHECK_THAT( 1.03125000000E+00, WithinRel( range[0] ) );
+  CHECK_THAT( 1.06250000000E+00, WithinRel( range[1] ) );
 
 #ifndef NDEBUG
   CHECK_THROWS( chunk.IZ( 0 ) );

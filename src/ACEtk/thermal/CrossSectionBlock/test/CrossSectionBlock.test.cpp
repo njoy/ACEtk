@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/thermal/CrossSectionBlock.hpp"
 
 // other includes
@@ -37,7 +40,7 @@ SCENARIO( "CrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -57,7 +60,7 @@ SCENARIO( "CrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -84,10 +87,10 @@ void verifyChunk( const CrossSectionBlock& chunk ) {
   CHECK( 4 == chunk.numberIncidentEnergies() );
 
   CHECK( 4 == chunk.energies().size() );
-  CHECK( 10. == Approx( chunk.energies().front() ) );
-  CHECK( 40. == Approx( chunk.energies().back() ) );
+  CHECK_THAT( 10., WithinRel( chunk.energies().front() ) );
+  CHECK_THAT( 40., WithinRel( chunk.energies().back() ) );
 
   CHECK( 4 == chunk.crossSections().size() );
-  CHECK( 1. == Approx( chunk.crossSections().front() ) );
-  CHECK( 4. == Approx( chunk.crossSections().back() ) );
+  CHECK_THAT( 1., WithinRel( chunk.crossSections().front() ) );
+  CHECK_THAT( 4., WithinRel( chunk.crossSections().back() ) );
 }

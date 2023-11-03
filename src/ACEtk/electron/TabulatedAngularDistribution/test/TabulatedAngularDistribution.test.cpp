@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/electron/TabulatedAngularDistribution.hpp"
 
 // other includes
@@ -38,7 +41,7 @@ SCENARIO( "TabulatedAngularDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -58,7 +61,7 @@ SCENARIO( "TabulatedAngularDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -77,7 +80,7 @@ void verifyChunk( const TabulatedAngularDistribution& chunk ) {
   CHECK( 6 == chunk.length() );
   CHECK( "TabulatedAngularDistribution" == chunk.name() );
 
-  CHECK( 1000. == Approx( chunk.energy() ) );
+  CHECK_THAT( 1000., WithinRel( chunk.energy() ) );
 
   CHECK( 3 == chunk.LA() );
   CHECK( 3 == chunk.numberCosines() );
@@ -85,11 +88,11 @@ void verifyChunk( const TabulatedAngularDistribution& chunk ) {
   CHECK( 3 == chunk.cosines().size() );
   CHECK( 3 == chunk.cdf().size() );
 
-  CHECK( -1. == Approx( chunk.cosines()[0] ) );
-  CHECK(  0. == Approx( chunk.cosines()[1] ) );
-  CHECK(  1. == Approx( chunk.cosines()[2] ) );
+  CHECK_THAT( -1., WithinRel( chunk.cosines()[0] ) );
+  CHECK_THAT(  0., WithinRel( chunk.cosines()[1] ) );
+  CHECK_THAT(  1., WithinRel( chunk.cosines()[2] ) );
 
-  CHECK(  0.   == Approx( chunk.cdf()[0] ) );
-  CHECK(  0.75 == Approx( chunk.cdf()[1] ) );
-  CHECK(  1.   == Approx( chunk.cdf()[2] ) );
+  CHECK_THAT(  0.  , WithinRel( chunk.cdf()[0] ) );
+  CHECK_THAT(  0.75, WithinRel( chunk.cdf()[1] ) );
+  CHECK_THAT(  1.  , WithinRel( chunk.cdf()[2] ) );
 }

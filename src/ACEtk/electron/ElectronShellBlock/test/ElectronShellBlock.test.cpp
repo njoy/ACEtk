@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/electron/ElectronShellBlock.hpp"
 
 // other includes
@@ -39,7 +42,7 @@ SCENARIO( "ElectronShellBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -59,7 +62,7 @@ SCENARIO( "ElectronShellBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -82,17 +85,17 @@ void verifyChunk( const ElectronShellBlock& chunk ) {
   CHECK( 2 == chunk.NSH() );
   CHECK( 2 == chunk.numberElectronShells() );
 
-  CHECK( 2 == Approx( chunk.numberElectrons()[0] ) );
-  CHECK( 1 == Approx( chunk.numberElectrons()[1] ) );
-  CHECK( 5.480000000000e-05 == Approx( chunk.bindingEnergies()[0] ) );
-  CHECK( 1.000000000000e-06 == Approx( chunk.bindingEnergies()[1] ) );
-  CHECK( 6.666666666667e-01 == Approx( chunk.interactionProbabilities()[0] ) );
-  CHECK( 3.333333333333e-01 == Approx( chunk.interactionProbabilities()[1] ) );
+  CHECK( 2 == chunk.numberElectrons()[0] );
+  CHECK( 1 == chunk.numberElectrons()[1] );
+  CHECK_THAT( 5.480000000000e-05, WithinRel( chunk.bindingEnergies()[0] ) );
+  CHECK_THAT( 1.000000000000e-06, WithinRel( chunk.bindingEnergies()[1] ) );
+  CHECK_THAT( 6.666666666667e-01, WithinRel( chunk.interactionProbabilities()[0] ) );
+  CHECK_THAT( 3.333333333333e-01, WithinRel( chunk.interactionProbabilities()[1] ) );
 
   CHECK( 2 == chunk.numberElectronsPerShell( 1 ) );
   CHECK( 1 == chunk.numberElectronsPerShell( 2 ) );
-  CHECK( 5.480000000000e-05 == Approx( chunk.bindingEnergy( 1 ) ) );
-  CHECK( 1.000000000000e-06 == Approx( chunk.bindingEnergy( 2 ) ) );
-  CHECK( 6.666666666667e-01 == Approx( chunk.interactionProbability( 1 ) ) );
-  CHECK( 3.333333333333e-01 == Approx( chunk.interactionProbability( 2 ) ) );
+  CHECK_THAT( 5.480000000000e-05, WithinRel( chunk.bindingEnergy( 1 ) ) );
+  CHECK_THAT( 1.000000000000e-06, WithinRel( chunk.bindingEnergy( 2 ) ) );
+  CHECK_THAT( 6.666666666667e-01, WithinRel( chunk.interactionProbability( 1 ) ) );
+  CHECK_THAT( 3.333333333333e-01, WithinRel( chunk.interactionProbability( 2 ) ) );
 }

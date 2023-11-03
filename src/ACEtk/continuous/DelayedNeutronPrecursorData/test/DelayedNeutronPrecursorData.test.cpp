@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/DelayedNeutronPrecursorData.hpp"
 
 // other includes
@@ -40,7 +43,7 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -60,7 +63,7 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -70,7 +73,7 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
 std::vector< double > chunk() {
 
   return {  2.30000000000E-04,                   0,                   3,
-            1.00000000000E-11,   1.00000000000E+00,   2.00000000000E+01,   1.20000000000E-03,
+            1.00000000000E-05,   1.00000000000E+00,   2.00000000000E+01,   1.20000000000E-03,
             2.50000000000E-02,   1.00000000000E+00 };
 }
 
@@ -82,8 +85,8 @@ void verifyChunk( const DelayedNeutronPrecursorData& chunk ) {
 
   CHECK( 1 == chunk.number() );
 
-  CHECK( 2.3e-4 == Approx( chunk.DEC() ) );
-  CHECK( 2.3e-4 == Approx( chunk.decayConstant() ) );
+  CHECK_THAT( 2.3e-4, WithinRel( chunk.DEC() ) );
+  CHECK_THAT( 2.3e-4, WithinRel( chunk.decayConstant() ) );
 
   CHECK( 0 == chunk.interpolationData().NB() );
   CHECK( 0 == chunk.interpolationData().numberInterpolationRegions() );
@@ -103,12 +106,12 @@ void verifyChunk( const DelayedNeutronPrecursorData& chunk ) {
   CHECK( 3 == chunk.numberValues() );
 
   CHECK( 3 == chunk.energies().size() );
-  CHECK( 1e-11 == Approx( chunk.energies()[0] ) );
-  CHECK( 1. == Approx( chunk.energies()[1] ) );
-  CHECK( 20. == Approx( chunk.energies()[2] ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( chunk.energies()[1] ) );
+  CHECK_THAT( 20., WithinRel( chunk.energies()[2] ) );
 
   CHECK( 3 == chunk.probabilities().size() );
-  CHECK( 1.2e-3 == Approx( chunk.probabilities()[0] ) );
-  CHECK( 2.5e-2 == Approx( chunk.probabilities()[1] ) );
-  CHECK( 1. == Approx( chunk.probabilities()[2] ) );
+  CHECK_THAT( 1.2e-3, WithinRel( chunk.probabilities()[0] ) );
+  CHECK_THAT( 2.5e-2, WithinRel( chunk.probabilities()[1] ) );
+  CHECK_THAT( 1., WithinRel( chunk.probabilities()[2] ) );
 }

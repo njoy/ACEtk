@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/XsdirEntry.hpp"
 
 // other includes
@@ -247,8 +250,8 @@ std::string chunk() {
 void verifyChunk( const XsdirEntry& chunk ) {
 
   CHECK( "92235.00c" == chunk.ZAID() );
-  CHECK( 235. == Approx( chunk.AWR() ) );
-  CHECK( 235. == Approx( chunk.atomicWeightRatio() ) );
+  CHECK_THAT( 235., WithinRel( chunk.AWR() ) );
+  CHECK_THAT( 235., WithinRel( chunk.atomicWeightRatio() ) );
   CHECK( "file" == chunk.fileName() );
   CHECK( std::nullopt == chunk.accessRoute() );
   CHECK( 1 == chunk.fileType() );
@@ -257,7 +260,7 @@ void verifyChunk( const XsdirEntry& chunk ) {
   CHECK( std::nullopt == chunk.recordLength() );
   CHECK( std::nullopt == chunk.entriesPerRecord() );
   CHECK( std::nullopt != chunk.temperature() );
-  CHECK( 2.53e-8 == Approx( chunk.temperature().value() ) );
+  CHECK_THAT( 2.53e-8, WithinRel( chunk.temperature().value() ) );
   CHECK( true == chunk.ptable() );
 }
 
@@ -272,8 +275,8 @@ std::string chunkWithSplit() {
 void verifyChunkWithSplit( const XsdirEntry& chunk ) {
 
   CHECK( "92235.00c" == chunk.ZAID() );
-  CHECK( 235. == Approx( chunk.AWR() ) );
-  CHECK( 235. == Approx( chunk.atomicWeightRatio() ) );
+  CHECK_THAT( 235., WithinRel( chunk.AWR() ) );
+  CHECK_THAT( 235., WithinRel( chunk.atomicWeightRatio() ) );
   CHECK( "filenamethatiswaaaaaaaaaaaaaaaaaaaaaaaaaytoolong" == chunk.fileName() );
   CHECK( "accessnamethatisevenwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaylonger"
          == chunk.accessRoute().value() );
@@ -283,7 +286,7 @@ void verifyChunkWithSplit( const XsdirEntry& chunk ) {
   CHECK( std::nullopt == chunk.recordLength() );
   CHECK( std::nullopt == chunk.entriesPerRecord() );
   CHECK( std::nullopt != chunk.temperature() );
-  CHECK( 2.53e-8 == Approx( chunk.temperature().value() ) );
+  CHECK_THAT( 2.53e-8, WithinRel( chunk.temperature().value() ) );
   CHECK( true == chunk.ptable() );
 }
 
@@ -296,8 +299,8 @@ std::string chunkWith7entries() {
 void verifyChunkWith7entries( const XsdirEntry& chunk ) {
 
   CHECK( "92235.00c" == chunk.ZAID() );
-  CHECK( 235. == Approx( chunk.AWR() ) );
-  CHECK( 235. == Approx( chunk.atomicWeightRatio() ) );
+  CHECK_THAT( 235., WithinRel( chunk.AWR() ) );
+  CHECK_THAT( 235., WithinRel( chunk.atomicWeightRatio() ) );
   CHECK( "file" == chunk.fileName() );
   CHECK( std::nullopt == chunk.accessRoute() );
   CHECK( 1 == chunk.fileType() );
@@ -318,8 +321,8 @@ std::string chunkWith10entries() {
 void verifyChunkWith10entries( const XsdirEntry& chunk ) {
 
   CHECK( "92235.00c" == chunk.ZAID() );
-  CHECK( 235. == Approx( chunk.AWR() ) );
-  CHECK( 235. == Approx( chunk.atomicWeightRatio() ) );
+  CHECK_THAT( 235., WithinRel( chunk.AWR() ) );
+  CHECK_THAT( 235., WithinRel( chunk.atomicWeightRatio() ) );
   CHECK( "file" == chunk.fileName() );
   CHECK( std::nullopt == chunk.accessRoute() );
   CHECK( 1 == chunk.fileType() );
@@ -328,6 +331,6 @@ void verifyChunkWith10entries( const XsdirEntry& chunk ) {
   CHECK( std::nullopt == chunk.recordLength() );
   CHECK( std::nullopt == chunk.entriesPerRecord() );
   CHECK( std::nullopt != chunk.temperature() );
-  CHECK( 2.53e-8 == Approx( chunk.temperature().value() ) );
+  CHECK_THAT( 2.53e-8, WithinRel( chunk.temperature().value() ) );
   CHECK( false == chunk.ptable() );
 }

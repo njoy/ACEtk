@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/dosimetry/CrossSectionBlock.hpp"
 
 // other includes
@@ -44,7 +47,7 @@ SCENARIO( "CrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -63,7 +66,7 @@ SCENARIO( "CrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -101,18 +104,18 @@ void verifyChunk( const CrossSectionBlock& chunk ) {
   CHECK( 4 == xs.numberEnergyPoints() );
   CHECK( 4 == xs.energies().size() );
   CHECK( 4 == xs.crossSections().size() );
-  CHECK( 1.8961 == Approx( xs.energies().front() ) );
-  CHECK( 20. == Approx( xs.energies().back() ) );
-  CHECK( 0. == Approx( xs.crossSections().front() ) );
-  CHECK( 0.0322 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 1.8961, WithinRel( xs.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( xs.energies().back() ) );
+  CHECK_THAT( 0., WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 0.0322, WithinRel( xs.crossSections().back() ) );
 
   xs = chunk.crossSectionData(2);
   CHECK( 0 == xs.NB() );
   CHECK( 3 == xs.numberEnergyPoints() );
   CHECK( 3 == xs.energies().size() );
   CHECK( 3 == xs.crossSections().size() );
-  CHECK( 3.2487 == Approx( xs.energies().front() ) );
-  CHECK( 20. == Approx( xs.energies().back() ) );
-  CHECK( 0. == Approx( xs.crossSections().front() ) );
-  CHECK( 0.0498 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 3.2487, WithinRel( xs.energies().front() ) );
+  CHECK_THAT( 20., WithinRel( xs.energies().back() ) );
+  CHECK_THAT( 0., WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 0.0498, WithinRel( xs.crossSections().back() ) );
 }

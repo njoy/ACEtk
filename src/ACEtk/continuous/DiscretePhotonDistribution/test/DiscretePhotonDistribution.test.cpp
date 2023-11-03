@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/DiscretePhotonDistribution.hpp"
 
 // other includes
@@ -38,7 +41,7 @@ SCENARIO( "DiscretePhotonDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -59,7 +62,7 @@ SCENARIO( "DiscretePhotonDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -80,12 +83,12 @@ void verifyChunk( const DiscretePhotonDistribution& chunk ) {
   CHECK( EnergyDistributionType::DiscretePhoton == chunk.LAW() );
   CHECK( EnergyDistributionType::DiscretePhoton == chunk.type() );
 
-  CHECK( 1e-5 == Approx( chunk.minimumIncidentEnergy() ) );
-  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.minimumIncidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( chunk.maximumIncidentEnergy() ) );
 
-  CHECK( 2 == Approx( chunk.LP() ) );
-  CHECK( 2 == Approx( chunk.primaryPhotonFlag() ) );
-  CHECK( true == Approx( chunk.isPrimaryPhoton() ) );
-  CHECK( 1e+5 == Approx( chunk.EG() ) );
-  CHECK( 1e+5 == Approx( chunk.photonOrBindingEnergy() ) );
+  CHECK( 2 == chunk.LP() );
+  CHECK( 2 == chunk.primaryPhotonFlag() );
+  CHECK( true == chunk.isPrimaryPhoton() );
+  CHECK_THAT( 1e+5, WithinRel( chunk.EG() ) );
+  CHECK_THAT( 1e+5, WithinRel( chunk.photonOrBindingEnergy() ) );
 }

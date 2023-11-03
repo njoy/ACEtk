@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/photoatomic/PrincipalCrossSectionBlock.hpp"
 
 // other includes
@@ -110,7 +113,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -130,7 +133,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -214,14 +217,14 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
   CHECK( 43 == chunk.photoelectric().size() );
   CHECK( 43 == chunk.pairproduction().size() );
 
-  CHECK( -6.907755278982E+00 == Approx( chunk.energies().front() ) );
-  CHECK(  4.605170185988E+00 == Approx( chunk.energies().back() ) );
-  CHECK( -2.474115088710E+00 == Approx( chunk.incoherent().front() ) );
-  CHECK( -4.794460770140E+00 == Approx( chunk.incoherent().back() ) );
-  CHECK( -5.438809818403E-01 == Approx( chunk.coherent().front() ) );
-  CHECK( -2.149558177385E+01 == Approx( chunk.coherent().back() ) );
-  CHECK(  2.449279472145E+00 == Approx( chunk.photoelectric().front() ) );
-  CHECK( -2.622629761934E+01 == Approx( chunk.photoelectric().back() ) );
-  CHECK(  0.000000000000E+00 == Approx( chunk.pairproduction().front() ) );
-  CHECK( -4.455371820900E+00 == Approx( chunk.pairproduction().back() ) );
+  CHECK_THAT( -6.907755278982E+00, WithinRel( chunk.energies().front() ) );
+  CHECK_THAT(  4.605170185988E+00, WithinRel( chunk.energies().back() ) );
+  CHECK_THAT( -2.474115088710E+00, WithinRel( chunk.incoherent().front() ) );
+  CHECK_THAT( -4.794460770140E+00, WithinRel( chunk.incoherent().back() ) );
+  CHECK_THAT( -5.438809818403E-01, WithinRel( chunk.coherent().front() ) );
+  CHECK_THAT( -2.149558177385E+01, WithinRel( chunk.coherent().back() ) );
+  CHECK_THAT(  2.449279472145E+00, WithinRel( chunk.photoelectric().front() ) );
+  CHECK_THAT( -2.622629761934E+01, WithinRel( chunk.photoelectric().back() ) );
+  CHECK_THAT(  0.000000000000E+00, WithinRel( chunk.pairproduction().front() ) );
+  CHECK_THAT( -4.455371820900E+00, WithinRel( chunk.pairproduction().back() ) );
 }

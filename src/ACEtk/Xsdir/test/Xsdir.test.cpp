@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/Xsdir.hpp"
 
 // other includes
@@ -215,25 +218,25 @@ void verifyChunk( const Xsdir& chunk ) {
   CHECK( "/some/path/to/Data" == chunk.dataPath().value() );
 
   CHECK( 9 == chunk.atomicWeightRatios().size() );
-  CHECK(   1.00000000 == Approx( chunk.atomicWeightRatios().at( 1 ) ) );
-  CHECK(   0.99931697 == Approx( chunk.atomicWeightRatios().at( 1000 ) ) );
-  CHECK(   0.99916733 == Approx( chunk.atomicWeightRatios().at( 1001 ) ) );
-  CHECK(   1.99679968 == Approx( chunk.atomicWeightRatios().at( 1002 ) ) );
-  CHECK(   2.99013997 == Approx( chunk.atomicWeightRatios().at( 1003 ) ) );
-  CHECK(   3.99320563 == Approx( chunk.atomicWeightRatios().at( 1004 ) ) );
-  CHECK( 235.98412800 == Approx( chunk.atomicWeightRatios().at( 92000 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatios().at( 92235 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatios().at( 1092235 ) ) );
+  CHECK_THAT(   1.00000000, WithinRel( chunk.atomicWeightRatios().at( 1 ) ) );
+  CHECK_THAT(   0.99931697, WithinRel( chunk.atomicWeightRatios().at( 1000 ) ) );
+  CHECK_THAT(   0.99916733, WithinRel( chunk.atomicWeightRatios().at( 1001 ) ) );
+  CHECK_THAT(   1.99679968, WithinRel( chunk.atomicWeightRatios().at( 1002 ) ) );
+  CHECK_THAT(   2.99013997, WithinRel( chunk.atomicWeightRatios().at( 1003 ) ) );
+  CHECK_THAT(   3.99320563, WithinRel( chunk.atomicWeightRatios().at( 1004 ) ) );
+  CHECK_THAT( 235.98412800, WithinRel( chunk.atomicWeightRatios().at( 92000 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatios().at( 92235 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatios().at( 1092235 ) ) );
 
-  CHECK(   1.00000000 == Approx( chunk.atomicWeightRatio( 1 ) ) );
-  CHECK(   0.99931697 == Approx( chunk.atomicWeightRatio( 1000 ) ) );
-  CHECK(   0.99916733 == Approx( chunk.atomicWeightRatio( 1001 ) ) );
-  CHECK(   1.99679968 == Approx( chunk.atomicWeightRatio( 1002 ) ) );
-  CHECK(   2.99013997 == Approx( chunk.atomicWeightRatio( 1003 ) ) );
-  CHECK(   3.99320563 == Approx( chunk.atomicWeightRatio( 1004 ) ) );
-  CHECK( 235.98412800 == Approx( chunk.atomicWeightRatio( 92000 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatio( 92235 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatio( 1092235 ) ) );
+  CHECK_THAT(   1.00000000, WithinRel( chunk.atomicWeightRatio( 1 ) ) );
+  CHECK_THAT(   0.99931697, WithinRel( chunk.atomicWeightRatio( 1000 ) ) );
+  CHECK_THAT(   0.99916733, WithinRel( chunk.atomicWeightRatio( 1001 ) ) );
+  CHECK_THAT(   1.99679968, WithinRel( chunk.atomicWeightRatio( 1002 ) ) );
+  CHECK_THAT(   2.99013997, WithinRel( chunk.atomicWeightRatio( 1003 ) ) );
+  CHECK_THAT(   3.99320563, WithinRel( chunk.atomicWeightRatio( 1004 ) ) );
+  CHECK_THAT( 235.98412800, WithinRel( chunk.atomicWeightRatio( 92000 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatio( 92235 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatio( 1092235 ) ) );
 
   CHECK( 3 == chunk.entries().size() );
   CHECK( "92234.00c" == chunk.entries()[0].ZAID() );
@@ -271,25 +274,25 @@ void verifyChunkWithoutDatapath( const Xsdir& chunk ) {
   CHECK( std::nullopt == chunk.dataPath() );
 
   CHECK( 9 == chunk.atomicWeightRatios().size() );
-  CHECK(   1.00000000 == Approx( chunk.atomicWeightRatios().at( 1 ) ) );
-  CHECK(   0.99931697 == Approx( chunk.atomicWeightRatios().at( 1000 ) ) );
-  CHECK(   0.99916733 == Approx( chunk.atomicWeightRatios().at( 1001 ) ) );
-  CHECK(   1.99679968 == Approx( chunk.atomicWeightRatios().at( 1002 ) ) );
-  CHECK(   2.99013997 == Approx( chunk.atomicWeightRatios().at( 1003 ) ) );
-  CHECK(   3.99320563 == Approx( chunk.atomicWeightRatios().at( 1004 ) ) );
-  CHECK( 235.98412800 == Approx( chunk.atomicWeightRatios().at( 92000 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatios().at( 92235 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatios().at( 1092235 ) ) );
+  CHECK_THAT(   1.00000000, WithinRel( chunk.atomicWeightRatios().at( 1 ) ) );
+  CHECK_THAT(   0.99931697, WithinRel( chunk.atomicWeightRatios().at( 1000 ) ) );
+  CHECK_THAT(   0.99916733, WithinRel( chunk.atomicWeightRatios().at( 1001 ) ) );
+  CHECK_THAT(   1.99679968, WithinRel( chunk.atomicWeightRatios().at( 1002 ) ) );
+  CHECK_THAT(   2.99013997, WithinRel( chunk.atomicWeightRatios().at( 1003 ) ) );
+  CHECK_THAT(   3.99320563, WithinRel( chunk.atomicWeightRatios().at( 1004 ) ) );
+  CHECK_THAT( 235.98412800, WithinRel( chunk.atomicWeightRatios().at( 92000 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatios().at( 92235 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatios().at( 1092235 ) ) );
 
-  CHECK(   1.00000000 == Approx( chunk.atomicWeightRatio( 1 ) ) );
-  CHECK(   0.99931697 == Approx( chunk.atomicWeightRatio( 1000 ) ) );
-  CHECK(   0.99916733 == Approx( chunk.atomicWeightRatio( 1001 ) ) );
-  CHECK(   1.99679968 == Approx( chunk.atomicWeightRatio( 1002 ) ) );
-  CHECK(   2.99013997 == Approx( chunk.atomicWeightRatio( 1003 ) ) );
-  CHECK(   3.99320563 == Approx( chunk.atomicWeightRatio( 1004 ) ) );
-  CHECK( 235.98412800 == Approx( chunk.atomicWeightRatio( 92000 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatio( 92235 ) ) );
-  CHECK( 233.02478975 == Approx( chunk.atomicWeightRatio( 1092235 ) ) );
+  CHECK_THAT(   1.00000000, WithinRel( chunk.atomicWeightRatio( 1 ) ) );
+  CHECK_THAT(   0.99931697, WithinRel( chunk.atomicWeightRatio( 1000 ) ) );
+  CHECK_THAT(   0.99916733, WithinRel( chunk.atomicWeightRatio( 1001 ) ) );
+  CHECK_THAT(   1.99679968, WithinRel( chunk.atomicWeightRatio( 1002 ) ) );
+  CHECK_THAT(   2.99013997, WithinRel( chunk.atomicWeightRatio( 1003 ) ) );
+  CHECK_THAT(   3.99320563, WithinRel( chunk.atomicWeightRatio( 1004 ) ) );
+  CHECK_THAT( 235.98412800, WithinRel( chunk.atomicWeightRatio( 92000 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatio( 92235 ) ) );
+  CHECK_THAT( 233.02478975, WithinRel( chunk.atomicWeightRatio( 1092235 ) ) );
 
   CHECK( 3 == chunk.entries().size() );
   CHECK( "92234.00c" == chunk.entries()[0].ZAID() );

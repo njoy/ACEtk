@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
 
 // other includes
@@ -41,7 +44,7 @@ SCENARIO( "FluorescenceDataBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -61,7 +64,7 @@ SCENARIO( "FluorescenceDataBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -95,20 +98,20 @@ void verifyChunk( const FluorescenceDataBlock& chunk ) {
   CHECK( 2 == chunk.yields().size() );
   CHECK( 2 == chunk.fluorescentEnergies().size() );
 
-  CHECK( 1.294500000000E-03 == Approx( chunk.E().front() ) );
-  CHECK( 1.294500000000E-03 == Approx( chunk.E().back() ) );
-  CHECK( 8.180862310960E-02 == Approx( chunk.PHI().front() ) );
-  CHECK( 1.000000000000E+00 == Approx( chunk.PHI().back() ) );
-  CHECK( 0.000000000000E+00 == Approx( chunk.Y().front() ) );
-  CHECK( 2.542671170140E-02 == Approx( chunk.Y().back() ) );
-  CHECK( 0.000000000000E+00 == Approx( chunk.F().front() ) );
-  CHECK( 1.238156190380E-03 == Approx( chunk.F().back() ) );
-  CHECK( 1.294500000000E-03 == Approx( chunk.fluorescenceEdgeEnergies().front() ) );
-  CHECK( 1.294500000000E-03 == Approx( chunk.fluorescenceEdgeEnergies().back() ) );
-  CHECK( 8.180862310960E-02 == Approx( chunk.relativeEjectionProbabilities().front() ) );
-  CHECK( 1.000000000000E+00 == Approx( chunk.relativeEjectionProbabilities().back() ) );
-  CHECK( 0.000000000000E+00 == Approx( chunk.yields().front() ) );
-  CHECK( 2.542671170140E-02 == Approx( chunk.yields().back() ) );
-  CHECK( 0.000000000000E+00 == Approx( chunk.fluorescentEnergies().front() ) );
-  CHECK( 1.238156190380E-03 == Approx( chunk.fluorescentEnergies().back() ) );
+  CHECK_THAT( 1.294500000000E-03, WithinRel( chunk.E().front() ) );
+  CHECK_THAT( 1.294500000000E-03, WithinRel( chunk.E().back() ) );
+  CHECK_THAT( 8.180862310960E-02, WithinRel( chunk.PHI().front() ) );
+  CHECK_THAT( 1.000000000000E+00, WithinRel( chunk.PHI().back() ) );
+  CHECK_THAT( 0.000000000000E+00, WithinRel( chunk.Y().front() ) );
+  CHECK_THAT( 2.542671170140E-02, WithinRel( chunk.Y().back() ) );
+  CHECK_THAT( 0.000000000000E+00, WithinRel( chunk.F().front() ) );
+  CHECK_THAT( 1.238156190380E-03, WithinRel( chunk.F().back() ) );
+  CHECK_THAT( 1.294500000000E-03, WithinRel( chunk.fluorescenceEdgeEnergies().front() ) );
+  CHECK_THAT( 1.294500000000E-03, WithinRel( chunk.fluorescenceEdgeEnergies().back() ) );
+  CHECK_THAT( 8.180862310960E-02, WithinRel( chunk.relativeEjectionProbabilities().front() ) );
+  CHECK_THAT( 1.000000000000E+00, WithinRel( chunk.relativeEjectionProbabilities().back() ) );
+  CHECK_THAT( 0.000000000000E+00, WithinRel( chunk.yields().front() ) );
+  CHECK_THAT( 2.542671170140E-02, WithinRel( chunk.yields().back() ) );
+  CHECK_THAT( 0.000000000000E+00, WithinRel( chunk.fluorescentEnergies().front() ) );
+  CHECK_THAT( 1.238156190380E-03, WithinRel( chunk.fluorescentEnergies().back() ) );
 }

@@ -61,7 +61,6 @@ add_library( ACEtk INTERFACE )
 target_include_directories( ACEtk INTERFACE src/ )
 target_link_libraries( ACEtk
     INTERFACE Log
-    INTERFACE catch-adapter
     INTERFACE disco
     INTERFACE range-v3
     )
@@ -187,7 +186,7 @@ if(ACEtk.python)
   target_compile_options( ACEtk.python PRIVATE "-fvisibility=hidden" )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
   set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
-  set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON)
+  set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
 
   message( STATUS "Building ACEtk's python API" )
 

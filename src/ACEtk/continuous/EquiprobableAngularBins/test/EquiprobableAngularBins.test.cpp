@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/EquiprobableAngularBins.hpp"
 
 // other includes
@@ -42,7 +45,7 @@ SCENARIO( "EquiprobableAngularBins" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -62,7 +65,7 @@ SCENARIO( "EquiprobableAngularBins" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -91,10 +94,10 @@ void verifyChunk( const EquiprobableAngularBins& chunk ) {
   CHECK( 33 == chunk.length() );
   CHECK( "EquiprobableAngularBins" == chunk.name() );
 
-  CHECK( 2.1 == Approx( chunk.energy() ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.energy() ) );
   CHECK( 32 == chunk.numberBins() );
 
   CHECK( 33 == chunk.cosines().size() );
-  CHECK( -1. == Approx( chunk.cosines().front() ) );
-  CHECK( +1. == Approx( chunk.cosines().back() ) );
+  CHECK_THAT( -1., WithinRel( chunk.cosines().front() ) );
+  CHECK_THAT( +1., WithinRel( chunk.cosines().back() ) );
 }

@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/thermal/InelasticAngularDistributionBlock.hpp"
 
 // other includes
@@ -51,7 +54,7 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -72,7 +75,7 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -114,7 +117,7 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -135,7 +138,7 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -205,66 +208,66 @@ void verifyChunk( const InelasticAngularDistributionBlock& chunk ) {
   auto data11 = std::get< DiscreteCosines >( chunk.discreteCosineData( 1, 1 ) );
   CHECK( 3 == data11.NC() );
   CHECK( 3 == data11.numberDiscreteCosines() );
-  CHECK( 1. == Approx( data11.energy() ) );
-  CHECK( -1. == Approx( data11.cosines()[0] ) );
-  CHECK( -.9 == Approx( data11.cosines()[1] ) );
-  CHECK( +1. == Approx( data11.cosines()[2] ) );
+  CHECK_THAT( 1., WithinRel( data11.energy() ) );
+  CHECK_THAT( -1., WithinRel( data11.cosines()[0] ) );
+  CHECK_THAT( -.9, WithinRel( data11.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data11.cosines()[2] ) );
 
   auto data12 = std::get< DiscreteCosines >( chunk.discreteCosineData( 1, 2 ) );
   CHECK( 3 == data12.NC() );
   CHECK( 3 == data12.numberDiscreteCosines() );
-  CHECK( 2. == Approx( data12.energy() ) );
-  CHECK( -1. == Approx( data12.cosines()[0] ) );
-  CHECK(  0. == Approx( data12.cosines()[1] ) );
-  CHECK( +1. == Approx( data12.cosines()[2] ) );
+  CHECK_THAT( 2., WithinRel( data12.energy() ) );
+  CHECK_THAT( -1., WithinRel( data12.cosines()[0] ) );
+  CHECK_THAT(  0., WithinRel( data12.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data12.cosines()[2] ) );
 
   auto data21 = std::get< DiscreteCosines >( chunk.discreteCosineData( 2, 1 ) );
   CHECK( 3 == data21.NC() );
   CHECK( 3 == data21.numberDiscreteCosines() );
-  CHECK( 3. == Approx( data21.energy() ) );
-  CHECK( -1. == Approx( data21.cosines()[0] ) );
-  CHECK(  .5 == Approx( data21.cosines()[1] ) );
-  CHECK( +1. == Approx( data21.cosines()[2] ) );
+  CHECK_THAT( 3., WithinRel( data21.energy() ) );
+  CHECK_THAT( -1., WithinRel( data21.cosines()[0] ) );
+  CHECK_THAT(  .5, WithinRel( data21.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data21.cosines()[2] ) );
 
   auto data22 = std::get< DiscreteCosines >( chunk.discreteCosineData( 2, 2 ) );
   CHECK( 3 == data22.NC() );
   CHECK( 3 == data22.numberDiscreteCosines() );
-  CHECK( 4. == Approx( data22.energy() ) );
-  CHECK( -1. == Approx( data22.cosines()[0] ) );
-  CHECK(  .9 == Approx( data22.cosines()[1] ) );
-  CHECK( +1. == Approx( data22.cosines()[2] ) );
+  CHECK_THAT( 4., WithinRel( data22.energy() ) );
+  CHECK_THAT( -1., WithinRel( data22.cosines()[0] ) );
+  CHECK_THAT(  .9, WithinRel( data22.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data22.cosines()[2] ) );
 
   auto data31 = std::get< DiscreteCosines >( chunk.discreteCosineData( 3, 1 ) );
   CHECK( 3 == data31.NC() );
   CHECK( 3 == data31.numberDiscreteCosines() );
-  CHECK( 5. == Approx( data31.energy() ) );
-  CHECK( -1. == Approx( data31.cosines()[0] ) );
-  CHECK(  .4 == Approx( data31.cosines()[1] ) );
-  CHECK( +1. == Approx( data31.cosines()[2] ) );
+  CHECK_THAT( 5., WithinRel( data31.energy() ) );
+  CHECK_THAT( -1., WithinRel( data31.cosines()[0] ) );
+  CHECK_THAT(  .4, WithinRel( data31.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data31.cosines()[2] ) );
 
   auto data32 = std::get< DiscreteCosines >( chunk.discreteCosineData( 3, 2 ) );
   CHECK( 3 == data32.NC() );
   CHECK( 3 == data32.numberDiscreteCosines() );
-  CHECK( 6. == Approx( data32.energy() ) );
-  CHECK( -1. == Approx( data32.cosines()[0] ) );
-  CHECK(  .8 == Approx( data32.cosines()[1] ) );
-  CHECK( +1. == Approx( data32.cosines()[2] ) );
+  CHECK_THAT( 6., WithinRel( data32.energy() ) );
+  CHECK_THAT( -1., WithinRel( data32.cosines()[0] ) );
+  CHECK_THAT(  .8, WithinRel( data32.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data32.cosines()[2] ) );
 
   auto data41 = std::get< DiscreteCosines >( chunk.discreteCosineData( 4, 1 ) );
   CHECK( 3 == data41.NC() );
   CHECK( 3 == data41.numberDiscreteCosines() );
-  CHECK( 7. == Approx( data41.energy() ) );
-  CHECK( -1. == Approx( data41.cosines()[0] ) );
-  CHECK(  .3 == Approx( data41.cosines()[1] ) );
-  CHECK( +1. == Approx( data41.cosines()[2] ) );
+  CHECK_THAT( 7., WithinRel( data41.energy() ) );
+  CHECK_THAT( -1., WithinRel( data41.cosines()[0] ) );
+  CHECK_THAT(  .3, WithinRel( data41.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data41.cosines()[2] ) );
 
   auto data42 = std::get< DiscreteCosines >( chunk.discreteCosineData( 4, 2 ) );
   CHECK( 3 == data42.NC() );
   CHECK( 3 == data42.numberDiscreteCosines() );
-  CHECK( 8. == Approx( data42.energy() ) );
-  CHECK( -1. == Approx( data42.cosines()[0] ) );
-  CHECK(  .7 == Approx( data42.cosines()[1] ) );
-  CHECK( +1. == Approx( data42.cosines()[2] ) );
+  CHECK_THAT( 8., WithinRel( data42.energy() ) );
+  CHECK_THAT( -1., WithinRel( data42.cosines()[0] ) );
+  CHECK_THAT(  .7, WithinRel( data42.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data42.cosines()[2] ) );
 }
 
 void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& chunk ) {
@@ -294,120 +297,120 @@ void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& chunk ) {
   auto data11 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 1, 1 ) );
   CHECK( 3 == data11.NC() );
   CHECK( 3 == data11.numberDiscreteCosines() );
-  CHECK(  1. == Approx( data11.energy() ) );
-  CHECK(  .5 == Approx( data11.pdf() ) );
-  CHECK(  .0 == Approx( data11.cdf() ) );
-  CHECK( -1. == Approx( data11.cosines()[0] ) );
-  CHECK( -.9 == Approx( data11.cosines()[1] ) );
-  CHECK( +1. == Approx( data11.cosines()[2] ) );
+  CHECK_THAT(  1., WithinRel( data11.energy() ) );
+  CHECK_THAT(  .5, WithinRel( data11.pdf() ) );
+  CHECK_THAT(  .0, WithinRel( data11.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data11.cosines()[0] ) );
+  CHECK_THAT( -.9, WithinRel( data11.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data11.cosines()[2] ) );
 
   auto data12 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 1, 2 ) );
   CHECK( 3 == data12.NC() );
   CHECK( 3 == data12.numberDiscreteCosines() );
-  CHECK(  2. == Approx( data12.energy() ) );
-  CHECK(  .5 == Approx( data12.pdf() ) );
-  CHECK(  1. == Approx( data12.cdf() ) );
-  CHECK( -1. == Approx( data12.cosines()[0] ) );
-  CHECK(  0. == Approx( data12.cosines()[1] ) );
-  CHECK( +1. == Approx( data12.cosines()[2] ) );
+  CHECK_THAT(  2., WithinRel( data12.energy() ) );
+  CHECK_THAT(  .5, WithinRel( data12.pdf() ) );
+  CHECK_THAT(  1., WithinRel( data12.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data12.cosines()[0] ) );
+  CHECK_THAT(  0., WithinRel( data12.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data12.cosines()[2] ) );
 
   auto data21 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 1 ) );
   CHECK( 3 == data21.NC() );
   CHECK( 3 == data21.numberDiscreteCosines() );
-  CHECK(  3. == Approx( data21.energy() ) );
-  CHECK(  .25 == Approx( data21.pdf() ) );
-  CHECK(  0. == Approx( data21.cdf() ) );
-  CHECK( -1. == Approx( data21.cosines()[0] ) );
-  CHECK(  .5 == Approx( data21.cosines()[1] ) );
-  CHECK( +1. == Approx( data21.cosines()[2] ) );
+  CHECK_THAT(  3., WithinRel( data21.energy() ) );
+  CHECK_THAT(  .25, WithinRel( data21.pdf() ) );
+  CHECK_THAT(  0., WithinRel( data21.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data21.cosines()[0] ) );
+  CHECK_THAT(  .5, WithinRel( data21.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data21.cosines()[2] ) );
 
   auto data22 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 2 ) );
   CHECK( 3 == data22.NC() );
   CHECK( 3 == data22.numberDiscreteCosines() );
-  CHECK(  4. == Approx( data22.energy() ) );
-  CHECK(  .25 == Approx( data22.pdf() ) );
-  CHECK(  0.33 == Approx( data22.cdf() ) );
-  CHECK( -1. == Approx( data22.cosines()[0] ) );
-  CHECK(  .9 == Approx( data22.cosines()[1] ) );
-  CHECK( +1. == Approx( data22.cosines()[2] ) );
+  CHECK_THAT(  4., WithinRel( data22.energy() ) );
+  CHECK_THAT(  .25, WithinRel( data22.pdf() ) );
+  CHECK_THAT(  0.33, WithinRel( data22.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data22.cosines()[0] ) );
+  CHECK_THAT(  .9, WithinRel( data22.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data22.cosines()[2] ) );
 
   auto data23 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 3 ) );
   CHECK( 3 == data23.NC() );
   CHECK( 3 == data23.numberDiscreteCosines() );
-  CHECK(  5. == Approx( data23.energy() ) );
-  CHECK(  .25 == Approx( data23.pdf() ) );
-  CHECK(  0.66 == Approx( data23.cdf() ) );
-  CHECK( -1. == Approx( data23.cosines()[0] ) );
-  CHECK(  .4 == Approx( data23.cosines()[1] ) );
-  CHECK( +1. == Approx( data23.cosines()[2] ) );
+  CHECK_THAT(  5., WithinRel( data23.energy() ) );
+  CHECK_THAT(  .25, WithinRel( data23.pdf() ) );
+  CHECK_THAT(  0.66, WithinRel( data23.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data23.cosines()[0] ) );
+  CHECK_THAT(  .4, WithinRel( data23.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data23.cosines()[2] ) );
 
   auto data24 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 2, 4 ) );
   CHECK( 3 == data24.NC() );
   CHECK( 3 == data24.numberDiscreteCosines() );
-  CHECK(  6. == Approx( data24.energy() ) );
-  CHECK(  .25 == Approx( data24.pdf() ) );
-  CHECK(  1. == Approx( data24.cdf() ) );
-  CHECK( -1. == Approx( data24.cosines()[0] ) );
-  CHECK(  .8 == Approx( data24.cosines()[1] ) );
-  CHECK( +1. == Approx( data24.cosines()[2] ) );
+  CHECK_THAT(  6., WithinRel( data24.energy() ) );
+  CHECK_THAT(  .25, WithinRel( data24.pdf() ) );
+  CHECK_THAT(  1., WithinRel( data24.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data24.cosines()[0] ) );
+  CHECK_THAT(  .8, WithinRel( data24.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data24.cosines()[2] ) );
 
   auto data31 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 1 ) );
   CHECK( 3 == data31.NC() );
   CHECK( 3 == data31.numberDiscreteCosines() );
-  CHECK(  7. == Approx( data31.energy() ) );
-  CHECK(  .33 == Approx( data31.pdf() ) );
-  CHECK(  0. == Approx( data31.cdf() ) );
-  CHECK( -1. == Approx( data31.cosines()[0] ) );
-  CHECK(  .3 == Approx( data31.cosines()[1] ) );
-  CHECK( +1. == Approx( data31.cosines()[2] ) );
+  CHECK_THAT(  7., WithinRel( data31.energy() ) );
+  CHECK_THAT(  .33, WithinRel( data31.pdf() ) );
+  CHECK_THAT(  0., WithinRel( data31.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data31.cosines()[0] ) );
+  CHECK_THAT(  .3, WithinRel( data31.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data31.cosines()[2] ) );
 
   auto data32 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 2 ) );
   CHECK( 3 == data32.NC() );
   CHECK( 3 == data32.numberDiscreteCosines() );
-  CHECK(  8. == Approx( data32.energy() ) );
-  CHECK(  .33 == Approx( data32.pdf() ) );
-  CHECK(  .5 == Approx( data32.cdf() ) );
-  CHECK( -1. == Approx( data32.cosines()[0] ) );
-  CHECK(  .7 == Approx( data32.cosines()[1] ) );
-  CHECK( +1. == Approx( data32.cosines()[2] ) );
+  CHECK_THAT(  8., WithinRel( data32.energy() ) );
+  CHECK_THAT(  .33, WithinRel( data32.pdf() ) );
+  CHECK_THAT(  .5, WithinRel( data32.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data32.cosines()[0] ) );
+  CHECK_THAT(  .7, WithinRel( data32.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data32.cosines()[2] ) );
 
   auto data33 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 3, 3 ) );
   CHECK( 3 == data33.NC() );
   CHECK( 3 == data33.numberDiscreteCosines() );
-  CHECK(  9. == Approx( data33.energy() ) );
-  CHECK(  .33 == Approx( data33.pdf() ) );
-  CHECK(  1. == Approx( data33.cdf() ) );
-  CHECK( -1. == Approx( data33.cosines()[0] ) );
-  CHECK(  .6 == Approx( data33.cosines()[1] ) );
-  CHECK( +1. == Approx( data33.cosines()[2] ) );
+  CHECK_THAT(  9., WithinRel( data33.energy() ) );
+  CHECK_THAT(  .33, WithinRel( data33.pdf() ) );
+  CHECK_THAT(  1., WithinRel( data33.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data33.cosines()[0] ) );
+  CHECK_THAT(  .6, WithinRel( data33.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data33.cosines()[2] ) );
 
   auto data41 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 1 ) );
   CHECK( 3 == data41.NC() );
   CHECK( 3 == data41.numberDiscreteCosines() );
-  CHECK( 10. == Approx( data41.energy() ) );
-  CHECK(  .33 == Approx( data41.pdf() ) );
-  CHECK(  0. == Approx( data41.cdf() ) );
-  CHECK( -1. == Approx( data41.cosines()[0] ) );
-  CHECK(  .2 == Approx( data41.cosines()[1] ) );
-  CHECK( +1. == Approx( data41.cosines()[2] ) );
+  CHECK_THAT( 10., WithinRel( data41.energy() ) );
+  CHECK_THAT(  .33, WithinRel( data41.pdf() ) );
+  CHECK_THAT(  0., WithinRel( data41.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data41.cosines()[0] ) );
+  CHECK_THAT(  .2, WithinRel( data41.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data41.cosines()[2] ) );
 
   auto data42 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 2 ) );
   CHECK( 3 == data42.NC() );
   CHECK( 3 == data42.numberDiscreteCosines() );
-  CHECK( 11. == Approx( data42.energy() ) );
-  CHECK(  .33 == Approx( data42.pdf() ) );
-  CHECK(  .5 == Approx( data42.cdf() ) );
-  CHECK( -1. == Approx( data42.cosines()[0] ) );
-  CHECK(  .5 == Approx( data42.cosines()[1] ) );
-  CHECK( +1. == Approx( data42.cosines()[2] ) );
+  CHECK_THAT( 11., WithinRel( data42.energy() ) );
+  CHECK_THAT(  .33, WithinRel( data42.pdf() ) );
+  CHECK_THAT(  .5, WithinRel( data42.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data42.cosines()[0] ) );
+  CHECK_THAT(  .5, WithinRel( data42.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data42.cosines()[2] ) );
 
   auto data43 = std::get< DiscreteCosinesWithProbability >( chunk.discreteCosineData( 4, 3 ) );
   CHECK( 3 == data43.NC() );
   CHECK( 3 == data43.numberDiscreteCosines() );
-  CHECK( 12. == Approx( data43.energy() ) );
-  CHECK(  .33 == Approx( data43.pdf() ) );
-  CHECK(  1. == Approx( data43.cdf() ) );
-  CHECK( -1. == Approx( data43.cosines()[0] ) );
-  CHECK(  .4 == Approx( data43.cosines()[1] ) );
-  CHECK( +1. == Approx( data43.cosines()[2] ) );
+  CHECK_THAT( 12., WithinRel( data43.energy() ) );
+  CHECK_THAT(  .33, WithinRel( data43.pdf() ) );
+  CHECK_THAT(  1., WithinRel( data43.cdf() ) );
+  CHECK_THAT( -1., WithinRel( data43.cosines()[0] ) );
+  CHECK_THAT(  .4, WithinRel( data43.cosines()[1] ) );
+  CHECK_THAT( +1., WithinRel( data43.cosines()[2] ) );
 }

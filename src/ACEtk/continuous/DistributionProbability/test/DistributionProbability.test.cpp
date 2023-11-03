@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/DistributionProbability.hpp"
 
 // other includes
@@ -41,7 +44,7 @@ SCENARIO( "DistributionProbability" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -61,7 +64,7 @@ SCENARIO( "DistributionProbability" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -97,12 +100,12 @@ void verifyChunk( const DistributionProbability& chunk ) {
   CHECK( 3 == chunk.numberEnergyPoints() );
 
   CHECK( 3 == chunk.energies().size() );
-  CHECK( 1. == Approx( chunk.energies()[0] ) );
-  CHECK( 3. == Approx( chunk.energies()[1] ) );
-  CHECK( 5. == Approx( chunk.energies()[2] ) );
+  CHECK_THAT( 1., WithinRel( chunk.energies()[0] ) );
+  CHECK_THAT( 3., WithinRel( chunk.energies()[1] ) );
+  CHECK_THAT( 5., WithinRel( chunk.energies()[2] ) );
 
   CHECK( 3 == chunk.probabilities().size() );
-  CHECK( 2. == Approx( chunk.probabilities()[0] ) );
-  CHECK( 4. == Approx( chunk.probabilities()[1] ) );
-  CHECK( 6. == Approx( chunk.probabilities()[2] ) );
+  CHECK_THAT( 2., WithinRel( chunk.probabilities()[0] ) );
+  CHECK_THAT( 4., WithinRel( chunk.probabilities()[1] ) );
+  CHECK_THAT( 6., WithinRel( chunk.probabilities()[2] ) );
 }

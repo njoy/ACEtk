@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/Table.hpp"
 
 // other includes
@@ -83,10 +86,10 @@ void verifyChunk( const Header201& chunk ) {
   CHECK( "2.0.1" == chunk.VERS() );
   CHECK( "2.0.1" == chunk.version() );
   CHECK( "92238.800nc" == chunk.ZAID() );
-  CHECK( 236.0058 == Approx( chunk.AWR() ) );
-  CHECK( 236.0058 == Approx( chunk.atomicWeightRatio() ) );
-  CHECK( 2.5301E-08 == Approx( chunk.TEMP() ) );
-  CHECK( 2.5301E-08 == Approx( chunk.temperature() ) );
+  CHECK_THAT( 236.0058, WithinRel( chunk.AWR() ) );
+  CHECK_THAT( 236.0058, WithinRel( chunk.atomicWeightRatio() ) );
+  CHECK_THAT( 2.5301E-08, WithinRel( chunk.TEMP() ) );
+  CHECK_THAT( 2.5301E-08, WithinRel( chunk.temperature() ) );
   CHECK( "2018-05-01" == chunk.date() );
   CHECK( " 92238.80c  236.005800  2.5301E-08   12/13/12" == chunk.comments()[0] );
   CHECK( "U238 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)    mat9237"

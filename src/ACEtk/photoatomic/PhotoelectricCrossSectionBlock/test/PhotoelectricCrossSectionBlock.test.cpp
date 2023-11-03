@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/photoatomic/PhotoelectricCrossSectionBlock.hpp"
 
 // other includes
@@ -40,7 +43,7 @@ SCENARIO( "PhotoelectricCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -60,7 +63,7 @@ SCENARIO( "PhotoelectricCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -94,19 +97,19 @@ void verifyChunk( const PhotoelectricCrossSectionBlock& chunk ) {
   CHECK( 5 == chunk.photoelectric(2).size() );
   CHECK( 5 == chunk.photoelectric(3).size() );
 
-  CHECK(   1. == Approx( chunk.photoelectric(1)[0] ) );
-  CHECK(   2. == Approx( chunk.photoelectric(1)[1] ) );
-  CHECK(   3. == Approx( chunk.photoelectric(1)[2] ) );
-  CHECK(   4. == Approx( chunk.photoelectric(1)[3] ) );
-  CHECK(   5. == Approx( chunk.photoelectric(1)[4] ) );
-  CHECK(   6. == Approx( chunk.photoelectric(2)[0] ) );
-  CHECK(   7. == Approx( chunk.photoelectric(2)[1] ) );
-  CHECK(   8. == Approx( chunk.photoelectric(2)[2] ) );
-  CHECK(   9. == Approx( chunk.photoelectric(2)[3] ) );
-  CHECK(  10. == Approx( chunk.photoelectric(2)[4] ) );
-  CHECK(  11. == Approx( chunk.photoelectric(3)[0] ) );
-  CHECK(  12. == Approx( chunk.photoelectric(3)[1] ) );
-  CHECK(  13. == Approx( chunk.photoelectric(3)[2] ) );
-  CHECK(  14. == Approx( chunk.photoelectric(3)[3] ) );
-  CHECK(  15. == Approx( chunk.photoelectric(3)[4] ) );
+  CHECK_THAT(   1., WithinRel( chunk.photoelectric(1)[0] ) );
+  CHECK_THAT(   2., WithinRel( chunk.photoelectric(1)[1] ) );
+  CHECK_THAT(   3., WithinRel( chunk.photoelectric(1)[2] ) );
+  CHECK_THAT(   4., WithinRel( chunk.photoelectric(1)[3] ) );
+  CHECK_THAT(   5., WithinRel( chunk.photoelectric(1)[4] ) );
+  CHECK_THAT(   6., WithinRel( chunk.photoelectric(2)[0] ) );
+  CHECK_THAT(   7., WithinRel( chunk.photoelectric(2)[1] ) );
+  CHECK_THAT(   8., WithinRel( chunk.photoelectric(2)[2] ) );
+  CHECK_THAT(   9., WithinRel( chunk.photoelectric(2)[3] ) );
+  CHECK_THAT(  10., WithinRel( chunk.photoelectric(2)[4] ) );
+  CHECK_THAT(  11., WithinRel( chunk.photoelectric(3)[0] ) );
+  CHECK_THAT(  12., WithinRel( chunk.photoelectric(3)[1] ) );
+  CHECK_THAT(  13., WithinRel( chunk.photoelectric(3)[2] ) );
+  CHECK_THAT(  14., WithinRel( chunk.photoelectric(3)[3] ) );
+  CHECK_THAT(  15., WithinRel( chunk.photoelectric(3)[4] ) );
 }

@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/photonuclear/PrincipalCrossSectionBlock.hpp"
 
 // other includes
@@ -114,7 +117,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -134,7 +137,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -231,10 +234,10 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
   CHECK( 90 == chunk.heating().size() );
   CHECK( 0 == chunk.elastic().size() );
 
-  CHECK( 1. == Approx( chunk.energies().front() ) );
-  CHECK( 200. == Approx( chunk.energies().back() ) );
-  CHECK( 0. == Approx( chunk.total().front() ) );
-  CHECK( 6.99225100000E-03 == Approx( chunk.total().back() ) );
-  CHECK( 0. == Approx( chunk.heating().front() ) );
-  CHECK( 309.8838 == Approx( chunk.heating().back() ) );
+  CHECK_THAT( 1., WithinRel( chunk.energies().front() ) );
+  CHECK_THAT( 200., WithinRel( chunk.energies().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.total().front() ) );
+  CHECK_THAT( 6.99225100000E-03, WithinRel( chunk.total().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.heating().front() ) );
+  CHECK_THAT( 309.8838, WithinRel( chunk.heating().back() ) );
 }

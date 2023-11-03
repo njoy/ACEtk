@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/IsotropicAngularDistribution.hpp"
 
 // other includes
@@ -32,5 +35,5 @@ SCENARIO( "IsotropicAngularDistribution" ) {
 
 void verifyChunk( const IsotropicAngularDistribution& chunk ) {
 
-  CHECK( 2.1 == Approx( chunk.energy() ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.energy() ) );
 }

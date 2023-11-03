@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/EquiprobableOutgoingEnergyBinData.hpp"
 
 // other includes
@@ -40,7 +43,7 @@ SCENARIO( "EquiprobableOutgoingEnergyBinData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -59,7 +62,7 @@ SCENARIO( "EquiprobableOutgoingEnergyBinData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -107,14 +110,14 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk ) {
   CHECK( 2 == chunk.numberIncidentEnergies() );
 
   CHECK( 2 == chunk.incidentEnergies().size() );
-  CHECK( 1e-05 == Approx( chunk.incidentEnergies()[0] ) );
-  CHECK( 20. == Approx( chunk.incidentEnergies()[1] ) );
+  CHECK_THAT( 1e-05, WithinRel( chunk.incidentEnergies()[0] ) );
+  CHECK_THAT( 20., WithinRel( chunk.incidentEnergies()[1] ) );
 
-  CHECK( 1e-5 == Approx( chunk.incidentEnergy(1) ) );
-  CHECK( 20. == Approx( chunk.incidentEnergy(2) ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.incidentEnergy(1) ) );
+  CHECK_THAT( 20., WithinRel( chunk.incidentEnergy(2) ) );
 
-  CHECK( 1e-5 == Approx( chunk.minimumIncidentEnergy() ) );
-  CHECK( 20. == Approx( chunk.maximumIncidentEnergy() ) );
+  CHECK_THAT( 1e-5, WithinRel( chunk.minimumIncidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( chunk.maximumIncidentEnergy() ) );
 
   CHECK( 4 == chunk.NET() );
   CHECK( 3 == chunk.numberBins() );
@@ -122,37 +125,37 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk ) {
   decltype(auto) distributions = chunk.distributions();
   CHECK( 2 == distributions.size() );
 
-  CHECK( 1e-5 == Approx( distributions[0].incidentEnergy() ) );
+  CHECK_THAT( 1e-5, WithinRel( distributions[0].incidentEnergy() ) );
   CHECK( 3 == distributions[0].numberBins() );
   CHECK( 4 == distributions[0].energies().size() );
-  CHECK( 1e-4 == Approx( distributions[0].energies()[0] ) );
-  CHECK( 1. == Approx( distributions[0].energies()[1] ) );
-  CHECK( 10. == Approx( distributions[0].energies()[2] ) );
-  CHECK( 20. == Approx( distributions[0].energies()[3] ) );
+  CHECK_THAT( 1e-4, WithinRel( distributions[0].energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( distributions[0].energies()[1] ) );
+  CHECK_THAT( 10., WithinRel( distributions[0].energies()[2] ) );
+  CHECK_THAT( 20., WithinRel( distributions[0].energies()[3] ) );
 
-  CHECK( 20. == Approx( distributions[1].incidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( distributions[1].incidentEnergy() ) );
   CHECK( 3 == distributions[1].numberBins() );
   CHECK( 4 == distributions[1].energies().size() );
-  CHECK( 1e-5 == Approx( distributions[1].energies()[0] ) );
-  CHECK( 3. == Approx( distributions[1].energies()[1] ) );
-  CHECK( 12. == Approx( distributions[1].energies()[2] ) );
-  CHECK( 20. == Approx( distributions[1].energies()[3] ) );
+  CHECK_THAT( 1e-5, WithinRel( distributions[1].energies()[0] ) );
+  CHECK_THAT( 3., WithinRel( distributions[1].energies()[1] ) );
+  CHECK_THAT( 12., WithinRel( distributions[1].energies()[2] ) );
+  CHECK_THAT( 20., WithinRel( distributions[1].energies()[3] ) );
 
   auto bins1 = chunk.distribution(1);
-  CHECK( 1e-5 == Approx( bins1.incidentEnergy() ) );
+  CHECK_THAT( 1e-5, WithinRel( bins1.incidentEnergy() ) );
   CHECK( 3 == bins1.numberBins() );
   CHECK( 4 == bins1.energies().size() );
-  CHECK( 1e-4 == Approx( bins1.energies()[0] ) );
-  CHECK( 1. == Approx( bins1.energies()[1] ) );
-  CHECK( 10. == Approx( bins1.energies()[2] ) );
-  CHECK( 20. == Approx( bins1.energies()[3] ) );
+  CHECK_THAT( 1e-4, WithinRel( bins1.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( bins1.energies()[1] ) );
+  CHECK_THAT( 10., WithinRel( bins1.energies()[2] ) );
+  CHECK_THAT( 20., WithinRel( bins1.energies()[3] ) );
 
   auto bins2 = chunk.distribution(2);
-  CHECK( 20. == Approx( bins2.incidentEnergy() ) );
+  CHECK_THAT( 20., WithinRel( bins2.incidentEnergy() ) );
   CHECK( 3 == bins2.numberBins() );
   CHECK( 4 == bins2.energies().size() );
-  CHECK( 1e-5 == Approx( bins2.energies()[0] ) );
-  CHECK( 3. == Approx( bins2.energies()[1] ) );
-  CHECK( 12. == Approx( bins2.energies()[2] ) );
-  CHECK( 20. == Approx( bins2.energies()[3] ) );
+  CHECK_THAT( 1e-5, WithinRel( bins2.energies()[0] ) );
+  CHECK_THAT( 3., WithinRel( bins2.energies()[1] ) );
+  CHECK_THAT( 12., WithinRel( bins2.energies()[2] ) );
+  CHECK_THAT( 20., WithinRel( bins2.energies()[3] ) );
 }

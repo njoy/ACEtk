@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/TabulatedEnergyAngleDistribution.hpp"
 
 // other includes
@@ -47,7 +50,7 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -67,7 +70,7 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -92,7 +95,7 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
   CHECK( 29 == chunk.length() );
   CHECK( "TabulatedEnergyAngleDistribution" == chunk.name() );
 
-  CHECK( 1.1 == Approx( chunk.incidentEnergy() ) );
+  CHECK_THAT( 1.1, WithinRel( chunk.incidentEnergy() ) );
 
   CHECK( 2 == chunk.interpolation() );
 
@@ -101,25 +104,25 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
   CHECK( 2 == chunk.distributions().size() );
 
   CHECK( 2 == chunk.outgoingEnergies().size() );
-  CHECK( 2.1 == Approx( chunk.outgoingEnergies()[0] ) );
-  CHECK( 20. == Approx( chunk.outgoingEnergies()[1] ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.outgoingEnergies()[0] ) );
+  CHECK_THAT( 20., WithinRel( chunk.outgoingEnergies()[1] ) );
 
   CHECK( 2 == chunk.pdf().size() );
-  CHECK( 0.5 == Approx( chunk.pdf()[0] ) );
-  CHECK( 0.5 == Approx( chunk.pdf()[1] ) );
+  CHECK_THAT( 0.5, WithinRel( chunk.pdf()[0] ) );
+  CHECK_THAT( 0.5, WithinRel( chunk.pdf()[1] ) );
 
   CHECK( 2 == chunk.cdf().size() );
-  CHECK( 0.5 == Approx( chunk.cdf()[0] ) );
-  CHECK( 1.0 == Approx( chunk.cdf()[1] ) );
+  CHECK_THAT( 0.5, WithinRel( chunk.cdf()[0] ) );
+  CHECK_THAT( 1.0, WithinRel( chunk.cdf()[1] ) );
 
-  CHECK( 2.1 == Approx( chunk.outgoingEnergy(1) ) );
-  CHECK( 20. == Approx( chunk.outgoingEnergy(2) ) );
+  CHECK_THAT( 2.1, WithinRel( chunk.outgoingEnergy(1) ) );
+  CHECK_THAT( 20., WithinRel( chunk.outgoingEnergy(2) ) );
 
-  CHECK( 0.5 == Approx( chunk.probability(1) ) );
-  CHECK( 0.5 == Approx( chunk.probability(2) ) );
+  CHECK_THAT( 0.5, WithinRel( chunk.probability(1) ) );
+  CHECK_THAT( 0.5, WithinRel( chunk.probability(2) ) );
 
-  CHECK( 0.5 == Approx( chunk.cumulativeProbability(1) ) );
-  CHECK( 1.0 == Approx( chunk.cumulativeProbability(2) ) );
+  CHECK_THAT( 0.5, WithinRel( chunk.cumulativeProbability(1) ) );
+  CHECK_THAT( 1.0, WithinRel( chunk.cumulativeProbability(2) ) );
 
   CHECK( 31 == chunk.LOCC(1) );
   CHECK( 42 == chunk.LOCC(2) );
@@ -130,40 +133,40 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk ) {
   CHECK( 22 == chunk.relativeDistributionLocator(2) );
 
   auto data1 = chunk.distribution(1);
-  CHECK( 2.1 == Approx( data1.energy() ) );
-  CHECK( 0.5 == Approx( data1.probability() ) );
-  CHECK( 0.5 == Approx( data1.cumulativeProbability() ) );
+  CHECK_THAT( 2.1, WithinRel( data1.energy() ) );
+  CHECK_THAT( 0.5, WithinRel( data1.probability() ) );
+  CHECK_THAT( 0.5, WithinRel( data1.cumulativeProbability() ) );
   CHECK( 2 == data1.interpolation() );
   CHECK( 3 == data1.numberCosines() );
 
   CHECK( 3 == data1.cosines().size() );
-  CHECK( -1. == Approx( data1.cosines().front() ) );
-  CHECK( +1. == Approx( data1.cosines().back() ) );
+  CHECK_THAT( -1., WithinRel( data1.cosines().front() ) );
+  CHECK_THAT( +1., WithinRel( data1.cosines().back() ) );
 
   CHECK( 3 == data1.pdf().size() );
-  CHECK( .5 == Approx( data1.pdf().front() ) );
-  CHECK( .5 == Approx( data1.pdf().back() ) );
+  CHECK_THAT( .5, WithinRel( data1.pdf().front() ) );
+  CHECK_THAT( .5, WithinRel( data1.pdf().back() ) );
 
   CHECK( 3 == data1.cdf().size() );
-  CHECK( 0. == Approx( data1.cdf().front() ) );
-  CHECK( 1. == Approx( data1.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( data1.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( data1.cdf().back() ) );
 
   auto data2 = chunk.distribution(2);
-  CHECK( 20 == Approx( data2.energy() ) );
-  CHECK( 0.5 == Approx( data1.probability() ) );
-  CHECK( 0.5 == Approx( data1.cumulativeProbability() ) );
+  CHECK_THAT( 20, WithinRel( data2.energy() ) );
+  CHECK_THAT( 0.5, WithinRel( data1.probability() ) );
+  CHECK_THAT( 0.5, WithinRel( data1.cumulativeProbability() ) );
   CHECK( 1 == data2.interpolation() );
   CHECK( 2 == data2.numberCosines() );
 
   CHECK( 2 == data2.cosines().size() );
-  CHECK( -1. == Approx( data2.cosines().front() ) );
-  CHECK( +1. == Approx( data2.cosines().back() ) );
+  CHECK_THAT( -1., WithinRel( data2.cosines().front() ) );
+  CHECK_THAT( +1., WithinRel( data2.cosines().back() ) );
 
   CHECK( 2 == data2.pdf().size() );
-  CHECK( .5 == Approx( data2.pdf().front() ) );
-  CHECK( .5 == Approx( data2.pdf().back() ) );
+  CHECK_THAT( .5, WithinRel( data2.pdf().front() ) );
+  CHECK_THAT( .5, WithinRel( data2.pdf().back() ) );
 
   CHECK( 2 == data2.cdf().size() );
-  CHECK( 0. == Approx( data2.cdf().front() ) );
-  CHECK( 1. == Approx( data2.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( data2.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( data2.cdf().back() ) );
 }

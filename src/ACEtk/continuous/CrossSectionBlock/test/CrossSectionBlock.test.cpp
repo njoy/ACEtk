@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/CrossSectionBlock.hpp"
 
 // other includes
@@ -116,7 +119,7 @@ SCENARIO( "CrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -135,7 +138,7 @@ SCENARIO( "CrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -246,60 +249,60 @@ void verifyChunk( const CrossSectionBlock& chunk ) {
   CHECK( 1 == chunk.energyIndex(1) );
   CHECK( 99 == chunk.numberValues(1) );
   CHECK( 99 == chunk.crossSections(1).size() );
-  CHECK( 17.17401 == Approx( chunk.crossSections(1).front() ) );
-  CHECK( 2.72235400000E-05 == Approx( chunk.crossSections(1).back() ) );
+  CHECK_THAT( 17.17401, WithinRel( chunk.crossSections(1).front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( chunk.crossSections(1).back() ) );
 
   CHECK( 1 == chunk.energyIndex(2) );
   CHECK( 99 == chunk.numberValues(2) );
   CHECK( 99 == chunk.crossSections(2).size() );
-  CHECK( 18.17401 == Approx( chunk.crossSections(2).front() ) );
-  CHECK( 2.72235400000E-05 == Approx( chunk.crossSections(2).back() ) );
+  CHECK_THAT( 18.17401, WithinRel( chunk.crossSections(2).front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( chunk.crossSections(2).back() ) );
 
   CHECK( 1 == chunk.energyIndex(3) );
   CHECK( 99 == chunk.numberValues(3) );
   CHECK( 99 == chunk.crossSections(3).size() );
-  CHECK( 9.02129200000E-03 == Approx( chunk.crossSections(3).front() ) );
-  CHECK( 3.06769500000E-04 == Approx( chunk.crossSections(3).back() ) );
+  CHECK_THAT( 9.02129200000E-03, WithinRel( chunk.crossSections(3).front() ) );
+  CHECK_THAT( 3.06769500000E-04, WithinRel( chunk.crossSections(3).back() ) );
 
   auto xs = chunk.crossSectionData(1);
   CHECK( 1 == xs.energyIndex() );
   CHECK( 99 == xs.numberValues() );
   CHECK( 99 == xs.crossSections().size() );
-  CHECK( 17.17401 == Approx( xs.crossSections().front() ) );
-  CHECK( 2.72235400000E-05 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 17.17401, WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( xs.crossSections().back() ) );
 
   xs = chunk.crossSectionData(2);
   CHECK( 1 == xs.energyIndex() );
   CHECK( 99 == xs.numberValues() );
   CHECK( 99 == xs.crossSections().size() );
-  CHECK( 18.17401 == Approx( xs.crossSections().front() ) );
-  CHECK( 2.72235400000E-05 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 18.17401, WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( xs.crossSections().back() ) );
 
   xs = chunk.crossSectionData(3);
   CHECK( 1 == xs.energyIndex() );
   CHECK( 99 == xs.numberValues() );
   CHECK( 99 == xs.crossSections().size() );
-  CHECK( 9.02129200000E-03 == Approx( xs.crossSections().front() ) );
-  CHECK( 3.06769500000E-04 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 9.02129200000E-03, WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 3.06769500000E-04, WithinRel( xs.crossSections().back() ) );
 
   xs = chunk.data()[0];
   CHECK( 1 == xs.energyIndex() );
   CHECK( 99 == xs.numberValues() );
   CHECK( 99 == xs.crossSections().size() );
-  CHECK( 17.17401 == Approx( xs.crossSections().front() ) );
-  CHECK( 2.72235400000E-05 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 17.17401, WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( xs.crossSections().back() ) );
 
   xs = chunk.data()[1];
   CHECK( 1 == xs.energyIndex() );
   CHECK( 99 == xs.numberValues() );
   CHECK( 99 == xs.crossSections().size() );
-  CHECK( 18.17401 == Approx( xs.crossSections().front() ) );
-  CHECK( 2.72235400000E-05 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 18.17401, WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( xs.crossSections().back() ) );
 
   xs = chunk.data()[2];
   CHECK( 1 == xs.energyIndex() );
   CHECK( 99 == xs.numberValues() );
   CHECK( 99 == xs.crossSections().size() );
-  CHECK( 9.02129200000E-03 == Approx( xs.crossSections().front() ) );
-  CHECK( 3.06769500000E-04 == Approx( xs.crossSections().back() ) );
+  CHECK_THAT( 9.02129200000E-03, WithinRel( xs.crossSections().front() ) );
+  CHECK_THAT( 3.06769500000E-04, WithinRel( xs.crossSections().back() ) );
 }

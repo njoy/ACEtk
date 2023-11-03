@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/Table.hpp"
 
 // other includes
@@ -217,12 +220,12 @@ SCENARIO( "Data parsing functions" ) {
       THEN( "the data is parsed correctly" ) {
 
         CHECK( 6 == result.size() );
-        CHECK( 1.00000000000E+00 == Approx(result[0] ) );
-        CHECK( 1.03125000000E+00 == Approx(result[1] ) );
-        CHECK( 1.06250000000E+00 == Approx(result[2] ) );
-        CHECK( 1.09375000000E+00 == Approx(result[3] ) );
-        CHECK( 1.12500000000E+00 == Approx(result[4] ) );
-        CHECK( 1.15625000000E+00 == Approx(result[5] ) );
+        CHECK_THAT( 1.00000000000E+00, WithinRel( result[0] ) );
+        CHECK_THAT( 1.03125000000E+00, WithinRel( result[1] ) );
+        CHECK_THAT( 1.06250000000E+00, WithinRel( result[2] ) );
+        CHECK_THAT( 1.09375000000E+00, WithinRel( result[3] ) );
+        CHECK_THAT( 1.12500000000E+00, WithinRel( result[4] ) );
+        CHECK_THAT( 1.15625000000E+00, WithinRel( result[5] ) );
       } // THEN
     } // WHEN
 

@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/photoatomic/ComptonProfileBlock.hpp"
 
 // other includes
@@ -91,7 +94,7 @@ SCENARIO( "ComptonProfileBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -110,7 +113,7 @@ SCENARIO( "ComptonProfileBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -192,51 +195,51 @@ void verifyChunk( const ComptonProfileBlock& chunk ) {
   CHECK( 2 == profile.interpolation() );
   CHECK( 31 == profile.numberValues() );
   CHECK( 31 == profile.momentum().size() );
-  CHECK( 0. == Approx( profile.momentum().front() ) );
-  CHECK( 100. == Approx( profile.momentum().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.momentum().front() ) );
+  CHECK_THAT( 100., WithinRel( profile.momentum().back() ) );
   CHECK( 31 == profile.pdf().size() );
-  CHECK( 6.527863344596e-01 == Approx( profile.pdf().front() ) );
-  CHECK( 3.571475386101e-10 == Approx( profile.pdf().back() ) );
+  CHECK_THAT( 6.527863344596e-01, WithinRel( profile.pdf().front() ) );
+  CHECK_THAT( 3.571475386101e-10, WithinRel( profile.pdf().back() ) );
   CHECK( 31 == profile.cdf().size() );
-  CHECK( 0. == Approx( profile.cdf().front() ) );
-  CHECK( 1. == Approx( profile.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( profile.cdf().back() ) );
 
   profile = chunk.comptonProfile(2);
   CHECK( 2 == profile.interpolation() );
   CHECK( 31 == profile.numberValues() );
   CHECK( 31 == profile.momentum().size() );
-  CHECK( 0. == Approx( profile.momentum().front() ) );
-  CHECK( 100. == Approx( profile.momentum().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.momentum().front() ) );
+  CHECK_THAT( 100., WithinRel( profile.momentum().back() ) );
   CHECK( 31 == profile.pdf().size() );
-  CHECK( 3.848272047027e+00 == Approx( profile.pdf().front() ) );
-  CHECK( 8.728039694288e-12 == Approx( profile.pdf().back() ) );
+  CHECK_THAT( 3.848272047027e+00, WithinRel( profile.pdf().front() ) );
+  CHECK_THAT( 8.728039694288e-12, WithinRel( profile.pdf().back() ) );
   CHECK( 31 == profile.cdf().size() );
-  CHECK( 0. == Approx( profile.cdf().front() ) );
-  CHECK( 1. == Approx( profile.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( profile.cdf().back() ) );
 
   profile = chunk.data()[0];
   CHECK( 2 == profile.interpolation() );
   CHECK( 31 == profile.numberValues() );
   CHECK( 31 == profile.momentum().size() );
-  CHECK( 0. == Approx( profile.momentum().front() ) );
-  CHECK( 100. == Approx( profile.momentum().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.momentum().front() ) );
+  CHECK_THAT( 100., WithinRel( profile.momentum().back() ) );
   CHECK( 31 == profile.pdf().size() );
-  CHECK( 6.527863344596e-01 == Approx( profile.pdf().front() ) );
-  CHECK( 3.571475386101e-10 == Approx( profile.pdf().back() ) );
+  CHECK_THAT( 6.527863344596e-01, WithinRel( profile.pdf().front() ) );
+  CHECK_THAT( 3.571475386101e-10, WithinRel( profile.pdf().back() ) );
   CHECK( 31 == profile.cdf().size() );
-  CHECK( 0. == Approx( profile.cdf().front() ) );
-  CHECK( 1. == Approx( profile.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( profile.cdf().back() ) );
 
   profile = chunk.data()[1];
   CHECK( 2 == profile.interpolation() );
   CHECK( 31 == profile.numberValues() );
   CHECK( 31 == profile.momentum().size() );
-  CHECK( 0. == Approx( profile.momentum().front() ) );
-  CHECK( 100. == Approx( profile.momentum().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.momentum().front() ) );
+  CHECK_THAT( 100., WithinRel( profile.momentum().back() ) );
   CHECK( 31 == profile.pdf().size() );
-  CHECK( 3.848272047027e+00 == Approx( profile.pdf().front() ) );
-  CHECK( 8.728039694288e-12 == Approx( profile.pdf().back() ) );
+  CHECK_THAT( 3.848272047027e+00, WithinRel( profile.pdf().front() ) );
+  CHECK_THAT( 8.728039694288e-12, WithinRel( profile.pdf().back() ) );
   CHECK( 31 == profile.cdf().size() );
-  CHECK( 0. == Approx( profile.cdf().front() ) );
-  CHECK( 1. == Approx( profile.cdf().back() ) );
+  CHECK_THAT( 0., WithinRel( profile.cdf().front() ) );
+  CHECK_THAT( 1., WithinRel( profile.cdf().back() ) );
 }

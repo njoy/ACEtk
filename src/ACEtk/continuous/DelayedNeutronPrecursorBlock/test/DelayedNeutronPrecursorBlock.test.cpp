@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/DelayedNeutronPrecursorBlock.hpp"
 
 // other includes
@@ -44,7 +47,7 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -64,7 +67,7 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -74,10 +77,10 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
 std::vector< double > chunk() {
 
   return {  2.30000000000E-04,                   0,                   3,
-            1.00000000000E-11,   1.00000000000E+00,   2.00000000000E+01,   1.20000000000E-03,
+            1.00000000000E-05,   1.00000000000E+00,   2.00000000000E+01,   1.20000000000E-03,
             2.50000000000E-02,   1.00000000000E+00,
             3.20000000000E-04,                   0,                   2,
-            1.00000000000E-11,   2.00000000000E+01,   2.40000000000E-03,   2.00000000000E+00 };
+            1.00000000000E-05,   2.00000000000E+01,   2.40000000000E-03,   2.00000000000E+00 };
 }
 
 void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
@@ -93,8 +96,8 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
   decltype(auto) group1 = chunk.precursorGroupData( 1 );
   CHECK( 1 == group1.number() );
 
-  CHECK( 2.3e-4 == Approx( group1.DEC() ) );
-  CHECK( 2.3e-4 == Approx( group1.decayConstant() ) );
+  CHECK_THAT( 2.3e-4, WithinRel( group1.DEC() ) );
+  CHECK_THAT( 2.3e-4, WithinRel( group1.decayConstant() ) );
 
   CHECK( 0 == group1.interpolationData().NB() );
   CHECK( 0 == group1.interpolationData().numberInterpolationRegions() );
@@ -114,20 +117,20 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
   CHECK( 3 == group1.numberValues() );
 
   CHECK( 3 == group1.energies().size() );
-  CHECK( 1e-11 == Approx( group1.energies()[0] ) );
-  CHECK( 1. == Approx( group1.energies()[1] ) );
-  CHECK( 20. == Approx( group1.energies()[2] ) );
+  CHECK_THAT( 1e-5, WithinRel( group1.energies()[0] ) );
+  CHECK_THAT( 1., WithinRel( group1.energies()[1] ) );
+  CHECK_THAT( 20., WithinRel( group1.energies()[2] ) );
 
   CHECK( 3 == group1.probabilities().size() );
-  CHECK( 1.2e-3 == Approx( group1.probabilities()[0] ) );
-  CHECK( 2.5e-2 == Approx( group1.probabilities()[1] ) );
-  CHECK( 1. == Approx( group1.probabilities()[2] ) );
+  CHECK_THAT( 1.2e-3, WithinRel( group1.probabilities()[0] ) );
+  CHECK_THAT( 2.5e-2, WithinRel( group1.probabilities()[1] ) );
+  CHECK_THAT( 1., WithinRel( group1.probabilities()[2] ) );
 
   decltype(auto) group2 = chunk.precursorGroupData( 2 );
   CHECK( 2 == group2.number() );
 
-  CHECK( 3.2e-4 == Approx( group2.DEC() ) );
-  CHECK( 3.2e-4 == Approx( group2.decayConstant() ) );
+  CHECK_THAT( 3.2e-4, WithinRel( group2.DEC() ) );
+  CHECK_THAT( 3.2e-4, WithinRel( group2.decayConstant() ) );
 
   CHECK( 0 == group2.interpolationData().NB() );
   CHECK( 0 == group2.interpolationData().numberInterpolationRegions() );
@@ -147,10 +150,10 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
   CHECK( 2 == group2.numberValues() );
 
   CHECK( 2 == group2.energies().size() );
-  CHECK( 1e-11 == Approx( group2.energies()[0] ) );
-  CHECK( 20. == Approx( group2.energies()[1] ) );
+  CHECK_THAT( 1e-5, WithinRel( group2.energies()[0] ) );
+  CHECK_THAT( 20., WithinRel( group2.energies()[1] ) );
 
   CHECK( 2 == group2.probabilities().size() );
-  CHECK( 2.4e-3 == Approx( group2.probabilities()[0] ) );
-  CHECK( 2. == Approx( group2.probabilities()[1] ) );
+  CHECK_THAT( 2.4e-3, WithinRel( group2.probabilities()[0] ) );
+  CHECK_THAT( 2., WithinRel( group2.probabilities()[1] ) );
 }

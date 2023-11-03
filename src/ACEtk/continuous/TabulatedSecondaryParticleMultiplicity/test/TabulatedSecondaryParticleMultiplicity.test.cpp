@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/TabulatedSecondaryParticleMultiplicity.hpp"
 
 // other includes
@@ -46,7 +49,7 @@ SCENARIO( "TabulatedSecondaryParticleMultiplicity" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -66,7 +69,7 @@ SCENARIO( "TabulatedSecondaryParticleMultiplicity" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -111,12 +114,12 @@ void verifyChunk( const TabulatedSecondaryParticleMultiplicity& chunk ) {
   CHECK( 7 == chunk.numberValues() );
 
   CHECK( 7 == chunk.energies().size() );
-  CHECK( 0.7742381 == Approx( chunk.energies().front() ) );
-  CHECK( 1. == Approx( chunk.energies()[3] ) );
-  CHECK( 20. == Approx( chunk.energies().back() ) );
+  CHECK_THAT( 0.7742381, WithinRel( chunk.energies().front() ) );
+  CHECK_THAT( 1., WithinRel( chunk.energies()[3] ) );
+  CHECK_THAT( 20., WithinRel( chunk.energies().back() ) );
 
   CHECK( 7 == chunk.multiplicities().size() );
-  CHECK( 0. == Approx( chunk.multiplicities().front() ) );
-  CHECK( 0.119 == Approx( chunk.multiplicities()[3] ) );
-  CHECK( 0. == Approx( chunk.multiplicities().back() ) );
+  CHECK_THAT( 0., WithinRel( chunk.multiplicities().front() ) );
+  CHECK_THAT( 0.119, WithinRel( chunk.multiplicities()[3] ) );
+  CHECK_THAT( 0., WithinRel( chunk.multiplicities().back() ) );
 }

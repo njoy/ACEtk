@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/photoatomic/HeatingNumbersBlock.hpp"
 
 // other includes
@@ -49,7 +52,7 @@ SCENARIO( "HeatingNumbersBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -69,7 +72,7 @@ SCENARIO( "HeatingNumbersBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -107,6 +110,6 @@ void verifyChunk( const HeatingNumbersBlock& chunk ) {
   CHECK( 43 == chunk.numberEnergyPoints() );
   CHECK( 43 == chunk.heating().size() );
 
-  CHECK( 9.457315870945E-04 == Approx( chunk.heating().front() ) );
-  CHECK( 9.086036433693E+01 == Approx( chunk.heating().back() ) );
+  CHECK_THAT( 9.457315870945E-04, WithinRel( chunk.heating().front() ) );
+  CHECK_THAT( 9.086036433693E+01, WithinRel( chunk.heating().back() ) );
 }

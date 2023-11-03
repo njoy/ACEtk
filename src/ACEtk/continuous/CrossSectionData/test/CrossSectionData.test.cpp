@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/CrossSectionData.hpp"
 
 // other includes
@@ -62,7 +65,7 @@ SCENARIO( "CrossSectionData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -81,7 +84,7 @@ SCENARIO( "CrossSectionData" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -130,6 +133,6 @@ void verifyChunk( const CrossSectionData& chunk ) {
   CHECK( 99 == chunk.numberValues() );
 
   CHECK( 99 == chunk.crossSections().size() );
-  CHECK( 17.17401 == Approx( chunk.crossSections().front() ) );
-  CHECK( 2.72235400000E-05 == Approx( chunk.crossSections().back() ) );
+  CHECK_THAT( 17.17401, WithinRel( chunk.crossSections().front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( chunk.crossSections().back() ) );
 }

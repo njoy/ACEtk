@@ -1,6 +1,9 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
+// what we are testing
 #include "ACEtk/continuous/PrincipalCrossSectionBlock.hpp"
 
 // other includes
@@ -180,7 +183,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -200,7 +203,7 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         auto xss_chunk = chunk.XSS();
         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
 
-          CHECK( xss[i] == Approx( xss_chunk[i] ) );
+          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
         }
       } // THEN
     } // WHEN
@@ -354,14 +357,14 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
   CHECK( 99 == chunk.elastic().size() );
   CHECK( 99 == chunk.heating().size() );
 
-  CHECK( 1.00000000000E-11 == Approx( chunk.energies().front() ) );
-  CHECK( 2.00000000000E+01 == Approx( chunk.energies().back() ) );
-  CHECK( 1.17771501000E+03 == Approx( chunk.total().front() ) );
-  CHECK( 4.82773424000E-01 == Approx( chunk.total().back() ) );
-  CHECK( 1.71740100000E+01 == Approx( chunk.disappearance().front() ) );
-  CHECK( 2.72235400000E-05 == Approx( chunk.disappearance().back() ) );
-  CHECK( 1.16054100000E+03 == Approx( chunk.elastic().front() ) );
-  CHECK( 4.82746200000E-01 == Approx( chunk.elastic().back() ) );
-  CHECK( 1.91876400000E-05 == Approx( chunk.heating().front() ) );
-  CHECK( 1.01608500000E+01 == Approx( chunk.heating().back() ) );
+  CHECK_THAT( 1.00000000000E-11, WithinRel( chunk.energies().front() ) );
+  CHECK_THAT( 2.00000000000E+01, WithinRel( chunk.energies().back() ) );
+  CHECK_THAT( 1.17771501000E+03, WithinRel( chunk.total().front() ) );
+  CHECK_THAT( 4.82773424000E-01, WithinRel( chunk.total().back() ) );
+  CHECK_THAT( 1.71740100000E+01, WithinRel( chunk.disappearance().front() ) );
+  CHECK_THAT( 2.72235400000E-05, WithinRel( chunk.disappearance().back() ) );
+  CHECK_THAT( 1.16054100000E+03, WithinRel( chunk.elastic().front() ) );
+  CHECK_THAT( 4.82746200000E-01, WithinRel( chunk.elastic().back() ) );
+  CHECK_THAT( 1.91876400000E-05, WithinRel( chunk.heating().front() ) );
+  CHECK_THAT( 1.01608500000E+01, WithinRel( chunk.heating().back() ) );
 }
