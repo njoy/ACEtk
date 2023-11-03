@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import MultiplicityReactionNumberBlock
 
-class Test_ACEtk_MultiplicityReactionNumberBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_MultiplicityReactionNumberBlock( unittest.TestCase ) :
     """Unit test for the MultiplicityReactionNumberBlock class."""
 
     chunk = [ 3, 102, 204, 444 ]

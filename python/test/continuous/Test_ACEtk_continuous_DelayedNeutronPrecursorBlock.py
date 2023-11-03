@@ -7,7 +7,7 @@ import unittest
 from ACEtk.continuous import DelayedNeutronPrecursorBlock
 from ACEtk.continuous import DelayedNeutronPrecursorData
 
-class Test_ACEtk_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_DelayedNeutronPrecursorBlock( unittest.TestCase ) :
     """Unit test for the DelayedNeutronPrecursorBlock class."""
 
     chunk = [  2.30000000000E-04,                   0,                   3,

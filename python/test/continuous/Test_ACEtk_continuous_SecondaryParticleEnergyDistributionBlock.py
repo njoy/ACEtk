@@ -11,7 +11,7 @@ from ACEtk.continuous import KalbachMannDistributionData
 from ACEtk import EnergyDistributionType
 from ACEtk import ReferenceFrame
 
-class Test_ACEtk_SecondaryParticleEnergyDistributionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_SecondaryParticleEnergyDistributionBlock( unittest.TestCase ) :
     """Unit test for the SecondaryParticleEnergyDistributionBlock class."""
 
     chunk = [ # LDLWH

@@ -7,7 +7,7 @@ import unittest
 from ACEtk.continuous import ProbabilityTableBlock
 from ACEtk.continuous import ProbabilityTable
 
-class Test_ACEtk_ProbabilityTableBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_ProbabilityTableBlock( unittest.TestCase ) :
     """Unit test for the ProbabilityTableBlock class."""
 
     chunk = [ 2, 2, 2, -1, 0, 1, 1e-3, 1e+3,

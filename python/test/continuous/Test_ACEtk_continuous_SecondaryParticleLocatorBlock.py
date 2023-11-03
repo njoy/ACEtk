@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import SecondaryParticleLocatorBlock
 
-class Test_ACEtk_SecondaryParticleLocatorBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_SecondaryParticleLocatorBlock( unittest.TestCase ) :
     """Unit test for the SecondaryParticleLocatorBlock class."""
 
     chunk = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,

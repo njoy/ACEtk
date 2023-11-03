@@ -8,7 +8,7 @@ from ACEtk import EnergyDistributionType
 from ACEtk.continuous import OutgoingEnergyDistributionData
 from ACEtk.continuous import TabulatedEnergyDistribution
 
-class Test_ACEtk_OutgoingEnergyDistributionData( unittest.TestCase ) :
+class Test_ACEtk_continuous_OutgoingEnergyDistributionData( unittest.TestCase ) :
     """Unit test for the OutgoingEnergyDistributionData class."""
 
     chunk = [            0,             2,  1.000000E-11,  2.000000E+01,

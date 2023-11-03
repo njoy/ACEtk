@@ -7,7 +7,7 @@ import unittest
 from ACEtk import EnergyDistributionType
 from ACEtk.continuous import SimpleMaxwellianFissionSpectrum
 
-class Test_ACEtk_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
+class Test_ACEtk_continuous_SimpleMaxwellianFissionSpectrum( unittest.TestCase ) :
     """Unit test for the SimpleMaxwellianFissionSpectrum class."""
 
     chunk = [ 0,

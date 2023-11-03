@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import TabulatedKalbachMannDistribution
 
-class Test_ACEtk_TabulatedKalbachMannDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedKalbachMannDistribution( unittest.TestCase ) :
     """Unit test for the TabulatedKalbachMannDistribution class."""
 
     chunk = [                32,                  3,  1.00000000000E-11,  1.00000000000E+00,

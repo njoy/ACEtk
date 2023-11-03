@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import TabulatedSecondaryParticleMultiplicity
 
-class Test_ACEtk_TabulatedSecondaryParticleMultiplicity( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedSecondaryParticleMultiplicity( unittest.TestCase ) :
     """Unit test for the TabulatedSecondaryParticleMultiplicity class."""
 
     chunk = [                 12,                   4,                   0,                   7,

@@ -9,7 +9,7 @@ from ACEtk.continuous import AngleEnergyDistributionData
 from ACEtk.continuous import TabulatedAngleEnergyDistribution
 from ACEtk.continuous import TabulatedEnergyDistribution
 
-class Test_ACEtk_AngleEnergyDistributionData( unittest.TestCase ) :
+class Test_ACEtk_continuous_AngleEnergyDistributionData( unittest.TestCase ) :
     """Unit test for the KalbachMannDistributionData class."""
 
     chunk = [              0,             2,  1.000000E-05,  2.000000E+01,

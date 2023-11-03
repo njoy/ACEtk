@@ -12,7 +12,7 @@ from ACEtk.continuous import IsotropicAngularDistribution
 from ACEtk.continuous import TabulatedAngularDistribution
 from ACEtk import AngularDistributionType
 
-class Test_ACEtk_AngularDistributionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_AngularDistributionBlock( unittest.TestCase ) :
     """Unit test for the AngularDistributionBlock class."""
 
     chunk = [                  1,                 -1,                  0,                 25,

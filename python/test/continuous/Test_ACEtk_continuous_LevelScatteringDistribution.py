@@ -7,7 +7,7 @@ import unittest
 from ACEtk import EnergyDistributionType
 from ACEtk.continuous import LevelScatteringDistribution
 
-class Test_ACEtk_LevelScatteringDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_LevelScatteringDistribution( unittest.TestCase ) :
     """Unit test for the LevelScatteringDistribution class."""
 
     chunk = [ 7.71295800000E-05, 9.91472200000E-01 ]

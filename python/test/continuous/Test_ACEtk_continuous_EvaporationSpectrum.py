@@ -7,7 +7,7 @@ import unittest
 from ACEtk import EnergyDistributionType
 from ACEtk.continuous import EvaporationSpectrum
 
-class Test_ACEtk_EvaporationSpectrum( unittest.TestCase ) :
+class Test_ACEtk_continuous_EvaporationSpectrum( unittest.TestCase ) :
     """Unit test for the EvaporationSpectrum class."""
 
     chunk = [ 0,

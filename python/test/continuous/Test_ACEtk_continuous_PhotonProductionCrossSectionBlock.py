@@ -8,7 +8,7 @@ from ACEtk.continuous import PhotonProductionCrossSectionBlock
 from ACEtk.continuous import PhotonProductionCrossSectionData
 from ACEtk.continuous import TabulatedSecondaryParticleMultiplicity
 
-class Test_ACEtk_PhotonProductionCrossSectionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_PhotonProductionCrossSectionBlock( unittest.TestCase ) :
     """Unit test for the PhotonProductionCrossSectionBlock class."""
 
     chunk = [                 1,               103,

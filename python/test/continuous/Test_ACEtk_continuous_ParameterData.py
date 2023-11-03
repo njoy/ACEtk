@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import ParameterData
 
-class Test_ACEtk_ParameterData( unittest.TestCase ) :
+class Test_ACEtk_continuous_ParameterData( unittest.TestCase ) :
     """Unit test for the ParameterData class."""
 
     chunk = [ 0, 3, 1., 3., 5., 2., 4., 6. ]

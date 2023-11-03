@@ -8,7 +8,7 @@ from ACEtk.continuous import EnergyDependentWattSpectrum
 from ACEtk.continuous import ParameterData
 from ACEtk import EnergyDistributionType
 
-class Test_ACEtk_EnergyDependentWattSpectrum( unittest.TestCase ) :
+class Test_ACEtk_continuous_EnergyDependentWattSpectrum( unittest.TestCase ) :
     """Unit test for the EnergyDependentWattSpectrum class."""
 
     chunk = [ 0, 4, 1e-5, 1., 10., 20., 1., 2., 3., 4.,

@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import TabulatedFissionMultiplicity
 
-class Test_ACEtk_TabulatedFissionMultiplicity( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedFissionMultiplicity( unittest.TestCase ) :
     """Unit test for the TabulatedFissionMultiplicity class."""
 
     chunk = [                  2,                   0,                   3,

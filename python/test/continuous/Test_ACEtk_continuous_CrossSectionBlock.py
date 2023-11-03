@@ -7,7 +7,7 @@ import unittest
 from ACEtk.continuous import CrossSectionBlock
 from ACEtk.continuous import CrossSectionData
 
-class Test_ACEtk_CrossSectionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_CrossSectionBlock( unittest.TestCase ) :
     """Unit test for the CrossSectionBlock class."""
 
     chunk = [                 1,               102,               203,                 1,

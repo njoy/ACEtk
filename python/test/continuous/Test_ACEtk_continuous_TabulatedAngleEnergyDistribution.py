@@ -7,7 +7,7 @@ import unittest
 from ACEtk.continuous import TabulatedAngleEnergyDistribution
 from ACEtk.continuous import TabulatedEnergyDistribution
 
-class Test_ACEtk_TabulatedAngleEnergyDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedAngleEnergyDistribution( unittest.TestCase ) :
     """Unit test for the TabulatedAngleEnergyDistribution class."""
 
     chunk = [             2,             2, -1.000000E+00,  1.000000E+00,

@@ -7,7 +7,7 @@ import unittest
 from ACEtk import EnergyDistributionType
 from ACEtk.continuous import TwoBodyTransferDistribution
 
-class Test_ACEtk_TwoBodyTransferDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_TwoBodyTransferDistribution( unittest.TestCase ) :
     """Unit test for the TwoBodyTransferDistribution class."""
 
     chunk = [ 7.71295800000E-05, 9.91472200000E-01 ]

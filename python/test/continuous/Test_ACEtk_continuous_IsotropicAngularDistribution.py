@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import IsotropicAngularDistribution
 
-class Test_ACEtk_IsotropicAngularDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_IsotropicAngularDistribution( unittest.TestCase ) :
     """Unit test for the IsotropicAngularDistribution class."""
 
     def test_component( self ) :

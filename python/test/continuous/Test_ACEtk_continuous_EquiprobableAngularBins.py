@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import EquiprobableAngularBins
 
-class Test_ACEtk_EquiprobableAngularBins( unittest.TestCase ) :
+class Test_ACEtk_continuous_EquiprobableAngularBins( unittest.TestCase ) :
     """Unit test for the EquiprobableAngularBins class."""
 
     chunk = [ -1.00000000000E+00, -0.90000000000E+00, -0.80000000000E+00, -0.70000000000E+00,

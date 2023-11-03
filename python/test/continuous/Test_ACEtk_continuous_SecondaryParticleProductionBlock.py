@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import SecondaryParticleProductionBlock
 
-class Test_ACEtk_SecondaryParticleProductionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_SecondaryParticleProductionBlock( unittest.TestCase ) :
     """Unit test for the SecondaryParticleProductionBlock class."""
 
     chunk = [                 1,

@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import CrossSectionData
 
-class Test_ACEtk_CrossSectionData( unittest.TestCase ) :
+class Test_ACEtk_continuous_CrossSectionData( unittest.TestCase ) :
     """Unit test for the CrossSectionData class."""
 
     chunk = [                 1,

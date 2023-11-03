@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import TabulatedAngularDistribution
 
-class Test_ACEtk_TabulatedAngularDistribution( unittest.TestCase ) :
+class Test_ACEtk_continuous_TabulatedAngularDistribution( unittest.TestCase ) :
     """Unit test for the TabulatedAngularDistribution class."""
 
     chunk = [                 2,                  3, -1.00000000000E+00,  0.00000000000E+00,

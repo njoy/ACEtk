@@ -6,7 +6,7 @@ import unittest
 # local imports
 from ACEtk.continuous import PhotonProductionBlock
 
-class Test_ACEtk_PhotonProductionBlock( unittest.TestCase ) :
+class Test_ACEtk_continuous_PhotonProductionBlock( unittest.TestCase ) :
     """Unit test for the PhotonProductionBlock class."""
 
     chunk = [                                                          1.17771501000E+03,
