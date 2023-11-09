@@ -35,7 +35,5 @@ jobs:
       run: make -j2
       working-directory: ./bin
     - name: ctest
-      run: |
-        cp *.so ../python
-        ctest --rerun-failed --output-on-failure -j2
+      run: ctest -j2
       working-directory: ./bin
