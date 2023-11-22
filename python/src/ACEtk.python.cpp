@@ -55,15 +55,15 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // wrap some basic recurring views
   // none of these are supposed to be created directly by the user
-  wrapBasicRandomAccessAnyViewOf< double >(
-      viewmodule,
-      "any_view< double, random_access >" );
+//  wrapBasicRandomAccessAnyViewOf< double >(
+//      viewmodule,
+//      "any_view< double, random_access >" );
   wrapBasicRandomAccessAnyViewOf< unsigned int >(
       viewmodule,
       "any_view< unsigned int, random_access >" );
-  wrapBasicRandomAccessAnyViewOf< long >(
-      viewmodule,
-      "any_view< long, random_access >" );
+//  wrapBasicRandomAccessAnyViewOf< long >(
+//      viewmodule,
+//      "any_view< long, random_access >" );
 
   // wrap enumerators
   wrapReferenceFrame( module, viewmodule );
