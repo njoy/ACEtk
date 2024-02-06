@@ -67,7 +67,7 @@ public:
   auto elastic() const { return this->darray( 4 ); }
 
   /**
-   *  @brief Return the average heating cross section values
+   *  @brief Return the average heating numbers
    */
   auto heating() const { return this->darray( 5 ); }
 
