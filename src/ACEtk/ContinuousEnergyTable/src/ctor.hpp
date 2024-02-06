@@ -6,6 +6,7 @@
 ContinuousEnergyTable( const Table& table ): Table( table ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -17,6 +18,7 @@ ContinuousEnergyTable( const Table& table ): Table( table ) {
 ContinuousEnergyTable( Table&& table ): Table( std::move( table ) ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -29,6 +31,7 @@ ContinuousEnergyTable( const ContinuousEnergyTable& table ) :
   Table( table ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -41,6 +44,7 @@ ContinuousEnergyTable( ContinuousEnergyTable&& table ) :
   Table( std::move( table ) ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -69,9 +73,9 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
 /**
  *  @brief Constructor (from scratch)
  *
- *  @param[in] z         the Z number of the nuclide
- *  @param[in] a         the A number of the nuclide
- *  @param[in] s         the S number of the nuclide
+ *  @param[in] z         the Z number of the target
+ *  @param[in] a         the A number of the target
+ *  @param[in] s         the S number of the target
  *  @param[in] header    the header for the table
  *  @param[in] esz       the principal cross section block
  *  @param[in] nu        the optional fission neutron multiplicity block

@@ -19,7 +19,7 @@ generateTYRH( const std::optional< std::vector< continuous::DLWH > >& dlwh ) {
   return tyrh;
 }
 
-Data generateData( unsigned int z, unsigned int a,
+Data generateData( unsigned int z, unsigned int a, unsigned int s,
                    photonuclear::ESZU&& eszu,  continuous::MTR&& mtr,
                    continuous::LQR&& lqr, continuous::SIG&& sig,
                    std::optional< std::vector< unsigned int > > ptype,
@@ -128,6 +128,9 @@ Data generateData( unsigned int z, unsigned int a,
   nxs[4] = ntype;
   nxs[5] = 2;
   nxs[6] = 12;
+  nxs[8] = s;
+  nxs[9] = z;
+  nxs[10] = a;
   nxs[15] = 1;
 
   return { std::move( iz ), std::move( aw ),

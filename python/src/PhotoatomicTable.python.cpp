@@ -78,6 +78,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
+    "    z         the Z number of the target\n"
     "    header    the header for the table\n"
     "    za        the list of ZA values\n"
     "    awr       the list of atomic mass values\n"

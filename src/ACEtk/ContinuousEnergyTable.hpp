@@ -73,6 +73,7 @@ class ContinuousEnergyTable : protected Table {
   std::vector< continuous::YH > yh_;
 
   /* auxiliary functions */
+  #include "ACEtk/ContinuousEnergyTable/src/setSZA.hpp"
   #include "ACEtk/ContinuousEnergyTable/src/generateBlocks.hpp"
   #include "ACEtk/ContinuousEnergyTable/src/generateData.hpp"
   #include "ACEtk/ContinuousEnergyTable/src/verifyType.hpp"

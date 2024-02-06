@@ -69,6 +69,7 @@ PhotoatomicTable& operator=( PhotoatomicTable&& base ) {
 /**
  *  @brief Constructor (from scratch)
  *
+ *  @param[in] z         the Z number of the target
  *  @param[in] header    the header for the table
  *  @param[in] za        the list of ZA values
  *  @param[in] awr       the list of atomic mass values
