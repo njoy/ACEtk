@@ -430,7 +430,7 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 33 == chunk.NTRP() );
   CHECK( 33 == chunk.numberPhotonProductionReactions() );
   CHECK( 0 == chunk.NTYPE() );
-  CHECK( 0 == chunk.numberAdditionalSecondaryParticleTypes() );
+  CHECK( 0 == chunk.numberSecondaryParticleTypes() );
   CHECK( 6 == chunk.NPCR() );
   CHECK( 6 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
@@ -738,7 +738,7 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 0 == chunk.NTRP() );
   CHECK( 0 == chunk.numberPhotonProductionReactions() );
   CHECK( 1 == chunk.NTYPE() );
-  CHECK( 1 == chunk.numberAdditionalSecondaryParticleTypes() );
+  CHECK( 1 == chunk.numberSecondaryParticleTypes() );
   CHECK( 0 == chunk.NPCR() );
   CHECK( 0 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
@@ -1002,7 +1002,7 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 6 == chunk.NTRP() );
   CHECK( 6 == chunk.numberPhotonProductionReactions() );
   CHECK( 0 == chunk.NTYPE() );
-  CHECK( 0 == chunk.numberAdditionalSecondaryParticleTypes() );
+  CHECK( 0 == chunk.numberSecondaryParticleTypes() );
   CHECK( 6 == chunk.NPCR() );
   CHECK( 6 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );

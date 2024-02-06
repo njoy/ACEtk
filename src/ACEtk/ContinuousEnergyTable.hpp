@@ -199,15 +199,15 @@ public:
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
   unsigned int NTYPE() const { return this->data().NXS(7); }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
-  unsigned int numberAdditionalSecondaryParticleTypes() const { return this->NTYPE(); }
+  unsigned int numberSecondaryParticleTypes() const { return this->NTYPE(); }
 
   /**
    *  @brief Return the number of delayed percursor families

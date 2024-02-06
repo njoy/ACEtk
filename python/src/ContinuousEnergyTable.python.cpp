@@ -222,13 +222,13 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
     "NTYPE",
     &Table::NTYPE,
-    "The number of secondary particle types (excluding the projectile)"
+    "The number of secondary particle types (excluding the projectile and photons)"
   )
   .def_property_readonly(
 
-    "number_additional_secondary_particle_types",
-    &Table::numberAdditionalSecondaryParticleTypes,
-    "The number of secondary particle types (excluding the projectile)"
+    "number_secondary_particle_types",
+    &Table::numberSecondaryParticleTypes,
+    "The number of secondary particle types (excluding the projectile and photons)"
   )
   .def_property_readonly(
 
