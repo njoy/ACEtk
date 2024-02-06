@@ -64,7 +64,7 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
     "    self      the table\n"
     "    z         the Z number of the target\n"
     "    a         the A number of the target\n"
-    "    a         the S number of the target\n"
+    "    s         the S number of the target\n"
     "    header    the header for the table\n"
     "    eszu      the principal cross section block\n"
     "    mtr       the reaction number block\n"
