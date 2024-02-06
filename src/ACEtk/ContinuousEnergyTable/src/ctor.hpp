@@ -71,6 +71,7 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *
  *  @param[in] z         the Z number of the nuclide
  *  @param[in] a         the A number of the nuclide
+ *  @param[in] s         the S number of the nuclide
  *  @param[in] header    the header for the table
  *  @param[in] esz       the principal cross section block
  *  @param[in] nu        the optional fission neutron multiplicity block
@@ -97,7 +98,8 @@ ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
  *  @param[in] yh        the secondary particle multiplicity reaction number blocks
  */
-ContinuousEnergyTable( unsigned int z, unsigned int a, HeaderVariant header,
+ContinuousEnergyTable( unsigned int z, unsigned int a, unsigned int s,
+                       HeaderVariant header,
                        continuous::ESZ esz, std::optional< continuous::NU > nu,
                        std::optional< continuous::DNU > dnu,
                        continuous::MTR mtr, continuous::LQR lqr,
@@ -121,7 +123,7 @@ ContinuousEnergyTable( unsigned int z, unsigned int a, HeaderVariant header,
                        std::optional< std::vector< continuous::YH > > yh ) :
   ContinuousEnergyTable(
       Table( std::move( header ),
-             generateData( z, a, std::move( esz ), std::move( nu ),
+             generateData( z, a, s, std::move( esz ), std::move( nu ),
                            std::move( mtr ), std::move( lqr ),
                            std::move( sig ),
                            std::move( ang ), std::move( dlw ),

@@ -232,12 +232,7 @@ public:
   /**
    *  @brief Return the atom number of the target
    */
-  unsigned int Z() const { 
-    
-    return this->data().NXS(10) != 0 
-               ? this->data().NXS(10) 
-               : ( this->ZA() - this->A() ) / 1000;
-  }
+  unsigned int Z() const { return this->data().NXS(10); }
 
   /**
    *  @brief Return the atom number of the target
@@ -247,12 +242,7 @@ public:
   /**
    *  @brief Return the mass number of the target
    */
-  unsigned int A() const { 
-    
-    return this->data().NXS(11) != 0 
-               ? this->data().NXS(11) 
-               : this->ZA()%1000; 
-  }
+  unsigned int A() const { return this->data().NXS(11); }
 
   /**
    *  @brief Return the mass number of the target

@@ -26,7 +26,7 @@ void verifyChunkU235( const ContinuousEnergyTable& );
 void verifyChunkHe3( const ContinuousEnergyTable& );
 void verifyChunkNJOY99U238( const ContinuousEnergyTable& );
 
-SCENARIO( "ContinuousEnergyTable" ){
+SCENARIO( "ContinuousEnergyTable" ) {
 
   GIVEN( "valid data for a ContinuousEnergyTable - U235" ) {
 
@@ -102,7 +102,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       ContinuousEnergyTable base( std::move( table ) );
 
-      ContinuousEnergyTable chunk( 92, 235, base.header(),
+      ContinuousEnergyTable chunk( 92, 235, 0, base.header(),
                                    base.ESZ(), base.NU(), base.DNU(),
                                    base.MTR(), base.LQR(),
                                    base.SIG(), base.AND(), base.DLW(),
@@ -261,7 +261,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         yh->push_back( base.YH( index ) );
       }
 
-      ContinuousEnergyTable chunk( 2, 3, base.header(),
+      ContinuousEnergyTable chunk( 2, 3, 0, base.header(),
                                    base.ESZ(), std::nullopt, std::nullopt,
                                    base.MTR(), base.LQR(),
                                    base.SIG(), base.AND(), base.DLW(),
@@ -379,7 +379,14 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == nxs_chunk[i] );
+          // S, Z, A was added to the NXS array
+          switch ( i ) {
+
+            case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
+            case  9 : { CHECK(     92 == nxs_chunk[i] ); break; }
+            case 10 : { CHECK(    238 == nxs_chunk[i] ); break; }
+            default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
+          }
         }
       } // THEN
 
