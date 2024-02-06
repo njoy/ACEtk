@@ -136,22 +136,22 @@ public:
   /**
    *  @brief Return the excited state of the target
    */
-  unsigned int S() const { return 0; }
+  static constexpr unsigned int S() { return 0; }
 
   /**
    *  @brief Return the excited state of the target
    */
-  unsigned int excitedState() const { return 0; }
+  static constexpr unsigned int excitedState() { return 0; }
 
   /**
    *  @brief Return the mass number of the target
    */
-  unsigned int A() const { return 0; }
+  static constexpr unsigned int A() { return 0; }
 
   /**
    *  @brief Return the mass number of the target
    */
-  unsigned int massNumber() const { return this->A(); }
+  static constexpr unsigned int massNumber() { return 0; }
 
   /**
    *  @brief Return the number of energy points
