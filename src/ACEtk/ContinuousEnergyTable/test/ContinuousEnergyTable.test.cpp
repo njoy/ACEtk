@@ -1007,10 +1007,10 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 6 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
   CHECK( 0 == chunk.excitedState() );
-  CHECK( 0 == chunk.Z() );
-  CHECK( 0 == chunk.atomNumber() );
-  CHECK( 0 == chunk.A() );
-  CHECK( 0 == chunk.massNumber() );
+  CHECK( 92 == chunk.Z() );
+  CHECK( 92 == chunk.atomNumber() );
+  CHECK( 238 == chunk.A() );
+  CHECK( 238 == chunk.massNumber() );
 
   // ESZ block
   CHECK( false == chunk.ESZ().empty() );
