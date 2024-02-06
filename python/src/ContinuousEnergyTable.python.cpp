@@ -57,7 +57,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   table
   .def(
 
-    python::init< unsigned int, unsigned int, HeaderVariant,
+    python::init< unsigned int, unsigned int, unsigned int, HeaderVariant,
                   ESZ, std::optional< NU >, std::optional< DNU >,
                   MTR, LQR, SIG, AND, DLW,
                   std::optional< BDD >, std::optional< DNED >,
@@ -71,7 +71,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
                   std::optional< std::vector< ANDH > >,
                   std::optional< std::vector< DLWH > >,
                   std::optional< std::vector< YH > > >(),
-    python::arg( "z" ), python::arg( "a" ),
+    python::arg( "z" ), python::arg( "a" ), python::arg( "s" ),
     python::arg( "header" ), python::arg( "esz" ),
     python::arg( "nu" ) = std::nullopt, python::arg( "dnu" ) = std::nullopt,
     python::arg( "mtr" ), python::arg( "lqr" ),
@@ -90,6 +90,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "    self      the table\n"
     "    z         the Z number of the nuclide\n"
     "    a         the A number of the nuclide\n"
+    "    s         the S number of the nuclide\n"
     "    header    the header for the table\n"
     "    esz       the principal cross section block\n"
     "    nu        the optional fission neutron multiplicity block\n"
