@@ -620,8 +620,12 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
 
   CHECK( 389 == chunk.length() );
+  CHECK( 0 == chunk.S() );
+  CHECK( 0 == chunk.excitedState() );
   CHECK( 1 == chunk.Z() );
   CHECK( 1 == chunk.atomNumber() );
+  CHECK( 0 == chunk.A() );
+  CHECK( 0 == chunk.massNumber() );
   CHECK( 43 == chunk.NES() );
   CHECK( 43 == chunk.numberEnergyPoints() );
   CHECK( 0 == chunk.NFLO() );
@@ -759,8 +763,12 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
 
   CHECK( 821 == chunk.length() );
+  CHECK( 0 == chunk.S() );
+  CHECK( 0 == chunk.excitedState() );
   CHECK( 3 == chunk.Z() );
   CHECK( 3 == chunk.atomNumber() );
+  CHECK( 0 == chunk.A() );
+  CHECK( 0 == chunk.massNumber() );
   CHECK( 82 == chunk.NES() );
   CHECK( 82 == chunk.numberEnergyPoints() );
   CHECK( 0 == chunk.NFLO() );
@@ -946,8 +954,12 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
 
   CHECK( 12025 == chunk.length() );
+  CHECK( 0 == chunk.S() );
+  CHECK( 0 == chunk.excitedState() );
   CHECK( 1 == chunk.Z() );
   CHECK( 1 == chunk.atomNumber() );
+  CHECK( 0 == chunk.A() );
+  CHECK( 0 == chunk.massNumber() );
   CHECK( 647 == chunk.NES() );
   CHECK( 647 == chunk.numberEnergyPoints() );
   CHECK( 0 == chunk.NFLO() );
@@ -1338,8 +1350,12 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
 
   CHECK( 24009 == chunk.length() );
+  CHECK( 0 == chunk.S() );
+  CHECK( 0 == chunk.excitedState() );
   CHECK( 6 == chunk.Z() );
   CHECK( 6 == chunk.atomNumber() );
+  CHECK( 0 == chunk.A() );
+  CHECK( 0 == chunk.massNumber() );
   CHECK( 1210 == chunk.NES() );
   CHECK( 1210 == chunk.numberEnergyPoints() );
   CHECK( 0 == chunk.NFLO() );

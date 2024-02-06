@@ -134,6 +134,26 @@ public:
   unsigned int atomNumber() const { return this->Z(); }
 
   /**
+   *  @brief Return the excited state of the target
+   */
+  unsigned int S() const { return 0; }
+
+  /**
+   *  @brief Return the excited state of the target
+   */
+  unsigned int excitedState() const { return 0; }
+
+  /**
+   *  @brief Return the mass number of the target
+   */
+  unsigned int A() const { return 0; }
+
+  /**
+   *  @brief Return the mass number of the target
+   */
+  unsigned int massNumber() const { return this->A(); }
+
+  /**
    *  @brief Return the number of energy points
    */
   unsigned int NES() const { return this->data().NXS(3); }
