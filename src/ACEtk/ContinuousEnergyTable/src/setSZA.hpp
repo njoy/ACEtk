@@ -2,9 +2,12 @@ void setSZA() {
 
   // check for S, Z, A in NXS(9), NXS(10) and NXS(11)
   // using MCNP rules
-  if ( this->data().NXS(10) == 0 ) {
+  if ( ( this->data().NXS(9) == 0 ) &&
+       ( this->data().NXS(10) == 0 ) &&
+       ( this->data().NXS(11) == 0 ) ) {
 
-    unsigned int za = this->ZA();
+    std::string zaid = this->ZAID();
+    unsigned int za = std::stoi( zaid.substr( 0, zaid.size() - 4 ) );
     unsigned int a = za % 1000;
     unsigned int z = ( za - a ) / 1000;
     unsigned int s = 0;
@@ -17,11 +20,14 @@ void setSZA() {
 
     if ( a != 999 ) {
 
-      if ( a > 3 * z ) {
+      // MCNP uses this formula to approximate the value of the atomic mass
+      unsigned int estimate =
+      static_cast< unsigned int >( std::round((0.0064*z+2.0009)*z-0.281));
+      if ( a > estimate + 40 ) {
 
         a -= 400;
         s = 1;
-        while ( a > 3 * z ) {
+        while ( a > estimate + 40 ) {
 
           a -= 100;
           ++s;
