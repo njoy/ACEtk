@@ -221,14 +221,14 @@ public:
   unsigned int numberDelayedPrecursors() const { return this->NPCR(); }
 
   /**
-   *  @brief Return the excited state of the target
+   *  @brief Return the isomeric state of the target
    */
   unsigned int S() const { return this->data().NXS(9); }
 
   /**
-   *  @brief Return the excited state of the target
+   *  @brief Return the isomeric state of the target
    */
-  unsigned int excitedState() const { return this->S(); }
+  unsigned int isomericState() const { return this->S(); }
 
   /**
    *  @brief Return the atom number of the target

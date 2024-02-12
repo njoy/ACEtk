@@ -166,13 +166,13 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
 
     "S",
     &Table::S,
-    "The excited state of the target"
+    "The isomeric state of the target"
   )
   .def_property_readonly(
 
-    "excited_state",
-    &Table::excitedState,
-    "The excited state of the target"
+    "isomeric_state",
+    &Table::isomericState,
+    "The isomeric state of the target"
   )
   .def_property_readonly(
 

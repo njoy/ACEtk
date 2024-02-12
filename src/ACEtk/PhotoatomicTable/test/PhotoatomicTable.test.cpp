@@ -621,7 +621,7 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 
   CHECK( 389 == chunk.length() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 1 == chunk.Z() );
   CHECK( 1 == chunk.atomNumber() );
   CHECK( 0 == chunk.A() );
@@ -764,7 +764,7 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 
   CHECK( 821 == chunk.length() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 3 == chunk.Z() );
   CHECK( 3 == chunk.atomNumber() );
   CHECK( 0 == chunk.A() );
@@ -955,7 +955,7 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 
   CHECK( 12025 == chunk.length() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 1 == chunk.Z() );
   CHECK( 1 == chunk.atomNumber() );
   CHECK( 0 == chunk.A() );
@@ -1351,7 +1351,7 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
 
   CHECK( 24009 == chunk.length() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 6 == chunk.Z() );
   CHECK( 6 == chunk.atomNumber() );
   CHECK( 0 == chunk.A() );

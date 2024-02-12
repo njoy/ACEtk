@@ -204,7 +204,7 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 7 == chunk.NTYPE() );
   CHECK( 7 == chunk.numberSecondaryParticleTypes() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 94 == chunk.Z() );
   CHECK( 94 == chunk.atomNumber() );
   CHECK( 239 == chunk.A() );

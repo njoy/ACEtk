@@ -134,14 +134,14 @@ public:
   unsigned int atomNumber() const { return this->Z(); }
 
   /**
-   *  @brief Return the excited state of the target
+   *  @brief Return the isomeric state of the target
    */
   static constexpr unsigned int S() { return 0; }
 
   /**
-   *  @brief Return the excited state of the target
+   *  @brief Return the isomeric state of the target
    */
-  static constexpr unsigned int excitedState() { return 0; }
+  static constexpr unsigned int isomericState() { return 0; }
 
   /**
    *  @brief Return the mass number of the target

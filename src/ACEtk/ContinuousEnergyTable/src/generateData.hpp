@@ -322,6 +322,9 @@ Data generateData( unsigned int z, unsigned int a, unsigned int s,
   // NXS(6) = NTRP (number of photon production reactions)
   // NXS(7) = NTYPE (number of secondary particle types)
   // NXS(8) = NPCR (number of delayed precursor groups)
+  // NXS(9) = s (isomeric state)
+  // NXS(10) = z (atom number)
+  // NXS(11) = a (mass number)
   nxs[0] = xss.size();
   nxs[1] = z * 1000 + a;
   nxs[2] = esz.energies().size();

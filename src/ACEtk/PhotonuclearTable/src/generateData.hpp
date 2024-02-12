@@ -115,12 +115,18 @@ Data generateData( unsigned int z, unsigned int a, unsigned int s,
     xss.insert( xss.begin() + ixs_position, locators.begin(), locators.end() );
   }
 
-  // set the nxs values for the continuous energy table
+  // set the nxs values for the photonuclear table
   // NXS(1) = length
   // NXS(2) = za
   // NXS(3) = NES (number energies)
   // NXS(4) = NTR (total number of reactions)
   // NXS(5) = NTYPE (number of secondary particle types)
+  // NXS(6) = 2
+  // NXS(7) = 12
+  // NXS(9) = s (isomeric state)
+  // NXS(10) = z (atom number)
+  // NXS(11) = a (mass number)
+  // NXS(16) = 1
   nxs[0] = xss.size();
   nxs[1] = z * 1000 + a;
   nxs[2] = eszu.NES();

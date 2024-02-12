@@ -441,7 +441,7 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 6 == chunk.NPCR() );
   CHECK( 6 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 92 == chunk.Z() );
   CHECK( 92 == chunk.atomNumber() );
   CHECK( 235 == chunk.A() );
@@ -749,7 +749,7 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 0 == chunk.NPCR() );
   CHECK( 0 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 2 == chunk.Z() );
   CHECK( 2 == chunk.atomNumber() );
   CHECK( 3 == chunk.A() );
@@ -1013,7 +1013,7 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 6 == chunk.NPCR() );
   CHECK( 6 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 92 == chunk.Z() );
   CHECK( 92 == chunk.atomNumber() );
   CHECK( 238 == chunk.A() );

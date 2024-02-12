@@ -18,22 +18,25 @@ void setSZA() {
       s = ( sz - z ) / 1000;
     }
 
-    if ( a != 999 ) {
+    if ( z != 999 ) { // z = 999 is considered an unphysical z value in MCNP
 
       // MCNP uses this formula to approximate the value of the atomic mass
       unsigned int estimate =
       static_cast< unsigned int >( std::round((0.0064*z+2.0009)*z-0.281));
-      if ( a > estimate + 40 ) {
+
+      if ( ( a > 400 ) && ( a > estimate + 40 ) ) {
 
         a -= 400;
         s = 1;
-        while ( a > estimate + 40 ) {
+        while ( ( a > 100 ) && ( a > estimate + 40 ) ) {
 
           a -= 100;
           ++s;
         }
       }
 
+      // exception for Am242 and Am242m1 (Am242m1 has historically been
+      // associated with the 95242 zaid value)
       if ( ( z == 95 ) && ( a == 242 ) ) {
 
         if ( s < 2 ) {
