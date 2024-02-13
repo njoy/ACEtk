@@ -26,7 +26,7 @@ void verifyChunkU235( const ContinuousEnergyTable& );
 void verifyChunkHe3( const ContinuousEnergyTable& );
 void verifyChunkNJOY99U238( const ContinuousEnergyTable& );
 
-SCENARIO( "ContinuousEnergyTable" ){
+SCENARIO( "ContinuousEnergyTable" ) {
 
   GIVEN( "valid data for a ContinuousEnergyTable - U235" ) {
 
@@ -102,7 +102,7 @@ SCENARIO( "ContinuousEnergyTable" ){
 
       ContinuousEnergyTable base( std::move( table ) );
 
-      ContinuousEnergyTable chunk( 92, 235, base.header(),
+      ContinuousEnergyTable chunk( 92, 235, 0, base.header(),
                                    base.ESZ(), base.NU(), base.DNU(),
                                    base.MTR(), base.LQR(),
                                    base.SIG(), base.AND(), base.DLW(),
@@ -261,7 +261,7 @@ SCENARIO( "ContinuousEnergyTable" ){
         yh->push_back( base.YH( index ) );
       }
 
-      ContinuousEnergyTable chunk( 2, 3, base.header(),
+      ContinuousEnergyTable chunk( 2, 3, 0, base.header(),
                                    base.ESZ(), std::nullopt, std::nullopt,
                                    base.MTR(), base.LQR(),
                                    base.SIG(), base.AND(), base.DLW(),
@@ -379,7 +379,14 @@ SCENARIO( "ContinuousEnergyTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == nxs_chunk[i] );
+          // S, Z, A was added to the NXS array
+          switch ( i ) {
+
+            case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
+            case  9 : { CHECK(     92 == nxs_chunk[i] ); break; }
+            case 10 : { CHECK(    238 == nxs_chunk[i] ); break; }
+            default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
+          }
         }
       } // THEN
 
@@ -430,11 +437,11 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
   CHECK( 33 == chunk.NTRP() );
   CHECK( 33 == chunk.numberPhotonProductionReactions() );
   CHECK( 0 == chunk.NTYPE() );
-  CHECK( 0 == chunk.numberAdditionalSecondaryParticleTypes() );
+  CHECK( 0 == chunk.numberSecondaryParticleTypes() );
   CHECK( 6 == chunk.NPCR() );
   CHECK( 6 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 92 == chunk.Z() );
   CHECK( 92 == chunk.atomNumber() );
   CHECK( 235 == chunk.A() );
@@ -738,11 +745,11 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
   CHECK( 0 == chunk.NTRP() );
   CHECK( 0 == chunk.numberPhotonProductionReactions() );
   CHECK( 1 == chunk.NTYPE() );
-  CHECK( 1 == chunk.numberAdditionalSecondaryParticleTypes() );
+  CHECK( 1 == chunk.numberSecondaryParticleTypes() );
   CHECK( 0 == chunk.NPCR() );
   CHECK( 0 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
+  CHECK( 0 == chunk.isomericState() );
   CHECK( 2 == chunk.Z() );
   CHECK( 2 == chunk.atomNumber() );
   CHECK( 3 == chunk.A() );
@@ -1002,15 +1009,15 @@ void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
   CHECK( 6 == chunk.NTRP() );
   CHECK( 6 == chunk.numberPhotonProductionReactions() );
   CHECK( 0 == chunk.NTYPE() );
-  CHECK( 0 == chunk.numberAdditionalSecondaryParticleTypes() );
+  CHECK( 0 == chunk.numberSecondaryParticleTypes() );
   CHECK( 6 == chunk.NPCR() );
   CHECK( 6 == chunk.numberDelayedPrecursors() );
   CHECK( 0 == chunk.S() );
-  CHECK( 0 == chunk.excitedState() );
-  CHECK( 0 == chunk.Z() );
-  CHECK( 0 == chunk.atomNumber() );
-  CHECK( 0 == chunk.A() );
-  CHECK( 0 == chunk.massNumber() );
+  CHECK( 0 == chunk.isomericState() );
+  CHECK( 92 == chunk.Z() );
+  CHECK( 92 == chunk.atomNumber() );
+  CHECK( 238 == chunk.A() );
+  CHECK( 238 == chunk.massNumber() );
 
   // ESZ block
   CHECK( false == chunk.ESZ().empty() );

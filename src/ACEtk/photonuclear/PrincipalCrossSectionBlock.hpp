@@ -52,18 +52,18 @@ public:
   auto energies() const { return this->darray( 1 ); }
 
   /**
-   *  @brief Return the incoherent cross section values
+   *  @brief Return the total cross section values
    */
   auto total() const { return this->darray( 2 ); }
 
   /**
-   *  @brief Return the coherent cross section values
+   *  @brief Return the elastic cross section values (this can be empty)
    */
   auto elastic() const { return this->M() == 3 ? this->emptyArray()
                                                : this->darray( 3 ); }
 
   /**
-   *  @brief Return the average heating cross section values
+   *  @brief Return the average heating numbers
    */
   auto heating() const { return this->darray( this->M() ); }
 

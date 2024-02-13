@@ -101,7 +101,7 @@ void wrapPrincipalCrossSectionBlock( python::module& module, python::module& ) {
     "heating",
     [] ( const Block& self ) -> DoubleRange
        { return self.heating(); },
-    "The average heating cross section values"
+    "The average heating numbers"
   );
 
   // add standard block definitions

@@ -43,6 +43,7 @@ class PhotonuclearTable : protected Table {
   std::vector< continuous::DLWH > dlwh_;
 
   /* auxiliary functions */
+  #include "ACEtk/ContinuousEnergyTable/src/setSZA.hpp"
   #include "ACEtk/PhotonuclearTable/src/generateBlocks.hpp"
   #include "ACEtk/PhotonuclearTable/src/generateData.hpp"
   #include "ACEtk/PhotonuclearTable/src/verifyType.hpp"
@@ -149,6 +150,36 @@ public:
    *  @brief Return the number of secondary particle types
    */
   unsigned int numberSecondaryParticleTypes() const { return this->NTYPE(); }
+
+  /**
+   *  @brief Return the isomeric state of the target
+   */
+  unsigned int S() const { return this->data().NXS(9); }
+
+  /**
+   *  @brief Return the isomeric state of the target
+   */
+  unsigned int isomericState() const { return this->S(); }
+
+  /**
+   *  @brief Return the atom number of the target
+   */
+  unsigned int Z() const { return this->data().NXS(10); }
+
+  /**
+   *  @brief Return the atom number of the target
+   */
+  unsigned int atomNumber() const { return this->Z(); }
+
+  /**
+   *  @brief Return the mass number of the target
+   */
+  unsigned int A() const { return this->data().NXS(11); }
+
+  /**
+   *  @brief Return the mass number of the target
+   */
+  unsigned int massNumber() const { return this->A(); }
 
   // JXS information
 

@@ -33,7 +33,7 @@ generateTYRH( const std::optional< std::vector< continuous::DLWH > >& dlwh ) {
   return tyrh;
 }
 
-Data generateData( unsigned int z, unsigned int a,
+Data generateData( unsigned int z, unsigned int a, unsigned int s,
                    continuous::ESZ&& esz, std::optional< continuous::NU >&& nu,
                    continuous::MTR&& mtr, continuous::LQR&& lqr,
                    continuous::SIG&& sig, continuous::AND&& ang,
@@ -322,6 +322,9 @@ Data generateData( unsigned int z, unsigned int a,
   // NXS(6) = NTRP (number of photon production reactions)
   // NXS(7) = NTYPE (number of secondary particle types)
   // NXS(8) = NPCR (number of delayed precursor groups)
+  // NXS(9) = s (isomeric state)
+  // NXS(10) = z (atom number)
+  // NXS(11) = a (mass number)
   nxs[0] = xss.size();
   nxs[1] = z * 1000 + a;
   nxs[2] = esz.energies().size();
@@ -330,6 +333,7 @@ Data generateData( unsigned int z, unsigned int a,
   nxs[5] = ntrp;
   nxs[6] = ntype;
   nxs[7] = npcr;
+  nxs[8] = s;
   nxs[9] = z;
   nxs[10] = a;
 

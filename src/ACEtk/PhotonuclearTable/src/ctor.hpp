@@ -6,6 +6,7 @@
 PhotonuclearTable( const Table& table ): Table( table ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -17,6 +18,7 @@ PhotonuclearTable( const Table& table ): Table( table ) {
 PhotonuclearTable( Table&& table ): Table( std::move( table ) ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -29,6 +31,7 @@ PhotonuclearTable( const PhotonuclearTable& table ) :
   Table( table ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -41,6 +44,7 @@ PhotonuclearTable( PhotonuclearTable&& table ) :
   Table( std::move( table ) ) {
 
   this->verifyType();
+  this->setSZA();
   this->generateBlocks();
 }
 
@@ -69,8 +73,9 @@ PhotonuclearTable& operator=( PhotonuclearTable&& base ) {
 /**
  *  @brief Constructor (from scratch)
  *
- *  @param[in] z         the Z number of the nuclide
- *  @param[in] a         the A number of the nuclide
+ *  @param[in] z         the Z number of the target
+ *  @param[in] a         the A number of the target
+ *  @param[in] s         the S number of the target
  *  @param[in] header    the header for the table
  *  @param[in] eszu      the principal cross section block
  *  @param[in] mtr       the reaction number block
@@ -84,7 +89,8 @@ PhotonuclearTable& operator=( PhotonuclearTable&& base ) {
  *  @param[in] andh      the secondary particle angular distribution data blocks
  *  @param[in] dlwh      the secondary particle energy distribution data blocks
  */
-PhotonuclearTable( unsigned int z, unsigned int a, HeaderVariant header,
+PhotonuclearTable( unsigned int z, unsigned int a, unsigned int s,
+                   HeaderVariant header,
                    photonuclear::ESZU eszu, continuous::MTR mtr,
                    continuous::LQR lqr, continuous::SIG sig,
                    std::optional< std::vector< unsigned int > > ptype,
@@ -96,7 +102,7 @@ PhotonuclearTable( unsigned int z, unsigned int a, HeaderVariant header,
                    std::optional< std::vector< continuous::DLWH > > dlwh ) :
   PhotonuclearTable(
       Table( std::move( header ),
-             generateData( z, a, std::move( eszu ),
+             generateData( z, a, s, std::move( eszu ),
                            std::move( mtr ), std::move( lqr ),
                            std::move( sig ),
                            std::move( ptype ),

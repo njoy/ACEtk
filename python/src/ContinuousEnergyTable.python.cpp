@@ -57,7 +57,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
   table
   .def(
 
-    python::init< unsigned int, unsigned int, HeaderVariant,
+    python::init< unsigned int, unsigned int, unsigned int, HeaderVariant,
                   ESZ, std::optional< NU >, std::optional< DNU >,
                   MTR, LQR, SIG, AND, DLW,
                   std::optional< BDD >, std::optional< DNED >,
@@ -71,7 +71,7 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
                   std::optional< std::vector< ANDH > >,
                   std::optional< std::vector< DLWH > >,
                   std::optional< std::vector< YH > > >(),
-    python::arg( "z" ), python::arg( "a" ),
+    python::arg( "z" ), python::arg( "a" ), python::arg( "s" ),
     python::arg( "header" ), python::arg( "esz" ),
     python::arg( "nu" ) = std::nullopt, python::arg( "dnu" ) = std::nullopt,
     python::arg( "mtr" ), python::arg( "lqr" ),
@@ -88,8 +88,9 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
-    "    z         the Z number of the nuclide\n"
-    "    a         the A number of the nuclide\n"
+    "    z         the Z number of the target\n"
+    "    a         the A number of the target\n"
+    "    s         the S number of the target\n"
     "    header    the header for the table\n"
     "    esz       the principal cross section block\n"
     "    nu        the optional fission neutron multiplicity block\n"
@@ -222,13 +223,13 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
     "NTYPE",
     &Table::NTYPE,
-    "The number of secondary particle types (excluding the projectile)"
+    "The number of secondary particle types (excluding the projectile and photons)"
   )
   .def_property_readonly(
 
-    "number_additional_secondary_particle_types",
-    &Table::numberAdditionalSecondaryParticleTypes,
-    "The number of secondary particle types (excluding the projectile)"
+    "number_secondary_particle_types",
+    &Table::numberSecondaryParticleTypes,
+    "The number of secondary particle types (excluding the projectile and photons)"
   )
   .def_property_readonly(
 
@@ -246,13 +247,13 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
 
     "S",
     &Table::S,
-    "The excited state of the target"
+    "The isomeric state of the target"
   )
   .def_property_readonly(
 
-    "excited_state",
-    &Table::excitedState,
-    "The excited state of the target"
+    "isomeric_state",
+    &Table::isomericState,
+    "The isomeric state of the target"
   )
   .def_property_readonly(
 

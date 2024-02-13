@@ -19,7 +19,7 @@ generateTYRH( const std::optional< std::vector< continuous::DLWH > >& dlwh ) {
   return tyrh;
 }
 
-Data generateData( unsigned int z, unsigned int a,
+Data generateData( unsigned int z, unsigned int a, unsigned int s,
                    photonuclear::ESZU&& eszu,  continuous::MTR&& mtr,
                    continuous::LQR&& lqr, continuous::SIG&& sig,
                    std::optional< std::vector< unsigned int > > ptype,
@@ -115,12 +115,18 @@ Data generateData( unsigned int z, unsigned int a,
     xss.insert( xss.begin() + ixs_position, locators.begin(), locators.end() );
   }
 
-  // set the nxs values for the continuous energy table
+  // set the nxs values for the photonuclear table
   // NXS(1) = length
   // NXS(2) = za
   // NXS(3) = NES (number energies)
   // NXS(4) = NTR (total number of reactions)
   // NXS(5) = NTYPE (number of secondary particle types)
+  // NXS(6) = 2
+  // NXS(7) = 12
+  // NXS(9) = s (isomeric state)
+  // NXS(10) = z (atom number)
+  // NXS(11) = a (mass number)
+  // NXS(16) = 1
   nxs[0] = xss.size();
   nxs[1] = z * 1000 + a;
   nxs[2] = eszu.NES();
@@ -128,6 +134,9 @@ Data generateData( unsigned int z, unsigned int a,
   nxs[4] = ntype;
   nxs[5] = 2;
   nxs[6] = 12;
+  nxs[8] = s;
+  nxs[9] = z;
+  nxs[10] = a;
   nxs[15] = 1;
 
   return { std::move( iz ), std::move( aw ),

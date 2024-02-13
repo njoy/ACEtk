@@ -134,6 +134,26 @@ public:
   unsigned int atomNumber() const { return this->Z(); }
 
   /**
+   *  @brief Return the isomeric state of the target
+   */
+  static constexpr unsigned int S() { return 0; }
+
+  /**
+   *  @brief Return the isomeric state of the target
+   */
+  static constexpr unsigned int isomericState() { return 0; }
+
+  /**
+   *  @brief Return the mass number of the target
+   */
+  static constexpr unsigned int A() { return 0; }
+
+  /**
+   *  @brief Return the mass number of the target
+   */
+  static constexpr unsigned int massNumber() { return 0; }
+
+  /**
    *  @brief Return the number of energy points
    */
   unsigned int NES() const { return this->data().NXS(3); }

@@ -18,7 +18,7 @@ void verifyChunk( const PhotonuclearTable& );
 
 SCENARIO( "PhotonuclearTable" ){
 
-  GIVEN( "valid data for a PhotonuclearTable" ) {
+  GIVEN( "valid data for a PhotonuclearTable prior to NJOY2016.75" ) {
 
     auto table = fromFile( "94239.31u" );
     std::array< int32_t, 16 > iz = table.data().IZ();
@@ -63,7 +63,14 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == nxs_chunk[i] );
+          // S, Z, A was added to the NXS array
+          switch ( i ) {
+
+            case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
+            case  9 : { CHECK(     94 == nxs_chunk[i] ); break; }
+            case 10 : { CHECK(    239 == nxs_chunk[i] ); break; }
+            default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
+          }
         }
       } // THEN
 
@@ -110,7 +117,7 @@ SCENARIO( "PhotonuclearTable" ){
         dlwh->push_back( base.DLWH( index ) );
       }
 
-      PhotonuclearTable chunk( 94, 239, base.header(),
+      PhotonuclearTable chunk( 94, 239, 0, base.header(),
                                base.ESZ(), base.MTR(), base.LQR(),
                                base.SIG(), std::move( ptype ),
                                std::move( pxs ), std::move( phn ),
@@ -149,7 +156,14 @@ SCENARIO( "PhotonuclearTable" ){
         CHECK( nxs.size() == nxs_chunk.size() );
         for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
 
-          CHECK( nxs[i] == nxs_chunk[i] );
+          // S, Z, A was added to the NXS array
+          switch ( i ) {
+
+            case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
+            case  9 : { CHECK(     94 == nxs_chunk[i] ); break; }
+            case 10 : { CHECK(    239 == nxs_chunk[i] ); break; }
+            default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
+          }
         }
       } // THEN
 
@@ -189,6 +203,12 @@ void verifyChunk( const PhotonuclearTable& chunk ) {
   CHECK( 2 == chunk.numberReactions() );
   CHECK( 7 == chunk.NTYPE() );
   CHECK( 7 == chunk.numberSecondaryParticleTypes() );
+  CHECK( 0 == chunk.S() );
+  CHECK( 0 == chunk.isomericState() );
+  CHECK( 94 == chunk.Z() );
+  CHECK( 94 == chunk.atomNumber() );
+  CHECK( 239 == chunk.A() );
+  CHECK( 239 == chunk.massNumber() );
 
   // ESZ block
   CHECK( false == chunk.ESZ().empty() );

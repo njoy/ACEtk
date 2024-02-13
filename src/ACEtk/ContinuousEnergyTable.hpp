@@ -73,6 +73,7 @@ class ContinuousEnergyTable : protected Table {
   std::vector< continuous::YH > yh_;
 
   /* auxiliary functions */
+  #include "ACEtk/ContinuousEnergyTable/src/setSZA.hpp"
   #include "ACEtk/ContinuousEnergyTable/src/generateBlocks.hpp"
   #include "ACEtk/ContinuousEnergyTable/src/generateData.hpp"
   #include "ACEtk/ContinuousEnergyTable/src/verifyType.hpp"
@@ -199,15 +200,15 @@ public:
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
   unsigned int NTYPE() const { return this->data().NXS(7); }
 
   /**
    *  @brief Return the number of secondary particle types (excluding the
-   *         projectile)
+   *         projectile and photons)
    */
-  unsigned int numberAdditionalSecondaryParticleTypes() const { return this->NTYPE(); }
+  unsigned int numberSecondaryParticleTypes() const { return this->NTYPE(); }
 
   /**
    *  @brief Return the number of delayed percursor families
@@ -220,14 +221,14 @@ public:
   unsigned int numberDelayedPrecursors() const { return this->NPCR(); }
 
   /**
-   *  @brief Return the excited state of the target
+   *  @brief Return the isomeric state of the target
    */
   unsigned int S() const { return this->data().NXS(9); }
 
   /**
-   *  @brief Return the excited state of the target
+   *  @brief Return the isomeric state of the target
    */
-  unsigned int excitedState() const { return this->S(); }
+  unsigned int isomericState() const { return this->S(); }
 
   /**
    *  @brief Return the atom number of the target

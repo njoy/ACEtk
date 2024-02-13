@@ -42,7 +42,7 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
   table
   .def(
 
-    python::init< unsigned int, unsigned int, HeaderVariant,
+    python::init< unsigned int, unsigned int, unsigned int, HeaderVariant,
                   ESZU, MTR, LQR, SIG,
                   std::optional< std::vector< unsigned int > >,
                   std::optional< std::vector< CrossSectionData > >,
@@ -51,7 +51,7 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
                   std::optional< std::vector< SIGH > >,
                   std::optional< std::vector< ANDH > >,
                   std::optional< std::vector< DLWH > > >(),
-    python::arg( "z" ), python::arg( "a" ),
+    python::arg( "z" ), python::arg( "a" ), python::arg( "s" ),
     python::arg( "header" ), python::arg( "eszu" ),
     python::arg( "mtr" ), python::arg( "lqr" ),
     python::arg( "sig" ),
@@ -62,8 +62,9 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
-    "    z         the Z number of the nuclide\n"
-    "    a         the A number of the nuclide\n"
+    "    z         the Z number of the target\n"
+    "    a         the A number of the target\n"
+    "    s         the S number of the target\n"
     "    header    the header for the table\n"
     "    eszu      the principal cross section block\n"
     "    mtr       the reaction number block\n"
@@ -160,6 +161,42 @@ void wrapPhotonuclearTable( python::module& module, python::module& ) {
     "number_secondary_particle_types",
     &Table::numberSecondaryParticleTypes,
     "The number of secondary particle types"
+  )
+  .def_property_readonly(
+
+    "S",
+    &Table::S,
+    "The isomeric state of the target"
+  )
+  .def_property_readonly(
+
+    "isomeric_state",
+    &Table::isomericState,
+    "The isomeric state of the target"
+  )
+  .def_property_readonly(
+
+    "Z",
+    &Table::Z,
+    "The atom number of the target"
+  )
+  .def_property_readonly(
+
+    "atom_number",
+    &Table::atomNumber,
+    "The atom number of the target"
+  )
+  .def_property_readonly(
+
+    "A",
+    &Table::A,
+    "The mass number of the target"
+  )
+  .def_property_readonly(
+
+    "mass_number",
+    &Table::massNumber,
+    "The mass number of the target"
   )
   .def_property_readonly(
 

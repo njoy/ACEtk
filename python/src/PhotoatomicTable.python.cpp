@@ -78,6 +78,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "Initialise the table\n\n"
     "Arguments:\n"
     "    self      the table\n"
+    "    z         the Z number of the target\n"
     "    header    the header for the table\n"
     "    za        the list of ZA values\n"
     "    awr       the list of atomic mass values\n"
@@ -143,15 +144,39 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "S",
+    &Table::S,
+    "The isomeric state of the target"
+  )
+  .def_property_readonly(
+
+    "isomeric_state",
+    &Table::isomericState,
+    "The isomeric state of the target"
+  )
+  .def_property_readonly(
+
     "Z",
     &Table::Z,
-    "The atom number of the element"
+    "The atom number of the target"
   )
   .def_property_readonly(
 
     "atom_number",
     &Table::atomNumber,
-    "The atom number of the element"
+    "The atom number of the target"
+  )
+  .def_property_readonly(
+
+    "A",
+    &Table::A,
+    "The mass number of the target"
+  )
+  .def_property_readonly(
+
+    "mass_number",
+    &Table::massNumber,
+    "The mass number of the target"
   )
   .def_property_readonly(
 
