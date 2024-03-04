@@ -11,9 +11,9 @@
 
 // other includes
 #include "tools/Log.hpp"
+#include "tools/std20/views.hpp"
 #include "ACEtk/State.hpp"
 #include "disco.hpp"
-#include "range/v3/view/subrange.hpp"
 
 namespace njoy {
 namespace ACEtk {

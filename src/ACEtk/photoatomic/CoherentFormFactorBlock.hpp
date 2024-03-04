@@ -6,6 +6,7 @@
 
 // other includes
 #include "ACEtk/base/ArrayData.hpp"
+#include "tools/std20/views.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -55,8 +56,8 @@ public:
 
     if ( this->momentum_.has_value() ) {
 
-      return ranges::make_subrange( this->momentum_.value().begin(),
-                                    this->momentum_.value().end() );
+      return nano::ranges::subrange( this->momentum_.value().begin(),
+                                     this->momentum_.value().end() );
     }
     else {
 

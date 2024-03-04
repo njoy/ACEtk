@@ -78,7 +78,6 @@ target_link_libraries( ACEtk
   INTERFACE
     njoy::tools
     disco
-    range-v3
 )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
