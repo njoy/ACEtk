@@ -144,6 +144,14 @@ void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
   CHECK( 33 == chunk.IP( 6 ) );
   CHECK( 34 == chunk.IP( 7 ) );
 
+  CHECK( 1 == chunk.particleType( 1 ) );
+  CHECK( 2 == chunk.particleType( 2 ) );
+  CHECK( 9 == chunk.particleType( 3 ) );
+  CHECK( 31 == chunk.particleType( 4 ) );
+  CHECK( 32 == chunk.particleType( 5 ) );
+  CHECK( 33 == chunk.particleType( 6 ) );
+  CHECK( 34 == chunk.particleType( 7 ) );
+
   CHECK( 2 == chunk.NP( 1 ) );
   CHECK( 1 == chunk.NP( 2 ) );
   CHECK( 1 == chunk.NP( 3 ) );
@@ -151,6 +159,14 @@ void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
   CHECK( 1 == chunk.NP( 5 ) );
   CHECK( 1 == chunk.NP( 6 ) );
   CHECK( 1 == chunk.NP( 7 ) );
+
+  CHECK( 2 == chunk.numberSecondaryParticleProductionReactions( 1 ) );
+  CHECK( 1 == chunk.numberSecondaryParticleProductionReactions( 2 ) );
+  CHECK( 1 == chunk.numberSecondaryParticleProductionReactions( 3 ) );
+  CHECK( 1 == chunk.numberSecondaryParticleProductionReactions( 4 ) );
+  CHECK( 1 == chunk.numberSecondaryParticleProductionReactions( 5 ) );
+  CHECK( 1 == chunk.numberSecondaryParticleProductionReactions( 6 ) );
+  CHECK( 1 == chunk.numberSecondaryParticleProductionReactions( 7 ) );
 
   CHECK( 543 == chunk.PXS( 1 ) );
   CHECK( 635 == chunk.PHN( 1 ) );
@@ -173,4 +189,32 @@ void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
   CHECK( 863658 == chunk.ANDH( 7 ) );
   CHECK( 863658 == chunk.LDLWH( 7 ) );
   CHECK( 863659 == chunk.DLWH( 7 ) );
+
+  CHECK( true == chunk.hasIP( 1 ) );
+  CHECK( true == chunk.hasIP( 2 ) );
+  CHECK( true == chunk.hasIP( 9 ) );
+  CHECK( true == chunk.hasIP( 31 ) );
+  CHECK( true == chunk.hasIP( 32 ) );
+  CHECK( true == chunk.hasIP( 33 ) );
+  CHECK( true == chunk.hasIP( 34 ) );
+  CHECK( false == chunk.hasIP( 3 ) );
+
+  CHECK( true == chunk.hasParticleType( 1 ) );
+  CHECK( true == chunk.hasParticleType( 2 ) );
+  CHECK( true == chunk.hasParticleType( 9 ) );
+  CHECK( true == chunk.hasParticleType( 31 ) );
+  CHECK( true == chunk.hasParticleType( 32 ) );
+  CHECK( true == chunk.hasParticleType( 33 ) );
+  CHECK( true == chunk.hasParticleType( 34 ) );
+  CHECK( false == chunk.hasParticleType( 3 ) );
+
+  CHECK( 1 == chunk.index( 1 ) );
+  CHECK( 2 == chunk.index( 2 ) );
+  CHECK( 3 == chunk.index( 9 ) );
+  CHECK( 4 == chunk.index( 31 ) );
+  CHECK( 5 == chunk.index( 32 ) );
+  CHECK( 6 == chunk.index( 33 ) );
+  CHECK( 7 == chunk.index( 34 ) );
+
+  CHECK_THROWS( chunk.index( 3 ) );
 }
