@@ -37,7 +37,7 @@ FetchContent_Declare( spdlog
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  https://github.com/njoy/tools
-    GIT_TAG         965f731d44c3f84806644b888aa1e0827bd21062
+    GIT_TAG         5c8aae93bc5f770a647e85b10c64ecb939242024
     )
 
 #######################################################################
