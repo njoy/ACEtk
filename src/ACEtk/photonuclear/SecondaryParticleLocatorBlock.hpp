@@ -218,6 +218,7 @@ public:
    */
   bool hasIP( unsigned int type ) const {
 
+    //! @todo use a stride view to use std::find_if instead of a handwritten loop
     for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
 
         if ( this->IP( index ) == type ) {
@@ -245,6 +246,7 @@ public:
    */
   std::size_t index( unsigned int type ) const {
 
+    //! @todo use a stride view to use std::find_if instead of a handwritten loop
     for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
 
         if ( this->IP( index ) == type ) {
