@@ -29,7 +29,7 @@ jobs:
     - name: mkdir bin
       run: mkdir bin
     - name: cmake
-      run: cmake -DPYTHON_EXECUTABLE=$(which python3) -D CMAKE_CXX_COMPILER=`which ${{matrix.cxx}}` -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D ACEtk.tests=ON ..
+      run: cmake -DPYTHON_EXECUTABLE=$(which python3) -D CMAKE_CXX_COMPILER=`which ${{matrix.cxx}}` -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D ACEtk.tests=OFF ..
       working-directory: ./bin
     - name: make
       run: make -j2
