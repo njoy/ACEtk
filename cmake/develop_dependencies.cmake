@@ -40,5 +40,4 @@ FetchContent_Declare( pybind11
 FetchContent_MakeAvailable(
     tools
     disco
-    range-v3
     )

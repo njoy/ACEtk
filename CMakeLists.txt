@@ -86,7 +86,10 @@ target_link_libraries( ACEtk
 
 if( ACEtk.python )
 
-  FetchContent_MakeAvailable( pybind11 )
+  FetchContent_MakeAvailable(
+    pybind11
+    range-v3
+    )
 
   pybind11_add_module( ACEtk.python
       python/src/ACEtk.python.cpp
@@ -198,7 +201,7 @@ if( ACEtk.python )
       python/src/PhotonuclearTable.python.cpp
       )
 
-  target_link_libraries( ACEtk.python PRIVATE ACEtk )
+  target_link_libraries( ACEtk.python PRIVATE ACEtk range-v3 )
   target_include_directories( ACEtk.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
   target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
