@@ -52,6 +52,14 @@ class Test_ACEtk_photonuclear_SecondaryParticleLocatorBlock( unittest.TestCase )
             self.assertEqual( 33, chunk.IP( 6 ) )
             self.assertEqual( 34, chunk.IP( 7 ) )
 
+            self.assertEqual( 1, chunk.particle_type( 1 ) )
+            self.assertEqual( 2, chunk.particle_type( 2 ) )
+            self.assertEqual( 9, chunk.particle_type( 3 ) )
+            self.assertEqual( 31, chunk.particle_type( 4 ) )
+            self.assertEqual( 32, chunk.particle_type( 5 ) )
+            self.assertEqual( 33, chunk.particle_type( 6 ) )
+            self.assertEqual( 34, chunk.particle_type( 7 ) )
+
             self.assertEqual( 2, chunk.NP( 1 ) )
             self.assertEqual( 1, chunk.NP( 2 ) )
             self.assertEqual( 1, chunk.NP( 3 ) )
@@ -59,6 +67,14 @@ class Test_ACEtk_photonuclear_SecondaryParticleLocatorBlock( unittest.TestCase )
             self.assertEqual( 1, chunk.NP( 5 ) )
             self.assertEqual( 1, chunk.NP( 6 ) )
             self.assertEqual( 1, chunk.NP( 7 ) )
+
+            self.assertEqual( 2, chunk.number_secondary_particle_production_reactions( 1 ) )
+            self.assertEqual( 1, chunk.number_secondary_particle_production_reactions( 2 ) )
+            self.assertEqual( 1, chunk.number_secondary_particle_production_reactions( 3 ) )
+            self.assertEqual( 1, chunk.number_secondary_particle_production_reactions( 4 ) )
+            self.assertEqual( 1, chunk.number_secondary_particle_production_reactions( 5 ) )
+            self.assertEqual( 1, chunk.number_secondary_particle_production_reactions( 6 ) )
+            self.assertEqual( 1, chunk.number_secondary_particle_production_reactions( 7 ) )
 
             self.assertEqual( 543, chunk.PXS( 1 ) )
             self.assertEqual( 635, chunk.PHN( 1 ) )
@@ -82,9 +98,35 @@ class Test_ACEtk_photonuclear_SecondaryParticleLocatorBlock( unittest.TestCase )
             self.assertEqual( 863658, chunk.LDLWH( 7 ) )
             self.assertEqual( 863659, chunk.DLWH( 7 ) )
 
+            self.assertEqual( True, chunk.has_IP( 1 ) )
+            self.assertEqual( True, chunk.has_IP( 2 ) )
+            self.assertEqual( True, chunk.has_IP( 9 ) )
+            self.assertEqual( True, chunk.has_IP( 31 ) )
+            self.assertEqual( True, chunk.has_IP( 32 ) )
+            self.assertEqual( True, chunk.has_IP( 33 ) )
+            self.assertEqual( True, chunk.has_IP( 34 ) )
+            self.assertEqual( False, chunk.has_IP( 3 ) )
+
+            self.assertEqual( True, chunk.has_particle_type( 1 ) )
+            self.assertEqual( True, chunk.has_particle_type( 2 ) )
+            self.assertEqual( True, chunk.has_particle_type( 9 ) )
+            self.assertEqual( True, chunk.has_particle_type( 31 ) )
+            self.assertEqual( True, chunk.has_particle_type( 32 ) )
+            self.assertEqual( True, chunk.has_particle_type( 33 ) )
+            self.assertEqual( True, chunk.has_particle_type( 34 ) )
+            self.assertEqual( False, chunk.has_particle_type( 3 ) )
+
+            self.assertEqual( 1, chunk.index( 1 ) )
+            self.assertEqual( 2, chunk.index( 2 ) )
+            self.assertEqual( 3, chunk.index( 9 ) )
+            self.assertEqual( 4, chunk.index( 31 ) )
+            self.assertEqual( 5, chunk.index( 32 ) )
+            self.assertEqual( 6, chunk.index( 33 ) )
+            self.assertEqual( 7, chunk.index( 34 ) )
+
             with self.assertRaises( Exception ) :
 
-                index = chunk.index(1)
+                index = chunk.index( 3 )
 
             # verify the xss array
             xss = chunk.xss_array

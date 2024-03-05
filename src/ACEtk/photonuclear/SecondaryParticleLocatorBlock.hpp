@@ -211,6 +211,54 @@ public:
     return this->LLOC( index, 12 );
   }
 
+  /**
+   *  @brief Return whether or not the particle type is present
+   *
+   *  @param[in] type    the particle type
+   */
+  bool hasIP( unsigned int type ) const {
+
+    //! @todo use a stride view to use std::find_if instead of a handwritten loop
+    for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
+
+        if ( this->IP( index ) == type ) {
+
+          return true;
+        }
+    }
+    return false;
+  }
+
+  /**
+   *  @brief Return whether or not the particle type is present
+   *
+   *  @param[in] type    the particle type
+   */
+  bool hasParticleType( unsigned int reaction ) const {
+
+    return this->hasIP( reaction );
+  }
+
+  /**
+   *  @brief Return the index (one-based) of the particle type
+   *
+   *  @param[in] type    the particle type
+   */
+  std::size_t index( unsigned int type ) const {
+
+    //! @todo use a stride view to use std::find_if instead of a handwritten loop
+    for ( std::size_t index = 1; index <= this->NTYPE(); ++index ) {
+
+        if ( this->IP( index ) == type ) {
+
+          return index;
+        }
+    }
+
+    Log::error( "The requested particle type IP{} is not present", type );
+    throw std::exception();
+  }
+
   using Base::empty;
   using Base::name;
   using Base::length;

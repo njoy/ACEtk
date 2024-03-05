@@ -196,6 +196,33 @@ void wrapSecondaryParticleLocatorBlock( python::module& module, python::module& 
     "Arguments:\n"
     "    self     the block\n"
     "    index    the secondary particle index (one-based)"
+  )
+  .def(
+
+    "has_IP",
+    &Block::hasIP,
+    python::arg( "type" ),
+    "Return whether or not the particle type is present\n\n"
+    "    self    the block\n"
+    "    type    the particle type"
+  )
+  .def(
+
+    "has_particle_type",
+    &Block::hasParticleType,
+    python::arg( "type" ),
+    "Return whether or not the particle type is present\n\n"
+    "    self    the block\n"
+    "    type    the particle type"
+  )
+  .def(
+
+    "index",
+    &Block::index,
+    python::arg( "type" ),
+    "Return the index (one-based) of the particle type\n\n"
+    "    self    the block\n"
+    "    type    the particle type"
   );
 
   // add standard block definitions
