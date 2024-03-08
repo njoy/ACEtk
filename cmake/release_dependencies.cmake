@@ -25,11 +25,6 @@ FetchContent_Declare( pybind11
     GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
     )
 
-FetchContent_Declare( range-v3
-    GIT_REPOSITORY  https://github.com/ericniebler/range-v3
-    GIT_TAG         4989f3e9ff2efee1852942bb9328ef121369ba02 # tag: 0.11.0
-    )
-
 FetchContent_Declare( spdlog
     GIT_REPOSITORY  https://github.com/gabime/spdlog
     GIT_TAG         ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36 # tag: v1.11.0
@@ -37,7 +32,7 @@ FetchContent_Declare( spdlog
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  https://github.com/njoy/tools
-    GIT_TAG         5c8aae93bc5f770a647e85b10c64ecb939242024
+    GIT_TAG         dabe58d4147e0e9415e6c8d882a23fed2625b46a
     )
 
 #######################################################################

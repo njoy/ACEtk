@@ -7,7 +7,7 @@ include( FetchContent )
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  https://github.com/njoy/tools
-    GIT_TAG         feature/std-ranges-part5
+    GIT_TAG         feature/std-ranges-part6
     GIT_SHALLOW     TRUE
     )
 
@@ -21,11 +21,6 @@ FetchContent_Declare( disco
     GIT_REPOSITORY  https://github.com/njoy/disco
     GIT_TAG         origin/master
     GIT_SHALLOW     TRUE
-    )
-
-FetchContent_Declare( range-v3
-    GIT_REPOSITORY  https://github.com/ericniebler/range-v3
-    GIT_TAG         0.11.0
     )
 
 FetchContent_Declare( pybind11
