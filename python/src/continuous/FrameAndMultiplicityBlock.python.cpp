@@ -24,7 +24,7 @@ void wrapFrameAndMultiplicityBlock( python::module& module,
   // none of these are supposed to be created directly by the user
   wrapBasicRandomAccessAnyViewOf< ReferenceFrame >(
       viewmodule,
-      "any_view< ReferenceFrame, random_access >" );
+      "AnyRandomAccessView< ReferenceFrame >" );
 
   // create the block
   python::class_< Block > block(
