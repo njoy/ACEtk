@@ -55,6 +55,7 @@ PYBIND11_MODULE( ACEtk, module ) {
 
   // wrap some basic recurring views
   // none of these are supposed to be created directly by the user
+  // @todo test performance against range-v3
   wrapBasicRandomAccessAnyViewOf< double >(
       viewmodule,
       "AnyRandomAccessView< double >" );
