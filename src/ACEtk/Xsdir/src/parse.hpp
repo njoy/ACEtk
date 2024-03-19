@@ -24,6 +24,7 @@ static void trimToLowerCase( std::string& string ) {
 
 static std::string getline( std::istream& in, std::istream::pos_type& position ) {
 
+  // a line is a comment line if the first character on it is '#'
   auto isCommentLine = [] ( const auto& line ) {
 
     if ( line.size() > 0 ) {
@@ -37,13 +38,14 @@ static std::string getline( std::istream& in, std::istream::pos_type& position )
 
   position = in.tellg();
   std::getline( in, current );
-  trim( current );
   while ( isCommentLine( current ) ) {
 
     position = in.tellg();
     std::getline( in, current );
-    trim( current );
   }
+
+  // trim the line and return it
+  trim( current );
   return current;
 }
 
@@ -52,7 +54,8 @@ static Xsdir parse( std::istream& in ) {
   auto position = in.tellg();
   std::string current;
 
-  // read lines skipping over comment lines and verify for the datapath
+  // read lines skipping over comment lines
+  // and verify for the presence of a datapath
   std::optional< std::string > datapath = std::nullopt;
   current = getline( in, position );
   if ( current.size() != 0 ) {
@@ -100,16 +103,17 @@ static Xsdir parse( std::istream& in ) {
   unsigned int za;
   double awr;
   std::map< unsigned int, double > ratios;
-  while ( in >> za >> awr ) {
-
-    //! @todo we do not verify duplicates or completeness
-    ratios[ za ] = awr;
-  }
-  in.clear();
-
-  // read lines till you find the directory
+  current = getline( in, position );
   while ( current != "directory" ) {
 
+    //! @todo we do not verify duplicates or completeness
+    std::istringstream input( current );
+    while ( input >> za >> awr ) {
+
+      ratios[ za ] = awr;
+    }
+
+    // read the next line
     current = getline( in, position );
     toLowerCase( current );
     if ( in.fail() ) {
@@ -118,7 +122,7 @@ static Xsdir parse( std::istream& in ) {
       in.seekg( position );
       in.setstate( std::ios::failbit );
 
-      Log::error( "Could not find \'directory\' in the xsdir file" );
+      Log::error( "Unexpected error while reading atomic weights" );
       throw std::exception();
     }
   }

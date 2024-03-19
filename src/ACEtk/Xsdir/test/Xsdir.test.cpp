@@ -12,6 +12,7 @@ using Catch::Matchers::WithinRel;
 using namespace njoy::ACEtk;
 
 std::string chunk();
+std::string chunkWithCommentLines();
 std::string chunkWithUpperCaseAndTrailingWhitespace();
 void verifyChunk( const Xsdir& );
 std::string chunkWithoutDatapath();
@@ -111,6 +112,30 @@ SCENARIO( "Xsdir" ) {
         CHECK( oss.str() == string );
       } // THEN
     } // WHEN
+
+    WHEN( "the data is read from a string/stream with some comment lines" ) {
+
+      std::istringstream in( chunkWithCommentLines() );
+      Xsdir chunk;
+      in >> chunk;
+
+      THEN( "an Xsdir can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+
+        CHECK( true == in.eof() );
+        CHECK( true == in.fail() );
+      } // THEN
+
+      THEN( "it can be printed but it will not have the upper case text or "
+            "the trailing whitespace" ) {
+
+        std::ostringstream oss;
+        oss << chunk;
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for an Xsdir instance without a datapath" ) {
@@ -190,6 +215,26 @@ std::string chunk() {
     "                         1004   3.99320563\n"
     "   92000 235.98412800   92235 233.02478975 1092235 233.02478975\n"
     "\n"
+    "directory\n"
+    " 92234.00c   234.000000 file 0 1 5 1000 0 0 2.530000e-08\n"
+    " 92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n"
+    " 92000.00p   233.000000 file3 0 1 4 3000\n";
+}
+
+std::string chunkWithCommentLines() {
+
+  return
+    "# this is a comment line\n"
+    "datapath=/some/path/to/Data\n"
+    "# this is a comment line\n"
+    "# this is a comment line\n"
+    "atomic weight ratios\n"
+    "       1   1.00000000\n"
+    "    1000   0.99931697    1001   0.99916733    1002   1.99679968    1003   2.99013997\n"
+    "                         1004   3.99320563\n"
+    "   92000 235.98412800   92235 233.02478975 1092235 233.02478975\n"
+    "\n"
+    "# this is a comment line\n"
     "directory\n"
     " 92234.00c   234.000000 file 0 1 5 1000 0 0 2.530000e-08\n"
     " 92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n"
