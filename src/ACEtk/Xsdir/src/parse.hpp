@@ -22,15 +22,39 @@ static void trimToLowerCase( std::string& string ) {
   toLowerCase( string );
 }
 
+static std::string getline( std::istream& in, std::istream::pos_type& position ) {
+
+  auto isCommentLine = [] ( const auto& line ) {
+
+    if ( line.size() > 0 ) {
+
+      return line[0] == '#' ? true : false;
+    }
+    return false;
+  };
+
+  std::string current;
+
+  position = in.tellg();
+  std::getline( in, current );
+  trim( current );
+  while ( isCommentLine( current ) ) {
+
+    position = in.tellg();
+    std::getline( in, current );
+    trim( current );
+  }
+  return current;
+}
+
 static Xsdir parse( std::istream& in ) {
 
   auto position = in.tellg();
   std::string current;
 
-  // read a line and verify for the datapath
+  // read lines skipping over comment lines and verify for the datapath
   std::optional< std::string > datapath = std::nullopt;
-  std::getline( in, current );
-  trim( current );
+  current = getline( in, position );
   if ( current.size() != 0 ) {
 
     std::string path = current.substr( 0, 8 );
@@ -60,8 +84,8 @@ static Xsdir parse( std::istream& in ) {
   }
 
   // read a line and verify for the atomic weight ratios
-  std::getline( in, current );
-  trimToLowerCase( current );
+  current = getline( in, position );
+  toLowerCase( current );
   if ( current != "atomic weight ratios" ) {
 
     in.clear();
@@ -86,8 +110,8 @@ static Xsdir parse( std::istream& in ) {
   // read lines till you find the directory
   while ( current != "directory" ) {
 
-    std::getline( in, current );
-    trimToLowerCase( current );
+    current = getline( in, position );
+    toLowerCase( current );
     if ( in.fail() ) {
 
       in.clear();
