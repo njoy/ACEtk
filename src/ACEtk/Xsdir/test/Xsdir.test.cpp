@@ -236,8 +236,11 @@ std::string chunkWithCommentLines() {
     "\n"
     "# this is a comment line\n"
     "directory\n"
+    "# this is a comment line\n"
     " 92234.00c   234.000000 file 0 1 5 1000 0 0 2.530000e-08\n"
     " 92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n"
+    "# this is a comment line\n"
+    "# this is a comment line\n"
     " 92000.00p   233.000000 file3 0 1 4 3000\n";
 }
 

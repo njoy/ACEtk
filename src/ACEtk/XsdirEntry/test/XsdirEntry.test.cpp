@@ -12,6 +12,7 @@ using Catch::Matchers::WithinRel;
 using namespace njoy::ACEtk;
 
 std::string chunk();
+std::string chunkWithCommentLines();
 std::string chunkWithSplit();
 std::string chunkWith7entries();
 std::string chunkWith10entries();
@@ -56,6 +57,29 @@ SCENARIO( "XsdirEntry" ) {
     WHEN( "the data is read from a string/stream" ) {
 
       std::istringstream in( string );
+      XsdirEntry chunk;
+      in >> chunk;
+
+      THEN( "an XsdirEntry can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+
+        CHECK( false == in.eof() );
+        CHECK( false == in.fail() );
+      } // THEN
+
+      THEN( "it can be printed" ) {
+
+        std::ostringstream oss;
+        oss << chunk;
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
+
+    WHEN( "the data is read from a string/stream with comment lines" ) {
+
+      std::istringstream in( chunkWithCommentLines() );
       XsdirEntry chunk;
       in >> chunk;
 
@@ -244,6 +268,13 @@ SCENARIO( "XsdirEntry" ) {
 std::string chunk() {
 
   return
+    " 92235.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08 ptable\n";
+}
+
+std::string chunkWithCommentLines() {
+
+  return
+    "# this is a comment line\n"
     " 92235.00c   235.000000 file 0 1 5 1000 0 0 2.530000e-08 ptable\n";
 }
 
