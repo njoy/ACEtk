@@ -1,3 +1,40 @@
+static void trim( std::string& string ) {
+
+  // useful lambdas
+  auto isNotSpace = [] ( const auto& c ) { return !std::isspace( c ); };
+
+  // trim front and back whitespace
+  string.erase( string.begin(),
+                std::find_if( string.begin(), string.end(), isNotSpace ) );
+  string.erase( std::find_if( string.rbegin(), string.rend(), isNotSpace ).base(),
+                string.end() );
+}
+
+static std::string getline( std::istream& in ) {
+
+  // a line is a comment line if the first character on it is '#'
+  auto isCommentLine = [] ( const auto& line ) {
+
+    if ( line.size() > 0 ) {
+
+      return line[0] == '#' ? true : false;
+    }
+    return false;
+  };
+
+  std::string current;
+
+  std::getline( in, current );
+  while ( isCommentLine( current ) ) {
+
+    std::getline( in, current );
+  }
+
+  // trim the line and return it
+  trim( current );
+  return current;
+}
+
 static XsdirEntry parse( std::istream& in ) {
 
   auto position = in.tellg();
@@ -5,19 +42,13 @@ static XsdirEntry parse( std::istream& in ) {
   // read a line and verify for continue on the next line
   std::string line;
   std::string next;
-  std::getline( in, line );
-  auto iter = std::find_if( line.rbegin(), line.rend(),
-                            [] ( char c )
-                               { return !std::isspace( c ); } );
 
-  while ( *iter == '+' ) {
+  line = getline( in );
+  while ( line.back() == '+' ) {
 
-    *iter = ' ';
-    std::getline( in, next );
+    line.back() = ' ';
+    next = getline( in );
     line += next;
-    iter = std::find_if( line.rbegin(), line.rend(),
-                         [] ( char c )
-                            { return !std::isspace( c ); } );
   }
 
   if ( !in.eof() ) {

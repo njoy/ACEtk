@@ -2,7 +2,6 @@
 # Setup
 #######################################################################
 
-message( STATUS "Adding ACEtk unit testing" )
 enable_testing()
 
 FetchContent_MakeAvailable( Catch2 )
@@ -25,6 +24,8 @@ endfunction()
 #######################################################################
 # Unit testing directories
 #######################################################################
+
+message( STATUS "Adding ACEtk C++ unit testing" )
 
 add_subdirectory( src/ACEtk/ContinuousEnergyTable/test )
 add_subdirectory( src/ACEtk/DosimetryTable/test )

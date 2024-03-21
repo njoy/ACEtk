@@ -22,46 +22,70 @@ static void trimToLowerCase( std::string& string ) {
   toLowerCase( string );
 }
 
+static std::string getline( std::istream& in, std::istream::pos_type& position ) {
+
+  // a line is a comment line if the first character on it is '#'
+  auto isCommentLine = [] ( const auto& line ) {
+
+    if ( line.size() > 0 ) {
+
+      return line[0] == '#' ? true : false;
+    }
+    return false;
+  };
+
+  std::string current;
+
+  // read over all comment lines and empty lines
+  position = in.tellg();
+  std::getline( in, current );
+  while ( !in.eof() && ( isCommentLine( current ) || current.size() == 0 ) ) {
+
+    position = in.tellg();
+    std::getline( in, current );
+  }
+
+  // trim the line and return it
+  trim( current );
+  return current;
+}
+
 static Xsdir parse( std::istream& in ) {
 
   auto position = in.tellg();
   std::string current;
 
-  // read a line and verify for the datapath
+  // go to the next line
+  current = getline( in, position );
+
+  // verify for the presence of a datapath
   std::optional< std::string > datapath = std::nullopt;
-  std::getline( in, current );
-  trim( current );
   if ( current.size() != 0 ) {
 
     std::string path = current.substr( 0, 8 );
     toLowerCase( path );
-    if ( path != "datapath" ) {
+    if ( path == "datapath" ) {
 
-      in.clear();
-      in.seekg( position );
-      in.setstate( std::ios::failbit );
+      current = current.erase( 0, 8 );
+      trim( current );
+      if ( current.size() != 0 ) {
 
-      Log::error( "Expected \'datapath\' but found \'{}\'", path );
-      throw std::exception();
-    }
-    current = current.erase( 0, 8 );
-    trim( current );
-    if ( current.size() != 0 ) {
+        if ( current[0] == '=' ) {
 
-      if ( current[0] == '=' ) {
+          current.erase( 0, 1 );
+          if ( current.size() != 0 ) {
 
-        current.erase( 0, 1 );
-        if ( current.size() != 0 ) {
-
-          datapath = current;
+            datapath = current;
+          }
         }
       }
+
+      current = getline( in, position );
+      toLowerCase( current );
     }
   }
 
-  // read a line and verify for the atomic weight ratios
-  std::getline( in, current );
-  trimToLowerCase( current );
+  // verify for the atomic weight ratios
   if ( current != "atomic weight ratios" ) {
 
     in.clear();
@@ -76,25 +100,26 @@ static Xsdir parse( std::istream& in ) {
   unsigned int za;
   double awr;
   std::map< unsigned int, double > ratios;
-  while ( in >> za >> awr ) {
-
-    //! @todo we do not verify duplicates or completeness
-    ratios[ za ] = awr;
-  }
-  in.clear();
-
-  // read lines till you find the directory
+  current = getline( in, position );
   while ( current != "directory" ) {
 
-    std::getline( in, current );
-    trimToLowerCase( current );
+    //! @todo we do not verify duplicates or completeness
+    std::istringstream input( current );
+    while ( input >> za >> awr ) {
+
+      ratios[ za ] = awr;
+    }
+
+    // read the next line
+    current = getline( in, position );
+    toLowerCase( current );
     if ( in.fail() ) {
 
       in.clear();
       in.seekg( position );
       in.setstate( std::ios::failbit );
 
-      Log::error( "Could not find \'directory\' in the xsdir file" );
+      Log::error( "Unexpected error while reading atomic weights" );
       throw std::exception();
     }
   }
@@ -105,6 +130,18 @@ static Xsdir parse( std::istream& in ) {
   while ( in >> entry ) {
 
     entries.emplace_back( std::move( entry ) );
+
+    // check if there is another entry after this one
+    current = getline( in, position );
+    if ( !in.eof() ) {
+
+      in.clear();
+      in.seekg( position );
+    }
+    else {
+
+      break;
+    }
   }
 
   if ( !in.eof() ) {
