@@ -7,7 +7,7 @@ include( FetchContent )
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  https://github.com/njoy/tools
-    GIT_TAG         feature/std-ranges-part7
+    GIT_TAG         feature/std-ranges-part8
     GIT_SHALLOW     TRUE
     )
 
