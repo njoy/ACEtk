@@ -22,6 +22,27 @@ class Test_ACEtk_XsdirEntry( unittest.TestCase ) :
               ' 92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n'
               ' 92000.00p   233.000000 file3 0 1 4 3000\n' )
 
+    chunk_with_comment_lines = ( '# this is a comment line\n'
+                                 'datapath=/some/path/to/Data\n'
+                                 '# this is a comment line\n'
+                                 '# this is a comment line\n'
+                                 'atomic weight ratios\n'
+                                 '       1   1.00000000\n'
+                                 '    1000   0.99931697    1001   0.99916733    1002   1.99679968    1003   2.99013997\n'
+                                 '                         1004   3.99320563\n'
+                                 '# this is a comment line\n'
+                                 '   92000 235.98412800   92235 233.02478975 1092235 233.02478975\n'
+                                 '\n'
+                                 '# this is a comment line\n'
+                                 'directory\n'
+                                 '# this is a comment line\n'
+                                 ' 92234.00c   234.000000 file 0 1 5 1000 0 0 2.530000e-08\n'
+                                 ' 92235.00c   235.000000 file2 0 1 3 2000 0 0 +\n'
+                                 '     2.530000e-08 ptable\n'
+                                 '# this is a comment line\n'
+                                 '# this is a comment line\n'
+                                 ' 92000.00p   233.000000 file3 0 1 4 3000\n' )
+
     chunk_with_upper_case = ( '   DaTaPatH=/some/path/to/Data   \n'
                               ' atomic WEIGHT ratios                      \n'
                               '       1   1.00000000\n'
@@ -31,7 +52,8 @@ class Test_ACEtk_XsdirEntry( unittest.TestCase ) :
                               '\n'
                               '  DIRECTory               \n'
                               ' 92234.00c   234.000000 file 0 1 5 1000 0 0 2.530000e-08\n'
-                              ' 92235.00c   235.000000 file2 0 1 3 2000 0 0 2.530000e-08 ptable\n'
+                              ' 92235.00c   235.000000 file2 0 1 3 2000 0 0 +\n'
+                              '     2.530000e-08 ptable\n'
                               ' 92000.00p   233.000000 file3 0 1 4 3000\n' )
 
     chunk_without_datapath = ( '\n'
@@ -159,6 +181,11 @@ class Test_ACEtk_XsdirEntry( unittest.TestCase ) :
 
         # the data is read from a string
         chunk = Xsdir.from_string( self.chunk )
+
+        verify_chunk( self, chunk )
+
+        # the data is read from a string with some comment lines
+        chunk = Xsdir.from_string( self.chunk_with_comment_lines )
 
         verify_chunk( self, chunk )
 
