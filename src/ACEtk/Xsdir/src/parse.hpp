@@ -29,7 +29,7 @@ static std::string getline( std::istream& in, std::istream::pos_type& position )
 
     if ( line.size() > 0 ) {
 
-      return line[0] == '#' ? true : false;
+      return line[0] == '#';
     }
     return false;
   };
