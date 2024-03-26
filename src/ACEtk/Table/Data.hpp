@@ -40,52 +40,52 @@ public:
   /**
    *  @brief Return the IZ array
    */
-  const auto& IZ() const { return this->izaw_.first; }
+  const std::array< int32_t, 16 >& IZ() const { return this->izaw_.first; }
 
   /**
    *  @brief Return the AW array
    */
-  const auto& AW() const { return this->izaw_.second; }
+  const std::array< double, 16 >& AW() const { return this->izaw_.second; }
 
   /**
    *  @brief Return the NXS array
    */
-  const auto& NXS() const { return this->nxs_; }
+  const std::array< int64_t, 16 >& NXS() const { return this->nxs_; }
 
   /**
    *  @brief Return the JXS array
    */
-  const auto& JXS() const { return this->jxs_; }
+  const std::array< int64_t, 32 >& JXS() const { return this->jxs_; }
 
   /**
    *  @brief Return the XSS array
    */
-  const auto& XSS() const { return this->xss_; }
+  const std::vector< double >& XSS() const { return this->xss_; }
 
   /**
    *  @brief Return the IZ array
    */
-  auto& IZ() { return this->izaw_.first; }
+  std::array< int32_t, 16 >& IZ() { return this->izaw_.first; }
 
   /**
    *  @brief Return the AW array
    */
-  auto& AW() { return this->izaw_.second; }
+  std::array< double, 16 >& AW() { return this->izaw_.second; }
 
   /**
    *  @brief Return the NXS array
    */
-  auto& NXS() { return this->nxs_; }
+  std::array< int64_t, 16 >& NXS() { return this->nxs_; }
 
   /**
    *  @brief Return the JXS array
    */
-  auto& JXS() { return this->jxs_; }
+  std::array< int64_t, 32 >& JXS() { return this->jxs_; }
 
   /**
    *  @brief Return the XSS array
    */
-  auto& XSS() { return this->xss_; }
+  std::vector< double >& XSS() { return this->xss_; }
 
   /**
    *  @brief Return a value from the IZ array
@@ -95,7 +95,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto& IZ( std::size_t index ) { return fetch( this->izaw_.first, index ); }
+  int32_t& IZ( std::size_t index ) { return fetch( this->izaw_.first, index ); }
 
   /**
    *  @brief Return a value from the IZ array
@@ -105,7 +105,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto IZ( std::size_t index ) const { return fetch( this->izaw_.first, index ); }
+  int32_t IZ( std::size_t index ) const { return fetch( this->izaw_.first, index ); }
 
   /**
    *  @brief Return a value from the AW array
@@ -115,14 +115,14 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto& AW( std::size_t index ) { return fetch( this->izaw_.second, index ); }
+  double& AW( std::size_t index ) { return fetch( this->izaw_.second, index ); }
 
   /**
    *  @brief Return a value from the AW array
    *
    *  @param[in] index    the index (one-based)
    */
-  auto AW( std::size_t index ) const { return fetch( this->izaw_.second, index ); }
+  double AW( std::size_t index ) const { return fetch( this->izaw_.second, index ); }
 
   /**
    *  @brief Return a value from the NXS array
@@ -132,7 +132,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto& NXS( std::size_t index ) { return fetch( this->nxs_, index ); }
+  int64_t& NXS( std::size_t index ) { return fetch( this->nxs_, index ); }
 
   /**
    *  @brief Return a value from the NXS array
@@ -142,7 +142,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto NXS( std::size_t index ) const { return fetch( this->nxs_, index ); }
+  int64_t NXS( std::size_t index ) const { return fetch( this->nxs_, index ); }
 
   /**
    *  @brief Return a value from the JXS array
@@ -152,7 +152,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto& JXS( std::size_t index ) { return fetch( this->jxs_, index ); }
+  int64_t& JXS( std::size_t index ) { return fetch( this->jxs_, index ); }
 
   /**
    *  @brief Return a value from the JXS array
@@ -162,7 +162,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto JXS( std::size_t index ) const { return fetch( this->jxs_, index ); }
+  int64_t JXS( std::size_t index ) const { return fetch( this->jxs_, index ); }
 
   /**
    *  @brief Return a value from the XSS array
@@ -172,7 +172,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto& XSS( std::size_t index ) { return fetch( this->xss_, index ); }
+  double& XSS( std::size_t index ) { return fetch( this->xss_, index ); }
 
   /**
    *  @brief Return a value from the XSS array
@@ -182,7 +182,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto XSS( std::size_t index ) const { return fetch( this->xss_, index ); }
+  double XSS( std::size_t index ) const { return fetch( this->xss_, index ); }
 
   /**
    *  @brief Return a value from the XSS array as an integer value
@@ -192,7 +192,7 @@ public:
    *
    *  @param[in] index    the index (one-based)
    */
-  auto IXSS( std::size_t index ) const {
+  int IXSS( std::size_t index ) const {
 
     return static_cast< int >( std::round( fetch( this->xss_, index ) ) );
   }
