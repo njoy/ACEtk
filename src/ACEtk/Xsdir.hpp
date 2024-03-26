@@ -6,6 +6,7 @@
 #include <map>
 #include <vector>
 #include <fstream>
+#include <locale>
 
 // other includes
 #include "ACEtk/XsdirEntry.hpp"
