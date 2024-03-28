@@ -2,6 +2,7 @@
 #define NJOY_ACETK_CONTINUOUS_ANGULARDISTRIBUTIONDATA
 
 // system includes
+#include <algorithm>
 #include <variant>
 
 // other includes

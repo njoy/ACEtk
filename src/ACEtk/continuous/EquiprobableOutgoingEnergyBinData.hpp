@@ -2,6 +2,7 @@
 #define NJOY_ACETK_CONTINUOUS_EQUIPROBABLEOUTGOINGENERGYBINDATA
 
 // system includes
+#include <algorithm>
 
 // other includes
 #include "ACEtk/EnergyDistributionType.hpp"

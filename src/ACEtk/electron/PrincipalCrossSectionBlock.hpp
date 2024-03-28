@@ -2,6 +2,7 @@
 #define NJOY_ACETK_ELECTRON_PRINCIPALCROSSSECTIONBLOCK
 
 // system includes
+#include <algorithm>
 
 // other includes
 #include "ACEtk/base/ArrayData.hpp"
