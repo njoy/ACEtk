@@ -1,6 +1,8 @@
 template< typename Ostream >
 void print( Ostream& ostream ) const {
 
+  using namespace njoy::tools::disco;
+
   auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
 
   using IZAWLine = Record< Integer<7>, FixedPoint<11, 7>,

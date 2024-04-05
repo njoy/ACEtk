@@ -2,6 +2,8 @@ template< typename Iterator, typename Range >
 static void
 JXS( State<Iterator>& state, Range& result ) {
 
+  using namespace njoy::tools::disco;
+
   using Line = Record< Integer<9>, Integer<9>,
                        Integer<9>, Integer<9>,
                        Integer<9>, Integer<9>,

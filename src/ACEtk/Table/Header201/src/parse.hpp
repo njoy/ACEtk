@@ -1,10 +1,12 @@
 template< typename Iterator >
 Header201 parse( State< Iterator >& state ) {
 
+  using namespace njoy::tools::disco;
+
   using Line1 = Record< Character< 10 >,
-                        ColumnPosition< 1 >,
+                        Column< 1 >,
                         Character< 24 >,
-                        ColumnPosition< 1 >,
+                        Column< 1 >,
                         Character< 24 > >;
 
   std::string szaid;

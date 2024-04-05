@@ -77,7 +77,6 @@ target_include_directories( ACEtk
 target_link_libraries( ACEtk
   INTERFACE
     njoy::tools
-    disco
 )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
