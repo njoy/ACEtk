@@ -4,7 +4,7 @@
 
 // local includes
 #include "ACEtk/Table.hpp"
-#include "views.hpp"
+#include "tools/views/views-python.hpp"
 
 // namespace aliases
 namespace python = pybind11;

@@ -4,7 +4,7 @@
 
 // local includes
 #include "ACEtk/electron/TabulatedEnergyDistribution.hpp"
-#include "views.hpp"
+#include "tools/views/views-python.hpp"
 #include "definitions.hpp"
 
 // namespace aliases

@@ -4,7 +4,6 @@
 
 // local includes
 #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock.hpp"
-#include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases

@@ -4,7 +4,6 @@
 
 // local includes
 #include "ACEtk/photoatomic/ComptonProfileBlock.hpp"
-#include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases

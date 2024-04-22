@@ -3,7 +3,6 @@
 #include <pybind11/stl.h>
 
 // other includes
-#include "views.hpp"
 
 // namespace aliases
 namespace python = pybind11;
@@ -46,25 +45,14 @@ void wrapPhotonuclearTable( python::module&, python::module& );
  */
 PYBIND11_MODULE( ACEtk, module ) {
 
+  python::module::import( "tools" );
+
   // create the views submodule
   python::module viewmodule = module.def_submodule(
 
     "sequence",
     "sequence - ACE sequences (internal use only)"
   );
-
-  // wrap some basic recurring views
-  // none of these are supposed to be created directly by the user
-  // @todo test performance against range-v3
-  wrapBasicRandomAccessAnyViewOf< double >(
-      viewmodule,
-      "AnyRandomAccessView< double >" );
-  wrapBasicRandomAccessAnyViewOf< unsigned int >(
-      viewmodule,
-      "AnyRandomAccessView< unsigned int >" );
-  wrapBasicRandomAccessAnyViewOf< long >(
-      viewmodule,
-      "AnyRandomAccessView< long >" );
 
   // wrap enumerators
   wrapReferenceFrame( module, viewmodule );

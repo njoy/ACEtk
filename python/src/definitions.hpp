@@ -8,7 +8,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include "ACEtk/fromFile.hpp"
-#include "views.hpp"
+#include "tools/views/views-python.hpp"
 
 namespace python = pybind11;
 
