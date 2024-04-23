@@ -7,7 +7,7 @@ include( FetchContent )
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  https://github.com/njoy/tools
-    GIT_TAG         v0.2.0
+    GIT_TAG         feature/python-views
     GIT_SHALLOW     TRUE
     )
 
@@ -15,17 +15,6 @@ FetchContent_Declare( Catch2
     GIT_REPOSITORY  https://github.com/catchorg/Catch2
     GIT_TAG         v3.3.2
     GIT_SHALLOW     TRUE
-    )
-
-FetchContent_Declare( disco
-    GIT_REPOSITORY  https://github.com/njoy/disco
-    GIT_TAG         origin/master
-    GIT_SHALLOW     TRUE
-    )
-
-FetchContent_Declare( range-v3
-    GIT_REPOSITORY  https://github.com/ericniebler/range-v3
-    GIT_TAG         0.11.0
     )
 
 FetchContent_Declare( pybind11
@@ -39,6 +28,4 @@ FetchContent_Declare( pybind11
 
 FetchContent_MakeAvailable(
     tools
-    disco
-    range-v3
     )

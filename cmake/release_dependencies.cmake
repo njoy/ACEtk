@@ -10,19 +10,14 @@ FetchContent_Declare( Catch2
     GIT_TAG         3f0283de7a9c43200033da996ff9093be3ac84dc # tag: v3.3.2
     )
 
-FetchContent_Declare( disco
-    GIT_REPOSITORY  https://github.com/njoy/disco
-    GIT_TAG         2606933a854bb0269c4ec37143e1236797e27838
+FetchContent_Declare( fast_float
+    GIT_REPOSITORY  https://github.com/fastfloat/fast_float
+    GIT_TAG         f476bc713fda06fbd34dc621b466745a574b3d4c # tag: v6.1.1
     )
 
 FetchContent_Declare( pybind11
     GIT_REPOSITORY  https://github.com/pybind/pybind11
     GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
-    )
-
-FetchContent_Declare( range-v3
-    GIT_REPOSITORY  https://github.com/ericniebler/range-v3
-    GIT_TAG         4989f3e9ff2efee1852942bb9328ef121369ba02 # tag: 0.11.0
     )
 
 FetchContent_Declare( spdlog
@@ -33,7 +28,7 @@ set( SPDLOG_BUILD_PIC CACHE INTERNAL BOOL ON )
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  https://github.com/njoy/tools
-    GIT_TAG         25c9273d05601a9644feea6d7539250bf1d1c0dc # tag: v0.2.0
+    GIT_TAG         14596b303de7413167f4f4c030e2923cabd3f2a3
     )
 
 #######################################################################
@@ -41,8 +36,7 @@ FetchContent_Declare( tools
 #######################################################################
 
 FetchContent_MakeAvailable(
-    disco
-    range-v3
+    fast_float
     spdlog
     tools
     )

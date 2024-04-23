@@ -2,6 +2,8 @@ template< typename Iterator, typename IZrange, typename AWrange>
 static void
 IZAW( State<Iterator>& state, IZrange& izrange, AWrange& awrange ) {
 
+  using namespace njoy::tools::disco;
+
   using Line = Record< Integer<7>, Scientific<11, 0>,
                        Integer<7>, Scientific<11, 0>,
                        Integer<7>, Scientific<11, 0>,

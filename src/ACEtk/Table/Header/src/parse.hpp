@@ -1,10 +1,12 @@
 template< typename Iterator >
 static Header parse( State< Iterator >& state ) {
 
+  using namespace njoy::tools::disco;
+
   using Line1 = Record< Character< 10 >,
                         Scientific< 12, 6 >,
                         Scientific< 12, 6 >,
-                        ColumnPosition< 1 >,
+                        Column< 1 >,
                         Character< 10 > >;
 
   std::string zaid;

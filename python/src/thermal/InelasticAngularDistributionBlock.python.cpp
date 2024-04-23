@@ -4,7 +4,6 @@
 
 // local includes
 #include "ACEtk/thermal/InelasticAngularDistributionBlock.hpp"
-#include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases

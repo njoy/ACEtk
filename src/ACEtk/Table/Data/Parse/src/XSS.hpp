@@ -2,6 +2,8 @@ template< typename Iterator, typename Range >
 static void
 XSS( State<Iterator>& state, Range& result ) {
 
+  using namespace njoy::tools::disco;
+
   using Line = Record< Scientific< 20, 0 >,
                        Scientific< 20, 0 >,
                        Scientific< 20, 0 >,

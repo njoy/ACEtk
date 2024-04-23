@@ -4,7 +4,6 @@
 
 // local includes
 #include "ACEtk/continuous/FrameAndMultiplicityBlock.hpp"
-#include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases
@@ -19,12 +18,6 @@ void wrapFrameAndMultiplicityBlock( python::module& module,
   using Block = njoy::ACEtk::continuous::FrameAndMultiplicityBlock;
   using ReferenceFrame = njoy::ACEtk::ReferenceFrame;
   using ReferenceFrameRange = BasicRandomAccessAnyView< ReferenceFrame >;
-
-  // wrap views created by this block
-  // none of these are supposed to be created directly by the user
-  wrapBasicRandomAccessAnyViewOf< ReferenceFrame >(
-      viewmodule,
-      "any_view< ReferenceFrame, random_access >" );
 
   // create the block
   python::class_< Block > block(

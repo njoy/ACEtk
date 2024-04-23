@@ -4,7 +4,7 @@
 
 // local includes
 #include "ACEtk/thermal/CrossSectionBlock.hpp"
-#include "views.hpp"
+#include "tools/views/views-python.hpp"
 #include "definitions.hpp"
 
 // namespace aliases

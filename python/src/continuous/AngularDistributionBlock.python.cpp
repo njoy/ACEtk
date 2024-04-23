@@ -4,7 +4,6 @@
 
 // local includes
 #include "ACEtk/continuous/AngularDistributionBlock.hpp"
-#include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases

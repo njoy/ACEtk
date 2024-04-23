@@ -7,7 +7,6 @@
 // other includes
 #include "ACEtk/base/Base.hpp"
 #include "ACEtk/ReferenceFrame.hpp"
-#include "range/v3/view/transform.hpp"
 
 namespace njoy {
 namespace ACEtk {

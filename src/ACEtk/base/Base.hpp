@@ -7,8 +7,7 @@
 
 // other includes
 #include "tools/Log.hpp"
-#include "range/v3/view/subrange.hpp"
-#include "range/v3/view/transform.hpp"
+#include "tools/std20/views.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -101,7 +100,7 @@ public:
    */
   auto XSS() const {
 
-    return ranges::make_subrange( this->begin(), this->end() );
+    return nano::ranges::subrange( this->begin(), this->end() );
   }
 
   /**
@@ -147,7 +146,7 @@ public:
     const auto left = this->iterator( index );
     const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
                                   : left;
-    return ranges::make_subrange( left, right );
+    return nano::ranges::subrange( left, right );
   }
 
   /**
@@ -166,7 +165,7 @@ public:
     const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
                                   : left;
     return this->XSS( index, length )
-           | ranges::views::transform(
+           | nano::views::transform(
                  [] ( auto value ) -> int
                     { return static_cast< int >( std::round( value ) ); } );
   }

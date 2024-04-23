@@ -4,7 +4,7 @@
 
 // local includes
 #include "ACEtk/photoatomic/FluorescenceDataBlock.hpp"
-#include "views.hpp"
+#include "tools/views/views-python.hpp"
 #include "definitions.hpp"
 
 // namespace aliases

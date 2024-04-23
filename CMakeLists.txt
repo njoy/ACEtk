@@ -33,8 +33,11 @@ cmake_dependent_option(
 cmake_dependent_option(
   ACEtk.python
   "Build ACEtk python bindings" ON
-  "NOT ${subproject}" OFF
+  "NOT ${subproject} OR DEFINED require.ACEtk.python " OFF
 )
+if ( ACEtk.python )
+  set( require.tools.python CACHE BOOL ON )
+endif()
 
 ########################################################################
 # Dependencies
@@ -77,8 +80,6 @@ target_include_directories( ACEtk
 target_link_libraries( ACEtk
   INTERFACE
     njoy::tools
-    disco
-    range-v3
 )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -87,7 +88,9 @@ target_link_libraries( ACEtk
 
 if( ACEtk.python )
 
-  FetchContent_MakeAvailable( pybind11 )
+  FetchContent_MakeAvailable(
+    pybind11
+    )
 
   pybind11_add_module( ACEtk.python
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/ACEtk.python.cpp
@@ -200,6 +203,7 @@ if( ACEtk.python )
       )
 
   target_link_libraries( ACEtk.python PRIVATE ACEtk )
+  add_dependencies( ACEtk.python tools.python )
   target_include_directories( ACEtk.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
   target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
@@ -209,8 +213,11 @@ if( ACEtk.python )
   message( STATUS "Building ACEtk's python API" )
 
   list( APPEND ACEtk_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
+  list( APPEND tools_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR}/_deps/tools-build )
 
-  include( cmake/unit_testing_python.cmake )
+  if( ACEtk.tests )
+    include( cmake/unit_testing_python.cmake )
+  endif()
 
 endif()
 

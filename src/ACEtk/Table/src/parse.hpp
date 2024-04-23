@@ -1,6 +1,8 @@
 template< typename Iterator >
 static std::string readVersion( State< Iterator >& state ) {
 
+  using namespace njoy::tools::disco;
+
   // read a line, reset state
   using Line = Record< Character< 80 > >;
   std::string line;

@@ -4,7 +4,6 @@
 
 // local includes
 #include "ACEtk/electron/SubshellTransitionDataBlock.hpp"
-#include "views.hpp"
 #include "definitions.hpp"
 
 // namespace aliases
