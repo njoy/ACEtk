@@ -100,7 +100,7 @@ public:
    */
   auto XSS() const {
 
-    return nano::ranges::subrange( this->begin(), this->end() );
+    return njoy::tools::std20::ranges::subrange( this->begin(), this->end() );
   }
 
   /**
@@ -146,7 +146,7 @@ public:
     const auto left = this->iterator( index );
     const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
                                   : left;
-    return nano::ranges::subrange( left, right );
+    return njoy::tools::std20::ranges::subrange( left, right );
   }
 
   /**
@@ -165,7 +165,7 @@ public:
     const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
                                   : left;
     return this->XSS( index, length )
-           | nano::views::transform(
+           | njoy::tools::std20::views::transform(
                  [] ( auto value ) -> int
                     { return static_cast< int >( std::round( value ) ); } );
   }
