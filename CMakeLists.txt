@@ -33,12 +33,10 @@ cmake_dependent_option(
 cmake_dependent_option(
   ACEtk.python
   "Build ACEtk python bindings" ON
-  "NOT ${subproject}" OFF
+  "NOT ${subproject} OR DEFINED requires.ACEtk.python " OFF
 )
-
-# we need tools.python for ACEtk.python
 if ( ACEtk.python )
-  set( subproject_python ON )
+  set( require.tools.python CACHE BOOL ON )
 endif()
 
 ########################################################################
@@ -217,7 +215,9 @@ if( ACEtk.python )
   list( APPEND ACEtk_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
   list( APPEND tools_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR}/_deps/tools-build )
 
-  include( cmake/unit_testing_python.cmake )
+  if( ACEtk.tests )
+    include( cmake/unit_testing_python.cmake )
+  endif()
 
 endif()
 
