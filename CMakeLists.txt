@@ -33,7 +33,7 @@ cmake_dependent_option(
 cmake_dependent_option(
   ACEtk.python
   "Build ACEtk python bindings" ON
-  "NOT ${subproject} OR DEFINED requires.ACEtk.python " OFF
+  "NOT ${subproject} OR DEFINED require.ACEtk.python " OFF
 )
 if ( ACEtk.python )
   set( require.tools.python CACHE BOOL ON )
