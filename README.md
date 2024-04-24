@@ -1,13 +1,18 @@
 ![Continuous Integration](https://github.com/njoy/ACEtk/workflows/Continuous%20Integration/badge.svg)
 
-
 # ACEtk
-
 Toolkit for reading and interacting with ACE nuclear data files. This toolkit provides a full C++ library along with python bindings.
+
+## Release and development versions
+For the latest version of ACEtk and an overview of the latest changes, please see the [Release Notes](ReleaseNotes.md) or the [release](https://github.com/njoy/ACEtk/releases) page.
+
+The latest release version of ACEtk can always be found at the head of the [main](https://github.com/njoy/ACEtk) branch of this repository and every release is associated to a release tag. New versions are released on a regular basis (we aim to provide updates at least every three months). The latest development version of ACEtk containing the latest updates and changes can be found in at the head of the [develop](https://github.com/njoy/ACEtk/tree/develop) branch. This development version should be used with caution.
 
 ## ACEtk in python
 
-The python bindings for ACEtk are still work in progress and should be used accordingly. Please report any issues encountered while using the python bindings using the issue tracker on this repository.
+### Required NJOY libraries
+
+The ACEtk python bindings require the python bindings of the [tools](https://github.com/njoy/tools) library (more specifically version v0.3.0).
 
 ### Installing ACEtk for python
 
@@ -18,10 +23,12 @@ cd ACEtk
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ../
-make ACEtk.python -j8
+make -j8
 ```
 
-ACEtk in python requires python 3.x so you will need to have at least one python 3.x installed. When multiple python versions are installed, it may be beneficial to include ```-DPYTHON_EXECUTABLE=$(which python3)``` in the cmake configuration step so that the default python3 version will be picked. The compilation will produce a dynamic library linked to the python libraries on the user's computer (it'll be named something like `ACEtk.cpython-37m-darwin.so`). This name will also indicate which version of the python libraries this library is linked to. This is important since you will need to use the associated python version with the ACEtk python package.
+The compilation will produce a number of dynamic libraries linked to the python libraries on the user's computer (these will be named something like `< component >.cpython-37m-darwin.so` with `< component >` the name of the component). The names of these dynamic libraries will also indicate which version of the python libraries they are linked against. This is important since you will need to use the associated python version along with them.
+
+ACEtk in python requires python 3.x so you will need to have at least one python 3.x installed. When multiple python versions are installed, it may be beneficial to include ```-DPYTHON_EXECUTABLE=$(which python3)``` in the cmake configuration step so that the default python3 version will be picked.
 
 In order to use the ACEtk python package, the user should make sure that the library is within the python path. This can be done in multiple ways. You can set that up by adding the ACEtk build path to the python path `$PYTHONPATH` environmental variable on your machine, or by using the following in your python code:
 ```
@@ -30,9 +37,11 @@ sys.path.append( < ACEtk-build-path > )
 ```
 where `< ACEtk-build-path >` is the path to the ACEtk python dynamic library.
 
-When running python in the build directory directly, none of these steps are required.
-
 #### Troubleshooting ####
+
+##### c++: Permission denied #####
+
+On MacOS, an error may occur when using `make -j8` telling the user that there is no permission to execute the compiler (the error message will contain the full path to the compiler executable). This error is related to an issue with the MacOS system default make installation not allowing parallel compilation (the `-j8` part of the make command). Executing `make` without a parallel option will function, but the user should consider installing a different version of make (e.g. using homebrew) to get around this.
 
 ##### CMake doesn’t detect the right Python version #####
 
@@ -42,12 +51,17 @@ The CMake-based build system will try to automatically detect the installed vers
 
 A version of python 3.x is preferred.
 
-##### importError cannot import name <sysconfig> #####
+##### ImportError cannot import name <sysconfig> #####
 
 This error sometimes comes up when running the cmake command. This appears to be related to an incomplete/corrupted python installation. It can be rectified by installing the distutils package for the python version that is being used. On a linux system, the following command should install the distutils package:
 ```
 sudo apt install python3-distutils
 ```
+
+##### ImportError `GLIBCXX_3.4.30' not found
+
+A problem may occur if a user's installed python environment is through conda. The user will be able to build properly but all of the unit tests for python may fail due to GLIBCXX_3.4.30 being missing. This seems to be an a problem with conda not having GLIBCXX_3.4.30 in the path. If the user is able to compile ENDFtk, they have GLIBCXX_3.4.30. At which point, a symlink will need to be created to point the conda enviroment to where GLIBCXX_3.4.30 is installed.
+
 
 ##### cannot find python.h #####
 
