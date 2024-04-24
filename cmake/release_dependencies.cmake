@@ -5,54 +5,30 @@ include( FetchContent )
 # Declare project dependencies
 #######################################################################
 
-FetchContent_Declare( catch-adapter
-    GIT_REPOSITORY  https://github.com/njoy/catch-adapter
-    GIT_TAG         fb84b82ebf7a4789aa43cea560680cf745c6ee4f
+FetchContent_Declare( Catch2
+    GIT_REPOSITORY  https://github.com/catchorg/Catch2
+    GIT_TAG         3f0283de7a9c43200033da996ff9093be3ac84dc # tag: v3.3.2
     )
 
-FetchContent_Declare( date-adapter
-    GIT_REPOSITORY  https://github.com/njoy/date-adapter
-    GIT_TAG         c929fa53cacb9074b53360cb696c5a669df3723f
+FetchContent_Declare( fast_float
+    GIT_REPOSITORY  https://github.com/fastfloat/fast_float
+    GIT_TAG         f476bc713fda06fbd34dc621b466745a574b3d4c # tag: v6.1.1
     )
 
-FetchContent_Declare( dimwits
-    GIT_REPOSITORY  https://github.com/njoy/DimensionalAnalysis
-    GIT_TAG         acd794d373c8740a788f5c9d58a6eb8ba4d9861a
-    )
-
-FetchContent_Declare( disco
-    GIT_REPOSITORY  https://github.com/njoy/disco
-    GIT_TAG         a1a7ddb2c0f69465524d8640ee29988b714a881e
-    )
-
-FetchContent_Declare( hana-adapter
-    GIT_REPOSITORY  https://github.com/njoy/hana-adapter
-    GIT_TAG         f58e8973c9a614dc4f3720b5581a762c61bdbb40
-    )
-
-FetchContent_Declare( header-utilities
-    GIT_REPOSITORY  https://github.com/njoy/header-utilities
-    GIT_TAG         cc2610fee15e255c151e8e22aca1e8b3d1a96b39
-    )
-
-FetchContent_Declare( interpolation
-    GIT_REPOSITORY  https://github.com/njoy/interpolation
-    GIT_TAG         2a76934a148bf379ab594f6cdd2cdf4c8c28e447 # tag: v0.1.0
-    )
-
-FetchContent_Declare( Log
-    GIT_REPOSITORY  https://github.com/njoy/Log
-    GIT_TAG         52962b7796afe37ef1d8f7edb4bf9ecb1b868d15
-    )
-
-FetchContent_Declare( range-v3-adapter
-    GIT_REPOSITORY  https://github.com/njoy/range-v3-adapter
-    GIT_TAG         252679d4737c8f755d87c0e1eed6c37394a2ec59
+FetchContent_Declare( pybind11
+    GIT_REPOSITORY  https://github.com/pybind/pybind11
+    GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
     )
 
 FetchContent_Declare( spdlog
     GIT_REPOSITORY  https://github.com/gabime/spdlog
-    GIT_TAG         a51b4856377a71f81b6d74b9af459305c4c644f8
+    GIT_TAG         ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36 # tag: v1.11.0
+    )
+set( SPDLOG_BUILD_PIC CACHE INTERNAL BOOL ON )
+
+FetchContent_Declare( tools
+    GIT_REPOSITORY  https://github.com/njoy/tools
+    GIT_TAG         368dbd9bd44754de616c46ffed0f80d2d16d8360 # tag: v0.3.0
     )
 
 #######################################################################
@@ -60,14 +36,7 @@ FetchContent_Declare( spdlog
 #######################################################################
 
 FetchContent_MakeAvailable(
-    catch-adapter
-    date-adapter
-    dimwits
-    disco
-    hana-adapter
-    header-utilities
-    interpolation
-    Log
-    range-v3-adapter
+    fast_float
     spdlog
+    tools
     )

@@ -1,5 +1,8 @@
 template< typename Ostream >
 void print( Ostream& ostream ) const {
+
+  using namespace njoy::tools::disco;
+
   auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
 
   using IZAWLine = Record< Integer<7>, FixedPoint<11, 7>,
@@ -54,9 +57,9 @@ void print( Ostream& ostream ) const {
                   this->JXS(25), this->JXS(26), this->JXS(27), this->JXS(28),
                   this->JXS(29), this->JXS(30), this->JXS(31), this->JXS(32) );
 
-  auto remainingLines = this->xss.size() / 4;
-  auto remainingEntries = this->xss.size() % 4;
-  auto iterator = this->xss.begin();
+  auto remainingLines = this->XSS().size() / 4;
+  auto remainingEntries = this->XSS().size() % 4;
+  auto iterator = this->XSS().begin();
 
   using XSSLine = Record< Scientific< 20, 12 >,
                           Scientific< 20, 12 >,
@@ -64,13 +67,16 @@ void print( Ostream& ostream ) const {
                           Scientific< 20, 12 > >;
 
   while ( remainingLines-- ) {
+
     XSSLine::write( it, iterator[0], iterator[1], iterator[2], iterator[3] );
     std::advance( iterator, 4 );
   }
 
-  if ( remainingEntries ){
-    while( remainingEntries-- ){
-      Scientific< 20, 13 >::write( *iterator, it );
+  if ( remainingEntries ) {
+
+    while( remainingEntries-- ) {
+
+      Scientific< 20, 12 >::write( *iterator, it );
       ++iterator;
     }
     Record<>::write( it );

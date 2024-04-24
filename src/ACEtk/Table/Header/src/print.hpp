@@ -1,71 +1,19 @@
-protected:
-
 template< typename Ostream >
-void print( Ostream& ostream, Version< 2,0,1 > ) const {
-  auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
-  
-  using Line1 = disco::Record< disco::Character<10>,     // Format
-                               disco::ColumnPosition<1>,
-                               disco::Character<24>,     // SZAID
-                               disco::ColumnPosition<1>,
-                               disco::Character<24> >;   // Source
-
-  Line1::write( it,
-                "     2.0.1",
-                static_cast< const std::string& >( this->szaid ),
-                this->source ?
-                static_cast< const std::string& >( *(this->source) ) :
-                std::string(24, ' ') );
-
-  using Line2 = disco::Record< disco::FixedPoint<12,6>,   // AWR
-                               disco::ColumnPosition<1>,
-                               disco::Scientific<12,4>,   // temperature
-                               disco::ColumnPosition<1>,
-                               disco::Character<10>,      // processing date
-                               disco::ColumnPosition<1>,
-                               disco::Integer<4> >; // number of comments
-
-  Line2::write( it,
-                this->atomicWeightRatio,
-                this->processTemperature.value,
-                date::format( "%Y-%m-%d", this->processDate ),
-                this->comments.size() );
-
-  using CommentLine = disco::Record< disco::Character<70> >;
-  for( const auto& comment : this->comments ){
-    CommentLine::write( it, static_cast< const std::string& >(comment) );
-  }
-}
-
-template< typename Ostream >
-void print( Ostream& ostream, Version< 1,0,0 > ) const {
-  auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
-
-  using Line1 = disco::Record< disco::Character<10>,     // ZAID
-                               disco::FixedPoint<12,6>,  // AWR
-                               disco::Scientific<12,4>,  // temperature
-                               disco::ColumnPosition<1>,
-                               disco::Character<10> >;   // processing date
-
-  Line1::write( it,
-                std::string{ this->szaid.begin() + 14, this->szaid.end() },
-                this->atomicWeightRatio,
-                this->processTemperature.value,
-                date::format( "%m/%d/%y", this->processDate ) );
-
-  using Line2 = disco::Record< disco::Character<70>, disco::Character<10> >;
-  auto empty = []( int size ){ return std::string(size, ' '); };
-  Line2::write( it,
-                this->comments.size() ?
-                  static_cast< const std::string& >(this->comments.front()) :
-                  empty(70),
-                this->mat ?
-                  static_cast< const std::string& >( *(this->mat) ) : empty(10) );
-}
-
-public:
-
-template< int... values, typename Ostream >
 void print( Ostream& ostream ) const {
-  this->print( ostream, Version< values... >{} );
+
+  using namespace njoy::tools::disco;
+
+  auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
+
+  using Line1 = Record< Character< 10 >,
+                        FixedPoint< 12, 6>,
+                        Scientific< 12, 4 >,
+                        Column< 1 >,
+                        Character< 10 > >;
+
+  Line1::write( it, right( this->ZAID(), 10 ), this->AWR(), this->TEMP(),
+                right( this->date(), 10 ) );
+
+  using Line2 = Record< Character< 70 >, Character< 10 > >;
+  Line2::write( it, left( this->title(), 70 ), right( this->material(), 10 ) );
 }

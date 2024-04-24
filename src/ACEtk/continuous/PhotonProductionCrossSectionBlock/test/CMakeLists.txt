@@ -1,0 +1,1 @@
+add_cpp_test( continuous.PhotonProductionCrossSectionBlock PhotonProductionCrossSectionBlock.test.cpp )

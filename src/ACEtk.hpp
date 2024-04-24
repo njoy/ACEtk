@@ -1,43 +1,27 @@
-#ifndef ACETK_HPP
-#define ACETK_HPP
+// xsdir
+#include "ACEtk/XsdirEntry.hpp"
+#include "ACEtk/Xsdir.hpp"
 
-#include <regex>
-#include <istream>
-#include <iterator>
-#include <functional>
-#include <algorithm>
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wsign-compare"
-#include "range/v3/all.hpp"
-#pragma GCC diagnostic pop
-
-#include "date.h"
-#include "disco.hpp"
-#include "dimwits.hpp"
-#include "interpolation.hpp"
-#include "header-utilities.hpp"
-#include "Log.hpp"
-
-namespace njoy {
-namespace ACEtk {
-
-using namespace date;
-using namespace disco;
-using namespace dimwits;
-
-template< typename Iterator >
-struct State{
-  long lineNumber = 1;
-  Iterator position;
-  const Iterator end;
-};
-
-#include "ACEtk/details.hpp"
+// generic ACE table
+#include "ACEtk/State.hpp"
 #include "ACEtk/Table.hpp"
-#include "ACEtk/interpretation.hpp"
+#include "ACEtk/fromFile.hpp"
 
-}
-}
+// enumerators
+#include "ACEtk/AngularDistributionType.hpp"
+#include "ACEtk/EnergyDistributionType.hpp"
+#include "ACEtk/ReferenceFrame.hpp"
 
-#endif
+// ACE data blocks
+#include "ACEtk/photoatomic.hpp"
+#include "ACEtk/dosimetry.hpp"
+#include "ACEtk/electron.hpp"
+#include "ACEtk/thermal.hpp"
+#include "ACEtk/continuous.hpp"
+
+// interpretation ACE tables
+#include "ACEtk/ContinuousEnergyTable.hpp"
+#include "ACEtk/DosimetryTable.hpp"
+#include "ACEtk/PhotoatomicTable.hpp"
+#include "ACEtk/PhotonuclearTable.hpp"
+#include "ACEtk/ThermalScatteringTable.hpp"

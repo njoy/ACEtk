@@ -1,51 +1,78 @@
+#ifndef NJOY_ACETK_TABLE
+#define NJOY_ACETK_TABLE
+
+// system includes
+#include <cctype>
+#include <istream>
+#include <regex>
+#include <string>
+#include <variant>
+#include <vector>
+
+// other includes
+#include "tools/Log.hpp"
+#include "tools/std20/views.hpp"
+#include "tools/disco.hpp"
+#include "ACEtk/State.hpp"
+
+namespace njoy {
+namespace ACEtk {
+
+/**
+ *  @class
+ *  @brief The generic ACE table
+ *
+ *  The Table class represents the generic ACE table, which can be of any type
+ *  (e.g. continuous energy, thermal scattering, etc.). It contains a header
+ *  and the actual data of the table (the data being the IZAW, NXS, JXS and XSS
+ *  arrays).
+ */
 class Table {
+
 public:
-  /* nested classes */
+
   #include "ACEtk/Table/Header.hpp"
+  #include "ACEtk/Table/Header201.hpp"
   #include "ACEtk/Table/Data.hpp"
 
-  Data data;
-  Header header;
- 
-  Table( Header&& header, Data&& data ) :
-    data( std::move(data) ), header( std::move(header) ){}
+  using HeaderVariant = std::variant< Header, Header201 >;
 
-protected:
-  /* api methods */
-  template< typename Iterator >
-  Table( State<Iterator>& state, Header&& header ) :
-    Table( std::forward< decltype(header) >(header), Data(state) ){}
+private:
+
+  Data data_;
+  HeaderVariant header_;
+
+  /* auxiliary functions */
+  #include "ACEtk/Table/src/parse.hpp"
 
 public:
-  template< typename Iterator >
-  Table( State<Iterator>& state )
-    try:
-      Table( state, Header::parse( state ) ){
-    } catch( std::exception& e ) {
-      Log::info("Error while constructing ACE Table");
-      throw e;
-    }
 
-  template< typename Iterator >
-  Table( State<Iterator>&& state ) : Table( state ){}
+  #include "ACEtk/Table/src/ctor.hpp"
 
-  template< typename Range,
-            typename... Args,
-            typename = utility::void_t
-            < decltype( std::declval< Range >().begin() ),
-              decltype( std::declval< Range >().end() ) > >
-  Table( Range&& range, Args&&... ) :
-    Table( State< decltype( range.begin() ) >
-           { 1, range.begin(), range.end() } ){}
+  /**
+   *  @brief Return the header information
+   */
+  const auto& header() const { return this->header_; }
 
-  template< typename Istream,
-            typename = std::enable_if_t
-                       < std::is_base_of< std::istream,
-                                          std::decay_t< Istream > >::value > >
-  Table( Istream&& istream ) :
-    Table( std::string{ std::istreambuf_iterator< char >{ istream },
-                        std::istreambuf_iterator< char >{} } ){}
-  
-public:
+  /**
+   *  @brief Return the data arrays
+   */
+  const auto& data() const { return this->data_; }
+
+  /**
+   *  @brief Return the header information
+   */
+  auto& header() { return this->header_; }
+
+  /**
+   *  @brief Return the data arrays
+   */
+  auto& data() { return this->data_; }
+
   #include "ACEtk/Table/src/print.hpp"
 };
+
+} // ACEtk namespace
+} // njoy namespace
+
+#endif

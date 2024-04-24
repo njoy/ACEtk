@@ -1,74 +1,274 @@
-#define CATCH_CONFIG_MAIN
+// include Catch2
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+using Catch::Matchers::WithinRel;
 
-#include "catch.hpp"
-#include "ACEtk.hpp"
+// what we are testing
+#include "ACEtk/Table.hpp"
 
+// other includes
+
+// convenience typedefs
 using namespace njoy::ACEtk;
+using Data = Table::Data;
 
-Table::Data build();
+std::string chunk();
+void verifyChunk( const Data& );
 
-auto data = build();
+SCENARIO( "Data" ) {
 
-inline Table::Data build(){
-  using IZ = std::array< int32_t, 16 >;
-  using AW = std::array< double, 16 >;
-  using IZAW = std::pair<IZ,AW>;
-  using NXS = std::array< int64_t, 16 >;
-  using JXS = std::array< int64_t, 32 >;
-  using XSS = std::vector< double >;
+  GIVEN( "valid data for a Data instance" ) {
+
+    std::string string = chunk();
+
+    WHEN( "the data is given explicitly (5 arrays)" ) {
+
+      std::array< int32_t, 16 > IZ = {{ 0, 1, 2, 3, 4, 5, 6, 7,
+                                        8, 9, 10, 11, 12, 13, 14, 15 }};
+      std::array< double, 16 > AW ={{ 15., 14., 13., 12., 11., 10., 9., 8.,
+                                      7., 6., 5., 4., 3., 2., 1., 0. }};
+      std::array< int64_t, 16 > NXS = {{  7, 33074, 1595, 132, 46, 814, 2, 0,
+                                          0,     0,    0,   0,  0,   0, 0, 9 }};
+      std::array< int64_t, 32 > JXS = {{       1,  788721,  788768,  788815,
+                                          788862,  788909,  788956, 1270743,
+                                         1270789, 1363882, 1363927, 1475750,
+                                         1633494, 1633500, 1633506, 1634036,
+                                         1634042, 1634042, 1634048, 1637218,
+                                          789147, 1637220, 1464171, 1465923,
+                                         1465934, 1465976, 1465982,       0,
+                                               0,       0,       0,       8 }};
+      std::vector< double > XSS = { 1.00000000000E+00, 1.03125000000E+00,
+                                    1.06250000000E+00, 1.09375000000E+00,
+                                    1.12500000000E+00, 1.15625000000E+00,
+                                    1.90000000000E+00 };
+
+      Data chunk( std::move( IZ ), std::move( AW ), std::move( NXS ),
+                  std::move( JXS ), std::move( XSS ) );
+
+      THEN( "a Data can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "it can be printed" ) {
+
+        std::ostringstream oss;
+        chunk.print( oss );
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
+
+    WHEN( "the data is given explicitly (4 arrays)" ) {
+
+      std::pair< std::array< int32_t, 16 >,
+                 std::array< double, 16 > > IZAW = {
+
+                   {{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }},
+                   {{ 15., 14., 13., 12., 11., 10., 9., 8.,
+                       7., 6., 5., 4., 3., 2., 1., 0. }}
+                 };
+      std::array< int64_t, 16 > NXS = {{  7, 33074, 1595, 132, 46, 814, 2, 0,
+                                          0,     0,    0,   0,  0,   0, 0, 9 }};
+      std::array< int64_t, 32 > JXS = {{       1,  788721,  788768,  788815,
+                                          788862,  788909,  788956, 1270743,
+                                         1270789, 1363882, 1363927, 1475750,
+                                         1633494, 1633500, 1633506, 1634036,
+                                         1634042, 1634042, 1634048, 1637218,
+                                          789147, 1637220, 1464171, 1465923,
+                                         1465934, 1465976, 1465982,       0,
+                                               0,       0,       0,       8 }};
+      std::vector< double > XSS = { 1.00000000000E+00, 1.03125000000E+00,
+                                    1.06250000000E+00, 1.09375000000E+00,
+                                    1.12500000000E+00, 1.15625000000E+00,
+                                    1.90000000000E+00 };
+
+      Data chunk( std::move( IZAW ), std::move( NXS ),
+                  std::move( JXS ), std::move( XSS ) );
+
+      THEN( "a Data can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "it can be printed" ) {
+
+        std::ostringstream oss;
+        chunk.print( oss );
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
+
+    WHEN( "the data is read from a string/stream" ) {
+
+      State< std::string::iterator > state{ 1, string.begin(), string.end() };
+      Data chunk( state );
+
+      THEN( "a Data can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk );
+      } // THEN
+
+      THEN( "it can be printed" ) {
+
+        std::ostringstream oss;
+        chunk.print( oss );
+
+        CHECK( oss.str() == string );
+      } // THEN
+    } // WHEN
+  } // GIVEN
+} // SCENARIO
+
+std::string chunk() {
+
   return
-    Table::Data(IZAW{{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}},
-                     {{0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.}}},
-                 NXS{{ 84, 33074, 1595, 132, 46, 814, 2, 0,
-                        0,     0,    0,   0,  0,   0, 0, 9 }},
-                 JXS{{       1,  788721,  788768,  788815,
-                        788862,  788909,  788956, 1270743,
-                       1270789, 1363882, 1363927, 1475750,
-                       1633494, 1633500, 1633506, 1634036,
-                       1634042, 1634042, 1634048, 1637218,
-                        789147, 1637220, 1464171, 1465923,
-                       1465934, 1465976, 1465982,       0,
-                             0,       0,       0,       8 }},
-                 XSS{ 1.00000000000E-11, 1.03125000000E-11,
-                      1.06250000000E-11, 1.09375000000E-11,
-                      1.12500000000E-11, 1.15625000000E-11,
-                      1.18750000000E-11, 1.21875000000E-11,
-                      1.25000000000E-11, 1.28125000000E-11,
-                      1.31250000000E-11, 1.34375000000E-11,
-                      1.37500000000E-11, 1.43750000000E-11,
-                      1.50000000000E-11, 1.56250000000E-11,
-                      1.62500000000E-11, 1.68750000000E-11,
-                      1.75000000000E-11, 1.81250000000E-11,
-                      1.87500000000E-11, 1.93750000000E-11,
-                      2.00000000000E-11, 2.09375000000E-11,
-                      2.18750000000E-11, 2.28125000000E-11,
-                      2.37500000000E-11, 2.46875000000E-11,
-                      2.56250000000E-11, 2.65625000000E-11,
-                      2.75000000000E-11, 2.84375000000E-11,
-                      2.93750000000E-11, 3.03125000000E-11,
-                      3.12500000000E-11, 3.21875000000E-11,
-                      3.31250000000E-11, 3.40625000000E-11,
-                      3.50000000000E-11, 3.59375000000E-11,
-                      3.68750000000E-11, 3.78125000000E-11,
-                      3.87500000000E-11, 3.96875000000E-11,
-                      4.06250000000E-11, 4.25000000000E-11,
-                      4.43750000000E-11, 4.62500000000E-11,
-                      4.81250000000E-11, 5.00000000000E-11,
-                      5.15625000000E-11, 5.31250000000E-11,
-                      5.46875000000E-11, 5.62500000000E-11,
-                      5.78125000000E-11, 5.93750000000E-11,
-                      6.09375000000E-11, 6.25000000000E-11,
-                      6.40625000000E-11, 6.56250000000E-11,
-                      6.71875000000E-11, 6.87500000000E-11,
-                      7.18750000000E-11, 7.50000000000E-11,
-                      7.81250000000E-11, 8.12500000000E-11,
-                      8.43750000000E-11, 8.75000000000E-11,
-                      9.06250000000E-11, 9.37500000000E-11,
-                      9.68750000000E-11, 1.00000000000E-10,
-                      1.03125000000E-10, 1.06250000000E-10,
-                      1.09375000000E-10, 1.12500000000E-10,
-                      1.15625000000E-10, 1.18750000000E-10,
-                      1.21875000000E-10, 1.25000000000E-10,
-                      1.28125000000E-10, 1.31250000000E-10,
-                      1.34375000000E-10, 1.37500000000E-10 } );
+    "      0 15.0000000      1 14.0000000      2 13.0000000      3 12.0000000\n"
+    "      4 11.0000000      5 10.0000000      6  9.0000000      7  8.0000000\n"
+    "      8  7.0000000      9  6.0000000     10  5.0000000     11  4.0000000\n"
+    "     12  3.0000000     13  2.0000000     14  1.0000000     15  0.0000000\n"
+    "        7    33074     1595      132       46      814        2        0\n"
+    "        0        0        0        0        0        0        0        9\n"
+    "        1   788721   788768   788815   788862   788909   788956  1270743\n"
+    "  1270789  1363882  1363927  1475750  1633494  1633500  1633506  1634036\n"
+    "  1634042  1634042  1634048  1637218   789147  1637220  1464171  1465923\n"
+    "  1465934  1465976  1465982        0        0        0        0        8\n"
+    "  1.000000000000E+00  1.031250000000E+00  1.062500000000E+00  1.093750000000E+00\n"
+    "  1.125000000000E+00  1.156250000000E+00  1.900000000000E+00\n";
+}
+
+void verifyChunk( const Data& chunk ) {
+
+  CHECK( 16 == chunk.IZ().size() );
+  CHECK( 0 == chunk.IZ( 1 ) );
+  CHECK( 1 == chunk.IZ( 2 ) );
+  CHECK( 2 == chunk.IZ( 3 ) );
+  CHECK( 3 == chunk.IZ( 4 ) );
+  CHECK( 4 == chunk.IZ( 5 ) );
+  CHECK( 5 == chunk.IZ( 6 ) );
+  CHECK( 6 == chunk.IZ( 7 ) );
+  CHECK( 7 == chunk.IZ( 8 ) );
+  CHECK( 8 == chunk.IZ( 9 ) );
+  CHECK( 9 == chunk.IZ( 10 ) );
+  CHECK( 10 == chunk.IZ( 11 ) );
+  CHECK( 11 == chunk.IZ( 12 ) );
+  CHECK( 12 == chunk.IZ( 13 ) );
+  CHECK( 13 == chunk.IZ( 14 ) );
+  CHECK( 14 == chunk.IZ( 15 ) );
+  CHECK( 15 == chunk.IZ( 16 ) );
+
+  CHECK( 16 == chunk.AW().size() );
+  CHECK( 15 == chunk.AW( 1 ) );
+  CHECK( 14 == chunk.AW( 2 ) );
+  CHECK( 13 == chunk.AW( 3 ) );
+  CHECK( 12 == chunk.AW( 4 ) );
+  CHECK( 11 == chunk.AW( 5 ) );
+  CHECK( 10 == chunk.AW( 6 ) );
+  CHECK( 9 == chunk.AW( 7 ) );
+  CHECK( 8 == chunk.AW( 8 ) );
+  CHECK( 7 == chunk.AW( 9 ) );
+  CHECK( 6 == chunk.AW( 10 ) );
+  CHECK( 5 == chunk.AW( 11 ) );
+  CHECK( 4 == chunk.AW( 12 ) );
+  CHECK( 3 == chunk.AW( 13 ) );
+  CHECK( 2 == chunk.AW( 14 ) );
+  CHECK( 1 == chunk.AW( 15 ) );
+  CHECK( 0 == chunk.AW( 16 ) );
+
+  CHECK( 16 == chunk.NXS().size() );
+  CHECK( 7 == chunk.NXS( 1 ) );
+  CHECK( 33074 == chunk.NXS( 2 ) );
+  CHECK( 1595 == chunk.NXS( 3 ) );
+  CHECK( 132 == chunk.NXS( 4 ) );
+  CHECK( 46 == chunk.NXS( 5 ) );
+  CHECK( 814 == chunk.NXS( 6 ) );
+  CHECK( 2 == chunk.NXS( 7 ) );
+  CHECK( 0 == chunk.NXS( 8 ) );
+  CHECK( 0 == chunk.NXS( 9 ) );
+  CHECK( 0 == chunk.NXS( 10 ) );
+  CHECK( 0 == chunk.NXS( 11 ) );
+  CHECK( 0 == chunk.NXS( 12 ) );
+  CHECK( 0 == chunk.NXS( 13 ) );
+  CHECK( 0 == chunk.NXS( 14 ) );
+  CHECK( 0 == chunk.NXS( 15 ) );
+  CHECK( 9 == chunk.NXS( 16 ) );
+
+  CHECK( 32 == chunk.JXS().size() );
+  CHECK( 1 == chunk.JXS( 1 ) );
+  CHECK( 788721 == chunk.JXS( 2 ) );
+  CHECK( 788768 == chunk.JXS( 3 ) );
+  CHECK( 788815 == chunk.JXS( 4 ) );
+  CHECK( 788862 == chunk.JXS( 5 ) );
+  CHECK( 788909 == chunk.JXS( 6 ) );
+  CHECK( 788956 == chunk.JXS( 7 ) );
+  CHECK( 1270743 == chunk.JXS( 8 ) );
+  CHECK( 1270789 == chunk.JXS( 9 ) );
+  CHECK( 1363882 == chunk.JXS( 10 ) );
+  CHECK( 1363927 == chunk.JXS( 11 ) );
+  CHECK( 1475750 == chunk.JXS( 12 ) );
+  CHECK( 1633494 == chunk.JXS( 13 ) );
+  CHECK( 1633500 == chunk.JXS( 14 ) );
+  CHECK( 1633506 == chunk.JXS( 15 ) );
+  CHECK( 1634036 == chunk.JXS( 16 ) );
+  CHECK( 1634042 == chunk.JXS( 17 ) );
+  CHECK( 1634042 == chunk.JXS( 18 ) );
+  CHECK( 1634048 == chunk.JXS( 19 ) );
+  CHECK( 1637218 == chunk.JXS( 20 ) );
+  CHECK( 789147 == chunk.JXS( 21 ) );
+  CHECK( 1637220 == chunk.JXS( 22 ) );
+  CHECK( 1464171 == chunk.JXS( 23 ) );
+  CHECK( 1465923 == chunk.JXS( 24 ) );
+  CHECK( 1465934 == chunk.JXS( 25 ) );
+  CHECK( 1465976 == chunk.JXS( 26 ) );
+  CHECK( 1465982 == chunk.JXS( 27 ) );
+  CHECK( 0 == chunk.JXS( 28 ) );
+  CHECK( 0 == chunk.JXS( 29 ) );
+  CHECK( 0 == chunk.JXS( 30 ) );
+  CHECK( 0 == chunk.JXS( 31 ) );
+  CHECK( 8 == chunk.JXS( 32 ) );
+
+  CHECK( 7 == chunk.XSS().size() );
+  CHECK_THAT( 1.00000000000E+00, WithinRel( chunk.XSS( 1 ) ) );
+  CHECK_THAT( 1.03125000000E+00, WithinRel( chunk.XSS( 2 ) ) );
+  CHECK_THAT( 1.06250000000E+00, WithinRel( chunk.XSS( 3 ) ) );
+  CHECK_THAT( 1.09375000000E+00, WithinRel( chunk.XSS( 4 ) ) );
+  CHECK_THAT( 1.12500000000E+00, WithinRel( chunk.XSS( 5 ) ) );
+  CHECK_THAT( 1.15625000000E+00, WithinRel( chunk.XSS( 6 ) ) );
+  CHECK_THAT( 1.90000000000E+00, WithinRel( chunk.XSS( 7 ) ) );
+
+  CHECK( 1 == chunk.IXSS( 1 ) );
+  CHECK( 1 == chunk.IXSS( 2 ) );
+  CHECK( 1 == chunk.IXSS( 3 ) );
+  CHECK( 1 == chunk.IXSS( 4 ) );
+  CHECK( 1 == chunk.IXSS( 5 ) );
+  CHECK( 1 == chunk.IXSS( 6 ) );
+  CHECK( 2 == chunk.IXSS( 7 ) );
+
+  auto range = chunk.XSS( 1, 2 );
+  CHECK( 2 == range.size() );
+  CHECK_THAT( 1.00000000000E+00, WithinRel( range[0] ) );
+  CHECK_THAT( 1.03125000000E+00, WithinRel( range[1] ) );
+
+  range = chunk.XSS( 2, 2 );
+  CHECK( 2 == range.size() );
+  CHECK_THAT( 1.03125000000E+00, WithinRel( range[0] ) );
+  CHECK_THAT( 1.06250000000E+00, WithinRel( range[1] ) );
+
+#ifndef NDEBUG
+  CHECK_THROWS( chunk.IZ( 0 ) );
+  CHECK_THROWS( chunk.IZ( 17 ) );
+
+  CHECK_THROWS( chunk.AW( 0 ) );
+  CHECK_THROWS( chunk.AW( 17 ) );
+
+  CHECK_THROWS( chunk.NXS( 0 ) );
+  CHECK_THROWS( chunk.NXS( 17 ) );
+
+  CHECK_THROWS( chunk.JXS( 0 ) );
+  CHECK_THROWS( chunk.JXS( 33 ) );
+
+  CHECK_THROWS( chunk.XSS( 0 ) );
+  CHECK_THROWS( chunk.XSS( 8 ) );
+#endif
 }

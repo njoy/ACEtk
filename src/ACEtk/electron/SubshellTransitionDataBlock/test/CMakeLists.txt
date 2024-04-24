@@ -1,0 +1,1 @@
+add_cpp_test( electron.SubshellTransitionDataBlock SubshellTransitionDataBlock.test.cpp )

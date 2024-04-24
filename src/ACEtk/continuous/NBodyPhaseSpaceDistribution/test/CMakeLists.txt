@@ -1,0 +1,1 @@
+add_cpp_test( continuous.NBodyPhaseSpaceDistribution NBodyPhaseSpaceDistribution.test.cpp )

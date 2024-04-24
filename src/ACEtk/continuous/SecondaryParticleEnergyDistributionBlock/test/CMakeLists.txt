@@ -1,0 +1,1 @@
+add_cpp_test( continuous.SecondaryParticleEnergyDistributionBlock SecondaryParticleEnergyDistributionBlock.test.cpp )

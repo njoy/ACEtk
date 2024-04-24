@@ -1,0 +1,1 @@
+add_cpp_test( photonuclear.PrincipalCrossSectionBlock PrincipalCrossSectionBlock.test.cpp )

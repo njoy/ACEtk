@@ -1,0 +1,687 @@
+// system includes
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
+// local includes
+#include "ACEtk/ContinuousEnergyTable.hpp"
+#include "ACEtk/fromFile.hpp"
+#include "definitions.hpp"
+
+// namespace aliases
+namespace python = pybind11;
+
+void wrapContinuousEnergyTable( python::module& module, python::module& ) {
+
+  // type aliases
+  using HeaderVariant = njoy::ACEtk::Table::HeaderVariant;
+  using Table = njoy::ACEtk::ContinuousEnergyTable;
+  using ESZ = njoy::ACEtk::continuous::ESZ;
+  using NU = njoy::ACEtk::continuous::NU;
+  using DNU = njoy::ACEtk::continuous::DNU;
+  using MTR = njoy::ACEtk::continuous::MTR;
+  using LQR = njoy::ACEtk::continuous::LQR;
+  using SIG = njoy::ACEtk::continuous::SIG;
+  using AND = njoy::ACEtk::continuous::AND;
+  using DLW = njoy::ACEtk::continuous::DLW;
+  using BDD = njoy::ACEtk::continuous::BDD;
+  using DNED = njoy::ACEtk::continuous::DNED;
+  using GPD = njoy::ACEtk::continuous::GPD;
+  using MTRP = njoy::ACEtk::continuous::MTRP;
+  using SIGP = njoy::ACEtk::continuous::SIGP;
+  using ANDP = njoy::ACEtk::continuous::ANDP;
+  using DLWP = njoy::ACEtk::continuous::DLWP;
+  using YP = njoy::ACEtk::continuous::YP;
+  using UNR = njoy::ACEtk::continuous::UNR;
+  using PTYPE = njoy::ACEtk::continuous::PTYPE;
+  using HPD = njoy::ACEtk::continuous::HPD;
+  using MTRH = njoy::ACEtk::continuous::MTRH;
+  using SIGH = njoy::ACEtk::continuous::SIGH;
+  using ANDH = njoy::ACEtk::continuous::ANDH;
+  using DLWH = njoy::ACEtk::continuous::DLWH;
+  using YH = njoy::ACEtk::continuous::YH;
+
+  // wrap views created by this table
+
+  // create the table
+  python::class_< Table > table(
+
+    module,
+    "ContinuousEnergyTable",
+    "A continuous energy ACE table\n\n"
+    "The ContinuousEnergyTable class represents the ACE table for continuous\n"
+    "energy data for incident neutrons and charged particles."
+  );
+
+  // wrap the table
+  table
+  .def(
+
+    python::init< unsigned int, unsigned int, unsigned int, HeaderVariant,
+                  ESZ, std::optional< NU >, std::optional< DNU >,
+                  MTR, LQR, SIG, AND, DLW,
+                  std::optional< BDD >, std::optional< DNED >,
+                  std::optional< GPD >, std::optional< MTRP >,
+                  std::optional< SIGP >, std::optional< ANDP >,
+                  std::optional< DLWP >, std::optional< YP >,
+                  std::optional< UNR >, std::optional< PTYPE >,
+                  std::optional< std::vector< HPD > >,
+                  std::optional< std::vector< MTRH > >,
+                  std::optional< std::vector< SIGH > >,
+                  std::optional< std::vector< ANDH > >,
+                  std::optional< std::vector< DLWH > >,
+                  std::optional< std::vector< YH > > >(),
+    python::arg( "z" ), python::arg( "a" ), python::arg( "s" ),
+    python::arg( "header" ), python::arg( "esz" ),
+    python::arg( "nu" ) = std::nullopt, python::arg( "dnu" ) = std::nullopt,
+    python::arg( "mtr" ), python::arg( "lqr" ),
+    python::arg( "sig" ), python::arg( "ang" ), python::arg( "dlw" ),
+    python::arg( "bdd" ) = std::nullopt, python::arg( "dned" ) = std::nullopt,
+    python::arg( "gpd" ) = std::nullopt, python::arg( "mtrp" ) = std::nullopt,
+    python::arg( "sigp" ) = std::nullopt, python::arg( "andp" ) = std::nullopt,
+    python::arg( "dlwp" ) = std::nullopt, python::arg( "yp" ) = std::nullopt,
+    python::arg( "unr" ) = std::nullopt, python::arg( "ptype" ) = std::nullopt,
+    python::arg( "hpd" ) = std::nullopt, python::arg( "mtrh" ) = std::nullopt,
+    python::arg( "sigh" ) = std::nullopt,
+    python::arg( "andh" ) = std::nullopt, python::arg( "dlwh" ) = std::nullopt,
+    python::arg( "yh" ) = std::nullopt,
+    "Initialise the table\n\n"
+    "Arguments:\n"
+    "    self      the table\n"
+    "    z         the Z number of the target\n"
+    "    a         the A number of the target\n"
+    "    s         the S number of the target\n"
+    "    header    the header for the table\n"
+    "    esz       the principal cross section block\n"
+    "    nu        the optional fission neutron multiplicity block\n"
+    "    dnu       the optional delayed fission neutron multiplicity block\n"
+    "    mtr       the reaction number block\n"
+    "    lqr       the reaction Q value block\n"
+    "    sig       the cross section data block\n"
+    "    ang       the angular distribution data block\n"
+    "    dlw       the energy distribution data block\n"
+    "    bdd       the delayed fission neutron precursor data block\n"
+    "    dned      the delayed fission neutron energy distribution data block\n"
+    "    gpd       the photon production block\n"
+    "    mtrp      the photon production reaction number block\n"
+    "    sigp      the photon production cross section data block\n"
+    "    angp      the photon production angular distribution data block\n"
+    "    dlwp      the photon production energy distribution data block\n"
+    "    yp        the photon multiplicity reaction number block\n"
+    "    unr       the unresolved resonance probability table block\n"
+    "    ptype     the secondary particle type block\n"
+    "    hpd       the secondary particle production blocks\n"
+    "    mtrh      the secondary particle production reaction number blocks\n"
+    "    sigh      the secondary particle production cross section data blocks\n"
+    "    andh      the secondary particle angular distribution data blocks\n"
+    "    dlwh      the secondary particle energy distribution data blocks\n"
+    "    yh        the secondary particle multiplicity reaction number blocks"
+  )
+  .def_property_readonly(
+
+    "zaid",
+    &Table::ZAID,
+    "The full ZAID or SZAID of the table"
+  )
+  .def_property_readonly(
+
+    "AWR",
+    &Table::AWR,
+    "The atomic weight ratio (with respect to the neutron mass)"
+  )
+  .def_property_readonly(
+
+    "atomic_weight_ratio",
+    &Table::atomicWeightRatio,
+    "The atomic weight ratio (with respect to the neutron mass)"
+  )
+  .def_property_readonly(
+
+    "TEMP",
+    &Table::TEMP,
+    "The temperature of the table"
+  )
+  .def_property_readonly(
+
+    "temperature",
+    &Table::temperature,
+    "The temperature of the table"
+  )
+  .def_property_readonly(
+
+    "date",
+    &Table::date,
+    "The date"
+  )
+  .def_property_readonly(
+
+    "length",
+    &Table::length,
+    "The total length of the XSS array"
+  )
+  .def_property_readonly(
+
+    "za",
+    &Table::ZA,
+    "The ZA of the target"
+  )
+  .def_property_readonly(
+
+    "NES",
+    &Table::NES,
+    "The number of energy points"
+  )
+  .def_property_readonly(
+
+    "number_energy_points",
+    &Table::numberEnergyPoints,
+    "The number of energy points"
+  )
+  .def_property_readonly(
+
+    "NTR",
+    &Table::NTR,
+    "The number of available reactions (excluding elastic)"
+  )
+  .def_property_readonly(
+
+    "number_reactions",
+    &Table::numberReactions,
+    "The number of available reactions (excluding elastic)"
+  )
+  .def_property_readonly(
+
+    "total_number_reactions",
+    &Table::totalNumberReactions,
+    "The total number of available reactions (including elastic)"
+  )
+  .def_property_readonly(
+
+    "NR",
+    &Table::NR,
+    "The number of reactions excluding elastic that produce the projectile"
+  )
+  .def_property_readonly(
+
+    "number_projectile_production_reactions",
+    &Table::numberProjectileProductionReactions,
+    "The number of reactions excluding elastic that produce the projectile"
+  )
+  .def_property_readonly(
+
+    "NTRP",
+    &Table::NTRP,
+    "The number of reactions that produce photons"
+  )
+  .def_property_readonly(
+
+    "number_photon_production_reactions",
+    &Table::numberPhotonProductionReactions,
+    "The number of reactions that produce photons"
+  )
+  .def_property_readonly(
+
+    "NTYPE",
+    &Table::NTYPE,
+    "The number of secondary particle types (excluding the projectile and photons)"
+  )
+  .def_property_readonly(
+
+    "number_secondary_particle_types",
+    &Table::numberSecondaryParticleTypes,
+    "The number of secondary particle types (excluding the projectile and photons)"
+  )
+  .def_property_readonly(
+
+    "NPCR",
+    &Table::NPCR,
+    "The number of delayed percursor families"
+  )
+  .def_property_readonly(
+
+    "number_delayed_precursors",
+    &Table::numberDelayedPrecursors,
+    "The number of delayed percursor families"
+  )
+  .def_property_readonly(
+
+    "S",
+    &Table::S,
+    "The isomeric state of the target"
+  )
+  .def_property_readonly(
+
+    "isomeric_state",
+    &Table::isomericState,
+    "The isomeric state of the target"
+  )
+  .def_property_readonly(
+
+    "Z",
+    &Table::Z,
+    "The atom number of the target"
+  )
+  .def_property_readonly(
+
+    "atom_number",
+    &Table::atomNumber,
+    "The atom number of the target"
+  )
+  .def_property_readonly(
+
+    "A",
+    &Table::A,
+    "The mass number of the target"
+  )
+  .def_property_readonly(
+
+    "mass_number",
+    &Table::massNumber,
+    "The mass number of the target"
+  )
+  .def_property_readonly(
+
+    "ESZ",
+    &Table::ESZ,
+    "The principal cross section block"
+  )
+  .def_property_readonly(
+
+    "principal_cross_section_block",
+    &Table::principalCrossSectionBlock,
+    "The principal cross section block"
+  )
+  .def_property_readonly(
+
+    "NU",
+    &Table::NU,
+    "The fission multiplicity block"
+  )
+  .def_property_readonly(
+
+    "fission_multiplicity_block",
+    &Table::fissionMultiplicityBlock,
+    "The fission multiplicity block"
+  )
+  .def_property_readonly(
+
+    "MTR",
+    &Table::MTR,
+    "The reaction number block"
+  )
+  .def_property_readonly(
+
+    "reaction_number_block",
+    &Table::reactionNumberBlock,
+    "The reaction number block"
+  )
+  .def_property_readonly(
+
+    "LQR",
+    &Table::LQR,
+    "The reaction Q value block"
+  )
+  .def_property_readonly(
+
+    "reaction_qvalue_block",
+    &Table::reactionQValueBlock,
+    "The reaction Q value block"
+  )
+  .def_property_readonly(
+
+    "TYR",
+    &Table::TYR,
+    "The reference frame and multiplicity block"
+  )
+  .def_property_readonly(
+
+    "frame_and_multiplicity_block",
+    &Table::frameAndMultiplicityBlock,
+    "The reference frame and multiplicity block"
+  )
+  .def_property_readonly(
+
+    "SIG",
+    &Table::SIG,
+    "The cross section block"
+  )
+  .def_property_readonly(
+
+    "cross_section_block",
+    &Table::crossSectionBlock,
+    "The cross section block"
+  )
+  .def_property_readonly(
+
+    "AND",
+    &Table::AND,
+    "The angular distribution block"
+  )
+  .def_property_readonly(
+
+    "angular_distribution_block",
+    &Table::angularDistributionBlock,
+    "The angular distribution block"
+  )
+  .def_property_readonly(
+
+    "DLW",
+    &Table::DLW,
+    "The energy distribution block"
+  )
+  .def_property_readonly(
+
+    "energy_distribution_block",
+    &Table::energyDistributionBlock,
+    "The energy distribution block"
+  )
+  .def_property_readonly(
+
+    "GPD",
+    &Table::GPD,
+    "The photon production block"
+  )
+  .def_property_readonly(
+
+    "photon_production_block",
+    &Table::photonProductionBlock,
+    "The photon production block"
+  )
+  .def_property_readonly(
+
+    "MTRP",
+    &Table::MTRP,
+    "The photon production reaction number block"
+  )
+  .def_property_readonly(
+
+    "photon_production_reaction_number_block",
+    &Table::photonProductionReactionNumberBlock,
+    "The photon production reaction number block"
+  )
+  .def_property_readonly(
+
+    "SIGP",
+    &Table::SIGP,
+    "The photon production cross section block"
+  )
+  .def_property_readonly(
+
+    "photon_production_cross_section_block",
+    &Table::crossSectionBlock,
+    "The photon production cross section block"
+  )
+  .def_property_readonly(
+
+    "ANDP",
+    &Table::ANDP,
+    "The photon production angular distribution block"
+  )
+  .def_property_readonly(
+
+    "photon_production_angular_distribution_block",
+    &Table::photonProductionAngularDistributionBlock,
+    "The photon production angular distribution block"
+  )
+  .def_property_readonly(
+
+    "DLWP",
+    &Table::DLWP,
+    "The photon production energy distribution block"
+  )
+  .def_property_readonly(
+
+    "photon_production_energy_distribution_block",
+    &Table::photonProductionEnergyDistributionBlock,
+    "The photon production energy distribution block"
+  )
+  .def_property_readonly(
+
+    "YP",
+    &Table::YP,
+    "The photon multiplicity reaction number block"
+  )
+  .def_property_readonly(
+
+    "photon_multiplicity_reaction_number_block",
+    &Table::photonMultiplicityReactionNumberBlock,
+    "The photon multiplicity reaction number block"
+  )
+  .def_property_readonly(
+
+    "UNR",
+    &Table::UNR,
+    "The unresolved probability table block"
+  )
+  .def_property_readonly(
+
+    "probability_table_block",
+    &Table::probabilityTableBlock,
+    "The unresolved probability table block"
+  )
+  .def_property_readonly(
+
+    "DNU",
+    &Table::DNU,
+    "The delayed fission multiplicity block"
+  )
+  .def_property_readonly(
+
+    "delayed_fission_multiplicity_block",
+    &Table::delayedFissionMultiplicityBlock,
+    "The delayed fission multiplicity block"
+  )
+  .def_property_readonly(
+
+    "BDD",
+    &Table::BDD,
+    "The delayed neutron precursor block"
+  )
+  .def_property_readonly(
+
+    "delayed_neutron_precursor_block",
+    &Table::delayedNeutronPrecursorBlock,
+    "The delayed neutron precursor block"
+  )
+  .def_property_readonly(
+
+    "DNED",
+    &Table::DNED,
+    "The delayed neutron energy distribution block"
+  )
+  .def_property_readonly(
+
+    "delayed_neutron_energy_distribution_block",
+    &Table::delayedNeutronEnergyDistributionBlock,
+    "The delayed neutron energy distribution block"
+  )
+  .def_property_readonly(
+    "PTYPE",
+    &Table::PTYPE,
+    "The secondary particle type block"
+  )
+  .def_property_readonly(
+
+    "secondary_particle_type_block",
+    &Table::secondaryParticleTypeBlock,
+    "The secondary particle type block"
+  )
+  .def_property_readonly(
+    "NTRO",
+    &Table::NTRO,
+    "The secondary particle information block"
+  )
+  .def_property_readonly(
+
+    "secondary_particle_information_block",
+    &Table::secondaryParticleInformationBlock,
+    "The secondary particle information block"
+  )
+  .def_property_readonly(
+    "IXS",
+    &Table::IXS,
+    "The secondary particle locator block"
+  )
+  .def_property_readonly(
+
+    "secondary_particle_locator_block",
+    &Table::secondaryParticleLocatorBlock,
+    "The secondary particle locator block"
+  )
+  .def(
+
+    "HPD",
+    &Table::HPD,
+    python::arg( "index" ),
+    "Return the secondary particle production block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_production_block",
+    &Table::secondaryParticleProductionBlock,
+    python::arg( "index" ),
+    "Return the secondary particle production block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "MTRH",
+    &Table::MTRH,
+    python::arg( "index" ),
+    "Return the reaction number block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_reaction_number_block",
+    &Table::secondaryParticleReactionNumberBlock,
+    python::arg( "index" ),
+    "Return the reaction number block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "TYRH",
+    &Table::TYRH,
+    python::arg( "index" ),
+    "Return the reference frame and multiplicity block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_frame_and_multiplicity_block",
+    &Table::secondaryParticleFrameAndMultiplicityBlock,
+    python::arg( "index" ),
+    "Return the reference frame and multiplicity block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "SIGH",
+    &Table::SIGH,
+    python::arg( "index" ),
+    "Return the production cross section block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_production_cross_section_block",
+    &Table::secondaryParticleFrameAndMultiplicityBlock,
+    python::arg( "index" ),
+    "Return the production cross section block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "ANDH",
+    &Table::ANDH,
+    python::arg( "index" ),
+    "Return the angular distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_angular_distribution_block",
+    &Table::secondaryParticleAngularDistributionBlock,
+    python::arg( "index" ),
+    "Return the angular distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "DLWH",
+    &Table::DLWH,
+    python::arg( "index" ),
+    "Return the energy distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_energy_distribution_block",
+    &Table::secondaryParticleEnergyDistributionBlock,
+    python::arg( "index" ),
+    "Return the energy distribution block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "YH",
+    &Table::YH,
+    python::arg( "index" ),
+    "Return the multiplicity reaction number block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  )
+  .def(
+
+    "secondary_particle_multiplicity_reaction_number_block",
+    &Table::secondaryParticleMultiplicityReactionNumberBlock,
+    python::arg( "index" ),
+    "Return the multiplicity reaction number block for a secondary particle index\n\n"
+    "When the index is out of range an out of range exception is thrown\n"
+    "(debug mode only).\n\n"
+    "    self     the block\n"
+    "    index    the index (one-based)"
+  );
+
+  // add standard block definitions
+  addStandardTableDefinitions< Table >( table );
+}

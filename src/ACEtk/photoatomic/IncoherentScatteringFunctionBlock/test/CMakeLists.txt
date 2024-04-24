@@ -1,0 +1,1 @@
+add_cpp_test( photoatomic.IncoherentScatteringFunctionBlock IncoherentScatteringFunctionBlock.test.cpp )
