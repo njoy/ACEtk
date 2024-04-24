@@ -56,8 +56,8 @@ public:
 
     if ( this->momentum_.has_value() ) {
 
-      return nano::ranges::subrange( this->momentum_.value().begin(),
-                                     this->momentum_.value().end() );
+      return njoy::tools::std20::ranges::subrange( this->momentum_.value().begin(),
+                                                   this->momentum_.value().end() );
     }
     else {
 
