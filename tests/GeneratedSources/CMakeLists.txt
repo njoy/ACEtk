@@ -1,0 +1,1 @@
+add_subdirectory(target_sources)
