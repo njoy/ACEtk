@@ -30,7 +30,7 @@ set( SPDLOG_INSTALL CACHE INTERNAL BOOL ON )
 
 shacl_FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         368dbd9bd44754de616c46ffed0f80d2d16d8360 # tag: v0.3.0
+    GIT_TAG         bfba151cc3ac3898fb6f66350a1db683d7d80035 # tag: v0.3.0
     )
 #######################################################################
 # Load dependencies
