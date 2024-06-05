@@ -4,7 +4,7 @@
 
 enable_testing()
 
-FetchContent_MakeAvailable( Catch2 )
+shacl_FetchContent_MakeAvailable( Catch2 )
 
 function( add_cpp_test name source )
 
