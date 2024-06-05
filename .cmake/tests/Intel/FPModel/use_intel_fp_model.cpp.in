@@ -1,0 +1,7 @@
+#include <iostream>
+
+int main() {
+  std::cout << "$<TARGET_PROPERTY:use_intel_fp_model_CXX,COMPILE_OPTIONS>";
+
+  return 0;
+}

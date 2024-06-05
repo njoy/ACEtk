@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+int main() {
+  printf("%s","$<TARGET_PROPERTY:use_intel_fp_model_C,COMPILE_OPTIONS>");
+
+  return 0;
+}
