@@ -100,10 +100,6 @@ endif()
 
 if(ACEtk.python)
 
-  shacl_FetchContent_MakeAvailable(
-    pybind11
-    )
-
   pybind11_add_module( ACEtk.python
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/ACEtk.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/XsdirEntry.python.cpp
