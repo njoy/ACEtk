@@ -680,6 +680,15 @@ void wrapContinuousEnergyTable( python::module& module, python::module& ) {
     "(debug mode only).\n\n"
     "    self     the block\n"
     "    index    the index (one-based)"
+  )
+  .def(
+
+    "insert_or_replace",
+    &Table::insertOrReplace,
+    python::arg( "nu" ),
+    "Insert or replace the fission neutron multiplicity block\n\n"
+    "    self   the block\n"
+    "    nu     the fission neutron multiplicity block to be inserted"
   );
 
   // add standard block definitions

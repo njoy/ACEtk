@@ -507,6 +507,97 @@ public:
   }
 
   /**
+   *  @brief Return the secondary particle production blocks
+   */
+  const std::vector< continuous::HPD >& HPDs() const { return this->hpd_; }
+
+  /**
+   *  @brief Return the secondary particle production blocks
+   */
+  const std::vector< continuous::HPD >& secondaryParticleProductionBlocks() const {
+
+    return this->HPDs();
+  }
+
+  /**
+   *  @brief Return the secondary particle reaction number blocks
+   */
+  const std::vector< continuous::MTRH >& MTRHs() const { return this->mtrh_; }
+
+  /**
+   *  @brief Return the secondary particle reaction number blocks
+   */
+  const std::vector< continuous::MTRH >& secondaryParticleReactionNumberBlocks() const {
+
+    return this->MTRHs();
+  }
+
+  /**
+   *  @brief Return the secondary particle multiplicity and reference frame blocks
+   */
+  const std::vector< continuous::TYRH >& TYRHs() const { return this->tyrh_; }
+
+  /**
+   *  @brief Return the secondary particle multiplicity and reference frame blocks
+   */
+  const std::vector< continuous::TYRH >& secondaryParticleFrameAndMultiplicityBlocks() const {
+
+    return this->TYRHs();
+  }
+
+  /**
+   *  @brief Return the secondary particle production cross section blocks
+   */
+  const std::vector< continuous::SIGH >& SIGHs() const { return this->sigh_; }
+
+  /**
+   *  @brief Return the secondary particle production cross section blocks
+   */
+  const std::vector< continuous::SIGH >& secondaryParticleProductionCrossSectionBlocks() const {
+
+    return this->SIGHs();
+  }
+
+  /**
+   *  @brief Return the secondary particle angular distribution blocks
+   */
+  const std::vector< continuous::ANDH >& ANDHs() const { return this->andh_; }
+
+  /**
+   *  @brief Return the secondary particle angular distribution blocks
+   */
+  const std::vector< continuous::ANDH >& secondaryParticleAngularDistributionBlocks() const {
+
+    return this->ANDHs();
+  }
+
+  /**
+   *  @brief Return the secondary particle energy distribution blocks
+   */
+  const std::vector< continuous::DLWH >& DLWHs() const { return this->dlwh_; }
+
+  /**
+   *  @brief Return the secondary particle energy distribution blocks
+   */
+  const std::vector< continuous::DLWH >& secondaryParticleEnergyDistributionBlocks() const {
+
+    return this->DLWHs();
+  }
+
+  /**
+   *  @brief Return the secondary particle multiplicity reaction number blocks
+   */
+  const std::vector< continuous::YH >& YHs() const { return this->yh_; }
+
+  /**
+   *  @brief Return the secondary particle multiplicity reaction number blocks
+   */
+  const std::vector< continuous::YH >& secondaryParticleMultiplicityReactionNumberBlocks() const {
+
+    return this->YHs();
+  }
+
+  /**
    *  @brief Return the secondary particle production block for a secondary
    *         particle index
    *
@@ -699,6 +790,8 @@ public:
 
     return this->YH( index );
   }
+
+  #include "ACEtk/ContinuousEnergyTable/src/insertOrReplace.hpp"
 };
 
 } // ACEtk namespace
