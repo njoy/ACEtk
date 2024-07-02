@@ -1,6 +1,9 @@
 # Release Notes&mdash;ACEtk
 Given here are some release notes for ACEtk.
 
+## [ACEtk v1.0.1](https://github.com/njoy/ENDFtk/pull/133)
+This updates the build system for ACEtk and contains no functional changes.
+
 ## [ACEtk v1.0.0](https://github.com/njoy/ENDFtk/pull/130)
 This represents the first proper release of ACEtk.
 
