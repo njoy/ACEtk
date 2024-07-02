@@ -8,7 +8,7 @@ include( FetchContent )
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         v0.3.0
+    GIT_TAG         v0.3.1
     GIT_SHALLOW     TRUE
     )
 
