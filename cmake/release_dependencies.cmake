@@ -20,7 +20,7 @@ set( SPDLOG_INSTALL CACHE INTERNAL BOOL ON )
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         bfba151cc3ac3898fb6f66350a1db683d7d80035 # tag: v0.3.0
+    GIT_TAG         5f8429f804a842d165e0efdf1ca1d2d06e720f45  # tag: v0.3.1
     )
 #######################################################################
 # Load dependencies
