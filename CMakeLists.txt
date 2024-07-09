@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( ACEtk
-  VERSION 1.0.0
+  VERSION 1.0.1
   LANGUAGES CXX
 )
 
@@ -25,7 +25,7 @@ include( GNUInstallDirs )
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
-cmake_dependent_option( 
+cmake_dependent_option(
   ACEtk.tests
     "Build the ACEtk unit tests and integrate with ctest" ON
     "BUILD_TESTING AND NOT ${subproject}" OFF
@@ -223,7 +223,7 @@ if(ACEtk.python)
   set( ACEtk_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}" )
   # Append potential installation and build paths for tools python module
   set( tools_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}/_deps/tools-build" )
-  if (tools_DIR) 
+  if (tools_DIR)
     set( tools_PYTHONPATH "${tools_PYTHONPATH}:${tools_DIR}/../../../lib64" )
   endif()
 
@@ -238,7 +238,7 @@ if( ${ACEtk.tests} )
 endif()
 
 #######################################################################
-# Installation 
+# Installation
 #######################################################################
 
 if(ACEtk.installation)
