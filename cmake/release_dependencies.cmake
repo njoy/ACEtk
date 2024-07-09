@@ -20,7 +20,7 @@ set( SPDLOG_INSTALL CACHE INTERNAL BOOL ON )
 
 FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         5f8429f804a842d165e0efdf1ca1d2d06e720f45  # tag: v0.3.1
+    GIT_TAG         e446ee45d5ddbc8d6bc0d47a75e9e20a8789afd9  # tag: v0.3.1
     )
 #######################################################################
 # Load dependencies
@@ -42,7 +42,7 @@ if(ACEtk.tests)
       GIT_TAG         3f0283de7a9c43200033da996ff9093be3ac84dc # tag: v3.3.2
       )
   FetchContent_MakeAvailable(
-      Catch2 
+      Catch2
     )
 endif()
 
@@ -51,4 +51,3 @@ FetchContent_MakeAvailable(
     spdlog
     tools
     )
-
