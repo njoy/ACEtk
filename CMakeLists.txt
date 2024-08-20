@@ -2,7 +2,7 @@
 # Preamble
 ########################################################################
 
-cmake_minimum_required( VERSION 3.14 )
+cmake_minimum_required( VERSION 3.27 )
 
 set( subproject OFF )
 if( DEFINED PROJECT_NAME )
@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( ACEtk
-  VERSION 1.0.0
+  VERSION 1.0.1
   LANGUAGES CXX
 )
 
@@ -27,17 +27,21 @@ set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
 cmake_dependent_option(
   ACEtk.tests
-  "Build the ACEtk unit tests and integrate with ctest" ON
-  "BUILD_TESTING AND NOT ${subproject}" OFF
+    "Build the ACEtk unit tests and integrate with ctest" ON
+    "BUILD_TESTING AND NOT ${subproject}" OFF
 )
+
 cmake_dependent_option(
   ACEtk.python
   "Build ACEtk python bindings" ON
   "NOT ${subproject} OR DEFINED require.ACEtk.python " OFF
 )
+
 if ( ACEtk.python )
   set( require.tools.python CACHE BOOL ON )
 endif()
+
+option( ACEtk.installation "Install ACEtk" ON )
 
 ########################################################################
 # Dependencies
@@ -66,17 +70,20 @@ endif()
 # Project targets
 ########################################################################
 
+string( CONCAT prefix
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
+  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # ACEtk : library
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 add_library( ACEtk INTERFACE )
-add_library( njoy::ACEtk ALIAS ACEtk )
-target_include_directories( ACEtk
-  INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
+add_library( njoy::ACEtk ALIAS ACEtk)
+
+target_include_directories( ACEtk INTERFACE ${prefix} )
+
 target_link_libraries( ACEtk
   INTERFACE
     njoy::tools
@@ -86,11 +93,12 @@ target_link_libraries( ACEtk
 # ACEtk : python bindings
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-if( ACEtk.python )
+if (ACEtk.python AND NOT TARGET njoy::tools.python)
+  message(WARNING "njoy::tools was not built with python enabled.  Disabling build of ACEtk's python API.")
+  set(ACEtk.python OFF)
+endif()
 
-  FetchContent_MakeAvailable(
-    pybind11
-    )
+if(ACEtk.python)
 
   pybind11_add_module( ACEtk.python
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/ACEtk.python.cpp
@@ -202,8 +210,8 @@ if( ACEtk.python )
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/PhotonuclearTable.python.cpp
       )
 
-  target_link_libraries( ACEtk.python PRIVATE ACEtk )
-  add_dependencies( ACEtk.python tools.python )
+  target_link_libraries(ACEtk.python PRIVATE njoy::ACEtk)
+  add_dependencies( ACEtk.python njoy::tools.python)
   target_include_directories( ACEtk.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
   target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
   set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
@@ -212,8 +220,12 @@ if( ACEtk.python )
 
   message( STATUS "Building ACEtk's python API" )
 
-  list( APPEND ACEtk_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
-  list( APPEND tools_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR}/_deps/tools-build )
+  set( ACEtk_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}" )
+  # Append potential installation and build paths for tools python module
+  set( tools_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}/_deps/tools-build" )
+  if (tools_DIR)
+    set( tools_PYTHONPATH "${tools_PYTHONPATH}:${tools_DIR}/../../../lib64" )
+  endif()
 
   if( ACEtk.tests )
     include( cmake/unit_testing_python.cmake )
@@ -221,8 +233,56 @@ if( ACEtk.python )
 
 endif()
 
-if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
-  if( ACEtk.tests )
-    include( cmake/unit_testing.cmake )
-  endif()
+if( ${ACEtk.tests} )
+  include( cmake/unit_testing.cmake )
+endif()
+
+#######################################################################
+# Installation
+#######################################################################
+
+if(ACEtk.installation)
+    include(CMakePackageConfigHelpers)
+
+    install(TARGETS ACEtk EXPORT ACEtk-targets
+      ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+      LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+      RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    )
+
+    install(EXPORT ACEtk-targets
+      FILE "ACEtk-targets.cmake"
+      NAMESPACE njoy::
+      DESTINATION share/cmake/ACEtk
+    )
+
+    install(DIRECTORY src/
+      DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+      FILES_MATCHING PATTERN "*.hpp"
+      PATTERN "*test*" EXCLUDE
+    )
+
+    string(TOLOWER ACEtk lowercasePackageName)
+
+    write_basic_package_version_file("${lowercasePackageName}-config-version.cmake"
+      VERSION ${PROJECT_VERSION}
+      COMPATIBILITY AnyNewerVersion)
+
+    configure_package_config_file(
+      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/${lowercasePackageName}-config.cmake.in
+      ${PROJECT_BINARY_DIR}/${lowercasePackageName}-config.cmake
+      INSTALL_DESTINATION share/cmake/ACEtk
+    )
+
+    install(FILES
+      "${PROJECT_BINARY_DIR}/${lowercasePackageName}-config.cmake"
+      "${PROJECT_BINARY_DIR}/${lowercasePackageName}-config-version.cmake"
+      DESTINATION share/cmake/ACEtk
+    )
+
+    if(NOT subproject)
+      set(CPACK_PACKAGE_VENDOR "Los Alamos National Laboratory")
+      set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+      include(CPack)
+    endif()
 endif()
