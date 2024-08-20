@@ -83,14 +83,14 @@ void wrapElectronSubshellBlock( python::module& module, python::module& ) {
   .def_property_readonly(
 
     "EP",
-    [] ( const Block& self ) -> UnsignedIntRange
+    [] ( const Block& self ) -> DoubleRange
        { return self.EP(); },
     "The electron population for each subshell"
   )
   .def_property_readonly(
 
     "populations",
-    [] ( const Block& self ) -> UnsignedIntRange
+    [] ( const Block& self ) -> DoubleRange
        { return self.populations(); },
        "The electron population for each subshell"
   )
