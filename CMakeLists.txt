@@ -169,6 +169,7 @@ if(ACEtk.python)
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/SecondaryParticleProductionCrossSectionBlock.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/ProbabilityTable.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/ProbabilityTableBlock.python.cpp
+      ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/UndefinedDistribution.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/photonuclear.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/photonuclear/PrincipalCrossSectionBlock.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/photonuclear/SecondaryParticleLocatorBlock.python.cpp
