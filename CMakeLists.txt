@@ -2,7 +2,7 @@
 # Preamble
 ########################################################################
 
-cmake_minimum_required( VERSION 3.27 )
+cmake_minimum_required( VERSION 3.24 )
 
 set( subproject OFF )
 if( DEFINED PROJECT_NAME )
@@ -46,6 +46,8 @@ option( ACEtk.installation "Install ACEtk" ON )
 ########################################################################
 # Dependencies
 ########################################################################
+
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
 
 set( REPOSITORIES "release"
     CACHE STRING
