@@ -1,0 +1,3 @@
+program use_standard_semantics
+  write(*,'(a)') "$<TARGET_PROPERTY:intel_standard_adherence,COMPILE_OPTIONS>"
+end program

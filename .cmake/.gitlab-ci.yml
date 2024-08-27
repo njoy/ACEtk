@@ -1,0 +1,5 @@
+include:
+  - project: 'scl/shacl-gitlab'
+    ref: main
+    file: '/ci.yml'
+

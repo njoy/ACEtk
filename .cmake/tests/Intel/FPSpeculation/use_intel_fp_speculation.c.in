@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+int main() {
+  printf("%s","$<TARGET_PROPERTY:use_intel_fp_speculation_C,COMPILE_OPTIONS>");
+
+  return 0;
+}
