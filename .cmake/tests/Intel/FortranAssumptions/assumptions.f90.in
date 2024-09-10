@@ -1,0 +1,3 @@
+program warnings
+  write(*,'(a)') "$<TARGET_PROPERTY:assumptions.test,COMPILE_OPTIONS>"
+end program

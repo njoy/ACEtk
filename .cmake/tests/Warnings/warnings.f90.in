@@ -1,0 +1,4 @@
+program warnings
+  write(*,'(a)') "$<JOIN:$<TARGET_PROPERTY:warnings.fortran.test,COMPILE_OPTIONS>,"
+  write(*,'(a)') ">"
+end program
