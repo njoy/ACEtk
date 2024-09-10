@@ -87,10 +87,18 @@ void generateBlocks() {
 
   for ( unsigned int index = 1; index <= this->NR(); ++index ) {
 
+    // zero lcoators in the LDLW are not allowed
+    std::size_t locator = this->LDLW( index );
+    if ( locator == 0 ) {
+
+      Log::error( "Detected a locator = 0 in the LDLW block for reaction with index "
+                  "= {}", index );
+      throw std::exception();
+    }
+
     // data : one-based index to the start of the data block
     // data + locator - 1 : one-based index to the start of cross section data
     std::size_t data = std::distance( this->begin(), this->iter() ) + 1;
-    std::size_t locator = this->LDLW( index );
     std::size_t multiplicity = index == this->NR()
                                ? 0
                                : this->TYR().multiplicity( index + 1 );

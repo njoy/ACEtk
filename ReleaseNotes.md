@@ -2,8 +2,13 @@
 Given here are some release notes for ACEtk.
 
 ## [ACEtk v1.0.2](https://github.com/njoy/ACEtk/pull/xxx)
-This fixes a bug in ACEtk for photoatomic tables in which the electron subshell populations
-were returned as integers instead of floating point values.
+This fixes the following issues in ACEtk:
+  - The electron subshell populations are now returned as floating point values instead of
+    integer values.
+  - An UndefinedDistribution has been introduced to handle cases where locators in the energy
+    distribution block for secondary particles are set to 0 (meaning no data is given). With
+    earlier versions of ACEtk, this would have lead to a crash because the XSS array was being
+    interpreted incorrectly.
 
 ## [ACEtk v1.0.1](https://github.com/njoy/ACEtk/pull/133)
 This updates the build system for ACEtk and contains no functional changes.

@@ -22,6 +22,7 @@
 #include "ACEtk/continuous/EnergyAngleDistributionData.hpp"
 #include "ACEtk/continuous/AngleEnergyDistributionData.hpp"
 #include "ACEtk/continuous/MultiDistributionData.hpp"
+#include "ACEtk/continuous/UndefinedDistribution.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -41,7 +42,8 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
                                              TwoBodyTransferDistribution,
                                              EnergyAngleDistributionData,
                                              AngleEnergyDistributionData,
-                                             MultiDistributionData >;
+                                             MultiDistributionData,
+                                             UndefinedDistribution >;
 
 /**
  *  @class

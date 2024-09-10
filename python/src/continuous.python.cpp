@@ -15,6 +15,7 @@ namespace continuous {
   void wrapDelayedNeutronPrecursorData( python::module&, python::module& );
   void wrapDiscretePhotonDistribution( python::module&, python::module& );
   void wrapDistributionGivenElsewhere( python::module&, python::module& );
+  void wrapUndefinedDistribution( python::module&, python::module& );
   void wrapDistributionProbability( python::module&, python::module& );
   void wrapEnergyDependentWattSpectrum( python::module&, python::module& );
   void wrapEquiprobableAngularBins( python::module&, python::module& );
@@ -85,6 +86,7 @@ void wrapContinuous( python::module& module, python::module& viewmodule ) {
   continuous::wrapDelayedNeutronPrecursorData( submodule, viewmodule );
   continuous::wrapDiscretePhotonDistribution( submodule, viewmodule );
   continuous::wrapDistributionGivenElsewhere( submodule, viewmodule );
+  continuous::wrapUndefinedDistribution( submodule, viewmodule );
   continuous::wrapDistributionProbability( submodule, viewmodule );
   continuous::wrapEnergyDependentWattSpectrum( submodule, viewmodule );
   continuous::wrapEquiprobableAngularBins( submodule, viewmodule );
