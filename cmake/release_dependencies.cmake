@@ -6,22 +6,11 @@ include( shacl_FetchContent )
 # Declare project dependencies
 #######################################################################
 
-shacl_FetchContent_Declare( FastFloat
-    GIT_REPOSITORY  ../../fastfloat/fast_float
-    GIT_TAG         f476bc713fda06fbd34dc621b466745a574b3d4c # tag: v6.1.1
-    )
-
-shacl_FetchContent_Declare( spdlog
-    GIT_REPOSITORY  ../../gabime/spdlog
-    GIT_TAG         ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36 # tag: v1.11.0
-    )
-set( SPDLOG_BUILD_PIC CACHE INTERNAL BOOL ON )
-set( SPDLOG_INSTALL CACHE INTERNAL BOOL ON )
-
 shacl_FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         e446ee45d5ddbc8d6bc0d47a75e9e20a8789afd9  # tag: v0.3.1
+    GIT_TAG         fdd04b21c38e5d3708c5162723e6d7a231bd7578  # tag: v0.4.0
     )
+
 #######################################################################
 # Load dependencies
 #######################################################################
@@ -47,7 +36,5 @@ if(ACEtk.tests)
 endif()
 
 shacl_FetchContent_MakeAvailable(
-    FastFloat
-    spdlog
     tools
     )
