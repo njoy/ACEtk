@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.27 )
+cmake_minimum_required( VERSION 3.24 )
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
 include( shacl_FetchContent )
 
@@ -8,7 +8,7 @@ include( shacl_FetchContent )
 
 shacl_FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         fdd04b21c38e5d3708c5162723e6d7a231bd7578  # tag: v0.4.0
+    GIT_TAG         392164c044dea641b7a42dc1a2e89da464289770  # tag: v0.4.0
     )
 
 #######################################################################
