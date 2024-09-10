@@ -1,7 +1,7 @@
 # Release Notes&mdash;ACEtk
 Given here are some release notes for ACEtk.
 
-## [ACEtk v1.0.2](https://github.com/njoy/ACEtk/pull/xxx)
+## [ACEtk v1.0.2](https://github.com/njoy/ACEtk/pull/137)
 This fixes the following issues in ACEtk:
   - The electron subshell populations are now returned as floating point values instead of
     integer values.
