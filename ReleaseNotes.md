@@ -10,6 +10,8 @@ This fixes the following issues in ACEtk:
     earlier versions of ACEtk, this would have lead to a crash because the XSS array was being
     interpreted incorrectly.
 
+This update also modifies the build system to use shacl-cmake.
+
 ## [ACEtk v1.0.1](https://github.com/njoy/ACEtk/pull/133)
 This updates the build system for ACEtk and contains no functional changes.
 
