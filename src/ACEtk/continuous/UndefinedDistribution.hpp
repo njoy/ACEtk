@@ -13,9 +13,9 @@ namespace continuous {
  *  @class
  *  @brief The distribution is undefined
  *
- *  The UndefinedDistribution class contains contains no data. It is a
- *  convenience interface object used in the DLWH block when no energy
- *  distribution data is given.
+ *  The UndefinedDistribution class contains no data. It is a convenience
+ *  interface object used in the DLWH block when no energy distribution data
+ *  is given.
  */
 class UndefinedDistribution {
 

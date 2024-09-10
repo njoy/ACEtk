@@ -24,9 +24,9 @@ void wrapUndefinedDistribution( python::module& module, python::module& ) {
     module,
     "UndefinedDistribution",
     "The distribution is undefined\n\n"
-    "The UndefinedDistribution class contains contains no data. It is a\n"
-    "convenience interface object used in the DLWH block when no energy\n"
-    "distribution data is given."
+    "The UndefinedDistribution class contains no data. It is a convenience\n"
+    "interface object used in the DLWH block when no energy distribution data\n"
+    "is given."
   );
 
   // wrap the block
