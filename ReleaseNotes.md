@@ -1,7 +1,7 @@
 # Release Notes&mdash;ACEtk
 Given here are some release notes for ACEtk.
 
-## [ACEtk v1.0.2](https://github.com/njoy/ENDFtk/pull/xxx)
+## [ACEtk v1.0.2](https://github.com/njoy/ACEtk/pull/xxx)
 This fixes the following issues in ACEtk:
   - The electron subshell populations are now returned as floating point values instead of
     integer values.
@@ -10,10 +10,10 @@ This fixes the following issues in ACEtk:
     earlier versions of ACEtk, this would have lead to a crash because the XSS array was being
     interpreted incorrectly.
 
-## [ACEtk v1.0.1](https://github.com/njoy/ENDFtk/pull/133)
+## [ACEtk v1.0.1](https://github.com/njoy/ACEtk/pull/133)
 This updates the build system for ACEtk and contains no functional changes.
 
-## [ACEtk v1.0.0](https://github.com/njoy/ENDFtk/pull/130)
+## [ACEtk v1.0.0](https://github.com/njoy/ACEtk/pull/130)
 This represents the first proper release of ACEtk.
 
 The following ACE file types are supported in this version:
