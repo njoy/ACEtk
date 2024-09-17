@@ -135,7 +135,7 @@ if(ACEtk.python)
 
     set( ACEtk_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}" )
     # Append potential installation and build paths for tools python module
-    set( tools_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}/_deps/tools-build" )
+    set( tools_PYTHONPATH "${PROJECT_BINARY_DIR}/_deps/tools-build" )
     if (tools_DIR)
       set( tools_PYTHONPATH "${tools_PYTHONPATH}:${tools_DIR}/../../../lib64" )
     endif()
@@ -144,8 +144,7 @@ if(ACEtk.python)
         include( ${PROJECT_SOURCE_DIR}/cmake/unit_testing_python.cmake )
     endif()
 
-
-    ## generate python stubs if possible
+        ## generate python stubs if possible
     find_program(pybind11stubgen_exe pybind11-stubgen)
 
     set(stubdir "${CMAKE_CURRENT_SOURCE_DIR}/stubs")
