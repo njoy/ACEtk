@@ -1,7 +1,7 @@
 """
 Dosimetry ACE blocks and components
 """
-import ACEtk.continuous
+import ACEtk.ACEtk.continuous
 from __future__ import annotations
 import typing
 __all__ = ['CrossSectionBlock', 'CrossSectionData']
@@ -202,7 +202,7 @@ class CrossSectionData:
         The interpolation type for each range
         """
     @property
-    def interpolation_data(self) -> ACEtk.continuous.InterpolationData:
+    def interpolation_data(self) -> ACEtk.ACEtk.continuous.InterpolationData:
         """
         The interpolation data
         """

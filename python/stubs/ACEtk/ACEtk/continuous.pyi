@@ -1,7 +1,7 @@
 """
 Continuous energy ACE blocks and components
 """
-import ACEtk
+import ACEtk.ACEtk
 from __future__ import annotations
 import typing
 __all__ = ['AngleEnergyDistributionData', 'AngularDistributionBlock', 'AngularDistributionData', 'CrossSectionBlock', 'CrossSectionData', 'DelayedNeutronPrecursorBlock', 'DelayedNeutronPrecursorData', 'DiscretePhotonDistribution', 'DistributionGivenElsewhere', 'DistributionProbability', 'EnergyAngleDistributionData', 'EnergyDependentWattSpectrum', 'EnergyDistributionBlock', 'EquiprobableAngularBins', 'EquiprobableOutgoingEnergyBinData', 'EquiprobableOutgoingEnergyBins', 'EvaporationSpectrum', 'FissionMultiplicityBlock', 'FrameAndMultiplicityBlock', 'FullyIsotropicDistribution', 'GeneralEvaporationSpectrum', 'InterpolationData', 'IsotropicAngularDistribution', 'KalbachMannDistributionData', 'LevelScatteringDistribution', 'MultiDistributionData', 'MultiplicityReactionNumberBlock', 'NBodyPhaseSpaceDistribution', 'OutgoingEnergyDistributionData', 'ParameterData', 'PhotonProductionBlock', 'PhotonProductionCrossSectionBlock', 'PhotonProductionCrossSectionData', 'PolynomialFissionMultiplicity', 'PrincipalCrossSectionBlock', 'ProbabilityTable', 'ProbabilityTableBlock', 'ReactionNumberBlock', 'ReactionQValueBlock', 'SecondaryParticleAngularDistributionBlock', 'SecondaryParticleEnergyDistributionBlock', 'SecondaryParticleInformationBlock', 'SecondaryParticleLocatorBlock', 'SecondaryParticleProductionBlock', 'SecondaryParticleProductionCrossSectionBlock', 'SecondaryParticleTypeBlock', 'SimpleMaxwellianFissionSpectrum', 'TabulatedAngleEnergyDistribution', 'TabulatedAngularDistribution', 'TabulatedAngularDistributionWithProbability', 'TabulatedEnergyAngleDistribution', 'TabulatedEnergyDistribution', 'TabulatedFissionMultiplicity', 'TabulatedKalbachMannDistribution', 'TabulatedMultiplicity', 'TabulatedSecondaryParticleMultiplicity', 'TwoBodyTransferDistribution', 'UndefinedDistribution']
@@ -121,7 +121,7 @@ class AngleEnergyDistributionData:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -201,7 +201,7 @@ class AngleEnergyDistributionData:
         The number of interpolation regions
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -401,7 +401,7 @@ class AngularDistributionData:
             self     the block
             index    the index (one-based)
         """
-    def distribution_type(self, index: int) -> ACEtk.AngularDistributionType:
+    def distribution_type(self, index: int) -> ACEtk.ACEtk.AngularDistributionType:
         """
         Return the angular distribution type for an incident energy index
         
@@ -963,7 +963,7 @@ class DiscretePhotonDistribution:
         The photon or binding energy
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1013,7 +1013,7 @@ class DiscretePhotonDistribution:
         The primary flag value (0, 1 or 2)
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1272,7 +1272,7 @@ class EnergyAngleDistributionData:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1352,7 +1352,7 @@ class EnergyAngleDistributionData:
         The number of interpolation regions
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1399,7 +1399,7 @@ class EnergyDependentWattSpectrum:
             length    the length of the subrange
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1449,7 +1449,7 @@ class EnergyDependentWattSpectrum:
         The restriction energy
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1477,7 +1477,7 @@ class EnergyDistributionBlock:
             self     the block
             index    the index (one-based)
         """
-    def __init__(self, distributions: list[EquiprobableOutgoingEnergyBinData | DiscretePhotonDistribution | LevelScatteringDistribution | OutgoingEnergyDistributionData | GeneralEvaporationSpectrum | SimpleMaxwellianFissionSpectrum | EvaporationSpectrum | EnergyDependentWattSpectrum | KalbachMannDistributionData | NBodyPhaseSpaceDistribution | TwoBodyTransferDistribution | EnergyAngleDistributionData | AngleEnergyDistributionData | MultiDistributionData | UndefinedDistribution], multiplicities: list[int | TabulatedMultiplicity], frames: list[ACEtk.ReferenceFrame]) -> None:
+    def __init__(self, distributions: list[EquiprobableOutgoingEnergyBinData | DiscretePhotonDistribution | LevelScatteringDistribution | OutgoingEnergyDistributionData | GeneralEvaporationSpectrum | SimpleMaxwellianFissionSpectrum | EvaporationSpectrum | EnergyDependentWattSpectrum | KalbachMannDistributionData | NBodyPhaseSpaceDistribution | TwoBodyTransferDistribution | EnergyAngleDistributionData | AngleEnergyDistributionData | MultiDistributionData | UndefinedDistribution], multiplicities: list[int | TabulatedMultiplicity], frames: list[ACEtk.ACEtk.ReferenceFrame]) -> None:
         """
         Initialise the block
         
@@ -1517,7 +1517,7 @@ class EnergyDistributionBlock:
             self     the block
             index    the index (one-based)
         """
-    def reference_frame(self, index: int) -> ACEtk.ReferenceFrame:
+    def reference_frame(self, index: int) -> ACEtk.ACEtk.ReferenceFrame:
         """
         Return the reference frame for a reaction index
         
@@ -1582,7 +1582,7 @@ class EnergyDistributionBlock:
         The number of reactions excluding elastic that produce the projectile
         """
     @property
-    def reference_frames(self) -> list[ACEtk.ReferenceFrame]:
+    def reference_frames(self) -> list[ACEtk.ACEtk.ReferenceFrame]:
         """
         The reference frames
         """
@@ -1724,7 +1724,7 @@ class EquiprobableOutgoingEnergyBinData:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1814,7 +1814,7 @@ class EquiprobableOutgoingEnergyBinData:
         The number of interpolation regions
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -1940,7 +1940,7 @@ class EvaporationSpectrum:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2030,7 +2030,7 @@ class EvaporationSpectrum:
         The temperature values
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2134,7 +2134,7 @@ class FrameAndMultiplicityBlock:
     The number of available reactions (excluding elastic) is stored in NXS(4).
     """
     @typing.overload
-    def __init__(self, frames: list[ACEtk.ReferenceFrame], multiplicities: list[int]) -> None:
+    def __init__(self, frames: list[ACEtk.ACEtk.ReferenceFrame], multiplicities: list[int]) -> None:
         """
         Initialise the TYR block
         
@@ -2144,7 +2144,7 @@ class FrameAndMultiplicityBlock:
             multiplicities    the multiplicities
         """
     @typing.overload
-    def __init__(self, frames: list[ACEtk.ReferenceFrame]) -> None:
+    def __init__(self, frames: list[ACEtk.ACEtk.ReferenceFrame]) -> None:
         """
         Initialise the TYRH block
         
@@ -2160,7 +2160,7 @@ class FrameAndMultiplicityBlock:
             self     the block
             index    the index (one-based)
         """
-    def reference_frame(self, index: int) -> ACEtk.ReferenceFrame:
+    def reference_frame(self, index: int) -> ACEtk.ACEtk.ReferenceFrame:
         """
         The reference frame for a reaction index
         
@@ -2218,7 +2218,7 @@ class FrameAndMultiplicityBlock:
         The number of available reactions (excluding elastic)
         """
     @property
-    def reference_frames(self) -> list[ACEtk.ReferenceFrame]:
+    def reference_frames(self) -> list[ACEtk.ACEtk.ReferenceFrame]:
         """
         The reference frames
         """
@@ -2298,7 +2298,7 @@ class GeneralEvaporationSpectrum:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2393,7 +2393,7 @@ class GeneralEvaporationSpectrum:
         The temperature values
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2615,7 +2615,7 @@ class KalbachMannDistributionData:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2690,7 +2690,7 @@ class KalbachMannDistributionData:
         The number of interpolation regions
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2752,7 +2752,7 @@ class LevelScatteringDistribution:
         The value of C2 = ( A / ( A + 1 ) )^2
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2782,7 +2782,7 @@ class LevelScatteringDistribution:
         The name of the block
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2853,7 +2853,7 @@ class MultiDistributionData:
             length    the length of the subrange
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -2888,7 +2888,7 @@ class MultiDistributionData:
         The probability data for each distribution
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -3057,7 +3057,7 @@ class NBodyPhaseSpaceDistribution:
         The total mass ratio
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -3122,7 +3122,7 @@ class NBodyPhaseSpaceDistribution:
         The total mass ratio
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -3252,7 +3252,7 @@ class OutgoingEnergyDistributionData:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -3327,7 +3327,7 @@ class OutgoingEnergyDistributionData:
         The number of interpolation regions
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -4488,7 +4488,7 @@ class SecondaryParticleEnergyDistributionBlock:
             distributions     the energy distribution data
         """
     @typing.overload
-    def __init__(self, distributions: list[EquiprobableOutgoingEnergyBinData | DiscretePhotonDistribution | LevelScatteringDistribution | OutgoingEnergyDistributionData | GeneralEvaporationSpectrum | SimpleMaxwellianFissionSpectrum | EvaporationSpectrum | EnergyDependentWattSpectrum | KalbachMannDistributionData | NBodyPhaseSpaceDistribution | TwoBodyTransferDistribution | EnergyAngleDistributionData | AngleEnergyDistributionData | MultiDistributionData | UndefinedDistribution], frames: list[ACEtk.ReferenceFrame]) -> None:
+    def __init__(self, distributions: list[EquiprobableOutgoingEnergyBinData | DiscretePhotonDistribution | LevelScatteringDistribution | OutgoingEnergyDistributionData | GeneralEvaporationSpectrum | SimpleMaxwellianFissionSpectrum | EvaporationSpectrum | EnergyDependentWattSpectrum | KalbachMannDistributionData | NBodyPhaseSpaceDistribution | TwoBodyTransferDistribution | EnergyAngleDistributionData | AngleEnergyDistributionData | MultiDistributionData | UndefinedDistribution], frames: list[ACEtk.ACEtk.ReferenceFrame]) -> None:
         """
         Initialise the DLWH block
         
@@ -4517,7 +4517,7 @@ class SecondaryParticleEnergyDistributionBlock:
             self     the block
             index    the index (one-based)
         """
-    def reference_frame(self, index: int) -> ACEtk.ReferenceFrame | None:
+    def reference_frame(self, index: int) -> ACEtk.ACEtk.ReferenceFrame | None:
         """
         Return the reference frame for a reaction index
         
@@ -4577,7 +4577,7 @@ class SecondaryParticleEnergyDistributionBlock:
         The number of reactions with energy distribution data
         """
     @property
-    def reference_frames(self) -> list[ACEtk.ReferenceFrame | None]:
+    def reference_frames(self) -> list[ACEtk.ACEtk.ReferenceFrame | None]:
         """
         The reference frames
         """
@@ -5181,7 +5181,7 @@ class SimpleMaxwellianFissionSpectrum:
         The interpolation type for each range
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -5271,7 +5271,7 @@ class SimpleMaxwellianFissionSpectrum:
         The temperature values
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -6471,7 +6471,7 @@ class TwoBodyTransferDistribution:
         The value of C2
         """
     @property
-    def LAW(self) -> ACEtk.EnergyDistributionType:
+    def LAW(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
@@ -6501,7 +6501,7 @@ class TwoBodyTransferDistribution:
         The name of the block
         """
     @property
-    def type(self) -> ACEtk.EnergyDistributionType:
+    def type(self) -> ACEtk.ACEtk.EnergyDistributionType:
         """
         The distribution type
         """
