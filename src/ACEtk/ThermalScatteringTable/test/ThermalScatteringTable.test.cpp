@@ -33,6 +33,56 @@ SCENARIO( "ThermalScatteringTable" ){
       } // THEN
     } // WHEN
 
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable copy( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable copy( fromFile( "d-lid.10t" ) );
+      copy = chunk;
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable move( fromFile( "d-lid.10t" ) );
+      move = std::move( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( move );
+      } // THEN
+    } // WHEN
+
     WHEN( "constructing a ThermalScatteringTable from its components" ) {
 
       ThermalScatteringTable base( fromFile( "h-h2o.40t" ) );
@@ -61,6 +111,56 @@ SCENARIO( "ThermalScatteringTable" ){
             "tested" ) {
 
         verifyChunkZrZrH( chunk );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable copy( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable copy( fromFile( "d-lid.10t" ) );
+      copy = chunk;
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable move( fromFile( "d-lid.10t" ) );
+      move = std::move( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( move );
       } // THEN
     } // WHEN
 
@@ -96,6 +196,56 @@ SCENARIO( "ThermalScatteringTable" ){
       } // THEN
     } // WHEN
 
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable copy( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable copy( fromFile( "d-lid.10t" ) );
+      copy = chunk;
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable move( fromFile( "d-lid.10t" ) );
+      move = std::move( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( move );
+      } // THEN
+    } // WHEN
+
     WHEN( "constructing a ThermalScatteringTable from its components" ) {
 
       ThermalScatteringTable base( fromFile( "al-27.40t" ) );
@@ -124,6 +274,56 @@ SCENARIO( "ThermalScatteringTable" ){
             "tested" ) {
 
         verifyChunkDLiD( chunk );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable copy( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
+
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable copy( fromFile( "h-h2o.40t" ) );
+      copy = chunk;
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
+
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable move( fromFile( "h-h2o.40t" ) );
+      move = std::move( chunk );
+
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( move );
       } // THEN
     } // WHEN
 

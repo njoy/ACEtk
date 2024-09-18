@@ -33,6 +33,56 @@ SCENARIO( "PhotoatomicTable" ) {
       } // THEN
     } // WHEN
 
+    WHEN( "constructing a PhotoatomicTable using the copy constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.01p" ) );
+      PhotoatomicTable copy( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a PhotoatomicTable using the move constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.01p" ) );
+      PhotoatomicTable move( std::move( chunk ) );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the copy assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.01p" ) );
+      PhotoatomicTable copy( fromFile( "3000.03p" ) );
+      copy = chunk;
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the move assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.01p" ) );
+      PhotoatomicTable move( fromFile( "3000.03p" ) );
+      move = std::move( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib( move );
+      } // THEN
+    } // WHEN
+
     WHEN( "constructing a PhotoatomicTable from its components" ) {
 
       PhotoatomicTable base( fromFile( "1000.01p" ) );
@@ -69,6 +119,56 @@ SCENARIO( "PhotoatomicTable" ) {
             "tested" ) {
 
         verifyChunkMcplib03( chunk );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a PhotoatomicTable using the copy constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "3000.03p" ) );
+      PhotoatomicTable copy( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib03( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a PhotoatomicTable using the move constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "3000.03p" ) );
+      PhotoatomicTable move( std::move( chunk ) );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib03( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the copy assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "3000.03p" ) );
+      PhotoatomicTable copy( fromFile( "1000.01p" ) );
+      copy = chunk;
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib03( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the move assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "3000.03p" ) );
+      PhotoatomicTable move( fromFile( "1000.01p" ) );
+      move = std::move( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkMcplib03( move );
       } // THEN
     } // WHEN
 
@@ -109,6 +209,56 @@ SCENARIO( "PhotoatomicTable" ) {
 
         verifyChunkEprdata12( chunk );
       }
+    } // WHEN
+
+    WHEN( "constructing a PhotoatomicTable using the copy constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.12p" ) );
+      PhotoatomicTable copy( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata12( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a PhotoatomicTable using the move constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.12p" ) );
+      PhotoatomicTable move( std::move( chunk ) );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata12( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the copy assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.12p" ) );
+      PhotoatomicTable copy( fromFile( "6000.14p" ) );
+      copy = chunk;
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata12( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the move assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "1000.12p" ) );
+      PhotoatomicTable move( fromFile( "6000.14p" ) );
+      move = std::move( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata12( move );
+      } // THEN
     } // WHEN
 
     WHEN( "constructing a PhotoatomicTable from its components" ) {
@@ -154,6 +304,56 @@ SCENARIO( "PhotoatomicTable" ) {
             "tested" ) {
 
         verifyChunkEprdata14( chunk );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a PhotoatomicTable using the copy constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "6000.14p" ) );
+      PhotoatomicTable copy( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata14( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a PhotoatomicTable using the move constructor" ) {
+
+      PhotoatomicTable chunk( fromFile( "6000.14p" ) );
+      PhotoatomicTable move( std::move( chunk ) );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata14( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the copy assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "6000.14p" ) );
+      PhotoatomicTable copy( fromFile( "1000.12p" ) );
+      copy = chunk;
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata14( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotoatomicTable using the move assignment" ) {
+
+      PhotoatomicTable chunk( fromFile( "6000.14p" ) );
+      PhotoatomicTable move( fromFile( "1000.12p" ) );
+      move = std::move( chunk );
+
+      THEN( "a PhotoatomicTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkEprdata14( move );
       } // THEN
     } // WHEN
 

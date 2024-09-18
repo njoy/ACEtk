@@ -32,6 +32,57 @@ SCENARIO( "PhotonuclearTable" ){
       } // THEN
     } // WHEN
 
+    WHEN( "constructing a PhotonuclearTable using the copy constructor" ) {
+
+      PhotonuclearTable chunk( fromFile( "94239.31u" ) );
+      PhotonuclearTable copy( chunk );
+
+      THEN( "a PhotonuclearTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a PhotonuclearTable using the move constructor" ) {
+
+      PhotonuclearTable chunk( fromFile( "94239.31u" ) );
+      PhotonuclearTable move( std::move( chunk ) );
+
+      THEN( "a PhotonuclearTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotonuclearTable using the copy assignment" ) {
+
+      PhotonuclearTable chunk( fromFile( "94239.31u" ) );
+      PhotonuclearTable copy( fromFile( "94239.31u" ) );
+      copy = chunk;
+
+      THEN( "a PhotonuclearTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a PhotonuclearTable using the move assignment" ) {
+
+      PhotonuclearTable chunk( fromFile( "94239.31u" ) );
+      PhotonuclearTable move( fromFile( "94239.31u" ) );
+      move = std::move( chunk );
+
+      THEN( "a PhotonuclearTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( move );
+      } // THEN
+    } // WHEN
+
+
     WHEN( "constructing a PhotonuclearTable from its components" ) {
 
       PhotonuclearTable base( fromFile( "94239.31u" ) );

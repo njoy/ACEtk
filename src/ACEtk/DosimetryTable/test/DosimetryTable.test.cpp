@@ -30,7 +30,57 @@ SCENARIO( "DosimetryTable" ){
       THEN( "a DosimetryTable can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
-      }
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a DosimetryTable using the copy constructor" ) {
+
+      DosimetryTable chunk( fromFile( "13027.24y" ) );
+      DosimetryTable copy( chunk );
+
+      THEN( "a DosimetryTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "constructing a DosimetryTable using the move constructor" ) {
+
+      DosimetryTable chunk( fromFile( "13027.24y" ) );
+      DosimetryTable move( std::move( chunk ) );
+
+      THEN( "a DosimetryTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( move );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a DosimetryTable using the copy assignment" ) {
+
+      DosimetryTable chunk( fromFile( "13027.24y" ) );
+      DosimetryTable copy( fromFile( "13027.24y" ) );
+      copy = chunk;
+
+      THEN( "a DosimetryTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( copy );
+      } // THEN
+    } // WHEN
+
+    WHEN( "assigning a DosimetryTable using the move assignment" ) {
+
+      DosimetryTable chunk( fromFile( "13027.24y" ) );
+      DosimetryTable move( fromFile( "13027.24y" ) );
+      move = std::move( chunk );
+
+      THEN( "a DosimetryTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunk( move );
+      } // THEN
     } // WHEN
 
     WHEN( "constructing a DosimetryTable from scratch" ) {
@@ -341,7 +391,7 @@ SCENARIO( "DosimetryTable" ){
       THEN( "a DosimetryTable can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
-      }
+      } // THEN
     } // WHEN
   } // GIVEN
 } // SCENARIO
