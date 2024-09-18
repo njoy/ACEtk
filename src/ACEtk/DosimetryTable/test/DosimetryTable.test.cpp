@@ -22,71 +22,15 @@ SCENARIO( "DosimetryTable" ){
 
   GIVEN( "valid data for a DosimetryTable" ) {
 
-    auto table = fromFile( "13027.24y" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a DosimetryTable from a table" ) {
 
+      auto table = fromFile( "13027.24y" );
       DosimetryTable chunk( std::move( table ) );
 
       THEN( "a DosimetryTable can be constructed and members can be tested" ) {
 
         verifyChunk( chunk );
       }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
-      } // THEN
     } // WHEN
 
     WHEN( "constructing a DosimetryTable from scratch" ) {
@@ -398,61 +342,57 @@ SCENARIO( "DosimetryTable" ){
 
         verifyChunk( chunk );
       }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
-      } // THEN
     } // WHEN
   } // GIVEN
 } // SCENARIO
 
 void verifyChunk( const DosimetryTable& chunk ) {
+
+  auto table = fromFile( "13027.24y" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // DosimetryTable interface
 
   CHECK( "13027.24y" == chunk.ZAID() );
   CHECK_THAT( 26.75, WithinRel( chunk.AWR() ) );

@@ -17,81 +17,25 @@ void verifyChunkMcplib03( const PhotoatomicTable& );
 void verifyChunkEprdata12( const PhotoatomicTable& );
 void verifyChunkEprdata14( const PhotoatomicTable& );
 
-SCENARIO( "PhotoatomicTable" ){
+SCENARIO( "PhotoatomicTable" ) {
 
   GIVEN( "valid data for a PhotoatomicTable - mcplib" ) {
 
-    auto table = fromFile( "1000.01p" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a PhotoatomicTable from a table" ) {
 
+      auto table = fromFile( "1000.01p" );
       PhotoatomicTable chunk( std::move( table ) );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkMcplib( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
 
     WHEN( "constructing a PhotoatomicTable from its components" ) {
 
-      PhotoatomicTable base( std::move( table ) );
+      PhotoatomicTable base( fromFile( "1000.01p" ) );
 
       PhotoatomicTable chunk( 1, base.header(),
                               { 1001, 1002, 1003 },
@@ -110,133 +54,27 @@ SCENARIO( "PhotoatomicTable" ){
             "tested" ) {
 
         verifyChunkMcplib( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a PhotoatomicTable - mcplib03" ) {
 
-    auto table = fromFile( "3000.03p" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a PhotoatomicTable from a table" ) {
 
+      auto table = fromFile( "3000.03p" );
       PhotoatomicTable chunk( std::move( table ) );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkMcplib03( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
 
     WHEN( "constructing a PhotoatomicTable from its components" ) {
 
-      PhotoatomicTable base( std::move( table ) );
+      PhotoatomicTable base( fromFile( "3000.03p" ) );
 
       PhotoatomicTable chunk( 3, base.header(),
                               {  },
@@ -255,71 +93,15 @@ SCENARIO( "PhotoatomicTable" ){
             "tested" ) {
 
         verifyChunkMcplib03( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a PhotoatomicTable - eprdata12" ) {
 
-    auto table = fromFile( "1000.12p" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a PhotoatomicTable from a table" ) {
 
+      auto table = fromFile( "1000.12p" );
       PhotoatomicTable chunk( std::move( table ) );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
@@ -327,61 +109,11 @@ SCENARIO( "PhotoatomicTable" ){
 
         verifyChunkEprdata12( chunk );
       }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
-      } // THEN
     } // WHEN
 
     WHEN( "constructing a PhotoatomicTable from its components" ) {
 
-      PhotoatomicTable base( std::move( table ) );
+      PhotoatomicTable base( fromFile( "1000.12p" ) );
 
       std::vector< electron::EION > eion = std::vector< electron::EION >{};
       for ( unsigned int index = 1; index <= base.NSSH(); ++index ) {
@@ -407,133 +139,27 @@ SCENARIO( "PhotoatomicTable" ){
             "tested" ) {
 
         verifyChunkEprdata12( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a PhotoatomicTable - eprdata14" ) {
 
-    auto table = fromFile( "6000.14p" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a PhotoatomicTable from a table" ) {
 
+      auto table = fromFile( "6000.14p" );
       PhotoatomicTable chunk( std::move( table ) );
 
       THEN( "a PhotoatomicTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkEprdata14( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
 
     WHEN( "constructing a PhotoatomicTable from its components" ) {
 
-      PhotoatomicTable base( std::move( table ) );
+      PhotoatomicTable base( fromFile( "6000.14p" ) );
 
       std::vector< electron::EION > eion = std::vector< electron::EION >{};
       for ( unsigned int index = 1; index <= base.NSSH(); ++index ) {
@@ -559,62 +185,58 @@ SCENARIO( "PhotoatomicTable" ){
             "tested" ) {
 
         verifyChunkEprdata14( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
-  }
+  } // WHEN
 } // SCENARIO
 
 void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
+
+  auto table = fromFile( "1000.01p" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // PhotoatomicTable interface
 
   CHECK( "1000.01p" == chunk.ZAID() );
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
@@ -758,6 +380,52 @@ void verifyChunkMcplib( const PhotoatomicTable& chunk ) {
 }
 
 void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
+
+  auto table = fromFile( "3000.03p" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // PhotoatomicTable interface
 
   CHECK( "3000.03p" == chunk.ZAID() );
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
@@ -949,6 +617,52 @@ void verifyChunkMcplib03( const PhotoatomicTable& chunk ) {
 }
 
 void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
+
+  auto table = fromFile( "1000.12p" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // PhotoatomicTable interface
 
   CHECK( "1000.12p" == chunk.ZAID() );
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );
@@ -1345,6 +1059,52 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
 }
 
 void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
+
+  auto table = fromFile( "6000.14p" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // PhotoatomicTable interface
 
   CHECK( "6000.14p" == chunk.ZAID() );
   CHECK_THAT( 0., WithinRel( chunk.temperature() ) );

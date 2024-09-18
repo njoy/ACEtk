@@ -20,84 +20,21 @@ SCENARIO( "PhotonuclearTable" ){
 
   GIVEN( "valid data for a PhotonuclearTable prior to NJOY2016.75" ) {
 
-    auto table = fromFile( "94239.31u" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a PhotonuclearTable from a table" ) {
 
+      auto table = fromFile( "94239.31u" );
       PhotonuclearTable chunk( std::move( table ) );
 
       THEN( "a PhotonuclearTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunk( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          // S, Z, A was added to the NXS array
-          switch ( i ) {
-
-            case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
-            case  9 : { CHECK(     94 == nxs_chunk[i] ); break; }
-            case 10 : { CHECK(    239 == nxs_chunk[i] ); break; }
-            default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
-          }
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
 
     WHEN( "constructing a PhotonuclearTable from its components" ) {
 
-      PhotonuclearTable base( std::move( table ) );
+      PhotonuclearTable base( fromFile( "94239.31u" ) );
 
       std::optional< std::vector< unsigned int > > ptype = std::vector< unsigned int >{};
       std::optional< std::vector< continuous::CrossSectionData > > pxs = std::vector< continuous::CrossSectionData >{};
@@ -128,69 +65,65 @@ SCENARIO( "PhotonuclearTable" ){
             "tested" ) {
 
         verifyChunk( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          // S, Z, A was added to the NXS array
-          switch ( i ) {
-
-            case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
-            case  9 : { CHECK(     94 == nxs_chunk[i] ); break; }
-            case 10 : { CHECK(    239 == nxs_chunk[i] ); break; }
-            default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
-          }
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 } // SCENARIO
 
 void verifyChunk( const PhotonuclearTable& chunk ) {
+
+  auto table = fromFile( "94239.31u" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    // S, Z, A was added to the NXS array
+    switch ( i ) {
+
+      case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
+      case  9 : { CHECK(     94 == nxs_chunk[i] ); break; }
+      case 10 : { CHECK(    239 == nxs_chunk[i] ); break; }
+      default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
+    }
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // PhotonuclearTable interface
 
   CHECK( "94239.31u" == chunk.ZAID() );
   CHECK_THAT( 0.0, WithinRel( chunk.temperature() ) );
