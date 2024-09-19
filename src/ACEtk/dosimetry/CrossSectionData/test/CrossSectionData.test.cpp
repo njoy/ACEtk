@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using CrossSectionData = dosimetry::CrossSectionData;
 
 std::vector< double > chunk();
-void verifyChunk( const CrossSectionData& );
+void verifyChunk( const CrossSectionData&, const std::vector< double >& );
+CrossSectionData makeDummyBlock();
 
 SCENARIO( "CrossSectionData" ) {
 
@@ -35,16 +36,7 @@ SCENARIO( "CrossSectionData" ) {
 
       THEN( "a CrossSectionData can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,7 @@ SCENARIO( "CrossSectionData" ) {
 
       THEN( "a CrossSectionData can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -74,7 +57,18 @@ std::vector< double > chunk() {
   return { 0, 3, 1., 3., 5., 2., 4., 6. };
 }
 
-void verifyChunk( const CrossSectionData& chunk ) {
+void verifyChunk( const CrossSectionData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using ElectronShellBlock = electron::ElectronShellBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ElectronShellBlock& );
+void verifyChunk( const ElectronShellBlock&, const std::vector< double >& );
+ElectronShellBlock makeDummyBlock();
 
 SCENARIO( "ElectronShellBlock" ) {
 
@@ -34,16 +35,7 @@ SCENARIO( "ElectronShellBlock" ) {
       THEN( "a ElectronShellBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,7 @@ SCENARIO( "ElectronShellBlock" ) {
       THEN( "a ElectronShellBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -76,7 +59,18 @@ std::vector< double > chunk() {
            3.333333333333e-01 };
 }
 
-void verifyChunk( const ElectronShellBlock& chunk ) {
+void verifyChunk( const ElectronShellBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );

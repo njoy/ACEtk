@@ -14,7 +14,8 @@ using SubshellTransitionDataBlock = electron::SubshellTransitionDataBlock;
 using SubshellTransitionData = electron::SubshellTransitionData;
 
 std::vector< double > chunk();
-void verifyChunk( const SubshellTransitionDataBlock& );
+void verifyChunk( const SubshellTransitionDataBlock&, const std::vector< double >& );
+SubshellTransitionDataBlock makeDummyBlock();
 
 SCENARIO( "SubshellTransitionDataBlock" ) {
 
@@ -38,16 +39,7 @@ SCENARIO( "SubshellTransitionDataBlock" ) {
       THEN( "a SubshellTransitionDataBlock can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -58,7 +50,7 @@ SCENARIO( "SubshellTransitionDataBlock" ) {
       THEN( "a SubshellTransitionDataBlock can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
 
       THEN( "the XSS array is correct" ) {
@@ -79,7 +71,18 @@ std::vector< double > chunk() {
            1, 0, 3.5, 0.25, 2, 3, 2.5, 0.75, 3, 1, 5.5, 1.00 };
 }
 
-void verifyChunk( const SubshellTransitionDataBlock& chunk ) {
+void verifyChunk( const SubshellTransitionDataBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 16 == chunk.length() );

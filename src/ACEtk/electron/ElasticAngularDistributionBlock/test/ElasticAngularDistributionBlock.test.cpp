@@ -14,7 +14,8 @@ using ElasticAngularDistributionBlock = electron::ElasticAngularDistributionBloc
 using TabulatedAngularDistribution = electron::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const ElasticAngularDistributionBlock& );
+void verifyChunk( const ElasticAngularDistributionBlock&, const std::vector< double >& );
+ElasticAngularDistributionBlock makeDummyBlock();
 
 SCENARIO( "ElasticAngularDistributionBlock" ) {
 
@@ -36,16 +37,7 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
 
       THEN( "a ElasticAngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -55,16 +47,7 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
 
       THEN( "a ElasticAngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -84,7 +67,18 @@ std::vector< double > chunk() {
      -1.0, 1.0, 0., 1. };
 }
 
-void verifyChunk( const ElasticAngularDistributionBlock& chunk ) {
+void verifyChunk( const ElasticAngularDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );
