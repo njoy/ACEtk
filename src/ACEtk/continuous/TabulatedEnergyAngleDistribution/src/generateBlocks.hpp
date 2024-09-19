@@ -1,5 +1,7 @@
 void generateBlocks() {
 
+  this->distributions_.clear();
+
   std::size_t ne = static_cast< std::size_t >( this->IXSS( 2 ) );
   auto data = this->begin() + 1;
   auto end = data + 4 * ne + 1;

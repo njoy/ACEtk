@@ -3,6 +3,9 @@ TwoParameterDistribution() = default;
 TwoParameterDistribution( const TwoParameterDistribution& ) = default;
 TwoParameterDistribution( TwoParameterDistribution&& ) = default;
 
+TwoParameterDistribution& operator=( const TwoParameterDistribution& ) = default;
+TwoParameterDistribution& operator=( TwoParameterDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -33,6 +36,3 @@ TwoParameterDistribution( std::string name, Iterator begin, Iterator end,
 
   verifySize( this->begin(), this->end() );
 }
-
-TwoParameterDistribution& operator=( const TwoParameterDistribution& ) = default;
-TwoParameterDistribution& operator=( TwoParameterDistribution&& ) = default;

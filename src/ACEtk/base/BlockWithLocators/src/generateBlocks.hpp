@@ -4,6 +4,8 @@
 // directly is also possible.
 void generateBlocks() {
 
+  this->data_.clear();
+
   for ( unsigned int index = 1; index <= this->N(); ++index ) {
 
     // data : one-based index to the start of the data block

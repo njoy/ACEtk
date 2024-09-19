@@ -1,8 +1,10 @@
 AngularDistributionBlock() = default;
 
 AngularDistributionBlock( const AngularDistributionBlock& ) = default;
-
 AngularDistributionBlock( AngularDistributionBlock&& ) = default;
+
+AngularDistributionBlock& operator=( const AngularDistributionBlock& ) = default;
+AngularDistributionBlock& operator=( AngularDistributionBlock&& ) = default;
 
 /**
  *  @brief Constructor
@@ -25,7 +27,3 @@ AngularDistributionBlock( DistributionData elastic,
 AngularDistributionBlock( Iterator loc, Iterator data, Iterator end,
                           unsigned int nr ) :
   base::AngularDistributionBlock( "AND", loc, data, end, nr, true ) {}
-
-AngularDistributionBlock& operator=( const AngularDistributionBlock& ) = default;
-
-AngularDistributionBlock& operator=( AngularDistributionBlock&& ) = default;

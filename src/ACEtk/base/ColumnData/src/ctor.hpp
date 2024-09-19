@@ -3,6 +3,9 @@ ColumnData() = default;
 ColumnData( const ColumnData& ) = default;
 ColumnData( ColumnData&& ) = default;
 
+ColumnData& operator=( const ColumnData& ) = default;
+ColumnData& operator=( ColumnData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -55,6 +58,3 @@ ColumnData( std::string name, Iterator begin, Iterator end, std::size_t nc ) :
   verifySize( this->begin(), this->end(),
               this->begin() == this->end() ? 0 : *( this->begin() ), nc );
 }
-
-ColumnData& operator=( const ColumnData& ) = default;
-ColumnData& operator=( ColumnData&& ) = default;

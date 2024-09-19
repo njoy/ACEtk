@@ -1,5 +1,7 @@
 void generateBlocks() {
 
+  this->data_.clear();
+
   for ( unsigned int index = this->zero_index_ ? 0 : 1;
         index <= this->NR(); ++index ) {
 
