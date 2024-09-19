@@ -14,7 +14,8 @@ using ProbabilityTableBlock = continuous::ProbabilityTableBlock;
 using ProbabilityTable = continuous::ProbabilityTable;
 
 std::vector< double > chunk();
-void verifyChunk( const ProbabilityTableBlock& );
+void verifyChunk( const ProbabilityTableBlock&, const std::vector< double >& );
+ProbabilityTableBlock makeDummyBlock();
 
 SCENARIO( "ProbabilityTableBlock" ) {
 
@@ -42,16 +43,7 @@ SCENARIO( "ProbabilityTableBlock" ) {
       THEN( "a ProbabilityTable can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -62,16 +54,7 @@ SCENARIO( "ProbabilityTableBlock" ) {
       THEN( "a ProbabilityTable can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -84,7 +67,18 @@ std::vector< double > chunk() {
            0.25, 1.0, 11., 12., 13., 14., 15., 16., 17., 18., 19., 20. };
 }
 
-void verifyChunk( const ProbabilityTableBlock& chunk ) {
+void verifyChunk( const ProbabilityTableBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 32 == chunk.length() );

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using SecondaryParticleInformationBlock = continuous::SecondaryParticleInformationBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleInformationBlock& );
+void verifyChunk( const SecondaryParticleInformationBlock&, const std::vector< double >& );
+SecondaryParticleInformationBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleInformationBlock" ) {
 
@@ -30,16 +31,7 @@ SCENARIO( "SecondaryParticleInformationBlock" ) {
       THEN( "a SecondaryParticleInformationBlock can be constructed and members "
             "bcan e tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,16 +42,7 @@ SCENARIO( "SecondaryParticleInformationBlock" ) {
       THEN( "a SecondaryParticleInformationBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -70,7 +53,18 @@ std::vector< double > chunk() {
   return { 3, 2, 4 };
 }
 
-void verifyChunk( const SecondaryParticleInformationBlock& chunk ) {
+void verifyChunk( const SecondaryParticleInformationBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 3 == chunk.length() );

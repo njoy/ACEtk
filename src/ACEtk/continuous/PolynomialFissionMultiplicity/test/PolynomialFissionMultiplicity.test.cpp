@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using PolynomialFissionMultiplicity = continuous::PolynomialFissionMultiplicity;
 
 std::vector< double > chunk();
-void verifyChunk( const PolynomialFissionMultiplicity& );
+void verifyChunk( const PolynomialFissionMultiplicity&, const std::vector< double >& );
+PolynomialFissionMultiplicity makeDummyBlock();
 
 SCENARIO( "PolynomialFissionMultiplicity" ) {
 
@@ -30,16 +31,7 @@ SCENARIO( "PolynomialFissionMultiplicity" ) {
       THEN( "a PolynomialFissionMultiplicity can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,16 +42,7 @@ SCENARIO( "PolynomialFissionMultiplicity" ) {
       THEN( "a PolynomialFissionMultiplicity can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -70,7 +53,18 @@ std::vector< double > chunk() {
   return { 1., 2., 2.5, 1e-8 };
 }
 
-void verifyChunk( const PolynomialFissionMultiplicity& chunk ) {
+void verifyChunk( const PolynomialFissionMultiplicity& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 4 == chunk.length() );

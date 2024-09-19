@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using MultiplicityReactionNumberBlock = continuous::MultiplicityReactionNumberBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const MultiplicityReactionNumberBlock& );
+void verifyChunk( const MultiplicityReactionNumberBlock&, const std::vector< double >& );
+MultiplicityReactionNumberBlock makeDummyBlock();
 
 SCENARIO( "MultiplicityReactionNumberBlock" ) {
 
@@ -30,16 +31,7 @@ SCENARIO( "MultiplicityReactionNumberBlock" ) {
       THEN( "a MultiplicityReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,16 +42,7 @@ SCENARIO( "MultiplicityReactionNumberBlock" ) {
       THEN( "a MultiplicityReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -70,7 +53,18 @@ std::vector< double > chunk() {
   return { 3, 102, 204, 444 };
 }
 
-void verifyChunk( const MultiplicityReactionNumberBlock& chunk ) {
+void verifyChunk( const MultiplicityReactionNumberBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 4 == chunk.length() );

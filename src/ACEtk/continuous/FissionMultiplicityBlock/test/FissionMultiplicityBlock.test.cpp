@@ -16,8 +16,9 @@ using TabulatedFissionMultiplicity = continuous::TabulatedFissionMultiplicity;
 
 std::vector< double > chunk();
 std::vector< double > chunkWithPromptAndTotal();
-void verifyChunk( const FissionMultiplicityBlock& );
-void verifyChunkWithPromptAndTotal( const FissionMultiplicityBlock& );
+void verifyChunk( const FissionMultiplicityBlock&, const std::vector< double >& );
+void verifyChunkWithPromptAndTotal( const FissionMultiplicityBlock&, const std::vector< double >& );
+FissionMultiplicityBlock makeDummyBlock();
 
 SCENARIO( "FissionMultiplicityBlock" ) {
 
@@ -33,16 +34,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
 
       THEN( "an FissionMultiplicityBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -52,16 +44,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
 
       THEN( "an FissionMultiplicityBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -80,16 +63,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
 
       THEN( "an FissionMultiplicityBlock can be constructed and members can be tested" ) {
 
-        verifyChunkWithPromptAndTotal( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkWithPromptAndTotal( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -99,16 +73,7 @@ SCENARIO( "FissionMultiplicityBlock" ) {
 
       THEN( "an FissionMultiplicityBlock can be constructed and members can be tested" ) {
 
-        verifyChunkWithPromptAndTotal( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkWithPromptAndTotal( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -125,7 +90,18 @@ std::vector< double > chunkWithPromptAndTotal() {
                1, 2, 2.35, 1e-3 };
 }
 
-void verifyChunk( const FissionMultiplicityBlock& chunk ) {
+void verifyChunk( const FissionMultiplicityBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 9 == chunk.length() );
@@ -167,7 +143,18 @@ void verifyChunk( const FissionMultiplicityBlock& chunk ) {
   CHECK( std::nullopt == chunk.totalFissionMultiplicity() );
 }
 
-void verifyChunkWithPromptAndTotal( const FissionMultiplicityBlock& chunk ) {
+void verifyChunkWithPromptAndTotal( const FissionMultiplicityBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 14 == chunk.length() );

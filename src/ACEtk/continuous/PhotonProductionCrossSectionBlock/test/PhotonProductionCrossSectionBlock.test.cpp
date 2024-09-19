@@ -16,7 +16,8 @@ using TabulatedSecondaryParticleMultiplicity = continuous::TabulatedSecondaryPar
 using PhotonProductionData = continuous::PhotonProductionData;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotonProductionCrossSectionBlock& );
+void verifyChunk( const PhotonProductionCrossSectionBlock&, const std::vector< double >& );
+PhotonProductionCrossSectionBlock makeDummyBlock();
 
 SCENARIO( "PhotonProductionCrossSectionBlock" ) {
 
@@ -69,16 +70,7 @@ SCENARIO( "PhotonProductionCrossSectionBlock" ) {
       THEN( "a PhotonProductionCrossSectionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -90,16 +82,7 @@ SCENARIO( "PhotonProductionCrossSectionBlock" ) {
       THEN( "a PhotonProductionCrossSectionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -144,7 +127,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotonProductionCrossSectionBlock& chunk ) {
+void verifyChunk( const PhotonProductionCrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 122 == chunk.length() );

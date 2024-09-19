@@ -14,7 +14,8 @@ using EnergyDependentWattSpectrum = continuous::EnergyDependentWattSpectrum;
 using ParameterData = continuous::ParameterData;
 
 std::vector< double > chunk();
-void verifyChunk( const EnergyDependentWattSpectrum& );
+void verifyChunk( const EnergyDependentWattSpectrum&, const std::vector< double >& );
+EnergyDependentWattSpectrum makeDummyBlock();
 
 SCENARIO( "EnergyDependentWattSpectrum" ) {
 
@@ -34,16 +35,7 @@ SCENARIO( "EnergyDependentWattSpectrum" ) {
       THEN( "an EnergyDependentWattSpectrum can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,7 @@ SCENARIO( "EnergyDependentWattSpectrum" ) {
       THEN( "an EnergyDependentWattSpectrum can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -76,7 +59,18 @@ std::vector< double > chunk() {
            1.5e+6 };
 }
 
-void verifyChunk( const EnergyDependentWattSpectrum& chunk ) {
+void verifyChunk( const EnergyDependentWattSpectrum& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 19 == chunk.length() );

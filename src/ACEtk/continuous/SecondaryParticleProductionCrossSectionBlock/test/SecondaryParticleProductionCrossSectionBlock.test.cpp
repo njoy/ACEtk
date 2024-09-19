@@ -14,7 +14,8 @@ using SecondaryParticleProductionCrossSectionBlock = continuous::SecondaryPartic
 using TabulatedSecondaryParticleMultiplicity = continuous::TabulatedSecondaryParticleMultiplicity;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& );
+void verifyChunk( const SecondaryParticleProductionCrossSectionBlock&, const std::vector< double >& );
+SecondaryParticleProductionCrossSectionBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
 
@@ -44,16 +45,7 @@ SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
       THEN( "a SecondaryParticleProductionCrossSectionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -65,16 +57,7 @@ SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
       THEN( "a SecondaryParticleProductionCrossSectionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -94,7 +77,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk ) {
+void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 28 == chunk.length() );

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using SimpleMaxwellianFissionSpectrum = continuous::SimpleMaxwellianFissionSpectrum;
 
 std::vector< double > chunk();
-void verifyChunk( const SimpleMaxwellianFissionSpectrum& );
+void verifyChunk( const SimpleMaxwellianFissionSpectrum&, const std::vector< double >& );
+SimpleMaxwellianFissionSpectrum makeDummyBlock();
 
 SCENARIO( "SimpleMaxwellianFissionSpectrum" ) {
 
@@ -34,16 +35,7 @@ SCENARIO( "SimpleMaxwellianFissionSpectrum" ) {
       THEN( "a SimpleMaxwellianFissionSpectrum can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -53,16 +45,7 @@ SCENARIO( "SimpleMaxwellianFissionSpectrum" ) {
 
       THEN( "a SimpleMaxwellianFissionSpectrum can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -75,7 +58,18 @@ std::vector< double > chunk() {
            1.5e+6 };
 }
 
-void verifyChunk( const SimpleMaxwellianFissionSpectrum& chunk ) {
+void verifyChunk( const SimpleMaxwellianFissionSpectrum& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );

@@ -14,7 +14,8 @@ using CrossSectionBlock = continuous::CrossSectionBlock;
 using CrossSectionData = continuous::CrossSectionData;
 
 std::vector< double > chunk();
-void verifyChunk( const CrossSectionBlock& );
+void verifyChunk( const CrossSectionBlock&, const std::vector< double >& );
+CrossSectionBlock makeDummyBlock();
 
 SCENARIO( "CrossSectionBlock" ) {
 
@@ -111,16 +112,7 @@ SCENARIO( "CrossSectionBlock" ) {
 
       THEN( "a CrossSectionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -130,16 +122,7 @@ SCENARIO( "CrossSectionBlock" ) {
 
       THEN( "a CrossSectionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -229,7 +212,18 @@ std::vector< double > chunk() {
     3.14799100000E-04, 3.06769500000E-04 };
 }
 
-void verifyChunk( const CrossSectionBlock& chunk ) {
+void verifyChunk( const CrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 306 == chunk.length() );

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using EquiprobableAngularBins = continuous::EquiprobableAngularBins;
 
 std::vector< double > chunk();
-void verifyChunk( const EquiprobableAngularBins& );
+void verifyChunk( const EquiprobableAngularBins&, const std::vector< double >& );
+EquiprobableAngularBins makeDummyBlock();
 
 SCENARIO( "EquiprobableAngularBins" ) {
 
@@ -37,16 +38,7 @@ SCENARIO( "EquiprobableAngularBins" ) {
       THEN( "an EquiprobableAngularBins can be constructed and members can be "
             "tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -57,16 +49,7 @@ SCENARIO( "EquiprobableAngularBins" ) {
 
       THEN( "an EquiprobableAngularBins can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -88,7 +71,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const EquiprobableAngularBins& chunk ) {
+void verifyChunk( const EquiprobableAngularBins& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 33 == chunk.length() );

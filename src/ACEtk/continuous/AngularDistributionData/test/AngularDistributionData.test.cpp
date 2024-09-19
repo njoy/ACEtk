@@ -17,7 +17,8 @@ using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
 using Distribution = AngularDistributionData::Distribution;
 
 std::vector< double > chunk();
-void verifyChunk( const AngularDistributionData& );
+void verifyChunk( const AngularDistributionData&, const std::vector< double >& );
+AngularDistributionData makeDummyBlock();
 
 SCENARIO( "AngularDistributionData" ) {
 
@@ -46,16 +47,7 @@ SCENARIO( "AngularDistributionData" ) {
       THEN( "an AngularDistributionData can be constructed and members can be "
             "tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -66,16 +58,53 @@ SCENARIO( "AngularDistributionData" ) {
       THEN( "an AngularDistributionData can be constructed and members can be "
             "tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      AngularDistributionData chunk( 6, xss.begin(), xss.end() );
+      AngularDistributionData copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a AngularDistributionData can be constructed and members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      AngularDistributionData chunk( 6, xss.begin(), xss.end() );
+      AngularDistributionData move( std::move( chunk ) );
+
+      THEN( "a AngularDistributionData can be constructed and members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      AngularDistributionData chunk( 6, xss.begin(), xss.end() );
+      AngularDistributionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      AngularDistributionData chunk( 6, xss.begin(), xss.end() );
+      AngularDistributionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -104,7 +133,18 @@ std::vector< double > chunk() {
             1.00000000000E+00 };
 }
 
-void verifyChunk( const AngularDistributionData& chunk ) {
+void verifyChunk( const AngularDistributionData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 51 == chunk.length() );
@@ -144,4 +184,16 @@ void verifyChunk( const AngularDistributionData& chunk ) {
   CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( chunk.distributions()[0] ) );
   CHECK( true == std::holds_alternative< EquiprobableAngularBins >( chunk.distributions()[1] ) );
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( chunk.distributions()[2] ) );
+}
+
+AngularDistributionData makeDummyBlock() {
+
+  std::vector< Distribution > distributions = {
+
+    TabulatedAngularDistribution(  1., 2, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+    TabulatedAngularDistribution( 20., 2, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } )
+  };
+  std::size_t locb = 6;
+
+  return { std::move( distributions ), locb };
 }

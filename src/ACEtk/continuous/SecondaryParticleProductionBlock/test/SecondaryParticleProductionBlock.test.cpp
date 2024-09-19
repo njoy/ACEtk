@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using SecondaryParticleProductionBlock = continuous::SecondaryParticleProductionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleProductionBlock& );
+void verifyChunk( const SecondaryParticleProductionBlock&, const std::vector< double >& );
+SecondaryParticleProductionBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleProductionBlock" ) {
 
@@ -40,16 +41,7 @@ SCENARIO( "SecondaryParticleProductionBlock" ) {
       THEN( "a SecondaryParticleProductionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -60,16 +52,7 @@ SCENARIO( "SecondaryParticleProductionBlock" ) {
       THEN( "a SecondaryParticleProductionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -84,7 +67,18 @@ std::vector< double > chunk() {
     3.63894900000E-05, 3.67662300000E-05, 3.70168600000E-05 };
 }
 
-void verifyChunk( const SecondaryParticleProductionBlock& chunk ) {
+void verifyChunk( const SecondaryParticleProductionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );

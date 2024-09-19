@@ -14,8 +14,9 @@ using FrameAndMultiplicityBlock = continuous::FrameAndMultiplicityBlock;
 
 std::vector< double > chunk();
 std::vector< double > chunkTYRH();
-void verifyChunk( const FrameAndMultiplicityBlock& );
-void verifyChunkTYRH( const FrameAndMultiplicityBlock& );
+void verifyChunk( const FrameAndMultiplicityBlock&, const std::vector< double >& );
+void verifyChunkTYRH( const FrameAndMultiplicityBlock&, const std::vector< double >& );
+FrameAndMultiplicityBlock makeDummyBlock();
 
 SCENARIO( "FrameAndMultiplicityBlock" ) {
 
@@ -39,16 +40,7 @@ SCENARIO( "FrameAndMultiplicityBlock" ) {
       THEN( "a FrameAndMultiplicityBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -59,16 +51,7 @@ SCENARIO( "FrameAndMultiplicityBlock" ) {
       THEN( "a FrameAndMultiplicityBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -91,16 +74,7 @@ SCENARIO( "FrameAndMultiplicityBlock" ) {
       THEN( "a FrameAndMultiplicityBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunkTYRH( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkTYRH( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -111,16 +85,7 @@ SCENARIO( "FrameAndMultiplicityBlock" ) {
       THEN( "a FrameAndMultiplicityBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunkTYRH( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkTYRH( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -136,7 +101,18 @@ std::vector< double > chunkTYRH() {
   return { -1, 1, 1 };
 }
 
-void verifyChunk( const FrameAndMultiplicityBlock& chunk ) {
+void verifyChunk( const FrameAndMultiplicityBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 3 == chunk.length() );
@@ -164,7 +140,18 @@ void verifyChunk( const FrameAndMultiplicityBlock& chunk ) {
   CHECK( 0 == chunk.multiplicities()[2] );
 }
 
-void verifyChunkTYRH( const FrameAndMultiplicityBlock& chunk ) {
+void verifyChunkTYRH( const FrameAndMultiplicityBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 3 == chunk.length() );

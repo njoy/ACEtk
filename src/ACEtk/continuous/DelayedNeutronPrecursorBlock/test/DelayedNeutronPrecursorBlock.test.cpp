@@ -14,7 +14,8 @@ using DelayedNeutronPrecursorBlock = continuous::DelayedNeutronPrecursorBlock;
 using DelayedNeutronPrecursorData = continuous::DelayedNeutronPrecursorData;
 
 std::vector< double > chunk();
-void verifyChunk( const DelayedNeutronPrecursorBlock& );
+void verifyChunk( const DelayedNeutronPrecursorBlock&, const std::vector< double >& );
+DelayedNeutronPrecursorBlock makeDummyBlock();
 
 SCENARIO( "DelayedNeutronPrecursorBlock" ) {
 
@@ -39,16 +40,7 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
       THEN( "a DelayedNeutronPrecursorBlock can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -59,16 +51,7 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
       THEN( "a DelayedNeutronPrecursorBlock can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -83,7 +66,18 @@ std::vector< double > chunk() {
             1.00000000000E-05,   2.00000000000E+01,   2.40000000000E-03,   2.00000000000E+00 };
 }
 
-void verifyChunk( const DelayedNeutronPrecursorBlock& chunk ) {
+void verifyChunk( const DelayedNeutronPrecursorBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 16 == chunk.length() );

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedAngularDistribution& );
+void verifyChunk( const TabulatedAngularDistribution&, const std::vector< double >& );
+TabulatedAngularDistribution makeDummyBlock();
 
 SCENARIO( "TabulatedAngularDistribution" ) {
 
@@ -36,16 +37,7 @@ SCENARIO( "TabulatedAngularDistribution" ) {
       THEN( "a TabulatedAngularDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -56,16 +48,7 @@ SCENARIO( "TabulatedAngularDistribution" ) {
 
       THEN( "a TabulatedAngularDistribution can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -78,7 +61,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,  0.50000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const TabulatedAngularDistribution& chunk ) {
+void verifyChunk( const TabulatedAngularDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );

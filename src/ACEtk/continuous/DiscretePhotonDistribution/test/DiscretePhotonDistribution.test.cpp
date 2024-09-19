@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using DiscretePhotonDistribution = continuous::DiscretePhotonDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const DiscretePhotonDistribution& );
+void verifyChunk( const DiscretePhotonDistribution&, const std::vector< double >& );
+DiscretePhotonDistribution makeDummyBlock();
 
 SCENARIO( "DiscretePhotonDistribution" ) {
 
@@ -33,16 +34,7 @@ SCENARIO( "DiscretePhotonDistribution" ) {
       THEN( "a DiscretePhotonDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,7 @@ SCENARIO( "DiscretePhotonDistribution" ) {
       THEN( "a DiscretePhotonDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -74,7 +57,18 @@ std::vector< double > chunk() {
   return { 2.0, 1e+5 };
 }
 
-void verifyChunk( const DiscretePhotonDistribution& chunk ) {
+void verifyChunk( const DiscretePhotonDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );

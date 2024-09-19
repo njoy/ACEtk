@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TwoBodyTransferDistribution = continuous::TwoBodyTransferDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TwoBodyTransferDistribution& );
+void verifyChunk( const TwoBodyTransferDistribution&, const std::vector< double >& );
+TwoBodyTransferDistribution makeDummyBlock();
 
 SCENARIO( "TwoBodyTransferDistribution" ) {
 
@@ -33,16 +34,7 @@ SCENARIO( "TwoBodyTransferDistribution" ) {
       THEN( "a TwoBodyTransferDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,7 @@ SCENARIO( "TwoBodyTransferDistribution" ) {
       THEN( "a TwoBodyTransferDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -74,7 +57,18 @@ std::vector< double > chunk() {
   return { 7.71295800000E-05,   9.91472200000E-01 };
 }
 
-void verifyChunk( const TwoBodyTransferDistribution& chunk ) {
+void verifyChunk( const TwoBodyTransferDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );

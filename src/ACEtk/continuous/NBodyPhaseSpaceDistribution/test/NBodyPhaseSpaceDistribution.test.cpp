@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using NBodyPhaseSpaceDistribution = continuous::NBodyPhaseSpaceDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const NBodyPhaseSpaceDistribution& );
+void verifyChunk( const NBodyPhaseSpaceDistribution&, const std::vector< double >& );
+NBodyPhaseSpaceDistribution makeDummyBlock();
 
 SCENARIO( "NBodyPhaseSpaceDistribution" ) {
 
@@ -41,16 +42,7 @@ SCENARIO( "NBodyPhaseSpaceDistribution" ) {
       THEN( "a NBodyPhaseSpaceDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -62,16 +54,7 @@ SCENARIO( "NBodyPhaseSpaceDistribution" ) {
       THEN( "a NBodyPhaseSpaceDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -86,7 +69,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,   3.30000000000E-01,   6.60000000000E-01,   1.00000000000E+00  };
 }
 
-void verifyChunk( const NBodyPhaseSpaceDistribution& chunk ) {
+void verifyChunk( const NBodyPhaseSpaceDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 16 == chunk.length() );

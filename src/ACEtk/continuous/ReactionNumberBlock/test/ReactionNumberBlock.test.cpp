@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using ReactionNumberBlock = continuous::ReactionNumberBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ReactionNumberBlock& );
+void verifyChunk( const ReactionNumberBlock&, const std::vector< double >& );
+ReactionNumberBlock makeDummyBlock();
 
 SCENARIO( "ReactionNumberBlock" ) {
 
@@ -30,16 +31,7 @@ SCENARIO( "ReactionNumberBlock" ) {
       THEN( "a ReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,16 +42,7 @@ SCENARIO( "ReactionNumberBlock" ) {
       THEN( "a ReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -70,7 +53,18 @@ std::vector< double > chunk() {
   return { 102, 204, 444 };
 }
 
-void verifyChunk( const ReactionNumberBlock& chunk ) {
+void verifyChunk( const ReactionNumberBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 3 == chunk.length() );

@@ -18,7 +18,8 @@ using EnergyDistributionData = continuous::EnergyDistributionData;
 using FrameAndMultiplicityBlock = continuous::FrameAndMultiplicityBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleEnergyDistributionBlock& );
+void verifyChunk( const SecondaryParticleEnergyDistributionBlock&, const std::vector< double >& );
+SecondaryParticleEnergyDistributionBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
 
@@ -54,16 +55,7 @@ SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
 
       THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -77,16 +69,7 @@ SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
 
       THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -119,7 +102,18 @@ std::vector< double > chunk() {
                 9.775367E-01,       2.391154E-01,       2.847920E-01,       5.592013E-01 };
 }
 
-void verifyChunk( const SecondaryParticleEnergyDistributionBlock& chunk ) {
+void verifyChunk( const SecondaryParticleEnergyDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 57 == chunk.length() );

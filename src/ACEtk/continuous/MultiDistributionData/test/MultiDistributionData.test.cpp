@@ -18,7 +18,8 @@ using TabulatedKalbachMannDistribution = continuous::TabulatedKalbachMannDistrib
 using GeneralEvaporationSpectrum = continuous::GeneralEvaporationSpectrum;
 
 std::vector< double > chunk();
-void verifyChunk( const MultiDistributionData& );
+void verifyChunk( const MultiDistributionData&, const std::vector< double >& );
+MultiDistributionData makeDummyBlock();
 
 SCENARIO( "MultiDistributionData" ) {
 
@@ -62,16 +63,7 @@ SCENARIO( "MultiDistributionData" ) {
       THEN( "a MultiDistributionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -82,16 +74,7 @@ SCENARIO( "MultiDistributionData" ) {
       THEN( "a MultiDistributionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -123,7 +106,18 @@ std::vector< double > chunk() {
             3, 5., 6., 7. };
 }
 
-void verifyChunk( const MultiDistributionData& chunk ) {
+void verifyChunk( const MultiDistributionData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 67 == chunk.length() );

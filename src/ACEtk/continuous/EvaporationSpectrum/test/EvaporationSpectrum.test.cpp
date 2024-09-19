@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using EvaporationSpectrum = continuous::EvaporationSpectrum;
 
 std::vector< double > chunk();
-void verifyChunk( const EvaporationSpectrum& );
+void verifyChunk( const EvaporationSpectrum&, const std::vector< double >& );
+EvaporationSpectrum makeDummyBlock();
 
 SCENARIO( "EvaporationSpectrum" ) {
 
@@ -34,16 +35,7 @@ SCENARIO( "EvaporationSpectrum" ) {
       THEN( "a EvaporationSpectrum can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,7 @@ SCENARIO( "EvaporationSpectrum" ) {
       THEN( "an EvaporationSpectrum can be constructed and members can be "
             "tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -76,7 +59,18 @@ std::vector< double > chunk() {
            1.5e+6 };
 }
 
-void verifyChunk( const EvaporationSpectrum& chunk ) {
+void verifyChunk( const EvaporationSpectrum& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using InterpolationData = continuous::InterpolationData;
 
 std::vector< double > chunk();
-void verifyChunk( const InterpolationData& );
+void verifyChunk( const InterpolationData&, const std::vector< double >& );
+InterpolationData makeDummyBlock();
 
 SCENARIO( "InterpolationData" ) {
 
@@ -32,16 +33,7 @@ SCENARIO( "InterpolationData" ) {
 
       THEN( "an InterpolationData can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -51,16 +43,7 @@ SCENARIO( "InterpolationData" ) {
 
       THEN( "an InterpolationData can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -71,7 +54,18 @@ std::vector< double > chunk() {
   return { 2, 5, 10, 1, 2 };
 }
 
-void verifyChunk( const InterpolationData& chunk ) {
+void verifyChunk( const InterpolationData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 5 == chunk.length() );

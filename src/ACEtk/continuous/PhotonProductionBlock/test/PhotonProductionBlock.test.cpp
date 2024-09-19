@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using PhotonProductionBlock = continuous::PhotonProductionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotonProductionBlock& );
+void verifyChunk( const PhotonProductionBlock&, const std::vector< double >& );
+PhotonProductionBlock makeDummyBlock();
 
 SCENARIO( "PhotonProductionBlock" ) {
 
@@ -58,16 +59,7 @@ SCENARIO( "PhotonProductionBlock" ) {
       THEN( "a PhotonProductionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -78,16 +70,7 @@ SCENARIO( "PhotonProductionBlock" ) {
       THEN( "a PhotonProductionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -126,7 +109,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotonProductionBlock& chunk ) {
+void verifyChunk( const PhotonProductionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 99 == chunk.length() );
