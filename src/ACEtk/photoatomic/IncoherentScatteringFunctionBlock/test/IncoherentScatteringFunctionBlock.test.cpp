@@ -55,6 +55,56 @@ SCENARIO( "IncoherentScatteringFunctionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy( chunk );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move( std::move( chunk ) );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a IncoherentScatteringFunctionBlock instance - eprdata style" ) {
@@ -84,6 +134,56 @@ SCENARIO( "IncoherentScatteringFunctionBlock" ) {
             "be tested" ) {
 
         verifyChunkEprdata( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy( chunk );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move( std::move( chunk ) );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -210,4 +310,9 @@ void verifyChunkEprdata( const IncoherentScatteringFunctionBlock& chunk,
   CHECK_THAT( 3., WithinRel( chunk.values()[2] ) );
   CHECK_THAT( 4., WithinRel( chunk.values()[3] ) );
   CHECK_THAT( 5., WithinRel( chunk.values()[4] ) );
+}
+
+IncoherentScatteringFunctionBlock makeDummyBlock() {
+
+  return { { 3., 4. }, { 5., 6. } };
 }

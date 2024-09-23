@@ -98,10 +98,10 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
       };
 
       PrincipalCrossSectionBlock chunk( std::move( energies ),
-                                                   std::move( incoherent ),
-                                                   std::move( coherent ),
-                                                   std::move( photoelectric ),
-                                                   std::move( pairproduction ) );
+                                        std::move( incoherent ),
+                                        std::move( coherent ),
+                                        std::move( photoelectric ),
+                                        std::move( pairproduction ) );
 
       THEN( "a PrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
@@ -118,6 +118,56 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock copy( chunk );
+
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -221,4 +271,9 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk,
   CHECK_THAT( -2.622629761934E+01, WithinRel( chunk.photoelectric().back() ) );
   CHECK_THAT(  0.000000000000E+00, WithinRel( chunk.pairproduction().front() ) );
   CHECK_THAT( -4.455371820900E+00, WithinRel( chunk.pairproduction().back() ) );
+}
+
+PrincipalCrossSectionBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. }, { 7., 8. }, { 9., 10. } };
 }

@@ -30,9 +30,9 @@ SCENARIO( "FluorescenceDataBlock" ) {
       std::vector< double > energies = { 0.000000000000E+00,  1.238156190380E-03 };
 
       FluorescenceDataBlock chunk( std::move( edges ),
-                                              std::move( probabilities ),
-                                              std::move( yields ),
-                                              std::move( energies ) );
+                                   std::move( probabilities ),
+                                   std::move( yields ),
+                                   std::move( energies ) );
 
       THEN( "a FluorescenceDataBlock can be constructed and members can "
             "be tested" ) {
@@ -49,6 +49,56 @@ SCENARIO( "FluorescenceDataBlock" ) {
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock copy( chunk );
+
+      THEN( "an FluorescenceDataBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock move( std::move( chunk ) );
+
+      THEN( "an FluorescenceDataBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an FluorescenceDataBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an FluorescenceDataBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -108,4 +158,9 @@ void verifyChunk( const FluorescenceDataBlock& chunk,
   CHECK_THAT( 2.542671170140E-02, WithinRel( chunk.yields().back() ) );
   CHECK_THAT( 0.000000000000E+00, WithinRel( chunk.fluorescentEnergies().front() ) );
   CHECK_THAT( 1.238156190380E-03, WithinRel( chunk.fluorescentEnergies().back() ) );
+}
+
+FluorescenceDataBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. }, { 7., 8. } };
 }

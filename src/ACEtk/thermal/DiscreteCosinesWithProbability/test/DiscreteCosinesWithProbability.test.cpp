@@ -55,6 +55,56 @@ SCENARIO( "DiscreteCosinesWithProbability" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability copy( chunk );
+
+      THEN( "an DiscreteCosinesWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability move( std::move( chunk ) );
+
+      THEN( "an DiscreteCosinesWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DiscreteCosinesWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DiscreteCosinesWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -100,4 +150,9 @@ void verifyChunk( const DiscreteCosinesWithProbability& chunk,
   CHECK( 33 == chunk.cosines().size() );
   CHECK_THAT( -1., WithinRel( chunk.cosines().front() ) );
   CHECK_THAT( +1., WithinRel( chunk.cosines().back() ) );
+}
+
+DiscreteCosinesWithProbability makeDummyBlock() {
+
+  return { 2., 1., 2., { -1., 1. } };
 }

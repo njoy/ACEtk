@@ -100,6 +100,56 @@ SCENARIO( "ComptonProfileBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock copy( chunk );
+
+      THEN( "an ComptonProfileBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock move( std::move( chunk ) );
+
+      THEN( "an ComptonProfileBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ComptonProfileBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ComptonProfileBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -236,4 +286,9 @@ void verifyChunk( const ComptonProfileBlock& chunk,
   CHECK( 31 == profile.cdf().size() );
   CHECK_THAT( 0., WithinRel( profile.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( profile.cdf().back() ) );
+}
+
+ComptonProfileBlock makeDummyBlock() {
+
+  return { { { 2, { 1., 2. }, { 3., 4. }, { 5., 6. } } } };
 }

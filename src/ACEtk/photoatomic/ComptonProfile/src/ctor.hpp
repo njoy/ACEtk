@@ -3,6 +3,9 @@ ComptonProfile() = default;
 ComptonProfile( const ComptonProfile& ) = default;
 ComptonProfile( ComptonProfile&& ) = default;
 
+ComptonProfile& operator=( const ComptonProfile& ) = default;
+ComptonProfile& operator=( ComptonProfile&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -27,6 +30,3 @@ ComptonProfile( int interpolation,
  */
 ComptonProfile( Iterator begin, Iterator end ) :
   TabulatedProbabilityDistribution( "ComptonProfile", begin, end ) {}
-
-ComptonProfile& operator=( const ComptonProfile& ) = default;
-ComptonProfile& operator=( ComptonProfile&& ) = default;

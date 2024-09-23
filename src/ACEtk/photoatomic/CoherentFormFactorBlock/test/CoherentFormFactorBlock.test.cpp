@@ -81,6 +81,56 @@ SCENARIO( "CoherentFormFactorBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy( chunk );
+
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move( std::move( chunk ) );
+
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a CoherentFormFactorBlock instance - eprdata style" ) {
@@ -112,6 +162,56 @@ SCENARIO( "CoherentFormFactorBlock" ) {
             "be tested" ) {
 
         verifyChunkEprdata( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy( chunk );
+
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move( std::move( chunk ) );
+
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -226,4 +326,9 @@ void verifyChunkEprdata( const CoherentFormFactorBlock& chunk,
   CHECK( 5 == chunk.formFactors().size() );
   CHECK_THAT(  6., WithinRel( chunk.formFactors().front() ) );
   CHECK_THAT( 10., WithinRel( chunk.formFactors().back() ) );
+}
+
+CoherentFormFactorBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. } };
 }

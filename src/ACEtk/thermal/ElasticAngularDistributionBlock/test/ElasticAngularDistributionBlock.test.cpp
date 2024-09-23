@@ -41,13 +41,62 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(),
-                                                              4, 3 );
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4, 3 );
 
       THEN( "a ElasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4, 3 );
+      ElasticAngularDistributionBlock copy( chunk );
+
+      THEN( "an ElasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4, 3 );
+      ElasticAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an ElasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4, 3 );
+      ElasticAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ElasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4, 3 );
+      ElasticAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ElasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -111,4 +160,9 @@ void verifyChunk( const ElasticAngularDistributionBlock& chunk,
   CHECK_THAT( -1., WithinRel( cosines[0] ) );
   CHECK_THAT(  .9, WithinRel( cosines[1] ) );
   CHECK_THAT( +1., WithinRel( cosines[2] ) );
+}
+
+ElasticAngularDistributionBlock makeDummyBlock() {
+
+  return { { { -1., 1. }, { -1., 1. } } };
 }

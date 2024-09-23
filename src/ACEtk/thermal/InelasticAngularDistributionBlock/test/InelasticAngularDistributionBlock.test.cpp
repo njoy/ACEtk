@@ -62,6 +62,56 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy( chunk );
+
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a InelasticAngularDistributionBlock "
@@ -105,6 +155,56 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
             "and members can be tested" ) {
 
         verifyChunkWithIFENG2( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy( chunk );
+
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -400,4 +500,10 @@ void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& chunk,
   CHECK_THAT( -1., WithinRel( data43.cosines()[0] ) );
   CHECK_THAT(  .4, WithinRel( data43.cosines()[1] ) );
   CHECK_THAT( +1., WithinRel( data43.cosines()[2] ) );
+}
+
+InelasticAngularDistributionBlock makeDummyBlock() {
+
+  return { { { { 1., { -1., 1. } }, { 2., { -1., 1. } } },
+             { { 1., { -1., 1. } }, { 3., { -1., 1. } } } }, true };
 }

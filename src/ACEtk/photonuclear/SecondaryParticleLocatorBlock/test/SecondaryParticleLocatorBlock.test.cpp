@@ -58,8 +58,8 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
       };
 
       SecondaryParticleLocatorBlock chunk( std::move( types ),
-                                                       std::move( numbers ),
-                                                       std::move( locators ) );
+                                           std::move( numbers ),
+                                           std::move( locators ) );
 
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
@@ -76,6 +76,56 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
             "can be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock copy( chunk );
+
+      THEN( "an SecondaryParticleLocatorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleLocatorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleLocatorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleLocatorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -211,4 +261,9 @@ void verifyChunk( const SecondaryParticleLocatorBlock& chunk,
   CHECK( 7 == chunk.index( 34 ) );
 
   CHECK_THROWS( chunk.index( 3 ) );
+}
+
+SecondaryParticleLocatorBlock makeDummyBlock() {
+
+  return { { 1 }, { 2 }, { { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } } };
 }

@@ -30,9 +30,9 @@ SCENARIO( "ComptonProfile" ) {
       std::vector< double > cdf = { 0.0, 0.5, 1.0 };
 
       ComptonProfile chunk( interpolation,
-                                       std::move( momentum ),
-                                       std::move( pdf ),
-                                       std::move( cdf ) );
+                            std::move( momentum ),
+                            std::move( pdf ),
+                            std::move( cdf ) );
 
       THEN( "a ComptonProfile can be constructed and "
             "members can be tested" ) {
@@ -49,6 +49,56 @@ SCENARIO( "ComptonProfile" ) {
             "members can be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ComptonProfile chunk( xss.begin(), xss.end() );
+      ComptonProfile copy( chunk );
+
+      THEN( "an ComptonProfile can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ComptonProfile chunk( xss.begin(), xss.end() );
+      ComptonProfile move( std::move( chunk ) );
+
+      THEN( "an ComptonProfile can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ComptonProfile chunk( xss.begin(), xss.end() );
+      ComptonProfile copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ComptonProfile can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ComptonProfile chunk( xss.begin(), xss.end() );
+      ComptonProfile move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ComptonProfile can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -92,4 +142,9 @@ void verifyChunk( const ComptonProfile& chunk,
   CHECK( 3 == chunk.cdf().size() );
   CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
+}
+
+ComptonProfile makeDummyBlock() {
+
+  return { 2, { 1., 2. }, { 3., 4. }, { 5., 6. } };
 }

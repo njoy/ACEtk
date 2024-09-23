@@ -50,6 +50,56 @@ SCENARIO( "PhotoelectricCrossSectionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock copy( chunk );
+
+      THEN( "an PhotoelectricCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an PhotoelectricCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PhotoelectricCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PhotoelectricCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -106,4 +156,9 @@ void verifyChunk( const PhotoelectricCrossSectionBlock& chunk,
   CHECK_THAT(  13., WithinRel( chunk.photoelectric(3)[2] ) );
   CHECK_THAT(  14., WithinRel( chunk.photoelectric(3)[3] ) );
   CHECK_THAT(  15., WithinRel( chunk.photoelectric(3)[4] ) );
+}
+
+PhotoelectricCrossSectionBlock makeDummyBlock() {
+
+  return { { { 1., 2. }, { 3., 4. }, { 5., 6. } } };
 }

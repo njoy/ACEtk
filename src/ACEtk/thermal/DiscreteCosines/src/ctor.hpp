@@ -3,6 +3,9 @@ DiscreteCosines() = default;
 DiscreteCosines( const DiscreteCosines& ) = default;
 DiscreteCosines( DiscreteCosines&& ) = default;
 
+DiscreteCosines& operator=( const DiscreteCosines& ) = default;
+DiscreteCosines& operator=( DiscreteCosines&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -29,6 +32,3 @@ DiscreteCosines( std::size_t ncosines, Iterator begin, Iterator end ) :
 
   verifySize( this->begin(), this->end(), this->numberDiscreteCosines() );
 }
-
-DiscreteCosines& operator=( const DiscreteCosines& ) = default;
-DiscreteCosines& operator=( DiscreteCosines&& ) = default;

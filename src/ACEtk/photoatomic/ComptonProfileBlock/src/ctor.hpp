@@ -3,6 +3,9 @@ ComptonProfileBlock() = default;
 ComptonProfileBlock( const ComptonProfileBlock& ) = default;
 ComptonProfileBlock( ComptonProfileBlock&& ) = default;
 
+ComptonProfileBlock& operator=( const ComptonProfileBlock& ) = default;
+ComptonProfileBlock& operator=( ComptonProfileBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ ComptonProfileBlock( std::vector< ComptonProfile > profiles ) :
  */
 ComptonProfileBlock( Iterator lsig, Iterator sig, Iterator end, unsigned int nsh ) :
   BlockWithLocators( "SWD", lsig, sig, end, nsh ) {}
-
-ComptonProfileBlock& operator=( const ComptonProfileBlock& ) = default;
-ComptonProfileBlock& operator=( ComptonProfileBlock&& ) = default;

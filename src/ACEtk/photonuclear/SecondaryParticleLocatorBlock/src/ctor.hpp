@@ -19,6 +19,9 @@ SecondaryParticleLocatorBlock() = default;
 SecondaryParticleLocatorBlock( const SecondaryParticleLocatorBlock& ) = default;
 SecondaryParticleLocatorBlock( SecondaryParticleLocatorBlock&& ) = default;
 
+SecondaryParticleLocatorBlock& operator=( const SecondaryParticleLocatorBlock& ) = default;
+SecondaryParticleLocatorBlock& operator=( SecondaryParticleLocatorBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -46,6 +49,3 @@ SecondaryParticleLocatorBlock( Iterator ixs, Iterator end, unsigned int ntype ) 
 
   verifySize( this->begin(), this->end(), this->NTYPE() );
 }
-
-SecondaryParticleLocatorBlock& operator=( const SecondaryParticleLocatorBlock& ) = default;
-SecondaryParticleLocatorBlock& operator=( SecondaryParticleLocatorBlock&& ) = default;

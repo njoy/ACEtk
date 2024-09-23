@@ -59,6 +59,56 @@ SCENARIO( "HeatingNumbersBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock copy( chunk );
+
+      THEN( "an HeatingNumbersBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock move( std::move( chunk ) );
+
+      THEN( "an HeatingNumbersBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an HeatingNumbersBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an HeatingNumbersBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -106,4 +156,9 @@ void verifyChunk( const HeatingNumbersBlock& chunk,
 
   CHECK_THAT( 9.457315870945E-04, WithinRel( chunk.heating().front() ) );
   CHECK_THAT( 9.086036433693E+01, WithinRel( chunk.heating().back() ) );
+}
+
+HeatingNumbersBlock makeDummyBlock() {
+
+  return { { 1., 2., 3., 4., 5., 6. } };
 }

@@ -3,6 +3,9 @@ DiscreteCosinesWithProbability() = default;
 DiscreteCosinesWithProbability( const DiscreteCosinesWithProbability& ) = default;
 DiscreteCosinesWithProbability( DiscreteCosinesWithProbability&& ) = default;
 
+DiscreteCosinesWithProbability& operator=( const DiscreteCosinesWithProbability& ) = default;
+DiscreteCosinesWithProbability& operator=( DiscreteCosinesWithProbability&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -36,6 +39,3 @@ DiscreteCosinesWithProbability(
 
   verifySize( this->begin(), this->end(), this->numberDiscreteCosines() );
 }
-
-DiscreteCosinesWithProbability& operator=( const DiscreteCosinesWithProbability& ) = default;
-DiscreteCosinesWithProbability& operator=( DiscreteCosinesWithProbability&& ) = default;
