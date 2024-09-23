@@ -54,6 +54,56 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 2, 3 );
+      PrincipalCrossSectionBlock copy( chunk );
+
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 2, 3 );
+      PrincipalCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 2, 3 );
+      PrincipalCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 2, 3 );
+      PrincipalCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -125,4 +175,10 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk,
   CHECK_THAT(  13., WithinRel( chunk.electroionisation(2)[0] ) );
   CHECK_THAT(  14., WithinRel( chunk.electroionisation(2)[1] ) );
   CHECK_THAT(  15., WithinRel( chunk.electroionisation(2)[2] ) );
+}
+
+PrincipalCrossSectionBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. }, { 7., 8. },
+           { { 1., 2. }, { 3., 4. } } };
 }

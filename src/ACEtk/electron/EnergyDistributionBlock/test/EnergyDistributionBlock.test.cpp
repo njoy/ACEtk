@@ -50,6 +50,56 @@ SCENARIO( "EnergyDistributionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock copy( chunk );
+
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -113,4 +163,15 @@ void verifyChunk( const EnergyDistributionBlock& chunk,
   distribution = chunk.distribution(4);
   CHECK( 1. == distribution.energy() );
   CHECK( 2 == distribution.numberOutgoingEnergies() );
+}
+
+EnergyDistributionBlock makeDummyBlock() {
+
+  std::vector< TabulatedEnergyDistribution > distributions = {
+
+    TabulatedEnergyDistribution( 1e-8, { 1e-12, 1 }, { 0., 1. } ),
+    TabulatedEnergyDistribution(   1., { 1e-11, 2 }, { 0., 1. } )
+  };
+
+  return { std::move( distributions ) };
 }

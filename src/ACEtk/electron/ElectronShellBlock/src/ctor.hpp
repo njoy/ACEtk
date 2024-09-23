@@ -3,6 +3,9 @@ ElectronShellBlock() = default;
 ElectronShellBlock( const ElectronShellBlock& ) = default;
 ElectronShellBlock( ElectronShellBlock&& ) = default;
 
+ElectronShellBlock& operator=( const ElectronShellBlock& ) = default;
+ElectronShellBlock& operator=( ElectronShellBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -31,6 +34,3 @@ ElectronShellBlock( std::vector< unsigned int > electrons,
  */
 ElectronShellBlock( Iterator begin, Iterator end, unsigned int nsh ) :
   ArrayData( "EPS", begin, end, nsh, 3 ) {}
-
-ElectronShellBlock& operator=( const ElectronShellBlock& ) = default;
-ElectronShellBlock& operator=( ElectronShellBlock&& ) = default;

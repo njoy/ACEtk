@@ -27,10 +27,9 @@ SCENARIO( "ExcitationBlock" ) {
       std::vector< double > energies = { 10., 20., 200. };
       std::vector< double > loss = { 1., 2., 3. };
 
-      ExcitationBlock chunk( std::move( energies ),
-                                                std::move( loss ) );
+      ExcitationBlock chunk( std::move( energies ), std::move( loss ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ExcitationBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
@@ -41,10 +40,60 @@ SCENARIO( "ExcitationBlock" ) {
 
       ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ExcitationBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock copy( chunk );
+
+      THEN( "an ExcitationBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock move( std::move( chunk ) );
+
+      THEN( "an ExcitationBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ExcitationBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ExcitationBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -86,4 +135,9 @@ void verifyChunk( const ExcitationBlock& chunk,
   CHECK_THAT(   1., WithinRel( chunk.excitationEnergyLoss()[0] ) );
   CHECK_THAT(   2., WithinRel( chunk.excitationEnergyLoss()[1] ) );
   CHECK_THAT(   3., WithinRel( chunk.excitationEnergyLoss()[2] ) );
+}
+
+ExcitationBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. } };
 }

@@ -3,6 +3,9 @@ CrossSectionBlock() = default;
 CrossSectionBlock( const CrossSectionBlock& ) = default;
 CrossSectionBlock( CrossSectionBlock&& ) = default;
 
+CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
+CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ CrossSectionBlock( std::vector< CrossSectionData > xs ) :
  */
 CrossSectionBlock( Iterator lsig, Iterator sig, Iterator end, unsigned int ntr ) :
   BlockWithLocators( "SIGD", lsig, sig, end, ntr ) {}
-
-CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
-CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;

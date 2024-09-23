@@ -50,6 +50,56 @@ SCENARIO( "SubshellTransitionData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData copy( chunk );
+
+      THEN( "an SubshellTransitionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData move( std::move( chunk ) );
+
+      THEN( "an SubshellTransitionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SubshellTransitionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SubshellTransitionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -114,4 +164,9 @@ void verifyChunk( const SubshellTransitionData& chunk,
   CHECK( true == chunk.isRadiativeTransition(1) );
   CHECK( false == chunk.isRadiativeTransition(2) );
   CHECK( false == chunk.isRadiativeTransition(3) );
+}
+
+SubshellTransitionData makeDummyBlock() {
+
+  return { { 1 }, { 0 }, { 1. }, { 3. } };
 }

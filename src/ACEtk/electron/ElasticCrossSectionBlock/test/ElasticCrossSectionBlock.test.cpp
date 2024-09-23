@@ -47,6 +47,56 @@ SCENARIO( "ElasticCrossSectionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ElasticCrossSectionBlock chunk( xss.begin(), xss.end(), 3 );
+      ElasticCrossSectionBlock copy( chunk );
+
+      THEN( "an ElasticCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ElasticCrossSectionBlock chunk( xss.begin(), xss.end(), 3 );
+      ElasticCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an ElasticCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ElasticCrossSectionBlock chunk( xss.begin(), xss.end(), 3 );
+      ElasticCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ElasticCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ElasticCrossSectionBlock chunk( xss.begin(), xss.end(), 3 );
+      ElasticCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ElasticCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -86,4 +136,9 @@ void verifyChunk( const ElasticCrossSectionBlock& chunk,
   CHECK_THAT(   4., WithinRel( chunk.total()[0] ) );
   CHECK_THAT(   5., WithinRel( chunk.total()[1] ) );
   CHECK_THAT(   6., WithinRel( chunk.total()[2] ) );
+}
+
+ElasticCrossSectionBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. } };
 }

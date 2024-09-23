@@ -34,12 +34,12 @@ SCENARIO( "ElectronSubshellBlock" ) {
       std::vector< unsigned int > transitions = { 12, 5, 3, 2, 0 };
 
       ElectronSubshellBlock chunk( std::move( designators ),
-                                              std::move( electrons ),
-                                              std::move( energies ),
-                                              std::move( probabilities ),
-                                              std::move( transitions ) );
+                                   std::move( electrons ),
+                                   std::move( energies ),
+                                   std::move( probabilities ),
+                                   std::move( transitions ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ElectronSubshellBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
@@ -50,10 +50,60 @@ SCENARIO( "ElectronSubshellBlock" ) {
 
       ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ElectronSubshellBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock copy( chunk );
+
+      THEN( "an ElectronSubshellBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock move( std::move( chunk ) );
+
+      THEN( "an ElectronSubshellBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ElectronSubshellBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ElectronSubshellBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -174,4 +224,9 @@ void verifyChunk( const ElectronSubshellBlock& chunk,
   CHECK(  3 == chunk.numberTransitions( 3 ) );
   CHECK(  2 == chunk.numberTransitions( 4 ) );
   CHECK(  0 == chunk.numberTransitions( 5 ) );
+}
+
+ElectronSubshellBlock makeDummyBlock() {
+
+  return { { 1 }, { 2 }, { 1. }, { 3. }, { 5 } };
 }

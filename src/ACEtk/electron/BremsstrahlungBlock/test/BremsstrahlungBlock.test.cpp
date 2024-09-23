@@ -27,8 +27,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
       std::vector< double > energies = { 10., 20., 200. };
       std::vector< double > remaining = { 1., 2., 3. };
 
-      BremsstrahlungBlock chunk( std::move( energies ),
-                                                    std::move( remaining ) );
+      BremsstrahlungBlock chunk( std::move( energies ), std::move( remaining ) );
 
       THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
             "be tested" ) {
@@ -45,6 +44,56 @@ SCENARIO( "BremsstrahlungBlock" ) {
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
+      BremsstrahlungBlock copy( chunk );
+
+      THEN( "an BremsstrahlungBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
+      BremsstrahlungBlock move( std::move( chunk ) );
+
+      THEN( "an BremsstrahlungBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
+      BremsstrahlungBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an BremsstrahlungBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
+      BremsstrahlungBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an BremsstrahlungBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -86,4 +135,9 @@ void verifyChunk( const BremsstrahlungBlock& chunk,
   CHECK_THAT(   1., WithinRel( chunk.energyAfterBremsstrahlung()[0] ) );
   CHECK_THAT(   2., WithinRel( chunk.energyAfterBremsstrahlung()[1] ) );
   CHECK_THAT(   3., WithinRel( chunk.energyAfterBremsstrahlung()[2] ) );
+}
+
+BremsstrahlungBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. } };
 }

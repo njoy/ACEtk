@@ -29,8 +29,8 @@ SCENARIO( "ElectronShellBlock" ) {
       std::vector< double > probabilities = { 6.666666666667e-01, 3.333333333333e-01 };
 
       ElectronShellBlock chunk( std::move( electrons ),
-                                         std::move( energies ),
-                                         std::move( probabilities ) );
+                                std::move( energies ),
+                                std::move( probabilities ) );
 
       THEN( "a ElectronShellBlock can be constructed and members can "
             "be tested" ) {
@@ -47,6 +47,56 @@ SCENARIO( "ElectronShellBlock" ) {
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ElectronShellBlock chunk( xss.begin(), xss.end(), 2 );
+      ElectronShellBlock copy( chunk );
+
+      THEN( "an ElectronShellBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ElectronShellBlock chunk( xss.begin(), xss.end(), 2 );
+      ElectronShellBlock move( std::move( chunk ) );
+
+      THEN( "an ElectronShellBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ElectronShellBlock chunk( xss.begin(), xss.end(), 2 );
+      ElectronShellBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ElectronShellBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ElectronShellBlock chunk( xss.begin(), xss.end(), 2 );
+      ElectronShellBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ElectronShellBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -92,4 +142,9 @@ void verifyChunk( const ElectronShellBlock& chunk,
   CHECK_THAT( 1.000000000000e-06, WithinRel( chunk.bindingEnergy( 2 ) ) );
   CHECK_THAT( 6.666666666667e-01, WithinRel( chunk.interactionProbability( 1 ) ) );
   CHECK_THAT( 3.333333333333e-01, WithinRel( chunk.interactionProbability( 2 ) ) );
+}
+
+ElectronShellBlock makeDummyBlock() {
+
+  return { { 1, 2 }, { 1., 2. }, { 3., 4. } };
 }

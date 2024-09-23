@@ -3,6 +3,9 @@ ExcitationBlock() = default;
 ExcitationBlock( const ExcitationBlock& ) = default;
 ExcitationBlock( ExcitationBlock&& ) = default;
 
+ExcitationBlock& operator=( const ExcitationBlock& ) = default;
+ExcitationBlock& operator=( ExcitationBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -29,6 +32,3 @@ ExcitationBlock(
 ExcitationBlock( Iterator begin, Iterator end,
                                     unsigned int nxl ) :
   ArrayData( "EXCIT", begin, end, nxl, 2 ) {}
-
-ExcitationBlock& operator=( const ExcitationBlock& ) = default;
-ExcitationBlock& operator=( ExcitationBlock&& ) = default;

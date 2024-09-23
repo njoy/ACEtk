@@ -48,6 +48,56 @@ SCENARIO( "TabulatedEnergyDistribution" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedEnergyDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedEnergyDistribution copy( chunk );
+
+      THEN( "an TabulatedEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedEnergyDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedEnergyDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedEnergyDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedEnergyDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedEnergyDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedEnergyDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -89,4 +139,9 @@ void verifyChunk( const TabulatedEnergyDistribution& chunk,
   CHECK_THAT(  0.  , WithinRel( chunk.cdf()[0] ) );
   CHECK_THAT(  0.75, WithinRel( chunk.cdf()[1] ) );
   CHECK_THAT(  1.  , WithinRel( chunk.cdf()[2] ) );
+}
+
+TabulatedEnergyDistribution makeDummyBlock() {
+
+  return { 1, { 0., 1. }, { 0.5, 0.5 } };
 }

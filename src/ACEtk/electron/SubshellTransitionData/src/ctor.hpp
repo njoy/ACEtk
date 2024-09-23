@@ -3,6 +3,9 @@ SubshellTransitionData() = default;
 SubshellTransitionData( const SubshellTransitionData& ) = default;
 SubshellTransitionData( SubshellTransitionData&& ) = default;
 
+SubshellTransitionData& operator=( const SubshellTransitionData& ) = default;
+SubshellTransitionData& operator=( SubshellTransitionData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -29,6 +32,3 @@ SubshellTransitionData(
  */
 SubshellTransitionData( Iterator begin, Iterator end ) :
   ArrayData( "TRAN", begin, end, 4, calculateNumberTransitions( begin, end ) ) {}
-
-SubshellTransitionData& operator=( const SubshellTransitionData& ) = default;
-SubshellTransitionData& operator=( SubshellTransitionData&& ) = default;

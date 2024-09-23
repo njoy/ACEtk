@@ -50,6 +50,56 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock copy( chunk );
+
+      THEN( "an ElasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an ElasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ElasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ElasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -113,4 +163,15 @@ void verifyChunk( const ElasticAngularDistributionBlock& chunk,
   distribution = chunk.distribution(4);
   CHECK( 1. == distribution.energy() );
   CHECK( 2 == distribution.numberCosines() );
+}
+
+ElasticAngularDistributionBlock makeDummyBlock() {
+
+  std::vector< TabulatedAngularDistribution > distributions = {
+
+    TabulatedAngularDistribution( 1e-11, { -1.0, 1.0 }, { 0., 1. } ),
+    TabulatedAngularDistribution(    1., { -1.0, 1.0 }, { 0., 1. } )
+  };
+
+  return { std::move( distributions ) };
 }

@@ -31,7 +31,7 @@ SCENARIO( "TabulatedAngularDistribution" ) {
       TabulatedAngularDistribution chunk( energy, std::move( cosines ),
                                                   std::move( cdf ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a TabulatedAngularDistribution can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
@@ -42,10 +42,60 @@ SCENARIO( "TabulatedAngularDistribution" ) {
 
       TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a TabulatedAngularDistribution can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution copy( chunk );
+
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -89,4 +139,9 @@ void verifyChunk( const TabulatedAngularDistribution& chunk,
   CHECK_THAT(  0.  , WithinRel( chunk.cdf()[0] ) );
   CHECK_THAT(  0.75, WithinRel( chunk.cdf()[1] ) );
   CHECK_THAT(  1.  , WithinRel( chunk.cdf()[2] ) );
+}
+
+TabulatedAngularDistribution makeDummyBlock() {
+
+  return { 1, { -1., 1. }, { 0.5, 0.5 } };
 }

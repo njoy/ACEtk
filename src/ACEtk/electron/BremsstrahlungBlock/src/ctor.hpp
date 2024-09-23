@@ -3,6 +3,9 @@ BremsstrahlungBlock() = default;
 BremsstrahlungBlock( const BremsstrahlungBlock& ) = default;
 BremsstrahlungBlock( BremsstrahlungBlock&& ) = default;
 
+BremsstrahlungBlock& operator=( const BremsstrahlungBlock& ) = default;
+BremsstrahlungBlock& operator=( BremsstrahlungBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -28,6 +31,3 @@ BremsstrahlungBlock(
  */
 BremsstrahlungBlock( Iterator begin, Iterator end, unsigned int nbl ) :
   ArrayData( "BREML", begin, end, nbl, 2 ) {}
-
-BremsstrahlungBlock& operator=( const BremsstrahlungBlock& ) = default;
-BremsstrahlungBlock& operator=( BremsstrahlungBlock&& ) = default;
