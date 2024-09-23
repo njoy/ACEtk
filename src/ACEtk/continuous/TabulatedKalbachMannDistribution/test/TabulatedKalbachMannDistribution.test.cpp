@@ -59,6 +59,56 @@ SCENARIO( "TabulatedKalbachMannDistribution" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedKalbachMannDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedKalbachMannDistribution copy( chunk );
+
+      THEN( "an TabulatedKalbachMannDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedKalbachMannDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedKalbachMannDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedKalbachMannDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedKalbachMannDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedKalbachMannDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedKalbachMannDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedKalbachMannDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedKalbachMannDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedKalbachMannDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -112,4 +162,9 @@ void verifyChunk( const TabulatedKalbachMannDistribution& chunk,
   CHECK( 3 == chunk.cdf().size() );
   CHECK_THAT( 4., WithinRel( chunk.angularDistributionSlopeValues().front() ) );
   CHECK_THAT( 6., WithinRel( chunk.angularDistributionSlopeValues().back() ) );
+}
+
+TabulatedKalbachMannDistribution makeDummyBlock() {
+
+  return { 1., 1, { 1., 2. }, { 3., 4. }, { 5., 6. }, { 7., 8. }, { 9., 10. }, 1 };
 }

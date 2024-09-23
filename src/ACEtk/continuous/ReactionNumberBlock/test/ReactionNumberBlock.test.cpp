@@ -45,6 +45,56 @@ SCENARIO( "ReactionNumberBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock copy( chunk );
+
+      THEN( "an ReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock move( std::move( chunk ) );
+
+      THEN( "an ReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -92,4 +142,9 @@ void verifyChunk( const ReactionNumberBlock& chunk,
   CHECK( 3 == chunk.index(444) );
 
   CHECK_THROWS( chunk.index(1) );
+}
+
+ReactionNumberBlock makeDummyBlock() {
+
+  return { { 103 } };
 }

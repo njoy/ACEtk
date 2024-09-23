@@ -58,6 +58,56 @@ SCENARIO( "TabulatedAngularDistributionWithProbability" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability copy( chunk );
+
+      THEN( "an TabulatedAngularDistributionWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngularDistributionWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngularDistributionWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngularDistributionWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -102,4 +152,9 @@ void verifyChunk( const TabulatedAngularDistributionWithProbability& chunk,
   CHECK( 3 == chunk.cdf().size() );
   CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
+}
+
+TabulatedAngularDistributionWithProbability makeDummyBlock() {
+
+  return {1., 2., 3., 2, { -1., 1. }, { 0.5, 0.5 }, { 0., 1. } };
 }

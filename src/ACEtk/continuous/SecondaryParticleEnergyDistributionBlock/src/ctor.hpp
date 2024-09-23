@@ -8,7 +8,6 @@ SecondaryParticleEnergyDistributionBlock(
 
   if ( Base::owner() ) {
 
-    this->frames_.clear();
     this->generateFrames();
   }
 }
@@ -21,9 +20,38 @@ SecondaryParticleEnergyDistributionBlock(
 
   if ( Base::owner() ) {
 
-    this->frames_.clear();
     this->generateFrames();
   }
+}
+
+SecondaryParticleEnergyDistributionBlock& operator=( const SecondaryParticleEnergyDistributionBlock& base ) {
+
+  if ( this != &base ) {
+
+    BlockWithLocators::operator=( base );
+    this->tyrh_ = base.tyrh_;
+    this->frames_ = base.frames_;
+    if ( Base::owner() ) {
+
+      this->generateFrames();
+    }
+  }
+  return *this;
+}
+
+SecondaryParticleEnergyDistributionBlock& operator=( SecondaryParticleEnergyDistributionBlock&& base ) {
+
+  if ( this != &base ) {
+
+    BlockWithLocators::operator=( std::move( base ) );
+    this->tyrh_ = std::move( base.tyrh_ );
+    this->frames_ = std::move( base.frames_ );
+    if ( Base::owner() ) {
+
+      this->generateFrames();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -82,16 +110,4 @@ SecondaryParticleEnergyDistributionBlock(
   BlockWithLocators( "DLWH", lsig, sig, end, nr ), tyrh_( std::move( tyrh ) ) {
 
   this->generateFrames();
-}
-
-SecondaryParticleEnergyDistributionBlock& operator=( const SecondaryParticleEnergyDistributionBlock& base ) {
-
-  new (this) SecondaryParticleEnergyDistributionBlock( base );
-  return *this;
-}
-
-SecondaryParticleEnergyDistributionBlock& operator=( SecondaryParticleEnergyDistributionBlock&& base ) {
-
-  new (this) SecondaryParticleEnergyDistributionBlock( std::move( base ) );
-  return *this;
 }

@@ -45,6 +45,56 @@ SCENARIO( "SecondaryParticleInformationBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      SecondaryParticleInformationBlock chunk( xss.begin(), xss.end(), 3 );
+      SecondaryParticleInformationBlock copy( chunk );
+
+      THEN( "an SecondaryParticleInformationBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleInformationBlock chunk( xss.begin(), xss.end(), 3 );
+      SecondaryParticleInformationBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleInformationBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleInformationBlock chunk( xss.begin(), xss.end(), 3 );
+      SecondaryParticleInformationBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleInformationBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleInformationBlock chunk( xss.begin(), xss.end(), 3 );
+      SecondaryParticleInformationBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleInformationBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -81,4 +131,9 @@ void verifyChunk( const SecondaryParticleInformationBlock& chunk,
   CHECK( 3  == chunk.NPs()[0] );
   CHECK( 2 == chunk.NPs()[1] );
   CHECK( 4 == chunk.NPs()[2] );
+}
+
+SecondaryParticleInformationBlock makeDummyBlock() {
+
+  return { { 2 } };
 }

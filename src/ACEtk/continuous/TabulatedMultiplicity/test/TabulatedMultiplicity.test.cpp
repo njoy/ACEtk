@@ -49,6 +49,56 @@ SCENARIO( "TabulatedMultiplicity" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedMultiplicity copy( chunk );
+
+      THEN( "an TabulatedMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedMultiplicity move( std::move( chunk ) );
+
+      THEN( "an TabulatedMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedMultiplicity copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedMultiplicity move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -100,4 +150,9 @@ void verifyChunk( const TabulatedMultiplicity& chunk,
   CHECK_THAT( 2., WithinRel( chunk.multiplicities()[0] ) );
   CHECK_THAT( 4., WithinRel( chunk.multiplicities()[1] ) );
   CHECK_THAT( 6., WithinRel( chunk.multiplicities()[2] ) );
+}
+
+TabulatedMultiplicity makeDummyBlock() {
+
+  return { {}, {}, { 1., 2. }, { 3., 4. } };
 }

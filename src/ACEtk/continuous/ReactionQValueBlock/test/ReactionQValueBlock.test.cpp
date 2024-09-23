@@ -45,6 +45,56 @@ SCENARIO( "ReactionQValueBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock copy( chunk );
+
+      THEN( "an ReactionQValueBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock move( std::move( chunk ) );
+
+      THEN( "an ReactionQValueBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ReactionQValueBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ReactionQValueBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -81,4 +131,9 @@ void verifyChunk( const ReactionQValueBlock& chunk,
   CHECK_THAT( 2.224631, WithinRel( chunk.QValues()[0] ) );
   CHECK_THAT( 0, WithinRel( chunk.QValues()[1] ) );
   CHECK_THAT( 0, WithinRel( chunk.QValues()[2] ) );
+}
+
+ReactionQValueBlock makeDummyBlock() {
+
+  return { { 1., 2. } };
 }

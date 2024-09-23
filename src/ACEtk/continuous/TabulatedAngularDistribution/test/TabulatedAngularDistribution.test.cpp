@@ -51,6 +51,56 @@ SCENARIO( "TabulatedAngularDistribution" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution copy( chunk );
+
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -93,4 +143,9 @@ void verifyChunk( const TabulatedAngularDistribution& chunk,
   CHECK( 3 == chunk.cdf().size() );
   CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
+}
+
+TabulatedAngularDistribution makeDummyBlock() {
+
+  return {1., 2, { -1., 1. }, { 0.5, 0.5 }, { 0., 1. } };
 }

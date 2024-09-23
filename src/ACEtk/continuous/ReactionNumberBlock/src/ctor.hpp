@@ -3,6 +3,9 @@ ReactionNumberBlock() = default;
 ReactionNumberBlock( const ReactionNumberBlock& ) = default;
 ReactionNumberBlock( ReactionNumberBlock&& ) = default;
 
+ReactionNumberBlock& operator=( const ReactionNumberBlock& ) = default;
+ReactionNumberBlock& operator=( ReactionNumberBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ ReactionNumberBlock( std::vector< unsigned int > reactions ) :
  */
 ReactionNumberBlock( Iterator begin, Iterator end, unsigned int ntr ) :
   ArrayData( "MTR", begin, end, ntr, 1 ) {}
-
-ReactionNumberBlock& operator=( const ReactionNumberBlock& ) = default;
-ReactionNumberBlock& operator=( ReactionNumberBlock&& ) = default;

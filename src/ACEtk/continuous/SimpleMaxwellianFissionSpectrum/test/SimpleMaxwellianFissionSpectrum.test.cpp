@@ -48,6 +48,56 @@ SCENARIO( "SimpleMaxwellianFissionSpectrum" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      SimpleMaxwellianFissionSpectrum chunk( xss.begin(), xss.end() );
+      SimpleMaxwellianFissionSpectrum copy( chunk );
+
+      THEN( "an SimpleMaxwellianFissionSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SimpleMaxwellianFissionSpectrum chunk( xss.begin(), xss.end() );
+      SimpleMaxwellianFissionSpectrum move( std::move( chunk ) );
+
+      THEN( "an SimpleMaxwellianFissionSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SimpleMaxwellianFissionSpectrum chunk( xss.begin(), xss.end() );
+      SimpleMaxwellianFissionSpectrum copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SimpleMaxwellianFissionSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SimpleMaxwellianFissionSpectrum chunk( xss.begin(), xss.end() );
+      SimpleMaxwellianFissionSpectrum move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SimpleMaxwellianFissionSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -112,4 +162,9 @@ void verifyChunk( const SimpleMaxwellianFissionSpectrum& chunk,
 
   CHECK( 1.5e+6 == chunk.U() );
   CHECK( 1.5e+6 == chunk.restrictionEnergy() );
+}
+
+SimpleMaxwellianFissionSpectrum makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, 5. };
 }

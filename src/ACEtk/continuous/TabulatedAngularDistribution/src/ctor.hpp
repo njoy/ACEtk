@@ -3,6 +3,9 @@ TabulatedAngularDistribution() = default;
 TabulatedAngularDistribution( const TabulatedAngularDistribution& ) = default;
 TabulatedAngularDistribution( TabulatedAngularDistribution&& ) = default;
 
+TabulatedAngularDistribution& operator=( const TabulatedAngularDistribution& ) = default;
+TabulatedAngularDistribution& operator=( TabulatedAngularDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -46,6 +49,3 @@ TabulatedAngularDistribution( double energy, Iterator begin, Iterator end ) :
 TabulatedAngularDistribution( double energy, std::size_t,
                               Iterator begin, Iterator end ) :
   TabulatedAngularDistribution( energy, begin, end ) {}
-
-TabulatedAngularDistribution& operator=( const TabulatedAngularDistribution& ) = default;
-TabulatedAngularDistribution& operator=( TabulatedAngularDistribution&& ) = default;

@@ -3,6 +3,9 @@ ReactionQValueBlock() = default;
 ReactionQValueBlock( const ReactionQValueBlock& ) = default;
 ReactionQValueBlock( ReactionQValueBlock&& ) = default;
 
+ReactionQValueBlock& operator=( const ReactionQValueBlock& ) = default;
+ReactionQValueBlock& operator=( ReactionQValueBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ ReactionQValueBlock( std::vector< double > qvalues ) :
  */
 ReactionQValueBlock( Iterator begin, Iterator end, unsigned int ntr ) :
   ArrayData( "LQR", begin, end, ntr, 1 ) {}
-
-ReactionQValueBlock& operator=( const ReactionQValueBlock& ) = default;
-ReactionQValueBlock& operator=( ReactionQValueBlock&& ) = default;

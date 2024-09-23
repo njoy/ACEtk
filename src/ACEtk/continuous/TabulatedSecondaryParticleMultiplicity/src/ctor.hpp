@@ -18,6 +18,34 @@ TabulatedSecondaryParticleMultiplicity( TabulatedSecondaryParticleMultiplicity&&
   }
 }
 
+TabulatedSecondaryParticleMultiplicity& operator=( const TabulatedSecondaryParticleMultiplicity& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+TabulatedSecondaryParticleMultiplicity& operator=( TabulatedSecondaryParticleMultiplicity&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
 /**
  *  @brief Constructor
  *
@@ -66,16 +94,4 @@ TabulatedSecondaryParticleMultiplicity( Iterator begin, Iterator end ) :
   Base( "TabulatedSecondaryParticleMultiplicity", begin, end ) {
 
   this->generateBlocks();
-}
-
-TabulatedSecondaryParticleMultiplicity& operator=( const TabulatedSecondaryParticleMultiplicity& base ) {
-
-  new (this) TabulatedSecondaryParticleMultiplicity( base );
-  return *this;
-}
-
-TabulatedSecondaryParticleMultiplicity& operator=( TabulatedSecondaryParticleMultiplicity&& base ) {
-
-  new (this) TabulatedSecondaryParticleMultiplicity( std::move( base ) );
-  return *this;
 }

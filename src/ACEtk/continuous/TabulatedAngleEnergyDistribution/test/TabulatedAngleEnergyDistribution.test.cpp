@@ -57,6 +57,56 @@ SCENARIO( "TabulatedAngleEnergyDistribution" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution copy( chunk );
+
+      THEN( "an TabulatedAngleEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngleEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngleEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngleEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -144,4 +194,18 @@ void verifyChunk( const TabulatedAngleEnergyDistribution& chunk,
   CHECK( 2 == data2.cdf().size() );
   CHECK_THAT( 0., WithinRel( data2.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( data2.cdf().back() ) );
+}
+
+TabulatedAngleEnergyDistribution makeDummyBlock() {
+
+  std::vector< TabulatedEnergyDistribution > distributions  = {
+
+    TabulatedEnergyDistribution(
+        -1., 2, { 1e-5, 20.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+    TabulatedEnergyDistribution(
+        1., 1, { 1e-3, 15.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } )
+  };
+  std::size_t locb = 15;
+
+  return { 1.1, 2, std::move( distributions ), locb };
 }

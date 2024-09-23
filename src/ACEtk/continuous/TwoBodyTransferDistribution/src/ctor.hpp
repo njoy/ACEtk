@@ -3,6 +3,9 @@ TwoBodyTransferDistribution() = default;
 TwoBodyTransferDistribution( const TwoBodyTransferDistribution& ) = default;
 TwoBodyTransferDistribution( TwoBodyTransferDistribution&& ) = default;
 
+TwoBodyTransferDistribution& operator=( const TwoBodyTransferDistribution& ) = default;
+TwoBodyTransferDistribution& operator=( TwoBodyTransferDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -25,6 +28,3 @@ TwoBodyTransferDistribution( double emin, double emax, double c1, double c2 ) :
 TwoBodyTransferDistribution( Iterator begin, Iterator end,
                              double emin, double emax ) :
   TwoParameterDistribution( "TwoBodyTransferDistribution", begin, end, emin, emax ) {}
-
-TwoBodyTransferDistribution& operator=( const TwoBodyTransferDistribution& ) = default;
-TwoBodyTransferDistribution& operator=( TwoBodyTransferDistribution&& ) = default;

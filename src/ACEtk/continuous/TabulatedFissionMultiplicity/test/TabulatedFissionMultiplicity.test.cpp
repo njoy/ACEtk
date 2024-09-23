@@ -47,6 +47,56 @@ SCENARIO( "TabulatedFissionMultiplicity" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity copy( chunk );
+
+      THEN( "an TabulatedFissionMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity move( std::move( chunk ) );
+
+      THEN( "an TabulatedFissionMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedFissionMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedFissionMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -103,4 +153,9 @@ void verifyChunk( const TabulatedFissionMultiplicity& chunk,
   CHECK_THAT( 2.35, WithinRel( chunk.multiplicities()[0] ) );
   CHECK_THAT( 2.55, WithinRel( chunk.multiplicities()[1] ) );
   CHECK_THAT( 7., WithinRel( chunk.multiplicities()[2] ) );
+}
+
+TabulatedFissionMultiplicity makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. } };
 }

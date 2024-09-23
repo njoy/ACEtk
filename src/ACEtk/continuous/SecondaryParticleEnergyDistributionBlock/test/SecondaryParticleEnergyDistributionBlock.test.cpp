@@ -72,6 +72,72 @@ SCENARIO( "SecondaryParticleEnergyDistributionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      FrameAndMultiplicityBlock tyrh( { ReferenceFrame::Laboratory,
+                                        ReferenceFrame::CentreOfMass } );
+
+      SecondaryParticleEnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                      xss.end(), tyrh, 2 );
+      SecondaryParticleEnergyDistributionBlock copy( chunk );
+
+      THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      FrameAndMultiplicityBlock tyrh( { ReferenceFrame::Laboratory,
+                                        ReferenceFrame::CentreOfMass } );
+
+      SecondaryParticleEnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                      xss.end(), tyrh, 2 );
+      SecondaryParticleEnergyDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleEnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      FrameAndMultiplicityBlock tyrh( { ReferenceFrame::Laboratory,
+                                        ReferenceFrame::CentreOfMass } );
+
+      SecondaryParticleEnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                      xss.end(), tyrh, 2 );
+      SecondaryParticleEnergyDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleEnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      FrameAndMultiplicityBlock tyrh( { ReferenceFrame::Laboratory,
+                                        ReferenceFrame::CentreOfMass } );
+
+      SecondaryParticleEnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                      xss.end(), tyrh, 2 );
+      SecondaryParticleEnergyDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleEnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -203,4 +269,10 @@ void verifyChunk( const SecondaryParticleEnergyDistributionBlock& chunk,
 
   CHECK( ReferenceFrame::Laboratory == chunk.referenceFrame(1).value() );
   CHECK( ReferenceFrame::CentreOfMass == chunk.referenceFrame(2).value() );
+}
+
+SecondaryParticleEnergyDistributionBlock makeDummyBlock() {
+
+  return { { LevelScatteringDistribution( 1., 2., 3., 4. ) },
+           { ReferenceFrame::CentreOfMass } };
 }

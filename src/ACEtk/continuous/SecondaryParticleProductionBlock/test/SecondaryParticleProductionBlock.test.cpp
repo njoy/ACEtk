@@ -55,6 +55,56 @@ SCENARIO( "SecondaryParticleProductionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      SecondaryParticleProductionBlock chunk( xss.begin(), xss.end() );
+      SecondaryParticleProductionBlock copy( chunk );
+
+      THEN( "an SecondaryParticleProductionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleProductionBlock chunk( xss.begin(), xss.end() );
+      SecondaryParticleProductionBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleProductionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleProductionBlock chunk( xss.begin(), xss.end() );
+      SecondaryParticleProductionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleProductionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleProductionBlock chunk( xss.begin(), xss.end() );
+      SecondaryParticleProductionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleProductionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -94,4 +144,9 @@ void verifyChunk( const SecondaryParticleProductionBlock& chunk,
   CHECK( 3 == chunk.heating().size() );
   CHECK_THAT( 3.63894900000E-05, WithinRel( chunk.heating().front() ) );
   CHECK_THAT( 3.70168600000E-05, WithinRel( chunk.heating().back() ) );
+}
+
+SecondaryParticleProductionBlock makeDummyBlock() {
+
+  return { 1, { 1., 2. }, { 3., 4. } };
 }

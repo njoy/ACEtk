@@ -52,12 +52,66 @@ SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
     WHEN( "the data is defined by iterators" ) {
 
       SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
-                                               xss.end(), 2 );
+                                                          xss.end(), 2 );
 
       THEN( "a SecondaryParticleProductionCrossSectionBlock can be constructed and members "
             "can be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock copy( chunk );
+
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -156,4 +210,9 @@ void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk,
   CHECK( 2 == xs2.multiplicities().size() );
   CHECK_THAT( 1., WithinRel( xs2.multiplicities().front() ) );
   CHECK_THAT( 1., WithinRel( xs2.multiplicities().back() ) );
+}
+
+SecondaryParticleProductionCrossSectionBlock makeDummyBlock() {
+
+  return { { TabulatedSecondaryParticleMultiplicity{ 12, 4, { 1., 2. }, { 3., 4. } } } };
 }

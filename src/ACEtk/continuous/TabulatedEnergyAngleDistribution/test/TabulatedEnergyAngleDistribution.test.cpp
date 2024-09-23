@@ -57,6 +57,56 @@ SCENARIO( "TabulatedEnergyAngleDistribution" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedEnergyAngleDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedEnergyAngleDistribution copy( chunk );
+
+      THEN( "an TabulatedEnergyAngleDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedEnergyAngleDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedEnergyAngleDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedEnergyAngleDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedEnergyAngleDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedEnergyAngleDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedEnergyAngleDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedEnergyAngleDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedEnergyAngleDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedEnergyAngleDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -163,4 +213,17 @@ void verifyChunk( const TabulatedEnergyAngleDistribution& chunk,
   CHECK( 2 == data2.cdf().size() );
   CHECK_THAT( 0., WithinRel( data2.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( data2.cdf().back() ) );
+}
+
+TabulatedEnergyAngleDistribution makeDummyBlock() {
+
+  std::vector< TabulatedAngularDistributionWithProbability > distributions  = {
+
+    TabulatedAngularDistributionWithProbability(
+        2.1, 0.5, 0.5, 2, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+    TabulatedAngularDistributionWithProbability(
+        20., 0.5, 1., 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } )
+  };
+
+  return { 2.1, 4, std::move( distributions ), 15 };
 }

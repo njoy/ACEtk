@@ -57,6 +57,56 @@ SCENARIO( "ProbabilityTableBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock copy( chunk );
+
+      THEN( "an ProbabilityTableBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock move( std::move( chunk ) );
+
+      THEN( "an ProbabilityTableBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ProbabilityTableBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ProbabilityTableBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -150,4 +200,17 @@ void verifyChunk( const ProbabilityTableBlock& chunk,
   CHECK_THAT( 18., WithinRel( table2.capture().back() ) );
   CHECK_THAT( 19., WithinRel( table2.heating().front() ) );
   CHECK_THAT( 20., WithinRel( table2.heating().back() ) );
+}
+
+ProbabilityTableBlock makeDummyBlock() {
+
+  std::vector< ProbabilityTable > tables = {
+
+    ProbabilityTable( 1e-3, { 0.5, 1.0 }, { 1., 2 }, { 3., 4. }, { 5., 6. },
+                      { 7., 8. }, { 9., 10. } ),
+    ProbabilityTable( 1e+3, { 0.25, 1.0 }, { 11., 12 }, { 13., 14. },
+                      { 15., 16. }, { 17., 18. }, { 19., 20. } )
+  };
+
+  return { 1, 1, 1, 1, std::move( tables ) };
 }

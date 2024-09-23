@@ -40,13 +40,62 @@ SCENARIO( "TwoBodyTransferDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      TwoBodyTransferDistribution chunk( xss.begin(), xss.end(),
-                                         2.249999e-3, 20. );
+      TwoBodyTransferDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
 
       THEN( "a TwoBodyTransferDistribution can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TwoBodyTransferDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      TwoBodyTransferDistribution copy( chunk );
+
+      THEN( "an TwoBodyTransferDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TwoBodyTransferDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      TwoBodyTransferDistribution move( std::move( chunk ) );
+
+      THEN( "an TwoBodyTransferDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TwoBodyTransferDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      TwoBodyTransferDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TwoBodyTransferDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TwoBodyTransferDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      TwoBodyTransferDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TwoBodyTransferDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -82,4 +131,9 @@ void verifyChunk( const TwoBodyTransferDistribution& chunk,
 
   CHECK_THAT( 7.71295800000E-05, WithinRel( chunk.C1() ) );
   CHECK_THAT( .9914722, WithinRel( chunk.C2() ) );
+}
+
+TwoBodyTransferDistribution makeDummyBlock() {
+
+  return { 1., 2., 3., 4. };
 }

@@ -56,6 +56,56 @@ SCENARIO( "TabulatedSecondaryParticleMultiplicity" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity copy( chunk );
+
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity move( std::move( chunk ) );
+
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -116,4 +166,9 @@ void verifyChunk( const TabulatedSecondaryParticleMultiplicity& chunk,
   CHECK_THAT( 0., WithinRel( chunk.multiplicities().front() ) );
   CHECK_THAT( 0.119, WithinRel( chunk.multiplicities()[3] ) );
   CHECK_THAT( 0., WithinRel( chunk.multiplicities().back() ) );
+}
+
+TabulatedSecondaryParticleMultiplicity makeDummyBlock() {
+
+  return { 12, 2, { 1., 2. }, { 3., 4. } };
 }
