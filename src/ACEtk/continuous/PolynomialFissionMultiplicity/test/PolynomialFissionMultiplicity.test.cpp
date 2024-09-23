@@ -45,6 +45,56 @@ SCENARIO( "PolynomialFissionMultiplicity" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PolynomialFissionMultiplicity chunk( xss.begin(), xss.end() );
+      PolynomialFissionMultiplicity copy( chunk );
+
+      THEN( "an PolynomialFissionMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PolynomialFissionMultiplicity chunk( xss.begin(), xss.end() );
+      PolynomialFissionMultiplicity move( std::move( chunk ) );
+
+      THEN( "an PolynomialFissionMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PolynomialFissionMultiplicity chunk( xss.begin(), xss.end() );
+      PolynomialFissionMultiplicity copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PolynomialFissionMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PolynomialFissionMultiplicity chunk( xss.begin(), xss.end() );
+      PolynomialFissionMultiplicity move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PolynomialFissionMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -84,4 +134,9 @@ void verifyChunk( const PolynomialFissionMultiplicity& chunk,
   CHECK_THAT( 1e-8, WithinRel( chunk.C().back() ) );
   CHECK_THAT( 2.5, WithinRel( chunk.coefficients().front() ) );
   CHECK_THAT( 1e-8, WithinRel( chunk.coefficients().back() ) );
+}
+
+PolynomialFissionMultiplicity makeDummyBlock() {
+
+  return { { 1., 2. } };
 }

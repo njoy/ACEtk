@@ -40,13 +40,62 @@ SCENARIO( "LevelScatteringDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      LevelScatteringDistribution chunk( xss.begin(), xss.end(),
-                                         2.249999e-3, 20. );
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
 
       THEN( "a LevelScatteringDistribution can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution copy( chunk );
+
+      THEN( "an LevelScatteringDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution move( std::move( chunk ) );
+
+      THEN( "an LevelScatteringDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an LevelScatteringDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an LevelScatteringDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -82,4 +131,9 @@ void verifyChunk( const LevelScatteringDistribution& chunk,
 
   CHECK_THAT( 7.71295800000E-05, WithinRel( chunk.C1() ) );
   CHECK_THAT( .9914722, WithinRel( chunk.C2() ) );
+}
+
+LevelScatteringDistribution makeDummyBlock() {
+
+  return { 1., 2., 3., 4. };
 }

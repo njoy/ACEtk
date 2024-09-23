@@ -99,6 +99,56 @@ SCENARIO( "ProbabilityTable" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ProbabilityTable chunk( xss.begin(), xss.end(), 2.250001e-3, 16 );
+      ProbabilityTable copy( chunk );
+
+      THEN( "an ProbabilityTable can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ProbabilityTable chunk( xss.begin(), xss.end(), 2.250001e-3, 16 );
+      ProbabilityTable move( std::move( chunk ) );
+
+      THEN( "an ProbabilityTable can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ProbabilityTable chunk( xss.begin(), xss.end(), 2.250001e-3, 16 );
+      ProbabilityTable copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ProbabilityTable can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ProbabilityTable chunk( xss.begin(), xss.end(), 2.250001e-3, 16 );
+      ProbabilityTable move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ProbabilityTable can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -175,4 +225,10 @@ void verifyChunk( const ProbabilityTable& chunk,
   CHECK_THAT( 3.73081700000E+00, WithinRel( chunk.capture().back() ) );
   CHECK_THAT( 1., WithinRel( chunk.heating().front() ) );
   CHECK_THAT( 1., WithinRel( chunk.heating().back() ) );
+}
+
+ProbabilityTable makeDummyBlock() {
+
+  return { 1., { 1., 2. }, { 3., 4. }, { 5., 6. },
+               { 1., 2. }, { 3., 4. }, { 5., 6. } };
 }

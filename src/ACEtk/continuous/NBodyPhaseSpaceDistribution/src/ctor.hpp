@@ -3,6 +3,9 @@ NBodyPhaseSpaceDistribution() = default;
 NBodyPhaseSpaceDistribution( const NBodyPhaseSpaceDistribution& ) = default;
 NBodyPhaseSpaceDistribution( NBodyPhaseSpaceDistribution&& ) = default;
 
+NBodyPhaseSpaceDistribution& operator=( const NBodyPhaseSpaceDistribution& ) = default;
+NBodyPhaseSpaceDistribution& operator=( NBodyPhaseSpaceDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -41,6 +44,3 @@ NBodyPhaseSpaceDistribution( Iterator begin, Iterator end,
 
   verifySize( this->begin(), this->end() );
 }
-
-NBodyPhaseSpaceDistribution& operator=( const NBodyPhaseSpaceDistribution& ) = default;
-NBodyPhaseSpaceDistribution& operator=( NBodyPhaseSpaceDistribution&& ) = default;

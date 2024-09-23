@@ -73,6 +73,56 @@ SCENARIO( "PhotonProductionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PhotonProductionBlock chunk( xss.begin(), xss.end(), 99 );
+      PhotonProductionBlock copy( chunk );
+
+      THEN( "an PhotonProductionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PhotonProductionBlock chunk( xss.begin(), xss.end(), 99 );
+      PhotonProductionBlock move( std::move( chunk ) );
+
+      THEN( "an PhotonProductionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PhotonProductionBlock chunk( xss.begin(), xss.end(), 99 );
+      PhotonProductionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PhotonProductionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PhotonProductionBlock chunk( xss.begin(), xss.end(), 99 );
+      PhotonProductionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PhotonProductionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -134,4 +184,9 @@ void verifyChunk( const PhotonProductionBlock& chunk,
 
   CHECK_THAT( 1.17771501000E+03, WithinRel( chunk.totalProduction().front() ) );
   CHECK_THAT( 4.82773424000E-01, WithinRel( chunk.totalProduction().back() ) );
+}
+
+PhotonProductionBlock makeDummyBlock() {
+
+  return { { 1., 2. } };
 }

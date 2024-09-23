@@ -3,6 +3,9 @@ OutgoingEnergyDistributionData() = default;
 OutgoingEnergyDistributionData( const OutgoingEnergyDistributionData& ) = default;
 OutgoingEnergyDistributionData( OutgoingEnergyDistributionData&& ) = default;
 
+OutgoingEnergyDistributionData& operator=( const OutgoingEnergyDistributionData& ) = default;
+OutgoingEnergyDistributionData& operator=( OutgoingEnergyDistributionData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -40,6 +43,3 @@ OutgoingEnergyDistributionData(
  */
 OutgoingEnergyDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
   DistributionData( "OutgoingEnergyDistributionData", locb, begin, end ) {}
-
-OutgoingEnergyDistributionData& operator=( const OutgoingEnergyDistributionData& ) = default;
-OutgoingEnergyDistributionData& operator=( OutgoingEnergyDistributionData&& ) = default;

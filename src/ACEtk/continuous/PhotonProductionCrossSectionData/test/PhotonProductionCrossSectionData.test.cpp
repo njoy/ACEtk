@@ -73,6 +73,56 @@ SCENARIO( "PhotonProductionCrossSectionData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PhotonProductionCrossSectionData chunk( xss.begin(), xss.end() );
+      PhotonProductionCrossSectionData copy( chunk );
+
+      THEN( "an PhotonProductionCrossSectionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PhotonProductionCrossSectionData chunk( xss.begin(), xss.end() );
+      PhotonProductionCrossSectionData move( std::move( chunk ) );
+
+      THEN( "an PhotonProductionCrossSectionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PhotonProductionCrossSectionData chunk( xss.begin(), xss.end() );
+      PhotonProductionCrossSectionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PhotonProductionCrossSectionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PhotonProductionCrossSectionData chunk( xss.begin(), xss.end() );
+      PhotonProductionCrossSectionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PhotonProductionCrossSectionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -133,4 +183,9 @@ void verifyChunk( const PhotonProductionCrossSectionData& chunk,
   CHECK( 99 == chunk.crossSections().size() );
   CHECK_THAT( 17.17401, WithinRel( chunk.crossSections().front() ) );
   CHECK_THAT( 2.72235400000E-05, WithinRel( chunk.crossSections().back() ) );
+}
+
+PhotonProductionCrossSectionData makeDummyBlock() {
+
+  return { 1, { 1., 2. } };
 }

@@ -3,6 +3,9 @@ ProbabilityTable() = default;
 ProbabilityTable( const ProbabilityTable& ) = default;
 ProbabilityTable( ProbabilityTable&& ) = default;
 
+ProbabilityTable& operator=( const ProbabilityTable& ) = default;
+ProbabilityTable& operator=( ProbabilityTable&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -59,7 +62,3 @@ ProbabilityTable( Iterator begin, Iterator end,
                   double incident, std::size_t bins ) :
   ArrayData( "ProbabilityTable", begin, end, bins, 6 ),
   incident_( incident ) {}
-
-ProbabilityTable& operator=( const ProbabilityTable& ) = default;
-
-ProbabilityTable& operator=( ProbabilityTable&& ) = default;

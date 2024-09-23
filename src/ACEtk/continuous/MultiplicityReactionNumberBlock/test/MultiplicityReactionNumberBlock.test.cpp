@@ -45,6 +45,56 @@ SCENARIO( "MultiplicityReactionNumberBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock copy( chunk );
+
+      THEN( "an MultiplicityReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock move( std::move( chunk ) );
+
+      THEN( "an MultiplicityReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an MultiplicityReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an MultiplicityReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -92,4 +142,9 @@ void verifyChunk( const MultiplicityReactionNumberBlock& chunk,
   CHECK( 3 == chunk.index(444) );
 
   CHECK_THROWS( chunk.index(1) );
+}
+
+MultiplicityReactionNumberBlock makeDummyBlock() {
+
+  return { { 103 } };
 }

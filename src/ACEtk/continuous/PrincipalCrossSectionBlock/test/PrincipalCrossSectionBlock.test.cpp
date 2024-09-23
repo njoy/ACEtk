@@ -190,6 +190,56 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 99 );
+      PrincipalCrossSectionBlock copy( chunk );
+
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 99 );
+      PrincipalCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 99 );
+      PrincipalCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 99 );
+      PrincipalCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -361,4 +411,9 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk,
   CHECK_THAT( 4.82746200000E-01, WithinRel( chunk.elastic().back() ) );
   CHECK_THAT( 1.91876400000E-05, WithinRel( chunk.heating().front() ) );
   CHECK_THAT( 1.01608500000E+01, WithinRel( chunk.heating().back() ) );
+}
+
+PrincipalCrossSectionBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. }, { 7., 8. }, { 9., 10. } };
 }

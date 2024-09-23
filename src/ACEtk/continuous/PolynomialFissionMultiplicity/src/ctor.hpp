@@ -3,6 +3,9 @@ PolynomialFissionMultiplicity() = default;
 PolynomialFissionMultiplicity( const PolynomialFissionMultiplicity& ) = default;
 PolynomialFissionMultiplicity( PolynomialFissionMultiplicity&& ) = default;
 
+PolynomialFissionMultiplicity& operator=( const PolynomialFissionMultiplicity& ) = default;
+PolynomialFissionMultiplicity& operator=( PolynomialFissionMultiplicity&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -24,6 +27,3 @@ PolynomialFissionMultiplicity( Iterator begin, Iterator end ) :
   verifySize( this->begin(), this->end(), this->numberCoefficients() );
   verifyLNU( this->type() );
 }
-
-PolynomialFissionMultiplicity& operator=( const PolynomialFissionMultiplicity& ) = default;
-PolynomialFissionMultiplicity& operator=( PolynomialFissionMultiplicity&& ) = default;

@@ -49,6 +49,56 @@ SCENARIO( "ParameterData" ) {
         verifyChunk( chunk, xss  );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      ParameterData chunk( xss.begin(), xss.end() );
+      ParameterData copy( chunk );
+
+      THEN( "an ParameterData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ParameterData chunk( xss.begin(), xss.end() );
+      ParameterData move( std::move( chunk ) );
+
+      THEN( "an ParameterData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ParameterData chunk( xss.begin(), xss.end() );
+      ParameterData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ParameterData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ParameterData chunk( xss.begin(), xss.end() );
+      ParameterData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ParameterData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -100,4 +150,9 @@ void verifyChunk( const ParameterData& chunk,
   CHECK_THAT( 2., WithinRel( chunk.values()[0] ) );
   CHECK_THAT( 4., WithinRel( chunk.values()[1] ) );
   CHECK_THAT( 6., WithinRel( chunk.values()[2] ) );
+}
+
+ParameterData makeDummyBlock() {
+
+  return { {}, {}, { 1., 2. }, { 3., 4. } };
 }

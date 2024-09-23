@@ -85,6 +85,60 @@ SCENARIO( "PhotonProductionCrossSectionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      PhotonProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                        xss.end(), 2 );
+      PhotonProductionCrossSectionBlock copy( chunk );
+
+      THEN( "an PhotonProductionCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PhotonProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                        xss.end(), 2 );
+      PhotonProductionCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an PhotonProductionCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PhotonProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                        xss.end(), 2 );
+      PhotonProductionCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PhotonProductionCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PhotonProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                        xss.end(), 2 );
+      PhotonProductionCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PhotonProductionCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -192,4 +246,9 @@ void verifyChunk( const PhotonProductionCrossSectionBlock& chunk,
   CHECK_THAT( 0., WithinRel( xs2.multiplicities().front() ) );
   CHECK_THAT( 0.119, WithinRel( xs2.multiplicities()[3] ) );
   CHECK_THAT( 0., WithinRel( xs2.multiplicities().back() ) );
+}
+
+PhotonProductionCrossSectionBlock makeDummyBlock() {
+
+  return { { TabulatedSecondaryParticleMultiplicity( 12, 4, { 3., 4. }, { 1., 1. } ) } };
 }

@@ -77,6 +77,56 @@ SCENARIO( "MultiDistributionData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      MultiDistributionData chunk( 12, xss.begin(), xss.end() );
+      MultiDistributionData copy( chunk );
+
+      THEN( "an MultiDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      MultiDistributionData chunk( 12, xss.begin(), xss.end() );
+      MultiDistributionData move( std::move( chunk ) );
+
+      THEN( "an MultiDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      MultiDistributionData chunk( 12, xss.begin(), xss.end() );
+      MultiDistributionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an MultiDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      MultiDistributionData chunk( 12, xss.begin(), xss.end() );
+      MultiDistributionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an MultiDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -315,4 +365,26 @@ void verifyChunk( const MultiDistributionData& chunk,
   CHECK_THAT( 5., WithinRel( distribution2.bins()[0] ) );
   CHECK_THAT( 6., WithinRel( distribution2.bins()[1] ) );
   CHECK_THAT( 7., WithinRel( distribution2.bins()[2] ) );
+}
+
+MultiDistributionData makeDummyBlock() {
+
+  std::vector< DistributionProbability > probabilities  = {
+
+    DistributionProbability( { 1., 2. }, { 3., 4. } ),
+    DistributionProbability( { 5., 6. }, { 7., 8. } )
+  };
+
+  std::vector< DistributionData > distributions  = {
+
+    GeneralEvaporationSpectrum(
+
+      { 1e-5, 20. }, { 1., 4. }, { 5., 7. } ),
+    GeneralEvaporationSpectrum(
+
+      { 1e-5, 20. }, { 1., 4. }, { 5., 7. } )
+  };
+  std::size_t locb = 6;
+
+  return { std::move( probabilities ), std::move( distributions ), locb };
 }
