@@ -46,6 +46,56 @@ SCENARIO( "EquiprobableOutgoingEnergyBins" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      EquiprobableOutgoingEnergyBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBins copy( chunk );
+
+      THEN( "an EquiprobableOutgoingEnergyBins can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EquiprobableOutgoingEnergyBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBins move( std::move( chunk ) );
+
+      THEN( "an EquiprobableOutgoingEnergyBins can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EquiprobableOutgoingEnergyBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBins copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EquiprobableOutgoingEnergyBins can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EquiprobableOutgoingEnergyBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBins move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EquiprobableOutgoingEnergyBins can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -82,4 +132,9 @@ void verifyChunk( const EquiprobableOutgoingEnergyBins& chunk,
   CHECK_THAT( .02, WithinRel( chunk.energies()[1] ) );
   CHECK_THAT( 1., WithinRel( chunk.energies()[2] ) );
   CHECK_THAT( 20., WithinRel( chunk.energies()[3] ) );
+}
+
+EquiprobableOutgoingEnergyBins makeDummyBlock() {
+
+  return { 1, { 1., 2. } };
 }

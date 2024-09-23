@@ -20,6 +20,36 @@ DelayedNeutronPrecursorData( DelayedNeutronPrecursorData&& base ) :
   }
 }
 
+DelayedNeutronPrecursorData& operator=( const DelayedNeutronPrecursorData& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->number_ = base.number_;
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+DelayedNeutronPrecursorData& operator=( DelayedNeutronPrecursorData&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->number_ = base.number_;
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
 /**
  *  @brief Constructor
  *
@@ -70,16 +100,4 @@ DelayedNeutronPrecursorData( Iterator begin, Iterator end, unsigned int number )
   number_( number ) {
 
   this->generateBlocks();
-}
-
-DelayedNeutronPrecursorData& operator=( const DelayedNeutronPrecursorData& base ) {
-
-  new (this) DelayedNeutronPrecursorData( base );
-  return *this;
-}
-
-DelayedNeutronPrecursorData& operator=( DelayedNeutronPrecursorData&& base ) {
-
-  new (this) DelayedNeutronPrecursorData( std::move( base ) );
-  return *this;
 }

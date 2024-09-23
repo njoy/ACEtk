@@ -54,6 +54,56 @@ SCENARIO( "DelayedNeutronPrecursorBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      DelayedNeutronPrecursorBlock chunk( xss.begin(), xss.end(), 2 );
+      DelayedNeutronPrecursorBlock copy( chunk );
+
+      THEN( "an DelayedNeutronPrecursorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DelayedNeutronPrecursorBlock chunk( xss.begin(), xss.end(), 2 );
+      DelayedNeutronPrecursorBlock move( std::move( chunk ) );
+
+      THEN( "an DelayedNeutronPrecursorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DelayedNeutronPrecursorBlock chunk( xss.begin(), xss.end(), 2 );
+      DelayedNeutronPrecursorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DelayedNeutronPrecursorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DelayedNeutronPrecursorBlock chunk( xss.begin(), xss.end(), 2 );
+      DelayedNeutronPrecursorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DelayedNeutronPrecursorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -150,4 +200,16 @@ void verifyChunk( const DelayedNeutronPrecursorBlock& chunk,
   CHECK( 2 == group2.probabilities().size() );
   CHECK_THAT( 2.4e-3, WithinRel( group2.probabilities()[0] ) );
   CHECK_THAT( 2., WithinRel( group2.probabilities()[1] ) );
+}
+
+DelayedNeutronPrecursorBlock makeDummyBlock() {
+
+  std::vector< DelayedNeutronPrecursorData > groups = {
+
+    DelayedNeutronPrecursorData( 1, 1e-2,
+                                 { 1e-5, 20. },
+                                 { 1.2e-3, 1. } )
+  };
+
+  return { std::move( groups ) };
 }

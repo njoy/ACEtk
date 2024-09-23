@@ -51,6 +51,56 @@ SCENARIO( "DistributionProbability" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability copy( chunk );
+
+      THEN( "an DistributionProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability move( std::move( chunk ) );
+
+      THEN( "an DistributionProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DistributionProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DistributionProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -102,4 +152,9 @@ void verifyChunk( const DistributionProbability& chunk,
   CHECK_THAT( 2., WithinRel( chunk.probabilities()[0] ) );
   CHECK_THAT( 4., WithinRel( chunk.probabilities()[1] ) );
   CHECK_THAT( 6., WithinRel( chunk.probabilities()[2] ) );
+}
+
+DistributionProbability makeDummyBlock() {
+
+  return { {}, {}, { 1., 2. }, { 3., 4. } };
 }

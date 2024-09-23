@@ -71,6 +71,56 @@ SCENARIO( "CrossSectionData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      CrossSectionData chunk( xss.begin(), xss.end() );
+      CrossSectionData copy( chunk );
+
+      THEN( "an CrossSectionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      CrossSectionData chunk( xss.begin(), xss.end() );
+      CrossSectionData move( std::move( chunk ) );
+
+      THEN( "an CrossSectionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      CrossSectionData chunk( xss.begin(), xss.end() );
+      CrossSectionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an CrossSectionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      CrossSectionData chunk( xss.begin(), xss.end() );
+      CrossSectionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an CrossSectionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -129,4 +179,9 @@ void verifyChunk( const CrossSectionData& chunk,
   CHECK( 99 == chunk.crossSections().size() );
   CHECK_THAT( 17.17401, WithinRel( chunk.crossSections().front() ) );
   CHECK_THAT( 2.72235400000E-05, WithinRel( chunk.crossSections().back() ) );
+}
+
+CrossSectionData makeDummyBlock() {
+
+  return { 1, { 1., 2. } };
 }

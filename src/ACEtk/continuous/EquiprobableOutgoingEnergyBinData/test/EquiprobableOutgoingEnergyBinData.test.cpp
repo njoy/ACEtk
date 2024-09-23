@@ -49,6 +49,56 @@ SCENARIO( "EquiprobableOutgoingEnergyBinData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      EquiprobableOutgoingEnergyBinData chunk( xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBinData copy( chunk );
+
+      THEN( "an EquiprobableOutgoingEnergyBinData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EquiprobableOutgoingEnergyBinData chunk( xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBinData move( std::move( chunk ) );
+
+      THEN( "an EquiprobableOutgoingEnergyBinData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EquiprobableOutgoingEnergyBinData chunk( xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBinData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EquiprobableOutgoingEnergyBinData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EquiprobableOutgoingEnergyBinData chunk( xss.begin(), xss.end() );
+      EquiprobableOutgoingEnergyBinData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EquiprobableOutgoingEnergyBinData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -152,4 +202,15 @@ void verifyChunk( const EquiprobableOutgoingEnergyBinData& chunk,
   CHECK_THAT( 3., WithinRel( bins2.energies()[1] ) );
   CHECK_THAT( 12., WithinRel( bins2.energies()[2] ) );
   CHECK_THAT( 20., WithinRel( bins2.energies()[3] ) );
+}
+
+EquiprobableOutgoingEnergyBinData makeDummyBlock() {
+
+  std::vector< EquiprobableOutgoingEnergyBins > distributions = {
+
+    EquiprobableOutgoingEnergyBins( 1e-3, { 1e-3, 20. } ),
+    EquiprobableOutgoingEnergyBins( 10., { 1e-4, 10. } )
+  };
+
+  return { std::move( distributions ) };
 }

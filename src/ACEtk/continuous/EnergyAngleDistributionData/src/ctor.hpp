@@ -3,6 +3,9 @@ EnergyAngleDistributionData() = default;
 EnergyAngleDistributionData( const EnergyAngleDistributionData& ) = default;
 EnergyAngleDistributionData( EnergyAngleDistributionData&& ) = default;
 
+EnergyAngleDistributionData& operator=( const EnergyAngleDistributionData& ) = default;
+EnergyAngleDistributionData& operator=( EnergyAngleDistributionData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -40,6 +43,3 @@ EnergyAngleDistributionData(
  */
 EnergyAngleDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
   DistributionData( "EnergyAngleDistributionData", locb, begin, end ) {}
-
-EnergyAngleDistributionData& operator=( const EnergyAngleDistributionData& ) = default;
-EnergyAngleDistributionData& operator=( EnergyAngleDistributionData&& ) = default;

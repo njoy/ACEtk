@@ -85,6 +85,11 @@ generateData( std::size_t locator, Iterator left, Iterator right ) {
 
 void generateBlocks() {
 
+  this->iterator_ = this->begin() + this->nr_;
+  this->data_.clear();
+  this->multiplicities_.clear();
+  this->frames_.clear();
+
   for ( unsigned int index = 1; index <= this->NR(); ++index ) {
 
     // zero lcoators in the LDLW are not allowed

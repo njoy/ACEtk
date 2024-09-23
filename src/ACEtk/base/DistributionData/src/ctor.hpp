@@ -73,6 +73,7 @@ DistributionData& operator=( const DistributionData& base ) {
     this->interpolation_ = base.interpolation_;
     this->values_ = base.values_;
     this->distributions_ = base.distributions_;
+    this->locb_ = base.locb_;
     if ( Base::owner() ) {
 
       static_cast< Derived* >( this )->generateBlocks();
@@ -89,6 +90,7 @@ DistributionData& operator=( DistributionData&& base ) {
     this->interpolation_ = std::move( base.interpolation_ );
     this->values_ = std::move( base.values_ );
     this->distributions_ = std::move( base.distributions_ );
+    this->locb_ = base.locb_;
     if ( Base::owner() ) {
 
       static_cast< Derived* >( this )->generateBlocks();

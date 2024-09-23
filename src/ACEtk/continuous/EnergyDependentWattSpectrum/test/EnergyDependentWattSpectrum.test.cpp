@@ -49,6 +49,56 @@ SCENARIO( "EnergyDependentWattSpectrum" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum copy( chunk );
+
+      THEN( "an EnergyDependentWattSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum move( std::move( chunk ) );
+
+      THEN( "an EnergyDependentWattSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyDependentWattSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyDependentWattSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -142,4 +192,13 @@ void verifyChunk( const EnergyDependentWattSpectrum& chunk,
 
   CHECK( 1.5e+6 == chunk.U() );
   CHECK( 1.5e+6 == chunk.restrictionEnergy() );
+}
+
+EnergyDependentWattSpectrum makeDummyBlock() {
+
+  ParameterData a( { 1e-5, 20. }, { 1., 4. } );
+  ParameterData b( { 1e-5, 20. }, { 5., 7. } );
+  double energy = 1.5e+6;
+
+  return { std::move( a ), std::move( b ), energy };
 }

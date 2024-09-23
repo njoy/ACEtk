@@ -49,6 +49,56 @@ SCENARIO( "EvaporationSpectrum" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      EvaporationSpectrum chunk( xss.begin(), xss.end() );
+      EvaporationSpectrum copy( chunk );
+
+      THEN( "an EvaporationSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EvaporationSpectrum chunk( xss.begin(), xss.end() );
+      EvaporationSpectrum move( std::move( chunk ) );
+
+      THEN( "an EvaporationSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EvaporationSpectrum chunk( xss.begin(), xss.end() );
+      EvaporationSpectrum copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EvaporationSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EvaporationSpectrum chunk( xss.begin(), xss.end() );
+      EvaporationSpectrum move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EvaporationSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -113,4 +163,9 @@ void verifyChunk( const EvaporationSpectrum& chunk,
 
   CHECK( 1.5e+6 == chunk.U() );
   CHECK( 1.5e+6 == chunk.restrictionEnergy() );
+}
+
+EvaporationSpectrum makeDummyBlock() {
+
+  return { { 1e-5, 20. }, { 1., 4. }, 1. };
 }

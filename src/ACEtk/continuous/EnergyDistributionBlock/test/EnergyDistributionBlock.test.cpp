@@ -81,6 +81,72 @@ SCENARIO( "EnergyDistributionBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock copy( chunk );
+
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -252,4 +318,24 @@ void verifyChunk( const EnergyDistributionBlock& chunk,
   CHECK( 2 == tyr.size() );
   CHECK( 101 == tyr[0] );
   CHECK( 1 == tyr[1] );
+}
+
+EnergyDistributionBlock makeDummyBlock() {
+
+  std::vector< EnergyDistributionData > distributions = {
+
+    LevelScatteringDistribution( 1., 20., 2., 3. )
+  };
+  std::vector< MultiplicityData > multiplicities = {
+
+        unsigned{ 1 }
+  };
+  std::vector< ReferenceFrame > frames = {
+
+    ReferenceFrame::CentreOfMass
+  };
+
+  return { std::move( distributions ),
+          std::move( multiplicities ),
+          std::move( frames ) };
 }

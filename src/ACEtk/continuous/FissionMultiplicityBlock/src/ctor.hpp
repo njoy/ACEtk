@@ -20,6 +20,36 @@ FissionMultiplicityBlock( FissionMultiplicityBlock&& base ) :
   }
 }
 
+FissionMultiplicityBlock& operator=( const FissionMultiplicityBlock& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->prompt_ = base.prompt_;
+    this->total_ = base.total_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+FissionMultiplicityBlock& operator=( FissionMultiplicityBlock&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->prompt_ = std::move( base.prompt_ );
+    this->total_ = std::move( base.total_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
 /**
  *  @brief Constructor
  *
@@ -54,16 +84,4 @@ FissionMultiplicityBlock( Iterator begin, Iterator end ) :
   Base( "NU", begin, end ) {
 
   this->generateBlocks();
-}
-
-FissionMultiplicityBlock& operator=( const FissionMultiplicityBlock& base ) {
-
-  new (this) FissionMultiplicityBlock( base );
-  return *this;
-}
-
-FissionMultiplicityBlock& operator=( FissionMultiplicityBlock&& base ) {
-
-  new (this) FissionMultiplicityBlock( std::move( base ) );
-  return *this;
 }

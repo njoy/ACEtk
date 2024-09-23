@@ -59,6 +59,56 @@ SCENARIO( "KalbachMannDistributionData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      KalbachMannDistributionData chunk( 21, xss.begin(), xss.end() );
+      KalbachMannDistributionData copy( chunk );
+
+      THEN( "an KalbachMannDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      KalbachMannDistributionData chunk( 21, xss.begin(), xss.end() );
+      KalbachMannDistributionData move( std::move( chunk ) );
+
+      THEN( "an KalbachMannDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      KalbachMannDistributionData chunk( 21, xss.begin(), xss.end() );
+      KalbachMannDistributionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an KalbachMannDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      KalbachMannDistributionData chunk( 21, xss.begin(), xss.end() );
+      KalbachMannDistributionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an KalbachMannDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -180,4 +230,24 @@ void verifyChunk( const KalbachMannDistributionData& chunk,
   CHECK( 3 == data2.angularDistributionSlopeValues().size() );
   CHECK_THAT( 2.391154E-01, WithinRel( data2.angularDistributionSlopeValues().front() ) );
   CHECK_THAT( 5.592013E-01, WithinRel( data2.angularDistributionSlopeValues().back() ) );
+}
+
+KalbachMannDistributionData makeDummyBlock() {
+
+  std::vector< TabulatedKalbachMannDistribution > distributions  = {
+
+    TabulatedKalbachMannDistribution(
+        1., 1, { 0.000000E+00, 1.866919E-02 },
+        { 5.356419E+01, 0.000000E+00 }, { 0., 1. }, { 0., 0. },
+        { 2.391154E-01, 2.398743E-01 } ),
+    TabulatedKalbachMannDistribution(
+        2., 2, { 0.000000E+00, 7.592137E+00 },
+        { 7.738696E-02, 1.226090E-11 },
+        { 0.000000E+00, 1.000000E+00 },
+        { 2.491475E-03, 9.775367E-01 },
+        { 2.391154E-01, 5.592013E-01 } )
+  };
+  std::size_t locb = 15;
+
+  return { std::move( distributions ), locb };
 }

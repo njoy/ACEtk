@@ -62,6 +62,56 @@ SCENARIO( "EnergyAngleDistributionData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData copy( chunk );
+
+      THEN( "an EnergyAngleDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData move( std::move( chunk ) );
+
+      THEN( "an EnergyAngleDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyAngleDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyAngleDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -293,4 +343,26 @@ void verifyChunk( const EnergyAngleDistributionData& chunk,
   CHECK( 3 == data22.cdf().size() );
   CHECK_THAT( 0., WithinRel( data22.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( data22.cdf().back() ) );
+}
+
+EnergyAngleDistributionData makeDummyBlock() {
+
+  std::vector< TabulatedEnergyAngleDistribution > distributions  = {
+
+    TabulatedEnergyAngleDistribution(
+      2e-5, 2,
+      { TabulatedAngularDistributionWithProbability(
+          1., 0.5, 0.5, 2, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+        TabulatedAngularDistributionWithProbability(
+          15., 0.5, 1.0, 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ) } ),
+    TabulatedEnergyAngleDistribution(
+      10., 2,
+      { TabulatedAngularDistributionWithProbability(
+          1.1, 0.5, 0.5, 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+        TabulatedAngularDistributionWithProbability(
+          15., 0.5, 1.0, 2, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ) } )
+  };
+  std::size_t locb = 21;
+
+  return { std::move( distributions ), locb };
 }

@@ -48,6 +48,56 @@ SCENARIO( "GeneralEvaporationSpectrum" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum copy( chunk );
+
+      THEN( "an GeneralEvaporationSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum move( std::move( chunk ) );
+
+      THEN( "an GeneralEvaporationSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an GeneralEvaporationSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an GeneralEvaporationSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -117,4 +167,9 @@ void verifyChunk( const GeneralEvaporationSpectrum& chunk,
   CHECK_THAT( 5., WithinRel( chunk.bins()[0] ) );
   CHECK_THAT( 6., WithinRel( chunk.bins()[1] ) );
   CHECK_THAT( 7., WithinRel( chunk.bins()[2] ) );
+}
+
+GeneralEvaporationSpectrum makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. } };
 }

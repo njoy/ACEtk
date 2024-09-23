@@ -1,5 +1,8 @@
 void generateBlocks() {
 
+  this->frames_.clear();
+  this->multiplicities_.clear();
+
   for ( std::size_t index = 1; index <= this->NTR(); ++index ) {
 
     this->frames_.emplace_back( this->XSS( index ) < 0

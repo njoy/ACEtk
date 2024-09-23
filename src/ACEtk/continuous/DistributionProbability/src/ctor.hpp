@@ -3,6 +3,9 @@ DistributionProbability() = default;
 DistributionProbability( const DistributionProbability& ) = default;
 DistributionProbability( DistributionProbability&& ) = default;
 
+DistributionProbability& operator=( const DistributionProbability& ) = default;
+DistributionProbability& operator=( DistributionProbability&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -38,6 +41,3 @@ DistributionProbability( std::vector< double >&& energies,
  */
 DistributionProbability( Iterator begin, Iterator end ) :
   TabulatedData( "DistributionProbability", begin, end ) {}
-
-DistributionProbability& operator=( const DistributionProbability& ) = default;
-DistributionProbability& operator=( DistributionProbability&& ) = default;

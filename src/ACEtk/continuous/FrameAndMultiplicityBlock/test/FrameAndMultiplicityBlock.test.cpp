@@ -54,6 +54,56 @@ SCENARIO( "FrameAndMultiplicityBlock" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock copy( chunk );
+
+      THEN( "an FrameAndMultiplicityBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock move( std::move( chunk ) );
+
+      THEN( "an FrameAndMultiplicityBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an FrameAndMultiplicityBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an FrameAndMultiplicityBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a FrameAndMultiplicityBlock instance as a TYRH block" ) {
@@ -86,6 +136,56 @@ SCENARIO( "FrameAndMultiplicityBlock" ) {
             "be tested" ) {
 
         verifyChunkTYRH( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock copy( chunk );
+
+      THEN( "an FrameAndMultiplicityBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkTYRH( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock move( std::move( chunk ) );
+
+      THEN( "an FrameAndMultiplicityBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkTYRH( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an FrameAndMultiplicityBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkTYRH( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      FrameAndMultiplicityBlock chunk( xss.begin(), xss.end(), 3 );
+      FrameAndMultiplicityBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an FrameAndMultiplicityBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkTYRH( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -177,4 +277,9 @@ void verifyChunkTYRH( const FrameAndMultiplicityBlock& chunk,
   CHECK( 1 == chunk.multiplicities()[0] );
   CHECK( 1 == chunk.multiplicities()[1] );
   CHECK( 1 == chunk.multiplicities()[2] );
+}
+
+FrameAndMultiplicityBlock makeDummyBlock() {
+
+  return { { ReferenceFrame::CentreOfMass } };
 }

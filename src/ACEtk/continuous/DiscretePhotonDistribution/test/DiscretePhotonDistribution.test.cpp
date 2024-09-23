@@ -40,13 +40,62 @@ SCENARIO( "DiscretePhotonDistribution" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      DiscretePhotonDistribution chunk( xss.begin(), xss.end(),
-                                        1e-5, 20. );
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
 
       THEN( "a DiscretePhotonDistribution can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution copy( chunk );
+
+      THEN( "an DiscretePhotonDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution move( std::move( chunk ) );
+
+      THEN( "an DiscretePhotonDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DiscretePhotonDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DiscretePhotonDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -85,4 +134,9 @@ void verifyChunk( const DiscretePhotonDistribution& chunk,
   CHECK( true == chunk.isPrimaryPhoton() );
   CHECK_THAT( 1e+5, WithinRel( chunk.EG() ) );
   CHECK_THAT( 1e+5, WithinRel( chunk.photonOrBindingEnergy() ) );
+}
+
+DiscretePhotonDistribution makeDummyBlock() {
+
+  return { 1e-2, 5., 2, 1e+4 };
 }

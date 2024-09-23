@@ -1,5 +1,7 @@
 void generateBlocks() {
 
+    this->data_.clear();
+
   auto begin = this->begin();
   auto left = begin;
   auto right = begin;

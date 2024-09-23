@@ -33,8 +33,6 @@ FrameAndMultiplicityBlock( const FrameAndMultiplicityBlock& base ) :
 
   if ( Base::owner() ) {
 
-    this->frames_.clear();
-    this->multiplicities_.clear();
     this->generateBlocks();
   }
 }
@@ -46,10 +44,40 @@ FrameAndMultiplicityBlock( FrameAndMultiplicityBlock&& base ) :
 
   if ( Base::owner() ) {
 
-    this->frames_.clear();
-    this->multiplicities_.clear();
     this->generateBlocks();
   }
+}
+
+FrameAndMultiplicityBlock& operator=( const FrameAndMultiplicityBlock& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->ntr_ = base.ntr_;
+    this->frames_ = base.frames_;
+    this->multiplicities_ = base.multiplicities_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+FrameAndMultiplicityBlock& operator=( FrameAndMultiplicityBlock&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->ntr_ = base.ntr_;
+    this->frames_ = std::move( base.frames_ );
+    this->multiplicities_ = std::move( base.multiplicities_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -84,6 +112,3 @@ FrameAndMultiplicityBlock( Iterator tyr, Iterator end, unsigned int ntr ) :
   verifySize( this->begin(), this->end(), this->ntr_ );
   this->generateBlocks();
 }
-
-FrameAndMultiplicityBlock& operator=( const FrameAndMultiplicityBlock& ) = default;
-FrameAndMultiplicityBlock& operator=( FrameAndMultiplicityBlock&& ) = default;

@@ -46,6 +46,56 @@ SCENARIO( "InterpolationData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData copy( chunk );
+
+      THEN( "an InterpolationData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData move( std::move( chunk ) );
+
+      THEN( "an InterpolationData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an InterpolationData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an InterpolationData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -89,4 +139,9 @@ void verifyChunk( const InterpolationData& chunk,
   CHECK( 10 == chunk.NBT()[1] );
   CHECK(  5 == chunk.boundaries()[0] );
   CHECK( 10 == chunk.boundaries()[1] );
+}
+
+InterpolationData makeDummyBlock() {
+
+  return { "dummy", { 2 }, { 2 } };
 }

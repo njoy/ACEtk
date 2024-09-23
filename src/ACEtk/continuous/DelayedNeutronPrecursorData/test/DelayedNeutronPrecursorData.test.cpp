@@ -50,6 +50,56 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData copy( chunk );
+
+      THEN( "an DelayedNeutronPrecursorData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData move( std::move( chunk ) );
+
+      THEN( "an DelayedNeutronPrecursorData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DelayedNeutronPrecursorData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DelayedNeutronPrecursorData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -108,4 +158,9 @@ void verifyChunk( const DelayedNeutronPrecursorData& chunk,
   CHECK_THAT( 1.2e-3, WithinRel( chunk.probabilities()[0] ) );
   CHECK_THAT( 2.5e-2, WithinRel( chunk.probabilities()[1] ) );
   CHECK_THAT( 1., WithinRel( chunk.probabilities()[2] ) );
+}
+
+DelayedNeutronPrecursorData makeDummyBlock() {
+
+  return { 1, 1e-4, { 1., 2. }, { 3., 4. } };
 }

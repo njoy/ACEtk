@@ -52,6 +52,56 @@ SCENARIO( "EquiprobableAngularBins" ) {
         verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      EquiprobableAngularBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableAngularBins copy( chunk );
+
+      THEN( "an EquiprobableAngularBins can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EquiprobableAngularBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableAngularBins move( std::move( chunk ) );
+
+      THEN( "an EquiprobableAngularBins can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EquiprobableAngularBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableAngularBins copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EquiprobableAngularBins can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EquiprobableAngularBins chunk( 2.1, xss.begin(), xss.end() );
+      EquiprobableAngularBins move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EquiprobableAngularBins can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -94,4 +144,12 @@ void verifyChunk( const EquiprobableAngularBins& chunk,
   CHECK( 33 == chunk.cosines().size() );
   CHECK_THAT( -1., WithinRel( chunk.cosines().front() ) );
   CHECK_THAT( +1., WithinRel( chunk.cosines().back() ) );
+}
+
+EquiprobableAngularBins makeDummyBlock() {
+
+  return { 1.1, { -1., -.9, -.8, -.7, -.6, -.5, -.4, -.3, -.2, -.1,
+                 0., 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19,
+                0.2, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29,
+                .5, .6, 1. } };
 }
