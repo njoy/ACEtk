@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using PhotoelectricCrossSectionBlock = photoatomic::PhotoelectricCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoelectricCrossSectionBlock& );
+void verifyChunk( const PhotoelectricCrossSectionBlock&, const std::vector< double >& );
+PhotoelectricCrossSectionBlock makeDummyBlock();
 
 SCENARIO( "PhotoelectricCrossSectionBlock" ) {
 
@@ -35,16 +36,7 @@ SCENARIO( "PhotoelectricCrossSectionBlock" ) {
       THEN( "a PhotoelectricCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -55,16 +47,7 @@ SCENARIO( "PhotoelectricCrossSectionBlock" ) {
       THEN( "a PhotoelectricCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -80,7 +63,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotoelectricCrossSectionBlock& chunk ) {
+void verifyChunk( const PhotoelectricCrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 15 == chunk.length() );

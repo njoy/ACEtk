@@ -14,7 +14,8 @@ using ComptonProfileBlock = photoatomic::ComptonProfileBlock;
 using ComptonProfile = photoatomic::ComptonProfile;
 
 std::vector< double > chunk();
-void verifyChunk( const ComptonProfileBlock& );
+void verifyChunk( const ComptonProfileBlock&, const std::vector< double >& );
+ComptonProfileBlock makeDummyBlock();
 
 SCENARIO( "ComptonProfileBlock" ) {
 
@@ -86,16 +87,7 @@ SCENARIO( "ComptonProfileBlock" ) {
 
       THEN( "a ComptonProfileBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -105,16 +97,7 @@ SCENARIO( "ComptonProfileBlock" ) {
 
       THEN( "a ComptonProfileBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -176,7 +159,18 @@ std::vector< double > chunk() {
     1.000000000000e+00 };
 }
 
-void verifyChunk( const ComptonProfileBlock& chunk ) {
+void verifyChunk( const ComptonProfileBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 192 == chunk.length() );

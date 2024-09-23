@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using SecondaryParticleLocatorBlock = photonuclear::SecondaryParticleLocatorBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleLocatorBlock& );
+void verifyChunk( const SecondaryParticleLocatorBlock&, const std::vector< double >& );
+SecondaryParticleLocatorBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleLocatorBlock" ) {
 
@@ -63,16 +64,7 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -83,16 +75,7 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -127,7 +110,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
+void verifyChunk( const SecondaryParticleLocatorBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 84 == chunk.length() );

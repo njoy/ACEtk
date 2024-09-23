@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using FluorescenceDataBlock = photoatomic::FluorescenceDataBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const FluorescenceDataBlock& );
+void verifyChunk( const FluorescenceDataBlock&, const std::vector< double >& );
+FluorescenceDataBlock makeDummyBlock();
 
 SCENARIO( "FluorescenceDataBlock" ) {
 
@@ -36,16 +37,7 @@ SCENARIO( "FluorescenceDataBlock" ) {
       THEN( "a FluorescenceDataBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -56,16 +48,7 @@ SCENARIO( "FluorescenceDataBlock" ) {
       THEN( "a FluorescenceDataBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -79,7 +62,18 @@ std::vector< double > chunk() {
     0.000000000000E+00,  2.542671170140E-02,  0.000000000000E+00,  1.238156190380E-03  };
 }
 
-void verifyChunk( const FluorescenceDataBlock& chunk ) {
+void verifyChunk( const FluorescenceDataBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
