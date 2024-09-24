@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using GeneralEvaporationSpectrum = continuous::GeneralEvaporationSpectrum;
 
 std::vector< double > chunk();
-void verifyChunk( const GeneralEvaporationSpectrum& );
+void verifyChunk( const GeneralEvaporationSpectrum&, const std::vector< double >& );
+GeneralEvaporationSpectrum makeDummyBlock();
 
 SCENARIO( "GeneralEvaporationSpectrum" ) {
 
@@ -34,16 +35,7 @@ SCENARIO( "GeneralEvaporationSpectrum" ) {
       THEN( "a GeneralEvaporationSpectrum can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -53,16 +45,57 @@ SCENARIO( "GeneralEvaporationSpectrum" ) {
 
       THEN( "a GeneralEvaporationSpectrum can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an GeneralEvaporationSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum move( std::move( chunk ) );
+
+      THEN( "an GeneralEvaporationSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an GeneralEvaporationSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      GeneralEvaporationSpectrum chunk( xss.begin(), xss.end() );
+      GeneralEvaporationSpectrum move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an GeneralEvaporationSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -75,7 +108,18 @@ std::vector< double > chunk() {
            3, 5., 6., 7. };
 }
 
-void verifyChunk( const GeneralEvaporationSpectrum& chunk ) {
+void verifyChunk( const GeneralEvaporationSpectrum& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 14 == chunk.length() );
@@ -123,4 +167,9 @@ void verifyChunk( const GeneralEvaporationSpectrum& chunk ) {
   CHECK_THAT( 5., WithinRel( chunk.bins()[0] ) );
   CHECK_THAT( 6., WithinRel( chunk.bins()[1] ) );
   CHECK_THAT( 7., WithinRel( chunk.bins()[2] ) );
+}
+
+GeneralEvaporationSpectrum makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. } };
 }

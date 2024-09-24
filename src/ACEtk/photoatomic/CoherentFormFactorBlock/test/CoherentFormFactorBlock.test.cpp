@@ -14,8 +14,9 @@ using CoherentFormFactorBlock = photoatomic::CoherentFormFactorBlock;
 
 std::vector< double > chunk();
 std::vector< double > chunkEprdata();
-void verifyChunk( const CoherentFormFactorBlock& );
-void verifyChunkEprdata( const CoherentFormFactorBlock& );
+void verifyChunk( const CoherentFormFactorBlock&, const std::vector< double >& );
+void verifyChunkEprdata( const CoherentFormFactorBlock&, const std::vector< double >& );
+CoherentFormFactorBlock makeDummyBlock();
 
 SCENARIO( "CoherentFormFactorBlock" ) {
 
@@ -66,16 +67,7 @@ SCENARIO( "CoherentFormFactorBlock" ) {
       THEN( "a CoherentFormFactorBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -86,16 +78,57 @@ SCENARIO( "CoherentFormFactorBlock" ) {
       THEN( "a CoherentFormFactorBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move( std::move( chunk ) );
+
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -117,16 +150,7 @@ SCENARIO( "CoherentFormFactorBlock" ) {
       THEN( "a CoherentFormFactorBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunkEprdata( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkEprdata( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -137,16 +161,57 @@ SCENARIO( "CoherentFormFactorBlock" ) {
       THEN( "a CoherentFormFactorBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunkEprdata( chunk );
+        verifyChunkEprdata( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move( std::move( chunk ) );
+
+      THEN( "an CoherentFormFactorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      CoherentFormFactorBlock chunk( xss.begin(), xss.end() );
+      CoherentFormFactorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an CoherentFormFactorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -197,7 +262,18 @@ std::vector< double > chunkEprdata() {
   };
 }
 
-void verifyChunk( const CoherentFormFactorBlock& chunk ) {
+void verifyChunk( const CoherentFormFactorBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 110 == chunk.length() );
@@ -219,7 +295,18 @@ void verifyChunk( const CoherentFormFactorBlock& chunk ) {
   CHECK_THAT( 6.282390000000E-06, WithinRel( chunk.formFactors().back() ) );
 }
 
-void verifyChunkEprdata( const CoherentFormFactorBlock& chunk ) {
+void verifyChunkEprdata( const CoherentFormFactorBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 15 == chunk.length() );
@@ -239,4 +326,9 @@ void verifyChunkEprdata( const CoherentFormFactorBlock& chunk ) {
   CHECK( 5 == chunk.formFactors().size() );
   CHECK_THAT(  6., WithinRel( chunk.formFactors().front() ) );
   CHECK_THAT( 10., WithinRel( chunk.formFactors().back() ) );
+}
+
+CoherentFormFactorBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. } };
 }

@@ -5,7 +5,6 @@ ProbabilityTableBlock( const ProbabilityTableBlock& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->generateBlocks();
   }
 }
@@ -15,9 +14,36 @@ ProbabilityTableBlock( ProbabilityTableBlock&& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->generateBlocks();
   }
+}
+
+ProbabilityTableBlock& operator=( const ProbabilityTableBlock& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+ProbabilityTableBlock& operator=( ProbabilityTableBlock&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -49,16 +75,4 @@ ProbabilityTableBlock( Iterator bdd, Iterator end ) :
   Base( "UNR", bdd, end ) {
 
   this->generateBlocks();
-}
-
-ProbabilityTableBlock& operator=( const ProbabilityTableBlock& base ) {
-
-  new (this) ProbabilityTableBlock( base );
-  return *this;
-}
-
-ProbabilityTableBlock& operator=( ProbabilityTableBlock&& base ) {
-
-  new (this) ProbabilityTableBlock( std::move( base ) );
-  return *this;
 }

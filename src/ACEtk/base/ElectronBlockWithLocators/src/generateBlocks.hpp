@@ -1,5 +1,7 @@
 void generateBlocks() {
 
+  this->data_.clear();
+
   auto begin = this->begin();
   auto iter = std::next( begin, 3 * this->N() );
   this->information_ = ArrayData( "ELAS", begin, iter, this->N(), 3 );

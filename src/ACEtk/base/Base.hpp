@@ -38,6 +38,7 @@ private:
 protected:
 
   /* auxiliary functions */
+  #include "ACEtk/base/Base/src/generateData.hpp"
   #include "ACEtk/base/Base/src/verifyIndex.hpp"
   #include "ACEtk/base/Base/src/verifyReactionIndex.hpp"
 

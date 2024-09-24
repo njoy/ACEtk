@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using PhotoelectricCrossSectionBlock = photoatomic::PhotoelectricCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PhotoelectricCrossSectionBlock& );
+void verifyChunk( const PhotoelectricCrossSectionBlock&, const std::vector< double >& );
+PhotoelectricCrossSectionBlock makeDummyBlock();
 
 SCENARIO( "PhotoelectricCrossSectionBlock" ) {
 
@@ -35,16 +36,7 @@ SCENARIO( "PhotoelectricCrossSectionBlock" ) {
       THEN( "a PhotoelectricCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -55,16 +47,57 @@ SCENARIO( "PhotoelectricCrossSectionBlock" ) {
       THEN( "a PhotoelectricCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an PhotoelectricCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an PhotoelectricCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PhotoelectricCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PhotoelectricCrossSectionBlock chunk( xss.begin(), xss.end(), 3, 5 );
+      PhotoelectricCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PhotoelectricCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -80,7 +113,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PhotoelectricCrossSectionBlock& chunk ) {
+void verifyChunk( const PhotoelectricCrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 15 == chunk.length() );
@@ -112,4 +156,9 @@ void verifyChunk( const PhotoelectricCrossSectionBlock& chunk ) {
   CHECK_THAT(  13., WithinRel( chunk.photoelectric(3)[2] ) );
   CHECK_THAT(  14., WithinRel( chunk.photoelectric(3)[3] ) );
   CHECK_THAT(  15., WithinRel( chunk.photoelectric(3)[4] ) );
+}
+
+PhotoelectricCrossSectionBlock makeDummyBlock() {
+
+  return { { { 1., 2. }, { 3., 4. }, { 5., 6. } } };
 }

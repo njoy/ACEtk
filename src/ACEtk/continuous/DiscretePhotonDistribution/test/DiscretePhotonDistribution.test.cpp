@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using DiscretePhotonDistribution = continuous::DiscretePhotonDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const DiscretePhotonDistribution& );
+void verifyChunk( const DiscretePhotonDistribution&, const std::vector< double >& );
+DiscretePhotonDistribution makeDummyBlock();
 
 SCENARIO( "DiscretePhotonDistribution" ) {
 
@@ -33,37 +34,68 @@ SCENARIO( "DiscretePhotonDistribution" ) {
       THEN( "a DiscretePhotonDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
 
-      DiscretePhotonDistribution chunk( xss.begin(), xss.end(),
-                                        1e-5, 20. );
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
 
       THEN( "a DiscretePhotonDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an DiscretePhotonDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution move( std::move( chunk ) );
+
+      THEN( "an DiscretePhotonDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DiscretePhotonDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DiscretePhotonDistribution chunk( xss.begin(), xss.end(), 1e-5, 20. );
+      DiscretePhotonDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DiscretePhotonDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -74,7 +106,18 @@ std::vector< double > chunk() {
   return { 2.0, 1e+5 };
 }
 
-void verifyChunk( const DiscretePhotonDistribution& chunk ) {
+void verifyChunk( const DiscretePhotonDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );
@@ -91,4 +134,9 @@ void verifyChunk( const DiscretePhotonDistribution& chunk ) {
   CHECK( true == chunk.isPrimaryPhoton() );
   CHECK_THAT( 1e+5, WithinRel( chunk.EG() ) );
   CHECK_THAT( 1e+5, WithinRel( chunk.photonOrBindingEnergy() ) );
+}
+
+DiscretePhotonDistribution makeDummyBlock() {
+
+  return { 1e-2, 5., 2, 1e+4 };
 }

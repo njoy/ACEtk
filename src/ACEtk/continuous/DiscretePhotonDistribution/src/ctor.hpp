@@ -3,6 +3,9 @@ DiscretePhotonDistribution() = default;
 DiscretePhotonDistribution( const DiscretePhotonDistribution& ) = default;
 DiscretePhotonDistribution( DiscretePhotonDistribution&& ) = default;
 
+DiscretePhotonDistribution& operator=( const DiscretePhotonDistribution& ) = default;
+DiscretePhotonDistribution& operator=( DiscretePhotonDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -27,6 +30,3 @@ DiscretePhotonDistribution( double emin, double emax,
 DiscretePhotonDistribution( Iterator begin, Iterator end,
                             double emin, double emax ) :
   TwoParameterDistribution( "DiscretePhotonDistribution", begin, end, emin, emax ) {}
-
-DiscretePhotonDistribution& operator=( const DiscretePhotonDistribution& ) = default;
-DiscretePhotonDistribution& operator=( DiscretePhotonDistribution&& ) = default;

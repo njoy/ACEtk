@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using FluorescenceDataBlock = photoatomic::FluorescenceDataBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const FluorescenceDataBlock& );
+void verifyChunk( const FluorescenceDataBlock&, const std::vector< double >& );
+FluorescenceDataBlock makeDummyBlock();
 
 SCENARIO( "FluorescenceDataBlock" ) {
 
@@ -29,23 +30,14 @@ SCENARIO( "FluorescenceDataBlock" ) {
       std::vector< double > energies = { 0.000000000000E+00,  1.238156190380E-03 };
 
       FluorescenceDataBlock chunk( std::move( edges ),
-                                              std::move( probabilities ),
-                                              std::move( yields ),
-                                              std::move( energies ) );
+                                   std::move( probabilities ),
+                                   std::move( yields ),
+                                   std::move( energies ) );
 
       THEN( "a FluorescenceDataBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -56,16 +48,57 @@ SCENARIO( "FluorescenceDataBlock" ) {
       THEN( "a FluorescenceDataBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an FluorescenceDataBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock move( std::move( chunk ) );
+
+      THEN( "an FluorescenceDataBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an FluorescenceDataBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      FluorescenceDataBlock chunk( xss.begin(), xss.end(), 2 );
+      FluorescenceDataBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an FluorescenceDataBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -79,7 +112,18 @@ std::vector< double > chunk() {
     0.000000000000E+00,  2.542671170140E-02,  0.000000000000E+00,  1.238156190380E-03  };
 }
 
-void verifyChunk( const FluorescenceDataBlock& chunk ) {
+void verifyChunk( const FluorescenceDataBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
@@ -114,4 +158,9 @@ void verifyChunk( const FluorescenceDataBlock& chunk ) {
   CHECK_THAT( 2.542671170140E-02, WithinRel( chunk.yields().back() ) );
   CHECK_THAT( 0.000000000000E+00, WithinRel( chunk.fluorescentEnergies().front() ) );
   CHECK_THAT( 1.238156190380E-03, WithinRel( chunk.fluorescentEnergies().back() ) );
+}
+
+FluorescenceDataBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. }, { 7., 8. } };
 }

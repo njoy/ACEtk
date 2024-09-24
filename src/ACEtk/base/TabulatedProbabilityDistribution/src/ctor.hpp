@@ -3,6 +3,9 @@ TabulatedProbabilityDistribution() = default;
 TabulatedProbabilityDistribution( const TabulatedProbabilityDistribution& ) = default;
 TabulatedProbabilityDistribution( TabulatedProbabilityDistribution&& ) = default;
 
+TabulatedProbabilityDistribution& operator=( const TabulatedProbabilityDistribution& ) = default;
+TabulatedProbabilityDistribution& operator=( TabulatedProbabilityDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -53,6 +56,3 @@ TabulatedProbabilityDistribution( std::string name, Iterator begin, Iterator end
 
   verifySize( this->begin(), this->end(), this->numberValues() );
 }
-
-TabulatedProbabilityDistribution& operator=( const TabulatedProbabilityDistribution& ) = default;
-TabulatedProbabilityDistribution& operator=( TabulatedProbabilityDistribution&& ) = default;

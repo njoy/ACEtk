@@ -14,7 +14,8 @@ using TabulatedAngleEnergyDistribution = continuous::TabulatedAngleEnergyDistrib
 using TabulatedEnergyDistribution = continuous::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedAngleEnergyDistribution& );
+void verifyChunk( const TabulatedAngleEnergyDistribution&, const std::vector< double >& );
+TabulatedAngleEnergyDistribution makeDummyBlock();
 
 SCENARIO( "TabulatedAngleEnergyDistribution" ) {
 
@@ -42,16 +43,7 @@ SCENARIO( "TabulatedAngleEnergyDistribution" ) {
       THEN( "a TabulatedAngleEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -62,16 +54,57 @@ SCENARIO( "TabulatedAngleEnergyDistribution" ) {
       THEN( "a TabulatedAngleEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an TabulatedAngleEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngleEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngleEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngleEnergyDistribution chunk( 1.1, 21, xss.begin(), xss.end() );
+      TabulatedAngleEnergyDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngleEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -88,7 +121,18 @@ std::vector< double > chunk() {
             1.000000E+00 };
 }
 
-void verifyChunk( const TabulatedAngleEnergyDistribution& chunk ) {
+void verifyChunk( const TabulatedAngleEnergyDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 25 == chunk.length() );
@@ -150,4 +194,18 @@ void verifyChunk( const TabulatedAngleEnergyDistribution& chunk ) {
   CHECK( 2 == data2.cdf().size() );
   CHECK_THAT( 0., WithinRel( data2.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( data2.cdf().back() ) );
+}
+
+TabulatedAngleEnergyDistribution makeDummyBlock() {
+
+  std::vector< TabulatedEnergyDistribution > distributions  = {
+
+    TabulatedEnergyDistribution(
+        -1., 2, { 1e-5, 20.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+    TabulatedEnergyDistribution(
+        1., 1, { 1e-3, 15.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } )
+  };
+  std::size_t locb = 15;
+
+  return { 1.1, 2, std::move( distributions ), locb };
 }

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using SubshellTransitionData = electron::SubshellTransitionData;
 
 std::vector< double > chunk();
-void verifyChunk( const SubshellTransitionData& );
+void verifyChunk( const SubshellTransitionData&, const std::vector< double >& );
+SubshellTransitionData makeDummyBlock();
 
 SCENARIO( "SubshellTransitionData" ) {
 
@@ -35,16 +36,7 @@ SCENARIO( "SubshellTransitionData" ) {
       THEN( "a SubshellTransitionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -55,16 +47,57 @@ SCENARIO( "SubshellTransitionData" ) {
       THEN( "a SubshellTransitionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an SubshellTransitionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData move( std::move( chunk ) );
+
+      THEN( "an SubshellTransitionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SubshellTransitionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SubshellTransitionData chunk( xss.begin(), xss.end() );
+      SubshellTransitionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SubshellTransitionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -78,7 +111,18 @@ std::vector< double > chunk() {
              3,   1,   5.5, 1.00 };
 }
 
-void verifyChunk( const SubshellTransitionData& chunk ) {
+void verifyChunk( const SubshellTransitionData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 12 == chunk.length() );
@@ -120,4 +164,9 @@ void verifyChunk( const SubshellTransitionData& chunk ) {
   CHECK( true == chunk.isRadiativeTransition(1) );
   CHECK( false == chunk.isRadiativeTransition(2) );
   CHECK( false == chunk.isRadiativeTransition(3) );
+}
+
+SubshellTransitionData makeDummyBlock() {
+
+  return { { 1 }, { 0 }, { 1. }, { 3. } };
 }

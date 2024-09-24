@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using DistributionProbability = continuous::DistributionProbability;
 
 std::vector< double > chunk();
-void verifyChunk( const DistributionProbability& );
+void verifyChunk( const DistributionProbability&, const std::vector< double >& );
+DistributionProbability makeDummyBlock();
 
 SCENARIO( "DistributionProbability" ) {
 
@@ -36,16 +37,7 @@ SCENARIO( "DistributionProbability" ) {
       THEN( "a DistributionProbability can be constructed and members can be "
             "tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -56,16 +48,57 @@ SCENARIO( "DistributionProbability" ) {
       THEN( "a DistributionProbability can be constructed and members can be "
             "tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an DistributionProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability move( std::move( chunk ) );
+
+      THEN( "an DistributionProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DistributionProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DistributionProbability chunk( xss.begin(), xss.end() );
+      DistributionProbability move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DistributionProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -76,7 +109,18 @@ std::vector< double > chunk() {
   return { 0, 3, 1., 3., 5., 2., 4., 6. };
 }
 
-void verifyChunk( const DistributionProbability& chunk ) {
+void verifyChunk( const DistributionProbability& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 8 == chunk.length() );
@@ -108,4 +152,9 @@ void verifyChunk( const DistributionProbability& chunk ) {
   CHECK_THAT( 2., WithinRel( chunk.probabilities()[0] ) );
   CHECK_THAT( 4., WithinRel( chunk.probabilities()[1] ) );
   CHECK_THAT( 6., WithinRel( chunk.probabilities()[2] ) );
+}
+
+DistributionProbability makeDummyBlock() {
+
+  return { {}, {}, { 1., 2. }, { 3., 4. } };
 }

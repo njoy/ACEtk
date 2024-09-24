@@ -3,6 +3,9 @@ EquiprobableAngularBins() = default;
 EquiprobableAngularBins( const EquiprobableAngularBins& ) = default;
 EquiprobableAngularBins( EquiprobableAngularBins&& ) = default;
 
+EquiprobableAngularBins& operator=( const EquiprobableAngularBins& ) = default;
+EquiprobableAngularBins& operator=( EquiprobableAngularBins&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -29,6 +32,3 @@ EquiprobableAngularBins( double energy, Iterator begin, Iterator end ) :
 
   verifySize( this->begin(), this->end() );
 }
-
-EquiprobableAngularBins& operator=( const EquiprobableAngularBins& ) = default;
-EquiprobableAngularBins& operator=( EquiprobableAngularBins&& ) = default;

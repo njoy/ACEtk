@@ -3,6 +3,9 @@ SecondaryParticleTypeBlock() = default;
 SecondaryParticleTypeBlock( const SecondaryParticleTypeBlock& ) = default;
 SecondaryParticleTypeBlock( SecondaryParticleTypeBlock&& ) = default;
 
+SecondaryParticleTypeBlock& operator=( const SecondaryParticleTypeBlock& ) = default;
+SecondaryParticleTypeBlock& operator=( SecondaryParticleTypeBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ SecondaryParticleTypeBlock( std::vector< unsigned int > types ) :
  */
 SecondaryParticleTypeBlock( Iterator begin, Iterator end, unsigned int ntype ) :
   ArrayData( "PTYPE", begin, end, ntype, 1 ) {}
-
-SecondaryParticleTypeBlock& operator=( const SecondaryParticleTypeBlock& ) = default;
-SecondaryParticleTypeBlock& operator=( SecondaryParticleTypeBlock&& ) = default;

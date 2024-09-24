@@ -29,6 +29,12 @@ auto block( std::size_t index ) const {
 
 void generateBlocks() {
 
+  // reset optional blocks
+  this->itce_ = std::nullopt;
+  this->itca_ = std::nullopt;
+  this->itcei_ = std::nullopt;
+  this->itcai_ = std::nullopt;
+
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
 

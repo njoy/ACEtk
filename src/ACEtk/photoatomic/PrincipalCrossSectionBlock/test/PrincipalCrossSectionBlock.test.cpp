@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using PrincipalCrossSectionBlock = photoatomic::PrincipalCrossSectionBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const PrincipalCrossSectionBlock& );
+void verifyChunk( const PrincipalCrossSectionBlock&, const std::vector< double >& );
+PrincipalCrossSectionBlock makeDummyBlock();
 
 SCENARIO( "PrincipalCrossSectionBlock" ) {
 
@@ -97,24 +98,15 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
       };
 
       PrincipalCrossSectionBlock chunk( std::move( energies ),
-                                                   std::move( incoherent ),
-                                                   std::move( coherent ),
-                                                   std::move( photoelectric ),
-                                                   std::move( pairproduction ) );
+                                        std::move( incoherent ),
+                                        std::move( coherent ),
+                                        std::move( photoelectric ),
+                                        std::move( pairproduction ) );
 
       THEN( "a PrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -125,16 +117,57 @@ SCENARIO( "PrincipalCrossSectionBlock" ) {
       THEN( "a PrincipalCrossSectionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an PrincipalCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      PrincipalCrossSectionBlock chunk( xss.begin(), xss.end(), 43 );
+      PrincipalCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an PrincipalCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -201,7 +234,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
+void verifyChunk( const PrincipalCrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 215 == chunk.length() );
@@ -227,4 +271,9 @@ void verifyChunk( const PrincipalCrossSectionBlock& chunk ) {
   CHECK_THAT( -2.622629761934E+01, WithinRel( chunk.photoelectric().back() ) );
   CHECK_THAT(  0.000000000000E+00, WithinRel( chunk.pairproduction().front() ) );
   CHECK_THAT( -4.455371820900E+00, WithinRel( chunk.pairproduction().back() ) );
+}
+
+PrincipalCrossSectionBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. }, { 5., 6. }, { 7., 8. }, { 9., 10. } };
 }

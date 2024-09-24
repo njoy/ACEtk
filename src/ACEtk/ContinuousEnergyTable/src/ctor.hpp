@@ -55,7 +55,13 @@ ContinuousEnergyTable( ContinuousEnergyTable&& table ) :
  */
 ContinuousEnergyTable& operator=( const ContinuousEnergyTable& base ) {
 
-  new (this) ContinuousEnergyTable( base );
+  if ( this != &base ) {
+
+    Table::operator=( base );
+    this->verifyType();
+    this->setSZA();
+    this->generateBlocks();
+  }
   return *this;
 }
 
@@ -66,7 +72,13 @@ ContinuousEnergyTable& operator=( const ContinuousEnergyTable& base ) {
  */
 ContinuousEnergyTable& operator=( ContinuousEnergyTable&& base ) {
 
-  new (this) ContinuousEnergyTable( std::move( base ) );
+  if ( this != &base ) {
+
+    Table::operator=( std::move( base ) );
+    this->verifyType();
+    this->setSZA();
+    this->generateBlocks();
+  }
   return *this;
 }
 

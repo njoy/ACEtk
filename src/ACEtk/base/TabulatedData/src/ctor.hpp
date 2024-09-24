@@ -58,12 +58,30 @@ TabulatedData( std::string name, Iterator begin, Iterator end ) :
 
 TabulatedData& operator=( const TabulatedData& base ) {
 
-  new (this) TabulatedData( base );
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->interpolation_ = base.interpolation_;
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
   return *this;
 }
 
 TabulatedData& operator=( TabulatedData&& base ) {
 
-  new (this) TabulatedData( std::move( base ) );
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->interpolation_ = std::move( base.interpolation_ );
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
   return *this;
 }

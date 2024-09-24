@@ -3,6 +3,9 @@ PhotonProductionBlock() = default;
 PhotonProductionBlock( const PhotonProductionBlock& ) = default;
 PhotonProductionBlock( PhotonProductionBlock&& ) = default;
 
+PhotonProductionBlock& operator=( const PhotonProductionBlock& ) = default;
+PhotonProductionBlock& operator=( PhotonProductionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ PhotonProductionBlock( std::vector< double > production ) :
  */
 PhotonProductionBlock( Iterator begin, Iterator end, unsigned int nes ) :
   ArrayData( "GPD", begin, end, nes, 1 ) {}
-
-PhotonProductionBlock& operator=( const PhotonProductionBlock& ) = default;
-PhotonProductionBlock& operator=( PhotonProductionBlock&& ) = default;

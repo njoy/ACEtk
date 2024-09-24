@@ -3,6 +3,9 @@ CrossSectionData() = default;
 CrossSectionData( const CrossSectionData& ) = default;
 CrossSectionData( CrossSectionData&& ) = default;
 
+CrossSectionData& operator=( const CrossSectionData& ) = default;
+CrossSectionData& operator=( CrossSectionData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -23,6 +26,3 @@ CrossSectionData( Iterator begin, Iterator end ) :
 
   verifySize( this->begin(), this->end(), this->numberValues() );
 }
-
-CrossSectionData& operator=( const CrossSectionData& ) = default;
-CrossSectionData& operator=( CrossSectionData&& ) = default;

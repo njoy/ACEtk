@@ -7,7 +7,6 @@ DistributionDataWithInterpolationType( const DistributionDataWithInterpolationTy
 
   if ( Base::owner() ) {
 
-    this->distributions_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -19,7 +18,6 @@ DistributionDataWithInterpolationType( DistributionDataWithInterpolationType&& b
 
   if ( Base::owner() ) {
 
-    this->distributions_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -64,12 +62,32 @@ DistributionDataWithInterpolationType( std::string&& name,
 
 DistributionDataWithInterpolationType& operator=( const DistributionDataWithInterpolationType& base ) {
 
-  new (this) DistributionDataWithInterpolationType( base );
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->locb_ = base.locb_;
+    this->values_ = base.values_;
+    this->distributions_ = base.distributions_;
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }
 
 DistributionDataWithInterpolationType& operator=( DistributionDataWithInterpolationType&& base ) {
 
-  new (this) DistributionDataWithInterpolationType( std::move( base ) );
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->locb_ = base.locb_;
+    this->values_ = std::move( base.values_ );
+    this->distributions_ = std::move( base.distributions_ );
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }

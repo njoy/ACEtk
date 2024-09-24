@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using HeatingNumbersBlock = photoatomic::HeatingNumbersBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const HeatingNumbersBlock& );
+void verifyChunk( const HeatingNumbersBlock&, const std::vector< double >& );
+HeatingNumbersBlock makeDummyBlock();
 
 SCENARIO( "HeatingNumbersBlock" ) {
 
@@ -44,16 +45,7 @@ SCENARIO( "HeatingNumbersBlock" ) {
       THEN( "a HeatingNumbersBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -64,16 +56,57 @@ SCENARIO( "HeatingNumbersBlock" ) {
       THEN( "a HeatingNumbersBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an HeatingNumbersBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock move( std::move( chunk ) );
+
+      THEN( "an HeatingNumbersBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an HeatingNumbersBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      HeatingNumbersBlock chunk( xss.begin(), xss.end(), 43 );
+      HeatingNumbersBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an HeatingNumbersBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -98,7 +131,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const HeatingNumbersBlock& chunk ) {
+void verifyChunk( const HeatingNumbersBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 43 == chunk.length() );
@@ -112,4 +156,9 @@ void verifyChunk( const HeatingNumbersBlock& chunk ) {
 
   CHECK_THAT( 9.457315870945E-04, WithinRel( chunk.heating().front() ) );
   CHECK_THAT( 9.086036433693E+01, WithinRel( chunk.heating().back() ) );
+}
+
+HeatingNumbersBlock makeDummyBlock() {
+
+  return { { 1., 2., 3., 4., 5., 6. } };
 }

@@ -14,7 +14,8 @@ using ComptonProfileBlock = photoatomic::ComptonProfileBlock;
 using ComptonProfile = photoatomic::ComptonProfile;
 
 std::vector< double > chunk();
-void verifyChunk( const ComptonProfileBlock& );
+void verifyChunk( const ComptonProfileBlock&, const std::vector< double >& );
+ComptonProfileBlock makeDummyBlock();
 
 SCENARIO( "ComptonProfileBlock" ) {
 
@@ -86,16 +87,7 @@ SCENARIO( "ComptonProfileBlock" ) {
 
       THEN( "a ComptonProfileBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -105,16 +97,57 @@ SCENARIO( "ComptonProfileBlock" ) {
 
       THEN( "a ComptonProfileBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an ComptonProfileBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock move( std::move( chunk ) );
+
+      THEN( "an ComptonProfileBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ComptonProfileBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ComptonProfileBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      ComptonProfileBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ComptonProfileBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -176,7 +209,18 @@ std::vector< double > chunk() {
     1.000000000000e+00 };
 }
 
-void verifyChunk( const ComptonProfileBlock& chunk ) {
+void verifyChunk( const ComptonProfileBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 192 == chunk.length() );
@@ -242,4 +286,9 @@ void verifyChunk( const ComptonProfileBlock& chunk ) {
   CHECK( 31 == profile.cdf().size() );
   CHECK_THAT( 0., WithinRel( profile.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( profile.cdf().back() ) );
+}
+
+ComptonProfileBlock makeDummyBlock() {
+
+  return { { { 2, { 1., 2. }, { 3., 4. }, { 5., 6. } } } };
 }

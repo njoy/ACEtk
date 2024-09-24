@@ -1,5 +1,7 @@
 void generateBlocks() {
 
+  this->distributions_.clear();
+
   const auto nr = static_cast< std::size_t >( this->IXSS( 1 ) );
   const auto ne = static_cast< std::size_t >( this->IXSS( 2 + 2 * nr ) );
   auto begin = this->begin();

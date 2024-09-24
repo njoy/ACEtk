@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TabulatedFissionMultiplicity = continuous::TabulatedFissionMultiplicity;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedFissionMultiplicity& );
+void verifyChunk( const TabulatedFissionMultiplicity&, const std::vector< double >& );
+TabulatedFissionMultiplicity makeDummyBlock();
 
 SCENARIO( "TabulatedFissionMultiplicity" ) {
 
@@ -32,16 +33,7 @@ SCENARIO( "TabulatedFissionMultiplicity" ) {
       THEN( "a TabulatedFissionMultiplicity can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -52,16 +44,57 @@ SCENARIO( "TabulatedFissionMultiplicity" ) {
       THEN( "a TabulatedFissionMultiplicity can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an TabulatedFissionMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity move( std::move( chunk ) );
+
+      THEN( "an TabulatedFissionMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedFissionMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedFissionMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedFissionMultiplicity move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedFissionMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -74,7 +107,18 @@ std::vector< double > chunk() {
             2.55000000000E+00,   7.00000000000E+00 };
 }
 
-void verifyChunk( const TabulatedFissionMultiplicity& chunk ) {
+void verifyChunk( const TabulatedFissionMultiplicity& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 9 == chunk.length() );
@@ -109,4 +153,9 @@ void verifyChunk( const TabulatedFissionMultiplicity& chunk ) {
   CHECK_THAT( 2.35, WithinRel( chunk.multiplicities()[0] ) );
   CHECK_THAT( 2.55, WithinRel( chunk.multiplicities()[1] ) );
   CHECK_THAT( 7., WithinRel( chunk.multiplicities()[2] ) );
+}
+
+TabulatedFissionMultiplicity makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. } };
 }

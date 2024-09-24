@@ -35,7 +35,6 @@ AngularDistributionBlock( const AngularDistributionBlock& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
     this->generateBlocks();
   }
@@ -47,7 +46,6 @@ AngularDistributionBlock( AngularDistributionBlock&& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
     this->generateBlocks();
   }
@@ -96,12 +94,36 @@ AngularDistributionBlock( std::string name,
 
 AngularDistributionBlock& operator=( const AngularDistributionBlock& base ) {
 
-  new (this) AngularDistributionBlock( base );
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->nr_ = base.nr_;
+    this->iterator_ = base.iterator_;
+    this->data_ = base.data_;
+    this->zero_index_ = base.zero_index_;
+    if ( Base::owner() ) {
+
+      this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
+      this->generateBlocks();
+    }
+  }
   return *this;
 }
 
 AngularDistributionBlock& operator=( AngularDistributionBlock&& base ) {
 
-  new (this) AngularDistributionBlock( std::move( base ) );
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->nr_ = base.nr_;
+    this->iterator_ = base.iterator_;
+    this->data_ = std::move( base.data_ );
+    this->zero_index_ = base.zero_index_;
+    if ( Base::owner() ) {
+
+      this->iterator_ = this->begin() + this->nr_ + ( this->zero_index_ ? 1 : 0 );
+      this->generateBlocks();
+    }
+  }
   return *this;
 }

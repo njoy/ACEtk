@@ -39,10 +39,6 @@ EnergyDistributionBlock( const EnergyDistributionBlock& base ) :
 
   if ( Base::owner() ) {
 
-    this->iterator_ = this->begin() + this->nr_;
-    this->data_.clear();
-    this->multiplicities_.clear();
-    this->frames_.clear();
     this->generateBlocks();
   }
 }
@@ -56,12 +52,46 @@ EnergyDistributionBlock( EnergyDistributionBlock&& base ) :
 
   if ( Base::owner() ) {
 
-    this->iterator_ = this->begin() + this->nr_;
-    this->data_.clear();
-    this->multiplicities_.clear();
-    this->frames_.clear();
     this->generateBlocks();
   }
+}
+
+EnergyDistributionBlock& operator=( const EnergyDistributionBlock& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->nr_ = base.nr_;
+    this->iterator_ = base.iterator_;
+    this->tyr_ = base.tyr_;
+    this->data_ = base.data_;
+    this->multiplicities_ = base.multiplicities_;
+    this->frames_ = base.frames_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+EnergyDistributionBlock& operator=( EnergyDistributionBlock&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->nr_ = base.nr_;
+    this->iterator_ = base.iterator_;
+    this->tyr_ = std::move( base.tyr_ );
+    this->data_ = std::move( base.data_ );
+    this->multiplicities_ = std::move( base.multiplicities_ );
+    this->frames_ = std::move( base.frames_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -94,16 +124,4 @@ EnergyDistributionBlock( Iterator loc, Iterator data, Iterator end,
 
   verifySize( this->begin(), this->iterator_, this->end(), this->nr_ );
   this->generateBlocks();
-}
-
-EnergyDistributionBlock& operator=( const EnergyDistributionBlock& base ) {
-
-  new (this) EnergyDistributionBlock( base );
-  return *this;
-}
-
-EnergyDistributionBlock& operator=( EnergyDistributionBlock&& base ) {
-
-  new (this) EnergyDistributionBlock( std::move( base ) );
-  return *this;
 }

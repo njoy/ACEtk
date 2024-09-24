@@ -1,5 +1,8 @@
 void generateBlocks() {
 
+  this->probabilities_.clear();
+  this->distributions_.clear();
+
   std::size_t locator = 1; // this->locb_ - ( this->locb_ - 1 )
   std::size_t lnw = 0;
   do {

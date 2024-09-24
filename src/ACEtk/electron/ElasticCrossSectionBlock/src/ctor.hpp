@@ -3,6 +3,9 @@ ElasticCrossSectionBlock() = default;
 ElasticCrossSectionBlock( const ElasticCrossSectionBlock& ) = default;
 ElasticCrossSectionBlock( ElasticCrossSectionBlock&& ) = default;
 
+ElasticCrossSectionBlock& operator=( const ElasticCrossSectionBlock& ) = default;
+ElasticCrossSectionBlock& operator=( ElasticCrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -25,6 +28,3 @@ ElasticCrossSectionBlock(
 ElasticCrossSectionBlock( Iterator begin, Iterator end,
                                       unsigned int ne ) :
   ArrayData( "SELAS", begin, end, ne, 2 ) {}
-
-ElasticCrossSectionBlock& operator=( const ElasticCrossSectionBlock& ) = default;
-ElasticCrossSectionBlock& operator=( ElasticCrossSectionBlock&& ) = default;

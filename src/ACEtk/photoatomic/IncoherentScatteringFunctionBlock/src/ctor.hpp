@@ -3,6 +3,9 @@ IncoherentScatteringFunctionBlock() = default;
 IncoherentScatteringFunctionBlock( const IncoherentScatteringFunctionBlock& ) = default;
 IncoherentScatteringFunctionBlock( IncoherentScatteringFunctionBlock&& ) = default;
 
+IncoherentScatteringFunctionBlock& operator=( const IncoherentScatteringFunctionBlock& ) = default;
+IncoherentScatteringFunctionBlock& operator=( IncoherentScatteringFunctionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -56,6 +59,3 @@ IncoherentScatteringFunctionBlock( Iterator begin, Iterator end ) :
                                      std::distance( begin, end ),
                                      numberElements( begin, end ),
                                      numberArrays( begin, end ) ) {}
-
-IncoherentScatteringFunctionBlock& operator=( const IncoherentScatteringFunctionBlock& ) = default;
-IncoherentScatteringFunctionBlock& operator=( IncoherentScatteringFunctionBlock&& ) = default;

@@ -3,6 +3,9 @@ PhotoelectricCrossSectionBlock() = default;
 PhotoelectricCrossSectionBlock( const PhotoelectricCrossSectionBlock& ) = default;
 PhotoelectricCrossSectionBlock( PhotoelectricCrossSectionBlock&& ) = default;
 
+PhotoelectricCrossSectionBlock& operator=( const PhotoelectricCrossSectionBlock& ) = default;
+PhotoelectricCrossSectionBlock& operator=( PhotoelectricCrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -24,6 +27,3 @@ PhotoelectricCrossSectionBlock(
 PhotoelectricCrossSectionBlock( Iterator begin, Iterator end,
                                 unsigned int nssh, unsigned int nes ) :
   ArrayData( "SPHEL", begin, end, nes, nssh ) {}
-
-PhotoelectricCrossSectionBlock& operator=( const PhotoelectricCrossSectionBlock& ) = default;
-PhotoelectricCrossSectionBlock& operator=( PhotoelectricCrossSectionBlock&& ) = default;

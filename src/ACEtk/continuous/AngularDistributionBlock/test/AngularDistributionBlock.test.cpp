@@ -19,7 +19,8 @@ using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
 using IsotropicAngularDistribution = continuous::IsotropicAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const AngularDistributionBlock& );
+void verifyChunk( const AngularDistributionBlock&, const std::vector< double >& );
+AngularDistributionBlock makeDummyBlock();
 
 SCENARIO( "AngularDistributionBlock" ) {
 
@@ -53,16 +54,7 @@ SCENARIO( "AngularDistributionBlock" ) {
 
       THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -72,16 +64,53 @@ SCENARIO( "AngularDistributionBlock" ) {
 
       THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 3 );
+      AngularDistributionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 3 );
+      AngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 3 );
+      AngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      AngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 3 );
+      AngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "a AngularDistributionBlock can be constructed and members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -112,7 +141,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const AngularDistributionBlock& chunk ) {
+void verifyChunk( const AngularDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 54 == chunk.length() );
@@ -191,4 +231,21 @@ void verifyChunk( const AngularDistributionBlock& chunk ) {
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data4.distribution(1) ) );
   CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( data4.distribution(2) ) );
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data4.distribution(3) ) );
+}
+
+AngularDistributionBlock makeDummyBlock() {
+
+  DistributionData elastic =
+    AngularDistributionData(
+      { TabulatedAngularDistribution( 1e-5, 2, { -1.0, 1.0 },
+                                      { 0.5, 0.5 }, { 0.0, 1.0 } ),
+        TabulatedAngularDistribution( 20e+6, 2, { -1.0, 0.0, 1.0 },
+                                      { 0.5, 0.5, 0.5 }, { 0.0, 0.5, 1.0 } ) } );
+
+  std::vector< DistributionData > distributions = {
+
+    FullyIsotropicDistribution()
+  };
+
+  return { std::move( elastic ), std::move( distributions ) };
 }

@@ -1,13 +1,15 @@
 Base() = default;
 
-Base( const Base& base ) {
+Base( const Base& base ) :
+    name_( base.name_ ), xss_( base.xss_ ) {
 
-  *this = base;
+  this->generateData( base );
 }
 
-Base( Base&& base ) {
+Base( Base&& base ) :
+    name_( std::move( base.name_ ) ), xss_( std::move( base.xss_ ) ) {
 
-  *this = std::move( base );
+  this->generateData( base );
 }
 
 Base( std::string&& name, const Iterator& begin, const Iterator& end ) :
@@ -23,40 +25,24 @@ Base( std::string&& name, std::vector< double >&& xss ) :
   this->length_ = this->xss_->size();
 }
 
-Base& operator=( const Base& right ) {
+Base& operator=( const Base& base ) {
 
-  this->name_ = right.name_;
-  this->xss_ = right.xss_;
-  if ( this->owner() ) {
+  if ( this != &base ) {
 
-    this->begin_ = this->xss_->begin();
-    this->end_ = this->xss_->end();
-    this->length_ = this->xss_->size();
-  }
-  else {
-
-    this->begin_ = right.begin_;
-    this->end_ = right.end_;
-    this->length_ = right.length_;
+    this->name_ = base.name_;
+    this->xss_ = base.xss_;
+    this->generateData( base );
   }
   return *this;
 }
 
-Base& operator=( Base&& right ) {
+Base& operator=( Base&& base ) {
 
-  this->name_ = std::move( right.name_ );
-  this->xss_ = std::move( right.xss_ );
-  if ( this->owner() ) {
+  if ( this != &base ) {
 
-    this->begin_ = this->xss_->begin();
-    this->end_ = this->xss_->end();
-    this->length_ = this->xss_->size();
-  }
-  else {
-
-    this->begin_ = right.begin_;
-    this->end_ = right.end_;
-    this->length_ = right.length_;
+    this->name_ = std::move( base.name_ );
+    this->xss_ = std::move( base.xss_ );
+    this->generateData( base );
   }
   return *this;
 }

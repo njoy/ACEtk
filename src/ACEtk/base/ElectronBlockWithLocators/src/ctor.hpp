@@ -20,7 +20,6 @@ ElectronBlockWithLocators( const ElectronBlockWithLocators& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -31,7 +30,6 @@ ElectronBlockWithLocators( ElectronBlockWithLocators&& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -62,12 +60,32 @@ ElectronBlockWithLocators( std::string name, Iterator begin, Iterator end,
 
 ElectronBlockWithLocators& operator=( const ElectronBlockWithLocators& base ) {
 
-  new (this) ElectronBlockWithLocators( base );
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->n_ = base.n_;
+    this->information_ = base.information_;
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }
 
 ElectronBlockWithLocators& operator=( ElectronBlockWithLocators&& base ) {
 
-  new (this) ElectronBlockWithLocators( std::move( base ) );
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->n_ = base.n_;
+    this->information_ = std::move( base.information_ );
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }

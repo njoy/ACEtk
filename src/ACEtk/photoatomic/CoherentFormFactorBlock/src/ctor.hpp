@@ -3,6 +3,9 @@ CoherentFormFactorBlock() = default;
 CoherentFormFactorBlock( const CoherentFormFactorBlock& ) = default;
 CoherentFormFactorBlock( CoherentFormFactorBlock&& ) = default;
 
+CoherentFormFactorBlock& operator=( const CoherentFormFactorBlock& ) = default;
+CoherentFormFactorBlock& operator=( CoherentFormFactorBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -67,6 +70,3 @@ CoherentFormFactorBlock( Iterator begin, Iterator end ) :
                            std::distance( begin, end ),
                            numberElements( begin, end ),
                            numberArrays( begin, end ) ) {}
-
-CoherentFormFactorBlock& operator=( const CoherentFormFactorBlock& ) = default;
-CoherentFormFactorBlock& operator=( CoherentFormFactorBlock&& ) = default;

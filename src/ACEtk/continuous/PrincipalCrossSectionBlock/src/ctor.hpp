@@ -3,6 +3,9 @@ PrincipalCrossSectionBlock() = default;
 PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
 PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
 
+PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
+PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -31,6 +34,3 @@ PrincipalCrossSectionBlock( std::vector< double > energies,
  */
 PrincipalCrossSectionBlock( Iterator begin, Iterator end, unsigned int nes ) :
   ArrayData( "ESZ", begin, end, nes, 5 ) {}
-
-PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
-PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;

@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedAngularDistribution& );
+void verifyChunk( const TabulatedAngularDistribution&, const std::vector< double >& );
+TabulatedAngularDistribution makeDummyBlock();
 
 SCENARIO( "TabulatedAngularDistribution" ) {
 
@@ -36,16 +37,7 @@ SCENARIO( "TabulatedAngularDistribution" ) {
       THEN( "a TabulatedAngularDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -56,16 +48,57 @@ SCENARIO( "TabulatedAngularDistribution" ) {
 
       THEN( "a TabulatedAngularDistribution can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngularDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedAngularDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -78,7 +111,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,  0.50000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const TabulatedAngularDistribution& chunk ) {
+void verifyChunk( const TabulatedAngularDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
@@ -99,4 +143,9 @@ void verifyChunk( const TabulatedAngularDistribution& chunk ) {
   CHECK( 3 == chunk.cdf().size() );
   CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
+}
+
+TabulatedAngularDistribution makeDummyBlock() {
+
+  return {1., 2, { -1., 1. }, { 0.5, 0.5 }, { 0., 1. } };
 }

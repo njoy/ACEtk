@@ -7,7 +7,6 @@ EquiprobableOutgoingEnergyBinData( const EquiprobableOutgoingEnergyBinData& base
 
   if ( Base::owner() ) {
 
-    this->bins_.clear();
     this->generateBlocks();
   }
 }
@@ -19,9 +18,40 @@ EquiprobableOutgoingEnergyBinData( EquiprobableOutgoingEnergyBinData&& base ) :
 
   if ( Base::owner() ) {
 
-    this->bins_.clear();
     this->generateBlocks();
   }
+}
+
+EquiprobableOutgoingEnergyBinData& operator=( const EquiprobableOutgoingEnergyBinData& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->interpolation_ = base.interpolation_;
+    this->energies_ = base.energies_;
+    this->bins_ = base.bins_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+EquiprobableOutgoingEnergyBinData& operator=( EquiprobableOutgoingEnergyBinData&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->interpolation_ = std::move( base.interpolation_ );
+    this->energies_ = std::move( base.energies_ );
+    this->bins_ = std::move( base.bins_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -66,16 +96,4 @@ EquiprobableOutgoingEnergyBinData( Iterator begin, Iterator end ) :
   std::size_t nb = static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 + ne + 1 ) );
   verifySize( this->begin(), this->end(), nr, ne, nb );
   this->generateBlocks();
-}
-
-EquiprobableOutgoingEnergyBinData& operator=( const EquiprobableOutgoingEnergyBinData& base ) {
-
-  new (this) EquiprobableOutgoingEnergyBinData( base );
-  return *this;
-}
-
-EquiprobableOutgoingEnergyBinData& operator=( EquiprobableOutgoingEnergyBinData&& base ) {
-
-  new (this) EquiprobableOutgoingEnergyBinData( std::move( base ) );
-  return *this;
 }

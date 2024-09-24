@@ -3,6 +3,9 @@ PhotonProductionCrossSectionData() = default;
 PhotonProductionCrossSectionData( const PhotonProductionCrossSectionData& ) = default;
 PhotonProductionCrossSectionData( PhotonProductionCrossSectionData&& ) = default;
 
+PhotonProductionCrossSectionData& operator=( const PhotonProductionCrossSectionData& ) = default;
+PhotonProductionCrossSectionData& operator=( PhotonProductionCrossSectionData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -25,6 +28,3 @@ PhotonProductionCrossSectionData( Iterator begin, Iterator end ) :
 
   verifySize( this->begin(), this->end(), this->numberValues() );
 }
-
-PhotonProductionCrossSectionData& operator=( const PhotonProductionCrossSectionData& ) = default;
-PhotonProductionCrossSectionData& operator=( PhotonProductionCrossSectionData&& ) = default;

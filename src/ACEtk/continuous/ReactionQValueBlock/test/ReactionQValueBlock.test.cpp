@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using ReactionQValueBlock = continuous::ReactionQValueBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ReactionQValueBlock& );
+void verifyChunk( const ReactionQValueBlock&, const std::vector< double >& );
+ReactionQValueBlock makeDummyBlock();
 
 SCENARIO( "ReactionQValueBlock" ) {
 
@@ -30,16 +31,7 @@ SCENARIO( "ReactionQValueBlock" ) {
       THEN( "a ReactionQValueBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,16 +42,57 @@ SCENARIO( "ReactionQValueBlock" ) {
       THEN( "a ReactionQValueBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an ReactionQValueBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock move( std::move( chunk ) );
+
+      THEN( "an ReactionQValueBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ReactionQValueBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ReactionQValueBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionQValueBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ReactionQValueBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -70,7 +103,18 @@ std::vector< double > chunk() {
   return { 2.22463100000E+00, 0., 0. };
 }
 
-void verifyChunk( const ReactionQValueBlock& chunk ) {
+void verifyChunk( const ReactionQValueBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 3 == chunk.length() );
@@ -87,4 +131,9 @@ void verifyChunk( const ReactionQValueBlock& chunk ) {
   CHECK_THAT( 2.224631, WithinRel( chunk.QValues()[0] ) );
   CHECK_THAT( 0, WithinRel( chunk.QValues()[1] ) );
   CHECK_THAT( 0, WithinRel( chunk.QValues()[2] ) );
+}
+
+ReactionQValueBlock makeDummyBlock() {
+
+  return { { 1., 2. } };
 }

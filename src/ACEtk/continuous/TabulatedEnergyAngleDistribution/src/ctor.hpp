@@ -3,6 +3,9 @@ TabulatedEnergyAngleDistribution() = default;
 TabulatedEnergyAngleDistribution( const TabulatedEnergyAngleDistribution& ) = default;
 TabulatedEnergyAngleDistribution( TabulatedEnergyAngleDistribution&& ) = default;
 
+TabulatedEnergyAngleDistribution& operator=( const TabulatedEnergyAngleDistribution& ) = default;
+TabulatedEnergyAngleDistribution& operator=( TabulatedEnergyAngleDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -34,6 +37,3 @@ TabulatedEnergyAngleDistribution( double incident, std::size_t locb,
   DistributionDataWithInterpolationType( "TabulatedEnergyAngleDistribution",
                                          locb, begin, end ),
   incident_( incident ) {}
-
-TabulatedEnergyAngleDistribution& operator=( const TabulatedEnergyAngleDistribution& ) = default;
-TabulatedEnergyAngleDistribution& operator=( TabulatedEnergyAngleDistribution&& ) = default;

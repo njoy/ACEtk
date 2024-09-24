@@ -106,7 +106,7 @@ auto block( std::size_t particle, std::size_t index ) const {
 
 void generateBlocks() {
 
-  // optional blocks
+  // reset optional blocks
   this->nu_ = std::nullopt;
   this->gpd_ = std::nullopt;
   this->mtrp_ = std::nullopt;
@@ -121,6 +121,15 @@ void generateBlocks() {
   this->ptype_ = std::nullopt;
   this->ntro_ = std::nullopt;
   this->ixs_ = std::nullopt;
+
+  // clear vectors
+  this->hpd_.clear();
+  this->mtrh_.clear();
+  this->tyrh_.clear();
+  this->sigh_.clear();
+  this->andh_.clear();
+  this->dlwh_.clear();
+  this->yh_.clear();
 
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();

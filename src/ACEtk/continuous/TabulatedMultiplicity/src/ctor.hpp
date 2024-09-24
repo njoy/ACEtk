@@ -3,6 +3,9 @@ TabulatedMultiplicity() = default;
 TabulatedMultiplicity( const TabulatedMultiplicity& ) = default;
 TabulatedMultiplicity( TabulatedMultiplicity&& ) = default;
 
+TabulatedMultiplicity& operator=( const TabulatedMultiplicity& ) = default;
+TabulatedMultiplicity& operator=( TabulatedMultiplicity&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -37,6 +40,3 @@ TabulatedMultiplicity( std::vector< double > energies,
  */
 TabulatedMultiplicity( Iterator begin, Iterator end ) :
   TabulatedData( "TabulatedMultiplicity", begin, end ) {}
-
-TabulatedMultiplicity& operator=( const TabulatedMultiplicity& ) = default;
-TabulatedMultiplicity& operator=( TabulatedMultiplicity&& ) = default;

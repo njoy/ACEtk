@@ -14,7 +14,8 @@ using SecondaryParticleProductionCrossSectionBlock = continuous::SecondaryPartic
 using TabulatedSecondaryParticleMultiplicity = continuous::TabulatedSecondaryParticleMultiplicity;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& );
+void verifyChunk( const SecondaryParticleProductionCrossSectionBlock&, const std::vector< double >& );
+SecondaryParticleProductionCrossSectionBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
 
@@ -44,37 +45,73 @@ SCENARIO( "SecondaryParticleProductionCrossSectionBlock" ) {
       THEN( "a SecondaryParticleProductionCrossSectionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
 
       SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
-                                               xss.end(), 2 );
+                                                          xss.end(), 2 );
 
       THEN( "a SecondaryParticleProductionCrossSectionBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleProductionCrossSectionBlock chunk( xss.begin(), xss.begin() + 2,
+                                                          xss.end(), 2 );
+      SecondaryParticleProductionCrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleProductionCrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -94,7 +131,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk ) {
+void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 28 == chunk.length() );
@@ -162,4 +210,9 @@ void verifyChunk( const SecondaryParticleProductionCrossSectionBlock& chunk ) {
   CHECK( 2 == xs2.multiplicities().size() );
   CHECK_THAT( 1., WithinRel( xs2.multiplicities().front() ) );
   CHECK_THAT( 1., WithinRel( xs2.multiplicities().back() ) );
+}
+
+SecondaryParticleProductionCrossSectionBlock makeDummyBlock() {
+
+  return { { TabulatedSecondaryParticleMultiplicity{ 12, 4, { 1., 2. }, { 3., 4. } } } };
 }

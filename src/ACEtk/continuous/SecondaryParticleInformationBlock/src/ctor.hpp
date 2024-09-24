@@ -15,6 +15,9 @@ SecondaryParticleInformationBlock() = default;
 SecondaryParticleInformationBlock( const SecondaryParticleInformationBlock& ) = default;
 SecondaryParticleInformationBlock( SecondaryParticleInformationBlock&& ) = default;
 
+SecondaryParticleInformationBlock& operator=( const SecondaryParticleInformationBlock& ) = default;
+SecondaryParticleInformationBlock& operator=( SecondaryParticleInformationBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -35,6 +38,3 @@ SecondaryParticleInformationBlock( Iterator ntro, Iterator end, unsigned int nty
 
   verifySize( this->begin(), this->end(), this->NTYPE() );
 }
-
-SecondaryParticleInformationBlock& operator=( const SecondaryParticleInformationBlock& ) = default;
-SecondaryParticleInformationBlock& operator=( SecondaryParticleInformationBlock&& ) = default;

@@ -3,6 +3,9 @@ TabulatedEnergyDistribution() = default;
 TabulatedEnergyDistribution( const TabulatedEnergyDistribution& ) = default;
 TabulatedEnergyDistribution( TabulatedEnergyDistribution&& ) = default;
 
+TabulatedEnergyDistribution& operator=( const TabulatedEnergyDistribution& ) = default;
+TabulatedEnergyDistribution& operator=( TabulatedEnergyDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -48,6 +51,3 @@ TabulatedEnergyDistribution( double incident, Iterator begin, Iterator end ) :
 TabulatedEnergyDistribution( double incident, std::size_t,
                              Iterator begin, Iterator end ) :
   TabulatedEnergyDistribution( incident, begin, end ) {}
-
-TabulatedEnergyDistribution& operator=( const TabulatedEnergyDistribution& ) = default;
-TabulatedEnergyDistribution& operator=( TabulatedEnergyDistribution&& ) = default;

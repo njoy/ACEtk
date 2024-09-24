@@ -29,7 +29,6 @@ InelasticAngularDistributionBlock( const InelasticAngularDistributionBlock& base
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->generateBlocks();
   }
 }
@@ -41,9 +40,48 @@ InelasticAngularDistributionBlock( InelasticAngularDistributionBlock&& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->generateBlocks();
   }
+}
+
+InelasticAngularDistributionBlock&
+operator=( const InelasticAngularDistributionBlock& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->ifeng_ = base.ifeng_;
+    this->nc_ = base.nc_;
+    this->nieb_ = base.nieb_;
+    this->ne_ = base.ne_;
+    this->locb_ = base.locb_;
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+InelasticAngularDistributionBlock&
+operator=( InelasticAngularDistributionBlock&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->ifeng_ = base.ifeng_;
+    this->nc_ = base.nc_;
+    this->nieb_ = std::move( base.nieb_ );
+    this->ne_ = base.ne_;
+    this->locb_ = base.locb_;
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -103,18 +141,4 @@ InelasticAngularDistributionBlock(
                       this->nieb_.value(), this->NC() );
   }
   this->generateBlocks();
-}
-
-InelasticAngularDistributionBlock&
-operator=( const InelasticAngularDistributionBlock& base ) {
-
-  new (this) InelasticAngularDistributionBlock( base );
-  return *this;
-}
-
-InelasticAngularDistributionBlock&
-operator=( InelasticAngularDistributionBlock&& base ) {
-
-  new (this) InelasticAngularDistributionBlock( std::move( base ) );
-  return *this;
 }

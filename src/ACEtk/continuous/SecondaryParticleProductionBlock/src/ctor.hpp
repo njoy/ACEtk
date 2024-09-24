@@ -3,6 +3,9 @@ SecondaryParticleProductionBlock() = default;
 SecondaryParticleProductionBlock( const SecondaryParticleProductionBlock& ) = default;
 SecondaryParticleProductionBlock( SecondaryParticleProductionBlock&& ) = default;
 
+SecondaryParticleProductionBlock& operator=( const SecondaryParticleProductionBlock& ) = default;
+SecondaryParticleProductionBlock& operator=( SecondaryParticleProductionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -27,6 +30,3 @@ SecondaryParticleProductionBlock( Iterator begin, Iterator end ) :
 
   verifySize( this->begin(), this->end(), this->numberValues() );
 }
-
-SecondaryParticleProductionBlock& operator=( const SecondaryParticleProductionBlock& ) = default;
-SecondaryParticleProductionBlock& operator=( SecondaryParticleProductionBlock&& ) = default;

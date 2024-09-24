@@ -20,7 +20,8 @@ using MultiplicityData = continuous::MultiplicityData;
 using TabulatedMultiplicity = continuous::TabulatedMultiplicity;
 
 std::vector< double > chunk();
-void verifyChunk( const EnergyDistributionBlock& );
+void verifyChunk( const EnergyDistributionBlock&, const std::vector< double >& );
+EnergyDistributionBlock makeDummyBlock();
 
 SCENARIO( "EnergyDistributionBlock" ) {
 
@@ -62,16 +63,7 @@ SCENARIO( "EnergyDistributionBlock" ) {
 
       THEN( "an EnergyDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -86,16 +78,73 @@ SCENARIO( "EnergyDistributionBlock" ) {
 
       THEN( "an EnergyDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock copy( chunk );
+
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      FrameAndMultiplicityBlock tyr( { ReferenceFrame::Laboratory,
+                                       ReferenceFrame::CentreOfMass },
+                                     { 101, 1 } );
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), tyr, 2 );
+      EnergyDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -131,7 +180,18 @@ std::vector< double > chunk() {
                 9.775367E-01,       2.391154E-01,       2.847920E-01,       5.592013E-01 };
 }
 
-void verifyChunk( const EnergyDistributionBlock& chunk ) {
+void verifyChunk( const EnergyDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 63 == chunk.length() );
@@ -258,4 +318,24 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
   CHECK( 2 == tyr.size() );
   CHECK( 101 == tyr[0] );
   CHECK( 1 == tyr[1] );
+}
+
+EnergyDistributionBlock makeDummyBlock() {
+
+  std::vector< EnergyDistributionData > distributions = {
+
+    LevelScatteringDistribution( 1., 20., 2., 3. )
+  };
+  std::vector< MultiplicityData > multiplicities = {
+
+        unsigned{ 1 }
+  };
+  std::vector< ReferenceFrame > frames = {
+
+    ReferenceFrame::CentreOfMass
+  };
+
+  return { std::move( distributions ),
+          std::move( multiplicities ),
+          std::move( frames ) };
 }

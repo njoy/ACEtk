@@ -9,6 +9,9 @@ This fixes the following issues in ACEtk:
     distribution block for secondary particles are set to 0 (meaning no data is given). With
     earlier versions of ACEtk, this would have lead to a crash because the XSS array was being
     interpreted incorrectly.
+  - Potential memory leaks have been eliminated when using placement new in copy and move
+    assignments. Unit tests now have specific tests for copy and move constructors and copy and
+    move assignment.
 
 This update also modifies the build system to use shacl-cmake.
 

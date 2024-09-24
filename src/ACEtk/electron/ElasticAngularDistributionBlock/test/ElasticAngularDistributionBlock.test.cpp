@@ -14,7 +14,8 @@ using ElasticAngularDistributionBlock = electron::ElasticAngularDistributionBloc
 using TabulatedAngularDistribution = electron::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const ElasticAngularDistributionBlock& );
+void verifyChunk( const ElasticAngularDistributionBlock&, const std::vector< double >& );
+ElasticAngularDistributionBlock makeDummyBlock();
 
 SCENARIO( "ElasticAngularDistributionBlock" ) {
 
@@ -36,16 +37,7 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
 
       THEN( "a ElasticAngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -55,16 +47,57 @@ SCENARIO( "ElasticAngularDistributionBlock" ) {
 
       THEN( "a ElasticAngularDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an ElasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an ElasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ElasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ElasticAngularDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      ElasticAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ElasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -84,7 +117,18 @@ std::vector< double > chunk() {
      -1.0, 1.0, 0., 1. };
 }
 
-void verifyChunk( const ElasticAngularDistributionBlock& chunk ) {
+void verifyChunk( const ElasticAngularDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );
@@ -119,4 +163,15 @@ void verifyChunk( const ElasticAngularDistributionBlock& chunk ) {
   distribution = chunk.distribution(4);
   CHECK( 1. == distribution.energy() );
   CHECK( 2 == distribution.numberCosines() );
+}
+
+ElasticAngularDistributionBlock makeDummyBlock() {
+
+  std::vector< TabulatedAngularDistribution > distributions = {
+
+    TabulatedAngularDistribution( 1e-11, { -1.0, 1.0 }, { 0., 1. } ),
+    TabulatedAngularDistribution(    1., { -1.0, 1.0 }, { 0., 1. } )
+  };
+
+  return { std::move( distributions ) };
 }

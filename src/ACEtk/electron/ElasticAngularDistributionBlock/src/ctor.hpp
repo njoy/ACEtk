@@ -3,6 +3,9 @@ ElasticAngularDistributionBlock() = default;
 ElasticAngularDistributionBlock( const ElasticAngularDistributionBlock& ) = default;
 ElasticAngularDistributionBlock( ElasticAngularDistributionBlock&& ) = default;
 
+ElasticAngularDistributionBlock& operator=( const ElasticAngularDistributionBlock& ) = default;
+ElasticAngularDistributionBlock& operator=( ElasticAngularDistributionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -20,6 +23,3 @@ ElasticAngularDistributionBlock( std::vector< TabulatedAngularDistribution > dis
  */
 ElasticAngularDistributionBlock( Iterator begin, Iterator end, unsigned int na ) :
   ElectronBlockWithLocators( "ELAS", begin, end, na ) {}
-
-ElasticAngularDistributionBlock& operator=( const ElasticAngularDistributionBlock& ) = default;
-ElasticAngularDistributionBlock& operator=( ElasticAngularDistributionBlock&& ) = default;

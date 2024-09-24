@@ -13,6 +13,9 @@ ArrayData() = default;
 ArrayData( const ArrayData& ) = default;
 ArrayData( ArrayData&& ) = default;
 
+ArrayData& operator=( const ArrayData& ) = default;
+ArrayData& operator=( ArrayData&& ) = default;
+
 /**
  *  @brief Convenience constructor
  *
@@ -148,6 +151,3 @@ ArrayData( std::string&& name,
 
   verifySize( this->begin(), this->end(), this->nelements_, this->narrays_ );
 }
-
-ArrayData& operator=( const ArrayData& ) = default;
-ArrayData& operator=( ArrayData&& ) = default;

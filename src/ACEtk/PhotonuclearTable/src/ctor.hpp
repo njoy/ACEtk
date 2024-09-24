@@ -23,9 +23,9 @@ PhotonuclearTable( Table&& table ): Table( std::move( table ) ) {
 }
 
 /**
- *  @brief Copy constructor using a continuous energy table
+ *  @brief Copy constructor using a photonuclear table
  *
- *  @param[in] table    the continuous energy table to be copied
+ *  @param[in] table    the photonuclear table to be copied
  */
 PhotonuclearTable( const PhotonuclearTable& table ) :
   Table( table ) {
@@ -36,9 +36,9 @@ PhotonuclearTable( const PhotonuclearTable& table ) :
 }
 
 /**
- *  @brief Move constructor using a continuous energy table
+ *  @brief Move constructor using a photonuclear table
  *
- *  @param[in] table    the continuous energy table to be moved
+ *  @param[in] table    the photonuclear table to be moved
  */
 PhotonuclearTable( PhotonuclearTable&& table ) :
   Table( std::move( table ) ) {
@@ -49,24 +49,34 @@ PhotonuclearTable( PhotonuclearTable&& table ) :
 }
 
 /**
- *  @brief Copy assignment using a continuous energy table
+ *  @brief Copy assignment using a photonuclear table
  *
- *  @param[in] table    the continuous energy table to be copied
+ *  @param[in] table    the photonuclear table to be copied
  */
 PhotonuclearTable& operator=( const PhotonuclearTable& base ) {
 
-  new (this) PhotonuclearTable( base );
+  if ( this != &base ) {
+
+    Table::operator=( base );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 
 /**
- *  @brief Move assignment using a continuous energy table
+ *  @brief Move assignment using a photonuclear table
  *
- *  @param[in] table    the continuous energy table to be moved
+ *  @param[in] table    the photonuclear table to be moved
  */
 PhotonuclearTable& operator=( PhotonuclearTable&& base ) {
 
-  new (this) PhotonuclearTable( std::move( base ) );
+  if ( this != &base ) {
+
+    Table::operator=( std::move( base ) );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 

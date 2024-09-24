@@ -8,7 +8,6 @@ DistributionData( const DistributionData& base ) :
 
   if ( Base::owner() ) {
 
-    this->distributions_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -21,7 +20,6 @@ DistributionData( DistributionData&& base ) :
 
   if ( Base::owner() ) {
 
-    this->distributions_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -69,12 +67,34 @@ DistributionData( std::string name, std::size_t locb,
 
 DistributionData& operator=( const DistributionData& base ) {
 
-  new (this) DistributionData( base );
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->interpolation_ = base.interpolation_;
+    this->values_ = base.values_;
+    this->distributions_ = base.distributions_;
+    this->locb_ = base.locb_;
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }
 
 DistributionData& operator=( DistributionData&& base ) {
 
-  new (this) DistributionData( std::move( base ) );
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->interpolation_ = std::move( base.interpolation_ );
+    this->values_ = std::move( base.values_ );
+    this->distributions_ = std::move( base.distributions_ );
+    this->locb_ = base.locb_;
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }

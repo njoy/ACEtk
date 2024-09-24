@@ -3,6 +3,9 @@ EnergyDistributionBlock() = default;
 EnergyDistributionBlock( const EnergyDistributionBlock& ) = default;
 EnergyDistributionBlock( EnergyDistributionBlock&& ) = default;
 
+EnergyDistributionBlock& operator=( const EnergyDistributionBlock& ) = default;
+EnergyDistributionBlock& operator=( EnergyDistributionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -20,6 +23,3 @@ EnergyDistributionBlock( std::vector< TabulatedEnergyDistribution > distribution
  */
 EnergyDistributionBlock( Iterator begin, Iterator end, unsigned int nb ) :
   ElectronBlockWithLocators( "BREME", begin, end, nb ) {}
-
-EnergyDistributionBlock& operator=( const EnergyDistributionBlock& ) = default;
-EnergyDistributionBlock& operator=( EnergyDistributionBlock&& ) = default;

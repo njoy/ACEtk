@@ -1,5 +1,7 @@
 void generateFrames() {
 
+  this->frames_.clear();
+
   if ( this->TYRH().has_value() ) {
 
     this->frames_.insert( this->frames_.end(),
