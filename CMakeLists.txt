@@ -2,7 +2,7 @@
 # Preamble
 ########################################################################
 
-cmake_minimum_required( VERSION 3.27 )
+cmake_minimum_required( VERSION 3.24 )
 
 set( subproject OFF )
 if( DEFINED PROJECT_NAME )
@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( ACEtk
-  VERSION 1.0.1
+  VERSION 1.0.2
   LANGUAGES CXX
 )
 
@@ -47,26 +47,10 @@ option( ACEtk.installation "Install ACEtk" ON )
 # Dependencies
 ########################################################################
 
-set( REPOSITORIES "release"
-    CACHE STRING
-    "Options for where to fetch repositories: develop, release, local"
-    )
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
+include( cmake/dependencies.cmake )
 
-message( STATUS "Using ${REPOSITORIES} repositories" )
-
-if( REPOSITORIES STREQUAL "develop" )
-    include( cmake/develop_dependencies.cmake )
-
-elseif( REPOSITORIES STREQUAL "release" )
-    include( cmake/release_dependencies.cmake )
-
-elseif( REPOSITORIES STREQUAL "local" )
-    include( cmake/local_dependencies.cmake )
-
-endif()
-
-
-########################################################################
+    ########################################################################
 # Project targets
 ########################################################################
 
@@ -169,6 +153,7 @@ if(ACEtk.python)
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/SecondaryParticleProductionCrossSectionBlock.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/ProbabilityTable.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/ProbabilityTableBlock.python.cpp
+      ${CMAKE_CURRENT_SOURCE_DIR}/python/src/continuous/UndefinedDistribution.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/photonuclear.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/photonuclear/PrincipalCrossSectionBlock.python.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/python/src/photonuclear/SecondaryParticleLocatorBlock.python.cpp

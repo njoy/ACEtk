@@ -3,6 +3,9 @@ SecondaryParticleAngularDistributionBlock() = default;
 SecondaryParticleAngularDistributionBlock( const SecondaryParticleAngularDistributionBlock& ) = default;
 SecondaryParticleAngularDistributionBlock( SecondaryParticleAngularDistributionBlock&& ) = default;
 
+SecondaryParticleAngularDistributionBlock& operator=( const SecondaryParticleAngularDistributionBlock& ) = default;
+SecondaryParticleAngularDistributionBlock& operator=( SecondaryParticleAngularDistributionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -22,7 +25,3 @@ SecondaryParticleAngularDistributionBlock( std::vector< DistributionData > data 
 SecondaryParticleAngularDistributionBlock( Iterator loc, Iterator data,
                                            Iterator end, unsigned int nr ) :
   AngularDistributionBlock( "ANDH", loc, data, end, nr, false ) {}
-
-SecondaryParticleAngularDistributionBlock& operator=( const SecondaryParticleAngularDistributionBlock& ) = default;
-
-SecondaryParticleAngularDistributionBlock& operator=( SecondaryParticleAngularDistributionBlock&& ) = default;

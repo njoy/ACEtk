@@ -51,7 +51,12 @@ DosimetryTable( DosimetryTable&& dostable ) :
  */
 DosimetryTable& operator=( const DosimetryTable& base ) {
 
-  new (this) DosimetryTable( base );
+  if ( this != &base ) {
+
+    Table::operator=( base );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 
@@ -62,7 +67,12 @@ DosimetryTable& operator=( const DosimetryTable& base ) {
  */
 DosimetryTable& operator=( DosimetryTable&& base ) {
 
-  new (this) DosimetryTable( std::move( base ) );
+  if ( this != &base ) {
+
+    Table::operator=( std::move( base ) );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 

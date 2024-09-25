@@ -1,0 +1,6 @@
+#include <stdio.h>
+
+int main(){
+  puts("$<TARGET_PROPERTY:warnings.c.test,COMPILE_OPTIONS>");
+  return 0;
+}

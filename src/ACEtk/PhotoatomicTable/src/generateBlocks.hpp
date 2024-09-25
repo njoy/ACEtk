@@ -42,7 +42,7 @@ auto electroionisation_block( std::size_t index ) const {
 
 void generateBlocks() {
 
-  // optional blocks
+  // reset optional blocks
   this->jflo_ = std::nullopt;
   this->eps_ = std::nullopt;
   this->swd_ = std::nullopt;
@@ -54,6 +54,10 @@ void generateBlocks() {
   this->elas_ = std::nullopt;
   this->breme_ = std::nullopt;
   this->breml_ = std::nullopt;
+  this->selas_ = std::nullopt;
+
+  // clear vectors
+  eion_.clear();
 
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();

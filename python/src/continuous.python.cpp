@@ -15,6 +15,7 @@ namespace continuous {
   void wrapDelayedNeutronPrecursorData( python::module&, python::module& );
   void wrapDiscretePhotonDistribution( python::module&, python::module& );
   void wrapDistributionGivenElsewhere( python::module&, python::module& );
+  void wrapUndefinedDistribution( python::module&, python::module& );
   void wrapDistributionProbability( python::module&, python::module& );
   void wrapEnergyDependentWattSpectrum( python::module&, python::module& );
   void wrapEquiprobableAngularBins( python::module&, python::module& );
@@ -80,33 +81,33 @@ void wrapContinuous( python::module& module, python::module& viewmodule ) {
     "Continuous energy ACE blocks and components"
   );
 
+  continuous::wrapInterpolationData( submodule, viewmodule );
+  continuous::wrapParameterData( submodule, viewmodule );
+  continuous::wrapIsotropicAngularDistribution( submodule, viewmodule );
+  continuous::wrapEquiprobableAngularBins( submodule, viewmodule );
+  continuous::wrapTabulatedAngularDistribution( submodule, viewmodule );
+  continuous::wrapTabulatedEnergyDistribution( submodule, viewmodule );
   continuous::wrapAngularDistributionData( submodule, viewmodule );
   continuous::wrapCrossSectionData( submodule, viewmodule );
   continuous::wrapDelayedNeutronPrecursorData( submodule, viewmodule );
   continuous::wrapDiscretePhotonDistribution( submodule, viewmodule );
   continuous::wrapDistributionGivenElsewhere( submodule, viewmodule );
+  continuous::wrapUndefinedDistribution( submodule, viewmodule );
   continuous::wrapDistributionProbability( submodule, viewmodule );
   continuous::wrapEnergyDependentWattSpectrum( submodule, viewmodule );
-  continuous::wrapEquiprobableAngularBins( submodule, viewmodule );
-  continuous::wrapEquiprobableOutgoingEnergyBinData( submodule, viewmodule );
   continuous::wrapEquiprobableOutgoingEnergyBins( submodule, viewmodule );
+  continuous::wrapEquiprobableOutgoingEnergyBinData( submodule, viewmodule );
   continuous::wrapEvaporationSpectrum( submodule, viewmodule );
   continuous::wrapFullyIsotropicDistribution( submodule, viewmodule );
-  continuous::wrapInterpolationData( submodule, viewmodule );
-  continuous::wrapIsotropicAngularDistribution( submodule, viewmodule );
   continuous::wrapLevelScatteringDistribution( submodule, viewmodule );
-  continuous::wrapMultiDistributionData( submodule, viewmodule );
   continuous::wrapNBodyPhaseSpaceDistribution( submodule, viewmodule );
   continuous::wrapOutgoingEnergyDistributionData( submodule, viewmodule );
-  continuous::wrapParameterData( submodule, viewmodule );
   continuous::wrapPolynomialFissionMultiplicity( submodule, viewmodule );
   continuous::wrapProbabilityTable( submodule, viewmodule );
   continuous::wrapSimpleMaxwellianFissionSpectrum( submodule, viewmodule );
   continuous::wrapTabulatedAngleEnergyDistribution( submodule, viewmodule );
-  continuous::wrapTabulatedAngularDistribution( submodule, viewmodule );
   continuous::wrapTabulatedAngularDistributionWithProbability( submodule, viewmodule );
   continuous::wrapTabulatedEnergyAngleDistribution( submodule, viewmodule );
-  continuous::wrapTabulatedEnergyDistribution( submodule, viewmodule );
   continuous::wrapTabulatedFissionMultiplicity( submodule, viewmodule );
   continuous::wrapTabulatedKalbachMannDistribution( submodule, viewmodule );
   continuous::wrapTabulatedMultiplicity( submodule, viewmodule );
@@ -117,6 +118,7 @@ void wrapContinuous( python::module& module, python::module& viewmodule ) {
   continuous::wrapGeneralEvaporationSpectrum( submodule, viewmodule );
   continuous::wrapKalbachMannDistributionData( submodule, viewmodule );
   continuous::wrapPhotonProductionCrossSectionData( submodule, viewmodule );
+  continuous::wrapMultiDistributionData( submodule, viewmodule );
   continuous::wrapAngularDistributionBlock( submodule, viewmodule );
   continuous::wrapCrossSectionBlock( submodule, viewmodule );
   continuous::wrapDelayedNeutronPrecursorBlock( submodule, viewmodule );

@@ -14,7 +14,8 @@ using OutgoingEnergyDistributionData = continuous::OutgoingEnergyDistributionDat
 using TabulatedEnergyDistribution = continuous::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const OutgoingEnergyDistributionData& );
+void verifyChunk( const OutgoingEnergyDistributionData&, const std::vector< double >& );
+OutgoingEnergyDistributionData makeDummyBlock();
 
 SCENARIO( "OutgoingEnergyDistributionData" ) {
 
@@ -39,16 +40,7 @@ SCENARIO( "OutgoingEnergyDistributionData" ) {
       THEN( "an OutgoingEnergyDistributionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -59,16 +51,58 @@ SCENARIO( "OutgoingEnergyDistributionData" ) {
       THEN( "an OutgoingEnergyDistributionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+    WHEN( "using the copy constructor" ) {
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      OutgoingEnergyDistributionData chunk( 21, xss.begin(), xss.end() );
+      OutgoingEnergyDistributionData copy( chunk );
+
+      THEN( "an OutgoingEnergyDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      OutgoingEnergyDistributionData chunk( 21, xss.begin(), xss.end() );
+      OutgoingEnergyDistributionData move( std::move( chunk ) );
+
+      THEN( "an OutgoingEnergyDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      OutgoingEnergyDistributionData chunk( 21, xss.begin(), xss.end() );
+      OutgoingEnergyDistributionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an OutgoingEnergyDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      OutgoingEnergyDistributionData chunk( 21, xss.begin(), xss.end() );
+      OutgoingEnergyDistributionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an OutgoingEnergyDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -85,7 +119,18 @@ std::vector< double > chunk() {
             1.000000E+00 };
 }
 
-void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
+void verifyChunk( const OutgoingEnergyDistributionData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 25 == chunk.length() );
@@ -164,4 +209,18 @@ void verifyChunk( const OutgoingEnergyDistributionData& chunk ) {
   CHECK( 2 == data2.cdf().size() );
   CHECK_THAT( 0., WithinRel( data2.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( data2.cdf().back() ) );
+}
+
+OutgoingEnergyDistributionData makeDummyBlock() {
+
+  std::vector< TabulatedEnergyDistribution > distributions  = {
+
+    TabulatedEnergyDistribution(
+        1e-5, 2, { 0.0, 1.84 }, { 2.364290E-01,0. }, { 0., 1. } ),
+    TabulatedEnergyDistribution(
+        10., 2, { 0.0, 1.84 }, { .5, .5 }, { 0., 1. } )
+  };
+  std::size_t locb = 15;
+
+  return { std::move( distributions ), locb };
 }

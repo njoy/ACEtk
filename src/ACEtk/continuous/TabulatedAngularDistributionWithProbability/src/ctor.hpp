@@ -3,6 +3,9 @@ TabulatedAngularDistributionWithProbability() = default;
 TabulatedAngularDistributionWithProbability( const TabulatedAngularDistributionWithProbability& ) = default;
 TabulatedAngularDistributionWithProbability( TabulatedAngularDistributionWithProbability&& ) = default;
 
+TabulatedAngularDistributionWithProbability& operator=( const TabulatedAngularDistributionWithProbability& ) = default;
+TabulatedAngularDistributionWithProbability& operator=( TabulatedAngularDistributionWithProbability&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -41,6 +44,3 @@ TabulatedAngularDistributionWithProbability( double energy,
                                              Iterator end ) :
   TabulatedAngularDistribution( energy, begin, end ),
   pdf_( probability ), cdf_( cumulative ) {}
-
-TabulatedAngularDistributionWithProbability& operator=( const TabulatedAngularDistributionWithProbability& ) = default;
-TabulatedAngularDistributionWithProbability& operator=( TabulatedAngularDistributionWithProbability&& ) = default;

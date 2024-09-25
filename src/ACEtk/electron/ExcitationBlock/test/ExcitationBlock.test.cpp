@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using ExcitationBlock = electron::ExcitationBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ExcitationBlock& );
+void verifyChunk( const ExcitationBlock&, const std::vector< double >& );
+ExcitationBlock makeDummyBlock();
 
 SCENARIO( "ExcitationBlock" ) {
 
@@ -26,22 +27,12 @@ SCENARIO( "ExcitationBlock" ) {
       std::vector< double > energies = { 10., 20., 200. };
       std::vector< double > loss = { 1., 2., 3. };
 
-      ExcitationBlock chunk( std::move( energies ),
-                                                std::move( loss ) );
+      ExcitationBlock chunk( std::move( energies ), std::move( loss ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ExcitationBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -49,19 +40,60 @@ SCENARIO( "ExcitationBlock" ) {
 
       ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ExcitationBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an ExcitationBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock move( std::move( chunk ) );
+
+      THEN( "an ExcitationBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ExcitationBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ExcitationBlock chunk( xss.begin(), xss.end(), 3 );
+      ExcitationBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ExcitationBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -73,7 +105,18 @@ std::vector< double > chunk() {
              1.,   2.,   3. };
 }
 
-void verifyChunk( const ExcitationBlock& chunk ) {
+void verifyChunk( const ExcitationBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );
@@ -92,4 +135,9 @@ void verifyChunk( const ExcitationBlock& chunk ) {
   CHECK_THAT(   1., WithinRel( chunk.excitationEnergyLoss()[0] ) );
   CHECK_THAT(   2., WithinRel( chunk.excitationEnergyLoss()[1] ) );
   CHECK_THAT(   3., WithinRel( chunk.excitationEnergyLoss()[2] ) );
+}
+
+ExcitationBlock makeDummyBlock() {
+
+  return { { 1., 2. }, { 3., 4. } };
 }

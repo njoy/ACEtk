@@ -3,6 +3,9 @@ EquiprobableOutgoingEnergyBins() = default;
 EquiprobableOutgoingEnergyBins( const EquiprobableOutgoingEnergyBins& ) = default;
 EquiprobableOutgoingEnergyBins( EquiprobableOutgoingEnergyBins&& ) = default;
 
+EquiprobableOutgoingEnergyBins& operator=( const EquiprobableOutgoingEnergyBins& ) = default;
+EquiprobableOutgoingEnergyBins& operator=( EquiprobableOutgoingEnergyBins&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -24,6 +27,3 @@ EquiprobableOutgoingEnergyBins( double incident,
 EquiprobableOutgoingEnergyBins( double incident, Iterator begin, Iterator end ) :
   Base( "EquiprobableOutgoingEnergyBins", begin, end ),
   incident_( incident ) {}
-
-EquiprobableOutgoingEnergyBins& operator=( const EquiprobableOutgoingEnergyBins& ) = default;
-EquiprobableOutgoingEnergyBins& operator=( EquiprobableOutgoingEnergyBins&& ) = default;

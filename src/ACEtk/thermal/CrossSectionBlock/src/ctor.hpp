@@ -3,6 +3,9 @@ CrossSectionBlock() = default;
 CrossSectionBlock( const CrossSectionBlock& ) = default;
 CrossSectionBlock( CrossSectionBlock&& ) = default;
 
+CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
+CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ CrossSectionBlock( std::vector< double > energies, std::vector< double > xs ) :
  */
 CrossSectionBlock( Iterator begin, Iterator end ) :
   ColumnData( "CrossSectionBlock", begin, end, 2 ) {}
-
-CrossSectionBlock& operator=( const CrossSectionBlock& ) = default;
-CrossSectionBlock& operator=( CrossSectionBlock&& ) = default;

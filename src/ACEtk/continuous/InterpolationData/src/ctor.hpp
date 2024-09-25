@@ -3,6 +3,9 @@ InterpolationData() = default;
 InterpolationData( const InterpolationData& ) = default;
 InterpolationData( InterpolationData&& ) = default;
 
+InterpolationData& operator=( const InterpolationData& ) = default;
+InterpolationData& operator=( InterpolationData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -26,6 +29,3 @@ InterpolationData( std::string name,
  */
 InterpolationData( std::string name, Iterator begin, Iterator end ) :
   ColumnData( std::move( name ), begin, end, 2 ) {}
-
-InterpolationData& operator=( const InterpolationData& ) = default;
-InterpolationData& operator=( InterpolationData&& ) = default;

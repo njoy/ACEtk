@@ -14,7 +14,8 @@ using EnergyDependentWattSpectrum = continuous::EnergyDependentWattSpectrum;
 using ParameterData = continuous::ParameterData;
 
 std::vector< double > chunk();
-void verifyChunk( const EnergyDependentWattSpectrum& );
+void verifyChunk( const EnergyDependentWattSpectrum&, const std::vector< double >& );
+EnergyDependentWattSpectrum makeDummyBlock();
 
 SCENARIO( "EnergyDependentWattSpectrum" ) {
 
@@ -34,16 +35,7 @@ SCENARIO( "EnergyDependentWattSpectrum" ) {
       THEN( "an EnergyDependentWattSpectrum can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,57 @@ SCENARIO( "EnergyDependentWattSpectrum" ) {
       THEN( "an EnergyDependentWattSpectrum can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an EnergyDependentWattSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum move( std::move( chunk ) );
+
+      THEN( "an EnergyDependentWattSpectrum can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyDependentWattSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EnergyDependentWattSpectrum chunk( xss.begin(), xss.end() );
+      EnergyDependentWattSpectrum move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyDependentWattSpectrum can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -76,7 +109,18 @@ std::vector< double > chunk() {
            1.5e+6 };
 }
 
-void verifyChunk( const EnergyDependentWattSpectrum& chunk ) {
+void verifyChunk( const EnergyDependentWattSpectrum& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 19 == chunk.length() );
@@ -148,4 +192,13 @@ void verifyChunk( const EnergyDependentWattSpectrum& chunk ) {
 
   CHECK( 1.5e+6 == chunk.U() );
   CHECK( 1.5e+6 == chunk.restrictionEnergy() );
+}
+
+EnergyDependentWattSpectrum makeDummyBlock() {
+
+  ParameterData a( { 1e-5, 20. }, { 1., 4. } );
+  ParameterData b( { 1e-5, 20. }, { 5., 7. } );
+  double energy = 1.5e+6;
+
+  return { std::move( a ), std::move( b ), energy };
 }

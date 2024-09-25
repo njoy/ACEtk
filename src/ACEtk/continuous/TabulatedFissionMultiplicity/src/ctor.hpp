@@ -18,6 +18,34 @@ TabulatedFissionMultiplicity( TabulatedFissionMultiplicity&& base ) :
   }
 }
 
+TabulatedFissionMultiplicity& operator=( const TabulatedFissionMultiplicity& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+TabulatedFissionMultiplicity& operator=( TabulatedFissionMultiplicity&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
 /**
  *  @brief Constructor
  *
@@ -58,16 +86,4 @@ TabulatedFissionMultiplicity( Iterator begin, Iterator end ) :
   Base( "TabulatedFissionMultiplicity", begin, end ) {
 
   this->generateBlocks();
-}
-
-TabulatedFissionMultiplicity& operator=( const TabulatedFissionMultiplicity& base ) {
-
-  new (this) TabulatedFissionMultiplicity( base );
-  return *this;
-}
-
-TabulatedFissionMultiplicity& operator=( TabulatedFissionMultiplicity&& base ) {
-
-  new (this) TabulatedFissionMultiplicity( std::move( base ) );
-  return *this;
 }

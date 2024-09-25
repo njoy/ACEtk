@@ -21,77 +21,71 @@ SCENARIO( "ThermalScatteringTable" ){
 
   GIVEN( "valid data for a ThermalScatteringTable - H2O" ) {
 
-    auto table = fromFile( "h-h2o.40t" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a ThermalScatteringTable from a table" ) {
 
+      auto table = fromFile( "h-h2o.40t" );
       ThermalScatteringTable chunk( std::move( table ) );
 
       THEN( "a ThermalScatteringTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkH2O( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
       } // THEN
+    } // WHEN
 
-      THEN( "the AW array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
 
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable copy( chunk );
 
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the NXS array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
 
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
 
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( move );
       } // THEN
+    } // WHEN
 
-      THEN( "the JXS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
 
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable copy( fromFile( "d-lid.10t" ) );
+      copy = chunk;
 
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
 
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "h-h2o.40t" ) );
+      ThermalScatteringTable move( fromFile( "d-lid.10t" ) );
+      move = std::move( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkH2O( move );
       } // THEN
     } // WHEN
 
     WHEN( "constructing a ThermalScatteringTable from its components" ) {
 
-      ThermalScatteringTable base( std::move( table ) );
+      ThermalScatteringTable base( fromFile( "h-h2o.40t" ) );
 
       ThermalScatteringTable chunk( base.header(), { 1001 },
                                     base.ITIE(), base.ITXE(),
@@ -102,133 +96,77 @@ SCENARIO( "ThermalScatteringTable" ){
             "tested" ) {
 
         verifyChunkH2O( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a ThermalScatteringTable - Zr-ZrH" ) {
 
-    auto table = fromFile( "zr-zrh.40t" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a ThermalScatteringTable from a table" ) {
 
+      auto table = fromFile( "zr-zrh.40t" );
       ThermalScatteringTable chunk( std::move( table ) );
 
       THEN( "a ThermalScatteringTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkZrZrH( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
       } // THEN
+    } // WHEN
 
-      THEN( "the AW array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
 
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable copy( chunk );
 
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the NXS array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
 
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
 
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( move );
       } // THEN
+    } // WHEN
 
-      THEN( "the JXS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
 
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable copy( fromFile( "d-lid.10t" ) );
+      copy = chunk;
 
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
 
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "zr-zrh.40t" ) );
+      ThermalScatteringTable move( fromFile( "d-lid.10t" ) );
+      move = std::move( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkZrZrH( move );
       } // THEN
     } // WHEN
 
     WHEN( "constructing a ThermalScatteringTable from its components" ) {
 
-      ThermalScatteringTable base( std::move( table ) );
+      ThermalScatteringTable base( fromFile( "zr-zrh.40t" ) );
 
       ThermalScatteringTable chunk( base.header(),
                                     { 40090, 40091, 40092, 40094, 40096, 40000 },
@@ -240,133 +178,77 @@ SCENARIO( "ThermalScatteringTable" ){
             "tested" ) {
 
         verifyChunkZrZrH( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a ThermalScatteringTable - Al" ) {
 
-    auto table = fromFile( "al-27.40t" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a ThermalScatteringTable from a table" ) {
 
+      auto table = fromFile( "al-27.40t" );
       ThermalScatteringTable chunk( std::move( table ) );
 
       THEN( "a ThermalScatteringTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkAl( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
       } // THEN
+    } // WHEN
 
-      THEN( "the AW array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
 
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable copy( chunk );
 
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the NXS array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
 
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
 
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( move );
       } // THEN
+    } // WHEN
 
-      THEN( "the JXS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
 
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable copy( fromFile( "d-lid.10t" ) );
+      copy = chunk;
 
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
 
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "al-27.40t" ) );
+      ThermalScatteringTable move( fromFile( "d-lid.10t" ) );
+      move = std::move( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkAl( move );
       } // THEN
     } // WHEN
 
     WHEN( "constructing a ThermalScatteringTable from its components" ) {
 
-      ThermalScatteringTable base( std::move( table ) );
+      ThermalScatteringTable base( fromFile( "al-27.40t" ) );
 
       ThermalScatteringTable chunk( base.header(), { 13027 },
                                     base.ITIE(), base.ITXE(),
@@ -377,133 +259,77 @@ SCENARIO( "ThermalScatteringTable" ){
             "tested" ) {
 
         verifyChunkAl( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a ThermalScatteringTable - D-LiD" ) {
 
-    auto table = fromFile( "d-lid.10t" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a ThermalScatteringTable from a table" ) {
 
+      auto table = fromFile( "d-lid.10t" );
       ThermalScatteringTable chunk( std::move( table ) );
 
       THEN( "a ThermalScatteringTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkDLiD( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
       } // THEN
+    } // WHEN
 
-      THEN( "the AW array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the copy constructor" ) {
 
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable copy( chunk );
 
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the NXS array is correct" ) {
+    WHEN( "constructing a ThermalScatteringTable using the move constructor" ) {
 
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable move( std::move( chunk ) );
 
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( move );
       } // THEN
+    } // WHEN
 
-      THEN( "the JXS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the copy assignment" ) {
 
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable copy( fromFile( "h-h2o.40t" ) );
+      copy = chunk;
 
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "assigning a ThermalScatteringTable using the move assignment" ) {
 
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+      ThermalScatteringTable chunk( fromFile( "d-lid.10t" ) );
+      ThermalScatteringTable move( fromFile( "h-h2o.40t" ) );
+      move = std::move( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a ThermalScatteringTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkDLiD( move );
       } // THEN
     } // WHEN
 
     WHEN( "constructing a ThermalScatteringTable from its components" ) {
 
-      ThermalScatteringTable base( std::move( table ) );
+      ThermalScatteringTable base( fromFile( "d-lid.10t" ) );
 
       ThermalScatteringTable chunk( base.header(), { 1002 },
                                     base.ITIE(), base.ITXE(),
@@ -514,62 +340,58 @@ SCENARIO( "ThermalScatteringTable" ){
             "tested" ) {
 
         verifyChunkDLiD( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 } // SCENARIO
 
 void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
+
+  auto table = fromFile( "h-h2o.40t" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // ThermalScatteringTable interface
 
   CHECK( "h-h2o.40t" == chunk.ZAID() );
   CHECK_THAT( 2.53e-8, WithinRel( chunk.temperature() ) );
@@ -630,6 +452,52 @@ void verifyChunkH2O( const ThermalScatteringTable& chunk ) {
 }
 
 void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
+
+  auto table = fromFile( "zr-zrh.40t" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // ThermalScatteringTable interface
 
   CHECK( "zr-zrh.40t" == chunk.ZAID() );
   CHECK_THAT( 2.5507e-8, WithinRel( chunk.temperature() ) );
@@ -711,6 +579,52 @@ void verifyChunkZrZrH( const ThermalScatteringTable& chunk ) {
 
 void verifyChunkAl( const ThermalScatteringTable& chunk ) {
 
+  auto table = fromFile( "al-27.40t" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // ThermalScatteringTable interface
+
   CHECK( "al-27.40t" == chunk.ZAID() );
   CHECK_THAT( 2.53e-8, WithinRel( chunk.temperature() ) );
 
@@ -781,6 +695,52 @@ void verifyChunkAl( const ThermalScatteringTable& chunk ) {
 }
 
 void verifyChunkDLiD( const ThermalScatteringTable& chunk ) {
+
+  auto table = fromFile( "d-lid.10t" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // ThermalScatteringTable interface
 
   CHECK( "d-lid.10t" == chunk.ZAID() );
   CHECK_THAT( 3.4469e-8, WithinRel( chunk.temperature() ) );

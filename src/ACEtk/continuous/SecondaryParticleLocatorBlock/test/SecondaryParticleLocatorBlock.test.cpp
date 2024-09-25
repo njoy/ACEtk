@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using SecondaryParticleLocatorBlock = continuous::SecondaryParticleLocatorBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleLocatorBlock& );
+void verifyChunk( const SecondaryParticleLocatorBlock&, const std::vector< double >& );
+SecondaryParticleLocatorBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleLocatorBlock" ) {
 
@@ -34,16 +35,7 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -54,16 +46,57 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 2 );
+      SecondaryParticleLocatorBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an SecondaryParticleLocatorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 2 );
+      SecondaryParticleLocatorBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleLocatorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 2 );
+      SecondaryParticleLocatorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleLocatorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 2 );
+      SecondaryParticleLocatorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleLocatorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -75,7 +108,18 @@ std::vector< double > chunk() {
            101, 102, 103, 104, 105, 106, 107, 108, 109, 110 };
 }
 
-void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
+void verifyChunk( const SecondaryParticleLocatorBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 20 == chunk.length() );
@@ -125,4 +169,9 @@ void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
   CHECK( 108 == chunk.LDLWH( 2 ) );
   CHECK( 109 == chunk.DLWH( 2 ) );
   CHECK( 110 == chunk.YP( 2 ) );
+}
+
+SecondaryParticleLocatorBlock makeDummyBlock() {
+
+  return { { { 201, 202, 203, 204, 205, 206, 207, 208, 209, 210 } } };
 }

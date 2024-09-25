@@ -20,6 +20,36 @@ EnergyDependentWattSpectrum( EnergyDependentWattSpectrum&& base ) :
   }
 }
 
+EnergyDependentWattSpectrum& operator=( const EnergyDependentWattSpectrum& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->a_ = base.a_;
+    this->b_ = base.b_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+EnergyDependentWattSpectrum& operator=( EnergyDependentWattSpectrum&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->a_ = std::move( base.a_ );
+    this->b_ = std::move( base.b_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
 /**
  *  @brief Constructor
  *
@@ -55,16 +85,4 @@ EnergyDependentWattSpectrum( Iterator begin, Iterator end ) :
   std::size_t neb = static_cast< std::size_t >( this->IXSS( size + 1 + 2 * nrb + 1 ) );
   verifySize( this->begin(), this->end(), nra, nea, nrb, neb );
   this->generateBlocks();
-}
-
-EnergyDependentWattSpectrum& operator=( const EnergyDependentWattSpectrum& base ) {
-
-  new (this) EnergyDependentWattSpectrum( base );
-  return *this;
-}
-
-EnergyDependentWattSpectrum& operator=( EnergyDependentWattSpectrum&& base ) {
-
-  new (this) EnergyDependentWattSpectrum( std::move( base ) );
-  return *this;
 }

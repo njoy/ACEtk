@@ -71,6 +71,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
         tools::overload{
 
           [] ( const MultiDistributionData& ) { /* nothing to do here */ },
+          [] ( const UndefinedDistribution& ) { /* nothing to do here */ },
           [ &xss, &idat, locator ] ( const auto& value ) {
 
             idat = locator + 3 + 1 + 5;
@@ -139,6 +140,7 @@ generateXSS( std::vector< EnergyDistributionData >&& distributions,
                       idat );
             xss.insert( xss.end(), temp.begin(), temp.end() );
           },
+          [] ( const UndefinedDistribution& ) { /* nothing to do here */ },
           [ &xss ] ( const auto& value ) {
 
             xss.insert( xss.end(), value.begin(), value.end() );

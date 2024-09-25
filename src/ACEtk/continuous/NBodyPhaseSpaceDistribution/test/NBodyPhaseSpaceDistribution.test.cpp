@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using NBodyPhaseSpaceDistribution = continuous::NBodyPhaseSpaceDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const NBodyPhaseSpaceDistribution& );
+void verifyChunk( const NBodyPhaseSpaceDistribution&, const std::vector< double >& );
+NBodyPhaseSpaceDistribution makeDummyBlock();
 
 SCENARIO( "NBodyPhaseSpaceDistribution" ) {
 
@@ -41,37 +42,69 @@ SCENARIO( "NBodyPhaseSpaceDistribution" ) {
       THEN( "a NBodyPhaseSpaceDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
 
-      NBodyPhaseSpaceDistribution chunk( xss.begin(), xss.end(),
-                                         2.249999e-3, 20. );
+      NBodyPhaseSpaceDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
 
       THEN( "a NBodyPhaseSpaceDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+    WHEN( "using the copy constructor" ) {
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      NBodyPhaseSpaceDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      NBodyPhaseSpaceDistribution copy( chunk );
+
+      THEN( "an NBodyPhaseSpaceDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      NBodyPhaseSpaceDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      NBodyPhaseSpaceDistribution move( std::move( chunk ) );
+
+      THEN( "an NBodyPhaseSpaceDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      NBodyPhaseSpaceDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      NBodyPhaseSpaceDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an NBodyPhaseSpaceDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      NBodyPhaseSpaceDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      NBodyPhaseSpaceDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an NBodyPhaseSpaceDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -86,7 +119,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,   3.30000000000E-01,   6.60000000000E-01,   1.00000000000E+00  };
 }
 
-void verifyChunk( const NBodyPhaseSpaceDistribution& chunk ) {
+void verifyChunk( const NBodyPhaseSpaceDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 16 == chunk.length() );
@@ -117,4 +161,9 @@ void verifyChunk( const NBodyPhaseSpaceDistribution& chunk ) {
   CHECK_THAT( .33, WithinRel( chunk.cdf()[1] ) );
   CHECK_THAT( .66, WithinRel( chunk.cdf()[2] ) );
   CHECK_THAT( 1., WithinRel( chunk.cdf()[3] ) );
+}
+
+NBodyPhaseSpaceDistribution makeDummyBlock() {
+
+  return { 1., 2., 3, 4., 2, { 0., 1. },  { 1., 1., }, { 0., 1. } };
 }

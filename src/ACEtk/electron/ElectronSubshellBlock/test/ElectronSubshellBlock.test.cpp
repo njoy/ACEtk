@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using ElectronSubshellBlock = electron::ElectronSubshellBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ElectronSubshellBlock& );
+void verifyChunk( const ElectronSubshellBlock&, const std::vector< double >& );
+ElectronSubshellBlock makeDummyBlock();
 
 SCENARIO( "ElectronSubshellBlock" ) {
 
@@ -33,24 +34,15 @@ SCENARIO( "ElectronSubshellBlock" ) {
       std::vector< unsigned int > transitions = { 12, 5, 3, 2, 0 };
 
       ElectronSubshellBlock chunk( std::move( designators ),
-                                              std::move( electrons ),
-                                              std::move( energies ),
-                                              std::move( probabilities ),
-                                              std::move( transitions ) );
+                                   std::move( electrons ),
+                                   std::move( energies ),
+                                   std::move( probabilities ),
+                                   std::move( transitions ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ElectronSubshellBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -58,19 +50,60 @@ SCENARIO( "ElectronSubshellBlock" ) {
 
       ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a ElectronSubshellBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an ElectronSubshellBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock move( std::move( chunk ) );
+
+      THEN( "an ElectronSubshellBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ElectronSubshellBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ElectronSubshellBlock chunk( xss.begin(), xss.end(), 5 );
+      ElectronSubshellBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ElectronSubshellBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -87,7 +120,18 @@ std::vector< double > chunk() {
            5.000000000000E+00, 3.000000000000E+00, 2.000000000000E+00, 0.000000000000E+00 };
 }
 
-void verifyChunk( const ElectronSubshellBlock& chunk ) {
+void verifyChunk( const ElectronSubshellBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 25 == chunk.length() );
@@ -180,4 +224,9 @@ void verifyChunk( const ElectronSubshellBlock& chunk ) {
   CHECK(  3 == chunk.numberTransitions( 3 ) );
   CHECK(  2 == chunk.numberTransitions( 4 ) );
   CHECK(  0 == chunk.numberTransitions( 5 ) );
+}
+
+ElectronSubshellBlock makeDummyBlock() {
+
+  return { { 1 }, { 2 }, { 1. }, { 3. }, { 5 } };
 }

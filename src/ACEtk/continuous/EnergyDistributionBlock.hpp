@@ -22,6 +22,7 @@
 #include "ACEtk/continuous/EnergyAngleDistributionData.hpp"
 #include "ACEtk/continuous/AngleEnergyDistributionData.hpp"
 #include "ACEtk/continuous/MultiDistributionData.hpp"
+#include "ACEtk/continuous/UndefinedDistribution.hpp"
 #include "ACEtk/continuous/TabulatedMultiplicity.hpp"
 #include "ACEtk/ReferenceFrame.hpp"
 
@@ -43,7 +44,8 @@ using EnergyDistributionData = std::variant< EquiprobableOutgoingEnergyBinData,
                                              TwoBodyTransferDistribution,
                                              EnergyAngleDistributionData,
                                              AngleEnergyDistributionData,
-                                             MultiDistributionData >;
+                                             MultiDistributionData,
+                                             UndefinedDistribution >;
 using MultiplicityData = std::variant< unsigned int, TabulatedMultiplicity >;
 
 /**

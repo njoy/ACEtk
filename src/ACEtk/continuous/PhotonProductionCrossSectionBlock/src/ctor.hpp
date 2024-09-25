@@ -3,6 +3,9 @@ PhotonProductionCrossSectionBlock() = default;
 PhotonProductionCrossSectionBlock( const PhotonProductionCrossSectionBlock& ) = default;
 PhotonProductionCrossSectionBlock( PhotonProductionCrossSectionBlock&& ) = default;
 
+PhotonProductionCrossSectionBlock& operator=( const PhotonProductionCrossSectionBlock& ) = default;
+PhotonProductionCrossSectionBlock& operator=( PhotonProductionCrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -22,6 +25,3 @@ PhotonProductionCrossSectionBlock( std::vector< PhotonProductionData > xs ) :
 PhotonProductionCrossSectionBlock( Iterator lsigp, Iterator sigp, Iterator end,
                                    unsigned int ntr ) :
   BlockWithLocators( "SIGP", lsigp, sigp, end, ntr ) {}
-
-PhotonProductionCrossSectionBlock& operator=( const PhotonProductionCrossSectionBlock& ) = default;
-PhotonProductionCrossSectionBlock& operator=( PhotonProductionCrossSectionBlock&& ) = default;

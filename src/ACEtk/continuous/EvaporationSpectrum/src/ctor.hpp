@@ -3,6 +3,9 @@ EvaporationSpectrum() = default;
 EvaporationSpectrum( const EvaporationSpectrum& ) = default;
 EvaporationSpectrum( EvaporationSpectrum&& ) = default;
 
+EvaporationSpectrum& operator=( const EvaporationSpectrum& ) = default;
+EvaporationSpectrum& operator=( EvaporationSpectrum&& base ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -50,6 +53,3 @@ EvaporationSpectrum( Iterator begin, Iterator end ) :
   base::EvaporationSpectrum( "EvaporationSpectrum",
                              EnergyDistributionType::Evaporation,
                              begin, end ) {}
-
-EvaporationSpectrum& operator=( const EvaporationSpectrum& ) = default;
-EvaporationSpectrum& operator=( EvaporationSpectrum&& base ) = default;

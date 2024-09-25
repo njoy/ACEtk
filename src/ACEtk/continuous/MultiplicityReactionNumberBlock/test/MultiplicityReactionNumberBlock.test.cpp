@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using MultiplicityReactionNumberBlock = continuous::MultiplicityReactionNumberBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const MultiplicityReactionNumberBlock& );
+void verifyChunk( const MultiplicityReactionNumberBlock&, const std::vector< double >& );
+MultiplicityReactionNumberBlock makeDummyBlock();
 
 SCENARIO( "MultiplicityReactionNumberBlock" ) {
 
@@ -30,16 +31,7 @@ SCENARIO( "MultiplicityReactionNumberBlock" ) {
       THEN( "a MultiplicityReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,16 +42,57 @@ SCENARIO( "MultiplicityReactionNumberBlock" ) {
       THEN( "a MultiplicityReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an MultiplicityReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock move( std::move( chunk ) );
+
+      THEN( "an MultiplicityReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an MultiplicityReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      MultiplicityReactionNumberBlock chunk( xss.begin(), xss.end() );
+      MultiplicityReactionNumberBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an MultiplicityReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -70,7 +103,18 @@ std::vector< double > chunk() {
   return { 3, 102, 204, 444 };
 }
 
-void verifyChunk( const MultiplicityReactionNumberBlock& chunk ) {
+void verifyChunk( const MultiplicityReactionNumberBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 4 == chunk.length() );
@@ -98,4 +142,9 @@ void verifyChunk( const MultiplicityReactionNumberBlock& chunk ) {
   CHECK( 3 == chunk.index(444) );
 
   CHECK_THROWS( chunk.index(1) );
+}
+
+MultiplicityReactionNumberBlock makeDummyBlock() {
+
+  return { { 103 } };
 }

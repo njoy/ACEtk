@@ -14,7 +14,8 @@ using EnergyDistributionBlock = electron::EnergyDistributionBlock;
 using TabulatedEnergyDistribution = electron::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const EnergyDistributionBlock& );
+void verifyChunk( const EnergyDistributionBlock&, const std::vector< double >& );
+EnergyDistributionBlock makeDummyBlock();
 
 SCENARIO( "EnergyDistributionBlock" ) {
 
@@ -36,16 +37,7 @@ SCENARIO( "EnergyDistributionBlock" ) {
 
       THEN( "a EnergyDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -55,16 +47,57 @@ SCENARIO( "EnergyDistributionBlock" ) {
 
       THEN( "a EnergyDistributionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an EnergyDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EnergyDistributionBlock chunk( xss.begin(), xss.end(), 4 );
+      EnergyDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -84,7 +117,18 @@ std::vector< double > chunk() {
     1e-11, 0.999, 0., 1. };
 }
 
-void verifyChunk( const EnergyDistributionBlock& chunk ) {
+void verifyChunk( const EnergyDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 34 == chunk.length() );
@@ -119,4 +163,15 @@ void verifyChunk( const EnergyDistributionBlock& chunk ) {
   distribution = chunk.distribution(4);
   CHECK( 1. == distribution.energy() );
   CHECK( 2 == distribution.numberOutgoingEnergies() );
+}
+
+EnergyDistributionBlock makeDummyBlock() {
+
+  std::vector< TabulatedEnergyDistribution > distributions = {
+
+    TabulatedEnergyDistribution( 1e-8, { 1e-12, 1 }, { 0., 1. } ),
+    TabulatedEnergyDistribution(   1., { 1e-11, 2 }, { 0., 1. } )
+  };
+
+  return { std::move( distributions ) };
 }

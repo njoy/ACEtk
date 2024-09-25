@@ -1,5 +1,7 @@
 void generateBlocks() {
 
+  this->data_.clear();
+
   auto ne = this->NE();
   auto nc = this->NC();
   if ( this->IFENG() < 2 ) {

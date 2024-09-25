@@ -3,6 +3,9 @@ KalbachMannDistributionData() = default;
 KalbachMannDistributionData( const KalbachMannDistributionData& ) = default;
 KalbachMannDistributionData( KalbachMannDistributionData&& ) = default;
 
+KalbachMannDistributionData& operator=( const KalbachMannDistributionData& ) = default;
+KalbachMannDistributionData& operator=( KalbachMannDistributionData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -40,6 +43,3 @@ KalbachMannDistributionData(
  */
 KalbachMannDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
   DistributionData( "KalbachMannDistributionData", locb, begin, end ) {}
-
-KalbachMannDistributionData& operator=( const KalbachMannDistributionData& ) = default;
-KalbachMannDistributionData& operator=( KalbachMannDistributionData&& ) = default;

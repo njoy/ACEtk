@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using DelayedNeutronPrecursorData = continuous::DelayedNeutronPrecursorData;
 
 std::vector< double > chunk();
-void verifyChunk( const DelayedNeutronPrecursorData& );
+void verifyChunk( const DelayedNeutronPrecursorData&, const std::vector< double >& );
+DelayedNeutronPrecursorData makeDummyBlock();
 
 SCENARIO( "DelayedNeutronPrecursorData" ) {
 
@@ -35,16 +36,7 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
       THEN( "a DelayedNeutronPrecursorData can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -55,16 +47,57 @@ SCENARIO( "DelayedNeutronPrecursorData" ) {
       THEN( "a DelayedNeutronPrecursorData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an DelayedNeutronPrecursorData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData move( std::move( chunk ) );
+
+      THEN( "an DelayedNeutronPrecursorData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DelayedNeutronPrecursorData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DelayedNeutronPrecursorData chunk( xss.begin(), xss.end(), 1 );
+      DelayedNeutronPrecursorData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DelayedNeutronPrecursorData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -77,7 +110,18 @@ std::vector< double > chunk() {
             2.50000000000E-02,   1.00000000000E+00 };
 }
 
-void verifyChunk( const DelayedNeutronPrecursorData& chunk ) {
+void verifyChunk( const DelayedNeutronPrecursorData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 9 == chunk.length() );
@@ -114,4 +158,9 @@ void verifyChunk( const DelayedNeutronPrecursorData& chunk ) {
   CHECK_THAT( 1.2e-3, WithinRel( chunk.probabilities()[0] ) );
   CHECK_THAT( 2.5e-2, WithinRel( chunk.probabilities()[1] ) );
   CHECK_THAT( 1., WithinRel( chunk.probabilities()[2] ) );
+}
+
+DelayedNeutronPrecursorData makeDummyBlock() {
+
+  return { 1, 1e-4, { 1., 2. }, { 3., 4. } };
 }

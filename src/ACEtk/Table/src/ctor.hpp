@@ -21,6 +21,9 @@ public:
 Table( const Table& ) = default;
 Table( Table&& ) = default;
 
+Table& operator=( const Table& ) = default;
+Table& operator=( Table&& ) = default;
+
 /**
  *  @brief Constructor (from a buffer)
  *

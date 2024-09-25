@@ -3,6 +3,9 @@ HeatingNumbersBlock() = default;
 HeatingNumbersBlock( const HeatingNumbersBlock& ) = default;
 HeatingNumbersBlock( HeatingNumbersBlock&& ) = default;
 
+HeatingNumbersBlock& operator=( const HeatingNumbersBlock& ) = default;
+HeatingNumbersBlock& operator=( HeatingNumbersBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -21,6 +24,3 @@ HeatingNumbersBlock( std::vector< double > heating ) :
  */
 HeatingNumbersBlock( Iterator begin, Iterator end, unsigned int nes ) :
   ArrayData( "LHNM", begin, end, nes, 1 ) {}
-
-HeatingNumbersBlock& operator=( const HeatingNumbersBlock& ) = default;
-HeatingNumbersBlock& operator=( HeatingNumbersBlock&& ) = default;

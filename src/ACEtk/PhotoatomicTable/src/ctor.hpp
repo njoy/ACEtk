@@ -51,7 +51,12 @@ PhotoatomicTable( PhotoatomicTable&& table ) :
  */
 PhotoatomicTable& operator=( const PhotoatomicTable& base ) {
 
-  new (this) PhotoatomicTable( base );
+  if ( this != &base ) {
+
+    Table::operator=( base );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 
@@ -62,7 +67,12 @@ PhotoatomicTable& operator=( const PhotoatomicTable& base ) {
  */
 PhotoatomicTable& operator=( PhotoatomicTable&& base ) {
 
-  new (this) PhotoatomicTable( std::move( base ) );
+  if ( this != &base ) {
+
+    Table::operator=( std::move( base ) );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 

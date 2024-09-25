@@ -3,6 +3,9 @@ PrincipalCrossSectionBlock() = default;
 PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
 PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
 
+PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
+PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -35,6 +38,3 @@ PrincipalCrossSectionBlock(
 PrincipalCrossSectionBlock( Iterator begin, Iterator end,
                                       unsigned int nssh, unsigned int ne ) :
   ArrayData( "ESZE", begin, end, ne, 6 + nssh ) {}
-
-PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
-PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;

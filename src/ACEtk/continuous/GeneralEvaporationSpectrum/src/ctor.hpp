@@ -20,6 +20,36 @@ GeneralEvaporationSpectrum( GeneralEvaporationSpectrum&& base ) :
   }
 }
 
+GeneralEvaporationSpectrum& operator=( const GeneralEvaporationSpectrum& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->tabulated_ = base.tabulated_;
+    this->bins_ = base.bins_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+GeneralEvaporationSpectrum& operator=( GeneralEvaporationSpectrum&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->tabulated_ = std::move( base.tabulated_ );
+    this->bins_ = std::move( base.bins_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
 /**
  *  @brief Constructor
  *
@@ -73,16 +103,4 @@ GeneralEvaporationSpectrum( Iterator begin, Iterator end ) :
   std::size_t nb = static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 + 2 * ne + 1 ) );
   verifySize( this->begin(), this->end(), nr, ne, nb );
   this->generateBlocks();
-}
-
-GeneralEvaporationSpectrum& operator=( const GeneralEvaporationSpectrum& base ) {
-
-  new (this) GeneralEvaporationSpectrum( base );
-  return *this;
-}
-
-GeneralEvaporationSpectrum& operator=( GeneralEvaporationSpectrum&& base ) {
-
-  new (this) GeneralEvaporationSpectrum( std::move( base ) );
-  return *this;
 }

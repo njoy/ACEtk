@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using SecondaryParticleLocatorBlock = photonuclear::SecondaryParticleLocatorBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleLocatorBlock& );
+void verifyChunk( const SecondaryParticleLocatorBlock&, const std::vector< double >& );
+SecondaryParticleLocatorBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleLocatorBlock" ) {
 
@@ -57,22 +58,13 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
       };
 
       SecondaryParticleLocatorBlock chunk( std::move( types ),
-                                                       std::move( numbers ),
-                                                       std::move( locators ) );
+                                           std::move( numbers ),
+                                           std::move( locators ) );
 
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -83,16 +75,57 @@ SCENARIO( "SecondaryParticleLocatorBlock" ) {
       THEN( "a SecondaryParticleLocatorBlock can be constructed and members "
             "can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an SecondaryParticleLocatorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleLocatorBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleLocatorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleLocatorBlock chunk( xss.begin(), xss.end(), 7 );
+      SecondaryParticleLocatorBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleLocatorBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -127,7 +160,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
+void verifyChunk( const SecondaryParticleLocatorBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 84 == chunk.length() );
@@ -217,4 +261,9 @@ void verifyChunk( const SecondaryParticleLocatorBlock& chunk ) {
   CHECK( 7 == chunk.index( 34 ) );
 
   CHECK_THROWS( chunk.index( 3 ) );
+}
+
+SecondaryParticleLocatorBlock makeDummyBlock() {
+
+  return { { 1 }, { 2 }, { { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } } };
 }

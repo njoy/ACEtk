@@ -3,6 +3,9 @@ SecondaryParticleProductionCrossSectionBlock() = default;
 SecondaryParticleProductionCrossSectionBlock( const SecondaryParticleProductionCrossSectionBlock& ) = default;
 SecondaryParticleProductionCrossSectionBlock( SecondaryParticleProductionCrossSectionBlock&& ) = default;
 
+SecondaryParticleProductionCrossSectionBlock& operator=( const SecondaryParticleProductionCrossSectionBlock& ) = default;
+SecondaryParticleProductionCrossSectionBlock& operator=( SecondaryParticleProductionCrossSectionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -22,6 +25,3 @@ SecondaryParticleProductionCrossSectionBlock( std::vector< TabulatedSecondaryPar
 SecondaryParticleProductionCrossSectionBlock( Iterator lsigh, Iterator sigh,
                                               Iterator end, unsigned int np ) :
   BlockWithLocators( "SIGH", lsigh, sigh, end, np ) {}
-
-SecondaryParticleProductionCrossSectionBlock& operator=( const SecondaryParticleProductionCrossSectionBlock& ) = default;
-SecondaryParticleProductionCrossSectionBlock& operator=( SecondaryParticleProductionCrossSectionBlock&& ) = default;

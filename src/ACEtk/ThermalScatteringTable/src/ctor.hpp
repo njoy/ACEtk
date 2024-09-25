@@ -51,7 +51,12 @@ ThermalScatteringTable( ThermalScatteringTable&& table ) :
  */
 ThermalScatteringTable& operator=( const ThermalScatteringTable& base ) {
 
-  new (this) ThermalScatteringTable( base );
+  if ( this != &base ) {
+
+    Table::operator=( base );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 
@@ -62,7 +67,12 @@ ThermalScatteringTable& operator=( const ThermalScatteringTable& base ) {
  */
 ThermalScatteringTable& operator=( ThermalScatteringTable&& base ) {
 
-  new (this) ThermalScatteringTable( std::move( base ) );
+  if ( this != &base ) {
+
+    Table::operator=( std::move( base ) );
+    this->verifyType();
+    this->generateBlocks();
+  }
   return *this;
 }
 

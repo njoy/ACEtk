@@ -19,7 +19,8 @@ using TabulatedAngularDistribution = continuous::TabulatedAngularDistribution;
 using IsotropicAngularDistribution = continuous::IsotropicAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const SecondaryParticleAngularDistributionBlock& );
+void verifyChunk( const SecondaryParticleAngularDistributionBlock&, const std::vector< double >& );
+SecondaryParticleAngularDistributionBlock makeDummyBlock();
 
 SCENARIO( "SecondaryParticleAngularDistributionBlock" ) {
 
@@ -51,16 +52,7 @@ SCENARIO( "SecondaryParticleAngularDistributionBlock" ) {
        THEN( "a SecondaryParticleAngularDistributionBlock can be constructed "
              "and members can be tested" ) {
 
-         verifyChunk( chunk );
-       } // THEN
-
-       THEN( "the XSS array is correct" ) {
-
-         auto xss_chunk = chunk.XSS();
-         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-           CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-         }
+         verifyChunk( chunk, xss );
        } // THEN
      } // WHEN
 
@@ -71,18 +63,59 @@ SCENARIO( "SecondaryParticleAngularDistributionBlock" ) {
        THEN( "a SecondaryParticleAngularDistributionBlock can be constructed "
              "and members can be tested" ) {
 
-         verifyChunk( chunk );
-       } // THEN
-
-       THEN( "the XSS array is correct" ) {
-
-         auto xss_chunk = chunk.XSS();
-         for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-           CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-         }
+         verifyChunk( chunk, xss );
        } // THEN
      } // WHEN
+
+    WHEN( "using the copy constructor" ) {
+
+      SecondaryParticleAngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 4 );
+      SecondaryParticleAngularDistributionBlock copy( chunk );
+
+      THEN( "an SecondaryParticleAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      SecondaryParticleAngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 4 );
+      SecondaryParticleAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an SecondaryParticleAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      SecondaryParticleAngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 4 );
+      SecondaryParticleAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an SecondaryParticleAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      SecondaryParticleAngularDistributionBlock chunk( xss.begin(), xss.begin() + 4, xss.end(), 4 );
+      SecondaryParticleAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an SecondaryParticleAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
   } // GIVEN
 } // SCENARIO
 
@@ -111,7 +144,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const SecondaryParticleAngularDistributionBlock& chunk ) {
+void verifyChunk( const SecondaryParticleAngularDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 54 == chunk.length() );
@@ -189,4 +233,9 @@ void verifyChunk( const SecondaryParticleAngularDistributionBlock& chunk ) {
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data4.distribution(1) ) );
   CHECK( true == std::holds_alternative< IsotropicAngularDistribution >( data4.distribution(2) ) );
   CHECK( true == std::holds_alternative< TabulatedAngularDistribution >( data4.distribution(3) ) );
+}
+
+SecondaryParticleAngularDistributionBlock makeDummyBlock() {
+
+  return { { DistributionGivenElsewhere(), FullyIsotropicDistribution() } };
 }

@@ -3,6 +3,9 @@ TabulatedAngularDistribution() = default;
 TabulatedAngularDistribution( const TabulatedAngularDistribution& ) = default;
 TabulatedAngularDistribution( TabulatedAngularDistribution&& ) = default;
 
+TabulatedAngularDistribution& operator=( const TabulatedAngularDistribution& ) = default;
+TabulatedAngularDistribution& operator=( TabulatedAngularDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -30,6 +33,3 @@ TabulatedAngularDistribution( double energy,
                               unsigned int la ) :
   ArrayData( "TabulatedAngularDistribution", begin, end, la, 2 ),
   energy_( energy ) {}
-
-TabulatedAngularDistribution& operator=( const TabulatedAngularDistribution& ) = default;
-TabulatedAngularDistribution& operator=( TabulatedAngularDistribution&& ) = default;

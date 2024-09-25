@@ -30,77 +30,71 @@ SCENARIO( "ContinuousEnergyTable" ) {
 
   GIVEN( "valid data for a ContinuousEnergyTable - U235" ) {
 
-    auto table = fromFile( "92235.710nc" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a ContinuousEnergyTable from a table" ) {
 
+      auto table = fromFile( "92235.710nc" );
       ContinuousEnergyTable chunk( std::move( table ) );
 
       THEN( "a ContinuousEnergyTable can be constructed and members can be "
             "tested" ) {
 
         verifyChunkU235( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
       } // THEN
+    } // WHEN
 
-      THEN( "the AW array is correct" ) {
+    WHEN( "constructing a ContinuousEnergyTable using the copy constructor" ) {
 
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92235.710nc" ) );
+      ContinuousEnergyTable copy( chunk );
 
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkU235( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the NXS array is correct" ) {
+    WHEN( "constructing a ContinuousEnergyTable using the move constructor" ) {
 
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92235.710nc" ) );
+      ContinuousEnergyTable move( std::move( chunk ) );
 
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkU235( move );
       } // THEN
+    } // WHEN
 
-      THEN( "the JXS array is correct" ) {
+    WHEN( "assigning a ContinuousEnergyTable using the copy assignment" ) {
 
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92235.710nc" ) );
+      ContinuousEnergyTable copy( fromFile( "2003.710nc" ) );
+      copy = chunk;
 
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkU235( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "assigning a ContinuousEnergyTable using the move assignment" ) {
 
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92235.710nc" ) );
+      ContinuousEnergyTable move( fromFile( "2003.710nc" ) );
+      move = std::move( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkU235( move );
       } // THEN
     } // WHEN
 
     WHEN( "constructing a ContinuousEnergyTable from its components" ) {
 
-      ContinuousEnergyTable base( std::move( table ) );
+      ContinuousEnergyTable base( fromFile( "92235.710nc" ) );
 
       ContinuousEnergyTable chunk( 92, 235, 0, base.header(),
                                    base.ESZ(), base.NU(), base.DNU(),
@@ -118,132 +112,76 @@ SCENARIO( "ContinuousEnergyTable" ) {
             "tested" ) {
 
         verifyChunkU235( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "valid data for a ContinuousEnergyTable - He3" ) {
 
-    auto table = fromFile( "2003.710nc" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a ContinuousEnergyTable from a table" ) {
 
+      auto table = fromFile( "2003.710nc" );
       ContinuousEnergyTable chunk( std::move( table ) );
 
       THEN( "a ContinuousEnergyTable can be constructed and members can be tested" ) {
 
         verifyChunkHe3( chunk );
-      }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
       } // THEN
+    } // WHEN
 
-      THEN( "the AW array is correct" ) {
+    WHEN( "constructing a ContinuousEnergyTable using the copy constructor" ) {
 
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "2003.710nc" ) );
+      ContinuousEnergyTable copy( chunk );
 
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkHe3( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the NXS array is correct" ) {
+    WHEN( "constructing a ContinuousEnergyTable using the move constructor" ) {
 
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "2003.710nc" ) );
+      ContinuousEnergyTable move( std::move( chunk ) );
 
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkHe3( move );
       } // THEN
+    } // WHEN
 
-      THEN( "the JXS array is correct" ) {
+    WHEN( "assigning a ContinuousEnergyTable using the copy assignment" ) {
 
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "2003.710nc" ) );
+      ContinuousEnergyTable copy( fromFile( "92235.710nc" ) );
+      copy = chunk;
 
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkHe3( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "assigning a ContinuousEnergyTable using the move assignment" ) {
 
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "2003.710nc" ) );
+      ContinuousEnergyTable move( fromFile( "92235.710nc" ) );
+      move = std::move( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkHe3( move );
       } // THEN
     } // WHEN
 
     WHEN( "constructing a ContinuousEnergyTable from its components" ) {
 
-      ContinuousEnergyTable base( std::move( table ) );
+      ContinuousEnergyTable base( fromFile( "2003.710nc" ) );
 
       std::optional< std::vector< continuous::HPD > > hpd = std::vector< continuous::HPD >{};
       std::optional< std::vector< continuous::MTRH > > mtrh = std::vector< continuous::MTRH >{};
@@ -279,56 +217,6 @@ SCENARIO( "ContinuousEnergyTable" ) {
 
         verifyChunkHe3( chunk );
       }
-
-      THEN( "the IZ array is correct" ) {
-
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
-
-          CHECK( iz[i] == iz_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the AW array is correct" ) {
-
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
-
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
-      } // THEN
-
-      THEN( "the NXS array is correct" ) {
-
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
-
-          CHECK( nxs[i] == nxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the JXS array is correct" ) {
-
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
-
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
-      } // THEN
     } // WHEN
   } // GIVEN
 
@@ -336,15 +224,9 @@ SCENARIO( "ContinuousEnergyTable" ) {
 
     // the ASCII representation of the XSS array uses no integer values
 
-    auto table = fromFile( "92238.69c" );
-    std::array< int32_t, 16 > iz = table.data().IZ();
-    std::array< double, 16 > aw = table.data().AW();
-    std::array< int64_t, 16 > nxs = table.data().NXS();
-    std::array< int64_t, 32 > jxs = table.data().JXS();
-    std::vector< double > xss = table.data().XSS();
-
     WHEN( "constructing a ContinuousEnergyTable from a table" ) {
 
+      auto table = fromFile( "92238.69c" );
       ContinuousEnergyTable chunk( std::move( table ) );
 
       THEN( "a ContinuousEnergyTable can be constructed and members can be "
@@ -352,62 +234,55 @@ SCENARIO( "ContinuousEnergyTable" ) {
 
         verifyChunkNJOY99U238( chunk );
       }
+    } // WHEN
 
-      THEN( "the IZ array is correct" ) {
+    WHEN( "constructing a ContinuousEnergyTable using the copy constructor" ) {
 
-        decltype(auto) iz_chunk = chunk.data().IZ();
-        CHECK( iz.size() == iz_chunk.size() );
-        for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92238.69c" ) );
+      ContinuousEnergyTable copy( chunk );
 
-          CHECK( iz[i] == iz_chunk[i] );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkNJOY99U238( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the AW array is correct" ) {
+    WHEN( "constructing a ContinuousEnergyTable using the move constructor" ) {
 
-        decltype(auto) aw_chunk = chunk.data().AW();
-        CHECK( aw.size() == aw_chunk.size() );
-        for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92238.69c" ) );
+      ContinuousEnergyTable move( std::move( chunk ) );
 
-          CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
-        }
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
+
+        verifyChunkNJOY99U238( move );
       } // THEN
+    } // WHEN
 
-      THEN( "the NXS array is correct" ) {
+    WHEN( "assigning a ContinuousEnergyTable using the copy assignment" ) {
 
-        decltype(auto) nxs_chunk = chunk.data().NXS();
-        CHECK( nxs.size() == nxs_chunk.size() );
-        for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92238.69c" ) );
+      ContinuousEnergyTable copy( fromFile( "92235.710nc" ) );
+      copy = chunk;
 
-          // S, Z, A was added to the NXS array
-          switch ( i ) {
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
 
-            case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
-            case  9 : { CHECK(     92 == nxs_chunk[i] ); break; }
-            case 10 : { CHECK(    238 == nxs_chunk[i] ); break; }
-            default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
-          }
-        }
+        verifyChunkNJOY99U238( copy );
       } // THEN
+    } // WHEN
 
-      THEN( "the JXS array is correct" ) {
+    WHEN( "assigning a ContinuousEnergyTable using the move assignment" ) {
 
-        decltype(auto) jxs_chunk = chunk.data().JXS();
-        CHECK( jxs.size() == jxs_chunk.size() );
-        for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+      ContinuousEnergyTable chunk( fromFile( "92238.69c" ) );
+      ContinuousEnergyTable move( fromFile( "92235.710nc" ) );
+      move = std::move( chunk );
 
-          CHECK( jxs[i] == jxs_chunk[i] );
-        }
-      } // THEN
+      THEN( "a ContinuousEnergyTable can be constructed and members can be "
+            "tested" ) {
 
-      THEN( "the XSS array is correct" ) {
-
-        decltype(auto) xss_chunk = chunk.data().XSS();
-        CHECK( xss.size() == xss_chunk.size() );
-        for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkNJOY99U238( move );
       } // THEN
     } // WHEN
 
@@ -421,6 +296,52 @@ SCENARIO( "ContinuousEnergyTable" ) {
 } // SCENARIO
 
 void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
+
+  auto table = fromFile( "92235.710nc" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // ContinuousEnergyTable interface
 
   CHECK( "92235.710nc" == chunk.ZAID() );
   CHECK_THAT( 2.5301e-8, WithinRel( chunk.temperature() ) );
@@ -730,6 +651,52 @@ void verifyChunkU235( const ContinuousEnergyTable& chunk ) {
 
 void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 
+  auto table = fromFile( "2003.710nc" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    CHECK( nxs[i] == nxs_chunk[i] );
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // ContinuousEnergyTable interface
+
   CHECK( "2003.710nc" == chunk.ZAID() );
   CHECK_THAT( 2.5301e-8, WithinRel( chunk.temperature() ) );
 
@@ -993,6 +960,59 @@ void verifyChunkHe3( const ContinuousEnergyTable& chunk ) {
 }
 
 void verifyChunkNJOY99U238( const ContinuousEnergyTable& chunk ) {
+
+  auto table = fromFile( "92238.69c" );
+  std::array< int32_t, 16 > iz = table.data().IZ();
+  std::array< double, 16 > aw = table.data().AW();
+  std::array< int64_t, 16 > nxs = table.data().NXS();
+  std::array< int64_t, 32 > jxs = table.data().JXS();
+  std::vector< double > xss = table.data().XSS();
+
+  // IZ, AW, NXS, JXS, XSS arrays
+
+  decltype(auto) iz_chunk = chunk.data().IZ();
+  CHECK( iz.size() == iz_chunk.size() );
+  for ( unsigned int i = 0; i < iz_chunk.size(); ++i ) {
+
+    CHECK( iz[i] == iz_chunk[i] );
+  }
+
+  decltype(auto) aw_chunk = chunk.data().AW();
+  CHECK( aw.size() == aw_chunk.size() );
+  for ( unsigned int i = 0; i < aw_chunk.size(); ++i ) {
+
+    CHECK_THAT( aw[i], WithinRel( aw_chunk[i] ) );
+  }
+
+  decltype(auto) nxs_chunk = chunk.data().NXS();
+  CHECK( nxs.size() == nxs_chunk.size() );
+  for ( unsigned int i = 0; i < nxs_chunk.size(); ++i ) {
+
+    // S, Z, A was added to the NXS array
+    switch ( i ) {
+
+      case  8 : { CHECK(      0 == nxs_chunk[i] ); break; }
+      case  9 : { CHECK(     92 == nxs_chunk[i] ); break; }
+      case 10 : { CHECK(    238 == nxs_chunk[i] ); break; }
+      default : { CHECK( nxs[i] == nxs_chunk[i] ); break; }
+    }
+  }
+
+  decltype(auto) jxs_chunk = chunk.data().JXS();
+  CHECK( jxs.size() == jxs_chunk.size() );
+  for ( unsigned int i = 0; i < jxs_chunk.size(); ++i ) {
+
+    CHECK( jxs[i] == jxs_chunk[i] );
+  }
+
+  decltype(auto) xss_chunk = chunk.data().XSS();
+  CHECK( xss.size() == xss_chunk.size() );
+  for ( unsigned int i = 0; i < xss_chunk.size(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // ContinuousEnergyTable interface
 
   CHECK( "92238.69c" == chunk.ZAID() );
   CHECK_THAT( 2.5301e-8, WithinRel( chunk.temperature() ) );

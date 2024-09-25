@@ -49,6 +49,18 @@ auto block( std::size_t particle, std::size_t index ) const {
 
 void generateBlocks() {
 
+  // reset optional blocks
+  this->ixsu_ = std::nullopt;
+
+  // clear vectors
+  this->pxs_.clear();
+  this->phn_.clear();
+  this->mtrh_.clear();
+  this->tyrh_.clear();
+  this->sigh_.clear();
+  this->andh_.clear();
+  this->dlwh_.clear();
+
   // starting iterator into the XSS array
   auto begin = this->data().XSS().begin();
 

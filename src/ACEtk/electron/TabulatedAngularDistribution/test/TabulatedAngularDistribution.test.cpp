@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TabulatedAngularDistribution = electron::TabulatedAngularDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedAngularDistribution& );
+void verifyChunk( const TabulatedAngularDistribution&, const std::vector< double >& );
+TabulatedAngularDistribution makeDummyBlock();
 
 SCENARIO( "TabulatedAngularDistribution" ) {
 
@@ -30,19 +31,10 @@ SCENARIO( "TabulatedAngularDistribution" ) {
       TabulatedAngularDistribution chunk( energy, std::move( cosines ),
                                                   std::move( cdf ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a TabulatedAngularDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,19 +42,60 @@ SCENARIO( "TabulatedAngularDistribution" ) {
 
       TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a TabulatedAngularDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngularDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngularDistribution chunk( 1000., xss.begin(), xss.end(), 3 );
+      TabulatedAngularDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngularDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -74,7 +107,18 @@ std::vector< double > chunk() {
             0., 0.75, 1. };
 }
 
-void verifyChunk( const TabulatedAngularDistribution& chunk ) {
+void verifyChunk( const TabulatedAngularDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );
@@ -95,4 +139,9 @@ void verifyChunk( const TabulatedAngularDistribution& chunk ) {
   CHECK_THAT(  0.  , WithinRel( chunk.cdf()[0] ) );
   CHECK_THAT(  0.75, WithinRel( chunk.cdf()[1] ) );
   CHECK_THAT(  1.  , WithinRel( chunk.cdf()[2] ) );
+}
+
+TabulatedAngularDistribution makeDummyBlock() {
+
+  return { 1, { -1., 1. }, { 0.5, 0.5 } };
 }

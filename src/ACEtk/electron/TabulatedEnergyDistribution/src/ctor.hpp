@@ -3,6 +3,9 @@ TabulatedEnergyDistribution() = default;
 TabulatedEnergyDistribution( const TabulatedEnergyDistribution& ) = default;
 TabulatedEnergyDistribution( TabulatedEnergyDistribution&& ) = default;
 
+TabulatedEnergyDistribution& operator=( const TabulatedEnergyDistribution& ) = default;
+TabulatedEnergyDistribution& operator=( TabulatedEnergyDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -30,6 +33,3 @@ TabulatedEnergyDistribution( double energy,
                              unsigned int la ) :
   ArrayData( "TabulatedEnergyDistribution", begin, end, la, 2 ),
   energy_( energy ) {}
-
-TabulatedEnergyDistribution& operator=( const TabulatedEnergyDistribution& ) = default;
-TabulatedEnergyDistribution& operator=( TabulatedEnergyDistribution&& ) = default;

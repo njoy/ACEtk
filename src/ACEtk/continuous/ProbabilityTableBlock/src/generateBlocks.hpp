@@ -1,5 +1,7 @@
 void generateBlocks() {
 
+  this->data_.clear();
+
   std::size_t m = this->M();
   auto left = this->begin() + 6 + this->N();
   auto right = left;

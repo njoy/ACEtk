@@ -7,8 +7,6 @@ MultiDistributionData( const MultiDistributionData& base ) :
 
   if ( Base::owner() ) {
 
-    this->probabilities_.clear();
-    this->distributions_.clear();
     this->generateBlocks();
   }
 }
@@ -20,10 +18,40 @@ MultiDistributionData( MultiDistributionData&& base ) :
 
   if ( Base::owner() ) {
 
-    this->probabilities_.clear();
-    this->distributions_.clear();
     this->generateBlocks();
   }
+}
+
+MultiDistributionData& operator=( const MultiDistributionData& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->locb_ = base.locb_;
+    this->probabilities_ = base.probabilities_;
+    this->distributions_ = base.distributions_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+MultiDistributionData& operator=( MultiDistributionData&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->locb_ = base.locb_;
+    this->probabilities_ = std::move( base.probabilities_ );
+    this->distributions_ = std::move( base.distributions_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -57,16 +85,4 @@ MultiDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
   locb_( locb ) {
 
   this->generateBlocks();
-}
-
-MultiDistributionData& operator=( const MultiDistributionData& base ) {
-
-  new (this) MultiDistributionData( base );
-  return *this;
-}
-
-MultiDistributionData& operator=( MultiDistributionData&& base ) {
-
-  new (this) MultiDistributionData( std::move( base ) );
-  return *this;
 }

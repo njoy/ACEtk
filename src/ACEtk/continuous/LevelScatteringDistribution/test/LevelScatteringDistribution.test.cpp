@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using LevelScatteringDistribution = continuous::LevelScatteringDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const LevelScatteringDistribution& );
+void verifyChunk( const LevelScatteringDistribution&, const std::vector< double >& );
+LevelScatteringDistribution makeDummyBlock();
 
 SCENARIO( "LevelScatteringDistribution" ) {
 
@@ -33,37 +34,68 @@ SCENARIO( "LevelScatteringDistribution" ) {
       THEN( "a LevelScatteringDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
 
-      LevelScatteringDistribution chunk( xss.begin(), xss.end(),
-                                         2.249999e-3, 20. );
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
 
       THEN( "a LevelScatteringDistribution can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an LevelScatteringDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution move( std::move( chunk ) );
+
+      THEN( "an LevelScatteringDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an LevelScatteringDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      LevelScatteringDistribution chunk( xss.begin(), xss.end(), 2.249999e-3, 20. );
+      LevelScatteringDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an LevelScatteringDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -74,7 +106,18 @@ std::vector< double > chunk() {
   return { 7.71295800000E-05,   9.91472200000E-01 };
 }
 
-void verifyChunk( const LevelScatteringDistribution& chunk ) {
+void verifyChunk( const LevelScatteringDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 2 == chunk.length() );
@@ -88,4 +131,9 @@ void verifyChunk( const LevelScatteringDistribution& chunk ) {
 
   CHECK_THAT( 7.71295800000E-05, WithinRel( chunk.C1() ) );
   CHECK_THAT( .9914722, WithinRel( chunk.C2() ) );
+}
+
+LevelScatteringDistribution makeDummyBlock() {
+
+  return { 1., 2., 3., 4. };
 }

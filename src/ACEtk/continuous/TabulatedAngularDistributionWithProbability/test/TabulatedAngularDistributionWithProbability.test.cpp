@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TabulatedAngularDistributionWithProbability = continuous::TabulatedAngularDistributionWithProbability;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedAngularDistributionWithProbability& );
+void verifyChunk( const TabulatedAngularDistributionWithProbability&, const std::vector< double >& );
+TabulatedAngularDistributionWithProbability makeDummyBlock();
 
 SCENARIO( "TabulatedAngularDistributionWithProbability" ) {
 
@@ -40,16 +41,7 @@ SCENARIO( "TabulatedAngularDistributionWithProbability" ) {
       THEN( "a TabulatedAngularDistributionWithProbability can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -63,16 +55,57 @@ SCENARIO( "TabulatedAngularDistributionWithProbability" ) {
 
       THEN( "a TabulatedAngularDistributionWithProbability can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an TabulatedAngularDistributionWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability move( std::move( chunk ) );
+
+      THEN( "an TabulatedAngularDistributionWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedAngularDistributionWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedAngularDistributionWithProbability chunk( 2.1, 0.5, 0.75, xss.begin(), xss.end() );
+      TabulatedAngularDistributionWithProbability move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedAngularDistributionWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -85,7 +118,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,  0.50000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const TabulatedAngularDistributionWithProbability& chunk ) {
+void verifyChunk( const TabulatedAngularDistributionWithProbability& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
@@ -108,4 +152,9 @@ void verifyChunk( const TabulatedAngularDistributionWithProbability& chunk ) {
   CHECK( 3 == chunk.cdf().size() );
   CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
+}
+
+TabulatedAngularDistributionWithProbability makeDummyBlock() {
+
+  return {1., 2., 3., 2, { -1., 1. }, { 0.5, 0.5 }, { 0., 1. } };
 }

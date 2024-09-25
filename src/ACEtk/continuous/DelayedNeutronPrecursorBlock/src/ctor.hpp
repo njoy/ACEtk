@@ -21,7 +21,6 @@ DelayedNeutronPrecursorBlock( const DelayedNeutronPrecursorBlock& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->generateBlocks();
   }
 }
@@ -32,9 +31,38 @@ DelayedNeutronPrecursorBlock( DelayedNeutronPrecursorBlock&& base ) :
 
   if ( Base::owner() ) {
 
-    this->data_.clear();
     this->generateBlocks();
   }
+}
+
+DelayedNeutronPrecursorBlock& operator=( const DelayedNeutronPrecursorBlock& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->npcr_ = base.npcr_;
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+DelayedNeutronPrecursorBlock& operator=( DelayedNeutronPrecursorBlock&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->npcr_ = base.npcr_;
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -56,16 +84,4 @@ DelayedNeutronPrecursorBlock( Iterator bdd, Iterator end, unsigned int npcr ) :
   Base( "BDD", bdd, end ), npcr_( npcr ) {
 
   this->generateBlocks();
-}
-
-DelayedNeutronPrecursorBlock& operator=( const DelayedNeutronPrecursorBlock& base ) {
-
-  new (this) DelayedNeutronPrecursorBlock( base );
-  return *this;
-}
-
-DelayedNeutronPrecursorBlock& operator=( DelayedNeutronPrecursorBlock&& base ) {
-
-  new (this) DelayedNeutronPrecursorBlock( std::move( base ) );
-  return *this;
 }

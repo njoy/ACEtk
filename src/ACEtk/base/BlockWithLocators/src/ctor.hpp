@@ -23,7 +23,6 @@ BlockWithLocators( const BlockWithLocators& base ) :
   if ( Base::owner() ) {
 
     this->iterator_ = this->begin() + this->N();
-    this->data_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -35,7 +34,6 @@ BlockWithLocators( BlockWithLocators&& base ) :
   if ( Base::owner() ) {
 
     this->iterator_ = this->begin() + this->N();
-    this->data_.clear();
     static_cast< Derived* >( this )->generateBlocks();
   }
 }
@@ -74,12 +72,36 @@ BlockWithLocators( std::string name,
 
 BlockWithLocators& operator=( const BlockWithLocators& base ) {
 
-  new (this) BlockWithLocators( base );
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->n_ = base.n_;
+    this->locator_ = base.locator_;
+    this->iterator_ = base.iterator_;
+    this->data_ = base.data_;
+    if ( Base::owner() ) {
+
+      this->iterator_ = this->begin() + this->N();
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }
 
 BlockWithLocators& operator=( BlockWithLocators&& base ) {
 
-  new (this) BlockWithLocators( std::move( base ) );
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->n_ = base.n_;
+    this->locator_ = base.locator_;
+    this->iterator_ = base.iterator_;
+    this->data_ = std::move( base.data_ );
+    if ( Base::owner() ) {
+
+      this->iterator_ = this->begin() + this->N();
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
   return *this;
 }

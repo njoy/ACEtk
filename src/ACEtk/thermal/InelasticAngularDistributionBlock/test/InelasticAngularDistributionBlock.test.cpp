@@ -16,8 +16,9 @@ using DiscreteCosinesWithProbability = thermal::DiscreteCosinesWithProbability;
 
 std::vector< double > chunk();
 std::vector< double > chunkWithIFENG2();
-void verifyChunk( const InelasticAngularDistributionBlock& );
-void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& );
+void verifyChunk( const InelasticAngularDistributionBlock&, const std::vector< double >& );
+void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock&, const std::vector< double >& );
+InelasticAngularDistributionBlock makeDummyBlock();
 
 SCENARIO( "InelasticAngularDistributionBlock" ) {
 
@@ -46,16 +47,7 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
       THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -67,16 +59,57 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
       THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 1, 2, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -109,16 +142,7 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
       THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
-        verifyChunkWithIFENG2( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkWithIFENG2( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -130,16 +154,57 @@ SCENARIO( "InelasticAngularDistributionBlock" ) {
       THEN( "a InelasticAngularDistributionBlock can be constructed "
             "and members can be tested" ) {
 
-        verifyChunkWithIFENG2( chunk );
+        verifyChunkWithIFENG2( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move( std::move( chunk ) );
+
+      THEN( "an InelasticAngularDistributionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      InelasticAngularDistributionBlock chunk( 2, 0, 3, 4, 9, xss.begin(), xss.end() );
+      InelasticAngularDistributionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an InelasticAngularDistributionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkWithIFENG2( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -181,7 +246,18 @@ std::vector< double > chunkWithIFENG2() {
   };
 }
 
-void verifyChunk( const InelasticAngularDistributionBlock& chunk ) {
+void verifyChunk( const InelasticAngularDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 32 == chunk.length() );
@@ -270,7 +346,18 @@ void verifyChunk( const InelasticAngularDistributionBlock& chunk ) {
   CHECK_THAT( +1., WithinRel( data42.cosines()[2] ) );
 }
 
-void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& chunk ) {
+void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 80 == chunk.length() );
@@ -413,4 +500,10 @@ void verifyChunkWithIFENG2( const InelasticAngularDistributionBlock& chunk ) {
   CHECK_THAT( -1., WithinRel( data43.cosines()[0] ) );
   CHECK_THAT(  .4, WithinRel( data43.cosines()[1] ) );
   CHECK_THAT( +1., WithinRel( data43.cosines()[2] ) );
+}
+
+InelasticAngularDistributionBlock makeDummyBlock() {
+
+  return { { { { 1., { -1., 1. } }, { 2., { -1., 1. } } },
+             { { 1., { -1., 1. } }, { 3., { -1., 1. } } } }, true };
 }

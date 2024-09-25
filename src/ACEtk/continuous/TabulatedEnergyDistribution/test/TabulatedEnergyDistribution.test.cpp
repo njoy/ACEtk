@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TabulatedEnergyDistribution = continuous::TabulatedEnergyDistribution;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedEnergyDistribution& );
+void verifyChunk( const TabulatedEnergyDistribution&, const std::vector< double >& );
+TabulatedEnergyDistribution makeDummyBlock();
 
 SCENARIO( "TabulatedEnergyDistribution" ) {
 
@@ -39,16 +40,7 @@ SCENARIO( "TabulatedEnergyDistribution" ) {
       THEN( "a TabulatedEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -60,16 +52,57 @@ SCENARIO( "TabulatedEnergyDistribution" ) {
       THEN( "a TabulatedEnergyDistribution can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      TabulatedEnergyDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedEnergyDistribution copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an TabulatedEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedEnergyDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedEnergyDistribution move( std::move( chunk ) );
+
+      THEN( "an TabulatedEnergyDistribution can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedEnergyDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedEnergyDistribution copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedEnergyDistribution chunk( 2.1, xss.begin(), xss.end() );
+      TabulatedEnergyDistribution move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedEnergyDistribution can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -82,7 +115,18 @@ std::vector< double > chunk() {
            0.00000000000E+00,  0.50000000000E+00,  1.00000000000E+00 };
 }
 
-void verifyChunk( const TabulatedEnergyDistribution& chunk ) {
+void verifyChunk( const TabulatedEnergyDistribution& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 11 == chunk.length() );
@@ -104,4 +148,9 @@ void verifyChunk( const TabulatedEnergyDistribution& chunk ) {
   CHECK( 3 == chunk.cdf().size() );
   CHECK_THAT( 0., WithinRel( chunk.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( chunk.cdf().back() ) );
+}
+
+TabulatedEnergyDistribution makeDummyBlock() {
+
+  return { 1.5, 1, { -1., 1. }, { 0.5, 0.5 }, { 0., 1. }, 1 };
 }

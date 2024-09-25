@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using ReactionNumberBlock = continuous::ReactionNumberBlock;
 
 std::vector< double > chunk();
-void verifyChunk( const ReactionNumberBlock& );
+void verifyChunk( const ReactionNumberBlock&, const std::vector< double >& );
+ReactionNumberBlock makeDummyBlock();
 
 SCENARIO( "ReactionNumberBlock" ) {
 
@@ -30,16 +31,7 @@ SCENARIO( "ReactionNumberBlock" ) {
       THEN( "a ReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -50,16 +42,57 @@ SCENARIO( "ReactionNumberBlock" ) {
       THEN( "a ReactionNumberBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an ReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock move( std::move( chunk ) );
+
+      THEN( "an ReactionNumberBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ReactionNumberBlock chunk( xss.begin(), xss.end(), 3 );
+      ReactionNumberBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ReactionNumberBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -70,7 +103,18 @@ std::vector< double > chunk() {
   return { 102, 204, 444 };
 }
 
-void verifyChunk( const ReactionNumberBlock& chunk ) {
+void verifyChunk( const ReactionNumberBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 3 == chunk.length() );
@@ -98,4 +142,9 @@ void verifyChunk( const ReactionNumberBlock& chunk ) {
   CHECK( 3 == chunk.index(444) );
 
   CHECK_THROWS( chunk.index(1) );
+}
+
+ReactionNumberBlock makeDummyBlock() {
+
+  return { { 103 } };
 }

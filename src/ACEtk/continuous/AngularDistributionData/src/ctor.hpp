@@ -7,7 +7,6 @@ AngularDistributionData( const AngularDistributionData& base ) :
 
   if ( Base::owner() ) {
 
-    this->distributions_.clear();
     this->generateBlocks();
   }
 }
@@ -19,9 +18,40 @@ AngularDistributionData( AngularDistributionData&& base ) :
 
   if ( Base::owner() ) {
 
-    this->distributions_.clear();
     this->generateBlocks();
   }
+}
+
+AngularDistributionData& operator=( const AngularDistributionData& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->locb_ = base.locb_;
+    this->values_ = base.values_;
+    this->distributions_ = base.distributions_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
+}
+
+AngularDistributionData& operator=( AngularDistributionData&& base ) {
+
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->locb_ = base.locb_;
+    this->values_ = std::move( base.values_ );
+    this->distributions_ = std::move( base.distributions_ );
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+  return *this;
 }
 
 /**
@@ -51,16 +81,4 @@ AngularDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
 
   this->generateBlocks();
   verifySize( this->begin(), this->end(), this->numberIncidentEnergies() );
-}
-
-AngularDistributionData& operator=( const AngularDistributionData& base ) {
-
-  new (this) AngularDistributionData( base );
-  return *this;
-}
-
-AngularDistributionData& operator=( AngularDistributionData&& base ) {
-
-  new (this) AngularDistributionData( std::move( base ) );
-  return *this;
 }

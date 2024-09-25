@@ -14,7 +14,8 @@ using ProbabilityTableBlock = continuous::ProbabilityTableBlock;
 using ProbabilityTable = continuous::ProbabilityTable;
 
 std::vector< double > chunk();
-void verifyChunk( const ProbabilityTableBlock& );
+void verifyChunk( const ProbabilityTableBlock&, const std::vector< double >& );
+ProbabilityTableBlock makeDummyBlock();
 
 SCENARIO( "ProbabilityTableBlock" ) {
 
@@ -42,16 +43,7 @@ SCENARIO( "ProbabilityTableBlock" ) {
       THEN( "a ProbabilityTable can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -62,16 +54,57 @@ SCENARIO( "ProbabilityTableBlock" ) {
       THEN( "a ProbabilityTable can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an ProbabilityTableBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock move( std::move( chunk ) );
+
+      THEN( "an ProbabilityTableBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an ProbabilityTableBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      ProbabilityTableBlock chunk( xss.begin(), xss.end() );
+      ProbabilityTableBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an ProbabilityTableBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -84,7 +117,18 @@ std::vector< double > chunk() {
            0.25, 1.0, 11., 12., 13., 14., 15., 16., 17., 18., 19., 20. };
 }
 
-void verifyChunk( const ProbabilityTableBlock& chunk ) {
+void verifyChunk( const ProbabilityTableBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 32 == chunk.length() );
@@ -156,4 +200,17 @@ void verifyChunk( const ProbabilityTableBlock& chunk ) {
   CHECK_THAT( 18., WithinRel( table2.capture().back() ) );
   CHECK_THAT( 19., WithinRel( table2.heating().front() ) );
   CHECK_THAT( 20., WithinRel( table2.heating().back() ) );
+}
+
+ProbabilityTableBlock makeDummyBlock() {
+
+  std::vector< ProbabilityTable > tables = {
+
+    ProbabilityTable( 1e-3, { 0.5, 1.0 }, { 1., 2 }, { 3., 4. }, { 5., 6. },
+                      { 7., 8. }, { 9., 10. } ),
+    ProbabilityTable( 1e+3, { 0.25, 1.0 }, { 11., 12 }, { 13., 14. },
+                      { 15., 16. }, { 17., 18. }, { 19., 20. } )
+  };
+
+  return { 1, 1, 1, 1, std::move( tables ) };
 }

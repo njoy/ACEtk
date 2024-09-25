@@ -1,15 +1,14 @@
-cmake_minimum_required( VERSION 3.27 )
+cmake_minimum_required( VERSION 3.24 )
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
-include( FetchContent )
+include( shacl_FetchContent )
 
 #######################################################################
 # Declare project dependencies
 #######################################################################
 
-FetchContent_Declare( tools
+shacl_FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         v0.3.1
-    GIT_SHALLOW     TRUE
+    GIT_TAG         392164c044dea641b7a42dc1a2e89da464289770  # tag: v0.4.0
     )
 
 #######################################################################
@@ -17,27 +16,25 @@ FetchContent_Declare( tools
 #######################################################################
 
 if(ACEtk.python)
-  FetchContent_Declare( pybind11
+  shacl_FetchContent_Declare( pybind11
       GIT_REPOSITORY  ../../pybind/pybind11
-      GIT_TAG         v2.10.4
-      GIT_SHALLOW     TRUE
+      GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
       )
-  FetchContent_MakeAvailable(
+  shacl_FetchContent_MakeAvailable(
     pybind11
     )
 endif()
 
 if(ACEtk.tests)
-  FetchContent_Declare( Catch2
-      GIT_REPOSITORY  ../../catchorg/catch2
-      GIT_TAG         v3.3.2
-      GIT_SHALLOW     TRUE
+  shacl_FetchContent_Declare( Catch2
+      GIT_REPOSITORY  ../../catchorg/Catch2
+      GIT_TAG         3f0283de7a9c43200033da996ff9093be3ac84dc # tag: v3.3.2
       )
-  FetchContent_MakeAvailable(
-      Catch2 
+  shacl_FetchContent_MakeAvailable(
+      Catch2
     )
 endif()
 
-FetchContent_MakeAvailable(
+shacl_FetchContent_MakeAvailable(
     tools
-)
+    )

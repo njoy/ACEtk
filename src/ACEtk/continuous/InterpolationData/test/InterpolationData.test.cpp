@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using InterpolationData = continuous::InterpolationData;
 
 std::vector< double > chunk();
-void verifyChunk( const InterpolationData& );
+void verifyChunk( const InterpolationData&, const std::vector< double >& );
+InterpolationData makeDummyBlock();
 
 SCENARIO( "InterpolationData" ) {
 
@@ -32,16 +33,7 @@ SCENARIO( "InterpolationData" ) {
 
       THEN( "an InterpolationData can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -51,16 +43,57 @@ SCENARIO( "InterpolationData" ) {
 
       THEN( "an InterpolationData can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an InterpolationData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData move( std::move( chunk ) );
+
+      THEN( "an InterpolationData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an InterpolationData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      InterpolationData chunk( "test", xss.begin(), xss.end() );
+      InterpolationData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an InterpolationData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -71,7 +104,18 @@ std::vector< double > chunk() {
   return { 2, 5, 10, 1, 2 };
 }
 
-void verifyChunk( const InterpolationData& chunk ) {
+void verifyChunk( const InterpolationData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 5 == chunk.length() );
@@ -95,4 +139,9 @@ void verifyChunk( const InterpolationData& chunk ) {
   CHECK( 10 == chunk.NBT()[1] );
   CHECK(  5 == chunk.boundaries()[0] );
   CHECK( 10 == chunk.boundaries()[1] );
+}
+
+InterpolationData makeDummyBlock() {
+
+  return { "dummy", { 2 }, { 2 } };
 }

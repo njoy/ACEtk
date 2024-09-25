@@ -3,6 +3,9 @@ MultiplicityReactionNumberBlock() = default;
 MultiplicityReactionNumberBlock( const MultiplicityReactionNumberBlock& ) = default;
 MultiplicityReactionNumberBlock( MultiplicityReactionNumberBlock&& ) = default;
 
+MultiplicityReactionNumberBlock& operator=( const MultiplicityReactionNumberBlock& ) = default;
+MultiplicityReactionNumberBlock& operator=( MultiplicityReactionNumberBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -22,6 +25,3 @@ MultiplicityReactionNumberBlock( Iterator yp, Iterator end ) :
 
   verifySize( this->begin(), this->end(), this->NYP() );
 }
-
-MultiplicityReactionNumberBlock& operator=( const MultiplicityReactionNumberBlock& ) = default;
-MultiplicityReactionNumberBlock& operator=( MultiplicityReactionNumberBlock&& ) = default;

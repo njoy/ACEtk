@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using DiscreteCosinesWithProbability = thermal::DiscreteCosinesWithProbability;
 
 std::vector< double > chunk();
-void verifyChunk( const DiscreteCosinesWithProbability& );
+void verifyChunk( const DiscreteCosinesWithProbability&, const std::vector< double >& );
+DiscreteCosinesWithProbability makeDummyBlock();
 
 SCENARIO( "DiscreteCosinesWithProbability" ) {
 
@@ -40,16 +41,7 @@ SCENARIO( "DiscreteCosinesWithProbability" ) {
       THEN( "a DiscreteCosinesWithProbability can be constructed "
             "and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -60,16 +52,57 @@ SCENARIO( "DiscreteCosinesWithProbability" ) {
       THEN( "a DiscreteCosinesWithProbability can be constructed "
             "and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an DiscreteCosinesWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability move( std::move( chunk ) );
+
+      THEN( "an DiscreteCosinesWithProbability can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an DiscreteCosinesWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      DiscreteCosinesWithProbability chunk( 33, xss.begin(), xss.end() );
+      DiscreteCosinesWithProbability move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an DiscreteCosinesWithProbability can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -92,7 +125,18 @@ std::vector< double > chunk() {
   };
 }
 
-void verifyChunk( const DiscreteCosinesWithProbability& chunk ) {
+void verifyChunk( const DiscreteCosinesWithProbability& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 36 == chunk.length() );
@@ -106,4 +150,9 @@ void verifyChunk( const DiscreteCosinesWithProbability& chunk ) {
   CHECK( 33 == chunk.cosines().size() );
   CHECK_THAT( -1., WithinRel( chunk.cosines().front() ) );
   CHECK_THAT( +1., WithinRel( chunk.cosines().back() ) );
+}
+
+DiscreteCosinesWithProbability makeDummyBlock() {
+
+  return { 2., 1., 2., { -1., 1. } };
 }

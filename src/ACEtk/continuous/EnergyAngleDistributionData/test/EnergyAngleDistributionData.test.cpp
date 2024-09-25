@@ -15,7 +15,8 @@ using TabulatedEnergyAngleDistribution = continuous::TabulatedEnergyAngleDistrib
 using TabulatedAngularDistributionWithProbability = continuous::TabulatedAngularDistributionWithProbability;
 
 std::vector< double > chunk();
-void verifyChunk( const EnergyAngleDistributionData& );
+void verifyChunk( const EnergyAngleDistributionData&, const std::vector< double >& );
+EnergyAngleDistributionData makeDummyBlock();
 
 SCENARIO( "EnergyAngleDistributionData" ) {
 
@@ -47,16 +48,7 @@ SCENARIO( "EnergyAngleDistributionData" ) {
       THEN( "an EnergyAngleDistributionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -67,16 +59,57 @@ SCENARIO( "EnergyAngleDistributionData" ) {
       THEN( "an EnergyAngleDistributionData can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an EnergyAngleDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData move( std::move( chunk ) );
+
+      THEN( "an EnergyAngleDistributionData can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an EnergyAngleDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      EnergyAngleDistributionData chunk( 21, xss.begin(), xss.end() );
+      EnergyAngleDistributionData move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an EnergyAngleDistributionData can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -107,7 +140,18 @@ std::vector< double > chunk() {
             1.000000E+00 };
 }
 
-void verifyChunk( const EnergyAngleDistributionData& chunk ) {
+void verifyChunk( const EnergyAngleDistributionData& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 64 == chunk.length() );
@@ -299,4 +343,26 @@ void verifyChunk( const EnergyAngleDistributionData& chunk ) {
   CHECK( 3 == data22.cdf().size() );
   CHECK_THAT( 0., WithinRel( data22.cdf().front() ) );
   CHECK_THAT( 1., WithinRel( data22.cdf().back() ) );
+}
+
+EnergyAngleDistributionData makeDummyBlock() {
+
+  std::vector< TabulatedEnergyAngleDistribution > distributions  = {
+
+    TabulatedEnergyAngleDistribution(
+      2e-5, 2,
+      { TabulatedAngularDistributionWithProbability(
+          1., 0.5, 0.5, 2, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+        TabulatedAngularDistributionWithProbability(
+          15., 0.5, 1.0, 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ) } ),
+    TabulatedEnergyAngleDistribution(
+      10., 2,
+      { TabulatedAngularDistributionWithProbability(
+          1.1, 0.5, 0.5, 1, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ),
+        TabulatedAngularDistributionWithProbability(
+          15., 0.5, 1.0, 2, { -1.0, 1.0 }, { 0.5, 0.5 }, { 0.0, 1.0 } ) } )
+  };
+  std::size_t locb = 21;
+
+  return { std::move( distributions ), locb };
 }

@@ -64,12 +64,30 @@ EvaporationSpectrum( std::string name, EnergyDistributionType type,
 
 EvaporationSpectrum& operator=( const EvaporationSpectrum& base ) {
 
-  new (this) EvaporationSpectrum( base );
+  if ( this != &base ) {
+
+    Base::operator=( base );
+    this->tabulated_ = base.tabulated_;
+    this->type_ = base.type_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
   return *this;
 }
 
 EvaporationSpectrum& operator=( EvaporationSpectrum&& base ) {
 
-  new (this) EvaporationSpectrum( std::move( base ) );
+  if ( this != &base ) {
+
+    Base::operator=( std::move( base ) );
+    this->tabulated_ = std::move( base.tabulated_ );
+    this->type_ = base.type_;
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
   return *this;
 }

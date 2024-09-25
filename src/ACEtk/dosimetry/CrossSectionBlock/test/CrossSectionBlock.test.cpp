@@ -14,7 +14,8 @@ using CrossSectionBlock = dosimetry::CrossSectionBlock;
 using CrossSectionData = dosimetry::CrossSectionData;
 
 std::vector< double > chunk();
-void verifyChunk( const CrossSectionBlock& );
+void verifyChunk( const CrossSectionBlock&, const std::vector< double >& );
+CrossSectionBlock makeDummyBlock();
 
 SCENARIO( "CrossSectionBlock" ) {
 
@@ -39,16 +40,7 @@ SCENARIO( "CrossSectionBlock" ) {
 
       THEN( "a CrossSectionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -58,16 +50,57 @@ SCENARIO( "CrossSectionBlock" ) {
 
       THEN( "a CrossSectionBlock can be constructed and members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      CrossSectionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      CrossSectionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an CrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      CrossSectionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      CrossSectionBlock move( std::move( chunk ) );
+
+      THEN( "an CrossSectionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      CrossSectionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      CrossSectionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an CrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      CrossSectionBlock chunk( xss.begin(), xss.begin() + 2, xss.end(), 2 );
+      CrossSectionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an CrossSectionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -85,7 +118,18 @@ std::vector< double > chunk() {
    5.653700000000E-02,  4.980000000000E-02 };
 }
 
-void verifyChunk( const CrossSectionBlock& chunk ) {
+void verifyChunk( const CrossSectionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 20 == chunk.length() );
@@ -118,4 +162,9 @@ void verifyChunk( const CrossSectionBlock& chunk ) {
   CHECK_THAT( 20., WithinRel( xs.energies().back() ) );
   CHECK_THAT( 0., WithinRel( xs.crossSections().front() ) );
   CHECK_THAT( 0.0498, WithinRel( xs.crossSections().back() ) );
+}
+
+CrossSectionBlock makeDummyBlock() {
+
+  return { { { { 1., 2. }, { 3., 4. } } } };
 }

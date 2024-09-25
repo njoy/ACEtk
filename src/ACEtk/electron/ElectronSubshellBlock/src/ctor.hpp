@@ -3,6 +3,9 @@ ElectronSubshellBlock() = default;
 ElectronSubshellBlock( const ElectronSubshellBlock& ) = default;
 ElectronSubshellBlock( ElectronSubshellBlock&& ) = default;
 
+ElectronSubshellBlock& operator=( const ElectronSubshellBlock& ) = default;
+ElectronSubshellBlock& operator=( ElectronSubshellBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -39,6 +42,3 @@ ElectronSubshellBlock( std::vector< unsigned int > designators,
  */
 ElectronSubshellBlock( Iterator begin, Iterator end, unsigned int nssh ) :
   ArrayData( "SUBSH", begin, end, nssh, 5 ) {}
-
-ElectronSubshellBlock& operator=( const ElectronSubshellBlock& ) = default;
-ElectronSubshellBlock& operator=( ElectronSubshellBlock&& ) = default;

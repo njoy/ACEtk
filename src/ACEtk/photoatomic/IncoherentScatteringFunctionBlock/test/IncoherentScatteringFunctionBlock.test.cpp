@@ -14,8 +14,9 @@ using IncoherentScatteringFunctionBlock = photoatomic::IncoherentScatteringFunct
 
 std::vector< double > chunk();
 std::vector< double > chunkEprdata();
-void verifyChunk( const IncoherentScatteringFunctionBlock& );
-void verifyChunkEprdata( const IncoherentScatteringFunctionBlock& );
+void verifyChunk( const IncoherentScatteringFunctionBlock&, const std::vector< double >& );
+void verifyChunkEprdata( const IncoherentScatteringFunctionBlock&, const std::vector< double >& );
+IncoherentScatteringFunctionBlock makeDummyBlock();
 
 SCENARIO( "IncoherentScatteringFunctionBlock" ) {
 
@@ -40,16 +41,7 @@ SCENARIO( "IncoherentScatteringFunctionBlock" ) {
       THEN( "a IncoherentScatteringFunctionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -60,16 +52,57 @@ SCENARIO( "IncoherentScatteringFunctionBlock" ) {
       THEN( "a IncoherentScatteringFunctionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move( std::move( chunk ) );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -89,16 +122,7 @@ SCENARIO( "IncoherentScatteringFunctionBlock" ) {
       THEN( "a IncoherentScatteringFunctionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunkEprdata( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunkEprdata( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -109,16 +133,57 @@ SCENARIO( "IncoherentScatteringFunctionBlock" ) {
       THEN( "a IncoherentScatteringFunctionBlock can be constructed and members can "
             "be tested" ) {
 
-        verifyChunkEprdata( chunk );
+        verifyChunkEprdata( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move( std::move( chunk ) );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      IncoherentScatteringFunctionBlock chunk( xss.begin(), xss.end() );
+      IncoherentScatteringFunctionBlock move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an IncoherentScatteringFunctionBlock can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunkEprdata( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -145,7 +210,18 @@ std::vector< double > chunkEprdata() {
   };
 }
 
-void verifyChunk( const IncoherentScatteringFunctionBlock& chunk ) {
+void verifyChunk( const IncoherentScatteringFunctionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 21 == chunk.length() );
@@ -201,7 +277,18 @@ void verifyChunk( const IncoherentScatteringFunctionBlock& chunk ) {
   CHECK_THAT( 1, WithinRel( chunk.values()[20] ) );
 }
 
-void verifyChunkEprdata( const IncoherentScatteringFunctionBlock& chunk ) {
+void verifyChunkEprdata( const IncoherentScatteringFunctionBlock& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 10 == chunk.length() );
@@ -223,4 +310,9 @@ void verifyChunkEprdata( const IncoherentScatteringFunctionBlock& chunk ) {
   CHECK_THAT( 3., WithinRel( chunk.values()[2] ) );
   CHECK_THAT( 4., WithinRel( chunk.values()[3] ) );
   CHECK_THAT( 5., WithinRel( chunk.values()[4] ) );
+}
+
+IncoherentScatteringFunctionBlock makeDummyBlock() {
+
+  return { { 3., 4. }, { 5., 6. } };
 }

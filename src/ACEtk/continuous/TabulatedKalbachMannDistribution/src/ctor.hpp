@@ -3,6 +3,9 @@ TabulatedKalbachMannDistribution() = default;
 TabulatedKalbachMannDistribution( const TabulatedKalbachMannDistribution& ) = default;
 TabulatedKalbachMannDistribution( TabulatedKalbachMannDistribution&& ) = default;
 
+TabulatedKalbachMannDistribution& operator=( const TabulatedKalbachMannDistribution& ) = default;
+TabulatedKalbachMannDistribution& operator=( TabulatedKalbachMannDistribution&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -52,6 +55,3 @@ TabulatedKalbachMannDistribution( double incident, Iterator begin, Iterator end 
 TabulatedKalbachMannDistribution( double incident, std::size_t,
                                   Iterator begin, Iterator end ) :
   TabulatedKalbachMannDistribution( incident, begin, end ) {}
-
-TabulatedKalbachMannDistribution& operator=( const TabulatedKalbachMannDistribution& ) = default;
-TabulatedKalbachMannDistribution& operator=( TabulatedKalbachMannDistribution&& ) = default;

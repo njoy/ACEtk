@@ -3,6 +3,9 @@ SimpleMaxwellianFissionSpectrum() = default;
 SimpleMaxwellianFissionSpectrum( const SimpleMaxwellianFissionSpectrum& ) = default;
 SimpleMaxwellianFissionSpectrum( SimpleMaxwellianFissionSpectrum&& ) = default;
 
+SimpleMaxwellianFissionSpectrum& operator=( const SimpleMaxwellianFissionSpectrum& ) = default;
+SimpleMaxwellianFissionSpectrum& operator=( SimpleMaxwellianFissionSpectrum&& base ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -50,6 +53,3 @@ SimpleMaxwellianFissionSpectrum( Iterator begin, Iterator end ) :
   EvaporationSpectrum( "SimpleMaxwellianFissionSpectrum",
                        EnergyDistributionType::SimpleMaxwellianFission,
                        begin, end ) {}
-
-SimpleMaxwellianFissionSpectrum& operator=( const SimpleMaxwellianFissionSpectrum& ) = default;
-SimpleMaxwellianFissionSpectrum& operator=( SimpleMaxwellianFissionSpectrum&& base ) = default;

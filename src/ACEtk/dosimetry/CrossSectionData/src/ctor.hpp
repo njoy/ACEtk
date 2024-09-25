@@ -3,6 +3,9 @@ CrossSectionData() = default;
 CrossSectionData( const CrossSectionData& ) = default;
 CrossSectionData( CrossSectionData&& ) = default;
 
+CrossSectionData& operator=( const CrossSectionData& ) = default;
+CrossSectionData& operator=( CrossSectionData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -37,6 +40,3 @@ CrossSectionData( std::vector< double > energies,
  */
 CrossSectionData( Iterator begin, Iterator end ) :
   TabulatedData( "CrossSectionData", begin, end ) {}
-
-CrossSectionData& operator=( const CrossSectionData& ) = default;
-CrossSectionData& operator=( CrossSectionData&& ) = default;

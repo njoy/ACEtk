@@ -3,6 +3,9 @@ ElasticAngularDistributionBlock() = default;
 ElasticAngularDistributionBlock( const ElasticAngularDistributionBlock& ) = default;
 ElasticAngularDistributionBlock( ElasticAngularDistributionBlock&& ) = default;
 
+ElasticAngularDistributionBlock& operator=( const ElasticAngularDistributionBlock& ) = default;
+ElasticAngularDistributionBlock& operator=( ElasticAngularDistributionBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -25,6 +28,3 @@ ElasticAngularDistributionBlock(
     std::size_t ne, std::size_t nc ) :
   ArrayData( "ElasticAngularDistributionBlock",
              begin, end, nc, ne ) {}
-
-ElasticAngularDistributionBlock& operator=( const ElasticAngularDistributionBlock& ) = default;
-ElasticAngularDistributionBlock& operator=( ElasticAngularDistributionBlock&& ) = default;

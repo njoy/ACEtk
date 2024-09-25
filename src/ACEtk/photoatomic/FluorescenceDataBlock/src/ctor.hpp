@@ -3,6 +3,9 @@ FluorescenceDataBlock() = default;
 FluorescenceDataBlock( const FluorescenceDataBlock& ) = default;
 FluorescenceDataBlock( FluorescenceDataBlock&& ) = default;
 
+FluorescenceDataBlock& operator=( const FluorescenceDataBlock& ) = default;
+FluorescenceDataBlock& operator=( FluorescenceDataBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -29,6 +32,3 @@ FluorescenceDataBlock( std::vector< double > edges,
  */
 FluorescenceDataBlock( Iterator begin, Iterator end, unsigned int nflo ) :
   ArrayData( "JFLO", begin, end, nflo, 4 ) {}
-
-FluorescenceDataBlock& operator=( const FluorescenceDataBlock& ) = default;
-FluorescenceDataBlock& operator=( FluorescenceDataBlock&& ) = default;

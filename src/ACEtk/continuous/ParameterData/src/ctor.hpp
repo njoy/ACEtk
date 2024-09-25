@@ -3,6 +3,9 @@ ParameterData() = default;
 ParameterData( const ParameterData& ) = default;
 ParameterData( ParameterData&& ) = default;
 
+ParameterData& operator=( const ParameterData& ) = default;
+ParameterData& operator=( ParameterData&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -36,6 +39,3 @@ ParameterData( std::vector< double > energies,
  */
 ParameterData( Iterator begin, Iterator end ) :
   TabulatedData( "ParameterData", begin, end ) {}
-
-ParameterData& operator=( const ParameterData& ) = default;
-ParameterData& operator=( ParameterData&& ) = default;

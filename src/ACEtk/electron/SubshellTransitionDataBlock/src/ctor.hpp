@@ -3,6 +3,9 @@ SubshellTransitionDataBlock() = default;
 SubshellTransitionDataBlock( const SubshellTransitionDataBlock& ) = default;
 SubshellTransitionDataBlock( SubshellTransitionDataBlock&& ) = default;
 
+SubshellTransitionDataBlock& operator=( const SubshellTransitionDataBlock& ) = default;
+SubshellTransitionDataBlock& operator=( SubshellTransitionDataBlock&& ) = default;
+
 /**
  *  @brief Constructor
  *
@@ -23,6 +26,3 @@ SubshellTransitionDataBlock(
 SubshellTransitionDataBlock( Iterator relo, Iterator xprob,
                              Iterator end, unsigned int nssh ) :
   BlockWithLocators( "XPROB", relo, xprob, end, nssh, false ) {}
-
-SubshellTransitionDataBlock& operator=( const SubshellTransitionDataBlock& ) = default;
-SubshellTransitionDataBlock& operator=( SubshellTransitionDataBlock&& ) = default;

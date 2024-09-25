@@ -13,7 +13,8 @@ using namespace njoy::ACEtk;
 using TabulatedSecondaryParticleMultiplicity = continuous::TabulatedSecondaryParticleMultiplicity;
 
 std::vector< double > chunk();
-void verifyChunk( const TabulatedSecondaryParticleMultiplicity& );
+void verifyChunk( const TabulatedSecondaryParticleMultiplicity&, const std::vector< double >& );
+TabulatedSecondaryParticleMultiplicity makeDummyBlock();
 
 SCENARIO( "TabulatedSecondaryParticleMultiplicity" ) {
 
@@ -41,16 +42,7 @@ SCENARIO( "TabulatedSecondaryParticleMultiplicity" ) {
       THEN( "a TabulatedSecondaryParticleMultiplicity can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
-      } // THEN
-
-      THEN( "the XSS array is correct" ) {
-
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
-
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+        verifyChunk( chunk, xss );
       } // THEN
     } // WHEN
 
@@ -61,16 +53,57 @@ SCENARIO( "TabulatedSecondaryParticleMultiplicity" ) {
       THEN( "a TabulatedSecondaryParticleMultiplicity can be constructed and "
             "members can be tested" ) {
 
-        verifyChunk( chunk );
+        verifyChunk( chunk, xss );
       } // THEN
+    } // WHEN
 
-      THEN( "the XSS array is correct" ) {
+    WHEN( "using the copy constructor" ) {
 
-        auto xss_chunk = chunk.XSS();
-        for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity copy( chunk );
 
-          CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
-        }
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using the move constructor" ) {
+
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity move( std::move( chunk ) );
+
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be constructed and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using copy assignment" ) {
+
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity copy = makeDummyBlock();
+      copy = chunk;
+
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( copy, xss );
+      } // THEN
+    } // WHEN
+
+    WHEN( "using move assignment" ) {
+
+      TabulatedSecondaryParticleMultiplicity chunk( xss.begin(), xss.end() );
+      TabulatedSecondaryParticleMultiplicity move = makeDummyBlock();
+      move = std::move( chunk );
+
+      THEN( "an TabulatedSecondaryParticleMultiplicity can be copy assigned and "
+            "members can be tested" ) {
+
+        verifyChunk( move, xss );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -85,7 +118,18 @@ std::vector< double > chunk() {
             0.00000000000E+00,   0.00000000000E+00 };
 }
 
-void verifyChunk( const TabulatedSecondaryParticleMultiplicity& chunk ) {
+void verifyChunk( const TabulatedSecondaryParticleMultiplicity& chunk,
+                  const std::vector< double >& xss ) {
+
+  // XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  // interface
 
   CHECK( false == chunk.empty() );
   CHECK( 18 == chunk.length() );
@@ -122,4 +166,9 @@ void verifyChunk( const TabulatedSecondaryParticleMultiplicity& chunk ) {
   CHECK_THAT( 0., WithinRel( chunk.multiplicities().front() ) );
   CHECK_THAT( 0.119, WithinRel( chunk.multiplicities()[3] ) );
   CHECK_THAT( 0., WithinRel( chunk.multiplicities().back() ) );
+}
+
+TabulatedSecondaryParticleMultiplicity makeDummyBlock() {
+
+  return { 12, 2, { 1., 2. }, { 3., 4. } };
 }
