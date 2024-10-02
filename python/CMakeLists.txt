@@ -116,16 +116,16 @@ if(ACEtk.python)
     target_include_directories( ACEtk.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src )
     target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
     set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
-    set_target_properties( ACEtk.python PROPERTIES LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR}/ACEtk)
+    set_target_properties( ACEtk.python PROPERTIES LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR})
     set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
     set_target_properties( ACEtk.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
     # add all .so's that are installed with mcatk to the installed library rpath
-    set_target_properties( ACEtk.python PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib64")
+    set_target_properties( ACEtk.python PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
     # add all .so's that are linked to at build time to the installed library rpath
     set_target_properties( ACEtk.python PROPERTIES INSTALL_RPATH_USE_LINK_PATH ON)
 
     set(PyVersion "${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}")
-    set( py_library_install_prefix ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/python${PyVersion}/site-packages/ACEtk )
+    set( py_library_install_prefix ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/python${PyVersion}/site-packages )
 
     if (ACEtk.installation)
         install( TARGETS ACEtk.python LIBRARY DESTINATION ${py_library_install_prefix} )
@@ -137,7 +137,7 @@ if(ACEtk.python)
     # Append potential installation and build paths for tools python module
     set( tools_PYTHONPATH "${PROJECT_BINARY_DIR}/_deps/tools-build" )
     if (tools_DIR)
-      set( tools_PYTHONPATH "${tools_PYTHONPATH}:${tools_DIR}/../../../lib64" )
+        set( tools_PYTHONPATH "${tools_PYTHONPATH}:${tools_DIR}/../../../${CMAKE_INSTALL_LIBDIR}" )
     endif()
 
     if( ACEtk.tests )
@@ -147,7 +147,7 @@ if(ACEtk.python)
         ## generate python stubs if possible
     find_program(pybind11stubgen_exe pybind11-stubgen)
 
-    set(stubdir "${CMAKE_CURRENT_SOURCE_DIR}/stubs")
+    set(stubdir "${CMAKE_CURRENT_SOURCE_DIR}/stubs/ACEtk")
     if (pybind11stubgen_exe)
         # the following command executes the pybind11-stubgen executable found via find_program
         # and puts its terminal output into pybind11-stubgen.log in the build tree.
@@ -157,6 +157,7 @@ if(ACEtk.python)
         add_custom_command( 
             TARGET ACEtk.python POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=${tools_PYTHONPATH}:${ACEtk_PYTHONPATH}:$ENV{PYTHONPATH} ${pybind11stubgen_exe} ACEtk -o ${CMAKE_CURRENT_SOURCE_DIR}/stubs &> ${CMAKE_CURRENT_BINARY_DIR}/pybind11-stubgen.log || echo ""
+            COMMAND ${CMAKE_COMMAND} -E rename ${stubdir}/__init__.pyi ${stubdir}/ACEtk.pyi
             COMMAND ${CMAKE_COMMAND} -E copy_directory ${stubdir}/ ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Building ACEtk's python stub files via pybind11-stubgen. See pybind11-stubgen.log for details."
             VERBATIM
@@ -166,7 +167,7 @@ if(ACEtk.python)
         # copy stub files to build tree even if pybind11stubgen isn't available.
         add_custom_command( 
             TARGET ACEtk.python POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_directory ${stubdir}/ ${CMAKE_CURRENT_BINARY_DIR}/ACEtk
+            COMMAND ${CMAKE_COMMAND} -E copy_directory ${stubdir}/ ${CMAKE_CURRENT_BINARY_DIR}
         )
     endif()
 
