@@ -13,6 +13,8 @@ This fixes the following issues in ACEtk:
     assignments. Unit tests now have specific tests for copy and move constructors and copy and
     move assignment.
 
+Python stubs have been added, which should improve Python auto-completion in IDEs.
+
 This update also modifies the build system to use shacl-cmake.
 
 ## [ACEtk v1.0.1](https://github.com/njoy/ACEtk/pull/133)
