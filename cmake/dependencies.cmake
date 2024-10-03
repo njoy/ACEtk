@@ -16,6 +16,8 @@ shacl_FetchContent_Declare( tools
 #######################################################################
 
 if(ACEtk.python)
+  # Required to obtain version information
+  find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
   shacl_FetchContent_Declare( pybind11
       GIT_REPOSITORY  ../../pybind/pybind11
       GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
