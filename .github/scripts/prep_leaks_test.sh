@@ -14,3 +14,6 @@ find . -iname "*.test" -type f | while IFS= read -r line; do
 	realname=$(basename "$line")
 	echo "cd ${dirname}; leaks --atExit -- ./${realname}; check_return_code; cd -" >> test_leaks.sh
 done
+
+echo "exit 0" >> test_leaks.sh
+
