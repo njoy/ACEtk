@@ -29,7 +29,7 @@ jobs:
     - name: mkdir bin
       run: mkdir bin
     - name: cmake
-      run: cmake -DPYTHON_EXECUTABLE=$(which python3) -D CMAKE_CXX_COMPILER=`which ${{matrix.cxx}}` -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D ACEtk.tests=ON -D ACEtk.python=ON ..
+      run: cmake -DCMAKE_CXX_FLAGS="-gdwarf-4" -DPYTHON_EXECUTABLE=$(which python3) -D CMAKE_CXX_COMPILER=`which ${{matrix.cxx}}` -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D ACEtk.tests=ON -D ACEtk.python=ON ..
       working-directory: ./bin
     - name: make
       run: make -j2
@@ -41,19 +41,7 @@ jobs:
     - name: Setup Valigrind on Ubuntu
       if: ${{matrix.os == 'ubuntu-22.04'}}
       run: | 
-        sudo apt-get install build-essential;
-        sudo apt-get install libc6-dev;
-        wget https://sourceware.org/pub/valgrind/valgrind-3.23.0.tar.bz2;
-        tar -xvf valgrind-3.23.0.tar.bz2;
-        cd valgrind-3.23.0;
-        ./configure;
-        make;
-        sudo make install;
-      working-directory: .
-
-    - name: Prep valgrind tests
-      if: ${{matrix.os == 'ubuntu-22.04'}}
-      run: | 
+        sudo apt-get install valgrind;
         bash .github/scripts/prep_valgrind_test.sh
       working-directory: .
 
