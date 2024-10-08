@@ -49,8 +49,12 @@ jobs:
         ./configure;
         make;
         sudo make install;
-        bash .github/scripts/prep_valgrind_test.sh
+      working-directory: .
 
+    - name: Prep valgrind tests
+      if: ${{matrix.os == 'ubuntu-22.04'}}
+      run: | 
+        bash .github/scripts/prep_valgrind_test.sh
       working-directory: .
 
     - name: Run tests with Valgrind
