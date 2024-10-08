@@ -60,5 +60,5 @@ jobs:
     - name: Run tests with Leaks
       if: ${{matrix.os == 'macos-12'}}
       run: |
-        bash test_valgrind.sh
+        bash test_leaks.sh
       working-directory: .
