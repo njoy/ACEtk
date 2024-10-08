@@ -41,8 +41,15 @@ jobs:
     - name: Setup Valigrind on Ubuntu
       if: ${{matrix.os == 'ubuntu-22.04'}}
       run: | 
-        sudo apt-get install valgrind;
-        bash .github/scripts/prep_valgrind_test.sh
+        sudo apt-get install build-essential;
+        sudo apt-get install libc6-dev;
+        wget https://sourceware.org/pub/valgrind/valgrind-3.23.0.tar.bz2;
+        tar -xvf valgrind-3.23.0.tar.bz2;
+        cd valgrind-3.23.0;
+        ./configure;
+        make;
+        sudo make install;
+
       working-directory: .
 
     - name: Run tests with Valgrind
