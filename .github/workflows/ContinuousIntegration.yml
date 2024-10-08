@@ -42,7 +42,7 @@ jobs:
       if: ${{matrix.os == 'ubuntu-22.04'}}
       run: | 
         sudo apt-get install valgrind;
-        bash ../.github/scripts/prep_valgrand_test.sh
+        bash .github/scripts/prep_valgrand_test.sh
       working-directory: .
 
     - name: Run tests with Valgrind
@@ -54,7 +54,7 @@ jobs:
     - name: Setup Leaks on MacOS
       if: ${{matrix.os == 'macos-12'}}
       run: | 
-        bash ../.github/scripts/prep_leaks_test.sh
+        bash .github/scripts/prep_leaks_test.sh
       working-directory: .
 
     - name: Run tests with Leaks
