@@ -51,3 +51,15 @@ jobs:
         bash test_valgrind.sh
       working-directory: . 
 
+    - name: Setup Leaks on MacOS
+      if: ${{matrix.os == 'macos-12'}}
+      run: | 
+        bash .github/scripts/prep_leaks_test.sh
+      working-directory: .
+
+    - name: Run tests with Leaks
+      if: ${{matrix.os == 'macos-12'}}
+      run: |
+        bash test_leaks.sh
+      working-directory: . 
+
