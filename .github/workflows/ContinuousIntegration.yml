@@ -38,7 +38,7 @@ jobs:
       run: ctest -j2
       working-directory: ./bin
 
-    - name: Setup Valigrind on Ubuntu
+    - name: Setup Valgrind on Ubuntu
       if: ${{matrix.os == 'ubuntu-22.04'}}
       run: |
         sudo apt-get install valgrind;
