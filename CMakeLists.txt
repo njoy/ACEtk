@@ -50,7 +50,7 @@ option( ACEtk.installation "Install ACEtk" ON )
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
 include( cmake/dependencies.cmake )
 
-    ########################################################################
+########################################################################
 # Project targets
 ########################################################################
 
