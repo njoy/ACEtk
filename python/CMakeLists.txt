@@ -114,7 +114,7 @@ if(ACEtk.python)
     target_link_libraries(ACEtk.python PRIVATE njoy::ACEtk)
     add_dependencies( ACEtk.python njoy::tools.python)
     target_include_directories( ACEtk.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src )
-    target_compile_options( ACEtk.python PRIVATE -fvisibility=hidden )
+    set_target_properties( tools.python PROPERTIES CXX_VISIBILITY_PRESET hidden)
     set_target_properties( ACEtk.python PROPERTIES OUTPUT_NAME ACEtk )
     set_target_properties( ACEtk.python PROPERTIES LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR})
     set_target_properties( ACEtk.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
@@ -154,7 +154,7 @@ if(ACEtk.python)
         # The stubs get generated in the source tree so users can determine what changes if any were made to the stubs.
         # The stubs are then copied into the build tree so developers get the stubs when using the build tree's python bindings.
         # If the stubs fail to generate then this command exits gracefully and allows the build to continue.
-        add_custom_command( 
+        add_custom_command(
             TARGET ACEtk.python POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=${tools_PYTHONPATH}:${ACEtk_PYTHONPATH}:$ENV{PYTHONPATH} ${pybind11stubgen_exe} ACEtk -o ${CMAKE_CURRENT_SOURCE_DIR}/stubs &> ${CMAKE_CURRENT_BINARY_DIR}/pybind11-stubgen.log || true
             COMMAND ${CMAKE_COMMAND} -E rename ${stubdir}/__init__.pyi ${stubdir}/ACEtk.pyi &> /dev/null || true
@@ -165,7 +165,7 @@ if(ACEtk.python)
 
     else()
         # copy stub files to build tree even if pybind11stubgen isn't available.
-        add_custom_command( 
+        add_custom_command(
             TARGET ACEtk.python POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory ${stubdir}/ ${CMAKE_CURRENT_BINARY_DIR}
         )
