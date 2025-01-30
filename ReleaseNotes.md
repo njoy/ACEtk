@@ -2,7 +2,13 @@
 Given here are some release notes for ACEtk.
 
 ## ACEtk v1.0.3
-A few updates were made in the CMake files for Windows compilation issues. The GitHub CI was also updated: macos-14 (arm64 architecture) was added in addition to macos-13 (intel architecture). The version of the tools dependency was upped to the latest release.
+A few updates were made in the CMake files for Windows compilation issues.
+
+The GitHub CI was also updated: macos-14 (arm64 architecture) was added in addition to macos-13 (intel architecture).
+
+The version of the tools dependency was upped to the latest release (no functionality chages result from this update).
+
+Valgrind testing was added to the GitHub CI to detect memory issues in the future.
 
 ## [ACEtk v1.0.2](https://github.com/njoy/ACEtk/pull/137)
 This fixes the following issues in ACEtk:
