@@ -8,7 +8,7 @@ include( shacl_FetchContent )
 
 shacl_FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         7124bbfc746a9fa0e37a2c1e4a8eb019ddec9f02  # tag: v0.4.1
+    GIT_TAG         204c0cf81eab97f51d3f8372c69fcdfd073ce60b  # tag: v0.4.2
     )
 
 #######################################################################
@@ -20,7 +20,7 @@ if(ACEtk.python)
   find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
   shacl_FetchContent_Declare( pybind11
       GIT_REPOSITORY  ../../pybind/pybind11
-      GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
+      GIT_TAG         a2e59f0e7065404b44dfe92a28aca47ba1378dc4 # tag: v2.13.6
       )
   shacl_FetchContent_MakeAvailable(
     pybind11
