@@ -1,0 +1,31 @@
+stages:
+  - ci_downstream
+  - check_ok
+
+trigger_ci_downstream:
+  stage: ci_downstream
+
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      variables:
+        PARENT_MR_ID: $CI_MERGE_REQUEST_IID
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+      variables:
+        REF_BRANCH: $CI_COMMIT_REF_NAME
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      variables:
+        REF_BRANCH: $CI_COMMIT_REF_NAME
+
+  trigger:
+    project: NJOY/common_ci
+    branch: main
+    strategy: depend
+
+  variables:
+    MERGE_TYPE: $CI_PIPELINE_SOURCE
+    PROJECT_ROOT_NAME: "ACEtk"
+
+check:
+  stage: check_ok
+  script:
+    - echo "Looks good..."
