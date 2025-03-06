@@ -2,11 +2,17 @@
 Given here are some release notes for ACEtk.
 
 ## ACEtk v1.0.3
+This fixes the following issues in ACEtk:
+  - The KalbachMannDistributionData object now has its' distributions() function exposed
+    on the Python side like any other secondary particle distribution object.
+
 A few updates were made in the CMake files for Windows compilation issues.
 
-The GitHub CI was also updated: macos-14 (arm64 architecture) was added in addition to macos-13 (intel architecture).
+The GitHub CI was also updated: macos-14 (arm64 architecture) was added in addition to
+macos-13 (intel architecture).
 
-The version of the tools dependency and the pybind11 dependency was upped to the latest release (no functionality changes result from these dependency changes).
+The version of the tools dependency and the pybind11 dependency was upped to the latest
+release (no functionality changes result from these dependency changes).
 
 Valgrind testing was added to the GitHub CI to detect memory issues in the future.
 
