@@ -144,7 +144,7 @@ if(ACEtk.python)
         include( ${PROJECT_SOURCE_DIR}/cmake/unit_testing_python.cmake )
     endif()
 
-        ## generate python stubs if possible
+    # generate python stubs if possible
     find_program(pybind11stubgen_exe pybind11-stubgen)
 
     set(stubdir "${CMAKE_CURRENT_SOURCE_DIR}/stubs/ACEtk")
@@ -171,7 +171,7 @@ if(ACEtk.python)
         )
     endif()
 
-# install stubs so the installed binaries play nice with IDEs
+    # install stubs so the installed binaries play nice with IDEs
     if (ACEtk.installation)
         install( DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/stubs/ACEtk/ DESTINATION ${py_library_install_prefix} )
     endif()
