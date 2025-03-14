@@ -135,7 +135,7 @@ if(ACEtk.python)
 
     set( ACEtk_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}" )
     # Append potential installation and build paths for tools python module
-    set( tools_PYTHONPATH "${PROJECT_BINARY_DIR}/_deps/tools-build" )
+    set( tools_PYTHONPATH "${PROJECT_BINARY_DIR}/_deps/tools-build/python" )
     if (tools_DIR)
         set( tools_PYTHONPATH "${tools_PYTHONPATH}:${tools_DIR}/../../../${CMAKE_INSTALL_LIBDIR}" )
     endif()
