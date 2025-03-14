@@ -86,7 +86,7 @@ if (ACEtk.python)
   add_subdirectory(python)
 endif()
 
-if( ${ACEtk.tests} )
+if( ACEtk.tests )
   include( cmake/unit_testing.cmake )
 endif()
 
