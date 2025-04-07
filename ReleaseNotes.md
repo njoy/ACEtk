@@ -8,6 +8,9 @@ This fixes the following issues in ACEtk:
 
 A few updates were made in the CMake files for Windows compilation issues.
 
+An Apple clang 17.0.0 compilation issue was resolved as well (an unknown member used in
+a method in a CRTP base class went undetected in the past).
+
 The GitHub CI was also updated: macos-14 (arm64 architecture) was added in addition to
 macos-13 (intel architecture).
 
