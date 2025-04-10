@@ -78,8 +78,8 @@ auto block( std::size_t index ) const {
   }
 
   return std::make_pair(
-             begin + start - 1,
-             end != 0 ? begin + end - 1 : this->data().XSS().end() );
+             begin + ( start - 1 ),
+             end != 0 ? begin + ( end - 1 ) : this->data().XSS().end() );
 }
 
 auto block( std::size_t particle, std::size_t index ) const {
