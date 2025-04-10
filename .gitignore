@@ -41,3 +41,10 @@ dependencies
 # python
 __pycache__
 *.pyc
+
+# visual studio
+.vs/
+.vscode/
+CMakeSettings.json
+*_err*.txt
+*_out*.txt
