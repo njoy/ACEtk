@@ -133,11 +133,12 @@ if(ACEtk.python)
 
     message( STATUS "Building ACEtk's python API" )
 
-    set( ACEtk_PYTHONPATH "${CMAKE_CURRENT_BINARY_DIR}" )
+    set( ACEtk_PYTHONPATH "${PROJECT_BINARY_DIR}/python/Debug" )
     # Append potential installation and build paths for tools python module
-    set( tools_PYTHONPATH "${PROJECT_BINARY_DIR}/_deps/tools-build/python" )
+    set( tools_PYTHONPATH "${PROJECT_BINARY_DIR}/_deps/tools-build/python/Debug" )
     if (tools_DIR)
-        set( tools_PYTHONPATH "${tools_PYTHONPATH}:${tools_DIR}/../../../${CMAKE_INSTALL_LIBDIR}" )
+	  set(tools_PYTHONPATH_PARTS ${tools_PYTHONPATH} "${tools_DIR}/../../../${CMAKE_INSTALL_LIBDIR}" )
+	  string( JOIN "\;" tools_PYTHONPATH ${tools_PYTHONPATH_PARTS})
     endif()
 
     if( ACEtk.tests )
@@ -146,6 +147,9 @@ if(ACEtk.python)
 
     # generate python stubs if possible
     find_program(pybind11stubgen_exe pybind11-stubgen)
+
+    set(PYTHONPATH_PARTS ${tools_PYTHONPATH} ${ACEtk_PYTHONPATH} $ENV{PYTHONPATH})
+    string( JOIN "\;" PYTHONPATH_VALUE ${PYTHONPATH_PARTS})
 
     set(stubdir "${CMAKE_CURRENT_SOURCE_DIR}/stubs/ACEtk")
     if (pybind11stubgen_exe)
@@ -156,7 +160,7 @@ if(ACEtk.python)
         # If the stubs fail to generate then this command exits gracefully and allows the build to continue.
         add_custom_command(
             TARGET ACEtk.python POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=${tools_PYTHONPATH}:${ACEtk_PYTHONPATH}:$ENV{PYTHONPATH} ${pybind11stubgen_exe} ACEtk -o ${CMAKE_CURRENT_SOURCE_DIR}/stubs &> ${CMAKE_CURRENT_BINARY_DIR}/pybind11-stubgen.log || true
+            COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH_VALUE}" ${pybind11stubgen_exe} ACEtk -o ${CMAKE_CURRENT_SOURCE_DIR}/stubs &> ${CMAKE_CURRENT_BINARY_DIR}/pybind11-stubgen.log || true
             COMMAND ${CMAKE_COMMAND} -E rename ${stubdir}/__init__.pyi ${stubdir}/ACEtk.pyi &> /dev/null || true
             COMMAND ${CMAKE_COMMAND} -E copy_directory ${stubdir}/ ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Building ACEtk's python stub files via pybind11-stubgen. See pybind11-stubgen.log for details."
