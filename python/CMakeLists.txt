@@ -139,7 +139,7 @@ if(ACEtk.python)
 
     # Windows and unix have different delimiter for paths
     if (WIN32)
-	    set(PATH_DELIM "\;");
+	    set(PATH_DELIM "\;")
     else()
 	    set(PATH_DELIM ":")
     endif()
