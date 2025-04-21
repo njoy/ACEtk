@@ -7,7 +7,7 @@ enable_testing()
 function( add_python_test name source )
 
   set(PYTHONPATH_PARTS ${tools_PYTHONPATH} ${ACEtk_PYTHONPATH} $ENV{PYTHONPATH})
-  string( JOIN "\;" PYTHONPATH_VALUE ${PYTHONPATH_PARTS})
+  string( JOIN "${PATH_DELIM}" PYTHONPATH_VALUE ${PYTHONPATH_PARTS})
 
   set( test_name "ACEtk.python.${name}.test" )
   add_test( NAME ${test_name}
