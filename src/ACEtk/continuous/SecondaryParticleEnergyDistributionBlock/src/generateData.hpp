@@ -20,7 +20,7 @@ generateData( std::size_t locator, Iterator left, Iterator right ) {
       double emax = *( left + 3 + 2 * nr + 1 + ne );
 
       // compute iterators into the xss array
-      const auto start = left + idat - locator;
+      const auto start = left + ( idat - locator );
 
       // switch on the law and return the appropriate data
       switch ( law ) {
