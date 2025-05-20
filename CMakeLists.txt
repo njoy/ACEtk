@@ -27,8 +27,8 @@ set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
 cmake_dependent_option(
   ACEtk.tests
-    "Build the ACEtk unit tests and integrate with ctest" ON
-    "BUILD_TESTING AND NOT ${subproject}" OFF
+  "Build the ACEtk unit tests and integrate with ctest" ON
+  "BUILD_TESTING AND NOT ${subproject}" OFF
 )
 
 cmake_dependent_option(
@@ -139,7 +139,6 @@ if(ACEtk.installation)
       include(CPack)
     endif()
 endif()
-
 
 ########################################################################
 # Windows-specific setup
