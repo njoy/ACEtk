@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( ACEtk
-  VERSION 1.0.3
+  VERSION 1.0.4
   LANGUAGES CXX
 )
 
