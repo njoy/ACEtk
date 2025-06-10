@@ -35,11 +35,6 @@ protected:
   /* constructor */
   #include "ACEtk/base/ElectronBlockWithLocators/src/ctor.hpp"
 
-  /**
-   *  @brief Return the iterator to the start of the data block
-   */
-  Iterator iter() const { return this->iterator_; }
-
 public:
 
   /* methods */

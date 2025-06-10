@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.24 )
+cmake_minimum_required( VERSION 3.27 )
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
 include( shacl_FetchContent )
 
@@ -8,7 +8,7 @@ include( shacl_FetchContent )
 
 shacl_FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         e0eb6b4f3e6d7afce7c2c521e68b4f223c50fe2d  # tag: v0.4.0
+    GIT_TAG         902cf189f7a28012945577a9f77180a516e0e978  # tag: v0.4.3
     )
 
 #######################################################################
@@ -20,7 +20,7 @@ if(ACEtk.python)
   find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
   shacl_FetchContent_Declare( pybind11
       GIT_REPOSITORY  ../../pybind/pybind11
-      GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
+      GIT_TAG         a2e59f0e7065404b44dfe92a28aca47ba1378dc4 # tag: v2.13.6
       )
   shacl_FetchContent_MakeAvailable(
     pybind11

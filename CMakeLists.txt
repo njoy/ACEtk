@@ -2,7 +2,7 @@
 # Preamble
 ########################################################################
 
-cmake_minimum_required( VERSION 3.24 )
+cmake_minimum_required( VERSION 3.27 )
 
 set( subproject OFF )
 if( DEFINED PROJECT_NAME )
@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( ACEtk
-  VERSION 1.0.2
+  VERSION 1.0.3
   LANGUAGES CXX
 )
 
@@ -27,8 +27,8 @@ set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
 cmake_dependent_option(
   ACEtk.tests
-    "Build the ACEtk unit tests and integrate with ctest" ON
-    "BUILD_TESTING AND NOT ${subproject}" OFF
+  "Build the ACEtk unit tests and integrate with ctest" ON
+  "BUILD_TESTING AND NOT ${subproject}" OFF
 )
 
 cmake_dependent_option(
@@ -50,7 +50,7 @@ option( ACEtk.installation "Install ACEtk" ON )
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
 include( cmake/dependencies.cmake )
 
-    ########################################################################
+########################################################################
 # Project targets
 ########################################################################
 
@@ -86,7 +86,7 @@ if (ACEtk.python)
   add_subdirectory(python)
 endif()
 
-if( ${ACEtk.tests} )
+if( ACEtk.tests )
   include( cmake/unit_testing.cmake )
 endif()
 
@@ -138,4 +138,14 @@ if(ACEtk.installation)
       set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
       include(CPack)
     endif()
+endif()
+
+########################################################################
+# Windows-specific setup
+########################################################################
+
+# enable Edit and Continue in Visual Studio (for debugging)
+if(MSVC)
+  target_compile_options(${PROJECT_NAME}  INTERFACE "/ZI")
+  target_link_options(${PROJECT_NAME} INTERFACE "/INCREMENTAL")
 endif()

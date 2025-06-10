@@ -3,7 +3,9 @@ Continuous energy ACE blocks and components
 """
 import ACEtk
 from __future__ import annotations
+import pybind11_stubgen.typing_ext
 import typing
+import typing_extensions
 __all__ = ['AngleEnergyDistributionData', 'AngularDistributionBlock', 'AngularDistributionData', 'CrossSectionBlock', 'CrossSectionData', 'DelayedNeutronPrecursorBlock', 'DelayedNeutronPrecursorData', 'DiscretePhotonDistribution', 'DistributionGivenElsewhere', 'DistributionProbability', 'EnergyAngleDistributionData', 'EnergyDependentWattSpectrum', 'EnergyDistributionBlock', 'EquiprobableAngularBins', 'EquiprobableOutgoingEnergyBinData', 'EquiprobableOutgoingEnergyBins', 'EvaporationSpectrum', 'FissionMultiplicityBlock', 'FrameAndMultiplicityBlock', 'FullyIsotropicDistribution', 'GeneralEvaporationSpectrum', 'InterpolationData', 'IsotropicAngularDistribution', 'KalbachMannDistributionData', 'LevelScatteringDistribution', 'MultiDistributionData', 'MultiplicityReactionNumberBlock', 'NBodyPhaseSpaceDistribution', 'OutgoingEnergyDistributionData', 'ParameterData', 'PhotonProductionBlock', 'PhotonProductionCrossSectionBlock', 'PhotonProductionCrossSectionData', 'PolynomialFissionMultiplicity', 'PrincipalCrossSectionBlock', 'ProbabilityTable', 'ProbabilityTableBlock', 'ReactionNumberBlock', 'ReactionQValueBlock', 'SecondaryParticleAngularDistributionBlock', 'SecondaryParticleEnergyDistributionBlock', 'SecondaryParticleInformationBlock', 'SecondaryParticleLocatorBlock', 'SecondaryParticleProductionBlock', 'SecondaryParticleProductionCrossSectionBlock', 'SecondaryParticleTypeBlock', 'SimpleMaxwellianFissionSpectrum', 'TabulatedAngleEnergyDistribution', 'TabulatedAngularDistribution', 'TabulatedAngularDistributionWithProbability', 'TabulatedEnergyAngleDistribution', 'TabulatedEnergyDistribution', 'TabulatedFissionMultiplicity', 'TabulatedKalbachMannDistribution', 'TabulatedMultiplicity', 'TabulatedSecondaryParticleMultiplicity', 'TwoBodyTransferDistribution', 'UndefinedDistribution']
 class AngleEnergyDistributionData:
     """
@@ -2640,6 +2642,11 @@ class KalbachMannDistributionData:
         The interpolation boundaries
         """
     @property
+    def distributions(self) -> list[TabulatedKalbachMannDistribution]:
+        """
+        The distributions
+        """
+    @property
     def empty(self) -> bool:
         """
         Whether or not the block is empty
@@ -4773,7 +4780,7 @@ class SecondaryParticleLocatorBlock:
             self     the block
             index    the secondary particle index (one-based)
         """
-    def __init__(self, locators: list[list[int[10]]]) -> None:
+    def __init__(self, locators: list[typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(10)]]) -> None:
         """
         Initialise the block
         
