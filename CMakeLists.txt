@@ -145,8 +145,8 @@ endif()
 ########################################################################
 
 # enable Edit and Continue in Visual Studio (for debugging)
-if(MSVC)
-  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  if(MSVC)
     target_compile_options(${PROJECT_NAME}  INTERFACE "/ZI")
     target_link_options(${PROJECT_NAME} INTERFACE "/INCREMENTAL")
   endif()
