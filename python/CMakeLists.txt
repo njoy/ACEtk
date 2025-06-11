@@ -1,5 +1,6 @@
 if(ACEtk.python)
 
+    find_package( Python3 REQUIRED )
     pybind11_add_module( ACEtk.python
         ${CMAKE_CURRENT_SOURCE_DIR}/src/ACEtk.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/XsdirEntry.python.cpp
