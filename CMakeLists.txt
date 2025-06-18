@@ -82,12 +82,12 @@ if (ACEtk.python AND NOT TARGET njoy::tools.python)
   set(ACEtk.python OFF)
 endif()
 
-if (ACEtk.python)
-  add_subdirectory(python)
+if ( ACEtk.python )
+  add_subdirectory( python )
 endif()
 
 if( ACEtk.tests )
-  include( cmake/unit_testing.cmake )
+  add_subdirectory( test )
 endif()
 
 #######################################################################

@@ -18,14 +18,16 @@ trigger_ci_downstream:
 
   trigger:
     project: NJOY/common_ci
-    branch: main
+    branch: 1-add-windows-ci-script
     strategy: depend
 
   variables:
     MERGE_TYPE: $CI_PIPELINE_SOURCE
+    PARENT_MR_ID: "$CI_MERGE_REQUEST_IID"
     PROJECT_ROOT_NAME: "ACEtk"
 
 check:
   stage: check_ok
   script:
+    - printenv
     - echo "Looks good..."
