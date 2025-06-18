@@ -18,7 +18,7 @@ trigger_ci_downstream:
 
   trigger:
     project: NJOY/common_ci
-    branch: 1-add-windows-ci-script
+    branch: main
     strategy: depend
 
   variables:
