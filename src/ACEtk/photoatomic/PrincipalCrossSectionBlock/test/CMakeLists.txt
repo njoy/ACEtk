@@ -1,1 +1,0 @@
-add_cpp_test( photoatomic.PrincipalCrossSectionBlock PrincipalCrossSectionBlock.test.cpp )

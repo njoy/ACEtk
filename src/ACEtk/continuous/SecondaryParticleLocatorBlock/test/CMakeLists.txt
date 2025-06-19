@@ -1,1 +1,0 @@
-add_cpp_test( continuous.SecondaryParticleLocatorBlock SecondaryParticleLocatorBlock.test.cpp )

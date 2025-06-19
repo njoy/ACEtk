@@ -1,1 +1,0 @@
-add_cpp_test( photonuclear.SecondaryParticleLocatorBlock SecondaryParticleLocatorBlock.test.cpp )

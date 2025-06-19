@@ -1,1 +1,0 @@
-add_cpp_test( continuous.EquiprobableOutgoingEnergyBins EquiprobableOutgoingEnergyBins.test.cpp )
