@@ -1344,6 +1344,11 @@ class PhotoatomicTable:
         The temperature of the table
         """
     @property
+    def XPROB(self) -> electron.SubshellTransitionDataBlock | None:
+        """
+        The subshell transition data block for eprdata (NEPR > 0)
+        """
+    @property
     def Z(self) -> int:
         """
         The atom number of the target
@@ -1508,6 +1513,11 @@ class PhotoatomicTable:
     def principal_cross_section_block(self) -> photoatomic.PrincipalCrossSectionBlock:
         """
         The principal cross section block
+        """
+    @property
+    def subshell_transition_data_block(self) -> electron.SubshellTransitionDataBlock | None:
+        """
+        The subshell transition data block for eprdata (NEPR > 0)
         """
     @property
     def temperature(self) -> float:

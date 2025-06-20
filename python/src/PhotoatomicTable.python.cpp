@@ -421,6 +421,18 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
+    "XPROB",
+    &Table::XPROB,
+    "The subshell transition data block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
+    "subshell_transition_data_block",
+    &Table::subshellTransitionDataBlock,
+    "The subshell transition data block for eprdata (NEPR > 0)"
+  )
+  .def_property_readonly(
+
     "ESZE",
     &Table::ESZE,
     "The electron cross section block for eprdata (NEPR > 0)"
