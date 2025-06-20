@@ -25,7 +25,7 @@ SCENARIO( "ElectronSubshellBlock" ) {
     WHEN( "the data is given explicitly" ) {
 
       std::vector< unsigned int > designators = { 1, 2, 3, 4, 5 };
-      std::vector< unsigned int > electrons = { 2, 2, 2, 4, 2 };
+      std::vector< double > electrons = { 2, 2, 2, 4, 2 };
       std::vector< double > energies = { 1.2945e-3, 8.946e-5, 5.655e-5,
                                          5.6240e-5, 6.890e-6 };
       std::vector< double > probabilities = { 1.666666666667E-1, 3.333333333333E-1,
