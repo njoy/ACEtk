@@ -39,7 +39,7 @@ void wrapElectronSubshellBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< unsigned int >, std::vector< unsigned int >,
+    python::init< std::vector< unsigned int >, std::vector< double >,
                   std::vector< double >, std::vector< double >,
                   std::vector< unsigned int > >(),
     python::arg( "designators" ), python::arg( "electrons" ),

@@ -24,7 +24,8 @@ ArrayData& operator=( ArrayData&& ) = default;
  */
 template < typename Number >
 ArrayData( std::string&& name, std::vector< std::vector< Number > >&& values ) :
-  ArrayData( std::move( name ), std::move( values ), values.front().size(),
+  ArrayData( std::move( name ), std::move( values ),
+             values.size() > 0 ? values.front().size() : 0,
              values.size() ) {}
 
 /**

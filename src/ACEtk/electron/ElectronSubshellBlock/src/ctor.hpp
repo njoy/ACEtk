@@ -16,7 +16,7 @@ ElectronSubshellBlock& operator=( ElectronSubshellBlock&& ) = default;
  *                              for each subshell
  */
 ElectronSubshellBlock( std::vector< unsigned int > designators,
-                       std::vector< unsigned int > electrons,
+                       std::vector< double > electrons,
                        std::vector< double > energies,
                        std::vector< double > probabilities,
                        std::vector< unsigned int > transitions ) :
@@ -25,8 +25,7 @@ ElectronSubshellBlock( std::vector< unsigned int > designators,
 
                [] ( auto&& vector ) -> std::vector< double >
                   { return { vector.begin(), vector.end() }; }( designators ),
-               [] ( auto&& vector ) -> std::vector< double >
-                  { return { vector.begin(), vector.end() }; }( electrons ),
+               std::move( electrons ),
                std::move( energies ),
                std::move( probabilities ),
                [] ( auto&& vector ) -> std::vector< double >
