@@ -8,7 +8,7 @@ include( shacl_FetchContent )
 
 shacl_FetchContent_Declare( tools
     GIT_REPOSITORY  ../../njoy/tools
-    GIT_TAG         22bae7709d012914f32c99c0fb7aab06f49c5f62  # tag: v0.4.3
+    GIT_TAG         08cac7cc68fcf83cc4b5230712fc3a4d9d990ac6  # NOT A RELEASED VERSION - CHANGE ME!
     )
 
 #######################################################################
