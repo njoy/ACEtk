@@ -3,6 +3,8 @@ Given here are some release notes for ACEtk.
 
 ## ACEtk v1.0.4
 
+shacl-cmake was updated to the latest version.
+
 ## ACEtk v1.0.3
 This fixes the following issues in ACEtk:
   - The KalbachMannDistributionData object now has its' distributions() function exposed
