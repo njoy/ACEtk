@@ -12,15 +12,15 @@
 #include "ACEtk/photoatomic/HeatingNumbersBlock.hpp"
 #include "ACEtk/photoatomic/ComptonProfileBlock.hpp"
 #include "ACEtk/photoatomic/PhotoelectricCrossSectionBlock.hpp"
-#include "ACEtk/electron/PrincipalCrossSectionBlock.hpp"
-#include "ACEtk/electron/ElasticCrossSectionBlock.hpp"
-#include "ACEtk/electron/ElectronShellBlock.hpp"
-#include "ACEtk/electron/ElectronSubshellBlock.hpp"
-#include "ACEtk/electron/SubshellTransitionDataBlock.hpp"
-#include "ACEtk/electron/ElasticAngularDistributionBlock.hpp"
-#include "ACEtk/electron/EnergyDistributionBlock.hpp"
-#include "ACEtk/electron/ExcitationBlock.hpp"
-#include "ACEtk/electron/BremsstrahlungBlock.hpp"
+#include "ACEtk/electroatomic/PrincipalCrossSectionBlock.hpp"
+#include "ACEtk/electroatomic/ElasticCrossSectionBlock.hpp"
+#include "ACEtk/electroatomic/ElectronShellBlock.hpp"
+#include "ACEtk/electroatomic/ElectronSubshellBlock.hpp"
+#include "ACEtk/electroatomic/SubshellTransitionDataBlock.hpp"
+#include "ACEtk/electroatomic/ElasticAngularDistributionBlock.hpp"
+#include "ACEtk/electroatomic/EnergyDistributionBlock.hpp"
+#include "ACEtk/electroatomic/ExcitationBlock.hpp"
+#include "ACEtk/electroatomic/BremsstrahlungBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -39,18 +39,18 @@ class PhotoatomicTable : protected Table {
   photoatomic::JCOH jcoh_;
   std::optional< photoatomic::JFLO > jflo_;
   photoatomic::LHNM lhnm_;
-  std::optional< electron::EPS > eps_;
+  std::optional< electroatomic::EPS > eps_;
   std::optional< photoatomic::SWD > swd_;
-  std::optional< electron::SUBSH > subsh_;
+  std::optional< electroatomic::SUBSH > subsh_;
   std::optional< photoatomic::SPHEL > sphel_;
-  std::optional< electron::XPROB > xprob_;
-  std::optional< electron::ESZE > esze_;
-  std::optional< electron::EXCIT > excit_;
-  std::optional< electron::ELAS > elas_;
-  std::vector< electron::EION > eion_;
-  std::optional< electron::BREME > breme_;
-  std::optional< electron::BREML > breml_;
-  std::optional< electron::SELAS > selas_;
+  std::optional< electroatomic::XPROB > xprob_;
+  std::optional< electroatomic::ESZE > esze_;
+  std::optional< electroatomic::EXCIT > excit_;
+  std::optional< electroatomic::ELAS > elas_;
+  std::vector< electroatomic::EION > eion_;
+  std::optional< electroatomic::BREME > breme_;
+  std::optional< electroatomic::BREML > breml_;
+  std::optional< electroatomic::SELAS > selas_;
 
   /* auxiliary functions */
   #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
@@ -359,12 +359,12 @@ public:
   /**
    *  @brief Return the electron shell block
    */
-  const std::optional< electron::EPS >& EPS() const { return this->eps_; }
+  const std::optional< electroatomic::EPS >& EPS() const { return this->eps_; }
 
   /**
    *  @brief Return the electron shell block
    */
-  const std::optional< electron::EPS >& electronShellBlock() const {
+  const std::optional< electroatomic::EPS >& electronShellBlock() const {
 
     return this->EPS();
   }
@@ -385,12 +385,12 @@ public:
   /**
    *  @brief Return the electron subshell data block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::SUBSH >& SUBSH() const { return this->subsh_; }
+  const std::optional< electroatomic::SUBSH >& SUBSH() const { return this->subsh_; }
 
   /**
    *  @brief Return the electron subshell data block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::SUBSH >& electronSubshellBlock() const {
+  const std::optional< electroatomic::SUBSH >& electronSubshellBlock() const {
 
     return this->SUBSH();
   }
@@ -414,12 +414,12 @@ public:
   /**
    *  @brief Return the subshell transition data block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::XPROB >& XPROB() const { return this->xprob_; }
+  const std::optional< electroatomic::XPROB >& XPROB() const { return this->xprob_; }
 
   /**
    *  @brief Return the subshell transition data block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::XPROB >& subshellTransitionDataBlock() const {
+  const std::optional< electroatomic::XPROB >& subshellTransitionDataBlock() const {
 
     return this->XPROB();
   }
@@ -427,12 +427,12 @@ public:
   /**
    *  @brief Return the electron cross section block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::ESZE >& ESZE() const { return this->esze_; }
+  const std::optional< electroatomic::ESZE >& ESZE() const { return this->esze_; }
 
   /**
    *  @brief Return the electron cross section block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::ESZE >& electronCrossSectionBlock() const {
+  const std::optional< electroatomic::ESZE >& electronCrossSectionBlock() const {
 
     return this->ESZE();
   }
@@ -440,12 +440,12 @@ public:
   /**
    *  @brief Return the electron excitation energy loss block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::EXCIT >& EXCIT() const { return this->excit_; }
+  const std::optional< electroatomic::EXCIT >& EXCIT() const { return this->excit_; }
 
   /**
    *  @brief Return the electron excitation energy loss block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::EXCIT >& electronExcitationEnergyLossBlock() const {
+  const std::optional< electroatomic::EXCIT >& electronExcitationEnergyLossBlock() const {
 
     return this->EXCIT();
   }
@@ -453,12 +453,12 @@ public:
   /**
    *  @brief Return the electron elastic angular distribution block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::ELAS >& ELAS() const { return this->elas_; }
+  const std::optional< electroatomic::ELAS >& ELAS() const { return this->elas_; }
 
   /**
    *  @brief Return the electron elastic angular distribution block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::ELAS >& electronElasticAngularDistributionBlock() const {
+  const std::optional< electroatomic::ELAS >& electronElasticAngularDistributionBlock() const {
 
     return this->ELAS();
   }
@@ -472,7 +472,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const electron::EION& EION( std::size_t index ) const {
+  const electroatomic::EION& EION( std::size_t index ) const {
 
     #ifndef NDEBUG
     this->verifySubshellIndex( index );
@@ -489,7 +489,7 @@ public:
    *
    *  @param[in] index     the index (one-based)
    */
-  const electron::EION& electroionisationEnergyDistributionBlock( std::size_t index ) const {
+  const electroatomic::EION& electroionisationEnergyDistributionBlock( std::size_t index ) const {
 
     return this->EION( index );
   }
@@ -497,12 +497,12 @@ public:
   /**
    *  @brief Return the Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::BREME >& BREME() const { return this->breme_; }
+  const std::optional< electroatomic::BREME >& BREME() const { return this->breme_; }
 
   /**
    *  @brief Return the Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::BREME >& bremsstrahlungEnergyDistributionBlock() const {
+  const std::optional< electroatomic::BREME >& bremsstrahlungEnergyDistributionBlock() const {
 
     return this->BREME();
   }
@@ -510,12 +510,12 @@ public:
   /**
    *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::BREML >& BREML() const { return this->breml_; }
+  const std::optional< electroatomic::BREML >& BREML() const { return this->breml_; }
 
   /**
    *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
    */
-  const std::optional< electron::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
+  const std::optional< electroatomic::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
 
     return this->BREML();
   }
@@ -523,12 +523,12 @@ public:
   /**
    *  @brief Return the additional elastic cross section block for eprdata (NEPR = 3)
    */
-  const std::optional< electron::SELAS >& SELAS() const { return this->selas_; }
+  const std::optional< electroatomic::SELAS >& SELAS() const { return this->selas_; }
 
   /**
    *  @brief Return the additional elastic cross section block for eprdata (NEPR = 3)
    */
-  const std::optional< electron::SELAS >& electronElasticCrossSectionBlock() const {
+  const std::optional< electroatomic::SELAS >& electronElasticCrossSectionBlock() const {
 
     return this->SELAS();
   }

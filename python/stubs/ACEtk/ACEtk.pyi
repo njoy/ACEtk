@@ -4,7 +4,7 @@ import typing
 import typing_extensions
 from . import continuous
 from . import dosimetry
-from . import electron
+from . import electroatomic
 from . import photoatomic
 from . import photonuclear
 from . import sequence
@@ -1141,7 +1141,7 @@ class PhotoatomicTable:
         Arguments:
             filename    the file name and path
         """
-    def EION(self, index: int) -> electron.EnergyDistributionBlock:
+    def EION(self, index: int) -> electroatomic.EnergyDistributionBlock:
         """
         Return the knock-on electron energy distribution block for a subshell index
         
@@ -1151,7 +1151,7 @@ class PhotoatomicTable:
             self     the block
             index    the index (one-based)
         """
-    def __init__(self, z: int, header: Header | Header201, za: list[int], awr: list[float], eszg: photoatomic.PrincipalCrossSectionBlock, jinc: photoatomic.IncoherentScatteringFunctionBlock, jcoh: photoatomic.CoherentFormFactorBlock, lhnm: photoatomic.HeatingNumbersBlock, jflo: photoatomic.FluorescenceDataBlock | None = None, eps: electron.ElectronShellBlock | None = None, swd: photoatomic.ComptonProfileBlock | None = None, subsh: electron.ElectronSubshellBlock | None = None, sphel: photoatomic.PhotoelectricCrossSectionBlock | None = None, xprob: electron.SubshellTransitionDataBlock | None = None, esze: electron.PrincipalCrossSectionBlock | None = None, excit: electron.ExcitationBlock | None = None, elas: electron.ElasticAngularDistributionBlock | None = None, eion: list[electron.EnergyDistributionBlock] = [], breme: electron.EnergyDistributionBlock | None = None, breml: electron.BremsstrahlungBlock | None = None, selas: electron.ElasticCrossSectionBlock | None = None) -> None:
+    def __init__(self, z: int, header: Header | Header201, za: list[int], awr: list[float], eszg: photoatomic.PrincipalCrossSectionBlock, jinc: photoatomic.IncoherentScatteringFunctionBlock, jcoh: photoatomic.CoherentFormFactorBlock, lhnm: photoatomic.HeatingNumbersBlock, jflo: photoatomic.FluorescenceDataBlock | None = None, eps: electroatomic.ElectronShellBlock | None = None, swd: photoatomic.ComptonProfileBlock | None = None, subsh: electroatomic.ElectronSubshellBlock | None = None, sphel: photoatomic.PhotoelectricCrossSectionBlock | None = None, xprob: electroatomic.SubshellTransitionDataBlock | None = None, esze: electroatomic.PrincipalCrossSectionBlock | None = None, excit: electroatomic.ExcitationBlock | None = None, elas: electroatomic.ElasticAngularDistributionBlock | None = None, eion: list[electroatomic.EnergyDistributionBlock] = [], breme: electroatomic.EnergyDistributionBlock | None = None, breml: electroatomic.BremsstrahlungBlock | None = None, selas: electroatomic.ElasticCrossSectionBlock | None = None) -> None:
         """
         Initialise the table
         
@@ -1179,7 +1179,7 @@ class PhotoatomicTable:
             breml     the electron average energy after Bremsstrahlung
             selas     the additional electron elastic cross section block
         """
-    def electroionisation_energy_distribution_block(self, index: int) -> electron.EnergyDistributionBlock:
+    def electroionisation_energy_distribution_block(self, index: int) -> electroatomic.EnergyDistributionBlock:
         """
         Return the knock-on electron energy distribution block for a subshell index
         
@@ -1208,27 +1208,27 @@ class PhotoatomicTable:
         The atomic weight ratio (with respect to the neutron mass)
         """
     @property
-    def BREME(self) -> electron.EnergyDistributionBlock | None:
+    def BREME(self) -> electroatomic.EnergyDistributionBlock | None:
         """
         The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
         """
     @property
-    def BREML(self) -> electron.BremsstrahlungBlock | None:
+    def BREML(self) -> electroatomic.BremsstrahlungBlock | None:
         """
         The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
         """
     @property
-    def ELAS(self) -> electron.ElasticAngularDistributionBlock | None:
+    def ELAS(self) -> electroatomic.ElasticAngularDistributionBlock | None:
         """
         The electron elastic angular distribution block for eprdata (NEPR > 0)
         """
     @property
-    def EPS(self) -> electron.ElectronShellBlock | None:
+    def EPS(self) -> electroatomic.ElectronShellBlock | None:
         """
         The electron shell block
         """
     @property
-    def ESZE(self) -> electron.PrincipalCrossSectionBlock | None:
+    def ESZE(self) -> electroatomic.PrincipalCrossSectionBlock | None:
         """
         The electron cross section block for eprdata (NEPR > 0)
         """
@@ -1238,7 +1238,7 @@ class PhotoatomicTable:
         The principal cross section block
         """
     @property
-    def EXCIT(self) -> electron.ExcitationBlock | None:
+    def EXCIT(self) -> electroatomic.ExcitationBlock | None:
         """
         The electron excitation energy loss block for eprdata (NEPR > 0)
         """
@@ -1319,7 +1319,7 @@ class PhotoatomicTable:
         The isomeric state of the target
         """
     @property
-    def SELAS(self) -> electron.ElasticCrossSectionBlock | None:
+    def SELAS(self) -> electroatomic.ElasticCrossSectionBlock | None:
         """
         The additional elastic cross section block for eprdata (NEPR = 3)
         """
@@ -1329,7 +1329,7 @@ class PhotoatomicTable:
         The photolectric cross section block for eprdata (NEPR > 0)
         """
     @property
-    def SUBSH(self) -> electron.ElectronSubshellBlock | None:
+    def SUBSH(self) -> electroatomic.ElectronSubshellBlock | None:
         """
         The electron subshell data block for eprdata (NEPR > 0)
         """
@@ -1359,7 +1359,7 @@ class PhotoatomicTable:
         The atomic weight ratio (with respect to the neutron mass)
         """
     @property
-    def bremsstrahlung_energy_distribution_block(self) -> electron.EnergyDistributionBlock | None:
+    def bremsstrahlung_energy_distribution_block(self) -> electroatomic.EnergyDistributionBlock | None:
         """
         The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
         """
@@ -1384,27 +1384,27 @@ class PhotoatomicTable:
         The date
         """
     @property
-    def electron_cross_section_block(self) -> electron.PrincipalCrossSectionBlock | None:
+    def electron_cross_section_block(self) -> electroatomic.PrincipalCrossSectionBlock | None:
         """
         The electron cross section block for eprdata (NEPR > 0)
         """
     @property
-    def electron_elastic_angular_distribution_block(self) -> electron.ElasticAngularDistributionBlock | None:
+    def electron_elastic_angular_distribution_block(self) -> electroatomic.ElasticAngularDistributionBlock | None:
         """
         The electron elastic angular distribution block for eprdata (NEPR > 0)
         """
     @property
-    def electron_elastic_cross_section_block(self) -> electron.ElasticCrossSectionBlock | None:
+    def electron_elastic_cross_section_block(self) -> electroatomic.ElasticCrossSectionBlock | None:
         """
         The additional elastic cross section block for eprdata (NEPR = 3)
         """
     @property
-    def electron_energy_after_bremsstrahlung_block(self) -> electron.BremsstrahlungBlock | None:
+    def electron_energy_after_bremsstrahlung_block(self) -> electroatomic.BremsstrahlungBlock | None:
         """
         The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
         """
     @property
-    def electron_excitation_energy_loss_block(self) -> electron.ExcitationBlock | None:
+    def electron_excitation_energy_loss_block(self) -> electroatomic.ExcitationBlock | None:
         """
         The electron excitation energy loss block for eprdata (NEPR > 0)
         """
@@ -1415,12 +1415,12 @@ class PhotoatomicTable:
         2012 and 3 for EPR data from 2014 and above)
         """
     @property
-    def electron_shell_block(self) -> electron.ElectronShellBlock | None:
+    def electron_shell_block(self) -> electroatomic.ElectronShellBlock | None:
         """
         The electron shell block
         """
     @property
-    def electron_subshell_block(self) -> electron.ElectronSubshellBlock | None:
+    def electron_subshell_block(self) -> electroatomic.ElectronSubshellBlock | None:
         """
         The electron subshell data block for eprdata (NEPR > 0)
         """

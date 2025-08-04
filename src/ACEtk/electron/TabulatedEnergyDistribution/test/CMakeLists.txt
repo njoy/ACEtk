@@ -1,1 +1,0 @@
-add_cpp_test( electron.TabulatedEnergyDistribution TabulatedEnergyDistribution.test.cpp )

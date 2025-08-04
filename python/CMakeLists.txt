@@ -86,19 +86,19 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/dosimetry.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/dosimetry/CrossSectionData.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/dosimetry/CrossSectionBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/ElectronShellBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/ElectronSubshellBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/PrincipalCrossSectionBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/ElasticCrossSectionBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/ExcitationBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/SubshellTransitionData.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/SubshellTransitionDataBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/TabulatedAngularDistribution.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/ElasticAngularDistributionBlock.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/TabulatedEnergyDistribution.python.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/EnergyDistributionBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/ElectronShellBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/ElectronSubshellBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/PrincipalCrossSectionBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/ElasticCrossSectionBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/ExcitationBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/BremsstrahlungBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/SubshellTransitionData.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/SubshellTransitionDataBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/TabulatedAngularDistribution.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/ElasticAngularDistributionBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/TabulatedEnergyDistribution.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/EnergyDistributionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal/CrossSectionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal/DiscreteCosines.python.cpp

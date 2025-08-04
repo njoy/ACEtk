@@ -15,7 +15,7 @@
 // ACE data blocks
 #include "ACEtk/photoatomic.hpp"
 #include "ACEtk/dosimetry.hpp"
-#include "ACEtk/electron.hpp"
+#include "ACEtk/electroatomic.hpp"
 #include "ACEtk/thermal.hpp"
 #include "ACEtk/continuous.hpp"
 
