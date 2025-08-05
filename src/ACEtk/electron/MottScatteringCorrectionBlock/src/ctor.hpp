@@ -16,12 +16,12 @@ MottScatteringCorrectionBlock& operator=( MottScatteringCorrectionBlock&& ) = de
  *  @param[in] corrections135deg    the Mott scattering corrections at 135 degrees
  *  @param[in] corrections180deg    the Mott scattering corrections at 180 degrees
  */
-MottScatteringCorrectionBlock( std::vector< double  > energies,
-                               std::vector< double  > corrections0deg,
-                               std::vector< double  > corrections45deg,
-                               std::vector< double  > corrections90deg,
-                               std::vector< double  > corrections135deg,
-                               std::vector< double  > corrections180deg ) :
+MottScatteringCorrectionBlock( std::vector< double > energies,
+                               std::vector< double > corrections0deg,
+                               std::vector< double > corrections45deg,
+                               std::vector< double > corrections90deg,
+                               std::vector< double > corrections135deg,
+                               std::vector< double > corrections180deg ) :
   ArrayData( "MOT",
              std::move( energies ), std::move( corrections0deg ),
              std::move( corrections45deg ), std::move( corrections90deg ),
