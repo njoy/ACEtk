@@ -33,14 +33,52 @@ class MottScatteringCorrectionBlock : protected base::ArrayData {
   /* fields */
   
   /* auxiliary functions */
+  #include "ACEtk/electron/MottScatteringCorrectionBlock/src/verifyMottCorrectionIndex.hpp"
   
 public:
 
   /* constructor */
+  #include "ACEtk/electron/MottScatteringCorrectionBlock/src/ctor.hpp"
   
   /* methods */
   
-
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int NMOT() const { return this->N(); }
+  
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int numberEnergyPoints() const { return this->NMOT(); }
+  
+  /**
+   *  @brief Return the energy points
+   */
+  auto energies() const { return this->darray(1); }
+  
+  /**
+   *  @brief Return the Mott scattering correction for an index
+   *
+   *  When the index is out of range an std::out_of_range exception is
+   *  thrown (debug mode only).
+   *
+   *  @param[in] index   the index (1 to 5, one-based)
+   */
+  auto mottScatteringCorrection( std::size_t index ) const {
+    
+    #ifndef NDEBUG
+    this->verifyMottCorrectionIndex( index );
+    #endif
+    return this->darray( 1 + index );
+  }
+  
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using MOT = MottScatteringCorrectionBlock;
