@@ -33,10 +33,39 @@ class OscillatorBlock : protected base::ArrayData {
 public:
 
   /* constructor */
+  #include "ACEtk/electron/OscillatorBlock/src/ctor.hpp"
   
   /* methods */
   
-
+  /**
+   *  @brief Return the number of oscillators
+   */
+  unsigned int NOSC() const { return this->N(); }
+  
+  /**
+   *  @brief Return the number of oscillators
+   */
+  unsigned int numberOscillators() const { return this->NOSC(); }
+  
+  /**
+   *  @brief Return the occupation numbers of each level
+   *
+   *  n < 0 at the last (highest) level signifies a conductor
+   */
+  auto occupationNumbers() const { return this->darray(1); }
+  
+  /**
+   *  @brief Return the binding energies of each level
+   */
+  auto bindingEnergies() const { return this->darray(2); }
+  
+  
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using OSC = OscillatorBlock;
