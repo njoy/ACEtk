@@ -33,10 +33,36 @@ class BremsstrahlungCorrectionFactorBlock : protected base::ArrayData {
 public:
 
   /* constructor */
+  #include "ACEtk/electron/BremsstrahlungCorrectionFactorBlock/src/ctor.hpp"
   
   /* methods */
   
-
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int NCRB() const { return this->N(); }
+  
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int numberEnergyPoints() const { return this->NCRB; }
+  
+  /**
+   *  @brief Return the energy values
+   */
+  auto energies() const { return this->darray( 1 ); }
+  
+  /**
+   *  @brief Return the bremsstrahlung production correction factors
+   */
+  auto corrections() const { return this->darray( 2 ); }
+  
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using CRB = BremsstrahlungCorrectionFactorBlock;
