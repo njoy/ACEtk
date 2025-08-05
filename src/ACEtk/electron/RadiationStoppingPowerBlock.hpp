@@ -34,10 +34,44 @@ class RadiationStoppingPowerBlock : protected base::ArrayData {
 public:
 
   /* constructor */
+  #include "ACEtk/electron/RadiationStoppingPowerBlock/src/ctor.hpp"
   
   /* methods */
   
-
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int NRAD() const { return this->N(); }
+  
+  /**
+   *  @brief Return the number of energy points
+   */
+  unsigned int numberEnergyPoints() const { return this->NRAD(); }
+  
+  /**
+   *  @brief Return the energy points for radiation stopping power interpolation
+   */
+  auto energies() const { return this->darray( 1 ); }
+  
+  /**
+   *  @brief Return the normalized radiation stopping powers
+   */
+  auto stoppingpowers() const { return this->darray( 2 ); }
+  
+  /**
+   *  @brief Return the electron-electron bremsstrahlung correction factors (NEL == 3)
+   */
+  auto corrections() const {
+    
+    return ( this->M() == 3 ) ? std::optional< auto > { this->darray( 3 ) } : std::nullopt;
+  }
+  
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
 };
 
 using RAD = RadiationStoppingPowerBlock;
