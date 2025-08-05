@@ -24,5 +24,5 @@ OscillatorBlock( std::vector< double > occupationnumbers,
  *  @param[in] end     the end iterator of the OSC block in the XSS array
  *  @param[in] nosc    the number of oscillators
  */
-PrincipalCrossSectionBlock( Iterator begin, Iterator end, unsigned int nosc ) :
+OscillatorBlock( Iterator begin, Iterator end, unsigned int nosc ) :
   ArrayData( "OSC", begin, end, nosc, 2 ) {}
