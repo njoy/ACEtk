@@ -16,12 +16,14 @@
 #include "ACEtk/photoatomic.hpp"
 #include "ACEtk/dosimetry.hpp"
 #include "ACEtk/electroatomic.hpp"
+#include "ACEtk/electron.hpp"
 #include "ACEtk/thermal.hpp"
 #include "ACEtk/continuous.hpp"
 
 // interpretation ACE tables
 #include "ACEtk/ContinuousEnergyTable.hpp"
 #include "ACEtk/DosimetryTable.hpp"
+#include "ACEtk/ElectronTable.hpp"
 #include "ACEtk/PhotoatomicTable.hpp"
 #include "ACEtk/PhotonuclearTable.hpp"
 #include "ACEtk/ThermalScatteringTable.hpp"

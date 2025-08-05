@@ -1,0 +1,7 @@
+#include "ACEtk/electron/BremsstrahlungCorrectionFactorBlock.hpp"
+#include "ACEtk/electron/BremsstrahlungHighFrequencyBlock.hpp"
+#include "ACEtk/electron/BremsstrahlungProductionBlock.hpp"
+#include "ACEtk/electron/MottScatteringCorrectionBlock.hpp"
+#include "ACEtk/electron/OscillatorBlock.hpp"
+#include "ACEtk/electron/RadiationStoppingPowerBlock.hpp"
+#include "ACEtk/electron/RileyCrossSectionBlock.hpp"
