@@ -40,13 +40,13 @@ class ElectronTable : protected Table {
   std::optional< electron::OSC > osc_;
   
   /* auxiliary functions */
-  // generateBlocks
-  // generateData
-  // verifyType
+  #include "ACEtk/ElectronTable/src/generateBlocks.hpp"
+  #include "ACEtk/ElectronTable/src/generateData.hpp"
+  #include "ACEtk/ElectronTable/src/verifyType.hpp"
   
 public:
 
-  // ctor
+  #include "ACEtk/ElectronTable/src/ctor.hpp"
   
   using Table::header;
   using Table::data;
