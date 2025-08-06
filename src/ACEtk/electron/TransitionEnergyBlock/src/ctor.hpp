@@ -12,7 +12,8 @@ TransitionEnergyBlock& operator=( TransitionEnergyBlock&& ) = default;
  *  @param[in] values    the various transition energy values
  */
 TransitionEnergyBlock( std::vector< double > values ) :
-  ArrayData( "EKT", std::move( values ) ) {}
+  ArrayData( "EKT",
+             std::vector< std::vector< double > >{ std::move( values ) } ) {}
 
 /**
  *  @brief Constructor
