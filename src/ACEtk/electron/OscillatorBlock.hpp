@@ -59,7 +59,6 @@ public:
    */
   auto bindingEnergies() const { return this->darray( 2 ); }
   
-  
   using ArrayData::empty;
   using ArrayData::name;
   using ArrayData::length;

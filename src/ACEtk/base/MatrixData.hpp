@@ -21,7 +21,6 @@ class MatrixData : protected Base {
   bool rowmajor_;
   unsigned int nrows_;
   unsigned int ncols_;
-  unsigned int nelements_;
   
   /* auxiliary functions */
   #include "ACEtk/base/MatrixData/src/verifyIndex.hpp"
