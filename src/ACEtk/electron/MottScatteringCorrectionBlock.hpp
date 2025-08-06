@@ -55,7 +55,7 @@ public:
   /**
    *  @brief Return the energy points
    */
-  auto energies() const { return this->darray(1); }
+  auto energies() const { return this->darray( 1 ); }
   
   /**
    *  @brief Return the Mott scattering correction for an index

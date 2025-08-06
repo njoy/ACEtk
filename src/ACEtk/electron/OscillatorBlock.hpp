@@ -52,12 +52,12 @@ public:
    *
    *  n < 0 at the last (highest) level signifies a conductor
    */
-  auto occupationNumbers() const { return this->darray(1); }
+  auto occupationNumbers() const { return this->darray( 1 ); }
   
   /**
    *  @brief Return the binding energies of each level
    */
-  auto bindingEnergies() const { return this->darray(2); }
+  auto bindingEnergies() const { return this->darray( 2 ); }
   
   
   using ArrayData::empty;
