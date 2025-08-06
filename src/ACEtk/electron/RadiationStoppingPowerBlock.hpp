@@ -56,14 +56,16 @@ public:
   /**
    *  @brief Return the normalized radiation stopping powers
    */
-  auto stoppingpowers() const { return this->darray( 2 ); }
+  auto stoppingPowers() const { return this->darray( 2 ); }
   
   /**
    *  @brief Return the electron-electron bremsstrahlung correction factors (NEL == 3)
    */
   auto corrections() const {
     
-    return ( this->M() == 3 ) ? std::optional< auto > { this->darray( 3 ) } : std::nullopt;
+    return ( this->M() == 3 )
+           ? std::optional< decltype( this->darray( 3 ) ) > { this->darray( 3 ) }
+           : std::nullopt;
   }
   
   using ArrayData::empty;
