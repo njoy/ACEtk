@@ -63,7 +63,9 @@ public:
    */
   auto lowerBremsstrahlungTransitionEnergy() const {
     
-    return ( this->N() > 2 ) ? std::optional< auto > { this->dvalue(1, 3) } : std::nullopt;
+    return ( this->N() > 2 )
+           ? std::optional< double > { this->dvalue(1, 3) }
+           : std::nullopt;
   }
   
   /**
@@ -71,7 +73,9 @@ public:
    */
   auto upperBremsstrahlungTransitionEnergy() const {
     
-    return ( this->N() > 2 ) ? std::optional< auto > { this->dvalue(1, 4) } : std::nullopt;
+    return ( this->N() > 2 )
+           ? std::optional< double > { this->dvalue(1, 4) }
+           : std::nullopt;
   }
   
   using ArrayData::empty;
