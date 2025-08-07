@@ -40,12 +40,12 @@ public:
   /**
    *  @brief Return the number of Riley cross section parameter sets
    */
-  static constexpr unsigned int NRLY() const { return 9; }
+  unsigned int NRLY() const { return 9; }
   
   /**
    *  @brief Return the number of Riley cross section parameter sets
    */
-  static constexpr unsigned int numberEnergyPoints() const { return this->NRLY(); }
+  unsigned int numberEnergyPoints() const { return this->NRLY(); }
   
   /**
    *  @brief Return the length of a Riley cross section parameter set
@@ -53,7 +53,7 @@ public:
    *  This includes the energy value for the paremeter set, which is
    *  listed as the first parameter.
    */
-  static constexpr unsigned int parameterSetLength() const { return 14; }
+  unsigned int parameterSetLength() const { return 14; }
   
   /**
    *  @brief Return the energy of a Riley cross section parameter set
