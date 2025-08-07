@@ -133,25 +133,25 @@ void verifyBlock( const MOT& block, const std::vector< double >& xss ) {
   CHECK_THAT( xss[1], WithinRel( block.energies()[1] ) );
   CHECK_THAT( xss[2], WithinRel( block.energies()[2] ) );
   
-  CHECK_THAT( xss[3], WithinRel( block.mottScatteringCorrection(1)[0] ) );
-  CHECK_THAT( xss[4], WithinRel( block.mottScatteringCorrection(1)[1] ) );
-  CHECK_THAT( xss[5], WithinRel( block.mottScatteringCorrection(1)[2] ) );
+  CHECK_THAT( xss[3], WithinRel( block.mottScatteringCorrection( 1 )[0] ) );
+  CHECK_THAT( xss[4], WithinRel( block.mottScatteringCorrection( 1 )[1] ) );
+  CHECK_THAT( xss[5], WithinRel( block.mottScatteringCorrection( 1 )[2] ) );
   
-  CHECK_THAT( xss[6], WithinRel( block.mottScatteringCorrection(2)[0] ) );
-  CHECK_THAT( xss[7], WithinRel( block.mottScatteringCorrection(2)[1] ) );
-  CHECK_THAT( xss[8], WithinRel( block.mottScatteringCorrection(2)[2] ) );
+  CHECK_THAT( xss[6], WithinRel( block.mottScatteringCorrection( 2 )[0] ) );
+  CHECK_THAT( xss[7], WithinRel( block.mottScatteringCorrection( 2 )[1] ) );
+  CHECK_THAT( xss[8], WithinRel( block.mottScatteringCorrection( 2 )[2] ) );
   
-  CHECK_THAT( xss[9], WithinRel( block.mottScatteringCorrection(3)[0] ) );
-  CHECK_THAT( xss[10], WithinRel( block.mottScatteringCorrection(3)[1] ) );
-  CHECK_THAT( xss[11], WithinRel( block.mottScatteringCorrection(3)[2] ) );
+  CHECK_THAT( xss[9], WithinRel( block.mottScatteringCorrection( 3 )[0] ) );
+  CHECK_THAT( xss[10], WithinRel( block.mottScatteringCorrection( 3 )[1] ) );
+  CHECK_THAT( xss[11], WithinRel( block.mottScatteringCorrection( 3 )[2] ) );
   
-  CHECK_THAT( xss[12], WithinRel( block.mottScatteringCorrection(4)[0] ) );
-  CHECK_THAT( xss[13], WithinRel( block.mottScatteringCorrection(4)[1] ) );
-  CHECK_THAT( xss[14], WithinRel( block.mottScatteringCorrection(4)[2] ) );
+  CHECK_THAT( xss[12], WithinRel( block.mottScatteringCorrection( 4 )[0] ) );
+  CHECK_THAT( xss[13], WithinRel( block.mottScatteringCorrection( 4 )[1] ) );
+  CHECK_THAT( xss[14], WithinRel( block.mottScatteringCorrection( 4 )[2] ) );
   
-  CHECK_THAT( xss[15], WithinRel( block.mottScatteringCorrection(5)[0] ) );
-  CHECK_THAT( xss[16], WithinRel( block.mottScatteringCorrection(5)[1] ) );
-  CHECK_THAT( xss[17], WithinRel( block.mottScatteringCorrection(5)[2] ) );
+  CHECK_THAT( xss[15], WithinRel( block.mottScatteringCorrection( 5 )[0] ) );
+  CHECK_THAT( xss[16], WithinRel( block.mottScatteringCorrection( 5 )[1] ) );
+  CHECK_THAT( xss[17], WithinRel( block.mottScatteringCorrection( 5 )[2] ) );
 }
 
 MOT makeDummyBlock() {
