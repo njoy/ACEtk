@@ -58,7 +58,7 @@ public:
   using ArrayData::end;
 };
 
-using RKT = BremsstrahlungAngularSpectrumBlock;
+using RKA = BremsstrahlungAngularSpectrumBlock;
 
 } // electron namespace
 } // ACEtk namespace
