@@ -407,7 +407,7 @@ class ElectronSubshellBlock:
       - the number of possible transitions to fill a vacancy for each subshell
     The size of each (the total number of electron shells) is stored in NXS(7).
     """
-    def __init__(self, designators: list[int], electrons: list[int], energies: list[float], probabilities: list[float], transitions: list[int]) -> None:
+    def __init__(self, designators: list[int], electrons: list[float], energies: list[float], probabilities: list[float], transitions: list[int]) -> None:
         """
         Initialise the block
         

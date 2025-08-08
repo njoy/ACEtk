@@ -1,1 +1,0 @@
-add_cpp_test( continuous.EnergyAngleDistributionData EnergyAngleDistributionData.test.cpp )

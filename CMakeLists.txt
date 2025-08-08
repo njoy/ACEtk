@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( ACEtk
-  VERSION 1.0.3
+  VERSION 1.0.4
   LANGUAGES CXX
 )
 
@@ -82,12 +82,12 @@ if (ACEtk.python AND NOT TARGET njoy::tools.python)
   set(ACEtk.python OFF)
 endif()
 
-if (ACEtk.python)
-  add_subdirectory(python)
+if ( ACEtk.python )
+  add_subdirectory( python )
 endif()
 
 if( ACEtk.tests )
-  include( cmake/unit_testing.cmake )
+  add_subdirectory( test )
 endif()
 
 #######################################################################
@@ -145,8 +145,8 @@ endif()
 ########################################################################
 
 # enable Edit and Continue in Visual Studio (for debugging)
-if(MSVC)
-  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  if(MSVC)
     target_compile_options(${PROJECT_NAME}  INTERFACE "/ZI")
     target_link_options(${PROJECT_NAME} INTERFACE "/INCREMENTAL")
   endif()

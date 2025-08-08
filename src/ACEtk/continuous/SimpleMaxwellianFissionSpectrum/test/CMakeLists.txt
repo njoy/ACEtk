@@ -1,1 +1,0 @@
-add_cpp_test( continuous.SimpleMaxwellianFissionSpectrum SimpleMaxwellianFissionSpectrum.test.cpp )
