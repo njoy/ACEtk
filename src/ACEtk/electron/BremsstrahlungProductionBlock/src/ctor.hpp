@@ -17,8 +17,8 @@ BremsstrahlungProductionBlock( std::vector< double > electronenergies,
                                std::vector< double > photonratios,
                                std::vector< std::vector< double > > crosssections ) :
   MatrixData( "XSB",
-              std::move( electronenergies ), std:move( photonratios ),
-              std::move( crosssections ), false ) ) {}
+              std::move( electronenergies ), std::move( photonratios ),
+              std::move( crosssections ), false ) {}
 
 /**
  *  @brief Constructor
