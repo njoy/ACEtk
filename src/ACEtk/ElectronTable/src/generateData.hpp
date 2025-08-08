@@ -122,16 +122,16 @@ Data generateData( unsigned int z,
     
     nxs[4] = xsb.value().NEB();
     nxs[5] = xsb.value().NPB();
-    nxs[9] = rkt.value().NRKT();
-    nxs[10] = rka.value().NRKA();
-    nxs[11] = osc.value().NOSC();
+    nxs[8] = rkt.value().NRKT();
+    nxs[9] = rka.value().NRKA();
+    nxs[10] = osc.value().NOSC();
   } else {
     
     nxs[4] = crb.value().NCRB();
     nxs[5] = hfb.value().NHFB();
+    nxs[8] = 0;
     nxs[9] = 0;
     nxs[10] = 0;
-    nxs[11] = 0;
   }
   nxs[15] = nel;
   

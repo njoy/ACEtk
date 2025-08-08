@@ -59,9 +59,9 @@ public:
   auto kXrayEmissionEnergy() const { return this->EEK(); }
   
   /**
-   *  @brief Return the lower bremsstrahlung extrapolation transition energy
+   *  @brief Return the upper bremsstrahlung extrapolation transition energy
    */
-  auto lowerBremsstrahlungTransitionEnergy() const {
+  auto upperBremsstrahlungTransitionEnergy() const {
     
     return ( this->N() > 2 )
            ? std::optional< double > { this->dvalue(1, 3) }
@@ -69,9 +69,9 @@ public:
   }
   
   /**
-   *  @brief Return the upper bremsstrahlung extrapolation transition energy
+   *  @brief Return the lower bremsstrahlung extrapolation transition energy
    */
-  auto upperBremsstrahlungTransitionEnergy() const {
+  auto lowerBremsstrahlungTransitionEnergy() const {
     
     return ( this->N() > 2 )
            ? std::optional< double > { this->dvalue(1, 4) }
