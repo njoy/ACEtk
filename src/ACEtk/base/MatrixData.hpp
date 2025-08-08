@@ -136,7 +136,7 @@ public:
    */
   auto dmatrix() const {
     
-    return this->XSS( this->M() + this->N(), this->M() * this->N() );
+    return this->XSS( this->M() + this->N() + 1, this->M() * this->N() );
   }
 
   /**
@@ -144,7 +144,7 @@ public:
    */
   auto imatrix() const {
     
-    return this->IXSS( this->M() + this->N(), this->M() * this->N() );
+    return this->IXSS( this->M() + this->N() + 1, this->M() * this->N() );
   }
 
   /**
@@ -197,7 +197,9 @@ public:
     #endif
     if ( rowmajor_ ) {
       
-      return this->XSS( ( row - 1 ) * this->N() + this->M() + this->N(), this->N() );
+      std::size_t index = ( row - 1 ) * this->N() + this->M() + this->N();
+      std::size_t span = this->N();
+      return njoy::tools::std23::views::stride( this->XSS( index, span ), 1 );
     } else {
       
       std::size_t index = this->M() + this->N() + row;
@@ -216,7 +218,9 @@ public:
     #endif
     if ( rowmajor_ ) {
       
-      return this->IXSS( ( row - 1 ) * this->N() + this->M() + this->N(), this->N() );
+      std::size_t index = ( row - 1 ) * this->N() + this->M() + this->N();
+      std::size_t span = this->N();
+      return njoy::tools::std23::views::stride( this->IXSS( index, span ), 1 );
     } else {
       
       std::size_t index = this->M() + this->N() + row;
@@ -240,7 +244,9 @@ public:
       return njoy::tools::std23::views::stride( this->XSS( index, span ), this->N() );
     } else {
       
-      return this->XSS( ( col - 1 ) * this->M() + this->M() + this->N(), this->M() );
+      std::size_t index = ( col - 1 ) * this->M() + this->M() + this->N();
+      std::size_t span = this->M();
+      return njoy::tools::std23::views::stride( this->XSS( index, span ), 1 );
     }
   }
 
@@ -259,7 +265,9 @@ public:
       return njoy::tools::std23::views::stride( this->IXSS( index, span ), this->N() );
     } else {
       
-      return this->IXSS( ( col - 1 ) * this->M() + this->M() + this->N(), this->M() );
+      std::size_t index = ( col - 1 ) * this->M() + this->M() + this->N();
+      std::size_t span = this->M();
+      return njoy::tools::std23::views::stride( this->IXSS( index, span ), 1 );
     }
   }
 
@@ -267,8 +275,6 @@ public:
    *  @brief Return an empty matrix
    */
   auto emptyMatrix() const { return this->XSS( 1, 0 ); }
-  auto emptyRow() const { return this->emptyMatrix(); }  // tomato, tomato
-  auto emptyColumn() const { return this->emptyMatrix(); }  // potato, potato
 
   using Base::empty;
   using Base::name;
