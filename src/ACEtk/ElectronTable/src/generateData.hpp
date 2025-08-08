@@ -65,14 +65,14 @@ Data generateData( unsigned int z,
   xss.insert( xss.end(), rly.begin(), rly.end() );
   if ( nel == 3 ) {
     
-    xss.insert( xss.end(), xsb.begin(), xsb.end() );
-    xss.insert( xss.end(), rkt.begin(), rkt.end() );
-    xss.insert( xss.end(), rka.begin(), rka.end() );
-    xss.insert( xss.end(), osc.begin(), osc.end() );
+    xss.insert( xss.end(), xsb.value().begin(), xsb.value().end() );
+    xss.insert( xss.end(), rkt.value().begin(), rkt.value().end() );
+    xss.insert( xss.end(), rka.value().begin(), rka.value().end() );
+    xss.insert( xss.end(), osc.value().begin(), osc.value().end() );
   } else {
     
-    xss.insert( xss.end(), crb.begin(), crb.end() );
-    xss.insert( xss.end(), hfb.begin(), hfb.end() );
+    xss.insert( xss.end(), crb.value().begin(), crb.value().end() );
+    xss.insert( xss.end(), hfb.value().begin(), hfb.value().end() );
   }
   
   // generate the jxs array
@@ -94,17 +94,17 @@ Data generateData( unsigned int z,
   jxs[4] = jxs[3] + rly.length();
   if ( nel == 3 ) {
     
-    jxs[8] = jxs[4] + xsb.length();
-    jxs[9] = jxs[8] + rkt.length();
-    jxs[10] = jxs[9] + rka.length();
+    jxs[8] = jxs[4] + xsb.value().length();
+    jxs[9] = jxs[8] + rkt.value().length();
+    jxs[10] = jxs[9] + rka.value().length();
   } else {
     
-    jxs[5] = jxs[4] + crb.length();
+    jxs[5] = jxs[4] + crb.value().length();
   }
   
   // generate the nxs array
   // NXS    EL03    EL
-  //  1     length  length
+  //  1    .value().length .value().length
   //  2     Z       Z
   //  3     NRAD    NRAD
   //  4     NMOT    NMOT
@@ -120,21 +120,20 @@ Data generateData( unsigned int z,
   nxs[3] = mot.NMOT();
   if ( nel == 3 ) {
     
-    nxs[4] = xsb.NEB();
-    nxs[5] = xsb.NPB();
-    nxs[9] = rkt.NRKT();
-    nxs[10] = rka.NRKA();
-    nxs[11] = osc.NOSC();
-    nxs[16] = nel;
+    nxs[4] = xsb.value().NEB();
+    nxs[5] = xsb.value().NPB();
+    nxs[9] = rkt.value().NRKT();
+    nxs[10] = rka.value().NRKA();
+    nxs[11] = osc.value().NOSC();
   } else {
     
-    nxs[4] = crb.NCRB();
-    nxs[5] = hfb.NHFB();
+    nxs[4] = crb.value().NCRB();
+    nxs[5] = hfb.value().NHFB();
     nxs[9] = 0;
     nxs[10] = 0;
     nxs[11] = 0;
-    nxs[16] = nel;
   }
+  nxs[15] = nel;
   
   return { std::move( iz ), std::move( aw ),
            std::move( nxs ), std::move( jxs ), std::move( xss ) };
