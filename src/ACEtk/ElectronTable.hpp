@@ -107,7 +107,7 @@ public:
   /**
    *  @brief Return the EL data format flag (0 or 3)
    */
-  unsigned int NEL() const { return this->data().NXS(16); }
+  unsigned int NEL() const { return this->data().NXS( 16 ); }
 
   /**
    *  @brief Return the EL data format flag (0 or 3)
@@ -117,12 +117,12 @@ public:
   /**
    *  @brief Return the total length of the XSS array
    */
-  unsigned int length() const { return this->data().NXS(1); }
+  unsigned int length() const { return this->data().NXS( 1 ); }
 
   /**
    *  @brief Return the atom number of the element
    */
-  unsigned int Z() const { return this->data().NXS(2); }
+  unsigned int Z() const { return this->data().NXS( 2 ); }
 
   /**
    *  @brief Return the atom number of the element
@@ -132,27 +132,27 @@ public:
   /**
    *  @brief Return the isomeric state of the target
    */
-  static constexpr unsigned int S() { return 0; }
+  unsigned int S() { return 0; }
 
   /**
    *  @brief Return the isomeric state of the target
    */
-  static constexpr unsigned int isomericState() { return this->S(); }
+  unsigned int isomericState() { return this->S(); }
 
   /**
    *  @brief Return the mass number of the target
    */
-  static constexpr unsigned int A() { return 0; }
+  unsigned int A() { return 0; }
 
   /**
    *  @brief Return the mass number of the target
    */
-  static constexpr unsigned int massNumber() { return this->A(); }
+  unsigned int massNumber() { return this->A(); }
 
   /**
    *  @brief Return the number of radiation stopping power points
    */
-  unsigned int NRAD() const { return this->data().NXS(3); }
+  unsigned int NRAD() const { return this->data().NXS( 3 ); }
 
   /**
    *  @brief Return the number of radiation stopping power points
@@ -162,7 +162,7 @@ public:
   /**
    *  @brief Return the number of Mott scattering correction points
    */
-  unsigned int NMOT() const { return this->data().NXS(4); }
+  unsigned int NMOT() const { return this->data().NXS( 4 ); }
 
   /**
    *  @brief Return the number of Mott scattering correction points
@@ -172,7 +172,7 @@ public:
   /**
    *  @brief Return the number of electron energy points for bremsstrahlung production (NEL == 3)
    */
-  unsigned int NEB() const { return ( this->NEL() == 3 ) ? this->data().NXS(5) : 0; }
+  unsigned int NEB() const { return ( this->NEL() == 3 ) ? this->data().NXS( 5 ) : 0; }
 
   /**
    *  @brief Return the number of electron energy points for bremsstrahlung production (NEL == 3)
@@ -182,7 +182,7 @@ public:
   /**
    *  @brief Return the number of photon ratio points for bremsstrahlung production (NEL == 3)
    */
-  unsigned int NPB() const { return ( this->NEL() == 3 ) ? this->data().NXS(6) : 0; }
+  unsigned int NPB() const { return ( this->NEL() == 3 ) ? this->data().NXS( 6 ) : 0; }
 
   /**
    *  @brief Return the number of photon ratio points for bremsstrahlung production (NEL == 3)
@@ -192,7 +192,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung correction factor points (NEL != 3)
    */
-  unsigned int NCRB() const { return ( this->NEL() != 3 ) ? this->data().NXS(5) : 0; }
+  unsigned int NCRB() const { return ( this->NEL() != 3 ) ? this->data().NXS( 5 ) : 0; }
 
   /**
    *  @brief Return the number of bremsstrahlung correction factor points (NEL != 3)
@@ -202,7 +202,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung high-frequency limit points (NEL != 3)
    */
-  unsigned int NHFB() const { return ( this->NEL() != 3 ) ? this->data().NXS(6) : 0; }
+  unsigned int NHFB() const { return ( this->NEL() != 3 ) ? this->data().NXS( 6 ) : 0; }
 
   /**
    *  @brief Return the number of bremsstrahlung high-frequency limit points (NEL != 3)
@@ -212,7 +212,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung energy spectrum points (NEL == 3)
    */
-  unsigned int NRKT() const { return ( this->NEL() != 3 ) ? this->data().NXS(9) : 0; }
+  unsigned int NRKT() const { return ( this->NEL() != 3 ) ? this->data().NXS( 9 ) : 0; }
 
   /**
    *  @brief Return the number of bremsstrahlung energy spectrum points (NEL == 3)
@@ -222,7 +222,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung angular spectrum points (NEL == 3)
    */
-  unsigned int NRKA() const { return ( this->NEL() != 3 ) ? this->data().NXS(10) : 0; }
+  unsigned int NRKA() const { return ( this->NEL() != 3 ) ? this->data().NXS( 10 ) : 0; }
 
   /**
    *  @brief Return the number of bremsstrahlung angular spectrum points (NEL == 3)
@@ -232,7 +232,7 @@ public:
   /**
    *  @brief Return the number of oscillator points (NEL == 3)
    */
-  unsigned int NOSC() const { return ( this->NEL() != 3 ) ? this->data().NXS(11) : 0; }
+  unsigned int NOSC() const { return ( this->NEL() != 3 ) ? this->data().NXS( 11 ) : 0; }
 
   /**
    *  @brief Return the number of oscillator points (NEL == 3)
