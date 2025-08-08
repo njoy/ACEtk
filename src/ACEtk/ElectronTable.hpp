@@ -132,22 +132,22 @@ public:
   /**
    *  @brief Return the isomeric state of the target
    */
-  unsigned int S() { return 0; }
+  unsigned int S() const { return 0; }
 
   /**
    *  @brief Return the isomeric state of the target
    */
-  unsigned int isomericState() { return this->S(); }
+  unsigned int isomericState() const { return this->S(); }
 
   /**
    *  @brief Return the mass number of the target
    */
-  unsigned int A() { return 0; }
+  unsigned int A() const { return 0; }
 
   /**
    *  @brief Return the mass number of the target
    */
-  unsigned int massNumber() { return this->A(); }
+  unsigned int massNumber() const { return this->A(); }
 
   /**
    *  @brief Return the number of radiation stopping power points
@@ -212,7 +212,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung energy spectrum points (NEL == 3)
    */
-  unsigned int NRKT() const { return ( this->NEL() != 3 ) ? this->data().NXS( 9 ) : 0; }
+  unsigned int NRKT() const { return ( this->NEL() == 3 ) ? this->data().NXS( 9 ) : 0; }
 
   /**
    *  @brief Return the number of bremsstrahlung energy spectrum points (NEL == 3)
@@ -222,7 +222,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung angular spectrum points (NEL == 3)
    */
-  unsigned int NRKA() const { return ( this->NEL() != 3 ) ? this->data().NXS( 10 ) : 0; }
+  unsigned int NRKA() const { return ( this->NEL() == 3 ) ? this->data().NXS( 10 ) : 0; }
 
   /**
    *  @brief Return the number of bremsstrahlung angular spectrum points (NEL == 3)
@@ -232,7 +232,7 @@ public:
   /**
    *  @brief Return the number of oscillator points (NEL == 3)
    */
-  unsigned int NOSC() const { return ( this->NEL() != 3 ) ? this->data().NXS( 11 ) : 0; }
+  unsigned int NOSC() const { return ( this->NEL() == 3 ) ? this->data().NXS( 11 ) : 0; }
 
   /**
    *  @brief Return the number of oscillator points (NEL == 3)

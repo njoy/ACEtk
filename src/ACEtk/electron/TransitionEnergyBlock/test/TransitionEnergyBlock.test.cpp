@@ -208,13 +208,13 @@ void verifyBlock( const EKT& block, const std::vector< double >& xss ) {
   if ( xss.size() > 2 ) {
     
     CHECK_THAT( xss[2],
-                WithinRel( block.lowerBremsstrahlungTransitionEnergy().value() ) );
-    CHECK_THAT( xss[3],
                 WithinRel( block.upperBremsstrahlungTransitionEnergy().value() ) );
+    CHECK_THAT( xss[3],
+                WithinRel( block.lowerBremsstrahlungTransitionEnergy().value() ) );
   } else {
     
-    CHECK( std::nullopt == block.lowerBremsstrahlungTransitionEnergy() );
     CHECK( std::nullopt == block.upperBremsstrahlungTransitionEnergy() );
+    CHECK( std::nullopt == block.lowerBremsstrahlungTransitionEnergy() );
   }
 }
 
