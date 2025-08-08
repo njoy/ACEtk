@@ -25,9 +25,7 @@ SCENARIO( "RadiationStoppingPowerBlock" ) {
     
     WHEN( "the data is given explicitly" ) {
       
-      std::vector< double > energies = { xss[0], xss[1], xss[2] };
-      std::vector< double > stoppingpowers = { xss[3], xss[4], xss[5] };
-      RAD block( energies, stoppingpowers );
+      RAD block( { xss[0], xss[1], xss[2] }, { xss[3], xss[4], xss[5] } );
       
       THEN( "a RadiationStoppingPowerBlock can be constructed "
             "and members can be tested" ) {
@@ -104,10 +102,9 @@ SCENARIO( "RadiationStoppingPowerBlock" ) {
     
     WHEN( "the data is given explicitly" ) {
       
-      std::vector< double > energies = { xss[0], xss[1], xss[2] };
-      std::vector< double > stoppingpowers = { xss[3], xss[4], xss[5] };
-      std::vector< double > corrections = { xss[6], xss[7], xss[8] };
-      RAD block( energies, stoppingpowers, corrections );
+      RAD block( { xss[0], xss[1], xss[2] },
+                 { xss[3], xss[4], xss[5] } ,
+                 { xss[6], xss[7], xss[8] } );
       
       THEN( "a RadiationStoppingPowerBlock can be constructed "
             "and members can be tested" ) {
