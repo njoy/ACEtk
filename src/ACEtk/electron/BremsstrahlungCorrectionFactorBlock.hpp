@@ -45,7 +45,7 @@ public:
   /**
    *  @brief Return the number of energy points
    */
-  unsigned int numberEnergyPoints() const { return this->NCRB; }
+  unsigned int numberEnergyPoints() const { return this->NCRB(); }
   
   /**
    *  @brief Return the energy values
