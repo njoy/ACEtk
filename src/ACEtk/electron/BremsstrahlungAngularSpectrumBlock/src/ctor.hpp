@@ -12,7 +12,8 @@ BremsstrahlungAngularSpectrumBlock& operator=( BremsstrahlungAngularSpectrumBloc
  *  @param[in] energyratios    the photon energy ratios
  */
 BremsstrahlungAngularSpectrumBlock( std::vector< double > energyratios ) :
-  ArrayData( "RKA", std::move( energyratios ) ) {}
+  ArrayData( "RKA",
+             std::move( std::vector< std::vector< double > > { energyratios } ) ) {}
 
 /**
  *  @brief Constructor
