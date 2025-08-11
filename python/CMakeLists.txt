@@ -104,6 +104,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungHighFrequencyBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungProductionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/MottScatteringCorrectionBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/OscillatorBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/RadiationStoppingPowerBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/RileyCrossSectionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/TransitionEnergyBlock.python.cpp
