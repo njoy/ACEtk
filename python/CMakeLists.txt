@@ -102,6 +102,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/MottScatteringCorrectionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/RadiationStoppingPowerBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/RileyCrossSectionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/TransitionEnergyBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal/CrossSectionBlock.python.cpp
