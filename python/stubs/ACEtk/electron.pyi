@@ -3,7 +3,7 @@ Electron ACE blocks
 """
 from __future__ import annotations
 import typing
-__all__ = ['BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
+__all__ = ['BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
 class BremsstrahlungCorrectionFactorBlock:
     """
     The electron CRB block with the bremsstrahlung production correction factor data
@@ -54,6 +54,87 @@ class BremsstrahlungCorrectionFactorBlock:
     def corrections(self) -> ...:
         """
         The bremsstrahlung production correction factors
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def energies(self) -> ...:
+        """
+        The energy values
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_energy_points(self) -> int:
+        """
+        The number of energy points
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class BremsstrahlungHighFrequencyBlock:
+    """
+    The electron HFB block with the bremsstrahlung high-frequency limit cross sections
+    
+    This block is part of the el format.
+    
+    The BremsstrahlungHighFrequencyBlock class contains 2 arrays of the
+    same length:
+      - The energy points
+      - The cross section values
+      
+    The size NHFB of each (the total number of electron energy points) is
+    stored in NXS(6).
+    """
+    def __init__(self, energies: list[float], corrections: list[float]) -> None:
+        """
+        Initialise the block
+        
+        Arguments:
+            energies          the energy values
+            cross_sections    the high-frequency-limit cross section values
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NHFB(self) -> int:
+        """
+        The number of energy points
+        """
+    @property
+    def cross_sections(self) -> ...:
+        """
+        The high-frequency-limit bremsstrahlung cross sections
         """
     @property
     def empty(self) -> bool:

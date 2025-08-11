@@ -116,6 +116,7 @@ add_python_test( electroatomic.ElasticAngularDistributionBlock electroatomic/Tes
 add_python_test( electroatomic.EnergyDistributionBlock         electroatomic/Test_ACEtk_electroatomic_EnergyDistributionBlock.py )
 
 add_python_test( electron.BremsstrahlungCorrectionFactorBlock electron/Test_ACEtk_electron_BremsstrahlungCorrectionFactorBlock.py )
+add_python_test( electron.BremsstrahlungHighFrequencyBlock    electron/Test_ACEtk_electron_BremsstrahlungHighFrequencyBlock.py )
 add_python_test( electron.BremsstrahlungProductionBlock       electron/Test_ACEtk_electron_BremsstrahlungProductionBlock.py )
 add_python_test( electron.MottScatteringCorrectionBlock       electron/Test_ACEtk_electron_MottScatteringCorrectionBlock.py )
 add_python_test( electron.RadiationStoppingPowerBlock         electron/Test_ACEtk_electron_RadiationStoppingPowerBlock.py )
