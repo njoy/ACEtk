@@ -3,7 +3,139 @@ Electron ACE blocks
 """
 from __future__ import annotations
 import typing
-__all__ = ['TransitionEnergyBlock']
+__all__ = ['BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
+class BremsstrahlungProductionBlock:
+    """
+    
+    """
+    def __init__(self, ) -> None:
+        """
+        The electron XSB block with the bremsstrahlung photon production data
+        
+        This block is part of el03 format.
+        
+        The BremsstrahlungProductionBlock class contains a variable number of
+        arrays of differing lengths:
+          - The electron energy points
+          - The photon energy ratio points
+          - The cross section values
+          
+        The size NEB of the electron energy values array (the total number of
+        electron energy points) is stored in NXS(5). The size NPB of the photon
+        energy ratio values array (the total number of photon energy points) is
+        stored in NXS(6). The size of the bremsstrahlung production cross
+        section array (the number of values for interpolation) is NEB*NPB.
+        
+        The cross section values are stored internally in column-major order.
+        """
+    def cross_section(self, ee_index: int, pr_index: int) -> float:
+        """
+        A single bremsstrahlung cross section value
+        
+        Arguments:
+            ee_index    the electron energy index (one-based)
+            pr_index    the photon energy ratio index (one-based)
+        """
+    def cross_sections(self, index: int) -> ...:
+        """
+        The cross section values for a given electron energy index
+        
+        Arguments:
+            index   the electron energy index (one-based)
+        """
+    def electron_energy(self, index: int) -> float:
+        """
+        A single electron energy point
+        
+        Arguments:
+            index   the electron energy index (one-based)
+        """
+    def photon_ratio(self, index: int) -> float:
+        """
+        A single photon energy ratio point
+        
+        Arguments:
+            index   the photon energy ratio index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NEB(self) -> int:
+        """
+        The number of electron energy points
+        """
+    @property
+    def NPB(self) -> int:
+        """
+        The number of photon energy ratio points
+        """
+    @property
+    def cross_section_data(self) -> ...:
+        """
+        The bremsstrahlung cross section data array
+        """
+    @property
+    def electron_energies(self) -> ...:
+        """
+        The electron energy points
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_cross_sections(self) -> int:
+        """
+        The number of cross section values
+        """
+    @property
+    def number_electron_energies(self) -> int:
+        """
+        The number of electron energy points
+        """
+    @property
+    def number_photon_ratios(self) -> int:
+        """
+        The number of photon energy ratio points
+        """
+    @property
+    def photon_ratios(self) -> ...:
+        """
+        The photon energy ratio points
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
 class MottScatteringCorrectionBlock:
     """
     The electron MOT block with the Mott scattering correction data

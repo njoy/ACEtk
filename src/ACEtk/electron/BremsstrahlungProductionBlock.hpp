@@ -27,6 +27,8 @@ namespace electron {
  *  energy ratio values array (the total number of photon energy points) is
  *  stored in NXS(6). The size of the bremsstrahlung production cross
  *  section array (the number of values for interpolation) is NEB*NPB.
+ *
+ *  The cross section values are stored internally in column-major order.
  */
 class BremsstrahlungProductionBlock : protected base::MatrixData {
 
