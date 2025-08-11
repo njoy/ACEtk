@@ -25,6 +25,10 @@ class Test_ACEtk_electron_RadiationStoppingPowerBlock( unittest.TestCase ) :
             self.assertEqual( 3, block.NRAD )
             self.assertEqual( 3, block.number_energy_points )
             
+            self.assertEqual( 3, len( block.energies ) )
+            self.assertEqual( 3, len( block.stopping_powers ) )
+            self.assertIsNone( block.corrections )
+            
             self.assertAlmostEqual( self.chunk_el[0],
                                     block.energies[0] )
             self.assertAlmostEqual( self.chunk_el[1],
@@ -37,7 +41,6 @@ class Test_ACEtk_electron_RadiationStoppingPowerBlock( unittest.TestCase ) :
                                     block.stopping_powers[1] )
             self.assertAlmostEqual( self.chunk_el[5],
                                     block.stopping_powers[2] )
-            self.assertIsNone( block.corrections )
             
             # verify the xss array
             self.assertEqual( 6, len( block.xss_array ) )
@@ -65,6 +68,11 @@ class Test_ACEtk_electron_RadiationStoppingPowerBlock( unittest.TestCase ) :
             self.assertEqual( 3, block.NRAD )
             self.assertEqual( 3, block.number_energy_points )
             
+            self.assertEqual( 3, len( block.energies ) )
+            self.assertEqual( 3, len( block.stopping_powers ) )
+            self.assertIsNotNone( block.corrections )
+            self.assertEqual( 3, len( block.corrections ) )
+            
             self.assertAlmostEqual( self.chunk_el03[0],
                                     block.energies[0] )
             self.assertAlmostEqual( self.chunk_el03[1],
@@ -77,7 +85,6 @@ class Test_ACEtk_electron_RadiationStoppingPowerBlock( unittest.TestCase ) :
                                     block.stopping_powers[1] )
             self.assertAlmostEqual( self.chunk_el03[5],
                                     block.stopping_powers[2] )
-            self.assertIsNotNone( block.corrections )
             self.assertAlmostEqual( self.chunk_el03[6],
                                     block.corrections[0] )
             self.assertAlmostEqual( self.chunk_el03[7],

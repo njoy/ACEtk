@@ -4,6 +4,83 @@ Electron ACE blocks
 from __future__ import annotations
 import typing
 __all__ = ['TransitionEnergyBlock']
+class MottScatteringCorrectionBlock:
+    """The electron MOT block with the Mott scattering correction data
+    
+    This block is part of el and el03 formats.
+    
+    The MottScatteringCorrectionBlock class contains 6 arrays of the same
+    length:
+      - The energy points
+      - The Mott scattering correction h(theta) for theta = 0
+      - The Mott scattering correction h(theta) for theta = pi/4
+      - The Mott scattering correction h(theta) for theta = pi/2
+      - The Mott scattering correction h(theta) for theta = 3*pi/4
+      - The Mott scattering correction h(theta) for theta = pi
+      
+    The size NMOT of each (the total number of Mott scattering cross
+    section energy points) is stored in NXS(4).
+    """
+    def mott_scattering_correction(self, index: int) -> ...:
+        """The Mott scattering correction for an index.
+        
+        Arguments:
+            index   the index (1 to 5 inclusively, one-based)
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NMOT(self) -> int:
+        """
+        The number of energy points
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def energies(self) -> ...:
+        """
+        The energy points
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_energy_points(self) -> int:
+        """
+        The number of energy points
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
 class RadiationStoppingPowerBlock:
     """The electron RAD block with the radiation stopping power data
     
