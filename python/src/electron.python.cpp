@@ -10,6 +10,7 @@ namespace python = pybind11;
 namespace electron {
 
   // declarations - ACE table blocks
+  void wrapRadiationStoppingPowerBlock( python::module&, python::module& );
   void wrapTransitionEnergyBlock( python::module&, python::module& );
 }
 
@@ -22,5 +23,6 @@ void wrapElectron( python::module& module, python::module& viewmodule ) {
     "Electron ACE blocks and components"
   );
 
+  electron::wrapRadiationStoppingPowerBlock( submodule, viewmodule );
   electron::wrapTransitionEnergyBlock( submodule, viewmodule );
 }

@@ -100,6 +100,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/TabulatedEnergyDistribution.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/EnergyDistributionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/RadiationStoppingPowerBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/TransitionEnergyBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal/CrossSectionBlock.python.cpp
