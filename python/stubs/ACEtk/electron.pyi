@@ -3,7 +3,7 @@ Electron ACE blocks
 """
 from __future__ import annotations
 import typing
-__all__ = ['BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
+__all__ = ['BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'OscillatorBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
 class BremsstrahlungCorrectionFactorBlock:
     """
     The electron CRB block with the bremsstrahlung production correction factor data
@@ -397,6 +397,89 @@ class MottScatteringCorrectionBlock:
     def number_energy_points(self) -> int:
         """
         The number of energy points
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class OscillatorBlock:
+    """
+    The electron CRB block with the oscillator descriptions
+    
+    This block is part of the el03 format.
+    
+    The OscillatorBlock class contains 2 arrays of the
+    same length:
+      - The level occupation numbers
+      - The level binding energies
+      
+    The size NOSC of each (the total number of oscillator points) is stored
+    in NXS(11).
+    """
+    def __init__(self, energies: list[float], corrections: list[float]) -> None:
+        """
+        Initialise the block
+        
+        Arguments:
+            occupation_numbers    The occupation numbers of each subshell
+            binding_energies      The binding energies of each subshell
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NOSC(self) -> int:
+        """
+        The number of oscillators
+        """
+    @property
+    def binding_energies(self) -> ...:
+        """
+        The binding energies of each level
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_oscillators(self) -> int:
+        """
+        The number of oscillators
+        """
+    @property
+    def occupation_numbers(self) -> ...:
+        """
+        The occupation numbers of each level
+        
+        n < 0 at the last (highest) level signifies a conductor
         """
     @property
     def xss_array(self) -> ...:

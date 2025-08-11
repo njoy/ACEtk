@@ -119,6 +119,7 @@ add_python_test( electron.BremsstrahlungCorrectionFactorBlock electron/Test_ACEt
 add_python_test( electron.BremsstrahlungHighFrequencyBlock    electron/Test_ACEtk_electron_BremsstrahlungHighFrequencyBlock.py )
 add_python_test( electron.BremsstrahlungProductionBlock       electron/Test_ACEtk_electron_BremsstrahlungProductionBlock.py )
 add_python_test( electron.MottScatteringCorrectionBlock       electron/Test_ACEtk_electron_MottScatteringCorrectionBlock.py )
+add_python_test( electron.OscillatorBlock                     electron/Test_ACEtk_electron_OscillatorBlock.py )
 add_python_test( electron.RadiationStoppingPowerBlock         electron/Test_ACEtk_electron_RadiationStoppingPowerBlock.py )
 add_python_test( electron.RileyCrossSectionBlock              electron/Test_ACEtk_electron_RileyCrossSectionBlock.py )
 add_python_test( electron.TransitionEnergyBlock               electron/Test_ACEtk_electron_TransitionEnergyBlock.py )

@@ -14,6 +14,7 @@ namespace electron {
   void wrapBremsstrahlungHighFrequencyBlock( python::module&, python::module& );
   void wrapBremsstrahlungProductionBlock( python::module&, python::module& );
   void wrapMottScatteringCorrectionBlock( python::module&, python::module& );
+  void wrapOscillatorBlock( python::module&, python::module& );
   void wrapRadiationStoppingPowerBlock( python::module&, python::module& );
   void wrapRileyCrossSectionBlock( python::module&, python::module& );
   void wrapTransitionEnergyBlock( python::module&, python::module& );
@@ -32,6 +33,7 @@ void wrapElectron( python::module& module, python::module& viewmodule ) {
   electron::wrapBremsstrahlungHighFrequencyBlock( submodule, viewmodule );
   electron::wrapBremsstrahlungProductionBlock( submodule, viewmodule );
   electron::wrapMottScatteringCorrectionBlock( submodule, viewmodule );
+  electron::wrapOscillatorBlock( submodule, viewmodule );
   electron::wrapRadiationStoppingPowerBlock( submodule, viewmodule );
   electron::wrapRileyCrossSectionBlock( submodule, viewmodule );
   electron::wrapTransitionEnergyBlock( submodule, viewmodule );
