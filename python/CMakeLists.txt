@@ -100,7 +100,9 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/TabulatedEnergyDistribution.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/EnergyDistributionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungAngularSpectrumBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungCorrectionFactorBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungEnergySpectrumBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungHighFrequencyBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/BremsstrahlungProductionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electron/MottScatteringCorrectionBlock.python.cpp

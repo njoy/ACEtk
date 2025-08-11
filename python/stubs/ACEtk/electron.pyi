@@ -3,7 +3,81 @@ Electron ACE blocks
 """
 from __future__ import annotations
 import typing
-__all__ = ['BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'OscillatorBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
+__all__ = ['BremsstrahlungAngularSpectrumBlock', 'BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungEnergySpectrumBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'OscillatorBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
+class BremsstrahlungAngularSpectrumBlock:
+    """
+    The electron RKA block with the bremsstrahlung angular spectrum data
+    
+    This block is part of the el03 format.
+    
+    The BremsstrahlungAngularSpectrumBlock class contains 1 array with
+    the ratio values of photon energy over electron energy for the
+    bremsstrahlung angular spectrum calculation (NEL == 3).
+    
+    The size NRKA is stored in NXS(10).
+    """
+    def __init__(self, energy_ratios: list[float]) -> None:
+        """
+        Initialise the block
+        
+        Arguments:
+            energy_ratios    the photon energy ratios
+        """
+    
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NRKA(self) -> int:
+        """
+        The number of bremstrahlung angular spectrum points
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_photon_energy_ratios(self) -> int:
+        """
+        The number of bremstrahlung angular spectrum points
+        """
+    @property
+    def photon_energy_ratios(self) -> ...:
+        """
+        The energy points for bremstrahlung angular spectrum interpolation
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
 class BremsstrahlungCorrectionFactorBlock:
     """
     The electron CRB block with the bremsstrahlung production correction factor data
@@ -79,6 +153,80 @@ class BremsstrahlungCorrectionFactorBlock:
     def number_energy_points(self) -> int:
         """
         The number of energy points
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class BremsstrahlungEnergySpectrumBlock:
+    """
+    The electron RKT block with the bremsstrahlung energy spectrum data
+    
+    This block is part of the el03 format.
+    
+    The BremsstrahlungEnergySpectrumBlock class contains 1 array with
+    the ratio values of photon energy over electron energy for the
+    bremsstrahlung energy spectrum calculation (NEL == 3).
+    
+    The size NRKT is stored in NXS(9).
+    """
+    def __init__(self, energy_ratios: list[float]) -> None:
+        """
+        Initialise the block
+        
+        Arguments:
+            energy_ratios    the photon energy ratios
+        """
+    
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NRKA(self) -> int:
+        """
+        The number of bremstrahlung energy spectrum points
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_photon_energy_ratios(self) -> int:
+        """
+        The number of bremstrahlung energy spectrum points
+        """
+    @property
+    def photon_energy_ratios(self) -> ...:
+        """
+        The energy points for bremstrahlung energy spectrum interpolation
         """
     @property
     def xss_array(self) -> ...:
