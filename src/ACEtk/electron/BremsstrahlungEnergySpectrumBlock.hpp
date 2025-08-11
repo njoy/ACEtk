@@ -18,7 +18,7 @@ namespace electron {
  *
  *  The BremsstrahlungEnergySpectrumBlock class contains 1 array with
  *  the ratio values of photon energy over electron energy for the
- *  bremsstrahlung spectrum calculation (NEL == 3)
+ *  bremsstrahlung energy spectrum calculation (NEL == 3).
  *
  *  The size NRKT is stored in NXS(9).
  */
