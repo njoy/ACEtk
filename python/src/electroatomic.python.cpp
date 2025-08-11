@@ -26,7 +26,7 @@ namespace electroatomic {
   void wrapEnergyDistributionBlock( python::module&, python::module& );
 }
 
-void wrapElectron( python::module& module, python::module& viewmodule ) {
+void wrapElectroatomic( python::module& module, python::module& viewmodule ) {
 
   // create the submodule
   python::module submodule = module.def_submodule(

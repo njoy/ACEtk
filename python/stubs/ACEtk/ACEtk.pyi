@@ -9,7 +9,7 @@ from . import photoatomic
 from . import photonuclear
 from . import sequence
 from . import thermal
-__all__ = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
+__all__ = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
 class AngularDistributionType:
     """
     The angular distribution types
