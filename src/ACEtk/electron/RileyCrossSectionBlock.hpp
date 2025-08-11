@@ -69,7 +69,7 @@ public:
   }
   
   /**
-   *  @brief Return 
+   *  @brief Return the Riley cross section parameter set at the index
    *
    *  @param[in] index    the index (1 to 9, one-based)
    */
