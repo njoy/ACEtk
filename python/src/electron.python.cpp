@@ -11,6 +11,7 @@ namespace electron {
 
   // declarations - ACE table blocks
   void wrapBremsstrahlungCorrectionFactorBlock( python::module&, python::module& );
+  void wrapBremsstrahlungHighFrequencyBlock( python::module&, python::module& );
   void wrapBremsstrahlungProductionBlock( python::module&, python::module& );
   void wrapMottScatteringCorrectionBlock( python::module&, python::module& );
   void wrapRadiationStoppingPowerBlock( python::module&, python::module& );
@@ -28,6 +29,7 @@ void wrapElectron( python::module& module, python::module& viewmodule ) {
   );
 
   electron::wrapBremsstrahlungCorrectionFactorBlock( submodule, viewmodule );
+  electron::wrapBremsstrahlungHighFrequencyBlock( submodule, viewmodule );
   electron::wrapBremsstrahlungProductionBlock( submodule, viewmodule );
   electron::wrapMottScatteringCorrectionBlock( submodule, viewmodule );
   electron::wrapRadiationStoppingPowerBlock( submodule, viewmodule );
