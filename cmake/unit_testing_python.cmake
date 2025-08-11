@@ -115,6 +115,8 @@ add_python_test( electroatomic.TabulatedEnergyDistribution     electroatomic/Tes
 add_python_test( electroatomic.ElasticAngularDistributionBlock electroatomic/Test_ACEtk_electroatomic_ElasticAngularDistributionBlock.py )
 add_python_test( electroatomic.EnergyDistributionBlock         electroatomic/Test_ACEtk_electroatomic_EnergyDistributionBlock.py )
 
+add_python_test( electron.TransitionEnergyBlock               electron/Test_ACEtk_electron_TransitionEnergyBlock.py )
+
 add_python_test( thermal.CrossSectionBlock                 thermal/Test_ACEtk_thermal_CrossSectionBlock.py )
 add_python_test( thermal.DiscreteCosines                   thermal/Test_ACEtk_thermal_DiscreteCosines.py )
 add_python_test( thermal.DiscreteCosinesWithProbability    thermal/Test_ACEtk_thermal_DiscreteCosinesWithProbability.py )
