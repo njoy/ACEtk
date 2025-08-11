@@ -30,8 +30,10 @@ class Test_ACEtk_electron_TransitionEnergyBlock( unittest.TestCase ) :
                                     block.EEK )
             self.assertAlmostEqual( self.chunk_el[1],
                                     block.k_xray_emission_energy )
+            self.assertIsNotNone( block.upper_bremsstrahlung_transition_energy )
             self.assertAlmostEqual( self.chunk_el[2],
                                     block.upper_bremsstrahlung_transition_energy )
+            self.assertIsNotNone( block.lower_bremsstrahlung_transition_energy )
             self.assertAlmostEqual( self.chunk_el[3],
                                     block.lower_bremsstrahlung_transition_energy )
             
