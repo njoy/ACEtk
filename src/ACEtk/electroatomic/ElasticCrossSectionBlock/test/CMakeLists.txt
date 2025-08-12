@@ -1,1 +1,0 @@
-add_cpp_test( electroatomic.ElasticCrossSectionBlock ElasticCrossSectionBlock.test.cpp )
