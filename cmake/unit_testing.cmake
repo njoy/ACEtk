@@ -27,6 +27,7 @@ message( STATUS "Adding ACEtk C++ unit testing" )
 
 add_cpp_test( ContinuousEnergyTable ContinuousEnergyTable.test.cpp )
 add_cpp_test( DosimetryTable DosimetryTable.test.cpp )
+add_cpp_test( ElectronTable ElectronTable.test.cpp )
 add_cpp_test( PhotoatomicTable PhotoatomicTable.test.cpp )
 add_cpp_test( PhotonuclearTable PhotonuclearTable.test.cpp )
 add_cpp_test( Table.Data.Parse Table/Data/Parse.test.cpp )
