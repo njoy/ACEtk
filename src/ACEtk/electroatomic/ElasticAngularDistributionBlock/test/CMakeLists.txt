@@ -1,0 +1,1 @@
+add_cpp_test( electroatomic.ElasticAngularDistributionBlock ElasticAngularDistributionBlock.test.cpp )

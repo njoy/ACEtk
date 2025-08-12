@@ -1,0 +1,1 @@
+add_cpp_test( electroatomic.TabulatedAngularDistribution TabulatedAngularDistribution.test.cpp )

@@ -1,0 +1,1 @@
+add_cpp_test( electroatomic.SubshellTransitionDataBlock SubshellTransitionDataBlock.test.cpp )
