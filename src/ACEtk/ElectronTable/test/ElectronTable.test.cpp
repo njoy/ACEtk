@@ -259,9 +259,9 @@ void verifyTableEl( const ElectronTable& table ) {
   CHECK( 39 == table.NHFB() );
   CHECK( 39 == table.numberBremsstrahlungHighFrequencyPoints() );
   CHECK( 0 == table.NRKT() );
-  CHECK( 0 == table.numberBremsstrahlungEnergyPoints() );
+  CHECK( 0 == table.numberBremsstrahlungEnergySpectrumPoints() );
   CHECK( 0 == table.NRKA() );
-  CHECK( 0 == table.numberBremsstrahlungAngularPoints() );
+  CHECK( 0 == table.numberBremsstrahlungAngularSpectrumPoints() );
   CHECK( 0 == table.NOSC() );
   CHECK( 0 == table.numberOscillatorPoints() );
   
@@ -466,9 +466,9 @@ void verifyTableEl03( const ElectronTable& table ) {
   CHECK( 0 == table.NHFB() );
   CHECK( 0 == table.numberBremsstrahlungHighFrequencyPoints() );
   CHECK( 89 == table.NRKT() );
-  CHECK( 89 == table.numberBremsstrahlungEnergyPoints() );
+  CHECK( 89 == table.numberBremsstrahlungEnergySpectrumPoints() );
   CHECK( 34 == table.NRKA() );
-  CHECK( 34 == table.numberBremsstrahlungAngularPoints() );
+  CHECK( 34 == table.numberBremsstrahlungAngularSpectrumPoints() );
   CHECK( 3 == table.NOSC() );
   CHECK( 3 == table.numberOscillatorPoints() );
   

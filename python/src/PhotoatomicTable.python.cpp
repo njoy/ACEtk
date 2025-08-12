@@ -40,7 +40,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
 
     module,
     "PhotoatomicTable",
-    "A thermal scattering ACE table\n\n"
+    "A photoatomic ACE table\n\n"
     "The PhotoatomicTable class represents the ACE table for photoatomic data."
   );
 
