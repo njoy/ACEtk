@@ -81,6 +81,7 @@ void wrapRileyCrossSectionBlock( python::module& module, python::module& ) {
   
     "energy",
     &Block::energy,
+    python::arg( "index" ),
     "The energy of a Riley cross section parameter set\n\n"
     "Arguments:\n"
     "    index   the index (1 to 9 inclusively, one-based)"
@@ -90,6 +91,7 @@ void wrapRileyCrossSectionBlock( python::module& module, python::module& ) {
     "parameter_set",
     [] ( const Block& self, std::size_t index ) -> DoubleRange
        { return self.parameterSet( index ); },
+    python::arg( "index" ),
     "The Riley cross section parameter set at the index"
     "Arguments:\n"
     "    index   the index (1 to 9 inclusively, one-based)"
