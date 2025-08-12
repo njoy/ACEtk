@@ -20,18 +20,18 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   using JCOH = njoy::ACEtk::photoatomic::JCOH;
   using JFLO = njoy::ACEtk::photoatomic::JFLO;
   using LHNM = njoy::ACEtk::photoatomic::LHNM;
-  using EPS = njoy::ACEtk::electron::EPS;
+  using EPS = njoy::ACEtk::electroatomic::EPS;
   using SWD = njoy::ACEtk::photoatomic::SWD;
-  using SUBSH = njoy::ACEtk::electron::SUBSH;
+  using SUBSH = njoy::ACEtk::electroatomic::SUBSH;
   using SPHEL = njoy::ACEtk::photoatomic::SPHEL;
-  using XPROB = njoy::ACEtk::electron::XPROB;
-  using ESZE = njoy::ACEtk::electron::ESZE;
-  using EXCIT = njoy::ACEtk::electron::EXCIT;
-  using ELAS = njoy::ACEtk::electron::ELAS;
-  using EION = njoy::ACEtk::electron::EION;
-  using BREME = njoy::ACEtk::electron::BREME;
-  using BREML = njoy::ACEtk::electron::BREML;
-  using SELAS = njoy::ACEtk::electron::SELAS;
+  using XPROB = njoy::ACEtk::electroatomic::XPROB;
+  using ESZE = njoy::ACEtk::electroatomic::ESZE;
+  using EXCIT = njoy::ACEtk::electroatomic::EXCIT;
+  using ELAS = njoy::ACEtk::electroatomic::ELAS;
+  using EION = njoy::ACEtk::electroatomic::EION;
+  using BREME = njoy::ACEtk::electroatomic::BREME;
+  using BREML = njoy::ACEtk::electroatomic::BREML;
+  using SELAS = njoy::ACEtk::electroatomic::SELAS;
 
   // wrap views created by this table
 

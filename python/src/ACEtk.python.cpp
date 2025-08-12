@@ -27,7 +27,7 @@ void wrapContinuous( python::module&, python::module& );
 void wrapPhotoatomic( python::module&, python::module& );
 void wrapPhotonuclear( python::module&, python::module& );
 void wrapDosimetry( python::module&, python::module& );
-void wrapElectron( python::module&, python::module& );
+void wrapElectroatomic( python::module&, python::module& );
 void wrapThermal( python::module&, python::module& );
 
 // declarations - ACE table types
@@ -74,7 +74,7 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapPhotoatomic( module, viewmodule );
   wrapPhotonuclear( module, viewmodule );
   wrapDosimetry( module, viewmodule );
-  wrapElectron( module, viewmodule );
+  wrapElectroatomic( module, viewmodule );
   wrapThermal( module, viewmodule );
 
   // wrap ACE table types
