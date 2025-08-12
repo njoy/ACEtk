@@ -118,6 +118,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/thermal/InelasticAngularDistributionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/ContinuousEnergyTable.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/DosimetryTable.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/ElectronTable.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/ThermalScatteringTable.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/PhotoatomicTable.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/PhotonuclearTable.python.cpp

@@ -217,7 +217,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung energy spectrum points (NEL == 3)
    */
-  unsigned int numberBremsstrahlungEnergyPoints() const { return this->NRKT(); }
+  unsigned int numberBremsstrahlungEnergySpectrumPoints() const { return this->NRKT(); }
 
   /**
    *  @brief Return the number of bremsstrahlung angular spectrum points (NEL == 3)
@@ -227,7 +227,7 @@ public:
   /**
    *  @brief Return the number of bremsstrahlung angular spectrum points (NEL == 3)
    */
-  unsigned int numberBremsstrahlungAngularPoints() const { return this->NRKA(); }
+  unsigned int numberBremsstrahlungAngularSpectrumPoints() const { return this->NRKA(); }
 
   /**
    *  @brief Return the number of oscillator points (NEL == 3)
@@ -249,9 +249,25 @@ public:
   const electron::EKT& EKT() const { return this->ekt_; }
 
   /**
+   *  @brief Return the transition energy block
+   */
+  const electron::EKT& transitionEnergyBlock() const {
+    
+    return this->EKT();
+  }
+
+  /**
    *  @brief Return the radiation stopping power block
    */
   const electron::RAD& RAD() const { return this->rad_; }
+
+  /**
+   *  @brief Return the radiation stopping power block
+   */
+  const electron::RAD& radiationStoppingPowerBlock() const {
+    
+    return this->RAD();
+  }
 
   /**
    *  @brief Return the Mott scattering correction block
@@ -259,39 +275,103 @@ public:
   const electron::MOT& MOT() const { return this->mot_; }
 
   /**
+   *  @brief Return the Mott scattering correction block
+   */
+  const electron::MOT& mottScatteringCorrectionBlock() const {
+    
+    return this->MOT();
+  }
+
+  /**
    *  @brief Return the Riley cross section block
    */
   const electron::RLY& RLY() const { return this->rly_; }
 
   /**
-   *  @brief Return the bremsstrahlung production block
+   *  @brief Return the Riley cross section block
+   */
+  const electron::RLY& rileyCrossSectionBlock() const {
+    
+    return this->RLY();
+  }
+
+  /**
+   *  @brief Return the bremsstrahlung production block (NEL == 3)
    */
   const std::optional< electron::XSB >& XSB() const { return this->xsb_; }
 
   /**
-   *  @brief Return the bremsstrahlung correction factor block
+   *  @brief Return the bremsstrahlung production block (NEL == 3)
+   */
+  const std::optional< electron::XSB >& bremsstrahlungProductionBlock() const {
+    
+    return this->XSB();
+  }
+
+  /**
+   *  @brief Return the bremsstrahlung correction factor block (NEL != 3)
    */
   const std::optional< electron::CRB >& CRB() const { return this->crb_; }
 
   /**
-   *  @brief Return the bremsstrahlung high-frequency block
+   *  @brief Return the bremsstrahlung correction factor block (NEL != 3)
+   */
+  const std::optional< electron::CRB >& bremsstrahlungCorrectionFactorBlock() const {
+    
+    return this->CRB();
+  }
+
+  /**
+   *  @brief Return the bremsstrahlung high-frequency block (NEL != 3)
    */
   const std::optional< electron::HFB >& HFB() const { return this->hfb_; }
 
   /**
-   *  @brief Return the bremsstrahlung energy spectrum block
+   *  @brief Return the bremsstrahlung high-frequency block (NEL != 3)
+   */
+  const std::optional< electron::HFB >& bremsstrahlungHighFrequencyBlock() const {
+    
+    return this->HFB();
+  }
+
+  /**
+   *  @brief Return the bremsstrahlung energy spectrum block (NEL == 3)
    */
   const std::optional< electron::RKT >& RKT() const { return this->rkt_; }
 
   /**
-   *  @brief Return the bremsstrahlung angular spectrum block
+   *  @brief Return the bremsstrahlung energy spectrum block (NEL == 3)
+   */
+  const std::optional< electron::RKT >& bremsstrahlungEnergySpectrumBlock() const {
+    
+    return this->RKT();
+  }
+
+  /**
+   *  @brief Return the bremsstrahlung angular spectrum block (NEL == 3)
    */
   const std::optional< electron::RKA >& RKA() const { return this->rka_; }
 
   /**
-   *  @brief Return the oscillator block
+   *  @brief Return the bremsstrahlung angular spectrum block (NEL == 3)
+   */
+  const std::optional< electron::RKA >& bremsstrahlungAngularSpectrumBlock() const {
+    
+    return this->RKA();
+  }
+
+  /**
+   *  @brief Return the oscillator block (NEL == 3)
    */
   const std::optional< electron::OSC >& OSC() const { return this->osc_; }
+
+  /**
+   *  @brief Return the oscillator block (NEL == 3)
+   */
+  const std::optional< electron::OSC >& oscillatorBlock() const {
+    
+    return this->OSC();
+  }
   
 };
 
