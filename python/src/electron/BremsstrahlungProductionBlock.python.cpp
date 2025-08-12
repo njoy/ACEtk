@@ -87,6 +87,7 @@ void wrapBremsstrahlungProductionBlock( python::module& module, python::module& 
   
     "electron_energy",
     &Block::electronEnergy,
+    python::arg( "index" ),
     "A single electron energy point\n\n"
     "Arguments:\n"
     "    index   the electron energy index (one-based)"
@@ -102,6 +103,7 @@ void wrapBremsstrahlungProductionBlock( python::module& module, python::module& 
   
     "photon_ratio",
     &Block::photonRatio,
+    python::arg( "index" ),
     "A single photon energy ratio point\n\n"
     "Arguments:\n"
     "    index   the photon energy ratio index (one-based)"
@@ -117,6 +119,8 @@ void wrapBremsstrahlungProductionBlock( python::module& module, python::module& 
   
     "cross_section",
     &Block::crossSection,
+    python::arg( "ee_index" ),
+    python::arg( "pr_index" ),
     "A single bremsstrahlung cross section value\n\n"
     "Arguments:\n"
     "    ee_index    the electron energy index (one-based)\n"
@@ -127,6 +131,7 @@ void wrapBremsstrahlungProductionBlock( python::module& module, python::module& 
     "cross_sections",
     [] ( const Block& self, std::size_t index ) -> DoubleRange
        { return self.crossSections( index ); },
+    python::arg( "index" ),
     "The cross section values for a given electron energy index\n\n"
     "Arguments:\n"
     "    index   the electron energy index (one-based)"
