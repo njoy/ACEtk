@@ -1,30 +1,29 @@
 """
-Electron ACE blocks and components
+Electron ACE blocks
 """
 from __future__ import annotations
 import typing
-__all__ = ['BremsstrahlungBlock', 'ElasticAngularDistributionBlock', 'ElasticCrossSectionBlock', 'ElectronShellBlock', 'ElectronSubshellBlock', 'EnergyDistributionBlock', 'ExcitationBlock', 'PrincipalCrossSectionBlock', 'SubshellTransitionData', 'SubshellTransitionDataBlock', 'TabulatedAngularDistribution', 'TabulatedEnergyDistribution']
-class BremsstrahlungBlock:
+__all__ = ['BremsstrahlungAngularSpectrumBlock', 'BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungEnergySpectrumBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'OscillatorBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
+class BremsstrahlungAngularSpectrumBlock:
     """
-    The electron BREML block with the average electron energy after Bremsstrahlung
+    The electron RKA block with the bremsstrahlung angular spectrum data
     
-    This block is part of the eprdata formats.
+    This block is part of the el03 format.
     
-    The BremsstrahlungBlock class contains 2 arrays of the same length:
-      - the energy points
-      - the average energy remaining after Bremsstrahlung
+    The BremsstrahlungAngularSpectrumBlock class contains 1 array with
+    the ratio values of photon energy over electron energy for the
+    bremsstrahlung angular spectrum calculation (NEL == 3).
     
-    The size NBL of each (the total number of energy points) is stored in NXS(12).
+    The size NRKA is stored in NXS(10).
     """
-    def __init__(self, energies: list[float], remaining: list[float]) -> None:
+    def __init__(self, energy_ratios: list[float]) -> None:
         """
         Initialise the block
         
         Arguments:
-            self         the block
-            energies     the energy values
-            remaining    the average energy remaining after Bremsstrahlung
+            energy_ratios    the photon energy ratios
         """
+    
     @typing.overload
     def xss(self, index: int) -> float:
         """
@@ -45,24 +44,14 @@ class BremsstrahlungBlock:
             length    the length of the subrange
         """
     @property
-    def NBL(self) -> int:
+    def NRKA(self) -> int:
         """
-        The number of energy points
+        The number of bremstrahlung angular spectrum points
         """
     @property
     def empty(self) -> bool:
         """
         Whether or not the block is empty
-        """
-    @property
-    def energies(self) -> ...:
-        """
-        The energy values
-        """
-    @property
-    def energy_after_bremsstrahlung(self) -> ...:
-        """
-        The average energy remaining after Bremsstrahlung
         """
     @property
     def length(self) -> int:
@@ -75,60 +64,41 @@ class BremsstrahlungBlock:
         The name of the block
         """
     @property
-    def number_energy_points(self) -> int:
+    def number_photon_energy_ratios(self) -> int:
         """
-        The number of energy points
+        The number of bremstrahlung angular spectrum points
+        """
+    @property
+    def photon_energy_ratios(self) -> ...:
+        """
+        The energy points for bremstrahlung angular spectrum interpolation
         """
     @property
     def xss_array(self) -> ...:
         """
         The xss array of the block
         """
-class ElasticAngularDistributionBlock:
+class BremsstrahlungCorrectionFactorBlock:
     """
-    The electron ELASI and ELAS block with the large angle elastic scattering
-    angular distribution data
+    The electron CRB block with the bremsstrahlung production correction factor data
     
-    The ElasticAngularDistributionBlock class contains a list of electron energies
-    for which angular distribution data is given.
+    This block is part of the el format.
+    
+    The BremsstrahlungCorrectionFactorBlock class contains 2 arrays of the
+    same length:
+      - The energy points
+      - The correction factor values
+      
+    The size NCRB of each (the total number of electron energy points) is
+    stored in NXS(5).
     """
-    def LLOC(self, index: int) -> int:
-        """
-        Return the relative distribution locator for an energy index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
-        """
-    def __init__(self, distributions: list[TabulatedAngularDistribution]) -> None:
+    def __init__(self, energies: list[float], corrections: list[float]) -> None:
         """
         Initialise the block
         
         Arguments:
-            self             the block
-            distributions    the angular distribution data
-        """
-    def distribution(self, index: int) -> TabulatedAngularDistribution:
-        """
-        Return the angular distribution for an energy index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
-        """
-    def distribution_locator(self, index: int) -> int:
-        """
-        Return the relative distribution locator for an energy index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
+            energies       the energy values
+            corrections    the correction factor values
         """
     @typing.overload
     def xss(self, index: int) -> float:
@@ -150,14 +120,14 @@ class ElasticAngularDistributionBlock:
             length    the length of the subrange
         """
     @property
-    def NA(self) -> int:
+    def NCRB(self) -> int:
         """
-        The number of available energies
+        The number of energy points
         """
     @property
-    def distributions(self) -> list[TabulatedAngularDistribution]:
+    def corrections(self) -> ...:
         """
-        The angular distribution data
+        The bremsstrahlung production correction factors
         """
     @property
     def empty(self) -> bool:
@@ -182,34 +152,108 @@ class ElasticAngularDistributionBlock:
     @property
     def number_energy_points(self) -> int:
         """
-        The number of available energies
+        The number of energy points
         """
     @property
     def xss_array(self) -> ...:
         """
         The xss array of the block
         """
-class ElasticCrossSectionBlock:
+class BremsstrahlungEnergySpectrumBlock:
     """
-    The electron SELAS block with the additional electron elastic cross section data
+    The electron RKT block with the bremsstrahlung energy spectrum data
     
-    This block is part of the eprdata14 format.
+    This block is part of the el03 format.
     
-    The ElasticCrossSectionBlock class contains 2 arrays of the same length:
-      - the transport elastic scattering cross section
-      - the total elastic scattering cross section
+    The BremsstrahlungEnergySpectrumBlock class contains 1 array with
+    the ratio values of photon energy over electron energy for the
+    bremsstrahlung energy spectrum calculation (NEL == 3).
     
-    The size NE of each (the total number of electron energy points) is stored in
-    NXS(8).
+    The size NRKT is stored in NXS(9).
     """
-    def __init__(self, transport: list[float], total: list[float]) -> None:
+    def __init__(self, energy_ratios: list[float]) -> None:
         """
         Initialise the block
         
         Arguments:
-            self         the block
-            transport    the transport elastic cross section values
-            total        the total elastic cross section values
+            energy_ratios    the photon energy ratios
+        """
+    
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NRKA(self) -> int:
+        """
+        The number of bremstrahlung energy spectrum points
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_photon_energy_ratios(self) -> int:
+        """
+        The number of bremstrahlung energy spectrum points
+        """
+    @property
+    def photon_energy_ratios(self) -> ...:
+        """
+        The energy points for bremstrahlung energy spectrum interpolation
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class BremsstrahlungHighFrequencyBlock:
+    """
+    The electron HFB block with the bremsstrahlung high-frequency limit cross sections
+    
+    This block is part of the el format.
+    
+    The BremsstrahlungHighFrequencyBlock class contains 2 arrays of the
+    same length:
+      - The energy points
+      - The cross section values
+      
+    The size NHFB of each (the total number of electron energy points) is
+    stored in NXS(6).
+    """
+    def __init__(self, energies: list[float], corrections: list[float]) -> None:
+        """
+        Initialise the block
+        
+        Arguments:
+            energies          the energy values
+            cross_sections    the high-frequency-limit cross section values
         """
     @typing.overload
     def xss(self, index: int) -> float:
@@ -231,408 +275,14 @@ class ElasticCrossSectionBlock:
             length    the length of the subrange
         """
     @property
-    def NE(self) -> int:
+    def NHFB(self) -> int:
         """
         The number of energy points
         """
     @property
-    def empty(self) -> bool:
+    def cross_sections(self) -> ...:
         """
-        Whether or not the block is empty
-        """
-    @property
-    def length(self) -> int:
-        """
-        The length of the the xss array of the block
-        """
-    @property
-    def name(self) -> str:
-        """
-        The name of the block
-        """
-    @property
-    def number_energy_points(self) -> int:
-        """
-        The number of energy points
-        """
-    @property
-    def total(self) -> ...:
-        """
-        The total elastic cross section values
-        """
-    @property
-    def transport(self) -> ...:
-        """
-        The transport elastic cross section values
-        """
-    @property
-    def xss_array(self) -> ...:
-        """
-        The xss array of the block
-        """
-class ElectronShellBlock:
-    """
-    The electron LNEPS, LBEPS and LPIPS block with the electron shell data
-    
-    The ElectronShellBlock class contains 3 arrays of the same length:
-      - the number of electrons for each shell
-      - the binding energy for each shell
-      - the interaction probability for each shell
-    The size of each (the total number of electron shells) is stored in NXS(5).
-    """
-    def __init__(self, electrons: list[int], energies: list[float], probabilities: list[float]) -> None:
-        """
-        Initialise the block
-        
-        Arguments:
-            self             the block
-            electrons        the number of electrons for each shell
-            energies         the binding energy for each shell
-            probabilities    the interaction probability for each shell
-        """
-    def binding_energy(self, index: int) -> float:
-        """
-        The binding energy for a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    def interaction_probability(self, index: int) -> float:
-        """
-        The interaction probability for a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    def number_electrons_per_shell(self, index: int) -> int:
-        """
-        The number of electrons on a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int) -> float:
-        """
-        Return a value from the xss array of the block
-        
-        Arguments:
-            self     the data block
-            index    the index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int, length: int) -> ...:
-        """
-        Return a subrange of a given length from the xss array of the block
-        
-        Arguments:
-            self      the data block
-            index     the index (one-based)
-            length    the length of the subrange
-        """
-    @property
-    def LBEPS(self) -> ...:
-        """
-        The binding energies for each shell
-        """
-    @property
-    def LNEPS(self) -> ...:
-        """
-        The number of electrons for each shell
-        """
-    @property
-    def LPIPS(self) -> ...:
-        """
-        The interaction probability for each shell
-        """
-    @property
-    def NSH(self) -> int:
-        """
-        The number of electron shells
-        """
-    @property
-    def binding_energies(self) -> ...:
-        """
-        The binding energies for each shell
-        """
-    @property
-    def empty(self) -> bool:
-        """
-        Whether or not the block is empty
-        """
-    @property
-    def interaction_probabilities(self) -> ...:
-        """
-        The interaction probability for each shell
-        """
-    @property
-    def length(self) -> int:
-        """
-        The length of the the xss array of the block
-        """
-    @property
-    def name(self) -> str:
-        """
-        The name of the block
-        """
-    @property
-    def number_electron_shells(self) -> int:
-        """
-        The number of electron shells
-        """
-    @property
-    def number_electrons(self) -> ...:
-        """
-        The number of electrons for each shell
-        """
-    @property
-    def xss_array(self) -> ...:
-        """
-        The xss array of the block
-        """
-class ElectronSubshellBlock:
-    """
-    The electron SUBSH block with the electron subshell data
-    
-    This block is part of the eprdata formats.
-    
-    The ElectronSubshellBlock class contains 5 arrays of the same length:
-      - the ENDF designator of each subshell
-      - the electron population for each subshell
-      - the binding energy for each subshell
-      - the vacancy cumulative probability for each subshell
-      - the number of possible transitions to fill a vacancy for each subshell
-    The size of each (the total number of electron shells) is stored in NXS(7).
-    """
-    def __init__(self, designators: list[int], electrons: list[float], energies: list[float], probabilities: list[float], transitions: list[int]) -> None:
-        """
-        Initialise the block
-        
-        Arguments:
-            self             the block
-            designators      the ENDF designator of each subshell
-            electrons        the electron population for each subshell
-            energies         the vacancy cumulative probability for each subshell
-            probabilities    the number of possible transitions to fill a vacancy
-                             for each subshell
-        """
-    def binding_energy(self, index: int) -> float:
-        """
-        The binding energy for a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    def designator(self, index: int) -> int:
-        """
-        The ENDF designator for a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    def population(self, index: int) -> float:
-        """
-        The electron population for a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    def transitions(self, index: int) -> int:
-        """
-        The number of transitions to fill a vacancy for a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    def vacancy_probability(self, index: int) -> float:
-        """
-        The vacancy probability for a specific shell
-        
-        Arguments:
-            self     the block
-            index    the electron shell index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int) -> float:
-        """
-        Return a value from the xss array of the block
-        
-        Arguments:
-            self     the data block
-            index    the index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int, length: int) -> ...:
-        """
-        Return a subrange of a given length from the xss array of the block
-        
-        Arguments:
-            self      the data block
-            index     the index (one-based)
-            length    the length of the subrange
-        """
-    @property
-    def BE(self) -> ...:
-        """
-        The binding energies for each subshell
-        """
-    @property
-    def CV(self) -> ...:
-        """
-        The vacancy probabilities for each subshell
-        """
-    @property
-    def EP(self) -> ...:
-        """
-        The electron population for each subshell
-        """
-    @property
-    def ID(self) -> ...:
-        """
-        The number of electron shells
-        """
-    @property
-    def NSSH(self) -> int:
-        """
-        The number of electron subshells
-        """
-    @property
-    def NT(self) -> ...:
-        """
-        The number of transitions to fill a vacancy for each subshell
-        """
-    @property
-    def binding_energies(self) -> ...:
-        """
-        The binding energies for each subshell
-        """
-    @property
-    def designators(self) -> ...:
-        """
-        The number of electron shells
-        """
-    @property
-    def empty(self) -> bool:
-        """
-        Whether or not the block is empty
-        """
-    @property
-    def length(self) -> int:
-        """
-        The length of the the xss array of the block
-        """
-    @property
-    def name(self) -> str:
-        """
-        The name of the block
-        """
-    @property
-    def number_electron_subshells(self) -> int:
-        """
-        The number of electron subshells
-        """
-    @property
-    def number_transitions(self) -> ...:
-        """
-        The number of transitions to fill a vacancy for each subshell
-        """
-    @property
-    def populations(self) -> ...:
-        """
-        The electron population for each subshell
-        """
-    @property
-    def vacancy_probabilities(self) -> ...:
-        """
-        The vacancy probabilities for each subshell
-        """
-    @property
-    def xss_array(self) -> ...:
-        """
-        The xss array of the block
-        """
-class EnergyDistributionBlock:
-    """
-    The energy distribution block for photons from Bremsstrahlung or knock-on
-    electrons for a specific subshell
-    
-    The EnergyDistributionBlock class contains a list of electron energies
-    for which energy distribution data is given (for either photons in the
-    BREMI/BREME block or electrons in the EION blocks).
-    """
-    def LLOC(self, index: int) -> int:
-        """
-        Return the relative distribution locator for an energy index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
-        """
-    def __init__(self, distributions: list[TabulatedEnergyDistribution]) -> None:
-        """
-        Initialise the block
-        
-        Arguments:
-            self             the block
-            distributions    the energy distribution data
-        """
-    def distribution(self, index: int) -> TabulatedEnergyDistribution:
-        """
-        Return the angular distribution for an energy index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
-        """
-    def distribution_locator(self, index: int) -> int:
-        """
-        Return the relative distribution locator for an energy index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int) -> float:
-        """
-        Return a value from the xss array of the block
-        
-        Arguments:
-            self     the data block
-            index    the index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int, length: int) -> ...:
-        """
-        Return a subrange of a given length from the xss array of the block
-        
-        Arguments:
-            self      the data block
-            index     the index (one-based)
-            length    the length of the subrange
-        """
-    @property
-    def NB(self) -> int:
-        """
-        The number of available energies
-        """
-    @property
-    def distributions(self) -> list[TabulatedEnergyDistribution]:
-        """
-        The angular distribution data
+        The high-frequency-limit bremsstrahlung cross sections
         """
     @property
     def empty(self) -> bool:
@@ -657,34 +307,73 @@ class EnergyDistributionBlock:
     @property
     def number_energy_points(self) -> int:
         """
-        The number of available energies
+        The number of energy points
         """
     @property
     def xss_array(self) -> ...:
         """
         The xss array of the block
         """
-class ExcitationBlock:
+class BremsstrahlungProductionBlock:
     """
-    The electron EXCIT block with the electron excitation energy loss data
+    The electron XSB block with the bremsstrahlung photon production data
     
-    This block is part of the eprdata formats.
+    This block is part of el03 format.
     
-    The ExcitationBlock class contains 2 arrays of the same length:
-      - the energy points
-      - the average excitation energy loss values
+    The BremsstrahlungProductionBlock class contains a variable number of
+    arrays of differing lengths:
+      - The electron energy points
+      - The photon energy ratio points
+      - The cross section values
+      
+    The size NEB of the electron energy values array (the total number of
+    electron energy points) is stored in NXS(5). The size NPB of the photon
+    energy ratio values array (the total number of photon energy points) is
+    stored in NXS(6). The size of the bremsstrahlung production cross
+    section array (the number of values for interpolation) is NEB*NPB.
     
-    The size NXL of each (the total number of excitation energy points) is
-    stored in NXS(9).
+    The cross section values are stored internally in column-major order.
     """
-    def __init__(self, energies: list[float], loss: list[float]) -> None:
+    def __init__(self,
+                 electron_energies: list[float],
+                 photon_ratios: list[float],
+                 cross_sections: list[list[float]]) -> None:
         """
-        Initialise the block
+        Initialize the block
         
         Arguments:
-            self        the block
-            energies    the energy values
-            loss        the average excitation energy loss values
+            electron_energies    the electron energy points
+            photon_ratios        the photon energy ratio points
+            cross_sections       the bremsstrahlung cross section values
+        """
+    def cross_section(self, ee_index: int, pr_index: int) -> float:
+        """
+        A single bremsstrahlung cross section value
+        
+        Arguments:
+            ee_index    the electron energy index (one-based)
+            pr_index    the photon energy ratio index (one-based)
+        """
+    def cross_sections(self, index: int) -> ...:
+        """
+        The cross section values for a given electron energy index
+        
+        Arguments:
+            index   the electron energy index (one-based)
+        """
+    def electron_energy(self, index: int) -> float:
+        """
+        A single electron energy point
+        
+        Arguments:
+            index   the electron energy index (one-based)
+        """
+    def photon_ratio(self, index: int) -> float:
+        """
+        A single photon energy ratio point
+        
+        Arguments:
+            index   the photon energy ratio index (one-based)
         """
     @typing.overload
     def xss(self, index: int) -> float:
@@ -706,24 +395,29 @@ class ExcitationBlock:
             length    the length of the subrange
         """
     @property
-    def NXL(self) -> int:
+    def NEB(self) -> int:
         """
-        The number of energy points
+        The number of electron energy points
+        """
+    @property
+    def NPB(self) -> int:
+        """
+        The number of photon energy ratio points
+        """
+    @property
+    def cross_section_data(self) -> ...:
+        """
+        The bremsstrahlung cross section data array
+        """
+    @property
+    def electron_energies(self) -> ...:
+        """
+        The electron energy points
         """
     @property
     def empty(self) -> bool:
         """
         Whether or not the block is empty
-        """
-    @property
-    def energies(self) -> ...:
-        """
-        The energy values
-        """
-    @property
-    def excitation_energy_loss(self) -> ...:
-        """
-        The average excitation energy loss values
         """
     @property
     def length(self) -> int:
@@ -736,52 +430,72 @@ class ExcitationBlock:
         The name of the block
         """
     @property
-    def number_energy_points(self) -> int:
+    def number_cross_sections(self) -> int:
         """
-        The number of energy points
+        The number of cross section values
+        """
+    @property
+    def number_electron_energies(self) -> int:
+        """
+        The number of electron energy points
+        """
+    @property
+    def number_photon_ratios(self) -> int:
+        """
+        The number of photon energy ratio points
+        """
+    @property
+    def photon_ratios(self) -> ...:
+        """
+        The photon energy ratio points
         """
     @property
     def xss_array(self) -> ...:
         """
         The xss array of the block
         """
-class PrincipalCrossSectionBlock:
+class MottScatteringCorrectionBlock:
     """
-    The electron ESZE block with the electron cross section data
+    The electron MOT block with the Mott scattering correction data
     
-    This block is part of the eprdata formats.
+    This block is part of el and el03 formats.
     
-    The PrincipalCrossSectionBlock class contains 5 + NSSH arrays of the same length:
-      - the energy points
-      - the total cross section (sum of the following three arrays)
-      - the large angle elastic scattering cross section
-      - the Bremsstrahlung cross section
-      - the excitation cross section
-      - the total electroionisation cross section (sum of the following NSSH arrays)
-      - the electroionisation cross section for each subshell (NSSH arrays)
-    
-    The size NE of each (the total number of electron energy points) is stored in
-    NXS(8). The number of subshells NSSH is stored in NXS(7).
+    The MottScatteringCorrectionBlock class contains 6 arrays of the same
+    length:
+      - The energy points
+      - The Mott scattering correction h(theta) for theta = 0
+      - The Mott scattering correction h(theta) for theta = pi/4
+      - The Mott scattering correction h(theta) for theta = pi/2
+      - The Mott scattering correction h(theta) for theta = 3*pi/4
+      - The Mott scattering correction h(theta) for theta = pi
+      
+    The size NMOT of each (the total number of Mott scattering cross
+    section energy points) is stored in NXS(4).
     """
-    def __init__(self, energies: list[float], elastic: list[float], bremsstrahlung: list[float], excitation: list[float], electroionisation: list[list[float]]) -> None:
+    def __init__(self,
+                 energies: list[float],
+                 corrections0deg: list[float],
+                 corrections45deg: list[float],
+                 corrections90deg: list[float],
+                 corrections135deg: list[float],
+                 corrections180deg: list[float]) -> None:
         """
-        Initialise the block
+        Initialize the block
         
         Arguments:
-            self                 the block
             energies             the energy values
-            elastic              the elastic cross section values
-            bremsstrahlung       the Bremsstrahlung cross section values
-            excitation           the excitation cross section values
-            electroionisation    the electroionisation cross section values
+            corrections0deg      the Mott scattering corrections at 0 degrees
+            corrections45deg     the Mott scattering corrections at 45 degrees
+            corrections90deg     the Mott scattering corrections at 90 degrees
+            corrections135deg    the Mott scattering corrections at 135 degrees
+            corrections180deg    the Mott scattering corrections at 180 degrees
         """
-    def electroionisation(self, index: int) -> ...:
+    def mott_scattering_correction(self, index: int) -> ...:
         """
-        The electroionisation cross section values for a specific shell
+        The Mott scattering correction for an index.
         
         Arguments:
-            self     the block
-            index    the electron shell index (one-based)
+            index   the index (1 to 5 inclusively, one-based)
         """
     @typing.overload
     def xss(self, index: int) -> float:
@@ -803,24 +517,9 @@ class PrincipalCrossSectionBlock:
             length    the length of the subrange
         """
     @property
-    def NE(self) -> int:
+    def NMOT(self) -> int:
         """
         The number of energy points
-        """
-    @property
-    def NSSH(self) -> int:
-        """
-        The number of electron subshells
-        """
-    @property
-    def bremsstrahlung(self) -> ...:
-        """
-        The Bremsstrahlung cross section values
-        """
-    @property
-    def elastic(self) -> ...:
-        """
-        The large angle elastic cross section values
         """
     @property
     def empty(self) -> bool:
@@ -830,12 +529,7 @@ class PrincipalCrossSectionBlock:
     @property
     def energies(self) -> ...:
         """
-        The energy values
-        """
-    @property
-    def excitation(self) -> ...:
-        """
-        The excitation cross section values
+        The energy points
         """
     @property
     def length(self) -> int:
@@ -848,9 +542,174 @@ class PrincipalCrossSectionBlock:
         The name of the block
         """
     @property
-    def number_electron_subshells(self) -> int:
+    def number_energy_points(self) -> int:
         """
-        The number of electron subshells
+        The number of energy points
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class OscillatorBlock:
+    """
+    The electron CRB block with the oscillator descriptions
+    
+    This block is part of the el03 format.
+    
+    The OscillatorBlock class contains 2 arrays of the
+    same length:
+      - The level occupation numbers
+      - The level binding energies
+      
+    The size NOSC of each (the total number of oscillator points) is stored
+    in NXS(11).
+    """
+    def __init__(self, energies: list[float], corrections: list[float]) -> None:
+        """
+        Initialise the block
+        
+        Arguments:
+            occupation_numbers    The occupation numbers of each subshell
+            binding_energies      The binding energies of each subshell
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NOSC(self) -> int:
+        """
+        The number of oscillators
+        """
+    @property
+    def binding_energies(self) -> ...:
+        """
+        The binding energies of each level
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_oscillators(self) -> int:
+        """
+        The number of oscillators
+        """
+    @property
+    def occupation_numbers(self) -> ...:
+        """
+        The occupation numbers of each level
+        
+        n < 0 at the last (highest) level signifies a conductor
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class RadiationStoppingPowerBlock:
+    """
+    The electron RAD block with the radiation stopping power data
+    
+    This block is part of el and el03 formats.
+    
+    The RadiationStoppingPowerBlock class contains 3 arrays of the same
+    length:
+      - The energy points
+      - The normalized stopping powers
+      - The electron-electron bremsstrahlung correction (NEL == 3)
+    
+    The size NRAD of each (the total number of electron energy points) is
+    stored in NXS(3).
+    """
+    def __init__(self,
+                 energies: list[float],
+                 stopping_powers: list[float],
+                 energies: list[float] = None) -> None:
+        """
+        Initialize the block
+        
+        Arguments:
+            self               the block
+            energies           the energy values
+            stopping_powers    the normalized radiative stopping power values
+            corrections        the electron-electron bremsstrahlung correction values (NEL == 3)
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NRAD(self) -> int:
+        """
+        The number of energy points
+        """
+    @property
+    def corrections(self) -> ...:
+        """
+        The electron-electron bremsstrahlung correction factors (NEL == 3)
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def energies(self) -> ...:
+        """
+        The energy points for radiation stopping power interpolation
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
         """
     @property
     def number_energy_points(self) -> int:
@@ -858,103 +717,65 @@ class PrincipalCrossSectionBlock:
         The number of energy points
         """
     @property
-    def total(self) -> ...:
+    def stopping_powers(self) -> ...:
         """
-        The total cross section values
-        """
-    @property
-    def total_electroionisation(self) -> ...:
-        """
-        The total electroionisation cross section values
+        The normalized radiation stopping powers
         """
     @property
     def xss_array(self) -> ...:
         """
         The xss array of the block
         """
-class SubshellTransitionData:
+class RileyCrossSectionBlock:
     """
-    The electron transition data for a given subshell
+    The electron RLY block with the Riley cross section data
     
-    This block is part of the eprdata formats.
+    This block is part of el and el03 formats.
     
-    The SubshellTransitionData class contains the transition data to fill vacancies
-    in the given subshell. Each transition has the following information associated to it:
-      - the primary subshell designator (the designator of the subshell from
-        where the electron is "moving" from)
-      - the secondary subshell designator (the designator of the subshell from
-        which the emitted electron is ejected or 0 for a radiative transition
-        that only emits a photon)
-      - the energy of the emitted photon or electron
-      - the cumulative probability of the transition
+    The RileyCrossSectionBlock class contains 9 arrays of the same length.
+    Each array contains an energy value from 1 to 256 keV followed by the
+    set of Riley scattering cross section parameters at that energy.
     
-    The size NT of each (the total number of transitions) is stored in the SUBSH
-    block. This data block may be empty (NT = 0).
+    The size of each Riley set array is 14 (1 energy + 13 parameters).
+    This size value is hard-coded and is not stored in the NXS array.
     """
-    @typing.overload
-    def __init__(self) -> None:
+    def __init__(self,
+                 rileySet256keV: list[float],
+                 rileySet128keV: list[float],
+                 rileySet64keV: list[float],
+                 rileySet32keV: list[float],
+                 rileySet16keV: list[float],
+                 rileySet8keV: list[float],
+                 rileySet4keV: list[float],
+                 rileySet2keV: list[float],
+                 rileySet1keV: list[float]) -> None:
         """
-        Initialise an empty block
-        """
-    @typing.overload
-    def __init__(self, primary: list[int], secondary: list[int], energies: list[float], probabilities: list[float]) -> None:
-        """
-        Initialise the block
+        Initialize the block
         
         Arguments:
-            self             the block
-            primary          the primary subshell designators
-            secondary        the secondary subshell designators
-            energies         the energy values of the secondary photon or electron
-            probabilities    the cumulative probabilities of the transitions
+            rileySet256keV    the Riley cross section parameters at 256 keV
+            rileySet128keV    the Riley cross section parameters at 128 keV
+            rileySet64keV     the Riley cross section parameters at 64 keV
+            rileySet32keV     the Riley cross section parameters at 32 keV
+            rileySet16keV     the Riley cross section parameters at 16 keV
+            rileySet8keV      the Riley cross section parameters at 8 keV
+            rileySet4keV      the Riley cross section parameters at 4 keV
+            rileySet2keV      the Riley cross section parameters at 2 keV
+            rileySet1keV      the Riley cross section parameters at 1 keV
         """
     def energy(self, index: int) -> float:
         """
-        The energy of the secondary photon or electron for a given transition
+        The energy of a Riley cross section parameter set
         
         Arguments:
-            self     the block
-            index    the transition index (one-based)
+            index   the index (1 to 9 inclusively, one-based)
         """
-    def is_radiative_transition(self, index: int) -> bool:
+    def parameter_set(self, index: int) -> ...:
         """
-        Return whether or not the transition is a radiative transitions
+        The Riley cross section parameter set at the index
         
         Arguments:
-            self     the block
-            index    the transition index (one-based)
-        """
-    def primary_designator(self, index: int) -> int:
-        """
-        The primary designator for a given transition
-        
-        Arguments:
-            self     the block
-            index    the transition index (one-based)
-        """
-    def probability(self, index: int) -> float:
-        """
-        The cumulative probability for a given transition
-        
-        Arguments:
-            self     the block
-            index    the transition index (one-based)
-        """
-    def secondary_designator(self, index: int) -> int:
-        """
-        The secondary designator for a given transition
-        
-        Arguments:
-            self     the block
-            index    the transition index (one-based)
-        """
-    def transition(self, arg0: int) -> ...:
-        """
-        The transition data for a given transition
-        
-        Arguments:
-            self     the block
-            index    the transition index (one-based)
+            index   the index (1 to 9 inclusively, one-based)
         """
     @typing.overload
     def xss(self, index: int) -> float:
@@ -976,9 +797,9 @@ class SubshellTransitionData:
             length    the length of the subrange
         """
     @property
-    def NT(self) -> int:
+    def NRLY(self) -> :
         """
-        The number of transitions
+        The number of Riley cross section parameter sets
         """
     @property
     def empty(self) -> bool:
@@ -996,59 +817,39 @@ class SubshellTransitionData:
         The name of the block
         """
     @property
-    def number_transitions(self) -> int:
+    def number_energy_points(self) -> :
         """
-        The number of transitions
+        The number of Riley cross section parameter sets
+        """
+    @property
+    def parameter_set_length(self) -> :
+        """
+        The length of a Riley cross section parameter set
         """
     @property
     def xss_array(self) -> ...:
         """
         The xss array of the block
         """
-class SubshellTransitionDataBlock:
+class TransitionEnergyBlock:
     """
-    The electron RELO and XPROB block with the transition data
+    The electron EKT block with the transition energy data
     
-    The SubshellTransitionDataBlock class contains the transition data for each
-    subshell (the number of subshells NSSH is stored in NXS(7)).
+    This block is part of el and el03 formats.
+    
+    The TransitionEnergyBlock class contains 2 or 4 data points:
+      - The K edge energy below which no electron induced relaxation will
+        occur (EDG)
+      - The K x-ray or Auger electron emission energy (EEK)
+      - The (2) bremsstrahlung extrapolation transition points (NEL != 3)
     """
-    def LTRAN(self, index: int) -> int:
+    def __init__(self, values: list[float]) -> None:
         """
-        Return the relative transition data locator for a subshell index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
-        """
-    def __init__(self, transitions: list[SubshellTransitionData]) -> None:
-        """
-        Initialise the block
+        Initialize the block
         
         Arguments:
-            self           the block
-            transitions    the transition data
-        """
-    def transition_data(self, index: int) -> SubshellTransitionData:
-        """
-        Return the transition data for a subshell index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
-        """
-    def transition_data_locator(self, index: int) -> int:
-        """
-        Return the relative transition data locator for a subshell index
-        
-        When the index is out of range an out of range exception is thrown
-        (debug mode only).
-        
-            self     the block
-            index    the index (one-based)
+            self      the block
+            values    the transition energy values (4 for el, 2 for el03)
         """
     @typing.overload
     def xss(self, index: int) -> float:
@@ -1070,86 +871,14 @@ class SubshellTransitionDataBlock:
             length    the length of the subrange
         """
     @property
-    def NSSH(self) -> int:
+    def EDG(self) -> float:
         """
-        The number of electron subshells
-        """
-    @property
-    def data(self) -> list[SubshellTransitionData]:
-        """
-        The cross section data
+        The K edge energy
         """
     @property
-    def empty(self) -> bool:
+    def EEK(self) -> float:
         """
-        Whether or not the block is empty
-        """
-    @property
-    def length(self) -> int:
-        """
-        The length of the the xss array of the block
-        """
-    @property
-    def name(self) -> str:
-        """
-        The name of the block
-        """
-    @property
-    def number_electron_subshells(self) -> int:
-        """
-        The number of electron subshells
-        """
-    @property
-    def xss_array(self) -> ...:
-        """
-        The xss array of the block
-        """
-class TabulatedAngularDistribution:
-    """
-    Tabulated electron angular distribution data for a single incident energy
-    
-    The TabulatedAngularDistribution class contains the cumulative density function
-    (CDF) as a function of cosine for the given incident energy. It is used in
-    the ELAS block.
-    """
-    def __init__(self, energy: float, cosines: list[float], cdf: list[float]) -> None:
-        """
-        Initialise the block
-        
-        Arguments:
-            self            the block
-            energy          the associated incident energy value
-            cosines         the cosine values
-            cdf             the cdf values
-        """
-    @typing.overload
-    def xss(self, index: int) -> float:
-        """
-        Return a value from the xss array of the block
-        
-        Arguments:
-            self     the data block
-            index    the index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int, length: int) -> ...:
-        """
-        Return a subrange of a given length from the xss array of the block
-        
-        Arguments:
-            self      the data block
-            index     the index (one-based)
-            length    the length of the subrange
-        """
-    @property
-    def cdf(self) -> ...:
-        """
-        The cdf values
-        """
-    @property
-    def cosines(self) -> ...:
-        """
-        The cosine values
+        The K x-ray or Auger electron emission energy
         """
     @property
     def empty(self) -> bool:
@@ -1157,9 +886,14 @@ class TabulatedAngularDistribution:
         Whether or not the block is empty
         """
     @property
-    def energy(self) -> float:
+    def k_edge_energy(self) -> float:
         """
-        The associated incident energy value
+        The K edge energy
+        """
+    @property
+    def k_xray_emission_energy(self) -> float:
+        """
+        The K x-ray or Auger electron emission energy
         """
     @property
     def length(self) -> int:
@@ -1167,76 +901,9 @@ class TabulatedAngularDistribution:
         The length of the the xss array of the block
         """
     @property
-    def name(self) -> str:
+    def lower_bremsstrahlung_transition_energy(self) -> float:
         """
-        The name of the block
-        """
-    @property
-    def number_cosines(self) -> int:
-        """
-        The number of cosine values
-        """
-    @property
-    def xss_array(self) -> ...:
-        """
-        The xss array of the block
-        """
-class TabulatedEnergyDistribution:
-    """
-    Tabulated photon energy distribution from Bremsstrahlung for a single incident energy
-    
-    The TabulatedEnergyDistribution class contains the cumulative density function
-    (CDF) as a function of photon energy for the given incident energy. It is used
-    in the BREME block.
-    """
-    def __init__(self, energy: float, outgoing: list[float], cdf: list[float]) -> None:
-        """
-        Initialise the block
-        
-        Arguments:
-            self        the block
-            energy      the associated incident energy value
-            outgoing    the outgoing energy values
-            cdf         the cdf values
-        """
-    @typing.overload
-    def xss(self, index: int) -> float:
-        """
-        Return a value from the xss array of the block
-        
-        Arguments:
-            self     the data block
-            index    the index (one-based)
-        """
-    @typing.overload
-    def xss(self, index: int, length: int) -> ...:
-        """
-        Return a subrange of a given length from the xss array of the block
-        
-        Arguments:
-            self      the data block
-            index     the index (one-based)
-            length    the length of the subrange
-        """
-    @property
-    def cdf(self) -> ...:
-        """
-        The cdf values
-        """
-    @property
-    def empty(self) -> bool:
-        """
-        Whether or not the block is empty
-        """
-    @property
-    def energy(self) -> float:
-        """
-        The associated incident energy value
-        """
-    @property
-    def length(self) -> int:
-        """
-        The length of the the xss array of the block
+        The lower bremsstrahlung extrapolation transition energy
         """
     @property
     def name(self) -> str:
@@ -1244,14 +911,9 @@ class TabulatedEnergyDistribution:
         The name of the block
         """
     @property
-    def number_outgoing_energies(self) -> int:
+    def upper_bremsstrahlung_transition_energy(self) -> float:
         """
-        The number of outgoing energy values
-        """
-    @property
-    def outgoing_energies(self) -> ...:
-        """
-        The cosine values
+        The upper bremsstrahlung extrapolation transition energy
         """
     @property
     def xss_array(self) -> ...:

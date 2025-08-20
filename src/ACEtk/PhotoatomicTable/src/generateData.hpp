@@ -3,18 +3,18 @@ Data generateData( unsigned int z,
                    photoatomic::ESZG&& eszg, photoatomic::JINC&& jinc,
                    photoatomic::JCOH&& jcoh, photoatomic::LHNM&& lhnm,
                    std::optional< photoatomic::JFLO >&& jflo,
-                   std::optional< electron::EPS >&& eps,
+                   std::optional< electroatomic::EPS >&& eps,
                    std::optional< photoatomic::SWD >&& swd,
-                   std::optional< electron::SUBSH >&& subsh,
+                   std::optional< electroatomic::SUBSH >&& subsh,
                    std::optional< photoatomic::SPHEL >&& sphel,
-                   std::optional< electron::XPROB >&& xprob,
-                   std::optional< electron::ESZE >&& esze,
-                   std::optional< electron::EXCIT >&& excit,
-                   std::optional< electron::ELAS >&& elas,
-                   std::vector< electron::EION >&& eion,
-                   std::optional< electron::BREME >&& breme,
-                   std::optional< electron::BREML >&& breml,
-                   std::optional< electron::SELAS >&& selas ) {
+                   std::optional< electroatomic::XPROB >&& xprob,
+                   std::optional< electroatomic::ESZE >&& esze,
+                   std::optional< electroatomic::EXCIT >&& excit,
+                   std::optional< electroatomic::ELAS >&& elas,
+                   std::vector< electroatomic::EION >&& eion,
+                   std::optional< electroatomic::BREME >&& breme,
+                   std::optional< electroatomic::BREML >&& breml,
+                   std::optional< electroatomic::SELAS >&& selas ) {
 
   std::array< int32_t, 16 > iz;
   std::array< double, 16 > aw;

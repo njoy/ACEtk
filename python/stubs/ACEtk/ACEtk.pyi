@@ -4,12 +4,13 @@ import typing
 import typing_extensions
 from . import continuous
 from . import dosimetry
+from . import electroatomic
 from . import electron
 from . import photoatomic
 from . import photonuclear
 from . import sequence
 from . import thermal
-__all__ = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
+__all__ = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
 class AngularDistributionType:
     """
     The angular distribution types
@@ -871,6 +872,352 @@ class DosimetryTable:
         """
         The full ZAID or SZAID of the table
         """
+class ElectronTable:
+    """
+    An electron ACE table
+    
+    The ElectronTable class represents the ACE table for electron data.
+    """
+    @staticmethod
+    def from_concatenated_file(arg0: str) -> list[ElectronTable]:
+        """
+        Read ACE tables from a concatenated file
+        
+        An exception is raised if something goes wrong while reading the
+        table
+        
+        Arguments:
+            filename    the file name and path
+        """
+    @staticmethod
+    def from_file(arg0: str) -> ElectronTable:
+        """
+        Read an ACE table from a file
+        
+        An exception is raised if something goes wrong while reading the
+        table
+        
+        Arguments:
+            filename    the file name and path
+        """
+    def __init__(self, z: int, header: Header | Header201,
+                 za: list[int], awr: list[float],
+                 ekt: electron.TransitionEnergyBlock,
+                 rad: electron.RadiationStoppingPowerBlock,
+                 mot: electron.MottScatteringCorrectionBlock,
+                 rly: electron.RileyCrossSectionBlock,
+                 xsb: electron.BremsstrahlungProductionBlock | None = None,
+                 crb: electron.BremsstrahlungCorrectionFactorBlock | None = None,
+                 hfb: electron.BremsstrahlungHighFrequencyBlock | None = None,
+                 rkt: electron.BremsstrahlungEnergySpectrumBlock | None = None,
+                 rka: electron.BremsstrahlungAngularSpectrumBlock | None = None,
+                 osc: electron.OscillatorBlock | None = None) -> None:
+        """
+        Initialise the table
+        
+        Arguments:
+            z         the Z number of the target
+            header    the header for the table
+            za        the list of ZA values
+            awr       the list of atomic mass values
+            ekt       the transition energy block
+            rad       the radiation stopping power block
+            mot       the Mott scattering correction block
+            rly       the Riley cross section block
+            xsb       the brmsstrahlung production block (NEL == 3)
+            crb       the bremsstrahlung correction factor block (NEL != 3)
+            hfb       the bremsstrahlung high-frequency block (NEL != 3)
+            rkt       the bremsstrahlung energy spectrum block (NEL == 3)
+            rka       the bremsstrahlung angular spectrum block (NEL == 3)
+            osc       the oscillator block (NEL == 3)"
+        """
+    def to_file(self, arg0: str) -> None:
+        """
+        Write the ACE table to a file
+        
+        Arguments:
+            self        the table
+            filename    the file name and path
+        """
+    @property
+    def A(self) -> int:
+        """
+        The mass number of the target
+        """
+    @property
+    def AWR(self) -> float:
+        """
+        The atomic weight ratio (with respect to the neutron mass)
+        """
+    @property
+    def CRB(self) -> electron.BremsstrahlungCorrectionFactorBlock | None:
+        """
+        The bremsstrahlung correction factor block (NEL != 3)
+        """
+    @property
+    def EKT(self) -> electron.TransitionEnergyBlock | None:
+        """
+        The transition energy block
+        """
+    @property
+    def HFB(self) -> electron.BremsstrahlungHighFrequencyBlock | None:
+        """
+        The bremsstrahlung high-frequency block (NEL != 3)
+        """
+    @property
+    def MOT(self) -> electron.MottScatteringCorrectionBlock | None:
+        """
+        The Mott scattering correction block
+        """
+    @property
+    def NCRB(self) -> int:
+        """
+        The number of bremsstrahlung correction factor points (NEL != 3)
+        """
+    @property
+    def NEB(self) -> int:
+        """
+        The number of electron energy points for bremsstrahlung production
+        (NEL == 3)
+        """
+    @property
+    def NEL(self) -> int:
+        """
+        The EL data format flag (0 or 3)
+        """
+    @property
+    def NHFB(self) -> int:
+        """
+        The number of bremsstrahlung high-frequency limit points (NEL != 3)
+        """
+    @property
+    def NMOT(self) -> int:
+        """
+        The number of Mott scattering correction points
+        """
+    @property
+    def NOSC(self) -> int:
+        """
+        The number of oscillator points (NEL == 3)
+        """
+    @property
+    def NPB(self) -> int:
+        """
+        The number of photon ratio points for bremsstrahlung production
+        (NEL == 3)
+        """
+    @property
+    def NRAD(self) -> int:
+        """
+        The number of radiation stopping power points
+        """
+    @property
+    def NRKA(self) -> int:
+        """
+        The number of bremsstrahlung angular spectrum points (NEL == 3)
+        """
+    @property
+    def NRKT(self) -> int:
+        """
+        The number of bremsstrahlung energy spectrum points (NEL == 3)
+        """
+    @property
+    def OSC(self) -> electron.OscillatorBlock | None:
+        """
+        The oscillator block (NEL == 3)
+        """
+    @property
+    def RAD(self) -> electron.RadiationStoppingPowerBlock | None:
+        """
+        The radiation stopping power block
+        """
+    @property
+    def RKA(self) -> electron.BremsstrahlungAngularSpectrumBlock | None:
+        """
+        The bremsstrahlung angular spectrum block (NEL == 3)
+        """
+    @property
+    def RKT(self) -> electron.BremsstrahlungEnergySpectrumBlock | None:
+        """
+        The bremsstrahlung energy spectrum block (NEL == 3)
+        """
+    @property
+    def RLY(self) -> electron.RileyCrossSectionBlock | None:
+        """
+        The Riley cross section block
+        """
+    @property
+    def S(self) -> int:
+        """
+        The isomeric state of the target
+        """
+    @property
+    def TEMP(self) -> float:
+        """
+        The temperature of the table
+        """
+    @property
+    def XSB(self) -> electron.BremsstrahlungProductionBlock | None:
+        """
+        The bremsstrahlung production block (NEL == 3)
+        """
+    @property
+    def Z(self) -> int:
+        """
+        The atom number of the target
+        """
+    @property
+    def atom_number(self) -> int:
+        """
+        The atom number of the target
+        """
+    @property
+    def atomic_weight_ratio(self) -> float:
+        """
+        The atomic weight ratio (with respect to the neutron mass)
+        """
+    @property
+    def bremsstrahlung_angular_spectrum_block(self) -> electron.BremsstrahlungAngularSpectrumBlock | None:
+        """
+        The bremsstrahlung angular spectrum block (NEL == 3)
+        """
+    @property
+    def bremsstrahlung_correction_factor_block(self) -> electron.BremsstrahlungCorrectionFactorBlock | None:
+        """
+        The bremsstrahlung correction factor block (NEL != 3)
+        """
+    @property
+    def bremsstrahlung_energy_spectrum_block(self) -> electron.BremsstrahlungEnergySpectrumBlock | None:
+        """
+        The bremsstrahlung energy spectrum block (NEL == 3)
+        """
+    @property
+    def bremsstrahlung_high_frequency_block(self) -> electron.BremsstrahlungHighFrequencyBlock | None:
+        """
+        The bremsstrahlung high-frequency block (NEL != 3)
+        """
+    @property
+    def bremsstrahlung_production_block(self) -> electron.BremsstrahlungProductionBlock | None:
+        """
+        The bremsstrahlung production block (NEL == 3)
+        """
+    @property
+    def data(self) -> Data:
+        """
+        The data arrays
+        """
+    @property
+    def date(self) -> str:
+        """
+        The date
+        """
+    @property
+    def electron_data_format(self) -> int:
+        """
+        The EL data format flag (0 or 3)
+        """
+    @property
+    def header(self) -> Header | Header201:
+        """
+        The header information
+        """
+    @property
+    def isomeric_state(self) -> int:
+        """
+        The isomeric state of the target
+        """
+    @property
+    def length(self) -> int:
+        """
+        The total length of the XSS array
+        """
+    @property
+    def mass_number(self) -> int:
+        """
+        The mass number of the target
+        """
+    @property
+    def mott_scattering_correction_block(self) -> electron.MottScatteringCorrectionBlock | None:
+        """
+        The Mott scattering correction block
+        """
+    @property
+    def number_bremsstrahlung_angular_spectrum_points(self) -> int:
+        """
+        The number of bremsstrahlung angular spectrum points (NEL == 3)
+        """
+    @property
+    def number_bremsstrahlung_correction_points(self) -> int:
+        """
+        The number of bremsstrahlung correction factor points (NEL != 3)
+        """
+    @property
+    def number_bremsstrahlung_energy_spectrum_points(self) -> int:
+        """
+        The number of bremsstrahlung energy spectrum points (NEL == 3)
+        """
+    @property
+    def number_bremsstrahlung_high_frequency_points(self) -> int:
+        """
+        The number of bremsstrahlung high-frequency limit points (NEL != 3)
+        """
+    @property
+    def number_electron_bremsstrahlung_energy_points(self) -> int:
+        """
+        The number of electron energy points for bremsstrahlung production
+        (NEL == 3)
+        """
+    @property
+    def number_mott_correction_points(self) -> int:
+        """
+        The number of Mott scattering correction points
+        """
+    @property
+    def number_oscillator_points(self) -> int:
+        """
+        The number of oscillator points (NEL == 3)
+        """
+    @property
+    def number_photon_bremsstrahlung_ratio_points(self) -> int:
+        """
+        The number of photon ratio points for bremsstrahlung production
+        (NEL == 3)
+        """
+    @property
+    def oscillator_block(self) -> electron.OscillatorBlock | None:
+        """
+        The oscillator block (NEL == 3)
+        """
+    @property
+    def number_radiation_stopping_points(self) -> int:
+        """
+        The number of radiation stopping power points
+        """
+    @property
+    def radiation_stopping_power_block(self) -> electron.RadiationStoppingPowerBlock | None:
+        """
+        The radiation stopping power block
+        """
+    @property
+    def riley_cross_section_block(self) -> electron.RileyCrossSectionBlock | None:
+        """
+        The Riley cross section block
+        """
+    @property
+    def temperature(self) -> float:
+        """
+        The temperature of the table
+        """
+    @property
+    def transition_energy_block(self) -> electron.TransitionEnergyBlock | None:
+        """
+        The transition energy block
+        """
+    @property
+    def zaid(self) -> int:
+        """
+        The full ZAID or SZAID of the table
+        """
 class EnergyDistributionType:
     """
     The energy distribution types
@@ -1115,7 +1462,7 @@ class Header201:
         """
 class PhotoatomicTable:
     """
-    A thermal scattering ACE table
+    A photoatomic ACE table
     
     The PhotoatomicTable class represents the ACE table for photoatomic data.
     """
@@ -1141,7 +1488,7 @@ class PhotoatomicTable:
         Arguments:
             filename    the file name and path
         """
-    def EION(self, index: int) -> electron.EnergyDistributionBlock:
+    def EION(self, index: int) -> electroatomic.EnergyDistributionBlock:
         """
         Return the knock-on electron energy distribution block for a subshell index
         
@@ -1151,7 +1498,7 @@ class PhotoatomicTable:
             self     the block
             index    the index (one-based)
         """
-    def __init__(self, z: int, header: Header | Header201, za: list[int], awr: list[float], eszg: photoatomic.PrincipalCrossSectionBlock, jinc: photoatomic.IncoherentScatteringFunctionBlock, jcoh: photoatomic.CoherentFormFactorBlock, lhnm: photoatomic.HeatingNumbersBlock, jflo: photoatomic.FluorescenceDataBlock | None = None, eps: electron.ElectronShellBlock | None = None, swd: photoatomic.ComptonProfileBlock | None = None, subsh: electron.ElectronSubshellBlock | None = None, sphel: photoatomic.PhotoelectricCrossSectionBlock | None = None, xprob: electron.SubshellTransitionDataBlock | None = None, esze: electron.PrincipalCrossSectionBlock | None = None, excit: electron.ExcitationBlock | None = None, elas: electron.ElasticAngularDistributionBlock | None = None, eion: list[electron.EnergyDistributionBlock] = [], breme: electron.EnergyDistributionBlock | None = None, breml: electron.BremsstrahlungBlock | None = None, selas: electron.ElasticCrossSectionBlock | None = None) -> None:
+    def __init__(self, z: int, header: Header | Header201, za: list[int], awr: list[float], eszg: photoatomic.PrincipalCrossSectionBlock, jinc: photoatomic.IncoherentScatteringFunctionBlock, jcoh: photoatomic.CoherentFormFactorBlock, lhnm: photoatomic.HeatingNumbersBlock, jflo: photoatomic.FluorescenceDataBlock | None = None, eps: electroatomic.ElectronShellBlock | None = None, swd: photoatomic.ComptonProfileBlock | None = None, subsh: electroatomic.ElectronSubshellBlock | None = None, sphel: photoatomic.PhotoelectricCrossSectionBlock | None = None, xprob: electroatomic.SubshellTransitionDataBlock | None = None, esze: electroatomic.PrincipalCrossSectionBlock | None = None, excit: electroatomic.ExcitationBlock | None = None, elas: electroatomic.ElasticAngularDistributionBlock | None = None, eion: list[electroatomic.EnergyDistributionBlock] = [], breme: electroatomic.EnergyDistributionBlock | None = None, breml: electroatomic.BremsstrahlungBlock | None = None, selas: electroatomic.ElasticCrossSectionBlock | None = None) -> None:
         """
         Initialise the table
         
@@ -1179,7 +1526,7 @@ class PhotoatomicTable:
             breml     the electron average energy after Bremsstrahlung
             selas     the additional electron elastic cross section block
         """
-    def electroionisation_energy_distribution_block(self, index: int) -> electron.EnergyDistributionBlock:
+    def electroionisation_energy_distribution_block(self, index: int) -> electroatomic.EnergyDistributionBlock:
         """
         Return the knock-on electron energy distribution block for a subshell index
         
@@ -1208,27 +1555,27 @@ class PhotoatomicTable:
         The atomic weight ratio (with respect to the neutron mass)
         """
     @property
-    def BREME(self) -> electron.EnergyDistributionBlock | None:
+    def BREME(self) -> electroatomic.EnergyDistributionBlock | None:
         """
         The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
         """
     @property
-    def BREML(self) -> electron.BremsstrahlungBlock | None:
+    def BREML(self) -> electroatomic.BremsstrahlungBlock | None:
         """
         The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
         """
     @property
-    def ELAS(self) -> electron.ElasticAngularDistributionBlock | None:
+    def ELAS(self) -> electroatomic.ElasticAngularDistributionBlock | None:
         """
         The electron elastic angular distribution block for eprdata (NEPR > 0)
         """
     @property
-    def EPS(self) -> electron.ElectronShellBlock | None:
+    def EPS(self) -> electroatomic.ElectronShellBlock | None:
         """
         The electron shell block
         """
     @property
-    def ESZE(self) -> electron.PrincipalCrossSectionBlock | None:
+    def ESZE(self) -> electroatomic.PrincipalCrossSectionBlock | None:
         """
         The electron cross section block for eprdata (NEPR > 0)
         """
@@ -1238,7 +1585,7 @@ class PhotoatomicTable:
         The principal cross section block
         """
     @property
-    def EXCIT(self) -> electron.ExcitationBlock | None:
+    def EXCIT(self) -> electroatomic.ExcitationBlock | None:
         """
         The electron excitation energy loss block for eprdata (NEPR > 0)
         """
@@ -1319,7 +1666,7 @@ class PhotoatomicTable:
         The isomeric state of the target
         """
     @property
-    def SELAS(self) -> electron.ElasticCrossSectionBlock | None:
+    def SELAS(self) -> electroatomic.ElasticCrossSectionBlock | None:
         """
         The additional elastic cross section block for eprdata (NEPR = 3)
         """
@@ -1329,7 +1676,7 @@ class PhotoatomicTable:
         The photolectric cross section block for eprdata (NEPR > 0)
         """
     @property
-    def SUBSH(self) -> electron.ElectronSubshellBlock | None:
+    def SUBSH(self) -> electroatomic.ElectronSubshellBlock | None:
         """
         The electron subshell data block for eprdata (NEPR > 0)
         """
@@ -1344,7 +1691,7 @@ class PhotoatomicTable:
         The temperature of the table
         """
     @property
-    def XPROB(self) -> electron.SubshellTransitionDataBlock | None:
+    def XPROB(self) -> electroatomic.SubshellTransitionDataBlock | None:
         """
         The subshell transition data block for eprdata (NEPR > 0)
         """
@@ -1364,7 +1711,7 @@ class PhotoatomicTable:
         The atomic weight ratio (with respect to the neutron mass)
         """
     @property
-    def bremsstrahlung_energy_distribution_block(self) -> electron.EnergyDistributionBlock | None:
+    def bremsstrahlung_energy_distribution_block(self) -> electroatomic.EnergyDistributionBlock | None:
         """
         The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
         """
@@ -1389,27 +1736,27 @@ class PhotoatomicTable:
         The date
         """
     @property
-    def electron_cross_section_block(self) -> electron.PrincipalCrossSectionBlock | None:
+    def electron_cross_section_block(self) -> electroatomic.PrincipalCrossSectionBlock | None:
         """
         The electron cross section block for eprdata (NEPR > 0)
         """
     @property
-    def electron_elastic_angular_distribution_block(self) -> electron.ElasticAngularDistributionBlock | None:
+    def electron_elastic_angular_distribution_block(self) -> electroatomic.ElasticAngularDistributionBlock | None:
         """
         The electron elastic angular distribution block for eprdata (NEPR > 0)
         """
     @property
-    def electron_elastic_cross_section_block(self) -> electron.ElasticCrossSectionBlock | None:
+    def electron_elastic_cross_section_block(self) -> electroatomic.ElasticCrossSectionBlock | None:
         """
         The additional elastic cross section block for eprdata (NEPR = 3)
         """
     @property
-    def electron_energy_after_bremsstrahlung_block(self) -> electron.BremsstrahlungBlock | None:
+    def electron_energy_after_bremsstrahlung_block(self) -> electroatomic.BremsstrahlungBlock | None:
         """
         The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
         """
     @property
-    def electron_excitation_energy_loss_block(self) -> electron.ExcitationBlock | None:
+    def electron_excitation_energy_loss_block(self) -> electroatomic.ExcitationBlock | None:
         """
         The electron excitation energy loss block for eprdata (NEPR > 0)
         """
@@ -1420,12 +1767,12 @@ class PhotoatomicTable:
         2012 and 3 for EPR data from 2014 and above)
         """
     @property
-    def electron_shell_block(self) -> electron.ElectronShellBlock | None:
+    def electron_shell_block(self) -> electroatomic.ElectronShellBlock | None:
         """
         The electron shell block
         """
     @property
-    def electron_subshell_block(self) -> electron.ElectronSubshellBlock | None:
+    def electron_subshell_block(self) -> electroatomic.ElectronSubshellBlock | None:
         """
         The electron subshell data block for eprdata (NEPR > 0)
         """
@@ -1515,7 +1862,7 @@ class PhotoatomicTable:
         The principal cross section block
         """
     @property
-    def subshell_transition_data_block(self) -> electron.SubshellTransitionDataBlock | None:
+    def subshell_transition_data_block(self) -> electroatomic.SubshellTransitionDataBlock | None:
         """
         The subshell transition data block for eprdata (NEPR > 0)
         """

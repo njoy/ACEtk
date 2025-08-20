@@ -9,21 +9,17 @@ namespace python = pybind11;
 
 namespace electron {
 
-  // declarations - ACE data components
-  void wrapSubshellTransitionData( python::module&, python::module& );
-  void wrapTabulatedAngularDistribution( python::module&, python::module& );
-  void wrapTabulatedEnergyDistribution( python::module&, python::module& );
-
   // declarations - ACE table blocks
-  void wrapElectronShellBlock( python::module&, python::module& );
-  void wrapElectronSubshellBlock( python::module&, python::module& );
-  void wrapPrincipalCrossSectionBlock( python::module&, python::module& );
-  void wrapElasticCrossSectionBlock( python::module&, python::module& );
-  void wrapExcitationBlock( python::module&, python::module& );
-  void wrapBremsstrahlungBlock( python::module&, python::module& );
-  void wrapSubshellTransitionDataBlock( python::module&, python::module& );
-  void wrapElasticAngularDistributionBlock( python::module&, python::module& );
-  void wrapEnergyDistributionBlock( python::module&, python::module& );
+  void wrapBremsstrahlungAngularSpectrumBlock( python::module&, python::module& );
+  void wrapBremsstrahlungCorrectionFactorBlock( python::module&, python::module& );
+  void wrapBremsstrahlungEnergySpectrumBlock( python::module&, python::module& );
+  void wrapBremsstrahlungHighFrequencyBlock( python::module&, python::module& );
+  void wrapBremsstrahlungProductionBlock( python::module&, python::module& );
+  void wrapMottScatteringCorrectionBlock( python::module&, python::module& );
+  void wrapOscillatorBlock( python::module&, python::module& );
+  void wrapRadiationStoppingPowerBlock( python::module&, python::module& );
+  void wrapRileyCrossSectionBlock( python::module&, python::module& );
+  void wrapTransitionEnergyBlock( python::module&, python::module& );
 }
 
 void wrapElectron( python::module& module, python::module& viewmodule ) {
@@ -35,16 +31,14 @@ void wrapElectron( python::module& module, python::module& viewmodule ) {
     "Electron ACE blocks and components"
   );
 
-  electron::wrapSubshellTransitionData( submodule, viewmodule );
-  electron::wrapTabulatedAngularDistribution( submodule, viewmodule );
-  electron::wrapTabulatedEnergyDistribution( submodule, viewmodule );
-  electron::wrapElectronShellBlock( submodule, viewmodule );
-  electron::wrapElectronSubshellBlock( submodule, viewmodule );
-  electron::wrapPrincipalCrossSectionBlock( submodule, viewmodule );
-  electron::wrapElasticCrossSectionBlock( submodule, viewmodule );
-  electron::wrapExcitationBlock( submodule, viewmodule );
-  electron::wrapBremsstrahlungBlock( submodule, viewmodule );
-  electron::wrapSubshellTransitionDataBlock( submodule, viewmodule );
-  electron::wrapElasticAngularDistributionBlock( submodule, viewmodule );
-  electron::wrapEnergyDistributionBlock( submodule, viewmodule );
+  electron::wrapBremsstrahlungAngularSpectrumBlock( submodule, viewmodule );
+  electron::wrapBremsstrahlungCorrectionFactorBlock( submodule, viewmodule );
+  electron::wrapBremsstrahlungEnergySpectrumBlock( submodule, viewmodule );
+  electron::wrapBremsstrahlungHighFrequencyBlock( submodule, viewmodule );
+  electron::wrapBremsstrahlungProductionBlock( submodule, viewmodule );
+  electron::wrapMottScatteringCorrectionBlock( submodule, viewmodule );
+  electron::wrapOscillatorBlock( submodule, viewmodule );
+  electron::wrapRadiationStoppingPowerBlock( submodule, viewmodule );
+  electron::wrapRileyCrossSectionBlock( submodule, viewmodule );
+  electron::wrapTransitionEnergyBlock( submodule, viewmodule );
 }
