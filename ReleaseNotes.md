@@ -2,6 +2,13 @@
 Given here are some release notes for ACEtk.
 
 ## ACEtk v1.1.0
+This adds support for the electron table ACE file type (e.g., `el` and `el03` libraries).
+  - Added `ElectronTable` class and component block classes. This class supports two different but
+    related formats (`el` and `el03`); users should check NXS(16) or the
+    `ElectronTable.electron_data_format` member to identify the format type.
+  - Added `MatrixData` base class. For a M by N matrix data block, the `MatrixData` class contains
+    M row labels, N column labels, and M\*N matrix data points which may be in row-major or column-
+    major order.
 
 ## ACEtk v1.0.4
 This fixes the following issues in ACEtk:
