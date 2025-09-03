@@ -1,5 +1,5 @@
 """
-Electron ACE blocks
+Electron ACE blocks and components
 """
 from __future__ import annotations
 import typing
@@ -23,7 +23,6 @@ class BremsstrahlungAngularSpectrumBlock:
         Arguments:
             energy_ratios    the photon energy ratios
         """
-    
     @typing.overload
     def xss(self, index: int) -> float:
         """
@@ -88,7 +87,7 @@ class BremsstrahlungCorrectionFactorBlock:
     same length:
       - The energy points
       - The correction factor values
-      
+    
     The size NCRB of each (the total number of electron energy points) is
     stored in NXS(5).
     """
@@ -178,7 +177,6 @@ class BremsstrahlungEnergySpectrumBlock:
         Arguments:
             energy_ratios    the photon energy ratios
         """
-    
     @typing.overload
     def xss(self, index: int) -> float:
         """
@@ -199,7 +197,7 @@ class BremsstrahlungEnergySpectrumBlock:
             length    the length of the subrange
         """
     @property
-    def NRKA(self) -> int:
+    def NRKT(self) -> int:
         """
         The number of bremstrahlung energy spectrum points
         """
@@ -243,11 +241,11 @@ class BremsstrahlungHighFrequencyBlock:
     same length:
       - The energy points
       - The cross section values
-      
+    
     The size NHFB of each (the total number of electron energy points) is
     stored in NXS(6).
     """
-    def __init__(self, energies: list[float], corrections: list[float]) -> None:
+    def __init__(self, energies: list[float], cross_sections: list[float]) -> None:
         """
         Initialise the block
         
@@ -325,7 +323,7 @@ class BremsstrahlungProductionBlock:
       - The electron energy points
       - The photon energy ratio points
       - The cross section values
-      
+    
     The size NEB of the electron energy values array (the total number of
     electron energy points) is stored in NXS(5). The size NPB of the photon
     energy ratio values array (the total number of photon energy points) is
@@ -334,10 +332,7 @@ class BremsstrahlungProductionBlock:
     
     The cross section values are stored internally in column-major order.
     """
-    def __init__(self,
-                 electron_energies: list[float],
-                 photon_ratios: list[float],
-                 cross_sections: list[list[float]]) -> None:
+    def __init__(self, electron_energies: list[float], photon_ratios: list[float], cross_sections: list[list[float]]) -> None:
         """
         Initialize the block
         
@@ -468,17 +463,11 @@ class MottScatteringCorrectionBlock:
       - The Mott scattering correction h(theta) for theta = pi/2
       - The Mott scattering correction h(theta) for theta = 3*pi/4
       - The Mott scattering correction h(theta) for theta = pi
-      
+    
     The size NMOT of each (the total number of Mott scattering cross
     section energy points) is stored in NXS(4).
     """
-    def __init__(self,
-                 energies: list[float],
-                 corrections0deg: list[float],
-                 corrections45deg: list[float],
-                 corrections90deg: list[float],
-                 corrections135deg: list[float],
-                 corrections180deg: list[float]) -> None:
+    def __init__(self, energies: list[float], corrections0deg: list[float], corrections45deg: list[float], corrections90deg: list[float], corrections135deg: list[float], corrections180deg: list[float]) -> None:
         """
         Initialize the block
         
@@ -561,11 +550,11 @@ class OscillatorBlock:
     same length:
       - The level occupation numbers
       - The level binding energies
-      
+    
     The size NOSC of each (the total number of oscillator points) is stored
     in NXS(11).
     """
-    def __init__(self, energies: list[float], corrections: list[float]) -> None:
+    def __init__(self, occupation_numbers: list[float], binding_energies: list[float]) -> None:
         """
         Initialise the block
         
@@ -649,10 +638,19 @@ class RadiationStoppingPowerBlock:
     The size NRAD of each (the total number of electron energy points) is
     stored in NXS(3).
     """
-    def __init__(self,
-                 energies: list[float],
-                 stopping_powers: list[float],
-                 energies: list[float] = None) -> None:
+    @typing.overload
+    def __init__(self, energies: list[float], stopping_powers: list[float]) -> None:
+        """
+        Initialize the block
+        
+        Arguments:
+            self               the block
+            energies           the energy values
+            stopping_powers    the normalized radiative stopping power values
+            corrections        the electron-electron bremsstrahlung correction values (NEL == 3)
+        """
+    @typing.overload
+    def __init__(self, energies: list[float], stopping_powers: list[float], corrections: list[float]) -> None:
         """
         Initialize the block
         
@@ -687,7 +685,7 @@ class RadiationStoppingPowerBlock:
         The number of energy points
         """
     @property
-    def corrections(self) -> ...:
+    def corrections(self) -> ... | None:
         """
         The electron-electron bremsstrahlung correction factors (NEL == 3)
         """
@@ -739,16 +737,7 @@ class RileyCrossSectionBlock:
     The size of each Riley set array is 14 (1 energy + 13 parameters).
     This size value is hard-coded and is not stored in the NXS array.
     """
-    def __init__(self,
-                 rileySet256keV: list[float],
-                 rileySet128keV: list[float],
-                 rileySet64keV: list[float],
-                 rileySet32keV: list[float],
-                 rileySet16keV: list[float],
-                 rileySet8keV: list[float],
-                 rileySet4keV: list[float],
-                 rileySet2keV: list[float],
-                 rileySet1keV: list[float]) -> None:
+    def __init__(self, rileySet256keV: list[float], rileySet128keV: list[float], rileySet64keV: list[float], rileySet32keV: list[float], rileySet16keV: list[float], rileySet8keV: list[float], rileySet4keV: list[float], rileySet2keV: list[float], rileySet1keV: list[float]) -> None:
         """
         Initialize the block
         
@@ -772,9 +761,7 @@ class RileyCrossSectionBlock:
         """
     def parameter_set(self, index: int) -> ...:
         """
-        The Riley cross section parameter set at the index
-        
-        Arguments:
+        The Riley cross section parameter set at the indexArguments:
             index   the index (1 to 9 inclusively, one-based)
         """
     @typing.overload
@@ -797,7 +784,7 @@ class RileyCrossSectionBlock:
             length    the length of the subrange
         """
     @property
-    def NRLY(self) -> :
+    def NRLY(self) -> int:
         """
         The number of Riley cross section parameter sets
         """
@@ -817,12 +804,12 @@ class RileyCrossSectionBlock:
         The name of the block
         """
     @property
-    def number_energy_points(self) -> :
+    def number_energy_points(self) -> int:
         """
         The number of Riley cross section parameter sets
         """
     @property
-    def parameter_set_length(self) -> :
+    def parameter_set_length(self) -> int:
         """
         The length of a Riley cross section parameter set
         """
@@ -901,7 +888,7 @@ class TransitionEnergyBlock:
         The length of the the xss array of the block
         """
     @property
-    def lower_bremsstrahlung_transition_energy(self) -> float:
+    def lower_bremsstrahlung_transition_energy(self) -> float | None:
         """
         The lower bremsstrahlung extrapolation transition energy
         """
@@ -911,7 +898,7 @@ class TransitionEnergyBlock:
         The name of the block
         """
     @property
-    def upper_bremsstrahlung_transition_energy(self) -> float:
+    def upper_bremsstrahlung_transition_energy(self) -> float | None:
         """
         The upper bremsstrahlung extrapolation transition energy
         """
