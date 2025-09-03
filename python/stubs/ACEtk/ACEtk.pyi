@@ -10,7 +10,7 @@ from . import photoatomic
 from . import photonuclear
 from . import sequence
 from . import thermal
-__all__ = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
+__all__ = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'ElectronTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
 class AngularDistributionType:
     """
     The angular distribution types
@@ -900,20 +900,9 @@ class ElectronTable:
         Arguments:
             filename    the file name and path
         """
-    def __init__(self, z: int, header: Header | Header201,
-                 za: list[int], awr: list[float],
-                 ekt: electron.TransitionEnergyBlock,
-                 rad: electron.RadiationStoppingPowerBlock,
-                 mot: electron.MottScatteringCorrectionBlock,
-                 rly: electron.RileyCrossSectionBlock,
-                 xsb: electron.BremsstrahlungProductionBlock | None = None,
-                 crb: electron.BremsstrahlungCorrectionFactorBlock | None = None,
-                 hfb: electron.BremsstrahlungHighFrequencyBlock | None = None,
-                 rkt: electron.BremsstrahlungEnergySpectrumBlock | None = None,
-                 rka: electron.BremsstrahlungAngularSpectrumBlock | None = None,
-                 osc: electron.OscillatorBlock | None = None) -> None:
+    def __init__(self, z: int, header: Header | Header201, za: list[int], awr: list[float], ekt: electron.TransitionEnergyBlock, rad: electron.RadiationStoppingPowerBlock, mot: electron.MottScatteringCorrectionBlock, rly: electron.RileyCrossSectionBlock, xsb: electron.BremsstrahlungProductionBlock | None = None, crb: electron.BremsstrahlungCorrectionFactorBlock | None = None, hfb: electron.BremsstrahlungHighFrequencyBlock | None = None, rkt: electron.BremsstrahlungEnergySpectrumBlock | None = None, rka: electron.BremsstrahlungAngularSpectrumBlock | None = None, osc: electron.OscillatorBlock | None = None) -> None:
         """
-        Initialise the table
+        Initialize the table
         
         Arguments:
             z         the Z number of the target
@@ -929,7 +918,7 @@ class ElectronTable:
             hfb       the bremsstrahlung high-frequency block (NEL != 3)
             rkt       the bremsstrahlung energy spectrum block (NEL == 3)
             rka       the bremsstrahlung angular spectrum block (NEL == 3)
-            osc       the oscillator block (NEL == 3)"
+            osc       the oscillator block (NEL == 3)
         """
     def to_file(self, arg0: str) -> None:
         """
@@ -955,7 +944,7 @@ class ElectronTable:
         The bremsstrahlung correction factor block (NEL != 3)
         """
     @property
-    def EKT(self) -> electron.TransitionEnergyBlock | None:
+    def EKT(self) -> electron.TransitionEnergyBlock:
         """
         The transition energy block
         """
@@ -965,7 +954,7 @@ class ElectronTable:
         The bremsstrahlung high-frequency block (NEL != 3)
         """
     @property
-    def MOT(self) -> electron.MottScatteringCorrectionBlock | None:
+    def MOT(self) -> electron.MottScatteringCorrectionBlock:
         """
         The Mott scattering correction block
         """
@@ -1027,7 +1016,7 @@ class ElectronTable:
         The oscillator block (NEL == 3)
         """
     @property
-    def RAD(self) -> electron.RadiationStoppingPowerBlock | None:
+    def RAD(self) -> electron.RadiationStoppingPowerBlock:
         """
         The radiation stopping power block
         """
@@ -1042,7 +1031,7 @@ class ElectronTable:
         The bremsstrahlung energy spectrum block (NEL == 3)
         """
     @property
-    def RLY(self) -> electron.RileyCrossSectionBlock | None:
+    def RLY(self) -> electron.RileyCrossSectionBlock:
         """
         The Riley cross section block
         """
@@ -1137,7 +1126,7 @@ class ElectronTable:
         The mass number of the target
         """
     @property
-    def mott_scattering_correction_block(self) -> electron.MottScatteringCorrectionBlock | None:
+    def mott_scattering_correction_block(self) -> electron.MottScatteringCorrectionBlock:
         """
         The Mott scattering correction block
         """
@@ -1184,22 +1173,22 @@ class ElectronTable:
         (NEL == 3)
         """
     @property
-    def oscillator_block(self) -> electron.OscillatorBlock | None:
-        """
-        The oscillator block (NEL == 3)
-        """
-    @property
     def number_radiation_stopping_points(self) -> int:
         """
         The number of radiation stopping power points
         """
     @property
-    def radiation_stopping_power_block(self) -> electron.RadiationStoppingPowerBlock | None:
+    def oscillator_block(self) -> electron.OscillatorBlock | None:
+        """
+        The oscillator block (NEL == 3)
+        """
+    @property
+    def radiation_stopping_power_block(self) -> electron.RadiationStoppingPowerBlock:
         """
         The radiation stopping power block
         """
     @property
-    def riley_cross_section_block(self) -> electron.RileyCrossSectionBlock | None:
+    def riley_cross_section_block(self) -> electron.RileyCrossSectionBlock:
         """
         The Riley cross section block
         """
@@ -1209,12 +1198,12 @@ class ElectronTable:
         The temperature of the table
         """
     @property
-    def transition_energy_block(self) -> electron.TransitionEnergyBlock | None:
+    def transition_energy_block(self) -> electron.TransitionEnergyBlock:
         """
         The transition energy block
         """
     @property
-    def zaid(self) -> int:
+    def zaid(self) -> str:
         """
         The full ZAID or SZAID of the table
         """
