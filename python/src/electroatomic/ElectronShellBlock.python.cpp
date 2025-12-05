@@ -36,7 +36,8 @@ void wrapElectronShellBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< unsigned int >, std::vector< double >,
+    python::init< std::vector< double >, 
+                  std::vector< double >,
                   std::vector< double > >(),
     python::arg( "electrons" ), python::arg( "energies" ),
     python::arg( "probabilities" ),
@@ -62,14 +63,14 @@ void wrapElectronShellBlock( python::module& module, python::module& ) {
   .def_property_readonly(
 
     "LNEPS",
-    [] ( const Block& self ) -> UnsignedIntRange
+    [] ( const Block& self ) -> DoubleRange
        { return self.LNEPS(); },
     "The number of electrons for each shell"
   )
   .def_property_readonly(
 
     "number_electrons",
-    [] ( const Block& self ) -> UnsignedIntRange
+    [] ( const Block& self ) -> DoubleRange
        { return self.numberElectrons(); },
     "The number of electrons for each shell"
   )

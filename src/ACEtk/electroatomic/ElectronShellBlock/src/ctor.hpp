@@ -13,14 +13,13 @@ ElectronShellBlock& operator=( ElectronShellBlock&& ) = default;
  *  @param[in] energies         the binding energy for each shell
  *  @param[in] probabilities    the interaction probability for each shell
  */
-ElectronShellBlock( std::vector< unsigned int > electrons,
-                               std::vector< double > energies,
-                               std::vector< double > probabilities ) :
+ElectronShellBlock( std::vector< double > electrons,
+                    std::vector< double > energies,
+                    std::vector< double > probabilities ) :
   ArrayData( "EPS",
              std::vector< std::vector< double > > {
 
-               [] ( auto&& vector ) -> std::vector< double >
-                  { return { vector.begin(), vector.end() }; }( electrons ),
+               std::move( electrons ),
                std::move( energies ),
                std::move( probabilities )
              } ) {}
