@@ -3,7 +3,7 @@ Thermal scattering ACE blocks and components
 """
 from __future__ import annotations
 import typing
-__all__ = ['CrossSectionBlock', 'DiscreteCosines', 'DiscreteCosinesWithProbability', 'ElasticAngularDistributionBlock', 'InelasticAngularDistributionBlock']
+__all__: list[str] = ['CrossSectionBlock', 'DiscreteCosines', 'DiscreteCosinesWithProbability', 'ElasticAngularDistributionBlock', 'InelasticAngularDistributionBlock']
 class CrossSectionBlock:
     """
     The thermal scattering cross section block

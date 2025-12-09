@@ -3,7 +3,7 @@ Electron ACE blocks and components
 """
 from __future__ import annotations
 import typing
-__all__ = ['BremsstrahlungAngularSpectrumBlock', 'BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungEnergySpectrumBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'OscillatorBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
+__all__: list[str] = ['BremsstrahlungAngularSpectrumBlock', 'BremsstrahlungCorrectionFactorBlock', 'BremsstrahlungEnergySpectrumBlock', 'BremsstrahlungHighFrequencyBlock', 'BremsstrahlungProductionBlock', 'MottScatteringCorrectionBlock', 'OscillatorBlock', 'RadiationStoppingPowerBlock', 'RileyCrossSectionBlock', 'TransitionEnergyBlock']
 class BremsstrahlungAngularSpectrumBlock:
     """
     The electron RKA block with the bremsstrahlung angular spectrum data

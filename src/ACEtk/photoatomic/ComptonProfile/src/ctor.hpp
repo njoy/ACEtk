@@ -15,9 +15,9 @@ ComptonProfile& operator=( ComptonProfile&& ) = default;
  *  @param[in] cdf             the cdf values (N values)
  */
 ComptonProfile( int interpolation,
-                           std::vector< double > momentum,
-                           std::vector< double > pdf,
-                           std::vector< double > cdf ) :
+                std::vector< double > momentum,
+                std::vector< double > pdf,
+                std::vector< double > cdf ) :
   TabulatedProbabilityDistribution(
         "ComptonProfile", interpolation, std::move( momentum ),
         std::move( pdf ), std::move( cdf ) ) {}

@@ -3,7 +3,7 @@ Electroatomic ACE blocks and components
 """
 from __future__ import annotations
 import typing
-__all__ = ['BremsstrahlungBlock', 'ElasticAngularDistributionBlock', 'ElasticCrossSectionBlock', 'ElectronShellBlock', 'ElectronSubshellBlock', 'EnergyDistributionBlock', 'ExcitationBlock', 'PrincipalCrossSectionBlock', 'SubshellTransitionData', 'SubshellTransitionDataBlock', 'TabulatedAngularDistribution', 'TabulatedEnergyDistribution']
+__all__: list[str] = ['BremsstrahlungBlock', 'ElasticAngularDistributionBlock', 'ElasticCrossSectionBlock', 'ElectronShellBlock', 'ElectronSubshellBlock', 'EnergyDistributionBlock', 'ExcitationBlock', 'PrincipalCrossSectionBlock', 'SubshellTransitionData', 'SubshellTransitionDataBlock', 'TabulatedAngularDistribution', 'TabulatedEnergyDistribution']
 class BremsstrahlungBlock:
     """
     The electron BREML block with the average electron energy after Bremsstrahlung
@@ -280,7 +280,7 @@ class ElectronShellBlock:
       - the interaction probability for each shell
     The size of each (the total number of electron shells) is stored in NXS(5).
     """
-    def __init__(self, electrons: list[int], energies: list[float], probabilities: list[float]) -> None:
+    def __init__(self, electrons: list[float], energies: list[float], probabilities: list[float]) -> None:
         """
         Initialise the block
         

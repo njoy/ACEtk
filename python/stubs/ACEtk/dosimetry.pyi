@@ -4,7 +4,7 @@ Dosimetry ACE blocks and components
 import ACEtk.continuous
 from __future__ import annotations
 import typing
-__all__ = ['CrossSectionBlock', 'CrossSectionData']
+__all__: list[str] = ['CrossSectionBlock', 'CrossSectionData']
 class CrossSectionBlock:
     """
     The continuous energy LSIG and SIGD block with the dosimetry cross section data
