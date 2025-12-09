@@ -10,6 +10,10 @@ This adds support for the electron table ACE file type (e.g., `el` and `el03` li
     M row labels, N column labels, and M\*N matrix data points which may be in row-major or column-
     major order.
 
+This fixes the following issues in ACEtk:
+  - Electron population when contructing the electron shell block should now be given as
+    floating point numbers.
+
 ## ACEtk v1.0.4
 This fixes the following issues in ACEtk:
   - The subshell transition data block (or XPROB block) was not available in Python. A
