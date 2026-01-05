@@ -1,7 +1,6 @@
 from __future__ import annotations
 import pybind11_stubgen.typing_ext
 import typing
-import typing_extensions
 from . import continuous
 from . import dosimetry
 from . import electroatomic
@@ -10,7 +9,7 @@ from . import photoatomic
 from . import photonuclear
 from . import sequence
 from . import thermal
-__all__ = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'ElectronTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
+__all__: list[str] = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'ElectronTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
 class AngularDistributionType:
     """
     The angular distribution types
@@ -652,7 +651,7 @@ class Data:
         Arguments:
             string    the string representing the ACE data arrays
         """
-    def __init__(self, iz: typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)], aw: typing_extensions.Annotated[list[float], pybind11_stubgen.typing_ext.FixedSize(16)], nxs: typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)], jxs: typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(32)], xss: list[float]) -> None:
+    def __init__(self, iz: typing.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)], aw: typing.Annotated[list[float], pybind11_stubgen.typing_ext.FixedSize(16)], nxs: typing.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)], jxs: typing.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(32)], xss: list[float]) -> None:
         """
         Initialise the component
         
@@ -720,22 +719,22 @@ class Data:
             length    the length of the subrange
         """
     @property
-    def aw_array(self) -> typing_extensions.Annotated[list[float], pybind11_stubgen.typing_ext.FixedSize(16)]:
+    def aw_array(self) -> typing.Annotated[list[float], pybind11_stubgen.typing_ext.FixedSize(16)]:
         """
         The aw array
         """
     @property
-    def iz_array(self) -> typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)]:
+    def iz_array(self) -> typing.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)]:
         """
         The iz array
         """
     @property
-    def jxs_array(self) -> typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(32)]:
+    def jxs_array(self) -> typing.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(32)]:
         """
         The jxs array
         """
     @property
-    def nxs_array(self) -> typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)]:
+    def nxs_array(self) -> typing.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(16)]:
         """
         The nxs array
         """

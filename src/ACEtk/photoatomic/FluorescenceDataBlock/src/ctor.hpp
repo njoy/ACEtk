@@ -15,9 +15,9 @@ FluorescenceDataBlock& operator=( FluorescenceDataBlock&& ) = default;
  *  @param[in] energies         the fluorescent energies
  */
 FluorescenceDataBlock( std::vector< double > edges,
-                                  std::vector< double > probabilities,
-                                  std::vector< double > yields,
-                                  std::vector< double > energies ) :
+                       std::vector< double > probabilities,
+                       std::vector< double > yields,
+                       std::vector< double > energies ) :
   ArrayData( "JFLO",
              std::vector< std::vector< double > > {
                std::move( edges ), std::move( probabilities ),

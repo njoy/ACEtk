@@ -24,7 +24,7 @@ SCENARIO( "ElectronShellBlock" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< unsigned int > electrons = { 2, 1 };
+      std::vector< double > electrons = { 2, 1 };
       std::vector< double > energies = { 5.480000000000e-05, 1.000000000000e-06 };
       std::vector< double > probabilities = { 6.666666666667e-01, 3.333333333333e-01 };
 
