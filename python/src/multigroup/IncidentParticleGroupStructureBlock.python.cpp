@@ -44,7 +44,7 @@ void wrapIncidentParticleGroupStructureBlock( python::module& module,
 
     python::init< std::vector< double >, std::vector< double > >(),
     python::arg( "group_means" ), python::arg( "group_widths" ),
-    "Initialise the block with group means and widths \n\n"
+    "Create the ERG block with group means and widths \n\n"
   )
   .def_property_readonly(
 
