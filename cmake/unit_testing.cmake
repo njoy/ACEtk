@@ -133,3 +133,4 @@ add_cpp_test( thermal.DiscreteCosinesWithProbability thermal/DiscreteCosinesWith
 add_cpp_test( thermal.ElasticAngularDistributionBlock thermal/ElasticAngularDistributionBlock.test.cpp )
 add_cpp_test( thermal.InelasticAngularDistributionBlock thermal/InelasticAngularDistributionBlock.test.cpp )
 add_cpp_test( multigroup.IncidentParticleGroupStructure multigroup/IncidentParticleGroupStructure.test.cpp )
+add_cpp_test( multigroup.TotalCrossSectionBlock multigroup/TotalCrossSectionBlock.test.cpp )
