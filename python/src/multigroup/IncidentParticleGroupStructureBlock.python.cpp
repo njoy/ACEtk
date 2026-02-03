@@ -35,7 +35,7 @@ void wrapIncidentParticleGroupStructureBlock( python::module& module,
     "    group_centers : list of floats \n"
     "        the center energies of each group in MeV \n"
     "    group_widths : list of floats \n"
-    "        the widths of each group in MeV \n"
+    "        the widths of each group in MeV \n\n"
   );
 
   // wrap the block

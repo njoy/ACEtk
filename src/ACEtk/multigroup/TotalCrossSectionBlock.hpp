@@ -17,7 +17,7 @@ namespace multigroup {
  *  The TotalCrossSectionBlock class contains 1 array 
  *    - the total cross section for each group
  *
- *  The size of each (the total number of energy groups) is stored in NXS(5).
+ *  The size the array (the total number of energy groups) is stored in NXS(5).
  */
 class TotalCrossSectionBlock : protected base::ArrayData {
 
