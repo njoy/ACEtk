@@ -23,7 +23,7 @@ SCENARIO( "IncidentParticleGroupStructureBlock" ) {
 
     WHEN( "the data is given explicitly" ) {
 
-      std::vector< double > means = {
+      std::vector< double > centers = {
 
            1.6000E+01,  1.42500E+01,  1.2750E+01,  1.1000E+01,
            8.8950E+00,  6.93000E+00,  4.8750E+00,  3.2725E+00,
@@ -47,7 +47,7 @@ SCENARIO( "IncidentParticleGroupStructureBlock" ) {
           1.930E-06,  7.160E-07,  2.620E-07,  1.51861E-07,
       };
 
-      IncidentParticleGroupStructureBlock chunk( std::move( means ),
+      IncidentParticleGroupStructureBlock chunk( std::move( centers ),
                                         std::move( widths ));
 
       THEN( "a IncidentParticleGroupStructureBlock can be constructed and members can "
@@ -138,11 +138,11 @@ void verifyChunk( const IncidentParticleGroupStructureBlock& chunk,
 
   CHECK( 30 == chunk.NGRP() );
   CHECK( 30 == chunk.numberEnergyGroups() );
-  CHECK( 30 == chunk.groupMeans().size() );
+  CHECK( 30 == chunk.groupCenters().size() );
   CHECK( 30 == chunk.groupWidths().size() );
 
-  CHECK_THAT( 16, WithinRel( chunk.groupMeans().front() ) );
-  CHECK_THAT( 7.60695E-08, WithinRel( chunk.groupMeans().back() ) );
+  CHECK_THAT( 16, WithinRel( chunk.groupCenters().front() ) );
+  CHECK_THAT( 7.60695E-08, WithinRel( chunk.groupCenters().back() ) );
   CHECK_THAT( 2, WithinRel( chunk.groupWidths().front() ) );
   CHECK_THAT( 1.51861E-07, WithinRel( chunk.groupWidths().back() ) );
 }

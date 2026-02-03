@@ -38,11 +38,11 @@ class Test_ACEtk_multigroup_IncidentParticleGroupStructureBlock( unittest.TestCa
 
             self.assertEqual( 30, chunk.NGRP )
             self.assertEqual( 30, chunk.number_energy_groups )
-            self.assertEqual( 30, len( chunk.group_means ) )
+            self.assertEqual( 30, len( chunk.group_centers ) )
             self.assertEqual( 30, len( chunk.group_widths ) )
 
-            self.assertAlmostEqual( 16, chunk.group_means[0] )
-            self.assertAlmostEqual( 7.60695E-08, chunk.group_means[-1] )
+            self.assertAlmostEqual( 16, chunk.group_centers[0] )
+            self.assertAlmostEqual( 7.60695E-08, chunk.group_centers[-1] )
             self.assertAlmostEqual( 2, chunk.group_widths[0] )
             self.assertAlmostEqual( 1.51861E-07, chunk.group_widths[-1] )
 
@@ -54,7 +54,7 @@ class Test_ACEtk_multigroup_IncidentParticleGroupStructureBlock( unittest.TestCa
 
         # the data is given explicitly
         chunk = IncidentParticleGroupStructureBlock(
-          group_means =  [ 1.6000E+01,  1.42500E+01,  1.2750E+01,  1.1000E+01,
+          group_centers =  [ 1.6000E+01,  1.42500E+01,  1.2750E+01,  1.1000E+01,
                            8.8950E+00,  6.93000E+00,  4.8750E+00,  3.2725E+00,
                            2.5485E+00,  1.98500E+00,  1.5455E+00,  1.0880E+00,
                            6.6150E-01,  4.01500E-01,  2.4350E-01,  1.2580E-01,

@@ -44,14 +44,25 @@ public:
   unsigned int numberEnergyGroups() const { return this->NGRP(); }
 
   /**
-   *  @brief Return the energy group means in MeV
+   *  @brief Return the centers of the energy groups in MeV
    */
-  auto groupMeans() const { return this->darray( 1 ); }
+  auto ECENT() const { return this->darray( 1 ); }
 
   /**
-   *  @brief Return the energy group widths in MeV
+   *  @brief Return the centers of the energy groups in MeV
    */
-  auto groupWidths() const { return this->darray( 2 ); }
+  auto groupCenters() const { return this->ECENT(); }
+
+
+  /**
+   *  @brief Return the widths of the energy groups in MeV
+   */
+  auto EWID() const { return this->darray( 2 ); }
+
+  /**
+   *  @brief Return the widths of the energy groups in MeV
+   */
+  auto groupWidths() const { return this->EWID(); }
 
   using ArrayData::empty;
   using ArrayData::name;

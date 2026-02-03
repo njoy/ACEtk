@@ -8,9 +8,6 @@
 namespace python = pybind11;
 
 namespace multigroup {
-
-  // declarations - ACE data components
-  void wrapIncidentParticleGroupStructureBlock( python::module&, python::module& );
   
 
   // declarations - ACE table blocks

@@ -32,8 +32,8 @@ void wrapIncidentParticleGroupStructureBlock( python::module& module,
     " The size of each (the total number of energy points) is stored in NXS(5).\n\n"
     "Parameters\n"
     "----------\n"
-    "    group_means : list of floats \n"
-    "        the mean energies of each group in MeV \n"
+    "    group_centers : list of floats \n"
+    "        the center energies of each group in MeV \n"
     "    group_widths : list of floats \n"
     "        the widths of each group in MeV \n"
   );
@@ -43,7 +43,7 @@ void wrapIncidentParticleGroupStructureBlock( python::module& module,
   .def(
 
     python::init< std::vector< double >, std::vector< double > >(),
-    python::arg( "group_means" ), python::arg( "group_widths" ),
+    python::arg( "group_centers" ), python::arg( "group_widths" ),
     "Create the ERG block with group means and widths \n\n"
   )
   .def_property_readonly(
@@ -60,17 +60,31 @@ void wrapIncidentParticleGroupStructureBlock( python::module& module,
   )
   .def_property_readonly(
 
-    "group_means",
+    "ECENT",
     [] ( const Block& self ) -> DoubleRange
-       { return self.groupMeans(); },
-    "The group means in MeV"
+       { return self.groupCenters(); },
+    "The center energies of each group in MeV"
+  )
+  .def_property_readonly(
+
+    "group_centers",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.groupCenters(); },
+    "The center energies of each group in MeV"
+  )
+  .def_property_readonly(
+
+    "EWID",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.groupWidths(); },
+    "The widths of each group MeV"
   )
   .def_property_readonly(
 
     "group_widths",
     [] ( const Block& self ) -> DoubleRange
        { return self.groupWidths(); },
-    "The group widths in MeV"
+    "The widths of each group MeV"
   );
 
   // add standard block definitions
