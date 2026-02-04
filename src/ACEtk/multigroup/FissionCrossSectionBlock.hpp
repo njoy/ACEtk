@@ -12,7 +12,7 @@ namespace multigroup {
 
 /**
  *  @class
- *  @brief The multigroup FISS block with the total cross section for each group
+ *  @brief The multigroup FISS block with the fission cross section for each group
  *
  *  The FissionCrossSectionBlock class contains 1 array 
  *    - the fission cross section for each group
@@ -31,6 +31,16 @@ public:
   #include "ACEtk/multigroup/FissionCrossSectionBlock/src/ctor.hpp"
 
   /* methods */
+    
+  /**
+   *  @brief Return the number of energy groups
+   */
+  unsigned int NGRP() const { return this->N(); }
+
+  /**
+   *  @brief Return the number of energy groups
+   */
+  unsigned int numberEnergyGroups() const { return this->NGRP(); }
 
   /**
    *  @brief Return the fission cross section values

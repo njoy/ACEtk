@@ -31,7 +31,7 @@ void wrapTotalCrossSectionBlock( python::module& module,
     " The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
-    "    totalCrossSection : list of float \n "
+    "    total_cross_section : list of float \n "
     "        the total cross section for each group\n\n"
   );
 

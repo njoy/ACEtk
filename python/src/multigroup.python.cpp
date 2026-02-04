@@ -13,6 +13,7 @@ namespace multigroup {
   // declarations - ACE table blocks
   void wrapIncidentParticleGroupStructureBlock( python::module&, python::module& );
   void wrapTotalCrossSectionBlock( python::module&, python::module& );
+  void wrapFissionCrossSectionBlock( python::module&, python::module& );
 }
 
 void wrapMultigroup( python::module& module, python::module& viewmodule ) {
@@ -26,4 +27,5 @@ void wrapMultigroup( python::module& module, python::module& viewmodule ) {
 
   multigroup::wrapIncidentParticleGroupStructureBlock( submodule, viewmodule );
   multigroup::wrapTotalCrossSectionBlock( submodule, viewmodule );
+  multigroup::wrapFissionCrossSectionBlock( submodule, viewmodule );
 }

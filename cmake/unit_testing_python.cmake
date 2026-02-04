@@ -134,3 +134,4 @@ add_python_test( thermal.InelasticAngularDistributionBlock thermal/Test_ACEtk_th
 
 add_python_test( multigroup.IncidentParticleGroupStructureBlock multigroup/Test_ACEtk_multigroup_IncidentParticleGroupStructureBlock.py )
 add_python_test( multigroup.TotalCrossSectionBlock multigroup/Test_ACEtk_multigroup_TotalCrossSectionBlock.py )
+add_python_test( multigroup.FissionCrossSectionBlock multigroup/Test_ACEtk_multigroup_FissionCrossSectionBlock.py )
