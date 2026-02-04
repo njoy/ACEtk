@@ -18,7 +18,7 @@ namespace multigroup {
  *    - the mean energies of each group (in MeV)
  *    - the widths of each group (in MeV)
  *
- *  The size of each (the total number of energy points) is stored in NXS(5).
+ *  The size of each (the total number of energy groups) is stored in NXS(5).
  */
 class IncidentParticleGroupStructureBlock : protected base::ArrayData {
 
