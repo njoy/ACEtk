@@ -21,7 +21,7 @@ Read-only Attributes
     ~IncidentParticleGroupStructureBlock.NGRP
     ~IncidentParticleGroupStructureBlock.number_energy_groups
     ~IncidentParticleGroupStructureBlock.ECENT
-    ~IncidentParticleGroupStructureBlock.group_centers
+    ~IncidentParticleGroupStructureBlock.group_means
     ~IncidentParticleGroupStructureBlock.EWID
     ~IncidentParticleGroupStructureBlock.group_widths
     ~IncidentParticleGroupStructureBlock.empty
