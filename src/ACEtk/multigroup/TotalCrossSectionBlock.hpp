@@ -33,12 +33,22 @@ public:
   /* methods */
 
   /**
+   *  @brief Return the number of energy groups
+   */
+  unsigned int NGRP() const { return this->N(); }
+
+  /**
+   *  @brief Return the number of energy groups
+   */
+  unsigned int numberEnergyGroups() const { return this->NGRP(); }
+
+  /**
    *  @brief Return the total cross section values
    */
   auto SIGTOT() const { return this->darray( 1 ); }
 
   /**
-   *  @brief Return the centers of the energy groups in MeV
+   *  @brief Return the total cross section values
    */
   auto totalCrossSection() const { return this->SIGTOT(); }
 
