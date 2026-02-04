@@ -44,14 +44,14 @@ public:
   unsigned int numberEnergyGroups() const { return this->NGRP(); }
 
   /**
-   *  @brief Return the centers of the energy groups in MeV
+   *  @brief Return the mean energies of the groups
    */
   auto ECENT() const { return this->darray( 1 ); }
 
   /**
-   *  @brief Return the centers of the energy groups in MeV
+   *  @brief Return the mean energies of the groups
    */
-  auto groupCenters() const { return this->ECENT(); }
+  auto groupMeans() const { return this->ECENT(); }
 
 
   /**

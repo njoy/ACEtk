@@ -138,11 +138,11 @@ void verifyChunk( const IncidentParticleGroupStructureBlock& chunk,
 
   CHECK( 30 == chunk.NGRP() );
   CHECK( 30 == chunk.numberEnergyGroups() );
-  CHECK( 30 == chunk.groupCenters().size() );
+  CHECK( 30 == chunk.groupMeans().size() );
   CHECK( 30 == chunk.groupWidths().size() );
 
-  CHECK_THAT( 16, WithinRel( chunk.groupCenters().front() ) );
-  CHECK_THAT( 7.60695E-08, WithinRel( chunk.groupCenters().back() ) );
+  CHECK_THAT( 16, WithinRel( chunk.groupMeans().front() ) );
+  CHECK_THAT( 7.60695E-08, WithinRel( chunk.groupMeans().back() ) );
   CHECK_THAT( 2, WithinRel( chunk.groupWidths().front() ) );
   CHECK_THAT( 1.51861E-07, WithinRel( chunk.groupWidths().back() ) );
 }
