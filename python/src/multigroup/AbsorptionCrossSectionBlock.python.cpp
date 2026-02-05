@@ -26,9 +26,9 @@ void wrapAbsorptionCrossSectionBlock( python::module& module,
     module,
     "AbsorptionCrossSectionBlock",
     "The multigroup absorption cross section block\n\n"
-    " The AbsorptionCrossSectionBlock class contains 1 array: \n"
-    "   - absorption cross section for each group \n"
-    " The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
+    "The AbsorptionCrossSectionBlock class contains 1 array: \n"
+    "  - absorption cross section for each group \n"
+    "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
     "    absorption_cross_section : list of float \n "

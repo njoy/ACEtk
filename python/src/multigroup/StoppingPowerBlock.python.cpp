@@ -26,9 +26,9 @@ void wrapStoppingPowerBlock( python::module& module,
     module,
     "StoppingPowerBlock",
     "The multigroup stopping power section block\n\n"
-    " The StoppingPowerBlock class contains 1 array: \n"
-    "   - the stopping power for each group \n"
-    " The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
+    "The StoppingPowerBlock class contains 1 array: \n"
+    "  - the stopping power for each group \n"
+    "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
     "    stopping_power : list of float \n "

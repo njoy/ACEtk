@@ -26,9 +26,9 @@ void wrapMomentumTransferBlock( python::module& module,
     module,
     "MomentumTransferBlock",
     "The multigroup momentum transfer block\n\n"
-    " The MomentumTransferBlock class contains 1 array: \n"
-    "   - the momentum transfer values for each group \n"
-    " The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
+    "The MomentumTransferBlock class contains 1 array: \n"
+    "  - the momentum transfer values for each group \n"
+    "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
     "    momentum_transfer : list of float \n "

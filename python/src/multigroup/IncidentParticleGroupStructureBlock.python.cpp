@@ -26,10 +26,10 @@ void wrapIncidentParticleGroupStructureBlock( python::module& module,
     module,
     "IncidentParticleGroupStructureBlock",
     "The multigroup group structure block\n\n"
-    " The IncidentParticleGroupStructureBlock class contains 2 arrays of the same length:\n"
-    "   - the mean energies of each group (in MeV)\n"
-    "   - the widths of each group (in MeV)\n"
-    " The size of each (the total number of energy groups) is stored in NXS(5).\n\n"
+    "The IncidentParticleGroupStructureBlock class contains 2 arrays of the same length:\n"
+    "  - the mean energies of each group (in MeV)\n"
+    "  - the widths of each group (in MeV)\n"
+    "The size of each (the total number of energy groups) is stored in NXS(5).\n\n"
     "Parameters\n"
     "----------\n"
     "    group_means : list of floats \n"

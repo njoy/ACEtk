@@ -26,9 +26,9 @@ void wrapFissionChiDataBlock( python::module& module,
     module,
     "FissionChiDataBlock",
     "The multigroup fission fraction (PFNS) section block\n\n"
-    " The FissionChiDataBlock class contains 1 array: \n"
-    "   - the fission fraction (PFNS) for each group \n"
-    " The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
+    "The FissionChiDataBlock class contains 1 array: \n"
+    "  - the fission fraction (PFNS) for each group \n"
+    "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
     "    fission_fraction : list of float \n "

@@ -26,9 +26,9 @@ void wrapTotalCrossSectionBlock( python::module& module,
     module,
     "TotalCrossSectionBlock",
     "The multigroup total cross section block\n\n"
-    " The TotalCrossSectionBlock class contains 1 array: \n"
-    "   - total cross section for each group \n"
-    " The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
+    "The TotalCrossSectionBlock class contains 1 array: \n"
+    "  - total cross section for each group \n"
+    "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
     "    total_cross_section : list of float \n "
