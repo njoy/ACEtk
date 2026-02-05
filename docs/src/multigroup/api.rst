@@ -9,3 +9,4 @@ API
 
    api/IncidentParticleGroupStructureBlock
    api/TotalCrossSectionBlock
+   api/FissionCrossSectionBlock
