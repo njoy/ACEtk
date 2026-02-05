@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/multigroup/TotalCrossSectionBlock.hpp"
+#include "ACEtk/multigroup/StoppingPowerBlock.hpp"
 #include "tools/views/views-python.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace multigroup {
 
-void wrapTotalCrossSectionBlock( python::module& module,
+void wrapStoppingPowerBlock( python::module& module,
                                           python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::multigroup::TotalCrossSectionBlock;
+  using Block = njoy::ACEtk::multigroup::StoppingPowerBlock;
 
   // wrap views created by this block
 
@@ -24,15 +24,15 @@ void wrapTotalCrossSectionBlock( python::module& module,
   python::class_< Block > block(
 
     module,
-    "TotalCrossSectionBlock",
-    "The multigroup total cross section block\n\n"
-    "The TotalCrossSectionBlock class contains 1 array: \n"
-    "  - total cross section for each group \n"
+    "StoppingPowerBlock",
+    "The multigroup stopping power section block\n\n"
+    "The StoppingPowerBlock class contains 1 array: \n"
+    "  - the stopping power for each group \n"
     "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
-    "    total_cross_section : list of float \n "
-    "        the total cross section for each group\n\n"
+    "    stopping_power : list of float \n "
+    "        the stopping power for each group\n\n"
   );
 
   // wrap the block
@@ -40,8 +40,8 @@ void wrapTotalCrossSectionBlock( python::module& module,
   .def(
 
     python::init< std::vector< double > >(),
-    python::arg( "total_cross_section" ),
-    "Create the TOT block with the total cross section values \n\n"
+    python::arg( "stopping_power" ),
+    "Create the STOP block with the stopping power values \n\n"
   )  
   .def_property_readonly(
 
@@ -57,17 +57,17 @@ void wrapTotalCrossSectionBlock( python::module& module,
   )
   .def_property_readonly(
 
-    "SIGTOT",
+    "SPOW",
     [] ( const Block& self ) -> DoubleRange
-       { return self.SIGTOT(); },
-    "The total cross section values"
+       { return self.SPOW(); },
+    "The stopping power values"
   )
   .def_property_readonly(
 
-    "total_cross_section",
+    "stopping_power",
     [] ( const Block& self ) -> DoubleRange
-       { return self.totalCrossSection(); },
-    "The total cross section values"
+       { return self.stoppingPower(); },
+    "The stopping power values"
   );
 
   // add standard block definitions

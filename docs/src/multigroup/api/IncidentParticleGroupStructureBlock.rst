@@ -20,7 +20,6 @@ ACE Variables
 
     ~IncidentParticleGroupStructureBlock.NGRP
     ~IncidentParticleGroupStructureBlock.ECENT
-    ~IncidentParticleGroupStructureBlock.group_means
     ~IncidentParticleGroupStructureBlock.EWID
 
 Human-Readable Variables
@@ -29,7 +28,7 @@ Human-Readable Variables
     :toctree: generated/
     
     ~IncidentParticleGroupStructureBlock.number_energy_groups
-    ~IncidentParticleGroupStructureBlock.group_centers
+    ~IncidentParticleGroupStructureBlock.group_means
     ~IncidentParticleGroupStructureBlock.group_widths
     ~IncidentParticleGroupStructureBlock.empty
     ~IncidentParticleGroupStructureBlock.length

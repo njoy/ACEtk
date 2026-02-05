@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // local includes
-#include "ACEtk/multigroup/TotalCrossSectionBlock.hpp"
+#include "ACEtk/multigroup/AbsorptionCrossSectionBlock.hpp"
 #include "tools/views/views-python.hpp"
 #include "definitions.hpp"
 
@@ -12,11 +12,11 @@ namespace python = pybind11;
 
 namespace multigroup {
 
-void wrapTotalCrossSectionBlock( python::module& module,
+void wrapAbsorptionCrossSectionBlock( python::module& module,
                                           python::module& ) {
 
   // type aliases
-  using Block = njoy::ACEtk::multigroup::TotalCrossSectionBlock;
+  using Block = njoy::ACEtk::multigroup::AbsorptionCrossSectionBlock;
 
   // wrap views created by this block
 
@@ -24,15 +24,15 @@ void wrapTotalCrossSectionBlock( python::module& module,
   python::class_< Block > block(
 
     module,
-    "TotalCrossSectionBlock",
-    "The multigroup total cross section block\n\n"
-    "The TotalCrossSectionBlock class contains 1 array: \n"
-    "  - total cross section for each group \n"
+    "AbsorptionCrossSectionBlock",
+    "The multigroup absorption cross section block\n\n"
+    "The AbsorptionCrossSectionBlock class contains 1 array: \n"
+    "  - absorption cross section for each group \n"
     "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
-    "    total_cross_section : list of float \n "
-    "        the total cross section for each group\n\n"
+    "    absorption_cross_section : list of float \n "
+    "        the absorption cross section for each group\n\n"
   );
 
   // wrap the block
@@ -40,8 +40,8 @@ void wrapTotalCrossSectionBlock( python::module& module,
   .def(
 
     python::init< std::vector< double > >(),
-    python::arg( "total_cross_section" ),
-    "Create the TOT block with the total cross section values \n\n"
+    python::arg( "absorption_cross_section" ),
+    "Create the ABS block with the absorption cross section values \n\n"
   )  
   .def_property_readonly(
 
@@ -57,17 +57,17 @@ void wrapTotalCrossSectionBlock( python::module& module,
   )
   .def_property_readonly(
 
-    "SIGTOT",
+    "SIGABS",
     [] ( const Block& self ) -> DoubleRange
-       { return self.SIGTOT(); },
-    "The total cross section values"
+       { return self.SIGABS(); },
+    "The absorption cross section values"
   )
   .def_property_readonly(
 
-    "total_cross_section",
+    "absorption_cross_section",
     [] ( const Block& self ) -> DoubleRange
-       { return self.totalCrossSection(); },
-    "The total cross section values"
+       { return self.absorptionCrossSection(); },
+    "The absorption cross section values"
   );
 
   // add standard block definitions

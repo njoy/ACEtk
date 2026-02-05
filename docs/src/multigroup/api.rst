@@ -10,3 +10,7 @@ API
    api/IncidentParticleGroupStructureBlock
    api/TotalCrossSectionBlock
    api/FissionCrossSectionBlock
+   api/FissionChiDataBlock
+   api/AbsorptionCrossSectionBlock
+   api/StoppingPowerBlock
+   api/MomentumTransferBlock

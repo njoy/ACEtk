@@ -26,9 +26,9 @@ void wrapFissionCrossSectionBlock( python::module& module,
     module,
     "FissionCrossSectionBlock",
     "The multigroup fission cross section block\n\n"
-    " The FissionCrossSectionBlock class contains 1 array: \n"
-    "   - fission cross section for each group \n"
-    " The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
+    "The FissionCrossSectionBlock class contains 1 array: \n"
+    "  - fission cross section for each group \n"
+    "The size the array (the total number of energy groups) is stored in NXS(5). \n\n"
     "Parameters\n"
     "----------\n"
     "    fission_cross_section : list of float \n "
