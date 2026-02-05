@@ -13,3 +13,4 @@ API
    api/FissionChiDataBlock
    api/AbsorptionCrossSectionBlock
    api/StoppingPowerBlock
+   api/MomentumTransferBlock
