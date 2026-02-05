@@ -131,3 +131,5 @@ add_python_test( thermal.DiscreteCosines                   thermal/Test_ACEtk_th
 add_python_test( thermal.DiscreteCosinesWithProbability    thermal/Test_ACEtk_thermal_DiscreteCosinesWithProbability.py )
 add_python_test( thermal.ElasticAngularDistributionBlock   thermal/Test_ACEtk_thermal_ElasticAngularDistributionBlock.py )
 add_python_test( thermal.InelasticAngularDistributionBlock thermal/Test_ACEtk_thermal_InelasticAngularDistributionBlock.py )
+
+add_python_test( multigroup.IncidentParticleGroupStructureBlock multigroup/Test_ACEtk_multigroup_IncidentParticleGroupStructureBlock.py )
