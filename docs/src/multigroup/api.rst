@@ -11,3 +11,4 @@ API
    api/TotalCrossSectionBlock
    api/FissionCrossSectionBlock
    api/FissionChiDataBlock
+   api/AbsorptionCrossSectionBlock
