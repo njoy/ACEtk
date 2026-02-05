@@ -9,7 +9,7 @@ from ACEtk.multigroup import AbsorptionCrossSectionBlock
 class Test_ACEtk_multigroup_AbsorptionCrossSectionBlock( unittest.TestCase ) :
     """Unit test for the AbsorptionCrossSectionBlock class."""
 
-    chunk = [             2.847090000000E-05,  2.976620000000E-05,
+    chunk = [2.847090000000E-05,  2.976620000000E-05,
              3.032220000000E-05,  3.180660000000E-05,  3.349790000000E-05,  3.524820000000E-05,
              3.623040000000E-05,  3.579650000000E-05,  3.497190000000E-05,  3.431090000000E-05,
              3.433360000000E-05,  3.451760000000E-05,  3.622100000000E-05,  4.202520000000E-05,
@@ -44,7 +44,7 @@ class Test_ACEtk_multigroup_AbsorptionCrossSectionBlock( unittest.TestCase ) :
 
         # the data is given explicitly
         chunk = AbsorptionCrossSectionBlock(
-          absorption_cross_section =  [              2.847090000000E-05,  2.976620000000E-05,
+          absorption_cross_section =  [ 2.847090000000E-05,  2.976620000000E-05,
              3.032220000000E-05,  3.180660000000E-05,  3.349790000000E-05,  3.524820000000E-05,
              3.623040000000E-05,  3.579650000000E-05,  3.497190000000E-05,  3.431090000000E-05,
              3.433360000000E-05,  3.451760000000E-05,  3.622100000000E-05,  4.202520000000E-05,
