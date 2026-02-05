@@ -3,7 +3,7 @@
 AbsorptionCrossSectionBlock
 ===========================
 
-The `FISS` block...
+The `ABS` block...
 
 Constructors
 ~~~~~~~~~~~~
