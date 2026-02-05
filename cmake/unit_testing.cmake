@@ -135,3 +135,4 @@ add_cpp_test( thermal.InelasticAngularDistributionBlock thermal/InelasticAngular
 add_cpp_test( multigroup.IncidentParticleGroupStructure multigroup/IncidentParticleGroupStructure.test.cpp )
 add_cpp_test( multigroup.TotalCrossSectionBlock multigroup/TotalCrossSectionBlock.test.cpp )
 add_cpp_test( multigroup.FissionCrossSectionBlock multigroup/FissionCrossSectionBlock.test.cpp )
+add_cpp_test( multigroup.FissionChiDataBlock multigroup/FissionChiDataBlock.test.cpp )
