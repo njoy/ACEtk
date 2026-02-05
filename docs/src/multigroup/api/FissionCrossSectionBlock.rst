@@ -13,14 +13,21 @@ Constructors
     ~FissionCrossSectionBlock
 
 
-Read-only Attributes
-~~~~~~~~~~~~~~~~~~~~~
+ACE Variables
+~~~~~~~~~~~~~
 .. autosummary::
     :toctree: generated/
 
     ~FissionCrossSectionBlock.SIGFISS
-    ~FissionCrossSectionBlock.fission_cross_section
     ~FissionCrossSectionBlock.NGRP
+
+
+Human-Readable Variables
+~~~~~~~~~~~~~~~~~~~~~~~~
+.. autosummary::
+    :toctree: generated/
+    
+    ~FissionCrossSectionBlock.fission_cross_section
     ~FissionCrossSectionBlock.number_energy_groups
     ~FissionCrossSectionBlock.empty
     ~FissionCrossSectionBlock.length

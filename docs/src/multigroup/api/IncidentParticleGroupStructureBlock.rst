@@ -13,16 +13,22 @@ Constructors
     ~IncidentParticleGroupStructureBlock
 
 
-Read-only Attributes
-~~~~~~~~~~~~~~~~~~~~~
+ACE Variables
+~~~~~~~~~~~~~
 .. autosummary::
     :toctree: generated/
 
     ~IncidentParticleGroupStructureBlock.NGRP
-    ~IncidentParticleGroupStructureBlock.number_energy_groups
     ~IncidentParticleGroupStructureBlock.ECENT
-    ~IncidentParticleGroupStructureBlock.group_centers
     ~IncidentParticleGroupStructureBlock.EWID
+
+Human-Readable Variables
+~~~~~~~~~~~~~~~~~~~~~~~~
+.. autosummary::
+    :toctree: generated/
+    
+    ~IncidentParticleGroupStructureBlock.number_energy_groups
+    ~IncidentParticleGroupStructureBlock.group_centers
     ~IncidentParticleGroupStructureBlock.group_widths
     ~IncidentParticleGroupStructureBlock.empty
     ~IncidentParticleGroupStructureBlock.length
