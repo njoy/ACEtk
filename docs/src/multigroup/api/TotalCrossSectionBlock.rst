@@ -12,15 +12,20 @@ Constructors
 
     ~TotalCrossSectionBlock
 
-
-Read-only Attributes
-~~~~~~~~~~~~~~~~~~~~~
+ACE Variables
+~~~~~~~~~~~~~
 .. autosummary::
     :toctree: generated/
 
     ~TotalCrossSectionBlock.SIGTOT
-    ~TotalCrossSectionBlock.total_cross_section
     ~TotalCrossSectionBlock.NGRP
+
+Human-Readable Variables
+~~~~~~~~~~~~~~~~~~~~~~~~
+.. autosummary::
+    :toctree: generated/
+
+    ~TotalCrossSectionBlock.total_cross_section
     ~TotalCrossSectionBlock.number_energy_groups
     ~TotalCrossSectionBlock.empty
     ~TotalCrossSectionBlock.length

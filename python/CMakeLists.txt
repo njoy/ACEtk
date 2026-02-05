@@ -126,6 +126,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/IncidentParticleGroupStructureBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/TotalCrossSectionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/FissionCrossSectionBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/FissionChiDataBlock.python.cpp
         )
 
     target_link_libraries(ACEtk.python PRIVATE njoy::ACEtk)

@@ -121,4 +121,6 @@ void verifyChunk( const FissionChiDataBlock& chunk,
 
   CHECK_THAT( 3.227570000000E-05, WithinRel( chunk.fissionFraction().front() ) );
   CHECK_THAT( 2.337520000000E-11, WithinRel( chunk.fissionFraction().back() ) );
+  CHECK_THAT( 3.227570000000E-05, WithinRel( chunk.FISFR().front() ) );
+  CHECK_THAT( 2.337520000000E-11, WithinRel( chunk.FISFR().back() ) );
 }
