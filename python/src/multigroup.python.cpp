@@ -16,6 +16,7 @@ namespace multigroup {
   void wrapFissionCrossSectionBlock( python::module&, python::module& );
   void wrapFissionChiDataBlock( python::module&, python::module& );
   void wrapAbsorptionCrossSectionBlock( python::module&, python::module& );
+  void wrapStoppingPowerBlock( python::module&, python::module& );
 }
 
 void wrapMultigroup( python::module& module, python::module& viewmodule ) {
@@ -32,4 +33,5 @@ void wrapMultigroup( python::module& module, python::module& viewmodule ) {
   multigroup::wrapFissionCrossSectionBlock( submodule, viewmodule );
   multigroup::wrapFissionChiDataBlock( submodule, viewmodule );
   multigroup::wrapAbsorptionCrossSectionBlock( submodule, viewmodule );
+  multigroup::wrapStoppingPowerBlock( submodule, viewmodule );
 }

@@ -12,3 +12,4 @@ API
    api/FissionCrossSectionBlock
    api/FissionChiDataBlock
    api/AbsorptionCrossSectionBlock
+   api/StoppingPowerBlock

@@ -137,3 +137,4 @@ add_python_test( multigroup.TotalCrossSectionBlock multigroup/Test_ACEtk_multigr
 add_python_test( multigroup.FissionCrossSectionBlock multigroup/Test_ACEtk_multigroup_FissionCrossSectionBlock.py )
 add_python_test( multigroup.FissionChiDataBlock multigroup/Test_ACEtk_multigroup_FissionChiDataBlock.py )
 add_python_test( multigroup.AbsorptionCrossSectionBlock multigroup/Test_ACEtk_multigroup_AbsorptionCrossSectionBlock.py )
+add_python_test( multigroup.StoppingPowerBlock multigroup/Test_ACEtk_multigroup_StoppingPowerBlock.py )
