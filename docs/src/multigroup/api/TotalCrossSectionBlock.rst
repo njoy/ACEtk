@@ -20,6 +20,8 @@ Read-only Attributes
 
     ~TotalCrossSectionBlock.SIGTOT
     ~TotalCrossSectionBlock.total_cross_section
+    ~TotalCrossSectionBlock.NGRP
+    ~TotalCrossSectionBlock.number_energy_groups
     ~TotalCrossSectionBlock.empty
     ~TotalCrossSectionBlock.length
     ~TotalCrossSectionBlock.name

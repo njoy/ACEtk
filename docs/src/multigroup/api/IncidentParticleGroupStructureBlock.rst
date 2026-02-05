@@ -20,6 +20,7 @@ ACE Variables
 
     ~IncidentParticleGroupStructureBlock.NGRP
     ~IncidentParticleGroupStructureBlock.ECENT
+    ~IncidentParticleGroupStructureBlock.group_means
     ~IncidentParticleGroupStructureBlock.EWID
 
 Human-Readable Variables

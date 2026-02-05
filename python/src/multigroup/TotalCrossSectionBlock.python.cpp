@@ -42,6 +42,18 @@ void wrapTotalCrossSectionBlock( python::module& module,
     python::init< std::vector< double > >(),
     python::arg( "total_cross_section" ),
     "Create the TOT block with the total cross section values \n\n"
+  )  
+  .def_property_readonly(
+
+    "NGRP",
+    &Block::NGRP,
+    "The number of energy groups"
+  )
+  .def_property_readonly(
+
+    "number_energy_groups",
+    &Block::numberEnergyGroups,
+    "The number of energy groups"
   )
   .def_property_readonly(
 

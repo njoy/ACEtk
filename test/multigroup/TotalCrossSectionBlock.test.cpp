@@ -117,6 +117,8 @@ void verifyChunk( const TotalCrossSectionBlock& chunk,
 
   CHECK( 30 == chunk.XSS().size() );
 
+  CHECK( 30 == chunk.NGRP() );
+  CHECK( 30 == chunk.numberEnergyGroups() );
   CHECK( 30 == chunk.totalCrossSection().size() );
 
   CHECK_THAT( 6.200214709000E-01, WithinRel( chunk.totalCrossSection().front() ) );

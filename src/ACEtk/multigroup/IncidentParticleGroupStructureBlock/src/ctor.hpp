@@ -9,12 +9,12 @@ IncidentParticleGroupStructureBlock& operator=( IncidentParticleGroupStructureBl
 /**
  *  @brief Constructor
  *
- *  @param[in] groupCenters       the center energies of each group in MeV
+ *  @param[in] groupMeans         the mean energies of the groups
  *  @param[in] groupWidths        the widths of each group in MeV
  */
-IncidentParticleGroupStructureBlock( std::vector< double > groupCenters, std::vector< double > groupWidths ) :
+IncidentParticleGroupStructureBlock( std::vector< double > groupMeans, std::vector< double > groupWidths ) :
   ArrayData( "ERG",
-             std::move( groupCenters ), std::move( groupWidths ) ) {}
+             std::move( groupMeans ), std::move( groupWidths ) ) {}
 
 /**
  *  @brief Constructor
