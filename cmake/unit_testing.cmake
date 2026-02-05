@@ -136,3 +136,4 @@ add_cpp_test( multigroup.IncidentParticleGroupStructure multigroup/IncidentParti
 add_cpp_test( multigroup.TotalCrossSectionBlock multigroup/TotalCrossSectionBlock.test.cpp )
 add_cpp_test( multigroup.FissionCrossSectionBlock multigroup/FissionCrossSectionBlock.test.cpp )
 add_cpp_test( multigroup.FissionChiDataBlock multigroup/FissionChiDataBlock.test.cpp )
+add_cpp_test( multigroup.AbsorptionCrossSectionBlock multigroup/AbsorptionCrossSectionBlock.test.cpp )
