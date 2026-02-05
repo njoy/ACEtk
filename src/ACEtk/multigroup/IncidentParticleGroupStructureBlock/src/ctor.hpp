@@ -21,7 +21,7 @@ IncidentParticleGroupStructureBlock( std::vector< double > groupMeans, std::vect
  *
  *  @param[in] begin   the begin iterator of the ERG block in the XSS array
  *  @param[in] end     the end iterator of the ERG block in the XSS array
- *  @param[in] nes     the number of energy groups
+ *  @param[in] ngrp     the number of energy groups
  */
-IncidentParticleGroupStructureBlock( Iterator begin, Iterator end, unsigned int nes ) :
-  ArrayData( "ERG", begin, end, nes, 2 ) {}
+IncidentParticleGroupStructureBlock( Iterator begin, Iterator end, unsigned int ngrp ) :
+  ArrayData( "ERG", begin, end, ngrp, 2 ) {}

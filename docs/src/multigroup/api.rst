@@ -8,3 +8,4 @@ API
    :caption: Data Blocks:
 
    api/IncidentParticleGroupStructureBlock
+   api/TotalCrossSectionBlock
