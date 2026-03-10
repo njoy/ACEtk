@@ -139,4 +139,5 @@ add_python_test( multigroup.FissionChiDataBlock                 multigroup/Test_
 add_python_test( multigroup.AbsorptionCrossSectionBlock         multigroup/Test_ACEtk_multigroup_AbsorptionCrossSectionBlock.py )
 add_python_test( multigroup.StoppingPowerBlock                  multigroup/Test_ACEtk_multigroup_StoppingPowerBlock.py )
 add_python_test( multigroup.MomentumTransferBlock               multigroup/Test_ACEtk_multigroup_MomentumTransferBlock.py )
+add_python_test( multigroup.EditReactionNumberBlock             multigroup/Test_ACEtk_multigroup_EditReactionNumberBlock.py )
 add_python_test( multigroup.EditCrossSectionBlock               multigroup/Test_ACEtk_multigroup_EditCrossSectionBlock.py )
