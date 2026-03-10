@@ -10,11 +10,11 @@ generateXSS( std::vector< DistributionData >&& distributions ) {
 
       tools::overload{
 
-        [ &xss, index ] ( const continuous::FullyIsotropicDistribution& value ) {
+        [ &xss, index ] ( const continuous::FullyIsotropicDistribution& ) {
 
           xss[index] = 0;
         },
-        [ &xss, index ] ( const continuous::DistributionGivenElsewhere& value ) {
+        [ &xss, index ] ( const continuous::DistributionGivenElsewhere& ) {
 
           xss[index] = -1;
         },

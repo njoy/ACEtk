@@ -29,11 +29,10 @@ RileyCrossSectionBlock( std::vector< double > rileySet256keV,
                         std::vector< double > rileySet2keV,
                         std::vector< double > rileySet1keV ) :
   ArrayData( "RLY",
-             std::move(
-               std::vector< std::vector< double > > {
+             std::vector< std::vector< double > > {
                  rileySet256keV, rileySet128keV, rileySet64keV,
                  rileySet32keV, rileySet16keV, rileySet8keV,
-                 rileySet4keV, rileySet2keV, rileySet1keV } ) ) {}
+                 rileySet4keV, rileySet2keV, rileySet1keV } ) {}
 
 /**
  *  @brief Constructor

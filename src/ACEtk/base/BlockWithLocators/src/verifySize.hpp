@@ -1,4 +1,4 @@
-void verifySize( Iterator begin, Iterator data, Iterator end,
+void verifySize( Iterator begin, Iterator data, Iterator,
                  unsigned int n ) {
 
   // there are at least n values in the locator block
