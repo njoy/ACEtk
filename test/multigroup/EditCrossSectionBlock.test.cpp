@@ -189,27 +189,27 @@ void verifyChunk( const EditCrossSectionBlock& chunk,
   CHECK( 4 == chunk.NEDIT() );
   CHECK( 4 == chunk.numberEditReactions() );
 
-  CHECK_THAT( 6.199930000000E-01, WithinRel( chunk.C( 1 ).front() ) );
-  CHECK_THAT( 6.199930000000E-01, WithinRel( chunk.column( 1 ).front() ) );
-  CHECK_THAT( 2.942240000000E+01, WithinRel( chunk.C( 1 ).back() ) );
-  CHECK_THAT( 2.942240000000E+01, WithinRel( chunk.column( 1 ).back() ) );
+  CHECK_THAT( 6.199930000000E-01, WithinRel( chunk.XS( 1 ).front() ) );
+  CHECK_THAT( 6.199930000000E-01, WithinRel( chunk.editCrossSection( 1 ).front() ) );
+  CHECK_THAT( 2.942240000000E+01, WithinRel( chunk.XS( 1 ).back() ) );
+  CHECK_THAT( 2.942240000000E+01, WithinRel( chunk.editCrossSection( 1 ).back() ) );
 
-  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.C( 2 ).front() ) );
-  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.column( 2 ).front() ) );
-  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.C( 2 ).back() ) );
-  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.column( 2 ).back() ) );
+  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.XS( 2 ).front() ) );
+  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.editCrossSection( 2 ).front() ) );
+  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.XS( 2 ).back() ) );
+  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.editCrossSection( 2 ).back() ) );
 
-  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.C( 3 ).front() ) );
-  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.column( 3 ).front() ) );
-  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.C( 3 ).back() ) );
-  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.column( 3 ).back() ) );
+  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.XS( 3 ).front() ) );
+  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.editCrossSection( 3 ).front() ) );
+  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.XS( 3 ).back() ) );
+  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.editCrossSection( 3 ).back() ) );
 
-  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.C( 4 ).front() ) );
-  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.column( 4 ).front() ) );
-  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.C( 4 ).back() ) );
-  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.column( 4 ).back() ) );
+  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.XS( 4 ).front() ) );
+  CHECK_THAT( 2.847090000000E-05, WithinRel( chunk.editCrossSection( 4 ).front() ) );
+  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.XS( 4 ).back() ) );
+  CHECK_THAT( 3.011490000000E-01, WithinRel( chunk.editCrossSection( 4 ).back() ) );
 
-  CHECK_THROWS( chunk.column( 7 ) );
+  CHECK_THROWS( chunk.editCrossSection( 7 ) );
 
 }
 

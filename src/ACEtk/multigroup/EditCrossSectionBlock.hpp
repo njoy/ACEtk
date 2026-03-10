@@ -53,20 +53,16 @@ public:
   /**
    *  @brief Return the cross section at a specific index
    *
-   *  @param[in] column     the edit reaction index (one-based)
+   *  @param[in] index     the edit reaction index (one-based)
    */
-  auto C( std::size_t column ) const {
-
-    auto number = this->N();
-    return this->XSS( 2 + ( column - 1 ) * number, number );
-  }
+  auto XS( unsigned int index ) const { return this->column( index ); }
 
   /**
    *  @brief Return the cross section at a specific index
    *
-   *  @param[in] column     the edit reaction index (one-based)
+   *  @param[in] index     the edit reaction index (one-based)
    */
-  auto column( std::size_t column ) const { return this->C( column ); }
+  auto editCrossSection( unsigned int index ) const { return this->XS( index ); }
 
 
   using Base::empty;

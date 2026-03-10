@@ -130,6 +130,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/AbsorptionCrossSectionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/StoppingPowerBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/MomentumTransferBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/EditCrossSectionBlock.python.cpp
         )
 
     target_link_libraries(ACEtk.python PRIVATE njoy::ACEtk)
