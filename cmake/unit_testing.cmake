@@ -139,4 +139,5 @@ add_cpp_test( multigroup.FissionChiDataBlock multigroup/FissionChiDataBlock.test
 add_cpp_test( multigroup.AbsorptionCrossSectionBlock multigroup/AbsorptionCrossSectionBlock.test.cpp )
 add_cpp_test( multigroup.StoppingPowerBlock multigroup/StoppingPowerBlock.test.cpp )
 add_cpp_test( multigroup.MomentumTransferBlock multigroup/MomentumTransferBlock.test.cpp )
+add_cpp_test( multigroup.EditCrossSectionBlock multigroup/EditCrossSectionBlock.test.cpp )
 
