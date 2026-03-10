@@ -16,3 +16,4 @@ API
    api/MomentumTransferBlock
    api/EditReactionNumberBlock
    api/EditCrossSectionBlock
+   api/SecondaryParticleTypeBlock
