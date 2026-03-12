@@ -32,7 +32,7 @@ static std::vector< std::vector< double > > generateArrays(
     unsigned int index = 0;
     for ( const auto& values : electroionisation ) {
 
-      Log::info( "electroionisation.size() for subshell {}: {}", index, bremsstrahlung.size() );
+      Log::info( "electroionisation.size() for subshell {}: {}", index, values.size() );
       ++index;
     }
     throw std::exception();

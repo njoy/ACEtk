@@ -11,7 +11,10 @@ auto block( std::size_t index ) const {
     // look for the first value that is larger than or equal to the start locator
     auto iter = std::find_if( this->data().JXS().begin() + index,
                               this->data().JXS().end(),
-                              [start] ( auto&& value ) { return value >= start; } );
+                              [start] ( auto&& value ) {
+
+                                return value >= static_cast< int64_t >( start );
+                              } );
     if ( iter != this->data().JXS().end() ) {
 
       end = *iter;
@@ -36,7 +39,10 @@ auto block( std::size_t particle, std::size_t index ) const {
   std::size_t end = 0;
   auto iter = std::find_if( this->IXS()->begin() + ( particle - 1 ) * 12 + index,
                             this->IXS()->end(),
-                            [start] ( auto&& value ) { return value >= start; } );
+                            [start] ( auto&& value ) {
+
+                              return value >= static_cast< int64_t >( start );
+                            } );
   if ( iter != this->IXS()->end() ) {
 
     end = *iter;
@@ -60,9 +66,6 @@ void generateBlocks() {
   this->sigh_.clear();
   this->andh_.clear();
   this->dlwh_.clear();
-
-  // starting iterator into the XSS array
-  auto begin = this->data().XSS().begin();
 
   // principal cross section block
   unsigned int size = 3;
