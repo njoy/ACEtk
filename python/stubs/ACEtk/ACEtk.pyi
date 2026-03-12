@@ -5,11 +5,12 @@ from . import continuous
 from . import dosimetry
 from . import electroatomic
 from . import electron
+from . import multigroup
 from . import photoatomic
 from . import photonuclear
 from . import sequence
 from . import thermal
-__all__: list[str] = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'ElectronTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'electron', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
+__all__: list[str] = ['AngularDistributionType', 'ContinuousEnergyTable', 'Data', 'DosimetryTable', 'ElectronTable', 'EnergyDistributionType', 'Header', 'Header201', 'PhotoatomicTable', 'PhotonuclearTable', 'ReferenceFrame', 'Table', 'ThermalScatteringTable', 'Xsdir', 'XsdirEntry', 'continuous', 'dosimetry', 'electroatomic', 'electron', 'multigroup', 'photoatomic', 'photonuclear', 'sequence', 'thermal']
 class AngularDistributionType:
     """
     The angular distribution types

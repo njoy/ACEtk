@@ -1,8 +1,8 @@
-void verifySize( Iterator begin, Iterator data, Iterator end,
+void verifySize( Iterator begin, Iterator data, Iterator,
                  unsigned int nr ) {
 
   // there are at least nr values in the locator block
-  auto size = std::distance( begin, data );
+  std::size_t size = std::distance( begin, data );
   std::size_t add = this->zero_index_ ? 1 : 0;
   if ( size < nr + add ) {
 

@@ -11,7 +11,10 @@ auto block( std::size_t index ) const {
     // look for the first value that is larger than or equal to the start locator
     auto iter = std::find_if( this->data().JXS().begin() + index,
                               this->data().JXS().end(),
-                              [start] ( auto&& value ) { return value >= start; } );
+                              [start] ( auto&& value ) {
+
+                                return value >= static_cast< int64_t >( start );
+                              } );
     if ( iter != this->data().JXS().end() ) {
 
       end = *iter;
@@ -58,9 +61,6 @@ void generateBlocks() {
 
   // clear vectors
   eion_.clear();
-
-  // starting iterator into the XSS array
-  auto begin = this->data().XSS().begin();
 
   // principal cross section data
   auto iterators = block( 1 );

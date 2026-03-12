@@ -12,7 +12,6 @@ void generateBlocks() {
     const double energy = this->values_.value( 1, index );
     const double probability = this->values_.value( 2, index );
     const double cumulative = this->values_.value( 3, index );
-    const auto locb = this->distributionLocator( index );
     const auto locator = this->relativeDistributionLocator( index );
     const auto left = std::next( this->begin(), locator - 1 );
     const auto right = index == this->numberValues()

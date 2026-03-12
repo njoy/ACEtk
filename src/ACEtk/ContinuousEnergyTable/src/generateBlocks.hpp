@@ -13,7 +13,10 @@ auto block( std::size_t index ) const {
       // look for the first value that is larger than or equal to the start locator
       auto iter = std::find_if( this->data().JXS().begin() + index,
                                 this->data().JXS().end(),
-                                [start] ( auto&& value ) { return value >= start; } );
+                                [start] ( auto&& value ) {
+
+                                  return value >= static_cast< int64_t >( start );
+                                } );
       if ( iter != this->data().JXS().end() ) {
 
         // JXS(22) is not a locator, it points to the last value of the conventional
@@ -21,7 +24,7 @@ auto block( std::size_t index ) const {
         end = *iter != this->data().JXS(22) ? *iter : *iter + 1;
 
         // JXS(21) does not point to an actual block so set it to END + 1 instead
-        if ( end == this->data().JXS(21) ) {
+        if ( static_cast< int64_t >( end ) == this->data().JXS(21) ) {
 
           end = this->data().JXS(22) + 1;
         }
@@ -35,12 +38,15 @@ auto block( std::size_t index ) const {
 
           iter = std::find_if( this->data().JXS().begin() + 22,
                                this->data().JXS().end(),
-                               [start] ( auto&& value ) { return value >= start; } );
+                               [start] ( auto&& value ) {
+
+                                 return value >= static_cast< int64_t >( start );
+                               } );
 
           if ( iter != this->data().JXS().end() ) {
 
             auto next = *iter;
-            if ( end > next ) {
+            if ( static_cast< int64_t >( end ) > next ) {
 
               end = next;
             }
@@ -58,7 +64,7 @@ auto block( std::size_t index ) const {
           auto gpd = this->data().JXS( 12 );
           if ( gpd != 0 ) {
 
-            if ( end > gpd ) {
+            if ( static_cast< int64_t >( end ) > gpd ) {
 
               end = gpd;
             }
@@ -130,9 +136,6 @@ void generateBlocks() {
   this->andh_.clear();
   this->dlwh_.clear();
   this->yh_.clear();
-
-  // starting iterator into the XSS array
-  auto begin = this->data().XSS().begin();
 
   // principal cross section block
   auto iterators = block( 1 );

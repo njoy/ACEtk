@@ -23,7 +23,7 @@ MatrixData( std::string&& name,
             bool rowmajor ) :
 Base( std::move( name ),
       generateXSS( std::move( rows ), std::move( cols ), std::move( vals ) ) ),
-nrows_( rows.size() ), ncols_( cols.size() ), rowmajor_( rowmajor ) {}
+rowmajor_( rowmajor ), nrows_( rows.size() ), ncols_( cols.size() ) {}
 
 /**
 *  @brief Constructor
@@ -41,7 +41,7 @@ MatrixData( std::string&& name,
             unsigned int ncols,
             bool rowmajor ) :
 Base( std::move( name ), begin, end ),
-nrows_(nrows), ncols_(ncols), rowmajor_(rowmajor) {
-  
+rowmajor_(rowmajor), nrows_(nrows), ncols_(ncols) {
+
   verifySize( this->begin(), this->end(), this->nrows_, this->ncols_ );
 }

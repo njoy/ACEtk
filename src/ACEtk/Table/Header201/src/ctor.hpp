@@ -14,7 +14,7 @@ Header201( const std::string& version, const std::string& szaid,
            double awr, double temperature, const std::string& date,
            const std::vector< std::string >& comments ) :
   vers_( strip( version ) ), szaid_( strip( szaid ) ), src_( strip( source ) ),
-  awr_( awr ), temp_( temperature ), date_( strip( date ) ),
+  temp_( temperature ), awr_( awr ), date_( strip( date ) ),
   comments_( std::move( comments ) ) {}
 
 public:
