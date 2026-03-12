@@ -3,7 +3,7 @@ Multigroup MC ACE blocks and components
 """
 from __future__ import annotations
 import typing
-__all__: list[str] = ['AbsorptionCrossSectionBlock', 'FissionChiDataBlock', 'FissionCrossSectionBlock', 'IncidentParticleGroupStructureBlock', 'MomentumTransferBlock', 'StoppingPowerBlock', 'TotalCrossSectionBlock']
+__all__: list[str] = ['AbsorptionCrossSectionBlock', 'EditCrossSectionBlock', 'EditReactionNumberBlock', 'FissionChiDataBlock', 'FissionCrossSectionBlock', 'IncidentParticleGroupStructureBlock', 'MomentumTransferBlock', 'StoppingPowerBlock', 'TotalCrossSectionBlock']
 class AbsorptionCrossSectionBlock:
     """
     The multigroup absorption cross section block
@@ -75,6 +75,282 @@ class AbsorptionCrossSectionBlock:
     def number_energy_groups(self) -> int:
         """
         The number of energy groups
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class EditCrossSectionBlock:
+    """
+    The EditCrossSectionBlock class contains the edit cross section values 
+    in the XSED block. The number of edit reactions is in NXS(4) and the 
+    number of groups is NXS(5). The order of the edit cross sections is the 
+    same as the order of the edit reaction numbers in the MTED block. 
+    
+    Parameters
+    ----------
+        reactions : list of lists of float 
+            The edit reaction cross section data 
+    
+    """
+    def XS(self, index: int) -> ...:
+        """
+        Return the cross section at a specific index
+        
+        Parameters
+        ----------
+            index : int 
+                The edit reaction index 
+        
+        Returns
+        -------
+            list of floats 
+                The cross section values for the edit reaction 
+        
+        Raises
+        ------
+            Exception 
+                When the index is out of range 
+        """
+    def __init__(self, reactions: list[list[float]]) -> None:
+        """
+        Create the XSED block with the edit cross section values 
+        """
+    def edit_cross_section(self, index: int) -> ...:
+        """
+        Return the cross section at a specific index
+        
+        Parameters
+        ----------
+            index : int 
+                The edit reaction index 
+        
+        Returns
+        -------
+            list of floats 
+                The cross section values for the edit reaction 
+        
+        Raises
+        ------
+            Exception 
+                When the index is out of range 
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NEDIT(self) -> int:
+        """
+        The number of edit reactions
+        """
+    @property
+    def NGRP(self) -> int:
+        """
+        The number of energy groups
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_edit_reactions(self) -> int:
+        """
+        The number of edit reactions
+        """
+    @property
+    def number_energy_groups(self) -> int:
+        """
+        The number of energy groups
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class EditReactionNumberBlock:
+    """
+    The multigroup MTED block with the edit reaction MT numbers
+    
+    The EditReactionNumberBlock class contains the edit reaction MT numbers
+    
+    The number of edit reactions is stored in NXS(4).
+    
+    Parameters
+    ----------
+        edit_reaction_numbers : list of int 
+             the edit reaction MT numbers
+    
+    """
+    def MT(self, index: int) -> int:
+        """
+        The edit reaction number for an index
+        
+        Parameters
+        ----------
+            index : int   
+                the index (one-based)
+        
+        Returns
+        -------
+            int 
+                The edit reaction number at the index given
+        
+        Raises
+        ------
+            Exception 
+                If the index provided doesn't exist in the block 
+        """
+    def __init__(self, edit_reaction_numbers: list[int]) -> None:
+        """
+        Create the MTED block with the edit reaction MT numbers
+        """
+    def edit_reaction_number(self, index: int) -> int:
+        """
+        The edit reaction number for an index
+        
+        Parameters
+        ----------
+            index : int   
+                the index (one-based)
+        
+        Returns
+        -------
+            int 
+                The edit reaction number at the index given
+        
+        Raises
+        ------
+            Exception 
+                If the index provided doesn't exist in the block 
+        """
+    def has_MT(self, mt: int) -> bool:
+        """
+        Return whether or not a reaction MT is present in the edit reactions
+        
+        Parameters
+        ----------
+            mt : int   
+                the mt number
+        
+        Returns
+        -------
+            bool 
+                True if the MT exists in the edit reactions
+        """
+    def has_edit_reaction_number(self, reaction: int) -> bool:
+        """
+        Return whether or not a reaction MT is present in the edit reactions
+        
+        Parameters
+        ----------
+            mt : int   
+                the mt number
+        
+        Returns
+        -------
+            bool 
+                True if the MT exists in the edit reactions
+        """
+    def index(self, mt: int) -> int:
+        """
+        Return the index (one-based) of the edit reaction number, if present
+        
+        Parameters
+        ----------
+            mt : int   
+                the mt number
+        
+        Returns
+        -------
+            int 
+                The index of the MT number
+        
+        Raises
+        ------
+            Exception 
+                If the MT provided doesn't exist in the block 
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def MTs(self) -> ...:
+        """
+        The edit reaction numbers
+        """
+    @property
+    def NEDIT(self) -> int:
+        """
+        The number of edit reactions 
+        """
+    @property
+    def edit_reaction_numbers(self) -> ...:
+        """
+        The edit reaction numbers
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_edit_reactions(self) -> int:
+        """
+        The number of edit reactions
         """
     @property
     def xss_array(self) -> ...:
