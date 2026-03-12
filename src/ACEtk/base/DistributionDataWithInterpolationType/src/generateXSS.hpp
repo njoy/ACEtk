@@ -1,5 +1,5 @@
 static std::vector< double >
-generateXSS( const std::string& name,
+generateXSS( const std::string&,
              unsigned int interpolation,
              std::vector< Distribution >&& distributions,
              std::size_t locb ) {

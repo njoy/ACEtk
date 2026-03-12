@@ -162,9 +162,6 @@ public:
    */
   auto IXSS( std::size_t index, std::size_t length ) const {
 
-    const auto left = this->iterator( index );
-    const auto right = length > 0 ? this->iterator( index + length - 1 ) + 1
-                                  : left;
     return this->XSS( index, length )
            | njoy::tools::std20::views::transform(
                  [] ( auto value ) -> int

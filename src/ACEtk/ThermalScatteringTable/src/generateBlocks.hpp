@@ -13,7 +13,10 @@ auto block( std::size_t index ) const {
                                 ? this->data().JXS().begin() + index + 1
                                 : this->data().JXS().begin() + index,
                               this->data().JXS().end(),
-                              [start] ( auto&& value ) { return value >= start; } );
+                              [start] ( auto&& value ) {
+
+                                return value >= static_cast< int64_t >( start );
+                              } );
     if ( iter != this->data().JXS().end() ) {
 
       end = *iter;

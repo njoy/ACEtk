@@ -7,7 +7,6 @@ void generateBlocks() {
   auto begin = this->begin();
   auto incident = begin + 2 * nr + 1;
   auto bins = incident + ne + 1;
-  auto end = this->end();
 
   this->interpolation_ = continuous::InterpolationData( this->name(),
                                                         begin, incident );
