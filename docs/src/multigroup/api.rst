@@ -14,3 +14,5 @@ API
    api/AbsorptionCrossSectionBlock
    api/StoppingPowerBlock
    api/MomentumTransferBlock
+   api/EditReactionNumberBlock
+   api/EditCrossSectionBlock

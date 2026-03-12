@@ -18,6 +18,8 @@ namespace multigroup {
   void wrapAbsorptionCrossSectionBlock( python::module&, python::module& );
   void wrapStoppingPowerBlock( python::module&, python::module& );
   void wrapMomentumTransferBlock( python::module&, python::module& );
+  void wrapEditReactionNumberBlock( python::module&, python::module& );
+  void wrapEditCrossSectionBlock( python::module&, python::module& );
 }
 
 void wrapMultigroup( python::module& module, python::module& viewmodule ) {
@@ -36,4 +38,6 @@ void wrapMultigroup( python::module& module, python::module& viewmodule ) {
   multigroup::wrapAbsorptionCrossSectionBlock( submodule, viewmodule );
   multigroup::wrapStoppingPowerBlock( submodule, viewmodule );
   multigroup::wrapMomentumTransferBlock( submodule, viewmodule );
+  multigroup::wrapEditReactionNumberBlock( submodule, viewmodule );
+  multigroup::wrapEditCrossSectionBlock( submodule, viewmodule );
 }
