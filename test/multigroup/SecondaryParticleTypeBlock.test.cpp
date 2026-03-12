@@ -136,7 +136,7 @@ void verifyChunk( const SecondaryParticleTypeBlock& chunk,
   CHECK( 1 == chunk.index(1) );
   CHECK( 2 == chunk.index(2) );
 
-  // CHECK_THROWS( chunk.index(9) );
+  CHECK_THROWS( chunk.index(9) );
 }
 
 SecondaryParticleTypeBlock makeDummyBlock() {
