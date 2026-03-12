@@ -135,6 +135,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/SecondaryParticleTypeBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/SecondaryParticleGroupStructureBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/SecondaryParticleGroupStructureLocatorBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/P0LocatorBlock.python.cpp
         )
 
     target_link_libraries(ACEtk.python PRIVATE njoy::ACEtk)

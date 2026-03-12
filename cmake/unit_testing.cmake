@@ -144,4 +144,5 @@ add_cpp_test( multigroup.EditCrossSectionBlock multigroup/EditCrossSectionBlock.
 add_cpp_test( multigroup.SecondaryParticleTypeBlock multigroup/SecondaryParticleTypeBlock.test.cpp )
 add_cpp_test( multigroup.SecondaryParticleGroupStructureBlock multigroup/SecondaryParticleGroupStructureBlock.test.cpp )
 add_cpp_test( multigroup.SecondaryParticleGroupStructureLocatorBlock multigroup/SecondaryParticleGroupStructureLocatorBlock.test.cpp )
+add_cpp_test( multigroup.P0LocatorBlock multigroup/P0LocatorBlock.test.cpp )
 

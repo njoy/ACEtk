@@ -19,3 +19,4 @@ API
    api/SecondaryParticleTypeBlock
    api/SecondaryParticleGroupStructureBlock
    api/SecondaryParticleGroupStructureLocatorBlock
+   api/P0LocatorBlock

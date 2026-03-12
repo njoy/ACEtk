@@ -144,3 +144,4 @@ add_python_test( multigroup.EditCrossSectionBlock                         multig
 add_python_test( multigroup.SecondaryParticleTypeBlock                    multigroup/Test_ACEtk_multigroup_SecondaryParticleTypeBlock.py )
 add_python_test( multigroup.SecondaryParticleGroupStructureBlock          multigroup/Test_ACEtk_multigroup_SecondaryParticleGroupStructureBlock.py )
 add_python_test( multigroup.SecondaryParticleGroupStructureLocatorBlock   multigroup/Test_ACEtk_multigroup_SecondaryParticleGroupStructureLocatorBlock.py )
+add_python_test( multigroup.P0LocatorBlock                                multigroup/Test_ACEtk_multigroup_P0LocatorBlock.py )
