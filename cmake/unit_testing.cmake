@@ -141,4 +141,5 @@ add_cpp_test( multigroup.StoppingPowerBlock multigroup/StoppingPowerBlock.test.c
 add_cpp_test( multigroup.MomentumTransferBlock multigroup/MomentumTransferBlock.test.cpp )
 add_cpp_test( multigroup.EditReactionNumberBlock multigroup/EditReactionNumberBlock.test.cpp )
 add_cpp_test( multigroup.EditCrossSectionBlock multigroup/EditCrossSectionBlock.test.cpp )
+add_cpp_test( multigroup.SecondaryParticleTypeBlock multigroup/SecondaryParticleTypeBlock.test.cpp )
 

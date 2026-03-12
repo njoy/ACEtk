@@ -3,7 +3,7 @@ Multigroup MC ACE blocks and components
 """
 from __future__ import annotations
 import typing
-__all__: list[str] = ['AbsorptionCrossSectionBlock', 'EditCrossSectionBlock', 'EditReactionNumberBlock', 'FissionChiDataBlock', 'FissionCrossSectionBlock', 'IncidentParticleGroupStructureBlock', 'MomentumTransferBlock', 'StoppingPowerBlock', 'TotalCrossSectionBlock']
+__all__: list[str] = ['AbsorptionCrossSectionBlock', 'EditCrossSectionBlock', 'EditReactionNumberBlock', 'FissionChiDataBlock', 'FissionCrossSectionBlock', 'IncidentParticleGroupStructureBlock', 'MomentumTransferBlock', 'SecondaryParticleTypeBlock', 'StoppingPowerBlock', 'TotalCrossSectionBlock']
 class AbsorptionCrossSectionBlock:
     """
     The multigroup absorption cross section block
@@ -672,6 +672,170 @@ class MomentumTransferBlock:
     def number_energy_groups(self) -> int:
         """
         The number of energy groups
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class SecondaryParticleTypeBlock:
+    """
+    The multigroup IPT block with the secondary particle types
+    
+    The SecondaryParticleTypeBlock class contains the secondary particle types
+    for which data is available. The allowed particle types are: 
+        1  -  neutron 
+        2  -  photon 
+    The number of available particle types is stored in NXS(8).
+    
+    Parameters
+    ----------
+        types : list of int 
+            the secondary particle types
+    
+    """
+    def IPT(self, index: int) -> int:
+        """
+        The particle type for a secondary particle index
+        
+        Parameters
+        ----------
+            index : int 
+                the index (one-based)
+        
+        Returns
+        -------
+            int 
+                The particle type 
+        
+        Raises
+        ------
+            Exception 
+                When the index is out of range 
+        """
+    def __init__(self, types: list[int]) -> None:
+        """
+        Create the IPT block
+        """
+    def has_IPT(self, type: int) -> bool:
+        """
+        Return whether or not the particle type is present
+        
+        Parameters
+        ----------
+            type : int 
+                the particle type
+        
+        Returns
+        -------
+            bool 
+                Whether or not the particle type is present 
+        """
+    def has_particle_type(self, type: int) -> bool:
+        """
+        Return whether or not the particle type is present
+        
+        Parameters
+        ----------
+            type : int 
+                the particle type
+        
+        Returns
+        -------
+            bool 
+                Whether or not the particle type is present 
+        """
+    def index(self, type: int) -> int:
+        """
+        Return the index (one-based) of the particle type
+        
+        Parameters
+        ----------
+            type : int 
+                The particle type 
+        
+        Returns
+        -------
+            int 
+                The index of the particle type (one-based) 
+        
+        Raises
+        ------
+            Exception 
+                When the particle type is not present 
+        """
+    def particle_type(self, index: int) -> int:
+        """
+        The particle type for a secondary particle index
+        
+        Parameters
+        ----------
+            index : int 
+                the index (one-based)
+        
+        Returns
+        -------
+            int 
+                The particle type 
+        
+        Raises
+        ------
+            Exception 
+                When the index is out of range 
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def IPTs(self) -> ...:
+        """
+        The particle types
+        """
+    @property
+    def NTYPE(self) -> int:
+        """
+        The number of secondary particle types
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_secondary_particle_types(self) -> int:
+        """
+        The number of secondary particle types
+        """
+    @property
+    def particle_types(self) -> ...:
+        """
+        The particle types
         """
     @property
     def xss_array(self) -> ...:
