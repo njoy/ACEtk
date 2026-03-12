@@ -27,7 +27,7 @@ SCENARIO( "EditReactionNumberBlock" ) {
 
                 2, 102, 101, 204, 401, 1, 301, 302
               };
-      
+
 
       EditReactionNumberBlock chunk( std::move( reactions ) );
 
@@ -168,7 +168,10 @@ void verifyChunk( const EditReactionNumberBlock& chunk,
   CHECK( 302 == chunk.MT(i) );
   CHECK( 302 == chunk.editReactionNumber(i) );
 
-  // i++;
-  // CHECK_THROWS( chunk.MT(i) );
-  // CHECK_THROWS( chunk.index(4) );
+#ifndef NDEBUG
+  i++;
+  CHECK_THROWS( chunk.MT(i) );
+#endif
+
+  CHECK_THROWS( chunk.index(4) );
 }
