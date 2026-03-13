@@ -41,6 +41,17 @@ SCENARIO( "BandMatrixData" ) {
 
       } // THEN
     } // WHEN
+
+    WHEN( "the data is defined by iterators" ) {
+
+      BandMatrixData chunk( "Band", xss.begin(), xss.end(), 4, 2, 1 );
+
+      THEN( "a BandMatrixData can be constructed and members can be tested" ) {
+
+        verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
+
   } // GIVEN
 } // SCENARIO
 

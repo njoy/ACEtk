@@ -9,7 +9,7 @@ unsigned int rowListStart( unsigned int row ) const {
 
     unsigned int index = 0;
 
-    // recursively get length of rows above desired row to
+    // get length of rows above desired row to
     // find the start index of desired row
     for (int i = row - 1; i > 0; --i) {
         index = index + this->rowLength( i );

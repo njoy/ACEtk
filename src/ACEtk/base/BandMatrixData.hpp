@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BASE_DIAGONALMATRIXDATA
-#define NJOY_ACETK_BASE_DIAGONALMATRIXDATA
+#ifndef NJOY_ACETK_BASE_BANDMATRIXDATA
+#define NJOY_ACETK_BASE_BANDMATRIXDATA
 
 // system includes
 #include <algorithm>
@@ -36,7 +36,7 @@ private:
   #include "ACEtk/base/BandMatrixData/src/verifyIndex.hpp"
   #include "ACEtk/base/BandMatrixData/src/generateXSS.hpp"
   #include "ACEtk/base/BandMatrixData/src/listIndices.hpp"
-  // #include "ACEtk/base/BandMatrixData/src/verifySize.hpp"
+  #include "ACEtk/base/BandMatrixData/src/verifySize.hpp"
   
 public:
 
