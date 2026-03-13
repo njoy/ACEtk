@@ -52,6 +52,27 @@ SCENARIO( "BandMatrixData" ) {
       } // THEN
     } // WHEN
 
+    WHEN( "the matrix has non-zero values outside the bands" ) {
+
+        std::vector < std::vector < double > > badValues = {
+            { 2., 3., 4., 6. },
+            { 1., 2., 3., 4. },
+            { 0., 1., 2., 3. },
+            { 9., 0., 1., 2. }
+        };
+
+        BandMatrixData chunk( "Band", std::move( badValues ), 2, 1 );
+
+
+      THEN( "those values are thrown away" ) {
+            
+          verifyChunk( chunk, xss );
+
+      } // THEN
+    } // WHEN
+
+  //  @TODO Figure out how to test exceptions thrown by the constructor itselfs
+
   } // GIVEN
 } // SCENARIO
 

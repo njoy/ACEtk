@@ -9,6 +9,13 @@ BandMatrixData& operator=( BandMatrixData&& ) = default;
 /**
 *  @brief Constructor
 *
+*  Note: Any non-zero values in the matrix outside of the defined
+*  bands will be lost in the construction of the BandMatrixData 
+*  object. The object will check that that the given number of
+*  super-diagonals and sub-diagonals are allowed (no greater than
+*  one less than the length of the side of the matrix) but does not
+*  check that they are consistent with the values in the matrix
+*
 *  @param[in] name        the name of the block
 *  @param[in] vals        the two-dimensional matrix data values
 *  @param[in] nsuper      the number of super-diagonals
