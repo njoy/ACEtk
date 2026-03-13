@@ -27,13 +27,13 @@ generateXSS( std::vector< std::vector< double > >&& vals,
     Log::info( "Number of sub-diagonals: {} ", nsub );
   }
 
-  const auto sz = nrows * (1+nsub + nsuper) - ((nsub * (1+nsub)) + (nsuper * (1+nsuper))) / 2 ; 
-
+  const auto sz = nrows * (1 + nsub + nsuper) - ( ( nsub * (1 + nsub ) ) + ( nsuper * ( 1 + nsuper ) ) ) / 2 ; 
+  std::cout << "sz: " << sz << "\n";
   xss.reserve( sz );
 
-  unsigned int k = 0;
-  unsigned int rowStart;
-  unsigned int rowEnd;
+  int k = 0;
+  int rowStart;
+  int rowEnd;
 
   for ( auto&& array: vals ) {
 
@@ -48,8 +48,11 @@ generateXSS( std::vector< std::vector< double > >&& vals,
     }
 
     // both of these calculations are based on one-indexed matrices
-    rowStart = std::max( k - nsub, static_cast< unsigned int >( 1 ) );   
+    rowStart = std::max( k - static_cast< int >( nsub ),  1 );   
     rowEnd = std::min( nrows, k + nsuper );
+
+    std::cout<< "rowstart: " << rowStart << "\n";
+    std::cout<< "rowEnd: " << rowEnd << "\n";
 
 
     if ( array.begin() + rowEnd  > array.end() ) {
@@ -59,7 +62,7 @@ generateXSS( std::vector< std::vector< double > >&& vals,
       throw std::exception();
     }
 
-    xss.insert( xss.end(), array.begin() + ( rowStart - 1 ), array.begin() + ( rowEnd ) );
+    xss.insert( xss.end(), array.begin() + ( rowStart - 1 ), array.begin() + rowEnd );
 
   }
 

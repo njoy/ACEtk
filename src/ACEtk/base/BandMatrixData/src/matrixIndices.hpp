@@ -3,9 +3,13 @@
    *
    *  @param[in] row     the row index (one-based)
    */
-  unsigned int rowStart( unsigned int row ) const {
+  unsigned int rowStart( int row ) const {
 
-    return std::max( row - this->NSUB(), static_cast< unsigned int >( 1 ) );   
+    // Have to have signed ints here because this equation relies on the
+    // ability of the first term to go negative when the row is filled
+    // in all the way to first column, so that the max function gives 1. 
+    // To avoid casting to signed int, the logic would need to be changed.
+    return std::max( row - static_cast< int >( this->NSUB() ),  1  );    
   }
 
   /**

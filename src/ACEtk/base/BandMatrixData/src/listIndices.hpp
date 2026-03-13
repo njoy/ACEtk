@@ -11,7 +11,8 @@ unsigned int rowListStart( unsigned int row ) const {
 
     // get length of rows above desired row to
     // find the start index of desired row
-    for (int i = row - 1; i > 0; --i) {
+    for (unsigned int i = 1; i < row; ++i) {
+        
         index = index + this->rowLength( i );
     }
 

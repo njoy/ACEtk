@@ -13,14 +13,20 @@ using namespace njoy::ACEtk;
 using BandMatrixData = base::BandMatrixData;
 
 std::vector< double > chunk();
+std::vector< double > fullChunk();
+std::vector< double > diagonalChunk();
 void verifyChunk( const BandMatrixData&, std::vector< double >&);
+void verifyFullChunk( const BandMatrixData&, std::vector< double >&);
+void verifyDiagonalChunk( const BandMatrixData&, std::vector< double >&);
 BandMatrixData makeDummyBlock();
 
 SCENARIO( "BandMatrixData" ) {
 
-  GIVEN( "valid data for an BandMatrixData instance" ) {
+  GIVEN( "valid data for a BandMatrixData instance" ) {
 
     std::vector< double > xss = chunk();
+    std::vector< double > fullXSS = fullChunk();
+    std::vector< double > diagonalXSS = diagonalChunk();
 
     WHEN( "the data is given explicitly" ) {
 
@@ -71,6 +77,45 @@ SCENARIO( "BandMatrixData" ) {
       } // THEN
     } // WHEN
 
+
+    WHEN( "given a full matrix" ) {
+
+        std::vector < std::vector < double > > fullMatrix = {
+            { 2., 3., 4., 5. },
+            { 1., 2., 3., 4. },
+            { 8., 1., 2., 3. },
+            { 9., 6., 1., 2. }
+        };
+
+        BandMatrixData fullChunk( "Band", std::move( fullMatrix ), 3, 3 );
+
+
+      THEN( "the BandMatrixData is constructed correctly" ) {
+            
+          verifyFullChunk( fullChunk, fullXSS );
+
+      } // THEN
+    } // WHEN
+
+    WHEN( "given a diagonal matrix" ) {
+
+        std::vector < std::vector < double > > diagonalMatrix = {
+            { 1., 0., 0., 0. },
+            { 0., 2., 0., 0. },
+            { 0., 0., 3., 0. },
+            { 0., 0., 0., 4. }
+        };
+
+        BandMatrixData diagonalChunk( "Band", std::move( diagonalMatrix ), 0, 0 );
+
+
+      THEN( "the BandMatrixData is constructed correctly" ) {
+            
+          verifyDiagonalChunk( diagonalChunk, diagonalXSS );
+
+      } // THEN
+    } // WHEN
+
   //  @TODO Figure out how to test exceptions thrown by the constructor itselfs
 
   } // GIVEN
@@ -80,6 +125,19 @@ std::vector< double > chunk() {
 
    return { 2., 3., 4., 1., 2., 3., 4., 1., 2., 3., 1., 2. };
 }
+
+
+std::vector< double > fullChunk() {
+
+   return { 2., 3., 4., 5., 1., 2., 3., 4., 8., 1., 2., 3., 9., 6., 1., 2. };
+}
+
+
+std::vector< double > diagonalChunk() {
+
+   return { 1., 2., 3., 4. };
+}
+
 
 void verifyChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
 
@@ -190,6 +248,89 @@ void verifyChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
   CHECK_THAT( 0., WithinRel( chunk.matrixRow( 4 )[1] ) );
   CHECK_THAT( 1., WithinRel( chunk.matrixRow( 4 )[2] ) );
   CHECK_THAT( 2., WithinRel( chunk.matrixRow( 4 )[3] ) );
+
+  auto mat = chunk.matrix();
+  for (unsigned int row = 1; row <= 4; ++row ){
+    for (unsigned int col = 1; col <= 4; ++col ) {
+      CHECK_THAT( ans[row-1][col-1], WithinRel( mat[row-1][col-1] ) );
+    }
+  }
+}
+
+
+
+void verifyFullChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
+
+    std::vector < std::vector < double > > ans = {
+            { 2., 3., 4., 5. },
+            { 1., 2., 3., 4. },
+            { 8., 1., 2., 3. },
+            { 9., 6., 1., 2. }
+    };
+
+
+  CHECK( 4 == chunk.size() );
+  CHECK( 4 == chunk.M() );
+  CHECK( 4 == chunk.numberRows() );
+  CHECK( 4 == chunk.N() );
+  CHECK( 4 == chunk.numberColumns() );
+
+  CHECK( 3 == chunk.NSUP() );
+  CHECK( 3 == chunk.numberSuperDiagonals() );
+  CHECK( 3 == chunk.NSUB() );
+  CHECK( 3 == chunk.numberSubDiagonals() );
+
+  CHECK( 16 == chunk.blockLength() );
+  CHECK( 16 == chunk.length() );
+
+// XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
+
+  auto mat = chunk.matrix();
+  for (unsigned int row = 1; row <= 4; ++row ){
+    for (unsigned int col = 1; col <= 4; ++col ) {
+      CHECK_THAT( ans[row-1][col-1], WithinRel( mat[row-1][col-1] ) );
+    }
+  }
+}
+
+
+void verifyDiagonalChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
+
+    std::vector < std::vector < double > > ans = {
+            { 1., 0., 0., 0. },
+            { 0., 2., 0., 0. },
+            { 0., 0., 3., 0. },
+            { 0., 0., 0., 4. }
+    };
+
+
+  CHECK( 4 == chunk.size() );
+  CHECK( 4 == chunk.M() );
+  CHECK( 4 == chunk.numberRows() );
+  CHECK( 4 == chunk.N() );
+  CHECK( 4 == chunk.numberColumns() );
+
+  CHECK( 0 == chunk.NSUP() );
+  CHECK( 0 == chunk.numberSuperDiagonals() );
+  CHECK( 0 == chunk.NSUB() );
+  CHECK( 0 == chunk.numberSubDiagonals() );
+
+  CHECK( 4 == chunk.blockLength() );
+  CHECK( 4 == chunk.length() );
+
+// XSS
+
+  auto xss_chunk = chunk.XSS();
+  for ( unsigned int i = 0; i < chunk.length(); ++i ) {
+
+    CHECK_THAT( xss[i], WithinRel( xss_chunk[i] ) );
+  }
 
   auto mat = chunk.matrix();
   for (unsigned int row = 1; row <= 4; ++row ){
