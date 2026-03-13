@@ -4,25 +4,25 @@
 using Catch::Matchers::WithinRel;
 
 // what we are testing
-#include "ACEtk/base/BandMatrixData.hpp"
+#include "ACEtk/base/SquareBandMatrixData.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::ACEtk;
-using BandMatrixData = base::BandMatrixData;
+using SquareBandMatrixData = base::SquareBandMatrixData;
 
 std::vector< double > chunk();
 std::vector< double > fullChunk();
 std::vector< double > diagonalChunk();
-void verifyChunk( const BandMatrixData&, std::vector< double >&);
-void verifyFullChunk( const BandMatrixData&, std::vector< double >&);
-void verifyDiagonalChunk( const BandMatrixData&, std::vector< double >&);
-BandMatrixData makeDummyBlock();
+void verifyChunk( const SquareBandMatrixData&, std::vector< double >&);
+void verifyFullChunk( const SquareBandMatrixData&, std::vector< double >&);
+void verifyDiagonalChunk( const SquareBandMatrixData&, std::vector< double >&);
+SquareBandMatrixData makeDummyBlock();
 
-SCENARIO( "BandMatrixData" ) {
+SCENARIO( "SquareBandMatrixData" ) {
 
-  GIVEN( "valid data for a BandMatrixData instance" ) {
+  GIVEN( "valid data for a SquareBandMatrixData instance" ) {
 
     std::vector< double > xss = chunk();
     std::vector< double > fullXSS = fullChunk();
@@ -37,10 +37,10 @@ SCENARIO( "BandMatrixData" ) {
             { 0., 0., 1., 2. }
         };
 
-        BandMatrixData chunk( "Band", std::move( values ), 2, 1 );
+        SquareBandMatrixData chunk( "Band", std::move( values ), 2, 1 );
 
 
-      THEN( "an BandMatrixData can be constructed and "
+      THEN( "an SquareBandMatrixData can be constructed and "
             "members can be tested" ) {
             
           verifyChunk( chunk, xss );
@@ -50,9 +50,9 @@ SCENARIO( "BandMatrixData" ) {
 
     WHEN( "the data is defined by iterators" ) {
 
-      BandMatrixData chunk( "Band", xss.begin(), xss.end(), 4, 2, 1 );
+      SquareBandMatrixData chunk( "Band", xss.begin(), xss.end(), 4, 2, 1 );
 
-      THEN( "a BandMatrixData can be constructed and members can be tested" ) {
+      THEN( "a SquareBandMatrixData can be constructed and members can be tested" ) {
 
         verifyChunk( chunk, xss );
       } // THEN
@@ -67,7 +67,7 @@ SCENARIO( "BandMatrixData" ) {
             { 9., 0., 1., 2. }
         };
 
-        BandMatrixData chunk( "Band", std::move( badValues ), 2, 1 );
+        SquareBandMatrixData chunk( "Band", std::move( badValues ), 2, 1 );
 
 
       THEN( "those values are thrown away" ) {
@@ -87,10 +87,10 @@ SCENARIO( "BandMatrixData" ) {
             { 9., 6., 1., 2. }
         };
 
-        BandMatrixData fullChunk( "Band", std::move( fullMatrix ), 3, 3 );
+        SquareBandMatrixData fullChunk( "Band", std::move( fullMatrix ), 3, 3 );
 
 
-      THEN( "the BandMatrixData is constructed correctly" ) {
+      THEN( "the SquareBandMatrixData is constructed correctly" ) {
             
           verifyFullChunk( fullChunk, fullXSS );
 
@@ -106,10 +106,10 @@ SCENARIO( "BandMatrixData" ) {
             { 0., 0., 0., 4. }
         };
 
-        BandMatrixData diagonalChunk( "Band", std::move( diagonalMatrix ), 0, 0 );
+        SquareBandMatrixData diagonalChunk( "Band", std::move( diagonalMatrix ), 0, 0 );
 
 
-      THEN( "the BandMatrixData is constructed correctly" ) {
+      THEN( "the SquareBandMatrixData is constructed correctly" ) {
             
           verifyDiagonalChunk( diagonalChunk, diagonalXSS );
 
@@ -139,7 +139,7 @@ std::vector< double > diagonalChunk() {
 }
 
 
-void verifyChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
+void verifyChunk( const SquareBandMatrixData& chunk, std::vector< double >& xss ) {
 
     std::vector < std::vector < double > > ans = {
             { 2., 3., 4., 0. },
@@ -259,7 +259,7 @@ void verifyChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
 
 
 
-void verifyFullChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
+void verifyFullChunk( const SquareBandMatrixData& chunk, std::vector< double >& xss ) {
 
     std::vector < std::vector < double > > ans = {
             { 2., 3., 4., 5. },
@@ -300,7 +300,7 @@ void verifyFullChunk( const BandMatrixData& chunk, std::vector< double >& xss ) 
 }
 
 
-void verifyDiagonalChunk( const BandMatrixData& chunk, std::vector< double >& xss ) {
+void verifyDiagonalChunk( const SquareBandMatrixData& chunk, std::vector< double >& xss ) {
 
     std::vector < std::vector < double > > ans = {
             { 1., 0., 0., 0. },

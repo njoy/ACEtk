@@ -1,16 +1,16 @@
-BandMatrixData() = default;
+SquareBandMatrixData() = default;
 
-BandMatrixData( const BandMatrixData& ) = default;
-BandMatrixData( BandMatrixData&& ) = default;
+SquareBandMatrixData( const SquareBandMatrixData& ) = default;
+SquareBandMatrixData( SquareBandMatrixData&& ) = default;
 
-BandMatrixData& operator=( const BandMatrixData& ) = default;
-BandMatrixData& operator=( BandMatrixData&& ) = default;
+SquareBandMatrixData& operator=( const SquareBandMatrixData& ) = default;
+SquareBandMatrixData& operator=( SquareBandMatrixData&& ) = default;
 
 /**
 *  @brief Constructor
 *
 *  Note: Any non-zero values in the matrix outside of the defined
-*  bands will be lost in the construction of the BandMatrixData 
+*  bands will be lost in the construction of the SquareBandMatrixData 
 *  object. The object will check that that the given number of
 *  super-diagonals and sub-diagonals are allowed (no greater than
 *  one less than the length of the side of the matrix) but does not
@@ -21,7 +21,7 @@ BandMatrixData& operator=( BandMatrixData&& ) = default;
 *  @param[in] nsuper      the number of super-diagonals
 *  @param[in] nsub         the number of sub-diagonals
 */
-BandMatrixData( std::string&& name,
+SquareBandMatrixData( std::string&& name,
             std::vector< std::vector< double > >&& vals,
             unsigned int nsuper, unsigned int nsub ) :
 Base( std::move( name ),
@@ -38,7 +38,7 @@ Base( std::move( name ),
 *  @param[in] nsuper     the number of super-diagonals
 *  @param[in] nsub       the number of sub-diagonals
 */
-BandMatrixData( std::string&& name,
+SquareBandMatrixData( std::string&& name,
             Iterator begin,
             Iterator end,
             unsigned int size,

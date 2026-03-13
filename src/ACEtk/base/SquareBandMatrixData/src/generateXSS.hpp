@@ -8,7 +8,7 @@ generateXSS( std::vector< std::vector< double > >&& vals,
 
   if ( nrows != ncols ) {
 
-    Log::error( "BandMatrixData requires a square matrix" );
+    Log::error( "SquareBandMatrixData requires a square matrix" );
     Log::info( "Matrix has {} rows", nrows );
     Log::info( "But the first row is length {} ", ncols);
     throw std::exception();

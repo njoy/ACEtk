@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_BASE_BANDMATRIXDATA
-#define NJOY_ACETK_BASE_BANDMATRIXDATA
+#ifndef NJOY_ACETK_BASE_SQUAREBANDMATRIXDATA
+#define NJOY_ACETK_BASE_SQUAREBANDMATRIXDATA
 
 // system includes
 #include <algorithm>
@@ -17,7 +17,7 @@ namespace base {
  *  @brief A block of data given as a square matrix with a defined number of
  *         super-diagonals and sub-diagonals (default is zero for each)
  */
-class BandMatrixData : protected Base {
+class SquareBandMatrixData : protected Base {
 
   /* fields */
   unsigned int size_;
@@ -27,21 +27,21 @@ class BandMatrixData : protected Base {
 public:
 
 
-  #include "ACEtk/base/BandMatrixData/src/matrixIndices.hpp"
+  #include "ACEtk/base/SquareBandMatrixData/src/matrixIndices.hpp"
 
 
 private:
   
   /* auxiliary functions */
-  #include "ACEtk/base/BandMatrixData/src/verifyIndex.hpp"
-  #include "ACEtk/base/BandMatrixData/src/generateXSS.hpp"
-  #include "ACEtk/base/BandMatrixData/src/listIndices.hpp"
-  #include "ACEtk/base/BandMatrixData/src/verifySize.hpp"
+  #include "ACEtk/base/SquareBandMatrixData/src/verifyIndex.hpp"
+  #include "ACEtk/base/SquareBandMatrixData/src/generateXSS.hpp"
+  #include "ACEtk/base/SquareBandMatrixData/src/listIndices.hpp"
+  #include "ACEtk/base/SquareBandMatrixData/src/verifySize.hpp"
   
 public:
 
   /* constructor */
-  #include "ACEtk/base/BandMatrixData/src/ctor.hpp"
+  #include "ACEtk/base/SquareBandMatrixData/src/ctor.hpp"
   
   /* methods */
 
