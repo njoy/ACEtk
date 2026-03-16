@@ -41,15 +41,15 @@ SCENARIO( "RectangularMatrixData" ) {
       } // THEN
     } // WHEN
 
-    // WHEN( "the data is defined by iterators" ) {
+    WHEN( "the data is defined by iterators" ) {
 
-    //   RectangularMatrixData chunk( "Band", xss.begin(), xss.end(), 4, 2, 1 );
+      RectangularMatrixData chunk( "Band", xss.begin(), xss.end(), 3, 4 );
 
-    //   THEN( "a RectangularMatrixData can be constructed and members can be tested" ) {
+      THEN( "a RectangularMatrixData can be constructed and members can be tested" ) {
 
-    //     verifyChunk( chunk, xss );
-    //   } // THEN
-    // } // WHEN
+        verifyChunk( chunk, xss );
+      } // THEN
+    } // WHEN
 
 
   } // GIVEN
