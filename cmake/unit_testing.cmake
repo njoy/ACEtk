@@ -26,6 +26,7 @@ endfunction()
 message( STATUS "Adding ACEtk C++ unit testing" )
 
 add_cpp_test( base.SquareBandMatrixData base/SquareBandMatrixData.test.cpp)
+add_cpp_test( base.RectangularMatrixData base/RectangularMatrixData.test.cpp)
 add_cpp_test( ContinuousEnergyTable ContinuousEnergyTable.test.cpp )
 add_cpp_test( DosimetryTable DosimetryTable.test.cpp )
 add_cpp_test( ElectronTable ElectronTable.test.cpp )
