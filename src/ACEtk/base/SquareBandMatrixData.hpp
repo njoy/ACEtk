@@ -168,7 +168,7 @@ public:
 
       std::vector< double > v;
 
-      for (unsigned int col = 1; col <= this->size(); ++col ) {
+      for (unsigned int col = 1; col <= this->M(); ++col ) {
         v.push_back( this-> matrixValue( row, col ) ) ;
       }
 

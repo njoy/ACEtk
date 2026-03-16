@@ -14,13 +14,13 @@ BandP0Data& operator=( BandP0Data&& ) = default;
 *  bands will be lost in the construction of the BandP0Data 
 *  object. 
  *
-*  @param[in] vals       the two-dimensional matrix data values
+*  @param[in] matrix     the two-dimensional matrix data values
 *  @param[in] down       the number of down-scatter groups
 *  @param[in] up         the number of up-scatter groups
 */
-BandP0Data( std::vector< std::vector< double > >&& vals,
+BandP0Data( std::vector< std::vector< double > >&& matrix,
             unsigned int down, unsigned int up ) :
-  SquareBandMatrixData( "BandP0Data", std::move( vals ), down, up ) {}
+  SquareBandMatrixData( "BandP0Data", std::move( matrix ), down, up ) {}
 
 /**
 *  @brief Constructor

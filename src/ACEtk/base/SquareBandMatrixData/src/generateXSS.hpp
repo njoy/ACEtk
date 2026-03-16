@@ -28,7 +28,6 @@ generateXSS( std::vector< std::vector< double > >&& vals,
   }
 
   const auto sz = nrows * (1 + nsub + nsuper) - ( ( nsub * (1 + nsub ) ) + ( nsuper * ( 1 + nsuper ) ) ) / 2 ; 
-  std::cout << "sz: " << sz << "\n";
   xss.reserve( sz );
 
   int k = 0;
@@ -50,9 +49,6 @@ generateXSS( std::vector< std::vector< double > >&& vals,
     // both of these calculations are based on one-indexed matrices
     rowStart = std::max( k - static_cast< int >( nsub ),  1 );   
     rowEnd = std::min( nrows, k + nsuper );
-
-    std::cout<< "rowstart: " << rowStart << "\n";
-    std::cout<< "rowEnd: " << rowEnd << "\n";
 
 
     if ( array.begin() + rowEnd  > array.end() ) {

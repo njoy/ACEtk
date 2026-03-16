@@ -38,7 +38,7 @@ public:
   #include "ACEtk/multigroup/BandP0Data/src/ctor.hpp"
 
   /**
-   *  @brief Return the representation type (should always be 2)
+   *  @brief Return the number of energy groups
    */
   unsigned int NGRP() const {
 
@@ -46,7 +46,7 @@ public:
   }
 
   /**
-   *  @brief Return the representation type (should always be 2)
+   *  @brief Return the number of energy groups
    */
   unsigned int numberEnergyGroups() const {
 
