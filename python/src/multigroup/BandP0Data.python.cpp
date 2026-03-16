@@ -173,7 +173,7 @@ void wrapBandP0Data( python::module& module, python::module& ) {
     "p0_matrix",
     [] ( const Block& self ) -> DoubleRange2D
        { return self.P0Matrix(); },
-    "The P0 Matrix"
+    "The P0 Matrix\n\n"
   );
 
   // add standard block definitions
