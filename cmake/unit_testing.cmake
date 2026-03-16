@@ -147,4 +147,5 @@ add_cpp_test( multigroup.SecondaryParticleTypeBlock multigroup/SecondaryParticle
 add_cpp_test( multigroup.SecondaryParticleGroupStructureBlock multigroup/SecondaryParticleGroupStructureBlock.test.cpp )
 add_cpp_test( multigroup.SecondaryParticleGroupStructureLocatorBlock multigroup/SecondaryParticleGroupStructureLocatorBlock.test.cpp )
 add_cpp_test( multigroup.P0LocatorBlock multigroup/P0LocatorBlock.test.cpp )
+add_cpp_test( multigroup.BandP0Data multigroup/BandP0Data.test.cpp )
 

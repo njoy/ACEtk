@@ -11,3 +11,4 @@
 #include "ACEtk/multigroup/SecondaryParticleGroupStructureBlock.hpp"
 #include "ACEtk/multigroup/SecondaryParticleGroupStructureLocatorBlock.hpp"
 #include "ACEtk/multigroup/P0LocatorBlock.hpp"
+#include "ACEtk/multigroup/BandP0Data.hpp"
