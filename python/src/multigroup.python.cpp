@@ -25,6 +25,7 @@ namespace multigroup {
   void wrapSecondaryParticleGroupStructureLocatorBlock( python::module&, python::module& );
   void wrapP0LocatorBlock( python::module&, python::module& );
   void wrapBandP0Data( python::module&, python::module& );
+  void wrapRectangularP0Data( python::module&, python::module& );
 }
 
 void wrapMultigroup( python::module& module, python::module& viewmodule ) {
@@ -50,4 +51,5 @@ void wrapMultigroup( python::module& module, python::module& viewmodule ) {
   multigroup::wrapSecondaryParticleGroupStructureLocatorBlock( submodule, viewmodule );
   multigroup::wrapP0LocatorBlock( submodule, viewmodule );
   multigroup::wrapBandP0Data( submodule, viewmodule );
+  multigroup::wrapRectangularP0Data( submodule, viewmodule );
 }

@@ -1,5 +1,5 @@
-#ifndef NJOY_ACETK_MULTIGROUP_BANDP0BLOCK
-#define NJOY_ACETK_MULTIGROUP_BANDP0BLOCK
+#ifndef NJOY_ACETK_MULTIGROUP_BANDP0DATA
+#define NJOY_ACETK_MULTIGROUP_BANDP0DATA
 
 // system includes
 
@@ -29,8 +29,6 @@ class BandP0Data : protected base::SquareBandMatrixData {
   base::SquareBandMatrixData matrix_;
 
   /* auxiliary functions */
-  // #include "ACEtk/multigroup/BandP0Data/src/generateXSS.hpp"
-  // #include "ACEtk/multigroup/BandP0Data/src/generateBlocks.hpp"
 
 public:
 

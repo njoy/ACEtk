@@ -130,7 +130,7 @@ public:
     this->verifyIndex( row, 1 );
     #endif
       
-    std::size_t index = ( row - 1 ) * this->N() + this->M() + this->N();
+    std::size_t index = ( row - 1 ) * this->N() + 1;
     std::size_t span = this->N();
     return njoy::tools::std23::views::stride( this->IXSS( index, span ), 1 );
 
@@ -146,7 +146,7 @@ public:
     #endif
       
     std::size_t index =  col;
-    std::size_t span = ( this->M() - 1 ) * this->N();
+    std::size_t span = ( this->M() - 1 ) * this->N() + 1;
     return njoy::tools::std23::views::stride( this->XSS( index, span ), this->N() );
 
   }
@@ -160,7 +160,7 @@ public:
     this->verifyIndex( 1, col );
     #endif
       
-    std::size_t index = this->M() + this->N() + col;
+    std::size_t index = col;
     std::size_t span = ( this->M() - 1 ) * this->N() + 1;
     return njoy::tools::std23::views::stride( this->IXSS( index, span ), this->N() );
 
