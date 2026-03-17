@@ -22,3 +22,4 @@ API
    api/P0LocatorBlock
    api/BandP0Data
    api/RectangularP0Data
+   api/SecondaryAngularDistributionTypeBlock

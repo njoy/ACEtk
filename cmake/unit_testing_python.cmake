@@ -147,3 +147,4 @@ add_python_test( multigroup.SecondaryParticleGroupStructureLocatorBlock   multig
 add_python_test( multigroup.P0LocatorBlock                                multigroup/Test_ACEtk_multigroup_P0LocatorBlock.py )
 add_python_test( multigroup.BandP0Data                                    multigroup/Test_ACEtk_multigroup_BandP0Data.py )
 add_python_test( multigroup.RectangularP0Data                             multigroup/Test_ACEtk_multigroup_RectangularP0Data.py )
+add_python_test( multigroup.SecondaryAngularDistributionTypeBlock         multigroup/Test_ACEtk_multigroup_SecondaryAngularDistributionTypeBlock.py )
