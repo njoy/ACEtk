@@ -33,5 +33,5 @@
    */
   unsigned int rowLength( unsigned int row ) const {
 
-        return 1 + this->rowEnd(row) - this->rowStart(row) ;
+        return 1 + this->rowEnd( row ) - this->rowStart( row ) ;
   }

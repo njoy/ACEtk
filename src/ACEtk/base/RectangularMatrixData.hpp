@@ -175,8 +175,10 @@ public:
       std::vector<  std::vector < double > > v;
 
       for (unsigned int row = 1; row <= this->M(); ++row ){
+
         v.push_back( {} );
         for (unsigned int col = 1; col <= this-> N(); ++col ) {
+          
           v.back().push_back( this-> dvalue( row, col ) ) ;
         }
       }

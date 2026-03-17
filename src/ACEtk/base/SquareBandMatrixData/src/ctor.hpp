@@ -45,7 +45,7 @@ SquareBandMatrixData( std::string&& name,
             unsigned int nsuper,
             unsigned int nsub ) :
 Base( std::move( name ), begin, end ),
-size_(size), nsuper_(nsuper), nsub_(nsub) {
+size_( size ), nsuper_( nsuper ), nsub_( nsub ) {
 
   verifySize( this->begin(), this->end() );
 }

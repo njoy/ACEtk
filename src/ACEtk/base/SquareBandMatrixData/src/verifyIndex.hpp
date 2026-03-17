@@ -24,7 +24,7 @@ void verifyRow( unsigned int row ) const {
 void verifyCol( unsigned int col ) const {
   
   // Verify column index
-  if ( ( col < 1 ) || (col > this->N() ) ) {
+  if ( ( col < 1 ) || ( col > this->N() ) ) {
     
     Log::error( "Illegal column index argument into the {} block", this->name() );
     Log::info( "Column index value: {}", col );
@@ -47,13 +47,13 @@ void verifyIndex( std::size_t row, std::size_t col ) const {
   verifyCol( col );
   
   // Verify that the (row,col) pair exists in the list
-  if ( ( col < this->rowStart(row) ) || (col > this->rowEnd(row) ) ) {
+  if ( ( col < this->rowStart( row ) ) || ( col > this->rowEnd( row ) ) ) {
     
     Log::error( "Illegal index argument into the {} block", this->name() );
     Log::info( "Row index value: {}", row );
     Log::info( "Column index value: {}", col );
     Log::info( "Row {} accepts a col index between {} and {} inclusively",
-               row, this->rowStart(row), this->rowEnd(row) );
+               row, this->rowStart( row ), this->rowEnd( row ) );
     throw std::out_of_range( this->name() );
   }
 }

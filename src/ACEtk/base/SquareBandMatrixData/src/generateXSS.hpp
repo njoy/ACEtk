@@ -27,7 +27,7 @@ generateXSS( std::vector< std::vector< double > >&& vals,
     Log::info( "Number of sub-diagonals: {} ", nsub );
   }
 
-  const auto sz = nrows * (1 + nsub + nsuper) - ( ( nsub * (1 + nsub ) ) + ( nsuper * ( 1 + nsuper ) ) ) / 2 ; 
+  const auto sz = nrows * ( 1 + nsub + nsuper)  - ( ( nsub * ( 1 + nsub ) ) + ( nsuper * ( 1 + nsuper ) ) ) / 2 ; 
   xss.reserve( sz );
 
   int k = 0;

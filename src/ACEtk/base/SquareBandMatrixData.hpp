@@ -97,7 +97,7 @@ public:
    */
   unsigned int blockLength() const { 
     
-    return (this->size() * (1 + this->NSUB() + this->NSUP())) - ((this->NSUB() * (1+this->NSUB())) + (this->NSUP() * (1+this->NSUP())))/2; 
+    return ( this->size() * ( 1 + this->NSUB() + this->NSUP() )) - ( ( this->NSUB() * ( 1 + this->NSUB() ) ) + ( this->NSUP() * ( 1 + this->NSUP() ) ) ) / 2; 
   }
 
   /**
@@ -169,6 +169,7 @@ public:
       std::vector< double > v;
 
       for (unsigned int col = 1; col <= this->M(); ++col ) {
+
         v.push_back( this-> matrixValue( row, col ) ) ;
       }
 
@@ -184,8 +185,10 @@ public:
       std::vector<  std::vector < double > > v;
 
       for (unsigned int row = 1; row <= this->size(); ++row ){
+
         v.push_back( {} );
         for (unsigned int col = 1; col <= this->size(); ++col ) {
+          
           v.back().push_back( this-> matrixValue( row, col ) ) ;
         }
       }

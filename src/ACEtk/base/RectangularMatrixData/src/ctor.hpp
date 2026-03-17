@@ -34,7 +34,7 @@ RectangularMatrixData( std::string&& name,
             unsigned int nrows,
             unsigned int ncols ) :
 Base( std::move( name ), begin, end ),
- nrows_(nrows), ncols_(ncols) {
+ nrows_( nrows ), ncols_( ncols ) {
 
   verifySize( this->begin(), this->end(), this->nrows_, this->ncols_ );
 }

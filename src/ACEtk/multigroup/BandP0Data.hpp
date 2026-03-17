@@ -78,7 +78,7 @@ public:
    */
   unsigned int blockLength() const { 
     
-    return (this->NGRP() * (1 + this->NUS() + this->NDS())) - ((this->NUS() * (1+this->NDS())) + (this->NDS() * (1+this->NDS() ) ) ) / 2; 
+    return (this->NGRP() * ( 1 + this->NUS() + this->NDS() ) ) - ( ( this->NUS() * ( 1 + this->NDS() ) ) + ( this->NDS() * ( 1 + this->NDS() ) ) ) / 2; 
   }
 
   /**

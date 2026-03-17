@@ -17,7 +17,7 @@ RectangularP0Data& operator=( RectangularP0Data&& ) = default;
 *  @param[in] matrix     the two-dimensional matrix data values
 */
 RectangularP0Data( std::vector< std::vector< double > >&& matrix ) :
-  RectangularMatrixData( "RectangularP0Data", std::move( matrix )) {}
+  RectangularMatrixData( "RectangularP0Data", std::move( matrix ) ) {}
 
 /**
 *  @brief Constructor

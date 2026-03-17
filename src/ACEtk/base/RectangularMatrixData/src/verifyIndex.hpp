@@ -1,7 +1,7 @@
 void verifyIndex( std::size_t row, std::size_t col ) const {
   
   // Verify row index
-  if ( ( row < 1 ) || (row > this->M() ) ) {
+  if ( ( row < 1 ) || ( row > this->M() ) ) {
     
     Log::error( "Illegal row index argument into the {} block", this->name() );
     Log::info( "Row index value: {}", row );
@@ -11,7 +11,7 @@ void verifyIndex( std::size_t row, std::size_t col ) const {
   }
   
   // Verify column index
-  if ( ( col < 1 ) || (col > this->N() ) ) {
+  if ( ( col < 1 ) || ( col > this->N() ) ) {
     
     Log::error( "Illegal column index argument into the {} block", this->name() );
     Log::info( "Column index value: {}", col );
