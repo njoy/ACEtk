@@ -29,6 +29,7 @@ namespace multigroup {
   void wrapSecondaryAngularDistributionTypeBlock( python::module&, python::module& );
   void wrapNumberSecondaryAngularVariablesBlock( python::module&, python::module& );
   void wrapXPNLocatorBlock( python::module&, python::module& );
+  void wrapPNLocatorBlock( python::module&, python::module& );
 }
 
 void wrapMultigroup( python::module& module, python::module& viewmodule ) {
@@ -58,4 +59,5 @@ void wrapMultigroup( python::module& module, python::module& viewmodule ) {
   multigroup::wrapSecondaryAngularDistributionTypeBlock( submodule, viewmodule );
   multigroup::wrapNumberSecondaryAngularVariablesBlock( submodule, viewmodule );
   multigroup::wrapXPNLocatorBlock( submodule, viewmodule );
+  multigroup::wrapPNLocatorBlock( submodule, viewmodule );
 }

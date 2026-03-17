@@ -87,7 +87,7 @@ void wrapXPNLocatorBlock( python::module& module, python::module& ) {
     "    int \n"
     "        The locator\n"
   )
-  .def(
+  .def_property_readonly(
 
     "LXPN1",
     &Block::LXPN1,
@@ -97,7 +97,7 @@ void wrapXPNLocatorBlock( python::module& module, python::module& ) {
     "    int \n"
     "        The locator\n"
   )
-  .def(
+  .def_property_readonly(
 
     "incident_locator",
     &Block::incidentLocator,
@@ -122,7 +122,7 @@ void wrapXPNLocatorBlock( python::module& module, python::module& ) {
     "    bool \n"
     "        If the angular distribution is isotropic\n"
   )
-  .def(
+  .def_property_readonly(
 
     "incident_isotropic",
     &Block::incidentIsotropic,

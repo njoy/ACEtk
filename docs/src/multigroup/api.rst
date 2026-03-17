@@ -25,3 +25,4 @@ API
    api/SecondaryAngularDistributionTypeBlock
    api/NumberSecondaryAngularVariablesBlock
    api/XPNLocatorBlock
+   api/PNLocatorBlock

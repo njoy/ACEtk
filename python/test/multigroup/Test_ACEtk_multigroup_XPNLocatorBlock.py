@@ -23,13 +23,13 @@ class Test_ACEtk_multigroup_XPNLocatorBlock( unittest.TestCase ) :
             self.assertEqual( 1, chunk.NSEC )
             self.assertEqual( 1, chunk.number_secondary_particle_types )
 
-            self.assertEqual( 834, chunk.LXPN1() )
+            self.assertEqual( 834, chunk.LXPN1 )
             self.assertEqual( 0, chunk.LXPN(1) )
             
-            self.assertEqual( 834, chunk.incident_locator() )
+            self.assertEqual( 834, chunk.incident_locator )
             self.assertEqual( 0, chunk.secondary_locator(1) )
 
-            self.assertFalse( chunk.incident_isotropic() )
+            self.assertFalse( chunk.incident_isotropic )
             self.assertTrue( chunk.is_isotropic( 1 ) )
 
 
