@@ -12,3 +12,4 @@
 #include "ACEtk/multigroup/SecondaryParticleGroupStructureLocatorBlock.hpp"
 #include "ACEtk/multigroup/P0LocatorBlock.hpp"
 #include "ACEtk/multigroup/SecondaryAngularDistributionTypeBlock.hpp"
+#include "ACEtk/multigroup/NumberSecondaryAngularParametersBlock.hpp"

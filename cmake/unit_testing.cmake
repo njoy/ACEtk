@@ -150,4 +150,5 @@ add_cpp_test( multigroup.P0LocatorBlock multigroup/P0LocatorBlock.test.cpp )
 add_cpp_test( multigroup.BandP0Data multigroup/BandP0Data.test.cpp )
 add_cpp_test( multigroup.RectangularP0Data multigroup/RectangularP0Data.test.cpp )
 add_cpp_test( multigroup.SecondaryAngularDistributionTypeBlock multigroup/SecondaryAngularDistributionTypeBlock.test.cpp )
+add_cpp_test( multigroup.NumberSecondaryAngularVariablesBlock multigroup/NumberSecondaryAngularVariablesBlock.test.cpp )
 
