@@ -31,6 +31,7 @@ namespace multigroup {
   void wrapXPNLocatorBlock( python::module&, python::module& );
   void wrapPNLocatorBlock( python::module&, python::module& );
   void wrapBandXPNData( python::module&, python::module& );
+  void wrapRectangularXPNData( python::module&, python::module& );
 }
 
 void wrapMultigroup( python::module& module, python::module& viewmodule ) {
@@ -62,4 +63,5 @@ void wrapMultigroup( python::module& module, python::module& viewmodule ) {
   multigroup::wrapXPNLocatorBlock( submodule, viewmodule );
   multigroup::wrapPNLocatorBlock( submodule, viewmodule );
   multigroup::wrapBandXPNData( submodule, viewmodule );
+  multigroup::wrapRectangularXPNData( submodule, viewmodule );
 }

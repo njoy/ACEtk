@@ -27,3 +27,4 @@ API
    api/XPNLocatorBlock
    api/PNLocatorBlock
    api/BandXPNData
+   api/RectangularXPNData

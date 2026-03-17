@@ -143,6 +143,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/XPNLocatorBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/PNLocatorBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/BandXPNData.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/RectangularXPNData.python.cpp
         )
 
     target_link_libraries(ACEtk.python PRIVATE njoy::ACEtk)
