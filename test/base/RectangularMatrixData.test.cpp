@@ -13,7 +13,6 @@ using namespace njoy::ACEtk;
 using RectangularMatrixData = base::RectangularMatrixData;
 
 std::vector< double > chunk();
-std::vector< double > integerChunk();
 
 void verifyChunk( const RectangularMatrixData&, std::vector< double >&);
 void verifyIntegerChunk( const RectangularMatrixData&, std::vector< double >&);
@@ -59,7 +58,7 @@ SCENARIO( "RectangularMatrixData" ) {
   } // GIVEN
   GIVEN( "valid integer data for a RectangularMatrixData instance" ) {
 
-    std::vector< double > xssInteger = integerChunk();
+    std::vector< double > xssInteger = chunk();
 
     WHEN( "the data is given explicitly" ) {
 
@@ -69,24 +68,24 @@ SCENARIO( "RectangularMatrixData" ) {
             { 10, 11, 12, 13 },
         };
 
-        RectangularMatrixData integerChunk( "Rectangular", std::move( values ) );
+        RectangularMatrixData chunk( "Rectangular", std::move( values ) );
 
 
       THEN( "an RectangularMatrixData can be constructed and "
             "members can be tested" ) {
             
-          verifyIntegerChunk( integerChunk, xssInteger );
+          verifyIntegerChunk( chunk, xssInteger );
 
       } // THEN
     } // WHEN
 
     WHEN( "the data is defined by iterators" ) {
 
-      RectangularMatrixData integerChunk( "Rectangular", xssInteger.begin(), xssInteger.end(), 3, 4);
+      RectangularMatrixData chunk( "Rectangular", xssInteger.begin(), xssInteger.end(), 3, 4);
 
       THEN( "a RectangularMatrixData can be constructed and members can be tested" ) {
 
-        verifyIntegerChunk( integerChunk, xssInteger );
+        verifyIntegerChunk( chunk, xssInteger );
       } // THEN
     } // WHEN
 
@@ -101,10 +100,6 @@ std::vector< double > chunk() {
    return { 2., 3., 4., 5., 1., 2., 3., 4., 10., 11., 12., 13. };
 }
 
-std::vector< double > integerChunk() {
-
-   return { 2, 3, 4, 5, 1, 2, 3, 4, 10, 11, 12, 13 };
-}
 
 
 void verifyChunk( const RectangularMatrixData& chunk, std::vector< double >& xss ) {

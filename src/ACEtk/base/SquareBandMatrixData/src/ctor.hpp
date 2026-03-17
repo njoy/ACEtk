@@ -21,8 +21,9 @@ SquareBandMatrixData& operator=( SquareBandMatrixData&& ) = default;
 *  @param[in] nsuper      the number of super-diagonals
 *  @param[in] nsub         the number of sub-diagonals
 */
+template < typename Number >
 SquareBandMatrixData( std::string&& name,
-            std::vector< std::vector< double > >&& vals,
+            std::vector< std::vector< Number > >&& vals,
             unsigned int nsuper, unsigned int nsub ) :
 Base( std::move( name ),
       generateXSS( std::move( vals ), nsuper, nsub ) ),
