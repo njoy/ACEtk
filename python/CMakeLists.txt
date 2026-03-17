@@ -140,6 +140,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/RectangularP0Data.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/SecondaryAngularDistributionTypeBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/NumberSecondaryAngularVariablesBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/multigroup/XPNLocatorBlock.python.cpp
         )
 
     target_link_libraries(ACEtk.python PRIVATE njoy::ACEtk)

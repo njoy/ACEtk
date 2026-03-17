@@ -24,3 +24,4 @@ API
    api/RectangularP0Data
    api/SecondaryAngularDistributionTypeBlock
    api/NumberSecondaryAngularVariablesBlock
+   api/XPNLocatorBlock
