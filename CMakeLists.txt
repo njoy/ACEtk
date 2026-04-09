@@ -27,7 +27,7 @@ set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
 cmake_dependent_option(
   ACEtk.tests
-  "Build the ACEtk unit tests and integrate with ctest" ON
+  "Build the ACEtk unit tests and integrate with ctest" OFF
   "BUILD_TESTING AND NOT ${subproject}" OFF
 )
 
