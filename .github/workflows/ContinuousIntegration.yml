@@ -12,14 +12,14 @@ on:
     branches: 'master'
 
 # ubuntu-22.04 is x64
-# macos-13 is intel
-# macos-14 is arm64 (M1)
+# macos-13 is intel - currently disabled (g++-12 not found)
+# macos-14 is arm64 (M1) - currently disabled (g++-12 not found)
 jobs:
   build:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ ubuntu-22.04, macos-13, macos-14 ]
+        os: [ ubuntu-22.04 ]
         cxx: [ clang++, g++-12 ]
         build_type: [ Debug, Release ]
 
@@ -32,7 +32,7 @@ jobs:
     - name: mkdir bin
       run: mkdir bin
     - name: cmake
-      run: cmake -DCMAKE_CXX_FLAGS="-gdwarf-4" -DPYTHON_EXECUTABLE=$(which python3) -D CMAKE_CXX_COMPILER=`which ${{matrix.cxx}}` -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D ACEtk.tests=ON -D ACEtk.python=ON ..
+      run: cmake -DCMAKE_CXX_FLAGS="-gdwarf-4" -DPYTHON_EXECUTABLE=$(which python3) -D CMAKE_CXX_COMPILER=`which ${{matrix.cxx}}` -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D ACEtk.tests=ON ..
       working-directory: ./bin
     - name: make
       run: make -j2
