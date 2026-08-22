@@ -52,6 +52,7 @@ Data generateData( unsigned int z,
   // verify some stuff:
   //  - same number of ZA and atomic mass values
   //  - ESZG, LHNM and SPHEL use the same number of incident energy values
+  //  - SWD and EPS use the same number of shells
   //  - SUBSH, XPROB, ESZE and EION use the same number of subshells for nepr > 0
   if ( za.size() != awr.size() ) {
 
@@ -67,6 +68,16 @@ Data generateData( unsigned int z,
     Log::info( "ESZG NES value = {}", eszg.NES() );
     Log::info( "LHNM NES value = {}", lhnm.NES() );
     throw std::exception();
+  }
+  if ( eps.has_value() && swd.has_value() ) {
+
+    if ( ( nsh != eps->NSH() ) || ( nsh != swd->NSH() ) ) {
+
+      Log::error( "Inconsistent NSH between the different blocks" );
+      Log::info( "EPS NSH value = {}", eps->NSH() );
+      Log::info( "SWD NSH value = {}", swd->NSH() );
+      throw std::exception();
+    }
   }
   if ( nepr > 0 ) {
 

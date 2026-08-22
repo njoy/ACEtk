@@ -8,6 +8,7 @@ This fixes the following issues in ACEtk:
   - The photon production cross section block and the secondary particle production cross section block
     are now returned properly when using the human readable functions (the ACE speak SIGP and SIGH functions
     worked properly and are not impacted).
+  - Added a check on the number of shells in the SWD and EPS block in the photoatomic table.
 
 ## ACEtk v1.1.0
 This adds support for the electron table ACE file type (e.g., `el` and `el03` libraries).
