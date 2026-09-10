@@ -3,17 +3,15 @@
    *
    *  @param[in] row    the row index (one-based)
    */
-void verifyRow( unsigned int row ) const {
+bool verifyRow( unsigned int row ) const {
   
   // Verify row index
   if ( ( row < 1 ) || (row > this->M() ) ) {
     
-    Log::error( "Illegal row index argument into the {} block", this->name() );
-    Log::info( "Row index value: {}", row );
-    Log::info( "{} accepts an index between {} and {} inclusively",
-               this->name(), 1, this->M() );
-    throw std::out_of_range( this->name() );
+    return false;
   }
+
+  return true;
 }
 
   /**
@@ -21,17 +19,15 @@ void verifyRow( unsigned int row ) const {
    *
    *  @param[in] col    the column index (one-based)
    */
-void verifyCol( unsigned int col ) const {
+bool verifyCol( unsigned int col ) const {
   
   // Verify column index
   if ( ( col < 1 ) || ( col > this->N() ) ) {
     
-    Log::error( "Illegal column index argument into the {} block", this->name() );
-    Log::info( "Column index value: {}", col );
-    Log::info( "{} accepts an index between {} and {} inclusively",
-               this->name(), 1, this->N() );
-    throw std::out_of_range( this->name() );
+    return false;
   }
+
+  return true;
 }
 
   /**
@@ -41,19 +37,18 @@ void verifyCol( unsigned int col ) const {
    *  @param[in] row    the row index (one-based)
    *  @param[in] col    the column index (one-based)
    */
-void verifyIndex( std::size_t row, std::size_t col ) const {
+bool verifyIndex( std::size_t row, std::size_t col ) const {
 
-  verifyRow( row );
-  verifyCol( col );
+  if ( !verifyRow( row ) || !verifyCol( col ) ) {
+    
+    return false;
+  }
   
   // Verify that the (row,col) pair exists in the list
   if ( ( col < this->rowStart( row ) ) || ( col > this->rowEnd( row ) ) ) {
     
-    Log::error( "Illegal index argument into the {} block", this->name() );
-    Log::info( "Row index value: {}", row );
-    Log::info( "Column index value: {}", col );
-    Log::info( "Row {} accepts a col index between {} and {} inclusively",
-               row, this->rowStart( row ), this->rowEnd( row ) );
-    throw std::out_of_range( this->name() );
+    return false;
   }
+
+  return true;
 }

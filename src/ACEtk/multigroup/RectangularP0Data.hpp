@@ -22,7 +22,6 @@ namespace multigroup {
 class RectangularP0Data : protected base::RectangularMatrixData {
 
   /* fields */
-  base::RectangularMatrixData matrix_;
 
   /* auxiliary functions */
 

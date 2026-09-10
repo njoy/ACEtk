@@ -144,16 +144,18 @@ public:
     
     // if this element isn't in the matrix or in the list, 
     // return zero 
-    try
-    {
-        this->verifyIndex( row, col );
+    
+    if ( this->verifyIndex( row, col ) ) {
+
+      unsigned int index = this->listIndex( row, col );
+      return this->XSS( index ) ; 
     }
-    catch (const std::out_of_range& e){
-        return 0.;
+    else {
+      
+      return 0.;
     }
 
-    unsigned int index = this->listIndex( row, col );
-    return this->XSS( index ) ; 
+    
   }
 
   /**
@@ -196,12 +198,6 @@ public:
     return v;
     }
 
-
-
-  // /**
-  //  *  @brief Return an empty matrix
-  //  */
-  // auto emptyMatrix() const { return this->XSS( 1, 0 ); }
 
   using Base::empty;
   using Base::name;

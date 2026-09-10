@@ -3,9 +3,9 @@ void verifySize( Iterator begin, Iterator end, unsigned int nrows, unsigned int 
   // There must be nrows * ncols values
   auto size = std::distance( begin, end );
   unsigned int expectedSize =  nrows * ncols;
-  if ( size != expectedSize ) {
+  if ( size < expectedSize ) {
     
-    Log::error( "The size of the XSS subrange in the {} block should be {}",
+    Log::error( "The size of the XSS subrange in the {} block should be at least {}",
                 this->name(), expectedSize );
     Log::info( "M value: {}, N value: {}", nrows, ncols );
     Log::info( "XSS.size(): {}", size );

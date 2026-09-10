@@ -4,9 +4,9 @@ void verifySize( Iterator begin,
   
   auto length = std::distance( begin, end );
   unsigned int expectedSize = this->blockLength();
-  if ( length != expectedSize ) {
+  if ( length < expectedSize ) {
     
-    Log::error( "The size of the XSS subrange in the {} block should be {}",
+    Log::error( "The size of the XSS subrange in the {} block should be at least {}",
                 this->name(), expectedSize );
     Log::info( "XSS.size(): {}", length );
     throw std::exception();
