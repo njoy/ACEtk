@@ -19,3 +19,6 @@ API
    api/SecondaryParticleTypeBlock
    api/SecondaryParticleGroupStructureBlock
    api/SecondaryParticleGroupStructureLocatorBlock
+   api/P0LocatorBlock
+   api/BandP0Data
+   api/RectangularP0Data

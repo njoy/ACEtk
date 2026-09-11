@@ -25,6 +25,8 @@ endfunction()
 
 message( STATUS "Adding ACEtk C++ unit testing" )
 
+add_cpp_test( base.SquareBandMatrixData base/SquareBandMatrixData.test.cpp)
+add_cpp_test( base.RectangularMatrixData base/RectangularMatrixData.test.cpp)
 add_cpp_test( ContinuousEnergyTable ContinuousEnergyTable.test.cpp )
 add_cpp_test( DosimetryTable DosimetryTable.test.cpp )
 add_cpp_test( ElectronTable ElectronTable.test.cpp )
@@ -144,4 +146,7 @@ add_cpp_test( multigroup.EditCrossSectionBlock multigroup/EditCrossSectionBlock.
 add_cpp_test( multigroup.SecondaryParticleTypeBlock multigroup/SecondaryParticleTypeBlock.test.cpp )
 add_cpp_test( multigroup.SecondaryParticleGroupStructureBlock multigroup/SecondaryParticleGroupStructureBlock.test.cpp )
 add_cpp_test( multigroup.SecondaryParticleGroupStructureLocatorBlock multigroup/SecondaryParticleGroupStructureLocatorBlock.test.cpp )
+add_cpp_test( multigroup.P0LocatorBlock multigroup/P0LocatorBlock.test.cpp )
+add_cpp_test( multigroup.BandP0Data multigroup/BandP0Data.test.cpp )
+add_cpp_test( multigroup.RectangularP0Data multigroup/RectangularP0Data.test.cpp )
 

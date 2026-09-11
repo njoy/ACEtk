@@ -5,7 +5,7 @@ SecondaryParticleGroupStructureLocatorBlock
 
 The `ERG2L` block holds the locators for the `ERG2` blocks (secondary particle outgoing energy groups) within the XSS array.
 These locators are absolute within the full XSS array. 
-There are `NSEC` secondary particles (which includes the incident particle) and `NSEC` `ERG2` blocks, which do not need to be contiguous.
+There are `NSEC` secondary particles and `NSEC` `ERG2` blocks, which do not need to be contiguous.
 
 Constructors
 ~~~~~~~~~~~~

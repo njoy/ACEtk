@@ -144,3 +144,6 @@ add_python_test( multigroup.EditCrossSectionBlock                         multig
 add_python_test( multigroup.SecondaryParticleTypeBlock                    multigroup/Test_ACEtk_multigroup_SecondaryParticleTypeBlock.py )
 add_python_test( multigroup.SecondaryParticleGroupStructureBlock          multigroup/Test_ACEtk_multigroup_SecondaryParticleGroupStructureBlock.py )
 add_python_test( multigroup.SecondaryParticleGroupStructureLocatorBlock   multigroup/Test_ACEtk_multigroup_SecondaryParticleGroupStructureLocatorBlock.py )
+add_python_test( multigroup.P0LocatorBlock                                multigroup/Test_ACEtk_multigroup_P0LocatorBlock.py )
+add_python_test( multigroup.BandP0Data                                    multigroup/Test_ACEtk_multigroup_BandP0Data.py )
+add_python_test( multigroup.RectangularP0Data                             multigroup/Test_ACEtk_multigroup_RectangularP0Data.py )
