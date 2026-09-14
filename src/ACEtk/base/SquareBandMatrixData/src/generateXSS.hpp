@@ -1,5 +1,6 @@
+template < typename Number >
 static std::vector< double >
-generateXSS( std::vector< std::vector< double > >&& vals,
+generateXSS( std::vector< std::vector< Number > >&& vals,
             unsigned int nsuper, unsigned int nsub ) {
 
   std::vector< double > xss;

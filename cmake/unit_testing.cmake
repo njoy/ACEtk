@@ -153,4 +153,6 @@ add_cpp_test( multigroup.SecondaryAngularDistributionTypeBlock multigroup/Second
 add_cpp_test( multigroup.NumberSecondaryAngularVariablesBlock multigroup/NumberSecondaryAngularVariablesBlock.test.cpp )
 add_cpp_test( multigroup.XPNLocatorBlock multigroup/XPNLocatorBlock.test.cpp )
 add_cpp_test( multigroup.PNLocatorBlock multigroup/PNLocatorBlock.test.cpp )
+add_cpp_test( multigroup.BandXPNData multigroup/BandXPNData.test.cpp )
+add_cpp_test( multigroup.RectangularXPNData multigroup/RectangularXPNData.test.cpp )
 

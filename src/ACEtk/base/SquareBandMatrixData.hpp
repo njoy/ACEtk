@@ -140,7 +140,7 @@ public:
    *  @param[in] row     the row index (one-based)
    *  @param[in] col     the row index (one-based)
    */
-  double matrixValue( unsigned int row, unsigned int col ) const {
+  auto matrixValue( unsigned int row, unsigned int col ) const {
     
     // if this element isn't in the matrix or in the list, 
     // return zero 

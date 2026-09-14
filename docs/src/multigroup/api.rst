@@ -26,3 +26,5 @@ API
    api/NumberSecondaryAngularVariablesBlock
    api/XPNLocatorBlock
    api/PNLocatorBlock
+   api/BandXPNData
+   api/RectangularXPNData
