@@ -13,3 +13,4 @@
 #include "ACEtk/multigroup/P0LocatorBlock.hpp"
 #include "ACEtk/multigroup/SecondaryAngularDistributionTypeBlock.hpp"
 #include "ACEtk/multigroup/NumberSecondaryAngularParametersBlock.hpp"
+#include "ACEtk/multigroup/XPNLocatorBlock.hpp"

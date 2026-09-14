@@ -149,3 +149,5 @@ add_python_test( multigroup.BandP0Data                                          
 add_python_test( multigroup.RectangularP0Data                                    multigroup/Test_ACEtk_multigroup_RectangularP0Data.py )
 add_python_test( multigroup.SecondaryAngularDistributionTypeBlock                multigroup/Test_ACEtk_multigroup_SecondaryAngularDistributionTypeBlock.py )
 add_python_test( multigroup.NumberSecondaryAngularVariablesBlock                 multigroup/Test_ACEtk_multigroup_NumberSecondaryAngularVariablesBlock.py )
+add_python_test( multigroup.XPNLocatorBlock                                      multigroup/Test_ACEtk_multigroup_XPNLocatorBlock.py )
+add_python_test( multigroup.PNLocatorBlock                                       multigroup/Test_ACEtk_multigroup_PNLocatorBlock.py )
