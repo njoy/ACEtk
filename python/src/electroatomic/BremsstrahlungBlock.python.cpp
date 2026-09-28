@@ -29,6 +29,7 @@ void wrapBremsstrahlungBlock( python::module& module, python::module& ) {
     "The BremsstrahlungBlock class contains 2 arrays of the same length:\n"
     "  - the energy points\n"
     "  - the average energy remaining after Bremsstrahlung\n\n"
+    "For NEPR = 3, the second array contains the average energy loss instead.\n\n"
     "The size NBL of each (the total number of energy points) is stored in NXS(12)."
   );
 
@@ -36,13 +37,15 @@ void wrapBremsstrahlungBlock( python::module& module, python::module& ) {
   block
   .def(
 
-    python::init< std::vector< double >, std::vector< double > >(),
-    python::arg( "energies" ), python::arg( "remaining" ),
+    python::init< std::vector< double >, std::vector< double >, unsigned int >(),
+    python::arg( "energies" ), python::arg( "remaining" ), python::arg( "nepr" ) = 1,
     "Initialise the block\n\n"
     "Arguments:\n"
     "    self         the block\n"
     "    energies     the energy values\n"
-    "    remaining    the average energy remaining after Bremsstrahlung"
+    "    remaining    the average energy remaining after Bremsstrahlung\n"
+    "                 (or the average energy loss when NEPR = 3)\n"
+    "    nepr         1 for remaining energy, 3 for energy loss"
   )
   .def_property_readonly(
 
@@ -68,7 +71,15 @@ void wrapBremsstrahlungBlock( python::module& module, python::module& ) {
     "energy_after_bremsstrahlung",
     [] ( const Block& self ) -> DoubleRange
        { return self.energyAfterBremsstrahlung(); },
-    "The average energy remaining after Bremsstrahlung"
+    "The average energy remaining after Bremsstrahlung\n\n"
+    "Requires NEPR = 1."
+  )
+  .def_property_readonly(
+
+    "energy_loss",
+    [] ( const Block& self ) -> DoubleRange
+       { return self.energyLoss(); },
+    "The average energy loss (requires NEPR = 3)"
   );
 
   // add standard block definitions

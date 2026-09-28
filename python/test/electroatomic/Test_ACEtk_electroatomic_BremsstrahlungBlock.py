@@ -49,6 +49,19 @@ class Test_ACEtk_electroatomic_BremsstrahlungBlock( unittest.TestCase ) :
 
         verify_chunk( self, chunk )
 
+    def test_energy_accessors( self ) :
+
+        for nepr, valid, invalid in [
+            ( 1, "energy_after_bremsstrahlung", "energy_loss" ),
+            ( 3, "energy_loss", "energy_after_bremsstrahlung" ) ] :
+
+            with self.subTest( nepr = nepr ) :
+                chunk = BremsstrahlungBlock( [ 10., 20., 200. ], [ 1., 2., 3. ], nepr )
+                self.assertEqual( [ 1., 2., 3. ], list( getattr( chunk, valid ) ) )
+                self.assertEqual( self.chunk, list( chunk.xss_array ) )
+                with self.assertRaises( RuntimeError ) :
+                    getattr( chunk, invalid )
+
 if __name__ == '__main__' :
 
     unittest.main()
