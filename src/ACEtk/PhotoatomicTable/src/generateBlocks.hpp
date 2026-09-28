@@ -131,7 +131,7 @@ void generateBlocks() {
     auto breme = block( 25 );
     this->breme_ = electroatomic::BREME( bremi.first, breme.second, this->NB() );
     auto breml = block( 26 );
-    this->breml_ = electroatomic::BREML( breml.first, breml.second, this->NBL() );
+    this->breml_ = electroatomic::BREML( breml.first, breml.second, this->NBL(), this->NEPR() );
 
     present = ( this->NEPR() == 3 );
     if ( present ) {

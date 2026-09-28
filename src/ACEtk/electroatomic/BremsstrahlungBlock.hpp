@@ -2,6 +2,7 @@
 #define NJOY_ACETK_BLOCK_BREMSSTRAHLUNGBLOCK
 
 // system includes
+#include <stdexcept>
 
 // other includes
 #include "ACEtk/base/ArrayData.hpp"
@@ -21,11 +22,14 @@ namespace electroatomic {
  *    - the energy points
  *    - the average energy remaining after Bremsstrahlung
  *
+ *  For NEPR = 3, the second array contains the average energy loss instead.
+ *
  *  The size NBL of each (the total number of energy points) is stored in NXS(12).
  */
 class BremsstrahlungBlock : protected base::ArrayData {
 
   /* fields */
+  unsigned int nepr_ = 1;
 
   /* auxiliary functions */
 
@@ -53,8 +57,29 @@ public:
 
   /**
    *  @brief Return the average remaining energy after loss to Bremsstrahlung
+   *
+   *  Requires NEPR = 1.
    */
-  auto energyAfterBremsstrahlung() const { return this->darray( 2 ); }
+  auto energyAfterBremsstrahlung() const {
+
+    if ( this->nepr_ != 1 ) {
+
+      throw std::logic_error( "BREML remaining energy requires NEPR = 1" );
+    }
+    return this->darray( 2 );
+  }
+
+  /**
+   *  @brief Return the average energy loss (requires NEPR = 3)
+   */
+  auto energyLoss() const {
+
+    if ( this->nepr_ != 3 ) {
+
+      throw std::logic_error( "BREML energy loss requires NEPR = 3" );
+    }
+    return this->darray( 2 );
+  }
 
   using ArrayData::empty;
   using ArrayData::name;
