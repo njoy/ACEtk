@@ -18,13 +18,11 @@ namespace multigroup {
  *  in the XSED block. The number of edit reactions is in NXS(4) and the
  *  number of groups is NXS(5). The order of the edit cross sections is the
  *  same as the order of the edit reaction numbers in the MTED block.
- *  
+ *
  */
 class EditCrossSectionBlock : protected base::ColumnData {
 
   /* auxiliary functions */
-
-  // #include "ACEtk/multigroup/EditCrossSectionBlock/src/generateXSS.hpp"
 
 public:
 

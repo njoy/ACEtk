@@ -77,8 +77,6 @@ private:
     }
   }
 
-protected:
-
   /* constructor */
 
   /**

@@ -28,8 +28,6 @@ class Data {
 
   /* auxiliary functions */
 
-  /* helper functions */
-
   static constexpr const char*
   name( const decltype(xss_)& ){ return "XSS"; }
 
