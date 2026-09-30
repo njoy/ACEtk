@@ -10,6 +10,9 @@ This fixes the following issues in ACEtk:
     worked properly and are not impacted).
   - Added a check on the number of shells in the SWD and EPS block in the photoatomic table.
 
+The repository has been restructured: all code contained in component specific hpp files are now in the
+main component's hpp file. This was done to make the repository more readable.
+
 ## ACEtk v1.1.0
 This adds support for the electron table ACE file type (e.g., `el` and `el03` libraries).
   - Added `ElectronTable` class and component block classes. This class supports two different but
