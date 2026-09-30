@@ -26,20 +26,203 @@ namespace continuous {
 class EquiprobableOutgoingEnergyBinData : protected base::Base {
 
   /* fields */
+
   InterpolationData interpolation_;
   base::ColumnData energies_;
   std::vector< EquiprobableOutgoingEnergyBins > bins_;
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/EquiprobableOutgoingEnergyBinData/src/verifySize.hpp"
-  #include "ACEtk/continuous/EquiprobableOutgoingEnergyBinData/src/verifyIncidentEnergyIndex.hpp"
-  #include "ACEtk/continuous/EquiprobableOutgoingEnergyBinData/src/generateBlocks.hpp"
-  #include "ACEtk/continuous/EquiprobableOutgoingEnergyBinData/src/generateXSS.hpp"
+
+  static void verifySize( Iterator begin, Iterator end,
+                          unsigned int nr, unsigned int ne, unsigned int net ) {
+
+    auto size = std::distance( begin, end );
+    if ( size < 1 + 2 * nr + 1 + ne + 1 + ne * net ) {
+
+      Log::error( "The size of the XSS subrange in the equiprobable outgoing "
+                  "energy data block should be at least 3 + 2 * NR + NE * ( NET + 1 )" );
+      Log::info( "NR value: {}", nr );
+      Log::info( "NE value: {}", ne );
+      Log::info( "NET value: {}", net );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
+
+  void verifyIncidentEnergyIndex( const std::size_t index ) const {
+
+    if ( ( index < 1 ) || ( index > this->numberIncidentEnergies() ) ) {
+
+      Log::error( "Illegal incident energy index argument into {} block",
+                  this->name() );
+      Log::info( "Index value: {}", index );
+      Log::info( "{} accepts an incident energy index between 1 and {} inclusively",
+                 this->name(), this->numberIncidentEnergies() );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  void generateBlocks() {
+
+    this->bins_.clear();
+
+    std::size_t nr = static_cast< std::size_t >( this->IXSS( 1 ) );
+    std::size_t ne = static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 ) );
+    auto begin = this->begin();
+    auto incident = begin + 2 * nr + 1;
+    auto bins = incident + ne + 1;
+
+    this->interpolation_ = continuous::InterpolationData( this->name(),
+                                                          begin, incident );
+    this->energies_ = base::ColumnData( this->name(), incident, bins, 1 );
+
+    for ( unsigned int index = 1; index <= ne; ++index ) {
+
+      this->bins_.emplace_back( this->incidentEnergy( index ),
+                                bins + 1 + this->NET() * ( index - 1 ),
+                                bins + 1 + this->NET() * index );
+    }
+  }
+
+  static std::vector< double >
+  generateXSS(
+    std::vector< long >&& boundaries,
+    std::vector< long >&& interpolants,
+    std::vector< EquiprobableOutgoingEnergyBins >&& distributions ) {
+
+    // reserve size in the vector
+    const auto nr = boundaries.size();
+    const auto ne = distributions.size();
+    std::vector< double > xss( 2 + ne ); // NE, list of energies, NET
+
+    // sort distributions
+    std::sort( distributions.begin(), distributions.end(),
+               [=] ( const auto& left, const auto& right )
+                   { return left.incidentEnergy() < right.incidentEnergy(); } );
+
+    // insert the interpolation data
+    const InterpolationData interpolation( "EquiprobableOutgoingEnergyBinData",
+                                           std::move( boundaries ),
+                                           std::move( interpolants ) );
+    xss.insert( xss.begin(), interpolation.begin(), interpolation.end() );
+
+    // insert the bin data
+    xss[ 1 + 2 * nr ] = static_cast< double >( ne );
+    xss[ 2 + 2 * nr + ne ] = static_cast< double >( distributions.front().numberBins() + 1 );
+    std::size_t index = 2 + 2 * nr;
+    for ( const auto& distribution : distributions ) {
+
+      xss[index] = distribution.incidentEnergy();
+      xss.insert( xss.end(), distribution.begin(), distribution.end() );
+      ++index;
+    }
+
+    return xss;
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/EquiprobableOutgoingEnergyBinData/src/ctor.hpp"
+
+  EquiprobableOutgoingEnergyBinData() = default;
+
+  EquiprobableOutgoingEnergyBinData( const EquiprobableOutgoingEnergyBinData& base ) :
+    Base( base ), interpolation_( base.interpolation_ ),
+    energies_( base.energies_ ),
+    bins_( base.bins_ ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  EquiprobableOutgoingEnergyBinData( EquiprobableOutgoingEnergyBinData&& base ) :
+    Base( std::move( base ) ), interpolation_( std::move( base.interpolation_ ) ),
+    energies_( std::move( base.energies_ ) ),
+    bins_( std::move( base.bins_ ) ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  EquiprobableOutgoingEnergyBinData& operator=( const EquiprobableOutgoingEnergyBinData& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->interpolation_ = base.interpolation_;
+      this->energies_ = base.energies_;
+      this->bins_ = base.bins_;
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  EquiprobableOutgoingEnergyBinData& operator=( EquiprobableOutgoingEnergyBinData&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->interpolation_ = std::move( base.interpolation_ );
+      this->energies_ = std::move( base.energies_ );
+      this->bins_ = std::move( base.bins_ );
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] boundaries       the interpolation range boundaries
+   *  @param[in] interpolants     the interpolation types for each range
+   *  @param[in] distributions    the distributions for each incident energy
+   */
+  EquiprobableOutgoingEnergyBinData(
+      std::vector< long > boundaries,
+      std::vector< long > interpolants,
+      std::vector< EquiprobableOutgoingEnergyBins > distributions ) :
+    Base( "EquiprobableOutgoingEnergyBinData",
+          generateXSS( std::move( boundaries ), std::move( interpolants ),
+                       std::move( distributions ) ) ) {
+
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Constructor without interpolation data
+   *
+   *  @param[in] distributions    the distributions for each incident energy
+   */
+  EquiprobableOutgoingEnergyBinData(
+      std::vector< EquiprobableOutgoingEnergyBins >&& distributions ) :
+    EquiprobableOutgoingEnergyBinData( {}, {}, std::move( distributions ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] locb    the starting xss index with respect to the superblock
+   *  @param[in] sig     the begin iterator of the block in the XSS array
+   *  @param[in] end     the end iterator of the block in the XSS array
+   */
+  EquiprobableOutgoingEnergyBinData( Iterator begin, Iterator end ) :
+    Base( "EquiprobableOutgoingEnergyBinData", begin, end ) {
+
+    std::size_t nr = static_cast< std::size_t >( this->IXSS( 1 ) );
+    std::size_t ne = static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 ) );
+    std::size_t nb = static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 + ne + 1 ) );
+    verifySize( this->begin(), this->end(), nr, ne, nb );
+    this->generateBlocks();
+  }
 
   /**
    *  @brief Return the distribution type

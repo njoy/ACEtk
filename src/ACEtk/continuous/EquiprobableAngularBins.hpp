@@ -22,15 +22,66 @@ namespace continuous {
 class EquiprobableAngularBins : protected base::Base {
 
   /* fields */
+
   double energy_ = 0.0;
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/EquiprobableAngularBins/src/verifySize.hpp"
+
+  static void verifySize( std::size_t size ) {
+
+    if ( size < 33 ) {
+
+      Log::error( "The size of the XSS subrange in the equiprobable cosine bins "
+                  "should be at least 33 (for 32 bins)" );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
+
+  static void verifySize( Iterator begin, Iterator end ) {
+
+    auto size = std::distance( begin, end );
+    verifySize( size );
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/EquiprobableAngularBins/src/ctor.hpp"
+
+  EquiprobableAngularBins() = default;
+
+  EquiprobableAngularBins( const EquiprobableAngularBins& ) = default;
+  EquiprobableAngularBins( EquiprobableAngularBins&& ) = default;
+
+  EquiprobableAngularBins& operator=( const EquiprobableAngularBins& ) = default;
+  EquiprobableAngularBins& operator=( EquiprobableAngularBins&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] energy     the associated energy value
+   *  @param[in] cosines    the cosine values (33 values)
+   */
+  EquiprobableAngularBins( double energy, std::vector< double > cosines ) :
+    Base( "EquiprobableAngularBins", std::move( cosines ) ),
+    energy_( energy ) {
+
+    verifySize( this->XSS().size() );
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] energy     the associated energy value
+   *  @param[in] begin      the begin iterator of the equiprobable bin data
+   *  @param[in] end        the end iterator of the equiprobable bin data
+   */
+  EquiprobableAngularBins( double energy, Iterator begin, Iterator end ) :
+    Base( "EquiprobableAngularBins", begin, end ),
+    energy_( energy ) {
+
+    verifySize( this->begin(), this->end() );
+  }
 
   /**
    *  @brief Return the associated energy value

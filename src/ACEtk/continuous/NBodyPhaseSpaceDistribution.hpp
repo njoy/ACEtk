@@ -23,17 +23,93 @@ namespace continuous {
 class NBodyPhaseSpaceDistribution : protected base::Base {
 
   /* fields */
+
   double emin_ = 0.0;
   double emax_ = 0.0;
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/NBodyPhaseSpaceDistribution/src/generateXSS.hpp"
-  #include "ACEtk/continuous/NBodyPhaseSpaceDistribution/src/verifySize.hpp"
+
+  static std::vector< double > generateXSS( unsigned int npsx, double ap,
+                                            unsigned int interpolation,
+                                            std::vector< double >&& values,
+                                            std::vector< double >&& pdf,
+                                            std::vector< double >&& cdf ) {
+
+    std::vector< double > xss = { static_cast< double >( npsx ), ap,
+                                  static_cast< double >( interpolation ) };
+    xss.reserve( 5 + 3 * values.size() );
+    const base::ColumnData columns( "NBodyPhaseSpaceDistribution",
+                                    std::move( values ),
+                                    std::move( pdf ),
+                                    std::move( cdf ) );
+    xss.insert( xss.end(), columns.begin(), columns.end() );
+
+    return xss;
+  }
+
+  static void verifySize( Iterator begin, Iterator end ) {
+
+    // there are at least 2 values in the block
+    auto size = std::distance( begin, end );
+    if ( size < 2 ) {
+
+      Log::error( "The size of the XSS subrange in the DLW block should be at "
+                  "least 2 for an N-body phase space distribution" );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/NBodyPhaseSpaceDistribution/src/ctor.hpp"
+
+  NBodyPhaseSpaceDistribution() = default;
+
+  NBodyPhaseSpaceDistribution( const NBodyPhaseSpaceDistribution& ) = default;
+  NBodyPhaseSpaceDistribution( NBodyPhaseSpaceDistribution&& ) = default;
+
+  NBodyPhaseSpaceDistribution& operator=( const NBodyPhaseSpaceDistribution& ) = default;
+  NBodyPhaseSpaceDistribution& operator=( NBodyPhaseSpaceDistribution&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] emin             the minimum energy for the distribution
+   *  @param[in] emax             the maximum energy for the distribution
+   *  @param[in] npsx             the number of particles in the system
+   *  @param[in] ap               the total mass ratio
+   *  @param[in] interpolation    the interpolation flag
+   *  @param[in] values           the xi values
+   *  @param[in] pdf              the pdf values
+   *  @param[in] cdf              the cdf values
+   */
+  NBodyPhaseSpaceDistribution( double emin, double emax,
+                               unsigned int npsx, double ap,
+                               unsigned int interpolation,
+                               std::vector< double > values,
+                               std::vector< double > pdf,
+                               std::vector< double > cdf ) :
+    Base( "NBodyPhaseSpaceDistribution",
+          generateXSS( npsx, ap, interpolation, std::move( values ),
+                       std::move( pdf ), std::move( cdf ) ) ),
+    emin_( emin ), emax_( emax ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin   the begin iterator of the block
+   *  @param[in] end     the end iterator of the block
+   *  @param[in] emin    the minimum energy for the distribution
+   *  @param[in] emax    the maximum energy for the distribution
+   */
+  NBodyPhaseSpaceDistribution( Iterator begin, Iterator end,
+                               double emin, double emax ) :
+    Base( "NBodyPhaseSpaceDistribution", begin, end ),
+    emin_( emin ), emax_( emax ) {
+
+    verifySize( this->begin(), this->end() );
+  }
 
   /**
    *  @brief Return the distribution type
