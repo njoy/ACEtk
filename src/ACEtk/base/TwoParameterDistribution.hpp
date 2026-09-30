@@ -18,16 +18,67 @@ namespace base {
 class TwoParameterDistribution : protected Base {
 
   /* fields */
+
   double emin_;
   double emax_;
 
   /* auxiliary functions */
-  #include "ACEtk/base/TwoParameterDistribution/src/verifySize.hpp"
+
+  static void verifySize( Iterator begin, Iterator end ) {
+
+    // there are at least 2 values in the block
+    auto size = std::distance( begin, end );
+    if ( size < 2 ) {
+
+      Log::error( "The size of the XSS subrange should be at least 2 for a "
+                  "two parameter distribution" );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/base/TwoParameterDistribution/src/ctor.hpp"
+
+  TwoParameterDistribution() = default;
+
+  TwoParameterDistribution( const TwoParameterDistribution& ) = default;
+  TwoParameterDistribution( TwoParameterDistribution&& ) = default;
+
+  TwoParameterDistribution& operator=( const TwoParameterDistribution& ) = default;
+  TwoParameterDistribution& operator=( TwoParameterDistribution&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name    the name of the block
+   *  @param[in] emin    the minimum energy for the distribution
+   *  @param[in] emax    the maximum energy for the distribution
+   *  @param[in] c1      the value of C1
+   *  @param[in] c2      the value of C2
+   */
+  TwoParameterDistribution( std::string name, double emin, double emax,
+                            double c1, double c2 ) :
+    Base( std::move( name ), { c1, c2 } ),
+    emin_( emin ), emax_( emax ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name    the name of the block
+   *  @param[in] begin   the begin iterator of the block
+   *  @param[in] end     the end iterator of the block
+   *  @param[in] emin    the minimum energy for the distribution
+   *  @param[in] emax    the maximum energy for the distribution
+   */
+  TwoParameterDistribution( std::string name, Iterator begin, Iterator end,
+                            double emin, double emax ) :
+    Base( std::move( name ), begin, end ),
+    emin_( emin ), emax_( emax ) {
+
+    verifySize( this->begin(), this->end() );
+  }
 
   /**
    *  @brief Return the distribution type

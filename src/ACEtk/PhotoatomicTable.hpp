@@ -34,6 +34,7 @@ namespace ACEtk {
 class PhotoatomicTable : protected Table {
 
   /* fields */
+
   photoatomic::ESZG eszg_;
   photoatomic::JINC jinc_;
   photoatomic::JCOH jcoh_;
@@ -53,14 +54,518 @@ class PhotoatomicTable : protected Table {
   std::optional< electroatomic::SELAS > selas_;
 
   /* auxiliary functions */
-  #include "ACEtk/PhotoatomicTable/src/generateBlocks.hpp"
-  #include "ACEtk/PhotoatomicTable/src/generateData.hpp"
-  #include "ACEtk/PhotoatomicTable/src/verifyType.hpp"
-  #include "ACEtk/PhotoatomicTable/src/verifySubshellIndex.hpp"
+
+  auto block( std::size_t index ) const {
+
+    // assumption: blocks are stored in sequence!
+
+    auto begin = this->data().XSS().begin();
+    std::size_t start = this->data().JXS( index );
+
+    std::size_t end = 0;
+    if ( start != 0 ) {
+
+      // look for the first value that is larger than or equal to the start locator
+      auto iter = std::find_if( this->data().JXS().begin() + index,
+                                this->data().JXS().end(),
+                                [start] ( auto&& value ) {
+
+                                  return value >= static_cast< int64_t >( start );
+                                } );
+      if ( iter != this->data().JXS().end() ) {
+
+        end = *iter;
+      }
+    }
+
+    return std::make_pair(
+               begin + start - 1,
+               end != 0 ? begin + end - 1
+                        : start != 0 ? this->data().XSS().end()
+                                     : begin + end - 1 );
+  }
+
+  auto electroionisation_block( std::size_t index ) const {
+
+    auto begin = this->data().XSS().begin();
+    auto jxs23 = this->data().JXS( 23 );
+
+    auto nssh = this->NSSH();
+    auto n = *std::next( begin, jxs23 + index - 2 );
+    auto start = std::next( begin, *std::next( begin, jxs23 + nssh + index - 2 ) - 1 );
+    auto end = index != nssh
+               ? std::next( begin, *std::next( begin, jxs23 + nssh + index - 1 ) - 1 )
+               : std::next( begin, this->data().JXS( 24 ) - 1 );
+
+    return std::make_tuple( start, end, n );
+  }
+
+  void generateBlocks() {
+
+    // reset optional blocks
+    this->jflo_ = std::nullopt;
+    this->eps_ = std::nullopt;
+    this->swd_ = std::nullopt;
+    this->subsh_ = std::nullopt;
+    this->sphel_ = std::nullopt;
+    this->xprob_ = std::nullopt;
+    this->esze_ = std::nullopt;
+    this->excit_ = std::nullopt;
+    this->elas_ = std::nullopt;
+    this->breme_ = std::nullopt;
+    this->breml_ = std::nullopt;
+    this->selas_ = std::nullopt;
+
+    // clear vectors
+    eion_.clear();
+
+    // principal cross section data
+    auto iterators = block( 1 );
+    this->eszg_ = photoatomic::ESZG( iterators.first, iterators.second, this->NES() );
+
+    // incoherent scattering functions
+    iterators = block( 2 );
+    this->jinc_ = photoatomic::JINC( iterators.first, iterators.second );
+
+    // coherent form factor
+    iterators = block( 3 );
+    this->jcoh_ = photoatomic::JCOH( iterators.first, iterators.second );
+
+    // fluorescence data block
+    bool present = ( this->NFLO() > 0 );
+    if ( present ) {
+
+      iterators = block( 4 );
+      this->jflo_ = photoatomic::JFLO( iterators.first, iterators.second, this->NFLO() );
+    }
+
+    // heating numbers
+    iterators = block( 5 );
+    this->lhnm_ = photoatomic::LHNM( iterators.first, iterators.second, this->NES() );
+
+    present = ( this->NSH() > 0 );
+    if ( present ) {
+
+      // electron shell block
+      auto locators = block( 6 );
+      iterators = block( 8 );
+      this->eps_ = electroatomic::EPS( locators.first, iterators.second, this->NSH() );
+
+      // compton profile block
+      locators = block( 9 );
+      iterators = block( 10 );
+      this->swd_ = photoatomic::SWD( locators.first, iterators.first, iterators.second,
+                                     this->NSH() );
+    }
+
+    present = ( this->NEPR() > 0 );
+    if ( present ) {
+
+      auto subsh = block( 11 );
+      auto sphel = block( 16 );
+      this->subsh_ = electroatomic::SUBSH( subsh.first, sphel.first, this->NSSH() );
+      this->sphel_ = photoatomic::SPHEL( sphel.first, sphel.second, this->NSSH(), this->NES() );
+      auto relo = block( 17 );
+      auto xprob = block( 18 );
+      this->xprob_ = electroatomic::XPROB( relo.first, xprob.first, xprob.second, this->NSSH() );
+      auto esze = block( 19 );
+      this->esze_ = electroatomic::ESZE( esze.first, esze.second, this->NSSH(), this->NE() );
+      auto excit = block( 20 );
+      this->excit_ = electroatomic::EXCIT( excit.first, excit.second, this->NXL() );
+      auto elasi = block( 21 );
+      auto elas = block( 22 );
+      this->elas_ = electroatomic::ELAS( elasi.first, elas.second, this->NA() );
+
+      // electronionisation
+      for ( std::size_t index = 1; index <= this->NSSH(); ++index ) {
+
+        auto eion = electroionisation_block( index );
+        this->eion_.emplace_back( std::get< 0 >( eion ), std::get< 1 >( eion ),
+                                  std::get< 2 >( eion ) );
+      }
+
+      auto bremi = block( 24 );
+      auto breme = block( 25 );
+      this->breme_ = electroatomic::BREME( bremi.first, breme.second, this->NB() );
+      auto breml = block( 26 );
+      this->breml_ = electroatomic::BREML( breml.first, breml.second, this->NBL() );
+
+      present = ( this->NEPR() == 3 );
+      if ( present ) {
+
+        auto selas = block( 27 );
+        this->selas_ = electroatomic::SELAS( selas.first, selas.second, this->NE() );
+      }
+    }
+  }
+
+  Data generateData( unsigned int z,
+                     std::vector< unsigned int > za, std::vector< double > awr,
+                     photoatomic::ESZG&& eszg, photoatomic::JINC&& jinc,
+                     photoatomic::JCOH&& jcoh, photoatomic::LHNM&& lhnm,
+                     std::optional< photoatomic::JFLO >&& jflo,
+                     std::optional< electroatomic::EPS >&& eps,
+                     std::optional< photoatomic::SWD >&& swd,
+                     std::optional< electroatomic::SUBSH >&& subsh,
+                     std::optional< photoatomic::SPHEL >&& sphel,
+                     std::optional< electroatomic::XPROB >&& xprob,
+                     std::optional< electroatomic::ESZE >&& esze,
+                     std::optional< electroatomic::EXCIT >&& excit,
+                     std::optional< electroatomic::ELAS >&& elas,
+                     std::vector< electroatomic::EION >&& eion,
+                     std::optional< electroatomic::BREME >&& breme,
+                     std::optional< electroatomic::BREML >&& breml,
+                     std::optional< electroatomic::SELAS >&& selas ) {
+
+    std::array< int32_t, 16 > iz;
+    std::array< double, 16 > aw;
+    std::array< int64_t, 16 > nxs;
+    std::array< int64_t, 32 > jxs;
+    iz.fill( 0 );
+    aw.fill( 0. );
+    nxs.fill( 0 );
+    jxs.fill( 0 );
+    std::vector< double > xss;
+
+    // assign za values
+    for ( unsigned int i = 0; i < za.size(); ++i ) {
+
+      iz[i] = za[i];
+      aw[i] = awr[i];
+    }
+
+    // determine data type
+    unsigned int nepr = ( subsh.has_value() ? ( selas.has_value() ? 3 : 1 ) : 0 );
+
+    // some size values
+    unsigned int nes = eszg.NES();
+    unsigned int nsh = swd.has_value() ? swd->NSH() : 0;
+    unsigned int nflo = jflo.has_value() ? jflo->NFLO() : 0;
+    unsigned int nssh = nepr > 0 ? subsh->NSSH() : 0;
+    unsigned int ne = nepr > 0 ? esze->NE() : 0;
+    unsigned int nxl = nepr > 0 ? excit->NXL() : 0;
+    unsigned int na = nepr > 0 ? elas->NA() : 0;
+    unsigned int nb = nepr > 0 ? breme->NB() : 0;
+    unsigned int nbl = nepr > 0 ? breml->NBL() : 0;
+    unsigned int ninc = nepr > 1 ? jinc.NM() : 0;
+    unsigned int ncoh = nepr > 1 ? jcoh.NM() : 0;
+
+    // verify some stuff:
+    //  - same number of ZA and atomic mass values
+    //  - ESZG, LHNM and SPHEL use the same number of incident energy values
+    //  - SWD and EPS use the same number of shells
+    //  - SUBSH, XPROB, ESZE and EION use the same number of subshells for nepr > 0
+    if ( za.size() != awr.size() ) {
+
+      Log::error( "Inconsistent number of ZA and atomic mass values" );
+      Log::info( "Number of ZA values = {}", za.size() );
+      Log::info( "Number of atomic mass values = {}", awr.size() );
+      throw std::exception();
+    }
+    bool sphelsize = sphel.has_value() ? nes != sphel->NES() : false;
+    if ( ( nes != lhnm.NES() ) || sphelsize ) {
+
+      Log::error( "Inconsistent NES between the different blocks" );
+      Log::info( "ESZG NES value = {}", eszg.NES() );
+      Log::info( "LHNM NES value = {}", lhnm.NES() );
+      throw std::exception();
+    }
+    if ( eps.has_value() && swd.has_value() ) {
+
+      if ( ( nsh != eps->NSH() ) || ( nsh != swd->NSH() ) ) {
+
+        Log::error( "Inconsistent NSH between the different blocks" );
+        Log::info( "EPS NSH value = {}", eps->NSH() );
+        Log::info( "SWD NSH value = {}", swd->NSH() );
+        throw std::exception();
+      }
+    }
+    if ( nepr > 0 ) {
+
+      if ( ( nssh != xprob->NSSH() ) || ( nssh != esze->NSSH() ) ||
+           ( nssh != eion.size() ) ) {
+
+        Log::error( "Inconsistent NSSH between the different blocks" );
+        Log::info( "SUBSH NSSH value = {}", subsh->NSSH() );
+        Log::info( "XPROB NSSH value = {}", xprob->NSSH() );
+        Log::info( "ESZE NSSH value = {}", esze->NSSH() );
+        Log::info( "EION NSSH value = {}", eion.size() );
+        throw std::exception();
+      }
+    }
+    if ( nepr == 3 ) {
+
+      if ( ne != selas->NE() ) {
+
+        Log::error( "Inconsistent NE between the different blocks" );
+        Log::info( "ESZE NE value = {}", esze->NE() );
+        Log::info( "SELAS NE value = {}", selas->NE() );
+        throw std::exception();
+      }
+    }
+
+    // generate the xss array and set the locators in the jxs array as we go
+    jxs[0] = 1;
+    xss.insert( xss.end(), eszg.begin(), eszg.end() );
+    jxs[1] = xss.size() + 1;
+    xss.insert( xss.end(), jinc.begin(), jinc.end() );
+    jxs[2] = xss.size() + 1;
+    xss.insert( xss.end(), jcoh.begin(), jcoh.end() );
+    jxs[3] = xss.size() + 1;
+    if ( jflo.has_value() ) {
+
+      xss.insert( xss.end(), jflo->begin(), jflo->end() );
+    }
+    jxs[4] = xss.size() + 1;
+    xss.insert( xss.end(), lhnm.begin(), lhnm.end() );
+    if ( eps.has_value() ) {
+
+      jxs[5] = xss.size() + 1;
+      jxs[6] = xss.size() + nsh + 1;
+      jxs[7] = xss.size() + 2 * nsh + 1;
+      xss.insert( xss.end(), eps->begin(), eps->end() );
+    }
+    if ( swd.has_value() ) {
+
+      jxs[8] = xss.size() + 1;
+      jxs[9] = xss.size() + nsh + 1;
+      xss.insert( xss.end(), swd->begin(), swd->end() );
+    }
+    if ( nepr > 0 ) {
+
+      jxs[10] = xss.size() + 1;
+      jxs[11] = jxs[10] + nssh;
+      jxs[12] = jxs[11] + nssh;
+      jxs[13] = jxs[12] + nssh;
+      jxs[14] = jxs[13] + nssh;
+      xss.insert( xss.end(), subsh->begin(), subsh->end() );
+      jxs[15] = xss.size() + 1;
+      xss.insert( xss.end(), sphel->begin(), sphel->end() );
+      jxs[16] = xss.size() + 1;
+      jxs[17] = jxs[16] + nssh;
+      xss.insert( xss.end(), xprob->begin(), xprob->end() );
+      jxs[18] = xss.size() + 1;
+      xss.insert( xss.end(), esze->begin(), esze->end() );
+      jxs[19] = xss.size() + 1;
+      xss.insert( xss.end(), excit->begin(), excit->end() );
+      jxs[20] = xss.size() + 1;
+      jxs[21] = jxs[20] + 3 * na;
+      xss.insert( xss.end(), elas->begin(), elas->end() );
+      jxs[22] = xss.size() + 1;
+      unsigned int l = xss.size();
+      xss.insert( xss.end(), 3 * nssh, 0.0 );
+      for ( auto&& block : eion ) {
+
+        xss[l] = block.NB();
+        xss[l + nssh] = xss.size() + 1;
+        xss[l + 2 * nssh] = xss.size() + 3 * block.NB() + 1;
+        xss.insert( xss.end(), block.begin(), block.end() );
+        ++l;
+      }
+      jxs[23] = xss.size() + 1;
+      jxs[24] = jxs[23] + 3 * nb;
+      xss.insert( xss.end(), breme->begin(), breme->end() );
+      jxs[25] = xss.size() + 1;
+      xss.insert( xss.end(), breml->begin(), breml->end() );
+      if ( nepr == 3 ) {
+
+        jxs[26] = xss.size() + 1;
+        xss.insert( xss.end(), selas->begin(), selas->end() );
+      }
+    }
+
+    // set the nxs values for the continuous energy table
+    // NXS(1) = length
+    // NXS(2) = Z
+    // NXS(3) = NES
+    // NXS(4) = NFLO
+    // NXS(5) = NSH
+    // NXS(6) = NEPR
+    // NXS(7) = NSSH
+    // NXS(8) = NE
+    // NXS(9) = NXL
+    // NXS(10) = NA
+    // NXS(11) = NB
+    // NXS(12) = NBL
+    // NXS(13) = NINC
+    // NXS(14) = NCOH
+    nxs[0] = xss.size();
+    nxs[1] = z;
+    nxs[2] = nes;
+    nxs[3] = nflo;
+    nxs[4] = nsh;
+    nxs[5] = nepr;
+    nxs[6] = nssh;
+    nxs[7] = ne;
+    nxs[8] = nxl;
+    nxs[9] = na;
+    nxs[10] = nb;
+    nxs[11] = nbl;
+    nxs[12] = ninc;
+    nxs[13] = ncoh;
+
+    return { std::move( iz ), std::move( aw ),
+             std::move( nxs ), std::move( jxs ), std::move( xss ) };
+  }
+
+  void verifyType() {
+
+    char type = this->ZAID().back();
+    if ( ( type != 'p' ) ) {
+
+
+      Log::error( "The ZAID given in the ACE table ({}) does not appear to be a "
+                  "photoatomic type (p)", this->ZAID() );
+      throw std::exception();
+    }
+  }
+
+  void verifySubshellIndex( const std::size_t index ) const {
+
+    if ( ( index < 1 ) || ( index > this->NSSH() ) ) {
+
+      Log::error( "Illegal subshell index argument into the photoatomic table" );
+      Log::info( "Index value: {}", index );
+      Log::info( "The photoatomic table accepts an index between 1 and {} inclusively",
+                 this->NSSH() );
+      throw std::out_of_range( "PhotoatomicTable" );
+    }
+  }
 
 public:
 
-  #include "ACEtk/PhotoatomicTable/src/ctor.hpp"
+  /**
+   *  @brief Copy constructor using a generic table
+   *
+   *  @param[in] table    the generic table to be copied
+   */
+  PhotoatomicTable( const Table& table ): Table( table ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Move constructor using a generic table
+   *
+   *  @param[in] table    the generic table to be moved
+   */
+  PhotoatomicTable( Table&& table ): Table( std::move( table ) ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Copy constructor using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be copied
+   */
+  PhotoatomicTable( const PhotoatomicTable& table ) :
+    Table( table ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Move constructor using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be moved
+   */
+  PhotoatomicTable( PhotoatomicTable&& table ) :
+    Table( std::move( table ) ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Copy assignment using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be copied
+   */
+  PhotoatomicTable& operator=( const PhotoatomicTable& base ) {
+
+    if ( this != &base ) {
+
+      Table::operator=( base );
+      this->verifyType();
+      this->generateBlocks();
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Move assignment using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be moved
+   */
+  PhotoatomicTable& operator=( PhotoatomicTable&& base ) {
+
+    if ( this != &base ) {
+
+      Table::operator=( std::move( base ) );
+      this->verifyType();
+      this->generateBlocks();
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor (from scratch)
+   *
+   *  @param[in] z         the Z number of the target
+   *  @param[in] header    the header for the table
+   *  @param[in] za        the list of ZA values
+   *  @param[in] awr       the list of atomic mass values
+   *  @param[in] eszg      the principal cross section block
+   *  @param[in] jinc      the incoherent scattering function block
+   *  @param[in] jcoh      the coherent form factor block
+   *  @param[in] lhnm      the heating numbers block
+   *  @param[in] jflo      the fluorescence data block
+   *  @param[in] eps       the electron shell data block
+   *  @param[in] swd       the compton profile block
+   *  @param[in] subsh     the electron subshell data block
+   *  @param[in] sphel     the photoelectric cross section block
+   *  @param[in] xprob     the atomic relaxation data block
+   *  @param[in] esze      the electron cross section block
+   *  @param[in] excit     the excitation energy loss data block
+   *  @param[in] elas      the electron elastic angular distribution block
+   *  @param[in] eion      the electronionisation data block
+   *  @param[in] breme     the photon energy distributions from Bremsstrahlung
+   *  @param[in] breml     the electron average energy after Bremsstrahlung
+   *  @param[in] selas     the additional electron elastic cross section block
+   */
+  PhotoatomicTable( unsigned int z, HeaderVariant header,
+                    std::vector< unsigned int > za, std::vector< double > awr,
+                    photoatomic::ESZG eszg, photoatomic::JINC jinc,
+                    photoatomic::JCOH jcoh, photoatomic::LHNM lhnm,
+                    std::optional< photoatomic::JFLO > jflo,
+                    std::optional< electroatomic::EPS > eps,
+                    std::optional< photoatomic::SWD > swd,
+                    std::optional< electroatomic::SUBSH > subsh,
+                    std::optional< photoatomic::SPHEL > sphel,
+                    std::optional< electroatomic::XPROB > xprob,
+                    std::optional< electroatomic::ESZE > esze,
+                    std::optional< electroatomic::EXCIT > excit,
+                    std::optional< electroatomic::ELAS > elas,
+                    std::vector< electroatomic::EION > eion,
+                    std::optional< electroatomic::BREME > breme,
+                    std::optional< electroatomic::BREML > breml,
+                    std::optional< electroatomic::SELAS > selas ) :
+    PhotoatomicTable(
+        Table( std::move( header ),
+               generateData( z, std::move( za ), std::move( awr ),
+                             std::move( eszg ), std::move( jinc ),
+                             std::move( jcoh ), std::move( lhnm ),
+                             std::move( jflo ), std::move( eps ),
+                             std::move( swd ), std::move( subsh ),
+                             std::move( sphel ), std::move( xprob ),
+                             std::move( esze ), std::move( excit ),
+                             std::move( elas ), std::move( eion ),
+                             std::move( breme ), std::move( breml ),
+                             std::move( selas ) ) ) ) {}
 
   using Table::header;
   using Table::data;

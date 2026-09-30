@@ -17,16 +17,141 @@ namespace base {
 class ColumnData : protected Base {
 
   /* fields */
+
   std::size_t nc_;
 
   /* auxiliary functions */
-  #include "ACEtk/base/ColumnData/src/generateXSS.hpp"
-  #include "ACEtk/base/ColumnData/src/verifySize.hpp"
+
+  static std::vector< double >
+  generateXSS( std::vector< std::vector< double > >&& columns ) {
+
+    std::vector< double > xss;
+    const auto nc = columns.size();
+    const auto ne = columns[0].size();
+    xss.reserve( 1 + ne * nc );
+    xss.push_back( static_cast< double >( ne ) );
+
+    for ( unsigned int i = 0; i < nc; ++i ) {
+
+      if ( columns[i].size() != ne ) {
+
+        Log::error( "The size of the column with index {} is not equal to the "
+                    "expected value", i + 1 );
+        Log::info( "Expected size = {}", ne );
+        Log::info( "Found size = {}", columns[i].size() );
+        throw std::exception();
+      }
+      xss.insert( xss.end(), columns[i].begin(), columns[i].end() );
+    }
+
+    return xss;
+  }
+
+  static std::vector< double >
+  generateXSS( std::vector< double >&& column1,
+               std::vector< double >&& column2 ) {
+
+    std::vector< std::vector< double > > columns;
+    columns.emplace_back( std::move( column1 ) );
+    columns.emplace_back( std::move( column2 ) );
+    return generateXSS( std::move( columns ) );
+  }
+
+  static std::vector< double >
+  generateXSS( std::vector< double >&& column1,
+               std::vector< double >&& column2,
+               std::vector< double >&& column3 ) {
+
+    std::vector< std::vector< double > > columns;
+    columns.emplace_back( std::move( column1 ) );
+    columns.emplace_back( std::move( column2 ) );
+    columns.emplace_back( std::move( column3 ) );
+    return generateXSS( std::move( columns ) );
+  }
+
+  static void verifySize( Iterator begin, Iterator end,
+                          std::size_t ne, std::size_t nc ) {
+
+    std::size_t size = std::distance( begin, end );
+    if ( size != 0 ) {
+
+      std::size_t minimum = 1 + ne * nc;
+      if ( size < minimum ) {
+
+        Log::error( "The size of the XSS subrange in the column data should be at "
+                    "equal to 1 + NE * NC" );
+        Log::info( "NE: {}", ne );
+        Log::info( "NC: {}", nc );
+        Log::info( "XSS.size(): {}", size );
+        throw std::exception();
+      }
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/base/ColumnData/src/ctor.hpp"
+
+  ColumnData() = default;
+
+  ColumnData( const ColumnData& ) = default;
+  ColumnData( ColumnData&& ) = default;
+
+  ColumnData& operator=( const ColumnData& ) = default;
+  ColumnData& operator=( ColumnData&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name           the name of the data
+   *  @param[in] columns        the columns
+   */
+  ColumnData( std::string name, std::vector< std::vector< double > > columns ) :
+    Base( std::move( name ), generateXSS( std::move( columns ) ) ),
+    nc_( columns.size() ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name           the name of the data
+   *  @param[in] column1        the first column
+   *  @param[in] column2        the second column
+   */
+  ColumnData( std::string name, std::vector< double > column1,
+              std::vector< double > column2 ) :
+    Base( std::move( name ),
+          generateXSS( std::move( column1 ), std::move( column2 ) ) ),
+    nc_( 2 ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name           the name of the data
+   *  @param[in] column1        the first column
+   *  @param[in] column2        the second column
+   *  @param[in] column3        the third column
+   */
+  ColumnData( std::string name, std::vector< double > column1,
+              std::vector< double > column2, std::vector< double > column3 ) :
+    Base( std::move( name ),
+          generateXSS( std::move( column1 ), std::move( column2 ),
+                       std::move( column3 ) ) ),
+    nc_( 3 ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name     the name for this data piece
+   *  @param[in] begin    the begin iterator of the SIG block in the XSS array
+   *  @param[in] end      the end iterator of the SIG block in the XSS array
+   *  @param[in] nc       the number of columns
+   */
+  ColumnData( std::string name, Iterator begin, Iterator end, std::size_t nc ) :
+    Base( std::move( name ), begin, end ), nc_( nc ) {
+
+    verifySize( this->begin(), this->end(),
+                this->begin() == this->end() ? 0 : *( this->begin() ), nc );
+  }
 
   /**
    *  @brief Return the number of columns
