@@ -21,18 +21,147 @@ namespace continuous {
 class DelayedNeutronPrecursorBlock : protected base::Base {
 
   /* fields */
+
   unsigned int npcr_ = 0;
   std::vector< DelayedNeutronPrecursorData > data_;
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/DelayedNeutronPrecursorBlock/src/generateXSS.hpp"
-  #include "ACEtk/continuous/DelayedNeutronPrecursorBlock/src/generateBlocks.hpp"
-  #include "ACEtk/continuous/DelayedNeutronPrecursorBlock/src/verifyGroupIndex.hpp"
+
+  static std::vector< double >
+  generateXSS( std::vector< DelayedNeutronPrecursorData >&& groups ) {
+
+    std::vector< double > xss;
+    // commmenting this out for now - potential clash with user provided data
+    // std::sort( groups.begin(), groups.end(),
+    //            [] ( auto&& left, auto&& right )
+    //               { return left.number() < right.number(); } );
+    for ( const auto& group : groups ) {
+
+      xss.insert( xss.end(), group.begin(), group.end() );
+    }
+    return xss;
+  }
+
+  void generateBlocks() {
+
+      this->data_.clear();
+
+    auto begin = this->begin();
+    auto left = begin;
+    auto right = begin;
+    std::size_t locator = 1;
+    for ( unsigned int index = 1; index <= this->NPCR(); ++index ) {
+
+      std::size_t nr = static_cast< std::size_t >( this->IXSS( locator + 1 ) );
+      std::size_t ne = static_cast< std::size_t >( this->IXSS( locator + 1 + 2 * nr + 1 ) );
+      locator += 2 + 2 * nr + 2 * ne + 1;
+      right = begin + ( locator - 1 );
+      this->data_.emplace_back( left, right, index );
+      left = right;
+    }
+  }
+
+  void verifyGroupIndex( const std::size_t index ) const {
+
+    if ( ( index < 1 ) || ( index > this->NPCR() ) ) {
+
+      Log::error( "Illegal index argument into the {} block", this->name() );
+      Log::info( "Index value: {}", index );
+      Log::info( "{} accepts an index between 1 and {} inclusively",
+                 this->name(), this->NPCR() );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  /* constructor */
+
+  /**
+   *  @brief Private constructor
+   */
+  DelayedNeutronPrecursorBlock( std::vector< DelayedNeutronPrecursorData >&& groups,
+                                std::size_t npcr ) :
+    Base( "BDD", generateXSS( std::move( groups ) ) ),
+    npcr_( npcr ) {
+
+    this->generateBlocks();
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/DelayedNeutronPrecursorBlock/src/ctor.hpp"
+
+  DelayedNeutronPrecursorBlock() = default;
+
+  DelayedNeutronPrecursorBlock( const DelayedNeutronPrecursorBlock& base ) :
+    Base( base ), npcr_( base.npcr_ ),
+    data_( base.data_ ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  DelayedNeutronPrecursorBlock( DelayedNeutronPrecursorBlock&& base ) :
+    Base( std::move( base ) ), npcr_( base.npcr_ ),
+    data_( std::move( base.data_ ) ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  DelayedNeutronPrecursorBlock& operator=( const DelayedNeutronPrecursorBlock& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->npcr_ = base.npcr_;
+      this->data_ = base.data_;
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  DelayedNeutronPrecursorBlock& operator=( DelayedNeutronPrecursorBlock&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->npcr_ = base.npcr_;
+      this->data_ = std::move( base.data_ );
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] groups    the data for the precursor groups
+   */
+  DelayedNeutronPrecursorBlock( std::vector< DelayedNeutronPrecursorData > groups ) :
+    DelayedNeutronPrecursorBlock( std::move( groups ), groups.size() ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] bdd    the begin iterator of the BDD block in the XSS array
+   *  @param[in] end    the end iterator of the BDD block in the XSS array
+   *  @param[in] npcr   the number of delayed precursor groups
+   */
+  DelayedNeutronPrecursorBlock( Iterator bdd, Iterator end, unsigned int npcr ) :
+    Base( "BDD", bdd, end ), npcr_( npcr ) {
+
+    this->generateBlocks();
+  }
 
   /* methods */
 

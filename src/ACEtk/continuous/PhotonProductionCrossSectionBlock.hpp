@@ -14,6 +14,7 @@ namespace ACEtk {
 namespace continuous {
 
 /* type alias */
+
 using PhotonProductionData = std::variant<
                                  PhotonProductionCrossSectionData,
                                  TabulatedSecondaryParticleMultiplicity >;
@@ -38,13 +39,68 @@ class PhotonProductionCrossSectionBlock :
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/PhotonProductionCrossSectionBlock/src/generateXSS.hpp"
-  #include "ACEtk/continuous/PhotonProductionCrossSectionBlock/src/generateData.hpp"
+
+  static std::vector< double > generateXSS( std::vector< PhotonProductionData >&& xs, bool ) {
+
+    const auto ntr = xs.size();
+    std::vector< double > xss( ntr );
+    std::size_t index = 0;
+    for ( const auto& data : xs ) {
+
+      xss[index] = xss.size() - ntr + 1;
+      std::visit( [&xss] ( const auto& value )
+                         { xss.insert( xss.end(), value.begin(), value.end() ); },
+                   data );
+      ++index;
+    }
+
+    return xss;
+  }
+
+  static PhotonProductionData
+  generateData( std::size_t, Iterator left, Iterator right ) {
+
+    if ( static_cast< int >( std::round( *left ) ) == 13 ) {
+
+      return PhotonProductionCrossSectionData( left, right );
+    }
+    else {
+
+      return TabulatedSecondaryParticleMultiplicity( left, right );
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/PhotonProductionCrossSectionBlock/src/ctor.hpp"
+
+  PhotonProductionCrossSectionBlock() = default;
+
+  PhotonProductionCrossSectionBlock( const PhotonProductionCrossSectionBlock& ) = default;
+  PhotonProductionCrossSectionBlock( PhotonProductionCrossSectionBlock&& ) = default;
+
+  PhotonProductionCrossSectionBlock& operator=( const PhotonProductionCrossSectionBlock& ) = default;
+  PhotonProductionCrossSectionBlock& operator=( PhotonProductionCrossSectionBlock&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] xs    the cross section data
+   */
+  PhotonProductionCrossSectionBlock( std::vector< PhotonProductionData > xs ) :
+    BlockWithLocators( "SIGP", std::move( xs ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] lsigp    the begin iterator of the LSIGP block in the XSS array
+   *  @param[in] sigp     the begin iterator of the SIGP block in the XSS array
+   *  @param[in] end      the end iterator of the SIGP block in the XSS array
+   *  @param[in] ntr      the number of reactions
+   */
+  PhotonProductionCrossSectionBlock( Iterator lsigp, Iterator sigp, Iterator end,
+                                     unsigned int ntr ) :
+    BlockWithLocators( "SIGP", lsigp, sigp, end, ntr ) {}
 
   /* methods */
 

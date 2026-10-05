@@ -22,16 +22,125 @@ namespace continuous {
 class TabulatedFissionMultiplicity : protected base::Base {
 
   /* fields */
+
   base::TabulatedData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/TabulatedFissionMultiplicity/src/generateXSS.hpp"
-  #include "ACEtk/continuous/TabulatedFissionMultiplicity/src/generateBlocks.hpp"
+
+  static std::vector< double >
+  generateXSS( std::vector< long >&& boundaries,
+               std::vector< long >&& interpolants,
+               std::vector< double >&& x,
+               std::vector< double >&& y ) {
+
+    std::vector< double > xss = { 2. };
+    const base::TabulatedData data( "TabulatedFissionMultiplicity",
+                                    std::move( boundaries ),
+                                    std::move( interpolants ),
+                                    std::move( x ),
+                                    std::move( y ) );
+    xss.insert( xss.end(), data.begin(), data.end() );
+    return xss;
+  }
+
+  void generateBlocks() {
+
+    this->data_ = base::TabulatedData( this->name(), this->begin() + 1, this->end() );
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/TabulatedFissionMultiplicity/src/ctor.hpp"
+
+  TabulatedFissionMultiplicity() = default;
+
+  TabulatedFissionMultiplicity( const TabulatedFissionMultiplicity& base ) :
+    Base( base ), data_( base.data_ ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  TabulatedFissionMultiplicity( TabulatedFissionMultiplicity&& base ) :
+    Base( std::move( base ) ), data_( std::move( base.data_ ) ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  TabulatedFissionMultiplicity& operator=( const TabulatedFissionMultiplicity& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->data_ = base.data_;
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  TabulatedFissionMultiplicity& operator=( TabulatedFissionMultiplicity&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->data_ = std::move( base.data_ );
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] boundaries        the interpolation range boundaries
+   *  @param[in] interpolants      the interpolation types for each range
+   *  @param[in] energies          the energy values
+   *  @param[in] multiplicities    the multiplicity values
+   */
+  TabulatedFissionMultiplicity( std::vector< long > boundaries,
+                                std::vector< long > interpolants,
+                                std::vector< double > energies,
+                                std::vector< double > multiplicities ) :
+    Base( "TabulatedFissionMultiplicity",
+          generateXSS( std::move( boundaries ), std::move( interpolants ),
+                       std::move( energies ), std::move( multiplicities ) ) ) {
+
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] energies          the energy values
+   *  @param[in] multiplicities    the multiplicity values
+   */
+  TabulatedFissionMultiplicity( std::vector< double > energies,
+                                std::vector< double > multiplicities ) :
+   TabulatedFissionMultiplicity( {}, {}, std::move( energies ),
+                                 std::move( multiplicities ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin    the begin iterator of the multiplicity data in the XSS array
+   *  @param[in] end      the end iterator of the multiplicity data in the XSS array
+   */
+  TabulatedFissionMultiplicity( Iterator begin, Iterator end ) :
+    Base( "TabulatedFissionMultiplicity", begin, end ) {
+
+    this->generateBlocks();
+  }
 
   /**
    *  @brief Return the representation type (should always be 2)

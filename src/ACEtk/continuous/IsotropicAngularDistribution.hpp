@@ -19,6 +19,7 @@ namespace continuous {
 class IsotropicAngularDistribution {
 
   /* fields */
+
   double energy_ = 0.0;
 
   /* auxiliary functions */
@@ -26,7 +27,22 @@ class IsotropicAngularDistribution {
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/IsotropicAngularDistribution/src/ctor.hpp"
+
+  IsotropicAngularDistribution() = default;
+
+  IsotropicAngularDistribution( const IsotropicAngularDistribution& ) = default;
+  IsotropicAngularDistribution( IsotropicAngularDistribution&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] energy    the associated energy value
+   */
+  IsotropicAngularDistribution( double energy ) :
+    energy_( energy ) {}
+
+  IsotropicAngularDistribution& operator=( const IsotropicAngularDistribution& ) = default;
+  IsotropicAngularDistribution& operator=( IsotropicAngularDistribution&& ) = default;
 
   /**
    *  @brief Return the associated energy value

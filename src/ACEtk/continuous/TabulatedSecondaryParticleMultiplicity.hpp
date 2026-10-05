@@ -22,16 +22,135 @@ namespace continuous {
 class TabulatedSecondaryParticleMultiplicity : protected base::Base {
 
   /* fields */
+
   base::TabulatedData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/TabulatedSecondaryParticleMultiplicity/src/generateXSS.hpp"
-  #include "ACEtk/continuous/TabulatedSecondaryParticleMultiplicity/src/generateBlocks.hpp"
+
+  static std::vector< double >
+  generateXSS( unsigned int mftype, unsigned int mt,
+               std::vector< long >&& boundaries,
+               std::vector< long >&& interpolants,
+               std::vector< double >&& x,
+               std::vector< double >&& y ) {
+
+    std::vector< double > xss = { static_cast< double >( mftype ),
+                                  static_cast< double >( mt ) };
+    base::TabulatedData data( "TabulatedSecondaryParticleMultiplicity",
+                              std::move( boundaries ),
+                              std::move( interpolants ),
+                              std::move( x ),
+                              std::move( y ) );
+    xss.insert( xss.end(), data.begin(), data.end() );
+    return xss;
+  }
+
+  void generateBlocks() {
+
+    this->data_ = base::TabulatedData( this->name(), this->begin() + 2, this->end() );
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/TabulatedSecondaryParticleMultiplicity/src/ctor.hpp"
+
+  TabulatedSecondaryParticleMultiplicity() = default;
+
+  TabulatedSecondaryParticleMultiplicity( const TabulatedSecondaryParticleMultiplicity& base ) :
+    Base( base ), data_( base.data_ ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  TabulatedSecondaryParticleMultiplicity( TabulatedSecondaryParticleMultiplicity&& base ) :
+    Base( std::move( base ) ), data_( std::move( base.data_ ) ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  TabulatedSecondaryParticleMultiplicity& operator=( const TabulatedSecondaryParticleMultiplicity& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->data_ = base.data_;
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  TabulatedSecondaryParticleMultiplicity& operator=( TabulatedSecondaryParticleMultiplicity&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->data_ = std::move( base.data_ );
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] mftype            the type (12 or 16)
+   *  @param[in] mt                the associated reaction number
+   *  @param[in] boundaries        the interpolation range boundaries
+   *  @param[in] interpolants      the interpolation types for each range
+   *  @param[in] energies          the energy values
+   *  @param[in] multiplicities    the multiplicity values
+   */
+  TabulatedSecondaryParticleMultiplicity( unsigned int mftype, unsigned int mt,
+                                          std::vector< long > boundaries,
+                                          std::vector< long > interpolants,
+                                          std::vector< double > energies,
+                                          std::vector< double > multiplicities ) :
+    Base( "TabulatedSecondaryParticleMultiplicity",
+          generateXSS( mftype, mt,
+                       std::move( boundaries ), std::move( interpolants ),
+                       std::move( energies ), std::move( multiplicities ) ) ) {
+
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] mfmult            the type (12 or 16)
+   *  @param[in] mt                the associated reaction number
+   *  @param[in] energies          the energy values
+   *  @param[in] multiplicities    the multiplicity values
+   */
+  TabulatedSecondaryParticleMultiplicity( unsigned int mftype, unsigned int mt,
+                                          std::vector< double > energies,
+                                          std::vector< double > multiplicities ) :
+   TabulatedSecondaryParticleMultiplicity( mftype, mt, {}, {},
+                                           std::move( energies ),
+                                           std::move( multiplicities ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin    the begin iterator of the multiplicity data in the XSS array
+   *  @param[in] end      the end iterator of the multiplicity data in the XSS array
+   */
+  TabulatedSecondaryParticleMultiplicity( Iterator begin, Iterator end ) :
+    Base( "TabulatedSecondaryParticleMultiplicity", begin, end ) {
+
+    this->generateBlocks();
+  }
 
   /**
    *  @brief Return the representation type (should always be 12 or 16)

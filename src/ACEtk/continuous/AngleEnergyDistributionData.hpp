@@ -32,12 +32,99 @@ class AngleEnergyDistributionData :
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/AngleEnergyDistributionData/src/generateXSS.hpp"
+
+  static std::vector< double >
+  generateXSS( const std::string& name,
+               std::vector< long >&& boundaries,
+               std::vector< long >&& interpolants,
+               std::vector< TabulatedAngleEnergyDistribution >&& distributions,
+               std::size_t locb ) {
+
+    // add the distribution data to the xss array
+    const auto nr = boundaries.size();
+    const auto ne = distributions.size();
+    std::vector< double > xss( 1 + 2 * ne );
+    xss[0] = ne;
+    std::size_t index = 1;
+    const auto offset = 1 + 2 * nr + locb;
+    for ( const auto& distribution : distributions ) {
+
+      // set the associated value
+      xss[index] = distribution.value();
+
+      // set the locator
+      xss[index + ne] = xss.size() + offset;
+
+      // remake the internal xss array with the proper locators
+      const TabulatedAngleEnergyDistribution temp(
+                distribution.value(),
+                distribution.interpolation(),
+                std::move( distribution.distributions() ),
+                xss[index + ne] );
+      xss.insert( xss.end(), temp.begin(), temp.end() );
+
+      // on to the next distribution
+      ++index;
+    }
+
+    // insert the interpolation data in the front
+    InterpolationData interpolation( std::string( name ),
+                                     std::move( boundaries ),
+                                     std::move( interpolants ) );
+    xss.insert( xss.begin(), interpolation.begin(), interpolation.end() );
+
+    return xss;
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/AngleEnergyDistributionData/src/ctor.hpp"
+
+  AngleEnergyDistributionData() = default;
+
+  AngleEnergyDistributionData( const AngleEnergyDistributionData& ) = default;
+  AngleEnergyDistributionData( AngleEnergyDistributionData&& ) = default;
+
+  AngleEnergyDistributionData& operator=( const AngleEnergyDistributionData& ) = default;
+  AngleEnergyDistributionData& operator=( AngleEnergyDistributionData&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] boundaries       the interpolation range boundaries
+   *  @param[in] interpolants     the interpolation types for each range
+   *  @param[in] distributions    the distributions for each incident energy
+   *  @param[in] locb             the starting xss index with respect to the superblock
+   */
+  AngleEnergyDistributionData(
+      std::vector< long > boundaries,
+      std::vector< long > interpolants,
+      std::vector< TabulatedAngleEnergyDistribution > distributions,
+      std::size_t locb = 1 ) :
+    DistributionData( "AngleEnergyDistributionData",
+                      std::move( boundaries ), std::move( interpolants ),
+                      std::move( distributions ), locb ) {}
+
+  /**
+   *  @brief Constructor without interpolation data
+   *
+   *  @param[in] distributions    the distributions for each incident energy
+   *  @param[in] locb             the starting xss index with respect to the superblock
+   */
+  AngleEnergyDistributionData(
+      std::vector< TabulatedAngleEnergyDistribution > distributions,
+      std::size_t locb = 1 ) :
+    AngleEnergyDistributionData( {}, {}, std::move( distributions ), locb ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] locb    the starting xss index with respect to the superblock
+   *  @param[in] sig     the begin iterator of the block in the XSS array
+   *  @param[in] end     the end iterator of the block in the XSS array
+   */
+  AngleEnergyDistributionData( std::size_t locb, Iterator begin, Iterator end ) :
+    DistributionData( "AngleEnergyDistributionData", locb, begin, end ) {}
 
   /**
    *  @brief Return the distribution type

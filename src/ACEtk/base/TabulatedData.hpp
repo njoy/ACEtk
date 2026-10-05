@@ -19,18 +19,157 @@ namespace base {
 class TabulatedData : protected Base {
 
   /* fields */
+
   continuous::InterpolationData interpolation_;
   ColumnData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/base/TabulatedData/src/generateXSS.hpp"
-  #include "ACEtk/base/TabulatedData/src/generateBlocks.hpp"
-  #include "ACEtk/base/TabulatedData/src/verifySize.hpp"
+
+  static std::vector< double >
+  generateXSS( const std::string& name,
+               std::vector< long >&& boundaries,
+               std::vector< long >&& interpolants,
+               std::vector< double >&& x,
+               std::vector< double >&& y ) {
+
+    // reserve size in the vector
+    std::vector< double > xss;
+    const auto nr = boundaries.size();
+    const auto ne = x.size();
+    xss.reserve( 2 + 2 * nr + 2 * ne );
+
+    // insert the interpolation data
+    const continuous::InterpolationData interpolation( std::string( name ),
+                                                       std::move( boundaries ),
+                                                       std::move( interpolants ) );
+    xss.insert( xss.end(), interpolation.begin(), interpolation.end() );
+
+    // insert the tabulated data
+    const ColumnData table( std::string( name ), std::move( x ), std::move( y ) );
+    xss.insert( xss.end(), table.begin(), table.end() );
+
+    return xss;
+  }
+
+  void generateBlocks() {
+
+    const auto nr = static_cast< std::size_t >( this->IXSS( 1 ) );
+    const auto ne = static_cast< std::size_t >( this->IXSS( 1 + 2 * nr + 1 ) );
+    const auto begin = this->begin();
+    const auto data = begin + 2 * nr + 1;
+    const auto end = data + 2 * ne + 1;
+
+    this->interpolation_ = continuous::InterpolationData( this->name(), begin, data );
+    this->data_ = ColumnData( this->name(), data, end, 2 );
+  }
+
+  static void verifySize( Iterator begin, Iterator end,
+                          unsigned int nr, unsigned int ne ) {
+
+    // there are at least 2 + 2 * nr + 2 * ne values in the tabulated data block
+    auto size = std::distance( begin, end );
+    if ( size < 2 + 2 * nr + 2 * ne ) {
+
+      Log::error( "The size of the XSS subrange in the tabulated data "
+                  "block should be at least 2 + 2 * NR + 2 * NE" );
+      Log::info( "NR value: {}", nr );
+      Log::info( "NE value: {}", ne );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/base/TabulatedData/src/ctor.hpp"
+
+  TabulatedData() = default;
+
+  TabulatedData( const TabulatedData& base ) :
+    Base( base ), interpolation_( base.interpolation_ ),
+    data_( base.data_ ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  TabulatedData( TabulatedData&& base ) :
+    Base( std::move( base ) ), interpolation_( std::move( base.interpolation_ ) ),
+    data_( std::move( base.data_ ) ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name            the name of the block
+   *  @param[in] boundaries      the interpolation range boundaries
+   *  @param[in] interpolants    the interpolation types for each range
+   *  @param[in] x               the x values
+   *  @param[in] y               the y values
+   */
+  TabulatedData( std::string name, std::vector< long > boundaries,
+                 std::vector< long > interpolants, std::vector< double > x,
+                 std::vector< double > y ) :
+    Base( std::move( name ),
+          generateXSS( name,
+                       std::move( boundaries ), std::move( interpolants ),
+                       std::move( x ), std::move( y ) ) ) {
+
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name    the name of the block
+   *  @param[in] sig     the begin iterator of the block in the XSS array
+   *  @param[in] end     the end iterator of the block in the XSS array
+   */
+  TabulatedData( std::string name, Iterator begin, Iterator end ) :
+    Base( std::move( name ), begin, end ) {
+
+    const auto nr = static_cast< std::size_t >( std::round( this->XSS( 1 ) ) );
+    const auto ne = static_cast< std::size_t >( std::round( this->XSS( 1 + 2 * nr + 1 ) ) );
+    verifySize( this->begin(), this->end(), nr, ne );
+    this->generateBlocks();
+  }
+
+  TabulatedData& operator=( const TabulatedData& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->interpolation_ = base.interpolation_;
+      this->data_ = base.data_;
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  TabulatedData& operator=( TabulatedData&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->interpolation_ = std::move( base.interpolation_ );
+      this->data_ = std::move( base.data_ );
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
 
   /**
    *  @brief Return the interpolation data

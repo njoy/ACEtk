@@ -25,13 +25,62 @@ class MultiplicityReactionNumberBlock : protected base::Base {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/MultiplicityReactionNumberBlock/src/generateXSS.hpp"
-  #include "ACEtk/continuous/MultiplicityReactionNumberBlock/src/verifySize.hpp"
+
+  static std::vector< double > generateXSS( std::vector< unsigned int >&& mts ) {
+
+    const auto nyp = mts.size();
+    std::vector< double > xss{ static_cast< double >( nyp ) };
+    xss.reserve( nyp + 1 );
+    xss.insert( xss.end(), mts.begin(), mts.end() );
+    return xss;
+  }
+
+  static void verifySize( Iterator begin, Iterator end, unsigned int nyp ) {
+
+    if ( nyp != 0 ) {
+
+      auto size = std::distance( begin, end );
+      if ( size < nyp + 1 ) {
+
+        Log::error( "The size of the XSS subrange should be at least NYP + 1" );
+        Log::info( "NYP value: {}", nyp );
+        Log::info( "XSS.size(): {}", size );
+        throw std::exception();
+      }
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/MultiplicityReactionNumberBlock/src/ctor.hpp"
+
+  MultiplicityReactionNumberBlock() = default;
+
+  MultiplicityReactionNumberBlock( const MultiplicityReactionNumberBlock& ) = default;
+  MultiplicityReactionNumberBlock( MultiplicityReactionNumberBlock&& ) = default;
+
+  MultiplicityReactionNumberBlock& operator=( const MultiplicityReactionNumberBlock& ) = default;
+  MultiplicityReactionNumberBlock& operator=( MultiplicityReactionNumberBlock&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] mts    the MT numbers
+   */
+  MultiplicityReactionNumberBlock( std::vector< unsigned int > reactions ) :
+    Base( "YP", generateXSS( std::move( reactions ) ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] yp    the begin iterator of the YP block in the XSS array
+   *  @param[in] end   the end iterator of the YP block in the XSS array
+   */
+  MultiplicityReactionNumberBlock( Iterator yp, Iterator end ) :
+    Base( "YP", yp, end ) {
+
+    verifySize( this->begin(), this->end(), this->NYP() );
+  }
 
   /* methods */
 

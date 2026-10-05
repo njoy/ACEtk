@@ -22,6 +22,7 @@ template< typename Derived, typename Distribution >
 class DistributionData : protected Base {
 
   /* fields */
+
   std::size_t locb_;
 
 protected:
@@ -33,17 +34,212 @@ protected:
 private:
 
   /* auxiliary functions */
-  #include "ACEtk/base/DistributionData/src/verifyValueIndex.hpp"
-  #include "ACEtk/base/DistributionData/src/generateBlocks.hpp"
-  #include "ACEtk/base/DistributionData/src/verifySize.hpp"
+
+  void verifyValueIndex( const std::size_t index ) const {
+
+    if ( ( index < 1 ) || ( index > this->numberValues() ) ) {
+
+      Log::error( "Illegal index argument into {} block",
+                  this->name() );
+      Log::info( "Index value: {}", index );
+      Log::info( "{} accepts an index between 1 and {} inclusively",
+                 this->name(), this->numberValues() );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  void generateBlocks() {
+
+    this->distributions_.clear();
+
+    const auto nr = static_cast< std::size_t >( this->IXSS( 1 ) );
+    const auto ne = static_cast< std::size_t >( this->IXSS( 2 + 2 * nr ) );
+    auto begin = this->begin();
+    auto data = this->iterator( 2 + 2 * nr );
+    auto end = this->iterator( 2 + 2 * nr + 2 * ne + 1 );
+
+    this->interpolation_ = continuous::InterpolationData( this->name(), begin, data );
+    this->values_ = ColumnData( this->name(), data, end, 2 );
+    for ( unsigned int index = 1; index <= this->numberValues(); ++index ) {
+
+      const double value = this->value( 1, index );
+      const auto locb = this->distributionLocator( index );
+      const auto locator = this->relativeDistributionLocator( index );
+      const auto left = this->iterator( locator );
+      auto right = this->end();
+      for ( auto next = index + 1; next <= this->numberValues(); ++next ) {
+
+        auto nextlocator = this->relativeDistributionLocator( next );
+        if ( nextlocator > locator ) {
+
+          right = this->iterator( nextlocator );
+          break;
+        }
+      }
+      this->distributions_.emplace_back( Distribution( value, locb, left, right ) );
+    }
+  }
+
+  static void verifySize( Iterator begin, Iterator end,
+                          unsigned int nr, unsigned int ne ) {
+
+    // there are at least 2 + 2 * nr + 2 * ne values in the distribution data block
+    auto size = std::distance( begin, end );
+    if ( size < 2 + 2 * nr + 2 * ne ) {
+
+      Log::error( "The size of the XSS subrange in the distribution data "
+                  "block should be at least 2 + 2 * NR + 2 * NE" );
+      Log::info( "NR value: {}", nr );
+      Log::info( "NE value: {}", ne );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
 
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/base/DistributionData/src/generateXSS.hpp"
+
+  static std::vector< double >
+  generateXSS( const std::string& name,
+               std::vector< long >&& boundaries,
+               std::vector< long >&& interpolants,
+               std::vector< Distribution >&& distributions,
+               std::size_t locb ) {
+
+    // add the distribution data to the xss array
+    const auto nr = boundaries.size();
+    const auto ne = distributions.size();
+    std::vector< double > xss( 1 + 2 * ne );
+    xss[0] = ne;
+    std::size_t index = 1;
+    const auto offset = 1 + 2 * nr + locb;
+    for ( const auto& distribution : distributions ) {
+
+      // set the associated value
+      xss[index] = distribution.value();
+
+      // set the locator
+      xss[index + ne] = static_cast< double >( xss.size() + offset );
+
+      // insert the xss array
+      xss.insert( xss.end(), distribution.begin(), distribution.end() );
+
+      // on to the next distribution
+      ++index;
+    }
+
+    // insert the interpolation data in the front
+    const continuous::InterpolationData interpolation( std::string( name ),
+                                                       std::move( boundaries ),
+                                                       std::move( interpolants ) );
+    xss.insert( xss.begin(), interpolation.begin(), interpolation.end() );
+
+    return xss;
+  }
 
   /* constructor */
-  #include "ACEtk/base/DistributionData/src/ctor.hpp"
+
+  DistributionData() = default;
+
+  DistributionData( const DistributionData& base ) :
+    Base( base ), locb_( base.locb_ ),
+    interpolation_( base.interpolation_ ),
+    values_( base.values_ ),
+    distributions_( base.distributions_ ) {
+
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
+
+  DistributionData( DistributionData&& base ) :
+    Base( std::move( base ) ), locb_( base.locb_ ),
+    interpolation_( std::move( base.interpolation_ ) ),
+    values_( std::move( base.values_ ) ),
+    distributions_( std::move( base.distributions_ ) ) {
+
+    if ( Base::owner() ) {
+
+      static_cast< Derived* >( this )->generateBlocks();
+    }
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name             the name of the block
+   *  @param[in] boundaries       the interpolation range boundaries
+   *  @param[in] interpolants     the interpolation types for each range
+   *  @param[in] distributions    the distributions for each incident energy
+   *  @param[in] locb             the starting xss index with respect to the superblock
+   */
+  DistributionData( std::string name,
+                    std::vector< long > boundaries,
+                    std::vector< long > interpolants,
+                    std::vector< Distribution > distributions,
+                    std::size_t locb ) :
+    Base( std::move( name ),
+          Derived::generateXSS( std::string( name ),
+                                std::move( boundaries ), std::move( interpolants ),
+                                std::move( distributions ), locb ) ),
+    locb_( locb ) {
+
+    static_cast< Derived* >( this )->generateBlocks();
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] name    the name of the block
+   *  @param[in] locb    the starting xss index with respect to the superblock
+   *  @param[in] sig     the begin iterator of the block in the XSS array
+   *  @param[in] end     the end iterator of the block in the XSS array
+   */
+  DistributionData( std::string name, std::size_t locb,
+                    Iterator begin, Iterator end ) :
+    Base( std::move( name ), begin, end ), locb_( locb ) {
+
+    const auto nr = static_cast< std::size_t >( std::round( this->XSS( 1 ) ) );
+    const auto ne = static_cast< std::size_t >( std::round( this->XSS( 1 + 2 * nr + 1 ) ) );
+    verifySize( this->begin(), this->end(), nr, ne );
+    static_cast< Derived* >( this )->generateBlocks();
+  }
+
+  DistributionData& operator=( const DistributionData& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->interpolation_ = base.interpolation_;
+      this->values_ = base.values_;
+      this->distributions_ = base.distributions_;
+      this->locb_ = base.locb_;
+      if ( Base::owner() ) {
+
+        static_cast< Derived* >( this )->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  DistributionData& operator=( DistributionData&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->interpolation_ = std::move( base.interpolation_ );
+      this->values_ = std::move( base.values_ );
+      this->distributions_ = std::move( base.distributions_ );
+      this->locb_ = base.locb_;
+      if ( Base::owner() ) {
+
+        static_cast< Derived* >( this )->generateBlocks();
+      }
+    }
+    return *this;
+  }
 
 public:
 

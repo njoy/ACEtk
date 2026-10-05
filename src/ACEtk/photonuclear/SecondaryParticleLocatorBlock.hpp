@@ -23,16 +23,105 @@ namespace photonuclear {
 class SecondaryParticleLocatorBlock : protected base::Base {
 
   /* fields */
+
   unsigned int ntype_ = 0;
 
   /* auxiliary functions */
-  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/generateXSS.hpp"
-  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/verifySize.hpp"
+
+  static std::vector< double >
+  generateXSS( std::vector< unsigned int >&& types,
+               std::vector< unsigned int >&& numbers,
+               std::vector< std::array< unsigned int, 10 > >&& locators ) {
+
+    std::vector< double > xss;
+    const auto ntype = locators.size();
+    xss.reserve( ntype * 12 );
+
+    if ( ( types.size() != ntype ) || ( numbers.size() != ntype ) ) {
+
+      Log::error( "The number of particles is not consistent between the particle types, "
+                  "the number of reactions and the locator sets" );
+      Log::info( "Expected: {}", ntype );
+      Log::info( "Found types: {}", types.size() );
+      Log::info( "Found numbers: {}", numbers.size() );
+      Log::info( "Found locators: {}", locators.size() );
+      throw std::exception();
+    }
+
+    for ( unsigned int index = 0; index < ntype; ++index ) {
+
+      xss.push_back( static_cast< double >( types[index] ) );
+      xss.push_back( static_cast< double >( numbers[index] ) );
+      xss.insert( xss.end(), locators[index].begin(), locators[index].end() );
+    }
+    return xss;
+  }
+
+  static void verifySize( Iterator begin, Iterator end, unsigned int ntype ) {
+
+    auto size = std::distance( begin, end );
+    if ( size < 12 * ntype ) {
+
+      Log::error( "The size of the XSS subrange should be at least 12 * NTYPE" );
+      Log::info( "NTYPE value: {}", ntype );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
+
+  /* constructor */
+
+  /**
+   *  @brief Private constructor
+   */
+  SecondaryParticleLocatorBlock(
+      std::vector< unsigned int >&& types,
+      std::vector< unsigned int >&& numbers,
+      std::vector< std::array< unsigned int, 10 > >&& locators,
+      std::size_t ntype ) :
+    Base( "IXSU", generateXSS( std::move( types ), std::move( numbers ),
+                               std::move( locators ) ) ),
+    ntype_( ntype ) {}
 
 public:
 
   /* constructor */
-  #include "ACEtk/photonuclear/SecondaryParticleLocatorBlock/src/ctor.hpp"
+
+  SecondaryParticleLocatorBlock() = default;
+
+  SecondaryParticleLocatorBlock( const SecondaryParticleLocatorBlock& ) = default;
+  SecondaryParticleLocatorBlock( SecondaryParticleLocatorBlock&& ) = default;
+
+  SecondaryParticleLocatorBlock& operator=( const SecondaryParticleLocatorBlock& ) = default;
+  SecondaryParticleLocatorBlock& operator=( SecondaryParticleLocatorBlock&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] types       the particle types
+   *  @param[in] numbers     the number of reactions for each particle type
+   *  @param[in] locators    the locators for each secondary particle type
+   */
+  SecondaryParticleLocatorBlock(
+      std::vector< unsigned int > types,
+      std::vector< unsigned int > numbers,
+      std::vector< std::array< unsigned int, 10 > > locators ) :
+    SecondaryParticleLocatorBlock(
+      std::move( types ), std::move( numbers ),
+      std::move( locators ), locators.size() ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] ixs     the begin iterator of the IXS block in the XSS array
+   *  @param[in] end     the end iterator of the IXS block in the XSS array
+   *  @param[in] ntype   the number of secondary particle types
+   */
+  SecondaryParticleLocatorBlock( Iterator ixs, Iterator end, unsigned int ntype ) :
+    Base( "IXSU", ixs, end ), ntype_( ntype ) {
+
+    verifySize( this->begin(), this->end(), this->NTYPE() );
+  }
 
   /* methods */
 
