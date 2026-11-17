@@ -4,8 +4,7 @@ Photonuclear ACE blocks and components
 from __future__ import annotations
 import pybind11_stubgen.typing_ext
 import typing
-import typing_extensions
-__all__ = ['PrincipalCrossSectionBlock', 'SecondaryParticleLocatorBlock']
+__all__: list[str] = ['PrincipalCrossSectionBlock', 'SecondaryParticleLocatorBlock']
 class PrincipalCrossSectionBlock:
     """
     The photoatomic ESZG block with the principal cross sections
@@ -216,7 +215,7 @@ class SecondaryParticleLocatorBlock:
             self     the block
             index    the secondary particle index (one-based)
         """
-    def __init__(self, types: list[int], numbers: list[int], locators: list[typing_extensions.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(10)]]) -> None:
+    def __init__(self, types: list[int], numbers: list[int], locators: list[typing.Annotated[list[int], pybind11_stubgen.typing_ext.FixedSize(10)]]) -> None:
         """
         Initialise the block
         

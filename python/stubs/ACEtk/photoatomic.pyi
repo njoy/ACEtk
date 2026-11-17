@@ -3,7 +3,7 @@ Photoatomic ACE blocks and components
 """
 from __future__ import annotations
 import typing
-__all__ = ['CoherentFormFactorBlock', 'ComptonProfile', 'ComptonProfileBlock', 'FluorescenceDataBlock', 'HeatingNumbersBlock', 'IncoherentScatteringFunctionBlock', 'PhotoelectricCrossSectionBlock', 'PrincipalCrossSectionBlock']
+__all__: list[str] = ['CoherentFormFactorBlock', 'ComptonProfile', 'ComptonProfileBlock', 'FluorescenceDataBlock', 'HeatingNumbersBlock', 'IncoherentScatteringFunctionBlock', 'PhotoelectricCrossSectionBlock', 'PrincipalCrossSectionBlock']
 class CoherentFormFactorBlock:
     """
     The photoatomic JCOH block with the coherent form factors

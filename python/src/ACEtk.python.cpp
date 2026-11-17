@@ -27,12 +27,15 @@ void wrapContinuous( python::module&, python::module& );
 void wrapPhotoatomic( python::module&, python::module& );
 void wrapPhotonuclear( python::module&, python::module& );
 void wrapDosimetry( python::module&, python::module& );
+void wrapElectroatomic( python::module&, python::module& );
 void wrapElectron( python::module&, python::module& );
 void wrapThermal( python::module&, python::module& );
+void wrapMultigroup( python::module&, python::module& );
 
 // declarations - ACE table types
 void wrapContinuousEnergyTable( python::module&, python::module& );
 void wrapDosimetryTable( python::module&, python::module& );
+void wrapElectronTable( python::module&, python::module& );
 void wrapThermalScatteringTable( python::module&, python::module& );
 void wrapPhotoatomicTable( python::module&, python::module& );
 void wrapPhotonuclearTable( python::module&, python::module& );
@@ -74,12 +77,15 @@ PYBIND11_MODULE( ACEtk, module ) {
   wrapPhotoatomic( module, viewmodule );
   wrapPhotonuclear( module, viewmodule );
   wrapDosimetry( module, viewmodule );
+  wrapElectroatomic( module, viewmodule );
   wrapElectron( module, viewmodule );
   wrapThermal( module, viewmodule );
+  wrapMultigroup( module, viewmodule );
 
   // wrap ACE table types
   wrapContinuousEnergyTable( module, viewmodule );
   wrapDosimetryTable( module, viewmodule );
+  wrapElectronTable( module, viewmodule );
   wrapThermalScatteringTable( module, viewmodule );
   wrapPhotoatomicTable( module, viewmodule );
   wrapPhotonuclearTable( module, viewmodule );

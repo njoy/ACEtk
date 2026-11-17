@@ -21,17 +21,141 @@ namespace continuous {
 class DelayedNeutronPrecursorData : protected base::Base {
 
   /* fields */
+
   unsigned int number_ = 0;
   base::TabulatedData data_;
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/DelayedNeutronPrecursorData/src/generateXSS.hpp"
-  #include "ACEtk/continuous/DelayedNeutronPrecursorData/src/generateBlocks.hpp"
+
+  static std::vector< double >
+  generateXSS( double lambda,
+               std::vector< long >&& boundaries,
+               std::vector< long >&& interpolants,
+               std::vector< double >&& x,
+               std::vector< double >&& y ) {
+
+    std::vector< double > xss = { lambda };
+    const base::TabulatedData data( "DelayedNeutronPrecursorData",
+                                    std::move( boundaries ),
+                                    std::move( interpolants ),
+                                    std::move( x ),
+                                    std::move( y ) );
+    xss.insert( xss.end(), data.begin(), data.end() );
+    return xss;
+  }
+
+  void generateBlocks() {
+
+    this->data_ = base::TabulatedData( this->name(), this->begin() + 1, this->end() );
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/DelayedNeutronPrecursorData/src/ctor.hpp"
+
+  DelayedNeutronPrecursorData() = default;
+
+  DelayedNeutronPrecursorData( const DelayedNeutronPrecursorData& base ) :
+    Base( base ), number_( base.number_ ),
+    data_( base.data_ ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  DelayedNeutronPrecursorData( DelayedNeutronPrecursorData&& base ) :
+    Base( std::move( base ) ), number_( base.number_ ),
+    data_( std::move( base.data_ ) ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  DelayedNeutronPrecursorData& operator=( const DelayedNeutronPrecursorData& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->number_ = base.number_;
+      this->data_ = base.data_;
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  DelayedNeutronPrecursorData& operator=( DelayedNeutronPrecursorData&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->number_ = base.number_;
+      this->data_ = std::move( base.data_ );
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] number            the precursor group number
+   *  @param[in] constant          the precursor group's decay constant
+   *  @param[in] boundaries        the interpolation range boundaries
+   *  @param[in] interpolants      the interpolation types for each range
+   *  @param[in] energies          the energy values
+   *  @param[in] multiplicities    the multiplicity values
+   */
+  DelayedNeutronPrecursorData( unsigned int number, double constant,
+                               std::vector< long > boundaries,
+                               std::vector< long > interpolants,
+                               std::vector< double > energies,
+                               std::vector< double > multiplicities ) :
+    Base( "DelayedNeutronPrecursorData",
+          generateXSS( constant,
+                       std::move( boundaries ), std::move( interpolants ),
+                       std::move( energies ), std::move( multiplicities ) ) ),
+    number_( number ) {
+
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] number            the precursor group number
+   *  @param[in] constant          the precursor group's decay constant
+   *  @param[in] energies          the energy values
+   *  @param[in] multiplicities    the multiplicity values
+   */
+  DelayedNeutronPrecursorData( unsigned int number, double constant,
+                               std::vector< double > energies,
+                               std::vector< double > multiplicities ) :
+   DelayedNeutronPrecursorData( number, constant, {}, {}, std::move( energies ),
+                                std::move( multiplicities ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] number   the precursor group number
+   *  @param[in] begin    the begin iterator of the multiplicity data in the XSS array
+   *  @param[in] end      the end iterator of the multiplicity data in the XSS array
+   */
+  DelayedNeutronPrecursorData( Iterator begin, Iterator end, unsigned int number ) :
+    Base( "DelayedNeutronPrecursorData", begin, end ),
+    number_( number ) {
+
+    this->generateBlocks();
+  }
 
   /**
    *  @brief Return the delayed precursor group number

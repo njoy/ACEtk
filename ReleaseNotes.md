@@ -1,6 +1,28 @@
 # Release Notes&mdash;ACEtk
 Given here are some release notes for ACEtk.
 
+## ACEtk v1.1.0
+This adds support for the electron table ACE file type (e.g., `el` and `el03` libraries).
+  - Added `ElectronTable` class and component block classes. This class supports two different but
+    related formats (`el` and `el03`); users should check NXS(16) or the
+    `ElectronTable.electron_data_format` member to identify the format type.
+  - Added `MatrixData` base class. For a M by N matrix data block, the `MatrixData` class contains
+    M row labels, N column labels, and M\*N matrix data points which may be in row-major or column-
+    major order.
+
+This adds support for the multigroup ACE file type.
+
+This fixes the following issues in ACEtk:
+  - Electron population when contructing the electron shell block should now be given as
+    floating point numbers.
+  - The photon production cross section block and the secondary particle production cross section block
+    are now returned properly when using the human readable functions (the ACE speak SIGP and SIGH functions
+    worked properly and are not impacted).
+  - Added a check on the number of shells in the SWD and EPS block in the photoatomic table.
+
+The repository has been restructured: all code contained in component specific hpp files are now in the
+main component's hpp file. This was done to make the repository more readable.
+
 ## ACEtk v1.0.4
 This fixes the following issues in ACEtk:
   - The subshell transition data block (or XPROB block) was not available in Python. A

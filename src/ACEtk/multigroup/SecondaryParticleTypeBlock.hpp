@@ -1,0 +1,170 @@
+#ifndef NJOY_ACETK_MULTIGROUP_SECONDARYPARTICLETYPEBLOCK
+#define NJOY_ACETK_MULTIGROUP_SECONDARYPARTICLETYPEBLOCK
+
+// system includes
+#include <algorithm>
+
+// other includes
+#include "ACEtk/base/ArrayData.hpp"
+
+namespace njoy {
+namespace ACEtk {
+namespace multigroup {
+
+/**
+ *  @class
+ *  @brief The multigroup IPT block with the secondary particle types
+ *
+ *  The SecondaryParticleTypeBlock class contains the secondary particle types
+ *  for which data is available. The allowed particle types are:
+ *      1  -  neutron
+ *      2  -  photon
+ *
+ *  The number of available particle types is stored in NXS(8).
+ */
+class SecondaryParticleTypeBlock : protected base::ArrayData {
+
+  /* fields */
+
+  /* auxiliary functions */
+
+public:
+
+  /* constructor */
+
+  SecondaryParticleTypeBlock() = default;
+
+  SecondaryParticleTypeBlock( const SecondaryParticleTypeBlock& ) = default;
+  SecondaryParticleTypeBlock( SecondaryParticleTypeBlock&& ) = default;
+
+  SecondaryParticleTypeBlock& operator=( const SecondaryParticleTypeBlock& ) = default;
+  SecondaryParticleTypeBlock& operator=( SecondaryParticleTypeBlock&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] types    the secondary particle types
+   */
+  SecondaryParticleTypeBlock( std::vector< unsigned int > types ) :
+    ArrayData( "IPT",
+               std::vector< std::vector< unsigned int > >{ std::move( types ) } ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin   the begin iterator of the IPT block in the XSS array
+   *  @param[in] end     the end iterator of the IPT block in the XSS array
+   *  @param[in] ntype   the number of secondary particle types
+   */
+  SecondaryParticleTypeBlock( Iterator begin, Iterator end, unsigned int ntype ) :
+    ArrayData( "IPT", begin, end, ntype, 1 ) {}
+
+  /* methods */
+
+  /**
+   *  @brief Return the number of secondary particle types
+   */
+  unsigned int NTYPE() const { return this->N(); }
+
+  /**
+   *  @brief Return the number of secondary particle types 
+   */
+  unsigned int numberSecondaryParticleTypes() const {
+
+    return this->NTYPE();
+  }
+
+  /**
+   *  @brief Return the particle type for a secondary particle index
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  unsigned int IPT( std::size_t index ) const { return this->ivalue( 1, index ); }
+
+  /**
+   *  @brief Return the particle type for a secondary particle index
+   *
+   *  @param[in] index     the index (one-based)
+   */
+  unsigned int particleType( std::size_t index ) const {
+
+    return this->IPT( index );
+  }
+
+  /**
+   *  @brief Return the particle types
+   */
+  auto IPTs() const { return this->iarray( 1 ); }
+
+  /**
+   *  @brief Return the particle types
+   */
+  auto particleTypes() const { return this->IPTs(); }
+
+  /**
+   *  @brief Return whether or not the particle type is present
+   *
+   *  @param[in] type    the particle type
+   */
+  bool hasIPT( unsigned int type ) const {
+
+    return std::find_if(
+               this->begin(),
+               this->begin() + this->NTYPE(),
+               [type] ( auto&& value ) {
+
+                 return static_cast< unsigned int >( std::round( value ) )
+                        == type;
+               } ) != this->end();
+  }
+
+  /**
+   *  @brief Return whether or not the particle type is present
+   *
+   *  @param[in] type    the particle type
+   */
+  bool hasParticleType( unsigned int reaction ) const {
+
+    return this->hasIPT( reaction );
+  }
+
+  /**
+   *  @brief Return the index (one-based) of the particle type
+   *
+   *  @param[in] type    the particle type
+   */
+  std::size_t index( unsigned int type ) const {
+
+    auto iter = std::find_if(
+                    this->begin(), this->begin() + this->NTYPE(),
+                    [type] ( auto&& value ) {
+
+                      return static_cast< unsigned int >( std::round( value ) )
+                             == type;
+                    } );
+    if ( iter != this->end() ) {
+
+      return std::distance( this->begin(), iter ) + 1;
+    }
+    else {
+
+      Log::error( "The requested particle type IP{} is not present", type );
+      throw std::exception();
+    }
+  }
+
+  using ArrayData::empty;
+  using ArrayData::name;
+  using ArrayData::length;
+  using ArrayData::XSS;
+  using ArrayData::begin;
+  using ArrayData::end;
+};
+
+using IPT = SecondaryParticleTypeBlock;
+
+} // multigroup namespace
+} // ACEtk namespace
+} // njoy namespace
+
+#endif

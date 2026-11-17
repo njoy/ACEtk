@@ -20,13 +20,68 @@ class PhotonProductionCrossSectionData : protected base::Base {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/PhotonProductionCrossSectionData/src/generateXSS.hpp"
-  #include "ACEtk/continuous/PhotonProductionCrossSectionData/src/verifySize.hpp"
+
+  static std::vector< double > generateXSS(
+      std::size_t index,
+      std::vector< double >&& values ) {
+
+    std::vector< double > xss = { 13.,
+                                  static_cast< double >( index ),
+                                  static_cast< double >( values.size() ) };
+    xss.reserve( 3 + values.size() );
+    xss.insert( xss.end(), values.begin(), values.end() );
+
+    return xss;
+  }
+
+  static void verifySize( Iterator begin, Iterator end,
+                          unsigned int numberValues ) {
+
+    auto size = std::distance( begin, end );
+    if ( size < numberValues + 3 ) {
+
+      Log::error( "The size of the XSS subrange in the production cross section "
+                  "data should be at least 3 + XSS(3)" );
+      Log::info( "XSS(3) value: {}", numberValues );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/PhotonProductionCrossSectionData/src/ctor.hpp"
+
+  PhotonProductionCrossSectionData() = default;
+
+  PhotonProductionCrossSectionData( const PhotonProductionCrossSectionData& ) = default;
+  PhotonProductionCrossSectionData( PhotonProductionCrossSectionData&& ) = default;
+
+  PhotonProductionCrossSectionData& operator=( const PhotonProductionCrossSectionData& ) = default;
+  PhotonProductionCrossSectionData& operator=( PhotonProductionCrossSectionData&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] index     the energy index
+   *  @param[in] values    the cross section values
+   */
+  PhotonProductionCrossSectionData( std::size_t index,
+                                    std::vector< double > values ) :
+    Base( "PhotonProductionCrossSectionData",
+          generateXSS( index, std::move( values ) ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin    the begin iterator of the cross section data
+   *  @param[in] end      the end iterator of the cross section data
+   */
+  PhotonProductionCrossSectionData( Iterator begin, Iterator end ) :
+    Base( "PhotonProductionCrossSectionData", begin, end ) {
+
+    verifySize( this->begin(), this->end(), this->numberValues() );
+  }
 
   /**
    *  @brief Return the representation type (should always be 13)

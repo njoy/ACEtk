@@ -12,12 +12,11 @@ namespace python = pybind11;
 namespace continuous {
 
 void wrapFrameAndMultiplicityBlock( python::module& module,
-                                    python::module& viewmodule ) {
+                                    python::module& ) {
 
   // type aliases
   using Block = njoy::ACEtk::continuous::FrameAndMultiplicityBlock;
   using ReferenceFrame = njoy::ACEtk::ReferenceFrame;
-  using ReferenceFrameRange = BasicRandomAccessAnyView< ReferenceFrame >;
 
   // create the block
   python::class_< Block > block(

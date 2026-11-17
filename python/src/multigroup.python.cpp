@@ -1,0 +1,67 @@
+// system includes
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
+// local includes
+
+// namespace aliases
+namespace python = pybind11;
+
+namespace multigroup {
+  
+
+  // declarations - ACE table blocks
+  void wrapIncidentParticleGroupStructureBlock( python::module&, python::module& );
+  void wrapTotalCrossSectionBlock( python::module&, python::module& );
+  void wrapFissionCrossSectionBlock( python::module&, python::module& );
+  void wrapFissionChiDataBlock( python::module&, python::module& );
+  void wrapAbsorptionCrossSectionBlock( python::module&, python::module& );
+  void wrapStoppingPowerBlock( python::module&, python::module& );
+  void wrapMomentumTransferBlock( python::module&, python::module& );
+  void wrapEditReactionNumberBlock( python::module&, python::module& );
+  void wrapEditCrossSectionBlock( python::module&, python::module& );
+  void wrapSecondaryParticleTypeBlock( python::module&, python::module& );
+  void wrapSecondaryParticleGroupStructureBlock( python::module&, python::module& );
+  void wrapSecondaryParticleGroupStructureLocatorBlock( python::module&, python::module& );
+  void wrapP0LocatorBlock( python::module&, python::module& );
+  void wrapBandP0Data( python::module&, python::module& );
+  void wrapRectangularP0Data( python::module&, python::module& );
+  void wrapSecondaryAngularDistributionTypeBlock( python::module&, python::module& );
+  void wrapNumberSecondaryAngularVariablesBlock( python::module&, python::module& );
+  void wrapXPNLocatorBlock( python::module&, python::module& );
+  void wrapPNLocatorBlock( python::module&, python::module& );
+  void wrapBandXPNData( python::module&, python::module& );
+  void wrapRectangularXPNData( python::module&, python::module& );
+}
+
+void wrapMultigroup( python::module& module, python::module& viewmodule ) {
+
+  // create the submodule
+  python::module submodule = module.def_submodule(
+
+    "multigroup",
+    "Multigroup MC ACE blocks and components"
+  );
+
+  multigroup::wrapIncidentParticleGroupStructureBlock( submodule, viewmodule );
+  multigroup::wrapTotalCrossSectionBlock( submodule, viewmodule );
+  multigroup::wrapFissionCrossSectionBlock( submodule, viewmodule );
+  multigroup::wrapFissionChiDataBlock( submodule, viewmodule );
+  multigroup::wrapAbsorptionCrossSectionBlock( submodule, viewmodule );
+  multigroup::wrapStoppingPowerBlock( submodule, viewmodule );
+  multigroup::wrapMomentumTransferBlock( submodule, viewmodule );
+  multigroup::wrapEditReactionNumberBlock( submodule, viewmodule );
+  multigroup::wrapEditCrossSectionBlock( submodule, viewmodule );
+  multigroup::wrapSecondaryParticleTypeBlock( submodule, viewmodule );
+  multigroup::wrapSecondaryParticleGroupStructureBlock( submodule, viewmodule );
+  multigroup::wrapSecondaryParticleGroupStructureLocatorBlock( submodule, viewmodule );
+  multigroup::wrapP0LocatorBlock( submodule, viewmodule );
+  multigroup::wrapBandP0Data( submodule, viewmodule );
+  multigroup::wrapRectangularP0Data( submodule, viewmodule );
+  multigroup::wrapSecondaryAngularDistributionTypeBlock( submodule, viewmodule );
+  multigroup::wrapNumberSecondaryAngularVariablesBlock( submodule, viewmodule );
+  multigroup::wrapXPNLocatorBlock( submodule, viewmodule );
+  multigroup::wrapPNLocatorBlock( submodule, viewmodule );
+  multigroup::wrapBandXPNData( submodule, viewmodule );
+  multigroup::wrapRectangularXPNData( submodule, viewmodule );
+}

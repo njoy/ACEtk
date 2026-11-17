@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( ACEtk
-  VERSION 1.0.4
+  VERSION 1.1.0
   LANGUAGES CXX
 )
 
@@ -27,7 +27,7 @@ set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
 cmake_dependent_option(
   ACEtk.tests
-  "Build the ACEtk unit tests and integrate with ctest" ON
+  "Build the ACEtk unit tests and integrate with ctest" OFF
   "BUILD_TESTING AND NOT ${subproject}" OFF
 )
 
@@ -49,6 +49,16 @@ option( ACEtk.installation "Install ACEtk" ON )
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
 include( cmake/dependencies.cmake )
+
+########################################################################
+# Sphinx documentation
+########################################################################
+
+if( NOT subproject )
+  # when using find_program, cmake will look specifically for ${CMAKE_MODULE_PATH}/Find{program}.cmake
+  list( APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" )
+  add_subdirectory( docs )
+endif()
 
 ########################################################################
 # Project targets
