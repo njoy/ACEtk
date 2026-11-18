@@ -1487,7 +1487,7 @@ class PhotoatomicTable:
             self     the block
             index    the index (one-based)
         """
-    def __init__(self, z: int, header: Header | Header201, za: list[int], awr: list[float], eszg: photoatomic.PrincipalCrossSectionBlock, jinc: photoatomic.IncoherentScatteringFunctionBlock, jcoh: photoatomic.CoherentFormFactorBlock, lhnm: photoatomic.HeatingNumbersBlock, jflo: photoatomic.FluorescenceDataBlock | None = None, eps: electroatomic.ElectronShellBlock | None = None, swd: photoatomic.ComptonProfileBlock | None = None, subsh: electroatomic.ElectronSubshellBlock | None = None, sphel: photoatomic.PhotoelectricCrossSectionBlock | None = None, xprob: electroatomic.SubshellTransitionDataBlock | None = None, esze: electroatomic.PrincipalCrossSectionBlock | None = None, excit: electroatomic.ExcitationBlock | None = None, elas: electroatomic.ElasticAngularDistributionBlock | None = None, eion: list[electroatomic.EnergyDistributionBlock] = [], breme: electroatomic.EnergyDistributionBlock | None = None, breml: electroatomic.BremsstrahlungBlock | None = None, selas: electroatomic.ElasticCrossSectionBlock | None = None) -> None:
+    def __init__(self, z: int, header: Header | Header201, za: list[int], awr: list[float], eszg: photoatomic.PrincipalCrossSectionBlock, jinc: photoatomic.IncoherentScatteringFunctionBlock, jcoh: photoatomic.CoherentFormFactorBlock, lhnm: photoatomic.HeatingNumbersBlock, jflo: photoatomic.FluorescenceDataBlock | None = None, eps: electroatomic.ElectronShellBlock | None = None, swd: photoatomic.ComptonProfileBlock | None = None, subsh: electroatomic.ElectronSubshellBlock | None = None, sphel: photoatomic.PhotoelectricCrossSectionBlock | None = None, xprob: electroatomic.SubshellTransitionDataBlock | None = None, esze: electroatomic.PrincipalCrossSectionBlock | None = None, excit: electroatomic.ExcitationBlock | None = None, elas: electroatomic.ElasticAngularDistributionBlock | None = None, eion: list[electroatomic.EnergyDistributionBlock] = [], breme: electroatomic.EnergyDistributionBlock | None = None, breml: electroatomic.BremsstrahlungBlock | electroatomic.BremsstrahlungEnergyLossBlock | None = None, selas: electroatomic.ElasticCrossSectionBlock | None = None) -> None:
         """
         Initialise the table
         
@@ -1512,7 +1512,7 @@ class PhotoatomicTable:
             elas      the electron elastic angular distribution block
             eion      the electronionisation data block
             breme     the photon energy distributions from Bremsstrahlung
-            breml     the electron average energy after Bremsstrahlung
+            breml     the average electron energy remaining after or lost to Bremsstrahlung
             selas     the additional electron elastic cross section block
         """
     def electroionisation_energy_distribution_block(self, index: int) -> electroatomic.EnergyDistributionBlock:
@@ -1549,9 +1549,12 @@ class PhotoatomicTable:
         The Bremsstrahlung energy distribution block for eprdata (NEPR > 0)
         """
     @property
-    def BREML(self) -> electroatomic.BremsstrahlungBlock | None:
+    def BREML(self) -> electroatomic.BremsstrahlungBlock | electroatomic.BremsstrahlungEnergyLossBlock | None:
         """
-        The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
+        The electron Bremsstrahlung energy block for eprdata (NEPR > 0)
+        
+        The block contains the average remaining energy for NEPR = 1 and the
+        average energy loss for the other EPR formats.
         """
     @property
     def ELAS(self) -> electroatomic.ElasticAngularDistributionBlock | None:
@@ -1740,9 +1743,12 @@ class PhotoatomicTable:
         The additional elastic cross section block for eprdata (NEPR = 3)
         """
     @property
-    def electron_energy_after_bremsstrahlung_block(self) -> electroatomic.BremsstrahlungBlock | None:
+    def electron_energy_after_bremsstrahlung_block(self) -> electroatomic.BremsstrahlungBlock | electroatomic.BremsstrahlungEnergyLossBlock | None:
         """
-        The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
+        The electron Bremsstrahlung energy block for eprdata (NEPR > 0)
+        
+        The block contains the average remaining energy for NEPR = 1 and the
+        average energy loss for the other EPR formats.
         """
     @property
     def electron_excitation_energy_loss_block(self) -> electroatomic.ExcitationBlock | None:
