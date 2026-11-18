@@ -98,6 +98,7 @@ add_cpp_test( continuous.TwoBodyTransferDistribution continuous/TwoBodyTransferD
 add_cpp_test( dosimetry.CrossSectionBlock dosimetry/CrossSectionBlock.test.cpp )
 add_cpp_test( dosimetry.CrossSectionData dosimetry/CrossSectionData.test.cpp )
 add_cpp_test( electroatomic.BremsstrahlungBlock electroatomic/BremsstrahlungBlock.test.cpp )
+add_cpp_test( electroatomic.BremsstrahlungEnergyLossBlock electroatomic/BremsstrahlungEnergyLossBlock.test.cpp )
 add_cpp_test( electroatomic.ElasticAngularDistributionBlock electroatomic/ElasticAngularDistributionBlock.test.cpp )
 add_cpp_test( electroatomic.ElasticCrossSectionBlock electroatomic/ElasticCrossSectionBlock.test.cpp )
 add_cpp_test( electroatomic.ElectronShellBlock electroatomic/ElectronShellBlock.test.cpp )
