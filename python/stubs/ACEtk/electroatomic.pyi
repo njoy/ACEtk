@@ -13,12 +13,10 @@ class BremsstrahlungBlock:
     The BremsstrahlungBlock class contains 2 arrays of the same length:
       - the energy points
       - the average energy remaining after Bremsstrahlung
-
-    For NEPR = 3, the second array contains the average energy loss instead.
     
     The size NBL of each (the total number of energy points) is stored in NXS(12).
     """
-    def __init__(self, energies: list[float], remaining: list[float], nepr: int = 1) -> None:
+    def __init__(self, energies: list[float], remaining: list[float]) -> None:
         """
         Initialise the block
         
@@ -26,8 +24,6 @@ class BremsstrahlungBlock:
             self         the block
             energies     the energy values
             remaining    the average energy remaining after Bremsstrahlung
-                         (or the average energy loss when NEPR = 3)
-            nepr         1 for average remaining energy, 3 for energy loss
         """
     @typing.overload
     def xss(self, index: int) -> float:
@@ -67,13 +63,6 @@ class BremsstrahlungBlock:
     def energy_after_bremsstrahlung(self) -> ...:
         """
         The average energy remaining after Bremsstrahlung
-
-        Requires NEPR = 1.
-        """
-    @property
-    def energy_loss(self) -> ...:
-        """
-        The average energy loss (requires NEPR = 3)
         """
     @property
     def length(self) -> int:

@@ -1242,7 +1242,6 @@ void verifyChunkEprdata12( const PhotoatomicTable& chunk ) {
   // BREML block - EPR data file
   CHECK( true == chunk.BREML().has_value() );
 
-  CHECK_THROWS_AS( chunk.BREML()->energyLoss(), std::logic_error );
   CHECK( 82 == chunk.BREML()->NBL() );
   CHECK( 82 == chunk.BREML()->numberEnergyPoints() );
 
@@ -1721,18 +1720,17 @@ void verifyChunkEprdata14( const PhotoatomicTable& chunk ) {
   // BREML block - EPR data file
   CHECK( true == chunk.BREML().has_value() );
 
-  CHECK_THROWS_AS( chunk.BREML()->energyAfterBremsstrahlung(), std::logic_error );
   CHECK( 75 == chunk.BREML()->NBL() );
   CHECK( 75 == chunk.BREML()->numberEnergyPoints() );
 
   CHECK( 75 == chunk.BREML()->energies().size() );
-  CHECK( 75 == chunk.BREML()->energyLoss().size() );
+  CHECK( 75 == chunk.BREML()->energyAfterBremsstrahlung().size() );
 
   CHECK_THAT( 1.000000000000E-05, WithinRel( chunk.BREML()->energies().front() ) );
   CHECK_THAT( 1.000000000000E+05, WithinRel( chunk.BREML()->energies().back() ) );
 
-  CHECK_THAT( 2.150380000000E-06, WithinRel( chunk.BREML()->energyLoss().front() ) );
-  CHECK_THAT( 2.712000000000E+03, WithinRel( chunk.BREML()->energyLoss().back() ) );
+  CHECK_THAT( 2.150380000000E-06, WithinRel( chunk.BREML()->energyAfterBremsstrahlung().front() ) );
+  CHECK_THAT( 2.712000000000E+03, WithinRel( chunk.BREML()->energyAfterBremsstrahlung().back() ) );
 
   // SELAS block - EPR data file
   CHECK( true == chunk.SELAS().has_value() );
