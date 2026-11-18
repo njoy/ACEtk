@@ -2,9 +2,11 @@
 #define NJOY_ACETK_BLOCK_BREMSSTRAHLUNGBLOCK
 
 // system includes
+#include <variant>
 
 // other includes
 #include "ACEtk/base/ArrayData.hpp"
+#include "ACEtk/electroatomic/BremsstrahlungEnergyLossBlock.hpp"
 
 namespace njoy {
 namespace ACEtk {
@@ -97,7 +99,8 @@ public:
   using ArrayData::end;
 };
 
-using BREML = BremsstrahlungBlock;
+using BREML = std::variant< BremsstrahlungBlock,
+                            BremsstrahlungEnergyLossBlock >;
 
 } // electroatomic namespace
 } // ACEtk namespace
