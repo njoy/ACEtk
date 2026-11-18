@@ -23,16 +23,77 @@ namespace multigroup {
 class SecondaryParticleGroupStructureLocatorBlock : protected base::Base {
 
   /* fields */
+
   unsigned int nsec_ = 0;
 
   /* auxiliary functions */
-  #include "ACEtk/multigroup/SecondaryParticleGroupStructureLocatorBlock/src/generateXSS.hpp"
-  #include "ACEtk/multigroup/SecondaryParticleGroupStructureLocatorBlock/src/verifySize.hpp"
+
+  static std::vector< double >
+  generateXSS( std::vector< unsigned int >&& locators ) {
+
+    std::vector< double > xss;
+    const auto nsec = locators.size();
+    xss.reserve( nsec );
+    xss.insert( xss.end(), locators.begin(), locators.end() );
+    return xss;
+  }
+
+  static void verifySize( Iterator begin, Iterator end, unsigned int nsec ) {
+
+    auto size = std::distance( begin, end );
+    if ( size < 1 * nsec ) {
+
+      Log::error( "The size of the XSS subrange should be at least 1 * NSEC" );
+      Log::info( "NSEC value: {}", nsec );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
+
+  /* constructor */
+
+  /**
+   *  @brief Private constructor
+   */
+  SecondaryParticleGroupStructureLocatorBlock(
+      std::vector< unsigned int > && locators,
+      std::size_t nsec ) :
+    Base( "ERG2L", generateXSS( std::move( locators ) ) ),
+    nsec_( nsec ) {}
 
 public:
 
   /* constructor */
-  #include "ACEtk/multigroup/SecondaryParticleGroupStructureLocatorBlock/src/ctor.hpp"
+
+  SecondaryParticleGroupStructureLocatorBlock() = default;
+
+  SecondaryParticleGroupStructureLocatorBlock( const SecondaryParticleGroupStructureLocatorBlock& ) = default;
+  SecondaryParticleGroupStructureLocatorBlock( SecondaryParticleGroupStructureLocatorBlock&& ) = default;
+
+  SecondaryParticleGroupStructureLocatorBlock& operator=( const SecondaryParticleGroupStructureLocatorBlock& ) = default;
+  SecondaryParticleGroupStructureLocatorBlock& operator=( SecondaryParticleGroupStructureLocatorBlock&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] locators    the locators for each secondary particle type
+   */
+  SecondaryParticleGroupStructureLocatorBlock(
+      std::vector< unsigned int > locators ) :
+    SecondaryParticleGroupStructureLocatorBlock( std::move( locators ), locators.size() ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] erg2l     the begin iterator of the ERG2L block in the XSS array
+   *  @param[in] end       the end iterator of the ERG2L block in the XSS array
+   *  @param[in] nsec      the number of secondary particle types
+   */
+  SecondaryParticleGroupStructureLocatorBlock( Iterator erg2l, Iterator end, unsigned int nsec ) :
+    Base( "ERG2L", erg2l, end ), nsec_( nsec ) {
+
+    verifySize( this->begin(), this->end(), this->NSEC() );
+  }
 
   /* methods */
 

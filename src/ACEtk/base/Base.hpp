@@ -29,6 +29,7 @@ public:
 private:
 
   /* fields */
+
   std::string name_;
   std::optional< std::vector< double > > xss_;
   Iterator begin_;
@@ -38,12 +39,101 @@ private:
 protected:
 
   /* auxiliary functions */
-  #include "ACEtk/base/Base/src/generateData.hpp"
-  #include "ACEtk/base/Base/src/verifyIndex.hpp"
-  #include "ACEtk/base/Base/src/verifyReactionIndex.hpp"
+
+  void generateData( const Base& base ) {
+
+    if ( this->owner() ) {
+
+      this->begin_ = this->xss_->begin();
+      this->end_ = this->xss_->end();
+      this->length_ = this->xss_->size();
+    }
+    else {
+
+      this->begin_ = base.begin_;
+      this->end_ = base.end_;
+      this->length_ = base.length_;
+    }
+  }
+
+  void verifyIndex( const std::size_t index,
+                    const std::size_t min,
+                    const std::size_t max ) const {
+
+    if ( ( index < min ) || ( index > max ) ) {
+
+      Log::error( "Illegal relative index argument into {} block", this->name() );
+      Log::info( "Index value: {}", index );
+      Log::info( "{} may be indexed with values between {} and {} inclusively",
+                 this->name(), min, max );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  void verifyReactionIndex( const std::size_t index,
+                            const std::size_t min,
+                            const std::size_t max ) const {
+
+    if ( ( index < min ) || ( index > max ) ) {
+
+      Log::error( "Illegal reaction index argument into {} block", this->name() );
+      Log::info( "Index value: {}", index );
+      Log::info( "{} accepts a reaction index between {} and {} inclusively",
+                 this->name(), min, max );
+      throw std::out_of_range( this->name() );
+    }
+  }
 
   /* constructor */
-  #include "ACEtk/base/Base/src/ctor.hpp"
+
+  Base() = default;
+
+  Base( const Base& base ) :
+      name_( base.name_ ), xss_( base.xss_ ) {
+
+    this->generateData( base );
+  }
+
+  Base( Base&& base ) :
+      name_( std::move( base.name_ ) ), xss_( std::move( base.xss_ ) ) {
+
+    this->generateData( base );
+  }
+
+  Base( std::string&& name, const Iterator& begin, const Iterator& end ) :
+    name_( std::move( name ) ), xss_( std::nullopt ),
+    begin_( begin ), end_( end ),
+    length_( std::distance( begin, end ) ) {}
+
+  Base( std::string&& name, std::vector< double >&& xss ) :
+    name_( std::move( name ) ), xss_( std::move( xss ) ) {
+
+    this->begin_ = this->xss_->begin();
+    this->end_ = this->xss_->end();
+    this->length_ = this->xss_->size();
+  }
+
+  Base& operator=( const Base& base ) {
+
+    if ( this != &base ) {
+
+      this->name_ = base.name_;
+      this->xss_ = base.xss_;
+      this->generateData( base );
+    }
+    return *this;
+  }
+
+  Base& operator=( Base&& base ) {
+
+    if ( this != &base ) {
+
+      this->name_ = std::move( base.name_ );
+      this->xss_ = std::move( base.xss_ );
+      this->generateData( base );
+    }
+    return *this;
+  }
 
 public:
 

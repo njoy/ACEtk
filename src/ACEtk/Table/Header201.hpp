@@ -29,6 +29,7 @@
 class Header201 {
 
   /* fields */
+
   std::string vers_;
   std::string szaid_;
   std::string src_;
@@ -38,12 +39,160 @@ class Header201 {
   std::vector< std::string > comments_;
 
   /* auxiliary functions */
-  #include "ACEtk/Table/Header/src/strip.hpp"
-  #include "ACEtk/Table/Header201/src/parse.hpp"
+
+  static std::string strip( const std::string& string ) {
+
+    std::string result = string;
+    auto notspace = [] ( char c ) { return !std::isspace( c ); };
+
+    auto front = std::find_if( result.begin(), result.end(), notspace );
+    result.erase( result.begin(), front );
+    auto back = std::find_if( result.rbegin(), result.rend(), notspace );
+    result.erase( back.base(), result.end() );
+    return result;
+  }
+
+  static std::string left( const std::string& string, std::size_t length ) {
+
+    std::string result = string;
+    result.resize( length, ' ' );
+    return result;
+  }
+
+  static std::string right( const std::string& string, std::size_t length ) {
+
+    std::string result = string;
+    const auto pivot = result.size();
+    result = left( result, length );
+    std::rotate( result.begin(),
+                 std::next( result.begin(), pivot ),
+                 result.end() );
+    return result;
+  }
+
+  template< typename Iterator >
+  Header201 parse( State< Iterator >& state ) {
+
+    using namespace njoy::tools::disco;
+
+    using Line1 = Record< Character< 10 >,
+                          Column< 1 >,
+                          Character< 24 >,
+                          Column< 1 >,
+                          Character< 24 > >;
+
+    std::string szaid;
+    std::string version;
+    std::string source;
+
+    Line1::read( state.position, state.end, version, szaid, source );
+    ++state.lineNumber;
+
+    version = strip( version );
+    if ( ( version != "2.0.0" ) && ( version != "2.0.1" ) ) {
+
+      Log::error( "The header version is not as expected" );
+      Log::info( "Expected version 2.0.0 or 2.0.1" );
+      Log::info( "Found version: \'{}\'", strip( version ) );
+      throw std::exception();
+    }
+
+    using Line = Record< Character< 80 > >;
+
+    double awr;
+    double temp;
+    std::string date;
+    int number;
+
+    std::string line;
+    Line::read( state.position, state.end, line );
+    std::istringstream input( line );
+    input >> awr >> temp >> date >> number;
+
+    if ( awr < 0.0 ) {
+
+      Log::error("Encountered non-physical atomic weight ratio");
+      throw std::exception();
+    }
+
+    if ( temp < 0.0 ) {
+
+      Log::error("Encountered non-physical temperature");
+      throw std::exception();
+    }
+
+    if ( number < 0 ) {
+
+      Log::error("Encountered a negative number of comment lines");
+      throw std::exception();
+    }
+
+    std::vector< std::string > comments;
+    auto notspace = [] ( char c ) { return !std::isspace( c ); };
+    for ( unsigned int i = 0; i < static_cast< unsigned int >( number ); ++i ) {
+
+      Line::read( state.position, state.end, line );
+      auto back = std::find_if( line.rbegin(), line.rend(), notspace );
+      line.erase( back.base(), line.end() );
+      comments.push_back( line );
+    }
+
+    return  Header201( std::move( version ), std::move( szaid ),
+                       std::move( source ), awr, temp,
+                       std::move( date ), std::move( comments ) );
+  }
+
+  /* constructor */
+
+  /**
+   *  @brief private constructor
+   */
+  Header201( const std::string& version, const std::string& szaid,
+             const std::string& source,
+             double awr, double temperature, const std::string& date,
+             const std::vector< std::string >& comments ) :
+    vers_( strip( version ) ), szaid_( strip( szaid ) ), src_( strip( source ) ),
+    temp_( temperature ), awr_( awr ), date_( strip( date ) ),
+    comments_( std::move( comments ) ) {}
 
 public:
 
-  #include "ACEtk/Table/Header201/src/ctor.hpp"
+  Header201() = default;
+  Header201( const Header201& ) = default;
+  Header201( Header201&& ) = default;
+  Header201& operator=( const Header201& ) = default;
+  Header201& operator=( Header201&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] szaid         the szaid (max 24 characters)
+   *  @param[in] source        the source of the file
+   *  @param[in] awr           the atomic weight ratio (to the neutron mass)
+   *  @param[in] temperature   the temperature in MeV
+   *  @param[in] date          the date (max 10 characters)
+   *  @param[in] comments      the comments
+   */
+  Header201( const std::string& szaid, const std::string& source,
+             double awr, double temperature, const std::string& date,
+             const std::vector< std::string >& comments ) :
+    Header201( "2.0.1", szaid, source, awr, temperature, date, comments ) {}
+
+  /**
+   *  @brief Constructor (from a buffer)
+   *
+   *  @tparam Iterator   a buffer iterator
+   *
+   *  @param[in] state   the buffer state
+   */
+  template< typename Iterator >
+  Header201( State< Iterator >& state )
+    try : Header201( parse( state ) ) {}
+    catch( std::exception& e ) {
+
+      Log::info("Error while constructing ACE Table Header201");
+      throw e;
+  }
 
   /**
    *  @brief Return the header version
@@ -100,5 +249,37 @@ public:
    */
   const std::vector< std::string >& comments() const { return this->comments_; }
 
-  #include "ACEtk/Table/Header201/src/print.hpp"
+  template< typename Ostream >
+  void print( Ostream& ostream ) const {
+
+    using namespace njoy::tools::disco;
+
+    auto it = std::ostreambuf_iterator< typename Ostream::char_type >( ostream );
+
+    using Line1 = Record< Character< 10 >,
+                          Column< 1 >,
+                          Character< 24 >,
+                          Column< 1 >,
+                          Character< 24 > >;
+
+    Line1::write( it, left( this->version(), 10 ),
+                      right( this->ZAID(), 24 ),
+                      right( this->source(), 24 ) );
+
+    using Line2 = Record< FixedPoint< 12, 6 >,
+                          Column< 1 >,
+                          Scientific< 12, 4 >,
+                          Column< 1 >,
+                          Character< 10 >,
+                          Column< 1 >,
+                          Integer< 10 > >;
+
+    Line2::write( it, this->AWR(), this->TEMP(),
+                  right( this->date(), 10 ), this->comments().size() );
+
+    for ( auto&& line : this->comments() ) {
+
+      ostream << line << std::endl;
+    }
+  }
 };

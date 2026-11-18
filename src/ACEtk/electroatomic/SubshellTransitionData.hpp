@@ -35,13 +35,93 @@ class SubshellTransitionData : protected base::ArrayData {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/electroatomic/SubshellTransitionData/src/calculateNumberTransitions.hpp"
-  #include "ACEtk/electroatomic/SubshellTransitionData/src/generateArrays.hpp"
+
+  static std::size_t calculateNumberTransitions( Iterator begin, Iterator end ) {
+
+    const auto size = std::distance( begin, end );
+
+    if ( size%4 != 0 ) {
+
+      Log::error( "The size of the transition data xss arry should be multiples of 4" );
+      Log::info( "XSS size: {}", size );
+      throw std::exception();
+    }
+
+    return size / 4;
+  }
+
+  static std::vector< std::vector< double > > generateArrays(
+      std::vector< unsigned int > primary,
+      std::vector< unsigned int > secondary,
+      std::vector< double > energies,
+      std::vector< double > probabilities ) {
+
+    const auto nt = primary.size();
+
+    if ( ( secondary.size() != nt ) || ( energies.size() != nt ) ||
+         ( probabilities.size() != nt ) ) {
+
+      Log::error( "The sizes of the transition data arrays are not consistent" );
+      Log::info( "primary.size(): {}", nt );
+      Log::info( "secondary.size(): {}", secondary.size() );
+      Log::info( "energies.size(): {}", energies.size() );
+      Log::info( "probabilities.size(): {}", probabilities.size() );
+      throw std::exception();
+    }
+
+    std::vector< std::vector< double > > arrays;
+
+    for ( unsigned int index = 0; index < nt; ++index ) {
+
+      std::vector< double > data( 4 );
+      data[0] = static_cast< double >( primary[index] );
+      data[1] = static_cast< double >( secondary[index] );
+      data[2] = energies[index];
+      data[3] = probabilities[index];
+      arrays.emplace_back( std::move( data ) );
+    }
+
+    return arrays;
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/electroatomic/SubshellTransitionData/src/ctor.hpp"
+
+  SubshellTransitionData() = default;
+
+  SubshellTransitionData( const SubshellTransitionData& ) = default;
+  SubshellTransitionData( SubshellTransitionData&& ) = default;
+
+  SubshellTransitionData& operator=( const SubshellTransitionData& ) = default;
+  SubshellTransitionData& operator=( SubshellTransitionData&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] primary          the primary subshell designators
+   *  @param[in] secondary        the secondary subshell designators
+   *  @param[in] energies         the energy values of the secondary photon or electron
+   *  @param[in] probabilities    the cumulative probabilities of the transitions
+   */
+  SubshellTransitionData(
+      std::vector< unsigned int > primary,
+      std::vector< unsigned int > secondary,
+      std::vector< double > energies,
+      std::vector< double > probabilities ) :
+    ArrayData( "TRAN",
+               generateArrays( std::move( primary ), std::move( secondary ),
+                               std::move( energies ), std::move( probabilities ) ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin   the begin iterator of the transition data in the XSS array
+   *  @param[in] end     the end iterator of the transition data in the XSS array
+   *  @param[in] nt      the number of transitions
+   */
+  SubshellTransitionData( Iterator begin, Iterator end ) :
+    ArrayData( "TRAN", begin, end, 4, calculateNumberTransitions( begin, end ) ) {}
 
   /* methods */
 

@@ -26,12 +26,14 @@ class InelasticAngularDistributionBlock : protected base::Base {
 public:
 
   /* type alias */
+
   using AngularDistributionData = std::variant< DiscreteCosines,
                                                 DiscreteCosinesWithProbability >;
 
 private:
 
   /* fields */
+
   unsigned int ifeng_;
   std::size_t nc_;
   std::optional< std::size_t > nieb_;
@@ -40,10 +42,159 @@ private:
   std::vector< std::vector< AngularDistributionData > > data_;
 
   /* auxiliary functions */
-  #include "ACEtk/thermal/InelasticAngularDistributionBlock/src/generateBlocks.hpp"
-  #include "ACEtk/thermal/InelasticAngularDistributionBlock/src/verifyIndices.hpp"
-  #include "ACEtk/thermal/InelasticAngularDistributionBlock/src/verifySize.hpp"
-  #include "ACEtk/thermal/InelasticAngularDistributionBlock/src/generateXSS.hpp"
+
+  void generateBlocks() {
+
+    this->data_.clear();
+
+    auto ne = this->NE();
+    auto nc = this->NC();
+    if ( this->IFENG() < 2 ) {
+
+      auto current = this->begin();
+      auto end = current;
+      for ( unsigned int incident = 1; incident <= ne; ++incident ) {
+
+        auto nieb = this->NIEB( incident );
+        std::vector< AngularDistributionData > data;
+        for ( unsigned int outgoing = 1; outgoing <= nieb; ++outgoing ) {
+
+          end = current + nc + 1;
+          data.emplace_back( DiscreteCosines( nc, current, end ) );
+          current = end;
+        }
+        this->data_.emplace_back( std::move( data ) );
+      }
+    }
+    else {
+
+      auto locator = this->relativeDistributionLocator( 1 );
+      auto current = this->iterator( locator );
+      auto end = current;
+      for ( unsigned int incident = 1; incident <= ne; ++incident ) {
+
+        locator = this->relativeDistributionLocator( incident + 1 );
+        auto nieb = this->NIEB( incident );
+        auto next = incident == ne ? this->end() : this->iterator( locator );
+
+        std::vector< AngularDistributionData > data;
+        for ( unsigned int outgoing = 1; outgoing <= nieb; ++outgoing ) {
+
+          end = outgoing == nieb ? next : current + nc + 3;
+          data.emplace_back( DiscreteCosinesWithProbability( nc, current, end ) );
+          current = end;
+        }
+        this->data_.emplace_back( std::move( data ) );
+      }
+    }
+  }
+
+  void verifyIndex( const std::size_t incident ) const {
+
+    std::size_t max = this->NE();
+    if ( ( incident < 1 ) || ( incident > max ) ) {
+
+      Log::error( "Illegal incident energy index argument into the {} block", this->name() );
+      Log::info( "Index value: {}", incident );
+      Log::info( "{} accepts an index between 1 and {} inclusively",
+                 this->name(), max );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  void verifyIndices( const std::size_t incident, const std::size_t outgoing ) const {
+
+    this->verifyIndex( incident );
+
+    std::size_t max = this->NIEB( incident );
+    if ( ( outgoing < 1 ) || ( outgoing > max ) ) {
+
+      Log::error( "Illegal outgoing energy index argument into the {} block", this->name() );
+      Log::info( "Index value: {}", outgoing );
+      Log::info( "{} accepts an index between 1 and {} inclusively",
+                 this->name(), max );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  void verifySize( Iterator begin, Iterator end, unsigned int ne,
+                   unsigned int nieb, unsigned int nc ) {
+
+    // there are at least nr values in the locator block
+    auto size = std::distance( begin, end );
+    if ( size < ne * nieb * ( 1 + nc ) ) {
+
+      Log::error( "The size of the XSS array in the {} "
+                  "block should be at least NE * NIEB * ( 1 + NC )", this->name() );
+      Log::info( "NE value: {}", ne );
+      Log::info( "NIEB value: {}", nieb );
+      Log::info( "NC value: {}", nc );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
+
+  static std::vector< double >
+  generateXSS(
+    std::vector< std::vector< DiscreteCosines > >&& cosines,
+    std::size_t ) {
+
+    std::vector< double > xss;
+    const auto ne = cosines.size();
+    const auto nieb = cosines.front().size();
+    for ( unsigned int i = 0; i < ne; ++i ) {
+
+      if ( nieb != cosines[i].size() ) {
+
+        Log::error( "The number of outgoing energies for the incident energy "
+                    "with index {} is not equal to the expected number"
+                    "expected value", i + 1 );
+        Log::info( "Expected number = {}", nieb );
+        Log::info( "Found number = {}", cosines[i].size() );
+        throw std::exception();
+      }
+
+      for ( unsigned int j = 0; j < nieb; ++j ) {
+
+        xss.insert( xss.end(), cosines[i][j].begin(), cosines[i][j].end() );
+      }
+    }
+
+    return xss;
+  }
+
+  static std::vector< double >
+  generateXSS(
+    std::vector< std::vector< DiscreteCosinesWithProbability > >&& cosines,
+    std::size_t locb ) {
+
+    const auto size = cosines.size();
+    std::vector< double > xss( size * 2 );
+    std::size_t index = 0;
+    for ( auto&& data : cosines ) {
+
+      // current value of a locator into the xss array
+      // these locators are the actual one-based indices into the xss array
+      // so we need to know the size of the xss array prior to this being created
+      std::size_t locator = xss.size() + 1;
+
+      // set the locator and number of outgoing energies for the current incident
+      // energy
+      // Note: historically, these locators are off by 1
+      xss[index] = static_cast< double >( locator + ( locb - 1 ) - 1 );
+      xss[size + index] = static_cast< double >( data.size() );
+
+      // insert every set of discrete cosines
+      for ( auto&& entry : data ) {
+
+        xss.insert( xss.end(), entry.begin(), entry.end() );
+      }
+
+      ++index;
+    }
+
+    return xss;
+  }
 
   /**
    *  @brief Return the distribution locator for an incident energy index
@@ -92,10 +243,152 @@ private:
     return locator - ( this->locb_ - 1 );
   }
 
+  /* constructor */
+
+  /**
+   *  @brief Private intermediate constructor
+   */
+  template < typename Data >
+  InelasticAngularDistributionBlock(
+      std::vector< std::vector< Data > >&& cosines,
+      unsigned int ifeng,
+      unsigned int nc,
+      std::optional< unsigned int > nieb,
+      unsigned int ne,
+      std::size_t locb ) :
+    Base( "InelasticAngularDistributionBlock",
+          generateXSS( std::move( cosines ), locb ) ),
+    ifeng_( ifeng ), nc_( nc ), nieb_( nieb ), ne_( ne ), locb_( locb ) {
+
+    this->generateBlocks();
+  }
+
 public:
 
   /* constructor */
-  #include "ACEtk/thermal/InelasticAngularDistributionBlock/src/ctor.hpp"
+
+  InelasticAngularDistributionBlock() = default;
+
+  InelasticAngularDistributionBlock( const InelasticAngularDistributionBlock& base ) :
+    Base( base ), ifeng_( base.ifeng_ ),
+    nc_( base.nc_ ), nieb_( base.nieb_ ), ne_( base.ne_ ),
+    locb_( base.locb_ ), data_( base.data_ ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  InelasticAngularDistributionBlock( InelasticAngularDistributionBlock&& base ) :
+    Base( std::move( base ) ), ifeng_( base.ifeng_ ),
+    nc_( base.nc_ ), nieb_( base.nieb_ ), ne_( base.ne_ ),
+    locb_( base.locb_ ), data_( std::move( base.data_ ) ) {
+
+    if ( Base::owner() ) {
+
+      this->generateBlocks();
+    }
+  }
+
+  InelasticAngularDistributionBlock&
+  operator=( const InelasticAngularDistributionBlock& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( base );
+      this->ifeng_ = base.ifeng_;
+      this->nc_ = base.nc_;
+      this->nieb_ = base.nieb_;
+      this->ne_ = base.ne_;
+      this->locb_ = base.locb_;
+      this->data_ = base.data_;
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  InelasticAngularDistributionBlock&
+  operator=( InelasticAngularDistributionBlock&& base ) {
+
+    if ( this != &base ) {
+
+      Base::operator=( std::move( base ) );
+      this->ifeng_ = base.ifeng_;
+      this->nc_ = base.nc_;
+      this->nieb_ = std::move( base.nieb_ );
+      this->ne_ = base.ne_;
+      this->locb_ = base.locb_;
+      this->data_ = std::move( base.data_ );
+      if ( Base::owner() ) {
+
+        this->generateBlocks();
+      }
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] cosines    the discrete cosine data for each incident and outgoing
+   *                        energy value
+   *  @param[in] skewed     flag to indicate whether or not the distribution is
+   *                        skewed or equiprobable
+   *  @param[in] locb       the starting xss index for the ITXE block (default = 1)
+   */
+  InelasticAngularDistributionBlock(
+      std::vector< std::vector< DiscreteCosines > > cosines,
+      bool skewed, std::size_t locb = 1 ) :
+    InelasticAngularDistributionBlock(
+        std::move( cosines ),
+        static_cast< unsigned int >( skewed ),
+        cosines.front().front().NC(),
+        cosines.front().size(),
+        cosines.size(),
+        locb ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] cosines    the discrete cosine data for each incident and outgoing
+   *                        energy value
+   *  @param[in] locb       the starting xss index for the ITXE block (default = 1)
+   */
+  InelasticAngularDistributionBlock(
+      std::vector< std::vector< DiscreteCosinesWithProbability > > cosines,
+      std::size_t locb = 1 ) :
+    InelasticAngularDistributionBlock(
+        std::move( cosines ), 2, cosines.front().front().NC(),
+        std::nullopt, cosines.size(), locb ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] ifeng      the inelastic format flag
+   *  @param[in] nieb       the number of outgoing energy values (for ifeng < 2 only)
+   *  @param[in] nc         the number of discrete cosine values
+   *  @param[in] begin      the begin iterator of the angular distribution data
+   *  @param[in] end        the end iterator of the angular distribution data
+   */
+  InelasticAngularDistributionBlock(
+      unsigned int ifeng, std::size_t nieb, std::size_t nc, std::size_t ne,
+      std::size_t locb, Iterator begin, Iterator end ) :
+    Base( "InelasticAngularDistributionBlock", begin, end ),
+    ifeng_( ifeng ), nc_( nc ),
+    nieb_( ifeng < 2 ? std::optional< std::size_t >( nieb ) : std::nullopt ),
+    ne_( ne ),locb_( locb ) {
+
+    if ( ifeng < 2 ) {
+
+      this->verifySize( this->begin(), this->end(), this->NE(),
+                        this->nieb_.value(), this->NC() );
+    }
+    this->generateBlocks();
+  }
 
   /**
    *  @brief Return the secondary energy mode

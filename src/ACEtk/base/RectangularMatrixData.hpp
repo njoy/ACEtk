@@ -18,18 +18,119 @@ namespace base {
 class RectangularMatrixData : protected Base {
 
   /* fields */
+
   unsigned int nrows_;
   unsigned int ncols_;
   
   /* auxiliary functions */
-  #include "ACEtk/base/RectangularMatrixData/src/verifyIndex.hpp"
-  #include "ACEtk/base/RectangularMatrixData/src/generateXSS.hpp"
-  #include "ACEtk/base/RectangularMatrixData/src/verifySize.hpp"
+
+  void verifyIndex( std::size_t row, std::size_t col ) const {
+
+    // Verify row index
+    if ( ( row < 1 ) || ( row > this->M() ) ) {
+
+      Log::error( "Illegal row index argument into the {} block", this->name() );
+      Log::info( "Row index value: {}", row );
+      Log::info( "{} accepts an index between {} and {} inclusively",
+                 this->name(), 1, this->M() );
+      throw std::out_of_range( this->name() );
+    }
+
+    // Verify column index
+    if ( ( col < 1 ) || ( col > this->N() ) ) {
+
+      Log::error( "Illegal column index argument into the {} block", this->name() );
+      Log::info( "Column index value: {}", col );
+      Log::info( "{} accepts an index between {} and {} inclusively",
+                 this->name(), 1, this->N() );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  template < typename Number >
+  static std::vector< double >
+  generateXSS( std::vector< std::vector< Number > >&& vals ) {
+
+    std::vector< double > xss;
+    const auto nrows = vals.size();
+    const auto ncols = vals.front().size();
+    const auto sz = nrows * ncols;
+    xss.reserve( sz );
+
+    for ( auto&& array: vals ) {
+
+      if ( array.size() != ncols ) {
+
+        Log::error( "The size of a rectangular matrix data array is not as expected in" );
+        Log::info( "Expected: {} elements", ncols );
+        Log::info( "Found: {} elements", array.size() );
+        throw std::exception();
+      }
+      xss.insert( xss.end(), array.begin(), array.end() );
+    }
+
+    return xss;
+  }
+
+  void verifySize( Iterator begin, Iterator end, unsigned int nrows, unsigned int ncols ) {
+
+    // There must be nrows * ncols values
+    auto size = std::distance( begin, end );
+    unsigned int expectedSize =  nrows * ncols;
+    if ( size < expectedSize ) {
+
+      Log::error( "The size of the XSS subrange in the {} block should be at least {}",
+                  this->name(), expectedSize );
+      Log::info( "M value: {}, N value: {}", nrows, ncols );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
   
 public:
 
   /* constructor */
-  #include "ACEtk/base/RectangularMatrixData/src/ctor.hpp"
+
+  RectangularMatrixData() = default;
+
+  RectangularMatrixData( const RectangularMatrixData& ) = default;
+  RectangularMatrixData( RectangularMatrixData&& ) = default;
+
+  RectangularMatrixData& operator=( const RectangularMatrixData& ) = default;
+  RectangularMatrixData& operator=( RectangularMatrixData&& ) = default;
+
+  /**
+  *  @brief Constructor
+  *
+  *  @param[in] name        the name of the block
+  *  @param[in] vals        the two-dimensional matrix data values
+  */
+  template < typename Number >
+  RectangularMatrixData( std::string&& name,
+              std::vector< std::vector< Number > >&& vals ) :
+  Base( std::move( name ),
+        generateXSS( std::move( vals ) ) ),
+   nrows_( vals.size() ), ncols_( vals.front().size() ) {}
+
+  /**
+  *  @brief Constructor
+  *
+  *  @param[in] begin      the begin iterator of the matrix data in the XSS array
+  *  @param[in] end        the end iterator of the matrix data in the XSS array
+  *  @param[in] nrows      the number of rows and row labels
+  *  @param[in] ncols      the number of columns and column labels
+  *  @param[in] rowmajor   whether the matrix data have row or column major order
+  */
+  RectangularMatrixData( std::string&& name,
+              Iterator begin,
+              Iterator end,
+              unsigned int nrows,
+              unsigned int ncols ) :
+  Base( std::move( name ), begin, end ),
+   nrows_( nrows ), ncols_( ncols ) {
+
+    verifySize( this->begin(), this->end(), this->nrows_, this->ncols_ );
+  }
   
   /* methods */
 

@@ -25,13 +25,82 @@ class SecondaryParticleProductionBlock : protected base::Base {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/continuous/SecondaryParticleProductionBlock/src/generateXSS.hpp"
-  #include "ACEtk/continuous/SecondaryParticleProductionBlock/src/verifySize.hpp"
+
+  static std::vector< double > generateXSS(
+      std::size_t index,
+      std::vector< double >&& production,
+      std::vector< double >&& heating ) {
+
+    const auto size = production.size();
+    if ( heating.size() != size ) {
+
+      Log::error( "The number of heating values is not equal to the number of "
+                  "production values" );
+      Log::info( "Expected size = {}", size );
+      Log::info( "Found production size = {}", production.size() );
+      Log::info( "Found heating size = {}", heating.size() );
+      throw std::exception();
+    }
+
+    std::vector< double > xss = { static_cast< double >( index ),
+                                  static_cast< double >( size ) };
+    xss.reserve( 2 + 2 * size );
+    xss.insert( xss.end(), production.begin(), production.end() );
+    xss.insert( xss.end(), heating.begin(), heating.end() );
+
+    return xss;
+  }
+
+  static void verifySize( Iterator begin, Iterator end,
+                          unsigned int numberValues ) {
+
+    auto size = std::distance( begin, end );
+    if ( size < 2 * numberValues + 2 ) {
+
+      Log::error( "The size of the XSS subrange in the cross section data should "
+                  "be at least 2 + 2 * XSS(2)" );
+      Log::info( "XSS(2) value: {}", numberValues );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/continuous/SecondaryParticleProductionBlock/src/ctor.hpp"
+
+  SecondaryParticleProductionBlock() = default;
+
+  SecondaryParticleProductionBlock( const SecondaryParticleProductionBlock& ) = default;
+  SecondaryParticleProductionBlock( SecondaryParticleProductionBlock&& ) = default;
+
+  SecondaryParticleProductionBlock& operator=( const SecondaryParticleProductionBlock& ) = default;
+  SecondaryParticleProductionBlock& operator=( SecondaryParticleProductionBlock&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] index         the energy index
+   *  @param[in] production    the total production cross section values
+   *  @param[in] heating       the heating values
+   */
+  SecondaryParticleProductionBlock( std::size_t index,
+                                    std::vector< double > production,
+                                    std::vector< double > heating ) :
+    Base( "HPD", generateXSS( index, std::move( production ),
+                              std::move( heating ) ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin    the begin iterator of the cross section data
+   *  @param[in] end      the end iterator of the cross section data
+   */
+  SecondaryParticleProductionBlock( Iterator begin, Iterator end ) :
+    Base( "HPD", begin, end ) {
+
+    verifySize( this->begin(), this->end(), this->numberValues() );
+  }
 
   /**
    *  @brief Return the energy index

@@ -35,13 +35,135 @@ class PrincipalCrossSectionBlock : protected base::ArrayData {
   /* fields */
 
   /* auxiliary functions */
-  #include "ACEtk/electroatomic/PrincipalCrossSectionBlock/src/verifyIndex.hpp"
-  #include "ACEtk/electroatomic/PrincipalCrossSectionBlock/src/generateArrays.hpp"
+
+  void verifyIndex( const std::size_t index ) const {
+
+    if ( ( index < 1 ) || ( index > this->NSSH() ) ) {
+
+      Log::error( "Illegal subshell index argument into the {} block", this->name() );
+      Log::info( "Index value: {}", index );
+      Log::info( "{} accepts an index between {} and {} inclusively",
+                 this->name(), 1, this->NSSH() );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  static std::vector< std::vector< double > > generateArrays(
+      std::vector< double > energies,
+      std::vector< double > elastic,
+      std::vector< double > bremsstrahlung,
+      std::vector< double > excitation,
+      std::vector< std::vector< double > > electroionisation ) {
+
+    const auto ne = energies.size();
+    const auto nssh = electroionisation.size();
+
+    if ( electroionisation.size() == 0 ) {
+
+      Log::error( "Expected at least 1 electroionisation cross section, found 0" );
+      throw std::exception();
+    }
+    bool size = false;
+    for ( const auto& values : electroionisation ) {
+
+      if ( values.size() != ne ) {
+
+        size = true;
+      }
+    }
+    if ( ( elastic.size() != ne ) || ( bremsstrahlung.size() != ne ) ||
+         ( excitation.size() != ne ) || size ) {
+
+      Log::error( "The sizes of the principal cross sections are not consistent" );
+      Log::info( "energies.size(): {}", ne );
+      Log::info( "elastic.size(): {}", elastic.size() );
+      Log::info( "bremsstrahlung.size(): {}", bremsstrahlung.size() );
+      Log::info( "excitation.size(): {}", excitation.size() );
+      unsigned int index = 0;
+      for ( const auto& values : electroionisation ) {
+
+        Log::info( "electroionisation.size() for subshell {}: {}", index, values.size() );
+        ++index;
+      }
+      throw std::exception();
+    }
+
+    std::vector< std::vector< double > > arrays;
+
+    std::vector< double > total = elastic;
+    std::vector< double > totalionisation = electroionisation.front();
+
+    arrays.push_back( std::move( energies ) );
+    arrays.push_back( std::move( elastic ) );
+    arrays.push_back( std::move( bremsstrahlung ) );
+    std::transform( arrays.back().cbegin(), arrays.back().cend(),
+                    total.cbegin(), total.begin(), std::plus<>{} );
+    arrays.push_back( std::move( excitation ) );
+    std::transform( arrays.back().cbegin(), arrays.back().cend(),
+                    total.cbegin(), total.begin(), std::plus<>{} );
+    for ( unsigned int i = 0; i < nssh; ++i ) {
+
+      arrays.push_back( std::move( electroionisation[i] ) );
+      if ( i != 0 ) {
+
+        std::transform( arrays.back().cbegin(), arrays.back().cend(),
+                        totalionisation.cbegin(), totalionisation.begin(),
+                        std::plus<>{} );
+      }
+    }
+    std::transform( totalionisation.cbegin(), totalionisation.cend(),
+                    total.cbegin(), total.begin(), std::plus<>{} );
+
+    arrays.insert( std::next( arrays.begin(), 4 ), totalionisation );
+    arrays.insert( std::next( arrays.begin() ), total );
+
+    return arrays;
+  }
 
 public:
 
   /* constructor */
-  #include "ACEtk/electroatomic/PrincipalCrossSectionBlock/src/ctor.hpp"
+
+  PrincipalCrossSectionBlock() = default;
+
+  PrincipalCrossSectionBlock( const PrincipalCrossSectionBlock& ) = default;
+  PrincipalCrossSectionBlock( PrincipalCrossSectionBlock&& ) = default;
+
+  PrincipalCrossSectionBlock& operator=( const PrincipalCrossSectionBlock& ) = default;
+  PrincipalCrossSectionBlock& operator=( PrincipalCrossSectionBlock&& ) = default;
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] energies             the energy values
+   *  @param[in] elastic              the elastic cross section values
+   *  @param[in] bremsstrahlung       the Bremsstrahlung cross section values
+   *  @param[in] excitation           the excitation cross section values
+   *  @param[in] electroionisation    the electroionisation cross section values
+   *                                  for each shell
+   */
+  PrincipalCrossSectionBlock(
+      std::vector< double > energies,
+      std::vector< double > elastic,
+      std::vector< double > bremsstrahlung,
+      std::vector< double > excitation,
+      std::vector< std::vector< double > > electroionisation ) :
+    ArrayData( "ESZE",
+               generateArrays( std::move( energies ), std::move( elastic ),
+                               std::move( bremsstrahlung ), std::move( excitation ),
+                               std::move( electroionisation ) ) ) {}
+
+  /**
+   *  @brief Constructor
+   *
+   *  @param[in] begin   the begin iterator of the ESZE block in the XSS array
+   *  @param[in] end     the end iterator of the ESZE block in the XSS array
+   *  @param[in] nssh    the number of electron shells
+   *  @param[in] ne      the number of energy values
+   */
+  PrincipalCrossSectionBlock( Iterator begin, Iterator end,
+                                        unsigned int nssh, unsigned int ne ) :
+    ArrayData( "ESZE", begin, end, ne, 6 + nssh ) {}
 
   /* methods */
 

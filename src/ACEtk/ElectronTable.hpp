@@ -28,6 +28,7 @@ namespace ACEtk {
 class ElectronTable : protected Table {
   
   /* fields */
+
   electron::EKT ekt_;
   electron::RAD rad_;
   electron::MOT mot_;
@@ -40,13 +41,365 @@ class ElectronTable : protected Table {
   std::optional< electron::OSC > osc_;
   
   /* auxiliary functions */
-  #include "ACEtk/ElectronTable/src/generateBlocks.hpp"
-  #include "ACEtk/ElectronTable/src/generateData.hpp"
-  #include "ACEtk/ElectronTable/src/verifyType.hpp"
+
+  auto block( std::size_t index ) const {
+
+    // assumption: blocks are stored in sequence!
+
+    auto begin = this->data().XSS().begin();
+    std::size_t start = this->data().JXS( index );
+
+    std::size_t end = 0;
+    if ( start != 0 ) {
+
+      // look for the first value that is larger than or equal to the start locator
+      auto iter = std::find_if( this->data().JXS().begin() + index,
+                                this->data().JXS().end(),
+                                [start] ( auto&& value ) {
+
+                                  return value >= static_cast< int64_t >( start );
+                                } );
+      if ( iter != this->data().JXS().end() ) {
+
+        end = *iter;
+      }
+    }
+
+    return std::make_pair(
+               begin + start - 1,
+               end != 0 ? begin + end - 1
+                        : start != 0 ? this->data().XSS().end()
+                                     : begin + end - 1 );
+  }
+
+
+  void generateBlocks() {
+
+    // transition energy block
+    auto iterators = block( 1 );
+    this->ekt_ = electron::EKT( iterators.first, iterators.second, this->NEL() );
+
+    // radiation stopping power block
+    iterators = block( 2 );
+    this->rad_ = electron::RAD( iterators.first, iterators.second,
+                                this->NRAD(), this->NEL() );
+
+    // Mott scattering correction block
+    iterators = block( 3 );
+    this->mot_ = electron::MOT( iterators.first, iterators.second, this->NMOT() );
+
+    // Riley cross section block
+    iterators = block( 4 );
+    this->rly_ = electron::RLY( iterators.first, iterators.second );
+
+    if ( this->NEL() == 3 ) {
+
+      // nullify unused blocks
+      this->crb_ = std::nullopt;
+      this->hfb_ = std::nullopt;
+
+      // bremsstrahlung production block
+      iterators = block( 5 );
+      this->xsb_ = electron::XSB( iterators.first, iterators.second,
+                                  this->NEB(), this->NPB() );
+
+      // bremsstrahlung energy spectrum block
+      iterators = block( 9 );
+      this->rkt_ = electron::RKT( iterators.first, iterators.second, this->NRKT() );
+
+      // bremsstrahlung angular spectrum block
+      iterators = block( 10 );
+      this->rka_ = electron::RKA( iterators.first, iterators.second, this->NRKA() );
+
+      // oscillator block
+      iterators = block( 11 );
+      this->osc_ = electron::OSC( iterators.first, iterators.second, this->NOSC() );
+    } else {
+
+      // nullify unused blocks
+      this->xsb_ = std::nullopt;
+      this->rkt_ = std::nullopt;
+      this->rka_ = std::nullopt;
+      this->osc_ = std::nullopt;
+
+      // bremsstrahlung correction factor block
+      iterators = block( 5 );
+      this->crb_ = electron::CRB( iterators.first, iterators.second, this->NCRB() );
+
+      // bremsstrahlung high frequency block
+      iterators = block( 6 );
+      this->hfb_ = electron::HFB( iterators.first, iterators.second, this->NHFB() );
+    }
+  }
+
+  Data generateData( unsigned int z,
+                     std::vector< unsigned int > za, std::vector< double > awr,
+                     electron::EKT&& ekt, electron::RAD&& rad,
+                     electron::MOT&& mot, electron::RLY&& rly,
+                     std::optional< electron::XSB >&& xsb,
+                     std::optional< electron::CRB >&& crb,
+                     std::optional< electron::HFB >&& hfb,
+                     std::optional< electron::RKT >&& rkt,
+                     std::optional< electron::RKA >&& rka,
+                     std::optional< electron::OSC >&& osc ) {
+
+    std::array< int32_t, 16 > iz;
+    std::array< double, 16 > aw;
+    std::array< int64_t, 16 > nxs;
+    std::array< int64_t, 32 > jxs;
+    std::vector< double > xss;
+    iz.fill( 0 );
+    aw.fill( 0.0 );
+    nxs.fill( 0 );
+    jxs.fill( 0 );
+
+    // assign za values
+    if ( za.size() != awr.size() ) {
+
+      Log::error( "Inconsistent number of ZA and atomic mass values" );
+      Log::info( "Number of ZA values = {}", za.size() );
+      Log::info( "Number of atomic mass values = {}", awr.size() );
+      throw std::exception();
+    }
+    for ( unsigned int i = 0; i < za.size(); ++i ) {
+
+      iz[i] = za[i];
+      aw[i] = awr[i];
+    }
+
+    // determine electron table type (EL or EL03)
+    unsigned int nel;
+    if ( xsb.has_value() && !crb.has_value() && !hfb.has_value()
+         && rkt.has_value() && rka.has_value() && osc.has_value() ) {
+
+      nel = 3;
+    } else if ( !xsb.has_value() && crb.has_value() && hfb.has_value()
+                && !rkt.has_value() && !rka.has_value() && !osc.has_value() ) {
+
+      nel = 0;
+    } else {
+
+      Log::error( "Inconsistent data blocks for electron table type" );
+      Log::info( "For EL03 expect: XSB ({}), RKT ({}), RKA ({}), OSC ({})",
+                 xsb.has_value() ? "yes" : "no",
+                 rkt.has_value() ? "yes" : "no",
+                 rka.has_value() ? "yes" : "no",
+                 osc.has_value() ? "yes" : "no" );
+      Log::info( "For EL expect: CRB ({}), HFB ({})",
+                 crb.has_value() ? "yes" : "no",
+                 hfb.has_value() ? "yes" : "no" );
+      Log::info( "EL and EL03 are mutually exclusive" );
+      throw std::exception();
+    }
+
+    // generate the xss array
+    xss.insert( xss.end(), ekt.begin(), ekt.end() );
+    xss.insert( xss.end(), rad.begin(), rad.end() );
+    xss.insert( xss.end(), mot.begin(), mot.end() );
+    xss.insert( xss.end(), rly.begin(), rly.end() );
+    if ( nel == 3 ) {
+
+      xss.insert( xss.end(), xsb.value().begin(), xsb.value().end() );
+      xss.insert( xss.end(), rkt.value().begin(), rkt.value().end() );
+      xss.insert( xss.end(), rka.value().begin(), rka.value().end() );
+      xss.insert( xss.end(), osc.value().begin(), osc.value().end() );
+    } else {
+
+      xss.insert( xss.end(), crb.value().begin(), crb.value().end() );
+      xss.insert( xss.end(), hfb.value().begin(), hfb.value().end() );
+    }
+
+    // generate the jxs array
+    // offsets to blocks listed below:
+    // JXS    EL03    EL
+    //  1     1       1
+    //  2     RAD     RAD
+    //  3     MOT     MOT
+    //  4     RLY     RLY
+    //  5     XSB     CRB
+    //  6     unused  HFB
+    //  9     RKT     unused
+    // 10     RKA     unused
+    // 11     OSC     unused
+    jxs[0] = 1;
+    jxs[1] = jxs[0] + ekt.length();
+    jxs[2] = jxs[1] + rad.length();
+    jxs[3] = jxs[2] + mot.length();
+    jxs[4] = jxs[3] + rly.length();
+    if ( nel == 3 ) {
+
+      jxs[8] = jxs[4] + xsb.value().length();
+      jxs[9] = jxs[8] + rkt.value().length();
+      jxs[10] = jxs[9] + rka.value().length();
+    } else {
+
+      jxs[5] = jxs[4] + crb.value().length();
+    }
+
+    // generate the nxs array
+    // NXS    EL03    EL
+    //  1    .value().length .value().length
+    //  2     Z       Z
+    //  3     NRAD    NRAD
+    //  4     NMOT    NMOT
+    //  5     NEB     NCRB
+    //  6     NPB     NHFB
+    //  9     NRKT    unused
+    // 10     NRKA    unused
+    // 11     NOSC    unused
+    // 16     3       unused
+    nxs[0] = xss.size();
+    nxs[1] = z;
+    nxs[2] = rad.NRAD();
+    nxs[3] = mot.NMOT();
+    if ( nel == 3 ) {
+
+      nxs[4] = xsb.value().NEB();
+      nxs[5] = xsb.value().NPB();
+      nxs[8] = rkt.value().NRKT();
+      nxs[9] = rka.value().NRKA();
+      nxs[10] = osc.value().NOSC();
+    } else {
+
+      nxs[4] = crb.value().NCRB();
+      nxs[5] = hfb.value().NHFB();
+      nxs[8] = 0;
+      nxs[9] = 0;
+      nxs[10] = 0;
+    }
+    nxs[15] = nel;
+
+    return { std::move( iz ), std::move( aw ),
+             std::move( nxs ), std::move( jxs ), std::move( xss ) };
+  }
+
+  void verifyType() {
+
+    char type = this->ZAID().back();
+    if ( ( type != 'e' ) ) {
+
+      Log::error( "The ZAID given in the ACE table ({}) does not appear to be an "
+                  "electron type (e)", this->ZAID() );
+      throw std::exception();
+    }
+  }
   
 public:
 
-  #include "ACEtk/ElectronTable/src/ctor.hpp"
+  /**
+   *  @brief Copy constructor using a generic table
+   *
+   *  @param[in] table    the generic table to be copied
+   */
+  ElectronTable( const Table& table ): Table( table ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Move constructor using a generic table
+   *
+   *  @param[in] table    the generic table to be moved
+   */
+  ElectronTable( Table&& table ): Table( std::move( table ) ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Copy constructor using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be copied
+   */
+  ElectronTable( const ElectronTable& table ) :
+    Table( table ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Move constructor using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be moved
+   */
+  ElectronTable( ElectronTable&& table ) :
+    Table( std::move( table ) ) {
+
+    this->verifyType();
+    this->generateBlocks();
+  }
+
+  /**
+   *  @brief Copy assignment using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be copied
+   */
+  ElectronTable& operator=( const ElectronTable& base ) {
+
+    if ( this != &base ) {
+
+      Table::operator=( base );
+      this->verifyType();
+      this->generateBlocks();
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Move assignment using a photoatomic table
+   *
+   *  @param[in] table    the photoatomic table to be moved
+   */
+  ElectronTable& operator=( ElectronTable&& base ) {
+
+    if ( this != &base ) {
+
+      Table::operator=( std::move( base ) );
+      this->verifyType();
+      this->generateBlocks();
+    }
+    return *this;
+  }
+
+  /**
+   *  @brief Constructor (from scratch)
+   *
+   *  @param[in] z         the Z number of the target
+   *  @param[in] header    the header for the table
+   *  @param[in] za        the list of ZA values
+   *  @param[in] awr       the list of atomic mass values
+   *  @param[in] ekt       the transition energy block
+   *  @param[in] rad       the radiation stopping power block
+   *  @param[in] mot       the Mott scattering correction block
+   *  @param[in] rly       the Riley cross section block
+   *  @param[in] xsb       the brmsstrahlung production block (NEL == 3)
+   *  @param[in] crb       the bremsstrahlung correction factor block (NEL != 3)
+   *  @param[in] hfb       the bremsstrahlung high-frequency block (NEL != 3)
+   *  @param[in] rkt       the bremsstrahlung energy spectrum block (NEL == 3)
+   *  @param[in] rka       the bremsstrahlung angular spectrum block (NEL == 3)
+   *  @param[in] osc       the oscillator block (NEL == 3)
+   */
+  ElectronTable( unsigned int z, HeaderVariant header,
+                 std::vector< unsigned int > za, std::vector< double > awr,
+                 electron::EKT ekt, electron::RAD rad,
+                 electron::MOT mot, electron::RLY rly,
+                 std::optional< electron::XSB > xsb,
+                 std::optional< electron::CRB > crb,
+                 std::optional< electron::HFB > hfb,
+                 std::optional< electron::RKT > rkt,
+                 std::optional< electron::RKA > rka,
+                 std::optional< electron::OSC > osc ) :
+    ElectronTable(
+      Table( std::move( header ),
+             generateData( z, std::move( za ), std::move( awr ),
+                           std::move( ekt ), std::move( rad ),
+                           std::move( mot ), std::move( rly ),
+                           std::move( xsb ), std::move( crb ),
+                           std::move( hfb ), std::move( rkt ),
+                           std::move( rka ), std::move( osc ) ) ) ) {}
   
   using Table::header;
   using Table::data;

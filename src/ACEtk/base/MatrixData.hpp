@@ -18,19 +18,157 @@ namespace base {
 class MatrixData : protected Base {
 
   /* fields */
+
   bool rowmajor_;
   unsigned int nrows_;
   unsigned int ncols_;
   
   /* auxiliary functions */
-  #include "ACEtk/base/MatrixData/src/verifyIndex.hpp"
-  #include "ACEtk/base/MatrixData/src/generateXSS.hpp"
-  #include "ACEtk/base/MatrixData/src/verifySize.hpp"
+
+  void verifyIndex( std::size_t row, std::size_t col ) const {
+
+    // Verify row index
+    if ( ( row < 1 ) || (row > this->M() ) ) {
+
+      Log::error( "Illegal row index argument into the {} block", this->name() );
+      Log::info( "Row index value: {}", row );
+      Log::info( "{} accepts an index between {} and {} inclusively",
+                 this->name(), 1, this->M() );
+      throw std::out_of_range( this->name() );
+    }
+
+    // Verify column index
+    if ( ( col < 1 ) || (col > this->N() ) ) {
+
+      Log::error( "Illegal column index argument into the {} block", this->name() );
+      Log::info( "Column index value: {}", col );
+      Log::info( "{} accepts an index between {} and {} inclusively",
+                 this->name(), 1, this->N() );
+      throw std::out_of_range( this->name() );
+    }
+  }
+
+  template < typename Number >
+  static std::vector< double >
+  generateXSS( std::vector< Number >&& rows,
+               std::vector< Number >&& cols,
+               std::vector< std::vector< Number > >&& vals ) {
+
+    std::vector< double > xss;
+    const auto nrows = rows.size();
+    const auto ncols = cols.size();
+    const auto sz = nrows + ncols + nrows * ncols;
+    xss.reserve( sz );
+
+    if ( vals.front().size() == ncols ) {
+
+      if (vals.size() != nrows ) {
+
+        Log::error( "The size of the matrix data is not as expected" );
+        Log::info( "Expected: {} arrays", nrows );
+        Log::info( "Found: {} arrays", vals.size() );
+        throw std::exception();
+      }
+    } else if ( vals.front().size() == nrows ) {
+
+      if (vals.size() != ncols ) {
+
+        Log::error( "The size of the matrix data is not as expected" );
+        Log::info( "Expected: {} arrays", ncols );
+        Log::info( "Found: {} arrays", vals.size() );
+        throw std::exception();
+      }
+    } else {
+
+      Log::error( "The size of the matrix data is not as expected" );
+      Log::info( "Expected: {} or {}", nrows, ncols );
+      Log::info( "Found: {}", vals.front().size() );
+      throw std::exception();
+    }
+
+    xss.insert( xss.end(), rows.begin(), rows.end() );
+    xss.insert( xss.end(), cols.begin(), cols.end() );
+    for ( auto&& array: vals ) {
+
+      if ( array.size() != vals.front().size() ) {
+
+        Log::error( "The size of a matrix data array is not as expected" );
+        Log::info( "Expected: {} elements", vals.front().size() );
+        Log::info( "Found: {} elements", array.size() );
+        throw std::exception();
+      }
+      xss.insert( xss.end(), array.begin(), array.end() );
+    }
+
+    return xss;
+  }
+
+  void verifySize( Iterator begin, Iterator end, unsigned int nrows, unsigned int ncols ) {
+
+    // There must be at least nrows + ncols + nrows * ncols values
+    auto size = std::distance( begin, end );
+    unsigned int expectedSize = nrows + ncols + nrows * ncols;
+    if ( size < expectedSize ) {
+
+      Log::error( "The size of the XSS subrange in the {} block should be at least {}",
+                  this->name(), expectedSize );
+      Log::info( "M value: {}, N value: {}", nrows, ncols );
+      Log::info( "XSS.size(): {}", size );
+      throw std::exception();
+    }
+  }
   
 public:
 
   /* constructor */
-  #include "ACEtk/base/MatrixData/src/ctor.hpp"
+
+  MatrixData() = default;
+
+  MatrixData( const MatrixData& ) = default;
+  MatrixData( MatrixData&& ) = default;
+
+  MatrixData& operator=( const MatrixData& ) = default;
+  MatrixData& operator=( MatrixData&& ) = default;
+
+  /**
+  *  @brief Constructor
+  *
+  *  @param[in] name        the name of the block
+  *  @param[in] rows        the row labels
+  *  @param[in] cols        the column labels
+  *  @param[in] vals        the two-dimensional matrix data values
+  *  @param[in] rowmajor    whether the matrix data have row or column major order
+  */
+  template < typename Number >
+  MatrixData( std::string&& name,
+              std::vector< Number >&& rows,
+              std::vector< Number >&& cols,
+              std::vector< std::vector< Number > >&& vals,
+              bool rowmajor ) :
+  Base( std::move( name ),
+        generateXSS( std::move( rows ), std::move( cols ), std::move( vals ) ) ),
+  rowmajor_( rowmajor ), nrows_( rows.size() ), ncols_( cols.size() ) {}
+
+  /**
+  *  @brief Constructor
+  *
+  *  @param[in] begin      the begin iterator of the matrix data in the XSS array
+  *  @param[in] end        the end iterator of the matrix data in the XSS array
+  *  @param[in] nrows      the number of rows and row labels
+  *  @param[in] ncols      the number of columns and column labels
+  *  @param[in] rowmajor   whether the matrix data have row or column major order
+  */
+  MatrixData( std::string&& name,
+              Iterator begin,
+              Iterator end,
+              unsigned int nrows,
+              unsigned int ncols,
+              bool rowmajor ) :
+  Base( std::move( name ), begin, end ),
+  rowmajor_(rowmajor), nrows_(nrows), ncols_(ncols) {
+
+    verifySize( this->begin(), this->end(), this->nrows_, this->ncols_ );
+  }
   
   /* methods */
 
