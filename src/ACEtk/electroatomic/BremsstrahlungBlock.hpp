@@ -72,6 +72,11 @@ public:
   /* methods */
 
   /**
+   *  @brief Return the EPR data format flag
+   */
+  static constexpr unsigned int NEPR() { return 1; }
+
+  /**
    *  @brief Return the number of energy points
    */
   unsigned int NBL() const { return this->N(); }
