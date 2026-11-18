@@ -295,6 +295,16 @@ class PhotoatomicTable : protected Table {
     }
     if ( nepr > 0 ) {
 
+      unsigned int breml_nepr = std::visit( [] ( const auto& block ) { return block.NEPR(); },
+                                            *breml );
+      if ( breml_nepr != nepr ) {
+
+        Log::error( "Inconsistent BREML block for EPR data format" );
+        Log::info( "Expected NEPR = {}", nepr );
+        Log::info( "Found NEPR = {}", breml_nepr );
+        throw std::exception();
+      }
+
       if ( ( nssh != xprob->NSSH() ) || ( nssh != esze->NSSH() ) ||
            ( nssh != eion.size() ) ) {
 

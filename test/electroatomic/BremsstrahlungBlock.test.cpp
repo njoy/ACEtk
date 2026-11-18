@@ -122,6 +122,8 @@ void verifyChunk( const BremsstrahlungBlock& chunk,
   CHECK( 6 == chunk.length() );
   CHECK( "BREML" == chunk.name() );
 
+  CHECK( 1 == chunk.NEPR() );
+
   CHECK( 3 == chunk.NBL() );
   CHECK( 3 == chunk.numberEnergyPoints() );
 
