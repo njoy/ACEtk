@@ -108,6 +108,7 @@ add_python_test( electroatomic.PrincipalCrossSectionBlock      electroatomic/Tes
 add_python_test( electroatomic.ElasticCrossSectionBlock        electroatomic/Test_ACEtk_electroatomic_ElasticCrossSectionBlock.py )
 add_python_test( electroatomic.ExcitationBlock                 electroatomic/Test_ACEtk_electroatomic_ExcitationBlock.py )
 add_python_test( electroatomic.BremsstrahlungBlock             electroatomic/Test_ACEtk_electroatomic_BremsstrahlungBlock.py )
+add_python_test( electroatomic.BremsstrahlungEnergyLossBlock   electroatomic/Test_ACEtk_electroatomic_BremsstrahlungEnergyLossBlock.py )
 add_python_test( electroatomic.SubshellTransitionData          electroatomic/Test_ACEtk_electroatomic_SubshellTransitionData.py )
 add_python_test( electroatomic.SubshellTransitionDataBlock     electroatomic/Test_ACEtk_electroatomic_SubshellTransitionDataBlock.py )
 add_python_test( electroatomic.TabulatedAngularDistribution    electroatomic/Test_ACEtk_electroatomic_TabulatedAngularDistribution.py )

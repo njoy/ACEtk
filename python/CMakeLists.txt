@@ -93,6 +93,7 @@ if(ACEtk.python)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/ElasticCrossSectionBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/ExcitationBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/BremsstrahlungBlock.python.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/BremsstrahlungEnergyLossBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/SubshellTransitionData.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/SubshellTransitionDataBlock.python.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/electroatomic/TabulatedAngularDistribution.python.cpp
