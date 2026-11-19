@@ -1728,6 +1728,14 @@ class PhotoatomicTable:
         The date
         """
     @property
+    def electron_bremsstrahlung_energy_block(self) -> electroatomic.BremsstrahlungBlock | electroatomic.BremsstrahlungEnergyLossBlock | None:
+        """
+        The electron Bremsstrahlung energy block for eprdata (NEPR > 0)
+        
+        The block contains the average remaining energy for NEPR = 1 and the
+        average energy loss for the other EPR formats.
+        """
+    @property
     def electron_cross_section_block(self) -> electroatomic.PrincipalCrossSectionBlock | None:
         """
         The electron cross section block for eprdata (NEPR > 0)
@@ -1741,14 +1749,6 @@ class PhotoatomicTable:
     def electron_elastic_cross_section_block(self) -> electroatomic.ElasticCrossSectionBlock | None:
         """
         The additional elastic cross section block for eprdata (NEPR = 3)
-        """
-    @property
-    def electron_energy_after_bremsstrahlung_block(self) -> electroatomic.BremsstrahlungBlock | electroatomic.BremsstrahlungEnergyLossBlock | None:
-        """
-        The electron Bremsstrahlung energy block for eprdata (NEPR > 0)
-        
-        The block contains the average remaining energy for NEPR = 1 and the
-        average energy loss for the other EPR formats.
         """
     @property
     def electron_excitation_energy_loss_block(self) -> electroatomic.ExcitationBlock | None:

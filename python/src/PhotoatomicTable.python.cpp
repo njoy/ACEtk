@@ -511,8 +511,8 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
   )
   .def_property_readonly(
 
-    "electron_energy_after_bremsstrahlung_block",
-    &Table::electronEnergyAfterBremsstrahlungBlock,
+    "electron_bremsstrahlung_energy_block",
+    &Table::electronBremsstrahlungEnergyBlock,
     "The electron Bremsstrahlung energy block for eprdata (NEPR > 0)\n\n"
     "The block contains the average remaining energy for NEPR = 1 and the\n"
     "average energy loss for the other EPR formats."

@@ -1050,7 +1050,7 @@ public:
    *  The block contains the average remaining energy for NEPR = 1 and the
    *  average energy loss for the other EPR formats.
    */
-  const std::optional< electroatomic::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
+  const std::optional< electroatomic::BREML >& electronBremsstrahlungEnergyBlock() const {
 
     return this->BREML();
   }
