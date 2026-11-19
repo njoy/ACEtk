@@ -21,6 +21,7 @@ namespace electroatomic {
   void wrapElasticCrossSectionBlock( python::module&, python::module& );
   void wrapExcitationBlock( python::module&, python::module& );
   void wrapBremsstrahlungBlock( python::module&, python::module& );
+  void wrapBremsstrahlungEnergyLossBlock( python::module&, python::module& );
   void wrapSubshellTransitionDataBlock( python::module&, python::module& );
   void wrapElasticAngularDistributionBlock( python::module&, python::module& );
   void wrapEnergyDistributionBlock( python::module&, python::module& );
@@ -44,6 +45,7 @@ void wrapElectroatomic( python::module& module, python::module& viewmodule ) {
   electroatomic::wrapElasticCrossSectionBlock( submodule, viewmodule );
   electroatomic::wrapExcitationBlock( submodule, viewmodule );
   electroatomic::wrapBremsstrahlungBlock( submodule, viewmodule );
+  electroatomic::wrapBremsstrahlungEnergyLossBlock( submodule, viewmodule );
   electroatomic::wrapSubshellTransitionDataBlock( submodule, viewmodule );
   electroatomic::wrapElasticAngularDistributionBlock( submodule, viewmodule );
   electroatomic::wrapEnergyDistributionBlock( submodule, viewmodule );

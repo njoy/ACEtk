@@ -2,6 +2,7 @@
 #define NJOY_ACETK_PHOTOATOMICTABLE
 
 // system includes
+#include <variant>
 
 // other includes
 #include "ACEtk/Table.hpp"
@@ -188,7 +189,16 @@ class PhotoatomicTable : protected Table {
       auto breme = block( 25 );
       this->breme_ = electroatomic::BREME( bremi.first, breme.second, this->NB() );
       auto breml = block( 26 );
-      this->breml_ = electroatomic::BREML( breml.first, breml.second, this->NBL() );
+      if ( this->NEPR() == 1 ) {
+
+        this->breml_ = electroatomic::BremsstrahlungBlock(
+                         breml.first, breml.second, this->NBL() );
+      }
+      else {
+
+        this->breml_ = electroatomic::BremsstrahlungEnergyLossBlock(
+                         breml.first, breml.second, this->NBL() );
+      }
 
       present = ( this->NEPR() == 3 );
       if ( present ) {
@@ -246,7 +256,10 @@ class PhotoatomicTable : protected Table {
     unsigned int nxl = nepr > 0 ? excit->NXL() : 0;
     unsigned int na = nepr > 0 ? elas->NA() : 0;
     unsigned int nb = nepr > 0 ? breme->NB() : 0;
-    unsigned int nbl = nepr > 0 ? breml->NBL() : 0;
+    unsigned int nbl = nepr > 0
+                        ? std::visit( [] ( const auto& block ) { return block.NBL(); },
+                                      *breml )
+                        : 0;
     unsigned int ninc = nepr > 1 ? jinc.NM() : 0;
     unsigned int ncoh = nepr > 1 ? jcoh.NM() : 0;
 
@@ -281,6 +294,16 @@ class PhotoatomicTable : protected Table {
       }
     }
     if ( nepr > 0 ) {
+
+      unsigned int breml_nepr = std::visit( [] ( const auto& block ) { return block.NEPR(); },
+                                            *breml );
+      if ( breml_nepr != nepr ) {
+
+        Log::error( "Inconsistent BREML block for EPR data format" );
+        Log::info( "Expected NEPR = {}", nepr );
+        Log::info( "Found NEPR = {}", breml_nepr );
+        throw std::exception();
+      }
 
       if ( ( nssh != xprob->NSSH() ) || ( nssh != esze->NSSH() ) ||
            ( nssh != eion.size() ) ) {
@@ -366,7 +389,9 @@ class PhotoatomicTable : protected Table {
       jxs[24] = jxs[23] + 3 * nb;
       xss.insert( xss.end(), breme->begin(), breme->end() );
       jxs[25] = xss.size() + 1;
-      xss.insert( xss.end(), breml->begin(), breml->end() );
+      std::visit( [&xss] ( const auto& block )
+                         { xss.insert( xss.end(), block.begin(), block.end() ); },
+                   *breml );
       if ( nepr == 3 ) {
 
         jxs[26] = xss.size() + 1;
@@ -533,7 +558,7 @@ public:
    *  @param[in] elas      the electron elastic angular distribution block
    *  @param[in] eion      the electronionisation data block
    *  @param[in] breme     the photon energy distributions from Bremsstrahlung
-   *  @param[in] breml     the electron average energy after Bremsstrahlung
+   *  @param[in] breml     the average electron energy remaining after or lost to Bremsstrahlung
    *  @param[in] selas     the additional electron elastic cross section block
    */
   PhotoatomicTable( unsigned int z, HeaderVariant header,
@@ -1012,14 +1037,20 @@ public:
   }
 
   /**
-   *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
+   *  @brief Return the electron Bremsstrahlung energy block for eprdata (NEPR > 0)
+   *
+   *  The block contains the average remaining energy for NEPR = 1 and the
+   *  average energy loss for the other EPR formats.
    */
   const std::optional< electroatomic::BREML >& BREML() const { return this->breml_; }
 
   /**
-   *  @brief Return the electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)
+   *  @brief Return the electron Bremsstrahlung energy block for eprdata (NEPR > 0)
+   *
+   *  The block contains the average remaining energy for NEPR = 1 and the
+   *  average energy loss for the other EPR formats.
    */
-  const std::optional< electroatomic::BREML >& electronEnergyAfterBremsstrahlungBlock() const {
+  const std::optional< electroatomic::BREML >& electronBremsstrahlungEnergyBlock() const {
 
     return this->BREML();
   }

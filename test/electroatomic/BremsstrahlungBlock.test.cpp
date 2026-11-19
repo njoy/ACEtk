@@ -29,7 +29,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
 
       BremsstrahlungBlock chunk( std::move( energies ), std::move( remaining ) );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a BremsstrahlungBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
@@ -40,7 +40,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
 
       BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
 
-      THEN( "a PhotoatomicElectronShellBlock can be constructed and members can "
+      THEN( "a BremsstrahlungBlock can be constructed and members can "
             "be tested" ) {
 
         verifyChunk( chunk, xss );
@@ -52,7 +52,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
       BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
       BremsstrahlungBlock copy( chunk );
 
-      THEN( "an BremsstrahlungBlock can be constructed and "
+      THEN( "a BremsstrahlungBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( copy, xss );
@@ -64,7 +64,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
       BremsstrahlungBlock chunk( xss.begin(), xss.end(), 3 );
       BremsstrahlungBlock move( std::move( chunk ) );
 
-      THEN( "an BremsstrahlungBlock can be constructed and "
+      THEN( "a BremsstrahlungBlock can be constructed and "
             "members can be tested" ) {
 
         verifyChunk( move, xss );
@@ -77,7 +77,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
       BremsstrahlungBlock copy = makeDummyBlock();
       copy = chunk;
 
-      THEN( "an BremsstrahlungBlock can be copy assigned and "
+      THEN( "a BremsstrahlungBlock can be copy assigned and "
             "members can be tested" ) {
 
         verifyChunk( copy, xss );
@@ -90,7 +90,7 @@ SCENARIO( "BremsstrahlungBlock" ) {
       BremsstrahlungBlock move = makeDummyBlock();
       move = std::move( chunk );
 
-      THEN( "an BremsstrahlungBlock can be copy assigned and "
+      THEN( "a BremsstrahlungBlock can be move assigned and "
             "members can be tested" ) {
 
         verifyChunk( move, xss );
@@ -121,6 +121,8 @@ void verifyChunk( const BremsstrahlungBlock& chunk,
   CHECK( false == chunk.empty() );
   CHECK( 6 == chunk.length() );
   CHECK( "BREML" == chunk.name() );
+
+  CHECK( 1 == chunk.NEPR() );
 
   CHECK( 3 == chunk.NBL() );
   CHECK( 3 == chunk.numberEnergyPoints() );

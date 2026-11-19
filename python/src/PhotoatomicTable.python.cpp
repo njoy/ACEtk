@@ -96,7 +96,7 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
     "    elas      the electron elastic angular distribution block\n"
     "    eion      the electronionisation data block\n"
     "    breme     the photon energy distributions from Bremsstrahlung\n"
-    "    breml     the electron average energy after Bremsstrahlung\n"
+    "    breml     the average electron energy remaining after or lost to Bremsstrahlung\n"
     "    selas     the additional electron elastic cross section block"
   )
   .def_property_readonly(
@@ -505,13 +505,17 @@ void wrapPhotoatomicTable( python::module& module, python::module& ) {
 
     "BREML",
     &Table::BREML,
-    "The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)"
+    "The electron Bremsstrahlung energy block for eprdata (NEPR > 0)\n\n"
+    "The block contains the average remaining energy for NEPR = 1 and the\n"
+    "average energy loss for the other EPR formats."
   )
   .def_property_readonly(
 
-    "electron_energy_after_bremsstrahlung_block",
-    &Table::electronEnergyAfterBremsstrahlungBlock,
-    "The electron energy after Brehmsstrahlung block for eprdata (NEPR > 0)"
+    "electron_bremsstrahlung_energy_block",
+    &Table::electronBremsstrahlungEnergyBlock,
+    "The electron Bremsstrahlung energy block for eprdata (NEPR > 0)\n\n"
+    "The block contains the average remaining energy for NEPR = 1 and the\n"
+    "average energy loss for the other EPR formats."
   )
   .def_property_readonly(
 

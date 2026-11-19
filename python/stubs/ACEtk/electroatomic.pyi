@@ -3,7 +3,7 @@ Electroatomic ACE blocks and components
 """
 from __future__ import annotations
 import typing
-__all__: list[str] = ['BremsstrahlungBlock', 'ElasticAngularDistributionBlock', 'ElasticCrossSectionBlock', 'ElectronShellBlock', 'ElectronSubshellBlock', 'EnergyDistributionBlock', 'ExcitationBlock', 'PrincipalCrossSectionBlock', 'SubshellTransitionData', 'SubshellTransitionDataBlock', 'TabulatedAngularDistribution', 'TabulatedEnergyDistribution']
+__all__: list[str] = ['BremsstrahlungBlock', 'BremsstrahlungEnergyLossBlock', 'ElasticAngularDistributionBlock', 'ElasticCrossSectionBlock', 'ElectronShellBlock', 'ElectronSubshellBlock', 'EnergyDistributionBlock', 'ExcitationBlock', 'PrincipalCrossSectionBlock', 'SubshellTransitionData', 'SubshellTransitionDataBlock', 'TabulatedAngularDistribution', 'TabulatedEnergyDistribution']
 class BremsstrahlungBlock:
     """
     The electron BREML block with the average electron energy after Bremsstrahlung
@@ -63,6 +63,86 @@ class BremsstrahlungBlock:
     def energy_after_bremsstrahlung(self) -> ...:
         """
         The average energy remaining after Bremsstrahlung
+        """
+    @property
+    def length(self) -> int:
+        """
+        The length of the the xss array of the block
+        """
+    @property
+    def name(self) -> str:
+        """
+        The name of the block
+        """
+    @property
+    def number_energy_points(self) -> int:
+        """
+        The number of energy points
+        """
+    @property
+    def xss_array(self) -> ...:
+        """
+        The xss array of the block
+        """
+class BremsstrahlungEnergyLossBlock:
+    """
+    The electron BREML block with the average electron energy loss due to Bremsstrahlung
+    
+    This block is part of the eprdata formats.
+    
+    The BremsstrahlungEnergyLossBlock class contains 2 arrays of the same length:
+      - the energy points
+      - the average energy loss due to Bremsstrahlung
+    
+    The size NBL of each (the total number of energy points) is stored in NXS(12).
+    """
+    def __init__(self, energies: list[float], loss: list[float]) -> None:
+        """
+        Initialise the block
+        
+        Arguments:
+            self         the block
+            energies     the energy values
+            loss         the average energy loss due to Bremsstrahlung
+        """
+    @typing.overload
+    def xss(self, index: int) -> float:
+        """
+        Return a value from the xss array of the block
+        
+        Arguments:
+            self     the data block
+            index    the index (one-based)
+        """
+    @typing.overload
+    def xss(self, index: int, length: int) -> ...:
+        """
+        Return a subrange of a given length from the xss array of the block
+        
+        Arguments:
+            self      the data block
+            index     the index (one-based)
+            length    the length of the subrange
+        """
+    @property
+    def NBL(self) -> int:
+        """
+        The number of energy points
+        """
+    @property
+    def empty(self) -> bool:
+        """
+        Whether or not the block is empty
+        """
+    @property
+    def energies(self) -> ...:
+        """
+        The energy values
+        """
+    @property
+    def energy_loss(self) -> ...:
+        """
+        The average energy loss due to Bremsstrahlung
         """
     @property
     def length(self) -> int:
